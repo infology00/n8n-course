@@ -1,113 +1,200 @@
-<!DOCTYPE html>
-<html lang="en">
+*{
 
-<head>
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Automation With Sajjad Zaidi</title>
-
-<link rel="stylesheet" href="style.css">
-
-</head>
+}
 
 
-<body>
+body{
 
+background:black;
 
-<header class="header">
-
-<div class="container">
-
-
-<div class="logo">
-Automation With Sajjad Zaidi
-</div>
+}
 
 
 
-<nav class="menu">
+.navbar{
 
-<a href="#">Home</a>
-<a href="#">Services</a>
-<a href="#">AI Solutions</a>
-<a href="#">Projects</a>
-<a href="#">Courses</a>
-<a href="#">About</a>
+height:90px;
+width:100%;
+display:flex;
+align-items:center;
+justify-content:space-between;
 
-</nav>
+padding:0 6%;
 
+background:white;
+position:absolute;
+top:0;
+z-index:10;
 
-
-<a href="#" class="consult-btn">
-Get 15 Min Free Consultation
-</a>
-
-
-</div>
-
-</header>
+}
 
 
 
+.top-phone{
 
-<!-- HERO BANNER -->
+color:#a8d410;
+font-weight:bold;
+font-size:16px;
 
-
-<section class="hero">
-
-
-<div class="hero-container">
-
-
-<div class="hero-text">
-
-
-<h1>
-Business Systems Consultant
-</h1>
-
-
-<h2>
-Diagnosing & Optimizing AI, CRM & Automation Systems for Home Service Businesses
-</h2>
-
-
-<p>
-Helping businesses reduce manual work, optimize operations,
-and build powerful AI automation systems.
-</p>
+}
 
 
 
-<a href="#" class="consult-btn">
-Start Your Automation Journey
-</a>
+.logo{
+
+font-size:30px;
+font-weight:900;
+letter-spacing:2px;
+
+}
 
 
-</div>
+
+nav{
+
+display:flex;
+align-items:center;
+gap:30px;
+
+}
+
+
+nav a{
+
+text-decoration:none;
+color:#111;
+font-weight:600;
+
+}
+
+
+
+.contact-btn{
+
+background:#a8d410;
+padding:14px 25px;
+border-radius:30px;
+
+}
 
 
 
 
-<div class="hero-image">
 
-<!-- Yahan apni banner image add karna -->
+.hero{
 
-<img src="images/banner.png" alt="AI Automation Banner">
+height:100vh;
+position:relative;
+overflow:hidden;
 
-
-</div>
-
-
-</div>
-
-
-</section>
+}
 
 
 
-</body>
+.bg-video{
 
-</html>
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+
+}
+
+
+
+.overlay{
+
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.45);
+
+}
+
+
+
+
+.hero-content{
+
+position:relative;
+z-index:2;
+
+height:100%;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+text-align:center;
+
+color:white;
+
+}
+
+
+
+.hero-content h1{
+
+font-size:70px;
+line-height:1.1;
+font-weight:900;
+
+}
+
+
+
+.hero-content h2{
+
+font-size:55px;
+margin-top:20px;
+
+}
+
+
+
+.hero-content p{
+
+font-size:35px;
+margin-top:20px;
+
+}
+
+
+
+.hero-content span{
+
+color:#a8d410;
+
+}
+
+
+
+@media(max-width:900px){
+
+
+nav{
+
+display:none;
+
+}
+
+
+.hero-content h1{
+
+font-size:40px;
+
+}
+
+
+.logo{
+
+font-size:22px;
+
+}
+
+}
