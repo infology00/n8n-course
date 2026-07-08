@@ -1,132 +1,113 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Automation With Sajjad Zaidi</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
 
 
-body{
-    background:white;
-    color:#111;
-}
+<body>
 
 
-.container{
+<header class="header">
 
-    width:90%;
-    max-width:1200px;
-    margin:auto;
-
-}
+<div class="container">
 
 
-.header{
-
-    width:100%;
-    padding:25px 0;
-    background:#ffffff;
-    border-bottom:1px solid #eee;
-
-}
-
-
-.header .container{
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:30px;
-
-}
+<div class="logo">
+Automation With Sajjad Zaidi
+</div>
 
 
 
-.logo{
+<nav class="menu">
 
-    font-size:22px;
-    font-weight:800;
-    color:#111827;
-    white-space:nowrap;
+<a href="#">Home</a>
+<a href="#">Services</a>
+<a href="#">AI Solutions</a>
+<a href="#">Projects</a>
+<a href="#">Courses</a>
+<a href="#">About</a>
 
-}
-
-
-
-.menu{
-
-    display:flex;
-    align-items:center;
-    gap:28px;
-
-}
+</nav>
 
 
 
-.menu a{
-
-    text-decoration:none;
-    color:#374151;
-    font-size:15px;
-    font-weight:600;
-    transition:.3s;
-
-}
+<a href="#" class="consult-btn">
+Get 15 Min Free Consultation
+</a>
 
 
+</div>
 
-.menu a:hover{
-
-    color:#ff6b00;
-
-}
-
-
-
-.consult-btn{
-
-    text-decoration:none;
-    background:#ff6b00;
-    color:white;
-    padding:14px 24px;
-    border-radius:30px;
-    font-size:14px;
-    font-weight:700;
-    white-space:nowrap;
-    transition:.3s;
-
-}
-
-
-
-.consult-btn:hover{
-
-    background:#e85d00;
-    transform:translateY(-2px);
-
-}
+</header>
 
 
 
 
-
-@media(max-width:900px){
-
-    .menu{
-        display:none;
-    }
+<!-- HERO BANNER -->
 
 
-    .logo{
-        font-size:18px;
-    }
+<section class="hero">
 
 
-    .consult-btn{
+<div class="hero-container">
 
-        padding:12px 16px;
-        font-size:12px;
 
-    }
+<div class="hero-text">
 
-}
+
+<h1>
+Business Systems Consultant
+</h1>
+
+
+<h2>
+Diagnosing & Optimizing AI, CRM & Automation Systems for Home Service Businesses
+</h2>
+
+
+<p>
+Helping businesses reduce manual work, optimize operations,
+and build powerful AI automation systems.
+</p>
+
+
+
+<a href="#" class="consult-btn">
+Start Your Automation Journey
+</a>
+
+
+</div>
+
+
+
+
+<div class="hero-image">
+
+<!-- Yahan apni banner image add karna -->
+
+<img src="images/banner.png" alt="AI Automation Banner">
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+</body>
+
+</html>
