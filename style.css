@@ -94,6 +94,8 @@ header{
     border-radius:22px;
 
     box-shadow:var(--shadow);
+   
+    overflow:visible;
 
 }
 
@@ -202,7 +204,6 @@ MEGA MENU
 /* ==========================================
 MEGA MENU
 ========================================== */
-
 .mega-menu{
 
     position:absolute;
@@ -213,19 +214,17 @@ MEGA MENU
 
     transform:translateX(-50%);
 
-    width:1350px;
-
-    max-width:95vw;
+    width:min(1200px, calc(100vw - 40px));
 
     background:#fff;
 
     border-radius:26px;
 
-    box-shadow:0 40px 90px rgba(0,0,0,.12);
+    box-shadow:0 40px 90px rgba(0,0,0,.15);
 
     display:grid;
 
-    grid-template-columns:260px 1fr 320px;
+    grid-template-columns:220px 1fr 280px;
 
     overflow:hidden;
 
@@ -240,7 +239,6 @@ MEGA MENU
     z-index:999999;
 
 }
-
 /* Invisible bridge taake hover toot na jaye */
 
 .mega-parent::after{
@@ -736,11 +734,7 @@ HERO SECTION
 PREMIUM ANIMATIONS
 ====================================================== */
 
-.navbar{
 
-    overflow:visible;
-
-}
 
 .navbar:hover{
 
