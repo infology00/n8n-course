@@ -122,13 +122,10 @@ MENU
 ====================================================== */
 
 .nav-menu{
-
     display:flex;
-
     align-items:center;
-
-    gap:38px;
-
+    gap:35px;
+    overflow:visible;
 }
 
 .nav-menu li{
@@ -208,13 +205,15 @@ MEGA MENU
 
     position:absolute;
 
-    top:calc(100% + 15px);
+    top:90px;
 
     left:50%;
 
     transform:translateX(-50%);
 
-    width:min(1200px, calc(100vw - 40px));
+    width:1200px;
+
+    max-width:calc(100vw - 40px);
 
     background:#fff;
 
@@ -239,21 +238,12 @@ MEGA MENU
     z-index:999999;
 
 }
+
 /* Invisible bridge taake hover toot na jaye */
 
-.mega-parent::after{
+.mega-parent{
 
-    content:"";
-
-    position:absolute;
-
-    left:0;
-
-    top:100%;
-
-    width:100%;
-
-    height:20px;
+    position:static;
 
 }
 
