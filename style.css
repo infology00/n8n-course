@@ -193,15 +193,25 @@ CTA BUTTON
 MEGA MENU
 ====================================================== */
 
+/* ==========================================
+MEGA MENU
+========================================== */
+
+.mega-parent{
+    position:relative;
+}
+
 .mega-menu{
 
-    position:fixed;
+    position:absolute;
 
-    top:105px;
+    top:100%;
 
     left:50%;
 
     transform:translateX(-50%);
+
+    margin-top:15px;
 
     width:min(1450px,96vw);
 
@@ -223,12 +233,29 @@ MEGA MENU
 
     pointer-events:none;
 
-    transition:.35s ease;
+    transition:opacity .3s ease, transform .3s ease;
 
     z-index:9999;
 
 }
 
+/* Invisible bridge taake hover toot na jaye */
+
+.mega-parent::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:100%;
+
+    width:100%;
+
+    height:20px;
+
+}
 
 .mega-parent:hover .mega-menu{
 
@@ -238,8 +265,9 @@ MEGA MENU
 
     pointer-events:auto;
 
-}
+    transform:translateX(-50%) translateY(0);
 
+}
 
 /* ======================================================
 LEFT PANEL
