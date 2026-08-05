@@ -54,10 +54,16 @@ HEADER
 header{
 
     position:fixed;
+
     top:0;
+
     left:0;
+
     width:100%;
+
     z-index:99999;
+
+    overflow:visible;
 
 }
 
@@ -197,23 +203,19 @@ MEGA MENU
 MEGA MENU
 ========================================== */
 
-.mega-parent{
-    position:relative;
-}
-
 .mega-menu{
 
     position:absolute;
 
-    top:100%;
+    top:calc(100% + 15px);
 
     left:50%;
 
     transform:translateX(-50%);
 
-    margin-top:15px;
+    width:1350px;
 
-    width:min(1450px,96vw);
+    max-width:95vw;
 
     background:#fff;
 
@@ -233,9 +235,9 @@ MEGA MENU
 
     pointer-events:none;
 
-    transition:opacity .3s ease, transform .3s ease;
+    transition:.35s ease;
 
-    z-index:9999;
+    z-index:999999;
 
 }
 
@@ -736,7 +738,7 @@ PREMIUM ANIMATIONS
 
 .navbar{
 
-    transition:.35s ease;
+    overflow:visible;
 
 }
 
