@@ -1,6 +1,5 @@
 /* ======================================================
-   AWSZ - PREMIUM AI AUTOMATION WEBSITE
-   GLOBAL CSS
+GLOBAL
 ====================================================== */
 
 
@@ -36,17 +35,16 @@ body{
 }
 
 
+
 :root{
 
-    --primary:#D6FF00;
+    --yellow:#D6FF00;
 
     --black:#111111;
 
     --white:#ffffff;
 
     --gray:#777;
-
-    --shadow:0 20px 60px rgba(0,0,0,.08);
 
 }
 
@@ -59,6 +57,16 @@ a{
     color:inherit;
 
 }
+
+
+
+ul{
+
+    list-style:none;
+
+}
+
+
 
 
 
@@ -77,11 +85,11 @@ header{
 
     width:100%;
 
-    z-index:99999;
-
-    overflow:visible;
+    z-index:9999;
 
 }
+
+
 
 
 
@@ -92,11 +100,12 @@ NAVBAR
 
 .navbar{
 
+
     width:min(1450px,96%);
 
-    margin:auto;
 
-    margin-top:15px;
+    margin:15px auto 0;
+
 
     height:90px;
 
@@ -108,25 +117,34 @@ NAVBAR
     justify-content:space-between;
 
 
+
     padding:0 40px;
 
 
-    background:rgba(255,255,255,.82);
+
+    background:rgba(255,255,255,.85);
+
+
 
     backdrop-filter:blur(20px);
 
 
-    border:1px solid rgba(255,255,255,.6);
 
-    border-radius:22px;
-
-
-    box-shadow:var(--shadow);
+    border-radius:25px;
 
 
-    overflow:visible;
+
+    border:1px solid rgba(255,255,255,.5);
+
+
+
+    box-shadow:0 20px 60px rgba(0,0,0,.08);
+
+
 
 }
+
+
 
 
 
@@ -137,22 +155,23 @@ LOGO
 
 .logo h2{
 
-    font-size:34px;
+
+    font-size:38px;
+
 
     font-weight:800;
 
-    letter-spacing:3px;
+
+    letter-spacing:4px;
+
 
     color:#111;
 
+
+
 }
 
 
-.logo span{
-
-    color:var(--primary);
-
-}
 
 
 
@@ -163,22 +182,26 @@ NAV LINKS
 
 .nav-links{
 
+
     display:flex;
+
 
     align-items:center;
 
-    gap:35px;
 
-    overflow:visible;
+    gap:32px;
+
+
 
 }
 
 
+
 .nav-links li{
 
-    list-style:none;
 
     position:relative;
+
 
 }
 
@@ -186,13 +209,19 @@ NAV LINKS
 
 .nav-links a{
 
+
     font-size:16px;
+
 
     font-weight:600;
 
+
     color:#111;
 
+
     transition:.3s;
+
+
 
 }
 
@@ -200,9 +229,28 @@ NAV LINKS
 
 .nav-links a:hover{
 
+
     color:#9bc900;
 
+
+
 }
+
+
+
+.nav-links i{
+
+
+    font-size:12px;
+
+
+    margin-left:5px;
+
+
+
+}
+
+
 
 
 
@@ -213,15 +261,22 @@ BUTTON
 
 .header-btn{
 
-    background:var(--primary);
 
-    padding:16px 28px;
+    background:var(--yellow);
+
+
+    padding:16px 30px;
+
 
     border-radius:50px;
 
+
     font-weight:700;
 
-    transition:.3s;
+
+    cursor:pointer;
+
+
 
 }
 
@@ -229,14 +284,16 @@ BUTTON
 
 .header-btn:hover{
 
-    transform:translateY(-4px);
 
-    box-shadow:0 20px 40px rgba(214,255,0,.45);
+    box-shadow:0 15px 40px rgba(214,255,0,.5);
+
+
+    transform:translateY(-3px);
+
 
 }
-
 /* ======================================================
-   PREMIUM MEGA MENU
+MEGA MENU
 ====================================================== */
 
 
@@ -248,7 +305,6 @@ BUTTON
 
 
 
-/* MAIN MEGA MENU */
 
 .mega-menu{
 
@@ -256,7 +312,7 @@ BUTTON
     position:absolute;
 
 
-    top:100px;
+    top:110px;
 
 
     left:50%;
@@ -266,10 +322,7 @@ BUTTON
 
 
 
-    width:min(1250px, calc(100vw - 60px));
-
-
-    min-height:520px;
+    width:min(1200px, calc(100vw - 40px));
 
 
 
@@ -295,7 +348,7 @@ BUTTON
 
     box-shadow:
 
-    0 40px 100px rgba(0,0,0,.16);
+    0 40px 100px rgba(0,0,0,.15);
 
 
 
@@ -315,7 +368,7 @@ BUTTON
 
 
 
-    z-index:999999;
+    z-index:99999;
 
 
 
@@ -323,8 +376,6 @@ BUTTON
 
 
 
-
-/* OPEN MENU */
 
 
 .mega-parent:hover .mega-menu{
@@ -349,7 +400,8 @@ BUTTON
 
 
 
-/* HOVER BRIDGE */
+
+/* Hover bridge */
 
 
 .mega-parent::after{
@@ -370,7 +422,7 @@ BUTTON
     width:100%;
 
 
-    height:35px;
+    height:25px;
 
 
 
@@ -381,14 +433,14 @@ BUTTON
 
 
 /* ======================================================
-LEFT CATEGORY PANEL
+LEFT MENU
 ====================================================== */
 
 
 .menu-left{
 
 
-    background:#f7f7f7;
+    background:#f8f8f8;
 
 
     padding:30px;
@@ -402,16 +454,17 @@ LEFT CATEGORY PANEL
 
 
 
+
 .menu-left h3{
 
 
-    font-size:20px;
-
-
-    font-weight:700;
+    font-size:22px;
 
 
     margin-bottom:25px;
+
+
+    font-weight:800;
 
 
 
@@ -419,7 +472,6 @@ LEFT CATEGORY PANEL
 
 
 
-/* CATEGORY ITEMS */
 
 
 .category{
@@ -442,7 +494,7 @@ LEFT CATEGORY PANEL
 
 
 
-    border-radius:16px;
+    border-radius:18px;
 
 
 
@@ -455,6 +507,8 @@ LEFT CATEGORY PANEL
 
 
 }
+
+
 
 
 
@@ -471,14 +525,14 @@ LEFT CATEGORY PANEL
     display:flex;
 
 
-    align-items:center;
-
-
     justify-content:center;
 
 
+    align-items:center;
 
-    background:#fff;
+
+
+    background:white;
 
 
 
@@ -490,10 +544,6 @@ LEFT CATEGORY PANEL
 
 
 
-    color:#111;
-
-
-
     box-shadow:0 10px 25px rgba(0,0,0,.05);
 
 
@@ -502,20 +552,21 @@ LEFT CATEGORY PANEL
 
 
 
+
+
 .category span{
-
-
-    font-size:15px;
 
 
     font-weight:600;
 
 
-    color:#111;
+    font-size:15px;
 
 
 
 }
+
+
 
 
 
@@ -533,14 +584,18 @@ LEFT CATEGORY PANEL
 
 
 
+
+
 .category.active{
 
 
-    background:var(--primary);
+    background:var(--yellow);
 
 
 
 }
+
+
 
 
 
@@ -558,26 +613,51 @@ LEFT CATEGORY PANEL
 
 
 
+
+
+
+
 /* ======================================================
-MIDDLE SERVICES AREA
+MIDDLE CONTENT
 ====================================================== */
 
 
-.menu-middle{
+.menu-content{
 
 
     padding:35px;
 
 
 
-    display:grid;
-
-
-    grid-template-columns:repeat(2,1fr);
+}
 
 
 
-    gap:25px;
+.menu-content h3{
+
+
+    font-size:28px;
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+
+
+.menu-content p{
+
+
+    color:#777;
+
+
+    line-height:1.7;
+
+
+    margin-bottom:25px;
 
 
 
@@ -586,14 +666,39 @@ MIDDLE SERVICES AREA
 
 
 
-.service-box{
+
+.service-list{
 
 
-    padding:20px;
+    display:grid;
+
+
+    grid-template-columns:repeat(2,1fr);
+
+
+    gap:15px;
 
 
 
-    border-radius:18px;
+}
+
+
+
+
+.service-list a{
+
+
+    padding:15px;
+
+
+    background:#f8f8f8;
+
+
+    border-radius:15px;
+
+
+
+    font-weight:600;
 
 
 
@@ -605,30 +710,15 @@ MIDDLE SERVICES AREA
 
 
 
-.service-box:hover{
 
 
-    background:#f8f8f8;
+.service-list a:hover{
 
 
-    transform:translateY(-5px);
+    background:var(--yellow);
 
 
-
-}
-
-
-
-.service-box h4{
-
-
-    font-size:18px;
-
-
-    margin-bottom:10px;
-
-
-    color:#111;
+    transform:translateY(-4px);
 
 
 
@@ -636,81 +726,23 @@ MIDDLE SERVICES AREA
 
 
 
-.service-box p{
 
-
-    font-size:14px;
-
-
-    color:#777;
-
-
-    line-height:1.6;
-
-
-
-}
-
-
-
-.service-box a{
-
-
-    display:inline-block;
-
-
-    margin-top:12px;
-
-
-    font-size:14px;
-
-
-    font-weight:600;
-
-
-    color:#111;
-
-
-
-}
 
 /* ======================================================
-RIGHT CTA PANEL
+RIGHT CTA
 ====================================================== */
-
-
-.menu-right{
-
-
-    padding:30px;
-
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-}
-
 
 
 .menu-cta{
 
 
-    width:100%;
-
-
-    height:100%;
-
-
-
     background:#111;
 
 
+    margin:20px;
 
-    border-radius:24px;
+
+    border-radius:25px;
 
 
 
@@ -718,71 +750,17 @@ RIGHT CTA PANEL
 
 
 
-    color:#fff;
+    color:white;
 
 
 
     display:flex;
 
 
-
     flex-direction:column;
 
 
-
     justify-content:center;
-
-
-
-    position:relative;
-
-
-
-    overflow:hidden;
-
-
-
-}
-
-
-
-/* Neon Glow */
-
-
-.menu-cta::before{
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-
-    width:220px;
-
-
-    height:220px;
-
-
-
-    background:var(--primary);
-
-
-
-    filter:blur(100px);
-
-
-
-    opacity:.25;
-
-
-
-    top:-80px;
-
-
-
-    right:-80px;
 
 
 
@@ -795,27 +773,18 @@ RIGHT CTA PANEL
 .menu-cta h3{
 
 
-    font-size:28px;
-
-
-
-    font-weight:800;
-
+    font-size:30px;
 
 
     line-height:1.2;
 
 
-
-    margin-bottom:18px;
-
-
-
-    position:relative;
+    margin-bottom:15px;
 
 
 
 }
+
 
 
 
@@ -823,23 +792,13 @@ RIGHT CTA PANEL
 .menu-cta p{
 
 
-    color:#cccccc;
+    color:#ccc;
 
 
-
-    font-size:15px;
-
+    line-height:1.6;
 
 
-    line-height:1.7;
-
-
-
-    margin-bottom:30px;
-
-
-
-    position:relative;
+    margin-bottom:25px;
 
 
 
@@ -848,34 +807,21 @@ RIGHT CTA PANEL
 
 
 
-.menu-btn{
+
+.menu-cta a{
 
 
-    display:inline-flex;
+    display:inline-block;
 
 
-
-    align-items:center;
-
-
-
-    justify-content:center;
-
-
-
-    width:max-content;
-
-
-
-    background:var(--primary);
-
+    background:var(--yellow);
 
 
     color:#111;
 
 
 
-    padding:15px 28px;
+    padding:15px 25px;
 
 
 
@@ -887,203 +833,50 @@ RIGHT CTA PANEL
 
 
 
-    transition:.3s;
-
-
-
-    position:relative;
+    text-align:center;
 
 
 
 }
-
-
-
-
-.menu-btn:hover{
-
-
-    transform:translateY(-4px);
-
-
-
-    box-shadow:
-
-    0 20px 40px rgba(214,255,0,.35);
-
-
-
-}
-
-
-
 /* ======================================================
-MENU PREMIUM ANIMATION
-====================================================== */
-
-
-.mega-menu .category,
-.mega-menu .service-box,
-.mega-menu .menu-cta{
-
-
-    animation:menuFade .35s ease forwards;
-
-
-
-}
-
-
-
-@keyframes menuFade{
-
-
-    from{
-
-
-        opacity:0;
-
-
-        transform:translateY(15px);
-
-
-    }
-
-
-
-    to{
-
-
-        opacity:1;
-
-
-        transform:translateY(0);
-
-
-    }
-
-
-}
-
-
-
-
-/* ======================================================
-NAVBAR HOVER EFFECT
-====================================================== */
-
-
-.navbar:hover{
-
-
-    box-shadow:
-
-    0 30px 80px rgba(0,0,0,.12);
-
-
-
-}
-
-
-
-/* ======================================================
-MOBILE MENU SAFETY
-====================================================== */
-
-
-@media(max-width:1200px){
-
-
-    .mega-menu{
-
-
-        width:95vw;
-
-
-        grid-template-columns:220px 1fr;
-
-
-
-    }
-
-
-
-    .menu-right{
-
-
-        display:none;
-
-
-    }
-
-
-
-}
-
-
-
-@media(max-width:900px){
-
-
-    .mega-menu{
-
-
-        display:none;
-
-
-    }
-
-
-    .nav-links{
-
-
-        display:none;
-
-
-    }
-
-
-    .navbar{
-
-
-        padding:0 20px;
-
-
-    }
-
-
-
-}
-
-/* ======================================================
-   HERO SECTION
+HERO SECTION
 ====================================================== */
 
 
 .hero{
 
+
     height:100vh;
 
-    min-height:800px;
+
+    min-height:750px;
+
 
     position:relative;
 
+
     display:flex;
+
 
     align-items:center;
 
+
     justify-content:center;
+
+
 
     overflow:hidden;
 
+
+
     background:#000;
+
+
 
 }
 
 
 
-
-/* VIDEO BACKGROUND */
 
 
 .hero video{
@@ -1092,10 +885,8 @@ MOBILE MENU SAFETY
     position:absolute;
 
 
-    top:0;
+    inset:0;
 
-
-    left:0;
 
 
     width:100%;
@@ -1117,7 +908,8 @@ MOBILE MENU SAFETY
 
 
 
-.hero-overlay{
+
+.overlay{
 
 
     position:absolute;
@@ -1129,15 +921,7 @@ MOBILE MENU SAFETY
 
     background:
 
-    linear-gradient(
-
-    180deg,
-
-    rgba(0,0,0,.55),
-
-    rgba(0,0,0,.75)
-
-    );
+    rgba(0,0,0,.60);
 
 
 
@@ -1150,8 +934,6 @@ MOBILE MENU SAFETY
 
 
 
-/* HERO CONTENT */
-
 
 .hero-content{
 
@@ -1163,7 +945,11 @@ MOBILE MENU SAFETY
 
 
 
-    max-width:1000px;
+    max-width:950px;
+
+
+
+    padding:20px;
 
 
 
@@ -1175,32 +961,20 @@ MOBILE MENU SAFETY
 
 
 
-    padding:20px;
-
-
-
 }
 
 
 
 
 
-.hero-tag{
+.tag{
 
 
-    display:inline-flex;
-
-
-
-    align-items:center;
+    display:inline-block;
 
 
 
-    gap:10px;
-
-
-
-    padding:10px 20px;
+    padding:10px 22px;
 
 
 
@@ -1212,11 +986,11 @@ MOBILE MENU SAFETY
 
 
 
-    backdrop-filter:blur(15px);
-
-
-
     border:1px solid rgba(255,255,255,.2);
+
+
+
+    backdrop-filter:blur(15px);
 
 
 
@@ -1233,10 +1007,11 @@ MOBILE MENU SAFETY
 
 
 
+
 .hero h1{
 
 
-    font-size:80px;
+    font-size:85px;
 
 
 
@@ -1248,7 +1023,7 @@ MOBILE MENU SAFETY
 
 
 
-    letter-spacing:-2px;
+    letter-spacing:-3px;
 
 
 
@@ -1260,10 +1035,11 @@ MOBILE MENU SAFETY
 
 
 
+
 .hero h1 span{
 
 
-    color:var(--primary);
+    color:var(--yellow);
 
 
 
@@ -1276,15 +1052,11 @@ MOBILE MENU SAFETY
 .hero p{
 
 
-    max-width:750px;
+    max-width:780px;
 
 
 
     margin:auto;
-
-
-
-    color:#ddd;
 
 
 
@@ -1296,13 +1068,14 @@ MOBILE MENU SAFETY
 
 
 
+    color:#ddd;
+
+
+
 }
 
 
 
-
-
-/* HERO BUTTONS */
 
 
 .hero-buttons{
@@ -1333,7 +1106,7 @@ MOBILE MENU SAFETY
 .primary-btn{
 
 
-    background:var(--primary);
+    background:var(--yellow);
 
 
 
@@ -1372,7 +1145,7 @@ MOBILE MENU SAFETY
 
     box-shadow:
 
-    0 20px 50px rgba(214,255,0,.35);
+    0 20px 50px rgba(214,255,0,.4);
 
 
 
@@ -1381,10 +1154,11 @@ MOBILE MENU SAFETY
 
 
 
+
 .secondary-btn{
 
 
-    border:1px solid rgba(255,255,255,.6);
+    border:2px solid rgba(255,255,255,.6);
 
 
 
@@ -1420,34 +1194,26 @@ MOBILE MENU SAFETY
     background:white;
 
 
-
     color:#111;
 
 
 
 }
+
 
 
 
 
 
 /* ======================================================
-TRUSTED TECHNOLOGY SECTION
+ANIMATIONS
 ====================================================== */
 
 
-.trusted{
+.hero-content{
 
 
-    padding:80px 5%;
-
-
-
-    background:#fff;
-
-
-
-    overflow:hidden;
+    animation:fadeUp .8s ease;
 
 
 
@@ -1455,118 +1221,28 @@ TRUSTED TECHNOLOGY SECTION
 
 
 
-
-.trusted-title{
-
-
-    text-align:center;
-
-
-
-    color:#777;
-
-
-
-    font-size:14px;
-
-
-
-    text-transform:uppercase;
-
-
-
-    letter-spacing:3px;
-
-
-
-    margin-bottom:45px;
-
-
-
-}
-
-
-
-
-.tech-slider{
-
-
-    display:flex;
-
-
-
-    gap:25px;
-
-
-
-    width:max-content;
-
-
-
-    animation:scrollTech 25s linear infinite;
-
-
-
-}
-
-
-
-
-
-.tech-item{
-
-
-    padding:18px 35px;
-
-
-
-    border-radius:50px;
-
-
-
-    background:#f7f7f7;
-
-
-
-    border:1px solid #eee;
-
-
-
-    font-weight:600;
-
-
-
-    color:#111;
-
-
-
-    white-space:nowrap;
-
-
-
-}
-
-
-
-
-
-@keyframes scrollTech{
+@keyframes fadeUp{
 
 
     from{
 
 
-        transform:translateX(0);
+        opacity:0;
+
+
+        transform:translateY(40px);
 
 
     }
 
 
-
     to{
 
 
-        transform:translateX(-50%);
+        opacity:1;
+
+
+        transform:translateY(0);
 
 
     }
@@ -1577,18 +1253,22 @@ TRUSTED TECHNOLOGY SECTION
 
 
 
+
+
 /* ======================================================
-RESPONSIVE HERO
+RESPONSIVE
 ====================================================== */
 
 
-@media(max-width:900px){
+@media(max-width:1200px){
 
 
-.hero{
+
+.nav-links{
 
 
-    min-height:700px;
+    gap:18px;
+
 
 
 }
@@ -1598,10 +1278,77 @@ RESPONSIVE HERO
 .hero h1{
 
 
-    font-size:48px;
+    font-size:65px;
 
 
 }
+
+
+
+}
+
+
+
+
+@media(max-width:900px){
+
+
+.nav-links{
+
+
+    display:none;
+
+
+}
+
+
+
+.header-btn{
+
+
+    display:none;
+
+
+}
+
+
+
+
+.navbar{
+
+
+    padding:0 20px;
+
+
+
+}
+
+
+
+.logo h2{
+
+
+    font-size:30px;
+
+
+
+}
+
+
+
+
+.hero h1{
+
+
+    font-size:48px;
+
+
+    letter-spacing:-1px;
+
+
+
+}
+
 
 
 
@@ -1611,7 +1358,9 @@ RESPONSIVE HERO
     font-size:18px;
 
 
+
 }
+
 
 
 
@@ -1621,677 +1370,17 @@ RESPONSIVE HERO
     flex-direction:column;
 
 
-}
-
-
-
-}
-
-/* ======================================================
-   SERVICES SECTION
-====================================================== */
-
-
-.services{
-
-    padding:120px 5%;
-
-    background:#fff;
-
-}
-
-
-
-.section-title{
-
-
-    text-align:center;
-
-    max-width:800px;
-
-    margin:auto;
-
-    margin-bottom:70px;
-
-
-}
-
-
-
-.section-title span{
-
-
-    color:#8dbb00;
-
-    font-weight:700;
-
-    text-transform:uppercase;
-
-    letter-spacing:3px;
-
-    font-size:14px;
-
-
-}
-
-
-
-.section-title h2{
-
-
-    font-size:60px;
-
-    line-height:1.1;
-
-    margin-top:15px;
-
-    font-weight:800;
-
-
-}
-
-
-
-.section-title p{
-
-
-    color:#777;
-
-    font-size:20px;
-
-    margin-top:20px;
-
-    line-height:1.7;
-
 
 }
 
 
 
 
+.mega-menu{
 
-/* ======================================================
-BENTO SERVICE GRID
-====================================================== */
 
+    display:none;
 
-.service-grid{
-
-
-    max-width:1300px;
-
-    margin:auto;
-
-
-    display:grid;
-
-
-    grid-template-columns:repeat(3,1fr);
-
-
-    gap:25px;
-
-
-}
-
-
-
-
-.service-card{
-
-
-    background:#fff;
-
-
-    border:1px solid #eeeeee;
-
-
-    border-radius:30px;
-
-
-    padding:35px;
-
-
-    min-height:280px;
-
-
-    transition:.35s;
-
-
-    position:relative;
-
-
-    overflow:hidden;
-
-
-}
-
-
-
-
-
-.service-card::before{
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    width:150px;
-
-
-    height:150px;
-
-
-    background:var(--primary);
-
-
-    filter:blur(100px);
-
-
-    opacity:.25;
-
-
-    right:-50px;
-
-
-    top:-50px;
-
-
-}
-
-
-
-
-.service-card:hover{
-
-
-    transform:translateY(-10px);
-
-
-    box-shadow:0 30px 70px rgba(0,0,0,.1);
-
-
-}
-
-
-
-
-.service-icon{
-
-
-    width:60px;
-
-
-    height:60px;
-
-
-    border-radius:18px;
-
-
-    background:#111;
-
-
-    color:white;
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
-
-
-    font-size:25px;
-
-
-    margin-bottom:25px;
-
-
-}
-
-
-
-.service-card h3{
-
-
-    font-size:26px;
-
-
-    margin-bottom:15px;
-
-
-}
-
-
-
-.service-card p{
-
-
-    color:#777;
-
-
-    line-height:1.7;
-
-
-}
-
-
-
-
-
-/* ======================================================
-CASE STUDIES
-====================================================== */
-
-
-.case-section{
-
-
-    padding:120px 5%;
-
-
-    background:#111;
-
-
-    color:white;
-
-
-}
-
-
-
-
-.case-grid{
-
-
-    max-width:1300px;
-
-
-    margin:auto;
-
-
-    display:grid;
-
-
-    grid-template-columns:repeat(3,1fr);
-
-
-    gap:25px;
-
-
-}
-
-
-
-
-.case-card{
-
-
-    background:#1b1b1b;
-
-
-    border-radius:30px;
-
-
-    padding:35px;
-
-
-    min-height:350px;
-
-
-    transition:.35s;
-
-
-}
-
-
-
-
-.case-card:hover{
-
-
-    transform:translateY(-8px);
-
-
-}
-
-
-
-
-.case-card span{
-
-
-    color:var(--primary);
-
-
-    font-size:14px;
-
-
-    text-transform:uppercase;
-
-
-    letter-spacing:2px;
-
-
-}
-
-
-
-
-.case-card h3{
-
-
-    font-size:30px;
-
-
-    margin:25px 0;
-
-
-}
-
-
-
-
-.case-card p{
-
-
-    color:#bbb;
-
-
-    line-height:1.7;
-
-
-}
-
-
-
-
-
-/* ======================================================
-RESULTS SECTION
-====================================================== */
-
-
-.results{
-
-
-    padding:100px 5%;
-
-
-    background:#fff;
-
-
-}
-
-
-
-
-.results-grid{
-
-
-    max-width:1200px;
-
-
-    margin:auto;
-
-
-    display:grid;
-
-
-    grid-template-columns:repeat(4,1fr);
-
-
-    gap:30px;
-
-
-    text-align:center;
-
-
-}
-
-
-
-.result-box h2{
-
-
-    font-size:55px;
-
-
-    font-weight:800;
-
-
-}
-
-
-
-.result-box p{
-
-
-    color:#777;
-
-
-    margin-top:10px;
-
-
-}
-
-
-
-
-
-/* ======================================================
-FINAL CTA
-====================================================== */
-
-
-.final-cta{
-
-
-    margin:80px 5%;
-
-
-    padding:80px 40px;
-
-
-    border-radius:40px;
-
-
-    background:#111;
-
-
-    color:white;
-
-
-    text-align:center;
-
-
-}
-
-
-
-.final-cta h2{
-
-
-    font-size:65px;
-
-
-    line-height:1.1;
-
-
-}
-
-
-
-.final-cta span{
-
-
-    color:var(--primary);
-
-
-}
-
-
-
-
-.final-cta p{
-
-
-    color:#ccc;
-
-
-    font-size:20px;
-
-
-    margin:25px auto 40px;
-
-
-    max-width:700px;
-
-
-}
-
-
-
-
-
-/* ======================================================
-FOOTER
-====================================================== */
-
-
-footer{
-
-
-    background:#111;
-
-
-    color:white;
-
-
-    padding:60px 5%;
-
-
-}
-
-
-
-.footer-grid{
-
-
-    display:grid;
-
-
-    grid-template-columns:2fr 1fr 1fr 1fr;
-
-
-    gap:40px;
-
-
-}
-
-
-
-.footer-grid h4{
-
-
-    margin-bottom:20px;
-
-
-}
-
-
-
-.footer-grid a{
-
-
-    display:block;
-
-
-    color:#aaa;
-
-
-    margin-bottom:12px;
-
-
-    transition:.3s;
-
-
-}
-
-
-
-.footer-grid a:hover{
-
-
-    color:var(--primary);
-
-
-}
-
-
-
-.footer-bottom{
-
-
-    border-top:1px solid #333;
-
-
-    margin-top:40px;
-
-
-    padding-top:25px;
-
-
-    color:#777;
-
-
-    text-align:center;
-
-
-}
-
-
-
-
-
-/* ======================================================
-FINAL MOBILE RESPONSIVE
-====================================================== */
-
-
-@media(max-width:1100px){
-
-
-.service-grid,
-
-.case-grid{
-
-
-    grid-template-columns:repeat(2,1fr);
-
-
-}
-
-
-
-.results-grid{
-
-
-    grid-template-columns:repeat(2,1fr);
-
-
-}
-
-
-.footer-grid{
-
-
-    grid-template-columns:repeat(2,1fr);
 
 
 }
@@ -2302,42 +1391,24 @@ FINAL MOBILE RESPONSIVE
 
 
 
-@media(max-width:700px){
+@media(max-width:500px){
 
 
 
-.section-title h2,
-
-.final-cta h2{
+.hero h1{
 
 
-    font-size:38px;
-
-
-}
-
-
-
-.service-grid,
-
-.case-grid,
-
-.results-grid,
-
-.footer-grid{
-
-
-    grid-template-columns:1fr;
+    font-size:40px;
 
 
 }
 
 
 
-.final-cta{
+.tag{
 
 
-    padding:50px 20px;
+    font-size:12px;
 
 
 }
