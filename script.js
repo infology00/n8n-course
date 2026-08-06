@@ -3,7 +3,10 @@
 // =====================================
 
 
-// Mega Menu
+// ================================
+// MEGA MENU
+// ================================
+
 
 const megaParent = document.querySelector(".mega-parent");
 const megaMenu = document.querySelector(".mega-menu");
@@ -12,9 +15,17 @@ const megaMenu = document.querySelector(".mega-menu");
 if(megaParent && megaMenu){
 
 
+    let closeTimer;
+
+
     megaParent.addEventListener("mouseenter", function(){
 
+
+        clearTimeout(closeTimer);
+
+
         megaMenu.classList.add("active");
+
 
     });
 
@@ -22,7 +33,15 @@ if(megaParent && megaMenu){
 
     megaParent.addEventListener("mouseleave", function(){
 
-        megaMenu.classList.remove("active");
+
+        closeTimer = setTimeout(function(){
+
+
+            megaMenu.classList.remove("active");
+
+
+        },300);
+
 
     });
 
@@ -30,7 +49,12 @@ if(megaParent && megaMenu){
 
     megaMenu.addEventListener("mouseenter", function(){
 
+
+        clearTimeout(closeTimer);
+
+
         megaMenu.classList.add("active");
+
 
     });
 
@@ -38,7 +62,15 @@ if(megaParent && megaMenu){
 
     megaMenu.addEventListener("mouseleave", function(){
 
-        megaMenu.classList.remove("active");
+
+        closeTimer = setTimeout(function(){
+
+
+            megaMenu.classList.remove("active");
+
+
+        },300);
+
 
     });
 
@@ -49,11 +81,15 @@ if(megaParent && megaMenu){
 
 
 
-// Mobile Menu
+// ================================
+// MOBILE MENU
+// ================================
+
 
 const menuBtn = document.querySelector(".menu-toggle");
 
 const navLinks = document.querySelector(".nav-links");
+
 
 
 if(menuBtn && navLinks){
@@ -61,7 +97,9 @@ if(menuBtn && navLinks){
 
     menuBtn.addEventListener("click", function(){
 
+
         navLinks.classList.toggle("show");
+
 
     });
 
@@ -72,7 +110,9 @@ if(menuBtn && navLinks){
 
 
 
-// Navbar shadow on scroll
+// ================================
+// NAVBAR SHADOW ON SCROLL
+// ================================
 
 
 window.addEventListener("scroll", function(){
@@ -81,10 +121,12 @@ window.addEventListener("scroll", function(){
     const navbar = document.querySelector(".navbar");
 
 
+
     if(navbar){
 
 
         if(window.scrollY > 50){
+
 
             navbar.classList.add("scrolled");
 
