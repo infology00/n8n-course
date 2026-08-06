@@ -1,514 +1,178 @@
-// =====================================
-// TETA AI KNOWLEDGE ENGINE
-// PART 1
-// =====================================
-
-
 const tetaKnowledge = {
 
+start: {
 
-// =====================================
-// GENERAL START
-// =====================================
+question: "How can I help you today?",
 
-general:{
-
-title:"AI Business Assistant",
-
-questions:[
+options: [
 
 {
-user:[
-"help",
-"need help",
-"support",
-"solution"
-],
-
-answer:{
-
-message:
-"I can help you with AI automation, CRM, marketing, integrations, business systems and growth strategies.",
-
-next:[
-"AI Automation",
-"CRM Help",
-"Marketing",
-"AI Agents",
-"Business Audit"
-]
-
-}
-
-}
-
-]
-
+text:"I need AI Automation help",
+next:"automation"
 },
-
-
-
-
-// =====================================
-// AI AUTOMATION
-// =====================================
-
-
-automation:{
-
-
-keywords:[
-
-"automation",
-"automate",
-"workflow",
-"process",
-"manual work"
-
-],
-
-
-solutions:{
-
-
-default:{
-
-message:
-
-"AI automation can reduce repetitive work and connect your tools together.",
-
-
-recommendations:[
-
-"n8n Workflow Automation",
-"CRM Automation",
-"AI Agents",
-"API Integrations",
-"Business Process Audit"
-
-]
-
-
-},
-
-
-
-n8n:{
-
-
-keywords:[
-
-"n8n",
-"workflow",
-"node",
-"webhook"
-
-],
-
-
-
-message:
-
-"For n8n automation you can connect apps using triggers, actions and APIs.",
-
-
-solution:[
-
-
-"1. Create workflow in n8n",
-
-"2. Add trigger (Webhook, Schedule, App Event)",
-
-"3. Connect API credentials",
-
-"4. Process data",
-
-"5. Send output to CRM or customer"
-
-
-],
-
-
-
-examples:[
-
-
-"WhatsApp automation",
-
-"Lead management",
-
-"CRM updates",
-
-"Email automation",
-
-"AI agents"
-
-]
-
-
-},
-
-
-
-
-api:{
-
-
-keywords:[
-
-"api",
-"connection",
-"integrate",
-"integration"
-
-],
-
-
-message:
-
-"API integration allows different software systems to communicate with each other.",
-
-
-solution:[
-
-
-"Check API documentation",
-
-"Generate API credentials",
-
-"Create authentication",
-
-"Send request",
-
-"Process response"
-
-
-]
-
-
-}
-
-
-
-}
-
-
-
-},
-
-
-
-
-
-
-
-// =====================================
-// CRM
-// =====================================
-
-
-crm:{
-
-
-keywords:[
-
-"crm",
-"pipeline",
-"lead",
-"customer management"
-
-],
-
-
-systems:{
-
-
-ghl:{
-
-
-keywords:[
-
-"ghl",
-"go high level",
-"gohighlevel"
-
-],
-
-
-
-message:
-
-"GoHighLevel can manage leads, pipelines, conversations, campaigns and automation.",
-
-
-
-solutions:[
-
-
-"Lead Capture Forms",
-
-"Pipeline Setup",
-
-"Email Follow Ups",
-
-"SMS Automation",
-
-"Appointment Booking",
-
-"AI Conversation Agent"
-
-
-]
-
-},
-
-
-
-
-hubspot:{
-
-
-keywords:[
-
-"hubspot"
-
-],
-
-
-message:
-
-"HubSpot can organize your sales process and automate customer journeys.",
-
-
-solutions:[
-
-
-"Lead Tracking",
-
-"Deal Pipeline",
-
-"Email Automation",
-
-"CRM Reports",
-
-"Marketing Automation"
-
-
-]
-
-
-}
-
-
-
-}
-
-
-
-},
-
-
-
-
-
-
-
-// =====================================
-// WHATSAPP
-// =====================================
-
-
-whatsapp:{
-
-
-keywords:[
-
-"whatsapp",
-"wa",
-"whatsapp api"
-
-],
-
-
-message:
-
-"WhatsApp automation requires WhatsApp Business API connected with automation tools.",
-
-
-
-solutions:[
-
-
-"Meta Developer Account",
-
-"WhatsApp Business API",
-
-"Phone Number ID",
-
-"Access Token",
-
-"Webhook Connection",
-
-"n8n Integration"
-
-
-],
-
-
-
-example:
-
 
 {
+text:"I need CRM help",
+next:"crm"
+},
 
-question:
+{
+text:"I need n8n help",
+next:"n8n"
+},
 
-"How to connect WhatsApp with n8n?",
+{
+text:"I need AI Agent help",
+next:"agent"
+},
 
+{
+text:"I need Marketing help",
+next:"marketing"
+},
 
-answer:
-
-`
-
-Steps:
-
-1. Create Meta Developer Account
-
-2. Create WhatsApp Business App
-
-3. Generate Access Token
-
-4. Get Phone Number ID
-
-5. Add Webhook URL in Meta
-
-6. Connect webhook with n8n
-
-7. Send and receive messages automatically
-
-
-Recommended Setup:
-
-WhatsApp API + n8n + CRM + AI Agent
-
-`
-
+{
+text:"I need Ads help",
+next:"ads"
 }
 
-
+]
 
 },
 
 
 
+automation: {
 
+question:"What type of automation do you need?",
 
+options:[
 
+{
+text:"Business workflow automation",
+solution:"I can help you automate repetitive tasks, connect your tools and build complete AI workflows."
+},
 
-// =====================================
-// AI AGENTS
-// =====================================
+{
+text:"Lead automation",
+solution:"We can capture leads, qualify them using AI and automatically send follow ups."
+},
 
-
-agents:{
-
-
-keywords:[
-
-"agent",
-"ai agent",
-"bot",
-"assistant"
-
-],
-
-
-types:{
-
-
-sales:{
-
-message:
-
-"AI Sales Agent can qualify leads, answer questions and book appointments.",
-
-
-features:[
-
-"Lead Qualification",
-
-"Follow Ups",
-
-"CRM Updates",
-
-"Meeting Booking"
+{
+text:"Content automation",
+solution:"AI can generate, schedule and distribute your content automatically."
+}
 
 ]
-
 
 },
 
 
 
-support:{
+crm: {
 
-message:
+question:"Which CRM are you using?",
 
-"AI Support Agent handles customer questions 24/7.",
+options:[
 
+{
+text:"GoHighLevel",
+next:"ghl"
+},
 
-features:[
+{
+text:"HubSpot",
+solution:"I can help setup pipelines, workflows, lead management and integrations."
+},
 
-"FAQs",
-
-"Knowledge Base",
-
-"Ticket Creation",
-
-"Customer Support"
+{
+text:"No CRM",
+solution:"I recommend setting up a CRM system based on your business process."
+}
 
 ]
-
 
 },
 
 
 
+ghl: {
 
-voice:{
+question:"What do you need in GoHighLevel?",
 
+options:[
 
-message:
+{
+text:"Pipeline setup",
+solution:"Create sales pipelines, stages, automation and follow-up systems."
+},
 
-"AI Voice Agent can handle inbound and outbound calls.",
+{
+text:"Workflow automation",
+solution:"Build triggers, actions, email/SMS automation and CRM updates."
+},
 
-
-features:[
-
-
-"Answer Calls",
-
-"Qualify Customers",
-
-"Book Appointments",
-
-"Update CRM"
+{
+text:"AI Agent",
+solution:"Setup Conversation AI, knowledge base and appointment booking."
+}
 
 ]
 
+},
 
+
+
+n8n: {
+
+question:"What do you want to build with n8n?",
+
+options:[
+
+{
+text:"WhatsApp automation",
+solution:"Connect Meta WhatsApp API with n8n using webhooks and automate conversations."
+},
+
+{
+text:"CRM integration",
+solution:"Connect n8n with GHL, HubSpot or other CRMs using APIs."
+},
+
+{
+text:"AI Agent workflow",
+solution:"Build AI agents with tools, memory and automation workflows."
 }
 
+]
+
+},
 
 
+
+agent: {
+
+question:"Which AI Agent do you need?",
+
+options:[
+
+{
+text:"Customer Support Agent",
+solution:"AI chatbot that answers customers, handles FAQs and escalates conversations."
+},
+
+{
+text:"Sales Agent",
+solution:"AI agent that qualifies leads and books meetings."
+},
+
+{
+text:"Voice Agent",
+solution:"AI calling agent for inbound and outbound calls."
 }
 
+]
 
 }
-
-
-
-
-
 
 };
