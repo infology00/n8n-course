@@ -281,227 +281,83 @@ ${x}
 });
 
 
+// ===============================
+// TETA AI
+// ===============================
 
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
 
+function startTeta() {
+    loadNode("start");
+}
 
+function loadNode(nodeName) {
 
-// =====================================
-// TETA AI ENGINE
-// =====================================
+    const node = window.tetaKnowledge[nodeName];
 
+    if (!node) {
+        questionEl.innerHTML = "Knowledge not found.";
+        optionsEl.innerHTML = "";
+        return;
+    }
 
-const questionBox=document.getElementById("question");
-const optionBox=document.getElementById("options");
+    questionEl.innerHTML = node.question;
+    optionsEl.innerHTML = "";
 
+    node.options.forEach(item => {
 
+        const btn = document.createElement("button");
 
-let tetaMemory=[];
+        btn.innerHTML = item.text;
 
+        btn.addEventListener("click", () => {
 
+            if (item.next) {
 
-function startTeta(){
+                loadNode(item.next);
 
+            }
 
-askTeta(
+            if (item.solution) {
 
-"Hi, I am Teta AI Genie. How can I help you?",
+                showSolution(item.solution);
 
-[
+            }
 
-"I need business help",
+        });
 
-"I need automation help",
+        optionsEl.appendChild(btn);
 
-"I have a technical question",
-
-"I want AI strategy"
-
-]
-
-
-);
-
+    });
 
 }
 
+function showSolution(text) {
 
+    questionEl.innerHTML = "Solution";
 
+    optionsEl.innerHTML = `
+        <p style="color:#bfbfbf;line-height:1.8;">
+            ${text}
+        </p>
 
-function askTeta(question,answers){
+        <br>
 
+        <button id="restartTeta">
+            Ask Another Question
+        </button>
+    `;
 
-questionBox.innerHTML=question;
-
-
-optionBox.innerHTML="";
-
-
-answers.forEach(answer=>{
-
-
-let btn=document.createElement("button");
-
-
-btn.innerHTML=answer;
-
-
-btn.onclick=()=>{
-
-tetaAnswer(answer);
-
-};
-
-
-optionBox.appendChild(btn);
-
-
-});
-
+    document
+        .getElementById("restartTeta")
+        .addEventListener("click", startTeta);
 
 }
 
+startTeta();
 
 
-
-
-
-function tetaAnswer(input){
-
-
-tetaMemory.push(input);
-
-
-
-let text=input.toLowerCase();
-
-
-
-let found=null;
-
-
-
-Object.keys(tetaKnowledge).forEach(key=>{
-
-
-let data=tetaKnowledge[key];
-
-
-if(
-text.includes(key.toLowerCase())
-){
-
-found=data;
-
-}
-
-
-});
-
-
-
-
-
-if(found){
-
-
-showResult(found);
-
-
-return;
-
-
-}
-
-
-
-
-
-askTeta(
-
-"What do you need help with?",
-
-[
-
-"n8n Automation",
-
-"CRM Setup",
-
-"GHL",
-
-"WhatsApp Integration",
-
-"AI Agents",
-
-"Ads & Marketing"
-
-]
-
-
-);
-
-
-
-}
-
-
-
-
-
-function showResult(data){
-
-
-let answer="";
-
-
-if(data.answer){
-
-answer=data.answer;
-
-}
-
-else if(data.solution){
-
-answer=data.solution;
-
-}
-
-else{
-
-answer="I found a possible solution. Let me guide you step by step.";
-
-}
-
-
-
-questionBox.innerHTML=data.title || "Teta Solution";
-
-
-
-optionBox.innerHTML=`
-
-<div style="
-color:#aaa;
-line-height:1.8;
-font-size:17px;
-">
-
-${answer}
-
-</div>
-
-
-<button onclick="location.reload()">
-
-Start Again
-
-</button>
-
-
-`;
-
-
-
-}
 
 
 
