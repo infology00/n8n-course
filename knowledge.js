@@ -1,3 +1,4 @@
+console.log("knowledge.js loaded");
 window.tetaKnowledge = {
 
 start: {
