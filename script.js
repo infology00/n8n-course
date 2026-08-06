@@ -361,11 +361,9 @@ function showSolution(text) {
             Want to implement this AI solution for your business?
             </p>
 
-
             <button id="bookCall">
                 Book Free AI Strategy Call
             </button>
-
 
             <button id="restartTeta">
                 Explore Another Solution
@@ -373,6 +371,21 @@ function showSolution(text) {
 
         </div>
     `;
+
+
+    document
+    .getElementById("restartTeta")
+    .addEventListener("click", startTeta);
+
+
+    document
+    .getElementById("bookCall")
+    .addEventListener("click", showLeadForm);
+
+}
+
+
+
 function showLeadForm(){
 
     questionEl.innerHTML = "Let's build your AI solution";
@@ -398,17 +411,7 @@ function showLeadForm(){
     `;
 
 }
-
-    document
-    .getElementById("restartTeta")
-    .addEventListener("click", startTeta);
-
-
-  document
-.getElementById("bookCall")
-.addEventListener("click", showLeadForm);
-}
-
+   
 if (questionEl && optionsEl) {
     startTeta();
 }
