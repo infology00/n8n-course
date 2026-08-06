@@ -1127,7 +1127,9 @@ AI AUTOMATION SHOWCASE
 
 
 
-/* LEFT CONTENT */
+/* =====================================
+LEFT CONTENT
+===================================== */
 
 
 .showcase-content{
@@ -1138,10 +1140,7 @@ AI AUTOMATION SHOWCASE
 
 
 
-
-
 .section-tag{
-
 
     display:inline-flex;
 
@@ -1149,30 +1148,21 @@ AI AUTOMATION SHOWCASE
 
     gap:8px;
 
-
     padding:8px 18px;
-
 
     background:#f4f4f0;
 
-
     border-radius:50px;
-
 
     color:#111;
 
-
     font-size:13px;
-
 
     font-weight:700;
 
-
     letter-spacing:1px;
 
-
     margin-bottom:25px;
-
 
 }
 
@@ -1182,21 +1172,15 @@ AI AUTOMATION SHOWCASE
 
 .showcase-content h2{
 
-
     font-size:68px;
-
 
     line-height:1.05;
 
-
     letter-spacing:-3px;
-
 
     font-weight:800;
 
-
     color:#111;
-
 
 }
 
@@ -1206,9 +1190,7 @@ AI AUTOMATION SHOWCASE
 
 .showcase-content h2 span{
 
-
     color:#D6FF00;
-
 
 }
 
@@ -1218,21 +1200,15 @@ AI AUTOMATION SHOWCASE
 
 .showcase-content p{
 
-
     margin-top:25px;
-
 
     max-width:520px;
 
-
     font-size:19px;
-
 
     line-height:1.7;
 
-
     color:#666;
-
 
 }
 
@@ -1240,12 +1216,12 @@ AI AUTOMATION SHOWCASE
 
 
 
-
-/* BUTTONS */
+/* =====================================
+BUTTONS
+===================================== */
 
 
 .showcase-buttons{
-
 
     display:flex;
 
@@ -1253,26 +1229,19 @@ AI AUTOMATION SHOWCASE
 
     margin-top:35px;
 
-
 }
-
 
 
 
 .showcase-buttons a{
 
-
     padding:16px 30px;
-
 
     border-radius:50px;
 
-
     font-weight:700;
 
-
     transition:.3s;
-
 
 }
 
@@ -1282,12 +1251,9 @@ AI AUTOMATION SHOWCASE
 
 .showcase-buttons a:first-child{
 
-
     background:#111;
 
-
     color:white;
-
 
 }
 
@@ -1297,12 +1263,9 @@ AI AUTOMATION SHOWCASE
 
 .showcase-buttons a:last-child{
 
-
     border:1px solid #ddd;
 
-
     color:#111;
-
 
 }
 
@@ -1312,13 +1275,172 @@ AI AUTOMATION SHOWCASE
 
 .showcase-buttons a:hover{
 
-
     transform:translateY(-4px);
-
 
 }
 
 
+
+
+
+/* =====================================
+VIDEO PYRAMID
+===================================== */
+
+
+.video-pyramid{
+
+    width:45%;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:18px;
+
+    transform:rotate(-3deg);
+
+}
+
+
+
+
+
+.video-card{
+
+    height:130px;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    background:#111;
+
+    border:5px solid white;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+
+    transition:.4s;
+
+    position:relative;
+
+    cursor:pointer;
+
+}
+
+
+
+
+
+.video-card video{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+
+
+
+.video-card:hover{
+
+    transform:scale(1.12) translateY(-10px);
+
+    z-index:5;
+
+    box-shadow:0 30px 70px rgba(0,0,0,.25);
+
+}
+
+
+
+
+
+/* PLAY BUTTON */
+
+
+.play-btn{
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    background:#D6FF00;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#111;
+
+    font-size:18px;
+
+    opacity:0;
+
+    transition:.3s;
+
+}
+
+
+
+
+
+.video-card:hover .play-btn{
+
+    opacity:1;
+
+}
+
+
+
+
+
+/* =====================================
+RESPONSIVE
+===================================== */
+
+
+@media(max-width:900px){
+
+
+.automation-showcase{
+
+    flex-direction:column;
+
+    gap:50px;
+
+}
+
+
+
+.showcase-content,
+.video-pyramid{
+
+    width:100%;
+
+}
+
+
+
+.showcase-content h2{
+
+    font-size:42px;
 
 }
 
