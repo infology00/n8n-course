@@ -373,21 +373,40 @@ function showSolution(text) {
 
         </div>
     `;
+function showLeadForm(){
 
+    questionEl.innerHTML = "Let's build your AI solution";
+
+    optionsEl.innerHTML = `
+
+        <div class="teta-form">
+
+            <input id="tetaName" placeholder="Your Name">
+
+            <input id="tetaEmail" placeholder="Business Email">
+
+            <input id="tetaCompany" placeholder="Company Name">
+
+            <textarea id="tetaChallenge" placeholder="What would you like to automate?"></textarea>
+
+            <button id="submitTeta">
+                Submit Request
+            </button>
+
+        </div>
+
+    `;
+
+}
 
     document
     .getElementById("restartTeta")
     .addEventListener("click", startTeta);
 
 
-    document
-    .getElementById("bookCall")
-    .addEventListener("click", ()=>{
-
-        window.location.href="#contact";
-
-    });
-
+  document
+.getElementById("bookCall")
+.addEventListener("click", showLeadForm);
 }
 
 if (questionEl && optionsEl) {
