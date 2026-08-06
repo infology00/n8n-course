@@ -285,31 +285,47 @@ ${x}
 // TETA AI
 // ===============================
 
+if (!window.tetaKnowledge) {
+    console.error("knowledge.js is not loaded");
+    return;
+}    
+
 const questionEl = document.getElementById("question");
 const optionsEl = document.getElementById("options");
 
 function startTeta() {
     loadNode("start");
 }
-
 function loadNode(nodeName) {
 
     const node = window.tetaKnowledge[nodeName];
 
     if (!node) {
-        questionEl.innerHTML = "Knowledge not found.";
-        optionsEl.innerHTML = "";
+
+        questionEl.innerHTML = "Sorry, I couldn't find that topic.";
+
+        optionsEl.innerHTML = `
+            <button id="restartTeta">
+                Start Again
+            </button>
+        `;
+
+        document
+            .getElementById("restartTeta")
+            .addEventListener("click", startTeta);
+
         return;
     }
 
     questionEl.innerHTML = node.question;
+
     optionsEl.innerHTML = "";
 
     node.options.forEach(item => {
 
         const btn = document.createElement("button");
 
-        btn.innerHTML = item.text;
+        btn.textContent = item.text;
 
         btn.addEventListener("click", () => {
 
@@ -317,9 +333,7 @@ function loadNode(nodeName) {
 
                 loadNode(item.next);
 
-            }
-
-            if (item.solution) {
+            } else if (item.solution) {
 
                 showSolution(item.solution);
 
@@ -332,21 +346,18 @@ function loadNode(nodeName) {
     });
 
 }
-
 function showSolution(text) {
 
-    questionEl.innerHTML = "Solution";
+    questionEl.innerHTML = "Recommended Solution";
 
     optionsEl.innerHTML = `
-        <p style="color:#bfbfbf;line-height:1.8;">
-            ${text}
-        </p>
+        <div class="teta-solution">
+            <p>${text}</p>
 
-        <br>
-
-        <button id="restartTeta">
-            Ask Another Question
-        </button>
+            <button id="restartTeta">
+                Ask Another Question
+            </button>
+        </div>
     `;
 
     document
@@ -355,14 +366,7 @@ function showSolution(text) {
 
 }
 
-startTeta();
-
-
-
-
-
-startTeta();
-
-
-
-});
+if (questionEl && optionsEl) {
+    startTeta();
+}
+    });
