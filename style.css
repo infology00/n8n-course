@@ -296,34 +296,29 @@ BUTTON
 MEGA MENU
 ====================================================== */
 
-
 .mega-parent{
 
-    position:static;
+    position:relative;
 
 }
 
 
 
-
 .mega-menu{
-
 
     position:absolute;
 
+    top:65px;
 
-    top:110px;
+    left:0;
 
+    transform:translateY(20px);
 
-    left:50%;
+    width:1200px;
 
+    max-width:90vw;
 
-    transform:translateX(-50%) translateY(20px);
-
-
-
-    width:min(1200px, calc(100vw - 40px));
-
+}
 
 
     background:#ffffff;
@@ -381,21 +376,15 @@ MEGA MENU
 .mega-parent:hover .mega-menu,
 .mega-menu.active{
 
-
     opacity:1;
-
 
     visibility:visible;
 
-
     pointer-events:auto;
 
-
-    transform:translateX(-50%) translateY(0);
-
+    transform:translateY(0);
 
 }
-
 
 
 
