@@ -2,418 +2,324 @@
 // AWSZ WEBSITE SCRIPT
 // =====================================
 
-document.addEventListener("DOMContentLoaded", () => {
 
-    // =====================================
-    // MEGA MENU
-    // =====================================
+document.addEventListener("DOMContentLoaded",()=>{
 
-    const megaParent = document.querySelector(".mega-parent");
-    const megaMenu = document.querySelector(".mega-menu");
 
-    if (megaParent && megaMenu) {
-
-        let closeTimer;
-
-        megaParent.addEventListener("mouseenter", () => {
-            clearTimeout(closeTimer);
-            megaMenu.classList.add("active");
-        });
-
-        megaParent.addEventListener("mouseleave", () => {
-            closeTimer = setTimeout(() => {
-                megaMenu.classList.remove("active");
-            }, 250);
-        });
-
-        megaMenu.addEventListener("mouseenter", () => {
-            clearTimeout(closeTimer);
-            megaMenu.classList.add("active");
-        });
-
-        megaMenu.addEventListener("mouseleave", () => {
-            closeTimer = setTimeout(() => {
-                megaMenu.classList.remove("active");
-            }, 250);
-        });
-
-    }
-
-    // =====================================
-    // MOBILE MENU
-    // =====================================
-
-    const menuBtn = document.querySelector(".menu-toggle");
-    const navLinks = document.querySelector(".nav-links");
-
-    if (menuBtn && navLinks) {
-
-        menuBtn.addEventListener("click", () => {
-            navLinks.classList.toggle("show");
-        });
-
-    }
-
-    // =====================================
-    // VIDEO CARDS
-    // =====================================
-
-    const cards = document.querySelectorAll(".video-card");
-
-    cards.forEach(card => {
-
-        const video = card.querySelector("video");
-
-        if (!video) return;
-
-        video.controls = false;
-
-        card.addEventListener("click", () => {
-
-            cards.forEach(other => {
-
-                const otherVideo = other.querySelector("video");
-
-                if (otherVideo !== video) {
-
-                    otherVideo.pause();
-                    otherVideo.currentTime = 0;
-                    other.classList.remove("playing");
-
-                }
-
-            });
-
-            if (video.paused) {
-
-                video.muted = false;
-                video.play();
-                card.classList.add("playing");
-
-            } else {
-
-                video.pause();
-                card.classList.remove("playing");
-
-            }
-
-        });
-
-        video.addEventListener("ended", () => {
-            card.classList.remove("playing");
-        });
-
-    });
-    // =====================================
-// AI ECOSYSTEM
+// =====================================
+// MEGA MENU
 // =====================================
 
-const ecoData = {
 
-    sales:{
-        name:"Sales Department",
-        title:"AI Sales Automation",
-        description:"Automatically qualify leads, book meetings, send follow-ups, update your CRM and help your sales team close more deals with less manual work.",
-        stats:["18 hrs","+32%","Easy"],
-        labels:["Saved Weekly","Revenue Growth","Setup"],
-        features:[
-            "Lead Qualification",
-            "Meeting Booking",
-            "CRM Updates",
-            "Proposal Generation",
-            "AI Follow-Ups",
-            "Pipeline Tracking"
-        ]
-    },
+const megaParent=document.querySelector(".mega-parent");
+const megaMenu=document.querySelector(".mega-menu");
 
-    marketing:{
-        name:"Marketing Department",
-        title:"AI Marketing Automation",
-        description:"Generate content, schedule social media, automate email campaigns and analyse performance using AI.",
-        stats:["14 hrs","+41%","Easy"],
-        labels:["Saved Weekly","More Leads","Setup"],
-        features:[
-            "AI Content",
-            "Email Campaigns",
-            "Social Scheduling",
-            "SEO Content",
-            "Ad Reporting",
-            "Analytics"
-        ]
-    },
 
-    support:{
-        name:"Support Department",
-        title:"AI Customer Support",
-        description:"Deliver instant customer support using AI Chatbots, WhatsApp and automated ticket routing.",
-        stats:["24/7","-70%","Easy"],
-        labels:["Availability","Support Cost","Setup"],
-        features:[
-            "Live Chat",
-            "WhatsApp",
-            "Ticket Routing",
-            "Knowledge Base",
-            "FAQs",
-            "Escalations"
-        ]
-    },
+if(megaParent && megaMenu){
 
-    operations:{
-        name:"Operations",
-        title:"AI Operations",
-        description:"Automate repetitive internal workflows, approvals, inventory and business operations.",
-        stats:["20 hrs","+40%","Medium"],
-        labels:["Saved Weekly","Efficiency","Setup"],
-        features:[
-            "Approvals",
-            "Inventory",
-            "Internal Tasks",
-            "Notifications",
-            "Reporting",
-            "Automation"
-        ]
-    },
+let timer;
 
-    finance:{
-        name:"Finance",
-        title:"AI Finance Automation",
-        description:"Automate invoices, reminders, reporting and accounting processes.",
-        stats:["15 hrs","100%","Easy"],
-        labels:["Saved Weekly","Accuracy","Setup"],
-        features:[
-            "Invoices",
-            "Expenses",
-            "Payments",
-            "Cashflow",
-            "Reports",
-            "Accounting"
-        ]
-    },
 
-    hr:{
-        name:"Human Resources",
-        title:"AI HR Automation",
-        description:"Speed up hiring, onboarding and employee management with AI.",
-        stats:["12 hrs","+55%","Easy"],
-        labels:["Saved Weekly","Hiring Speed","Setup"],
-        features:[
-            "Resume Screening",
-            "Interview Booking",
-            "Onboarding",
-            "Leave Requests",
-            "Training",
-            "HR Assistant"
-        ]
-    }
+megaParent.addEventListener("mouseenter",()=>{
+
+clearTimeout(timer);
+megaMenu.classList.add("active");
+
+});
+
+
+megaParent.addEventListener("mouseleave",()=>{
+
+timer=setTimeout(()=>{
+
+megaMenu.classList.remove("active");
+
+},250);
+
+
+});
+
+
+megaMenu.addEventListener("mouseenter",()=>{
+
+clearTimeout(timer);
+
+});
+
+
+megaMenu.addEventListener("mouseleave",()=>{
+
+timer=setTimeout(()=>{
+
+megaMenu.classList.remove("active");
+
+},250);
+
+});
+
+
+}
+
+
+
+
+// =====================================
+// MOBILE MENU
+// =====================================
+
+
+const menuBtn=document.querySelector(".menu-toggle");
+const nav=document.querySelector(".nav-links");
+
+
+if(menuBtn){
+
+menuBtn.onclick=()=>{
+
+nav.classList.toggle("show");
+
+}
+
+}
+
+
+
+// =====================================
+// VIDEO CARDS
+// =====================================
+
+
+const cards=document.querySelectorAll(".video-card");
+
+
+cards.forEach(card=>{
+
+
+let video=card.querySelector("video");
+
+
+if(!video)return;
+
+
+card.onclick=()=>{
+
+
+cards.forEach(c=>{
+
+let v=c.querySelector("video");
+
+if(v && v!==video){
+
+v.pause();
+v.currentTime=0;
+
+}
+
+});
+
+
+if(video.paused){
+
+video.play();
+
+}else{
+
+video.pause();
+
+}
+
 
 };
 
 
-const ecoNodes=document.querySelectorAll(".eco-node");
-
-const ecoName=document.querySelector(".department-name");
-const ecoTitle=document.getElementById("ecoTitle");
-const ecoDescription=document.getElementById("ecoDescription");
-const ecoFeatures=document.getElementById("ecoFeatures");
-
-const stat1=document.getElementById("stat1");
-const stat2=document.getElementById("stat2");
-const stat3=document.getElementById("stat3");
-
-const statLabels=document.querySelectorAll(".eco-stats span");
-
-ecoNodes.forEach(node=>{
-
-    node.addEventListener("click",()=>{
-
-        ecoNodes.forEach(btn=>btn.classList.remove("active"));
-
-        node.classList.add("active");
-
-        const data=ecoData[node.dataset.id];
-
-        if(!data) return;
-
-        ecoName.textContent=data.name;
-        ecoTitle.textContent=data.title;
-        ecoDescription.textContent=data.description;
-
-        stat1.textContent=data.stats[0];
-        stat2.textContent=data.stats[1];
-        stat3.textContent=data.stats[2];
-
-        statLabels[0].textContent=data.labels[0];
-        statLabels[1].textContent=data.labels[1];
-        statLabels[2].textContent=data.labels[2];
-
-        ecoFeatures.innerHTML="";
-
-        data.features.forEach(feature=>{
-
-            ecoFeatures.innerHTML+=`
-                <div>
-                    <i class="fa-solid fa-check"></i>
-                    ${feature}
-                </div>
-            `;
-
-        });
-
-        document.querySelector(".ecosystem-content").animate(
-        [
-            {opacity:0.5,transform:"translateY(20px)"},
-            {opacity:1,transform:"translateY(0)"}
-        ],
-        {
-            duration:350,
-            easing:"ease"
-        });
-
-    });
 
 });
 
-    // =====================================
+
+
+
+
+// =====================================
+// AI ECOSYSTEM
+// =====================================
+
+
+const ecoData={
+
+
+sales:{
+title:"AI Sales Automation",
+description:"AI qualifies leads, books meetings, updates CRM and improves sales pipeline.",
+features:[
+"Lead Qualification",
+"CRM Updates",
+"Follow Ups",
+"Meeting Booking"
+]
+},
+
+
+marketing:{
+title:"AI Marketing Automation",
+description:"AI creates content, manages campaigns and improves marketing performance.",
+features:[
+"Content Creation",
+"Email Automation",
+"SEO",
+"Ad Reports"
+]
+},
+
+
+support:{
+title:"AI Customer Support",
+description:"AI chatbot, WhatsApp automation and customer service systems.",
+features:[
+"WhatsApp AI",
+"Chatbots",
+"Tickets",
+"Knowledge Base"
+]
+},
+
+
+operations:{
+title:"AI Operations",
+description:"Automate daily business processes and repetitive tasks.",
+features:[
+"Workflow Automation",
+"Approvals",
+"Notifications",
+"Reports"
+]
+},
+
+
+finance:{
+title:"AI Finance Automation",
+description:"Automate invoices, reports and financial workflows.",
+features:[
+"Invoices",
+"Payments",
+"Reports",
+"Accounting"
+]
+},
+
+
+hr:{
+title:"AI HR Automation",
+description:"AI helps recruitment and employee management.",
+features:[
+"Hiring",
+"Interviews",
+"Onboarding",
+"HR Assistant"
+]
+}
+
+
+};
+
+
+
+document.querySelectorAll(".eco-node").forEach(node=>{
+
+
+node.onclick=()=>{
+
+
+let data=ecoData[node.dataset.id];
+
+
+if(!data)return;
+
+
+document.querySelectorAll(".eco-node")
+.forEach(n=>n.classList.remove("active"));
+
+
+node.classList.add("active");
+
+
+
+document.getElementById("ecoTitle").innerHTML=data.title;
+
+
+document.getElementById("ecoDescription").innerHTML=data.description;
+
+
+
+let box=document.getElementById("ecoFeatures");
+
+
+box.innerHTML="";
+
+
+data.features.forEach(x=>{
+
+
+box.innerHTML+=`
+
+<div>
+
+<i class="fa-solid fa-check"></i>
+
+${x}
+
+</div>
+
+`;
+
+
+});
+
+
+};
+
+
+});
+
+
+
+
+
+
+// =====================================
 // TETA AI ENGINE
 // =====================================
 
-let tetaHistory = [];
 
-const tetaQuestion = document.getElementById("question");
-const tetaOptions = document.getElementById("options");
-
-
-function showTeta(question, answers){
-
-    tetaQuestion.innerHTML = question;
-
-    tetaOptions.innerHTML = "";
-
-    answers.forEach(answer=>{
-
-        let btn=document.createElement("button");
-
-        btn.innerHTML=answer;
-
-        btn.onclick=()=>{
-
-            processTeta(answer);
-
-        };
-
-
-        tetaOptions.appendChild(btn);
-
-    });
-
-}
+const questionBox=document.getElementById("question");
+const optionBox=document.getElementById("options");
 
 
 
-
-function processTeta(input){
-
-    tetaHistory.push(input);
-
-
-    let text=input.toLowerCase();
-
-
-    // n8n
-
-    if(
-        text.includes("n8n") ||
-        text.includes("workflow")
-    ){
-
-        showSolution(
-        "n8n Automation Solution",
-
-        [
-
-        "Create n8n workflow",
-        "Connect API credentials",
-        "Use Webhooks",
-        "Connect CRM",
-        "Add AI Agent"
-
-        ]);
-
-        return;
-
-    }
+let tetaMemory=[];
 
 
 
-    // CRM
-
-    if(
-        text.includes("crm") ||
-        text.includes("ghl") ||
-        text.includes("hubspot")
-    ){
-
-        showSolution(
-
-        "CRM Automation Recommendation",
-
-        [
-
-        "Pipeline Setup",
-        "Lead Follow Up",
-        "AI Qualification",
-        "CRM Integrations"
-
-        ]);
-
-        return;
-
-    }
+function startTeta(){
 
 
+askTeta(
+
+"Hi, I am Teta AI Genie. How can I help you?",
+
+[
+
+"I need business help",
+
+"I need automation help",
+
+"I have a technical question",
+
+"I want AI strategy"
+
+]
 
 
-    // WhatsApp
-
-    if(
-        text.includes("whatsapp")
-    ){
-
-        showSolution(
-
-        "WhatsApp Automation",
-
-        [
-
-        "Meta WhatsApp API",
-        "Webhook Setup",
-        "n8n Connection",
-        "CRM Integration"
-
-        ]);
-
-        return;
-
-    }
-
-
-
-
-    showTeta(
-
-    "What would you like help with?",
-
-    [
-
-    "AI Automation",
-    "CRM Help",
-    "n8n Help",
-    "AI Agents",
-    "Business Audit"
-
-    ]
-
-    );
+);
 
 
 }
@@ -421,51 +327,186 @@ function processTeta(input){
 
 
 
-function showSolution(title,items){
+function askTeta(question,answers){
 
 
-tetaQuestion.innerHTML=title;
+questionBox.innerHTML=question;
 
 
-tetaOptions.innerHTML=`
+optionBox.innerHTML="";
 
 
-<div style="color:#aaa;line-height:1.8">
+answers.forEach(answer=>{
 
-${items.map(x=>`
-<p>✓ ${x}</p>
-`).join("")}
+
+let btn=document.createElement("button");
+
+
+btn.innerHTML=answer;
+
+
+btn.onclick=()=>{
+
+tetaAnswer(answer);
+
+};
+
+
+optionBox.appendChild(btn);
+
+
+});
+
+
+}
+
+
+
+
+
+
+function tetaAnswer(input){
+
+
+tetaMemory.push(input);
+
+
+
+let text=input.toLowerCase();
+
+
+
+let found=null;
+
+
+
+Object.keys(tetaKnowledge).forEach(key=>{
+
+
+let data=tetaKnowledge[key];
+
+
+if(
+text.includes(key.toLowerCase())
+){
+
+found=data;
+
+}
+
+
+});
+
+
+
+
+
+if(found){
+
+
+showResult(found);
+
+
+return;
+
+
+}
+
+
+
+
+
+askTeta(
+
+"What do you need help with?",
+
+[
+
+"n8n Automation",
+
+"CRM Setup",
+
+"GHL",
+
+"WhatsApp Integration",
+
+"AI Agents",
+
+"Ads & Marketing"
+
+]
+
+
+);
+
+
+
+}
+
+
+
+
+
+function showResult(data){
+
+
+let answer="";
+
+
+if(data.answer){
+
+answer=data.answer;
+
+}
+
+else if(data.solution){
+
+answer=data.solution;
+
+}
+
+else{
+
+answer="I found a possible solution. Let me guide you step by step.";
+
+}
+
+
+
+questionBox.innerHTML=data.title || "Teta Solution";
+
+
+
+optionBox.innerHTML=`
+
+<div style="
+color:#aaa;
+line-height:1.8;
+font-size:17px;
+">
+
+${answer}
 
 </div>
 
 
 <button onclick="location.reload()">
+
 Start Again
+
 </button>
 
 
 `;
 
 
+
 }
 
 
 
+startTeta();
 
-showTeta(
 
-"Hi, I am Teta AI Genie. How can I help you?",
 
-[
-
-"AI Automation",
-"Technical Help",
-"Business Solution",
-"AI Agents"
-
-]
-
-);
-    
 });
-
