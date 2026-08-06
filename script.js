@@ -160,62 +160,56 @@ cards.forEach(card => {
 
 });
 // =====================================
-// HOW AI FITS YOUR BUSINESS
+// AI ECOSYSTEM
 // =====================================
 
-const departmentData = {
+const ecosystemData = {
 
     sales:{
 
         badge:"Sales Department",
 
-        title:"AI Sales Assistant",
+        title:"AI Sales Automation",
 
-        description:"Automate lead qualification, follow-ups, CRM updates and appointment booking so your sales team focuses only on closing deals.",
-
-        button:"Explore Sales Automation",
-
-        stats:["18 hrs","+32%","Easy"],
-
-        labels:["Saved Weekly","Revenue Growth","Implementation"],
+        description:"Automatically qualify leads, respond instantly, schedule meetings, send follow-ups, update your CRM and help your sales team close more deals with less manual work.",
 
         features:[
             "Lead Qualification",
             "Meeting Booking",
             "CRM Updates",
             "Proposal Generation",
-            "Follow-Up Automation",
+            "AI Follow-Ups",
             "Pipeline Tracking"
-        ]
+        ],
+
+        stat1:"18 hrs",
+        stat2:"+32%",
+        stat3:"Easy"
+
     },
-
-
 
     marketing:{
 
         badge:"Marketing Department",
 
-        title:"AI Marketing Engine",
+        title:"AI Marketing Automation",
 
-        description:"Create content, schedule posts, generate campaigns and analyze performance automatically using AI.",
-
-        button:"Explore Marketing Automation",
-
-        stats:["14 hrs","+28%","Easy"],
-
-        labels:["Saved Weekly","More Leads","Implementation"],
+        description:"Generate content, schedule social media, launch campaigns, qualify marketing leads and optimize your entire customer journey automatically.",
 
         features:[
-            "AI Content",
-            "Social Scheduling",
+            "Social Media",
             "Email Campaigns",
-            "Ad Reporting",
-            "Lead Magnets",
-            "Analytics"
-        ]
+            "Lead Nurturing",
+            "Content Creation",
+            "AI Copywriting",
+            "Campaign Reports"
+        ],
+
+        stat1:"25 hrs",
+        stat2:"+47%",
+        stat3:"Fast"
+
     },
-
-
 
     support:{
 
@@ -223,203 +217,170 @@ const departmentData = {
 
         title:"AI Customer Support",
 
-        description:"Deliver instant support 24/7 using AI chatbots, WhatsApp automation and smart ticket routing.",
-
-        button:"Explore Support Automation",
-
-        stats:["24/7","-70%","Easy"],
-
-        labels:["Availability","Support Cost","Implementation"],
+        description:"Provide instant 24/7 customer support using AI chatbots, WhatsApp automation and voice agents while reducing support costs.",
 
         features:[
             "Live Chat",
-            "WhatsApp Replies",
+            "WhatsApp AI",
             "Ticket Routing",
+            "Voice Agent",
             "Knowledge Base",
-            "Escalation",
-            "Customer FAQs"
-        ]
+            "24/7 Support"
+        ],
+
+        stat1:"24/7",
+        stat2:"-65%",
+        stat3:"Instant"
+
     },
-
-
 
     operations:{
 
         badge:"Operations",
 
-        title:"AI Operations Manager",
+        title:"AI Operations Automation",
 
-        description:"Automate internal workflows, approvals, inventory and repetitive operational tasks.",
-
-        button:"Explore Operations",
-
-        stats:["20 hrs","+40%","Medium"],
-
-        labels:["Saved Weekly","Efficiency","Implementation"],
+        description:"Remove repetitive manual work by connecting your apps, approvals, notifications and internal workflows together.",
 
         features:[
-            "Approval Flows",
-            "Inventory",
-            "Notifications",
-            "Reports",
-            "Task Automation",
-            "Internal Requests"
-        ]
+            "n8n",
+            "Zapier",
+            "Make",
+            "Internal Workflows",
+            "Approvals",
+            "Notifications"
+        ],
+
+        stat1:"30 hrs",
+        stat2:"-70%",
+        stat3:"Smart"
+
     },
-
-
 
     finance:{
 
-        badge:"Finance Department",
+        badge:"Finance",
 
-        title:"AI Finance Assistant",
+        title:"AI Finance Automation",
 
-        description:"Automate invoicing, payment reminders, expense tracking and financial reporting.",
-
-        button:"Explore Finance Automation",
-
-        stats:["15 hrs","100%","Easy"],
-
-        labels:["Saved Weekly","Accuracy","Implementation"],
+        description:"Automate invoices, expense tracking, financial reporting and payment reminders while keeping your data synchronized.",
 
         features:[
             "Invoices",
-            "Expense Reports",
-            "Payment Reminders",
-            "Profit Dashboard",
-            "Cashflow Reports",
-            "Accounting Sync"
-        ]
+            "Expenses",
+            "Reports",
+            "Payments",
+            "Forecasting",
+            "Bookkeeping"
+        ],
+
+        stat1:"20 hrs",
+        stat2:"+99%",
+        stat3:"Secure"
+
     },
-
-
 
     hr:{
 
         badge:"Human Resources",
 
-        title:"AI HR Assistant",
+        title:"AI HR Automation",
 
-        description:"Speed up hiring, onboarding and employee management using intelligent workflows.",
-
-        button:"Explore HR Automation",
-
-        stats:["12 hrs","+55%","Easy"],
-
-        labels:["Saved Weekly","Hiring Speed","Implementation"],
+        description:"Automate recruitment, onboarding, leave management and employee communication with intelligent workflows.",
 
         features:[
-            "Resume Screening",
-            "Interview Booking",
-            "Employee Onboarding",
+            "Recruitment",
+            "Onboarding",
+            "Employee Portal",
             "Leave Requests",
-            "HR Chatbot",
+            "Documents",
             "Training"
-        ]
+        ],
+
+        stat1:"15 hrs",
+        stat2:"+55%",
+        stat3:"Simple"
+
     }
 
 };
 
 
+// Elements
+
+const ecoNodes = document.querySelectorAll(".eco-node");
+
+const ecoTitle = document.getElementById("ecoTitle");
+
+const ecoDescription = document.getElementById("ecoDescription");
+
+const ecoFeatures = document.getElementById("ecoFeatures");
+
+const ecoBadge = document.querySelector(".department-name");
+
+const stat1 = document.getElementById("stat1");
+
+const stat2 = document.getElementById("stat2");
+
+const stat3 = document.getElementById("stat3");
 
 
+// Change Content
 
-const nodes = document.querySelectorAll(".ai-node");
+function updateEco(key){
 
-const badge = document.querySelector(".department-badge");
+    const item = ecosystemData[key];
 
-const title = document.getElementById("departmentTitle");
+    if(!item) return;
 
-const description = document.getElementById("departmentDescription");
+    ecoBadge.textContent = item.badge;
 
-const featureList = document.querySelector(".feature-list");
+    ecoTitle.textContent = item.title;
 
-const button = document.querySelector(".department-btn");
+    ecoDescription.textContent = item.description;
 
-const statNumbers = document.querySelectorAll(".department-stats h4");
+    stat1.textContent = item.stat1;
 
-const statLabels = document.querySelectorAll(".department-stats span");
+    stat2.textContent = item.stat2;
+
+    stat3.textContent = item.stat3;
+
+    ecoFeatures.innerHTML = "";
+
+    item.features.forEach(feature=>{
+
+        ecoFeatures.innerHTML += `
+        <div>
+            <i class="fa-solid fa-check"></i>
+            ${feature}
+        </div>
+        `;
+
+    });
+
+}
 
 
+// Click Events
 
-nodes.forEach(node=>{
+ecoNodes.forEach(node=>{
 
     node.addEventListener("click",()=>{
 
-        nodes.forEach(n=>n.classList.remove("active"));
+        ecoNodes.forEach(btn=>btn.classList.remove("active"));
 
         node.classList.add("active");
 
-        const data = departmentData[node.dataset.department];
+        updateEco(node.dataset.id);
 
-        if(!data) return;
+    });
 
-        badge.textContent = data.badge;
-
-        title.textContent = data.title;
-
-        description.textContent = data.description;
-
-        button.textContent = data.button;
+});
 
 
+// Default
 
-        featureList.innerHTML = "";
-
-
-
-        data.features.forEach(item=>{
-
-            featureList.innerHTML += `
-
-                <div class="feature">
-
-                    <i class="fa-solid fa-check"></i>
-
-                    ${item}
-
-                </div>
-
-            `;
-
-        });
-
-
-
-        statNumbers.forEach((stat,index)=>{
-
-            stat.textContent = data.stats[index];
-
-        });
-
-
-
-        statLabels.forEach((label,index)=>{
-
-            label.textContent = data.labels[index];
-
-        });
-
-
-
-        document.querySelector(".department-info").animate(
-
-        [
-
-            {opacity:.5,transform:"translateY(20px)"},
-
-            {opacity:1,transform:"translateY(0)"}
-
-        ],
-
-        {
-
-            duration:400,
-
-            easing:"ease"
-
-        });
+updateEco("sales");
 
     });
 
