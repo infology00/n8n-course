@@ -3,18 +3,42 @@ window.tetaKnowledge = {
 
 start: {
 
-question: "How can I help you today?",
+question: "What brings you here today? Let's find the right AI solution for your business.",
 
 options: [
 
 {
-text:"I need AI Automation help",
+text:"Automate my business",
 next:"automation"
 },
 
 {
-text:"I need CRM help",
-next:"crm"
+text:"Improve sales & marketing",
+next:"marketing"
+},
+
+{
+text:"Build an AI agent",
+next:"agent"
+},
+
+{
+text:"Connect my systems",
+next:"integration"
+},
+
+{
+text:"Optimize operations",
+next:"operations"
+},
+
+{
+text:"I need a custom AI strategy",
+next:"strategy"
+}
+
+]
+
 },
 
 {
