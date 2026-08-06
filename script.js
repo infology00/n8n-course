@@ -348,21 +348,45 @@ function loadNode(nodeName) {
 }
 function showSolution(text) {
 
-    questionEl.innerHTML = "Recommended Solution";
+    questionEl.innerHTML = "Recommended AI Solution";
 
     optionsEl.innerHTML = `
         <div class="teta-solution">
+
             <p>${text}</p>
 
-            <button id="restartTeta">
-                Ask Another Question
+            <br>
+
+            <p>
+            Want to implement this AI solution for your business?
+            </p>
+
+
+            <button id="bookCall">
+                Book Free AI Strategy Call
             </button>
+
+
+            <button id="restartTeta">
+                Explore Another Solution
+            </button>
+
         </div>
     `;
 
+
     document
-        .getElementById("restartTeta")
-        .addEventListener("click", startTeta);
+    .getElementById("restartTeta")
+    .addEventListener("click", startTeta);
+
+
+    document
+    .getElementById("bookCall")
+    .addEventListener("click", ()=>{
+
+        window.location.href="#contact";
+
+    });
 
 }
 
