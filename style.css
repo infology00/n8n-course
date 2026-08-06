@@ -2551,17 +2551,56 @@ RESPONSIVE
 
 }
 
+@media(max-width:768px){
+
+.ecosystem{
+
+    padding:100px 0;
+
+}
+
+
+.ecosystem-heading h2{
+
+    font-size:44px;
+    letter-spacing:-1px;
+
+}
+
+
+.ecosystem-content{
+
+    padding:30px;
+
+}
+
+
+.ecosystem-content h3{
+
+    font-size:34px;
+
+}
+
+
+.eco-features{
+
+    grid-template-columns:1fr;
+
+}
+
+
+.eco-stats{
+
+    grid-template-columns:1fr;
+
+}
+
+
 .ecosystem-network{
 
     transform:scale(.72);
 
     transform-origin:top center;
-
-    /* HEADER OFFSET FIX */
-
-.ecosystem{
-    padding-top:80px;
-}
 
     height:520px;
 
