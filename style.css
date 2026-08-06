@@ -2557,6 +2557,12 @@ RESPONSIVE
 
     transform-origin:top center;
 
+    /* HEADER OFFSET FIX */
+
+.ecosystem{
+    padding-top:80px;
+}
+
     height:520px;
 
 }
