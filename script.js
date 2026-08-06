@@ -273,122 +273,199 @@ ecoNodes.forEach(node=>{
 
 });
 
-    
-const questions = [
+    // =====================================
+// TETA AI ENGINE
+// =====================================
 
-{
-q:"What type of business do you run?",
-options:[
-"E-commerce",
-"Agency",
-"Real Estate",
-"Service Business"
-]
-},
+let tetaHistory = [];
 
-{
-q:"What is your biggest challenge?",
-options:[
-"Too much manual work",
-"Losing leads",
-"Customer support",
-"Managing tools"
-]
-},
-
-{
-q:"Which tools are you using?",
-options:[
-"GHL",
-"Shopify",
-"CRM",
-"No system"
-]
-},
-
-{
-q:"What result do you want?",
-options:[
-"Save time",
-"More customers",
-"Better operations",
-"Scale faster"
-]
-}
-
-];
+const tetaQuestion = document.getElementById("question");
+const tetaOptions = document.getElementById("options");
 
 
-let current = 0;
+function showTeta(question, answers){
+
+    tetaQuestion.innerHTML = question;
+
+    tetaOptions.innerHTML = "";
+
+    answers.forEach(answer=>{
+
+        let btn=document.createElement("button");
+
+        btn.innerHTML=answer;
+
+        btn.onclick=()=>{
+
+            processTeta(answer);
+
+        };
 
 
-const question = document.getElementById("question");
-const options = document.getElementById("options");
+        tetaOptions.appendChild(btn);
 
-
-function loadQuestion(){
-
-question.innerHTML = questions[current].q;
-
-
-options.innerHTML="";
-
-
-questions[current].options.forEach(item=>{
-
-
-let btn=document.createElement("button");
-
-btn.innerHTML=item;
-
-
-btn.onclick=function(){
-
-current++;
-
-
-if(current < questions.length){
-
-loadQuestion();
+    });
 
 }
 
-else{
 
 
-question.innerHTML =
-"Your AI Automation Assessment is Ready 🚀";
+
+function processTeta(input){
+
+    tetaHistory.push(input);
 
 
-options.innerHTML=`
-
-<p style="color:#aaa">
-Teta found multiple opportunities where AI can improve your business.
-</p>
+    let text=input.toLowerCase();
 
 
-<button>
-Book Strategy Call
+    // n8n
+
+    if(
+        text.includes("n8n") ||
+        text.includes("workflow")
+    ){
+
+        showSolution(
+        "n8n Automation Solution",
+
+        [
+
+        "Create n8n workflow",
+        "Connect API credentials",
+        "Use Webhooks",
+        "Connect CRM",
+        "Add AI Agent"
+
+        ]);
+
+        return;
+
+    }
+
+
+
+    // CRM
+
+    if(
+        text.includes("crm") ||
+        text.includes("ghl") ||
+        text.includes("hubspot")
+    ){
+
+        showSolution(
+
+        "CRM Automation Recommendation",
+
+        [
+
+        "Pipeline Setup",
+        "Lead Follow Up",
+        "AI Qualification",
+        "CRM Integrations"
+
+        ]);
+
+        return;
+
+    }
+
+
+
+
+    // WhatsApp
+
+    if(
+        text.includes("whatsapp")
+    ){
+
+        showSolution(
+
+        "WhatsApp Automation",
+
+        [
+
+        "Meta WhatsApp API",
+        "Webhook Setup",
+        "n8n Connection",
+        "CRM Integration"
+
+        ]);
+
+        return;
+
+    }
+
+
+
+
+    showTeta(
+
+    "What would you like help with?",
+
+    [
+
+    "AI Automation",
+    "CRM Help",
+    "n8n Help",
+    "AI Agents",
+    "Business Audit"
+
+    ]
+
+    );
+
+
+}
+
+
+
+
+function showSolution(title,items){
+
+
+tetaQuestion.innerHTML=title;
+
+
+tetaOptions.innerHTML=`
+
+
+<div style="color:#aaa;line-height:1.8">
+
+${items.map(x=>`
+<p>✓ ${x}</p>
+`).join("")}
+
+</div>
+
+
+<button onclick="location.reload()">
+Start Again
 </button>
+
 
 `;
 
-}
-
-
-};
-
-
-options.appendChild(btn);
-
-
-});
-
 
 }
 
 
-loadQuestion();
- 
+
+
+showTeta(
+
+"Hi, I am Teta AI Genie. How can I help you?",
+
+[
+
+"AI Automation",
+"Technical Help",
+"Business Solution",
+"AI Agents"
+
+]
+
+);
+    
 });
 
