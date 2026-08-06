@@ -273,9 +273,7 @@ ecoNodes.forEach(node=>{
 
 });
 
- 
-});
-
+    
 const questions = [
 
 {
@@ -391,3 +389,6 @@ options.appendChild(btn);
 
 
 loadQuestion();
+ 
+});
+
