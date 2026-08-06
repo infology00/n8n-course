@@ -1,4 +1,4 @@
-const tetaKnowledge = {
+window.tetaKnowledge = {
 
 start: {
 
