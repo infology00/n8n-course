@@ -1852,405 +1852,712 @@ AI SOLUTIONS SECTION
 
 }
 
-/* =====================================
-HOW AI FITS YOUR BUSINESS
-===================================== */
+/* ======================================================
+AI ECOSYSTEM
+====================================================== */
 
-.ai-departments{
+.ecosystem{
 
-    width:min(1400px,90%);
-    margin:160px auto;
-}
-
-
-
-.department-heading{
-
-    text-align:center;
-    max-width:760px;
-    margin:0 auto 90px;
-}
-
-
-
-.department-heading h2{
-
-    font-size:68px;
-    line-height:1.05;
-    letter-spacing:-3px;
-    font-weight:800;
-    color:#111;
-    margin-top:18px;
-}
-
-
-
-.department-heading h2 span{
-
-    color:#D6FF00;
-}
-
-
-
-.department-heading p{
-
-    margin-top:25px;
-    color:#666;
-    font-size:20px;
-    line-height:1.8;
-}
-
-
-
-/* MAIN LAYOUT */
-
-.department-wrapper{
-
-    display:grid;
-    grid-template-columns:520px 1fr;
-    gap:90px;
-    align-items:center;
-}
-
-
-
-/* LEFT PANEL */
-
-.department-info{
-
-    background:#171717;
-    color:#fff;
-    border-radius:35px;
-    padding:45px;
+    padding:160px 0;
+    background:#0f1115;
     position:relative;
     overflow:hidden;
+
 }
 
-
-
-.department-info::before{
+.ecosystem::before{
 
     content:"";
     position:absolute;
-    top:-120px;
-    right:-120px;
-    width:260px;
-    height:260px;
-    background:#D6FF00;
-    opacity:.08;
-    border-radius:50%;
+    width:700px;
+    height:700px;
+    background:radial-gradient(circle,#d6ff0018 0%,transparent 70%);
+    top:-250px;
+    right:-250px;
+
 }
 
+.ecosystem::after{
 
+    content:"";
+    position:absolute;
+    width:600px;
+    height:600px;
+    background:radial-gradient(circle,#ffffff08 0%,transparent 70%);
+    bottom:-250px;
+    left:-250px;
 
-.department-badge{
-
-    display:inline-block;
-    padding:10px 18px;
-    border-radius:50px;
-    background:rgba(214,255,0,.12);
-    border:1px solid rgba(214,255,0,.25);
-    color:#D6FF00;
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:25px;
 }
 
+.ecosystem-heading{
 
+    width:min(900px,90%);
+    margin:auto;
+    text-align:center;
+    position:relative;
+    z-index:2;
 
-.department-info h3{
-
-    font-size:44px;
-    line-height:1.1;
-    margin-bottom:20px;
 }
 
+.ecosystem-heading h2{
 
-
-.department-info p{
-
-    color:#bdbdbd;
-    line-height:1.8;
-    font-size:18px;
-}
-
-
-
-/* FEATURES */
-
-.feature-list{
-
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:18px;
-    margin:40px 0;
-}
-
-
-
-.feature{
-
-    display:flex;
-    align-items:center;
-    gap:12px;
-    font-weight:600;
-}
-
-
-
-.feature i{
-
-    color:#D6FF00;
-}
-
-
-
-/* STATS */
-
-.department-stats{
-
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:25px;
+    font-size:72px;
+    font-weight:800;
+    line-height:1.05;
+    letter-spacing:-3px;
+    color:#fff;
     margin-top:20px;
+
 }
 
-
-
-.department-stats h4{
+.ecosystem-heading h2 span{
 
     color:#D6FF00;
-    font-size:32px;
+
 }
 
+.ecosystem-heading p{
 
+    max-width:700px;
+    margin:30px auto 0;
+    color:#9a9a9a;
+    font-size:20px;
+    line-height:1.8;
 
-.department-stats span{
-
-    color:#aaa;
-    font-size:14px;
 }
 
+.ecosystem-wrapper{
 
+    width:min(1450px,92%);
+    margin:100px auto 0;
 
-/* BUTTON */
+    display:grid;
+    grid-template-columns:500px 1fr;
+    gap:80px;
 
-.department-btn{
-
-    display:inline-block;
-    margin-top:45px;
-    background:#D6FF00;
-    color:#111;
-    padding:18px 34px;
-    border-radius:60px;
-    font-weight:700;
-    transition:.35s;
-}
-
-
-
-.department-btn:hover{
-
-    transform:translateY(-5px);
-    box-shadow:0 20px 50px rgba(214,255,0,.35);
-}
-
-
-
-/* RIGHT SIDE */
-
-.department-network{
+    align-items:center;
 
     position:relative;
-    height:700px;
+    z-index:2;
+
 }
 
+/* ==========================
+LEFT PANEL
+========================== */
 
+.ecosystem-content{
+
+    background:#17191d;
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:35px;
+
+    padding:45px;
+
+    box-shadow:0 25px 80px rgba(0,0,0,.45);
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.ecosystem-content::before{
+
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:#D6FF00;
+    opacity:.06;
+    top:-120px;
+    right:-120px;
+
+}
+
+.department-name{
+
+    display:inline-flex;
+    padding:10px 20px;
+    border-radius:50px;
+
+    background:rgba(214,255,0,.08);
+
+    border:1px solid rgba(214,255,0,.15);
+
+    color:#D6FF00;
+
+    font-size:13px;
+
+    font-weight:700;
+
+}
+
+.ecosystem-content h3{
+
+    color:#fff;
+
+    font-size:46px;
+
+    line-height:1.1;
+
+    margin:28px 0 20px;
+
+}
+
+.ecosystem-content p{
+
+    color:#bdbdbd;
+
+    font-size:18px;
+
+    line-height:1.9;
+
+}
+
+.eco-features{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+
+    margin:45px 0;
+
+}
+
+.eco-features div{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    color:#fff;
+
+    font-weight:600;
+
+}
+
+.eco-features i{
+
+    color:#D6FF00;
+
+}
+
+.eco-stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+    margin-top:15px;
+
+}
+
+.eco-stats h4{
+
+    color:#D6FF00;
+
+    font-size:34px;
+
+}
+
+.eco-stats span{
+
+    color:#8d8d8d;
+
+    font-size:14px;
+
+}
+
+.ecosystem-btn{
+
+    display:inline-block;
+
+    margin-top:45px;
+
+    padding:18px 34px;
+
+    border-radius:60px;
+
+    background:#D6FF00;
+
+    color:#111;
+
+    font-weight:700;
+
+    transition:.35s;
+
+}
+
+.ecosystem-btn:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 20px 50px rgba(214,255,0,.35);
+
+}
+
+/* ==========================
+RIGHT
+========================== */
+
+.ecosystem-network{
+
+    position:relative;
+
+    height:720px;
+
+}
 
 /* AI CORE */
 
-.center-core{
+.ai-core{
 
     position:absolute;
+
     left:50%;
+
     top:50%;
+
     transform:translate(-50%,-50%);
+
 }
-
-
 
 .core-circle{
 
-    width:160px;
-    height:160px;
+    width:170px;
+
+    height:170px;
+
     border-radius:50%;
+
     background:#D6FF00;
+
     display:flex;
-    justify-content:center;
+
     align-items:center;
-    font-size:42px;
-    font-weight:800;
+
+    justify-content:center;
+
     color:#111;
-    box-shadow:0 0 80px rgba(214,255,0,.45);
-    animation:pulseAI 2.5s infinite;
+
+    font-size:44px;
+
+    font-weight:800;
+
+    position:relative;
+
+    z-index:5;
+
 }
 
-
-
-/* NODES */
-
-.ai-node{
+.core-ring{
 
     position:absolute;
+
+    width:240px;
+
+    height:240px;
+
+    border-radius:50%;
+
+    border:2px solid rgba(214,255,0,.25);
+
+    left:50%;
+
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+}
+
+.ring2{
+
+    width:330px;
+
+    height:330px;
+
+    border-color:rgba(214,255,0,.08);
+
+}
+/* ======================================================
+AI ECOSYSTEM PART 2
+====================================================== */
+
+/* ==========================
+NODES
+========================== */
+
+.eco-node{
+
+    position:absolute;
+
     border:none;
-    cursor:pointer;
-    padding:18px 26px;
+
+    background:#17191d;
+
+    color:#fff;
+
+    border:1px solid rgba(255,255,255,.08);
+
     border-radius:60px;
-    background:#fff;
-    border:1px solid #eee;
+
+    padding:18px 28px;
+
+    font-size:16px;
+
     font-weight:700;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
     transition:.35s;
-    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    box-shadow:0 20px 50px rgba(0,0,0,.30);
+
+    z-index:10;
+
 }
 
+.eco-node i{
 
+    color:#D6FF00;
 
-.ai-node i{
+    font-size:18px;
 
-    margin-right:10px;
 }
 
-
-
-.ai-node:hover{
+.eco-node:hover{
 
     transform:translateY(-8px) scale(1.05);
+
+    background:#20242b;
+
+    box-shadow:0 30px 70px rgba(214,255,0,.18);
+
 }
 
-
-
-.ai-node.active{
+.eco-node.active{
 
     background:#D6FF00;
+
+    color:#111;
+
 }
 
+.eco-node.active i{
 
+    color:#111;
 
-/* POSITIONS */
-
-.ai-node:nth-child(2){
-
-    left:8%;
-    top:48%;
 }
 
+/* ==========================
+NODE POSITIONS
+========================== */
 
+.eco-node[data-id="marketing"]{
 
-.ai-node:nth-child(3){
-
-    top:10%;
+    top:40px;
     left:50%;
     transform:translateX(-50%);
+
 }
 
+.eco-node[data-id="sales"]{
 
+    left:40px;
+    top:50%;
+    transform:translateY(-50%);
 
-.ai-node:nth-child(4){
-
-    right:5%;
-    top:48%;
 }
 
+.eco-node[data-id="support"]{
 
+    right:40px;
+    top:50%;
+    transform:translateY(-50%);
 
-.ai-node:nth-child(5){
+}
 
-    bottom:12%;
+.eco-node[data-id="operations"]{
+
+    bottom:40px;
     left:50%;
     transform:translateX(-50%);
-}
-
-
-
-.ai-node:nth-child(6){
-
-    right:12%;
-    bottom:18%;
-}
-
-
-
-.ai-node:nth-child(7){
-
-    left:12%;
-    bottom:18%;
-}
-
-
-
-/* AI PULSE */
-
-@keyframes pulseAI{
-
-0%{
-
-transform:scale(1);
 
 }
 
-50%{
+.eco-node[data-id="finance"]{
 
-transform:scale(1.08);
-
-}
-
-100%{
-
-transform:scale(1);
+    right:120px;
+    bottom:140px;
 
 }
 
-}
+.eco-node[data-id="hr"]{
 
-
-
-/* RESPONSIVE */
-
-@media(max-width:1100px){
-
-.department-wrapper{
-
-grid-template-columns:1fr;
+    left:120px;
+    bottom:140px;
 
 }
 
-.department-network{
+/* ==========================
+LINES
+========================== */
 
-height:600px;
+.line{
+
+    position:absolute;
+
+    background:rgba(214,255,0,.20);
+
+    transform-origin:left center;
+
+    height:2px;
+
+    z-index:1;
+
+    animation:lineGlow 2.5s infinite alternate;
+
+}
+
+/* Marketing */
+
+.line1{
+
+    width:150px;
+
+    left:50%;
+
+    top:170px;
+
+    transform:translateX(-50%) rotate(90deg);
+
+}
+
+/* Sales */
+
+.line2{
+
+    width:220px;
+
+    left:190px;
+
+    top:50%;
+
+}
+
+/* Support */
+
+.line3{
+
+    width:220px;
+
+    right:190px;
+
+    top:50%;
+
+}
+
+/* Operations */
+
+.line4{
+
+    width:150px;
+
+    left:50%;
+
+    bottom:170px;
+
+    transform:translateX(-50%) rotate(90deg);
+
+}
+
+/* HR */
+
+.line5{
+
+    width:180px;
+
+    left:240px;
+
+    bottom:205px;
+
+    transform:rotate(30deg);
+
+}
+
+/* Finance */
+
+.line6{
+
+    width:180px;
+
+    right:240px;
+
+    bottom:205px;
+
+    transform:rotate(-30deg);
+
+}
+
+/* ==========================
+ANIMATIONS
+========================== */
+
+@keyframes pulseCore{
+
+    0%{
+
+        transform:translate(-50%,-50%) scale(1);
+
+    }
+
+    50%{
+
+        transform:translate(-50%,-50%) scale(1.06);
+
+    }
+
+    100%{
+
+        transform:translate(-50%,-50%) scale(1);
+
+    }
+
+}
+
+.ai-core{
+
+    animation:pulseCore 3s infinite ease-in-out;
+
+}
+
+@keyframes rotateRing{
+
+    from{
+
+        transform:translate(-50%,-50%) rotate(0deg);
+
+    }
+
+    to{
+
+        transform:translate(-50%,-50%) rotate(360deg);
+
+    }
+
+}
+
+.core-ring{
+
+    animation:rotateRing 18s linear infinite;
+
+}
+
+.ring2{
+
+    animation:rotateRing 30s linear infinite reverse;
+
+}
+
+@keyframes lineGlow{
+
+    from{
+
+        opacity:.25;
+
+    }
+
+    to{
+
+        opacity:1;
+
+        box-shadow:0 0 20px rgba(214,255,0,.45);
+
+    }
+
+}
+
+/* ==========================
+RESPONSIVE
+========================== */
+
+@media(max-width:1200px){
+
+.ecosystem-wrapper{
+
+    grid-template-columns:1fr;
+
+}
+
+.ecosystem-network{
+
+    height:650px;
 
 }
 
 }
 
+@media(max-width:768px){
 
+.ecosystem{
 
-@media(max-width:700px){
-
-.department-heading h2{
-
-font-size:44px;
+    padding:100px 0;
 
 }
 
-.feature-list{
+.ecosystem-heading h2{
 
-grid-template-columns:1fr;
+    font-size:44px;
+
+    letter-spacing:-1px;
 
 }
 
-.department-stats{
+.ecosystem-content{
 
-grid-template-columns:1fr;
+    padding:30px;
+
+}
+
+.ecosystem-content h3{
+
+    font-size:34px;
+
+}
+
+.eco-features{
+
+    grid-template-columns:1fr;
+
+}
+
+.eco-stats{
+
+    grid-template-columns:1fr;
+
+}
+
+.ecosystem-network{
+
+    transform:scale(.72);
+
+    transform-origin:top center;
+
+    height:520px;
 
 }
 
