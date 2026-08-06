@@ -2,7 +2,6 @@ console.log("knowledge.js loaded");
 
 window.tetaKnowledge = {
 
-
 start: {
 
 question: "What brings you here today? Let's find the right AI solution for your business.",
@@ -47,23 +46,33 @@ next:"strategy"
 
 automation: {
 
-question:"What would you like to automate?",
+question:"What would you like to automate first?",
 
 options:[
 
 {
-text:"Business workflows",
-solution:"I can help automate repetitive tasks, connect your tools and build AI-powered workflows that save time."
-},
-
-{
 text:"Lead generation & follow-ups",
-solution:"I can help capture leads, qualify prospects and automate follow-up systems."
+solution:"I can help you capture leads, qualify prospects using AI, automate follow-ups and create a complete sales automation system."
 },
 
 {
-text:"Content creation",
-solution:"I can help build AI content systems for generating, managing and distributing content."
+text:"Customer support",
+solution:"I can help build AI chatbots, WhatsApp assistants and support systems that answer customers instantly."
+},
+
+{
+text:"Repetitive business tasks",
+solution:"I can identify manual tasks in your business and create AI workflows to save time and reduce operational costs."
+},
+
+{
+text:"Data & reporting",
+solution:"I can automate data collection, reporting and dashboards so you always have real-time business insights."
+},
+
+{
+text:"Internal workflows",
+solution:"I can connect your tools and automate approvals, notifications and team processes."
 }
 
 ]
@@ -74,23 +83,23 @@ solution:"I can help build AI content systems for generating, managing and distr
 
 marketing: {
 
-question:"What area of marketing do you want to improve?",
+question:"What would you like to improve in your marketing?",
 
 options:[
 
 {
 text:"Generate more leads",
-solution:"I can help build AI-powered lead generation and qualification systems."
+solution:"I can help create AI-powered lead generation systems that find, qualify and organize potential customers."
 },
 
 {
-text:"Automate campaigns",
-solution:"I can help automate email campaigns, customer journeys and marketing workflows."
+text:"Automate marketing campaigns",
+solution:"I can build automated email, CRM and customer journey workflows."
 },
 
 {
-text:"Improve sales process",
-solution:"I can help connect marketing with CRM automation and sales follow-ups."
+text:"Improve sales conversion",
+solution:"I can connect marketing systems with AI follow-ups and sales automation."
 }
 
 ]
@@ -107,7 +116,7 @@ options:[
 
 {
 text:"Customer Support Agent",
-solution:"An AI assistant that answers customer questions, handles FAQs and improves support response time."
+solution:"An AI assistant that answers customer questions, handles FAQs and improves response time."
 },
 
 {
@@ -117,7 +126,7 @@ solution:"An AI sales assistant that qualifies leads, answers questions and book
 
 {
 text:"Voice AI Agent",
-solution:"An AI calling assistant for inbound and outbound customer conversations."
+solution:"An AI calling agent that handles inbound and outbound conversations."
 }
 
 ]
@@ -128,22 +137,22 @@ solution:"An AI calling assistant for inbound and outbound customer conversation
 
 integration: {
 
-question:"Which systems do you want to connect?",
+question:"What systems do you want to connect?",
 
 options:[
 
 {
 text:"CRM systems",
-solution:"I can connect CRM platforms like GoHighLevel, HubSpot and other business tools."
+solution:"I can connect platforms like GoHighLevel, HubSpot and other CRM systems."
 },
 
 {
-text:"Business apps",
-solution:"I can connect your tools and create automated workflows between platforms."
+text:"Business applications",
+solution:"I can connect your existing tools and automate workflows between them."
 },
 
 {
-text:"Custom API integration",
+text:"Custom API integrations",
 solution:"I can build custom integrations using APIs, webhooks and automation platforms."
 }
 
@@ -155,23 +164,23 @@ solution:"I can build custom integrations using APIs, webhooks and automation pl
 
 operations: {
 
-question:"Which part of your operations needs improvement?",
+question:"Which area of operations needs improvement?",
 
 options:[
 
 {
-text:"Reduce manual tasks",
-solution:"I can identify repetitive processes and automate them using AI workflows."
+text:"Reduce manual work",
+solution:"I can analyze your processes and automate repetitive tasks using AI workflows."
 },
 
 {
-text:"Internal processes",
-solution:"I can help optimize approvals, notifications and team workflows."
+text:"Team workflows",
+solution:"I can automate approvals, notifications and internal processes."
 },
 
 {
-text:"Reporting & data",
-solution:"I can build automated reports and dashboards for better decisions."
+text:"Reports & analytics",
+solution:"I can build automated reports and dashboards to improve decision making."
 }
 
 ]
@@ -182,23 +191,23 @@ solution:"I can build automated reports and dashboards for better decisions."
 
 strategy: {
 
-question:"Tell me about your business goal.",
+question:"What is your main business goal?",
 
 options:[
 
 {
-text:"Save time & reduce costs",
-solution:"I can analyze your workflow and identify the best automation opportunities."
+text:"Save time and reduce costs",
+solution:"I can analyze your business and identify the best automation opportunities."
 },
 
 {
 text:"Scale my business",
-solution:"I can design an AI roadmap to help your business grow faster."
+solution:"I can create an AI roadmap to help your business grow faster."
 },
 
 {
-text:"I need expert guidance",
-solution:"Let's understand your business and create a custom AI strategy."
+text:"Need expert guidance",
+solution:"Let's understand your business challenges and design a custom AI strategy."
 }
 
 ]
