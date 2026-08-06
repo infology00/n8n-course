@@ -275,3 +275,119 @@ ecoNodes.forEach(node=>{
 
  
 });
+
+const questions = [
+
+{
+q:"What type of business do you run?",
+options:[
+"E-commerce",
+"Agency",
+"Real Estate",
+"Service Business"
+]
+},
+
+{
+q:"What is your biggest challenge?",
+options:[
+"Too much manual work",
+"Losing leads",
+"Customer support",
+"Managing tools"
+]
+},
+
+{
+q:"Which tools are you using?",
+options:[
+"GHL",
+"Shopify",
+"CRM",
+"No system"
+]
+},
+
+{
+q:"What result do you want?",
+options:[
+"Save time",
+"More customers",
+"Better operations",
+"Scale faster"
+]
+}
+
+];
+
+
+let current = 0;
+
+
+const question = document.getElementById("question");
+const options = document.getElementById("options");
+
+
+function loadQuestion(){
+
+question.innerHTML = questions[current].q;
+
+
+options.innerHTML="";
+
+
+questions[current].options.forEach(item=>{
+
+
+let btn=document.createElement("button");
+
+btn.innerHTML=item;
+
+
+btn.onclick=function(){
+
+current++;
+
+
+if(current < questions.length){
+
+loadQuestion();
+
+}
+
+else{
+
+
+question.innerHTML =
+"Your AI Automation Assessment is Ready 🚀";
+
+
+options.innerHTML=`
+
+<p style="color:#aaa">
+Teta found multiple opportunities where AI can improve your business.
+</p>
+
+
+<button>
+Book Strategy Call
+</button>
+
+`;
+
+}
+
+
+};
+
+
+options.appendChild(btn);
+
+
+});
+
+
+}
+
+
+loadQuestion();
