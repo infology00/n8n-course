@@ -2188,7 +2188,7 @@ RIGHT
 
 }
 /* ======================================================
-AI ECOSYSTEM PART 2
+AI ECOSYSTEM PART 2 FIXED
 ====================================================== */
 
 
@@ -2233,6 +2233,7 @@ NODES
 }
 
 
+
 .eco-node i{
 
     color:#D6FF00;
@@ -2242,15 +2243,15 @@ NODES
 }
 
 
-.eco-node:hover{
 
-    transform:translateY(-8px) scale(1.05);
+.eco-node:hover{
 
     background:#20242b;
 
-    box-shadow:0 30px 70px rgba(214,255,0,.18);
+    box-shadow:0 30px 70px rgba(214,255,0,.25);
 
 }
+
 
 
 .eco-node.active{
@@ -2262,11 +2263,13 @@ NODES
 }
 
 
+
 .eco-node.active i{
 
     color:#111;
 
 }
+
 
 
 
@@ -2357,15 +2360,13 @@ LINES
 
     background:rgba(214,255,0,.25);
 
-    transform-origin:left center;
+    transform-origin:center;
 
     z-index:1;
 
     animation:lineGlow 2.5s infinite alternate;
 
 }
-
-
 
 
 .line1{
@@ -2450,31 +2451,33 @@ LINES
 
 
 /* ==========================
-ANIMATION
+CORE ANIMATION
 ========================== */
 
 
 @keyframes pulseCore{
 
+
 0%{
 
-transform:translate(-50%,-50%) scale(1);
+scale:1;
 
 }
 
 
 50%{
 
-transform:translate(-50%,-50%) scale(1.06);
+scale:1.06;
 
 }
 
 
 100%{
 
-transform:translate(-50%,-50%) scale(1);
+scale:1;
 
 }
+
 
 }
 
@@ -2489,19 +2492,20 @@ transform:translate(-50%,-50%) scale(1);
 
 
 
+
 @keyframes rotateRing{
 
 
 from{
 
-transform:translate(-50%,-50%) rotate(0deg);
+rotate:0deg;
 
 }
 
 
 to{
 
-transform:translate(-50%,-50%) rotate(360deg);
+rotate:360deg;
 
 }
 
@@ -2523,6 +2527,7 @@ transform:translate(-50%,-50%) rotate(360deg);
     animation:rotateRing 30s linear infinite reverse;
 
 }
+
 
 
 
@@ -2551,7 +2556,6 @@ box-shadow:0 0 20px rgba(214,255,0,.45);
 
 
 
-
 /* ==========================
 RESPONSIVE
 ========================== */
@@ -2567,6 +2571,7 @@ RESPONSIVE
 }
 
 
+
 .ecosystem-network{
 
     height:650px;
@@ -2575,7 +2580,6 @@ RESPONSIVE
 
 
 }
-
 
 
 
@@ -2594,8 +2598,6 @@ RESPONSIVE
 .ecosystem-heading h2{
 
     font-size:44px;
-
-    letter-spacing:-1px;
 
 }
 
@@ -2633,24 +2635,16 @@ RESPONSIVE
 
 
 
-/* NETWORK FIX */
-
-
 .ecosystem-network{
 
-    height:650px;
+    height:600px;
 
     transform:scale(.70);
 
-    transform-origin:top center;
-
-    margin-bottom:-120px;
+    transform-origin:center top;
 
 }
 
-
-
-/* NODE SIZE */
 
 
 .eco-node{
@@ -2663,12 +2657,9 @@ RESPONSIVE
 
 
 
-/* MOBILE POSITIONS */
-
-
 .eco-node[data-id="sales"]{
 
-    left:0;
+    left:10px;
 
 }
 
@@ -2676,7 +2667,7 @@ RESPONSIVE
 
 .eco-node[data-id="support"]{
 
-    right:0;
+    right:10px;
 
 }
 
@@ -2684,7 +2675,7 @@ RESPONSIVE
 
 .eco-node[data-id="finance"]{
 
-    right:30px;
+    right:40px;
 
     bottom:120px;
 
@@ -2694,12 +2685,11 @@ RESPONSIVE
 
 .eco-node[data-id="hr"]{
 
-    left:30px;
+    left:40px;
 
     bottom:120px;
 
 }
-
 
 
 .line2,
@@ -2708,7 +2698,6 @@ RESPONSIVE
     width:120px;
 
 }
-
 
 
 .line5,
