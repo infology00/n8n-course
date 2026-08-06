@@ -289,20 +289,36 @@ PREMIUM MEGA MENU
 .mega-parent{
     position:relative;
 }
+.mega-parent::after{
 
+    content:"";
+
+    position:absolute;
+
+    top:100%;
+
+    left:0;
+
+    width:100%;
+
+    height:25px;
+
+}
 
 
 .mega-menu{
 
     position:absolute;
 
-    top:85px;
+    top:75px;
 
-    left:0;
+    left:50%;
 
-    width:1150px;
+    width:1200px;
 
     max-width:90vw;
+
+    transform:translateX(-35%) translateY(20px);
 
     background:#fff;
 
@@ -343,12 +359,9 @@ PREMIUM MEGA MENU
 
     pointer-events:auto;
 
-    transform:translateY(0);
+    transform:translateX(-35%) translateY(0);
 
 }
-
-
-
 
 
 /* LEFT PANEL */
@@ -597,15 +610,8 @@ PREMIUM MEGA MENU
 
 
 .menu-cta h3{
-
-    font-size:32px;
-
-    line-height:1.1;
-
-    margin-bottom:15px;
-
-    position:relative;
-
+    font-size:38px;
+    font-weight:800;
 }
 
 
@@ -625,25 +631,9 @@ PREMIUM MEGA MENU
 
 
 .menu-cta a{
-
-    background:#D6FF00;
-
-    color:#111;
-
-    padding:16px 25px;
-
-    border-radius:50px;
-
-    text-align:center;
-
-    font-weight:800;
-
-    position:relative;
-
-    transition:.3s;
-
+    margin-top:10px;
+    font-size:16px;
 }
-
 
 
 .menu-cta a:hover{
