@@ -305,6 +305,10 @@ PREMIUM MEGA MENU
 
 }
 
+/* ======================================================
+PREMIUM AI MEGA MENU
+====================================================== */
+
 
 .mega-menu{
 
@@ -318,31 +322,27 @@ PREMIUM MEGA MENU
 
     max-width:90vw;
 
-     margin-top:20px;
-
     transform:translateX(-35%) translateY(20px);
 
-    background:#fff;
-
-    border-radius:32px;
+    background:#ffffff;
 
     display:grid;
 
-    grid-template-columns:240px 1fr 320px;
+    grid-template-columns:260px 1fr 300px;
 
     overflow:hidden;
 
-    box-shadow:0 35px 90px rgba(0,0,0,.18);
+    border-radius:18px;
 
-    border:1px solid rgba(0,0,0,.08);
+    border:1px solid #eeeeee;
+
+    box-shadow:0 30px 80px rgba(0,0,0,.12);
 
     opacity:0;
 
     visibility:hidden;
 
     pointer-events:none;
-
-    transform:translateY(25px);
 
     transition:.35s ease;
 
@@ -366,16 +366,17 @@ PREMIUM MEGA MENU
 }
 
 
-/* LEFT PANEL */
+
+
+
+/* LEFT NAVIGATION */
 
 
 .menu-left{
 
-    background:#111;
+    background:#f7f7f5;
 
-    padding:30px 22px;
-
-    color:white;
+    padding:35px 25px;
 
 }
 
@@ -383,11 +384,13 @@ PREMIUM MEGA MENU
 
 .menu-left h3{
 
-    font-size:20px;
+    font-size:22px;
+
+    font-weight:800;
 
     margin-bottom:25px;
 
-    color:white;
+    color:#111;
 
 }
 
@@ -405,15 +408,15 @@ PREMIUM MEGA MENU
 
     padding:14px;
 
-    border-radius:16px;
-
     margin-bottom:10px;
+
+    border-radius:14px;
 
     cursor:pointer;
 
-    color:#ddd;
-
     transition:.3s;
+
+    color:#555;
 
 }
 
@@ -421,21 +424,23 @@ PREMIUM MEGA MENU
 
 .category i{
 
-    width:40px;
+    width:42px;
 
-    height:40px;
+    height:42px;
 
     display:flex;
 
+    justify-content:center;
+
     align-items:center;
 
-    justify-content:center;
+    background:white;
 
     border-radius:12px;
 
-    background:#222;
+    color:#111;
 
-    color:white;
+    box-shadow:0 8px 20px rgba(0,0,0,.06);
 
 }
 
@@ -453,7 +458,7 @@ PREMIUM MEGA MENU
 
 .category:hover{
 
-    background:#222;
+    background:white;
 
     transform:translateX(5px);
 
@@ -471,6 +476,8 @@ PREMIUM MEGA MENU
 
 
 
+
+
 .category.active i{
 
     background:#111;
@@ -483,12 +490,12 @@ PREMIUM MEGA MENU
 
 
 
-/* CENTER CONTENT */
+/* CENTER SERVICES */
 
 
 .menu-content{
 
-    padding:35px;
+    padding:40px;
 
 }
 
@@ -496,11 +503,11 @@ PREMIUM MEGA MENU
 
 .menu-content h3{
 
-    font-size:30px;
+    font-size:32px;
 
     font-weight:800;
 
-    margin-bottom:10px;
+    margin-bottom:12px;
 
 }
 
@@ -510,11 +517,15 @@ PREMIUM MEGA MENU
 
     color:#777;
 
+    font-size:16px;
+
     line-height:1.6;
 
-    margin-bottom:25px;
+    margin-bottom:30px;
 
 }
+
+
 
 
 
@@ -524,7 +535,7 @@ PREMIUM MEGA MENU
 
     grid-template-columns:repeat(2,1fr);
 
-    gap:14px;
+    gap:15px;
 
 }
 
@@ -534,9 +545,11 @@ PREMIUM MEGA MENU
 
     padding:18px;
 
-    background:#f7f7f7;
+    background:#fafafa;
 
-    border-radius:18px;
+    border:1px solid #eee;
+
+    border-radius:14px;
 
     font-weight:600;
 
@@ -550,6 +563,8 @@ PREMIUM MEGA MENU
 
     background:#D6FF00;
 
+    border-color:#D6FF00;
+
     transform:translateY(-4px);
 
 }
@@ -558,20 +573,18 @@ PREMIUM MEGA MENU
 
 
 
-/* CTA */
+/* CTA SECTION */
 
 
 .menu-cta{
 
-    margin:20px;
+    margin:22px;
 
     padding:35px;
 
-    border-radius:28px;
+    border-radius:20px;
 
-    background:#111;
-
-    color:white;
+    background:#f1f1ed;
 
     display:flex;
 
@@ -587,62 +600,103 @@ PREMIUM MEGA MENU
 
 
 
-.menu-cta:before{
+
+
+.menu-cta:after{
 
     content:"";
 
     position:absolute;
 
-    width:180px;
+    width:170px;
 
-    height:180px;
+    height:170px;
 
     background:#D6FF00;
 
     border-radius:50%;
 
-    right:-80px;
+    right:-70px;
 
-    top:-80px;
+    top:-70px;
 
-    opacity:.15;
+    opacity:.5;
 
 }
 
 
 
+
+
 .menu-cta h3{
-    font-size:38px;
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:34px;
+
+    line-height:1.15;
+
     font-weight:800;
+
+    color:#111;
+
+    margin-bottom:15px;
+
 }
 
 
 
 .menu-cta p{
 
-    color:#bbb;
+    position:relative;
+
+    z-index:2;
+
+    color:#666;
 
     line-height:1.6;
 
     margin-bottom:30px;
 
-    position:relative;
-
 }
+
+
 
 
 
 .menu-cta a{
-    margin-top:10px;
-    font-size:16px;
+
+    position:relative;
+
+    z-index:2;
+
+    background:#111;
+
+    color:white;
+
+    padding:16px 25px;
+
+    border-radius:50px;
+
+    text-align:center;
+
+    font-weight:700;
+
+    transition:.3s;
+
 }
+
 
 
 .menu-cta a:hover{
 
-    transform:translateY(-4px);
+    background:#D6FF00;
 
-    box-shadow:0 15px 40px rgba(214,255,0,.4);
+    color:#111;
+
+    transform:translateY(-3px);
 
 }
 
