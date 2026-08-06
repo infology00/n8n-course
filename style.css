@@ -2191,6 +2191,7 @@ RIGHT
 AI ECOSYSTEM PART 2
 ====================================================== */
 
+
 /* ==========================
 NODES
 ========================== */
@@ -2198,8 +2199,6 @@ NODES
 .eco-node{
 
     position:absolute;
-
-    border:none;
 
     background:#17191d;
 
@@ -2223,13 +2222,16 @@ NODES
 
     gap:12px;
 
-    transition:.35s;
+    transition:.35s ease;
 
     box-shadow:0 20px 50px rgba(0,0,0,.30);
 
     z-index:10;
 
+    white-space:nowrap;
+
 }
+
 
 .eco-node i{
 
@@ -2238,6 +2240,7 @@ NODES
     font-size:18px;
 
 }
+
 
 .eco-node:hover{
 
@@ -2249,6 +2252,7 @@ NODES
 
 }
 
+
 .eco-node.active{
 
     background:#D6FF00;
@@ -2257,75 +2261,103 @@ NODES
 
 }
 
+
 .eco-node.active i{
 
     color:#111;
 
 }
 
+
+
 /* ==========================
 NODE POSITIONS
 ========================== */
 
+
 .eco-node[data-id="marketing"]{
 
     top:40px;
+
     left:50%;
+
     transform:translateX(-50%);
 
 }
+
+
 
 .eco-node[data-id="sales"]{
 
     left:40px;
+
     top:50%;
+
     transform:translateY(-50%);
 
 }
+
+
 
 .eco-node[data-id="support"]{
 
     right:40px;
+
     top:50%;
+
     transform:translateY(-50%);
 
 }
 
+
+
 .eco-node[data-id="operations"]{
 
     bottom:40px;
+
     left:50%;
+
     transform:translateX(-50%);
 
 }
 
+
+
 .eco-node[data-id="finance"]{
 
     right:120px;
+
     bottom:140px;
 
 }
+
+
 
 .eco-node[data-id="hr"]{
 
     left:120px;
+
     bottom:140px;
 
 }
+
+
+
 
 /* ==========================
 LINES
 ========================== */
 
+
 .line{
 
     position:absolute;
 
-    background:rgba(214,255,0,.20);
+    height:2px;
+
+    background:rgba(214,255,0,.25);
 
     transform-origin:left center;
-
-    height:2px;
 
     z-index:1;
 
@@ -2333,7 +2365,8 @@ LINES
 
 }
 
-/* Marketing */
+
+
 
 .line1{
 
@@ -2347,7 +2380,7 @@ LINES
 
 }
 
-/* Sales */
+
 
 .line2{
 
@@ -2359,7 +2392,7 @@ LINES
 
 }
 
-/* Support */
+
 
 .line3{
 
@@ -2371,7 +2404,7 @@ LINES
 
 }
 
-/* Operations */
+
 
 .line4{
 
@@ -2385,7 +2418,7 @@ LINES
 
 }
 
-/* HR */
+
 
 .line5{
 
@@ -2399,7 +2432,7 @@ LINES
 
 }
 
-/* Finance */
+
 
 .line6{
 
@@ -2413,31 +2446,39 @@ LINES
 
 }
 
+
+
+
 /* ==========================
-ANIMATIONS
+ANIMATION
 ========================== */
+
 
 @keyframes pulseCore{
 
-    0%{
+0%{
 
-        transform:translate(-50%,-50%) scale(1);
-
-    }
-
-    50%{
-
-        transform:translate(-50%,-50%) scale(1.06);
-
-    }
-
-    100%{
-
-        transform:translate(-50%,-50%) scale(1);
-
-    }
+transform:translate(-50%,-50%) scale(1);
 
 }
+
+
+50%{
+
+transform:translate(-50%,-50%) scale(1.06);
+
+}
+
+
+100%{
+
+transform:translate(-50%,-50%) scale(1);
+
+}
+
+}
+
+
 
 .ai-core{
 
@@ -2445,21 +2486,29 @@ ANIMATIONS
 
 }
 
+
+
+
 @keyframes rotateRing{
 
-    from{
 
-        transform:translate(-50%,-50%) rotate(0deg);
+from{
 
-    }
-
-    to{
-
-        transform:translate(-50%,-50%) rotate(360deg);
-
-    }
+transform:translate(-50%,-50%) rotate(0deg);
 
 }
+
+
+to{
+
+transform:translate(-50%,-50%) rotate(360deg);
+
+}
+
+
+}
+
+
 
 .core-ring{
 
@@ -2467,35 +2516,49 @@ ANIMATIONS
 
 }
 
+
+
 .ring2{
 
     animation:rotateRing 30s linear infinite reverse;
 
 }
 
+
+
+
 @keyframes lineGlow{
 
-    from{
 
-        opacity:.25;
+from{
 
-    }
-
-    to{
-
-        opacity:1;
-
-        box-shadow:0 0 20px rgba(214,255,0,.45);
-
-    }
+opacity:.25;
 
 }
+
+
+to{
+
+opacity:1;
+
+box-shadow:0 0 20px rgba(214,255,0,.45);
+
+}
+
+
+}
+
+
+
+
 
 /* ==========================
 RESPONSIVE
 ========================== */
 
+
 @media(max-width:1200px){
+
 
 .ecosystem-wrapper{
 
@@ -2503,21 +2566,30 @@ RESPONSIVE
 
 }
 
+
 .ecosystem-network{
 
     height:650px;
 
 }
 
+
 }
 
+
+
+
+
 @media(max-width:768px){
+
 
 .ecosystem{
 
     padding:100px 0;
 
 }
+
+
 
 .ecosystem-heading h2{
 
@@ -2527,45 +2599,6 @@ RESPONSIVE
 
 }
 
-.ecosystem-content{
-
-    padding:30px;
-
-}
-
-.ecosystem-content h3{
-
-    font-size:34px;
-
-}
-
-.eco-features{
-
-    grid-template-columns:1fr;
-
-}
-
-.eco-stats{
-
-    grid-template-columns:1fr;
-
-}
-
-@media(max-width:768px){
-
-.ecosystem{
-
-    padding:100px 0;
-
-}
-
-
-.ecosystem-heading h2{
-
-    font-size:44px;
-    letter-spacing:-1px;
-
-}
 
 
 .ecosystem-content{
@@ -2575,11 +2608,13 @@ RESPONSIVE
 }
 
 
+
 .ecosystem-content h3{
 
     font-size:34px;
 
 }
+
 
 
 .eco-features{
@@ -2589,21 +2624,99 @@ RESPONSIVE
 }
 
 
+
 .eco-stats{
 
     grid-template-columns:1fr;
 
 }
+
+
+
+/* NETWORK FIX */
 
 
 .ecosystem-network{
 
-    transform:scale(.72);
+    height:650px;
+
+    transform:scale(.70);
 
     transform-origin:top center;
 
-    height:520px;
+    margin-bottom:-120px;
 
 }
+
+
+
+/* NODE SIZE */
+
+
+.eco-node{
+
+    padding:12px 18px;
+
+    font-size:13px;
+
+}
+
+
+
+/* MOBILE POSITIONS */
+
+
+.eco-node[data-id="sales"]{
+
+    left:0;
+
+}
+
+
+
+.eco-node[data-id="support"]{
+
+    right:0;
+
+}
+
+
+
+.eco-node[data-id="finance"]{
+
+    right:30px;
+
+    bottom:120px;
+
+}
+
+
+
+.eco-node[data-id="hr"]{
+
+    left:30px;
+
+    bottom:120px;
+
+}
+
+
+
+.line2,
+.line3{
+
+    width:120px;
+
+}
+
+
+
+.line5,
+.line6{
+
+    width:120px;
+
+}
+
 
 }
