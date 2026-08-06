@@ -3204,328 +3204,318 @@ SMALL PHONE
 
 
 }
+
 /*======================================
 CORPORATE AI TRAINING
 ======================================*/
 
 .training-section{
 
-padding:120px 8%;
-background:#070707;
-
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:80px;
-
-align-items:center;
-
-position:relative;
-
-overflow:hidden;
+    padding:140px 0;
+    background:#070707;
+    position:relative;
+    overflow:hidden;
 
 }
-
-
 
 .training-section::before{
 
-content:"";
+    content:"";
+    position:absolute;
 
-position:absolute;
+    width:600px;
+    height:600px;
 
-width:500px;
-height:500px;
+    background:radial-gradient(circle,rgba(214,255,0,.08),transparent 70%);
 
-background:#f7c60015;
+    top:-250px;
+    right:-250px;
 
-filter:blur(120px);
+}
 
-top:-120px;
-right:-120px;
+.training-section::after{
 
-border-radius:50%;
+    content:"";
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    background:radial-gradient(circle,rgba(255,255,255,.04),transparent 70%);
+
+    left:-220px;
+    bottom:-220px;
+
+}
+
+.training-section{
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+
+    width:min(1400px,90%);
+    margin:auto;
+
+    align-items:center;
 
 }
 
 
+/* LEFT */
 
 .training-left{
 
-position:relative;
-z-index:2;
+    position:relative;
+    z-index:2;
 
 }
-
-
 
 .training-left h2{
 
-font-size:56px;
+    font-size:58px;
+    line-height:1.05;
+    letter-spacing:-2px;
+    font-weight:800;
+    color:#fff;
 
-line-height:1.1;
-
-margin:18px 0 30px;
-
-font-weight:700;
-
-color:#fff;
+    margin:18px 0 30px;
 
 }
-
-
 
 .training-left h2 span{
 
-color:#f7c600;
+    color:var(--yellow);
 
 }
-
-
 
 .training-left p{
 
-color:#bdbdbd;
+    color:#bdbdbd;
+    font-size:18px;
+    line-height:1.9;
 
-font-size:18px;
+    max-width:620px;
 
-line-height:1.9;
-
-max-width:620px;
-
-margin-bottom:40px;
+    margin-bottom:40px;
 
 }
 
 
+/* BENEFITS */
 
 .training-benefits{
 
-display:grid;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
 
-grid-template-columns:repeat(2,1fr);
-
-gap:18px;
-
-margin-bottom:45px;
+    margin-bottom:45px;
 
 }
-
-
 
 .training-benefits .benefit{
 
-display:flex;
+    display:flex;
+    align-items:center;
+    gap:14px;
 
-align-items:center;
+    padding:18px 20px;
 
-gap:14px;
+    border-radius:16px;
 
-background:#101010;
+    background:#131313;
 
-padding:18px 20px;
+    border:1px solid rgba(255,255,255,.06);
 
-border:1px solid rgba(255,255,255,.06);
-
-border-radius:14px;
-
-transition:.35s;
+    transition:.35s;
 
 }
-
-
 
 .training-benefits .benefit:hover{
 
-transform:translateY(-6px);
+    transform:translateY(-6px);
 
-border-color:#f7c600;
+    border-color:var(--yellow);
 
-background:#141414;
+    background:#1a1a1a;
+
+    box-shadow:0 15px 40px rgba(214,255,0,.08);
 
 }
-
-
 
 .training-benefits i{
 
-font-size:20px;
-
-color:#f7c600;
+    color:var(--yellow);
+    font-size:20px;
 
 }
-
-
 
 .training-benefits span{
 
-color:#fff;
-
-font-weight:500;
+    color:#fff;
+    font-weight:600;
 
 }
 
 
+/* BUTTON */
+
+.training-left .primary-btn{
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+}
+
+
+/* RIGHT */
 
 .training-right{
 
-position:relative;
-
-z-index:2;
+    position:relative;
+    z-index:2;
 
 }
-
-
 
 .training-card{
 
-background:#111111;
+    background:#121212;
 
-border:1px solid rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
 
-border-radius:24px;
+    border-radius:28px;
 
-padding:40px;
+    padding:40px;
 
-backdrop-filter:blur(12px);
-
-box-shadow:0 30px 80px rgba(0,0,0,.45);
+    box-shadow:0 30px 80px rgba(0,0,0,.45);
 
 }
-
-
 
 .training-card h3{
 
-font-size:28px;
+    font-size:30px;
+    color:#fff;
 
-color:#fff;
-
-margin-bottom:30px;
+    margin-bottom:35px;
 
 }
 
 
+/* GRID */
 
 .training-grid{
 
-display:grid;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
 
-grid-template-columns:repeat(2,1fr);
-
-gap:16px;
+    gap:18px;
 
 }
-
-
 
 .training-grid div{
 
-display:flex;
+    display:flex;
+    align-items:center;
+    gap:14px;
 
-align-items:center;
+    padding:18px;
 
-gap:14px;
+    border-radius:16px;
 
-padding:16px 18px;
+    background:#181818;
 
-border-radius:14px;
+    border:1px solid rgba(255,255,255,.05);
 
-background:#181818;
+    color:#fff;
 
-border:1px solid rgba(255,255,255,.06);
+    font-size:15px;
+    font-weight:600;
 
-color:#fff;
+    transition:.35s;
 
-font-size:15px;
-
-font-weight:500;
-
-transition:.35s;
-
-cursor:pointer;
+    cursor:pointer;
 
 }
-
-
 
 .training-grid div:hover{
 
-transform:translateY(-5px);
+    transform:translateY(-5px);
 
-background:#1e1e1e;
+    background:#202020;
 
-border-color:#f7c600;
+    border-color:var(--yellow);
+
+    box-shadow:0 15px 40px rgba(214,255,0,.08);
 
 }
-
-
 
 .training-grid i{
 
-font-size:18px;
+    color:var(--yellow);
 
-color:#f7c600;
+    width:24px;
 
-width:24px;
+    text-align:center;
 
-text-align:center;
+    font-size:18px;
 
 }
 
 
+/* ===========================
+TABLET
+=========================== */
 
 @media(max-width:1100px){
 
 .training-section{
 
-grid-template-columns:1fr;
+    grid-template-columns:1fr;
 
-gap:60px;
-
-}
+    gap:70px;
 
 }
 
+}
 
+
+/* ===========================
+MOBILE
+=========================== */
 
 @media(max-width:768px){
 
 .training-section{
 
-padding:80px 25px;
+    padding:90px 25px;
 
 }
-
-
 
 .training-left h2{
 
-font-size:40px;
+    font-size:42px;
 
 }
-
-
 
 .training-benefits{
 
-grid-template-columns:1fr;
+    grid-template-columns:1fr;
 
 }
-
-
 
 .training-grid{
 
-grid-template-columns:1fr;
+    grid-template-columns:1fr;
 
 }
-
-
 
 .training-card{
 
-padding:25px;
+    padding:28px;
 
 }
 
 }
+
