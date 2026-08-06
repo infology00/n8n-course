@@ -3,9 +3,9 @@
 // =====================================
 
 
-// ================================
+// =====================================
 // MEGA MENU
-// ================================
+// =====================================
 
 
 const megaParent = document.querySelector(".mega-parent");
@@ -18,7 +18,8 @@ if(megaParent && megaMenu){
     let closeTimer;
 
 
-    megaParent.addEventListener("mouseenter", function(){
+
+    megaParent.addEventListener("mouseenter",()=>{
 
 
         clearTimeout(closeTimer);
@@ -31,10 +32,12 @@ if(megaParent && megaMenu){
 
 
 
-    megaParent.addEventListener("mouseleave", function(){
 
 
-        closeTimer = setTimeout(function(){
+    megaParent.addEventListener("mouseleave",()=>{
+
+
+        closeTimer = setTimeout(()=>{
 
 
             megaMenu.classList.remove("active");
@@ -47,7 +50,11 @@ if(megaParent && megaMenu){
 
 
 
-    megaMenu.addEventListener("mouseenter", function(){
+
+
+
+
+    megaMenu.addEventListener("mouseenter",()=>{
 
 
         clearTimeout(closeTimer);
@@ -60,10 +67,14 @@ if(megaParent && megaMenu){
 
 
 
-    megaMenu.addEventListener("mouseleave", function(){
 
 
-        closeTimer = setTimeout(function(){
+
+
+    megaMenu.addEventListener("mouseleave",()=>{
+
+
+        closeTimer = setTimeout(()=>{
 
 
             megaMenu.classList.remove("active");
@@ -73,6 +84,7 @@ if(megaParent && megaMenu){
 
 
     });
+
 
 
 }
@@ -81,9 +93,13 @@ if(megaParent && megaMenu){
 
 
 
-// ================================
+
+
+
+
+// =====================================
 // MOBILE MENU
-// ================================
+// =====================================
 
 
 const menuBtn = document.querySelector(".menu-toggle");
@@ -95,7 +111,7 @@ const navLinks = document.querySelector(".nav-links");
 if(menuBtn && navLinks){
 
 
-    menuBtn.addEventListener("click", function(){
+    menuBtn.addEventListener("click",()=>{
 
 
         navLinks.classList.toggle("show");
@@ -110,12 +126,16 @@ if(menuBtn && navLinks){
 
 
 
-// ================================
+
+
+
+
+// =====================================
 // NAVBAR SHADOW ON SCROLL
-// ================================
+// =====================================
 
 
-window.addEventListener("scroll", function(){
+window.addEventListener("scroll",()=>{
 
 
     const navbar = document.querySelector(".navbar");
@@ -141,6 +161,136 @@ window.addEventListener("scroll", function(){
 
 
     }
+
+
+});
+
+
+
+
+
+
+
+
+
+// =====================================
+// VIDEO AUTOMATION SHOWCASE
+// =====================================
+
+
+const videoCards = document.querySelectorAll(".video-card");
+
+
+
+videoCards.forEach(card=>{
+
+
+    const video = card.querySelector("video");
+
+
+
+    if(video){
+
+
+
+        card.addEventListener("click",()=>{
+
+
+
+            // Stop all other videos
+
+            document.querySelectorAll(".video-card video").forEach(otherVideo=>{
+
+
+                if(otherVideo !== video){
+
+
+                    otherVideo.pause();
+
+
+                    otherVideo.currentTime = 0;
+
+
+                }
+
+
+            });
+
+
+
+
+
+
+            // Play / Pause selected video
+
+
+            if(video.paused){
+
+
+                video.play();
+
+
+                card.classList.add("playing");
+
+
+            }else{
+
+
+                video.pause();
+
+
+                card.classList.remove("playing");
+
+
+            }
+
+
+
+        });
+
+
+
+    }
+
+
+
+});
+
+
+
+
+
+
+
+
+
+// =====================================
+// REMOVE PLAY BUTTON WHEN VIDEO PLAYING
+// =====================================
+
+
+document.querySelectorAll(".video-card video").forEach(video=>{
+
+
+    video.addEventListener("play",()=>{
+
+
+        video.parentElement.classList.add("playing");
+
+
+    });
+
+
+
+
+    video.addEventListener("pause",()=>{
+
+
+        video.parentElement.classList.remove("playing");
+
+
+    });
+
 
 
 });
