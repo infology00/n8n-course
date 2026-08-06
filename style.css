@@ -297,9 +297,9 @@ MEGA MENU
 
     top:90px;
 
-    left:50%;
+    left:0;
 
-    transform:translateX(-50%) translateY(20px);
+    transform:translateY(20px);
 
     width:1200px;
 
@@ -335,21 +335,15 @@ MEGA MENU
 .mega-parent:hover .mega-menu,
 .mega-menu.active{
 
-
     opacity:1;
-
 
     visibility:visible;
 
-
     pointer-events:auto;
 
-
-    transform:translateX(-50%) translateY(0);
-
+    transform:translateY(0);
 
 }
-
 
 
 
