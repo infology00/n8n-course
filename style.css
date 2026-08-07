@@ -64,7 +64,7 @@ NAVBAR
 .navbar{
     width:min(1450px,96%);
 
-    margin:0 auto;
+    margin:15px auto 0;
 
     height:90px;
 
@@ -74,8 +74,8 @@ NAVBAR
 
     padding:0 40px;
 
-    background:rgba(255,255,255,.85
-                   
+    background:#080808;
+
     border-radius:25px;
 
     border:1px solid rgba(255,255,255,.08);
@@ -83,10 +83,10 @@ NAVBAR
     box-shadow:0 20px 60px rgba(0,0,0,.35);
 }
 
+
 /* ======================================================
 LOGO
 ====================================================== */
-
 
 .logo h2{
 
@@ -96,7 +96,7 @@ LOGO
 
     letter-spacing:4px;
 
-    color:#111;
+    color:#fff;
 
 }
 
