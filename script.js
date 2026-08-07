@@ -896,56 +896,60 @@ if(clearWorkflow){
 }
 function makeNodeDraggable(node){
 
-let offsetX = 0;
-let offsetY = 0;
-let dragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+    let dragging = false;
+
+    node.addEventListener("mousedown", (e) => {
+
+        dragging = true;
+
+        const nodeRect = node.getBoundingClientRect();
+
+        offsetX = e.clientX - nodeRect.left;
+        offsetY = e.clientY - nodeRect.top;
+
+        node.style.cursor = "grabbing";
+
+        e.preventDefault();
+
+    });
 
 
-node.addEventListener("mousedown", (e)=>{
+    document.addEventListener("mousemove", (e) => {
 
-dragging = true;
+        if(!dragging) return;
 
+        const canvasRect = workflowNodes.getBoundingClientRect();
 
-offsetX = e.clientX - node.offsetLeft;
-offsetY = e.clientY - node.offsetTop;
-
-
-node.style.cursor="grabbing";
+        let x = e.clientX - canvasRect.left - offsetX;
+        let y = e.clientY - canvasRect.top - offsetY;
 
 
-});
+        // Keep node inside canvas
+
+        const maxX = canvasRect.width - node.offsetWidth;
+        const maxY = canvasRect.height - node.offsetHeight;
 
 
-
-document.addEventListener("mousemove",(e)=>{
-
-if(!dragging) return;
+        x = Math.max(0, Math.min(x, maxX));
+        y = Math.max(0, Math.min(y, maxY));
 
 
+        node.style.left = x + "px";
+        node.style.top = y + "px";
 
-let x = e.clientX - offsetX;
-let y = e.clientY - offsetY;
-
-
-
-node.style.left = x + "px";
-node.style.top = y + "px";
+    });
 
 
-});
+    document.addEventListener("mouseup", () => {
 
+        if(!dragging) return;
 
+        dragging = false;
 
-document.addEventListener("mouseup",()=>{
+        node.style.cursor = "grab";
 
-
-dragging=false;
-
-
-node.style.cursor="grab";
-
-
-});
-
+    });
 
 }
