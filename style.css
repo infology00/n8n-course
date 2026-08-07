@@ -3765,3 +3765,31 @@ SMALL PHONE
 
 }
 
+/* FORCE WORKFLOW DARK THEME */
+
+section.workflow-builder{
+    background:#050505 !important;
+    color:#ffffff !important;
+    width:100%;
+    position:relative;
+}
+
+
+section.workflow-builder .workflow-canvas{
+    background-color:#080808 !important;
+}
+
+
+section.workflow-builder .workflow-sidebar,
+section.workflow-builder .summary-card{
+    background:#0d0d0d !important;
+}
+
+
+section.workflow-builder h2,
+section.workflow-builder h3,
+section.workflow-builder p,
+section.workflow-builder span,
+section.workflow-builder li{
+    color:#ffffff !important;
+}
