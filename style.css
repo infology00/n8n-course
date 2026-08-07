@@ -3204,105 +3204,134 @@ SMALL PHONE
 }  /* <-- ye missing tha */
 
 /*=========================================
-  WORKFLOW BUILDER
+ WORKFLOW BUILDER PREMIUM AI STYLE
 =========================================*/
 
 .workflow-builder{
-    padding:140px 0;
+
+    min-height:100vh;
+    padding:100px 0;
     position:relative;
     overflow:hidden;
+    background:#050505;
+    color:#fff;
+
 }
 
 
+/* Heading */
+
 .workflow-heading{
+
     text-align:center;
     max-width:850px;
-    margin:0 auto 70px;
+    margin:0 auto 60px;
+
 }
 
 
 .workflow-heading h2{
+
     font-size:56px;
-    margin:18px 0;
     line-height:1.1;
+    margin:20px 0;
+    color:#fff;
+
 }
 
 
 .workflow-heading p{
+
     max-width:720px;
     margin:auto;
-    opacity:.8;
+    color:rgba(255,255,255,.65);
     font-size:18px;
+
 }
 
 
 
-/*=========================
-  LAYOUT
-=========================*/
+/*=========================================
+ LAYOUT
+=========================================*/
+
 
 .workflow-layout{
+
     display:grid;
-    grid-template-columns:320px 1fr 320px;
-    gap:30px;
+    grid-template-columns:260px 1fr 260px;
+    gap:25px;
     align-items:start;
+
 }
 
 
 
-/*=========================
-  LEFT SIDEBAR
-=========================*/
+
+/*=========================================
+ SIDEBAR
+=========================================*/
+
 
 .workflow-sidebar{
-    background:#0d0d0d;
-    border:1px solid rgba(214,255,0,.15);
-    border-radius:26px;
-    padding:28px;
+
+    background:rgba(15,15,15,.8);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+    padding:25px;
     position:sticky;
-    top:120px;
+    top:100px;
+
 }
+
 
 
 .workflow-category{
-    margin-bottom:34px;
-}
 
+    margin-bottom:30px;
 
-.workflow-category:last-child{
-    margin-bottom:0;
 }
 
 
 .workflow-category h3{
+
     color:#D6FF00;
-    font-size:18px;
-    margin-bottom:16px;
+    font-size:16px;
+    margin-bottom:15px;
+
 }
+
 
 
 .workflow-items,
 .workflow-subitems{
+
     display:flex;
     flex-wrap:wrap;
-    gap:10px;
+    gap:8px;
+
 }
+
 
 
 .workflow-items button,
 .workflow-subitems button,
 .parent-btn{
 
-    background:#161616;
+
+    background:#111;
     color:#fff;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:12px;
-    padding:11px 15px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:10px;
+    padding:10px 14px;
     cursor:pointer;
-    transition:.35s;
-    font-size:14px;
+    transition:.3s;
+    font-size:13px;
+
 
 }
+
 
 
 .workflow-items button:hover,
@@ -3316,43 +3345,85 @@ SMALL PHONE
 }
 
 
-.workflow-subitems{
-    margin:15px 0 25px;
-}
 
 
 
-/*=========================
-  CENTER CANVAS
-=========================*/
+/*=========================================
+ CANVAS
+=========================================*/
+
 
 .workflow-canvas{
 
-    background:#0c0c0c;
-    border-radius:30px;
-    border:1px solid rgba(214,255,0,.15);
-    min-height:720px;
+
+    height:720px;
     position:relative;
     overflow:hidden;
-    padding:35px;
+    padding:30px;
+
+    background-color:#080808;
+
+    background-image:
+    radial-gradient(
+    rgba(214,255,0,.25) 1px,
+    transparent 1px
+    );
+
+    background-size:22px 22px;
+
+
+    border-radius:30px;
+    border:1px solid rgba(255,255,255,.08);
+
 
 }
 
+
+
+
+.workflow-canvas:before{
+
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+    linear-gradient(
+    90deg,
+    rgba(214,255,0,.05),
+    transparent
+    );
+
+    pointer-events:none;
+
+}
+
+
+
+
+/* Canvas Header */
 
 
 .canvas-header{
 
+    position:relative;
+    z-index:2;
+
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:35px;
+
+    margin-bottom:30px;
+
 
 }
 
 
 
 .canvas-header h3{
-    font-size:26px;
+
+    color:#fff;
+    font-size:24px;
+
 }
 
 
@@ -3361,32 +3432,48 @@ SMALL PHONE
 
     background:#D6FF00;
     color:#000;
+
     border:none;
-    border-radius:12px;
     padding:12px 22px;
-    cursor:pointer;
+
+    border-radius:12px;
+
     font-weight:700;
+    cursor:pointer;
 
 }
 
+
+
+
+/* Workflow Nodes */
 
 
 #workflowNodes{
 
+    position:relative;
+    z-index:2;
+
     display:flex;
     flex-direction:column;
+
     align-items:center;
-    gap:30px;
+
+    gap:25px;
+
     min-height:550px;
 
+
 }
+
 
 
 
 .empty-workflow{
 
+    color:#fff;
+    opacity:.5;
     margin-top:120px;
-    opacity:.55;
     font-size:18px;
 
 }
@@ -3394,27 +3481,36 @@ SMALL PHONE
 
 
 
-/*=========================
-  RIGHT SUMMARY
-=========================*/
+/*=========================================
+ RIGHT SUMMARY
+=========================================*/
 
 
 .workflow-summary{
 
     position:sticky;
-    top:120px;
+    top:100px;
 
 }
 
 
 
+
 .summary-card{
 
-    background:#0d0d0d;
-    border:1px solid rgba(214,255,0,.15);
+
+    background:rgba(15,15,15,.85);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.08);
+
     border-radius:24px;
-    padding:28px;
-    margin-bottom:25px;
+
+    padding:25px;
+
+    margin-bottom:20px;
+
 
 }
 
@@ -3422,8 +3518,10 @@ SMALL PHONE
 
 .summary-card h3{
 
-    margin-bottom:22px;
-    font-size:22px;
+    color:#fff;
+    font-size:20px;
+    margin-bottom:20px;
+
 
 }
 
@@ -3431,12 +3529,17 @@ SMALL PHONE
 
 .summary-item{
 
+
     display:flex;
+
     justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-    padding-bottom:18px;
-    border-bottom:1px solid rgba(255,255,255,.06);
+
+    color:#ddd;
+
+    padding:15px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
 
 }
 
@@ -3444,8 +3547,6 @@ SMALL PHONE
 
 .summary-item:last-child{
 
-    margin-bottom:0;
-    padding-bottom:0;
     border:none;
 
 }
@@ -3461,41 +3562,42 @@ SMALL PHONE
 
 
 
-.summary-card ul{
-
-    padding-left:18px;
-
-}
-
-
-
 .summary-card li{
 
-    margin-bottom:12px;
-    opacity:.9;
+    color:#ccc;
+    margin-bottom:10px;
 
 }
 
 
 
-
-/*=========================
-  GENERATE BUTTON
-=========================*/
+/*=========================================
+ BUTTON
+=========================================*/
 
 
 .generate-btn{
 
+
     width:100%;
     height:58px;
-    border:none;
-    border-radius:18px;
+
     background:#D6FF00;
+
     color:#000;
-    font-weight:700;
-    cursor:pointer;
+
+    border:none;
+
+    border-radius:18px;
+
     font-size:18px;
-    transition:.35s;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
 
 }
 
@@ -3503,33 +3605,40 @@ SMALL PHONE
 
 .generate-btn:hover{
 
-    transform:translateY(-4px);
-    box-shadow:0 0 30px rgba(214,255,0,.35);
+    transform:translateY(-5px);
+
+    box-shadow:
+    0 0 40px rgba(214,255,0,.35);
 
 }
 
 
 
 
-/*=========================
-  RESPONSIVE
-=========================*/
+
+/*=========================================
+ RESPONSIVE
+=========================================*/
 
 
 @media(max-width:1200px){
 
-    .workflow-layout{
-        grid-template-columns:1fr;
-    }
+
+.workflow-layout{
+
+    grid-template-columns:1fr;
+
+}
 
 
-    .workflow-sidebar,
-    .workflow-summary{
+.workflow-sidebar,
+.workflow-summary{
 
-        position:relative;
-        top:0;
+    position:relative;
+    top:0;
 
-    }
+}
+
 
 }
 
@@ -3538,18 +3647,20 @@ SMALL PHONE
 @media(max-width:768px){
 
 
-    .workflow-heading h2{
+.workflow-heading h2{
 
-        font-size:40px;
-
-    }
-
-
-    .workflow-canvas{
-
-        padding:20px;
-        min-height:550px;
-
-    }
+    font-size:38px;
 
 }
+
+
+.workflow-canvas{
+
+    height:600px;
+    padding:20px;
+
+}
+
+
+}
+
