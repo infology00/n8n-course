@@ -3193,13 +3193,15 @@ SMALL PHONE
 
 
 
-    .ecosystem-network{
+   .ecosystem-network{
 
-        transform:scale(.45);
+    transform:scale(.45);
 
-        margin-bottom:-260px;
+    margin-bottom:-260px;
 
-    }
+}
+
+}  /* <-- ye missing tha */
 
 /*=========================================*
 * WORKFLOW BUILDER
