@@ -165,7 +165,6 @@ NAV LINKS
 HEADER BUTTON
 ====================================================== */
 
-
 .header-btn{
 
     background:var(--yellow);
@@ -176,10 +175,21 @@ HEADER BUTTON
 
     font-weight:700;
 
-    transition:.3s;
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:220px;
+
+    color:#000;
+
+    text-decoration:none;
+
+    transition:.3s ease;
 
 }
-
 
 
 .header-btn:hover{
@@ -191,7 +201,13 @@ HEADER BUTTON
 }
 
 
+#callText{
 
+    display:inline-block;
+
+    transition:opacity .3s ease, transform .3s ease;
+
+}
 
 
 /* ======================================================
