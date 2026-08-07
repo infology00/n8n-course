@@ -3387,26 +3387,14 @@ SMALL PHONE
 
     background-color:#080808;
 
+    background-image:
+radial-gradient(
+rgba(214,255,0,.25) 1px,
+transparent 1px
+);
 
- .workflow-canvas{
 
-height:720px;
-
-position:relative;
-
-overflow-y:auto;
-
-overflow-x:hidden;
-
-padding:30px;
-
-background:#080808;
-
-border-radius:30px;
-
-border:1px solid rgba(255,255,255,.08);
-
-}
+background-size:22px 22px;
 
     border-radius:30px;
 
