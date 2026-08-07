@@ -3793,3 +3793,151 @@ section.workflow-builder span,
 section.workflow-builder li{
     color:#ffffff !important;
 }
+
+/*=========================================
+ WORKFLOW NODES - N8N STYLE
+=========================================*/
+
+
+.workflow-node{
+
+    width:260px;
+
+    background:#111;
+
+    border:1px solid rgba(214,255,0,.25);
+
+    border-radius:16px;
+
+    padding:18px 22px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    color:#fff;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.4);
+
+    animation:nodeAppear .35s ease;
+
+    position:relative;
+
+    transition:.3s;
+
+}
+
+
+
+.workflow-node:hover{
+
+    border-color:#D6FF00;
+
+    transform:translateY(-4px);
+
+    box-shadow:
+    0 0 25px rgba(214,255,0,.25);
+
+}
+
+
+
+
+
+.node-icon{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:12px;
+
+    background:#D6FF00;
+
+    color:#000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:20px;
+
+    font-weight:700;
+
+}
+
+
+
+
+
+.node-name{
+
+    font-size:16px;
+
+    font-weight:600;
+
+    color:#fff;
+
+}
+
+
+
+
+
+/* Connection Line */
+
+.workflow-node:not(:last-child)::after{
+
+    content:"";
+
+    position:absolute;
+
+    bottom:-30px;
+
+    left:50%;
+
+    width:2px;
+
+    height:30px;
+
+    background:#D6FF00;
+
+    transform:translateX(-50%);
+
+    opacity:.5;
+
+}
+
+
+
+
+
+/* Node Animation */
+
+@keyframes nodeAppear{
+
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px) scale(.95);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0) scale(1);
+
+    }
+
+
+}
