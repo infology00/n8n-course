@@ -3374,8 +3374,7 @@ SMALL PHONE
 
 height:720px;
 
-position:absolute;
-
+position:relative;
 overflow-y:auto;
 
 overflow-x:hidden;
