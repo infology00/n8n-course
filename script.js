@@ -2,7 +2,6 @@
 // AWSZ WEBSITE SCRIPT
 // =====================================
 
-
 document.addEventListener("DOMContentLoaded",()=>{
 
 
@@ -10,13 +9,11 @@ document.addEventListener("DOMContentLoaded",()=>{
 // MEGA MENU
 // =====================================
 
-
 const megaParent=document.querySelector(".mega-parent");
 const megaMenu=document.querySelector(".mega-menu");
 
 
 if(megaParent && megaMenu){
-
 
 let timer;
 
@@ -32,13 +29,11 @@ megaMenu.classList.add("active");
 
 megaParent.addEventListener("mouseleave",()=>{
 
-
 timer=setTimeout(()=>{
 
 megaMenu.classList.remove("active");
 
 },250);
-
 
 });
 
@@ -52,20 +47,16 @@ clearTimeout(timer);
 
 megaMenu.addEventListener("mouseleave",()=>{
 
-
 timer=setTimeout(()=>{
 
 megaMenu.classList.remove("active");
 
 },250);
 
-
 });
 
 
 }
-
-
 
 
 
@@ -81,18 +72,13 @@ const nav=document.querySelector(".nav-links");
 
 if(menuBtn && nav){
 
-
 menuBtn.onclick=()=>{
-
 
 nav.classList.toggle("show");
 
-
 };
 
-
 }
-
 
 
 
@@ -142,6 +128,7 @@ if(video.paused){
 video.play();
 
 }
+
 else{
 
 video.pause();
@@ -149,12 +136,10 @@ video.pause();
 }
 
 
-
 };
 
 
 });
-
 
 
 
@@ -180,10 +165,15 @@ description:
 "AI qualifies leads, books meetings, updates CRM and improves sales pipeline.",
 
 features:[
+
 "Lead Qualification",
+
 "CRM Updates",
+
 "Follow Ups",
+
 "Meeting Booking"
+
 ]
 
 },
@@ -198,10 +188,15 @@ description:
 "AI creates content, manages campaigns and improves marketing performance.",
 
 features:[
+
 "Content Creation",
+
 "Email Automation",
+
 "SEO",
+
 "Ad Reports"
+
 ]
 
 },
@@ -216,17 +211,21 @@ description:
 "AI chatbot, WhatsApp automation and customer service systems.",
 
 features:[
+
 "WhatsApp AI",
+
 "Chatbots",
+
 "Tickets",
+
 "Knowledge Base"
+
 ]
 
 }
 
 
 };
-
 
 
 
@@ -262,11 +261,13 @@ const box=document.getElementById("ecoFeatures");
 
 
 if(title)
+
 title.innerHTML=data.title;
 
 
 
 if(desc)
+
 desc.innerHTML=data.description;
 
 
@@ -284,12 +285,9 @@ box.innerHTML+=`
 
 <div>
 
-<i class="fa-solid fa-check"></i>
-
 ${item}
 
 </div>
-
 
 `;
 
@@ -306,22 +304,16 @@ ${item}
 
 });
 
-
-
-
 // =====================================
 // TETA AI
 // =====================================
-
 
 const questionEl=document.getElementById("question");
 
 const optionsEl=document.getElementById("options");
 
 
-
 if(window.tetaKnowledge && questionEl && optionsEl){
-
 
 
 function startTeta(){
@@ -332,9 +324,7 @@ loadNode("start");
 
 
 
-
 function loadNode(nodeName){
-
 
 const node=window.tetaKnowledge[nodeName];
 
@@ -342,9 +332,7 @@ const node=window.tetaKnowledge[nodeName];
 if(!node)return;
 
 
-
 questionEl.innerHTML=node.question;
-
 
 optionsEl.innerHTML="";
 
@@ -387,9 +375,7 @@ optionsEl.appendChild(btn);
 });
 
 
-
 }
-
 
 
 
@@ -402,41 +388,33 @@ questionEl.innerHTML="Recommended AI Solution";
 
 optionsEl.innerHTML=`
 
-
-<div class="teta-solution">
-
-
-<p>${text}</p>
-
-
-<button id="restartTeta">
-
 Explore Another Solution
 
-</button>
-
-
-<button id="bookCall">
-
 Book Free AI Strategy Call
-
-</button>
-
-
-</div>
-
 
 `;
 
 
 
-document.getElementById("restartTeta")
-.onclick=startTeta;
+const restart=document.getElementById("restartTeta");
+
+
+if(restart){
+
+restart.onclick=startTeta;
+
+}
 
 
 
-document.getElementById("bookCall")
-.onclick=showLeadForm;
+const book=document.getElementById("bookCall");
+
+
+if(book){
+
+book.onclick=showLeadForm;
+
+}
 
 
 
@@ -453,26 +431,7 @@ questionEl.innerHTML="Let's build your AI solution";
 
 optionsEl.innerHTML=`
 
-
-<div class="teta-form">
-
-
-<input placeholder="Your Name">
-
-<input placeholder="Business Email">
-
-<textarea placeholder="What would you like to automate?"></textarea>
-
-
-<button>
-
 Submit Request
-
-</button>
-
-
-</div>
-
 
 `;
 
@@ -490,96 +449,87 @@ startTeta();
 
 
 
-});
+
 
 // =====================================
-// AI WORKFLOW BUILDER - PHASE 1
+// AI WORKFLOW BUILDER
 // =====================================
 
 
-const workflowButtons = document.querySelectorAll(
-    ".workflow-items button, .workflow-subitems button"
+const workflowButtons=document.querySelectorAll(
+".workflow-items button, .workflow-subitems button"
 );
 
 
-const workflowNodes = document.getElementById("workflowNodes");
+const workflowNodes=document.getElementById("workflowNodes");
+
+const clearWorkflow=document.getElementById("clearWorkflow");
 
 
-const clearWorkflow = document.getElementById("clearWorkflow");
+const nodeCount=document.getElementById("nodeCount");
 
+const priceEstimate=document.getElementById("priceEstimate");
 
-const nodeCount = document.getElementById("nodeCount");
-
-
-const priceEstimate = document.getElementById("priceEstimate");
-
-
-const timelineEstimate = document.getElementById("timelineEstimate");
+const timelineEstimate=document.getElementById("timelineEstimate");
 
 
 
 
 
-// Store selected nodes
-
-let selectedNodes = [];
+let selectedNodes=[];
 
 
 
 
+// =====================================
+// PRICING SYSTEM
+// =====================================
 
 
-// Pricing System
-
-const nodePricing = {
+const nodePricing={
 
 
-    "Facebook Leads":300,
+"Facebook Leads":300,
 
-    "Instagram DM":250,
+"Instagram DM":250,
 
-    "LinkedIn Automation":400,
+"LinkedIn Automation":400,
 
-    "YouTube Automation":350,
+"YouTube Automation":350,
 
-    "WhatsApp Automation":500,
+"WhatsApp Automation":500,
 
-    "Email Automation":300,
-
-
-
-    "Contact Sync":250,
-
-    "Lead Management":400,
-
-    "Deals Pipeline":500,
-
-    "Ticketing":350,
+"Email Automation":300,
 
 
+"Contact Sync":250,
 
-    "Pipeline":400,
+"Lead Management":400,
 
-    "Calendars":250,
+"Deals Pipeline":500,
 
-    "Opportunities":450,
-
-    "SMS Automation":350,
-
+"Ticketing":350,
 
 
-    "ChatGPT":300,
+"Pipeline":400,
 
-    "Claude":300,
+"Calendars":250,
 
-    "Gemini":300,
+"Opportunities":450,
 
-    "Perplexity":250
+"SMS Automation":350,
+
+
+"ChatGPT":300,
+
+"Claude":300,
+
+"Gemini":300,
+
+"Perplexity":250
 
 
 };
-
-
 
 
 
@@ -593,43 +543,35 @@ const nodePricing = {
 workflowButtons.forEach(button=>{
 
 
-    button.addEventListener("click",()=>{
+button.addEventListener("click",()=>{
 
 
-        const nodeName = button.dataset.node;
+const nodeName=button.dataset.node;
 
 
-
-        if(!nodeName)return;
-
-
-
-
-        // Stop duplicate nodes
-
-        if(selectedNodes.includes(nodeName)){
-
-            return;
-
-        }
+if(!nodeName)return;
 
 
 
+if(selectedNodes.includes(nodeName)){
 
+return;
 
-        selectedNodes.push(nodeName);
-
-
-
-        createWorkflowNode(nodeName);
-
-
-
-        updateEstimate();
+}
 
 
 
-    });
+selectedNodes.push(nodeName);
+
+
+createWorkflowNode(nodeName);
+
+
+updateEstimate();
+
+
+
+});
 
 
 });
@@ -638,115 +580,96 @@ workflowButtons.forEach(button=>{
 
 
 
-
-
 // =====================================
-// CREATE N8N STYLE NODE
+// CREATE WORKFLOW NODE
 // =====================================
 
 
 function createWorkflowNode(name){
 
 
+if(!workflowNodes)return;
 
-    if(!workflowNodes)return;
 
 
+const empty=document.querySelector(".empty-workflow");
 
 
-    const empty = document.querySelector(".empty-workflow");
+if(empty){
 
-
-
-    if(empty){
-
-        empty.remove();
-
-    }
-
-
-
-
-
-    const node=document.createElement("div");
-
-
-
-    node.className="workflow-node";
-
-
-
-
-
-    node.innerHTML=`
-
-
-
-    <div class="node-header">
-
-
-
-        <div class="node-icon">
-
-            ⚡
-
-        </div>
-
-
-
-
-        <div class="node-info">
-
-
-            <div class="node-name">
-
-                ${name}
-
-            </div>
-
-
-
-            <div class="node-type">
-
-                Automation Node
-
-            </div>
-
-
-        </div>
-
-
-
-        <div class="node-status"></div>
-
-
-
-    </div>
-
-
-
-
-
-    <div class="node-handle left"></div>
-
-
-    <div class="node-handle right"></div>
-
-
-
-    `;
-
-
-
-
-    workflowNodes.appendChild(node);
-    makeNodeDraggable(node);
-
+empty.remove();
 
 }
 
 
 
+const node=document.createElement("div");
+
+
+node.className="workflow-node";
+
+
+
+node.innerHTML=`
+
+<div class="node-header">
+
+
+<div class="node-icon">
+
+⚡
+
+</div>
+
+
+<div class="node-info">
+
+
+<div class="node-name">
+
+${name}
+
+</div>
+
+
+<div class="node-type">
+
+Automation Node
+
+</div>
+
+
+</div>
+
+
+<div class="node-status"></div>
+
+
+</div>
+
+
+
+<div class="node-handle left"></div>
+
+<div class="node-handle right"></div>
+
+
+`;
+
+
+
+workflowNodes.appendChild(node);
+
+
+
+if(typeof makeNodeDraggable==="function"){
+
+makeNodeDraggable(node);
+
+}
+
+
+}
 
 
 
@@ -760,88 +683,67 @@ function createWorkflowNode(name){
 function updateEstimate(){
 
 
-
-    let total=0;
-
-
-
-    selectedNodes.forEach(node=>{
-
-
-        total += nodePricing[node] || 250;
+let total=0;
 
 
 
-    });
+selectedNodes.forEach(node=>{
+
+
+total += nodePricing[node] || 250;
+
+
+});
 
 
 
+if(nodeCount){
 
-
-    if(nodeCount){
-
-        nodeCount.innerText=selectedNodes.length;
-
-    }
-
-
-
-
-
-    if(priceEstimate){
-
-        priceEstimate.innerText="$"+total;
-
-    }
-
-
-
-
-
-
-
-    if(!timelineEstimate)return;
-
-
-
-
-    if(selectedNodes.length===0){
-
-
-        timelineEstimate.innerText="—";
-
-
-    }
-
-    else if(selectedNodes.length<=3){
-
-
-        timelineEstimate.innerText="3-5 Days";
-
-
-    }
-
-    else if(selectedNodes.length<=6){
-
-
-        timelineEstimate.innerText="1-2 Weeks";
-
-
-    }
-
-    else{
-
-
-        timelineEstimate.innerText="2-4 Weeks";
-
-
-    }
-
-
+nodeCount.innerText=selectedNodes.length;
 
 }
 
 
+
+if(priceEstimate){
+
+priceEstimate.innerText="$"+total;
+
+}
+
+
+
+if(!timelineEstimate)return;
+
+
+
+if(selectedNodes.length===0){
+
+timelineEstimate.innerText="—";
+
+}
+
+else if(selectedNodes.length<=3){
+
+timelineEstimate.innerText="3-5 Days";
+
+}
+
+else if(selectedNodes.length<=6){
+
+timelineEstimate.innerText="1-2 Weeks";
+
+}
+
+else{
+
+timelineEstimate.innerText="2-4 Weeks";
+
+}
+
+
+
+}
 
 
 
@@ -855,44 +757,110 @@ function updateEstimate(){
 if(clearWorkflow){
 
 
-
-    clearWorkflow.addEventListener("click",()=>{
-
+clearWorkflow.addEventListener("click",()=>{
 
 
-        selectedNodes=[];
+selectedNodes=[];
 
 
+workflowNodes.innerHTML=`
 
+<div class="empty-workflow">
 
-        workflowNodes.innerHTML=`
+Select tools from the left to start building your automation workflow.
 
+</div>
 
-
-        <div class="empty-workflow">
-
-
-        Select tools from the left to start building your automation workflow.
-
-
-        </div>
+`;
 
 
 
-        `;
+updateEstimate();
+
+
+
+});
+
+
+}
 
 
 
 
 
-        updateEstimate();
+// =====================================
+// HEADER BUTTON TEXT ANIMATION
+// =====================================
+
+
+const callTexts=[
+
+"Book Strategy Call",
+
+"Dialing...",
+
+"Ringing...",
+
+"Connected",
+
+"Let's Talk"
+
+];
 
 
 
-    });
+let callIndex=0;
+
+
+
+const callText=document.getElementById("callText");
+
+
+
+if(callText){
+
+
+setInterval(()=>{
+
+
+callIndex++;
+
+
+if(callIndex>=callTexts.length){
+
+callIndex=0;
+
+}
+
+
+
+callText.style.opacity="0";
+
+callText.style.transform="translateY(5px)";
+
+
+
+setTimeout(()=>{
+
+
+callText.innerHTML=callTexts[callIndex];
+
+
+callText.style.opacity="1";
+
+callText.style.transform="translateY(0)";
+
+
+
+},300);
+
+
+
+},2000);
 
 
 
 }
 
 
+});    
