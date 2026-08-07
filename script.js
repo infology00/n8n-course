@@ -723,18 +723,44 @@ function createWorkflowNode(name){
 
 
 
-    node.innerHTML = `
+node.innerHTML = `
 
-        <div class="node-icon">
-            ⚡
-        </div>
+<div class="node-header">
 
+    <div class="node-icon">
+        ⚡
+    </div>
+
+    <div class="node-info">
 
         <div class="node-name">
             ${name}
         </div>
 
-    `;
+        <div class="node-type">
+            AI Automation
+        </div>
+
+    </div>
+
+
+    <div class="node-status"></div>
+
+</div>
+
+
+<div class="node-footer">
+
+    Ready
+
+</div>
+
+
+<div class="node-handle left"></div>
+
+<div class="node-handle right"></div>
+
+`;
 
 
 
