@@ -740,7 +740,7 @@ function createWorkflowNode(name){
 
 
     workflowNodes.appendChild(node);
-
+    makeNodeDraggable(node);
 
 
 }
@@ -891,6 +891,61 @@ if(clearWorkflow){
 
     });
 
+
+
+}
+function makeNodeDraggable(node){
+
+let offsetX = 0;
+let offsetY = 0;
+let dragging = false;
+
+
+node.addEventListener("mousedown", (e)=>{
+
+dragging = true;
+
+
+offsetX = e.clientX - node.offsetLeft;
+offsetY = e.clientY - node.offsetTop;
+
+
+node.style.cursor="grabbing";
+
+
+});
+
+
+
+document.addEventListener("mousemove",(e)=>{
+
+if(!dragging) return;
+
+
+
+let x = e.clientX - offsetX;
+let y = e.clientY - offsetY;
+
+
+
+node.style.left = x + "px";
+node.style.top = y + "px";
+
+
+});
+
+
+
+document.addEventListener("mouseup",()=>{
+
+
+dragging=false;
+
+
+node.style.cursor="grab";
+
+
+});
 
 
 }
