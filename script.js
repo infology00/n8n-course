@@ -58,7 +58,66 @@ megaMenu.classList.remove("active");
 
 }
 
+// =====================================
+// SOLUTIONS MEGA MENU SWITCH
+// =====================================
 
+
+const categories = document.querySelectorAll(".category");
+
+const contentBoxes = document.querySelectorAll(".content-box");
+
+
+categories.forEach(category=>{
+
+
+category.addEventListener("click",()=>{
+
+
+// remove active from all categories
+
+categories.forEach(item=>{
+
+item.classList.remove("active");
+
+});
+
+
+// add active clicked category
+
+category.classList.add("active");
+
+
+
+// hide all content
+
+contentBoxes.forEach(box=>{
+
+box.classList.remove("active");
+
+});
+
+
+
+// show selected content
+
+const target = category.dataset.content;
+
+
+const selectedContent = document.getElementById(target);
+
+
+if(selectedContent){
+
+selectedContent.classList.add("active");
+
+}
+
+
+});
+
+
+});
 
 // =====================================
 // MOBILE MENU
