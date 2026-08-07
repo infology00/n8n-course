@@ -894,6 +894,7 @@ if(clearWorkflow){
 
 
 }
+
 function makeNodeDraggable(node){
 
     let offsetX = 0;
@@ -953,3 +954,4 @@ function makeNodeDraggable(node){
     });
 
 }
+
