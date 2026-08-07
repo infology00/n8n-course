@@ -4,6 +4,11 @@ GLOBAL
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
+html,
+body{
+    margin:0;
+    padding:0;
+}
 
 *{
     margin:0;
@@ -11,68 +16,44 @@ GLOBAL
     box-sizing:border-box;
 }
 
-
 html{
     scroll-behavior:smooth;
 }
 
-
 body{
-
     font-family:'Outfit',sans-serif;
     background:#fff;
     color:#111;
     overflow-x:hidden;
-
 }
 
-
 :root{
-
     --yellow:#D6FF00;
     --black:#111;
     --white:#fff;
     --gray:#777;
-
 }
-
 
 a{
-
     text-decoration:none;
     color:inherit;
-
 }
-
 
 ul{
-
     list-style:none;
-
 }
-
-
 
 
 /* ======================================================
 HEADER
 ====================================================== */
 
-
 header{
-
-position:relative;
-
-width:100%;
-
-z-index:9999;
-
-background:#080808;    
-
+    position:relative;
+    width:100%;
+    z-index:9999;
+    background:#080808;
 }
-
-
-
 
 
 /* ======================================================
