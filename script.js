@@ -610,9 +610,11 @@ const timelineEstimate = document.getElementById("timelineEstimate");
 
 
 
+
 // Store selected nodes
 
 let selectedNodes = [];
+
 
 
 
@@ -621,27 +623,32 @@ let selectedNodes = [];
 
 const nodePricing = {
 
-    "Facebook Leads": 300,
-    "Instagram DM": 250,
-    "LinkedIn Automation": 400,
-    "YouTube Automation": 350,
-    "WhatsApp Automation": 500,
-    "Email Automation": 300,
 
-    "Contact Sync": 250,
-    "Lead Management": 400,
-    "Deals Pipeline": 500,
-    "Ticketing": 350,
+    "Facebook Leads":300,
+    "Instagram DM":250,
+    "LinkedIn Automation":400,
+    "YouTube Automation":350,
+    "WhatsApp Automation":500,
+    "Email Automation":300,
 
-    "Pipeline": 400,
-    "Calendars": 250,
-    "Opportunities": 450,
-    "SMS Automation": 350,
 
-    "ChatGPT": 300,
-    "Claude": 300,
-    "Gemini": 300,
-    "Perplexity": 250
+    "Contact Sync":250,
+    "Lead Management":400,
+    "Deals Pipeline":500,
+    "Ticketing":350,
+
+
+    "Pipeline":400,
+    "Calendars":250,
+    "Opportunities":450,
+    "SMS Automation":350,
+
+
+    "ChatGPT":300,
+    "Claude":300,
+    "Gemini":300,
+    "Perplexity":250
+
 
 };
 
@@ -649,9 +656,13 @@ const nodePricing = {
 
 
 
-// Add Node
 
-workflowButtons.forEach(button => {
+// =====================================
+// ADD NODE ON CLICK
+// =====================================
+
+
+workflowButtons.forEach(button=>{
 
 
     button.addEventListener("click",()=>{
@@ -660,12 +671,11 @@ workflowButtons.forEach(button => {
         const nodeName = button.dataset.node;
 
 
-
         if(!nodeName) return;
 
 
 
-        // prevent duplicate
+        // Prevent duplicate nodes
 
         if(selectedNodes.includes(nodeName)){
 
@@ -690,7 +700,6 @@ workflowButtons.forEach(button => {
     });
 
 
-
 });
 
 
@@ -698,14 +707,18 @@ workflowButtons.forEach(button => {
 
 
 
-// Create Node UI
+
+// =====================================
+// CREATE WORKFLOW NODE
+// =====================================
+
 
 function createWorkflowNode(name){
 
 
-    // remove empty message
 
     const empty = document.querySelector(".empty-workflow");
+
 
     if(empty){
 
@@ -723,44 +736,59 @@ function createWorkflowNode(name){
 
 
 
-node.innerHTML = `
 
-<div class="node-header">
 
-    <div class="node-icon">
-        ⚡
-    </div>
+    node.innerHTML = `
 
-    <div class="node-info">
 
-        <div class="node-name">
-            ${name}
+    <div class="node-header">
+
+
+        <div class="node-icon">
+
+            ⚡
+
         </div>
 
-        <div class="node-type">
-            AI Automation
+
+
+        <div class="node-info">
+
+
+            <div class="node-name">
+
+                ${name}
+
+            </div>
+
+
+
+            <div class="node-type">
+
+                Automation Node
+
+            </div>
+
+
         </div>
+
+
+
+        <div class="node-status"></div>
+
 
     </div>
 
 
-    <div class="node-status"></div>
 
-</div>
+    <div class="node-handle left"></div>
 
-
-<div class="node-footer">
-
-    Ready
-
-</div>
+    <div class="node-handle right"></div>
 
 
-<div class="node-handle left"></div>
+    `;
 
-<div class="node-handle right"></div>
 
-`;
 
 
 
@@ -776,7 +804,10 @@ node.innerHTML = `
 
 
 
-// Update Pricing
+// =====================================
+// UPDATE ESTIMATE
+// =====================================
+
 
 function updateEstimate(){
 
@@ -796,10 +827,14 @@ function updateEstimate(){
 
 
 
+
     nodeCount.innerText = selectedNodes.length;
 
 
+
     priceEstimate.innerText = "$" + total;
+
+
 
 
 
@@ -836,6 +871,7 @@ function updateEstimate(){
     }
 
 
+
 }
 
 
@@ -843,24 +879,35 @@ function updateEstimate(){
 
 
 
-// Clear Workflow
+
+// =====================================
+// CLEAR WORKFLOW
+// =====================================
+
 
 if(clearWorkflow){
+
 
 
     clearWorkflow.addEventListener("click",()=>{
 
 
+
         selectedNodes = [];
+
 
 
         workflowNodes.innerHTML = `
 
-            <div class="empty-workflow">
 
-                Select tools from the left to start building your automation workflow.
+        <div class="empty-workflow">
 
-            </div>
+
+            Select tools from the left to start building your automation workflow.
+
+
+        </div>
+
 
         `;
 
@@ -871,6 +918,7 @@ if(clearWorkflow){
 
 
     });
+
 
 
 }
