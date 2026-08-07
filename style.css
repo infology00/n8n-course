@@ -52,7 +52,7 @@ header{
     position:relative;
     width:100%;
     z-index:9999;
-    background:rgba(255,255,255,.85);
+    background:#080808;
     display:flow-root;
 }
 
@@ -74,7 +74,7 @@ NAVBAR
 
     padding:0 40px;
 
-    background:#080808;
+    background:rgba(255,255,255,.85);
 
     border-radius:25px;
 
