@@ -4150,3 +4150,13 @@ cursor:grabbing;
     top:50%;
 
 }
+/* Mega Menu Content Switch */
+
+.menu-content .content-box{
+    display:none;
+}
+
+
+.menu-content .content-box.active{
+    display:block;
+}
