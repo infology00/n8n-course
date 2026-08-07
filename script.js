@@ -6,7 +6,6 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
 
-
 // =====================================
 // MEGA MENU
 // =====================================
@@ -69,12 +68,14 @@ megaMenu.classList.remove("active");
 
 
 
+
 // =====================================
 // MOBILE MENU
 // =====================================
 
 
 const menuBtn=document.querySelector(".menu-toggle");
+
 const nav=document.querySelector(".nav-links");
 
 
@@ -83,12 +84,15 @@ if(menuBtn && nav){
 
 menuBtn.onclick=()=>{
 
+
 nav.classList.toggle("show");
+
 
 };
 
 
 }
+
 
 
 
@@ -104,7 +108,7 @@ const cards=document.querySelectorAll(".video-card");
 cards.forEach(card=>{
 
 
-let video=card.querySelector("video");
+const video=card.querySelector("video");
 
 
 if(!video)return;
@@ -117,12 +121,13 @@ card.onclick=()=>{
 cards.forEach(c=>{
 
 
-let v=c.querySelector("video");
+const v=c.querySelector("video");
 
 
 if(v && v!==video){
 
 v.pause();
+
 v.currentTime=0;
 
 }
@@ -144,6 +149,7 @@ video.pause();
 }
 
 
+
 };
 
 
@@ -159,6 +165,10 @@ video.pause();
 // =====================================
 
 
+const ecoNodes=document.querySelectorAll(".eco-node");
+
+
+
 const ecoData={
 
 
@@ -170,12 +180,10 @@ description:
 "AI qualifies leads, books meetings, updates CRM and improves sales pipeline.",
 
 features:[
-
 "Lead Qualification",
 "CRM Updates",
 "Follow Ups",
 "Meeting Booking"
-
 ]
 
 },
@@ -190,12 +198,10 @@ description:
 "AI creates content, manages campaigns and improves marketing performance.",
 
 features:[
-
 "Content Creation",
 "Email Automation",
 "SEO",
 "Ad Reports"
-
 ]
 
 },
@@ -210,72 +216,10 @@ description:
 "AI chatbot, WhatsApp automation and customer service systems.",
 
 features:[
-
 "WhatsApp AI",
 "Chatbots",
 "Tickets",
 "Knowledge Base"
-
-]
-
-},
-
-
-
-operations:{
-
-title:"AI Operations",
-
-description:
-"Automate daily business processes and repetitive tasks.",
-
-features:[
-
-"Workflow Automation",
-"Approvals",
-"Notifications",
-"Reports"
-
-]
-
-},
-
-
-
-finance:{
-
-title:"AI Finance Automation",
-
-description:
-"Automate invoices, reports and financial workflows.",
-
-features:[
-
-"Invoices",
-"Payments",
-"Reports",
-"Accounting"
-
-]
-
-},
-
-
-
-hr:{
-
-title:"AI HR Automation",
-
-description:
-"AI helps recruitment and employee management.",
-
-features:[
-
-"Hiring",
-"Interviews",
-"Onboarding",
-"HR Assistant"
-
 ]
 
 }
@@ -287,22 +231,20 @@ features:[
 
 
 
-document.querySelectorAll(".eco-node")
-.forEach(node=>{
+ecoNodes.forEach(node=>{
 
 
 node.onclick=()=>{
 
 
-let data=ecoData[node.dataset.id];
+const data=ecoData[node.dataset.id];
 
 
 if(!data)return;
 
 
 
-document
-.querySelectorAll(".eco-node")
+document.querySelectorAll(".eco-node")
 .forEach(n=>n.classList.remove("active"));
 
 
@@ -312,7 +254,9 @@ node.classList.add("active");
 
 
 const title=document.getElementById("ecoTitle");
+
 const desc=document.getElementById("ecoDescription");
+
 const box=document.getElementById("ecoFeatures");
 
 
@@ -333,7 +277,7 @@ if(box){
 box.innerHTML="";
 
 
-data.features.forEach(x=>{
+data.features.forEach(item=>{
 
 
 box.innerHTML+=`
@@ -342,9 +286,10 @@ box.innerHTML+=`
 
 <i class="fa-solid fa-check"></i>
 
-${x}
+${item}
 
 </div>
+
 
 `;
 
@@ -355,6 +300,7 @@ ${x}
 }
 
 
+
 };
 
 
@@ -363,29 +309,18 @@ ${x}
 
 
 
-
-
-
 // =====================================
-// TETA AI ASSISTANT
+// TETA AI
 // =====================================
-
-
-
-if(!window.tetaKnowledge){
-
-console.error("knowledge.js is not loaded");
-
-return;
-
-}
-
-
 
 
 const questionEl=document.getElementById("question");
+
 const optionsEl=document.getElementById("options");
 
+
+
+if(window.tetaKnowledge && questionEl && optionsEl){
 
 
 
@@ -404,17 +339,7 @@ function loadNode(nodeName){
 const node=window.tetaKnowledge[nodeName];
 
 
-
-if(!node){
-
-questionEl.innerHTML=
-"Sorry, I couldn't find that topic.";
-
-
-return;
-
-}
-
+if(!node)return;
 
 
 
@@ -435,35 +360,35 @@ btn.textContent=item.text;
 
 
 
-btn.addEventListener("click",()=>{
+btn.onclick=()=>{
 
 
 if(item.next){
 
 loadNode(item.next);
 
-
 }
+
 else if(item.solution){
 
 showSolution(item.solution);
 
-
 }
 
 
-});
+};
 
 
 
 optionsEl.appendChild(btn);
 
 
+
 });
 
 
-}
 
+}
 
 
 
@@ -472,34 +397,16 @@ optionsEl.appendChild(btn);
 function showSolution(text){
 
 
-questionEl.innerHTML=
-"Recommended AI Solution";
-
+questionEl.innerHTML="Recommended AI Solution";
 
 
 optionsEl.innerHTML=`
+
 
 <div class="teta-solution">
 
 
 <p>${text}</p>
-
-
-<br>
-
-
-<p>
-Want to implement this AI solution for your business?
-</p>
-
-
-
-<button id="bookCall">
-
-Book Free AI Strategy Call
-
-</button>
-
 
 
 <button id="restartTeta">
@@ -509,22 +416,27 @@ Explore Another Solution
 </button>
 
 
+<button id="bookCall">
+
+Book Free AI Strategy Call
+
+</button>
+
 
 </div>
+
 
 `;
 
 
 
-document
-.getElementById("restartTeta")
-.addEventListener("click",startTeta);
+document.getElementById("restartTeta")
+.onclick=startTeta;
 
 
 
-document
-.getElementById("bookCall")
-.addEventListener("click",showLeadForm);
+document.getElementById("bookCall")
+.onclick=showLeadForm;
 
 
 
@@ -533,34 +445,26 @@ document
 
 
 
-
 function showLeadForm(){
 
 
-
-questionEl.innerHTML=
-"Let's build your AI solution";
-
+questionEl.innerHTML="Let's build your AI solution";
 
 
 optionsEl.innerHTML=`
 
+
 <div class="teta-form">
 
 
-<input id="tetaName" placeholder="Your Name">
+<input placeholder="Your Name">
+
+<input placeholder="Business Email">
+
+<textarea placeholder="What would you like to automate?"></textarea>
 
 
-<input id="tetaEmail" placeholder="Business Email">
-
-
-<input id="tetaCompany" placeholder="Company Name">
-
-
-<textarea id="tetaChallenge" placeholder="What would you like to automate?"></textarea>
-
-
-<button id="submitTeta">
+<button>
 
 Submit Request
 
@@ -569,19 +473,20 @@ Submit Request
 
 </div>
 
+
 `;
+
+
 
 }
 
 
-
-
-if(questionEl && optionsEl){
 
 startTeta();
 
-}
 
+
+}
 
 
 
@@ -599,14 +504,18 @@ const workflowButtons = document.querySelectorAll(
 
 const workflowNodes = document.getElementById("workflowNodes");
 
+
 const clearWorkflow = document.getElementById("clearWorkflow");
 
 
 const nodeCount = document.getElementById("nodeCount");
 
+
 const priceEstimate = document.getElementById("priceEstimate");
 
+
 const timelineEstimate = document.getElementById("timelineEstimate");
+
 
 
 
@@ -619,34 +528,52 @@ let selectedNodes = [];
 
 
 
-// Pricing
+
+// Pricing System
 
 const nodePricing = {
 
 
     "Facebook Leads":300,
+
     "Instagram DM":250,
+
     "LinkedIn Automation":400,
+
     "YouTube Automation":350,
+
     "WhatsApp Automation":500,
+
     "Email Automation":300,
 
 
+
     "Contact Sync":250,
+
     "Lead Management":400,
+
     "Deals Pipeline":500,
+
     "Ticketing":350,
 
 
+
     "Pipeline":400,
+
     "Calendars":250,
+
     "Opportunities":450,
+
     "SMS Automation":350,
 
 
+
     "ChatGPT":300,
+
     "Claude":300,
+
     "Gemini":300,
+
     "Perplexity":250
 
 
@@ -657,8 +584,9 @@ const nodePricing = {
 
 
 
+
 // =====================================
-// ADD NODE ON CLICK
+// BUTTON CLICK
 // =====================================
 
 
@@ -671,17 +599,21 @@ workflowButtons.forEach(button=>{
         const nodeName = button.dataset.node;
 
 
-        if(!nodeName) return;
+
+        if(!nodeName)return;
 
 
 
-        // Prevent duplicate nodes
+
+        // Stop duplicate nodes
 
         if(selectedNodes.includes(nodeName)){
 
             return;
 
         }
+
+
 
 
 
@@ -709,7 +641,7 @@ workflowButtons.forEach(button=>{
 
 
 // =====================================
-// CREATE WORKFLOW NODE
+// CREATE N8N STYLE NODE
 // =====================================
 
 
@@ -717,7 +649,13 @@ function createWorkflowNode(name){
 
 
 
+    if(!workflowNodes)return;
+
+
+
+
     const empty = document.querySelector(".empty-workflow");
+
 
 
     if(empty){
@@ -729,19 +667,23 @@ function createWorkflowNode(name){
 
 
 
-    const node = document.createElement("div");
 
-
-    node.className = "workflow-node";
-
+    const node=document.createElement("div");
 
 
 
+    node.className="workflow-node";
 
-    node.innerHTML = `
+
+
+
+
+    node.innerHTML=`
+
 
 
     <div class="node-header">
+
 
 
         <div class="node-icon">
@@ -749,6 +691,7 @@ function createWorkflowNode(name){
             ⚡
 
         </div>
+
 
 
 
@@ -777,17 +720,21 @@ function createWorkflowNode(name){
         <div class="node-status"></div>
 
 
+
     </div>
+
+
 
 
 
     <div class="node-handle left"></div>
 
+
     <div class="node-handle right"></div>
 
 
-    `;
 
+    `;
 
 
 
@@ -804,8 +751,9 @@ function createWorkflowNode(name){
 
 
 
+
 // =====================================
-// UPDATE ESTIMATE
+// UPDATE PRICE + TIMELINE
 // =====================================
 
 
@@ -813,7 +761,7 @@ function updateEstimate(){
 
 
 
-    let total = 0;
+    let total=0;
 
 
 
@@ -823,41 +771,60 @@ function updateEstimate(){
         total += nodePricing[node] || 250;
 
 
+
     });
 
 
 
 
-    nodeCount.innerText = selectedNodes.length;
+
+    if(nodeCount){
+
+        nodeCount.innerText=selectedNodes.length;
+
+    }
 
 
 
-    priceEstimate.innerText = "$" + total;
+
+
+    if(priceEstimate){
+
+        priceEstimate.innerText="$"+total;
+
+    }
 
 
 
 
 
-    if(selectedNodes.length === 0){
 
 
-        timelineEstimate.innerText = "—";
+    if(!timelineEstimate)return;
+
+
+
+
+    if(selectedNodes.length===0){
+
+
+        timelineEstimate.innerText="—";
 
 
     }
 
-    else if(selectedNodes.length <=3){
+    else if(selectedNodes.length<=3){
 
 
-        timelineEstimate.innerText = "3-5 Days";
+        timelineEstimate.innerText="3-5 Days";
 
 
     }
 
-    else if(selectedNodes.length <=6){
+    else if(selectedNodes.length<=6){
 
 
-        timelineEstimate.innerText = "1-2 Weeks";
+        timelineEstimate.innerText="1-2 Weeks";
 
 
     }
@@ -865,7 +832,7 @@ function updateEstimate(){
     else{
 
 
-        timelineEstimate.innerText = "2-4 Weeks";
+        timelineEstimate.innerText="2-4 Weeks";
 
 
     }
@@ -893,23 +860,28 @@ if(clearWorkflow){
 
 
 
-        selectedNodes = [];
+        selectedNodes=[];
 
 
 
-        workflowNodes.innerHTML = `
+
+        workflowNodes.innerHTML=`
+
 
 
         <div class="empty-workflow">
 
 
-            Select tools from the left to start building your automation workflow.
+        Select tools from the left to start building your automation workflow.
 
 
         </div>
 
 
+
         `;
+
+
 
 
 
@@ -922,4 +894,3 @@ if(clearWorkflow){
 
 
 }
-
