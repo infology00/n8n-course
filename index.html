@@ -7,13 +7,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <title>AWSZ | AI Automation Agency</title>
 
-
-
 <link rel="stylesheet" href="style.css">
-
 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +18,6 @@
 
 
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -35,21 +30,10 @@
 <body>
 
 
-
-
-
-<!-- =====================================
-HEADER
-===================================== -->
-
-
 <header>
 
 
 <nav class="navbar">
-
-
-
 
 
 <div class="logo">
@@ -62,20 +46,14 @@ HEADER
 
 
 
-
-
 <ul class="nav-links">
 
 
 
-
-
 <li>
-
 <a href="#">
 Home
 </a>
-
 </li>
 
 
@@ -83,19 +61,16 @@ Home
 
 
 <li>
-  <a href="about.html">
-    About
-  </a>
+<a href="about.html">
+About
+</a>
 </li>
-
-
 
 
 
 
 
 <li class="mega-parent">
-
 
 
 <a href="#">
@@ -107,11 +82,7 @@ Solutions
 
 
 
-
-
 <div class="mega-menu">
-
-
 
 
 
@@ -128,18 +99,27 @@ Solutions
 
 
 
-
-
-<div class="category active">
-
+<div class="category active" data-content="automation">
 
 <i class="fa-solid fa-robot"></i>
-
 
 <span>
 AI Automation
 </span>
 
+</div>
+
+
+
+
+
+<div class="category" data-content="crm">
+
+<i class="fa-solid fa-users"></i>
+
+<span>
+CRM
+</span>
 
 </div>
 
@@ -147,65 +127,47 @@ AI Automation
 
 
 
-
-
-<div class="category">
-
+<div class="category" data-content="chat">
 
 <i class="fa-solid fa-comments"></i>
-
 
 <span>
 Chat Agents
 </span>
 
-
 </div>
 
 
 
 
 
-
-
-<div class="category">
-
+<div class="category" data-content="voice">
 
 <i class="fa-solid fa-phone"></i>
-
 
 <span>
 Voice AI
 </span>
 
-
 </div>
 
 
 
 
 
-
-
-<div class="category">
-
+<div class="category" data-content="ecommerce">
 
 <i class="fa-solid fa-cart-shopping"></i>
-
 
 <span>
 Ecommerce
 </span>
 
-
 </div>
 
 
 
-
-
 </div>
-
 
 
 
@@ -218,20 +180,19 @@ Ecommerce
 
 
 
+
+
+<div class="content-box active" id="automation">
+
+
 <h3>
 AI Automation
 </h3>
 
 
-
-
-
 <p>
 Build intelligent workflows that save time and reduce manual work.
 </p>
-
-
-
 
 
 
@@ -244,28 +205,86 @@ n8n Automation
 
 
 <a>
+Workflow Automation
+</a>
+
+
+<a>
+Email Automation
+</a>
+
+
+<a>
+Lead Routing
+</a>
+
+
+<a>
+Data Processing
+</a>
+
+
+<a>
+Social Media Automation
+</a>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="content-box" id="crm">
+
+
+<h3>
+CRM Systems
+</h3>
+
+
+<p>
+Manage leads, customers, and sales processes with powerful CRM solutions.
+</p>
+
+
+
+<div class="service-list">
+
+
+<a>
 GoHighLevel
 </a>
 
 
 <a>
-Zapier
+HubSpot CRM
 </a>
 
 
 <a>
-Make
+Pipeline Management
 </a>
 
 
 <a>
-HubSpot
+Lead Tracking
 </a>
 
+
 <a>
-Social Media
+Customer Management
 </a>
-  
+
+
+</div>
 
 
 </div>
@@ -274,8 +293,158 @@ Social Media
 
 
 
+
+
+
+<div class="content-box" id="chat">
+
+
+<h3>
+Chat Agents
+</h3>
+
+
+<p>
+AI chat solutions that handle customer conversations 24/7.
+</p>
+
+
+
+<div class="service-list">
+
+
+<a>
+AI Website Chatbot
+</a>
+
+
+<a>
+WhatsApp AI Agent
+</a>
+
+
+<a>
+Customer Support Agent
+</a>
+
+
+<a>
+Lead Qualification Bot
+</a>
+
+
+<a>
+Appointment Booking Agent
+</a>
+
+
 </div>
 
+
+</div>
+
+
+
+
+
+
+
+
+<div class="content-box" id="voice">
+
+
+<h3>
+Voice AI
+</h3>
+
+
+<p>
+AI voice agents that manage calls and customer interactions.
+</p>
+
+
+
+<div class="service-list">
+
+
+<a>
+AI Receptionist
+</a>
+
+
+<a>
+Inbound Call Agent
+</a>
+
+
+<a>
+Outbound Calling Agent
+</a>
+
+
+<a>
+Appointment Scheduling
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="content-box" id="ecommerce">
+
+
+<h3>
+Ecommerce Automation
+</h3>
+
+
+<p>
+Automate online store operations and improve customer experience.
+</p>
+
+
+
+<div class="service-list">
+
+
+<a>
+Shopify Automation
+</a>
+
+
+<a>
+WooCommerce Automation
+</a>
+
+
+<a>
+Order Processing
+</a>
+
+
+<a>
+Customer Retention
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+
+</div>
 
 
 
@@ -287,20 +456,14 @@ Social Media
 <div class="menu-cta">
 
 
-
 <h3>
-Buy Back Your Time
+Automate More. Grow Faster.
 </h3>
 
 
-
-
-
 <p>
-AI employees and automation systems designed for modern businesses.
+AI-powered systems designed to help businesses scale smarter.
 </p>
-
-
 
 
 
@@ -309,19 +472,13 @@ Book Strategy Call
 </a>
 
 
-
-
 </div>
 
 
 
 
 
-
-
 </div>
-
-
 
 
 
@@ -332,82 +489,70 @@ Book Strategy Call
 
 
 
-
 <li>
-
 <a href="#">
 Industries
 </a>
-
 </li>
 
 
 
 
 
-
-
 <li>
-
 <a href="#">
 Portfolio
 </a>
-
 </li>
 
 
 
 
 
-
-
 <li>
-
 <a href="#">
 Case Studies
 </a>
-
 </li>
 
 
 
 
 
-
-
 <li>
-
 <a href="#">
 Resources
 </a>
-
 </li>
-
-
 
 
 
 
 
 <li>
-
 <a href="#">
 Contact
 </a>
-
 </li>
-
-
-
 
 
 
 
 </ul>
 
+
+
+
+
 <a href="#" class="header-btn">
-    <span id="callText">Book Strategy Call</span>
+
+<span id="callText">
+Book Strategy Call
+</span>
+
 </a>
+
+
 
 </nav>
 
@@ -416,11 +561,9 @@ Contact
 
 
 
+</body>
 
-
-
-
-
+</html>
 
 <!-- =====================================
 HERO SECTION
