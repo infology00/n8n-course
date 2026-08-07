@@ -53,6 +53,7 @@ header{
     width:100%;
     z-index:9999;
     background:#080808;
+    padding-top:15px;
 }
 
 
@@ -61,31 +62,26 @@ NAVBAR
 ====================================================== */
 
 .navbar{
-
     width:min(1450px,96%);
 
-    margin:15px auto 0;
+    margin:0 auto;
 
     height:90px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 
     padding:0 40px;
 
-   background:rgba(255,255,255,.85);
-
+    background:rgba(255,255,255,.85
+                   
     border-radius:25px;
 
     border:1px solid rgba(255,255,255,.08);
 
     box-shadow:0 20px 60px rgba(0,0,0,.35);
-
 }
-
 
 /* ======================================================
 LOGO
