@@ -3941,3 +3941,185 @@ section.workflow-builder li{
 
 
 }
+
+/*=========================================
+ N8N STYLE WORKFLOW NODE
+=========================================*/
+
+
+.workflow-node{
+
+    width:280px;
+
+    background:#101010;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:18px;
+
+    padding:18px;
+
+    position:relative;
+
+    color:#fff;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.5);
+
+    transition:.3s;
+
+}
+
+
+
+.workflow-node:hover{
+
+    border-color:#D6FF00;
+
+    box-shadow:
+    0 0 35px rgba(214,255,0,.25);
+
+    transform:translateY(-5px);
+
+}
+
+
+
+
+.node-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+
+
+.node-icon{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:12px;
+
+    background:#D6FF00;
+
+    color:#000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:22px;
+
+}
+
+
+
+.node-info{
+
+    flex:1;
+
+}
+
+
+
+.node-name{
+
+    font-size:16px;
+
+    font-weight:700;
+
+    color:#fff;
+
+}
+
+
+
+.node-type{
+
+    font-size:12px;
+
+    color:rgba(255,255,255,.5);
+
+    margin-top:3px;
+
+}
+
+
+
+.node-status{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#D6FF00;
+
+}
+
+
+
+
+.node-footer{
+
+    margin-top:15px;
+
+    padding-top:12px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    font-size:12px;
+
+    color:#aaa;
+
+}
+
+
+
+
+/* Node Connection Handles */
+
+.node-handle{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    background:#D6FF00;
+
+    border:3px solid #101010;
+
+    position:absolute;
+
+}
+
+
+
+.node-handle.left{
+
+    left:-7px;
+
+    top:50%;
+
+}
+
+
+
+.node-handle.right{
+
+    right:-7px;
+
+    top:50%;
+
+}
