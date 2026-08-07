@@ -416,3 +416,387 @@ if (questionEl && optionsEl) {
     startTeta();
 }
     });
+
+// =====================================
+// AI WORKFLOW BUILDER ENGINE
+// Handles node creation, pricing & summary
+// =====================================
+
+
+document.addEventListener("DOMContentLoaded", function(){
+
+
+    const workflowButtons = document.querySelectorAll(
+        "[data-node]"
+    );
+
+
+    const workflowNodes = document.getElementById(
+        "workflowNodes"
+    );
+
+
+    const clearButton = document.getElementById(
+        "clearWorkflow"
+    );
+
+
+    const nodeCount = document.getElementById(
+        "nodeCount"
+    );
+
+
+    const priceEstimate = document.getElementById(
+        "priceEstimate"
+    );
+
+
+    const timelineEstimate = document.getElementById(
+        "timelineEstimate"
+    );
+
+
+    const workflowBenefits = document.getElementById(
+        "workflowBenefits"
+    );
+
+
+
+    let selectedNodes = [];
+
+
+
+    // ==============================
+    // Pricing Rules
+    // ==============================
+
+
+    const nodePricing = {
+
+        "Facebook Leads":500,
+        "Instagram DM":500,
+        "LinkedIn Automation":700,
+        "YouTube Automation":600,
+        "WhatsApp Automation":800,
+        "Email Automation":400,
+
+
+        "Contact Sync":600,
+        "Lead Management":900,
+        "Deals Pipeline":900,
+        "Ticketing":700,
+
+
+        "Pipeline":800,
+        "Calendars":500,
+        "Opportunities":700,
+        "SMS Automation":800,
+
+
+        "ChatGPT":1000,
+        "Claude":1000,
+        "Gemini":900,
+        "Perplexity":900
+
+    };
+
+
+
+
+    // ==============================
+    // Add Workflow Node
+    // ==============================
+
+
+    workflowButtons.forEach(button => {
+
+
+        button.addEventListener(
+            "click",
+            function(){
+
+
+                const nodeName =
+                this.getAttribute("data-node");
+
+
+
+                // Prevent duplicate
+
+                if(selectedNodes.includes(nodeName)){
+                    return;
+                }
+
+
+
+                selectedNodes.push(nodeName);
+
+
+
+                createNode(nodeName);
+
+
+
+                updateSummary();
+
+
+
+            }
+        );
+
+
+    });
+
+
+
+
+
+    // ==============================
+    // Create Node Card
+    // ==============================
+
+
+    function createNode(name){
+
+
+
+        const empty =
+        document.querySelector(
+            ".empty-workflow"
+        );
+
+
+        if(empty){
+            empty.remove();
+        }
+
+
+
+
+        const node =
+        document.createElement("div");
+
+
+
+        node.className =
+        "workflow-node";
+
+
+
+        node.innerHTML = `
+
+            <div class="node-icon">
+                ⚡
+            </div>
+
+            <div class="node-title">
+                ${name}
+            </div>
+
+        `;
+
+
+
+        workflowNodes.appendChild(node);
+
+
+
+    }
+
+
+
+
+
+    // ==============================
+    // Update Right Panel
+    // ==============================
+
+
+    function updateSummary(){
+
+
+
+        let total = 0;
+
+
+
+        selectedNodes.forEach(node=>{
+
+            total += nodePricing[node] || 500;
+
+        });
+
+
+
+        nodeCount.innerText =
+        selectedNodes.length;
+
+
+
+        priceEstimate.innerText =
+        "$" + total.toLocaleString();
+
+
+
+        let weeks =
+        Math.ceil(
+            selectedNodes.length / 3
+        );
+
+
+
+        timelineEstimate.innerText =
+        weeks + " Weeks";
+
+
+
+        updateBenefits();
+
+
+
+    }
+
+
+
+
+
+    // ==============================
+    // AI Recommendations
+    // ==============================
+
+
+    function updateBenefits(){
+
+
+
+        workflowBenefits.innerHTML="";
+
+
+
+        let benefits = [];
+
+
+
+        if(
+            selectedNodes.some(
+            n=>n.includes("Facebook")
+            )
+        ){
+
+            benefits.push(
+                "Capture and automate incoming leads."
+            );
+
+        }
+
+
+
+        if(
+            selectedNodes.some(
+            n=>n.includes("ChatGPT")
+            )
+        ){
+
+            benefits.push(
+                "AI assistant improves response speed."
+            );
+
+        }
+
+
+
+        if(
+            selectedNodes.some(
+            n=>n.includes("CRM") ||
+            n.includes("Pipeline") ||
+            n.includes("Lead")
+            )
+        ){
+
+            benefits.push(
+                "Centralized customer management system."
+            );
+
+        }
+
+
+
+        if(benefits.length===0){
+
+            benefits.push(
+                "Select more tools for AI recommendations."
+            );
+
+        }
+
+
+
+
+        benefits.forEach(item=>{
+
+
+            const li =
+            document.createElement("li");
+
+
+            li.innerText=item;
+
+
+            workflowBenefits.appendChild(li);
+
+
+        });
+
+
+    }
+
+
+
+
+
+    // ==============================
+    // Clear Workflow
+    // ==============================
+
+
+    clearButton.addEventListener(
+        "click",
+        function(){
+
+
+            selectedNodes=[];
+
+
+            workflowNodes.innerHTML = `
+
+                <div class="empty-workflow">
+
+                Select tools from the left to start building your automation workflow.
+
+                </div>
+
+            `;
+
+
+            nodeCount.innerText="0";
+
+            priceEstimate.innerText="$0";
+
+            timelineEstimate.innerText="—";
+
+
+            workflowBenefits.innerHTML=`
+
+            <li>
+            Select tools to receive AI recommendations.
+            </li>
+
+            `;
+
+
+        }
+    );
+
+
+
+});
