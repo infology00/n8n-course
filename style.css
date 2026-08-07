@@ -52,7 +52,7 @@ header{
     position:relative;
     width:100%;
     z-index:9999;
-    background:#080808;
+    background:rgba(255,255,255,.85);
     display:flow-root;
 }
 
