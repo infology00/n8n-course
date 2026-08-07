@@ -6,6 +6,7 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
 
+
 // =====================================
 // MEGA MENU
 // =====================================
@@ -17,18 +18,21 @@ const megaMenu=document.querySelector(".mega-menu");
 
 if(megaParent && megaMenu){
 
+
 let timer;
 
 
 megaParent.addEventListener("mouseenter",()=>{
 
 clearTimeout(timer);
+
 megaMenu.classList.add("active");
 
 });
 
 
 megaParent.addEventListener("mouseleave",()=>{
+
 
 timer=setTimeout(()=>{
 
@@ -49,11 +53,13 @@ clearTimeout(timer);
 
 megaMenu.addEventListener("mouseleave",()=>{
 
+
 timer=setTimeout(()=>{
 
 megaMenu.classList.remove("active");
 
 },250);
+
 
 });
 
@@ -72,15 +78,18 @@ const menuBtn=document.querySelector(".menu-toggle");
 const nav=document.querySelector(".nav-links");
 
 
-if(menuBtn){
+if(menuBtn && nav){
+
 
 menuBtn.onclick=()=>{
 
 nav.classList.toggle("show");
 
-}
+};
+
 
 }
+
 
 
 
@@ -101,12 +110,15 @@ let video=card.querySelector("video");
 if(!video)return;
 
 
+
 card.onclick=()=>{
 
 
 cards.forEach(c=>{
 
+
 let v=c.querySelector("video");
+
 
 if(v && v!==video){
 
@@ -115,14 +127,17 @@ v.currentTime=0;
 
 }
 
+
 });
+
 
 
 if(video.paused){
 
 video.play();
 
-}else{
+}
+else{
 
 video.pause();
 
@@ -132,8 +147,8 @@ video.pause();
 };
 
 
-
 });
+
 
 
 
@@ -148,74 +163,121 @@ const ecoData={
 
 
 sales:{
+
 title:"AI Sales Automation",
-description:"AI qualifies leads, books meetings, updates CRM and improves sales pipeline.",
+
+description:
+"AI qualifies leads, books meetings, updates CRM and improves sales pipeline.",
+
 features:[
+
 "Lead Qualification",
 "CRM Updates",
 "Follow Ups",
 "Meeting Booking"
+
 ]
+
 },
 
 
+
 marketing:{
+
 title:"AI Marketing Automation",
-description:"AI creates content, manages campaigns and improves marketing performance.",
+
+description:
+"AI creates content, manages campaigns and improves marketing performance.",
+
 features:[
+
 "Content Creation",
 "Email Automation",
 "SEO",
 "Ad Reports"
+
 ]
+
 },
 
 
+
 support:{
+
 title:"AI Customer Support",
-description:"AI chatbot, WhatsApp automation and customer service systems.",
+
+description:
+"AI chatbot, WhatsApp automation and customer service systems.",
+
 features:[
+
 "WhatsApp AI",
 "Chatbots",
 "Tickets",
 "Knowledge Base"
+
 ]
+
 },
 
 
+
 operations:{
+
 title:"AI Operations",
-description:"Automate daily business processes and repetitive tasks.",
+
+description:
+"Automate daily business processes and repetitive tasks.",
+
 features:[
+
 "Workflow Automation",
 "Approvals",
 "Notifications",
 "Reports"
+
 ]
+
 },
 
 
+
 finance:{
+
 title:"AI Finance Automation",
-description:"Automate invoices, reports and financial workflows.",
+
+description:
+"Automate invoices, reports and financial workflows.",
+
 features:[
+
 "Invoices",
 "Payments",
 "Reports",
 "Accounting"
+
 ]
+
 },
 
 
+
 hr:{
+
 title:"AI HR Automation",
-description:"AI helps recruitment and employee management.",
+
+description:
+"AI helps recruitment and employee management.",
+
 features:[
+
 "Hiring",
 "Interviews",
 "Onboarding",
 "HR Assistant"
+
 ]
+
 }
 
 
@@ -223,7 +285,10 @@ features:[
 
 
 
-document.querySelectorAll(".eco-node").forEach(node=>{
+
+
+document.querySelectorAll(".eco-node")
+.forEach(node=>{
 
 
 node.onclick=()=>{
@@ -235,22 +300,34 @@ let data=ecoData[node.dataset.id];
 if(!data)return;
 
 
-document.querySelectorAll(".eco-node")
+
+document
+.querySelectorAll(".eco-node")
 .forEach(n=>n.classList.remove("active"));
+
 
 
 node.classList.add("active");
 
 
 
-document.getElementById("ecoTitle").innerHTML=data.title;
+const title=document.getElementById("ecoTitle");
+const desc=document.getElementById("ecoDescription");
+const box=document.getElementById("ecoFeatures");
 
 
-document.getElementById("ecoDescription").innerHTML=data.description;
+
+if(title)
+title.innerHTML=data.title;
 
 
 
-let box=document.getElementById("ecoFeatures");
+if(desc)
+desc.innerHTML=data.description;
+
+
+
+if(box){
 
 
 box.innerHTML="";
@@ -275,146 +352,237 @@ ${x}
 });
 
 
+}
+
+
 };
 
 
 });
 
 
-// ===============================
-// TETA AI
-// ===============================
 
-if (!window.tetaKnowledge) {
-    console.error("knowledge.js is not loaded");
-    return;
-}    
 
-const questionEl = document.getElementById("question");
-const optionsEl = document.getElementById("options");
 
-function startTeta() {
-    loadNode("start");
-}
-function loadNode(nodeName) {
 
-    const node = window.tetaKnowledge[nodeName];
 
-    if (!node) {
+// =====================================
+// TETA AI ASSISTANT
+// =====================================
 
-        questionEl.innerHTML = "Sorry, I couldn't find that topic.";
 
-        optionsEl.innerHTML = `
-            <button id="restartTeta">
-                Start Again
-            </button>
-        `;
 
-        document
-            .getElementById("restartTeta")
-            .addEventListener("click", startTeta);
+if(!window.tetaKnowledge){
 
-        return;
-    }
+console.error("knowledge.js is not loaded");
 
-    questionEl.innerHTML = node.question;
-
-    optionsEl.innerHTML = "";
-
-    node.options.forEach(item => {
-
-        const btn = document.createElement("button");
-
-        btn.textContent = item.text;
-
-        btn.addEventListener("click", () => {
-
-            if (item.next) {
-
-                loadNode(item.next);
-
-            } else if (item.solution) {
-
-                showSolution(item.solution);
-
-            }
-
-        });
-
-        optionsEl.appendChild(btn);
-
-    });
+return;
 
 }
-function showSolution(text) {
-
-    questionEl.innerHTML = "Recommended AI Solution";
-
-    optionsEl.innerHTML = `
-        <div class="teta-solution">
-
-            <p>${text}</p>
-
-            <br>
-
-            <p>
-            Want to implement this AI solution for your business?
-            </p>
-
-            <button id="bookCall">
-                Book Free AI Strategy Call
-            </button>
-
-            <button id="restartTeta">
-                Explore Another Solution
-            </button>
-
-        </div>
-    `;
 
 
-    document
-    .getElementById("restartTeta")
-    .addEventListener("click", startTeta);
 
 
-    document
-    .getElementById("bookCall")
-    .addEventListener("click", showLeadForm);
+const questionEl=document.getElementById("question");
+const optionsEl=document.getElementById("options");
+
+
+
+
+function startTeta(){
+
+loadNode("start");
 
 }
+
+
+
+
+function loadNode(nodeName){
+
+
+const node=window.tetaKnowledge[nodeName];
+
+
+
+if(!node){
+
+questionEl.innerHTML=
+"Sorry, I couldn't find that topic.";
+
+
+return;
+
+}
+
+
+
+
+questionEl.innerHTML=node.question;
+
+
+optionsEl.innerHTML="";
+
+
+
+node.options.forEach(item=>{
+
+
+const btn=document.createElement("button");
+
+
+btn.textContent=item.text;
+
+
+
+btn.addEventListener("click",()=>{
+
+
+if(item.next){
+
+loadNode(item.next);
+
+
+}
+else if(item.solution){
+
+showSolution(item.solution);
+
+
+}
+
+
+});
+
+
+
+optionsEl.appendChild(btn);
+
+
+});
+
+
+}
+
+
+
+
+
+
+function showSolution(text){
+
+
+questionEl.innerHTML=
+"Recommended AI Solution";
+
+
+
+optionsEl.innerHTML=`
+
+<div class="teta-solution">
+
+
+<p>${text}</p>
+
+
+<br>
+
+
+<p>
+Want to implement this AI solution for your business?
+</p>
+
+
+
+<button id="bookCall">
+
+Book Free AI Strategy Call
+
+</button>
+
+
+
+<button id="restartTeta">
+
+Explore Another Solution
+
+</button>
+
+
+
+</div>
+
+`;
+
+
+
+document
+.getElementById("restartTeta")
+.addEventListener("click",startTeta);
+
+
+
+document
+.getElementById("bookCall")
+.addEventListener("click",showLeadForm);
+
+
+
+}
+
+
 
 
 
 function showLeadForm(){
 
-    questionEl.innerHTML = "Let's build your AI solution";
 
-    optionsEl.innerHTML = `
 
-        <div class="teta-form">
+questionEl.innerHTML=
+"Let's build your AI solution";
 
-            <input id="tetaName" placeholder="Your Name">
 
-            <input id="tetaEmail" placeholder="Business Email">
 
-            <input id="tetaCompany" placeholder="Company Name">
+optionsEl.innerHTML=`
 
-            <textarea id="tetaChallenge" placeholder="What would you like to automate?"></textarea>
+<div class="teta-form">
 
-            <button id="submitTeta">
-                Submit Request
-            </button>
 
-        </div>
+<input id="tetaName" placeholder="Your Name">
 
-    `;
+
+<input id="tetaEmail" placeholder="Business Email">
+
+
+<input id="tetaCompany" placeholder="Company Name">
+
+
+<textarea id="tetaChallenge" placeholder="What would you like to automate?"></textarea>
+
+
+<button id="submitTeta">
+
+Submit Request
+
+</button>
+
+
+</div>
+
+`;
 
 }
-   
-if (questionEl && optionsEl) {
-    startTeta();
+
+
+
+
+if(questionEl && optionsEl){
+
+startTeta();
+
 }
-    });
 
 
+
+
+});
