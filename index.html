@@ -1430,12 +1430,7 @@ TETA AI GENIE SECTION
 
 </section>
 
-
-  <!-- ========================================= -->
-<!-- AI WORKFLOW BUILDER -->
-<!-- ========================================= -->
-
-<section class="workflow-builder" id="workflow-builder">
+<section class="workflow-builder">
 
     <div class="container">
 
@@ -1457,9 +1452,11 @@ TETA AI GENIE SECTION
 
         <div class="workflow-layout">
 
-            <!-- LEFT -->
+            <!-- ================= LEFT ================= -->
 
             <aside class="workflow-sidebar">
+
+                <!-- Automation -->
 
                 <div class="workflow-category">
 
@@ -1469,76 +1466,58 @@ TETA AI GENIE SECTION
 
                         <button data-node="Facebook Leads">Facebook</button>
                         <button data-node="Instagram DM">Instagram</button>
-                        <button data-node="LinkedIn">LinkedIn</button>
-                        <button data-node="YouTube">YouTube</button>
-                        <button data-node="WhatsApp">WhatsApp</button>
-                        <button data-node="Email">Email</button>
+                        <button data-node="LinkedIn Automation">LinkedIn</button>
+                        <button data-node="YouTube Automation">YouTube</button>
+                        <button data-node="WhatsApp Automation">WhatsApp</button>
+                        <button data-node="Email Automation">Email</button>
 
                     </div>
 
                 </div>
+
+                <!-- CRM -->
 
                 <div class="workflow-category">
 
                     <h3>CRM</h3>
 
-                    <div class="workflow-items">
+                    <button class="parent-btn">
+                        HubSpot →
+                    </button>
 
-                        <button class="parent-btn">
-                            HubSpot →
-                        </button>
+                    <div class="workflow-subitems hubspot-items">
 
-                        <div class="workflow-subitems">
+                        <button data-node="Contact Sync">Contact Sync</button>
 
-                            <button data-node="Contact Sync">
-                                Contact Sync
-                            </button>
+                        <button data-node="Lead Management">Lead Management</button>
 
-                            <button data-node="Lead Management">
-                                Lead Management
-                            </button>
+                        <button data-node="Deals Pipeline">Deals Pipeline</button>
 
-                            <button data-node="Deals Pipeline">
-                                Deals Pipeline
-                            </button>
+                        <button data-node="Email Automation">Email Automation</button>
 
-                            <button data-node="Email Automation">
-                                Email Automation
-                            </button>
+                        <button data-node="Ticketing">Ticketing</button>
 
-                            <button data-node="Ticketing">
-                                Ticketing
-                            </button>
+                    </div>
 
-                        </div>
+                    <button class="parent-btn">
+                        GoHighLevel →
+                    </button>
 
-                        <button class="parent-btn">
-                            GoHighLevel →
-                        </button>
+                    <div class="workflow-subitems ghl-items">
 
-                        <div class="workflow-subitems">
+                        <button data-node="Pipeline">Pipeline</button>
 
-                            <button data-node="Pipeline">
-                                Pipeline
-                            </button>
+                        <button data-node="Calendars">Calendars</button>
 
-                            <button data-node="Calendars">
-                                Calendars
-                            </button>
+                        <button data-node="Opportunities">Opportunities</button>
 
-                            <button data-node="Opportunities">
-                                Opportunities
-                            </button>
-
-                            <button data-node="SMS Automation">
-                                SMS Automation
-                            </button>
-
-                        </div>
+                        <button data-node="SMS Automation">SMS Automation</button>
 
                     </div>
 
                 </div>
+
+                <!-- AI -->
 
                 <div class="workflow-category">
 
@@ -1546,21 +1525,13 @@ TETA AI GENIE SECTION
 
                     <div class="workflow-items">
 
-                        <button data-node="ChatGPT">
-                            ChatGPT
-                        </button>
+                        <button data-node="ChatGPT">ChatGPT</button>
 
-                        <button data-node="Claude">
-                            Claude
-                        </button>
+                        <button data-node="Claude">Claude</button>
 
-                        <button data-node="Gemini">
-                            Gemini
-                        </button>
+                        <button data-node="Gemini">Gemini</button>
 
-                        <button data-node="Perplexity">
-                            Perplexity
-                        </button>
+                        <button data-node="Perplexity">Perplexity</button>
 
                     </div>
 
@@ -1568,7 +1539,7 @@ TETA AI GENIE SECTION
 
             </aside>
 
-            <!-- CENTER -->
+            <!-- ================= CENTER ================= -->
 
             <div class="workflow-canvas">
 
@@ -1586,7 +1557,7 @@ TETA AI GENIE SECTION
 
                     <div class="empty-workflow">
 
-                        Select options from the left to build your workflow.
+                        Select tools from the left to start building your automation workflow.
 
                     </div>
 
@@ -1594,7 +1565,7 @@ TETA AI GENIE SECTION
 
             </div>
 
-            <!-- RIGHT -->
+            <!-- ================= RIGHT ================= -->
 
             <aside class="workflow-summary">
 
@@ -1606,9 +1577,7 @@ TETA AI GENIE SECTION
 
                         <span>Nodes</span>
 
-                        <strong id="nodeCount">
-                            0
-                        </strong>
+                        <strong id="nodeCount">0</strong>
 
                     </div>
 
@@ -1616,9 +1585,7 @@ TETA AI GENIE SECTION
 
                         <span>Estimated Cost</span>
 
-                        <strong id="priceEstimate">
-                            $0
-                        </strong>
+                        <strong id="priceEstimate">$0</strong>
 
                     </div>
 
@@ -1626,9 +1593,7 @@ TETA AI GENIE SECTION
 
                         <span>Timeline</span>
 
-                        <strong id="timelineEstimate">
-                            —
-                        </strong>
+                        <strong id="timelineEstimate">—</strong>
 
                     </div>
 
@@ -1640,13 +1605,13 @@ TETA AI GENIE SECTION
 
                     <ul id="workflowBenefits">
 
-                        <li>Choose tools to see recommendations.</li>
+                        <li>Select tools to receive AI recommendations.</li>
 
                     </ul>
 
                 </div>
 
-                <button class="primary-btn generate-btn">
+                <button class="generate-btn">
 
                     Generate Proposal
 
@@ -1658,7 +1623,9 @@ TETA AI GENIE SECTION
 
     </div>
 
-</section>
+</section>  
+  
+  
   
 <!-- =====================================
 JAVASCRIPT
