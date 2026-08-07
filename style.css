@@ -3219,7 +3219,11 @@ SMALL PHONE
 }
 
 
-/* Heading */
+
+/*=========================================
+ HEADING
+=========================================*/
+
 
 .workflow-heading{
 
@@ -3251,8 +3255,9 @@ SMALL PHONE
 
 
 
+
 /*=========================================
- LAYOUT
+ MAIN LAYOUT
 =========================================*/
 
 
@@ -3269,17 +3274,21 @@ SMALL PHONE
 
 
 /*=========================================
- SIDEBAR
+ LEFT SIDEBAR
 =========================================*/
 
 
 .workflow-sidebar{
 
-    background:rgba(15,15,15,.8);
+    background:rgba(15,15,15,.85);
     backdrop-filter:blur(20px);
+
     border:1px solid rgba(255,255,255,.08);
+
     border-radius:24px;
+
     padding:25px;
+
     position:sticky;
     top:100px;
 
@@ -3292,6 +3301,7 @@ SMALL PHONE
     margin-bottom:30px;
 
 }
+
 
 
 .workflow-category h3{
@@ -3321,12 +3331,19 @@ SMALL PHONE
 
 
     background:#111;
+
     color:#fff;
+
     border:1px solid rgba(255,255,255,.12);
+
     border-radius:10px;
+
     padding:10px 14px;
+
     cursor:pointer;
+
     transition:.3s;
+
     font-size:13px;
 
 
@@ -3338,12 +3355,15 @@ SMALL PHONE
 .workflow-subitems button:hover,
 .parent-btn:hover{
 
+
     background:#D6FF00;
+
     color:#000;
+
     transform:translateY(-3px);
 
-}
 
+}
 
 
 
@@ -3357,22 +3377,29 @@ SMALL PHONE
 
 
     height:720px;
+
     position:relative;
+
     overflow:hidden;
+
     padding:30px;
+
 
     background-color:#080808;
 
+
     background-image:
     radial-gradient(
-    rgba(214,255,0,.25) 1px,
-    transparent 1px
+        rgba(214,255,0,.25) 1px,
+        transparent 1px
     );
+
 
     background-size:22px 22px;
 
 
     border-radius:30px;
+
     border:1px solid rgba(255,255,255,.08);
 
 
@@ -3380,37 +3407,51 @@ SMALL PHONE
 
 
 
-
 .workflow-canvas:before{
 
+
     content:"";
+
     position:absolute;
+
     inset:0;
+
+
     background:
     linear-gradient(
-    90deg,
-    rgba(214,255,0,.05),
-    transparent
+        90deg,
+        rgba(214,255,0,.05),
+        transparent
     );
 
+
     pointer-events:none;
+
 
 }
 
 
 
 
-/* Canvas Header */
+/*=========================================
+ CANVAS HEADER
+=========================================*/
 
 
 .canvas-header{
 
+
     position:relative;
+
     z-index:2;
 
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
 
     margin-bottom:30px;
 
@@ -3421,8 +3462,11 @@ SMALL PHONE
 
 .canvas-header h3{
 
+
     color:#fff;
+
     font-size:24px;
+
 
 }
 
@@ -3430,36 +3474,53 @@ SMALL PHONE
 
 .canvas-header button{
 
+
     background:#D6FF00;
+
     color:#000;
 
+
     border:none;
+
     padding:12px 22px;
+
 
     border-radius:12px;
 
+
     font-weight:700;
+
     cursor:pointer;
+
 
 }
 
 
 
 
-/* Workflow Nodes */
+
+/*=========================================
+ WORKFLOW NODES
+=========================================*/
 
 
 #workflowNodes{
 
+
     position:relative;
+
     z-index:2;
 
+
     display:flex;
+
     flex-direction:column;
 
     align-items:center;
 
+
     gap:25px;
+
 
     min-height:550px;
 
@@ -3468,15 +3529,20 @@ SMALL PHONE
 
 
 
-
 .empty-workflow{
 
+
     color:#fff;
+
     opacity:.5;
+
     margin-top:120px;
+
     font-size:18px;
 
+
 }
+
 
 
 
@@ -3488,11 +3554,13 @@ SMALL PHONE
 
 .workflow-summary{
 
+
     position:sticky;
+
     top:100px;
 
-}
 
+}
 
 
 
@@ -3503,11 +3571,15 @@ SMALL PHONE
 
     backdrop-filter:blur(20px);
 
+
     border:1px solid rgba(255,255,255,.08);
+
 
     border-radius:24px;
 
+
     padding:25px;
+
 
     margin-bottom:20px;
 
@@ -3518,8 +3590,11 @@ SMALL PHONE
 
 .summary-card h3{
 
+
     color:#fff;
+
     font-size:20px;
+
     margin-bottom:20px;
 
 
@@ -3536,7 +3611,9 @@ SMALL PHONE
 
     color:#ddd;
 
+
     padding:15px 0;
+
 
     border-bottom:1px solid rgba(255,255,255,.08);
 
@@ -3547,7 +3624,9 @@ SMALL PHONE
 
 .summary-item:last-child{
 
+
     border:none;
+
 
 }
 
@@ -3555,8 +3634,11 @@ SMALL PHONE
 
 .summary-item strong{
 
+
     color:#D6FF00;
+
     font-size:22px;
+
 
 }
 
@@ -3564,10 +3646,14 @@ SMALL PHONE
 
 .summary-card li{
 
+
     color:#ccc;
+
     margin-bottom:10px;
 
+
 }
+
 
 
 
@@ -3580,21 +3666,30 @@ SMALL PHONE
 
 
     width:100%;
+
     height:58px;
+
 
     background:#D6FF00;
 
+
     color:#000;
+
 
     border:none;
 
+
     border-radius:18px;
+
 
     font-size:18px;
 
+
     font-weight:700;
 
+
     cursor:pointer;
+
 
     transition:.3s;
 
@@ -3605,13 +3700,16 @@ SMALL PHONE
 
 .generate-btn:hover{
 
+
     transform:translateY(-5px);
 
+
     box-shadow:
+
     0 0 40px rgba(214,255,0,.35);
 
-}
 
+}
 
 
 
@@ -3624,20 +3722,21 @@ SMALL PHONE
 @media(max-width:1200px){
 
 
-.workflow-layout{
+    .workflow-layout{
 
-    grid-template-columns:1fr;
+        grid-template-columns:1fr;
 
-}
+    }
 
 
-.workflow-sidebar,
-.workflow-summary{
+    .workflow-sidebar,
+    .workflow-summary{
 
-    position:relative;
-    top:0;
+        position:relative;
 
-}
+        top:0;
+
+    }
 
 
 }
@@ -3647,19 +3746,21 @@ SMALL PHONE
 @media(max-width:768px){
 
 
-.workflow-heading h2{
+    .workflow-heading h2{
 
-    font-size:38px;
+        font-size:38px;
 
-}
+    }
 
 
-.workflow-canvas{
 
-    height:600px;
-    padding:20px;
+    .workflow-canvas{
 
-}
+        height:600px;
+
+        padding:20px;
+
+    }
 
 
 }
