@@ -586,3 +586,266 @@ startTeta();
 
 
 });
+
+// =====================================
+// AI WORKFLOW BUILDER - PHASE 1
+// =====================================
+
+
+const workflowButtons = document.querySelectorAll(
+    ".workflow-items button, .workflow-subitems button"
+);
+
+
+const workflowNodes = document.getElementById("workflowNodes");
+
+const clearWorkflow = document.getElementById("clearWorkflow");
+
+
+const nodeCount = document.getElementById("nodeCount");
+
+const priceEstimate = document.getElementById("priceEstimate");
+
+const timelineEstimate = document.getElementById("timelineEstimate");
+
+
+
+// Store selected nodes
+
+let selectedNodes = [];
+
+
+
+
+// Pricing
+
+const nodePricing = {
+
+    "Facebook Leads": 300,
+    "Instagram DM": 250,
+    "LinkedIn Automation": 400,
+    "YouTube Automation": 350,
+    "WhatsApp Automation": 500,
+    "Email Automation": 300,
+
+    "Contact Sync": 250,
+    "Lead Management": 400,
+    "Deals Pipeline": 500,
+    "Ticketing": 350,
+
+    "Pipeline": 400,
+    "Calendars": 250,
+    "Opportunities": 450,
+    "SMS Automation": 350,
+
+    "ChatGPT": 300,
+    "Claude": 300,
+    "Gemini": 300,
+    "Perplexity": 250
+
+};
+
+
+
+
+
+// Add Node
+
+workflowButtons.forEach(button => {
+
+
+    button.addEventListener("click",()=>{
+
+
+        const nodeName = button.dataset.node;
+
+
+
+        if(!nodeName) return;
+
+
+
+        // prevent duplicate
+
+        if(selectedNodes.includes(nodeName)){
+
+            return;
+
+        }
+
+
+
+        selectedNodes.push(nodeName);
+
+
+
+        createWorkflowNode(nodeName);
+
+
+
+        updateEstimate();
+
+
+
+    });
+
+
+
+});
+
+
+
+
+
+
+// Create Node UI
+
+function createWorkflowNode(name){
+
+
+    // remove empty message
+
+    const empty = document.querySelector(".empty-workflow");
+
+    if(empty){
+
+        empty.remove();
+
+    }
+
+
+
+
+    const node = document.createElement("div");
+
+
+    node.className = "workflow-node";
+
+
+
+    node.innerHTML = `
+
+        <div class="node-icon">
+            ⚡
+        </div>
+
+
+        <div class="node-name">
+            ${name}
+        </div>
+
+    `;
+
+
+
+    workflowNodes.appendChild(node);
+
+
+
+}
+
+
+
+
+
+
+
+// Update Pricing
+
+function updateEstimate(){
+
+
+
+    let total = 0;
+
+
+
+    selectedNodes.forEach(node=>{
+
+
+        total += nodePricing[node] || 250;
+
+
+    });
+
+
+
+    nodeCount.innerText = selectedNodes.length;
+
+
+    priceEstimate.innerText = "$" + total;
+
+
+
+    if(selectedNodes.length === 0){
+
+
+        timelineEstimate.innerText = "—";
+
+
+    }
+
+    else if(selectedNodes.length <=3){
+
+
+        timelineEstimate.innerText = "3-5 Days";
+
+
+    }
+
+    else if(selectedNodes.length <=6){
+
+
+        timelineEstimate.innerText = "1-2 Weeks";
+
+
+    }
+
+    else{
+
+
+        timelineEstimate.innerText = "2-4 Weeks";
+
+
+    }
+
+
+}
+
+
+
+
+
+
+// Clear Workflow
+
+if(clearWorkflow){
+
+
+    clearWorkflow.addEventListener("click",()=>{
+
+
+        selectedNodes = [];
+
+
+        workflowNodes.innerHTML = `
+
+            <div class="empty-workflow">
+
+                Select tools from the left to start building your automation workflow.
+
+            </div>
+
+        `;
+
+
+
+        updateEstimate();
+
+
+
+    });
+
+
+}
+
