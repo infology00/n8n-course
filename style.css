@@ -3365,71 +3365,98 @@ SMALL PHONE
 
 }
 
-
-
-
-/*=========================================
- CANVAS
-=========================================*/
+/*=========================================*
+*CANVAS*
+*=========================================*/
 
 
 .workflow-canvas{
 
+height:720px;
 
-    height:720px;
+position:relative;
 
-    position:relative;
+overflow-y:auto;
 
-    overflow:hidden;
+overflow-x:hidden;
 
-    padding:30px;
+padding:30px;
 
 
-    background-color:#080808;
+background-color:#080808;
 
-    background-image:
+
+/* n8n style dots */
+
+background-image:
 radial-gradient(
 rgba(214,255,0,.25) 1px,
 transparent 1px
 );
 
-
 background-size:22px 22px;
 
-    border-radius:30px;
 
-    border:1px solid rgba(255,255,255,.08);
+border-radius:30px;
 
-
-}
-
-
-
-.workflow-canvas:before{
-
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-
-    background:
-    linear-gradient(
-        90deg,
-        rgba(214,255,0,.05),
-        transparent
-    );
-
-
-    pointer-events:none;
-
+border:1px solid rgba(255,255,255,.08);
 
 }
 
 
 
+/* Canvas Glow Overlay */
+
+
+.workflow-canvas::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+
+background:
+linear-gradient(
+90deg,
+rgba(214,255,0,.05),
+transparent
+);
+
+
+pointer-events:none;
+
+}
+
+
+
+
+
+/* Canvas Scrollbar */
+
+
+.workflow-canvas::-webkit-scrollbar{
+
+width:8px;
+
+}
+
+
+.workflow-canvas::-webkit-scrollbar-track{
+
+background:#111;
+
+}
+
+
+.workflow-canvas::-webkit-scrollbar-thumb{
+
+background:#D6FF00;
+
+border-radius:10px;
+
+}
 
 /*=========================================
  CANVAS HEADER
