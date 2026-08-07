@@ -3201,9 +3201,9 @@ SMALL PHONE
 
     }
 
-/*=========================================
-WORKFLOW BUILDER
-=========================================*/
+/*=========================================*
+* WORKFLOW BUILDER
+*=========================================*/
 
 .workflow-builder{
     padding:140px 0;
@@ -3231,346 +3231,216 @@ WORKFLOW BUILDER
 }
 
 .workflow-layout{
-
     display:grid;
     grid-template-columns:320px 1fr 320px;
     gap:30px;
     align-items:start;
-
 }
 
-/*=========================
-LEFT
-=========================*/
+/*=========================*
+* LEFT
+*=========================*/
 
 .workflow-sidebar{
-
     background:#0d0d0d;
-
     border:1px solid rgba(214,255,0,.15);
-
     border-radius:26px;
-
     padding:28px;
-
     position:sticky;
-
     top:120px;
-
 }
 
 .workflow-category{
-
     margin-bottom:34px;
-
 }
 
 .workflow-category:last-child{
-
     margin-bottom:0;
-
 }
 
 .workflow-category h3{
-
     color:#D6FF00;
-
     font-size:18px;
-
     margin-bottom:16px;
-
 }
 
 .workflow-items,
-
 .workflow-subitems{
-
     display:flex;
-
     flex-wrap:wrap;
-
     gap:10px;
-
 }
 
 .workflow-items button,
-
 .workflow-subitems button,
-
 .parent-btn{
-
     background:#161616;
-
     color:#fff;
-
     border:1px solid rgba(255,255,255,.08);
-
     border-radius:12px;
-
     padding:11px 15px;
-
     cursor:pointer;
-
     transition:.35s;
-
     font-size:14px;
-
 }
 
 .workflow-items button:hover,
-
 .workflow-subitems button:hover,
-
 .parent-btn:hover{
-
     background:#D6FF00;
-
     color:#000;
-
     transform:translateY(-3px);
-
 }
 
 .workflow-subitems{
-
     margin:15px 0 25px;
-
 }
 
-/*=========================
-CENTER
-=========================*/
+/*=========================*
+* CENTER
+*=========================*/
 
 .workflow-canvas{
-
     background:#0c0c0c;
-
     border-radius:30px;
-
     border:1px solid rgba(214,255,0,.15);
-
     min-height:720px;
-
     position:relative;
-
     overflow:hidden;
-
     padding:35px;
-
 }
 
 .canvas-header{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     margin-bottom:35px;
-
 }
 
 .canvas-header h3{
-
     font-size:26px;
-
 }
 
 .canvas-header button{
-
     background:#D6FF00;
-
     color:#000;
-
     border:none;
-
     border-radius:12px;
-
     padding:12px 22px;
-
     cursor:pointer;
-
     font-weight:700;
-
 }
 
 #workflowNodes{
-
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
-
     gap:30px;
-
     min-height:550px;
-
 }
 
 .empty-workflow{
-
     margin-top:120px;
-
     opacity:.55;
-
     font-size:18px;
-
 }
 
-/*=========================
-RIGHT
-=========================*/
+/*=========================*
+* RIGHT
+*=========================*/
 
 .workflow-summary{
-
     position:sticky;
-
     top:120px;
-
 }
 
 .summary-card{
-
     background:#0d0d0d;
-
     border:1px solid rgba(214,255,0,.15);
-
     border-radius:24px;
-
     padding:28px;
-
     margin-bottom:25px;
-
 }
 
 .summary-card h3{
-
     margin-bottom:22px;
-
     font-size:22px;
-
 }
 
 .summary-item{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     margin-bottom:18px;
-
     padding-bottom:18px;
-
     border-bottom:1px solid rgba(255,255,255,.06);
-
 }
 
 .summary-item:last-child{
-
     margin-bottom:0;
-
     padding-bottom:0;
-
     border:none;
-
 }
 
 .summary-item strong{
-
     color:#D6FF00;
-
     font-size:22px;
-
 }
 
 .summary-card ul{
-
     padding-left:18px;
-
 }
 
 .summary-card li{
-
     margin-bottom:12px;
-
     opacity:.9;
-
 }
 
 .generate-btn{
-
     width:100%;
-
     height:58px;
-
     border:none;
-
     border-radius:18px;
-
     background:#D6FF00;
-
     color:#000;
-
     font-weight:700;
-
     cursor:pointer;
-
     font-size:18px;
-
     transition:.35s;
-
 }
 
 .generate-btn:hover{
-
     transform:translateY(-4px);
-
     box-shadow:0 0 30px rgba(214,255,0,.35);
-
 }
 
-/*=========================
-RESPONSIVE
-=========================*/
+/*=========================*
+* RESPONSIVE
+*=========================*/
 
 @media(max-width:1200px){
 
-.workflow-layout{
+    .workflow-layout{
+        grid-template-columns:1fr;
+    }
 
-grid-template-columns:1fr;
-
-}
-
-.workflow-sidebar,
-
-.workflow-summary{
-
-position:relative;
-
-top:0;
-
-}
+    .workflow-sidebar,
+    .workflow-summary{
+        position:relative;
+        top:0;
+    }
 
 }
 
 @media(max-width:768px){
 
-.workflow-heading h2{
+    .workflow-heading h2{
+        font-size:40px;
+    }
 
-font-size:40px;
-
-}
-
-.workflow-canvas{
-
-padding:20px;
-
-min-height:550px;
-
-}
+    .workflow-canvas{
+        padding:20px;
+        min-height:550px;
+    }
 
 }
