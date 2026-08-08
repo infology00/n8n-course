@@ -4701,3 +4701,32 @@ section.teta-section {
 .workflow-sidebar .workflow-step-label{
     color:#000000 !important;
 }
+
+/* Tumhari purani CSS */
+
+.video-card img {
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+
+/* YAHAN SE MERA NAYA CSS START HOGA */
+
+.workflow-layout{
+    display:grid;
+    grid-template-columns:260px minmax(0,1fr) 280px;
+    gap:28px;
+    align-items:stretch;
+    height:720px;
+}
+
+.workflow-sidebar{
+    height:720px;
+    min-height:0;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+
+/* ...baqi mera CSS... */
