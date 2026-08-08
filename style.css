@@ -5422,3 +5422,169 @@ section.teta-section {
     height:720px;
     min-height:720px;
 }
+
+/* =========================================
+   WORKFLOW VIDEO MODAL
+========================================= */
+
+.workflow-video-modal{
+    position:fixed;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:30px;
+
+    box-sizing:border-box;
+
+    background:rgba(0,0,0,.78);
+
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+
+    opacity:0;
+    visibility:hidden;
+
+    z-index:999999;
+
+    transition:
+        opacity .25s ease,
+        visibility .25s ease;
+}
+
+
+/* OPEN */
+
+.workflow-video-modal.active{
+    opacity:1;
+    visibility:visible;
+}
+
+
+/* BACKDROP */
+
+.workflow-video-backdrop{
+    position:absolute;
+    inset:0;
+
+    cursor:pointer;
+}
+
+
+/* VIDEO BOX */
+
+.workflow-video-modal-box{
+    width:min(900px, 92vw);
+
+    position:relative;
+
+    background:#08090a;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.65);
+
+    transform:scale(.94);
+
+    transition:transform .25s ease;
+
+    z-index:2;
+}
+
+
+/* OPEN ANIMATION */
+
+.workflow-video-modal.active
+.workflow-video-modal-box{
+    transform:scale(1);
+}
+
+
+/* VIDEO */
+
+.workflow-video-modal-box video{
+    width:100%;
+    height:auto;
+
+    max-height:80vh;
+
+    display:block;
+
+    background:#000;
+}
+
+
+/* CLOSE BUTTON */
+
+.workflow-video-close{
+    position:absolute;
+
+    top:12px;
+    right:12px;
+
+    width:38px;
+    height:38px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.75);
+
+    color:#fff;
+
+    font-size:25px;
+    line-height:1;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    z-index:5;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+
+.workflow-video-close:hover{
+    background:#D6FF00;
+    color:#000;
+
+    transform:scale(1.08);
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .workflow-video-modal{
+        padding:15px;
+    }
+
+    .workflow-video-modal-box{
+        width:100%;
+        border-radius:14px;
+    }
+
+    .workflow-video-close{
+        width:34px;
+        height:34px;
+        font-size:22px;
+    }
+
+}
