@@ -4947,4 +4947,58 @@ section.teta-section {
     }
 
 }
-```
+/* =========================================
+   COMPACT TUTORIAL VIDEO
+========================================= */
+
+.new-tutorial-card{
+    margin-top:14px;
+    margin-bottom:14px;
+}
+
+.new-tutorial-label{
+    margin-bottom:7px;
+}
+
+.new-tutorial-media{
+    height:125px;
+    border-radius:16px;
+}
+
+
+/* SMALLER PLAY BUTTON */
+
+.new-tutorial-play{
+    width:46px;
+    height:46px;
+}
+
+.new-tutorial-play span{
+    font-size:15px;
+}
+
+
+/* SMALLER TEXT */
+
+.new-tutorial-info{
+    left:12px;
+    right:12px;
+    bottom:10px;
+}
+
+.new-tutorial-title{
+    font-size:13px;
+    margin-bottom:2px;
+}
+
+.new-tutorial-subtitle{
+    font-size:10px;
+}
+
+
+/* KEEP GENERATE BUTTON VISIBLE */
+
+.workflow-summary .generate-btn{
+    flex-shrink:0;
+    margin-top:auto;
+}
