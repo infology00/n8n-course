@@ -4698,6 +4698,6 @@ section.teta-section {
     }
 
 }
-.workflow-step-label{
-    color:#000 !important;
+.workflow-sidebar .workflow-step-label{
+    color:#000000 !important;
 }
