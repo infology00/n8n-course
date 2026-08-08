@@ -2237,24 +2237,21 @@ document.addEventListener("DOMContentLoaded", function () {
     // =========================================================
     // ADD NODE TO CANVAS
     // =========================================================
+function addWorkflowNode(data) {
 
-    function addWorkflowNode(data) {
-
-        console.log(
-            "Workflow node:",
-            data
-        );
+    const nodeName =
+        data.platform + " - " + data.option;
 
 
-        document.dispatchEvent(
-            new CustomEvent(
-                "workflowNodeAdded",
-                {
-                    detail: data
-                }
-            )
-        );
+    // Existing canvas node system
+    createWorkflowNode(nodeName);
 
-    }
+
+    // Update price / nodes / timeline
+    selectedNodes.push(nodeName);
+
+    updateEstimate();
+
+}
 
 });
