@@ -1306,210 +1306,170 @@ AI WORKFLOW BUILDER
 
 
 
-
-
 <!-- ==================================
-    LEFT SIDEBAR
-    User selects automation tools
+     LEFT SIDEBAR
+     DYNAMIC AUTOMATION BUILDER
 =================================== -->
-
 
 <aside class="workflow-sidebar">
 
-
-
-<!-- Automation Tools -->
-
-<div class="workflow-category">
-
-
-<h3>
-Automation
-</h3>
-
-
-<div class="workflow-items">
-
-
-<button data-node="Facebook Leads">
-Facebook
-</button>
-
-
-<button data-node="Instagram DM">
-Instagram
-</button>
-
-
-<button data-node="LinkedIn Automation">
-LinkedIn
-</button>
-
-
-<button data-node="YouTube Automation">
-YouTube
-</button>
-
-
-<button data-node="WhatsApp Automation">
-WhatsApp
-</button>
-
-
-<button data-node="Email Automation">
-Email
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<!-- CRM Tools -->
-
-<div class="workflow-category">
-
-
-<h3>
-CRM
-</h3>
-
-
-
-<button class="parent-btn">
-HubSpot →
-</button>
-
-
-
-<div class="workflow-subitems hubspot-items">
-
-
-<button data-node="Contact Sync">
-Contact Sync
-</button>
-
-
-<button data-node="Lead Management">
-Lead Management
-</button>
-
-
-<button data-node="Deals Pipeline">
-Deals Pipeline
-</button>
-
-
-<button data-node="Email Automation">
-Email Automation
-</button>
-
-
-<button data-node="Ticketing">
-Ticketing
-</button>
-
-
-</div>
-
-
-
-
-
-
-<button class="parent-btn">
-GoHighLevel →
-</button>
-
-
-
-<div class="workflow-subitems ghl-items">
-
-
-<button data-node="Pipeline">
-Pipeline
-</button>
-
-
-<button data-node="Calendars">
-Calendars
-</button>
-
-
-<button data-node="Opportunities">
-Opportunities
-</button>
-
-
-<button data-node="SMS Automation">
-SMS Automation
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<!-- AI Tools -->
-
-<div class="workflow-category">
-
-
-<h3>
-AI
-</h3>
-
-
-
-<div class="workflow-items">
-
-
-<button data-node="ChatGPT">
-ChatGPT
-</button>
-
-
-<button data-node="Claude">
-Claude
-</button>
-
-
-<button data-node="Gemini">
-Gemini
-</button>
-
-
-<button data-node="Perplexity">
-Perplexity
-</button>
-
-
-</div>
-
-
-</div>
-
+    <!-- SIDEBAR HEADER -->
+
+    <div class="workflow-sidebar-header">
+
+        <button
+            type="button"
+            id="workflowBack"
+            class="workflow-back"
+            style="display:none;"
+        >
+            ← Back
+        </button>
+
+        <div>
+
+            <span class="workflow-step-label">
+                STEP 1
+            </span>
+
+            <h3 id="workflowSidebarTitle">
+                What do you want to automate?
+            </h3>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================
+         DYNAMIC TOOL AREA
+    =================================== -->
+
+    <div id="workflowToolArea">
+
+
+        <!-- MAIN CATEGORIES -->
+
+        <div
+            class="workflow-category dynamic-category"
+            data-level="main"
+        >
+
+            <div class="workflow-items">
+
+                <button
+                    type="button"
+                    data-category="social"
+                >
+                    Social Media
+                </button>
+
+                <button
+                    type="button"
+                    data-category="crm"
+                >
+                    CRM
+                </button>
+
+                <button
+                    type="button"
+                    data-category="website"
+                >
+                    Website
+                </button>
+
+                <button
+                    type="button"
+                    data-category="ecommerce"
+                >
+                    E-commerce
+                </button>
+
+                <button
+                    type="button"
+                    data-category="communication"
+                >
+                    Communication
+                </button>
+
+                <button
+                    type="button"
+                    data-category="ai"
+                >
+                    AI
+                </button>
+
+                <button
+                    type="button"
+                    data-category="voice"
+                >
+                    Voice AI
+                </button>
+
+                <button
+                    type="button"
+                    data-category="automation"
+                >
+                    Automation
+                </button>
+
+                <button
+                    type="button"
+                    data-category="marketing"
+                >
+                    Marketing
+                </button>
+
+                <button
+                    type="button"
+                    data-category="operations"
+                >
+                    Operations
+                </button>
+
+                <button
+                    type="button"
+                    data-category="payments"
+                >
+                    Payments
+                </button>
+
+                <button
+                    type="button"
+                    data-category="data"
+                >
+                    Data & Productivity
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ==================================
+         CURRENT SELECTION
+    =================================== -->
+
+    <div
+        id="workflowPath"
+        class="workflow-path"
+    >
+
+        <span class="workflow-path-label">
+            YOUR SELECTION
+        </span>
+
+        <div id="workflowPathItems">
+            Nothing selected yet
+        </div>
+
+    </div>
 
 
 </aside>
-
-
-
-
-
-
 
 
 
