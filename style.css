@@ -5223,8 +5223,8 @@ section.teta-section {
 ========================================= */
 
 .new-tutorial-media{
-    width:105%;
-    height:190px;
+    width:100%;
+    height:180px;
 
     position:relative;
     overflow:hidden;
