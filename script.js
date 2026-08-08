@@ -735,4 +735,1277 @@ startTeta();
 // AI WORKFLOW BUILDER
 // =====================================
 
+// =====================================
+// AI WORKFLOW BUILDER
+// =====================================
+
+const workflowToolArea = document.getElementById("workflowToolArea");
+const workflowPathItems = document.getElementById("workflowPathItems");
+const workflowBack = document.getElementById("workflowBack");
+const workflowSidebarTitle = document.getElementById("workflowSidebarTitle");
+
+const workflowNodes = document.getElementById("workflowNodes");
+const clearWorkflow = document.getElementById("clearWorkflow");
+
+const nodeCount = document.getElementById("nodeCount");
+const priceEstimate = document.getElementById("priceEstimate");
+const timelineEstimate = document.getElementById("timelineEstimate");
+
+let selectedNodes = [];
+
+
+// =====================================
+// WORKFLOW DATA
+// =====================================
+
+const workflowData = {
+
+    crm: {
+        name: "CRM",
+        platforms: [
+            {
+                id: "hubspot",
+                name: "HubSpot",
+                options: [
+                    "Contacts",
+                    "Companies",
+                    "Deals",
+                    "Pipelines",
+                    "Tasks",
+                    "Forms",
+                    "Workflows",
+                    "Emails"
+                ]
+            },
+            {
+                id: "gohighlevel",
+                name: "GoHighLevel",
+                options: [
+                    "Contacts",
+                    "Opportunities",
+                    "Pipelines",
+                    "Workflows",
+                    "Calendars",
+                    "Forms",
+                    "Conversations",
+                    "Campaigns"
+                ]
+            },
+            {
+                id: "zoho",
+                name: "Zoho CRM",
+                options: [
+                    "Leads",
+                    "Contacts",
+                    "Deals",
+                    "Accounts",
+                    "Tasks",
+                    "Workflows"
+                ]
+            }
+        ]
+    },
+
+    social: {
+        name: "Social Media",
+        platforms: [
+            {
+                id: "facebook",
+                name: "Facebook",
+                options: [
+                    "Posts",
+                    "Comments",
+                    "Messages",
+                    "Leads",
+                    "Pages",
+                    "Ads"
+                ]
+            },
+            {
+                id: "instagram",
+                name: "Instagram",
+                options: [
+                    "Posts",
+                    "Comments",
+                    "Messages",
+                    "Reels",
+                    "Media"
+                ]
+            },
+            {
+                id: "linkedin",
+                name: "LinkedIn",
+                options: [
+                    "Posts",
+                    "Messages",
+                    "Leads",
+                    "Company Pages"
+                ]
+            },
+            {
+                id: "tiktok",
+                name: "TikTok",
+                options: [
+                    "Videos",
+                    "Comments",
+                    "Messages",
+                    "Leads"
+                ]
+            },
+            {
+                id: "youtube",
+                name: "YouTube",
+                options: [
+                    "Videos",
+                    "Comments",
+                    "Channels",
+                    "Subscribers"
+                ]
+            }
+        ]
+    },
+
+    website: {
+        name: "Website",
+        platforms: [
+            {
+                id: "wordpress",
+                name: "WordPress",
+                options: [
+                    "Posts",
+                    "Pages",
+                    "Forms",
+                    "Users",
+                    "Comments",
+                    "Media"
+                ]
+            },
+            {
+                id: "shopify",
+                name: "Shopify",
+                options: [
+                    "Products",
+                    "Orders",
+                    "Customers",
+                    "Inventory",
+                    "Discounts"
+                ]
+            },
+            {
+                id: "webflow",
+                name: "Webflow",
+                options: [
+                    "CMS",
+                    "Forms",
+                    "Collections",
+                    "Items"
+                ]
+            }
+        ]
+    },
+
+    ecommerce: {
+        name: "E-commerce",
+        platforms: [
+            {
+                id: "shopify",
+                name: "Shopify",
+                options: [
+                    "Products",
+                    "Orders",
+                    "Customers",
+                    "Inventory",
+                    "Payments",
+                    "Discounts"
+                ]
+            },
+            {
+                id: "woocommerce",
+                name: "WooCommerce",
+                options: [
+                    "Products",
+                    "Orders",
+                    "Customers",
+                    "Coupons",
+                    "Inventory"
+                ]
+            }
+        ]
+    },
+
+    communication: {
+        name: "Communication",
+        platforms: [
+            {
+                id: "gmail",
+                name: "Gmail",
+                options: [
+                    "Send Email",
+                    "Receive Email",
+                    "Search Email",
+                    "Attachments",
+                    "Labels"
+                ]
+            },
+            {
+                id: "slack",
+                name: "Slack",
+                options: [
+                    "Send Message",
+                    "Channels",
+                    "Users",
+                    "Files"
+                ]
+            },
+            {
+                id: "teams",
+                name: "Microsoft Teams",
+                options: [
+                    "Messages",
+                    "Channels",
+                    "Users",
+                    "Meetings"
+                ]
+            }
+        ]
+    },
+
+    ai: {
+        name: "AI",
+        platforms: [
+            {
+                id: "openai",
+                name: "OpenAI",
+                options: [
+                    "Chat",
+                    "Text Generation",
+                    "Image Generation",
+                    "Embeddings",
+                    "Analysis"
+                ]
+            },
+            {
+                id: "claude",
+                name: "Claude",
+                options: [
+                    "Chat",
+                    "Text Generation",
+                    "Analysis",
+                    "Documents"
+                ]
+            },
+            {
+                id: "gemini",
+                name: "Gemini",
+                options: [
+                    "Chat",
+                    "Text Generation",
+                    "Vision",
+                    "Analysis"
+                ]
+            }
+        ]
+    },
+
+    voice: {
+        name: "Voice AI",
+        platforms: [
+            {
+                id: "retell",
+                name: "Retell AI",
+                options: [
+                    "Voice Agent",
+                    "Make Call",
+                    "Transcript",
+                    "Recording",
+                    "Analysis"
+                ]
+            },
+            {
+                id: "twilio",
+                name: "Twilio",
+                options: [
+                    "Make Call",
+                    "Send SMS",
+                    "Receive SMS",
+                    "Phone Numbers"
+                ]
+            }
+        ]
+    },
+
+    automation: {
+        name: "Automation",
+        platforms: [
+            {
+                id: "n8n",
+                name: "n8n",
+                options: [
+                    "Workflow",
+                    "HTTP Request",
+                    "Webhook",
+                    "Code",
+                    "Google Sheets"
+                ]
+            },
+            {
+                id: "zapier",
+                name: "Zapier",
+                options: [
+                    "Trigger",
+                    "Action",
+                    "Filter",
+                    "Formatter"
+                ]
+            },
+            {
+                id: "make",
+                name: "Make",
+                options: [
+                    "Scenario",
+                    "Webhook",
+                    "Router",
+                    "HTTP"
+                ]
+            }
+        ]
+    },
+
+    marketing: {
+        name: "Marketing",
+        platforms: [
+            {
+                id: "meta",
+                name: "Meta Ads",
+                options: [
+                    "Campaigns",
+                    "Ad Sets",
+                    "Ads",
+                    "Leads",
+                    "Audiences"
+                ]
+            },
+            {
+                id: "google",
+                name: "Google Ads",
+                options: [
+                    "Campaigns",
+                    "Ad Groups",
+                    "Ads",
+                    "Leads",
+                    "Conversions"
+                ]
+            },
+            {
+                id: "mailchimp",
+                name: "Mailchimp",
+                options: [
+                    "Contacts",
+                    "Campaigns",
+                    "Lists",
+                    "Tags",
+                    "Automation"
+                ]
+            }
+        ]
+    },
+
+    operations: {
+        name: "Operations",
+        platforms: [
+            {
+                id: "google-sheets",
+                name: "Google Sheets",
+                options: [
+                    "Read Row",
+                    "Add Row",
+                    "Update Row",
+                    "Delete Row",
+                    "Search Rows"
+                ]
+            },
+            {
+                id: "airtable",
+                name: "Airtable",
+                options: [
+                    "Find Record",
+                    "Create Record",
+                    "Update Record",
+                    "Delete Record"
+                ]
+            }
+        ]
+    },
+
+    payments: {
+        name: "Payments",
+        platforms: [
+            {
+                id: "stripe",
+                name: "Stripe",
+                options: [
+                    "Payment",
+                    "Customer",
+                    "Invoice",
+                    "Subscription",
+                    "Refund"
+                ]
+            },
+            {
+                id: "paypal",
+                name: "PayPal",
+                options: [
+                    "Payment",
+                    "Order",
+                    "Refund",
+                    "Customer"
+                ]
+            }
+        ]
+    },
+
+    data: {
+        name: "Data & Productivity",
+        platforms: [
+            {
+                id: "google-sheets",
+                name: "Google Sheets",
+                options: [
+                    "Read Data",
+                    "Add Row",
+                    "Update Row",
+                    "Find Row",
+                    "Delete Row"
+                ]
+            },
+            {
+                id: "airtable",
+                name: "Airtable",
+                options: [
+                    "Find Record",
+                    "Create Record",
+                    "Update Record",
+                    "Delete Record"
+                ]
+            }
+        ]
+    }
+
+};
+
+
+// =====================================
+// STATE
+// =====================================
+
+let currentLevel = "main";
+let currentCategory = null;
+let currentPlatform = null;
+
+
+// =====================================
+// CATEGORY CLICK
+// =====================================
+
+if (workflowToolArea) {
+
+    workflowToolArea.addEventListener("click", function(event) {
+
+        const categoryButton =
+            event.target.closest(
+                "button[data-category]"
+            );
+
+        if (categoryButton) {
+
+            const categoryId =
+                categoryButton.dataset.category;
+
+            const category =
+                workflowData[categoryId];
+
+            if (!category) return;
+
+            currentCategory = categoryId;
+            currentPlatform = null;
+            currentLevel = "platforms";
+
+            renderPlatforms(category);
+
+            return;
+        }
+
+
+        const platformButton =
+            event.target.closest(
+                "button[data-platform]"
+            );
+
+        if (platformButton) {
+
+            const platformId =
+                platformButton.dataset.platform;
+
+            const category =
+                workflowData[currentCategory];
+
+            if (!category) return;
+
+            const platform =
+                category.platforms.find(
+                    item => item.id === platformId
+                );
+
+            if (!platform) return;
+
+            currentPlatform = platformId;
+            currentLevel = "options";
+
+            renderPlatformOptions(platform);
+
+            return;
+        }
+
+
+        const optionButton =
+            event.target.closest(
+                "button[data-option]"
+            );
+
+        if (optionButton) {
+
+            const option =
+                optionButton.dataset.option;
+
+            const category =
+                workflowData[currentCategory];
+
+            if (!category) return;
+
+            const platform =
+                category.platforms.find(
+                    item => item.id === currentPlatform
+                );
+
+            if (!platform) return;
+
+            optionButton.classList.toggle("selected");
+
+            addWorkflowNode({
+
+                categoryId: currentCategory,
+                category: category.name,
+
+                platformId: currentPlatform,
+                platform: platform.name,
+
+                option: option
+
+            });
+
+        }
+
+    });
+
+}
+
+
+// =====================================
+// RENDER PLATFORMS
+// =====================================
+
+function renderPlatforms(category) {
+
+    if (!workflowToolArea) return;
+
+    if (workflowSidebarTitle) {
+        workflowSidebarTitle.textContent =
+            category.name;
+    }
+
+    if (workflowBack) {
+        workflowBack.style.display =
+            "inline-flex";
+    }
+
+    workflowToolArea.innerHTML = "";
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.className =
+        "workflow-category dynamic-category";
+
+    const items =
+        document.createElement("div");
+
+    items.className =
+        "workflow-items";
+
+    category.platforms.forEach(platform => {
+
+        const button =
+            document.createElement("button");
+
+        button.type = "button";
+
+        button.dataset.platform =
+            platform.id;
+
+        button.textContent =
+            platform.name;
+
+        items.appendChild(button);
+
+    });
+
+    wrapper.appendChild(items);
+
+    workflowToolArea.appendChild(wrapper);
+
+    updateWorkflowPath([
+        category.name
+    ]);
+
+}
+
+
+// =====================================
+// RENDER OPTIONS
+// =====================================
+
+function renderPlatformOptions(platform) {
+
+    if (!workflowToolArea) return;
+
+    if (workflowSidebarTitle) {
+        workflowSidebarTitle.textContent =
+            platform.name;
+    }
+
+    if (workflowBack) {
+        workflowBack.style.display =
+            "inline-flex";
+    }
+
+    workflowToolArea.innerHTML = "";
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.className =
+        "workflow-category dynamic-category";
+
+    const items =
+        document.createElement("div");
+
+    items.className =
+        "workflow-items";
+
+    platform.options.forEach(option => {
+
+        const button =
+            document.createElement("button");
+
+        button.type = "button";
+
+        button.dataset.option =
+            option;
+
+        button.textContent =
+            option;
+
+        items.appendChild(button);
+
+    });
+
+    wrapper.appendChild(items);
+
+    workflowToolArea.appendChild(wrapper);
+
+    updateWorkflowPath([
+        workflowData[currentCategory].name,
+        platform.name
+    ]);
+
+}
+
+
+// =====================================
+// PATH
+// =====================================
+
+function updateWorkflowPath(items) {
+
+    if (!workflowPathItems) return;
+
+    workflowPathItems.innerHTML = "";
+
+    items.forEach((item, index) => {
+
+        const span =
+            document.createElement("span");
+
+        span.className =
+            "workflow-path-item";
+
+        span.textContent =
+            item;
+
+        workflowPathItems.appendChild(span);
+
+        if (index < items.length - 1) {
+
+            const separator =
+                document.createElement("span");
+
+            separator.className =
+                "workflow-path-separator";
+
+            separator.textContent =
+                " → ";
+
+            workflowPathItems.appendChild(
+                separator
+            );
+
+        }
+
+    });
+
+}
+
+
+// =====================================
+// BACK BUTTON
+// =====================================
+
+if (workflowBack) {
+
+    workflowBack.addEventListener(
+        "click",
+        function() {
+
+            if (currentLevel === "options") {
+
+                const category =
+                    workflowData[currentCategory];
+
+                currentPlatform = null;
+                currentLevel = "platforms";
+
+                renderPlatforms(category);
+
+                return;
+            }
+
+
+            if (currentLevel === "platforms") {
+
+                currentCategory = null;
+                currentPlatform = null;
+                currentLevel = "main";
+
+                restoreMainCategories();
+
+            }
+
+        }
+    );
+
+}
+
+
+// =====================================
+// RESTORE CATEGORIES
+// =====================================
+
+function restoreMainCategories() {
+
+    if (!workflowToolArea) return;
+
+    if (workflowSidebarTitle) {
+
+        workflowSidebarTitle.textContent =
+            "What do you want to automate?";
+
+    }
+
+    if (workflowBack) {
+
+        workflowBack.style.display =
+            "none";
+
+    }
+
+    workflowToolArea.innerHTML = `
+
+        <div
+            class="workflow-category dynamic-category"
+            data-level="main"
+        >
+
+            <div class="workflow-items">
+
+                <button type="button" data-category="social">
+                    Social Media
+                </button>
+
+                <button type="button" data-category="crm">
+                    CRM
+                </button>
+
+                <button type="button" data-category="website">
+                    Website
+                </button>
+
+                <button type="button" data-category="ecommerce">
+                    E-commerce
+                </button>
+
+                <button type="button" data-category="communication">
+                    Communication
+                </button>
+
+                <button type="button" data-category="ai">
+                    AI
+                </button>
+
+                <button type="button" data-category="voice">
+                    Voice AI
+                </button>
+
+                <button type="button" data-category="automation">
+                    Automation
+                </button>
+
+                <button type="button" data-category="marketing">
+                    Marketing
+                </button>
+
+                <button type="button" data-category="operations">
+                    Operations
+                </button>
+
+                <button type="button" data-category="payments">
+                    Payments
+                </button>
+
+                <button type="button" data-category="data">
+                    Data & Productivity
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+    if (workflowPathItems) {
+
+        workflowPathItems.textContent =
+            "Nothing selected yet";
+
+    }
+
+}
+
+
+// =====================================
+// ADD WORKFLOW NODE
+// =====================================
+
+function addWorkflowNode(data) {
+
+    if (!workflowNodes) return;
+
+    const nodeName =
+        data.platform + " - " + data.option;
+
+
+    // Prevent duplicate
+    if (selectedNodes.includes(nodeName)) {
+        return;
+    }
+
+
+    selectedNodes.push(nodeName);
+
+
+    const empty =
+        workflowNodes.querySelector(
+            ".empty-workflow"
+        );
+
+    if (empty) {
+        empty.remove();
+    }
+
+
+    const node =
+        document.createElement("div");
+
+    node.className =
+        "workflow-node";
+
+    node.dataset.nodeName =
+        nodeName;
+
+
+    node.innerHTML = `
+
+        <div class="workflow-node-icon">
+            ⚡
+        </div>
+
+        <div class="workflow-node-content">
+
+            <strong>
+                ${data.platform}
+            </strong>
+
+            <span>
+                ${data.option}
+            </span>
+
+        </div>
+
+    `;
+
+
+    workflowNodes.appendChild(node);
+
+
+    if (
+        typeof makeNodeDraggable ===
+        "function"
+    ) {
+
+        makeNodeDraggable(node);
+
+    }
+
+
+    updateWorkflowEstimate();
+
+}
+
+
+// =====================================
+// PRICING
+// =====================================
+
+const workflowPricing = {
+
+    "Facebook - Leads": 300,
+    "Instagram - Messages": 250,
+    "LinkedIn - Leads": 400,
+    "YouTube - Videos": 350,
+
+    "HubSpot - Contacts": 300,
+    "HubSpot - Deals": 400,
+    "HubSpot - Pipelines": 450,
+
+    "OpenAI - Chat": 300,
+    "Claude - Chat": 300,
+    "Gemini - Chat": 300,
+
+    "Retell AI - Voice Agent": 600,
+    "Twilio - Make Call": 500,
+
+    "n8n - Workflow": 400,
+    "Zapier - Trigger": 350,
+    "Make - Scenario": 400,
+
+    "Stripe - Payment": 400,
+    "PayPal - Payment": 400
+
+};
+
+
+// =====================================
+// ESTIMATE
+// =====================================
+
+function updateWorkflowEstimate() {
+
+    let total = 0;
+
+    selectedNodes.forEach(node => {
+
+        total +=
+            workflowPricing[node] ||
+            250;
+
+    });
+
+
+    if (nodeCount) {
+
+        nodeCount.innerText =
+            selectedNodes.length;
+
+    }
+
+
+    if (priceEstimate) {
+
+        priceEstimate.innerText =
+            "$" + total;
+
+    }
+
+
+    if (!timelineEstimate) return;
+
+
+    if (selectedNodes.length === 0) {
+
+        timelineEstimate.innerText =
+            "—";
+
+    }
+
+    else if (selectedNodes.length <= 3) {
+
+        timelineEstimate.innerText =
+            "3-5 Days";
+
+    }
+
+    else if (selectedNodes.length <= 6) {
+
+        timelineEstimate.innerText =
+            "1-2 Weeks";
+
+    }
+
+    else {
+
+        timelineEstimate.innerText =
+            "2-4 Weeks";
+
+    }
+
+}
+
+
+// =====================================
+// CLEAR WORKFLOW
+// =====================================
+
+if (clearWorkflow) {
+
+    clearWorkflow.addEventListener(
+        "click",
+        function() {
+
+            selectedNodes = [];
+
+
+            if (workflowNodes) {
+
+                workflowNodes.innerHTML = `
+
+                    <div class="empty-workflow">
+                        Select tools from the left to start building your automation workflow.
+                    </div>
+
+                `;
+
+            }
+
+
+            updateWorkflowEstimate();
+
+        }
+    );
+
+}
+
+
+// =====================================
+// HEADER CALL TEXT
+// =====================================
+
+const callTexts = [
+
+    "Book Strategy Call",
+    "Dialing...",
+    "Ringing...",
+    "Connected",
+    "Let's Talk"
+
+];
+
+let callIndex = 0;
+
+const callText =
+    document.getElementById("callText");
+
+
+if (callText) {
+
+    setInterval(() => {
+
+        callIndex++;
+
+        if (
+            callIndex >=
+            callTexts.length
+        ) {
+
+            callIndex = 0;
+
+        }
+
+
+        callText.style.opacity = "0";
+
+        callText.style.transform =
+            "translateY(5px)";
+
+
+        setTimeout(() => {
+
+            callText.innerHTML =
+                callTexts[callIndex];
+
+            callText.style.opacity =
+                "1";
+
+            callText.style.transform =
+                "translateY(0)";
+
+        }, 300);
+
+    }, 2000);
+
+}
+
+
+// =====================================
+// WORKFLOW VIDEO POPUP
+// =====================================
+
+const videoButton =
+    document.querySelector(
+        ".new-tutorial-play"
+    );
+
+const modal =
+    document.getElementById(
+        "workflowVideoModal"
+    );
+
+const closeButton =
+    document.getElementById(
+        "workflowVideoClose"
+    );
+
+const backdrop =
+    document.querySelector(
+        ".workflow-video-backdrop"
+    );
+
+const video =
+    document.getElementById(
+        "workflowTutorialVideo"
+    );
+
+
+if (videoButton && modal) {
+
+    videoButton.addEventListener(
+        "click",
+        function() {
+
+            modal.classList.add(
+                "active"
+            );
+
+            document.body.style.overflow =
+                "hidden";
+
+
+            if (video) {
+
+                video.currentTime = 0;
+
+                video.play().catch(
+                    () => {}
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+function closeWorkflowVideo() {
+
+    if (!modal) return;
+
+    modal.classList.remove(
+        "active"
+    );
+
+    document.body.style.overflow =
+        "";
+
+
+    if (video) {
+
+        video.pause();
+
+        video.currentTime = 0;
+
+    }
+
+}
+
+
+if (closeButton) {
+
+    closeButton.addEventListener(
+        "click",
+        closeWorkflowVideo
+    );
+
+}
+
+
+if (backdrop) {
+
+    backdrop.addEventListener(
+        "click",
+        closeWorkflowVideo
+    );
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape" &&
+            modal &&
+            modal.classList.contains(
+                "active"
+            )
+        ) {
+
+            closeWorkflowVideo();
+
+        }
+
+    }
+);
+
+});    
+
 
