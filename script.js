@@ -1232,3 +1232,121 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
 });
+
+// =========================================
+// WORKFLOW STEP 1 — CATEGORY SELECTION
+// =========================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const toolArea = document.getElementById("workflowToolArea");
+    const pathItems = document.getElementById("workflowPathItems");
+
+    if (!toolArea || !pathItems) return;
+
+
+    // SELECTED CATEGORIES
+    const selectedCategories = [];
+
+
+    // CATEGORY CLICK
+    toolArea.addEventListener("click", function (event) {
+
+        const button = event.target.closest(
+            ".workflow-items button[data-category]"
+        );
+
+        if (!button) return;
+
+
+        const category = button.dataset.category;
+        const categoryName = button.textContent.trim();
+
+
+        // -----------------------------------------
+        // TOGGLE SELECTION
+        // -----------------------------------------
+
+        const existingIndex =
+            selectedCategories.findIndex(
+                item => item.id === category
+            );
+
+
+        if (existingIndex !== -1) {
+
+            // REMOVE
+            selectedCategories.splice(
+                existingIndex,
+                1
+            );
+
+            button.classList.remove(
+                "selected"
+            );
+
+        } else {
+
+            // ADD
+            selectedCategories.push({
+                id: category,
+                name: categoryName
+            });
+
+            button.classList.add(
+                "selected"
+            );
+
+        }
+
+
+        // -----------------------------------------
+        // UPDATE YOUR SELECTION
+        // -----------------------------------------
+
+        updateWorkflowSelection();
+
+    });
+
+
+    // =========================================
+    // UPDATE SELECTION DISPLAY
+    // =========================================
+
+    function updateWorkflowSelection() {
+
+        if (selectedCategories.length === 0) {
+
+            pathItems.textContent =
+                "Nothing selected yet";
+
+            pathItems.classList.remove(
+                "has-selection"
+            );
+
+            return;
+        }
+
+
+        pathItems.classList.add(
+            "has-selection"
+        );
+
+
+        pathItems.innerHTML =
+            selectedCategories
+                .map(function (item) {
+
+                    return `
+                        <span class="workflow-selected-item">
+                            ${item.name}
+                        </span>
+                    `;
+
+                })
+                .join("");
+
+
+    }
+
+});
