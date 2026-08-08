@@ -1711,6 +1711,39 @@ JAVASCRIPT
 <script src="knowledge.js"></script>
 <script src="script.js"></script>
 
+<!-- =========================================
+     VIDEO POPUP
+========================================= -->
+
+<div class="workflow-video-modal" id="workflowVideoModal">
+
+    <div class="workflow-video-backdrop"></div>
+
+    <div class="workflow-video-modal-box">
+
+        <button
+            class="workflow-video-close"
+            id="workflowVideoClose"
+            type="button"
+            aria-label="Close video"
+        >
+            ×
+        </button>
+
+        <video
+            id="workflowTutorialVideo"
+            controls
+            playsinline
+            preload="metadata"
+        >
+            <!-- YAHAN APNI VIDEO FILE KA PATH DALO -->
+            <source src="assets/workflow-tutorial.mp4" type="video/mp4">
+        </video>
+
+    </div>
+
+</div>
+
 </body>
 
 </html>
