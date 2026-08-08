@@ -2,204 +2,713 @@
 // AWSZ WEBSITE SCRIPT
 // =====================================
 
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", () => {
 
 
 // =====================================
 // MEGA MENU
 // =====================================
 
-const megaParent=document.querySelector(".mega-parent");
-const megaMenu=document.querySelector(".mega-menu");
+const megaParent = document.querySelector(".mega-parent");
+const megaMenu = document.querySelector(".mega-menu");
 
+if (megaParent && megaMenu) {
 
-if(megaParent && megaMenu){
+    let timer;
 
-let timer;
+    megaParent.addEventListener("mouseenter", () => {
 
+        clearTimeout(timer);
 
-megaParent.addEventListener("mouseenter",()=>{
+        megaMenu.classList.add("active");
 
-clearTimeout(timer);
+    });
 
-megaMenu.classList.add("active");
+    megaParent.addEventListener("mouseleave", () => {
 
-});
+        timer = setTimeout(() => {
 
+            megaMenu.classList.remove("active");
 
-megaParent.addEventListener("mouseleave",()=>{
+        }, 250);
 
-timer=setTimeout(()=>{
+    });
 
-megaMenu.classList.remove("active");
+    megaMenu.addEventListener("mouseenter", () => {
 
-},250);
+        clearTimeout(timer);
 
-});
+    });
 
+    megaMenu.addEventListener("mouseleave", () => {
 
-megaMenu.addEventListener("mouseenter",()=>{
+        timer = setTimeout(() => {
 
-clearTimeout(timer);
+            megaMenu.classList.remove("active");
 
-});
+        }, 250);
 
-
-megaMenu.addEventListener("mouseleave",()=>{
-
-timer=setTimeout(()=>{
-
-megaMenu.classList.remove("active");
-
-},250);
-
-});
-
+    });
 
 }
+
 
 // =====================================
 // SOLUTIONS MEGA MENU SWITCH
 // =====================================
 
+const categories =
+    document.querySelectorAll(".category");
 
-const categories = document.querySelectorAll(".category");
+const contentBoxes =
+    document.querySelectorAll(".content-box");
 
-const contentBoxes = document.querySelectorAll(".content-box");
+categories.forEach(category => {
 
+    category.addEventListener("click", () => {
 
-categories.forEach(category=>{
+        categories.forEach(item => {
 
+            item.classList.remove("active");
 
-category.addEventListener("click",()=>{
+        });
 
-
-// remove active from all categories
-
-categories.forEach(item=>{
-
-item.classList.remove("active");
-
-});
+        category.classList.add("active");
 
 
-// add active clicked category
+        contentBoxes.forEach(box => {
 
-category.classList.add("active");
+            box.classList.remove("active");
 
-
-
-// hide all content
-
-contentBoxes.forEach(box=>{
-
-box.classList.remove("active");
-
-});
+        });
 
 
+        const target =
+            category.dataset.content;
 
-// show selected content
+        const selectedContent =
+            document.getElementById(target);
 
-const target = category.dataset.content;
+        if (selectedContent) {
 
+            selectedContent.classList.add("active");
 
-const selectedContent = document.getElementById(target);
+        }
 
-
-if(selectedContent){
-
-selectedContent.classList.add("active");
-
-}
-
+    });
 
 });
 
-
-});
 
 // =====================================
 // MOBILE MENU
 // =====================================
 
+const menuBtn =
+    document.querySelector(".menu-toggle");
 
-const menuBtn=document.querySelector(".menu-toggle");
+const nav =
+    document.querySelector(".nav-links");
 
-const nav=document.querySelector(".nav-links");
+if (menuBtn && nav) {
 
+    menuBtn.onclick = () => {
 
-if(menuBtn && nav){
+        nav.classList.toggle("show");
 
-menuBtn.onclick=()=>{
-
-nav.classList.toggle("show");
-
-};
+    };
 
 }
-
-
 
 
 // =====================================
 // VIDEO CARDS
 // =====================================
 
+const cards =
+    document.querySelectorAll(".video-card");
 
-const cards=document.querySelectorAll(".video-card");
+cards.forEach(card => {
 
+    const video =
+        card.querySelector("video");
 
-cards.forEach(card=>{
-
-
-const video=card.querySelector("video");
-
-
-if(!video)return;
+    if (!video) return;
 
 
+    card.onclick = () => {
 
-card.onclick=()=>{
+        cards.forEach(c => {
+
+            const v =
+                c.querySelector("video");
+
+            if (v && v !== video) {
+
+                v.pause();
+                v.currentTime = 0;
+
+            }
+
+        });
 
 
-cards.forEach(c=>{
+        if (video.paused) {
 
+            video.play();
 
-const v=c.querySelector("video");
+        } else {
 
+            video.pause();
 
-if(v && v!==video){
+        }
 
-v.pause();
-
-v.currentTime=0;
-
-}
-
+    };
 
 });
 
 
+// =====================================
+// AI ECOSYSTEM
+// =====================================
 
-if(video.paused){
+const ecoNodes =
+    document.querySelectorAll(".eco-node");
 
-video.play();
 
-}
+const ecoData = {
 
-else{
+    sales: {
 
-video.pause();
+        department: "Sales Department",
 
-}
+        title:
+            "Turn Your Sales Process Into an AI-Powered System",
 
+        description:
+            "Automatically capture and qualify leads, book meetings, update your CRM, follow up with prospects and keep your sales pipeline moving without the manual work.",
+
+        features: [
+            "Lead Qualification",
+            "Lead Follow-Ups",
+            "Meeting Booking",
+            "CRM Automation",
+            "Proposal Generation",
+            "Pipeline Management"
+        ],
+
+        stats: {
+
+            stat1: "18 hrs",
+            stat1Label: "Saved Every Week",
+
+            stat2: "+32%",
+            stat2Label: "Sales Efficiency",
+
+            stat3: "24/7",
+            stat3Label: "Automation"
+
+        },
+
+        button:
+            "Explore Sales Automation"
+
+    },
+
+
+    marketing: {
+
+        department: "Marketing Department",
+
+        title:
+            "Turn Your Marketing Into an Automated Growth Engine",
+
+        description:
+            "Automate content workflows, campaign follow-ups, lead nurturing and reporting so your marketing keeps moving without constant manual work.",
+
+        features: [
+            "Content Automation",
+            "Lead Nurturing",
+            "Email Campaigns",
+            "Social Media Workflows",
+            "Campaign Reporting",
+            "Lead Retargeting"
+        ],
+
+        stats: {
+
+            stat1: "12 hrs",
+            stat1Label: "Saved Every Week",
+
+            stat2: "+41%",
+            stat2Label: "Lead Engagement",
+
+            stat3: "24/7",
+            stat3Label: "Campaign Automation"
+
+        },
+
+        button:
+            "Explore Marketing Automation"
+
+    },
+
+
+    support: {
+
+        department: "Support Department",
+
+        title:
+            "Give Your Customers Instant AI-Powered Support",
+
+        description:
+            "Use AI chat, WhatsApp automation and intelligent support workflows to answer customers faster and reduce repetitive support work.",
+
+        features: [
+            "AI Chat Support",
+            "WhatsApp Automation",
+            "Instant Replies",
+            "Ticket Management",
+            "Knowledge Base",
+            "Customer Follow-Ups"
+        ],
+
+        stats: {
+
+            stat1: "20 hrs",
+            stat1Label: "Saved Every Week",
+
+            stat2: "-45%",
+            stat2Label: "Support Workload",
+
+            stat3: "24/7",
+            stat3Label: "Customer Support"
+
+        },
+
+        button:
+            "Explore Support Automation"
+
+    },
+
+
+    operations: {
+
+        department: "Operations Department",
+
+        title:
+            "Automate the Work That Slows Your Business Down",
+
+        description:
+            "Connect your tools and automate repetitive operational tasks, data entry, notifications and internal workflows so your team can work more efficiently.",
+
+        features: [
+            "Workflow Automation",
+            "Data Entry",
+            "Task Management",
+            "System Integrations",
+            "Internal Notifications",
+            "Process Automation"
+        ],
+
+        stats: {
+
+            stat1: "25 hrs",
+            stat1Label: "Saved Every Week",
+
+            stat2: "-38%",
+            stat2Label: "Manual Work",
+
+            stat3: "24/7",
+            stat3Label: "Workflow Automation"
+
+        },
+
+        button:
+            "Explore Operations Automation"
+
+    },
+
+
+    finance: {
+
+        department: "Finance Department",
+
+        title:
+            "Make Financial Operations Faster and More Accurate",
+
+        description:
+            "Automate repetitive finance workflows, reporting, notifications and data processing while keeping your financial operations organized and efficient.",
+
+        features: [
+            "Invoice Automation",
+            "Payment Notifications",
+            "Financial Reports",
+            "Data Processing",
+            "Expense Tracking",
+            "Client Billing"
+        ],
+
+        stats: {
+
+            stat1: "15 hrs",
+            stat1Label: "Saved Every Week",
+
+            stat2: "-30%",
+            stat2Label: "Manual Processing",
+
+            stat3: "24/7",
+            stat3Label: "Financial Workflows"
+
+        },
+
+        button:
+            "Explore Finance Automation"
+
+    },
+
+
+    hr: {
+
+        department: "Human Resources",
+
+        title:
+            "Automate Repetitive HR Tasks and Employee Workflows",
+
+        description:
+            "Streamline recruitment, onboarding, employee communication and repetitive HR processes with intelligent automation.",
+
+        features: [
+            "Candidate Screening",
+            "Interview Scheduling",
+            "Employee Onboarding",
+            "HR Notifications",
+            "Document Workflows",
+            "Employee Follow-Ups"
+        ],
+
+        stats: {
+
+            stat1: "14 hrs",
+            stat1Label: "Saved Every Week",
+
+            stat2: "+35%",
+            stat2Label: "Hiring Efficiency",
+
+            stat3: "24/7",
+            stat3Label: "HR Automation"
+
+        },
+
+        button:
+            "Explore HR Automation"
+
+    }
 
 };
 
 
+ecoNodes.forEach(node => {
+
+    node.addEventListener("click", () => {
+
+        const data =
+            ecoData[node.dataset.id];
+
+        if (!data) return;
+
+
+        ecoNodes.forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+        node.classList.add("active");
+
+
+        const department =
+            document.querySelector(
+                ".department-name"
+            );
+
+        if (department) {
+
+            department.innerHTML =
+                data.department;
+
+        }
+
+
+        const title =
+            document.getElementById("ecoTitle");
+
+        if (title) {
+
+            title.innerHTML =
+                data.title;
+
+        }
+
+
+        const description =
+            document.getElementById(
+                "ecoDescription"
+            );
+
+        if (description) {
+
+            description.innerHTML =
+                data.description;
+
+        }
+
+
+        const featureBox =
+            document.getElementById(
+                "ecoFeatures"
+            );
+
+        if (featureBox) {
+
+            featureBox.innerHTML = "";
+
+            data.features.forEach(feature => {
+
+                featureBox.innerHTML += `
+                    <div>
+                        <i class="fa-solid fa-check"></i>
+                        ${feature}
+                    </div>
+                `;
+
+            });
+
+        }
+
+
+        const stat1 =
+            document.getElementById("stat1");
+
+        if (stat1) {
+
+            stat1.innerHTML =
+                data.stats.stat1;
+
+        }
+
+
+        const stat1Label =
+            stat1
+                ? stat1.parentElement.querySelector("span")
+                : null;
+
+        if (stat1Label) {
+
+            stat1Label.innerHTML =
+                data.stats.stat1Label;
+
+        }
+
+
+        const stat2 =
+            document.getElementById("stat2");
+
+        if (stat2) {
+
+            stat2.innerHTML =
+                data.stats.stat2;
+
+        }
+
+
+        const stat2Label =
+            stat2
+                ? stat2.parentElement.querySelector("span")
+                : null;
+
+        if (stat2Label) {
+
+            stat2Label.innerHTML =
+                data.stats.stat2Label;
+
+        }
+
+
+        const stat3 =
+            document.getElementById("stat3");
+
+        if (stat3) {
+
+            stat3.innerHTML =
+                data.stats.stat3;
+
+        }
+
+
+        const stat3Label =
+            stat3
+                ? stat3.parentElement.querySelector("span")
+                : null;
+
+        if (stat3Label) {
+
+            stat3Label.innerHTML =
+                data.stats.stat3Label;
+
+        }
+
+
+        const button =
+            document.querySelector(
+                ".ecosystem-btn"
+            );
+
+        if (button) {
+
+            button.innerHTML =
+                data.button;
+
+        }
+
+    });
+
 });
 
+
+// =====================================
+// TETA AI
+// =====================================
+
+const questionEl =
+    document.getElementById("question");
+
+const optionsEl =
+    document.getElementById("options");
+
+
+if (
+    window.tetaKnowledge &&
+    questionEl &&
+    optionsEl
+) {
+
+    function startTeta() {
+
+        loadNode("start");
+
+    }
+
+
+    function loadNode(nodeName) {
+
+        const node =
+            window.tetaKnowledge[nodeName];
+
+        if (!node) return;
+
+
+        questionEl.innerHTML =
+            node.question;
+
+        optionsEl.innerHTML = "";
+
+
+        node.options.forEach(item => {
+
+            const btn =
+                document.createElement("button");
+
+            btn.textContent =
+                item.text;
+
+
+            btn.onclick = () => {
+
+                if (item.next) {
+
+                    loadNode(item.next);
+
+                }
+
+                else if (item.solution) {
+
+                    showSolution(item.solution);
+
+                }
+
+            };
+
+
+            optionsEl.appendChild(btn);
+
+        });
+
+    }
+
+
+    function showSolution(text) {
+
+        questionEl.innerHTML =
+            "Recommended AI Solution";
+
+        optionsEl.innerHTML = `
+            <button id="restartTeta">
+                Explore Another Solution
+            </button>
+
+            <button id="bookCall">
+                Book Free AI Strategy Call
+            </button>
+        `;
+
+
+        const restart =
+            document.getElementById(
+                "restartTeta"
+            );
+
+        if (restart) {
+
+            restart.onclick =
+                startTeta;
+
+        }
+
+
+        const book =
+            document.getElementById(
+                "bookCall"
+            );
+
+        if (book) {
+
+            book.onclick =
+                showLeadForm;
+
+        }
+
+    }
+
+
+    function showLeadForm() {
+
+        questionEl.innerHTML =
+            "Let's build your AI solution";
+
+        optionsEl.innerHTML = `
+            <button>
+                Submit Request
+            </button>
+        `;
+
+    }
+
+
+    startTeta();
+
+}
 
 // =====================================
 // AI ECOSYSTEM
@@ -415,12 +924,16 @@ const ecoData = {
 };
 
 
+// =====================================
+// AI ECOSYSTEM CLICK
+// =====================================
 
 ecoNodes.forEach(node => {
 
     node.addEventListener("click", () => {
 
-        const data = ecoData[node.dataset.id];
+        const data =
+            ecoData[node.dataset.id];
 
         if (!data) return;
 
@@ -439,142 +952,214 @@ ecoNodes.forEach(node => {
         node.classList.add("active");
 
 
-        // Department name
+        // =====================================
+        // DEPARTMENT
+        // =====================================
 
-        const department = document.querySelector(".department-name");
+        const department =
+            document.querySelector(
+                ".department-name"
+            );
 
         if (department) {
 
-            department.innerHTML = data.department;
+            department.innerHTML =
+                data.department;
 
         }
 
 
-        // Main heading
+        // =====================================
+        // TITLE
+        // =====================================
 
-        const title = document.getElementById("ecoTitle");
+        const title =
+            document.getElementById(
+                "ecoTitle"
+            );
 
         if (title) {
 
-            title.innerHTML = data.title;
+            title.innerHTML =
+                data.title;
 
         }
 
 
-        // Description
+        // =====================================
+        // DESCRIPTION
+        // =====================================
 
-        const description = document.getElementById("ecoDescription");
+        const description =
+            document.getElementById(
+                "ecoDescription"
+            );
 
         if (description) {
 
-            description.innerHTML = data.description;
+            description.innerHTML =
+                data.description;
 
         }
 
 
-        // Features
+        // =====================================
+        // FEATURES
+        // =====================================
 
-        const featureBox = document.getElementById("ecoFeatures");
+        const featureBox =
+            document.getElementById(
+                "ecoFeatures"
+            );
 
         if (featureBox) {
 
             featureBox.innerHTML = "";
 
-            data.features.forEach(feature => {
+            data.features.forEach(
+                feature => {
 
-                featureBox.innerHTML += `
+                    const featureItem =
+                        document.createElement(
+                            "div"
+                        );
 
-                    <div>
+                    featureItem.innerHTML = `
                         <i class="fa-solid fa-check"></i>
                         ${feature}
-                    </div>
+                    `;
 
-                `;
+                    featureBox.appendChild(
+                        featureItem
+                    );
 
-            });
+                }
+            );
 
         }
 
 
+        // =====================================
         // STAT 1
+        // =====================================
 
-        const stat1 = document.getElementById("stat1");
+        const stat1 =
+            document.getElementById(
+                "stat1"
+            );
 
         if (stat1) {
 
-            stat1.innerHTML = data.stats.stat1;
+            stat1.innerHTML =
+                data.stats.stat1;
 
         }
 
 
+        // =====================================
         // STAT 1 LABEL
+        // =====================================
 
-        const stat1Label = stat1
-            ? stat1.parentElement.querySelector("span")
-            : null;
+        const stat1Label =
+            stat1
+                ? stat1.parentElement.querySelector(
+                    "span"
+                )
+                : null;
 
         if (stat1Label) {
 
-            stat1Label.innerHTML = data.stats.stat1Label;
+            stat1Label.innerHTML =
+                data.stats.stat1Label;
 
         }
 
 
+        // =====================================
         // STAT 2
+        // =====================================
 
-        const stat2 = document.getElementById("stat2");
+        const stat2 =
+            document.getElementById(
+                "stat2"
+            );
 
         if (stat2) {
 
-            stat2.innerHTML = data.stats.stat2;
+            stat2.innerHTML =
+                data.stats.stat2;
 
         }
 
 
+        // =====================================
         // STAT 2 LABEL
+        // =====================================
 
-        const stat2Label = stat2
-            ? stat2.parentElement.querySelector("span")
-            : null;
+        const stat2Label =
+            stat2
+                ? stat2.parentElement.querySelector(
+                    "span"
+                )
+                : null;
 
         if (stat2Label) {
 
-            stat2Label.innerHTML = data.stats.stat2Label;
+            stat2Label.innerHTML =
+                data.stats.stat2Label;
 
         }
 
 
+        // =====================================
         // STAT 3
+        // =====================================
 
-        const stat3 = document.getElementById("stat3");
+        const stat3 =
+            document.getElementById(
+                "stat3"
+            );
 
         if (stat3) {
 
-            stat3.innerHTML = data.stats.stat3;
+            stat3.innerHTML =
+                data.stats.stat3;
 
         }
 
 
+        // =====================================
         // STAT 3 LABEL
+        // =====================================
 
-        const stat3Label = stat3
-            ? stat3.parentElement.querySelector("span")
-            : null;
+        const stat3Label =
+            stat3
+                ? stat3.parentElement.querySelector(
+                    "span"
+                )
+                : null;
 
         if (stat3Label) {
 
-            stat3Label.innerHTML = data.stats.stat3Label;
+            stat3Label.innerHTML =
+                data.stats.stat3Label;
 
         }
 
 
+        // =====================================
         // BUTTON
+        // =====================================
 
-        const button = document.querySelector(".ecosystem-btn");
+        const button =
+            document.querySelector(
+                ".ecosystem-btn"
+            );
 
         if (button) {
 
-            button.innerHTML = data.button;
+            button.innerHTML =
+                data.button;
 
         }
 
@@ -583,173 +1168,230 @@ ecoNodes.forEach(node => {
 });
 
 
-
 // =====================================
 // TETA AI
 // =====================================
 
-const questionEl=document.getElementById("question");
+const questionEl =
+    document.getElementById(
+        "question"
+    );
 
-const optionsEl=document.getElementById("options");
+const optionsEl =
+    document.getElementById(
+        "options"
+    );
 
 
-if(window.tetaKnowledge && questionEl && optionsEl){
+if (
+    window.tetaKnowledge &&
+    questionEl &&
+    optionsEl
+) {
 
 
-function startTeta(){
+    // =====================================
+    // START TETA
+    // =====================================
 
-loadNode("start");
+    function startTeta() {
+
+        loadNode("start");
+
+    }
+
+
+    // =====================================
+    // LOAD TETA NODE
+    // =====================================
+
+    function loadNode(nodeName) {
+
+        const node =
+            window.tetaKnowledge[
+                nodeName
+            ];
+
+        if (!node) return;
+
+
+        questionEl.innerHTML =
+            node.question;
+
+        optionsEl.innerHTML = "";
+
+
+        node.options.forEach(item => {
+
+            const btn =
+                document.createElement(
+                    "button"
+                );
+
+            btn.type = "button";
+
+            btn.textContent =
+                item.text;
+
+
+            btn.onclick = () => {
+
+                if (item.next) {
+
+                    loadNode(
+                        item.next
+                    );
+
+                }
+
+                else if (item.solution) {
+
+                    showSolution(
+                        item.solution
+                    );
+
+                }
+
+            };
+
+
+            optionsEl.appendChild(
+                btn
+            );
+
+        });
+
+    }
+
+
+    // =====================================
+    // SHOW SOLUTION
+    // =====================================
+
+    function showSolution(text) {
+
+        questionEl.innerHTML =
+            "Recommended AI Solution";
+
+
+        optionsEl.innerHTML = `
+
+            <div class="teta-solution">
+                ${text}
+            </div>
+
+            <button
+                type="button"
+                id="restartTeta"
+            >
+                Explore Another Solution
+            </button>
+
+            <button
+                type="button"
+                id="bookCall"
+            >
+                Book Free AI Strategy Call
+            </button>
+
+        `;
+
+
+        const restart =
+            document.getElementById(
+                "restartTeta"
+            );
+
+        if (restart) {
+
+            restart.onclick =
+                startTeta;
+
+        }
+
+
+        const book =
+            document.getElementById(
+                "bookCall"
+            );
+
+        if (book) {
+
+            book.onclick =
+                showLeadForm;
+
+        }
+
+    }
+
+
+    // =====================================
+    // SHOW LEAD FORM
+    // =====================================
+
+    function showLeadForm() {
+
+        questionEl.innerHTML =
+            "Let's build your AI solution";
+
+
+        optionsEl.innerHTML = `
+
+            <button
+                type="button"
+                id="submitTetaRequest"
+            >
+                Submit Request
+            </button>
+
+        `;
+
+    }
+
+
+    // =====================================
+    // START
+    // =====================================
+
+    startTeta();
 
 }
-
-
-
-function loadNode(nodeName){
-
-const node=window.tetaKnowledge[nodeName];
-
-
-if(!node)return;
-
-
-questionEl.innerHTML=node.question;
-
-optionsEl.innerHTML="";
-
-
-
-node.options.forEach(item=>{
-
-
-const btn=document.createElement("button");
-
-
-btn.textContent=item.text;
-
-
-
-btn.onclick=()=>{
-
-
-if(item.next){
-
-loadNode(item.next);
-
-}
-
-else if(item.solution){
-
-showSolution(item.solution);
-
-}
-
-
-};
-
-
-
-optionsEl.appendChild(btn);
-
-
-
-});
-
-
-}
-
-
-
-
-function showSolution(text){
-
-
-questionEl.innerHTML="Recommended AI Solution";
-
-
-optionsEl.innerHTML=`
-
-Explore Another Solution
-
-Book Free AI Strategy Call
-
-`;
-
-
-
-const restart=document.getElementById("restartTeta");
-
-
-if(restart){
-
-restart.onclick=startTeta;
-
-}
-
-
-
-const book=document.getElementById("bookCall");
-
-
-if(book){
-
-book.onclick=showLeadForm;
-
-}
-
-
-
-}
-
-
-
-
-function showLeadForm(){
-
-
-questionEl.innerHTML="Let's build your AI solution";
-
-
-optionsEl.innerHTML=`
-
-Submit Request
-
-`;
-
-
-
-}
-
-
-
-startTeta();
-
-
-
-}
-
-
-
-
 
 // =====================================
 // AI WORKFLOW BUILDER
 // =====================================
 
+const workflowToolArea =
+    document.getElementById("workflowToolArea");
+
+const workflowPathItems =
+    document.getElementById("workflowPathItems");
+
+const workflowBack =
+    document.getElementById("workflowBack");
+
+const workflowSidebarTitle =
+    document.getElementById("workflowSidebarTitle");
+
+const workflowNodes =
+    document.getElementById("workflowNodes");
+
+const clearWorkflow =
+    document.getElementById("clearWorkflow");
+
+const nodeCount =
+    document.getElementById("nodeCount");
+
+const priceEstimate =
+    document.getElementById("priceEstimate");
+
+const timelineEstimate =
+    document.getElementById("timelineEstimate");
+
+
 // =====================================
-// AI WORKFLOW BUILDER
+// SELECTED WORKFLOW NODES
 // =====================================
-
-const workflowToolArea = document.getElementById("workflowToolArea");
-const workflowPathItems = document.getElementById("workflowPathItems");
-const workflowBack = document.getElementById("workflowBack");
-const workflowSidebarTitle = document.getElementById("workflowSidebarTitle");
-
-const workflowNodes = document.getElementById("workflowNodes");
-const clearWorkflow = document.getElementById("clearWorkflow");
-
-const nodeCount = document.getElementById("nodeCount");
-const priceEstimate = document.getElementById("priceEstimate");
-const timelineEstimate = document.getElementById("timelineEstimate");
 
 let selectedNodes = [];
 
@@ -761,11 +1403,16 @@ let selectedNodes = [];
 const workflowData = {
 
     crm: {
+
         name: "CRM",
+
         platforms: [
+
             {
                 id: "hubspot",
+
                 name: "HubSpot",
+
                 options: [
                     "Contacts",
                     "Companies",
@@ -777,9 +1424,12 @@ const workflowData = {
                     "Emails"
                 ]
             },
+
             {
                 id: "gohighlevel",
+
                 name: "GoHighLevel",
+
                 options: [
                     "Contacts",
                     "Opportunities",
@@ -791,9 +1441,12 @@ const workflowData = {
                     "Campaigns"
                 ]
             },
+
             {
                 id: "zoho",
+
                 name: "Zoho CRM",
+
                 options: [
                     "Leads",
                     "Contacts",
@@ -803,15 +1456,23 @@ const workflowData = {
                     "Workflows"
                 ]
             }
+
         ]
+
     },
 
+
     social: {
+
         name: "Social Media",
+
         platforms: [
+
             {
                 id: "facebook",
+
                 name: "Facebook",
+
                 options: [
                     "Posts",
                     "Comments",
@@ -821,9 +1482,12 @@ const workflowData = {
                     "Ads"
                 ]
             },
+
             {
                 id: "instagram",
+
                 name: "Instagram",
+
                 options: [
                     "Posts",
                     "Comments",
@@ -832,9 +1496,12 @@ const workflowData = {
                     "Media"
                 ]
             },
+
             {
                 id: "linkedin",
+
                 name: "LinkedIn",
+
                 options: [
                     "Posts",
                     "Messages",
@@ -842,9 +1509,12 @@ const workflowData = {
                     "Company Pages"
                 ]
             },
+
             {
                 id: "tiktok",
+
                 name: "TikTok",
+
                 options: [
                     "Videos",
                     "Comments",
@@ -852,9 +1522,12 @@ const workflowData = {
                     "Leads"
                 ]
             },
+
             {
                 id: "youtube",
+
                 name: "YouTube",
+
                 options: [
                     "Videos",
                     "Comments",
@@ -862,15 +1535,23 @@ const workflowData = {
                     "Subscribers"
                 ]
             }
+
         ]
+
     },
 
+
     website: {
+
         name: "Website",
+
         platforms: [
+
             {
                 id: "wordpress",
+
                 name: "WordPress",
+
                 options: [
                     "Posts",
                     "Pages",
@@ -880,9 +1561,12 @@ const workflowData = {
                     "Media"
                 ]
             },
+
             {
                 id: "shopify",
+
                 name: "Shopify",
+
                 options: [
                     "Products",
                     "Orders",
@@ -891,9 +1575,12 @@ const workflowData = {
                     "Discounts"
                 ]
             },
+
             {
                 id: "webflow",
+
                 name: "Webflow",
+
                 options: [
                     "CMS",
                     "Forms",
@@ -901,15 +1588,23 @@ const workflowData = {
                     "Items"
                 ]
             }
+
         ]
+
     },
 
+
     ecommerce: {
+
         name: "E-commerce",
+
         platforms: [
+
             {
                 id: "shopify",
+
                 name: "Shopify",
+
                 options: [
                     "Products",
                     "Orders",
@@ -919,9 +1614,12 @@ const workflowData = {
                     "Discounts"
                 ]
             },
+
             {
                 id: "woocommerce",
+
                 name: "WooCommerce",
+
                 options: [
                     "Products",
                     "Orders",
@@ -930,15 +1628,23 @@ const workflowData = {
                     "Inventory"
                 ]
             }
+
         ]
+
     },
 
+
     communication: {
+
         name: "Communication",
+
         platforms: [
+
             {
                 id: "gmail",
+
                 name: "Gmail",
+
                 options: [
                     "Send Email",
                     "Receive Email",
@@ -947,9 +1653,12 @@ const workflowData = {
                     "Labels"
                 ]
             },
+
             {
                 id: "slack",
+
                 name: "Slack",
+
                 options: [
                     "Send Message",
                     "Channels",
@@ -957,9 +1666,12 @@ const workflowData = {
                     "Files"
                 ]
             },
+
             {
                 id: "teams",
+
                 name: "Microsoft Teams",
+
                 options: [
                     "Messages",
                     "Channels",
@@ -967,15 +1679,23 @@ const workflowData = {
                     "Meetings"
                 ]
             }
+
         ]
+
     },
 
+
     ai: {
+
         name: "AI",
+
         platforms: [
+
             {
                 id: "openai",
+
                 name: "OpenAI",
+
                 options: [
                     "Chat",
                     "Text Generation",
@@ -984,9 +1704,12 @@ const workflowData = {
                     "Analysis"
                 ]
             },
+
             {
                 id: "claude",
+
                 name: "Claude",
+
                 options: [
                     "Chat",
                     "Text Generation",
@@ -994,9 +1717,12 @@ const workflowData = {
                     "Documents"
                 ]
             },
+
             {
                 id: "gemini",
+
                 name: "Gemini",
+
                 options: [
                     "Chat",
                     "Text Generation",
@@ -1004,15 +1730,23 @@ const workflowData = {
                     "Analysis"
                 ]
             }
+
         ]
+
     },
 
+
     voice: {
+
         name: "Voice AI",
+
         platforms: [
+
             {
                 id: "retell",
+
                 name: "Retell AI",
+
                 options: [
                     "Voice Agent",
                     "Make Call",
@@ -1021,9 +1755,12 @@ const workflowData = {
                     "Analysis"
                 ]
             },
+
             {
                 id: "twilio",
+
                 name: "Twilio",
+
                 options: [
                     "Make Call",
                     "Send SMS",
@@ -1031,15 +1768,23 @@ const workflowData = {
                     "Phone Numbers"
                 ]
             }
+
         ]
+
     },
 
+
     automation: {
+
         name: "Automation",
+
         platforms: [
+
             {
                 id: "n8n",
+
                 name: "n8n",
+
                 options: [
                     "Workflow",
                     "HTTP Request",
@@ -1048,9 +1793,12 @@ const workflowData = {
                     "Google Sheets"
                 ]
             },
+
             {
                 id: "zapier",
+
                 name: "Zapier",
+
                 options: [
                     "Trigger",
                     "Action",
@@ -1058,9 +1806,12 @@ const workflowData = {
                     "Formatter"
                 ]
             },
+
             {
                 id: "make",
+
                 name: "Make",
+
                 options: [
                     "Scenario",
                     "Webhook",
@@ -1068,15 +1819,23 @@ const workflowData = {
                     "HTTP"
                 ]
             }
+
         ]
+
     },
 
+
     marketing: {
+
         name: "Marketing",
+
         platforms: [
+
             {
                 id: "meta",
+
                 name: "Meta Ads",
+
                 options: [
                     "Campaigns",
                     "Ad Sets",
@@ -1085,9 +1844,12 @@ const workflowData = {
                     "Audiences"
                 ]
             },
+
             {
                 id: "google",
+
                 name: "Google Ads",
+
                 options: [
                     "Campaigns",
                     "Ad Groups",
@@ -1096,9 +1858,12 @@ const workflowData = {
                     "Conversions"
                 ]
             },
+
             {
                 id: "mailchimp",
+
                 name: "Mailchimp",
+
                 options: [
                     "Contacts",
                     "Campaigns",
@@ -1107,15 +1872,23 @@ const workflowData = {
                     "Automation"
                 ]
             }
+
         ]
+
     },
 
+
     operations: {
+
         name: "Operations",
+
         platforms: [
+
             {
                 id: "google-sheets",
+
                 name: "Google Sheets",
+
                 options: [
                     "Read Row",
                     "Add Row",
@@ -1124,9 +1897,12 @@ const workflowData = {
                     "Search Rows"
                 ]
             },
+
             {
                 id: "airtable",
+
                 name: "Airtable",
+
                 options: [
                     "Find Record",
                     "Create Record",
@@ -1134,15 +1910,23 @@ const workflowData = {
                     "Delete Record"
                 ]
             }
+
         ]
+
     },
 
+
     payments: {
+
         name: "Payments",
+
         platforms: [
+
             {
                 id: "stripe",
+
                 name: "Stripe",
+
                 options: [
                     "Payment",
                     "Customer",
@@ -1151,9 +1935,12 @@ const workflowData = {
                     "Refund"
                 ]
             },
+
             {
                 id: "paypal",
+
                 name: "PayPal",
+
                 options: [
                     "Payment",
                     "Order",
@@ -1161,15 +1948,23 @@ const workflowData = {
                     "Customer"
                 ]
             }
+
         ]
+
     },
 
+
     data: {
+
         name: "Data & Productivity",
+
         platforms: [
+
             {
                 id: "google-sheets",
+
                 name: "Google Sheets",
+
                 options: [
                     "Read Data",
                     "Add Row",
@@ -1178,9 +1973,12 @@ const workflowData = {
                     "Delete Row"
                 ]
             },
+
             {
                 id: "airtable",
+
                 name: "Airtable",
+
                 options: [
                     "Find Record",
                     "Create Record",
@@ -1188,124 +1986,195 @@ const workflowData = {
                     "Delete Record"
                 ]
             }
+
         ]
+
     }
 
 };
 
 
 // =====================================
-// STATE
+// WORKFLOW STATE
 // =====================================
 
 let currentLevel = "main";
+
 let currentCategory = null;
+
 let currentPlatform = null;
 
 
 // =====================================
-// CATEGORY CLICK
+// WORKFLOW TOOL AREA
 // =====================================
 
 if (workflowToolArea) {
 
-    workflowToolArea.addEventListener("click", function(event) {
-
-        const categoryButton =
-            event.target.closest(
-                "button[data-category]"
-            );
-
-        if (categoryButton) {
-
-            const categoryId =
-                categoryButton.dataset.category;
-
-            const category =
-                workflowData[categoryId];
-
-            if (!category) return;
-
-            currentCategory = categoryId;
-            currentPlatform = null;
-            currentLevel = "platforms";
-
-            renderPlatforms(category);
-
-            return;
-        }
+    workflowToolArea.addEventListener(
+        "click",
+        function(event) {
 
 
-        const platformButton =
-            event.target.closest(
-                "button[data-platform]"
-            );
+            // =====================================
+            // CATEGORY
+            // =====================================
 
-        if (platformButton) {
-
-            const platformId =
-                platformButton.dataset.platform;
-
-            const category =
-                workflowData[currentCategory];
-
-            if (!category) return;
-
-            const platform =
-                category.platforms.find(
-                    item => item.id === platformId
+            const categoryButton =
+                event.target.closest(
+                    "button[data-category]"
                 );
 
-            if (!platform) return;
 
-            currentPlatform = platformId;
-            currentLevel = "options";
+            if (categoryButton) {
 
-            renderPlatformOptions(platform);
+                const categoryId =
+                    categoryButton.dataset.category;
 
-            return;
-        }
+                const category =
+                    workflowData[categoryId];
 
 
-        const optionButton =
-            event.target.closest(
-                "button[data-option]"
-            );
+                if (!category) return;
 
-        if (optionButton) {
 
-            const option =
-                optionButton.dataset.option;
+                currentCategory =
+                    categoryId;
 
-            const category =
-                workflowData[currentCategory];
+                currentPlatform =
+                    null;
 
-            if (!category) return;
+                currentLevel =
+                    "platforms";
 
-            const platform =
-                category.platforms.find(
-                    item => item.id === currentPlatform
+
+                renderPlatforms(
+                    category
                 );
 
-            if (!platform) return;
 
-            optionButton.classList.toggle("selected");
+                return;
 
-            addWorkflowNode({
+            }
 
-                categoryId: currentCategory,
-                category: category.name,
 
-                platformId: currentPlatform,
-                platform: platform.name,
+            // =====================================
+            // PLATFORM
+            // =====================================
 
-                option: option
+            const platformButton =
+                event.target.closest(
+                    "button[data-platform]"
+                );
 
-            });
+
+            if (platformButton) {
+
+                const platformId =
+                    platformButton.dataset.platform;
+
+
+                const category =
+                    workflowData[
+                        currentCategory
+                    ];
+
+
+                if (!category) return;
+
+
+                const platform =
+                    category.platforms.find(
+                        item =>
+                            item.id ===
+                            platformId
+                    );
+
+
+                if (!platform) return;
+
+
+                currentPlatform =
+                    platformId;
+
+                currentLevel =
+                    "options";
+
+
+                renderPlatformOptions(
+                    platform
+                );
+
+
+                return;
+
+            }
+
+
+            // =====================================
+            // OPTION
+            // =====================================
+
+            const optionButton =
+                event.target.closest(
+                    "button[data-option]"
+                );
+
+
+            if (optionButton) {
+
+                const option =
+                    optionButton.dataset.option;
+
+
+                const category =
+                    workflowData[
+                        currentCategory
+                    ];
+
+
+                if (!category) return;
+
+
+                const platform =
+                    category.platforms.find(
+                        item =>
+                            item.id ===
+                            currentPlatform
+                    );
+
+
+                if (!platform) return;
+
+
+                optionButton.classList.toggle(
+                    "selected"
+                );
+
+
+                addWorkflowNode({
+
+                    categoryId:
+                        currentCategory,
+
+                    category:
+                        category.name,
+
+                    platformId:
+                        currentPlatform,
+
+                    platform:
+                        platform.name,
+
+                    option:
+                        option
+
+                });
+
+            }
 
         }
-
-    });
+    );
 
 }
 
@@ -1316,52 +2185,85 @@ if (workflowToolArea) {
 
 function renderPlatforms(category) {
 
-    if (!workflowToolArea) return;
+    if (!workflowToolArea)
+        return;
+
 
     if (workflowSidebarTitle) {
+
         workflowSidebarTitle.textContent =
             category.name;
+
     }
 
+
     if (workflowBack) {
+
         workflowBack.style.display =
             "inline-flex";
+
     }
+
 
     workflowToolArea.innerHTML = "";
 
+
     const wrapper =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     wrapper.className =
         "workflow-category dynamic-category";
 
+
     const items =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     items.className =
         "workflow-items";
 
-    category.platforms.forEach(platform => {
 
-        const button =
-            document.createElement("button");
+    category.platforms.forEach(
+        platform => {
 
-        button.type = "button";
+            const button =
+                document.createElement(
+                    "button"
+                );
 
-        button.dataset.platform =
-            platform.id;
 
-        button.textContent =
-            platform.name;
+            button.type =
+                "button";
 
-        items.appendChild(button);
 
-    });
+            button.dataset.platform =
+                platform.id;
 
-    wrapper.appendChild(items);
 
-    workflowToolArea.appendChild(wrapper);
+            button.textContent =
+                platform.name;
+
+
+            items.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    wrapper.appendChild(
+        items
+    );
+
+
+    workflowToolArea.appendChild(
+        wrapper
+    );
+
 
     updateWorkflowPath([
         category.name
@@ -1374,104 +2276,168 @@ function renderPlatforms(category) {
 // RENDER OPTIONS
 // =====================================
 
-function renderPlatformOptions(platform) {
+function renderPlatformOptions(
+    platform
+) {
 
-    if (!workflowToolArea) return;
+    if (!workflowToolArea)
+        return;
+
 
     if (workflowSidebarTitle) {
+
         workflowSidebarTitle.textContent =
             platform.name;
+
     }
+
 
     if (workflowBack) {
+
         workflowBack.style.display =
             "inline-flex";
+
     }
 
-    workflowToolArea.innerHTML = "";
+
+    workflowToolArea.innerHTML =
+        "";
+
 
     const wrapper =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     wrapper.className =
         "workflow-category dynamic-category";
 
+
     const items =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     items.className =
         "workflow-items";
 
-    platform.options.forEach(option => {
 
-        const button =
-            document.createElement("button");
+    platform.options.forEach(
+        option => {
 
-        button.type = "button";
+            const button =
+                document.createElement(
+                    "button"
+                );
 
-        button.dataset.option =
-            option;
 
-        button.textContent =
-            option;
+            button.type =
+                "button";
 
-        items.appendChild(button);
 
-    });
+            button.dataset.option =
+                option;
 
-    wrapper.appendChild(items);
 
-    workflowToolArea.appendChild(wrapper);
+            button.textContent =
+                option;
+
+
+            items.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    wrapper.appendChild(
+        items
+    );
+
+
+    workflowToolArea.appendChild(
+        wrapper
+    );
+
 
     updateWorkflowPath([
-        workflowData[currentCategory].name,
+
+        workflowData[
+            currentCategory
+        ].name,
+
         platform.name
+
     ]);
 
 }
 
 
 // =====================================
-// PATH
+// WORKFLOW PATH
 // =====================================
 
 function updateWorkflowPath(items) {
 
-    if (!workflowPathItems) return;
+    if (!workflowPathItems)
+        return;
 
-    workflowPathItems.innerHTML = "";
 
-    items.forEach((item, index) => {
+    workflowPathItems.innerHTML =
+        "";
 
-        const span =
-            document.createElement("span");
 
-        span.className =
-            "workflow-path-item";
+    items.forEach(
+        (item, index) => {
 
-        span.textContent =
-            item;
 
-        workflowPathItems.appendChild(span);
+            const span =
+                document.createElement(
+                    "span"
+                );
 
-        if (index < items.length - 1) {
 
-            const separator =
-                document.createElement("span");
+            span.className =
+                "workflow-path-item";
 
-            separator.className =
-                "workflow-path-separator";
 
-            separator.textContent =
-                " → ";
+            span.textContent =
+                item;
+
 
             workflowPathItems.appendChild(
-                separator
+                span
             );
 
-        }
 
-    });
+            if (
+                index <
+                items.length - 1
+            ) {
+
+                const separator =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                separator.className =
+                    "workflow-path-separator";
+
+
+                separator.textContent =
+                    " → ";
+
+
+                workflowPathItems.appendChild(
+                    separator
+                );
+
+            }
+
+        }
+    );
 
 }
 
@@ -1486,25 +2452,56 @@ if (workflowBack) {
         "click",
         function() {
 
-            if (currentLevel === "options") {
+
+            // OPTIONS → PLATFORMS
+
+            if (
+                currentLevel ===
+                "options"
+            ) {
 
                 const category =
-                    workflowData[currentCategory];
+                    workflowData[
+                        currentCategory
+                    ];
 
-                currentPlatform = null;
-                currentLevel = "platforms";
 
-                renderPlatforms(category);
+                currentPlatform =
+                    null;
+
+
+                currentLevel =
+                    "platforms";
+
+
+                renderPlatforms(
+                    category
+                );
+
 
                 return;
+
             }
 
 
-            if (currentLevel === "platforms") {
+            // PLATFORMS → MAIN
 
-                currentCategory = null;
-                currentPlatform = null;
-                currentLevel = "main";
+            if (
+                currentLevel ===
+                "platforms"
+            ) {
+
+                currentCategory =
+                    null;
+
+
+                currentPlatform =
+                    null;
+
+
+                currentLevel =
+                    "main";
+
 
                 restoreMainCategories();
 
@@ -1517,12 +2514,14 @@ if (workflowBack) {
 
 
 // =====================================
-// RESTORE CATEGORIES
+// RESTORE MAIN CATEGORIES
 // =====================================
 
 function restoreMainCategories() {
 
-    if (!workflowToolArea) return;
+    if (!workflowToolArea)
+        return;
+
 
     if (workflowSidebarTitle) {
 
@@ -1531,12 +2530,14 @@ function restoreMainCategories() {
 
     }
 
+
     if (workflowBack) {
 
         workflowBack.style.display =
             "none";
 
     }
+
 
     workflowToolArea.innerHTML = `
 
@@ -1547,51 +2548,87 @@ function restoreMainCategories() {
 
             <div class="workflow-items">
 
-                <button type="button" data-category="social">
+                <button
+                    type="button"
+                    data-category="social"
+                >
                     Social Media
                 </button>
 
-                <button type="button" data-category="crm">
+                <button
+                    type="button"
+                    data-category="crm"
+                >
                     CRM
                 </button>
 
-                <button type="button" data-category="website">
+                <button
+                    type="button"
+                    data-category="website"
+                >
                     Website
                 </button>
 
-                <button type="button" data-category="ecommerce">
+                <button
+                    type="button"
+                    data-category="ecommerce"
+                >
                     E-commerce
                 </button>
 
-                <button type="button" data-category="communication">
+                <button
+                    type="button"
+                    data-category="communication"
+                >
                     Communication
                 </button>
 
-                <button type="button" data-category="ai">
+                <button
+                    type="button"
+                    data-category="ai"
+                >
                     AI
                 </button>
 
-                <button type="button" data-category="voice">
+                <button
+                    type="button"
+                    data-category="voice"
+                >
                     Voice AI
                 </button>
 
-                <button type="button" data-category="automation">
+                <button
+                    type="button"
+                    data-category="automation"
+                >
                     Automation
                 </button>
 
-                <button type="button" data-category="marketing">
+                <button
+                    type="button"
+                    data-category="marketing"
+                >
                     Marketing
                 </button>
 
-                <button type="button" data-category="operations">
+                <button
+                    type="button"
+                    data-category="operations"
+                >
                     Operations
                 </button>
 
-                <button type="button" data-category="payments">
+                <button
+                    type="button"
+                    data-category="payments"
+                >
                     Payments
                 </button>
 
-                <button type="button" data-category="data">
+                <button
+                    type="button"
+                    data-category="data"
+                >
                     Data & Productivity
                 </button>
 
@@ -1601,6 +2638,7 @@ function restoreMainCategories() {
 
     `;
 
+
     if (workflowPathItems) {
 
         workflowPathItems.textContent =
@@ -1609,425 +2647,51 @@ function restoreMainCategories() {
     }
 
 }
+// =====================================
+// PART 4
+// WORKFLOW SEARCH + VIDEO POPUP + FINAL
+// =====================================
 
 
 // =====================================
-// ADD WORKFLOW NODE
-// =====================================
-
-function addWorkflowNode(data) {
-
-    if (!workflowNodes) return;
-
-    const nodeName =
-        data.platform + " - " + data.option;
-
-
-    // Prevent duplicate
-    if (selectedNodes.includes(nodeName)) {
-        return;
-    }
-
-
-    selectedNodes.push(nodeName);
-
-
-    const empty =
-        workflowNodes.querySelector(
-            ".empty-workflow"
-        );
-
-    if (empty) {
-        empty.remove();
-    }
-
-
-    const node =
-        document.createElement("div");
-
-    node.className =
-        "workflow-node";
-
-    node.dataset.nodeName =
-        nodeName;
-
-
-    node.innerHTML = `
-
-        <div class="workflow-node-icon">
-            ⚡
-        </div>
-
-        <div class="workflow-node-content">
-
-            <strong>
-                ${data.platform}
-            </strong>
-
-            <span>
-                ${data.option}
-            </span>
-
-        </div>
-
-    `;
-
-
-    workflowNodes.appendChild(node);
-
-
-    if (
-        typeof makeNodeDraggable ===
-        "function"
-    ) {
-
-        makeNodeDraggable(node);
-
-    }
-
-
-    updateWorkflowEstimate();
-
-}
-
-
-// =====================================
-// PRICING
-// =====================================
-
-const workflowPricing = {
-
-    "Facebook - Leads": 300,
-    "Instagram - Messages": 250,
-    "LinkedIn - Leads": 400,
-    "YouTube - Videos": 350,
-
-    "HubSpot - Contacts": 300,
-    "HubSpot - Deals": 400,
-    "HubSpot - Pipelines": 450,
-
-    "OpenAI - Chat": 300,
-    "Claude - Chat": 300,
-    "Gemini - Chat": 300,
-
-    "Retell AI - Voice Agent": 600,
-    "Twilio - Make Call": 500,
-
-    "n8n - Workflow": 400,
-    "Zapier - Trigger": 350,
-    "Make - Scenario": 400,
-
-    "Stripe - Payment": 400,
-    "PayPal - Payment": 400
-
-};
-
-
-// =====================================
-// ESTIMATE
-// =====================================
-
-function updateWorkflowEstimate() {
-
-    let total = 0;
-
-    selectedNodes.forEach(node => {
-
-        total +=
-            workflowPricing[node] ||
-            250;
-
-    });
-
-
-    if (nodeCount) {
-
-        nodeCount.innerText =
-            selectedNodes.length;
-
-    }
-
-
-    if (priceEstimate) {
-
-        priceEstimate.innerText =
-            "$" + total;
-
-    }
-
-
-    if (!timelineEstimate) return;
-
-
-    if (selectedNodes.length === 0) {
-
-        timelineEstimate.innerText =
-            "—";
-
-    }
-
-    else if (selectedNodes.length <= 3) {
-
-        timelineEstimate.innerText =
-            "3-5 Days";
-
-    }
-
-    else if (selectedNodes.length <= 6) {
-
-        timelineEstimate.innerText =
-            "1-2 Weeks";
-
-    }
-
-    else {
-
-        timelineEstimate.innerText =
-            "2-4 Weeks";
-
-    }
-
-}
-
-
-// =====================================
-// CLEAR WORKFLOW
-// =====================================
-
-if (clearWorkflow) {
-
-    clearWorkflow.addEventListener(
-        "click",
-        function() {
-
-            selectedNodes = [];
-
-
-            if (workflowNodes) {
-
-                workflowNodes.innerHTML = `
-
-                    <div class="empty-workflow">
-                        Select tools from the left to start building your automation workflow.
-                    </div>
-
-                `;
-
-            }
-
-
-            updateWorkflowEstimate();
-
-        }
-    );
-
-}
-
-
-// =====================================
-// HEADER CALL TEXT
-// =====================================
-
-const callTexts = [
-
-    "Book Strategy Call",
-    "Dialing...",
-    "Ringing...",
-    "Connected",
-    "Let's Talk"
-
-];
-
-let callIndex = 0;
-
-const callText =
-    document.getElementById("callText");
-
-
-if (callText) {
-
-    setInterval(() => {
-
-        callIndex++;
-
-        if (
-            callIndex >=
-            callTexts.length
-        ) {
-
-            callIndex = 0;
-
-        }
-
-
-        callText.style.opacity = "0";
-
-        callText.style.transform =
-            "translateY(5px)";
-
-
-        setTimeout(() => {
-
-            callText.innerHTML =
-                callTexts[callIndex];
-
-            callText.style.opacity =
-                "1";
-
-            callText.style.transform =
-                "translateY(0)";
-
-        }, 300);
-
-    }, 2000);
-
-}
-
-
-// =====================================
-// WORKFLOW VIDEO POPUP
-// =====================================
-
-const videoButton =
-    document.querySelector(
-        ".new-tutorial-play"
-    );
-
-const modal =
-    document.getElementById(
-        "workflowVideoModal"
-    );
-
-const closeButton =
-    document.getElementById(
-        "workflowVideoClose"
-    );
-
-const backdrop =
-    document.querySelector(
-        ".workflow-video-backdrop"
-    );
-
-const video =
-    document.getElementById(
-        "workflowTutorialVideo"
-    );
-
-
-if (videoButton && modal) {
-
-    videoButton.addEventListener(
-        "click",
-        function() {
-
-            modal.classList.add(
-                "active"
-            );
-
-            document.body.style.overflow =
-                "hidden";
-
-
-            if (video) {
-
-                video.currentTime = 0;
-
-                video.play().catch(
-                    () => {}
-                );
-
-            }
-
-        }
-    );
-
-}
-
-
-function closeWorkflowVideo() {
-
-    if (!modal) return;
-
-    modal.classList.remove(
-        "active"
-    );
-
-    document.body.style.overflow =
-        "";
-
-
-    if (video) {
-
-        video.pause();
-
-        video.currentTime = 0;
-
-    }
-
-}
-
-
-if (closeButton) {
-
-    closeButton.addEventListener(
-        "click",
-        closeWorkflowVideo
-    );
-
-}
-
-
-if (backdrop) {
-
-    backdrop.addEventListener(
-        "click",
-        closeWorkflowVideo
-    );
-
-}
-
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key === "Escape" &&
-            modal &&
-            modal.classList.contains(
-                "active"
-            )
-        ) {
-
-            closeWorkflowVideo();
-
-        }
-
-    }
-);
-
-});    
-
-// =====================================
-// DIRECT WORKFLOW NODE SEARCH
+// WORKFLOW SEARCH
 // =====================================
 
 const workflowSearch =
-    document.getElementById("workflowSearch");
+document.getElementById("workflowSearch");
 
 if (workflowSearch) {
 
-    // Create results box
-    const searchResultsBox =
-        document.createElement("div");
+    // =====================================
+    // CREATE SEARCH RESULTS BOX
+    // =====================================
 
-    searchResultsBox.className =
-        "workflow-search-results";
+    const searchWrapper =
+        workflowSearch.parentElement;
 
-    workflowSearch.parentElement.appendChild(
-        searchResultsBox
-    );
+    let searchResultsBox =
+        searchWrapper.querySelector(
+            ".workflow-search-results"
+        );
 
+    if (!searchResultsBox) {
+
+        searchResultsBox =
+            document.createElement("div");
+
+        searchResultsBox.className =
+            "workflow-search-results";
+
+        searchWrapper.appendChild(
+            searchResultsBox
+        );
+
+    }
+
+
+    // =====================================
+    // SEARCH INPUT
+    // =====================================
 
     workflowSearch.addEventListener(
         "input",
@@ -2038,10 +2702,14 @@ if (workflowSearch) {
                     .toLowerCase()
                     .trim();
 
+
             searchResultsBox.innerHTML = "";
 
 
-            // Nothing typed
+            // =====================================
+            // EMPTY SEARCH
+            // =====================================
+
             if (!search) {
 
                 searchResultsBox.classList.remove(
@@ -2053,15 +2721,31 @@ if (workflowSearch) {
             }
 
 
+            // =====================================
+            // SEARCH RESULTS ARRAY
+            // =====================================
+
             const results = [];
 
 
-            // Search complete workflowData
-            Object.values(workflowData).forEach(
-                category => {
+            // =====================================
+            // SEARCH ALL WORKFLOW DATA
+            // =====================================
+
+            Object.keys(workflowData).forEach(
+                categoryId => {
+
+                    const category =
+                        workflowData[categoryId];
+
+                    if (!category) return;
+
 
                     category.platforms.forEach(
                         platform => {
+
+                            if (!platform) return;
+
 
                             platform.options.forEach(
                                 option => {
@@ -2093,14 +2777,23 @@ if (workflowSearch) {
 
                                         results.push({
 
+                                            categoryId:
+                                                categoryId,
+
                                             category:
                                                 category.name,
+
+                                            platformId:
+                                                platform.id,
 
                                             platform:
                                                 platform.name,
 
                                             option:
-                                                option
+                                                option,
+
+                                            fullName:
+                                                fullName
 
                                         });
 
@@ -2116,13 +2809,22 @@ if (workflowSearch) {
             );
 
 
-            // No results
+            // =====================================
+            // NO RESULTS
+            // =====================================
+
             if (results.length === 0) {
 
                 searchResultsBox.innerHTML = `
+
                     <div class="workflow-no-results">
-                        No workflow found
+
+                        <span>
+                            No workflow found
+                        </span>
+
                     </div>
+
                 `;
 
                 searchResultsBox.classList.add(
@@ -2134,31 +2836,49 @@ if (workflowSearch) {
             }
 
 
-            // Show results
+            // =====================================
+            // SHOW MAX 10 RESULTS
+            // =====================================
+
             results
                 .slice(0, 10)
                 .forEach(result => {
 
                     const button =
-                        document.createElement("button");
+                        document.createElement(
+                            "button"
+                        );
 
-                    button.type = "button";
+
+                    button.type =
+                        "button";
+
 
                     button.className =
                         "workflow-search-result";
 
 
+                    // =====================================
+                    // RESULT CONTENT
+                    // =====================================
+
                     button.innerHTML = `
 
-                        <span class="search-result-icon">
+                        <span
+                            class="search-result-icon"
+                        >
                             ⚡
                         </span>
 
-                        <span class="search-result-content">
+
+                        <span
+                            class="search-result-content"
+                        >
 
                             <strong>
                                 ${result.platform}
                             </strong>
+
 
                             <small>
                                 ${result.option}
@@ -2166,18 +2886,39 @@ if (workflowSearch) {
 
                         </span>
 
+
+                        <span
+                            class="search-result-arrow"
+                        >
+                            →
+                        </span>
+
                     `;
 
 
-                    // Add node directly
+                    // =====================================
+                    // RESULT CLICK
+                    // =====================================
+
                     button.addEventListener(
                         "click",
                         function () {
 
+
+                            // =====================================
+                            // ADD NODE
+                            // =====================================
+
                             addWorkflowNode({
+
+                                categoryId:
+                                    result.categoryId,
 
                                 category:
                                     result.category,
+
+                                platformId:
+                                    result.platformId,
 
                                 platform:
                                     result.platform,
@@ -2188,13 +2929,28 @@ if (workflowSearch) {
                             });
 
 
-                            workflowSearch.value = "";
+                            // =====================================
+                            // CLEAR SEARCH
+                            // =====================================
 
-                            searchResultsBox.innerHTML = "";
+                            workflowSearch.value =
+                                "";
+
+
+                            searchResultsBox.innerHTML =
+                                "";
+
 
                             searchResultsBox.classList.remove(
                                 "active"
                             );
+
+
+                            // =====================================
+                            // KEEP SEARCH FOCUS
+                            // =====================================
+
+                            workflowSearch.focus();
 
                         }
                     );
@@ -2207,6 +2963,10 @@ if (workflowSearch) {
                 });
 
 
+            // =====================================
+            // SHOW RESULTS
+            // =====================================
+
             searchResultsBox.classList.add(
                 "active"
             );
@@ -2214,4 +2974,286 @@ if (workflowSearch) {
         }
     );
 
+
+    // =====================================
+    // CLOSE SEARCH RESULTS
+    // WHEN CLICKING OUTSIDE
+    // =====================================
+
+    document.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                !workflowSearch.contains(
+                    event.target
+                ) &&
+                !searchResultsBox.contains(
+                    event.target
+                )
+            ) {
+
+                searchResultsBox.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+
+    // =====================================
+    // ESCAPE CLOSE SEARCH
+    // =====================================
+
+    workflowSearch.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                searchResultsBox.classList.remove(
+                    "active"
+                );
+
+                workflowSearch.blur();
+
+            }
+
+        }
+    );
+
 }
+
+
+// =====================================
+// WORKFLOW SEARCH END
+// =====================================
+
+
+
+
+
+// =====================================
+// WORKFLOW VIDEO POPUP
+// =====================================
+
+const videoButton =
+document.querySelector(
+    ".new-tutorial-play"
+);
+
+
+const modal =
+document.getElementById(
+    "workflowVideoModal"
+);
+
+
+const closeButton =
+document.getElementById(
+    "workflowVideoClose"
+);
+
+
+const backdrop =
+document.querySelector(
+    ".workflow-video-backdrop"
+);
+
+
+const tutorialVideo =
+document.getElementById(
+    "workflowTutorialVideo"
+);
+
+
+
+// =====================================
+// OPEN VIDEO MODAL
+// =====================================
+
+if (
+    videoButton &&
+    modal
+) {
+
+    videoButton.addEventListener(
+        "click",
+        function() {
+
+            modal.classList.add(
+                "active"
+            );
+
+
+            document.body.style.overflow =
+                "hidden";
+
+
+            if (
+                tutorialVideo
+            ) {
+
+                tutorialVideo.currentTime =
+                    0;
+
+
+                const playPromise =
+                    tutorialVideo.play();
+
+
+                if (
+                    playPromise &&
+                    typeof playPromise.catch ===
+                    "function"
+                ) {
+
+                    playPromise.catch(
+                        function() {}
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
+}
+
+
+
+// =====================================
+// CLOSE VIDEO MODAL
+// =====================================
+
+function closeWorkflowVideo() {
+
+    if (!modal) {
+        return;
+    }
+
+
+    modal.classList.remove(
+        "active"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+
+    if (
+        tutorialVideo
+    ) {
+
+        tutorialVideo.pause();
+
+        tutorialVideo.currentTime =
+            0;
+
+    }
+
+}
+
+
+
+// =====================================
+// CLOSE BUTTON
+// =====================================
+
+if (
+    closeButton
+) {
+
+    closeButton.addEventListener(
+        "click",
+        closeWorkflowVideo
+    );
+
+}
+
+
+
+// =====================================
+// CLOSE BACKDROP
+// =====================================
+
+if (
+    backdrop
+) {
+
+    backdrop.addEventListener(
+        "click",
+        closeWorkflowVideo
+    );
+
+}
+
+
+
+// =====================================
+// ESCAPE KEY
+// =====================================
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape" &&
+            modal &&
+            modal.classList.contains(
+                "active"
+            )
+        ) {
+
+            closeWorkflowVideo();
+
+        }
+
+    }
+);
+
+
+
+// =====================================
+// FINAL WORKFLOW INITIALIZATION
+// =====================================
+
+// Make sure estimate starts correctly
+
+if (
+    typeof updateWorkflowEstimate ===
+    "function"
+) {
+
+    updateWorkflowEstimate();
+
+}
+
+
+
+// =====================================
+// SEARCH INITIAL STATE
+// =====================================
+
+if (
+    workflowSearch
+) {
+
+    workflowSearch.value = "";
+
+}
+
+
+
+// =====================================
+// END OF AWSZ WEBSITE SCRIPT
+// =====================================    
+
+    
