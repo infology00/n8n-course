@@ -201,167 +201,388 @@ video.pause();
 });
 
 
-
-
-
 // =====================================
 // AI ECOSYSTEM
 // =====================================
 
+const ecoNodes = document.querySelectorAll(".eco-node");
 
-const ecoNodes=document.querySelectorAll(".eco-node");
+const ecoData = {
 
+    sales: {
 
+        department: "Sales Department",
 
-const ecoData={
+        title: "Turn Your Sales Process Into an AI-Powered System",
 
+        description:
+        "Automatically capture and qualify leads, book meetings, update your CRM, follow up with prospects and keep your sales pipeline moving without the manual work.",
 
-sales:{
+        features: [
+            "Lead Qualification",
+            "Lead Follow-Ups",
+            "Meeting Booking",
+            "CRM Automation",
+            "Proposal Generation",
+            "Pipeline Management"
+        ],
 
-title:"AI Sales Automation",
+        stats: {
+            stat1: "18 hrs",
+            stat1Label: "Saved Every Week",
 
-description:
-"AI qualifies leads, books meetings, updates CRM and improves sales pipeline.",
+            stat2: "+32%",
+            stat2Label: "Sales Efficiency",
 
-features:[
+            stat3: "24/7",
+            stat3Label: "Automation"
+        },
 
-"Lead Qualification",
+        button: "Explore Sales Automation"
 
-"CRM Updates",
-
-"Follow Ups",
-
-"Meeting Booking"
-
-]
-
-},
-
-
-
-marketing:{
-
-title:"AI Marketing Automation",
-
-description:
-"AI creates content, manages campaigns and improves marketing performance.",
-
-features:[
-
-"Content Creation",
-
-"Email Automation",
-
-"SEO",
-
-"Ad Reports"
-
-]
-
-},
+    },
 
 
+    marketing: {
 
-support:{
+        department: "Marketing Department",
 
-title:"AI Customer Support",
+        title: "Turn Your Marketing Into an Automated Growth Engine",
 
-description:
-"AI chatbot, WhatsApp automation and customer service systems.",
+        description:
+        "Automate content workflows, campaign follow-ups, lead nurturing and reporting so your marketing keeps moving without constant manual work.",
 
-features:[
+        features: [
+            "Content Automation",
+            "Lead Nurturing",
+            "Email Campaigns",
+            "Social Media Workflows",
+            "Campaign Reporting",
+            "Lead Retargeting"
+        ],
 
-"WhatsApp AI",
+        stats: {
+            stat1: "12 hrs",
+            stat1Label: "Saved Every Week",
 
-"Chatbots",
+            stat2: "+41%",
+            stat2Label: "Lead Engagement",
 
-"Tickets",
+            stat3: "24/7",
+            stat3Label: "Campaign Automation"
+        },
 
-"Knowledge Base"
+        button: "Explore Marketing Automation"
 
-]
+    },
 
-}
 
+    support: {
+
+        department: "Support Department",
+
+        title: "Give Your Customers Instant AI-Powered Support",
+
+        description:
+        "Use AI chat, WhatsApp automation and intelligent support workflows to answer customers faster and reduce repetitive support work.",
+
+        features: [
+            "AI Chat Support",
+            "WhatsApp Automation",
+            "Instant Replies",
+            "Ticket Management",
+            "Knowledge Base",
+            "Customer Follow-Ups"
+        ],
+
+        stats: {
+            stat1: "20 hrs",
+            stat1Label: "Saved Every Week",
+
+            stat2: "-45%",
+            stat2Label: "Support Workload",
+
+            stat3: "24/7",
+            stat3Label: "Customer Support"
+        },
+
+        button: "Explore Support Automation"
+
+    },
+
+
+    operations: {
+
+        department: "Operations Department",
+
+        title: "Automate the Work That Slows Your Business Down",
+
+        description:
+        "Connect your tools and automate repetitive operational tasks, data entry, notifications and internal workflows so your team can work more efficiently.",
+
+        features: [
+            "Workflow Automation",
+            "Data Entry",
+            "Task Management",
+            "System Integrations",
+            "Internal Notifications",
+            "Process Automation"
+        ],
+
+        stats: {
+            stat1: "25 hrs",
+            stat1Label: "Saved Every Week",
+
+            stat2: "-38%",
+            stat2Label: "Manual Work",
+
+            stat3: "24/7",
+            stat3Label: "Workflow Automation"
+        },
+
+        button: "Explore Operations Automation"
+
+    },
+
+
+    finance: {
+
+        department: "Finance Department",
+
+        title: "Make Financial Operations Faster and More Accurate",
+
+        description:
+        "Automate repetitive finance workflows, reporting, notifications and data processing while keeping your financial operations organized and efficient.",
+
+        features: [
+            "Invoice Automation",
+            "Payment Notifications",
+            "Financial Reports",
+            "Data Processing",
+            "Expense Tracking",
+            "Client Billing"
+        ],
+
+        stats: {
+            stat1: "15 hrs",
+            stat1Label: "Saved Every Week",
+
+            stat2: "-30%",
+            stat2Label: "Manual Processing",
+
+            stat3: "24/7",
+            stat3Label: "Financial Workflows"
+        },
+
+        button: "Explore Finance Automation"
+
+    },
+
+
+    hr: {
+
+        department: "Human Resources",
+
+        title: "Automate Repetitive HR Tasks and Employee Workflows",
+
+        description:
+        "Streamline recruitment, onboarding, employee communication and repetitive HR processes with intelligent automation.",
+
+        features: [
+            "Candidate Screening",
+            "Interview Scheduling",
+            "Employee Onboarding",
+            "HR Notifications",
+            "Document Workflows",
+            "Employee Follow-Ups"
+        ],
+
+        stats: {
+            stat1: "14 hrs",
+            stat1Label: "Saved Every Week",
+
+            stat2: "+35%",
+            stat2Label: "Hiring Efficiency",
+
+            stat3: "24/7",
+            stat3Label: "HR Automation"
+        },
+
+        button: "Explore HR Automation"
+
+    }
 
 };
 
 
 
+ecoNodes.forEach(node => {
 
-ecoNodes.forEach(node=>{
+    node.addEventListener("click", () => {
 
+        const data = ecoData[node.dataset.id];
 
-node.onclick=()=>{
-
-
-const data=ecoData[node.dataset.id];
-
-
-if(!data)return;
+        if (!data) return;
 
 
+        // Remove active from all nodes
 
-document.querySelectorAll(".eco-node")
-.forEach(n=>n.classList.remove("active"));
+        ecoNodes.forEach(item => {
 
+            item.classList.remove("active");
 
-
-node.classList.add("active");
-
-
-
-const title=document.getElementById("ecoTitle");
-
-const desc=document.getElementById("ecoDescription");
-
-const box=document.getElementById("ecoFeatures");
+        });
 
 
+        // Activate clicked node
 
-if(title)
-
-title.innerHTML=data.title;
-
+        node.classList.add("active");
 
 
-if(desc)
+        // Department name
 
-desc.innerHTML=data.description;
+        const department = document.querySelector(".department-name");
 
+        if (department) {
 
+            department.innerHTML = data.department;
 
-if(box){
-
-
-box.innerHTML="";
-
-
-data.features.forEach(item=>{
+        }
 
 
-box.innerHTML+=`
+        // Main heading
 
-<div>
+        const title = document.getElementById("ecoTitle");
 
-${item}
+        if (title) {
 
-</div>
+            title.innerHTML = data.title;
 
-`;
+        }
 
+
+        // Description
+
+        const description = document.getElementById("ecoDescription");
+
+        if (description) {
+
+            description.innerHTML = data.description;
+
+        }
+
+
+        // Features
+
+        const featureBox = document.getElementById("ecoFeatures");
+
+        if (featureBox) {
+
+            featureBox.innerHTML = "";
+
+            data.features.forEach(feature => {
+
+                featureBox.innerHTML += `
+
+                    <div>
+                        <i class="fa-solid fa-check"></i>
+                        ${feature}
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+
+        // STAT 1
+
+        const stat1 = document.getElementById("stat1");
+
+        if (stat1) {
+
+            stat1.innerHTML = data.stats.stat1;
+
+        }
+
+
+        // STAT 1 LABEL
+
+        const stat1Label = stat1
+            ? stat1.parentElement.querySelector("span")
+            : null;
+
+        if (stat1Label) {
+
+            stat1Label.innerHTML = data.stats.stat1Label;
+
+        }
+
+
+        // STAT 2
+
+        const stat2 = document.getElementById("stat2");
+
+        if (stat2) {
+
+            stat2.innerHTML = data.stats.stat2;
+
+        }
+
+
+        // STAT 2 LABEL
+
+        const stat2Label = stat2
+            ? stat2.parentElement.querySelector("span")
+            : null;
+
+        if (stat2Label) {
+
+            stat2Label.innerHTML = data.stats.stat2Label;
+
+        }
+
+
+        // STAT 3
+
+        const stat3 = document.getElementById("stat3");
+
+        if (stat3) {
+
+            stat3.innerHTML = data.stats.stat3;
+
+        }
+
+
+        // STAT 3 LABEL
+
+        const stat3Label = stat3
+            ? stat3.parentElement.querySelector("span")
+            : null;
+
+        if (stat3Label) {
+
+            stat3Label.innerHTML = data.stats.stat3Label;
+
+        }
+
+
+        // BUTTON
+
+        const button = document.querySelector(".ecosystem-btn");
+
+        if (button) {
+
+            button.innerHTML = data.button;
+
+        }
+
+    });
 
 });
 
 
-}
-
-
-
-};
-
-
-});
 
 // =====================================
 // TETA AI
