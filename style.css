@@ -5588,3 +5588,38 @@ section.teta-section {
     }
 
 }
+/* =========================================
+   RIGHT PANEL SPACING FIX
+========================================= */
+
+/* WHY THIS CARD - GAP REDUCE */
+
+.workflow-summary .summary-card{
+    margin-bottom:8px !important;
+}
+
+
+/* VIDEO - KEEP CLOSE TO WHY THIS */
+
+.new-tutorial-card{
+    margin-top:6px !important;
+    margin-bottom:8px !important;
+}
+
+
+/* VIDEO HEIGHT */
+
+.new-tutorial-media{
+    height:165px !important;
+}
+
+
+/* KEEP GENERATE PROPOSAL FULLY VISIBLE */
+
+.workflow-summary .generate-btn{
+    flex-shrink:0 !important;
+    margin-top:auto !important;
+    margin-bottom:0 !important;
+    position:relative;
+    z-index:50;
+}
