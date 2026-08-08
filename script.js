@@ -2255,3 +2255,100 @@ function addWorkflowNode(data) {
 }
 
 });
+// =====================================
+// CONNECT DYNAMIC WORKFLOW OPTIONS
+// TO EXISTING CANVAS NODES
+// =====================================
+
+document.addEventListener("workflowNodeAdded", function(event){
+
+    const data = event.detail;
+
+    if(!data) return;
+
+
+    const nodeName =
+        data.platform + " - " + data.option;
+
+
+    // Existing canvas elements
+    const workflowNodes =
+        document.getElementById("workflowNodes");
+
+    if(!workflowNodes) return;
+
+
+    // Remove empty message
+    const empty =
+        document.querySelector(".empty-workflow");
+
+    if(empty){
+        empty.remove();
+    }
+
+
+    // Prevent duplicate node
+    const existing =
+        [...workflowNodes.querySelectorAll(".workflow-node")]
+        .find(node =>
+            node.dataset.nodeName === nodeName
+        );
+
+    if(existing){
+        return;
+    }
+
+
+    // Create node
+    const node =
+        document.createElement("div");
+
+    node.className =
+        "workflow-node";
+
+    node.dataset.nodeName =
+        nodeName;
+
+
+    node.innerHTML = `
+
+        <div class="workflow-node-icon">
+            ⚡
+        </div>
+
+        <div class="workflow-node-content">
+
+            <strong>
+                ${data.platform}
+            </strong>
+
+            <span>
+                ${data.option}
+            </span>
+
+        </div>
+
+    `;
+
+
+    workflowNodes.appendChild(node);
+
+
+    // Make draggable if your existing function exists
+    if(typeof makeNodeDraggable === "function"){
+        makeNodeDraggable(node);
+    }
+
+
+    // Update estimate
+    const nodeCount =
+        document.getElementById("nodeCount");
+
+    if(nodeCount){
+        nodeCount.innerText =
+            workflowNodes.querySelectorAll(
+                ".workflow-node"
+            ).length;
+    }
+
+});
