@@ -2008,4 +2008,38 @@ document.addEventListener(
 
 });    
 
+// =====================================
+// WORKFLOW SEARCH
+// =====================================
 
+const workflowSearch =
+    document.getElementById("workflowSearch");
+
+if (workflowSearch) {
+
+    workflowSearch.addEventListener("input", function () {
+
+        const search =
+            this.value.toLowerCase().trim();
+
+        const buttons =
+            document.querySelectorAll(
+                "#workflowToolArea .workflow-items button"
+            );
+
+        buttons.forEach(button => {
+
+            const text =
+                button.textContent
+                    .toLowerCase();
+
+            button.style.display =
+                !search || text.includes(search)
+                    ? ""
+                    : "none";
+
+        });
+
+    });
+
+}
