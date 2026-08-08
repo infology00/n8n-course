@@ -1143,4 +1143,92 @@ callText.style.transform="translateY(0)";
 }
 
 
-});    
+});   
+
+// =========================================
+// WORKFLOW VIDEO POPUP
+// =========================================
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const videoButton = document.querySelector(".new-tutorial-play");
+    const modal = document.getElementById("workflowVideoModal");
+    const closeButton = document.getElementById("workflowVideoClose");
+    const backdrop = document.querySelector(".workflow-video-backdrop");
+    const video = document.getElementById("workflowTutorialVideo");
+
+
+    // OPEN VIDEO
+
+    if(videoButton && modal){
+
+        videoButton.addEventListener("click", function(){
+
+            modal.classList.add("active");
+
+            document.body.style.overflow = "hidden";
+
+            if(video){
+                video.currentTime = 0;
+
+                video.play().catch(function(){
+                    // Browser may require manual play
+                });
+            }
+
+        });
+
+    }
+
+
+    // CLOSE FUNCTION
+
+    function closeWorkflowVideo(){
+
+        modal.classList.remove("active");
+
+        document.body.style.overflow = "";
+
+        if(video){
+            video.pause();
+            video.currentTime = 0;
+        }
+
+    }
+
+
+    // CLOSE BUTTON
+
+    if(closeButton){
+        closeButton.addEventListener(
+            "click",
+            closeWorkflowVideo
+        );
+    }
+
+
+    // CLOSE BACKDROP
+
+    if(backdrop){
+        backdrop.addEventListener(
+            "click",
+            closeWorkflowVideo
+        );
+    }
+
+
+    // ESC KEY
+
+    document.addEventListener("keydown", function(event){
+
+        if(
+            event.key === "Escape" &&
+            modal &&
+            modal.classList.contains("active")
+        ){
+            closeWorkflowVideo();
+        }
+
+    });
+
+});
