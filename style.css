@@ -5623,3 +5623,68 @@ section.teta-section {
     position:relative;
     z-index:50;
 }
+/* =========================================
+   RIGHT PANEL — EQUAL SPACING
+========================================= */
+
+/* RIGHT PANEL */
+
+.workflow-summary{
+    display:flex !important;
+    flex-direction:column !important;
+
+    gap:14px !important;
+
+    height:720px;
+    min-height:720px;
+
+    box-sizing:border-box;
+}
+
+
+/* PROJECT ESTIMATE */
+
+.workflow-summary .summary-card{
+    margin-top:0 !important;
+    margin-bottom:0 !important;
+}
+
+
+/* WHY THIS */
+
+.workflow-summary .why-card{
+    margin-top:0 !important;
+    margin-bottom:0 !important;
+}
+
+
+/* VIDEO */
+
+.new-tutorial-card{
+    margin-top:0 !important;
+    margin-bottom:0 !important;
+}
+
+
+/* VIDEO HEIGHT */
+
+.new-tutorial-media{
+    height:155px !important;
+}
+
+
+/* GENERATE BUTTON */
+
+.workflow-summary .generate-btn{
+    margin-top:0 !important;
+    margin-bottom:0 !important;
+
+    flex-shrink:0 !important;
+}
+
+
+/* REMOVE RANDOM INTERNAL SPACING */
+
+.workflow-summary > *{
+    box-sizing:border-box;
+}
