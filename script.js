@@ -2015,14 +2015,10 @@ document.addEventListener(
 const workflowSearch =
     document.getElementById("workflowSearch");
 
-let searchResultsBox = null;
-
-
-// CREATE SEARCH RESULTS BOX
-
 if (workflowSearch) {
 
-    searchResultsBox =
+    // Create results box
+    const searchResultsBox =
         document.createElement("div");
 
     searchResultsBox.className =
@@ -2042,10 +2038,10 @@ if (workflowSearch) {
                     .toLowerCase()
                     .trim();
 
-
             searchResultsBox.innerHTML = "";
 
 
+            // Nothing typed
             if (!search) {
 
                 searchResultsBox.classList.remove(
@@ -2060,14 +2056,9 @@ if (workflowSearch) {
             const results = [];
 
 
-            // SEARCH ALL CATEGORIES
-
-            Object.keys(workflowData).forEach(
-                categoryId => {
-
-                    const category =
-                        workflowData[categoryId];
-
+            // Search complete workflowData
+            Object.values(workflowData).forEach(
+                category => {
 
                     category.platforms.forEach(
                         platform => {
@@ -2081,7 +2072,7 @@ if (workflowSearch) {
                                         option;
 
 
-                                    const searchable =
+                                    const searchableText =
                                         (
                                             category.name +
                                             " " +
@@ -2095,30 +2086,21 @@ if (workflowSearch) {
 
 
                                     if (
-                                        searchable.includes(
+                                        searchableText.includes(
                                             search
                                         )
                                     ) {
 
                                         results.push({
 
-                                            categoryId:
-                                                categoryId,
-
                                             category:
                                                 category.name,
-
-                                            platformId:
-                                                platform.id,
 
                                             platform:
                                                 platform.name,
 
                                             option:
-                                                option,
-
-                                            fullName:
-                                                fullName
+                                                option
 
                                         });
 
@@ -2134,16 +2116,31 @@ if (workflowSearch) {
             );
 
 
-            // SHOW RESULTS
+            // No results
+            if (results.length === 0) {
 
+                searchResultsBox.innerHTML = `
+                    <div class="workflow-no-results">
+                        No workflow found
+                    </div>
+                `;
+
+                searchResultsBox.classList.add(
+                    "active"
+                );
+
+                return;
+
+            }
+
+
+            // Show results
             results
-                .slice(0, 8)
+                .slice(0, 10)
                 .forEach(result => {
 
                     const button =
-                        document.createElement(
-                            "button"
-                        );
+                        document.createElement("button");
 
                     button.type = "button";
 
@@ -2172,20 +2169,15 @@ if (workflowSearch) {
                     `;
 
 
+                    // Add node directly
                     button.addEventListener(
                         "click",
                         function () {
 
                             addWorkflowNode({
 
-                                categoryId:
-                                    result.categoryId,
-
                                 category:
                                     result.category,
-
-                                platformId:
-                                    result.platformId,
 
                                 platform:
                                     result.platform,
@@ -2196,11 +2188,9 @@ if (workflowSearch) {
                             });
 
 
-                            workflowSearch.value =
-                                "";
+                            workflowSearch.value = "";
 
-                            searchResultsBox.innerHTML =
-                                "";
+                            searchResultsBox.innerHTML = "";
 
                             searchResultsBox.classList.remove(
                                 "active"
@@ -2217,28 +2207,9 @@ if (workflowSearch) {
                 });
 
 
-            if (results.length > 0) {
-
-                searchResultsBox.classList.add(
-                    "active"
-                );
-
-            }
-            else {
-
-                searchResultsBox.innerHTML = `
-
-                    <div class="workflow-no-results">
-                        No workflow found
-                    </div>
-
-                `;
-
-                searchResultsBox.classList.add(
-                    "active"
-                );
-
-            }
+            searchResultsBox.classList.add(
+                "active"
+            );
 
         }
     );
