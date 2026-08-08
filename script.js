@@ -1241,111 +1241,1019 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const toolArea = document.getElementById("workflowToolArea");
     const pathItems = document.getElementById("workflowPathItems");
+    const backButton = document.getElementById("workflowBack");
+    const sidebarTitle = document.getElementById("workflowSidebarTitle");
 
-    if (!toolArea || !pathItems) return;
-
-
-    // SELECTED CATEGORIES
-    const selectedCategories = [];
-
-
-    // CATEGORY CLICK
-    toolArea.addEventListener("click", function (event) {
-
-        const button = event.target.closest(
-            ".workflow-items button[data-category]"
-        );
-
-        if (!button) return;
+    if (!toolArea || !pathItems || !backButton || !sidebarTitle) {
+        return;
+    }
 
 
-        const category = button.dataset.category;
-        const categoryName = button.textContent.trim();
+    // =========================================================
+    // WORKFLOW DATA
+    // CATEGORY → PLATFORM → OPTIONS
+    // =========================================================
+
+    const workflowData = {
+
+        crm: {
+            name: "CRM",
+            platforms: [
+                {
+                    id: "hubspot",
+                    name: "HubSpot",
+                    options: [
+                        "Contacts",
+                        "Companies",
+                        "Deals",
+                        "Pipelines",
+                        "Tasks",
+                        "Forms",
+                        "Workflows",
+                        "Emails"
+                    ]
+                },
+                {
+                    id: "gohighlevel",
+                    name: "GoHighLevel",
+                    options: [
+                        "Contacts",
+                        "Opportunities",
+                        "Pipelines",
+                        "Workflows",
+                        "Calendars",
+                        "Forms",
+                        "Conversations",
+                        "Campaigns"
+                    ]
+                },
+                {
+                    id: "zoho",
+                    name: "Zoho CRM",
+                    options: [
+                        "Leads",
+                        "Contacts",
+                        "Deals",
+                        "Accounts",
+                        "Tasks",
+                        "Workflows"
+                    ]
+                },
+                {
+                    id: "bitrix24",
+                    name: "Bitrix24",
+                    options: [
+                        "Leads",
+                        "Contacts",
+                        "Deals",
+                        "Companies",
+                        "Tasks",
+                        "Automation"
+                    ]
+                },
+                {
+                    id: "brevo",
+                    name: "Brevo",
+                    options: [
+                        "Contacts",
+                        "Email Campaigns",
+                        "Lists",
+                        "Automation",
+                        "Transactional Email"
+                    ]
+                }
+            ]
+        },
 
 
-        // -----------------------------------------
-        // TOGGLE SELECTION
-        // -----------------------------------------
+        social: {
+            name: "Social Media",
+            platforms: [
+                {
+                    id: "facebook",
+                    name: "Facebook",
+                    options: [
+                        "Posts",
+                        "Comments",
+                        "Messages",
+                        "Leads",
+                        "Pages",
+                        "Ads"
+                    ]
+                },
+                {
+                    id: "instagram",
+                    name: "Instagram",
+                    options: [
+                        "Posts",
+                        "Comments",
+                        "Messages",
+                        "Reels",
+                        "Media"
+                    ]
+                },
+                {
+                    id: "linkedin",
+                    name: "LinkedIn",
+                    options: [
+                        "Posts",
+                        "Messages",
+                        "Leads",
+                        "Company Pages"
+                    ]
+                },
+                {
+                    id: "tiktok",
+                    name: "TikTok",
+                    options: [
+                        "Videos",
+                        "Comments",
+                        "Messages",
+                        "Leads"
+                    ]
+                },
+                {
+                    id: "youtube",
+                    name: "YouTube",
+                    options: [
+                        "Videos",
+                        "Comments",
+                        "Channels",
+                        "Subscribers"
+                    ]
+                }
+            ]
+        },
 
-        const existingIndex =
-            selectedCategories.findIndex(
-                item => item.id === category
-            );
+
+        website: {
+            name: "Website",
+            platforms: [
+                {
+                    id: "wordpress",
+                    name: "WordPress",
+                    options: [
+                        "Posts",
+                        "Pages",
+                        "Forms",
+                        "Users",
+                        "Comments",
+                        "Media"
+                    ]
+                },
+                {
+                    id: "shopify",
+                    name: "Shopify",
+                    options: [
+                        "Products",
+                        "Orders",
+                        "Customers",
+                        "Inventory",
+                        "Discounts"
+                    ]
+                },
+                {
+                    id: "webflow",
+                    name: "Webflow",
+                    options: [
+                        "CMS",
+                        "Forms",
+                        "Collections",
+                        "Items"
+                    ]
+                }
+            ]
+        },
 
 
-        if (existingIndex !== -1) {
+        ecommerce: {
+            name: "E-commerce",
+            platforms: [
+                {
+                    id: "shopify",
+                    name: "Shopify",
+                    options: [
+                        "Products",
+                        "Orders",
+                        "Customers",
+                        "Inventory",
+                        "Payments",
+                        "Discounts"
+                    ]
+                },
+                {
+                    id: "woocommerce",
+                    name: "WooCommerce",
+                    options: [
+                        "Products",
+                        "Orders",
+                        "Customers",
+                        "Coupons",
+                        "Inventory"
+                    ]
+                }
+            ]
+        },
 
-            // REMOVE
-            selectedCategories.splice(
-                existingIndex,
-                1
-            );
 
-            button.classList.remove(
-                "selected"
-            );
+        communication: {
+            name: "Communication",
+            platforms: [
+                {
+                    id: "gmail",
+                    name: "Gmail",
+                    options: [
+                        "Send Email",
+                        "Receive Email",
+                        "Search Email",
+                        "Attachments",
+                        "Labels"
+                    ]
+                },
+                {
+                    id: "slack",
+                    name: "Slack",
+                    options: [
+                        "Send Message",
+                        "Channels",
+                        "Users",
+                        "Files"
+                    ]
+                },
+                {
+                    id: "teams",
+                    name: "Microsoft Teams",
+                    options: [
+                        "Messages",
+                        "Channels",
+                        "Users",
+                        "Meetings"
+                    ]
+                }
+            ]
+        },
 
-        } else {
 
-            // ADD
-            selectedCategories.push({
-                id: category,
-                name: categoryName
-            });
+        ai: {
+            name: "AI",
+            platforms: [
+                {
+                    id: "openai",
+                    name: "OpenAI",
+                    options: [
+                        "Chat",
+                        "Text Generation",
+                        "Image Generation",
+                        "Embeddings",
+                        "Analysis"
+                    ]
+                },
+                {
+                    id: "claude",
+                    name: "Claude",
+                    options: [
+                        "Chat",
+                        "Text Generation",
+                        "Analysis",
+                        "Documents"
+                    ]
+                },
+                {
+                    id: "gemini",
+                    name: "Gemini",
+                    options: [
+                        "Chat",
+                        "Text Generation",
+                        "Vision",
+                        "Analysis"
+                    ]
+                }
+            ]
+        },
 
-            button.classList.add(
-                "selected"
-            );
 
+        voice: {
+            name: "Voice AI",
+            platforms: [
+                {
+                    id: "retell",
+                    name: "Retell AI",
+                    options: [
+                        "Voice Agent",
+                        "Make Call",
+                        "Transcript",
+                        "Recording",
+                        "Analysis"
+                    ]
+                },
+                {
+                    id: "twilio",
+                    name: "Twilio",
+                    options: [
+                        "Make Call",
+                        "Send SMS",
+                        "Receive SMS",
+                        "Phone Numbers"
+                    ]
+                }
+            ]
+        },
+
+
+        automation: {
+            name: "Automation",
+            platforms: [
+                {
+                    id: "n8n",
+                    name: "n8n",
+                    options: [
+                        "Workflow",
+                        "HTTP Request",
+                        "Webhook",
+                        "Code",
+                        "Google Sheets"
+                    ]
+                },
+                {
+                    id: "zapier",
+                    name: "Zapier",
+                    options: [
+                        "Trigger",
+                        "Action",
+                        "Filter",
+                        "Formatter"
+                    ]
+                },
+                {
+                    id: "make",
+                    name: "Make",
+                    options: [
+                        "Scenario",
+                        "Webhook",
+                        "Router",
+                        "HTTP"
+                    ]
+                }
+            ]
+        },
+
+
+        marketing: {
+            name: "Marketing",
+            platforms: [
+                {
+                    id: "meta",
+                    name: "Meta Ads",
+                    options: [
+                        "Campaigns",
+                        "Ad Sets",
+                        "Ads",
+                        "Leads",
+                        "Audiences"
+                    ]
+                },
+                {
+                    id: "google",
+                    name: "Google Ads",
+                    options: [
+                        "Campaigns",
+                        "Ad Groups",
+                        "Ads",
+                        "Leads",
+                        "Conversions"
+                    ]
+                },
+                {
+                    id: "mailchimp",
+                    name: "Mailchimp",
+                    options: [
+                        "Contacts",
+                        "Campaigns",
+                        "Lists",
+                        "Tags",
+                        "Automation"
+                    ]
+                }
+            ]
+        },
+
+
+        operations: {
+            name: "Operations",
+            platforms: [
+                {
+                    id: "google-sheets",
+                    name: "Google Sheets",
+                    options: [
+                        "Read Row",
+                        "Add Row",
+                        "Update Row",
+                        "Delete Row",
+                        "Search Rows"
+                    ]
+                },
+                {
+                    id: "airtable",
+                    name: "Airtable",
+                    options: [
+                        "Find Record",
+                        "Create Record",
+                        "Update Record",
+                        "Delete Record"
+                    ]
+                }
+            ]
+        },
+
+
+        payments: {
+            name: "Payments",
+            platforms: [
+                {
+                    id: "stripe",
+                    name: "Stripe",
+                    options: [
+                        "Payment",
+                        "Customer",
+                        "Invoice",
+                        "Subscription",
+                        "Refund"
+                    ]
+                },
+                {
+                    id: "paypal",
+                    name: "PayPal",
+                    options: [
+                        "Payment",
+                        "Order",
+                        "Refund",
+                        "Customer"
+                    ]
+                }
+            ]
+        },
+
+
+        data: {
+            name: "Data & Productivity",
+            platforms: [
+                {
+                    id: "google-sheets",
+                    name: "Google Sheets",
+                    options: [
+                        "Read Data",
+                        "Add Row",
+                        "Update Row",
+                        "Find Row",
+                        "Delete Row"
+                    ]
+                },
+                {
+                    id: "airtable",
+                    name: "Airtable",
+                    options: [
+                        "Find Record",
+                        "Create Record",
+                        "Update Record",
+                        "Delete Record"
+                    ]
+                }
+            ]
         }
 
-
-        // -----------------------------------------
-        // UPDATE YOUR SELECTION
-        // -----------------------------------------
-
-        updateWorkflowSelection();
-
-    });
+    };
 
 
-    // =========================================
-    // UPDATE SELECTION DISPLAY
-    // =========================================
+    // =========================================================
+    // CURRENT NAVIGATION STATE
+    // =========================================================
 
-    function updateWorkflowSelection() {
+    let currentLevel = "main";
+    let currentCategory = null;
+    let currentPlatform = null;
 
-        if (selectedCategories.length === 0) {
 
-            pathItems.textContent =
-                "Nothing selected yet";
+    // =========================================================
+    // CATEGORY CLICK
+    // =========================================================
 
-            pathItems.classList.remove(
-                "has-selection"
+    toolArea.addEventListener("click", function (event) {
+
+        const categoryButton =
+            event.target.closest(
+                ".workflow-items button[data-category]"
             );
 
+        if (!categoryButton) {
             return;
         }
 
 
-        pathItems.classList.add(
-            "has-selection"
+        const categoryId =
+            categoryButton.dataset.category;
+
+        const category =
+            workflowData[categoryId];
+
+        if (!category) {
+            return;
+        }
+
+
+        currentCategory =
+            categoryId;
+
+        currentPlatform =
+            null;
+
+        currentLevel =
+            "platforms";
+
+
+        renderPlatforms(category);
+
+    });
+
+
+    // =========================================================
+    // RENDER PLATFORMS
+    // =========================================================
+
+    function renderPlatforms(category) {
+
+        sidebarTitle.textContent =
+            category.name;
+
+        backButton.style.display =
+            "inline-flex";
+
+
+        toolArea.innerHTML = "";
+
+
+        const wrapper =
+            document.createElement("div");
+
+        wrapper.className =
+            "workflow-category dynamic-category";
+
+        wrapper.dataset.level =
+            "platforms";
+
+
+        const items =
+            document.createElement("div");
+
+        items.className =
+            "workflow-items";
+
+
+        category.platforms.forEach(function (platform) {
+
+            const button =
+                document.createElement("button");
+
+            button.type = "button";
+
+            button.dataset.platform =
+                platform.id;
+
+            button.textContent =
+                platform.name;
+
+            items.appendChild(button);
+
+        });
+
+
+        wrapper.appendChild(items);
+
+        toolArea.appendChild(wrapper);
+
+
+        updatePath([
+            category.name
+        ]);
+
+    }
+
+
+    // =========================================================
+    // PLATFORM CLICK
+    // =========================================================
+
+    toolArea.addEventListener("click", function (event) {
+
+        const platformButton =
+            event.target.closest(
+                ".workflow-items button[data-platform]"
+            );
+
+        if (!platformButton) {
+            return;
+        }
+
+
+        const platformId =
+            platformButton.dataset.platform;
+
+        const category =
+            workflowData[currentCategory];
+
+        if (!category) {
+            return;
+        }
+
+
+        const platform =
+            category.platforms.find(function (item) {
+
+                return item.id === platformId;
+
+            });
+
+
+        if (!platform) {
+            return;
+        }
+
+
+        currentPlatform =
+            platformId;
+
+        currentLevel =
+            "options";
+
+
+        renderPlatformOptions(
+            platform
+        );
+
+    });
+
+
+    // =========================================================
+    // RENDER PLATFORM OPTIONS
+    // =========================================================
+
+    function renderPlatformOptions(platform) {
+
+        sidebarTitle.textContent =
+            platform.name;
+
+
+        backButton.style.display =
+            "inline-flex";
+
+
+        toolArea.innerHTML = "";
+
+
+        const wrapper =
+            document.createElement("div");
+
+        wrapper.className =
+            "workflow-category dynamic-category";
+
+        wrapper.dataset.level =
+            "options";
+
+
+        const items =
+            document.createElement("div");
+
+        items.className =
+            "workflow-items";
+
+
+        platform.options.forEach(function (option) {
+
+            const button =
+                document.createElement("button");
+
+            button.type = "button";
+
+            button.dataset.option =
+                option;
+
+            button.textContent =
+                option;
+
+
+            items.appendChild(button);
+
+        });
+
+
+        wrapper.appendChild(items);
+
+        toolArea.appendChild(wrapper);
+
+
+        updatePath([
+            workflowData[currentCategory].name,
+            platform.name
+        ]);
+
+    }
+
+
+    // =========================================================
+    // OPTION CLICK
+    // =========================================================
+
+    toolArea.addEventListener("click", function (event) {
+
+        const optionButton =
+            event.target.closest(
+                ".workflow-items button[data-option]"
+            );
+
+        if (!optionButton) {
+            return;
+        }
+
+
+        const option =
+            optionButton.dataset.option;
+
+
+        const category =
+            workflowData[currentCategory];
+
+        if (!category) {
+            return;
+        }
+
+
+        const platform =
+            category.platforms.find(function (item) {
+
+                return item.id === currentPlatform;
+
+            });
+
+
+        if (!platform) {
+            return;
+        }
+
+
+        // VISUAL SELECT
+
+        optionButton.classList.add(
+            "selected"
         );
 
 
-        pathItems.innerHTML =
-            selectedCategories
-                .map(function (item) {
+        // ADD NODE EVENT
 
-                    return `
-                        <span class="workflow-selected-item">
-                            ${item.name}
-                        </span>
-                    `;
+        addWorkflowNode({
 
-                })
-                .join("");
+            categoryId:
+                currentCategory,
 
+            category:
+                category.name,
+
+            platformId:
+                currentPlatform,
+
+            platform:
+                platform.name,
+
+            option:
+                option
+
+        });
+
+
+        // IMPORTANT:
+        // DO NOT NAVIGATE AWAY.
+        // USER STAYS INSIDE CURRENT PLATFORM OPTIONS.
+
+    });
+
+
+    // =========================================================
+    // PATH
+    // =========================================================
+
+    function updatePath(items) {
+
+        pathItems.innerHTML = "";
+
+
+        items.forEach(function (item, index) {
+
+            const span =
+                document.createElement("span");
+
+            span.className =
+                "workflow-path-item";
+
+            span.textContent =
+                item;
+
+
+            pathItems.appendChild(span);
+
+
+            if (
+                index <
+                items.length - 1
+            ) {
+
+                const separator =
+                    document.createElement("span");
+
+                separator.className =
+                    "workflow-path-separator";
+
+                separator.textContent =
+                    " → ";
+
+
+                pathItems.appendChild(
+                    separator
+                );
+
+            }
+
+        });
+
+    }
+
+
+    // =========================================================
+    // BACK BUTTON
+    // =========================================================
+
+    backButton.addEventListener(
+        "click",
+        function () {
+
+
+            // OPTIONS → PLATFORMS
+
+            if (
+                currentLevel ===
+                "options"
+            ) {
+
+                const category =
+                    workflowData[currentCategory];
+
+
+                currentPlatform =
+                    null;
+
+
+                currentLevel =
+                    "platforms";
+
+
+                renderPlatforms(
+                    category
+                );
+
+
+                return;
+
+            }
+
+
+            // PLATFORMS → MAIN
+
+            if (
+                currentLevel ===
+                "platforms"
+            ) {
+
+                currentCategory =
+                    null;
+
+
+                currentPlatform =
+                    null;
+
+
+                currentLevel =
+                    "main";
+
+
+                restoreMainCategories();
+
+            }
+
+        }
+    );
+
+
+    // =========================================================
+    // RESTORE MAIN CATEGORIES
+    // =========================================================
+
+    function restoreMainCategories() {
+
+        sidebarTitle.textContent =
+            "What do you want to automate?";
+
+
+        backButton.style.display =
+            "none";
+
+
+        toolArea.innerHTML = `
+
+            <div
+                class="workflow-category dynamic-category"
+                data-level="main"
+            >
+
+                <div class="workflow-items">
+
+                    <button type="button" data-category="social">
+                        Social Media
+                    </button>
+
+                    <button type="button" data-category="crm">
+                        CRM
+                    </button>
+
+                    <button type="button" data-category="website">
+                        Website
+                    </button>
+
+                    <button type="button" data-category="ecommerce">
+                        E-commerce
+                    </button>
+
+                    <button type="button" data-category="communication">
+                        Communication
+                    </button>
+
+                    <button type="button" data-category="ai">
+                        AI
+                    </button>
+
+                    <button type="button" data-category="voice">
+                        Voice AI
+                    </button>
+
+                    <button type="button" data-category="automation">
+                        Automation
+                    </button>
+
+                    <button type="button" data-category="marketing">
+                        Marketing
+                    </button>
+
+                    <button type="button" data-category="operations">
+                        Operations
+                    </button>
+
+                    <button type="button" data-category="payments">
+                        Payments
+                    </button>
+
+                    <button type="button" data-category="data">
+                        Data & Productivity
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        pathItems.textContent =
+            "Nothing selected yet";
+
+    }
+
+
+    // =========================================================
+    // ADD NODE TO CANVAS
+    // =========================================================
+
+    function addWorkflowNode(data) {
+
+        console.log(
+            "Workflow node:",
+            data
+        );
+
+
+        document.dispatchEvent(
+            new CustomEvent(
+                "workflowNodeAdded",
+                {
+                    detail: data
+                }
+            )
+        );
 
     }
 
