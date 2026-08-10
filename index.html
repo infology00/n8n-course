@@ -1,1 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AWSZ | AI Automation Agency</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="site-header">
+
+    <nav class="navbar">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+            <a href="index.html">AWSZ</a>
+        </div>
+
+
+        <!-- DESKTOP NAVIGATION -->
+
+        <ul class="nav-links">
+
+
+            <!-- HOME -->
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+
+            <!-- ABOUT -->
+
+            <li>
+                <a href="about.html">
+                    About
+                </a>
+            </li>
+
+
+            <!-- SOLUTIONS -->
+
+            <li class="mega-parent">
+
+                <a href="#" class="solutions-trigger">
+                    Solutions
+                    <i class="fa-solid fa-chevron-down"></i>
+                </a>
+
+
+                <!-- MEGA MENU -->
+
+                <div class="mega-menu">
+
+
+                    <!-- LEFT CATEGORY -->
+
+                    <div class="menu-left">
+
+                        <h3>Solutions</h3>
+
+
+                        <button
+                            class="category active"
+                            data-content="automation"
+                            type="button"
+                        >
+                            <i class="fa-solid fa-robot"></i>
+                            <span>AI Automation</span>
+                        </button>
+
+
+                        <button
+                            class="category"
+                            data-content="crm"
+                            type="button"
+                        >
+                            <i class="fa-solid fa-users"></i>
+                            <span>CRM</span>
+                        </button>
+
+
+                        <button
+                            class="category"
+                            data-content="chat"
+                            type="button"
+                        >
+                            <i class="fa-solid fa-comments"></i>
+                            <span>Chat Agents</span>
+                        </button>
+
+
+                        <button
+                            class="category"
+                            data-content="voice"
+                            type="button"
+                        >
+                            <i class="fa-solid fa-phone"></i>
+                            <span>Voice AI</span>
+                        </button>
+
+
+                        <button
+                            class="category"
+                            data-content="ecommerce"
+                            type="button"
+                        >
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span>Ecommerce</span>
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- CENTER CONTENT -->
+
+                    <div class="menu-content">
+
+
+                        <!-- AI AUTOMATION -->
+
+                        <div
+                            class="content-box active"
+                            id="automation"
+                        >
+
+                            <h3>AI Automation</h3>
+
+                            <p>
+                                Build intelligent workflows that save time
+                                and reduce manual work.
+                            </p>
+
+
+                            <div class="service-list">
+
+                                <a href="#">n8n Automation</a>
+
+                                <a href="#">Workflow Automation</a>
+
+                                <a href="#">Email Automation</a>
+
+                                <a href="#">Lead Routing</a>
+
+                                <a href="#">Data Processing</a>
+
+                                <a href="#">Social Media Automation</a>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- CRM -->
+
+                        <div
+                            class="content-box"
+                            id="crm"
+                        >
+
+                            <h3>CRM Systems</h3>
+
+                            <p>
+                                Manage leads, customers, and sales processes
+                                with powerful CRM solutions.
+                            </p>
+
+
+                            <div class="service-list">
+
+                                <a href="#">GoHighLevel</a>
+
+                                <a href="#">HubSpot CRM</a>
+
+                                <a href="#">Pipeline Management</a>
+
+                                <a href="#">Lead Tracking</a>
+
+                                <a href="#">Customer Management</a>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- CHAT -->
+
+                        <div
+                            class="content-box"
+                            id="chat"
+                        >
+
+                            <h3>Chat Agents</h3>
+
+                            <p>
+                                AI chat solutions that handle customer
+                                conversations 24/7.
+                            </p>
+
+
+                            <div class="service-list">
+
+                                <a href="#">AI Website Chatbot</a>
+
+                                <a href="#">WhatsApp AI Agent</a>
+
+                                <a href="#">Customer Support Agent</a>
+
+                                <a href="#">Lead Qualification Bot</a>
+
+                                <a href="#">Appointment Booking Agent</a>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- VOICE AI -->
+
+                        <div
+                            class="content-box"
+                            id="voice"
+                        >
+
+                            <h3>Voice AI</h3>
+
+                            <p>
+                                AI voice agents that manage calls and
+                                customer interactions.
+                            </p>
+
+
+                            <div class="service-list">
+
+                                <a href="#">AI Receptionist</a>
+
+                                <a href="#">Inbound Call Agent</a>
+
+                                <a href="#">Outbound Calling Agent</a>
+
+                                <a href="#">Appointment Scheduling</a>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- ECOMMERCE -->
+
+                        <div
+                            class="content-box"
+                            id="ecommerce"
+                        >
+
+                            <h3>Ecommerce Automation</h3>
+
+                            <p>
+                                Automate online store operations and improve
+                                customer experience.
+                            </p>
+
+
+                            <div class="service-list">
+
+                                <a href="#">Shopify Automation</a>
+
+                                <a href="#">WooCommerce Automation</a>
+
+                                <a href="#">Order Processing</a>
+
+                                <a href="#">Customer Retention</a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- RIGHT CTA -->
+
+                    <div class="menu-cta">
+
+                        <span class="cta-label">
+                            AI SYSTEMS
+                        </span>
+
+                        <h3>
+                            Automate More.
+                            <span>Grow Faster.</span>
+                        </h3>
+
+                        <p>
+                            AI-powered systems designed to help businesses
+                            scale smarter.
+                        </p>
+
+                        <a
+                            href="#contact"
+                            class="mega-cta-btn"
+                        >
+                            Book Strategy Call
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </li>
+
+
+
+            <!-- INDUSTRIES -->
+
+            <li>
+                <a href="#industries">
+                    Industries
+                </a>
+            </li>
+
+
+            <!-- PORTFOLIO -->
+
+            <li>
+                <a href="#portfolio">
+                    Portfolio
+                </a>
+            </li>
+
+
+            <!-- CASE STUDIES -->
+
+            <li>
+                <a href="#case-studies">
+                    Case Studies
+                </a>
+            </li>
+
+
+            <!-- RESOURCES -->
+
+            <li>
+                <a href="#resources">
+                    Resources
+                </a>
+            </li>
+
+
+            <!-- CONTACT -->
+
+            <li>
+                <a href="#contact">
+                    Contact
+                </a>
+            </li>
+
+        </ul>
+
+
+
+        <!-- HEADER CTA -->
+
+        <a
+            href="#contact"
+            class="header-btn"
+        >
+
+            <span>
+                Book Strategy Call
+            </span>
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+
+
+        <!-- MOBILE MENU BUTTON -->
+
+        <button
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
+            type="button"
+            aria-label="Open menu"
+        >
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+
+    </nav>
+
+
+
+    <!-- MOBILE NAVIGATION -->
+
+    <div
+        class="mobile-menu"
+        id="mobileMenu"
+    >
+
+        <a href="index.html">Home</a>
+
+        <a href="about.html">About</a>
+
+        <a href="#industries">Industries</a>
+
+        <a href="#portfolio">Portfolio</a>
+
+        <a href="#case-studies">Case Studies</a>
+
+        <a href="#resources">Resources</a>
+
+        <a href="#contact">Contact</a>
+
+
+        <a
+            href="#contact"
+            class="mobile-cta"
+        >
+            Book Strategy Call
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<main>
+
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <span class="section-tag">
+            AI AUTOMATION AGENCY
+        </span>
+
+
+        <h1>
+
+            Build Smarter.
+
+            <br>
+
+            <span>
+                Automate Faster.
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            We design AI-powered automation systems,
+            intelligent agents and digital workflows
+            that help businesses save time and scale faster.
+
+        </p>
+
+
+        <div class="hero-actions">
+
+            <a
+                href="#contact"
+                class="primary-btn"
+            >
+                Book Strategy Call
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+
+            <a
+                href="#solutions"
+                class="secondary-btn"
+            >
+                Explore Solutions
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- HERO VISUAL -->
+
+    <div class="hero-visual">
+
+        <div class="hero-glow"></div>
+
+        <div class="hero-orbit orbit-one"></div>
+
+        <div class="hero-orbit orbit-two"></div>
+
+        <div class="hero-core">
+
+            <i class="fa-solid fa-bolt"></i>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SOLUTIONS
+===================================================== -->
+
+<section
+    class="solutions-section"
+    id="solutions"
+>
+
+    <div class="section-heading">
+
+        <span class="section-tag">
+            WHAT WE BUILD
+        </span>
+
+
+        <h2>
+            AI Systems That
+            <span>Work For You</span>
+        </h2>
+
+
+        <p>
+            From automation and CRM systems to AI agents,
+            we build practical systems around your business.
+        </p>
+
+    </div>
+
+
+    <div class="solutions-grid">
+
+
+        <article class="solution-card">
+
+            <div class="solution-icon">
+                <i class="fa-solid fa-robot"></i>
+            </div>
+
+            <h3>
+                AI Automation
+            </h3>
+
+            <p>
+                Automate repetitive tasks and connect
+                your business tools into intelligent workflows.
+            </p>
+
+            <a href="#contact">
+                Explore
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </article>
+
+
+
+        <article class="solution-card">
+
+            <div class="solution-icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <h3>
+                CRM Systems
+            </h3>
+
+            <p>
+                Build powerful CRM workflows that manage
+                leads, customers and sales automatically.
+            </p>
+
+            <a href="#contact">
+                Explore
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </article>
+
+
+
+        <article class="solution-card">
+
+            <div class="solution-icon">
+                <i class="fa-solid fa-comments"></i>
+            </div>
+
+            <h3>
+                AI Chat Agents
+            </h3>
+
+            <p>
+                Give your customers intelligent AI support
+                across your website and messaging channels.
+            </p>
+
+            <a href="#contact">
+                Explore
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </article>
+
+
+
+        <article class="solution-card">
+
+            <div class="solution-icon">
+                <i class="fa-solid fa-phone"></i>
+            </div>
+
+            <h3>
+                Voice AI
+            </h3>
+
+            <p>
+                Deploy AI voice agents that answer calls,
+                qualify leads and schedule appointments.
+            </p>
+
+            <a href="#contact">
+                Explore
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </article>
+
+
+
+        <article class="solution-card">
+
+            <div class="solution-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+
+            <h3>
+                Ecommerce Automation
+            </h3>
+
+            <p>
+                Automate orders, customer communication
+                and store operations.
+            </p>
+
+            <a href="#contact">
+                Explore
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </article>
+
+
+
+        <article class="solution-card">
+
+            <div class="solution-icon">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+
+            <h3>
+                Business Intelligence
+            </h3>
+
+            <p>
+                Turn your business data into useful insights
+                and automated reporting systems.
+            </p>
+
+            <a href="#contact">
+                Explore
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PLACEHOLDER SECTIONS
+===================================================== -->
+
+<section
+    class="page-placeholder"
+    id="industries"
+>
+
+    <span class="section-tag">
+        INDUSTRIES
+    </span>
+
+    <h2>
+        Industries We Serve
+    </h2>
+
+</section>
+
+
+
+<section
+    class="page-placeholder"
+    id="portfolio"
+>
+
+    <span class="section-tag">
+        PORTFOLIO
+    </span>
+
+    <h2>
+        Our Work
+    </h2>
+
+</section>
+
+
+
+<section
+    class="page-placeholder"
+    id="case-studies"
+>
+
+    <span class="section-tag">
+        CASE STUDIES
+    </span>
+
+    <h2>
+        Real Business Results
+    </h2>
+
+</section>
+
+
+
+<section
+    class="page-placeholder"
+    id="resources"
+>
+
+    <span class="section-tag">
+        RESOURCES
+    </span>
+
+    <h2>
+        Learn & Explore
+    </h2>
+
+</section>
+
+
+
+<section
+    class="contact-section"
+    id="contact"
+>
+
+    <span class="section-tag">
+        LET'S TALK
+    </span>
+
+    <h2>
+        Ready to Automate?
+    </h2>
+
+    <p>
+        Let's discuss what we can build for your business.
+    </p>
+
+
+    <a
+        href="mailto:hello@automationwithsajjadzaidi.com"
+        class="primary-btn"
+    >
+        Start a Conversation
+        <i class="fa-solid fa-arrow-right"></i>
+    </a>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
