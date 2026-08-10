@@ -1,170 +1,269 @@
-/* =========================================================
-   AWSZ HEADER
-========================================================= */
+/* ======================================================
+   AWSZ PREMIUM HEADER
+====================================================== */
 
-:root {
-    --yellow: #D6FF00;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: "Outfit", sans-serif;
-    background: #000;
-    color: #fff;
+:root{
+    --yellow:#D6FF00;
 }
 
 
-/* =========================================================
+/* ======================================================
+   RESET
+====================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Outfit',sans-serif;
+    background:#000;
+    color:#111;
+    overflow-x:hidden;
+}
+
+a{
+    text-decoration:none;
+}
+
+ul{
+    list-style:none;
+}
+
+
+/* ======================================================
    HEADER
-========================================================= */
+====================================================== */
 
-header {
-    width: 100%;
-    position: relative;
-    z-index: 9999;
-}
+header{
+    position:fixed;
 
-.navbar {
-    width: min(1400px, 92%);
-    margin: auto;
+    top:0;
+    left:0;
 
-    min-height: 90px;
+    width:100%;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 40px;
+    z-index:99999;
 }
 
 
-/* =========================================================
-   LOGO
-========================================================= */
+/* ======================================================
+   NAVBAR WHITE ROUNDED CARD
+====================================================== */
 
-.logo h2 {
-    margin: 0;
+.navbar{
 
-    color: #fff;
+    width:min(1450px,96%);
 
-    font-size: 30px;
-    font-weight: 800;
-}
+    margin:auto;
 
+    height:90px;
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+    display:flex;
 
-.nav-links {
-    list-style: none;
+    justify-content:space-between;
 
-    display: flex;
-    align-items: center;
+    align-items:center;
 
-    gap: 32px;
+    padding:0 40px;
 
-    margin: 0;
-    padding: 0;
-}
+    margin-top:15px;
 
-.nav-links li {
-    position: relative;
-}
+    background:rgba(255,255,255,.82);
 
-.nav-links li > a {
-    color: #fff;
+    backdrop-filter:blur(20px);
 
-    text-decoration: none;
+    -webkit-backdrop-filter:blur(20px);
 
-    font-size: 15px;
-    font-weight: 500;
+    border:1px solid rgba(255,255,255,.6);
 
-    transition: .3s ease;
-}
-
-.nav-links li > a:hover {
-    color: var(--yellow);
-}
-
-
-/* =========================================================
-   SOLUTIONS ARROW
-========================================================= */
-
-.mega-parent > a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.mega-parent > a i {
-    font-size: 11px;
-
-    transition: .3s ease;
-}
-
-.mega-parent:hover > a i {
-    transform: rotate(180deg);
-}
-
-
-/* =========================================================
-   MEGA MENU
-========================================================= */
-
-.mega-menu {
-
-    position: absolute;
-
-    top: 65px;
-    left: 0;
-
-    width: 1000px;
-
-    display: grid;
-
-    grid-template-columns: 260px 1fr;
-
-    background: #fff;
-
-    border-radius: 24px;
-
-    overflow: hidden;
+    border-radius:22px;
 
     box-shadow:
-        0 30px 80px rgba(0,0,0,.45);
+        0 20px 60px rgba(0,0,0,.08);
+}
 
-    opacity: 0;
 
-    visibility: hidden;
+/* ======================================================
+   LOGO
+====================================================== */
 
-    pointer-events: none;
+.logo h2{
+
+    font-size:36px;
+
+    color:#111;
+
+    font-weight:800;
+
+    letter-spacing:4px;
+}
+
+
+/* ======================================================
+   NAV LINKS
+====================================================== */
+
+.nav-links{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:32px;
+}
+
+.nav-links li{
+
+    position:relative;
+}
+
+.nav-links li > a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#111;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    transition:.35s;
+}
+
+.nav-links li > a:hover{
+
+    color:#99c500;
+}
+
+.nav-links i{
+
+    font-size:12px;
+}
+
+
+/* ======================================================
+   HEADER BUTTON
+====================================================== */
+
+.header-btn{
+
+    background:var(--yellow);
+
+    color:#111;
+
+    padding:16px 30px;
+
+    border-radius:50px;
+
+    font-weight:700;
+
+    transition:.3s;
+}
+
+.header-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 15px 40px rgba(214,255,0,.5);
+}
+
+
+/* ======================================================
+   SOLUTIONS PARENT
+====================================================== */
+
+.mega-parent{
+
+    position:relative;
+}
+
+
+/* bridge so menu doesn't disappear while moving mouse */
+
+.mega-parent::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:100%;
+
+    left:0;
+
+    width:100%;
+
+    height:40px;
+}
+
+
+/* ======================================================
+   MEGA MENU
+====================================================== */
+
+.mega-menu{
+
+    position:absolute;
+
+    top:75px;
+
+    left:50%;
+
+    width:1200px;
+
+    max-width:90vw;
 
     transform:
         translateX(-35%)
-        translateY(15px);
+        translateY(20px);
 
-    transition: .35s ease;
+    background:#fff;
+
+    display:grid;
+
+    grid-template-columns:
+        260px 1fr 300px;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    border:1px solid #eee;
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.12);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+    transition:.35s ease;
 }
 
 
-/* =========================================================
-   OPEN
-========================================================= */
+/* OPEN */
 
 .mega-parent:hover .mega-menu,
-.mega-menu.active {
+.mega-menu.active{
 
-    opacity: 1;
+    opacity:1;
 
-    visibility: visible;
+    visibility:visible;
 
-    pointer-events: auto;
+    pointer-events:auto;
 
     transform:
         translateX(-35%)
@@ -172,364 +271,357 @@ header {
 }
 
 
-/* =========================================================
-   LEFT
-========================================================= */
+/* ======================================================
+   LEFT SIDE
+====================================================== */
 
-.menu-left {
+.menu-left{
 
-    background: #f7f7f5;
+    background:#f7f7f5;
 
-    padding: 35px 25px;
+    padding:35px 25px;
 }
 
-.menu-left h3 {
+.menu-left h3{
 
-    color: #111;
+    color:#111;
 
-    font-size: 22px;
+    font-size:22px;
 
-    margin: 0 0 25px;
+    margin-bottom:25px;
 }
 
 
-/* =========================================================
-   CATEGORIES
-========================================================= */
+/* ======================================================
+   CATEGORY
+====================================================== */
 
-.category {
+.category{
 
-    display: flex;
+    display:flex;
 
-    align-items: center;
+    align-items:center;
 
-    gap: 14px;
+    gap:14px;
 
-    padding: 14px;
+    padding:14px;
 
-    margin-bottom: 10px;
+    margin-bottom:10px;
 
-    border-radius: 14px;
+    border-radius:14px;
 
-    cursor: pointer;
+    cursor:pointer;
 
-    color: #111;
-
-    transition: .3s;
+    transition:.3s;
 }
 
-.category i {
+.category i{
 
-    width: 42px;
-    height: 42px;
+    width:42px;
 
-    display: flex;
+    height:42px;
 
-    align-items: center;
-    justify-content: center;
+    display:flex;
 
-    background: #fff;
+    align-items:center;
 
-    color: #111;
+    justify-content:center;
 
-    border-radius: 12px;
+    background:white;
+
+    color:#111;
+
+    border-radius:12px;
 }
 
-.category span {
-    font-size: 15px;
-    font-weight: 600;
+.category span{
+
+    color:#111;
+
+    font-size:15px;
+
+    font-weight:600;
 }
 
 
 /* HOVER */
 
-.category:hover {
+.category:hover{
 
-    background: #fff;
+    background:#fff;
 
-    transform: translateX(5px);
+    transform:translateX(5px);
 }
 
 
 /* ACTIVE */
 
-.category.active {
+.category.active{
 
-    background: var(--yellow);
+    background:var(--yellow);
 }
 
-.category.active i {
+.category.active i{
 
-    background: #111;
+    background:#111;
 
-    color: var(--yellow);
-}
-
-
-/* =========================================================
-   CENTER
-========================================================= */
-
-.menu-content {
-
-    padding: 40px;
-
-    background: #fff;
-
-    color: #111;
-}
-
-.menu-content h3 {
-
-    font-size: 32px;
-
-    margin: 0 0 12px;
-}
-
-.menu-content p {
-
-    color: #777;
-
-    line-height: 1.6;
-
-    margin: 0 0 30px;
+    color:var(--yellow);
 }
 
 
-/* =========================================================
+/* ======================================================
+   CENTER CONTENT
+====================================================== */
+
+.menu-content{
+
+    padding:40px;
+
+    background:#fff;
+}
+
+.menu-content h3{
+
+    color:#111;
+
+    font-size:32px;
+
+    margin-bottom:12px;
+}
+
+.menu-content p{
+
+    color:#777;
+
+    line-height:1.6;
+
+    margin-bottom:30px;
+}
+
+
+/* ======================================================
    CONTENT BOX
-========================================================= */
+====================================================== */
 
-.content-box {
-    display: none;
+.content-box{
 
-    animation: menuFade .3s ease;
+    display:none;
+
+    animation:
+        menuContentFade
+        .3s
+        ease;
 }
 
-.content-box.active {
-    display: block;
+.content-box.active{
+
+    display:block;
 }
 
-@keyframes menuFade {
 
-    from {
-        opacity: 0;
-        transform: translateY(8px);
+@keyframes menuContentFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(8px);
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    to{
 
+        opacity:1;
+
+        transform:translateY(0);
+    }
 }
 
 
-/* =========================================================
+/* ======================================================
    SERVICES
-========================================================= */
+====================================================== */
 
-.service-list {
+.service-list{
 
-    display: grid;
+    display:grid;
 
     grid-template-columns:
-        repeat(2, 1fr);
+        repeat(2,1fr);
 
-    gap: 15px;
+    gap:15px;
 }
 
-.service-list a {
+.service-list a{
 
-    display: block;
+    display:block;
 
-    padding: 18px;
+    padding:18px;
 
-    background: #fafafa;
+    background:#fafafa;
 
-    border: 1px solid #eee;
+    border:1px solid #eee;
 
-    border-radius: 14px;
+    border-radius:14px;
 
-    color: #111;
+    color:#111;
 
-    text-decoration: none;
+    font-weight:600;
 
-    font-weight: 600;
-
-    transition: .3s;
+    transition:.3s;
 }
 
-.service-list a:hover {
+.service-list a:hover{
 
-    background: var(--yellow);
+    background:var(--yellow);
 
-    transform: translateY(-4px);
-}
-
-
-/* =========================================================
-   CTA
-========================================================= */
-
-.menu-cta {
-
-    grid-column: 1 / -1;
-
-    margin: 22px;
-
-    padding: 35px;
-
-    border-radius: 20px;
-
-    background: #f1f1ed;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    overflow: hidden;
-
-    position: relative;
-}
-
-.menu-cta h3 {
-
-    color: #111;
-
-    font-size: 34px;
-
-    line-height: 1.15;
-
-    margin: 0 0 15px;
-}
-
-.menu-cta p {
-
-    color: #666;
-
-    line-height: 1.6;
-
-    margin: 0;
-}
-
-.menu-cta a {
-
-    margin-top: 25px;
-
-    background: #111;
-
-    color: #fff;
-
-    padding: 16px;
-
-    border-radius: 50px;
-
-    text-align: center;
-
-    text-decoration: none;
-
-    transition: .3s;
-}
-
-.menu-cta a:hover {
-
-    background: var(--yellow);
-
-    color: #111;
-
-    transform: translateY(-3px);
+    transform:translateY(-4px);
 }
 
 
-/* =========================================================
-   HEADER BUTTON
-========================================================= */
+/* ======================================================
+   RIGHT CTA
+====================================================== */
 
-.header-btn {
+.menu-cta{
 
-    display: inline-flex;
+    margin:22px;
 
-    align-items: center;
-    justify-content: center;
+    padding:35px;
 
-    min-width: 170px;
+    border-radius:20px;
 
-    height: 50px;
+    background:#f1f1ed;
 
-    padding: 0 22px;
+    display:flex;
 
-    background: var(--yellow);
+    flex-direction:column;
 
-    color: #111;
+    justify-content:center;
 
-    border-radius: 50px;
+    overflow:hidden;
 
-    text-decoration: none;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    transition: .3s ease;
+    position:relative;
 }
 
-.header-btn:hover {
+.menu-cta h3{
 
-    transform: translateY(-3px);
+    color:#111;
 
-    box-shadow:
-        0 12px 30px
-        rgba(214,255,0,.25);
+    font-size:34px;
+
+    line-height:1.15;
+
+    margin-bottom:15px;
+}
+
+.menu-cta p{
+
+    color:#666;
+
+    line-height:1.6;
+}
+
+.menu-cta a{
+
+    margin-top:25px;
+
+    background:#111;
+
+    color:#fff;
+
+    padding:16px;
+
+    border-radius:50px;
+
+    text-align:center;
+
+    transition:.3s;
+}
+
+.menu-cta a:hover{
+
+    background:var(--yellow);
+
+    color:#111;
+
+    transform:translateY(-3px);
 }
 
 
-/* =========================================================
+/* ======================================================
    RESPONSIVE
-========================================================= */
+====================================================== */
 
-@media (max-width: 1200px) {
+@media(max-width:1200px){
 
-    .navbar {
-        width: 94%;
-        gap: 20px;
+    .navbar{
+
+        width:94%;
+
+        padding:0 25px;
     }
 
-    .nav-links {
-        gap: 20px;
+    .nav-links{
+
+        gap:20px;
     }
 
-    .mega-menu {
-        width: 900px;
-    }
-}
+    .mega-menu{
 
-
-@media (max-width: 1000px) {
-
-    .nav-links {
-        gap: 14px;
-    }
-
-    .mega-menu {
-        width: 800px;
+        width:1000px;
     }
 }
 
 
-@media (max-width: 800px) {
+@media(max-width:1000px){
 
-    .nav-links {
-        display: none;
+    .nav-links{
+
+        gap:14px;
     }
 
-    .mega-menu {
-        display: none;
+    .nav-links li > a{
+
+        font-size:14px;
     }
 
-    .header-btn {
-        min-width: 145px;
+    .mega-menu{
+
+        width:900px;
+    }
+}
+
+
+@media(max-width:800px){
+
+    .navbar{
+
+        height:75px;
+
+        padding:0 20px;
+
+        border-radius:18px;
+    }
+
+    .logo h2{
+
+        font-size:28px;
+    }
+
+    .nav-links{
+
+        display:none;
+    }
+
+    .header-btn{
+
+        padding:13px 20px;
+
+        font-size:13px;
+    }
+
+    .mega-menu{
+
+        display:none;
     }
 }
