@@ -9,615 +9,1052 @@
     <title>AWSZ | AI Automation Agency</title>
 
     <meta name="description"
-        content="AWSZ builds AI Automations, AI Agents, Voice AI and Business Systems that buy your business more time.">
+        content="AWSZ builds AI Employees, Voice Agents and Workflow Automations that eliminate repetitive work, reduce operational costs and help businesses scale faster.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
 </head>
+
 
 <body>
 
-<header>
 
-<nav class="navbar">
+<!-- ======================================================
+     HEADER
+====================================================== -->
 
-<div class="logo">
+<header class="site-header">
 
-<a href="index.html">AWSZ</a>
+    <nav class="navbar">
 
-</div>
 
-<ul class="nav-menu">
+        <!-- LOGO -->
 
-<li>
-<a href="#">Home</a>
-</li>
+        <a href="#" class="logo" aria-label="AWSZ Home">
 
-<li>
-<a href="#">About</a>
-</li>
+            <span>AWSZ</span>
 
-<li class="mega-parent">
+        </a>
 
-<a href="#">
 
-Services
 
-<i class="fa-solid fa-angle-down"></i>
+        <!-- DESKTOP NAVIGATION -->
 
-</a>
+        <ul class="nav-links">
 
-<!-- Mega Menu Start -->
 
-<div class="mega-menu">
+            <li>
+                <a href="#">Home</a>
+            </li>
 
-<!-- LEFT SIDEBAR -->
 
-<div class="menu-left">
+            <li>
+                <a href="#">About</a>
+            </li>
 
-<div class="category active">
 
-<i class="fa-solid fa-code-branch"></i>
 
-<span>Workflow Automation</span>
+            <!-- ==================================================
+                 SOLUTIONS / MEGA MENU
+            ================================================== -->
 
-</div>
+            <li class="mega-parent">
 
-<div class="category">
 
-<i class="fa-solid fa-comments"></i>
+                <a href="#" class="solutions-trigger">
 
-<span>AI Chat Agents</span>
+                    Solutions
 
-</div>
+                    <i class="fa-solid fa-chevron-down"></i>
 
-<div class="category">
+                </a>
 
-<i class="fa-solid fa-phone-volume"></i>
 
-<span>Voice Agents</span>
 
-</div>
+                <div class="mega-menu">
 
-<div class="category">
 
-<i class="fa-solid fa-cart-shopping"></i>
+                    <!-- LEFT CATEGORY PANEL -->
 
-<span>E-Commerce</span>
+                    <div class="mega-left">
 
-</div>
 
-<div class="category">
+                        <div class="mega-label">
+                            EXPLORE
+                        </div>
 
-<i class="fa-solid fa-bullseye"></i>
 
-<span>Lead Generation</span>
+                        <div class="mega-categories">
 
-</div>
 
-<div class="category">
+                            <button
+                                class="mega-category active"
+                                data-category="automation"
+                                type="button">
 
-<i class="fa-solid fa-microchip"></i>
+                                <span class="category-icon">
+                                    <i class="fa-solid fa-diagram-project"></i>
+                                </span>
 
-<span>Custom AI</span>
+                                <span class="category-text">
 
-</div>
+                                    <strong>Automations</strong>
 
-</div>
+                                    <small>
+                                        Business workflows
+                                    </small>
 
-<!-- RIGHT PANEL -->
+                                </span>
 
-<div class="menu-right">
+                                <i class="fa-solid fa-arrow-right category-arrow"></i>
 
-<!-- Workflow -->
+                            </button>
 
-<div class="service-group">
 
-<h3>Workflow Automation</h3>
 
-<div class="services-grid">
+                            <button
+                                class="mega-category"
+                                data-category="chat"
+                                type="button">
 
-<a href="#">n8n Automation</a>
+                                <span class="category-icon">
+                                    <i class="fa-solid fa-comments"></i>
+                                </span>
 
-<a href="#">Make.com</a>
+                                <span class="category-text">
 
-<a href="#">Zapier</a>
+                                    <strong>Chat Agents</strong>
 
-<a href="#">GoHighLevel</a>
+                                    <small>
+                                        AI conversations
+                                    </small>
 
-<a href="#">HubSpot</a>
+                                </span>
 
-<a href="#">API Integration</a>
+                                <i class="fa-solid fa-arrow-right category-arrow"></i>
 
-<a href="#">CRM Automation</a>
+                            </button>
 
-<a href="#">Google Workspace</a>
 
-</div>
 
-</div>
+                            <button
+                                class="mega-category"
+                                data-category="voice"
+                                type="button">
 
-<!-- Chat -->
+                                <span class="category-icon">
+                                    <i class="fa-solid fa-phone-volume"></i>
+                                </span>
 
-<div class="service-group">
+                                <span class="category-text">
 
-<h3>AI Chat Agents</h3>
+                                    <strong>Calling Agents</strong>
 
-<div class="services-grid">
+                                    <small>
+                                        AI voice systems
+                                    </small>
 
-<a href="#">WhatsApp AI</a>
+                                </span>
 
-<a href="#">Facebook Messenger</a>
+                                <i class="fa-solid fa-arrow-right category-arrow"></i>
 
-<a href="#">Instagram AI</a>
+                            </button>
 
-<a href="#">LinkedIn AI</a>
 
-<a href="#">Discord AI</a>
 
-<a href="#">Telegram AI</a>
+                            <button
+                                class="mega-category"
+                                data-category="ecommerce"
+                                type="button">
 
-<a href="#">Website Chatbot</a>
+                                <span class="category-icon">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </span>
 
-<a href="#">Slack AI</a>
+                                <span class="category-text">
 
-</div>
+                                    <strong>Ecommerce</strong>
 
-</div>
+                                    <small>
+                                        Store automation
+                                    </small>
 
-<!-- Voice -->
+                                </span>
 
-<div class="service-group">
+                                <i class="fa-solid fa-arrow-right category-arrow"></i>
 
-<h3>Voice Agents</h3>
+                            </button>
 
-<div class="services-grid">
 
-<a href="#">Retell AI</a>
 
-<a href="#">Twilio</a>
+                            <button
+                                class="mega-category"
+                                data-category="sourcing"
+                                type="button">
 
-<a href="#">ElevenLabs</a>
+                                <span class="category-icon">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </span>
 
-<a href="#">AI Receptionist</a>
+                                <span class="category-text">
 
-<a href="#">Appointment Setter</a>
+                                    <strong>Sourcing</strong>
 
-<a href="#">Inbound Calls</a>
+                                    <small>
+                                        Research & data
+                                    </small>
 
-<a href="#">Outbound Calls</a>
+                                </span>
 
-<a href="#">Call Routing</a>
+                                <i class="fa-solid fa-arrow-right category-arrow"></i>
 
-</div>
+                            </button>
 
-</div>
 
-<!-- Ecommerce -->
 
-<div class="service-group">
+                            <button
+                                class="mega-category"
+                                data-category="other"
+                                type="button">
 
-<h3>E-Commerce Automation</h3>
+                                <span class="category-icon">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                </span>
 
-<div class="services-grid">
+                                <span class="category-text">
 
-<a href="#">Shopify</a>
+                                    <strong>Other Automation</strong>
 
-<a href="#">WooCommerce</a>
+                                    <small>
+                                        Custom systems
+                                    </small>
 
-<a href="#">Abandoned Cart</a>
+                                </span>
 
-<a href="#">Order Confirmation</a>
+                                <i class="fa-solid fa-arrow-right category-arrow"></i>
 
-<a href="#">Invoices</a>
+                            </button>
 
-<a href="#">Review Requests</a>
 
-<a href="#">Email Automation</a>
+                        </div>
 
-<a href="#">SMS Automation</a>
 
-</div>
+                    </div>
 
-</div>
 
-<!-- Lead Generation -->
 
-<div class="service-group">
+                    <!-- ==================================================
+                         MIDDLE CONTENT
+                    ================================================== -->
 
-<h3>Lead Generation</h3>
+                    <div class="mega-center">
 
-<div class="services-grid">
 
-<a href="#">LinkedIn Leads</a>
+                        <!-- AUTOMATIONS -->
 
-<a href="#">Apollo</a>
+                        <div
+                            class="mega-panel active"
+                            data-panel="automation">
 
-<a href="#">Google Maps</a>
 
-<a href="#">Cold Email</a>
+                            <div class="mega-heading">
 
-<a href="#">Email Finder</a>
+                                <span class="panel-eyebrow">
+                                    WORKFLOW AUTOMATION
+                                </span>
 
-<a href="#">Prospecting</a>
+                                <h3>
+                                    Automate the work.
+                                </h3>
 
-<a href="#">CRM Sync</a>
+                                <p>
+                                    Connect your tools, eliminate repetitive tasks
+                                    and build intelligent business workflows.
+                                </p>
 
-<a href="#">Data Enrichment</a>
+                            </div>
 
-</div>
 
-</div>
 
-</div>
+                            <div class="service-grid">
 
-<!-- CTA CARD -->
 
-<div class="menu-card">
+                                <a href="#" class="service-item">
 
-<span class="card-tag">
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-bolt"></i>
+                                    </span>
 
-AI AUTOMATION
+                                    <span>
+                                        <strong>n8n</strong>
+                                        <small>Advanced workflows</small>
+                                    </span>
 
-</span>
+                                </a>
 
-<h2>
 
-We Buy You<br>
 
-More Time.
+                                <a href="#" class="service-item">
 
-</h2>
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-layer-group"></i>
+                                    </span>
 
-<p>
+                                    <span>
+                                        <strong>GoHighLevel</strong>
+                                        <small>CRM automation</small>
+                                    </span>
 
-Automate repetitive work with AI employees,
-voice agents, workflow automation and CRM systems.
+                                </a>
 
-</p>
 
-<a href="#">
 
-Book Strategy Call
+                                <a href="#" class="service-item">
 
-</a>
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-z"></i>
+                                    </span>
 
-</div>
+                                    <span>
+                                        <strong>Zapier</strong>
+                                        <small>App integrations</small>
+                                    </span>
 
-</div>
+                                </a>
 
-<!-- Mega Menu End -->
 
-</li>
 
-<li>
+                                <a href="#" class="service-item">
 
-<a href="#">Industries</a>
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-shapes"></i>
+                                    </span>
 
-</li>
+                                    <span>
+                                        <strong>Make</strong>
+                                        <small>Visual automation</small>
+                                    </span>
 
-<li>
+                                </a>
 
-<a href="#">Portfolio</a>
 
-</li>
 
-<li>
+                                <a href="#" class="service-item">
 
-<a href="#">Case Studies</a>
+                                    <span class="service-icon">
+                                        <i class="fa-brands fa-hubspot"></i>
+                                    </span>
 
-</li>
+                                    <span>
+                                        <strong>HubSpot</strong>
+                                        <small>CRM workflows</small>
+                                    </span>
 
-<li>
+                                </a>
 
-<a href="#">Resources</a>
 
-</li>
 
-<li>
+                            </div>
 
-<a href="#">Contact</a>
 
-</li>
+                        </div>
 
-</ul>
 
-<a href="#" class="nav-btn">
 
-Book Strategy Call
+                        <!-- CHAT AGENTS -->
 
-</a>
+                        <div
+                            class="mega-panel"
+                            data-panel="chat">
 
-</nav>
+
+                            <div class="mega-heading">
+
+                                <span class="panel-eyebrow">
+                                    AI CHAT AGENTS
+                                </span>
+
+                                <h3>
+                                    Conversations on autopilot.
+                                </h3>
+
+                                <p>
+                                    AI agents that respond, qualify, support
+                                    and engage customers across your channels.
+                                </p>
+
+                            </div>
+
+
+
+                            <div class="service-grid">
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-brands fa-whatsapp"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>WhatsApp</strong>
+                                        <small>AI conversations</small>
+                                    </span>
+                                </a>
+
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-brands fa-facebook-f"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>Facebook</strong>
+                                        <small>Messenger agents</small>
+                                    </span>
+                                </a>
+
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-brands fa-discord"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>Discord</strong>
+                                        <small>Community agents</small>
+                                    </span>
+                                </a>
+
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-brands fa-linkedin-in"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>LinkedIn</strong>
+                                        <small>Lead conversations</small>
+                                    </span>
+                                </a>
+
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>Instagram</strong>
+                                        <small>DM automation</small>
+                                    </span>
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- CALLING AGENTS -->
+
+                        <div
+                            class="mega-panel"
+                            data-panel="voice">
+
+
+                            <div class="mega-heading">
+
+                                <span class="panel-eyebrow">
+                                    VOICE AI
+                                </span>
+
+                                <h3>
+                                    AI that can make the call.
+                                </h3>
+
+                                <p>
+                                    Intelligent voice agents for inbound,
+                                    outbound and customer communication.
+                                </p>
+
+                            </div>
+
+
+
+                            <div class="service-grid">
+
+
+                                <a href="#" class="service-item">
+
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>Retell AI</strong>
+                                        <small>Voice agents</small>
+                                    </span>
+
+                                </a>
+
+
+
+                                <a href="#" class="service-item">
+
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-phone-volume"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>Twilio</strong>
+                                        <small>Voice infrastructure</small>
+                                    </span>
+
+                                </a>
+
+
+
+                                <a href="#" class="service-item">
+
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-wave-square"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>ElevenLabs</strong>
+                                        <small>AI voice technology</small>
+                                    </span>
+
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- ECOMMERCE -->
+
+                        <div
+                            class="mega-panel"
+                            data-panel="ecommerce">
+
+
+                            <div class="mega-heading">
+
+                                <span class="panel-eyebrow">
+                                    ECOMMERCE AUTOMATION
+                                </span>
+
+                                <h3>
+                                    Your store. Less manual work.
+                                </h3>
+
+                                <p>
+                                    Automate orders, customers, abandoned carts,
+                                    emails, invoices and everyday store operations.
+                                </p>
+
+                            </div>
+
+
+
+                            <div class="service-grid">
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-cart-arrow-down"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>Abandoned Cart</strong>
+                                        <small>Recovery automation</small>
+                                    </span>
+                                </a>
+
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-box"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>Order Automation</strong>
+                                        <small>Order workflows</small>
+                                    </span>
+                                </a>
+
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>Email Automation</strong>
+                                        <small>Customer communication</small>
+                                    </span>
+                                </a>
+
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-file-invoice"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>Invoices</strong>
+                                        <small>Automated invoicing</small>
+                                    </span>
+                                </a>
+
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-brands fa-shopify"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>Shopify</strong>
+                                        <small>Store automation</small>
+                                    </span>
+                                </a>
+
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-store"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>WooCommerce</strong>
+                                        <small>Store workflows</small>
+                                    </span>
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- SOURCING -->
+
+                        <div
+                            class="mega-panel"
+                            data-panel="sourcing">
+
+
+                            <div class="mega-heading">
+
+                                <span class="panel-eyebrow">
+                                    SOURCING AUTOMATION
+                                </span>
+
+                                <h3>
+                                    Find information automatically.
+                                </h3>
+
+                                <p>
+                                    Automate research, sourcing, data collection
+                                    and repetitive information gathering.
+                                </p>
+
+                            </div>
+
+
+
+                            <div class="service-grid">
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-globe"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>Web Research</strong>
+                                        <small>Automated research</small>
+                                    </span>
+                                </a>
+
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-database"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>Data Collection</strong>
+                                        <small>Structured data</small>
+                                    </span>
+                                </a>
+
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>Product Sourcing</strong>
+                                        <small>Automated sourcing</small>
+                                    </span>
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- OTHER AUTOMATION -->
+
+                        <div
+                            class="mega-panel"
+                            data-panel="other">
+
+
+                            <div class="mega-heading">
+
+                                <span class="panel-eyebrow">
+                                    CUSTOM AUTOMATION
+                                </span>
+
+                                <h3>
+                                    If it's repetitive, automate it.
+                                </h3>
+
+                                <p>
+                                    Custom AI systems and business automations
+                                    built around your exact workflow.
+                                </p>
+
+                            </div>
+
+
+
+                            <div class="service-grid">
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-gears"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>Custom Workflows</strong>
+                                        <small>Business processes</small>
+                                    </span>
+                                </a>
+
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-robot"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>AI Employees</strong>
+                                        <small>Digital workers</small>
+                                    </span>
+                                </a>
+
+
+
+                                <a href="#" class="service-item">
+                                    <span class="service-icon">
+                                        <i class="fa-solid fa-plug"></i>
+                                    </span>
+
+                                    <span>
+                                        <strong>API Integrations</strong>
+                                        <small>Connect your systems</small>
+                                    </span>
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- ==================================================
+                         RIGHT CTA
+                    ================================================== -->
+
+                    <aside class="mega-cta">
+
+
+                        <div class="cta-glow"></div>
+
+
+                        <span class="cta-label">
+                            AWSZ
+                        </span>
+
+
+                        <h3>
+                            We Buy You
+                            <span>More Time.</span>
+                        </h3>
+
+
+                        <p>
+                            Replace repetitive work with intelligent
+                            automation systems built for your business.
+                        </p>
+
+
+                        <a href="#" class="mega-cta-btn">
+
+                            Book Strategy Call
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+
+                    </aside>
+
+
+                </div>
+
+
+            </li>
+
+
+
+            <li>
+                <a href="#">Industries</a>
+            </li>
+
+
+            <li>
+                <a href="#">Portfolio</a>
+            </li>
+
+
+            <li>
+                <a href="#">Case Studies</a>
+            </li>
+
+
+            <li>
+                <a href="#">Resources</a>
+            </li>
+
+
+            <li>
+                <a href="#">Contact</a>
+            </li>
+
+
+        </ul>
+
+
+
+        <!-- HEADER CTA -->
+
+        <a href="#" class="header-btn">
+            Book Strategy Call
+        </a>
+
+
+    </nav>
 
 </header>
-<!-- =========================================
-HERO SECTION START
-========================================= -->
+
+
+
+
+
+<!-- ======================================================
+     HERO
+====================================================== -->
 
 <section class="hero">
 
-    <video class="hero-video" autoplay muted loop playsinline>
 
-        <source src="assets/videos/hero.mp4" type="video/mp4">
+    <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline>
+
+        <source src="video/hero.mp4" type="video/mp4">
 
     </video>
 
-    <div class="overlay"></div>
+
+
+    <div class="hero-overlay"></div>
+
+
 
     <div class="hero-content">
 
-        <div class="hero-badge">
 
-            <span></span>
+        <div class="hero-tag">
+
+            <span class="status-dot"></span>
 
             AI Automation Agency
 
         </div>
 
+
+
         <h1>
 
             We Buy You
+
             <br>
-            More Time.
+
+            <span>More Time.</span>
 
         </h1>
 
+
+
         <p>
 
-            We build AI Employees, Voice Agents and Workflow Automations
-            that eliminate repetitive work, reduce operational costs
-            and help businesses scale faster.
+            We build AI Employees, Voice Agents and Workflow
+            Automations that eliminate repetitive work, reduce
+            operational costs and help businesses scale faster.
 
         </p>
+
+
 
         <div class="hero-buttons">
 
-            <a href="#" class="primary-btn">
+
+            <a href="#" class="hero-primary">
 
                 Book Strategy Call
 
+                <i class="fa-solid fa-arrow-right"></i>
+
             </a>
 
-            <a href="#" class="secondary-btn">
+
+
+            <a href="#" class="hero-secondary">
 
                 View Portfolio
 
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
             </a>
 
+
         </div>
 
-    </div>
-
-    <div class="scroll-down">
-
-        <i class="fa-solid fa-chevron-down"></i>
 
     </div>
+
 
 </section>
 
-<!-- =========================================
-TRUST BAR
-========================================= -->
 
-<section class="tech-stack">
 
-    <div class="tech-title">
 
-        Trusted Technologies
 
-    </div>
+<!-- ======================================================
+     MOBILE MENU BUTTON
+====================================================== -->
 
-    <div class="marquee">
+<button
+    class="mobile-menu-toggle"
+    type="button"
+    aria-label="Open menu"
+    aria-expanded="false">
 
-        <div class="marquee-content">
+    <span></span>
+    <span></span>
+    <span></span>
 
-            <span>n8n</span>
+</button>
 
-            <span>GoHighLevel</span>
 
-            <span>Make</span>
 
-            <span>Zapier</span>
+<!-- ======================================================
+     MOBILE MENU
+====================================================== -->
 
-            <span>HubSpot</span>
+<div class="mobile-menu">
 
-            <span>OpenAI</span>
 
-            <span>Claude</span>
+    <div class="mobile-menu-inner">
 
-            <span>Retell AI</span>
 
-            <span>Twilio</span>
+        <a href="#">Home</a>
 
-            <span>ElevenLabs</span>
+        <a href="#">About</a>
 
-            <span>Shopify</span>
+        <a href="#">Solutions</a>
 
-            <span>WooCommerce</span>
+        <a href="#">Industries</a>
 
-            <span>WhatsApp API</span>
+        <a href="#">Portfolio</a>
 
-            <span>Stripe</span>
+        <a href="#">Case Studies</a>
 
-            <span>Airtable</span>
+        <a href="#">Resources</a>
 
-            <span>Google Workspace</span>
+        <a href="#">Contact</a>
 
-            <!-- duplicate for infinite scroll -->
 
-            <span>n8n</span>
+        <a href="#" class="mobile-cta">
+            Book Strategy Call
+        </a>
 
-            <span>GoHighLevel</span>
-
-            <span>Make</span>
-
-            <span>Zapier</span>
-
-            <span>HubSpot</span>
-
-            <span>OpenAI</span>
-
-            <span>Claude</span>
-
-            <span>Retell AI</span>
-
-            <span>Twilio</span>
-
-            <span>ElevenLabs</span>
-
-            <span>Shopify</span>
-
-            <span>WooCommerce</span>
-
-            <span>WhatsApp API</span>
-
-            <span>Stripe</span>
-
-            <span>Airtable</span>
-
-            <span>Google Workspace</span>
-
-        </div>
 
     </div>
 
-</section>
 
-<!-- =========================================
-WHAT WE AUTOMATE
-========================================= -->
+</div>
 
-<section class="automation-preview">
 
-    <div class="section-heading">
-
-        <span>
-
-            WHAT WE AUTOMATE
-
-        </span>
-
-        <h2>
-
-            AI Solutions Built
-            <br>
-            For Modern Businesses
-
-        </h2>
-
-        <p>
-
-            From lead generation to customer support,
-            we automate repetitive work so your team
-            can focus on growth.
-
-        </p>
-
-    </div>
-
-    <div class="preview-grid">
-
-        <div class="preview-card">
-
-            <i class="fa-solid fa-robot"></i>
-
-            <h3>
-
-                AI Chat Agents
-
-            </h3>
-
-            <p>
-
-                WhatsApp, Instagram,
-                Facebook,
-                Website Chatbots
-
-            </p>
-
-        </div>
-
-        <div class="preview-card">
-
-            <i class="fa-solid fa-microchip"></i>
-
-            <h3>
-
-                Workflow Automation
-
-            </h3>
-
-            <p>
-
-                n8n,
-                Make,
-                Zapier,
-                HubSpot,
-                GHL
-
-            </p>
-
-        </div>
-
-        <div class="preview-card">
-
-            <i class="fa-solid fa-phone-volume"></i>
-
-            <h3>
-
-                Voice AI
-
-            </h3>
-
-            <p>
-
-                Retell AI,
-                Twilio,
-                ElevenLabs
-
-            </p>
-
-        </div>
-
-        <div class="preview-card">
-
-            <i class="fa-solid fa-cart-shopping"></i>
-
-            <h3>
-
-                Ecommerce
-
-            </h3>
-
-            <p>
-
-                Shopify,
-                WooCommerce,
-                Email Automation
-
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- =========================================
-PART 2 END
-========================================= -->
 
 <script src="script.js"></script>
 
