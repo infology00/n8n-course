@@ -1233,7 +1233,7 @@ ANIMATIONS
         transform:translateY(40px);
 
 
-    }
+    }a
 
 
     to{
@@ -1415,4 +1415,11 @@ RESPONSIVE
 
 
 
+}
+.hero-content {
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center !important;
 }
