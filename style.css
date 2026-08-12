@@ -1901,14 +1901,13 @@ AI AUTOMATION SHOWCASE
 
 /* YOUR CURRENT HTML USES IMAGES */
 
-.video-card img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    display:block;
-    background:#111;
+.video-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;
+    display: block;
+    background: #111;
 }
-
 .video-card:hover{
 
     transform:scale(1.12) translateY(-10px);
@@ -1986,6 +1985,6 @@ AI AUTOMATION SHOWCASE
     }
 
 }
-.automation-showcase .section-tag{
-    display:none;
+.automation-showcase .section-tag {
+    display: none !important;
 }
