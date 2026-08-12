@@ -2032,3 +2032,8 @@ body > header .navbar {
     top: 0 !important;
     transform: none !important;
 }
+/* KEEP HEADER ABOVE ALL SECTIONS */
+body > header {
+    position: fixed !important;
+    z-index: 999999 !important;
+}
