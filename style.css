@@ -1709,3 +1709,572 @@ RESPONSIVE
 
     transform: translateY(-2px) !important;
 }
+/* ==========================================
+   AI AUTOMATION SHOWCASE
+========================================== */
+
+.automation-showcase {
+
+    width: min(1300px, 90%);
+
+    margin: 0 auto;
+
+    padding: 150px 0;
+
+    display: grid;
+
+    grid-template-columns: 0.85fr 1.15fr;
+
+    gap: 80px;
+
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+/* ==========================================
+   LEFT CONTENT
+========================================== */
+
+.showcase-content {
+
+    max-width: 560px;
+
+}
+
+
+.showcase-content .section-tag {
+
+    display: inline-block;
+
+    color: #D6FF00;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 22px;
+
+}
+
+
+.showcase-content h2 {
+
+    color: #FFFFFF;
+
+    font-size: 58px;
+
+    line-height: 1.05;
+
+    font-weight: 800;
+
+    margin: 0 0 28px;
+
+}
+
+
+.showcase-content h2 span {
+
+    color: #D6FF00;
+
+}
+
+
+.showcase-content p {
+
+    color: #BDBDBD;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    max-width: 520px;
+
+    margin: 0 0 35px;
+
+}
+
+
+/* ==========================================
+   SHOWCASE BUTTONS
+========================================== */
+
+.showcase-buttons {
+
+    display: flex;
+
+    gap: 14px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.showcase-buttons a {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 14px 24px;
+
+    border-radius: 50px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition: all .35s ease;
+
+}
+
+
+.showcase-buttons a:first-child {
+
+    background: #D6FF00;
+
+    color: #050505;
+
+}
+
+
+.showcase-buttons a:first-child:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow: 0 12px 35px rgba(214, 255, 0, .22);
+
+}
+
+
+.showcase-buttons a:last-child {
+
+    color: #FFFFFF;
+
+    border: 1px solid rgba(255,255,255,.14);
+
+    background: rgba(255,255,255,.03);
+
+}
+
+
+.showcase-buttons a:last-child:hover {
+
+    background: #FFFFFF;
+
+    color: #050505;
+
+    transform: translateY(-4px);
+
+}
+
+
+/* ==========================================
+   VIDEO PYRAMID
+========================================== */
+
+.video-pyramid {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 16px;
+
+    align-items: center;
+
+    position: relative;
+
+    perspective: 1000px;
+
+}
+
+
+/* ==========================================
+   VIDEO CARD
+========================================== */
+
+.video-card {
+
+    position: relative;
+
+    height: 180px;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    background: #171717;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    box-shadow: 0 20px 60px rgba(0,0,0,.35);
+
+    cursor: pointer;
+
+    transition:
+        transform .4s ease,
+        border-color .4s ease,
+        box-shadow .4s ease;
+
+}
+
+
+.video-card img {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform .5s ease;
+
+}
+
+
+.video-card:hover {
+
+    transform: translateY(-8px) scale(1.025);
+
+    border-color: rgba(214,255,0,.45);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.5),
+        0 0 35px rgba(214,255,0,.08);
+
+    z-index: 5;
+
+}
+
+
+.video-card:hover img {
+
+    transform: scale(1.08);
+
+}
+
+
+/* ==========================================
+   PLAY BUTTON
+========================================== */
+
+.play-btn {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    width: 52px;
+
+    height: 52px;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #D6FF00;
+
+    color: #050505;
+
+    box-shadow: 0 0 30px rgba(214,255,0,.3);
+
+    transition: all .35s ease;
+
+}
+
+
+.play-btn i {
+
+    font-size: 16px;
+
+    margin-left: 3px;
+
+}
+
+
+.video-card:hover .play-btn {
+
+    transform: translate(-50%, -50%) scale(1.12);
+
+    box-shadow: 0 0 45px rgba(214,255,0,.45);
+
+}
+
+
+/* ==========================================
+   PYRAMID POSITIONING
+========================================== */
+
+.video-card:nth-child(1) {
+
+    transform: translateY(35px);
+
+}
+
+
+.video-card:nth-child(2) {
+
+    transform: translateY(-10px);
+
+}
+
+
+.video-card:nth-child(3) {
+
+    transform: translateY(35px);
+
+}
+
+
+.video-card:nth-child(4) {
+
+    transform: translateY(-10px);
+
+}
+
+
+.video-card:nth-child(5) {
+
+    transform: translateY(-55px);
+
+}
+
+
+.video-card:nth-child(6) {
+
+    transform: translateY(-10px);
+
+}
+
+
+.video-card:nth-child(7) {
+
+    transform: translateY(35px);
+
+}
+
+
+.video-card:nth-child(8) {
+
+    transform: translateY(-10px);
+
+}
+
+
+/* Keep hover movement natural */
+
+.video-card:nth-child(1):hover,
+.video-card:nth-child(2):hover,
+.video-card:nth-child(3):hover,
+.video-card:nth-child(4):hover,
+.video-card:nth-child(5):hover,
+.video-card:nth-child(6):hover,
+.video-card:nth-child(7):hover,
+.video-card:nth-child(8):hover {
+
+    transform:
+        translateY(-18px)
+        scale(1.025);
+
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1100px) {
+
+    .automation-showcase {
+
+        grid-template-columns: 1fr;
+
+        gap: 70px;
+
+    }
+
+
+    .showcase-content {
+
+        max-width: 750px;
+
+    }
+
+
+    .showcase-content h2 {
+
+        font-size: 52px;
+
+    }
+
+
+    .video-pyramid {
+
+        max-width: 850px;
+
+        width: 100%;
+
+        margin: 0 auto;
+
+    }
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+    .automation-showcase {
+
+        width: min(92%, 600px);
+
+        padding: 100px 0;
+
+        gap: 55px;
+
+    }
+
+
+    .showcase-content {
+
+        text-align: center;
+
+        margin: 0 auto;
+
+    }
+
+
+    .showcase-content h2 {
+
+        font-size: 42px;
+
+    }
+
+
+    .showcase-content p {
+
+        font-size: 16px;
+
+    }
+
+
+    .showcase-buttons {
+
+        justify-content: center;
+
+    }
+
+
+    .video-pyramid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 14px;
+
+    }
+
+
+    .video-card {
+
+        height: 160px;
+
+    }
+
+
+    .video-card:nth-child(1),
+    .video-card:nth-child(2),
+    .video-card:nth-child(3),
+    .video-card:nth-child(4),
+    .video-card:nth-child(5),
+    .video-card:nth-child(6),
+    .video-card:nth-child(7),
+    .video-card:nth-child(8) {
+
+        transform: none;
+
+    }
+
+
+    .video-card:hover {
+
+        transform: translateY(-6px) scale(1.02);
+
+    }
+
+}
+
+
+/* ==========================================
+   SMALL PHONE
+========================================== */
+
+@media (max-width: 480px) {
+
+    .automation-showcase {
+
+        padding: 80px 0;
+
+    }
+
+
+    .showcase-content h2 {
+
+        font-size: 36px;
+
+    }
+
+
+    .showcase-buttons {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+
+    .showcase-buttons a {
+
+        width: 100%;
+
+    }
+
+
+    .video-pyramid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .video-card {
+
+        height: 190px;
+
+    }
+
+}
