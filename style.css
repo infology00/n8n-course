@@ -2013,3 +2013,22 @@ body > header .navbar {
     top: auto !important;
     transform: none !important;
 }
+/* HEADER — FORCE TO VERY TOP */
+body > header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 999999 !important;
+    transform: none !important;
+}
+
+/* REMOVE NAVBAR TOP GAP */
+body > header .navbar {
+    margin-top: 0 !important;
+    top: 0 !important;
+    transform: none !important;
+}
