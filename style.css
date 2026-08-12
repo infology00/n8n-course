@@ -1423,3 +1423,8 @@ RESPONSIVE
     padding: 20px;
     text-align: center !important;
 }
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
