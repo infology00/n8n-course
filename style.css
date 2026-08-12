@@ -1902,17 +1902,12 @@ AI AUTOMATION SHOWCASE
 /* YOUR CURRENT HTML USES IMAGES */
 
 .video-card img{
-
     width:100%;
-
     height:100%;
-
-    object-fit:cover;
-
+    object-fit:contain;
     display:block;
-
+    background:#111;
 }
-
 
 .video-card:hover{
 
@@ -1990,4 +1985,7 @@ AI AUTOMATION SHOWCASE
 
     }
 
+}
+.automation-showcase .section-tag{
+    display:none;
 }
