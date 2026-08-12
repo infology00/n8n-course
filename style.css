@@ -1445,3 +1445,50 @@ RESPONSIVE
 
     text-align: center !important;
 }
+/* FINAL HERO CENTER FIX */
+
+.hero-content {
+    position: absolute !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    width: min(1000px, 90%) !important;
+    max-width: 1000px !important;
+
+    margin: 0 !important;
+    padding: 20px !important;
+
+    text-align: center !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    animation: heroCenterFade 0.8s ease forwards !important;
+}
+
+.hero-content h1,
+.hero-content p {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.hero-buttons {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+@keyframes heroCenterFade {
+
+    from {
+        opacity: 0;
+        transform: translate(-50%, calc(-50% + 30px));
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+}
