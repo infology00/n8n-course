@@ -1712,6 +1712,9 @@ RESPONSIVE
 /* =====================================
    AI AUTOMATION SHOWCASE Video
 ===================================== */
+/* =====================================
+AI AUTOMATION SHOWCASE
+===================================== */
 
 .automation-showcase{
 
@@ -1732,9 +1735,7 @@ RESPONSIVE
 }
 
 
-/* =====================================
-   LEFT CONTENT
-===================================== */
+/* LEFT CONTENT */
 
 .showcase-content{
 
@@ -1743,9 +1744,7 @@ RESPONSIVE
 }
 
 
-/* SECTION TAG */
-
-.showcase-content .section-tag{
+.section-tag{
 
     display:inline-flex;
 
@@ -1772,8 +1771,6 @@ RESPONSIVE
 }
 
 
-/* HEADING */
-
 .showcase-content h2{
 
     font-size:68px;
@@ -1786,8 +1783,6 @@ RESPONSIVE
 
     color:#111;
 
-    margin:0;
-
 }
 
 
@@ -1797,8 +1792,6 @@ RESPONSIVE
 
 }
 
-
-/* DESCRIPTION */
 
 .showcase-content p{
 
@@ -1815,9 +1808,7 @@ RESPONSIVE
 }
 
 
-/* =====================================
-   BUTTONS
-===================================== */
+/* BUTTONS */
 
 .showcase-buttons{
 
@@ -1839,8 +1830,6 @@ RESPONSIVE
     font-weight:700;
 
     transition:.3s;
-
-    text-decoration:none;
 
 }
 
@@ -1870,9 +1859,7 @@ RESPONSIVE
 }
 
 
-/* =====================================
-   VIDEO PYRAMID
-===================================== */
+/* VIDEO PYRAMID */
 
 .video-pyramid{
 
@@ -1888,10 +1875,6 @@ RESPONSIVE
 
 }
 
-
-/* =====================================
-   VIDEO CARDS
-===================================== */
 
 .video-card{
 
@@ -1916,7 +1899,7 @@ RESPONSIVE
 }
 
 
-/* IMAGE */
+/* YOUR CURRENT HTML USES IMAGES */
 
 .video-card img{
 
@@ -1931,8 +1914,6 @@ RESPONSIVE
 }
 
 
-/* HOVER */
-
 .video-card:hover{
 
     transform:scale(1.12) translateY(-10px);
@@ -1941,10 +1922,6 @@ RESPONSIVE
 
 }
 
-
-/* =====================================
-   PLAY BUTTON
-===================================== */
 
 .play-btn{
 
@@ -1988,9 +1965,7 @@ RESPONSIVE
 }
 
 
-/* =====================================
-   RESPONSIVE
-===================================== */
+/* RESPONSIVE */
 
 @media(max-width:900px){
 
@@ -2002,14 +1977,12 @@ RESPONSIVE
 
     }
 
-
     .showcase-content,
     .video-pyramid{
 
         width:100%;
 
     }
-
 
     .showcase-content h2{
 
