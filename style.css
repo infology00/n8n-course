@@ -2523,3 +2523,239 @@ body > header {
     }
 
 }
+/* ==========================================
+   WORKFLOW BUILDER — DARK OVERRIDE
+   PASTE THIS AT THE VERY END OF CSS
+========================================== */
+
+.workflow-builder {
+    color: #fff !important;
+}
+
+
+/* LEFT + RIGHT SAME HEIGHT */
+
+.workflow-builder-inner {
+    align-items: stretch !important;
+}
+
+
+/* LEFT CARD */
+
+.workflow-options {
+    height: 650px !important;
+    min-height: 650px !important;
+    box-sizing: border-box !important;
+
+    background: #111 !important;
+
+    border: 1px solid rgba(255,255,255,.08) !important;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.03) !important;
+}
+
+
+/* LEFT TEXT */
+
+.workflow-options-header h2,
+.workflow-canvas-header h2 {
+    color: #fff !important;
+}
+
+.workflow-options-header p {
+    color: #888 !important;
+}
+
+.workflow-options-header > span,
+.workflow-canvas-header > div > span {
+    color: #D6FF00 !important;
+}
+
+
+/* CATEGORY TITLES */
+
+.workflow-category h3 {
+    color: #666 !important;
+}
+
+
+/* OPTION BUTTONS */
+
+.workflow-items button {
+    background: #171717 !important;
+    color: #d5d5d5 !important;
+
+    border-color: rgba(255,255,255,.07) !important;
+}
+
+.workflow-items button i {
+    color: #888 !important;
+}
+
+
+/* BUTTON HOVER */
+
+.workflow-items button:hover {
+    background: #1e1e1e !important;
+    color: #fff !important;
+
+    border-color: rgba(214,255,0,.35) !important;
+}
+
+.workflow-items button:hover i {
+    color: #D6FF00 !important;
+}
+
+
+/* SELECTED BUTTON */
+
+.workflow-items button.selected {
+    background: #D6FF00 !important;
+    color: #050505 !important;
+
+    border-color: #D6FF00 !important;
+}
+
+.workflow-items button.selected i {
+    color: #050505 !important;
+}
+
+
+/* CANVAS */
+
+.workflow-canvas {
+    height: 650px !important;
+    min-height: 650px !important;
+
+    box-sizing: border-box !important;
+
+    background-color: #050505 !important;
+
+    background-image:
+        radial-gradient(
+            rgba(214,255,0,.32) 1px,
+            transparent 1px
+        ) !important;
+
+    background-size: 24px 24px !important;
+
+    border-color: rgba(255,255,255,.09) !important;
+
+    box-shadow:
+        inset 0 0 100px rgba(214,255,0,.025),
+        0 25px 70px rgba(0,0,0,.5) !important;
+}
+
+
+/* CANVAS GLOW */
+
+.workflow-canvas::before {
+    background: rgba(214,255,0,.055) !important;
+}
+
+.workflow-canvas::after {
+    background: rgba(214,255,0,.025) !important;
+}
+
+
+/* EMPTY CANVAS */
+
+.workflow-empty h3 {
+    color: #fff !important;
+}
+
+.workflow-empty p {
+    color: #777 !important;
+}
+
+.empty-icon {
+    background: #111 !important;
+    color: #D6FF00 !important;
+
+    border-color: rgba(214,255,0,.15) !important;
+}
+
+
+/* CLEAR BUTTON */
+
+#clearWorkflow {
+    background: #111 !important;
+    color: #aaa !important;
+
+    border-color: rgba(255,255,255,.1) !important;
+}
+
+#clearWorkflow:hover {
+    background: #D6FF00 !important;
+    color: #050505 !important;
+    border-color: #D6FF00 !important;
+}
+
+
+/* WORKFLOW NODES */
+
+.workflow-node {
+    background: rgba(17,17,17,.96) !important;
+
+    border-color: rgba(255,255,255,.1) !important;
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+
+.workflow-node-icon {
+    background: #D6FF00 !important;
+    color: #050505 !important;
+}
+
+.workflow-node-content small {
+    color: #666 !important;
+}
+
+.workflow-node-content strong {
+    color: #fff !important;
+}
+
+
+/* NODE CONNECTION */
+
+.workflow-node::after {
+    background: #D6FF00 !important;
+    border-color: #050505 !important;
+
+    box-shadow:
+        0 0 12px rgba(214,255,0,.5) !important;
+}
+
+
+/* CONNECTION LINES */
+
+.workflow-line {
+    stroke: #D6FF00 !important;
+    opacity: .45 !important;
+
+    filter:
+        drop-shadow(
+            0 0 4px rgba(214,255,0,.25)
+        ) !important;
+}
+
+
+/* MOBILE */
+
+@media(max-width:760px) {
+
+    .workflow-options {
+        height: auto !important;
+        min-height: 0 !important;
+    }
+
+    .workflow-canvas {
+        height: 600px !important;
+        min-height: 600px !important;
+    }
+
+}
