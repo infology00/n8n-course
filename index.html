@@ -389,132 +389,201 @@
     <!-- ==========================================
      AI WORKFLOW CANVAS
 ========================================== -->
+
 <section class="workflow-builder">
 
     <div class="workflow-shell">
 
-        <!-- LEFT CONTROL PANEL -->
+        <!-- ==============================
+             LEFT CONTROL PANEL
+        =============================== -->
+
         <aside class="workflow-sidebar">
 
             <div class="workflow-sidebar-top">
-                <span class="workflow-eyebrow">AUTOMATION BUILDER</span>
 
-                <h2>Build Your<br><span>Workflow.</span></h2>
+                <span class="workflow-eyebrow">
+                    AUTOMATION BUILDER
+                </span>
+
+                <h2>
+                    Build Your
+                    <br>
+                    <span>Workflow.</span>
+                </h2>
 
                 <p>
                     Choose a platform and explore what you can automate.
                 </p>
+
             </div>
 
 
-            <!-- CATEGORY VIEW -->
+            <!-- ==============================
+                 CATEGORY VIEW
+            =============================== -->
+
             <div class="workflow-view" id="categoryView">
 
                 <div class="workflow-view-title">
+
                     <span>01</span>
-                    <strong>Choose a category</strong>
+
+                    <strong>
+                        Choose a category
+                    </strong>
+
                 </div>
+
 
                 <div class="workflow-category-list">
 
-                    <button class="workflow-category active"
-                            data-category="social">
+                    <button
+                        class="workflow-category active"
+                        data-category="social">
 
                         <div class="category-icon">
                             <i class="fa-solid fa-share-nodes"></i>
                         </div>
 
-                        <div>
-                            <strong>Social Media Automation</strong>
-                            <small>Posts, leads & engagement</small>
+                        <div class="category-copy">
+
+                            <strong>
+                                Social Media Automation
+                            </strong>
+
+                            <small>
+                                Posts, leads & engagement
+                            </small>
+
                         </div>
 
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <i class="fa-solid fa-arrow-right category-arrow"></i>
 
                     </button>
 
 
-                    <button class="workflow-category"
-                            data-category="crm">
+                    <button
+                        class="workflow-category"
+                        data-category="crm">
 
                         <div class="category-icon">
                             <i class="fa-solid fa-users"></i>
                         </div>
 
-                        <div>
-                            <strong>CRM Automation</strong>
-                            <small>Leads, pipelines & customers</small>
+                        <div class="category-copy">
+
+                            <strong>
+                                CRM Automation
+                            </strong>
+
+                            <small>
+                                Leads, pipelines & customers
+                            </small>
+
                         </div>
 
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <i class="fa-solid fa-arrow-right category-arrow"></i>
 
                     </button>
 
 
-                    <button class="workflow-category"
-                            data-category="scraping">
+                    <button
+                        class="workflow-category"
+                        data-category="scraping">
 
                         <div class="category-icon">
                             <i class="fa-solid fa-spider"></i>
                         </div>
 
-                        <div>
-                            <strong>Data Scraping</strong>
-                            <small>Extract & process data</small>
+                        <div class="category-copy">
+
+                            <strong>
+                                Data Scraping
+                            </strong>
+
+                            <small>
+                                Extract & process data
+                            </small>
+
                         </div>
 
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <i class="fa-solid fa-arrow-right category-arrow"></i>
 
                     </button>
 
 
-                    <button class="workflow-category"
-                            data-category="leads">
+                    <button
+                        class="workflow-category"
+                        data-category="leads">
 
                         <div class="category-icon">
                             <i class="fa-solid fa-bullseye"></i>
                         </div>
 
-                        <div>
-                            <strong>Lead Generation</strong>
-                            <small>Find & qualify prospects</small>
+                        <div class="category-copy">
+
+                            <strong>
+                                Lead Generation
+                            </strong>
+
+                            <small>
+                                Find & qualify prospects
+                            </small>
+
                         </div>
 
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <i class="fa-solid fa-arrow-right category-arrow"></i>
 
                     </button>
 
 
-                    <button class="workflow-category"
-                            data-category="ecommerce">
+                    <button
+                        class="workflow-category"
+                        data-category="ecommerce">
 
                         <div class="category-icon">
                             <i class="fa-solid fa-cart-shopping"></i>
                         </div>
 
-                        <div>
-                            <strong>Ecommerce Automation</strong>
-                            <small>Orders, customers & stores</small>
+                        <div class="category-copy">
+
+                            <strong>
+                                Ecommerce Automation
+                            </strong>
+
+                            <small>
+                                Orders, customers & stores
+                            </small>
+
                         </div>
 
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <i class="fa-solid fa-arrow-right category-arrow"></i>
 
                     </button>
 
 
-                    <button class="workflow-category"
-                            data-category="ai">
+                    <button
+                        class="workflow-category"
+                        data-category="ai">
 
                         <div class="category-icon">
                             <i class="fa-solid fa-wand-magic-sparkles"></i>
                         </div>
 
-                        <div>
-                            <strong>AI Agents</strong>
-                            <small>Chat, voice & intelligent agents</small>
+                        <div class="category-copy">
+
+                            <strong>
+                                AI Agents
+                            </strong>
+
+                            <small>
+                                Chat, voice & intelligent agents
+                            </small>
+
                         </div>
 
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <i class="fa-solid fa-arrow-right category-arrow"></i>
 
                     </button>
 
@@ -523,43 +592,77 @@
             </div>
 
 
-            <!-- PLATFORM VIEW -->
-            <div class="workflow-view hidden" id="platformView">
+            <!-- ==============================
+                 PLATFORM VIEW
+            =============================== -->
 
-                <button class="workflow-back" id="backToCategories">
+            <div
+                class="workflow-view hidden"
+                id="platformView">
+
+                <button
+                    class="workflow-back"
+                    id="backToCategories">
+
                     <i class="fa-solid fa-arrow-left"></i>
+
                     Back to categories
+
                 </button>
 
+
                 <div class="workflow-view-title">
+
                     <span>02</span>
-                    <strong id="platformTitle">Choose a platform</strong>
+
+                    <strong id="platformTitle">
+                        Choose a platform
+                    </strong>
+
                 </div>
 
-                <div class="workflow-platform-list"
-                     id="platformList">
+
+                <div
+                    class="workflow-platform-list"
+                    id="platformList">
                 </div>
 
             </div>
 
 
-            <!-- AUTOMATION VIEW -->
-            <div class="workflow-view hidden" id="automationView">
+            <!-- ==============================
+                 AUTOMATION VIEW
+            =============================== -->
 
-                <button class="workflow-back" id="backToPlatforms">
+            <div
+                class="workflow-view hidden"
+                id="automationView">
+
+                <button
+                    class="workflow-back"
+                    id="backToPlatforms">
+
                     <i class="fa-solid fa-arrow-left"></i>
+
                     Back to platforms
+
                 </button>
 
+
                 <div class="workflow-view-title">
+
                     <span>03</span>
+
                     <strong id="automationTitle">
                         Choose automation
                     </strong>
+
                 </div>
 
-                <div class="workflow-automation-list"
-                     id="automationList">
+
+                <div
+                    class="workflow-automation-list"
+                    id="automationList">
                 </div>
 
             </div>
@@ -567,18 +670,29 @@
         </aside>
 
 
-        <!-- RIGHT CANVAS -->
+        <!-- ==============================
+             RIGHT WORKFLOW CANVAS
+        =============================== -->
+
         <div class="workflow-workspace">
+
+
+            <!-- CANVAS HEADER -->
 
             <div class="workspace-header">
 
                 <div>
+
                     <span class="workspace-label">
                         LIVE WORKFLOW
                     </span>
 
-                    <h3>Your Automation</h3>
+                    <h3>
+                        Your Automation
+                    </h3>
+
                 </div>
+
 
                 <div class="workspace-actions">
 
@@ -587,8 +701,11 @@
                     </span>
 
                     <button id="clearWorkflow">
+
                         <i class="fa-solid fa-rotate-left"></i>
+
                         Clear
+
                     </button>
 
                 </div>
@@ -596,19 +713,32 @@
             </div>
 
 
-            <div class="workflow-canvas"
-                 id="workflowCanvas">
+            <!-- CANVAS -->
+
+            <div
+                class="workflow-canvas"
+                id="workflowCanvas">
+
+                <!-- GRID -->
 
                 <div class="canvas-grid"></div>
 
-                <div class="canvas-empty"
-                     id="canvasEmpty">
+
+                <!-- EMPTY STATE -->
+
+                <div
+                    class="canvas-empty"
+                    id="canvasEmpty">
 
                     <div class="canvas-empty-icon">
+
                         <i class="fa-solid fa-diagram-project"></i>
+
                     </div>
 
-                    <h3>Start Building</h3>
+                    <h3>
+                        Start Building
+                    </h3>
 
                     <p>
                         Select a platform and automation
@@ -618,13 +748,19 @@
                 </div>
 
 
-                <svg class="workflow-svg"
-                     id="workflowSvg">
+                <!-- SVG CONNECTION LINES -->
+
+                <svg
+                    class="workflow-svg"
+                    id="workflowSvg">
                 </svg>
 
 
-                <div class="canvas-nodes"
-                     id="canvasNodes">
+                <!-- GENERATED NODES -->
+
+                <div
+                    class="canvas-nodes"
+                    id="canvasNodes">
                 </div>
 
             </div>
@@ -634,7 +770,6 @@
     </div>
 
 </section>
-    
 
 
 
