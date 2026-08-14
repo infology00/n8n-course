@@ -389,90 +389,132 @@
     <!-- ==========================================
      AI WORKFLOW CANVAS
 ========================================== -->
-
 <section class="workflow-builder">
 
-    <div class="workflow-builder-inner">
+    <div class="workflow-shell">
 
+        <!-- LEFT CONTROL PANEL -->
+        <aside class="workflow-sidebar">
 
-        <!-- ==================================
-             LEFT OPTIONS
-        ================================== -->
+            <div class="workflow-sidebar-top">
+                <span class="workflow-eyebrow">AUTOMATION BUILDER</span>
 
-        <aside class="workflow-options">
-
-            <div class="workflow-options-header">
-
-                <span>BUILD YOUR WORKFLOW</span>
-
-                <h2>Choose Your Tools</h2>
+                <h2>Build Your<br><span>Workflow.</span></h2>
 
                 <p>
-                    Select the tools and systems you want to connect.
+                    Choose a platform and explore what you can automate.
                 </p>
-
             </div>
 
 
-            <!-- AUTOMATION -->
+            <!-- CATEGORY VIEW -->
+            <div class="workflow-view" id="categoryView">
 
-            <div class="workflow-category">
+                <div class="workflow-view-title">
+                    <span>01</span>
+                    <strong>Choose a category</strong>
+                </div>
 
-                <h3>Automation</h3>
+                <div class="workflow-category-list">
 
-                <div class="workflow-items">
+                    <button class="workflow-category active"
+                            data-category="social">
 
-                    <button
-                        type="button"
-                        data-node="Facebook Leads">
+                        <div class="category-icon">
+                            <i class="fa-solid fa-share-nodes"></i>
+                        </div>
 
-                        <i class="fa-brands fa-facebook-f"></i>
+                        <div>
+                            <strong>Social Media Automation</strong>
+                            <small>Posts, leads & engagement</small>
+                        </div>
 
-                        <span>Facebook</span>
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        data-node="Instagram DM">
-
-                        <i class="fa-brands fa-instagram"></i>
-
-                        <span>Instagram</span>
+                        <i class="fa-solid fa-arrow-right"></i>
 
                     </button>
 
 
-                    <button
-                        type="button"
-                        data-node="LinkedIn">
+                    <button class="workflow-category"
+                            data-category="crm">
 
-                        <i class="fa-brands fa-linkedin-in"></i>
+                        <div class="category-icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
 
-                        <span>LinkedIn</span>
+                        <div>
+                            <strong>CRM Automation</strong>
+                            <small>Leads, pipelines & customers</small>
+                        </div>
 
-                    </button>
-
-
-                    <button
-                        type="button"
-                        data-node="WhatsApp">
-
-                        <i class="fa-brands fa-whatsapp"></i>
-
-                        <span>WhatsApp</span>
+                        <i class="fa-solid fa-arrow-right"></i>
 
                     </button>
 
 
-                    <button
-                        type="button"
-                        data-node="Email">
+                    <button class="workflow-category"
+                            data-category="scraping">
 
-                        <i class="fa-solid fa-envelope"></i>
+                        <div class="category-icon">
+                            <i class="fa-solid fa-spider"></i>
+                        </div>
 
-                        <span>Email</span>
+                        <div>
+                            <strong>Data Scraping</strong>
+                            <small>Extract & process data</small>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+
+                    <button class="workflow-category"
+                            data-category="leads">
+
+                        <div class="category-icon">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+
+                        <div>
+                            <strong>Lead Generation</strong>
+                            <small>Find & qualify prospects</small>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+
+                    <button class="workflow-category"
+                            data-category="ecommerce">
+
+                        <div class="category-icon">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
+
+                        <div>
+                            <strong>Ecommerce Automation</strong>
+                            <small>Orders, customers & stores</small>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+
+                    <button class="workflow-category"
+                            data-category="ai">
+
+                        <div class="category-icon">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+
+                        <div>
+                            <strong>AI Agents</strong>
+                            <small>Chat, voice & intelligent agents</small>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right"></i>
 
                     </button>
 
@@ -481,139 +523,43 @@
             </div>
 
 
+            <!-- PLATFORM VIEW -->
+            <div class="workflow-view hidden" id="platformView">
 
-            <!-- CRM -->
+                <button class="workflow-back" id="backToCategories">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to categories
+                </button>
 
-            <div class="workflow-category">
+                <div class="workflow-view-title">
+                    <span>02</span>
+                    <strong id="platformTitle">Choose a platform</strong>
+                </div>
 
-                <h3>CRM</h3>
-
-                <div class="workflow-items">
-
-                    <button
-                        type="button"
-                        data-node="HubSpot">
-
-                        <i class="fa-brands fa-hubspot"></i>
-
-                        <span>HubSpot</span>
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        data-node="GoHighLevel">
-
-                        <i class="fa-solid fa-chart-line"></i>
-
-                        <span>GoHighLevel</span>
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        data-node="Zoho CRM">
-
-                        <i class="fa-solid fa-users"></i>
-
-                        <span>Zoho CRM</span>
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        data-node="Salesforce">
-
-                        <i class="fa-brands fa-salesforce"></i>
-
-                        <span>Salesforce</span>
-
-                    </button>
-
+                <div class="workflow-platform-list"
+                     id="platformList">
                 </div>
 
             </div>
 
 
+            <!-- AUTOMATION VIEW -->
+            <div class="workflow-view hidden" id="automationView">
 
-            <!-- AI -->
+                <button class="workflow-back" id="backToPlatforms">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to platforms
+                </button>
 
-            <div class="workflow-category">
-
-                <h3>AI</h3>
-
-                <div class="workflow-items">
-
-                    <button
-                        type="button"
-                        data-node="ChatGPT">
-
-                        <i class="fa-solid fa-robot"></i>
-
-                        <span>ChatGPT</span>
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        data-node="Claude">
-
-                        <i class="fa-solid fa-brain"></i>
-
-                        <span>Claude</span>
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        data-node="Gemini">
-
-                        <i class="fa-solid fa-sparkles"></i>
-
-                        <span>Gemini</span>
-
-                    </button>
-
+                <div class="workflow-view-title">
+                    <span>03</span>
+                    <strong id="automationTitle">
+                        Choose automation
+                    </strong>
                 </div>
 
-            </div>
-
-
-
-            <!-- ECOMMERCE -->
-
-            <div class="workflow-category">
-
-                <h3>Ecommerce</h3>
-
-                <div class="workflow-items">
-
-                    <button
-                        type="button"
-                        data-node="Shopify">
-
-                        <i class="fa-brands fa-shopify"></i>
-
-                        <span>Shopify</span>
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        data-node="WooCommerce">
-
-                        <i class="fa-brands fa-wordpress"></i>
-
-                        <span>WooCommerce</span>
-
-                    </button>
-
+                <div class="workflow-automation-list"
+                     id="automationList">
                 </div>
 
             </div>
@@ -621,90 +567,73 @@
         </aside>
 
 
+        <!-- RIGHT CANVAS -->
+        <div class="workflow-workspace">
 
-        <!-- ==================================
-             RIGHT CANVAS
-        ================================== -->
-
-        <div class="workflow-canvas-wrapper">
-
-
-            <div class="workflow-canvas-header">
+            <div class="workspace-header">
 
                 <div>
+                    <span class="workspace-label">
+                        LIVE WORKFLOW
+                    </span>
 
-                    <span>WORKFLOW CANVAS</span>
-
-                    <h2>Your Automation</h2>
-
+                    <h3>Your Automation</h3>
                 </div>
 
+                <div class="workspace-actions">
 
-                <button
-                    type="button"
-                    id="clearWorkflow">
+                    <span id="nodeCounter">
+                        0 nodes
+                    </span>
 
-                    Clear
+                    <button id="clearWorkflow">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        Clear
+                    </button>
 
-                </button>
+                </div>
 
             </div>
 
 
-            <!-- CANVAS -->
+            <div class="workflow-canvas"
+                 id="workflowCanvas">
 
-            <div
-                class="workflow-canvas"
-                id="workflowCanvas">
+                <div class="canvas-grid"></div>
 
+                <div class="canvas-empty"
+                     id="canvasEmpty">
 
-                <!-- EMPTY STATE -->
-
-                <div
-                    class="workflow-empty"
-                    id="workflowEmpty">
-
-                    <div class="empty-icon">
-
+                    <div class="canvas-empty-icon">
                         <i class="fa-solid fa-diagram-project"></i>
-
                     </div>
 
-                    <h3>Build Your Workflow</h3>
+                    <h3>Start Building</h3>
 
                     <p>
-                        Select tools from the left to start building
-                        your automation.
+                        Select a platform and automation
+                        from the panel.
                     </p>
 
                 </div>
 
 
-                <!-- NODES WILL BE INSERTED HERE -->
-
-                <div
-                    class="workflow-nodes"
-                    id="workflowNodes">
-                </div>
-
-
-                <!-- CONNECTIONS -->
-
-                <svg
-                    class="workflow-connections"
-                    id="workflowConnections">
-
+                <svg class="workflow-svg"
+                     id="workflowSvg">
                 </svg>
 
+
+                <div class="canvas-nodes"
+                     id="canvasNodes">
+                </div>
 
             </div>
 
         </div>
 
-
     </div>
 
-</section>   
+</section>
     
 
 
