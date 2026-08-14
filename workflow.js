@@ -1103,21 +1103,126 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* ==========================================
-       BUILD WORKFLOW
-    ========================================== */
-
     function buildWorkflow(nodes) {
 
-        /* CLEAR OLD WORKFLOW */
+    canvasNodes.innerHTML = "";
+    workflowSvg.innerHTML = "";
 
-        canvasNodes.innerHTML = "";
+    canvasEmpty.classList.add("hidden");
 
-        workflowSvg.innerHTML = "";
+    const nodeHeight = 78;
+    const gap = 65;
 
-        canvasEmpty.classList.add(
-            "hidden"
-        );
+    const startY = 35;
+
+    nodes.forEach((node, index) => {
+
+        const type = node[0];
+        const platform = node[1];
+        const title = node[2];
+        const icon = node[3];
+
+        const element =
+            document.createElement("div");
+
+        element.className = "workflow-node";
+
+        element.style.top =
+            `${startY + index * (nodeHeight + gap)}px`;
+
+        element.innerHTML = `
+
+            <div class="workflow-node-icon">
+                <i class="${icon}"></i>
+            </div>
+
+            <div>
+
+                <small>
+                    ${platform}
+                </small>
+
+                <strong>
+                    ${title}
+                </strong>
+
+            </div>
+
+        `;
+
+        canvasNodes.appendChild(element);
+
+    });
+
+
+    /* Total workflow height */
+
+    const totalHeight =
+        startY +
+        nodes.length * (nodeHeight + gap) +
+        40;
+
+    canvasNodes.style.height =
+        `${totalHeight}px`;
+
+    workflowSvg.style.height =
+        `${totalHeight}px`;
+
+
+    nodeCounter.textContent =
+        `${nodes.length} ${
+            nodes.length === 1
+                ? "node"
+                : "nodes"
+        }`;
+
+
+    /*
+       Wait until browser calculates
+       actual node dimensions
+    */
+
+    requestAnimationFrame(() => {
+
+        nodes.forEach((node, index) => {
+
+            if (index < nodes.length - 1) {
+
+                drawConnection(
+                    index,
+                    index + 1
+                );
+
+            }
+
+        });
+
+
+        /*
+           Scrollbar only becomes available
+           when workflow is taller than canvas
+        */
+
+        if (
+            totalHeight >
+            canvas.clientHeight
+        ) {
+
+            canvas.classList.add(
+                "workflow-scrollable"
+            );
+
+        } else {
+
+            canvas.classList.remove(
+                "workflow-scrollable"
+            );
+
+        }
+
+    });
+
+}
 
 
         /* ======================================
@@ -1353,193 +1458,96 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* ==========================================
-       DRAW STRAIGHT CONNECTION
-    ========================================== */
+   function drawConnection(
+    fromIndex,
+    toIndex
+) {
 
-    function drawConnection(
-        fromIndex,
-        toIndex
-    ) {
+    const nodes =
+        canvasNodes.querySelectorAll(
+            ".workflow-node"
+        );
 
-        const nodes =
-            canvasNodes.querySelectorAll(
-                ".workflow-node"
-            );
+    const from = nodes[fromIndex];
+    const to = nodes[toIndex];
 
-
-        const from =
-            nodes[fromIndex];
-
-        const to =
-            nodes[toIndex];
+    if (!from || !to) return;
 
 
-        if (!from || !to) return;
+    /*
+       Get REAL positions and dimensions
+       instead of hard-coded 205px.
+    */
+
+    const x1 =
+        from.offsetLeft +
+        (from.offsetWidth / 2);
+
+    const y1 =
+        from.offsetTop +
+        from.offsetHeight;
+
+    const x2 =
+        to.offsetLeft +
+        (to.offsetWidth / 2);
+
+    const y2 =
+        to.offsetTop;
 
 
-        /*
-            GET REAL POSITIONS
+    /*
+       Straight vertical connection
+    */
 
-            This avoids the old problem where
-            hard-coded left/top values caused
-            incorrect connection positions.
-        */
-
-        const canvasRect =
-            canvas.getBoundingClientRect();
-
-        const fromRect =
-            from.getBoundingClientRect();
-
-        const toRect =
-            to.getBoundingClientRect();
-
-
-        /*
-            CENTER X
-        */
-
-        const x1 =
-            (
-                fromRect.left +
-                fromRect.width / 2 -
-                canvasRect.left
-            );
-
-
-        const x2 =
-            (
-                toRect.left +
-                toRect.width / 2 -
-                canvasRect.left
-            );
-
-
-        /*
-            BOTTOM OF FIRST NODE
-        */
-
-        const y1 =
-            (
-                fromRect.bottom -
-                canvasRect.top +
-                canvas.scrollTop
-            );
-
-
-        /*
-            TOP OF NEXT NODE
-        */
-
-        const y2 =
-            (
-                toRect.top -
-                canvasRect.top +
-                canvas.scrollTop
-            );
-
-
-        /*
-            STRAIGHT VERTICAL PATH
-        */
-
-        const path =
-            document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "path"
-            );
-
-
-        path.setAttribute(
-            "d",
-            `M ${x1} ${y1} L ${x2} ${y2}`
+    const path =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
         );
 
 
-        path.classList.add(
-            "workflow-line"
-        );
+    path.setAttribute(
+        "d",
+        `M ${x1} ${y1} L ${x2} ${y2}`
+    );
 
 
-        /*
-            CONNECTION DOT
-        */
-
-        const startCircle =
-            document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "circle"
-            );
-
-        startCircle.setAttribute(
-            "cx",
-            x1
-        );
-
-        startCircle.setAttribute(
-            "cy",
-            y1
-        );
-
-        startCircle.setAttribute(
-            "r",
-            "3"
-        );
-
-        startCircle.classList.add(
-            "workflow-connection-dot"
-        );
+    path.classList.add(
+        "workflow-line"
+    );
 
 
-        workflowSvg.appendChild(
-            path
-        );
-
-        workflowSvg.appendChild(
-            startCircle
-        );
+    workflowSvg.appendChild(path);
 
 
-        /*
-            DRAW ANIMATION
-        */
+    /*
+       Animated line
+    */
 
-        try {
+    try {
 
-            const length =
-                path.getTotalLength();
+        const length =
+            path.getTotalLength();
 
+        path.style.strokeDasharray =
+            length;
 
-            path.style.strokeDasharray =
-                length;
+        path.style.strokeDashoffset =
+            length;
+
+        requestAnimationFrame(() => {
+
+            path.style.transition =
+                "stroke-dashoffset .65s ease";
 
             path.style.strokeDashoffset =
-                length;
+                "0";
 
+        });
 
-            requestAnimationFrame(
-                () => {
+    } catch (error) {}
 
-                    path.style.transition =
-                        "stroke-dashoffset .7s ease";
-
-                    path.style.strokeDashoffset =
-                        "0";
-
-                }
-            );
-
-        } catch (error) {
-
-            console.warn(
-                "Connection animation error:",
-                error
-            );
-
-        }
-
-    }
+}
 
 
     /* ==========================================
