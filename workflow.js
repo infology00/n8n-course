@@ -499,14 +499,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const nodeHeight = 78;
         const gap = 58;
-        const paddingTop = 45;
+        const nodeHeight = 78;
+        const gap = 58;
+
+        const paddingTop = 60;
         const paddingBottom = 60;
 
         const requiredHeight =
-            paddingTop +
-            nodes.length * nodeHeight +
-            (nodes.length - 1) * gap +
-            paddingBottom;
+        paddingTop +
+       (nodes.length * nodeHeight) +
+       ((nodes.length - 1) * gap) +
+       paddingBottom;
 
 
         /*
@@ -559,18 +562,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 "workflow-node";
 
 
-            const width =
-                Math.min(
-                    395,
-                    canvas.clientWidth - 40
-                );
+            const width = Math.min(395, canvas.clientWidth - 40);
 
-
-            const x =
-                Math.max(
-                    20,
-                    (canvas.clientWidth - width) / 2
-                );
+            const x = (canvas.clientWidth - width) / 2;
 
 
             const y =
