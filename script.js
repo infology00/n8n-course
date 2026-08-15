@@ -789,3 +789,450 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
+/* =========================================================
+   PREMIUM AUTOMATION NETWORK
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const canvas =
+        document.getElementById("automation-network");
+
+    const section =
+        document.querySelector(".automation-ecosystem");
+
+    if (!canvas || !section) return;
+
+
+    const ctx =
+        canvas.getContext("2d");
+
+    let width;
+    let height;
+
+    let nodes = [];
+
+
+    const mouse = {
+        x: -1000,
+        y: -1000
+    };
+
+
+    const nodeCount =
+        window.innerWidth < 700
+            ? 35
+            : 85;
+
+
+    const maxDistance = 155;
+
+
+    /* =====================================================
+       RESIZE
+    ===================================================== */
+
+    function resize() {
+
+        const rect =
+            section.getBoundingClientRect();
+
+        const dpr =
+            Math.min(
+                window.devicePixelRatio || 1,
+                2
+            );
+
+        width = rect.width;
+        height = rect.height;
+
+        canvas.width =
+            width * dpr;
+
+        canvas.height =
+            height * dpr;
+
+        canvas.style.width =
+            width + "px";
+
+        canvas.style.height =
+            height + "px";
+
+        ctx.setTransform(
+            dpr,
+            0,
+            0,
+            dpr,
+            0,
+            0
+        );
+
+        createNodes();
+
+    }
+
+
+    /* =====================================================
+       NODES
+    ===================================================== */
+
+    function createNodes() {
+
+        nodes = [];
+
+        for (
+            let i = 0;
+            i < nodeCount;
+            i++
+        ) {
+
+            nodes.push({
+
+                x:
+                    Math.random() * width,
+
+                y:
+                    Math.random() * height,
+
+                vx:
+                    (Math.random() - .5) * .35,
+
+                vy:
+                    (Math.random() - .5) * .35,
+
+                radius:
+                    Math.random() * 2 + 1,
+
+                phase:
+                    Math.random() * Math.PI * 2
+
+            });
+
+        }
+
+    }
+
+
+    /* =====================================================
+       MOUSE
+    ===================================================== */
+
+    section.addEventListener(
+        "mousemove",
+        function (event) {
+
+            const rect =
+                section.getBoundingClientRect();
+
+            mouse.x =
+                event.clientX - rect.left;
+
+            mouse.y =
+                event.clientY - rect.top;
+
+        },
+        { passive: true }
+    );
+
+
+    section.addEventListener(
+        "mouseleave",
+        function () {
+
+            mouse.x = -1000;
+            mouse.y = -1000;
+
+        }
+    );
+
+
+    /* =====================================================
+       DRAW
+    ===================================================== */
+
+    function animate() {
+
+        ctx.clearRect(
+            0,
+            0,
+            width,
+            height
+        );
+
+
+        /* MOVE */
+
+        nodes.forEach(node => {
+
+            node.x += node.vx;
+            node.y += node.vy;
+
+            node.phase += .025;
+
+
+            if (node.x < -20)
+                node.x = width + 20;
+
+            if (node.x > width + 20)
+                node.x = -20;
+
+            if (node.y < -20)
+                node.y = height + 20;
+
+            if (node.y > height + 20)
+                node.y = -20;
+
+
+            /* MOUSE INTERACTION */
+
+            const dx =
+                node.x - mouse.x;
+
+            const dy =
+                node.y - mouse.y;
+
+            const distance =
+                Math.sqrt(
+                    dx * dx +
+                    dy * dy
+                );
+
+
+            if (
+                distance < 180 &&
+                distance > 0
+            ) {
+
+                const force =
+                    (180 - distance) /
+                    180;
+
+                node.x +=
+                    (dx / distance) *
+                    force *
+                    1.5;
+
+                node.y +=
+                    (dy / distance) *
+                    force *
+                    1.5;
+
+            }
+
+        });
+
+
+        /* =================================================
+           CONNECTION LINES
+        ================================================= */
+
+        for (
+            let i = 0;
+            i < nodes.length;
+            i++
+        ) {
+
+            for (
+                let j = i + 1;
+                j < nodes.length;
+                j++
+            ) {
+
+                const a = nodes[i];
+                const b = nodes[j];
+
+
+                const dx =
+                    a.x - b.x;
+
+                const dy =
+                    a.y - b.y;
+
+                const distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
+
+
+                if (
+                    distance <
+                    maxDistance
+                ) {
+
+                    const opacity =
+                        (
+                            1 -
+                            distance /
+                            maxDistance
+                        ) * .18;
+
+
+                    ctx.beginPath();
+
+                    ctx.moveTo(
+                        a.x,
+                        a.y
+                    );
+
+                    ctx.lineTo(
+                        b.x,
+                        b.y
+                    );
+
+                    ctx.strokeStyle =
+                        `rgba(0,0,0,${opacity})`;
+
+                    ctx.lineWidth = .8;
+
+                    ctx.stroke();
+
+                }
+
+            }
+
+        }
+
+
+        /* =================================================
+           NODES
+        ================================================= */
+
+        nodes.forEach(node => {
+
+            const pulse =
+                Math.sin(node.phase) * .7;
+
+
+            /* OUTER */
+
+            ctx.beginPath();
+
+            ctx.arc(
+                node.x,
+                node.y,
+                (node.radius + pulse) * 4,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                "rgba(0,0,0,.035)";
+
+            ctx.fill();
+
+
+            /* CORE */
+
+            ctx.beginPath();
+
+            ctx.arc(
+                node.x,
+                node.y,
+                node.radius + pulse,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                "rgba(0,0,0,.48)";
+
+            ctx.fill();
+
+        });
+
+
+        /* =================================================
+           MOUSE CONNECTIONS
+        ================================================= */
+
+        if (mouse.x > -500) {
+
+            nodes.forEach(node => {
+
+                const dx =
+                    node.x - mouse.x;
+
+                const dy =
+                    node.y - mouse.y;
+
+                const distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
+
+
+                if (distance < 190) {
+
+                    const opacity =
+                        (
+                            1 -
+                            distance /
+                            190
+                        ) * .35;
+
+
+                    ctx.beginPath();
+
+                    ctx.moveTo(
+                        node.x,
+                        node.y
+                    );
+
+                    ctx.lineTo(
+                        mouse.x,
+                        mouse.y
+                    );
+
+                    ctx.strokeStyle =
+                        `rgba(0,0,0,${opacity})`;
+
+                    ctx.lineWidth = 1;
+
+                    ctx.stroke();
+
+                }
+
+            });
+
+
+            /* MOUSE POINT */
+
+            ctx.beginPath();
+
+            ctx.arc(
+                mouse.x,
+                mouse.y,
+                4,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                "rgba(0,0,0,.8)";
+
+            ctx.fill();
+
+        }
+
+
+        requestAnimationFrame(
+            animate
+        );
+
+    }
+
+
+    resize();
+
+    animate();
+
+
+    window.addEventListener(
+        "resize",
+        resize,
+        { passive: true }
+    );
+
+});
