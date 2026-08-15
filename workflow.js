@@ -1233,128 +1233,84 @@ document.addEventListener("DOMContentLoaded", function () {
             "none";
 
 
-        /* -----------------------------------------
-           CREATE NODES
-        ----------------------------------------- */
+       function createNode(node, index) {
 
-        nodes.forEach(function (node, index) {
+    const element = document.createElement("div");
 
-            const type =
-                node[0];
+    element.className = "workflow-node";
 
-            const platform =
-                node[1];
+    /* -----------------------------------------
+       SINGLE PREMIUM CENTER COLUMN
+    ----------------------------------------- */
 
-            const title =
-                node[2];
+    const nodeWidth = 390;
 
-            const icon =
-                node[3];
+    const canvasWidth = canvas.clientWidth;
 
+    const x = Math.max(
+        20,
+        (canvasWidth - nodeWidth) / 2
+    );
 
-            const element =
-                document.createElement("div");
+    const y = 55 + (index * 135);
 
+    element.style.left = `${x}px`;
+    element.style.top = `${y}px`;
 
-            element.className =
-                "workflow-node";
+    element.innerHTML = `
+        <div class="workflow-node-icon">
+            <i class="${node.icon}"></i>
+        </div>
 
+        <div>
+            <small>
+                ${node.platform}
+            </small>
 
-            /*
-               Keep node information available
-            */
+            <strong>
+                ${node.title}
+            </strong>
+        </div>
+    `;
 
-            element.dataset.type =
-                type;
-
-            element.dataset.platform =
-                platform;
-
-
-            /*
-               Position
-            */
-
-            element.style.position =
-                "absolute";
-
-            element.style.left =
-                "50%";
-
-            element.style.top =
-                `${
-                    startY +
-                    index *
-                    (nodeHeight + gapY)
-                }px`;
+    canvasNodes.appendChild(element);
 
 
-            element.style.transform =
-                "translateX(-50%)";
+    /* -----------------------------------------
+       CONNECT PREVIOUS NODE
+    ----------------------------------------- */
 
+    if (index > 0) {
 
-            /*
-               HTML
-            */
+        setTimeout(() => {
 
-            element.innerHTML = `
-
-                <div class="workflow-node-icon">
-
-                    <i class="${icon}"></i>
-
-                </div>
-
-                <div class="workflow-node-content">
-
-                    <small>
-                        ${platform}
-                    </small>
-
-                    <strong>
-                        ${title}
-                    </strong>
-
-                </div>
-
-            `;
-
-
-            /*
-               Initial animation
-            */
-
-            element.style.opacity =
-                "0";
-
-            element.style.translate =
-                "0 12px";
-
-
-            canvasNodes.appendChild(
-                element
+            drawConnection(
+                index - 1,
+                index
             );
 
+        }, 100);
+    }
 
-            /*
-               Animate
-            */
 
-            setTimeout(function () {
+    /* -----------------------------------------
+       AUTO SCROLL
+    ----------------------------------------- */
 
-                element.style.transition =
-                    "opacity .45s ease, translate .45s ease";
+    setTimeout(() => {
 
-                element.style.opacity =
-                    "1";
+        const targetY = Math.max(
+            0,
+            y - 180
+        );
 
-                element.style.translate =
-                    "0 0";
-
-            }, index * 100);
-
+        canvas.scrollTo({
+            top: targetY,
+            behavior: "smooth"
         });
 
+    }, 250);
+}
 
         /* -----------------------------------------
            NODE COUNTER
@@ -1394,31 +1350,84 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
 
-        /* -----------------------------------------
-           DRAW CONNECTIONS
-        ----------------------------------------- */
+       function drawConnection(fromIndex, toIndex) {
 
-        requestAnimationFrame(function () {
+    const nodes =
+        document.querySelectorAll(".workflow-node");
 
-            requestAnimationFrame(function () {
+    const from = nodes[fromIndex];
+    const to = nodes[toIndex];
 
-                for (
-                    let i = 0;
-                    i < nodes.length - 1;
-                    i++
-                ) {
+    if (!from || !to) return;
 
-                    drawConnection(
-                        i,
-                        i + 1
-                    );
 
-                }
+    const x1 =
+        parseFloat(from.style.left) + 195;
 
-            });
+    const y1 =
+        parseFloat(from.style.top) + 82;
 
-        });
 
+    const x2 =
+        parseFloat(to.style.left) + 195;
+
+    const y2 =
+        parseFloat(to.style.top);
+
+
+    const path =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
+        );
+
+
+    const curve = 55;
+
+
+    path.setAttribute(
+        "d",
+        `
+        M ${x1} ${y1}
+
+        C
+        ${x1} ${y1 + curve},
+        ${x2} ${y2 - curve},
+        ${x2} ${y2}
+        `
+    );
+
+
+    path.classList.add(
+        "workflow-line"
+    );
+
+
+    workflowSvg.appendChild(path);
+
+
+    /* Animated drawing */
+
+    const length =
+        path.getTotalLength();
+
+    path.style.strokeDasharray =
+        length;
+
+    path.style.strokeDashoffset =
+        length;
+
+
+    requestAnimationFrame(() => {
+
+        path.style.transition =
+            "stroke-dashoffset .7s ease";
+
+        path.style.strokeDashoffset =
+            "0";
+
+    });
+}
 
         /* -----------------------------------------
            SCROLL TO TOP
