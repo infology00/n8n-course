@@ -706,9 +706,32 @@ function drawConnection(from, to) {
 
     workflowSvg.appendChild(path);
 
-    /* Smooth line animation */
+    try {
 
+        const length =
+            path.getTotalLength();
 
+        path.style.strokeDasharray = length;
+        path.style.strokeDashoffset = length;
+
+        requestAnimationFrame(() => {
+
+            path.style.transition =
+                "stroke-dashoffset .7s ease";
+
+            path.style.strokeDashoffset = "0";
+
+        });
+
+    } catch (error) {
+
+        console.warn(
+            "Connection animation error:",
+            error
+        );
+
+    }
+}
 
 
 /* =========================================================
