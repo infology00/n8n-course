@@ -4418,3 +4418,30 @@ body {
     max-width: 100%;
     box-sizing: border-box;
 }
+.workflow-category,
+.workflow-card,
+.automation-card {
+    cursor: pointer;
+    position: relative;
+    z-index: 5;
+    pointer-events: auto;
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+}
+
+.workflow-category:hover,
+.workflow-card:hover,
+.automation-card:hover {
+    transform: translateY(-2px);
+}
+
+.workflow-category.active,
+.workflow-category.selected,
+.workflow-card.active,
+.workflow-card.selected,
+.automation-card.active,
+.automation-card.selected {
+    border-color: rgba(214, 255, 0, 0.5);
+}
