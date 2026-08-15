@@ -499,8 +499,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const nodeHeight = 78;
         const gap = 58;
-        const nodeHeight = 78;
-        const gap = 58;
+       
 
         const paddingTop = 60;
         const paddingBottom = 60;
