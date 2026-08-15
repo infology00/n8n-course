@@ -4445,3 +4445,282 @@ body {
 .automation-card.selected {
     border-color: rgba(214, 255, 0, 0.5);
 }
+/* =========================================================
+   WORKFLOW CANVAS
+========================================================= */
+
+#workflowCanvas {
+    position: relative;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CANVAS TOOLBAR
+========================================================= */
+
+.workflow-canvas-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    width: 100%;
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px 20px;
+
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(10,10,10,.96),
+            rgba(10,10,10,.72),
+            transparent
+        );
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+
+/* =========================================================
+   CANVAS INFO
+========================================================= */
+
+.workflow-canvas-info {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    opacity: .65;
+}
+
+
+.workflow-live-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #D6FF00;
+
+    box-shadow:
+        0 0 0 4px rgba(214,255,0,.08),
+        0 0 14px rgba(214,255,0,.45);
+}
+
+
+/* =========================================================
+   QUOTE BUTTON
+========================================================= */
+
+.workflow-quote-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    min-height: 44px;
+
+    padding: 0 20px;
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.05);
+
+    color: rgba(255,255,255,.4);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: not-allowed;
+
+    transition:
+        .25s ease;
+}
+
+
+.workflow-quote-button.is-active {
+    background: #D6FF00;
+
+    border-color: #D6FF00;
+
+    color: #050505;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px rgba(214,255,0,.12);
+}
+
+
+.workflow-quote-button.is-active:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 35px rgba(214,255,0,.2);
+}
+
+
+.workflow-quote-button i {
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   NODE LAYER
+========================================================= */
+
+#canvasNodes {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   SVG CONNECTION LAYER
+========================================================= */
+
+#workflowSvg {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+
+    pointer-events: none;
+
+    overflow: visible;
+}
+
+
+/* =========================================================
+   WORKFLOW NODE
+========================================================= */
+
+.workflow-node {
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 14px 18px;
+
+    border-radius: 17px;
+
+    pointer-events: auto;
+
+    z-index: 10;
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.workflow-node:hover {
+    transform:
+        translateY(-3px) !important;
+}
+
+
+/* =========================================================
+   NODE ICON
+========================================================= */
+
+.workflow-node-icon {
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+}
+
+
+/* =========================================================
+   NODE CONTENT
+========================================================= */
+
+.workflow-node-content {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.workflow-node-content small {
+    display: block;
+
+    font-size: 10px;
+
+    line-height: 1;
+
+    opacity: .5;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.workflow-node-content strong {
+    display: block;
+
+    font-size: 14px;
+
+    line-height: 1.25;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   CONNECTION
+========================================================= */
+
+.workflow-line {
+    fill: none;
+
+    stroke-width: 2;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
