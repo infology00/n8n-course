@@ -738,28 +738,7 @@ function drawConnection(from, to) {
    BACK BUTTONS
 ========================================================= */
 
-backToCategories?.addEventListener(
-    "click",
-    event => {
 
-        event.preventDefault();
-
-        showView(categoryView);
-
-    }
-);
-
-
-backToPlatforms?.addEventListener(
-    "click",
-    event => {
-
-        event.preventDefault();
-
-        showView(platformView);
-
-    }
-);
 
     /* =========================================================
        BACK BUTTONS
