@@ -666,61 +666,69 @@ document.addEventListener("DOMContentLoaded", () => {
        CONNECTION
     ========================================================= */
 
-  function drawConnection(from, to) {
+function drawConnection(from, to) {
 
     if (!from || !to) return;
 
-    const fromCenterX =
+    const x =
         from.offsetLeft + (from.offsetWidth / 2);
 
-    const fromBottomY =
+    const y1 =
         from.offsetTop + from.offsetHeight;
 
-    const toCenterX =
-        to.offsetLeft + (to.offsetWidth / 2);
-
-    const toTopY =
+    const y2 =
         to.offsetTop;
 
+    const path = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "path"
+    );
 
-    const path =
-        document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "path"
-        );
-
-
-    const distance =
-        toTopY - fromBottomY;
-
-    const curve =
-        Math.min(45, distance / 2);
-
+    const curve = Math.min(
+        50,
+        Math.max(25, (y2 - y1) / 2)
+    );
 
     path.setAttribute(
         "d",
         `
-        M ${fromCenterX} ${fromBottomY}
-
+        M ${x} ${y1}
         C
-        ${fromCenterX} ${fromBottomY + curve},
-
-        ${toCenterX} ${toTopY - curve},
-
-        ${toCenterX} ${toTopY}
+        ${x} ${y1 + curve},
+        ${x} ${y2 - curve},
+        ${x} ${y2}
         `
     );
 
+    path.classList.add("workflow-line");
 
-    path.classList.add(
-        "workflow-line"
-    );
+    workflowSvg.appendChild(path);
 
+    try {
 
-    workflowSvg.appendChild(
-        path
-    );
+        const length = path.getTotalLength();
 
+        path.style.strokeDasharray = length;
+        path.style.strokeDashoffset = length;
+
+        requestAnimationFrame(() => {
+
+            path.style.transition =
+                "stroke-dashoffset .7s ease";
+
+            path.style.strokeDashoffset = "0";
+
+        });
+
+    } catch (error) {
+
+        console.warn(
+            "Connection animation error:",
+            error
+        );
+
+    }
+}
 
     /* Smooth line animation */
 
