@@ -666,94 +666,96 @@ document.addEventListener("DOMContentLoaded", () => {
        CONNECTION
     ========================================================= */
 
-    function drawConnection(from, to) {
+  function drawConnection(from, to) {
 
-        if (!from || !to) return;
+    if (!from || !to) return;
 
+    const fromCenterX =
+        from.offsetLeft + (from.offsetWidth / 2);
 
-        const x =
-            from.offsetLeft +
-            from.offsetWidth / 2;
+    const fromBottomY =
+        from.offsetTop + from.offsetHeight;
 
+    const toCenterX =
+        to.offsetLeft + (to.offsetWidth / 2);
 
-        const y1 =
-            from.offsetTop +
-            from.offsetHeight;
-
-
-        const y2 =
-            to.offsetTop;
+    const toTopY =
+        to.offsetTop;
 
 
-        const path =
-            document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "path"
-            );
-
-
-        const curve =
-            Math.min(
-                45,
-                (y2 - y1) / 2
-            );
-
-
-        path.setAttribute(
-            "d",
-            `
-                M ${x} ${y1}
-
-                C
-                ${x} ${y1 + curve},
-                ${x} ${y2 - curve},
-                ${x} ${y2}
-            `
+    const path =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
         );
 
 
-        path.classList.add(
-            "workflow-line"
-        );
+    const distance =
+        toTopY - fromBottomY;
+
+    const curve =
+        Math.min(45, distance / 2);
 
 
-        workflowSvg.appendChild(
-            path
-        );
+    path.setAttribute(
+        "d",
+        `
+        M ${fromCenterX} ${fromBottomY}
+
+        C
+        ${fromCenterX} ${fromBottomY + curve},
+
+        ${toCenterX} ${toTopY - curve},
+
+        ${toCenterX} ${toTopY}
+        `
+    );
 
 
-        try {
+    path.classList.add(
+        "workflow-line"
+    );
 
-            const length =
-                path.getTotalLength();
 
-            path.style.strokeDasharray =
-                length;
+    workflowSvg.appendChild(
+        path
+    );
+
+
+    /* Smooth line animation */
+
+    try {
+
+        const length =
+            path.getTotalLength();
+
+        path.style.strokeDasharray =
+            length;
+
+        path.style.strokeDashoffset =
+            length;
+
+
+        requestAnimationFrame(() => {
+
+            path.style.transition =
+                "stroke-dashoffset .7s ease";
 
             path.style.strokeDashoffset =
-                length;
+                "0";
 
-            requestAnimationFrame(() => {
+        });
 
-                path.style.transition =
-                    "stroke-dashoffset .7s ease";
+    } catch (error) {
 
-                path.style.strokeDashoffset =
-                    "0";
-
-            });
-
-        } catch (error) {
-
-            console.warn(
-                "Connection animation error:",
-                error
-            );
-
-        }
+        console.warn(
+            "Workflow connection error:",
+            error
+        );
 
     }
 
+}
 
     /* =========================================================
        BACK BUTTONS
