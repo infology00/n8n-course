@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -25,142 +24,79 @@
 
 </head>
 
-
 <body>
 
-
-<!-- ==========================================
+<!-- =====================================================
      HEADER
-========================================== -->
+===================================================== -->
 
 <header>
 
     <nav class="navbar">
 
-
-        <!-- LOGO -->
-
         <div class="logo">
-
             <h2>AWSZ</h2>
-
         </div>
-
-
-        <!-- NAVIGATION -->
 
         <ul class="nav-links">
 
-            <li>
-                <a href="#">Home</a>
-            </li>
-
-            <li>
-                <a href="#">About</a>
-            </li>
-
-            <li>
-                <a href="#">Services</a>
-            </li>
-
-            <li>
-                <a href="#">Industries</a>
-            </li>
-
-            <li>
-                <a href="#">Portfolio</a>
-            </li>
-
-            <li>
-                <a href="#">Case Studies</a>
-            </li>
-
-            <li>
-                <a href="#">Resources</a>
-            </li>
-
-            <li>
-                <a href="#">Contact</a>
-            </li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Industries</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">Resources</a></li>
+            <li><a href="#">Contact</a></li>
 
         </ul>
-
-
-        <!-- HEADER CTA -->
 
         <a href="#" class="header-btn">
             Book Strategy Call
         </a>
 
+        <button class="menu-toggle" aria-label="Open Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
     </nav>
 
 </header>
 
 
-
-<!-- ==========================================
-     HERO SECTION
-========================================== -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
 <section class="hero">
 
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
 
-    <!-- INTERACTIVE CANVAS -->
-
-    <canvas
-        id="hero-canvas"
-        aria-hidden="true">
-    </canvas>
-
-
-    <!-- BACKGROUND VIDEO -->
-
-    <video
-        autoplay
-        muted
-        loop
-        playsinline>
-
-        <source
-            src="video/hero.mp4"
-            type="video/mp4">
-
+    <video autoplay muted loop playsinline>
+        <source src="video/hero.mp4" type="video/mp4">
     </video>
-
-
-    <!-- DARK OVERLAY -->
 
     <div class="overlay"></div>
 
-
-    <!-- HERO CONTENT -->
-
     <div class="hero-content">
 
+        <span class="tag">
+            AI AUTOMATION AGENCY
+        </span>
+
         <h1>
-
             We Buy You
-
             <br>
-
-            <span>
-                More Time.
-            </span>
-
+            <span>More Time.</span>
         </h1>
 
-
         <p>
-
             We build AI Employees, Voice Agents and Workflow
             Automations that eliminate repetitive work, reduce
             operational costs and help businesses scale faster.
-
         </p>
-
-
-        <!-- HERO BUTTONS -->
 
         <div class="hero-buttons">
 
@@ -179,48 +115,281 @@
 </section>
 
 
+<!-- =====================================================
+     AUTOMATION ECOSYSTEM
+     HERO KE BILKUL BAAD
+===================================================== -->
 
-<!-- ==========================================
-     AI AUTOMATION SHOWCASE
-========================================== -->
+<section class="automation-ecosystem">
+
+    <canvas
+        id="automation-network"
+        aria-hidden="true">
+    </canvas>
+
+    <div class="ecosystem-grid"></div>
+
+    <div class="ecosystem-glow glow-one"></div>
+    <div class="ecosystem-glow glow-two"></div>
+
+    <div class="ecosystem-content">
+
+        <div class="ecosystem-eyebrow">
+            <span class="eyebrow-dot"></span>
+            YOUR AUTOMATION ECOSYSTEM
+        </div>
+
+        <h2>
+            Everything
+            <span>Connected.</span>
+        </h2>
+
+        <p>
+            We connect your business with the tools you already use —
+            creating one intelligent automation ecosystem that works
+            continuously in the background.
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         MOVING PLATFORM NETWORK
+    ================================================= -->
+
+    <div class="platform-network">
+
+        <!-- ROW 1 -->
+
+        <div class="platform-row row-one">
+
+            <div class="platform-card">
+                <i class="fa-solid fa-diagram-project"></i>
+                <span>n8n</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-brands fa-hubspot"></i>
+                <span>HubSpot</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-bolt"></i>
+                <span>GoHighLevel</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-brands fa-facebook"></i>
+                <span>Facebook</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-brands fa-instagram"></i>
+                <span>Instagram</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-brands fa-google"></i>
+                <span>Google</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-table"></i>
+                <span>Sheets</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-magnifying-glass-chart"></i>
+                <span>Search Console</span>
+            </div>
+
+        </div>
+
+
+        <!-- ROW 2 -->
+
+        <div class="platform-row row-two">
+
+            <div class="platform-card">
+                <i class="fa-solid fa-database"></i>
+                <span>Airtable</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-brands fa-slack"></i>
+                <span>Slack</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-book"></i>
+                <span>Notion</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-fire"></i>
+                <span>Firebase</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-microphone-lines"></i>
+                <span>ElevenLabs</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-brain"></i>
+                <span>OpenAI</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-robot"></i>
+                <span>Claude</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <span>Make</span>
+            </div>
+
+        </div>
+
+
+        <!-- ROW 3 -->
+
+        <div class="platform-row row-three">
+
+            <div class="platform-card">
+                <i class="fa-solid fa-link"></i>
+                <span>Zapier</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-brands fa-shopify"></i>
+                <span>Shopify</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-brands fa-wordpress"></i>
+                <span>WordPress</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-phone"></i>
+                <span>Twilio</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-credit-card"></i>
+                <span>Stripe</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Calendly</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-globe"></i>
+                <span>Webflow</span>
+            </div>
+
+        </div>
+
+
+        <!-- ROW 4 -->
+
+        <div class="platform-row row-four">
+
+            <div class="platform-card">
+                <i class="fa-solid fa-pen-nib"></i>
+                <span>Framer</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-video"></i>
+                <span>Runway</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-spider"></i>
+                <span>Apify</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-brands fa-discord"></i>
+                <span>Discord</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Gmail</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-brands fa-microsoft"></i>
+                <span>Microsoft</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-phone-volume"></i>
+                <span>Retell AI</span>
+            </div>
+
+            <div class="platform-card">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>Higgsfield</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- BOTTOM STATUS -->
+
+    <div class="ecosystem-status">
+
+        <span class="status-line"></span>
+
+        <span>
+            40+ TOOLS · ONE INTELLIGENT SYSTEM
+        </span>
+
+        <span class="status-line"></span>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     EXISTING AUTOMATION SHOWCASE
+===================================================== -->
 
 <section class="automation-showcase">
 
-
-    <!-- SHOWCASE CONTENT -->
-
     <div class="showcase-content">
-
 
         <span class="section-tag">
             AI AUTOMATION LAB
         </span>
 
-
         <h2>
-
             Learn What’s Possible
-
             <br>
-
-            <span>
-                Before You Invest
-            </span>
-
+            <span>Before You Invest</span>
         </h2>
 
-
         <p>
-
             Explore real AI automation workflows, AI agents and
             business systems through short practical videos.
             Understand what AI can do for your business before
             making any investment.
-
         </p>
-
-
-        <!-- SHOWCASE BUTTONS -->
 
         <div class="showcase-buttons">
 
@@ -237,160 +406,94 @@
     </div>
 
 
-
-    <!-- =====================================
-         VIDEO / THUMBNAIL PYRAMID
-    ====================================== -->
-
     <div class="video-pyramid">
 
-
-        <!-- CARD 1 -->
-
         <div class="video-card">
-
             <img
                 src="assets/Gemini_Generated_Image_c4unncc4unncc4un.png"
                 alt="AI Automation">
 
             <div class="play-btn">
-
                 <i class="fa-solid fa-play"></i>
-
             </div>
-
         </div>
 
-
-        <!-- CARD 2 -->
-
         <div class="video-card">
-
             <img
                 src="assets/Aichat bot.png"
                 alt="AI Chat Bot">
 
             <div class="play-btn">
-
                 <i class="fa-solid fa-play"></i>
-
             </div>
-
         </div>
 
-
-        <!-- CARD 3 -->
-
         <div class="video-card">
-
             <img
                 src="assets/ai calling bot.png"
                 alt="AI Calling Bot">
 
             <div class="play-btn">
-
                 <i class="fa-solid fa-play"></i>
-
             </div>
-
         </div>
 
-
-        <!-- CARD 4 -->
-
         <div class="video-card">
-
             <img
                 src="assets/ghl1.png"
-                alt="GoHighLevel Automation">
+                alt="GoHighLevel">
 
             <div class="play-btn">
-
                 <i class="fa-solid fa-play"></i>
-
             </div>
-
         </div>
 
-
-        <!-- CARD 5 -->
-
         <div class="video-card">
-
             <img
                 src="assets/ghl2.png"
-                alt="GoHighLevel Automation">
+                alt="GoHighLevel">
 
             <div class="play-btn">
-
                 <i class="fa-solid fa-play"></i>
-
             </div>
-
         </div>
 
-
-        <!-- CARD 6 -->
-
         <div class="video-card">
-
             <img
                 src="assets/ghl3.png"
-                alt="GoHighLevel Automation">
+                alt="GoHighLevel">
 
             <div class="play-btn">
-
                 <i class="fa-solid fa-play"></i>
-
             </div>
-
         </div>
 
-
-        <!-- CARD 7 -->
-
         <div class="video-card">
-
             <img
                 src="assets/ordermanagement.png"
-                alt="Order Management Automation">
+                alt="Order Management">
 
             <div class="play-btn">
-
                 <i class="fa-solid fa-play"></i>
-
             </div>
-
         </div>
 
-
-        <!-- CARD 8 -->
-
         <div class="video-card">
-
             <img
                 src="assets/ecom-1.png"
                 alt="Ecommerce Automation">
 
             <div class="play-btn">
-
                 <i class="fa-solid fa-play"></i>
-
             </div>
-
         </div>
-
 
     </div>
 
 </section>
 
- <!-- ==========================================
-     JAVASCRIPT
-========================================== -->
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
