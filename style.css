@@ -2865,3 +2865,63 @@ body > header {
     }
 
 }
+/* =========================================================
+   WORKFLOW CLICK FIX
+   Paste ONLY at the very end
+========================================================= */
+
+.workflow-builder,
+.workflow-shell,
+.workflow-sidebar,
+.workflow-workspace {
+    position: relative !important;
+}
+
+.workflow-sidebar {
+    z-index: 50 !important;
+}
+
+.workflow-view,
+.workflow-category-list,
+.workflow-platform-list,
+.workflow-automation-list {
+    position: relative !important;
+    z-index: 60 !important;
+}
+
+.workflow-category,
+.workflow-platform,
+.workflow-automation,
+.workflow-back {
+    position: relative !important;
+    z-index: 70 !important;
+    pointer-events: auto !important;
+}
+
+/* Canvas layers */
+.workflow-canvas {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.canvas-grid {
+    z-index: 0 !important;
+    pointer-events: none !important;
+}
+
+.workflow-svg {
+    z-index: 2 !important;
+    pointer-events: none !important;
+}
+
+.canvas-nodes {
+    z-index: 10 !important;
+    pointer-events: none !important;
+}
+
+.workflow-node {
+    position: absolute !important;
+    z-index: 20 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
