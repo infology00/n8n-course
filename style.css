@@ -2555,3 +2555,313 @@ body > header {
     }
 
 }
+/* =========================================================
+   WORKFLOW BUILDER — FINAL CLICK + CANVAS FIX
+   PASTE THIS AT THE VERY END
+========================================================= */
+
+/* ---------- WORKFLOW SIDEBAR CLICK FIX ---------- */
+
+.workflow-sidebar,
+.workflow-sidebar *,
+.workflow-view,
+.workflow-view *,
+.workflow-category-list,
+.workflow-platform-list,
+.workflow-automation-list {
+    pointer-events: auto !important;
+}
+
+.workflow-category,
+.workflow-platform,
+.workflow-automation,
+.workflow-back {
+    position: relative !important;
+    z-index: 100 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}
+
+/* Make sure buttons remain clickable */
+.workflow-category button,
+.workflow-platform button,
+.workflow-automation button {
+    pointer-events: auto !important;
+}
+
+
+/* ---------- WORKSPACE ---------- */
+
+.workflow-workspace {
+    position: relative !important;
+    overflow: hidden !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+}
+
+
+/* ---------- CANVAS ---------- */
+
+.workflow-canvas {
+    position: relative !important;
+
+    /*
+       Don't force a scrollbar.
+       Canvas can grow when workflow becomes large.
+    */
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+
+    min-width: 0 !important;
+    min-height: 560px !important;
+
+    background: #050505 !important;
+
+    cursor: default !important;
+}
+
+
+/* ---------- GRID ---------- */
+
+.canvas-grid {
+    pointer-events: none !important;
+    z-index: 0 !important;
+
+    /*
+       Much fewer dots.
+    */
+    background-image:
+        radial-gradient(
+            rgba(214,255,0,.16) 1px,
+            transparent 1px
+        ) !important;
+
+    background-size: 40px 40px !important;
+
+    opacity: .28 !important;
+}
+
+
+/* ---------- NODE LAYER ---------- */
+
+.canvas-nodes {
+    position: absolute !important;
+
+    top: 0 !important;
+    left: 0 !important;
+
+    /*
+       IMPORTANT:
+       Don't force width/height.
+       Let JS control the canvas size.
+    */
+    width: 100% !important;
+    min-height: 100% !important;
+
+    pointer-events: none !important;
+
+    z-index: 10 !important;
+}
+
+
+/* ---------- WORKFLOW NODES ---------- */
+
+.workflow-node {
+    position: absolute !important;
+
+    /*
+       DO NOT FORCE left:50%.
+       Your JS should control node position.
+    */
+    left: auto !important;
+
+    width: 250px !important;
+    min-height: 76px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    gap: 13px !important;
+
+    padding: 12px 14px !important;
+
+    box-sizing: border-box !important;
+
+    pointer-events: auto !important;
+    cursor: pointer !important;
+
+    z-index: 50 !important;
+
+    border-radius: 16px !important;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,25,25,.98),
+            rgba(12,12,12,.98)
+        ) !important;
+
+    border: 1px solid rgba(255,255,255,.09) !important;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.40),
+        inset 0 1px 0 rgba(255,255,255,.035) !important;
+
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+
+    /*
+       IMPORTANT:
+       Don't override JS transform.
+    */
+    transition:
+        border-color .25s ease,
+        box-shadow .25s ease !important;
+}
+
+
+/* ---------- NODE HOVER ---------- */
+
+.workflow-node:hover {
+    border-color:
+        rgba(214,255,0,.38) !important;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.50),
+        0 0 25px rgba(214,255,0,.07) !important;
+}
+
+
+/* ---------- NODE ICON ---------- */
+
+.workflow-node-icon {
+    flex: 0 0 auto !important;
+
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border-radius: 12px !important;
+
+    background:
+        rgba(214,255,0,.07) !important;
+
+    border:
+        1px solid rgba(214,255,0,.16) !important;
+
+    color: #D6FF00 !important;
+
+    font-size: 16px !important;
+}
+
+
+/* ---------- NODE TEXT ---------- */
+
+.workflow-node small {
+    display: block !important;
+
+    margin-bottom: 4px !important;
+
+    color: #666 !important;
+
+    font-size: 9px !important;
+    font-weight: 700 !important;
+
+    letter-spacing: .08em !important;
+    text-transform: uppercase !important;
+}
+
+.workflow-node strong {
+    display: block !important;
+
+    color: #f5f5f5 !important;
+
+    font-size: 13px !important;
+    font-weight: 600 !important;
+
+    line-height: 1.3 !important;
+}
+
+
+/* ---------- CONNECTION SVG ---------- */
+
+.workflow-svg {
+    position: absolute !important;
+
+    top: 0 !important;
+    left: 0 !important;
+
+    pointer-events: none !important;
+
+    z-index: 5 !important;
+
+    overflow: visible !important;
+}
+
+.workflow-line {
+    pointer-events: none !important;
+
+    fill: none !important;
+
+    stroke:
+        rgba(214,255,0,.38) !important;
+
+    stroke-width: 2px !important;
+
+    stroke-linecap: round !important;
+
+    filter:
+        drop-shadow(
+            0 0 5px rgba(214,255,0,.10)
+        ) !important;
+}
+
+
+/* ---------- EMPTY STATE ---------- */
+
+.canvas-empty {
+    pointer-events: none !important;
+    z-index: 2 !important;
+}
+
+
+/* ---------- CANVAS SCROLLBARS ---------- */
+
+.workflow-canvas::-webkit-scrollbar {
+    width: 7px !important;
+    height: 7px !important;
+}
+
+.workflow-canvas::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+.workflow-canvas::-webkit-scrollbar-thumb {
+    background:
+        rgba(255,255,255,.10) !important;
+
+    border-radius: 20px !important;
+}
+
+.workflow-canvas::-webkit-scrollbar-thumb:hover {
+    background:
+        rgba(214,255,0,.30) !important;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 700px) {
+
+    .workflow-node {
+        width: 270px !important;
+    }
+
+    .workflow-canvas {
+        min-height: 560px !important;
+    }
+
+}
