@@ -4724,3 +4724,502 @@ body {
 
     stroke-linejoin: round;
 }
+/* =========================================================
+   QUOTE MODAL
+========================================================= */
+
+.workflow-quote-modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    box-sizing: border-box;
+
+    background:
+        rgba(0,0,0,.72);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity .3s ease,
+        visibility .3s ease;
+}
+
+
+.workflow-quote-modal.is-open {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+.workflow-quote-dialog {
+    position: relative;
+
+    width: min(
+        100%,
+        540px
+    );
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 36px;
+
+    box-sizing: border-box;
+
+    border: 1px solid
+        rgba(255,255,255,.1);
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(30,30,30,.97),
+            rgba(10,10,10,.98)
+        );
+
+    box-shadow:
+        0 40px 100px
+        rgba(0,0,0,.55),
+
+        inset 0 1px 0
+        rgba(255,255,255,.06);
+
+    transform:
+        translateY(20px)
+        scale(.97);
+
+    transition:
+        transform .35s
+        cubic-bezier(.2,.8,.2,1);
+}
+
+
+.workflow-quote-modal.is-open
+.workflow-quote-dialog {
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+.workflow-quote-close {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid
+        rgba(255,255,255,.08);
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.05);
+
+    color: #fff;
+
+    cursor: pointer;
+
+    transition:
+        .2s ease;
+}
+
+
+.workflow-quote-close:hover {
+    background:
+        rgba(255,255,255,.1);
+
+    transform:
+        rotate(90deg);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.workflow-quote-header {
+    padding-right: 45px;
+
+    margin-bottom: 28px;
+}
+
+
+.workflow-modal-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .14em;
+
+    color: #D6FF00;
+}
+
+
+.workflow-quote-header h2 {
+    margin: 0 0 10px;
+
+    font-size: clamp(
+        25px,
+        4vw,
+        34px
+    );
+
+    line-height: 1.05;
+
+    letter-spacing: -.04em;
+}
+
+
+.workflow-quote-header p {
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    opacity: .55;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.workflow-quote-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 17px;
+}
+
+
+.workflow-form-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.workflow-form-field label {
+    font-size: 11px;
+
+    font-weight: 700;
+
+    opacity: .65;
+}
+
+
+.workflow-form-field input,
+.workflow-form-field textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border: 1px solid
+        rgba(255,255,255,.09);
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    color: #fff;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.workflow-form-field input {
+    height: 48px;
+
+    padding: 0 14px;
+}
+
+
+.workflow-form-field textarea {
+    min-height: 125px;
+
+    padding: 13px 14px;
+
+    resize: vertical;
+}
+
+
+.workflow-form-field
+input::placeholder,
+
+.workflow-form-field
+textarea::placeholder {
+    color: rgba(255,255,255,.3);
+}
+
+
+.workflow-form-field
+input:focus,
+
+.workflow-form-field
+textarea:focus {
+    border-color:
+        rgba(214,255,0,.55);
+
+    background:
+        rgba(255,255,255,.06);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(214,255,0,.06);
+}
+
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.workflow-submit-button {
+    width: 100%;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 4px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background: #D6FF00;
+
+    color: #050505;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.workflow-submit-button:hover {
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 14px 30px
+        rgba(214,255,0,.18);
+}
+
+
+.workflow-submit-button i {
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   SUCCESS
+========================================================= */
+
+.workflow-form-success {
+    text-align: center;
+
+    padding: 30px 10px 15px;
+}
+
+
+.workflow-success-icon {
+    width: 60px;
+    height: 60px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(214,255,0,.1);
+
+    color: #D6FF00;
+
+    font-size: 20px;
+}
+
+
+.workflow-form-success h3 {
+    margin: 0 0 10px;
+
+    font-size: 24px;
+}
+
+
+.workflow-form-success p {
+    margin: 0 auto 25px;
+
+    max-width: 370px;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    opacity: .55;
+}
+
+
+.workflow-form-success button {
+    height: 44px;
+
+    padding: 0 25px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background: #D6FF00;
+
+    color: #050505;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   BODY LOCK
+========================================================= */
+
+body.workflow-modal-open {
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .workflow-canvas-toolbar {
+        padding:
+            12px 14px;
+    }
+
+
+    .workflow-canvas-info {
+        font-size: 10px;
+    }
+
+
+    .workflow-quote-button {
+        min-height: 40px;
+
+        padding:
+            0 15px;
+
+        font-size: 11px;
+    }
+
+
+    .workflow-node {
+        padding:
+            12px 14px;
+    }
+
+
+    .workflow-node-icon {
+        width: 38px;
+        height: 38px;
+
+        min-width: 38px;
+    }
+
+
+    .workflow-node-content strong {
+        font-size: 13px;
+    }
+
+
+    .workflow-quote-modal {
+        padding: 12px;
+    }
+
+
+    .workflow-quote-dialog {
+        padding: 28px 20px;
+
+        border-radius: 20px;
+
+        max-height: 94vh;
+    }
+
+
+    .workflow-quote-header {
+        padding-right: 35px;
+    }
+
+}
