@@ -2555,35 +2555,3 @@ body > header {
     }
 
 }
-/* ==========================================
-   WORKFLOW CANVAS — SUBTLE DOT GRID
-========================================== */
-
-.workflow-canvas {
-    background: #080808 !important;
-}
-
-/* Hide existing grid styling */
-.canvas-grid {
-    background-image: radial-gradient(
-        circle,
-        rgba(214, 255, 0, 0.20) 1px,
-        transparent 1px
-    ) !important;
-
-    background-size: 36px 36px !important;
-    background-position: 18px 18px !important;
-
-    opacity: 0.45 !important;
-}
-
-/* Keep grid behind everything */
-.canvas-grid,
-.workflow-svg,
-.canvas-nodes {
-    pointer-events: none !important;
-}
-
-.workflow-node {
-    pointer-events: auto !important;
-}
