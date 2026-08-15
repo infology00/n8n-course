@@ -51,8 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================================
-       CTA / FORM ELEMENTS
+       QUOTE ELEMENTS
     ========================================================= */
+
+    const quoteBar =
+        document.getElementById("workflowQuoteBar");
 
     const quoteButton =
         document.getElementById("workflowQuoteButton");
@@ -63,13 +66,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const quoteClose =
         document.getElementById("workflowQuoteClose");
 
+    const quoteOverlay =
+        document.getElementById("workflowQuoteOverlay");
+
     const quoteForm =
         document.getElementById("workflowQuoteForm");
 
-    const selectedWorkflowInput =
+    const selectedWorkflowName =
+        document.getElementById("selectedWorkflowName");
+
+    const modalWorkflowName =
+        document.getElementById("modalWorkflowName");
+
+    const selectedWorkflow =
         document.getElementById("selectedWorkflow");
 
-    const selectedPlatformInput =
+    const selectedPlatform =
         document.getElementById("selectedPlatform");
 
 
@@ -87,6 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
         !canvasNodes ||
         !workflowSvg
     ) {
+
         console.warn(
             "Workflow Builder: Required elements missing."
         );
@@ -96,11 +109,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================================
-       CURRENT WORKFLOW STATE
+       STATE
     ========================================================= */
 
-    let currentWorkflow = null;
-    let currentPlatform = null;
+    let currentPlatform = "";
+    let currentAutomation = "";
     let currentWorkflowNodes = [];
 
 
@@ -112,7 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         social: {
             title: "Social Media",
-
             platforms: [
                 ["Facebook", "fa-brands fa-facebook-f"],
                 ["Instagram", "fa-brands fa-instagram"],
@@ -121,10 +133,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ]
         },
 
-
         crm: {
             title: "CRM Systems",
-
             platforms: [
                 ["GoHighLevel", "fa-solid fa-layer-group"],
                 ["HubSpot", "fa-brands fa-hubspot"],
@@ -133,10 +143,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ]
         },
 
-
         scraping: {
             title: "Data Scraping",
-
             platforms: [
                 ["Google Maps", "fa-solid fa-map-location-dot"],
                 ["LinkedIn", "fa-brands fa-linkedin-in"],
@@ -145,10 +153,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ]
         },
 
-
         leads: {
             title: "Lead Generation",
-
             platforms: [
                 ["Apollo", "fa-solid fa-crosshairs"],
                 ["LinkedIn", "fa-brands fa-linkedin-in"],
@@ -157,10 +163,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ]
         },
 
-
         ecommerce: {
             title: "Ecommerce",
-
             platforms: [
                 ["Shopify", "fa-brands fa-shopify"],
                 ["WooCommerce", "fa-brands fa-wordpress"],
@@ -169,10 +173,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ]
         },
 
-
         ai: {
             title: "AI Agents",
-
             platforms: [
                 ["ChatGPT", "fa-solid fa-robot"],
                 ["Claude", "fa-solid fa-brain"],
@@ -194,10 +196,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             {
                 name: "DM Automation",
-
                 icon: "fa-solid fa-message",
 
                 workflow: [
+
                     [
                         "trigger",
                         "Facebook",
@@ -232,16 +234,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Save Conversation",
                         "fa-solid fa-users"
                     ]
+
                 ]
             },
 
 
             {
                 name: "Comment → DM",
-
                 icon: "fa-solid fa-comments",
 
                 workflow: [
+
                     [
                         "trigger",
                         "Facebook",
@@ -269,16 +272,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Save Lead",
                         "fa-solid fa-user-plus"
                     ]
+
                 ]
             },
 
 
             {
                 name: "Lead Ads → CRM",
-
                 icon: "fa-solid fa-user-plus",
 
                 workflow: [
+
                     [
                         "trigger",
                         "Facebook",
@@ -313,6 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Notify Sales",
                         "fa-solid fa-bell"
                     ]
+
                 ]
             }
 
@@ -323,10 +328,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             {
                 name: "Instagram DM Agent",
-
                 icon: "fa-solid fa-message",
 
                 workflow: [
+
                     [
                         "trigger",
                         "Instagram",
@@ -354,16 +359,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Send DM",
                         "fa-solid fa-paper-plane"
                     ]
+
                 ]
             },
 
 
             {
                 name: "Comment Automation",
-
                 icon: "fa-solid fa-comments",
 
                 workflow: [
+
                     [
                         "trigger",
                         "Instagram",
@@ -384,6 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Send Reply",
                         "fa-solid fa-reply"
                     ]
+
                 ]
             }
 
@@ -394,10 +401,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             {
                 name: "Lead Generation",
-
                 icon: "fa-solid fa-user-plus",
 
                 workflow: [
+
                     [
                         "trigger",
                         "LinkedIn",
@@ -432,6 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Create Lead",
                         "fa-solid fa-users"
                     ]
+
                 ]
             }
 
@@ -442,10 +450,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             {
                 name: "New Video → Social",
-
                 icon: "fa-solid fa-video",
 
                 workflow: [
+
                     [
                         "trigger",
                         "YouTube",
@@ -466,6 +474,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Publish Post",
                         "fa-solid fa-share-nodes"
                     ]
+
                 ]
             }
 
@@ -476,10 +485,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             {
                 name: "New Lead → Pipeline",
-
                 icon: "fa-solid fa-user-plus",
 
                 workflow: [
+
                     [
                         "trigger",
                         "GHL",
@@ -507,6 +516,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Notify Team",
                         "fa-solid fa-bell"
                     ]
+
                 ]
             }
 
@@ -517,10 +527,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             {
                 name: "Lead → CRM",
-
                 icon: "fa-solid fa-users",
 
                 workflow: [
+
                     [
                         "trigger",
                         "HubSpot",
@@ -548,6 +558,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Notify Sales",
                         "fa-solid fa-bell"
                     ]
+
                 ]
             }
 
@@ -558,10 +569,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             {
                 name: "Scrape Business Leads",
-
                 icon: "fa-solid fa-map-location-dot",
 
                 workflow: [
+
                     [
                         "trigger",
                         "Google Maps",
@@ -589,6 +600,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Save Leads",
                         "fa-solid fa-users"
                     ]
+
                 ]
             }
 
@@ -599,10 +611,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             {
                 name: "Find Prospects",
-
                 icon: "fa-solid fa-crosshairs",
 
                 workflow: [
+
                     [
                         "trigger",
                         "Apollo",
@@ -630,6 +642,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Create Leads",
                         "fa-solid fa-users"
                     ]
+
                 ]
             }
 
@@ -640,10 +653,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             {
                 name: "New Order Automation",
-
                 icon: "fa-brands fa-shopify",
 
                 workflow: [
+
                     [
                         "trigger",
                         "Shopify",
@@ -671,6 +684,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Send Confirmation",
                         "fa-solid fa-envelope"
                     ]
+
                 ]
             }
 
@@ -681,10 +695,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             {
                 name: "AI Customer Agent",
-
                 icon: "fa-solid fa-robot",
 
                 workflow: [
+
                     [
                         "trigger",
                         "Website",
@@ -712,6 +726,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Send Response",
                         "fa-solid fa-paper-plane"
                     ]
+
                 ]
             }
 
@@ -722,10 +737,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             {
                 name: "AI Receptionist",
-
                 icon: "fa-solid fa-phone",
 
                 workflow: [
+
                     [
                         "trigger",
                         "Phone",
@@ -753,6 +768,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Save Call",
                         "fa-solid fa-users"
                     ]
+
                 ]
             }
 
@@ -763,10 +779,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             {
                 name: "Inbound Call Agent",
-
                 icon: "fa-solid fa-phone",
 
                 workflow: [
+
                     [
                         "trigger",
                         "Phone",
@@ -794,6 +810,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Save Caller",
                         "fa-solid fa-users"
                     ]
+
                 ]
             }
 
@@ -809,11 +826,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function showView(view) {
 
         categoryView.classList.add("hidden");
-
         platformView.classList.add("hidden");
-
         automationView.classList.add("hidden");
-
 
         if (view) {
             view.classList.remove("hidden");
@@ -830,37 +844,25 @@ document.addEventListener("DOMContentLoaded", () => {
         .querySelectorAll(".workflow-category")
         .forEach(button => {
 
-            button.addEventListener(
-                "click",
-                event => {
+            button.addEventListener("click", event => {
 
-                    event.preventDefault();
+                event.preventDefault();
 
+                document
+                    .querySelectorAll(".workflow-category")
+                    .forEach(btn => {
 
-                    document
-                        .querySelectorAll(
-                            ".workflow-category"
-                        )
-                        .forEach(btn => {
+                        btn.classList.remove("active");
 
-                            btn.classList.remove(
-                                "active"
-                            );
+                    });
 
-                        });
+                button.classList.add("active");
 
+                loadPlatforms(
+                    button.dataset.category
+                );
 
-                    button.classList.add(
-                        "active"
-                    );
-
-
-                    loadPlatforms(
-                        button.dataset.category
-                    );
-
-                }
-            );
+            });
 
         });
 
@@ -874,37 +876,32 @@ document.addEventListener("DOMContentLoaded", () => {
         const data =
             categories[category];
 
-
         if (!data) return;
-
 
         platformTitle.textContent =
             data.title;
 
-
         platformList.innerHTML = "";
-
 
         data.platforms.forEach(
             ([name, icon]) => {
 
                 const button =
-                    document.createElement(
-                        "button"
-                    );
-
+                    document.createElement("button");
 
                 button.type = "button";
 
                 button.className =
                     "workflow-platform";
 
-
                 button.innerHTML = `
 
                     <div class="platform-icon">
+
                         <i class="${icon}"></i>
+
                     </div>
+
 
                     <div class="platform-text">
 
@@ -918,13 +915,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     </div>
 
-                    <i
-                        class="
-                            fa-solid
-                            fa-chevron-right
-                            platform-arrow
-                        "
-                    ></i>
+
+                    <i class="
+                        fa-solid
+                        fa-chevron-right
+                        platform-arrow
+                    "></i>
 
                 `;
 
@@ -933,46 +929,37 @@ document.addEventListener("DOMContentLoaded", () => {
                     "click",
                     () => {
 
-                        loadAutomations(
-                            name
-                        );
+                        loadAutomations(name);
 
                     }
                 );
 
 
-                platformList.appendChild(
-                    button
-                );
+                platformList.appendChild(button);
 
             }
         );
 
 
-        showView(
-            platformView
-        );
+        showView(platformView);
 
     }
 
 
     /* =========================================================
-       PLATFORM → AUTOMATION
+       PLATFORM → AUTOMATIONS
     ========================================================= */
 
     function loadAutomations(platform) {
 
-        const list =
-            automationData[platform] || [];
-
-
         currentPlatform =
             platform;
 
+        const list =
+            automationData[platform] || [];
 
         automationTitle.textContent =
             `${platform} Automations`;
-
 
         automationList.innerHTML = "";
 
@@ -983,12 +970,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 <div class="workflow-no-results">
 
-                    <i
-                        class="
-                            fa-solid
-                            fa-clock
-                        "
-                    ></i>
+                    <i class="fa-solid fa-clock"></i>
 
                     <strong>
                         More automations coming soon
@@ -1003,89 +985,109 @@ document.addEventListener("DOMContentLoaded", () => {
 
             `;
 
-
-            showView(
-                automationView
-            );
-
+            showView(automationView);
 
             return;
 
         }
 
 
-        list.forEach(
-            automation => {
+        list.forEach(automation => {
 
-                const button =
-                    document.createElement(
-                        "button"
+            const button =
+                document.createElement("button");
+
+            button.type = "button";
+
+            button.className =
+                "workflow-automation";
+
+
+            button.innerHTML = `
+
+                <div class="automation-icon">
+
+                    <i class="${automation.icon}"></i>
+
+                </div>
+
+
+                <div class="automation-text">
+
+                    <strong>
+                        ${automation.name}
+                    </strong>
+
+                    <small>
+                        Build this workflow
+                    </small>
+
+                </div>
+
+
+                <i class="
+                    fa-solid
+                    fa-chevron-right
+                    automation-arrow
+                "></i>
+
+            `;
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    selectAutomation(
+                        automation
                     );
 
-
-                button.type = "button";
-
-                button.className =
-                    "workflow-automation";
+                }
+            );
 
 
-                button.innerHTML = `
+            automationList.appendChild(button);
 
-                    <div class="automation-icon">
-
-                        <i
-                            class="${automation.icon}"
-                        ></i>
-
-                    </div>
-
-                    <div class="automation-text">
-
-                        <strong>
-                            ${automation.name}
-                        </strong>
-
-                        <small>
-                            Build this workflow
-                        </small>
-
-                    </div>
-
-                    <i
-                        class="
-                            fa-solid
-                            fa-chevron-right
-                            automation-arrow
-                        "
-                    ></i>
-
-                `;
+        });
 
 
-                button.addEventListener(
-                    "click",
-                    () => {
+        showView(automationView);
 
-                        buildWorkflow(
-                            automation.workflow,
-                            automation.name,
-                            platform
-                        );
-
-                    }
-                );
+    }
 
 
-                automationList.appendChild(
-                    button
-                );
+    /* =========================================================
+       SELECT AUTOMATION
+    ========================================================= */
 
-            }
+    function selectAutomation(automation) {
+
+        if (
+            !automation ||
+            !automation.workflow
+        ) {
+            return;
+        }
+
+
+        currentAutomation =
+            automation.name;
+
+        currentWorkflowNodes =
+            automation.workflow;
+
+
+        /* BUILD CANVAS */
+
+        buildWorkflow(
+            automation.workflow
         );
 
 
-        showView(
-            automationView
+        /* SHOW CTA */
+
+        showQuoteCTA(
+            automation.name
         );
 
     }
@@ -1095,11 +1097,7 @@ document.addEventListener("DOMContentLoaded", () => {
        BUILD WORKFLOW
     ========================================================= */
 
-    function buildWorkflow(
-        nodes,
-        workflowName,
-        platform
-    ) {
+    function buildWorkflow(nodes) {
 
         if (
             !nodes ||
@@ -1109,112 +1107,75 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* ================================
-           SAVE CURRENT WORKFLOW
-        ================================= */
-
-        currentWorkflow =
-            workflowName;
-
-        currentPlatform =
-            platform;
-
-        currentWorkflowNodes =
-            nodes;
-
-
-        /* ================================
-           CLEAR
-        ================================= */
+        /* -----------------------------------------
+           CLEAR PREVIOUS
+        ----------------------------------------- */
 
         canvasNodes.innerHTML = "";
 
         workflowSvg.innerHTML = "";
-
 
         canvasEmpty?.classList.add(
             "hidden"
         );
 
 
-        /* ================================
-           CANVAS SIZE
-        ================================= */
+        /* -----------------------------------------
+           CANVAS DIMENSIONS
+        ----------------------------------------- */
 
-        const canvasWidth =
-            canvas.clientWidth;
+        const nodeHeight = 82;
 
+        const verticalGap = 48;
 
-        const nodeHeight =
-            78;
+        const topPadding = 55;
 
-
-        const nodeWidth =
-            Math.min(
-                395,
-                Math.max(
-                    280,
-                    canvasWidth - 80
-                )
-            );
+        const bottomPadding = 70;
 
 
-        const verticalGap =
-            54;
+        const totalHeight =
+            topPadding +
+            (nodes.length * nodeHeight) +
+            ((nodes.length - 1) * verticalGap) +
+            bottomPadding;
 
 
-        const paddingTop =
-            110;
-
-
-        const paddingBottom =
-            80;
-
-
-        const requiredHeight =
-            paddingTop +
-            (
-                nodes.length *
-                nodeHeight
-            ) +
-            (
-                (nodes.length - 1) *
-                verticalGap
-            ) +
-            paddingBottom;
-
-
-        /* ================================
-           NODE LAYER
-        ================================= */
+        /*
+           IMPORTANT:
+           canvas itself stays normal.
+           Only inner layer gets required height.
+        */
 
         canvasNodes.style.position =
             "absolute";
 
-        canvasNodes.style.left =
+        canvasNodes.style.top =
             "0";
 
-        canvasNodes.style.top =
+        canvasNodes.style.left =
             "0";
 
         canvasNodes.style.width =
             "100%";
 
         canvasNodes.style.height =
-            `${requiredHeight}px`;
+            `${totalHeight}px`;
 
 
-        /* ================================
+        /* -----------------------------------------
            SVG
-        ================================= */
+        ----------------------------------------- */
+
+        const canvasWidth =
+            Math.max(
+                canvas.clientWidth,
+                1
+            );
+
 
         workflowSvg.setAttribute(
             "viewBox",
-            `
-            0 0
-            ${canvasWidth}
-            ${requiredHeight}
-            `
+            `0 0 ${canvasWidth} ${totalHeight}`
         );
 
 
@@ -1226,32 +1187,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         workflowSvg.setAttribute(
             "height",
-            requiredHeight
+            totalHeight
         );
 
 
-        workflowSvg.style.position =
-            "absolute";
-
-        workflowSvg.style.left =
-            "0";
-
-        workflowSvg.style.top =
-            "0";
-
         workflowSvg.style.width =
-            "100%";
+            `${canvasWidth}px`;
 
         workflowSvg.style.height =
-            `${requiredHeight}px`;
-
-        workflowSvg.style.pointerEvents =
-            "none";
+            `${totalHeight}px`;
 
 
-        /* ================================
+        /* -----------------------------------------
            CREATE NODES
-        ================================= */
+        ----------------------------------------- */
 
         const nodeElements = [];
 
@@ -1260,43 +1209,46 @@ document.addEventListener("DOMContentLoaded", () => {
             (node, index) => {
 
                 const element =
-                    document.createElement(
-                        "div"
-                    );
+                    document.createElement("div");
 
 
                 element.className =
-                    "workflow-node";
+                    `workflow-node workflow-node-${node[0]}`;
 
 
-                const x =
-                    (
-                        canvasWidth -
-                        nodeWidth
-                    ) / 2;
+                /*
+                   Keep node width responsive.
+                */
 
-
-                const y =
-                    paddingTop +
-                    (
-                        index *
-                        (
-                            nodeHeight +
-                            verticalGap
-                        )
+                const availableWidth =
+                    Math.max(
+                        canvas.clientWidth - 48,
+                        260
                     );
 
 
-                element.style.position =
-                    "absolute";
+                const width =
+                    Math.min(
+                        430,
+                        availableWidth
+                    );
+
+
+                const x =
+                    Math.max(
+                        24,
+                        (canvasWidth - width) / 2
+                    );
+
+
+                const y =
+                    topPadding +
+                    index *
+                    (nodeHeight + verticalGap);
 
 
                 element.style.width =
-                    `${nodeWidth}px`;
-
-
-                element.style.height =
-                    `${nodeHeight}px`;
+                    `${width}px`;
 
 
                 element.style.left =
@@ -1307,27 +1259,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     `${y}px`;
 
 
-                element.style.transform =
-                    "none";
+                element.style.height =
+                    `${nodeHeight}px`;
 
 
                 element.innerHTML = `
 
-                    <div
-                        class="
-                            workflow-node-icon
-                        "
-                    >
-                        <i
-                            class="${node[3]}"
-                        ></i>
+                    <div class="workflow-node-icon">
+
+                        <i class="${node[3]}"></i>
+
                     </div>
 
-                    <div
-                        class="
-                            workflow-node-content
-                        "
-                    >
+
+                    <div class="workflow-node-content">
 
                         <small>
                             ${node[1]}
@@ -1336,6 +1281,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         <strong>
                             ${node[2]}
                         </strong>
+
+                    </div>
+
+
+                    <div class="workflow-node-number">
+
+                        ${String(index + 1).padStart(2, "0")}
 
                     </div>
 
@@ -1355,82 +1307,54 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        /* ================================
+        /* -----------------------------------------
            DRAW CONNECTIONS
-        ================================= */
+        ----------------------------------------- */
 
-        requestAnimationFrame(
-            () => {
+        requestAnimationFrame(() => {
 
-                nodeElements.forEach(
-                    (node, index) => {
+            nodeElements.forEach(
+                (node, index) => {
 
-                        if (
-                            index === 0
-                        ) {
-                            return;
-                        }
-
-
-                        drawConnection(
-                            nodeElements[
-                                index - 1
-                            ],
-                            node
-                        );
-
+                    if (index === 0) {
+                        return;
                     }
-                );
-
-            }
-        );
 
 
-        /* ================================
-           COUNTER
-        ================================= */
+                    drawConnection(
+                        nodeElements[index - 1],
+                        node
+                    );
 
-        nodeCounter.textContent =
-            `${nodes.length} ${
-                nodes.length === 1
-                    ? "node"
-                    : "nodes"
-            }`;
+                }
+            );
 
-
-        /* ================================
-           ACTIVATE CTA
-        ================================= */
-
-        activateQuoteCTA(
-            workflowName,
-            platform
-        );
+        });
 
 
-        /* ================================
+        /* -----------------------------------------
+           NODE COUNTER
+        ----------------------------------------- */
+
+        if (nodeCounter) {
+
+            nodeCounter.textContent =
+                `${nodes.length} ${
+                    nodes.length === 1
+                        ? "node"
+                        : "nodes"
+                }`;
+
+        }
+
+
+        /* -----------------------------------------
            RESET SCROLL
-        ================================= */
+        ----------------------------------------- */
 
-        canvas.scrollLeft =
-            0;
+        canvas.scrollLeft = 0;
 
-        canvas.scrollTop =
-            0;
-
-
-        setTimeout(
-            () => {
-
-                canvas.scrollTop =
-                    0;
-
-                canvas.scrollLeft =
-                    0;
-
-            },
-            30
-        );
+        canvas.scrollTop = 0;
 
     }
 
@@ -1446,7 +1370,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (
             !from ||
-            !to
+            !to ||
+            !workflowSvg
         ) {
             return;
         }
@@ -1455,33 +1380,39 @@ document.addEventListener("DOMContentLoaded", () => {
         const x =
             from.offsetLeft +
             (
-                from.offsetWidth /
-                2
+                from.offsetWidth / 2
             );
 
 
-        const y1 =
+        const startY =
             from.offsetTop +
             from.offsetHeight;
 
 
-        const y2 =
+        const endY =
             to.offsetTop;
 
 
         const distance =
-            y2 - y1;
+            Math.max(
+                endY - startY,
+                1
+            );
 
 
         const curve =
-            Math.max(
-                20,
-                Math.min(
-                    45,
+            Math.min(
+                55,
+                Math.max(
+                    20,
                     distance / 2
                 )
             );
 
+
+        /* -----------------------------------------
+           SVG PATH
+        ----------------------------------------- */
 
         const path =
             document.createElementNS(
@@ -1493,12 +1424,12 @@ document.addEventListener("DOMContentLoaded", () => {
         path.setAttribute(
             "d",
             `
-                M ${x} ${y1}
+                M ${x} ${startY}
 
                 C
-                ${x} ${y1 + curve},
-                ${x} ${y2 - curve},
-                ${x} ${y2}
+                ${x} ${startY + curve},
+                ${x} ${endY - curve},
+                ${x} ${endY}
             `
         );
 
@@ -1512,6 +1443,10 @@ document.addEventListener("DOMContentLoaded", () => {
             path
         );
 
+
+        /* -----------------------------------------
+           ANIMATION
+        ----------------------------------------- */
 
         try {
 
@@ -1527,22 +1462,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 length;
 
 
-            requestAnimationFrame(
-                () => {
+            requestAnimationFrame(() => {
 
-                    path.style.transition =
-                        "stroke-dashoffset .7s ease";
+                path.style.transition =
+                    "stroke-dashoffset .7s cubic-bezier(.4,0,.2,1)";
 
-                    path.style.strokeDashoffset =
-                        "0";
+                path.style.strokeDashoffset =
+                    "0";
 
-                }
-            );
+            });
 
         } catch (error) {
 
             console.warn(
-                "Connection animation error:",
+                "Workflow line animation error:",
                 error
             );
 
@@ -1552,68 +1485,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================================
-       CTA ACTIVATION
+       SHOW QUOTE CTA
     ========================================================= */
 
-    function activateQuoteCTA(
-        workflowName,
-        platform
+    function showQuoteCTA(
+        automationName
     ) {
 
-        if (!quoteButton) {
+        if (!quoteBar) {
             return;
         }
 
 
-        quoteButton.classList.add(
-            "is-active"
-        );
+        if (selectedWorkflowName) {
 
-
-        quoteButton.disabled =
-            false;
-
-
-        quoteButton.innerHTML = `
-
-            <span>
-                Get a Quote
-            </span>
-
-            <i
-                class="
-                    fa-solid
-                    fa-arrow-right
-                "
-            ></i>
-
-        `;
-
-
-        quoteButton.setAttribute(
-            "aria-label",
-            `Get a quote for ${workflowName}`
-        );
-
-
-        if (
-            selectedWorkflowInput
-        ) {
-
-            selectedWorkflowInput.value =
-                workflowName;
+            selectedWorkflowName.textContent =
+                automationName;
 
         }
 
 
-        if (
-            selectedPlatformInput
-        ) {
-
-            selectedPlatformInput.value =
-                platform;
-
-        }
+        quoteBar.classList.add(
+            "is-visible"
+        );
 
     }
 
@@ -1629,22 +1523,27 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        if (
-            selectedWorkflowInput
-        ) {
+        if (selectedWorkflow) {
 
-            selectedWorkflowInput.value =
-                currentWorkflow || "";
+            selectedWorkflow.value =
+                currentAutomation;
 
         }
 
 
-        if (
-            selectedPlatformInput
-        ) {
+        if (selectedPlatform) {
 
-            selectedPlatformInput.value =
-                currentPlatform || "";
+            selectedPlatform.value =
+                currentPlatform;
+
+        }
+
+
+        if (modalWorkflowName) {
+
+            modalWorkflowName.textContent =
+                currentAutomation ||
+                "Selected automation";
 
         }
 
@@ -1654,25 +1553,28 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
+        quoteModal.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
         document.body.classList.add(
             "workflow-modal-open"
         );
 
 
-        setTimeout(
-            () => {
+        /*
+           Focus first input
+        */
 
-                const firstInput =
-                    quoteForm?.querySelector(
-                        "input:not([type='hidden'])"
-                    );
+        setTimeout(() => {
 
+            document
+                .getElementById("quoteName")
+                ?.focus();
 
-                firstInput?.focus();
-
-            },
-            200
-        );
+        }, 250);
 
     }
 
@@ -1693,6 +1595,12 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
+        quoteModal.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
         document.body.classList.remove(
             "workflow-modal-open"
         );
@@ -1709,14 +1617,6 @@ document.addEventListener("DOMContentLoaded", () => {
         event => {
 
             event.preventDefault();
-
-
-            if (!currentWorkflow) {
-
-                return;
-
-            }
-
 
             openQuoteModal();
 
@@ -1741,21 +1641,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================================
-       CLOSE WHEN CLICKING BACKDROP
+       OVERLAY CLOSE
     ========================================================= */
 
-    quoteModal?.addEventListener(
+    quoteOverlay?.addEventListener(
         "click",
         event => {
 
-            if (
-                event.target ===
-                quoteModal
-            ) {
+            event.preventDefault();
 
-                closeQuoteModal();
-
-            }
+            closeQuoteModal();
 
         }
     );
@@ -1770,7 +1665,10 @@ document.addEventListener("DOMContentLoaded", () => {
         event => {
 
             if (
-                event.key === "Escape"
+                event.key === "Escape" &&
+                quoteModal?.classList.contains(
+                    "is-open"
+                )
             ) {
 
                 closeQuoteModal();
@@ -1792,116 +1690,104 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
 
 
-            /*
-               IMPORTANT:
-               Yahan aap baad mein
-               Elementor / webhook / n8n /
-               GHL integration laga sakte ho.
-            */
-
-
             const formData =
                 new FormData(
                     quoteForm
                 );
 
 
-            const name =
-                formData.get("name");
+            const data = {
+
+                name:
+                    formData.get("name"),
+
+                whatsapp:
+                    formData.get("whatsapp"),
+
+                email:
+                    formData.get("email"),
+
+                comments:
+                    formData.get("comments"),
+
+                workflow:
+                    formData.get("workflow"),
+
+                platform:
+                    formData.get("platform")
+
+            };
 
 
-            const whatsapp =
-                formData.get("whatsapp");
+            /*
+               Temporary behavior.
 
-
-            const email =
-                formData.get("email");
-
-
-            const comments =
-                formData.get("comments");
-
-
-            const workflow =
-                formData.get(
-                    "selectedWorkflow"
-                );
-
-
-            const platform =
-                formData.get(
-                    "selectedPlatform"
-                );
-
+               Later we can connect this
+               directly to GHL / n8n / webhook.
+            */
 
             console.log(
                 "Workflow Quote Request:",
-                {
-                    name,
-                    whatsapp,
-                    email,
-                    comments,
-                    workflow,
-                    platform
-                }
+                data
             );
 
 
             /*
-               TEMPORARY SUCCESS STATE
+               Change button state.
             */
 
-            quoteForm.innerHTML = `
-
-                <div
-                    class="
-                        workflow-form-success
-                    "
-                >
-
-                    <div
-                        class="
-                            workflow-success-icon
-                        "
-                    >
-                        <i
-                            class="
-                                fa-solid
-                                fa-check
-                            "
-                        ></i>
-                    </div>
-
-                    <h3>
-                        Request Received
-                    </h3>
-
-                    <p>
-                        We'll review your
-                        workflow requirements
-                        and get back to you shortly.
-                    </p>
-
-                    <button
-                        type="button"
-                        id="workflowSuccessClose"
-                    >
-                        Done
-                    </button>
-
-                </div>
-
-            `;
-
-
-            document
-                .getElementById(
-                    "workflowSuccessClose"
-                )
-                ?.addEventListener(
-                    "click",
-                    closeQuoteModal
+            const submitButton =
+                quoteForm.querySelector(
+                    ".workflow-form-submit"
                 );
+
+
+            if (submitButton) {
+
+                submitButton.innerHTML = `
+
+                    Request Sent
+
+                    <i class="
+                        fa-solid
+                        fa-check
+                    "></i>
+
+                `;
+
+
+                submitButton.disabled =
+                    true;
+
+            }
+
+
+            setTimeout(() => {
+
+                quoteForm.reset();
+
+                if (submitButton) {
+
+                    submitButton.innerHTML = `
+
+                        Request My Quote
+
+                        <i class="
+                            fa-solid
+                            fa-arrow-right
+                        "></i>
+
+                    `;
+
+                    submitButton.disabled =
+                        false;
+
+                }
+
+
+                closeQuoteModal();
+
+            }, 1800);
 
         }
     );
@@ -1916,7 +1802,6 @@ document.addEventListener("DOMContentLoaded", () => {
         event => {
 
             event.preventDefault();
-
 
             showView(
                 categoryView
@@ -1935,7 +1820,6 @@ document.addEventListener("DOMContentLoaded", () => {
         event => {
 
             event.preventDefault();
-
 
             showView(
                 platformView
@@ -1956,9 +1840,18 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
 
 
-            canvasNodes.innerHTML =
+            currentPlatform =
                 "";
 
+            currentAutomation =
+                "";
+
+            currentWorkflowNodes =
+                [];
+
+
+            canvasNodes.innerHTML =
+                "";
 
             workflowSvg.innerHTML =
                 "";
@@ -1969,60 +1862,15 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
 
-            nodeCounter.textContent =
-                "0 nodes";
+            quoteBar?.classList.remove(
+                "is-visible"
+            );
 
 
-            currentWorkflow =
-                null;
+            if (nodeCounter) {
 
-
-            currentPlatform =
-                null;
-
-
-            currentWorkflowNodes =
-                [];
-
-
-            if (quoteButton) {
-
-                quoteButton.classList.remove(
-                    "is-active"
-                );
-
-
-                quoteButton.disabled =
-                    true;
-
-
-                quoteButton.innerHTML = `
-
-                    <span>
-                        Select a workflow
-                    </span>
-
-                `;
-
-            }
-
-
-            if (
-                selectedWorkflowInput
-            ) {
-
-                selectedWorkflowInput.value =
-                    "";
-
-            }
-
-
-            if (
-                selectedPlatformInput
-            ) {
-
-                selectedPlatformInput.value =
-                    "";
+                nodeCounter.textContent =
+                    "0 nodes";
 
             }
 
@@ -2038,7 +1886,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================================
-       RESPONSIVE WORKFLOW REBUILD
+       RESIZE
     ========================================================= */
 
     let resizeTimer;
@@ -2054,25 +1902,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             resizeTimer =
-                setTimeout(
-                    () => {
+                setTimeout(() => {
 
-                        if (
-                            !currentWorkflowNodes.length
-                        ) {
-                            return;
-                        }
-
+                    if (
+                        currentWorkflowNodes.length
+                    ) {
 
                         buildWorkflow(
-                            currentWorkflowNodes,
-                            currentWorkflow,
-                            currentPlatform
+                            currentWorkflowNodes
                         );
 
-                    },
-                    150
-                );
+                    }
+
+                }, 150);
 
         }
     );
@@ -2090,7 +1932,6 @@ document.addEventListener("DOMContentLoaded", () => {
     canvasNodes.innerHTML =
         "";
 
-
     workflowSvg.innerHTML =
         "";
 
@@ -2100,19 +1941,21 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    nodeCounter.textContent =
-        "0 nodes";
+    quoteBar?.classList.remove(
+        "is-visible"
+    );
 
 
-    if (quoteButton) {
+    if (nodeCounter) {
 
-        quoteButton.disabled =
-            true;
-
-        quoteButton.classList.remove(
-            "is-active"
-        );
+        nodeCounter.textContent =
+            "0 nodes";
 
     }
+
+
+    console.log(
+        "AWSZ Workflow Builder loaded."
+    );
 
 });
