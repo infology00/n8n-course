@@ -3035,67 +3035,158 @@ body > header {
 
 }
 /* =========================================================
-   WORKFLOW BUILDER — FINAL CLEAN FIX
-   Paste ONLY this block at the very END of CSS
+   WORKFLOW BUILDER — RESTORE / FINAL DESIGN
 ========================================================= */
 
-/* ---------- CANVAS ---------- */
+/* MAIN SHELL */
+.workflow-shell {
+    width: 100% !important;
+    max-width: 1500px !important;
+    height: 760px !important;
+
+    display: grid !important;
+    grid-template-columns: 390px minmax(0, 1fr) !important;
+
+    margin: 0 auto !important;
+
+    background: #0b0b0b !important;
+
+    border: 1px solid rgba(255,255,255,.08) !important;
+    border-radius: 28px !important;
+
+    overflow: hidden !important;
+}
+
+
+/* SIDEBAR */
+.workflow-sidebar {
+    width: 390px !important;
+    min-width: 390px !important;
+
+    padding: 34px 28px !important;
+
+    background:
+        linear-gradient(
+            180deg,
+            #101010 0%,
+            #090909 100%
+        ) !important;
+
+    border-right:
+        1px solid rgba(255,255,255,.07) !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    overflow: hidden !important;
+}
+
+
+/* WORKSPACE */
+.workflow-workspace {
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    background: #070707 !important;
+
+    overflow: hidden !important;
+}
+
+
+/* WORKSPACE HEADER */
+.workspace-header {
+    height: 82px !important;
+    min-height: 82px !important;
+
+    padding: 18px 25px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.07) !important;
+
+    background: rgba(10,10,10,.85) !important;
+
+    backdrop-filter: blur(20px) !important;
+
+    z-index: 20 !important;
+}
+
+
+/* =========================================================
+   CANVAS
+========================================================= */
 
 .workflow-canvas {
     position: relative !important;
+
+    flex: 1 !important;
+
     width: 100% !important;
-    height: 620px !important;
-    min-height: 620px !important;
+
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    height: auto !important;
 
     overflow-x: hidden !important;
     overflow-y: auto !important;
 
     background:
         radial-gradient(
-            circle at 50% 45%,
-            rgba(214,255,0,.045),
-            transparent 42%
+            circle at 50% 42%,
+            rgba(214,255,0,.035),
+            transparent 45%
         ),
         #050505 !important;
 
     isolation: isolate !important;
+
     cursor: default !important;
 }
 
-/* ---------- DOT GRID ---------- */
+
+/* =========================================================
+   DOT GRID
+========================================================= */
 
 .workflow-canvas::before {
     content: "";
 
     position: absolute;
-    inset: 0;
 
-    width: 100%;
-    height: 100%;
+    inset: 0;
 
     background-image:
         radial-gradient(
             circle,
-            rgba(255,255,255,.16) 1px,
+            rgba(255,255,255,.14) 1px,
             transparent 1.2px
         );
 
     background-size: 24px 24px;
-    opacity: .38;
+
+    opacity: .35;
 
     pointer-events: none;
+
     z-index: 0;
 }
 
-/* ---------- CENTER GLOW ---------- */
 
+/* CENTER GLOW */
 .workflow-canvas::after {
     content: "";
 
     position: absolute;
 
-    width: 650px;
-    height: 650px;
+    width: 600px;
+    height: 600px;
 
     left: 50%;
     top: 45%;
@@ -3107,90 +3198,35 @@ body > header {
     background:
         radial-gradient(
             circle,
-            rgba(214,255,0,.05),
-            rgba(214,255,0,.015) 30%,
+            rgba(214,255,0,.045),
             transparent 68%
         );
 
-    filter: blur(10px);
+    filter: blur(12px);
 
     pointer-events: none;
+
     z-index: 0;
 }
 
 
 /* =========================================================
-   GRID ELEMENT
+   GRID
 ========================================================= */
 
 .canvas-grid {
     position: absolute !important;
 
-    top: 0 !important;
-    left: 0 !important;
+    inset: 0 !important;
 
     width: 100% !important;
     height: 100% !important;
-
-    min-width: 100% !important;
-    min-height: 100% !important;
 
     background: transparent !important;
 
     pointer-events: none !important;
 
     z-index: 1 !important;
-}
-
-
-/* =========================================================
-   SVG CONNECTIONS
-========================================================= */
-
-.workflow-svg {
-    position: absolute !important;
-
-    top: 0 !important;
-    left: 0 !important;
-
-    width: 100% !important;
-    height: 100% !important;
-
-    min-width: 100% !important;
-    min-height: 100% !important;
-
-    overflow: visible !important;
-
-    pointer-events: none !important;
-
-    z-index: 5 !important;
-}
-
-.workflow-line {
-    fill: none !important;
-
-    stroke: rgba(214,255,0,.48) !important;
-
-    stroke-width: 2px !important;
-
-    stroke-linecap: round !important;
-    stroke-linejoin: round !important;
-
-    stroke-dasharray: 6 7 !important;
-
-    filter:
-        drop-shadow(
-            0 0 6px rgba(214,255,0,.18)
-        ) !important;
-
-    animation:
-        workflowLineFlow 1.8s linear infinite !important;
-}
-
-@keyframes workflowLineFlow {
-    to {
-        stroke-dashoffset: -26;
-    }
 }
 
 
@@ -3205,7 +3241,7 @@ body > header {
     left: 0 !important;
 
     width: 100% !important;
-    min-height: 100% !important;
+    height: 100% !important;
 
     pointer-events: none !important;
 
@@ -3214,7 +3250,48 @@ body > header {
 
 
 /* =========================================================
-   WORKFLOW NODE
+   CONNECTION SVG
+========================================================= */
+
+.workflow-svg {
+    position: absolute !important;
+
+    top: 0 !important;
+    left: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    pointer-events: none !important;
+
+    overflow: visible !important;
+
+    z-index: 5 !important;
+}
+
+
+/* CONNECTION LINE */
+.workflow-line {
+    fill: none !important;
+
+    stroke:
+        rgba(214,255,0,.48) !important;
+
+    stroke-width: 2px !important;
+
+    stroke-linecap: round !important;
+
+    stroke-dasharray: 6 7 !important;
+
+    filter:
+        drop-shadow(
+            0 0 5px rgba(214,255,0,.15)
+        ) !important;
+}
+
+
+/* =========================================================
+   NODES
 ========================================================= */
 
 .workflow-node {
@@ -3222,18 +3299,20 @@ body > header {
 
     /*
        IMPORTANT:
-       JS ka top value work karega.
-       Sirf horizontal center CSS handle karega.
+       JS ka TOP position preserve hoga.
+       CSS sirf horizontal positioning karega.
     */
 
     left: 50% !important;
 
-    width: 340px !important;
-    min-height: 78px !important;
+    width: 395px !important;
 
-    padding: 14px 17px !important;
+    min-height: 92px !important;
+
+    padding: 14px 18px !important;
 
     display: flex !important;
+
     align-items: center !important;
 
     gap: 15px !important;
@@ -3245,48 +3324,45 @@ body > header {
     background:
         linear-gradient(
             145deg,
-            rgba(28,28,28,.98),
-            rgba(12,12,12,.98)
+            rgba(25,25,25,.97),
+            rgba(13,13,13,.97)
         ) !important;
 
     border:
-        1px solid rgba(255,255,255,.09) !important;
+        1px solid rgba(255,255,255,.10) !important;
 
-    border-radius: 17px !important;
+    border-radius: 18px !important;
 
     box-shadow:
-        0 18px 45px rgba(0,0,0,.42),
-        inset 0 1px 0 rgba(255,255,255,.045) !important;
+        0 15px 40px rgba(0,0,0,.38),
+        inset 0 1px 0 rgba(255,255,255,.04) !important;
 
-    backdrop-filter: blur(18px) !important;
-    -webkit-backdrop-filter: blur(18px) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
 
     pointer-events: auto !important;
 
     z-index: 20 !important;
 
     transition:
-        transform .3s cubic-bezier(.2,.8,.2,1),
-        border-color .3s ease,
-        box-shadow .3s ease !important;
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease !important;
 }
 
 
-/* =========================================================
-   NODE HOVER
-========================================================= */
-
+/* NODE HOVER */
 .workflow-node:hover {
     transform:
         translateX(-50%)
         translateY(-4px) !important;
 
     border-color:
-        rgba(214,255,0,.4) !important;
+        rgba(214,255,0,.38) !important;
 
     box-shadow:
-        0 25px 60px rgba(0,0,0,.5),
-        0 0 35px rgba(214,255,0,.08) !important;
+        0 20px 50px rgba(0,0,0,.48),
+        0 0 28px rgba(214,255,0,.07) !important;
 }
 
 
@@ -3295,37 +3371,27 @@ body > header {
 ========================================================= */
 
 .workflow-node-icon {
-    width: 44px !important;
-    height: 44px !important;
+    width: 48px !important;
+    height: 48px !important;
 
-    min-width: 44px !important;
+    min-width: 48px !important;
 
     display: flex !important;
 
     align-items: center !important;
     justify-content: center !important;
 
-    border-radius: 13px !important;
+    border-radius: 14px !important;
 
     background:
-        linear-gradient(
-            145deg,
-            rgba(214,255,0,.12),
-            rgba(214,255,0,.035)
-        ) !important;
+        rgba(214,255,0,.075) !important;
 
     border:
         1px solid rgba(214,255,0,.18) !important;
 
     color: #D6FF00 !important;
 
-    font-size: 17px !important;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.05),
-        0 0 18px rgba(214,255,0,.04) !important;
-
-    flex-shrink: 0 !important;
+    font-size: 18px !important;
 }
 
 
@@ -3340,11 +3406,11 @@ body > header {
 
     color: #707070 !important;
 
-    font-size: 9px !important;
+    font-size: 10px !important;
 
     font-weight: 700 !important;
 
-    letter-spacing: .1em !important;
+    letter-spacing: .08em !important;
 
     text-transform: uppercase !important;
 }
@@ -3352,26 +3418,24 @@ body > header {
 .workflow-node strong {
     display: block !important;
 
-    color: #f5f5f5 !important;
+    color: #f4f4f4 !important;
 
-    font-size: 14px !important;
+    font-size: 15px !important;
 
-    font-weight: 600 !important;
+    font-weight: 650 !important;
 
     line-height: 1.3 !important;
 }
 
 
-/* =========================================================
-   NODE OUTPUT DOT
-========================================================= */
-
+/* OUTPUT DOT */
 .workflow-node::after {
     content: "";
 
     position: absolute;
 
     right: -6px;
+
     top: 50%;
 
     width: 10px;
@@ -3386,23 +3450,22 @@ body > header {
     background: #D6FF00;
 
     box-shadow:
-        0 0 10px rgba(214,255,0,.55),
-        0 0 22px rgba(214,255,0,.18);
+        0 0 12px rgba(214,255,0,.55);
 }
 
 
 /* =========================================================
-   EMPTY CANVAS
+   EMPTY STATE
 ========================================================= */
 
 .canvas-empty {
     position: absolute !important;
 
-    top: 50% !important;
     left: 50% !important;
+    top: 50% !important;
 
     transform:
-        translate(-50%, -50%) !important;
+        translate(-50%,-50%) !important;
 
     width: 320px !important;
 
@@ -3417,116 +3480,69 @@ body > header {
     display: none !important;
 }
 
-.canvas-empty-icon {
-    width: 64px !important;
-    height: 64px !important;
-
-    margin: 0 auto 18px !important;
-
-    display: flex !important;
-
-    align-items: center !important;
-    justify-content: center !important;
-
-    border-radius: 18px !important;
-
-    background:
-        rgba(214,255,0,.055) !important;
-
-    border:
-        1px solid rgba(214,255,0,.14) !important;
-
-    color: #D6FF00 !important;
-
-    font-size: 22px !important;
-
-    box-shadow:
-        0 0 35px rgba(214,255,0,.045) !important;
-}
-
-.canvas-empty h3 {
-    color: #eee !important;
-
-    font-size: 17px !important;
-
-    margin: 0 0 7px !important;
-}
-
-.canvas-empty p {
-    color: #666 !important;
-
-    font-size: 12px !important;
-
-    line-height: 1.6 !important;
-
-    margin: 0 !important;
-}
-
-
-/* =========================================================
-   SCROLLBAR
-========================================================= */
-
-.workflow-canvas::-webkit-scrollbar {
-    width: 6px !important;
-    height: 6px !important;
-}
-
-.workflow-canvas::-webkit-scrollbar-track {
-    background: transparent !important;
-}
-
-.workflow-canvas::-webkit-scrollbar-thumb {
-    background:
-        rgba(255,255,255,.12) !important;
-
-    border-radius: 20px !important;
-}
-
-.workflow-canvas::-webkit-scrollbar-thumb:hover {
-    background:
-        rgba(214,255,0,.3) !important;
-}
-
 
 /* =========================================================
    MOBILE
 ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
+
+    .workflow-shell {
+        grid-template-columns:
+            330px minmax(0,1fr) !important;
+    }
+
+    .workflow-sidebar {
+        width: 330px !important;
+        min-width: 330px !important;
+    }
 
     .workflow-node {
-        width: 300px !important;
+        width: 330px !important;
     }
-
 }
 
-@media (max-width: 700px) {
+
+@media (max-width: 800px) {
+
+    .workflow-shell {
+        grid-template-columns: 1fr !important;
+
+        height: auto !important;
+    }
+
+    .workflow-sidebar {
+        width: 100% !important;
+        min-width: 0 !important;
+
+        border-right: 0 !important;
+
+        border-bottom:
+            1px solid rgba(255,255,255,.07) !important;
+    }
+
+    .workflow-workspace {
+        min-height: 650px !important;
+    }
 
     .workflow-canvas {
-        height: 560px !important;
-        min-height: 560px !important;
+        min-height: 570px !important;
     }
+}
+
+
+@media (max-width: 600px) {
 
     .workflow-node {
         width: 285px !important;
 
-        min-height: 72px !important;
-
-        padding: 12px 14px !important;
+        min-height: 75px !important;
     }
 
     .workflow-node-icon {
-        width: 40px !important;
-        height: 40px !important;
+        width: 42px !important;
+        height: 42px !important;
 
-        min-width: 40px !important;
-
-        font-size: 15px !important;
+        min-width: 42px !important;
     }
-
-    .workflow-node strong {
-        font-size: 13px !important;
-    }
-
 }
