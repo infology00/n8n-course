@@ -360,3 +360,432 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+/* =========================================================
+   AUTOMATION ECOSYSTEM NETWORK
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const canvas =
+        document.getElementById("automation-network");
+
+    const section =
+        document.querySelector(".automation-ecosystem");
+
+    if (!canvas || !section) return;
+
+
+    const ctx = canvas.getContext("2d");
+
+    let width = 0;
+    let height = 0;
+
+    let nodes = [];
+
+    const mouse = {
+        x: -1000,
+        y: -1000
+    };
+
+
+    /* =====================================================
+       SETTINGS
+    ===================================================== */
+
+    const NODE_COUNT =
+        window.innerWidth < 700 ? 38 : 75;
+
+    const CONNECTION_DISTANCE = 145;
+
+    const MOUSE_DISTANCE = 190;
+
+
+    /* =====================================================
+       RESIZE
+    ===================================================== */
+
+    function resizeCanvas() {
+
+        const rect =
+            section.getBoundingClientRect();
+
+        const dpr =
+            Math.min(window.devicePixelRatio || 1, 2);
+
+        width = rect.width;
+        height = rect.height;
+
+        canvas.width =
+            width * dpr;
+
+        canvas.height =
+            height * dpr;
+
+        canvas.style.width =
+            width + "px";
+
+        canvas.style.height =
+            height + "px";
+
+        ctx.setTransform(
+            dpr,
+            0,
+            0,
+            dpr,
+            0,
+            0
+        );
+
+        createNodes();
+    }
+
+
+    /* =====================================================
+       CREATE NODES
+    ===================================================== */
+
+    function createNodes() {
+
+        nodes = [];
+
+        for (let i = 0; i < NODE_COUNT; i++) {
+
+            nodes.push({
+
+                x: Math.random() * width,
+
+                y: Math.random() * height,
+
+                radius:
+                    Math.random() * 2.4 + 1.2,
+
+                vx:
+                    (Math.random() - .5) * .28,
+
+                vy:
+                    (Math.random() - .5) * .28,
+
+                pulse:
+                    Math.random() * Math.PI * 2
+
+            });
+
+        }
+
+    }
+
+
+    /* =====================================================
+       MOUSE
+    ===================================================== */
+
+    section.addEventListener(
+        "mousemove",
+        event => {
+
+            const rect =
+                section.getBoundingClientRect();
+
+            mouse.x =
+                event.clientX - rect.left;
+
+            mouse.y =
+                event.clientY - rect.top;
+
+        },
+        { passive: true }
+    );
+
+
+    section.addEventListener(
+        "mouseleave",
+        () => {
+
+            mouse.x = -1000;
+            mouse.y = -1000;
+
+        }
+    );
+
+
+    /* =====================================================
+       DRAW
+    ===================================================== */
+
+    function draw() {
+
+        ctx.clearRect(
+            0,
+            0,
+            width,
+            height
+        );
+
+
+        /* MOVE */
+
+        nodes.forEach(node => {
+
+            node.x += node.vx;
+            node.y += node.vy;
+
+            node.pulse += .025;
+
+
+            if (node.x < -20)
+                node.x = width + 20;
+
+            if (node.x > width + 20)
+                node.x = -20;
+
+            if (node.y < -20)
+                node.y = height + 20;
+
+            if (node.y > height + 20)
+                node.y = -20;
+
+
+            /* MOUSE REPULSION */
+
+            const dx =
+                node.x - mouse.x;
+
+            const dy =
+                node.y - mouse.y;
+
+            const distance =
+                Math.sqrt(
+                    dx * dx +
+                    dy * dy
+                );
+
+            if (
+                distance < MOUSE_DISTANCE &&
+                distance > 0
+            ) {
+
+                const force =
+                    (MOUSE_DISTANCE - distance)
+                    / MOUSE_DISTANCE;
+
+                node.x +=
+                    (dx / distance) *
+                    force *
+                    1.5;
+
+                node.y +=
+                    (dy / distance) *
+                    force *
+                    1.5;
+
+            }
+
+        });
+
+
+        /* CONNECTIONS */
+
+        for (
+            let i = 0;
+            i < nodes.length;
+            i++
+        ) {
+
+            for (
+                let j = i + 1;
+                j < nodes.length;
+                j++
+            ) {
+
+                const a = nodes[i];
+                const b = nodes[j];
+
+                const dx =
+                    a.x - b.x;
+
+                const dy =
+                    a.y - b.y;
+
+                const distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
+
+
+                if (
+                    distance <
+                    CONNECTION_DISTANCE
+                ) {
+
+                    const opacity =
+                        1 -
+                        distance /
+                        CONNECTION_DISTANCE;
+
+
+                    ctx.beginPath();
+
+                    ctx.moveTo(
+                        a.x,
+                        a.y
+                    );
+
+                    ctx.lineTo(
+                        b.x,
+                        b.y
+                    );
+
+                    ctx.strokeStyle =
+                        `rgba(8,8,8,${opacity * .13})`;
+
+                    ctx.lineWidth = .7;
+
+                    ctx.stroke();
+
+                }
+
+            }
+
+        }
+
+
+        /* NODES */
+
+        nodes.forEach(node => {
+
+            const pulse =
+                Math.sin(node.pulse) * .7;
+
+
+            ctx.beginPath();
+
+            ctx.arc(
+                node.x,
+                node.y,
+                node.radius + pulse,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                "rgba(8,8,8,.42)";
+
+            ctx.fill();
+
+
+            /* NODE GLOW */
+
+            ctx.beginPath();
+
+            ctx.arc(
+                node.x,
+                node.y,
+                node.radius * 4,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                "rgba(8,8,8,.035)";
+
+            ctx.fill();
+
+        });
+
+
+        /* MOUSE NETWORK */
+
+        if (mouse.x > -500) {
+
+            nodes.forEach(node => {
+
+                const dx =
+                    node.x - mouse.x;
+
+                const dy =
+                    node.y - mouse.y;
+
+                const distance =
+                    Math.sqrt(
+                        dx * dx +
+                        dy * dy
+                    );
+
+
+                if (
+                    distance <
+                    MOUSE_DISTANCE
+                ) {
+
+                    const opacity =
+                        1 -
+                        distance /
+                        MOUSE_DISTANCE;
+
+
+                    ctx.beginPath();
+
+                    ctx.moveTo(
+                        node.x,
+                        node.y
+                    );
+
+                    ctx.lineTo(
+                        mouse.x,
+                        mouse.y
+                    );
+
+                    ctx.strokeStyle =
+                        `rgba(8,8,8,${opacity * .22})`;
+
+                    ctx.lineWidth = 1;
+
+                    ctx.stroke();
+
+                }
+
+            });
+
+
+            /* MOUSE NODE */
+
+            ctx.beginPath();
+
+            ctx.arc(
+                mouse.x,
+                mouse.y,
+                4,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                "rgba(8,8,8,.8)";
+
+            ctx.fill();
+
+        }
+
+
+        requestAnimationFrame(draw);
+
+    }
+
+
+    /* =====================================================
+       START
+    ===================================================== */
+
+    resizeCanvas();
+
+    draw();
+
+
+    window.addEventListener(
+        "resize",
+        resizeCanvas,
+        { passive: true }
+    );
+
+});
