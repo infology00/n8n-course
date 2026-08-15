@@ -22,13 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const nodeCounter = document.getElementById("nodeCounter");
     const clearWorkflow = document.getElementById("clearWorkflow");
 
-    const backToCategories = document.getElementById("backToCategories");
-    const backToPlatforms = document.getElementById("backToPlatforms");
+    const backToCategories =
+        document.getElementById("backToCategories");
 
+    const backToPlatforms =
+        document.getElementById("backToPlatforms");
 
-    /* =========================================================
-       SAFETY CHECK
-    ========================================================= */
 
     if (
         !categoryView ||
@@ -46,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================================
-       CATEGORY DATA
+       DATA
     ========================================================= */
 
     const categories = {
@@ -115,19 +114,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================================
-       AUTOMATION DATA
-       FORMAT:
-       [type, platform, title, icon]
+       AUTOMATIONS
     ========================================================= */
 
     const automationData = {
 
         Facebook: [
-
             {
                 name: "DM Automation",
                 icon: "fa-solid fa-message",
-
                 workflow: [
                     ["trigger", "Facebook", "New DM", "fa-brands fa-facebook-f"],
                     ["ai", "AI Agent", "Understand Message", "fa-solid fa-wand-magic-sparkles"],
@@ -136,11 +131,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     ["crm", "CRM", "Save Conversation", "fa-solid fa-users"]
                 ]
             },
-
             {
                 name: "Comment → DM",
                 icon: "fa-solid fa-comments",
-
                 workflow: [
                     ["trigger", "Facebook", "New Comment", "fa-brands fa-facebook-f"],
                     ["ai", "AI Agent", "Analyze Comment", "fa-solid fa-wand-magic-sparkles"],
@@ -148,11 +141,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     ["crm", "CRM", "Save Lead", "fa-solid fa-user-plus"]
                 ]
             },
-
             {
                 name: "Lead Ads → CRM",
                 icon: "fa-solid fa-user-plus",
-
                 workflow: [
                     ["trigger", "Facebook", "New Lead Ad", "fa-brands fa-facebook-f"],
                     ["action", "Facebook", "Capture Lead", "fa-solid fa-user"],
@@ -161,16 +152,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     ["action", "Sales Team", "Notify Sales", "fa-solid fa-bell"]
                 ]
             }
-
         ],
 
-
         Instagram: [
-
             {
                 name: "Instagram DM Agent",
                 icon: "fa-solid fa-message",
-
                 workflow: [
                     ["trigger", "Instagram", "New DM", "fa-brands fa-instagram"],
                     ["ai", "AI Agent", "Understand Intent", "fa-solid fa-wand-magic-sparkles"],
@@ -178,27 +165,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     ["action", "Instagram", "Send DM", "fa-solid fa-paper-plane"]
                 ]
             },
-
             {
                 name: "Comment Automation",
                 icon: "fa-solid fa-comments",
-
                 workflow: [
                     ["trigger", "Instagram", "New Comment", "fa-brands fa-instagram"],
                     ["ai", "AI Agent", "Analyze Comment", "fa-solid fa-wand-magic-sparkles"],
                     ["action", "Instagram", "Send Reply", "fa-solid fa-reply"]
                 ]
             }
-
         ],
 
-
         LinkedIn: [
-
             {
                 name: "Lead Generation",
                 icon: "fa-solid fa-user-plus",
-
                 workflow: [
                     ["trigger", "LinkedIn", "New Prospect", "fa-brands fa-linkedin-in"],
                     ["ai", "AI Agent", "Research Prospect", "fa-solid fa-wand-magic-sparkles"],
@@ -207,32 +188,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     ["crm", "CRM", "Create Lead", "fa-solid fa-users"]
                 ]
             }
-
         ],
 
-
         YouTube: [
-
             {
                 name: "New Video → Social",
                 icon: "fa-solid fa-video",
-
                 workflow: [
                     ["trigger", "YouTube", "New Video", "fa-brands fa-youtube"],
                     ["ai", "AI Agent", "Create Content", "fa-solid fa-wand-magic-sparkles"],
                     ["action", "Social Media", "Publish Post", "fa-solid fa-share-nodes"]
                 ]
             }
-
         ],
 
-
         GoHighLevel: [
-
             {
                 name: "New Lead → Pipeline",
                 icon: "fa-solid fa-user-plus",
-
                 workflow: [
                     ["trigger", "GHL", "New Lead", "fa-solid fa-user-plus"],
                     ["ai", "AI Agent", "Qualify Lead", "fa-solid fa-wand-magic-sparkles"],
@@ -240,16 +213,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     ["action", "Sales", "Notify Team", "fa-solid fa-bell"]
                 ]
             }
-
         ],
 
-
         HubSpot: [
-
             {
                 name: "Lead → CRM",
                 icon: "fa-solid fa-users",
-
                 workflow: [
                     ["trigger", "HubSpot", "New Lead", "fa-brands fa-hubspot"],
                     ["ai", "AI Agent", "Score Lead", "fa-solid fa-wand-magic-sparkles"],
@@ -257,16 +226,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     ["action", "Sales", "Notify Sales", "fa-solid fa-bell"]
                 ]
             }
-
         ],
 
-
         "Google Maps": [
-
             {
                 name: "Scrape Business Leads",
                 icon: "fa-solid fa-map-location-dot",
-
                 workflow: [
                     ["trigger", "Google Maps", "Search Businesses", "fa-solid fa-map-location-dot"],
                     ["action", "Scraper", "Extract Data", "fa-solid fa-spider"],
@@ -274,16 +239,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     ["crm", "CRM", "Save Leads", "fa-solid fa-users"]
                 ]
             }
-
         ],
 
-
         Apollo: [
-
             {
                 name: "Find Prospects",
                 icon: "fa-solid fa-crosshairs",
-
                 workflow: [
                     ["trigger", "Apollo", "Find Prospects", "fa-solid fa-crosshairs"],
                     ["action", "Apollo", "Export Leads", "fa-solid fa-download"],
@@ -291,16 +252,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     ["crm", "CRM", "Create Leads", "fa-solid fa-users"]
                 ]
             }
-
         ],
 
-
         Shopify: [
-
             {
                 name: "New Order Automation",
                 icon: "fa-brands fa-shopify",
-
                 workflow: [
                     ["trigger", "Shopify", "New Order", "fa-brands fa-shopify"],
                     ["action", "Shopify", "Process Order", "fa-solid fa-cart-shopping"],
@@ -308,16 +265,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     ["action", "Email", "Send Confirmation", "fa-solid fa-envelope"]
                 ]
             }
-
         ],
 
-
         ChatGPT: [
-
             {
                 name: "AI Customer Agent",
                 icon: "fa-solid fa-robot",
-
                 workflow: [
                     ["trigger", "Website", "New Message", "fa-solid fa-globe"],
                     ["ai", "ChatGPT", "Understand Request", "fa-solid fa-robot"],
@@ -325,16 +278,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     ["action", "Website", "Send Response", "fa-solid fa-paper-plane"]
                 ]
             }
-
         ],
 
-
         "Retell AI": [
-
             {
                 name: "AI Receptionist",
                 icon: "fa-solid fa-phone",
-
                 workflow: [
                     ["trigger", "Phone", "Incoming Call", "fa-solid fa-phone"],
                     ["ai", "Retell AI", "Understand Caller", "fa-solid fa-brain"],
@@ -342,16 +291,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     ["crm", "CRM", "Save Call", "fa-solid fa-users"]
                 ]
             }
-
         ],
 
-
         "Voice AI": [
-
             {
                 name: "Inbound Call Agent",
                 icon: "fa-solid fa-phone",
-
                 workflow: [
                     ["trigger", "Phone", "Incoming Call", "fa-solid fa-phone"],
                     ["ai", "Voice AI", "AI Receptionist", "fa-solid fa-microphone"],
@@ -359,7 +304,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     ["crm", "CRM", "Save Caller", "fa-solid fa-users"]
                 ]
             }
-
         ]
 
     };
@@ -382,57 +326,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================================
-       CATEGORY BUTTONS
+       CATEGORY → PLATFORM
     ========================================================= */
 
-    const categoryButtons =
-        document.querySelectorAll(".workflow-category");
+    document
+        .querySelectorAll(".workflow-category")
+        .forEach(button => {
 
-    categoryButtons.forEach(button => {
+            button.addEventListener("click", event => {
 
-        button.addEventListener("click", event => {
+                event.preventDefault();
 
-            event.preventDefault();
+                document
+                    .querySelectorAll(".workflow-category")
+                    .forEach(btn =>
+                        btn.classList.remove("active")
+                    );
 
-            const category =
-                button.dataset.category;
+                button.classList.add("active");
 
-            categoryButtons.forEach(item => {
-                item.classList.remove("active");
+                loadPlatforms(
+                    button.dataset.category
+                );
+
             });
-
-            button.classList.add("active");
-
-            loadPlatforms(category);
 
         });
 
-    });
-
-
-    /* =========================================================
-       LOAD PLATFORMS
-    ========================================================= */
 
     function loadPlatforms(category) {
 
-        const data =
-            categories[category];
+        const data = categories[category];
 
-        if (!data) {
-            console.warn("Category not found:", category);
-            return;
-        }
+        if (!data) return;
 
-        platformTitle.textContent =
-            data.title;
+        platformTitle.textContent = data.title;
 
         platformList.innerHTML = "";
 
-        data.platforms.forEach(platform => {
-
-            const name = platform[0];
-            const icon = platform[1];
+        data.platforms.forEach(([name, icon]) => {
 
             const button =
                 document.createElement("button");
@@ -455,12 +387,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 <i class="fa-solid fa-chevron-right platform-arrow"></i>
             `;
 
-            button.addEventListener("click", event => {
-
-                event.preventDefault();
-
+            button.addEventListener("click", () => {
                 loadAutomations(name);
-
             });
 
             platformList.appendChild(button);
@@ -472,7 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================================
-       LOAD AUTOMATIONS
+       PLATFORM → AUTOMATION
     ========================================================= */
 
     function loadAutomations(platform) {
@@ -489,7 +417,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             automationList.innerHTML = `
                 <div class="workflow-no-results">
-
                     <i class="fa-solid fa-clock"></i>
 
                     <strong>
@@ -499,7 +426,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     <small>
                         We are adding more workflows for ${platform}.
                     </small>
-
                 </div>
             `;
 
@@ -507,6 +433,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             return;
         }
+
 
         list.forEach(automation => {
 
@@ -531,9 +458,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <i class="fa-solid fa-chevron-right automation-arrow"></i>
             `;
 
-            button.addEventListener("click", event => {
-
-                event.preventDefault();
+            button.addEventListener("click", () => {
 
                 buildWorkflow(
                     automation.workflow
@@ -555,108 +480,170 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function buildWorkflow(nodes) {
 
-        if (!nodes || !nodes.length) {
-            console.warn("No workflow nodes.");
-            return;
-        }
+        if (!nodes || !nodes.length) return;
 
 
-        /* -----------------------------------------
-           CLEAR OLD
-        ----------------------------------------- */
+        /* CLEAR */
 
         canvasNodes.innerHTML = "";
         workflowSvg.innerHTML = "";
 
-
-        /* -----------------------------------------
-           HIDE EMPTY
-        ----------------------------------------- */
-
-        if (canvasEmpty) {
-            canvasEmpty.classList.add("hidden");
-        }
+        canvasEmpty?.classList.add("hidden");
 
 
-        /* -----------------------------------------
-           CANVAS DIMENSIONS
-        ----------------------------------------- */
+        /* =====================================================
+           IMPORTANT:
+           CANVAS DOES NOT BECOME HUGE.
+           ONLY VERTICAL SPACE IS USED.
+        ===================================================== */
 
-        const nodeWidth = 390;
-        const nodeHeight = 92;
+        const nodeHeight = 78;
+        const gap = 58;
+        const paddingTop = 45;
+        const paddingBottom = 60;
 
-        const gap = 55;
-
-        const startY = 45;
-
-        const totalHeight =
-            startY +
-            (nodes.length * nodeHeight) +
-            ((nodes.length - 1) * gap) +
-            80;
+        const requiredHeight =
+            paddingTop +
+            nodes.length * nodeHeight +
+            (nodes.length - 1) * gap +
+            paddingBottom;
 
 
-        /* -----------------------------------------
-           NODE CONTAINER
-        ----------------------------------------- */
+        /*
+           Canvas nodes become a simple vertical
+           coordinate layer.
+        */
 
         canvasNodes.style.position = "absolute";
-        canvasNodes.style.left = "0";
-        canvasNodes.style.top = "0";
+        canvasNodes.style.inset = "0";
         canvasNodes.style.width = "100%";
-        canvasNodes.style.height = `${totalHeight}px`;
+        canvasNodes.style.height = `${requiredHeight}px`;
 
 
-        /* -----------------------------------------
-           SVG
-        ----------------------------------------- */
+        /*
+           SVG follows same coordinate system.
+        */
 
-        const canvasWidth =
-            canvas.clientWidth || 800;
+        workflowSvg.setAttribute(
+            "viewBox",
+            `0 0 ${canvas.clientWidth} ${requiredHeight}`
+        );
 
         workflowSvg.setAttribute(
             "width",
-            canvasWidth
+            canvas.clientWidth
         );
 
         workflowSvg.setAttribute(
             "height",
-            totalHeight
+            requiredHeight
         );
 
-        workflowSvg.setAttribute(
-            "viewBox",
-            `0 0 ${canvasWidth} ${totalHeight}`
-        );
-
-        workflowSvg.style.width =
-            `${canvasWidth}px`;
-
-        workflowSvg.style.height =
-            `${totalHeight}px`;
+        workflowSvg.style.width = `${canvas.clientWidth}px`;
+        workflowSvg.style.height = `${requiredHeight}px`;
 
 
-        /* -----------------------------------------
+        /* =====================================================
            CREATE NODES
-        ----------------------------------------- */
+        ===================================================== */
+
+        const nodeElements = [];
+
 
         nodes.forEach((node, index) => {
 
-            createNode(
-                node,
-                index,
-                nodeWidth,
-                nodeHeight,
-                gap,
-                startY
+            const element =
+                document.createElement("div");
+
+            element.className =
+                "workflow-node";
+
+
+            const width =
+                Math.min(
+                    395,
+                    canvas.clientWidth - 40
+                );
+
+
+            const x =
+                Math.max(
+                    20,
+                    (canvas.clientWidth - width) / 2
+                );
+
+
+            const y =
+                paddingTop +
+                index * (nodeHeight + gap);
+
+
+            element.style.width =
+                `${width}px`;
+
+            element.style.left =
+                `${x}px`;
+
+            element.style.top =
+                `${y}px`;
+
+            element.style.transform =
+                "none";
+
+
+            element.innerHTML = `
+                <div class="workflow-node-icon">
+                    <i class="${node[3]}"></i>
+                </div>
+
+                <div>
+                    <small>
+                        ${node[1]}
+                    </small>
+
+                    <strong>
+                        ${node[2]}
+                    </strong>
+                </div>
+            `;
+
+
+            canvasNodes.appendChild(
+                element
+            );
+
+            nodeElements.push(
+                element
             );
 
         });
 
 
-        /* -----------------------------------------
+        /* =====================================================
+           DRAW CONNECTIONS
+        ===================================================== */
+
+        requestAnimationFrame(() => {
+
+            nodeElements.forEach(
+                (node, index) => {
+
+                    if (index === 0) return;
+
+                    drawConnection(
+                        nodeElements[index - 1],
+                        node
+                    );
+
+                }
+            );
+
+        });
+
+
+        /* =====================================================
            COUNTER
-        ----------------------------------------- */
+        ===================================================== */
 
         nodeCounter.textContent =
             `${nodes.length} ${
@@ -666,230 +653,43 @@ document.addEventListener("DOMContentLoaded", () => {
             }`;
 
 
-        /* -----------------------------------------
-           DRAW CONNECTIONS AFTER RENDER
-        ----------------------------------------- */
+        /*
+           Scroll ONLY vertically.
+        */
 
-        requestAnimationFrame(() => {
+        canvas.scrollLeft = 0;
 
-            requestAnimationFrame(() => {
+        setTimeout(() => {
 
-                for (
-                    let i = 0;
-                    i < nodes.length - 1;
-                    i++
-                ) {
+            canvas.scrollTop = 0;
 
-                    drawConnection(
-                        i,
-                        i + 1
-                    );
-
-                }
-
-            });
-
-        });
-
-
-        /* -----------------------------------------
-           RESET SCROLL
-        ----------------------------------------- */
-
-        canvas.scrollTop = 0;
-
-
-        /* -----------------------------------------
-           AUTO SCROLL IF LONG
-        ----------------------------------------- */
-
-        if (
-            totalHeight >
-            canvas.clientHeight
-        ) {
-
-            canvas.classList.add(
-                "workflow-scrollable"
-            );
-
-        } else {
-
-            canvas.classList.remove(
-                "workflow-scrollable"
-            );
-
-        }
+        }, 20);
 
     }
 
 
     /* =========================================================
-       CREATE NODE
+       CONNECTION
     ========================================================= */
 
-    function createNode(
-        node,
-        index,
-        nodeWidth,
-        nodeHeight,
-        gap,
-        startY
-    ) {
+    function drawConnection(from, to) {
 
-        /*
-         * IMPORTANT:
-         *
-         * node[0] = type
-         * node[1] = platform
-         * node[2] = title
-         * node[3] = icon
-         */
+        if (!from || !to) return;
 
-        const type =
-            node[0];
-
-        const platform =
-            node[1];
-
-        const title =
-            node[2];
-
-        const icon =
-            node[3];
-
-
-        const element =
-            document.createElement("div");
-
-        element.className =
-            "workflow-node";
-
-
-        /* -----------------------------------------
-           POSITION
-        ----------------------------------------- */
-
-        const canvasWidth =
-            canvas.clientWidth || 800;
 
         const x =
-            Math.max(
-                15,
-                (canvasWidth - nodeWidth) / 2
-            );
-
-        const y =
-            startY +
-            index * (nodeHeight + gap);
-
-
-        element.style.left =
-            `${x}px`;
-
-        element.style.top =
-            `${y}px`;
-
-        element.style.width =
-            `${nodeWidth}px`;
-
-        element.style.minHeight =
-            `${nodeHeight}px`;
-
-
-        /* -----------------------------------------
-           NODE TYPE CLASS
-        ----------------------------------------- */
-
-        element.dataset.type =
-            type;
-
-
-        /* -----------------------------------------
-           NODE HTML
-        ----------------------------------------- */
-
-        element.innerHTML = `
-
-            <div class="workflow-node-icon">
-
-                <i class="${icon}"></i>
-
-            </div>
-
-            <div class="workflow-node-content">
-
-                <small>
-                    ${platform}
-                </small>
-
-                <strong>
-                    ${title}
-                </strong>
-
-            </div>
-
-        `;
-
-
-        /* -----------------------------------------
-           ADD NODE
-        ----------------------------------------- */
-
-        canvasNodes.appendChild(
-            element
-        );
-
-    }
-
-
-    /* =========================================================
-       DRAW CONNECTION
-    ========================================================= */
-
-    function drawConnection(
-        fromIndex,
-        toIndex
-    ) {
-
-        const nodeElements =
-            canvasNodes.querySelectorAll(
-                ".workflow-node"
-            );
-
-        const from =
-            nodeElements[fromIndex];
-
-        const to =
-            nodeElements[toIndex];
-
-        if (!from || !to) {
-            return;
-        }
-
-
-        /* -----------------------------------------
-           NODE POSITIONS
-        ----------------------------------------- */
-
-        const x1 =
             from.offsetLeft +
-            (from.offsetWidth / 2);
+            from.offsetWidth / 2;
+
 
         const y1 =
             from.offsetTop +
             from.offsetHeight;
 
-        const x2 =
-            to.offsetLeft +
-            (to.offsetWidth / 2);
 
         const y2 =
             to.offsetTop;
 
-
-        /* -----------------------------------------
-           CREATE PATH
-        ----------------------------------------- */
 
         const path =
             document.createElementNS(
@@ -900,27 +700,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const curve =
             Math.min(
-                70,
-                Math.max(
-                    35,
-                    (y2 - y1) / 2
-                )
+                45,
+                (y2 - y1) / 2
             );
-
-
-        const pathData = `
-            M ${x1} ${y1}
-
-            C
-            ${x1} ${y1 + curve},
-            ${x2} ${y2 - curve},
-            ${x2} ${y2}
-        `;
 
 
         path.setAttribute(
             "d",
-            pathData
+            `
+                M ${x} ${y1}
+
+                C
+                ${x} ${y1 + curve},
+                ${x} ${y2 - curve},
+                ${x} ${y2}
+            `
         );
 
 
@@ -934,21 +728,16 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        /* -----------------------------------------
-           ANIMATE
-        ----------------------------------------- */
-
         try {
 
             const length =
                 path.getTotalLength();
 
             path.style.strokeDasharray =
-                `${length}`;
+                length;
 
             path.style.strokeDashoffset =
-                `${length}`;
-
+                length;
 
             requestAnimationFrame(() => {
 
@@ -973,200 +762,92 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================================
-       BACK TO CATEGORIES
+       BACK BUTTONS
     ========================================================= */
 
-    if (backToCategories) {
+    backToCategories?.addEventListener(
+        "click",
+        event => {
 
-        backToCategories.addEventListener(
-            "click",
-            event => {
+            event.preventDefault();
 
-                event.preventDefault();
+            showView(
+                categoryView
+            );
 
-                showView(
-                    categoryView
-                );
+        }
+    );
 
-            }
-        );
 
-    }
+    backToPlatforms?.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            showView(
+                platformView
+            );
+
+        }
+    );
 
 
     /* =========================================================
-       BACK TO PLATFORMS
+       CLEAR
     ========================================================= */
 
-    if (backToPlatforms) {
+    clearWorkflow?.addEventListener(
+        "click",
+        event => {
 
-        backToPlatforms.addEventListener(
-            "click",
-            event => {
+            event.preventDefault();
 
-                event.preventDefault();
+            canvasNodes.innerHTML = "";
 
-                showView(
-                    platformView
-                );
+            workflowSvg.innerHTML = "";
 
-            }
-        );
+            canvasEmpty?.classList.remove(
+                "hidden"
+            );
 
-    }
+            nodeCounter.textContent =
+                "0 nodes";
 
+            canvas.scrollTop = 0;
+            canvas.scrollLeft = 0;
 
-    /* =========================================================
-       CLEAR WORKFLOW
-    ========================================================= */
-
-    if (clearWorkflow) {
-
-        clearWorkflow.addEventListener(
-            "click",
-            event => {
-
-                event.preventDefault();
-
-                canvasNodes.innerHTML =
-                    "";
-
-                workflowSvg.innerHTML =
-                    "";
-
-
-                if (canvasEmpty) {
-
-                    canvasEmpty.classList.remove(
-                        "hidden"
-                    );
-
-                }
-
-
-                nodeCounter.textContent =
-                    "0 nodes";
-
-
-                canvas.scrollTop =
-                    0;
-
-
-                canvas.classList.remove(
-                    "workflow-scrollable"
-                );
-
-            }
-        );
-
-    }
+        }
+    );
 
 
     /* =========================================================
        RESIZE
     ========================================================= */
 
-    let resizeTimer;
-
     window.addEventListener(
         "resize",
         () => {
 
-            clearTimeout(
-                resizeTimer
-            );
+            const nodes =
+                canvasNodes.querySelectorAll(
+                    ".workflow-node"
+                );
 
-            resizeTimer =
-                setTimeout(() => {
+            if (!nodes.length) return;
 
-                    const nodes =
-                        canvasNodes.querySelectorAll(
-                            ".workflow-node"
-                        );
+            workflowSvg.innerHTML = "";
 
-                    if (!nodes.length) {
-                        return;
-                    }
+            nodes.forEach((node, index) => {
 
+                if (index === 0) return;
 
-                    const canvasWidth =
-                        canvas.clientWidth || 800;
+                drawConnection(
+                    nodes[index - 1],
+                    node
+                );
 
-
-                    /*
-                     * Re-center nodes
-                     */
-
-                    nodes.forEach(node => {
-
-                        const width =
-                            node.offsetWidth;
-
-                        const x =
-                            Math.max(
-                                15,
-                                (canvasWidth - width) / 2
-                            );
-
-                        node.style.left =
-                            `${x}px`;
-
-                    });
-
-
-                    /*
-                     * Update SVG
-                     */
-
-                    const height =
-                        canvasNodes.offsetHeight;
-
-
-                    workflowSvg.setAttribute(
-                        "width",
-                        canvasWidth
-                    );
-
-                    workflowSvg.setAttribute(
-                        "height",
-                        height
-                    );
-
-                    workflowSvg.setAttribute(
-                        "viewBox",
-                        `0 0 ${canvasWidth} ${height}`
-                    );
-
-
-                    workflowSvg.style.width =
-                        `${canvasWidth}px`;
-
-                    workflowSvg.style.height =
-                        `${height}px`;
-
-
-                    /*
-                     * Redraw connections
-                     */
-
-                    workflowSvg.innerHTML =
-                        "";
-
-
-                    for (
-                        let i = 0;
-                        i < nodes.length - 1;
-                        i++
-                    ) {
-
-                        drawConnection(
-                            i,
-                            i + 1
-                        );
-
-                    }
-
-                }, 150);
+            });
 
         }
     );
@@ -1176,26 +857,14 @@ document.addEventListener("DOMContentLoaded", () => {
        INITIAL STATE
     ========================================================= */
 
-    showView(
-        categoryView
+    showView(categoryView);
+
+    canvasNodes.innerHTML = "";
+    workflowSvg.innerHTML = "";
+
+    canvasEmpty?.classList.remove(
+        "hidden"
     );
-
-
-    canvasNodes.innerHTML =
-        "";
-
-    workflowSvg.innerHTML =
-        "";
-
-
-    if (canvasEmpty) {
-
-        canvasEmpty.classList.remove(
-            "hidden"
-        );
-
-    }
-
 
     nodeCounter.textContent =
         "0 nodes";
