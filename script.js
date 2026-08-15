@@ -360,432 +360,1215 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
-/* =========================================================
-   AUTOMATION ECOSYSTEM NETWORK
-========================================================= */
+// =====================================
+// AWSZ WEBSITE SCRIPT
+// PART 3 / 4
+// WORKFLOW BUILDER
+// =====================================
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const canvas =
-        document.getElementById("automation-network");
+    // =====================================
+    // WORKFLOW DATA
+    // =====================================
 
-    const section =
-        document.querySelector(".automation-ecosystem");
+    const workflowData = {
 
-    if (!canvas || !section) return;
+        "CRM Automation": {
+
+            description: "Leads, pipelines & customers",
+
+            platforms: [
+                "GoHighLevel",
+                "HubSpot",
+                "Zoho CRM",
+                "Bitrix24",
+                "Brevo"
+            ],
+
+            actions: [
+                "Create Lead",
+                "Update Contact",
+                "Move Pipeline Stage",
+                "Send Email",
+                "Send SMS",
+                "Assign Sales Rep",
+                "Add Tag"
+            ]
+
+        },
 
 
-    const ctx = canvas.getContext("2d");
+        "Data Scraping": {
 
-    let width = 0;
-    let height = 0;
+            description: "Extract & process data",
 
-    let nodes = [];
+            platforms: [
+                "Apify",
+                "Google",
+                "LinkedIn",
+                "Alibaba",
+                "Websites"
+            ],
 
-    const mouse = {
-        x: -1000,
-        y: -1000
+            actions: [
+                "Scrape Website",
+                "Extract Products",
+                "Extract Leads",
+                "Collect Emails",
+                "Clean Data",
+                "Save to Google Sheets",
+                "Send Data to CRM"
+            ]
+
+        },
+
+
+        "Lead Generation": {
+
+            description: "Find & qualify prospects",
+
+            platforms: [
+                "Apollo",
+                "LinkedIn",
+                "Google Maps",
+                "Facebook",
+                "Instagram"
+            ],
+
+            actions: [
+                "Find Leads",
+                "Enrich Lead",
+                "Verify Email",
+                "Score Lead",
+                "Add to CRM",
+                "Send Outreach"
+            ]
+
+        },
+
+
+        "Ecommerce Automation": {
+
+            description: "Products, orders & customers",
+
+            platforms: [
+                "Shopify",
+                "WooCommerce",
+                "Amazon",
+                "Stripe",
+                "Google Sheets"
+            ],
+
+            actions: [
+                "Create Product",
+                "Update Product",
+                "Sync Inventory",
+                "Process Order",
+                "Send Order Email",
+                "Update Customer",
+                "Create Invoice"
+            ]
+
+        }
+
     };
 
 
-    /* =====================================================
-       SETTINGS
-    ===================================================== */
+    // =====================================
+    // FIND WORKFLOW CONTAINER
+    // =====================================
 
-    const NODE_COUNT =
-        window.innerWidth < 700 ? 38 : 75;
+    const workflowShell =
+        document.querySelector(".workflow-shell");
 
-    const CONNECTION_DISTANCE = 145;
+    if (!workflowShell) {
 
-    const MOUSE_DISTANCE = 190;
-
-
-    /* =====================================================
-       RESIZE
-    ===================================================== */
-
-    function resizeCanvas() {
-
-        const rect =
-            section.getBoundingClientRect();
-
-        const dpr =
-            Math.min(window.devicePixelRatio || 1, 2);
-
-        width = rect.width;
-        height = rect.height;
-
-        canvas.width =
-            width * dpr;
-
-        canvas.height =
-            height * dpr;
-
-        canvas.style.width =
-            width + "px";
-
-        canvas.style.height =
-            height + "px";
-
-        ctx.setTransform(
-            dpr,
-            0,
-            0,
-            dpr,
-            0,
-            0
+        console.warn(
+            "AWSZ: .workflow-shell not found."
         );
 
-        createNodes();
-    }
-
-
-    /* =====================================================
-       CREATE NODES
-    ===================================================== */
-
-    function createNodes() {
-
-        nodes = [];
-
-        for (let i = 0; i < NODE_COUNT; i++) {
-
-            nodes.push({
-
-                x: Math.random() * width,
-
-                y: Math.random() * height,
-
-                radius:
-                    Math.random() * 2.4 + 1.2,
-
-                vx:
-                    (Math.random() - .5) * .28,
-
-                vy:
-                    (Math.random() - .5) * .28,
-
-                pulse:
-                    Math.random() * Math.PI * 2
-
-            });
-
-        }
+        return;
 
     }
 
 
-    /* =====================================================
-       MOUSE
-    ===================================================== */
+    // =====================================
+    // FIND WORKFLOW CARDS
+    // =====================================
 
-    section.addEventListener(
-        "mousemove",
-        event => {
-
-            const rect =
-                section.getBoundingClientRect();
-
-            mouse.x =
-                event.clientX - rect.left;
-
-            mouse.y =
-                event.clientY - rect.top;
-
-        },
-        { passive: true }
-    );
-
-
-    section.addEventListener(
-        "mouseleave",
-        () => {
-
-            mouse.x = -1000;
-            mouse.y = -1000;
-
-        }
-    );
-
-
-    /* =====================================================
-       DRAW
-    ===================================================== */
-
-    function draw() {
-
-        ctx.clearRect(
-            0,
-            0,
-            width,
-            height
+    let workflowCards =
+        workflowShell.querySelectorAll(
+            ".workflow-category, .workflow-card, .automation-card"
         );
 
 
-        /* MOVE */
+    // =====================================
+    // FALLBACK:
+    // FIND CARDS BY TEXT
+    // =====================================
 
-        nodes.forEach(node => {
+    if (!workflowCards.length) {
 
-            node.x += node.vx;
-            node.y += node.vy;
-
-            node.pulse += .025;
-
-
-            if (node.x < -20)
-                node.x = width + 20;
-
-            if (node.x > width + 20)
-                node.x = -20;
-
-            if (node.y < -20)
-                node.y = height + 20;
-
-            if (node.y > height + 20)
-                node.y = -20;
+        const allElements =
+            workflowShell.querySelectorAll(
+                "div, article, li, button"
+            );
 
 
-            /* MOUSE REPULSION */
+        workflowCards =
+            Array.from(allElements).filter(
+                element => {
 
-            const dx =
-                node.x - mouse.x;
+                    const text =
+                        element.innerText
+                            ?.trim();
 
-            const dy =
-                node.y - mouse.y;
+                    return Object.keys(workflowData)
+                        .some(category =>
+                            text === category
+                        );
 
-            const distance =
-                Math.sqrt(
-                    dx * dx +
-                    dy * dy
+                }
+            );
+
+    }
+
+
+    // =====================================
+    // WORKFLOW CANVAS
+    // =====================================
+
+    const canvas =
+        workflowShell.querySelector(
+            ".workflow-canvas, .workflow-builder-canvas, .workflow-main"
+        );
+
+
+    // =====================================
+    // NODE COUNT
+    // =====================================
+
+    const nodeCount =
+        workflowShell.querySelector(
+            ".node-count, .nodes-count"
+        );
+
+
+    // =====================================
+    // CLEAR BUTTON
+    // =====================================
+
+    const clearButton =
+        workflowShell.querySelector(
+            ".workflow-clear, .clear-workflow, button"
+        );
+
+
+    // =====================================
+    // SELECTED WORKFLOW
+    // =====================================
+
+    let selectedCategory = null;
+    let selectedPlatform = null;
+    let selectedAction = null;
+
+
+    // =====================================
+    // UPDATE NODE COUNT
+    // =====================================
+
+    function updateNodeCount() {
+
+        if (!nodeCount) return;
+
+        let count = 0;
+
+        if (selectedCategory)
+            count++;
+
+        if (selectedPlatform)
+            count++;
+
+        if (selectedAction)
+            count++;
+
+
+        nodeCount.textContent =
+            `${count} node${count === 1 ? "" : "s"}`;
+
+    }
+
+
+    // =====================================
+    // FIND CATEGORY
+    // =====================================
+
+    function getCategoryFromElement(element) {
+
+        const text =
+            element.innerText
+                ?.trim();
+
+        if (!text) return null;
+
+
+        return Object.keys(workflowData)
+            .find(category => {
+
+                return (
+                    text === category ||
+                    text.startsWith(category)
                 );
 
-            if (
-                distance < MOUSE_DISTANCE &&
-                distance > 0
-            ) {
-
-                const force =
-                    (MOUSE_DISTANCE - distance)
-                    / MOUSE_DISTANCE;
-
-                node.x +=
-                    (dx / distance) *
-                    force *
-                    1.5;
-
-                node.y +=
-                    (dy / distance) *
-                    force *
-                    1.5;
-
-            }
-
-        });
-
-
-        /* CONNECTIONS */
-
-        for (
-            let i = 0;
-            i < nodes.length;
-            i++
-        ) {
-
-            for (
-                let j = i + 1;
-                j < nodes.length;
-                j++
-            ) {
-
-                const a = nodes[i];
-                const b = nodes[j];
-
-                const dx =
-                    a.x - b.x;
-
-                const dy =
-                    a.y - b.y;
-
-                const distance =
-                    Math.sqrt(
-                        dx * dx +
-                        dy * dy
-                    );
-
-
-                if (
-                    distance <
-                    CONNECTION_DISTANCE
-                ) {
-
-                    const opacity =
-                        1 -
-                        distance /
-                        CONNECTION_DISTANCE;
-
-
-                    ctx.beginPath();
-
-                    ctx.moveTo(
-                        a.x,
-                        a.y
-                    );
-
-                    ctx.lineTo(
-                        b.x,
-                        b.y
-                    );
-
-                    ctx.strokeStyle =
-                        `rgba(8,8,8,${opacity * .13})`;
-
-                    ctx.lineWidth = .7;
-
-                    ctx.stroke();
-
-                }
-
-            }
-
-        }
-
-
-        /* NODES */
-
-        nodes.forEach(node => {
-
-            const pulse =
-                Math.sin(node.pulse) * .7;
-
-
-            ctx.beginPath();
-
-            ctx.arc(
-                node.x,
-                node.y,
-                node.radius + pulse,
-                0,
-                Math.PI * 2
-            );
-
-            ctx.fillStyle =
-                "rgba(8,8,8,.42)";
-
-            ctx.fill();
-
-
-            /* NODE GLOW */
-
-            ctx.beginPath();
-
-            ctx.arc(
-                node.x,
-                node.y,
-                node.radius * 4,
-                0,
-                Math.PI * 2
-            );
-
-            ctx.fillStyle =
-                "rgba(8,8,8,.035)";
-
-            ctx.fill();
-
-        });
-
-
-        /* MOUSE NETWORK */
-
-        if (mouse.x > -500) {
-
-            nodes.forEach(node => {
-
-                const dx =
-                    node.x - mouse.x;
-
-                const dy =
-                    node.y - mouse.y;
-
-                const distance =
-                    Math.sqrt(
-                        dx * dx +
-                        dy * dy
-                    );
-
-
-                if (
-                    distance <
-                    MOUSE_DISTANCE
-                ) {
-
-                    const opacity =
-                        1 -
-                        distance /
-                        MOUSE_DISTANCE;
-
-
-                    ctx.beginPath();
-
-                    ctx.moveTo(
-                        node.x,
-                        node.y
-                    );
-
-                    ctx.lineTo(
-                        mouse.x,
-                        mouse.y
-                    );
-
-                    ctx.strokeStyle =
-                        `rgba(8,8,8,${opacity * .22})`;
-
-                    ctx.lineWidth = 1;
-
-                    ctx.stroke();
-
-                }
-
-            });
-
-
-            /* MOUSE NODE */
-
-            ctx.beginPath();
-
-            ctx.arc(
-                mouse.x,
-                mouse.y,
-                4,
-                0,
-                Math.PI * 2
-            );
-
-            ctx.fillStyle =
-                "rgba(8,8,8,.8)";
-
-            ctx.fill();
-
-        }
-
-
-        requestAnimationFrame(draw);
+            }) || null;
 
     }
 
 
-    /* =====================================================
-       START
-    ===================================================== */
+    // =====================================
+    // CREATE WORKFLOW UI
+    // =====================================
 
-    resizeCanvas();
+    function renderWorkflow() {
 
-    draw();
+        if (!canvas) return;
 
 
-    window.addEventListener(
-        "resize",
-        resizeCanvas,
-        { passive: true }
+        canvas.innerHTML = "";
+
+
+        // =====================================
+        // EMPTY STATE
+        // =====================================
+
+        if (!selectedCategory) {
+
+            canvas.innerHTML = `
+
+                <div class="workflow-empty-state">
+
+                    <div class="workflow-empty-icon">
+                        <span>⚡</span>
+                    </div>
+
+                    <h3>Start Building</h3>
+
+                    <p>
+                        Select a platform and automation
+                        from the panel.
+                    </p>
+
+                </div>
+
+            `;
+
+            updateNodeCount();
+
+            return;
+
+        }
+
+
+        const data =
+            workflowData[selectedCategory];
+
+
+        // =====================================
+        // HEADER
+        // =====================================
+
+        const header =
+            document.createElement("div");
+
+        header.className =
+            "workflow-selection-header";
+
+
+        header.innerHTML = `
+
+            <div>
+
+                <span class="workflow-label">
+                    SELECTED AUTOMATION
+                </span>
+
+                <h3>
+                    ${selectedCategory}
+                </h3>
+
+                <p>
+                    ${data.description}
+                </p>
+
+            </div>
+
+        `;
+
+
+        canvas.appendChild(header);
+
+
+        // =====================================
+        // PLATFORM SECTION
+        // =====================================
+
+        const platformTitle =
+            document.createElement("div");
+
+        platformTitle.className =
+            "workflow-step-title";
+
+        platformTitle.textContent =
+            "01 — Choose Platform";
+
+
+        canvas.appendChild(platformTitle);
+
+
+        const platformGrid =
+            document.createElement("div");
+
+        platformGrid.className =
+            "workflow-options";
+
+
+        data.platforms.forEach(platform => {
+
+            const button =
+                document.createElement("button");
+
+            button.type = "button";
+
+            button.className =
+                "workflow-option";
+
+
+            if (
+                selectedPlatform === platform
+            ) {
+
+                button.classList.add(
+                    "selected"
+                );
+
+            }
+
+
+            button.innerHTML = `
+
+                <span class="workflow-option-icon">
+                    ${getPlatformIcon(platform)}
+                </span>
+
+                <span>
+                    ${platform}
+                </span>
+
+            `;
+
+
+            button.addEventListener(
+                "click",
+                event => {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+                    selectedPlatform =
+                        platform;
+
+                    selectedAction =
+                        null;
+
+                    renderWorkflow();
+
+                }
+            );
+
+
+            platformGrid.appendChild(button);
+
+        });
+
+
+        canvas.appendChild(platformGrid);
+
+
+        // =====================================
+        // ACTION SECTION
+        // =====================================
+
+        if (selectedPlatform) {
+
+            const actionTitle =
+                document.createElement("div");
+
+            actionTitle.className =
+                "workflow-step-title";
+
+            actionTitle.textContent =
+                "02 — Choose Automation";
+
+
+            canvas.appendChild(
+                actionTitle
+            );
+
+
+            const actionGrid =
+                document.createElement("div");
+
+            actionGrid.className =
+                "workflow-options";
+
+
+            data.actions.forEach(action => {
+
+                const button =
+                    document.createElement("button");
+
+                button.type = "button";
+
+                button.className =
+                    "workflow-option";
+
+
+                if (
+                    selectedAction === action
+                ) {
+
+                    button.classList.add(
+                        "selected"
+                    );
+
+                }
+
+
+                button.innerHTML = `
+
+                    <span class="workflow-option-icon">
+                        ⚡
+                    </span>
+
+                    <span>
+                        ${action}
+                    </span>
+
+                `;
+
+
+                button.addEventListener(
+                    "click",
+                    event => {
+
+                        event.preventDefault();
+
+                        event.stopPropagation();
+
+                        selectedAction =
+                            action;
+
+                        renderWorkflow();
+
+                    }
+                );
+
+
+                actionGrid.appendChild(
+                    button
+                );
+
+            });
+
+
+            canvas.appendChild(
+                actionGrid
+            );
+
+        }
+
+
+        // =====================================
+        // FINAL WORKFLOW
+        // =====================================
+
+        if (
+            selectedCategory &&
+            selectedPlatform &&
+            selectedAction
+        ) {
+
+            const finalBox =
+                document.createElement("div");
+
+            finalBox.className =
+                "workflow-final";
+
+
+            finalBox.innerHTML = `
+
+                <div class="workflow-final-line"></div>
+
+                <span class="workflow-label">
+                    WORKFLOW READY
+                </span>
+
+                <h3>
+                    ${selectedAction}
+                </h3>
+
+                <p>
+                    ${selectedCategory}
+                    →
+                    ${selectedPlatform}
+                    →
+                    ${selectedAction}
+                </p>
+
+                <button
+                    type="button"
+                    class="workflow-build-btn"
+                >
+                    Add to Workflow
+                    <span>→</span>
+                </button>
+
+            `;
+
+
+            canvas.appendChild(
+                finalBox
+            );
+
+
+            const buildButton =
+                finalBox.querySelector(
+                    ".workflow-build-btn"
+                );
+
+
+            buildButton.addEventListener(
+                "click",
+                event => {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+                    showWorkflowAdded();
+
+                }
+            );
+
+        }
+
+
+        updateNodeCount();
+
+    }
+
+
+    // =====================================
+    // PLATFORM ICON
+    // =====================================
+
+    function getPlatformIcon(platform) {
+
+        const icons = {
+
+            "GoHighLevel": "G",
+
+            "HubSpot": "H",
+
+            "Zoho CRM": "Z",
+
+            "Bitrix24": "B",
+
+            "Brevo": "B",
+
+            "Apify": "A",
+
+            "Google": "G",
+
+            "LinkedIn": "in",
+
+            "Alibaba": "A",
+
+            "Websites": "W",
+
+            "Apollo": "A",
+
+            "Google Maps": "M",
+
+            "Facebook": "f",
+
+            "Instagram": "◎",
+
+            "Shopify": "S",
+
+            "WooCommerce": "W",
+
+            "Amazon": "a",
+
+            "Stripe": "S",
+
+            "Google Sheets": "G"
+
+        };
+
+
+        return icons[platform] || "•";
+
+    }
+
+
+    // =====================================
+    // SHOW WORKFLOW ADDED
+    // =====================================
+
+    function showWorkflowAdded() {
+
+        const notification =
+            document.createElement("div");
+
+
+        notification.className =
+            "workflow-notification";
+
+
+        notification.innerHTML = `
+
+            <strong>
+                Workflow Added
+            </strong>
+
+            <span>
+                ${selectedPlatform}
+                →
+                ${selectedAction}
+            </span>
+
+        `;
+
+
+        document.body.appendChild(
+            notification
+        );
+
+
+        setTimeout(() => {
+
+            notification.classList.add(
+                "show"
+            );
+
+        }, 20);
+
+
+        setTimeout(() => {
+
+            notification.classList.remove(
+                "show"
+            );
+
+
+            setTimeout(() => {
+
+                notification.remove();
+
+            }, 300);
+
+        }, 2500);
+
+    }
+
+
+    // =====================================
+    // CLICK HANDLER
+    // =====================================
+
+    workflowCards.forEach(card => {
+
+        const category =
+            getCategoryFromElement(card);
+
+
+        if (!category) return;
+
+
+        // Force clickable
+
+        card.style.cursor =
+            "pointer";
+
+
+        card.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+
+                selectedCategory =
+                    category;
+
+                selectedPlatform =
+                    null;
+
+                selectedAction =
+                    null;
+
+
+                // Remove active
+
+                workflowCards.forEach(
+                    item => {
+
+                        item.classList.remove(
+                            "active",
+                            "selected"
+                        );
+
+                    }
+                );
+
+
+                // Add active
+
+                card.classList.add(
+                    "active",
+                    "selected"
+                );
+
+
+                renderWorkflow();
+
+            }
+        );
+
+    });
+
+
+    // =====================================
+    // CAPTURE CLICK FALLBACK
+    // =====================================
+
+    document.addEventListener(
+        "click",
+        event => {
+
+            const target =
+                event.target.closest(
+                    "div, article, li, button, a"
+                );
+
+
+            if (!target) return;
+
+
+            const category =
+                getCategoryFromElement(
+                    target
+                );
+
+
+            if (!category) return;
+
+
+            if (
+                !workflowShell.contains(
+                    target
+                )
+            ) return;
+
+
+            selectedCategory =
+                category;
+
+            selectedPlatform =
+                null;
+
+            selectedAction =
+                null;
+
+
+            workflowCards.forEach(
+                item => {
+
+                    item.classList.remove(
+                        "active",
+                        "selected"
+                    );
+
+                }
+            );
+
+
+            target.classList.add(
+                "active",
+                "selected"
+            );
+
+
+            renderWorkflow();
+
+        },
+        true
     );
 
+
+    // =====================================
+    // CLEAR WORKFLOW
+    // =====================================
+
+    if (clearButton) {
+
+        clearButton.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+
+                selectedCategory = null;
+
+                selectedPlatform = null;
+
+                selectedAction = null;
+
+
+                workflowCards.forEach(
+                    card => {
+
+                        card.classList.remove(
+                            "active",
+                            "selected"
+                        );
+
+                    }
+                );
+
+
+                renderWorkflow();
+
+            }
+        );
+
+    }
+
+
+    // =====================================
+    // INITIAL RENDER
+    // =====================================
+
+    renderWorkflow();
+
+});
+// =====================================
+// AWSZ WEBSITE SCRIPT
+// PART 4 / 4
+// =====================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+
+    // =====================================
+    // SMOOTH SCROLL
+    // =====================================
+
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                event => {
+
+                    const targetId =
+                        link.getAttribute("href");
+
+
+                    if (
+                        !targetId ||
+                        targetId === "#"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
+
+
+                    if (!target) return;
+
+
+                    event.preventDefault();
+
+
+                    target.scrollIntoView({
+
+                        behavior: "smooth",
+
+                        block: "start"
+
+                    });
+
+                }
+            );
+
+        });
+
+
+    // =====================================
+    // VIDEO IMAGE LOAD
+    // =====================================
+
+    document
+        .querySelectorAll(".video-card img")
+        .forEach(image => {
+
+            image.addEventListener(
+                "load",
+                () => {
+
+                    if (
+                        image.parentElement
+                    ) {
+
+                        image.parentElement
+                            .classList
+                            .add("loaded");
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    // =====================================
+    // HERO VIDEO
+    // =====================================
+
+    const heroVideo =
+        document.querySelector(
+            ".hero video"
+        );
+
+
+    if (heroVideo) {
+
+        heroVideo.muted =
+            true;
+
+        heroVideo.playsInline =
+            true;
+
+
+        const playVideo = () => {
+
+            const promise =
+                heroVideo.play();
+
+
+            if (
+                promise &&
+                typeof promise.catch ===
+                "function"
+            ) {
+
+                promise.catch(
+                    () => {}
+                );
+
+            }
+
+        };
+
+
+        playVideo();
+
+
+        document.addEventListener(
+            "visibilitychange",
+            () => {
+
+                if (
+                    document.visibilityState ===
+                    "visible"
+                ) {
+
+                    playVideo();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    // =====================================
+    // REVEAL ANIMATION
+    // =====================================
+
+    const revealElements =
+        document.querySelectorAll(
+            `
+            .showcase-content,
+            .video-card,
+            .workflow-shell
+            `
+        );
+
+
+    if (
+        revealElements.length &&
+        "IntersectionObserver" in window
+    ) {
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target
+                                    .classList
+                                    .add("visible");
+
+
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold: 0.12
+                }
+            );
+
+
+        revealElements.forEach(
+            element => {
+
+                observer.observe(
+                    element
+                );
+
+            }
+        );
+
+    }
+
+
+    // =====================================
+    // WORKFLOW CARD HOVER
+    // =====================================
+
+    document
+        .querySelectorAll(
+            `
+            .workflow-category,
+            .workflow-card,
+            .automation-card
+            `
+        )
+        .forEach(card => {
+
+            card.addEventListener(
+                "mouseenter",
+                () => {
+
+                    card.classList.add(
+                        "hovered"
+                    );
+
+                }
+            );
+
+
+            card.addEventListener(
+                "mouseleave",
+                () => {
+
+                    card.classList.remove(
+                        "hovered"
+                    );
+
+                }
+            );
+
+        });
+
+
+    // =====================================
+    // PREVENT DEAD BUTTON CLICKS
+    // =====================================
+
+    document
+        .querySelectorAll(
+            `
+            .workflow-category,
+            .workflow-card,
+            .automation-card
+            `
+        )
+        .forEach(card => {
+
+            card.setAttribute(
+                "role",
+                "button"
+            );
+
+            card.setAttribute(
+                "tabindex",
+                "0"
+            );
+
+
+            card.addEventListener(
+                "keydown",
+                event => {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+                        event.preventDefault();
+
+                        card.click();
+
+                    }
+
+                }
+            );
+
+        });
+
+
+});    
 });
