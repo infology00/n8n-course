@@ -1,10 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
-
-    /* =========================================================
-       WORKFLOW BUILDER
-       Category → Platform → Automation → Canvas
-    ========================================================= */
-
+document.addEventListener("DOMContentLoaded", () => {
 
     /* =========================================================
        ELEMENTS
@@ -46,114 +40,75 @@ document.addEventListener("DOMContentLoaded", function () {
         !canvasNodes ||
         !workflowSvg
     ) {
-
-        console.warn(
-            "Workflow Builder: Required HTML elements not found."
-        );
-
+        console.warn("Workflow Builder: Required elements missing.");
         return;
     }
 
 
     /* =========================================================
-       DATA
+       CATEGORY DATA
     ========================================================= */
 
     const categories = {
 
         social: {
-
             title: "Social Media",
-
             platforms: [
-
                 ["Facebook", "fa-brands fa-facebook-f"],
                 ["Instagram", "fa-brands fa-instagram"],
                 ["LinkedIn", "fa-brands fa-linkedin-in"],
                 ["YouTube", "fa-brands fa-youtube"]
-
             ]
-
         },
 
-
         crm: {
-
             title: "CRM Systems",
-
             platforms: [
-
                 ["GoHighLevel", "fa-solid fa-layer-group"],
                 ["HubSpot", "fa-brands fa-hubspot"],
                 ["Zoho CRM", "fa-solid fa-users"],
                 ["Salesforce", "fa-brands fa-salesforce"]
-
             ]
-
         },
 
-
         scraping: {
-
             title: "Data Scraping",
-
             platforms: [
-
                 ["Google Maps", "fa-solid fa-map-location-dot"],
                 ["LinkedIn", "fa-brands fa-linkedin-in"],
                 ["Amazon", "fa-brands fa-amazon"],
                 ["Websites", "fa-solid fa-globe"]
-
             ]
-
         },
 
-
         leads: {
-
             title: "Lead Generation",
-
             platforms: [
-
                 ["Apollo", "fa-solid fa-crosshairs"],
                 ["LinkedIn", "fa-brands fa-linkedin-in"],
                 ["Google Maps", "fa-solid fa-map-location-dot"],
                 ["Email Finder", "fa-solid fa-envelope"]
-
             ]
-
         },
 
-
         ecommerce: {
-
             title: "Ecommerce",
-
             platforms: [
-
                 ["Shopify", "fa-brands fa-shopify"],
                 ["WooCommerce", "fa-brands fa-wordpress"],
                 ["Stripe", "fa-brands fa-stripe"],
                 ["Klaviyo", "fa-solid fa-envelope"]
-
             ]
-
         },
 
-
         ai: {
-
             title: "AI Agents",
-
             platforms: [
-
                 ["ChatGPT", "fa-solid fa-robot"],
                 ["Claude", "fa-solid fa-brain"],
                 ["Retell AI", "fa-solid fa-phone"],
                 ["Voice AI", "fa-solid fa-microphone"]
-
             ]
-
         }
 
     };
@@ -161,724 +116,248 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =========================================================
        AUTOMATION DATA
+       FORMAT:
+       [type, platform, title, icon]
     ========================================================= */
 
     const automationData = {
 
-
-        /* =========================
-           FACEBOOK
-        ========================= */
-
         Facebook: [
 
             {
-
                 name: "DM Automation",
-
                 icon: "fa-solid fa-message",
 
                 workflow: [
-
-                    [
-                        "trigger",
-                        "Facebook",
-                        "New DM",
-                        "fa-brands fa-facebook-f"
-                    ],
-
-                    [
-                        "ai",
-                        "AI Agent",
-                        "Understand Message",
-                        "fa-solid fa-wand-magic-sparkles"
-                    ],
-
-                    [
-                        "action",
-                        "AI Agent",
-                        "Generate Reply",
-                        "fa-solid fa-comment-dots"
-                    ],
-
-                    [
-                        "action",
-                        "Facebook",
-                        "Send Reply",
-                        "fa-solid fa-paper-plane"
-                    ],
-
-                    [
-                        "crm",
-                        "CRM",
-                        "Save Conversation",
-                        "fa-solid fa-users"
-                    ]
-
+                    ["trigger", "Facebook", "New DM", "fa-brands fa-facebook-f"],
+                    ["ai", "AI Agent", "Understand Message", "fa-solid fa-wand-magic-sparkles"],
+                    ["action", "AI Agent", "Generate Reply", "fa-solid fa-comment-dots"],
+                    ["action", "Facebook", "Send Reply", "fa-solid fa-paper-plane"],
+                    ["crm", "CRM", "Save Conversation", "fa-solid fa-users"]
                 ]
-
             },
 
-
             {
-
                 name: "Comment → DM",
-
                 icon: "fa-solid fa-comments",
 
                 workflow: [
-
-                    [
-                        "trigger",
-                        "Facebook",
-                        "New Comment",
-                        "fa-brands fa-facebook-f"
-                    ],
-
-                    [
-                        "ai",
-                        "AI Agent",
-                        "Analyze Comment",
-                        "fa-solid fa-wand-magic-sparkles"
-                    ],
-
-                    [
-                        "action",
-                        "Facebook",
-                        "Send DM",
-                        "fa-solid fa-message"
-                    ],
-
-                    [
-                        "crm",
-                        "CRM",
-                        "Save Lead",
-                        "fa-solid fa-user-plus"
-                    ]
-
+                    ["trigger", "Facebook", "New Comment", "fa-brands fa-facebook-f"],
+                    ["ai", "AI Agent", "Analyze Comment", "fa-solid fa-wand-magic-sparkles"],
+                    ["action", "Facebook", "Send DM", "fa-solid fa-message"],
+                    ["crm", "CRM", "Save Lead", "fa-solid fa-user-plus"]
                 ]
-
             },
 
-
             {
-
                 name: "Lead Ads → CRM",
-
                 icon: "fa-solid fa-user-plus",
 
                 workflow: [
-
-                    [
-                        "trigger",
-                        "Facebook",
-                        "New Lead Ad",
-                        "fa-brands fa-facebook-f"
-                    ],
-
-                    [
-                        "action",
-                        "Facebook",
-                        "Capture Lead",
-                        "fa-solid fa-user"
-                    ],
-
-                    [
-                        "ai",
-                        "AI Agent",
-                        "Qualify Lead",
-                        "fa-solid fa-wand-magic-sparkles"
-                    ],
-
-                    [
-                        "crm",
-                        "CRM",
-                        "Create Lead",
-                        "fa-solid fa-users"
-                    ],
-
-                    [
-                        "action",
-                        "Sales Team",
-                        "Notify Sales",
-                        "fa-solid fa-bell"
-                    ]
-
+                    ["trigger", "Facebook", "New Lead Ad", "fa-brands fa-facebook-f"],
+                    ["action", "Facebook", "Capture Lead", "fa-solid fa-user"],
+                    ["ai", "AI Agent", "Qualify Lead", "fa-solid fa-wand-magic-sparkles"],
+                    ["crm", "CRM", "Create Lead", "fa-solid fa-users"],
+                    ["action", "Sales Team", "Notify Sales", "fa-solid fa-bell"]
                 ]
-
             }
 
         ],
 
-
-        /* =========================
-           INSTAGRAM
-        ========================= */
 
         Instagram: [
 
             {
-
                 name: "Instagram DM Agent",
-
                 icon: "fa-solid fa-message",
 
                 workflow: [
-
-                    [
-                        "trigger",
-                        "Instagram",
-                        "New DM",
-                        "fa-brands fa-instagram"
-                    ],
-
-                    [
-                        "ai",
-                        "AI Agent",
-                        "Understand Intent",
-                        "fa-solid fa-wand-magic-sparkles"
-                    ],
-
-                    [
-                        "action",
-                        "AI Agent",
-                        "Generate Response",
-                        "fa-solid fa-comment-dots"
-                    ],
-
-                    [
-                        "action",
-                        "Instagram",
-                        "Send DM",
-                        "fa-solid fa-paper-plane"
-                    ]
-
+                    ["trigger", "Instagram", "New DM", "fa-brands fa-instagram"],
+                    ["ai", "AI Agent", "Understand Intent", "fa-solid fa-wand-magic-sparkles"],
+                    ["action", "AI Agent", "Generate Response", "fa-solid fa-comment-dots"],
+                    ["action", "Instagram", "Send DM", "fa-solid fa-paper-plane"]
                 ]
-
             },
 
-
             {
-
                 name: "Comment Automation",
-
                 icon: "fa-solid fa-comments",
 
                 workflow: [
-
-                    [
-                        "trigger",
-                        "Instagram",
-                        "New Comment",
-                        "fa-brands fa-instagram"
-                    ],
-
-                    [
-                        "ai",
-                        "AI Agent",
-                        "Analyze Comment",
-                        "fa-solid fa-wand-magic-sparkles"
-                    ],
-
-                    [
-                        "action",
-                        "Instagram",
-                        "Send Reply",
-                        "fa-solid fa-reply"
-                    ]
-
+                    ["trigger", "Instagram", "New Comment", "fa-brands fa-instagram"],
+                    ["ai", "AI Agent", "Analyze Comment", "fa-solid fa-wand-magic-sparkles"],
+                    ["action", "Instagram", "Send Reply", "fa-solid fa-reply"]
                 ]
-
             }
 
         ],
 
-
-        /* =========================
-           LINKEDIN
-        ========================= */
 
         LinkedIn: [
 
             {
-
                 name: "Lead Generation",
-
                 icon: "fa-solid fa-user-plus",
 
                 workflow: [
-
-                    [
-                        "trigger",
-                        "LinkedIn",
-                        "New Prospect",
-                        "fa-brands fa-linkedin-in"
-                    ],
-
-                    [
-                        "ai",
-                        "AI Agent",
-                        "Research Prospect",
-                        "fa-solid fa-wand-magic-sparkles"
-                    ],
-
-                    [
-                        "action",
-                        "LinkedIn",
-                        "Send Connection",
-                        "fa-solid fa-user-plus"
-                    ],
-
-                    [
-                        "action",
-                        "LinkedIn",
-                        "Send Message",
-                        "fa-solid fa-message"
-                    ],
-
-                    [
-                        "crm",
-                        "CRM",
-                        "Create Lead",
-                        "fa-solid fa-users"
-                    ]
-
+                    ["trigger", "LinkedIn", "New Prospect", "fa-brands fa-linkedin-in"],
+                    ["ai", "AI Agent", "Research Prospect", "fa-solid fa-wand-magic-sparkles"],
+                    ["action", "LinkedIn", "Send Connection", "fa-solid fa-user-plus"],
+                    ["action", "LinkedIn", "Send Message", "fa-solid fa-message"],
+                    ["crm", "CRM", "Create Lead", "fa-solid fa-users"]
                 ]
-
             }
 
         ],
 
-
-        /* =========================
-           YOUTUBE
-        ========================= */
 
         YouTube: [
 
             {
-
                 name: "New Video → Social",
-
                 icon: "fa-solid fa-video",
 
                 workflow: [
-
-                    [
-                        "trigger",
-                        "YouTube",
-                        "New Video",
-                        "fa-brands fa-youtube"
-                    ],
-
-                    [
-                        "ai",
-                        "AI Agent",
-                        "Create Content",
-                        "fa-solid fa-wand-magic-sparkles"
-                    ],
-
-                    [
-                        "action",
-                        "Social Media",
-                        "Publish Post",
-                        "fa-solid fa-share-nodes"
-                    ]
-
+                    ["trigger", "YouTube", "New Video", "fa-brands fa-youtube"],
+                    ["ai", "AI Agent", "Create Content", "fa-solid fa-wand-magic-sparkles"],
+                    ["action", "Social Media", "Publish Post", "fa-solid fa-share-nodes"]
                 ]
-
             }
 
         ],
 
-
-        /* =========================
-           GOHIGHLEVEL
-        ========================= */
 
         GoHighLevel: [
 
             {
-
                 name: "New Lead → Pipeline",
-
                 icon: "fa-solid fa-user-plus",
 
                 workflow: [
-
-                    [
-                        "trigger",
-                        "GHL",
-                        "New Lead",
-                        "fa-solid fa-user-plus"
-                    ],
-
-                    [
-                        "ai",
-                        "AI Agent",
-                        "Qualify Lead",
-                        "fa-solid fa-wand-magic-sparkles"
-                    ],
-
-                    [
-                        "crm",
-                        "GHL",
-                        "Create Opportunity",
-                        "fa-solid fa-layer-group"
-                    ],
-
-                    [
-                        "action",
-                        "Sales",
-                        "Notify Team",
-                        "fa-solid fa-bell"
-                    ]
-
+                    ["trigger", "GHL", "New Lead", "fa-solid fa-user-plus"],
+                    ["ai", "AI Agent", "Qualify Lead", "fa-solid fa-wand-magic-sparkles"],
+                    ["crm", "GHL", "Create Opportunity", "fa-solid fa-layer-group"],
+                    ["action", "Sales", "Notify Team", "fa-solid fa-bell"]
                 ]
-
             }
 
         ],
 
-
-        /* =========================
-           HUBSPOT
-        ========================= */
 
         HubSpot: [
 
             {
-
                 name: "Lead → CRM",
-
                 icon: "fa-solid fa-users",
 
                 workflow: [
-
-                    [
-                        "trigger",
-                        "HubSpot",
-                        "New Lead",
-                        "fa-brands fa-hubspot"
-                    ],
-
-                    [
-                        "ai",
-                        "AI Agent",
-                        "Score Lead",
-                        "fa-solid fa-wand-magic-sparkles"
-                    ],
-
-                    [
-                        "crm",
-                        "HubSpot",
-                        "Create Contact",
-                        "fa-solid fa-users"
-                    ],
-
-                    [
-                        "action",
-                        "Sales",
-                        "Notify Sales",
-                        "fa-solid fa-bell"
-                    ]
-
+                    ["trigger", "HubSpot", "New Lead", "fa-brands fa-hubspot"],
+                    ["ai", "AI Agent", "Score Lead", "fa-solid fa-wand-magic-sparkles"],
+                    ["crm", "HubSpot", "Create Contact", "fa-solid fa-users"],
+                    ["action", "Sales", "Notify Sales", "fa-solid fa-bell"]
                 ]
-
             }
 
         ],
 
-
-        /* =========================
-           GOOGLE MAPS
-        ========================= */
 
         "Google Maps": [
 
             {
-
                 name: "Scrape Business Leads",
-
                 icon: "fa-solid fa-map-location-dot",
 
                 workflow: [
-
-                    [
-                        "trigger",
-                        "Google Maps",
-                        "Search Businesses",
-                        "fa-solid fa-map-location-dot"
-                    ],
-
-                    [
-                        "action",
-                        "Scraper",
-                        "Extract Data",
-                        "fa-solid fa-spider"
-                    ],
-
-                    [
-                        "ai",
-                        "AI Agent",
-                        "Clean Data",
-                        "fa-solid fa-wand-magic-sparkles"
-                    ],
-
-                    [
-                        "crm",
-                        "CRM",
-                        "Save Leads",
-                        "fa-solid fa-users"
-                    ]
-
+                    ["trigger", "Google Maps", "Search Businesses", "fa-solid fa-map-location-dot"],
+                    ["action", "Scraper", "Extract Data", "fa-solid fa-spider"],
+                    ["ai", "AI Agent", "Clean Data", "fa-solid fa-wand-magic-sparkles"],
+                    ["crm", "CRM", "Save Leads", "fa-solid fa-users"]
                 ]
-
             }
 
         ],
 
-
-        /* =========================
-           APOLLO
-        ========================= */
 
         Apollo: [
 
             {
-
                 name: "Find Prospects",
-
                 icon: "fa-solid fa-crosshairs",
 
                 workflow: [
-
-                    [
-                        "trigger",
-                        "Apollo",
-                        "Find Prospects",
-                        "fa-solid fa-crosshairs"
-                    ],
-
-                    [
-                        "action",
-                        "Apollo",
-                        "Export Leads",
-                        "fa-solid fa-download"
-                    ],
-
-                    [
-                        "ai",
-                        "AI Agent",
-                        "Enrich Leads",
-                        "fa-solid fa-wand-magic-sparkles"
-                    ],
-
-                    [
-                        "crm",
-                        "CRM",
-                        "Create Leads",
-                        "fa-solid fa-users"
-                    ]
-
+                    ["trigger", "Apollo", "Find Prospects", "fa-solid fa-crosshairs"],
+                    ["action", "Apollo", "Export Leads", "fa-solid fa-download"],
+                    ["ai", "AI Agent", "Enrich Leads", "fa-solid fa-wand-magic-sparkles"],
+                    ["crm", "CRM", "Create Leads", "fa-solid fa-users"]
                 ]
-
             }
 
         ],
 
-
-        /* =========================
-           SHOPIFY
-        ========================= */
 
         Shopify: [
 
             {
-
                 name: "New Order Automation",
-
                 icon: "fa-brands fa-shopify",
 
                 workflow: [
-
-                    [
-                        "trigger",
-                        "Shopify",
-                        "New Order",
-                        "fa-brands fa-shopify"
-                    ],
-
-                    [
-                        "action",
-                        "Shopify",
-                        "Process Order",
-                        "fa-solid fa-cart-shopping"
-                    ],
-
-                    [
-                        "crm",
-                        "CRM",
-                        "Update Customer",
-                        "fa-solid fa-users"
-                    ],
-
-                    [
-                        "action",
-                        "Email",
-                        "Send Confirmation",
-                        "fa-solid fa-envelope"
-                    ]
-
+                    ["trigger", "Shopify", "New Order", "fa-brands fa-shopify"],
+                    ["action", "Shopify", "Process Order", "fa-solid fa-cart-shopping"],
+                    ["crm", "CRM", "Update Customer", "fa-solid fa-users"],
+                    ["action", "Email", "Send Confirmation", "fa-solid fa-envelope"]
                 ]
-
             }
 
         ],
 
-
-        /* =========================
-           CHATGPT
-        ========================= */
 
         ChatGPT: [
 
             {
-
                 name: "AI Customer Agent",
-
                 icon: "fa-solid fa-robot",
 
                 workflow: [
-
-                    [
-                        "trigger",
-                        "Website",
-                        "New Message",
-                        "fa-solid fa-globe"
-                    ],
-
-                    [
-                        "ai",
-                        "ChatGPT",
-                        "Understand Request",
-                        "fa-solid fa-robot"
-                    ],
-
-                    [
-                        "ai",
-                        "ChatGPT",
-                        "Generate Answer",
-                        "fa-solid fa-wand-magic-sparkles"
-                    ],
-
-                    [
-                        "action",
-                        "Website",
-                        "Send Response",
-                        "fa-solid fa-paper-plane"
-                    ]
-
+                    ["trigger", "Website", "New Message", "fa-solid fa-globe"],
+                    ["ai", "ChatGPT", "Understand Request", "fa-solid fa-robot"],
+                    ["ai", "ChatGPT", "Generate Answer", "fa-solid fa-wand-magic-sparkles"],
+                    ["action", "Website", "Send Response", "fa-solid fa-paper-plane"]
                 ]
-
             }
 
         ],
 
-
-        /* =========================
-           RETELL AI
-        ========================= */
 
         "Retell AI": [
 
             {
-
                 name: "AI Receptionist",
-
                 icon: "fa-solid fa-phone",
 
                 workflow: [
-
-                    [
-                        "trigger",
-                        "Phone",
-                        "Incoming Call",
-                        "fa-solid fa-phone"
-                    ],
-
-                    [
-                        "ai",
-                        "Retell AI",
-                        "Understand Caller",
-                        "fa-solid fa-brain"
-                    ],
-
-                    [
-                        "ai",
-                        "Retell AI",
-                        "Handle Conversation",
-                        "fa-solid fa-comments"
-                    ],
-
-                    [
-                        "crm",
-                        "CRM",
-                        "Save Call",
-                        "fa-solid fa-users"
-                    ]
-
+                    ["trigger", "Phone", "Incoming Call", "fa-solid fa-phone"],
+                    ["ai", "Retell AI", "Understand Caller", "fa-solid fa-brain"],
+                    ["ai", "Retell AI", "Handle Conversation", "fa-solid fa-comments"],
+                    ["crm", "CRM", "Save Call", "fa-solid fa-users"]
                 ]
-
             }
 
         ],
 
 
-        /* =========================
-           VOICE AI
-        ========================= */
-
         "Voice AI": [
 
             {
-
                 name: "Inbound Call Agent",
-
                 icon: "fa-solid fa-phone",
 
                 workflow: [
-
-                    [
-                        "trigger",
-                        "Phone",
-                        "Incoming Call",
-                        "fa-solid fa-phone"
-                    ],
-
-                    [
-                        "ai",
-                        "Voice AI",
-                        "AI Receptionist",
-                        "fa-solid fa-microphone"
-                    ],
-
-                    [
-                        "action",
-                        "Calendar",
-                        "Book Appointment",
-                        "fa-solid fa-calendar"
-                    ],
-
-                    [
-                        "crm",
-                        "CRM",
-                        "Save Caller",
-                        "fa-solid fa-users"
-                    ]
-
+                    ["trigger", "Phone", "Incoming Call", "fa-solid fa-phone"],
+                    ["ai", "Voice AI", "AI Receptionist", "fa-solid fa-microphone"],
+                    ["action", "Calendar", "Book Appointment", "fa-solid fa-calendar"],
+                    ["crm", "CRM", "Save Caller", "fa-solid fa-users"]
                 ]
-
             }
 
         ]
@@ -887,7 +366,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================================
-       VIEW CONTROL
+       VIEW SYSTEM
     ========================================================= */
 
     function showView(view) {
@@ -909,23 +388,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const categoryButtons =
         document.querySelectorAll(".workflow-category");
 
+    categoryButtons.forEach(button => {
 
-    categoryButtons.forEach(function (button) {
-
-        button.addEventListener("click", function (event) {
+        button.addEventListener("click", event => {
 
             event.preventDefault();
 
             const category =
-                this.dataset.category;
+                button.dataset.category;
 
-            categoryButtons.forEach(function (item) {
-
+            categoryButtons.forEach(item => {
                 item.classList.remove("active");
-
             });
 
-            this.classList.add("active");
+            button.classList.add("active");
 
             loadPlatforms(category);
 
@@ -944,86 +420,54 @@ document.addEventListener("DOMContentLoaded", function () {
             categories[category];
 
         if (!data) {
-
-            console.warn(
-                "Workflow Builder: Category not found:",
-                category
-            );
-
+            console.warn("Category not found:", category);
             return;
-
         }
-
 
         platformTitle.textContent =
             data.title;
 
-
         platformList.innerHTML = "";
 
+        data.platforms.forEach(platform => {
 
-        data.platforms.forEach(function (item) {
-
-            const name = item[0];
-            const icon = item[1];
-
+            const name = platform[0];
+            const icon = platform[1];
 
             const button =
                 document.createElement("button");
-
 
             button.type = "button";
 
             button.className =
                 "workflow-platform";
 
-
             button.innerHTML = `
-
                 <div class="platform-icon">
-
                     <i class="${icon}"></i>
-
                 </div>
 
                 <div class="platform-text">
-
-                    <strong>
-                        ${name}
-                    </strong>
-
-                    <small>
-                        Explore automations
-                    </small>
-
+                    <strong>${name}</strong>
+                    <small>Explore automations</small>
                 </div>
 
-                <i
-                    class="fa-solid fa-chevron-right platform-arrow"
-                ></i>
-
+                <i class="fa-solid fa-chevron-right platform-arrow"></i>
             `;
 
+            button.addEventListener("click", event => {
 
-            button.addEventListener(
-                "click",
-                function (event) {
+                event.preventDefault();
 
-                    event.preventDefault();
+                loadAutomations(name);
 
-                    loadAutomations(name);
-
-                }
-            );
-
+            });
 
             platformList.appendChild(button);
 
         });
 
-
         showView(platformView);
-
     }
 
 
@@ -1036,18 +480,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const list =
             automationData[platform] || [];
 
-
         automationTitle.textContent =
-            platform + " Automations";
-
+            `${platform} Automations`;
 
         automationList.innerHTML = "";
-
 
         if (!list.length) {
 
             automationList.innerHTML = `
-
                 <div class="workflow-no-results">
 
                     <i class="fa-solid fa-clock"></i>
@@ -1061,76 +501,51 @@ document.addEventListener("DOMContentLoaded", function () {
                     </small>
 
                 </div>
-
             `;
 
             showView(automationView);
 
             return;
-
         }
 
-
-        list.forEach(function (automation) {
+        list.forEach(automation => {
 
             const button =
                 document.createElement("button");
-
 
             button.type = "button";
 
             button.className =
                 "workflow-automation";
 
-
             button.innerHTML = `
-
                 <div class="automation-icon">
-
                     <i class="${automation.icon}"></i>
-
                 </div>
 
                 <div class="automation-text">
-
-                    <strong>
-                        ${automation.name}
-                    </strong>
-
-                    <small>
-                        Build this workflow
-                    </small>
-
+                    <strong>${automation.name}</strong>
+                    <small>Build this workflow</small>
                 </div>
 
-                <i
-                    class="fa-solid fa-chevron-right automation-arrow"
-                ></i>
-
+                <i class="fa-solid fa-chevron-right automation-arrow"></i>
             `;
 
+            button.addEventListener("click", event => {
 
-            button.addEventListener(
-                "click",
-                function (event) {
+                event.preventDefault();
 
-                    event.preventDefault();
+                buildWorkflow(
+                    automation.workflow
+                );
 
-                    buildWorkflow(
-                        automation.workflow
-                    );
-
-                }
-            );
-
+            });
 
             automationList.appendChild(button);
 
         });
 
-
         showView(automationView);
-
     }
 
 
@@ -1141,18 +556,13 @@ document.addEventListener("DOMContentLoaded", function () {
     function buildWorkflow(nodes) {
 
         if (!nodes || !nodes.length) {
-
-            console.warn(
-                "Workflow Builder: No workflow nodes found."
-            );
-
+            console.warn("No workflow nodes.");
             return;
-
         }
 
 
         /* -----------------------------------------
-           CLEAR OLD WORKFLOW
+           CLEAR OLD
         ----------------------------------------- */
 
         canvasNodes.innerHTML = "";
@@ -1160,53 +570,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* -----------------------------------------
-           SHOW WORKFLOW
+           HIDE EMPTY
         ----------------------------------------- */
 
         if (canvasEmpty) {
-
             canvasEmpty.classList.add("hidden");
-
         }
 
 
         /* -----------------------------------------
-           CANVAS SETTINGS
+           CANVAS DIMENSIONS
         ----------------------------------------- */
 
-        const nodeHeight = 78;
-        const gapY = 65;
-        const startY = 40;
+        const nodeWidth = 390;
+        const nodeHeight = 92;
 
+        const gap = 55;
+
+        const startY = 45;
 
         const totalHeight =
             startY +
             (nodes.length * nodeHeight) +
-            ((nodes.length - 1) * gapY) +
+            ((nodes.length - 1) * gap) +
             80;
 
 
         /* -----------------------------------------
-           CANVAS NODE CONTAINER
+           NODE CONTAINER
         ----------------------------------------- */
 
-        canvasNodes.style.position =
-            "relative";
-
-        canvasNodes.style.width =
-            "100%";
-
-        canvasNodes.style.height =
-            `${totalHeight}px`;
+        canvasNodes.style.position = "absolute";
+        canvasNodes.style.left = "0";
+        canvasNodes.style.top = "0";
+        canvasNodes.style.width = "100%";
+        canvasNodes.style.height = `${totalHeight}px`;
 
 
         /* -----------------------------------------
            SVG
         ----------------------------------------- */
 
+        const canvasWidth =
+            canvas.clientWidth || 800;
+
         workflowSvg.setAttribute(
             "width",
-            "100%"
+            canvasWidth
         );
 
         workflowSvg.setAttribute(
@@ -1216,104 +626,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
         workflowSvg.setAttribute(
             "viewBox",
-            `0 0 ${canvas.clientWidth || 800} ${totalHeight}`
+            `0 0 ${canvasWidth} ${totalHeight}`
         );
 
+        workflowSvg.style.width =
+            `${canvasWidth}px`;
 
-        workflowSvg.style.position =
-            "absolute";
+        workflowSvg.style.height =
+            `${totalHeight}px`;
 
-        workflowSvg.style.top =
-            "0";
-
-        workflowSvg.style.left =
-            "0";
-
-        workflowSvg.style.pointerEvents =
-            "none";
-
-
-       function createNode(node, index) {
-
-    const element = document.createElement("div");
-
-    element.className = "workflow-node";
-
-    /* -----------------------------------------
-       SINGLE PREMIUM CENTER COLUMN
-    ----------------------------------------- */
-
-    const nodeWidth = 390;
-
-    const canvasWidth = canvas.clientWidth;
-
-    const x = Math.max(
-        20,
-        (canvasWidth - nodeWidth) / 2
-    );
-
-    const y = 55 + (index * 135);
-
-    element.style.left = `${x}px`;
-    element.style.top = `${y}px`;
-
-    element.innerHTML = `
-        <div class="workflow-node-icon">
-            <i class="${node.icon}"></i>
-        </div>
-
-        <div>
-            <small>
-                ${node.platform}
-            </small>
-
-            <strong>
-                ${node.title}
-            </strong>
-        </div>
-    `;
-
-    canvasNodes.appendChild(element);
-
-
-    /* -----------------------------------------
-       CONNECT PREVIOUS NODE
-    ----------------------------------------- */
-
-    if (index > 0) {
-
-        setTimeout(() => {
-
-            drawConnection(
-                index - 1,
-                index
-            );
-
-        }, 100);
-    }
-
-
-    /* -----------------------------------------
-       AUTO SCROLL
-    ----------------------------------------- */
-
-    setTimeout(() => {
-
-        const targetY = Math.max(
-            0,
-            y - 180
-        );
-
-        canvas.scrollTo({
-            top: targetY,
-            behavior: "smooth"
-        });
-
-    }, 250);
-}
 
         /* -----------------------------------------
-           NODE COUNTER
+           CREATE NODES
+        ----------------------------------------- */
+
+        nodes.forEach((node, index) => {
+
+            createNode(
+                node,
+                index,
+                nodeWidth,
+                nodeHeight,
+                gap,
+                startY
+            );
+
+        });
+
+
+        /* -----------------------------------------
+           COUNTER
         ----------------------------------------- */
 
         nodeCounter.textContent =
@@ -1325,122 +667,177 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* -----------------------------------------
-           ENABLE SCROLL
+           DRAW CONNECTIONS AFTER RENDER
         ----------------------------------------- */
 
-        requestAnimationFrame(function () {
+        requestAnimationFrame(() => {
 
-            if (
-                totalHeight >
-                canvas.clientHeight
-            ) {
+            requestAnimationFrame(() => {
 
-                canvas.classList.add(
-                    "workflow-scrollable"
-                );
+                for (
+                    let i = 0;
+                    i < nodes.length - 1;
+                    i++
+                ) {
 
-            } else {
+                    drawConnection(
+                        i,
+                        i + 1
+                    );
 
-                canvas.classList.remove(
-                    "workflow-scrollable"
-                );
+                }
 
-            }
+            });
 
         });
 
 
-       function drawConnection(fromIndex, toIndex) {
-
-    const nodes =
-        document.querySelectorAll(".workflow-node");
-
-    const from = nodes[fromIndex];
-    const to = nodes[toIndex];
-
-    if (!from || !to) return;
-
-
-    const x1 =
-        parseFloat(from.style.left) + 195;
-
-    const y1 =
-        parseFloat(from.style.top) + 82;
-
-
-    const x2 =
-        parseFloat(to.style.left) + 195;
-
-    const y2 =
-        parseFloat(to.style.top);
-
-
-    const path =
-        document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "path"
-        );
-
-
-    const curve = 55;
-
-
-    path.setAttribute(
-        "d",
-        `
-        M ${x1} ${y1}
-
-        C
-        ${x1} ${y1 + curve},
-        ${x2} ${y2 - curve},
-        ${x2} ${y2}
-        `
-    );
-
-
-    path.classList.add(
-        "workflow-line"
-    );
-
-
-    workflowSvg.appendChild(path);
-
-
-    /* Animated drawing */
-
-    const length =
-        path.getTotalLength();
-
-    path.style.strokeDasharray =
-        length;
-
-    path.style.strokeDashoffset =
-        length;
-
-
-    requestAnimationFrame(() => {
-
-        path.style.transition =
-            "stroke-dashoffset .7s ease";
-
-        path.style.strokeDashoffset =
-            "0";
-
-    });
-}
-
         /* -----------------------------------------
-           SCROLL TO TOP
+           RESET SCROLL
         ----------------------------------------- */
 
-        setTimeout(function () {
+        canvas.scrollTop = 0;
 
-            canvas.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
 
-        }, 100);
+        /* -----------------------------------------
+           AUTO SCROLL IF LONG
+        ----------------------------------------- */
+
+        if (
+            totalHeight >
+            canvas.clientHeight
+        ) {
+
+            canvas.classList.add(
+                "workflow-scrollable"
+            );
+
+        } else {
+
+            canvas.classList.remove(
+                "workflow-scrollable"
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       CREATE NODE
+    ========================================================= */
+
+    function createNode(
+        node,
+        index,
+        nodeWidth,
+        nodeHeight,
+        gap,
+        startY
+    ) {
+
+        /*
+         * IMPORTANT:
+         *
+         * node[0] = type
+         * node[1] = platform
+         * node[2] = title
+         * node[3] = icon
+         */
+
+        const type =
+            node[0];
+
+        const platform =
+            node[1];
+
+        const title =
+            node[2];
+
+        const icon =
+            node[3];
+
+
+        const element =
+            document.createElement("div");
+
+        element.className =
+            "workflow-node";
+
+
+        /* -----------------------------------------
+           POSITION
+        ----------------------------------------- */
+
+        const canvasWidth =
+            canvas.clientWidth || 800;
+
+        const x =
+            Math.max(
+                15,
+                (canvasWidth - nodeWidth) / 2
+            );
+
+        const y =
+            startY +
+            index * (nodeHeight + gap);
+
+
+        element.style.left =
+            `${x}px`;
+
+        element.style.top =
+            `${y}px`;
+
+        element.style.width =
+            `${nodeWidth}px`;
+
+        element.style.minHeight =
+            `${nodeHeight}px`;
+
+
+        /* -----------------------------------------
+           NODE TYPE CLASS
+        ----------------------------------------- */
+
+        element.dataset.type =
+            type;
+
+
+        /* -----------------------------------------
+           NODE HTML
+        ----------------------------------------- */
+
+        element.innerHTML = `
+
+            <div class="workflow-node-icon">
+
+                <i class="${icon}"></i>
+
+            </div>
+
+            <div class="workflow-node-content">
+
+                <small>
+                    ${platform}
+                </small>
+
+                <strong>
+                    ${title}
+                </strong>
+
+            </div>
+
+        `;
+
+
+        /* -----------------------------------------
+           ADD NODE
+        ----------------------------------------- */
+
+        canvasNodes.appendChild(
+            element
+        );
 
     }
 
@@ -1459,45 +856,40 @@ document.addEventListener("DOMContentLoaded", function () {
                 ".workflow-node"
             );
 
-
         const from =
             nodeElements[fromIndex];
 
         const to =
             nodeElements[toIndex];
 
-
         if (!from || !to) {
             return;
         }
 
 
-        /*
-           Real node position
-        */
+        /* -----------------------------------------
+           NODE POSITIONS
+        ----------------------------------------- */
 
         const x1 =
             from.offsetLeft +
             (from.offsetWidth / 2);
 
-
         const y1 =
             from.offsetTop +
             from.offsetHeight;
-
 
         const x2 =
             to.offsetLeft +
             (to.offsetWidth / 2);
 
-
         const y2 =
             to.offsetTop;
 
 
-        /*
-           Create SVG path
-        */
+        /* -----------------------------------------
+           CREATE PATH
+        ----------------------------------------- */
 
         const path =
             document.createElementNS(
@@ -1506,9 +898,29 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
+        const curve =
+            Math.min(
+                70,
+                Math.max(
+                    35,
+                    (y2 - y1) / 2
+                )
+            );
+
+
+        const pathData = `
+            M ${x1} ${y1}
+
+            C
+            ${x1} ${y1 + curve},
+            ${x2} ${y2 - curve},
+            ${x2} ${y2}
+        `;
+
+
         path.setAttribute(
             "d",
-            `M ${x1} ${y1} L ${x2} ${y2}`
+            pathData
         );
 
 
@@ -1522,28 +934,26 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-        /*
-           Animate path
-        */
+        /* -----------------------------------------
+           ANIMATE
+        ----------------------------------------- */
 
         try {
 
             const length =
                 path.getTotalLength();
 
-
             path.style.strokeDasharray =
-                length;
-
+                `${length}`;
 
             path.style.strokeDashoffset =
-                length;
+                `${length}`;
 
 
-            requestAnimationFrame(function () {
+            requestAnimationFrame(() => {
 
                 path.style.transition =
-                    "stroke-dashoffset .65s ease";
+                    "stroke-dashoffset .7s ease";
 
                 path.style.strokeDashoffset =
                     "0";
@@ -1553,7 +963,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (error) {
 
             console.warn(
-                "Workflow line animation error:",
+                "Connection animation error:",
                 error
             );
 
@@ -1570,7 +980,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         backToCategories.addEventListener(
             "click",
-            function (event) {
+            event => {
 
                 event.preventDefault();
 
@@ -1592,7 +1002,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         backToPlatforms.addEventListener(
             "click",
-            function (event) {
+            event => {
 
                 event.preventDefault();
 
@@ -1614,7 +1024,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         clearWorkflow.addEventListener(
             "click",
-            function (event) {
+            event => {
 
                 event.preventDefault();
 
@@ -1638,6 +1048,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     "0 nodes";
 
 
+                canvas.scrollTop =
+                    0;
+
+
                 canvas.classList.remove(
                     "workflow-scrollable"
                 );
@@ -1649,96 +1063,110 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================================
-       WINDOW RESIZE
+       RESIZE
     ========================================================= */
 
     let resizeTimer;
 
-
     window.addEventListener(
         "resize",
-        function () {
+        () => {
 
             clearTimeout(
                 resizeTimer
             );
 
-
             resizeTimer =
-                setTimeout(
-                    function () {
+                setTimeout(() => {
 
-                        const nodes =
-                            canvasNodes.querySelectorAll(
-                                ".workflow-node"
+                    const nodes =
+                        canvasNodes.querySelectorAll(
+                            ".workflow-node"
+                        );
+
+                    if (!nodes.length) {
+                        return;
+                    }
+
+
+                    const canvasWidth =
+                        canvas.clientWidth || 800;
+
+
+                    /*
+                     * Re-center nodes
+                     */
+
+                    nodes.forEach(node => {
+
+                        const width =
+                            node.offsetWidth;
+
+                        const x =
+                            Math.max(
+                                15,
+                                (canvasWidth - width) / 2
                             );
 
+                        node.style.left =
+                            `${x}px`;
 
-                        if (
-                            nodes.length < 2
-                        ) {
-
-                            return;
-
-                        }
+                    });
 
 
-                        /*
-                           Clear old SVG lines
-                        */
+                    /*
+                     * Update SVG
+                     */
 
-                        workflowSvg.innerHTML =
-                            "";
-
-
-                        /*
-                           Update SVG width
-                        */
-
-                        const currentHeight =
-                            canvasNodes.offsetHeight;
+                    const height =
+                        canvasNodes.offsetHeight;
 
 
-                        workflowSvg.setAttribute(
-                            "width",
-                            "100%"
+                    workflowSvg.setAttribute(
+                        "width",
+                        canvasWidth
+                    );
+
+                    workflowSvg.setAttribute(
+                        "height",
+                        height
+                    );
+
+                    workflowSvg.setAttribute(
+                        "viewBox",
+                        `0 0 ${canvasWidth} ${height}`
+                    );
+
+
+                    workflowSvg.style.width =
+                        `${canvasWidth}px`;
+
+                    workflowSvg.style.height =
+                        `${height}px`;
+
+
+                    /*
+                     * Redraw connections
+                     */
+
+                    workflowSvg.innerHTML =
+                        "";
+
+
+                    for (
+                        let i = 0;
+                        i < nodes.length - 1;
+                        i++
+                    ) {
+
+                        drawConnection(
+                            i,
+                            i + 1
                         );
 
+                    }
 
-                        workflowSvg.setAttribute(
-                            "height",
-                            currentHeight
-                        );
-
-
-                        workflowSvg.setAttribute(
-                            "viewBox",
-                            `0 0 ${
-                                canvas.clientWidth || 800
-                            } ${currentHeight}`
-                        );
-
-
-                        /*
-                           Redraw lines
-                        */
-
-                        for (
-                            let i = 0;
-                            i < nodes.length - 1;
-                            i++
-                        ) {
-
-                            drawConnection(
-                                i,
-                                i + 1
-                            );
-
-                        }
-
-                    },
-                    150
-                );
+                }, 150);
 
         }
     );
@@ -1752,10 +1180,6 @@ document.addEventListener("DOMContentLoaded", function () {
         categoryView
     );
 
-
-    /*
-       Initial empty canvas
-    */
 
     canvasNodes.innerHTML =
         "";
@@ -1775,6 +1199,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
     nodeCounter.textContent =
         "0 nodes";
-
 
 });
