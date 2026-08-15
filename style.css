@@ -590,3 +590,696 @@
     }
 
 }
+/* =========================================================
+   PREMIUM AUTOMATION ECOSYSTEM
+========================================================= */
+
+.automation-ecosystem {
+    position: relative;
+    width: 100%;
+    min-height: 900px;
+
+    padding: 125px 0 90px;
+
+    overflow: hidden;
+
+    background: #D6FF00;
+
+    color: #080808;
+
+    isolation: isolate;
+}
+
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+#automation-network {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    opacity: .8;
+}
+
+
+/* =========================================================
+   BACKGROUND GRID
+========================================================= */
+
+.eco-grid {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 0;
+
+    opacity: .17;
+
+    background-image:
+        linear-gradient(
+            rgba(0,0,0,.22) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.22) 1px,
+            transparent 1px
+        );
+
+    background-size: 50px 50px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            transparent,
+            black 12%,
+            black 88%,
+            transparent
+        );
+}
+
+
+/* =========================================================
+   GLOWS
+========================================================= */
+
+.eco-glow {
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    filter: blur(120px);
+
+    opacity: .25;
+
+    z-index: 0;
+
+    pointer-events: none;
+}
+
+.eco-glow-1 {
+    top: -250px;
+    left: -180px;
+}
+
+.eco-glow-2 {
+    right: -250px;
+    bottom: -250px;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.eco-heading {
+    position: relative;
+
+    z-index: 5;
+
+    width: min(850px, 90%);
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+
+.eco-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 9px 17px;
+
+    border-radius: 100px;
+
+    border: 1px solid rgba(0,0,0,.16);
+
+    background: rgba(255,255,255,.25);
+
+    backdrop-filter: blur(15px);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 27px;
+}
+
+.eco-badge span {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #080808;
+
+    animation: ecoPulse 1.8s ease-in-out infinite;
+}
+
+
+@keyframes ecoPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(0,0,0,.2);
+    }
+
+    50% {
+        box-shadow:
+            0 0 0 8px rgba(0,0,0,0);
+    }
+
+}
+
+
+.eco-heading h2 {
+    margin: 0;
+
+    font-size: clamp(55px, 7vw, 105px);
+
+    line-height: .92;
+
+    letter-spacing: -5px;
+
+    font-weight: 800;
+}
+
+.eco-heading h2 strong {
+    display: block;
+
+    color: #fff;
+
+    -webkit-text-stroke: 2px #080808;
+
+    text-shadow:
+        7px 7px 0 rgba(0,0,0,.08);
+}
+
+
+.eco-heading p {
+    width: min(650px, 100%);
+
+    margin: 30px auto 0;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    font-weight: 500;
+
+    color: rgba(0,0,0,.65);
+}
+
+
+/* =========================================================
+   PLATFORM AREA
+========================================================= */
+
+.platform-stream {
+    position: relative;
+
+    z-index: 5;
+
+    width: 100%;
+
+    margin-top: 100px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    overflow: hidden;
+
+    transform: rotate(-1.2deg);
+}
+
+
+/* =========================================================
+   ROW
+========================================================= */
+
+.platform-track {
+    display: flex;
+
+    align-items: center;
+
+    width: max-content;
+
+    gap: 15px;
+
+    will-change: transform;
+}
+
+
+/* =========================================================
+   PLATFORM CARD
+========================================================= */
+
+.platform-card {
+    position: relative;
+
+    flex: 0 0 auto;
+
+    height: 82px;
+
+    min-width: 190px;
+
+    padding: 0 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.85),
+            rgba(255,255,255,.42)
+        );
+
+    border: 1px solid rgba(0,0,0,.14);
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.10),
+        inset 0 1px 0 rgba(255,255,255,.9);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    transition:
+        transform .35s cubic-bezier(.2,.8,.2,1),
+        box-shadow .35s ease,
+        background .35s ease;
+
+    cursor: pointer;
+
+    overflow: hidden;
+}
+
+
+/* CARD SHINE */
+
+.platform-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 80%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.8),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition: left .7s ease;
+}
+
+.platform-card:hover::before {
+    left: 140%;
+}
+
+
+/* HOVER */
+
+.platform-card:hover {
+
+    transform:
+        translateY(-12px)
+        scale(1.13);
+
+    z-index: 20;
+
+    background: rgba(255,255,255,.97);
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.22),
+        0 0 0 2px rgba(0,0,0,.12);
+}
+
+
+/* ICON */
+
+.platform-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: rgba(0,0,0,.07);
+
+    font-size: 21px;
+
+    transition:
+        transform .35s ease,
+        background .35s ease;
+}
+
+.platform-card:hover .platform-icon {
+    transform: rotate(-5deg) scale(1.12);
+
+    background: #D6FF00;
+}
+
+
+/* TEXT */
+
+.platform-card span {
+    font-size: 16px;
+
+    font-weight: 700;
+
+    letter-spacing: -.2px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   EDGE MASK
+========================================================= */
+
+.platform-stream::before,
+.platform-stream::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: -20px;
+    bottom: -20px;
+
+    width: 180px;
+
+    z-index: 30;
+
+    pointer-events: none;
+}
+
+.platform-stream::before {
+    left: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #D6FF00 0%,
+            rgba(214,255,0,.9) 20%,
+            transparent 100%
+        );
+}
+
+.platform-stream::after {
+    right: 0;
+
+    background:
+        linear-gradient(
+            270deg,
+            #D6FF00 0%,
+            rgba(214,255,0,.9) 20%,
+            transparent 100%
+        );
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+.track-left {
+    animation:
+        automationLeft
+        35s
+        linear
+        infinite;
+}
+
+.track-right {
+    animation:
+        automationRight
+        40s
+        linear
+        infinite;
+}
+
+.platform-track.slow {
+    animation-duration: 48s;
+}
+
+
+@keyframes automationLeft {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+
+}
+
+
+@keyframes automationRight {
+
+    from {
+        transform: translateX(-50%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+
+}
+
+
+/* PAUSE ALL ROWS WHEN USER HOVERS */
+
+.platform-stream:hover .platform-track {
+    animation-play-state: paused;
+}
+
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.eco-bottom {
+
+    position: relative;
+
+    z-index: 6;
+
+    width: min(900px, 90%);
+
+    margin: 75px auto 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: rgba(0,0,0,.48);
+}
+
+.bottom-line {
+
+    height: 1px;
+
+    flex: 1;
+
+    background: rgba(0,0,0,.17);
+}
+
+.bottom-dot {
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #080808;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .automation-ecosystem {
+        min-height: 780px;
+
+        padding:
+            90px
+            0
+            70px;
+    }
+
+    .eco-heading h2 {
+        font-size: 62px;
+
+        letter-spacing: -3px;
+    }
+
+    .eco-heading p {
+        font-size: 16px;
+    }
+
+    .platform-stream {
+        margin-top: 70px;
+
+        gap: 12px;
+    }
+
+    .platform-card {
+        min-width: 160px;
+
+        height: 70px;
+
+        padding: 0 17px;
+
+        border-radius: 17px;
+    }
+
+    .platform-icon {
+        width: 36px;
+        height: 36px;
+
+        font-size: 17px;
+    }
+
+    .platform-card span {
+        font-size: 14px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .automation-ecosystem {
+        padding:
+            75px
+            0
+            55px;
+    }
+
+    .eco-badge {
+        font-size: 8px;
+
+        letter-spacing: 1.3px;
+    }
+
+    .eco-heading h2 {
+        font-size: 48px;
+
+        letter-spacing: -2.5px;
+    }
+
+    .eco-heading h2 strong {
+        -webkit-text-stroke: 1px #080808;
+    }
+
+    .eco-heading p {
+        font-size: 14px;
+
+        line-height: 1.6;
+    }
+
+    .platform-stream {
+        margin-top: 55px;
+
+        gap: 10px;
+    }
+
+    .platform-card {
+        min-width: 140px;
+
+        height: 60px;
+
+        padding: 0 13px;
+
+        border-radius: 15px;
+
+        gap: 9px;
+    }
+
+    .platform-icon {
+        width: 30px;
+        height: 30px;
+
+        border-radius: 9px;
+
+        font-size: 14px;
+    }
+
+    .platform-card span {
+        font-size: 12px;
+    }
+
+    .platform-stream::before,
+    .platform-stream::after {
+        width: 80px;
+    }
+
+    .eco-bottom {
+        margin-top: 50px;
+
+        font-size: 7px;
+
+        gap: 8px;
+    }
+
+}
