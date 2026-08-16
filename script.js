@@ -107,3 +107,47 @@ document.querySelectorAll(".process-step").forEach((step) => {
   });
 
 });
+/* =========================================================
+   AWSZ — SYSTEM MAP INTERACTION
+========================================================= */
+
+const systemMap = document.querySelector(".system-map");
+
+if (systemMap) {
+
+    const nodes = systemMap.querySelectorAll(".system-node");
+
+    systemMap.addEventListener("mousemove", (e) => {
+
+        const rect = systemMap.getBoundingClientRect();
+
+        const x =
+            (e.clientX - rect.left) / rect.width - 0.5;
+
+        const y =
+            (e.clientY - rect.top) / rect.height - 0.5;
+
+
+        nodes.forEach((node, index) => {
+
+            const strength = 5 + index * 1.5;
+
+            node.style.transform =
+                `translate(${x * strength}px, ${y * strength}px)`;
+
+        });
+
+    });
+
+
+    systemMap.addEventListener("mouseleave", () => {
+
+        nodes.forEach((node) => {
+
+            node.style.transform = "";
+
+        });
+
+    });
+
+}
