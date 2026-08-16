@@ -1911,3 +1911,569 @@ a {
         display: none;
     }
 }
+/* =========================================================
+   AWSZ — PROBLEM SECTION
+========================================================= */
+
+.problem-section {
+    --lime: #A8D410;
+
+    position: relative;
+
+    padding: 150px 30px 130px;
+
+    overflow: hidden;
+
+    background: #050505;
+
+    color: #fff;
+}
+
+
+/* BACKGROUND */
+
+.problem-bg-grid {
+    position: absolute;
+
+    inset: 0;
+
+    opacity: .16;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 70px 70px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 20%,
+        black 80%,
+        transparent
+    );
+}
+
+
+/* SUBTLE GLOW */
+
+.problem-section::before {
+    content: "";
+
+    position: absolute;
+
+    width: 550px;
+    height: 550px;
+
+    top: 30%;
+    left: -300px;
+
+    border-radius: 50%;
+
+    background: rgba(168,212,16,.035);
+
+    filter: blur(120px);
+
+    pointer-events: none;
+}
+
+
+/* CONTAINER */
+
+.problem-container {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1200px, 100%);
+
+    margin: auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.problem-header {
+    max-width: 720px;
+
+    margin-bottom: 70px;
+}
+
+
+.problem-eyebrow {
+    margin-bottom: 20px;
+
+    color: var(--lime);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.problem-header h2 {
+    margin: 0;
+
+    font-size: clamp(46px, 5.5vw, 76px);
+
+    line-height: .96;
+
+    letter-spacing: -4px;
+
+    font-weight: 800;
+}
+
+
+.problem-header h2 span {
+    color: #777;
+}
+
+
+.problem-header p {
+    max-width: 580px;
+
+    margin-top: 25px;
+
+    color: #858585;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.problem-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.problem-card {
+    position: relative;
+
+    min-height: 185px;
+
+    display: grid;
+
+    grid-template-columns: 60px 1fr 1.2fr;
+
+    align-items: center;
+
+    gap: 30px;
+
+    padding: 30px;
+
+    border: 1px solid rgba(255,255,255,.075);
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(255,255,255,.035),
+            rgba(255,255,255,.012)
+        );
+
+    backdrop-filter: blur(15px);
+
+    overflow: hidden;
+
+    transition:
+        transform .4s ease,
+        border-color .4s ease,
+        background .4s ease;
+}
+
+
+.problem-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 2px;
+
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--lime),
+        transparent
+    );
+
+    opacity: 0;
+
+    transition: .4s ease;
+}
+
+
+.problem-card:hover {
+    transform: translateX(8px);
+
+    border-color: rgba(168,212,16,.28);
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(168,212,16,.045),
+            rgba(255,255,255,.012)
+        );
+}
+
+
+.problem-card:hover::before {
+    opacity: 1;
+}
+
+
+/* NUMBER */
+
+.problem-number {
+    align-self: flex-start;
+
+    padding-top: 4px;
+
+    color: #444;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/* MAIN */
+
+.problem-main {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 17px;
+}
+
+
+.problem-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    color: var(--lime);
+
+    background: rgba(168,212,16,.075);
+
+    border: 1px solid rgba(168,212,16,.1);
+
+    font-size: 17px;
+}
+
+
+.problem-main h3 {
+    margin: 0;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    letter-spacing: -.3px;
+}
+
+
+.problem-main p {
+    max-width: 330px;
+
+    margin-top: 9px;
+
+    color: #707070;
+
+    font-size: 11px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   FLOW
+========================================================= */
+
+.problem-flow {
+    min-height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px;
+
+    border: 1px solid rgba(255,255,255,.05);
+
+    border-radius: 14px;
+
+    background: rgba(0,0,0,.2);
+}
+
+
+.flow-step {
+    padding: 10px 12px;
+
+    color: #aaa;
+
+    border: 1px solid rgba(255,255,255,.07);
+
+    border-radius: 8px;
+
+    background: rgba(255,255,255,.025);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.flow-step.muted {
+    color: #555;
+
+    text-decoration: line-through;
+
+    border-color: rgba(255,255,255,.04);
+}
+
+
+.flow-arrow {
+    color: #444;
+
+    font-size: 13px;
+
+    flex-shrink: 0;
+}
+
+
+.flow-result {
+    margin-left: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 10px 11px;
+
+    border: 1px solid rgba(168,212,16,.18);
+
+    border-radius: 8px;
+
+    background: rgba(168,212,16,.055);
+
+    color: var(--lime);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.flow-result b {
+    width: 14px;
+    height: 14px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(168,212,16,.15);
+
+    font-size: 8px;
+}
+
+
+/* TOOL FLOW */
+
+.tool-flow {
+    gap: 8px;
+}
+
+
+.mini-tool {
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    border: 1px solid rgba(255,255,255,.07);
+
+    background: rgba(255,255,255,.025);
+
+    color: #777;
+
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.problem-bottom {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    margin-top: 70px;
+}
+
+
+.problem-bottom p {
+    flex-shrink: 0;
+
+    color: #555;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    text-align: center;
+}
+
+
+.problem-bottom p span {
+    color: #aaa;
+}
+
+
+.problem-line {
+    flex: 1;
+
+    height: 1px;
+
+    background: rgba(255,255,255,.07);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 950px) {
+
+    .problem-card {
+        grid-template-columns: 40px 1fr;
+
+        gap: 20px;
+    }
+
+    .problem-flow {
+        grid-column: 2;
+
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .problem-section {
+        padding: 100px 15px 90px;
+    }
+
+    .problem-header {
+        margin-bottom: 45px;
+    }
+
+    .problem-header h2 {
+        font-size: 45px;
+
+        letter-spacing: -2.5px;
+    }
+
+    .problem-header p {
+        font-size: 13px;
+    }
+
+    .problem-card {
+        display: block;
+
+        padding: 23px 20px;
+
+        min-height: auto;
+    }
+
+    .problem-number {
+        margin-bottom: 18px;
+    }
+
+    .problem-main h3 {
+        font-size: 15px;
+    }
+
+    .problem-main p {
+        font-size: 10px;
+    }
+
+    .problem-flow {
+        margin-top: 22px;
+
+        overflow-x: auto;
+
+        padding: 8px;
+
+        scrollbar-width: none;
+    }
+
+    .problem-flow::-webkit-scrollbar {
+        display: none;
+    }
+
+    .flow-result {
+        margin-left: 0;
+    }
+
+    .problem-bottom {
+        margin-top: 50px;
+    }
+
+    .problem-bottom p {
+        font-size: 9px;
+        line-height: 1.5;
+    }
+}
