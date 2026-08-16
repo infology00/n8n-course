@@ -1115,3 +1115,799 @@ a {
         display: none;
     }
 }
+/* =========================================================
+   AWSZ CAPABILITIES
+========================================================= */
+
+.awsz-capabilities {
+    --lime: #A8D410;
+
+    position: relative;
+    min-height: 900px;
+    padding: 130px 30px 70px;
+
+    overflow: hidden;
+
+    background: #050505;
+    color: #fff;
+}
+
+
+/* BACKGROUND GRID */
+
+.cap-grid {
+    position: absolute;
+    inset: 0;
+
+    opacity: .22;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 70px 70px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 15%,
+        black 80%,
+        transparent
+    );
+}
+
+
+/* SOFT CENTER GLOW */
+
+.awsz-capabilities::before {
+    content: "";
+
+    position: absolute;
+
+    width: 650px;
+    height: 650px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -45%);
+
+    border-radius: 50%;
+
+    background: rgba(168,212,16,.045);
+
+    filter: blur(120px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.cap-header {
+    position: relative;
+    z-index: 5;
+
+    max-width: 760px;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+
+.cap-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+    color: var(--lime);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.cap-header h2 {
+    margin: 0;
+
+    font-size: clamp(44px, 5vw, 72px);
+
+    line-height: .98;
+
+    letter-spacing: -3.5px;
+
+    font-weight: 800;
+}
+
+
+.cap-header h2 span {
+    display: block;
+
+    color: #888;
+}
+
+
+.cap-header p {
+    max-width: 620px;
+
+    margin: 25px auto 0;
+
+    color: #858585;
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   STAGE
+========================================================= */
+
+.cap-stage {
+    position: relative;
+
+    z-index: 3;
+
+    width: min(1200px, 100%);
+
+    height: 650px;
+
+    margin: 70px auto 0;
+}
+
+
+/* =========================================================
+   CENTER CORE
+========================================================= */
+
+.cap-core {
+    position: absolute;
+
+    z-index: 8;
+
+    left: 50%;
+    top: 50%;
+
+    width: 180px;
+    height: 180px;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(168,212,16,.35);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(168,212,16,.08),
+            rgba(10,12,8,.95) 65%
+        );
+
+    box-shadow:
+        0 0 80px rgba(168,212,16,.08),
+        inset 0 0 40px rgba(168,212,16,.035);
+
+    backdrop-filter: blur(20px);
+}
+
+
+.core-logo {
+    font-size: 25px;
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+}
+
+
+.core-line {
+    width: 25px;
+    height: 1px;
+
+    margin: 9px 0;
+
+    background: var(--lime);
+}
+
+
+.cap-core small {
+    color: #777;
+
+    font-size: 6px;
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+}
+
+
+/* RINGS */
+
+.core-ring {
+    position: absolute;
+
+    border: 1px solid rgba(168,212,16,.1);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+.ring-1 {
+    width: 220px;
+    height: 220px;
+
+    animation: rotateRing 14s linear infinite;
+}
+
+
+.ring-2 {
+    width: 265px;
+    height: 265px;
+
+    border-style: dashed;
+
+    opacity: .45;
+
+    animation: rotateRingReverse 20s linear infinite;
+}
+
+
+/* =========================================================
+   SVG CONNECTIONS
+========================================================= */
+
+.cap-lines {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: visible;
+
+    pointer-events: none;
+}
+
+
+.line-path {
+    fill: none;
+
+    stroke: rgba(168,212,16,.20);
+
+    stroke-width: 1;
+
+    stroke-dasharray: 5 9;
+
+    animation: lineFlow 4s linear infinite;
+}
+
+
+.line-path:nth-child(2) {
+    animation-delay: .5s;
+}
+
+.line-path:nth-child(3) {
+    animation-delay: 1s;
+}
+
+.line-path:nth-child(4) {
+    animation-delay: 1.5s;
+}
+
+.line-path:nth-child(5) {
+    animation-delay: 2s;
+}
+
+.line-path:nth-child(6) {
+    animation-delay: 2.5s;
+}
+
+.line-path:nth-child(7) {
+    animation-delay: 3s;
+}
+
+.line-path:nth-child(8) {
+    animation-delay: 3.5s;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.cap-card {
+    position: absolute;
+
+    z-index: 6;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    width: 225px;
+
+    padding: 13px 15px;
+
+    border: 1px solid rgba(255,255,255,.09);
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20,23,18,.9),
+            rgba(9,10,8,.88)
+        );
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.35);
+
+    cursor: pointer;
+
+    transition:
+        border-color .3s ease,
+        box-shadow .3s ease,
+        transform .3s ease;
+}
+
+
+.cap-card:hover {
+    border-color: rgba(168,212,16,.45);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.5),
+        0 0 35px rgba(168,212,16,.06);
+}
+
+
+.cap-card strong {
+    display: block;
+
+    color: #e8e8e8;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+.cap-card span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #666;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   ICONS
+========================================================= */
+
+.cap-icon {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+
+.youtube-icon {
+    color: #ff5c5c;
+    background: rgba(255,60,60,.09);
+}
+
+
+.linkedin-icon {
+    color: #4d9cff;
+    background: rgba(40,120,255,.1);
+}
+
+
+.whatsapp-icon {
+    color: #4ddd87;
+    background: rgba(40,200,100,.09);
+}
+
+
+.facebook-icon {
+    color: #718eff;
+    background: rgba(60,100,255,.1);
+}
+
+
+.shopify-icon {
+    color: #9ed124;
+    background: rgba(150,210,30,.1);
+}
+
+
+.ai-icon {
+    color: var(--lime);
+    background: rgba(168,212,16,.09);
+}
+
+
+.ghl-icon {
+    color: #b179ff;
+    background: rgba(150,80,255,.09);
+}
+
+
+.web-icon {
+    color: #ddd;
+    background: rgba(255,255,255,.06);
+}
+
+
+/* =========================================================
+   CARD POSITIONS
+========================================================= */
+
+.card-youtube {
+    top: 45px;
+    left: 35px;
+
+    animation:
+        floatLeft 6s ease-in-out infinite;
+}
+
+
+.card-linkedin {
+    top: 45px;
+    right: 35px;
+
+    animation:
+        floatRight 7s ease-in-out infinite;
+}
+
+
+.card-whatsapp {
+    top: 270px;
+    left: 0;
+
+    animation:
+        floatLeft 7s ease-in-out infinite reverse;
+}
+
+
+.card-facebook {
+    top: 270px;
+    right: 0;
+
+    animation:
+        floatRight 6s ease-in-out infinite reverse;
+}
+
+
+.card-shopify {
+    bottom: 55px;
+    left: 90px;
+
+    animation:
+        floatLeft 8s ease-in-out infinite;
+}
+
+
+.card-ai {
+    bottom: 55px;
+    right: 90px;
+
+    animation:
+        floatRight 8s ease-in-out infinite;
+}
+
+
+.card-ghl {
+    top: 155px;
+    left: 280px;
+
+    animation:
+        floatLeft 6s ease-in-out infinite;
+}
+
+
+.card-web {
+    top: 155px;
+    right: 280px;
+
+    animation:
+        floatRight 6s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   BOTTOM LABEL
+========================================================= */
+
+.cap-bottom {
+    position: relative;
+    z-index: 5;
+
+    width: min(1200px, 100%);
+
+    margin: 10px auto 0;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    color: #454545;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+
+.cap-bottom div {
+    flex: 1;
+
+    height: 1px;
+
+    background: rgba(255,255,255,.07);
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes floatLeft {
+
+    0%,
+    100% {
+        transform: translateX(0) translateY(0);
+    }
+
+    50% {
+        transform: translateX(18px) translateY(-8px);
+    }
+}
+
+
+@keyframes floatRight {
+
+    0%,
+    100% {
+        transform: translateX(0) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-18px) translateY(8px);
+    }
+}
+
+
+@keyframes lineFlow {
+
+    to {
+        stroke-dashoffset: -70;
+    }
+}
+
+
+@keyframes rotateRing {
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+@keyframes rotateRingReverse {
+
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .awsz-capabilities {
+        padding: 100px 20px 60px;
+    }
+
+    .cap-stage {
+        height: 750px;
+    }
+
+    .card-ghl {
+        left: 0;
+        top: 155px;
+    }
+
+    .card-web {
+        right: 0;
+        top: 155px;
+    }
+
+    .card-youtube {
+        left: 0;
+        top: 40px;
+    }
+
+    .card-linkedin {
+        right: 0;
+        top: 40px;
+    }
+
+    .card-whatsapp {
+        left: 0;
+        top: 410px;
+    }
+
+    .card-facebook {
+        right: 0;
+        top: 410px;
+    }
+
+    .card-shopify {
+        left: 0;
+        bottom: 40px;
+    }
+
+    .card-ai {
+        right: 0;
+        bottom: 40px;
+    }
+
+    .cap-lines {
+        opacity: .5;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .awsz-capabilities {
+        min-height: auto;
+
+        padding: 90px 15px 55px;
+    }
+
+    .cap-header h2 {
+        font-size: 43px;
+
+        letter-spacing: -2.5px;
+    }
+
+    .cap-header p {
+        font-size: 13px;
+    }
+
+    .cap-stage {
+        height: 720px;
+
+        margin-top: 50px;
+    }
+
+    .cap-core {
+        width: 145px;
+        height: 145px;
+
+        top: 50%;
+    }
+
+    .core-logo {
+        font-size: 21px;
+    }
+
+    .ring-1 {
+        width: 180px;
+        height: 180px;
+    }
+
+    .ring-2 {
+        width: 215px;
+        height: 215px;
+    }
+
+    .cap-card {
+        width: 170px;
+
+        padding: 10px;
+
+        gap: 9px;
+    }
+
+    .cap-icon {
+        width: 32px;
+        height: 32px;
+
+        font-size: 12px;
+    }
+
+    .cap-card strong {
+        font-size: 8px;
+    }
+
+    .cap-card span {
+        font-size: 7px;
+    }
+
+    .card-youtube {
+        left: 0;
+        top: 20px;
+    }
+
+    .card-linkedin {
+        right: 0;
+        top: 20px;
+    }
+
+    .card-ghl {
+        left: 0;
+        top: 170px;
+    }
+
+    .card-web {
+        right: 0;
+        top: 170px;
+    }
+
+    .card-whatsapp {
+        left: 0;
+        top: auto;
+        bottom: 175px;
+    }
+
+    .card-facebook {
+        right: 0;
+        top: auto;
+        bottom: 175px;
+    }
+
+    .card-shopify {
+        left: 0;
+        bottom: 20px;
+    }
+
+    .card-ai {
+        right: 0;
+        bottom: 20px;
+    }
+
+    .cap-bottom {
+        display: none;
+    }
+}
