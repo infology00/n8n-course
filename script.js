@@ -25,3 +25,29 @@ document.querySelectorAll(".cap-card").forEach(card => {
     });
 
 });
+/* =========================================================
+   AWSZ — PROBLEM SECTION INTERACTION
+========================================================= */
+
+document.querySelectorAll(".problem-card").forEach((card) => {
+
+    card.addEventListener("mouseenter", () => {
+
+        card.querySelectorAll(".flow-step:not(.muted)").forEach((step) => {
+            step.style.borderColor = "rgba(168,212,16,.25)";
+            step.style.color = "#A8D410";
+        });
+
+    });
+
+
+    card.addEventListener("mouseleave", () => {
+
+        card.querySelectorAll(".flow-step:not(.muted)").forEach((step) => {
+            step.style.borderColor = "";
+            step.style.color = "";
+        });
+
+    });
+
+});
