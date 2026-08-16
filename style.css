@@ -4197,3 +4197,884 @@ a {
   }
 
 }
+/* =========================================================
+   AWSZ — MORE THAN AUTOMATION
+========================================================= */
+
+.awsz-value {
+
+    --lime: #A8D410;
+
+    position: relative;
+
+    padding: 150px 30px 140px;
+
+    background: #050505;
+
+    color: #fff;
+
+    overflow: hidden;
+}
+
+
+.value-bg {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: .12;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 75px 75px;
+
+    mask-image:
+        radial-gradient(
+            ellipse at center,
+            black 0%,
+            transparent 75%
+        );
+}
+
+
+.awsz-value::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 600px;
+    height: 600px;
+
+    left: 50%;
+    top: 35%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(168,212,16,.07),
+            transparent 65%
+        );
+
+    filter: blur(20px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.value-container {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1200px, 100%);
+
+    margin: auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.value-header {
+
+    max-width: 780px;
+
+    margin-bottom: 75px;
+}
+
+
+.value-eyebrow {
+
+    margin-bottom: 20px;
+
+    color: var(--lime);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.value-header h2 {
+
+    margin: 0;
+
+    font-size: clamp(46px, 5.5vw, 75px);
+
+    line-height: .95;
+
+    letter-spacing: -4px;
+
+    font-weight: 800;
+}
+
+
+.value-header h2 span {
+
+    display: block;
+
+    color: #777;
+}
+
+
+.value-header p {
+
+    max-width: 600px;
+
+    margin-top: 25px;
+
+    color: #707070;
+
+    font-size: 13px;
+
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   SYSTEM MAP
+========================================================= */
+
+.system-map {
+
+    position: relative;
+
+    height: 540px;
+
+    border: 1px solid rgba(255,255,255,.07);
+
+    border-radius: 25px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(168,212,16,.035),
+            transparent 42%
+        ),
+        rgba(255,255,255,.012);
+
+    overflow: hidden;
+}
+
+
+/* CENTER */
+
+.system-center {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 190px;
+    height: 190px;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.center-core {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: 110px;
+    height: 110px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(168,212,16,.3);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(168,212,16,.1),
+            #0a0c08 70%
+        );
+
+    box-shadow:
+        0 0 60px rgba(168,212,16,.08);
+}
+
+
+.core-logo {
+
+    color: var(--lime);
+
+    font-size: 17px;
+
+    font-weight: 900;
+
+    letter-spacing: -1px;
+}
+
+
+.center-core span {
+
+    margin-top: 5px;
+
+    color: #555;
+
+    font-size: 6px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.center-ring {
+
+    position: absolute;
+
+    border: 1px dashed rgba(168,212,16,.13);
+
+    border-radius: 50%;
+}
+
+
+.ring-one {
+
+    width: 150px;
+    height: 150px;
+
+    animation:
+        systemRotate 18s linear infinite;
+}
+
+
+.ring-two {
+
+    width: 240px;
+    height: 240px;
+
+    border-color: rgba(255,255,255,.06);
+
+    animation:
+        systemRotateReverse 25s linear infinite;
+}
+
+
+@keyframes systemRotate {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+@keyframes systemRotateReverse {
+
+    to {
+        transform: rotate(-360deg);
+    }
+
+}
+
+
+/* =========================================================
+   NODES
+========================================================= */
+
+.system-node {
+
+    position: absolute;
+
+    z-index: 6;
+
+    width: 135px;
+
+    padding: 17px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.05),
+            rgba(255,255,255,.015)
+        );
+
+    backdrop-filter: blur(15px);
+
+    transition:
+        transform .4s ease,
+        border-color .4s ease;
+}
+
+
+.system-node:hover {
+
+    border-color: rgba(168,212,16,.3);
+
+    transform: translateY(-6px);
+
+}
+
+
+.node-icon {
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 10px;
+
+    border-radius: 9px;
+
+    color: var(--lime);
+
+    background: rgba(168,212,16,.06);
+
+    font-size: 13px;
+}
+
+
+.system-node strong {
+
+    display: block;
+
+    color: #aaa;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.system-node span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: #555;
+
+    font-size: 7px;
+}
+
+
+/* POSITIONS */
+
+.node-one {
+
+    left: 12%;
+
+    top: 17%;
+}
+
+
+.node-two {
+
+    right: 12%;
+
+    top: 17%;
+}
+
+
+.node-three {
+
+    left: 12%;
+
+    bottom: 17%;
+}
+
+
+.node-four {
+
+    right: 12%;
+
+    bottom: 17%;
+}
+
+
+/* =========================================================
+   CONNECTING LINES
+========================================================= */
+
+.system-line {
+
+    position: absolute;
+
+    z-index: 1;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(168,212,16,.18),
+            transparent
+        );
+
+    transform-origin: center;
+
+    overflow: hidden;
+}
+
+
+.system-line i {
+
+    position: absolute;
+
+    top: -2px;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: var(--lime);
+
+    box-shadow:
+        0 0 12px var(--lime);
+
+    animation:
+        systemParticle 3s linear infinite;
+}
+
+
+.line-one {
+
+    width: 260px;
+
+    left: 24%;
+
+    top: 34%;
+
+    transform: rotate(15deg);
+}
+
+
+.line-two {
+
+    width: 260px;
+
+    right: 24%;
+
+    top: 34%;
+
+    transform: rotate(-15deg);
+}
+
+
+.line-three {
+
+    width: 260px;
+
+    left: 24%;
+
+    bottom: 34%;
+
+    transform: rotate(-15deg);
+}
+
+
+.line-four {
+
+    width: 260px;
+
+    right: 24%;
+
+    bottom: 34%;
+
+    transform: rotate(15deg);
+}
+
+
+.line-two i,
+.line-four i {
+
+    animation-delay: 1.5s;
+}
+
+
+@keyframes systemParticle {
+
+    0% {
+
+        left: 0;
+
+        opacity: 0;
+
+    }
+
+    15% {
+
+        opacity: 1;
+
+    }
+
+    85% {
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        left: calc(100% - 5px);
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* =========================================================
+   VALUE POINTS
+========================================================= */
+
+.value-points {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin-top: 14px;
+}
+
+
+.value-point {
+
+    display: grid;
+
+    grid-template-columns: 35px 1fr;
+
+    gap: 12px;
+
+    padding: 25px;
+
+    border: 1px solid rgba(255,255,255,.065);
+
+    border-radius: 17px;
+
+    background: rgba(255,255,255,.015);
+
+    transition: .35s ease;
+}
+
+
+.value-point:hover {
+
+    border-color: rgba(168,212,16,.2);
+
+    background: rgba(168,212,16,.025);
+
+}
+
+
+.value-point > span {
+
+    color: #444;
+
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+
+.value-point h3 {
+
+    margin: 0;
+
+    color: #aaa;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.value-point p {
+
+    margin-top: 9px;
+
+    color: #5e5e5e;
+
+    font-size: 9px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   STATEMENT
+========================================================= */
+
+.value-statement {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-top: 65px;
+
+    color: #444;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+
+.statement-line {
+
+    flex: 1;
+
+    height: 1px;
+
+    background: rgba(255,255,255,.07);
+}
+
+
+.value-statement p {
+
+    margin: 0;
+
+    color: #555;
+
+    font-size: 10px;
+
+    letter-spacing: 0;
+}
+
+
+.value-statement strong {
+
+    color: #aaa;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .awsz-value {
+
+        padding: 110px 20px;
+
+    }
+
+
+    .system-map {
+
+        height: 500px;
+
+    }
+
+
+    .node-one {
+
+        left: 6%;
+
+    }
+
+
+    .node-two {
+
+        right: 6%;
+
+    }
+
+
+    .node-three {
+
+        left: 6%;
+
+    }
+
+
+    .node-four {
+
+        right: 6%;
+
+    }
+
+
+    .value-points {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .awsz-value {
+
+        padding: 90px 15px;
+
+    }
+
+
+    .value-header h2 {
+
+        font-size: 44px;
+
+        letter-spacing: -2.5px;
+
+    }
+
+
+    .value-header p {
+
+        font-size: 12px;
+
+    }
+
+
+    .system-map {
+
+        height: 580px;
+
+    }
+
+
+    .system-center {
+
+        top: 50%;
+
+    }
+
+
+    .system-node {
+
+        width: 125px;
+
+    }
+
+
+    .node-one {
+
+        left: 20px;
+
+        top: 35px;
+
+    }
+
+
+    .node-two {
+
+        right: 20px;
+
+        top: 35px;
+
+    }
+
+
+    .node-three {
+
+        left: 20px;
+
+        bottom: 35px;
+
+    }
+
+
+    .node-four {
+
+        right: 20px;
+
+        bottom: 35px;
+
+    }
+
+
+    .system-line {
+
+        display: none;
+
+    }
+
+
+    .ring-two {
+
+        width: 210px;
+
+        height: 210px;
+
+    }
+
+
+    .value-point {
+
+        padding: 20px;
+
+    }
+
+
+    .value-statement {
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+    }
+
+
+    .statement-line {
+
+        width: 100%;
+
+        flex-basis: 100%;
+
+    }
+
+}
