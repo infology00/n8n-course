@@ -79,3 +79,31 @@ document.querySelectorAll(".work-card").forEach((card) => {
     });
 
 });
+/* =========================================================
+   AWSZ — PROCESS INTERACTION
+========================================================= */
+
+document.querySelectorAll(".process-step").forEach((step) => {
+
+  step.addEventListener("mouseenter", () => {
+
+    const line = step.querySelector(".process-line span");
+
+    if (line) {
+      line.style.width = "100%";
+    }
+
+  });
+
+
+  step.addEventListener("mouseleave", () => {
+
+    const line = step.querySelector(".process-line span");
+
+    if (line) {
+      line.style.width = "";
+    }
+
+  });
+
+});
