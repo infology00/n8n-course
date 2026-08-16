@@ -51,3 +51,31 @@ document.querySelectorAll(".problem-card").forEach((card) => {
     });
 
 });
+/* =========================================================
+   AWSZ — WORK SECTION INTERACTION
+========================================================= */
+
+document.querySelectorAll(".work-card").forEach((card) => {
+
+    card.addEventListener("mouseenter", () => {
+
+        card.querySelectorAll(".workflow-node").forEach((node, index) => {
+
+            setTimeout(() => {
+                node.style.transform = "translateY(-5px)";
+            }, index * 60);
+
+        });
+
+    });
+
+
+    card.addEventListener("mouseleave", () => {
+
+        card.querySelectorAll(".workflow-node").forEach((node) => {
+            node.style.transform = "";
+        });
+
+    });
+
+});
