@@ -179,3 +179,26 @@ document.querySelectorAll(".problem-item").forEach((item) => {
     });
 
 });
+/* =========================================================
+   AWSZ — FAQ ACCORDION
+========================================================= */
+
+document.querySelectorAll(".faq-question").forEach((button) => {
+
+    button.addEventListener("click", () => {
+
+        const currentItem = button.closest(".faq-item");
+
+        document.querySelectorAll(".faq-item").forEach((item) => {
+
+            if (item !== currentItem) {
+                item.classList.remove("active");
+            }
+
+        });
+
+        currentItem.classList.toggle("active");
+
+    });
+
+});
