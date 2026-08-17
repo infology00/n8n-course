@@ -6043,3 +6043,579 @@ a {
     }
 
 }
+/* =========================================================
+   AWSZ — FINAL CTA
+========================================================= */
+
+.awsz-final-cta {
+
+    --lime: #A8D410;
+
+    position: relative;
+
+    min-height: 760px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 120px 30px;
+
+    background: #030403;
+
+    color: #fff;
+
+    overflow: hidden;
+
+    isolation: isolate;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.final-noise {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: .15;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 70px 70px;
+
+    mask-image:
+        radial-gradient(
+            ellipse at center,
+            black 10%,
+            transparent 75%
+        );
+}
+
+
+.final-glow {
+
+    position: absolute;
+
+    width: 650px;
+    height: 650px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(168,212,16,.1) 0%,
+            rgba(168,212,16,.035) 35%,
+            transparent 70%
+        );
+
+    filter: blur(10px);
+
+    animation: finalGlow 5s ease-in-out infinite alternate;
+
+    pointer-events: none;
+}
+
+
+@keyframes finalGlow {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            scale(.9);
+
+        opacity: .6;
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            scale(1.12);
+
+        opacity: 1;
+    }
+
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.final-container {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: min(900px, 100%);
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.final-eyebrow {
+
+    margin-bottom: 25px;
+
+    color: var(--lime);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 2.5px;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.final-container h2 {
+
+    margin: 0;
+
+    font-size: clamp(55px, 8vw, 105px);
+
+    line-height: .88;
+
+    letter-spacing: -6px;
+
+    font-weight: 850;
+}
+
+
+.final-container h2 span {
+
+    display: block;
+
+    color: #6d6d6d;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.final-description {
+
+    width: min(540px, 100%);
+
+    margin: 30px auto 0;
+
+    color: #656565;
+
+    font-size: 12px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.final-actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 45px;
+}
+
+
+.final-actions a {
+
+    position: relative;
+
+    min-width: 230px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 14px 15px;
+
+    border-radius: 13px;
+
+    text-align: left;
+
+    text-decoration: none;
+
+    transition:
+        transform .35s ease,
+        border-color .35s ease,
+        background .35s ease;
+}
+
+
+.final-primary {
+
+    color: #080a05;
+
+    background: var(--lime);
+
+    border: 1px solid var(--lime);
+
+}
+
+
+.final-primary:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 20px 50px rgba(168,212,16,.18);
+}
+
+
+.final-secondary {
+
+    color: #aaa;
+
+    background: rgba(255,255,255,.025);
+
+    border: 1px solid rgba(255,255,255,.09);
+}
+
+
+.final-secondary:hover {
+
+    transform: translateY(-5px);
+
+    color: #fff;
+
+    border-color: rgba(168,212,16,.25);
+
+    background: rgba(168,212,16,.035);
+}
+
+
+/* ICON */
+
+.action-icon {
+
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+}
+
+
+.final-primary .action-icon {
+
+    background: rgba(0,0,0,.1);
+}
+
+
+.final-secondary .action-icon {
+
+    background: rgba(255,255,255,.05);
+
+    color: var(--lime);
+}
+
+
+/* TEXT */
+
+.final-actions a span:not(.action-icon) {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.final-actions small {
+
+    display: block;
+
+    font-size: 6px;
+
+    letter-spacing: 1.2px;
+
+    opacity: .55;
+}
+
+
+.final-actions b {
+
+    margin-left: auto;
+
+    font-size: 13px;
+
+    font-weight: 400;
+
+    transition: transform .3s ease;
+}
+
+
+.final-actions a:hover b {
+
+    transform: translate(3px, -3px);
+}
+
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.final-bottom {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 80px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid rgba(255,255,255,.06);
+
+    color: #414141;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.3px;
+}
+
+
+.final-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.status-dot {
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--lime);
+
+    box-shadow:
+        0 0 10px rgba(168,212,16,.7);
+
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        opacity: .4;
+        transform: scale(.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   ORBITS
+========================================================= */
+
+.final-orbit {
+
+    position: absolute;
+
+    border: 1px solid rgba(168,212,16,.055);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+.orbit-left {
+
+    width: 650px;
+    height: 650px;
+
+    left: -500px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    animation:
+        finalOrbit 20s linear infinite;
+}
+
+
+.orbit-right {
+
+    width: 500px;
+    height: 500px;
+
+    right: -390px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    animation:
+        finalOrbitReverse 25s linear infinite;
+}
+
+
+@keyframes finalOrbit {
+
+    to {
+        transform:
+            translateY(-50%)
+            rotate(360deg);
+    }
+
+}
+
+
+@keyframes finalOrbitReverse {
+
+    to {
+        transform:
+            translateY(-50%)
+            rotate(-360deg);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .awsz-final-cta {
+
+        min-height: 700px;
+
+        padding: 100px 18px;
+
+    }
+
+
+    .final-container h2 {
+
+        font-size: 52px;
+
+        letter-spacing: -3.5px;
+
+    }
+
+
+    .final-description {
+
+        font-size: 11px;
+
+    }
+
+
+    .final-actions {
+
+        flex-direction: column;
+
+        margin-top: 35px;
+
+    }
+
+
+    .final-actions a {
+
+        width: 100%;
+
+        min-width: 0;
+
+    }
+
+
+    .final-bottom {
+
+        flex-direction: column;
+
+        gap: 15px;
+
+        align-items: center;
+
+        margin-top: 55px;
+
+    }
+
+
+    .orbit-left {
+
+        width: 450px;
+        height: 450px;
+
+        left: -380px;
+
+    }
+
+
+    .orbit-right {
+
+        width: 350px;
+        height: 350px;
+
+        right: -300px;
+
+    }
+
+}
