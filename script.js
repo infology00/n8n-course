@@ -151,3 +151,31 @@ if (systemMap) {
     });
 
 }
+/* =========================================================
+   AWSZ — POSSIBILITIES INTERACTION
+========================================================= */
+
+document.querySelectorAll(".problem-item").forEach((item) => {
+
+    item.addEventListener("mouseenter", () => {
+
+        const icon = item.querySelector(".problem-icon");
+
+        if (icon) {
+            icon.style.transform = "rotate(8deg) scale(1.08)";
+        }
+
+    });
+
+
+    item.addEventListener("mouseleave", () => {
+
+        const icon = item.querySelector(".problem-icon");
+
+        if (icon) {
+            icon.style.transform = "";
+        }
+
+    });
+
+});
