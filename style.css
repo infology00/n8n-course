@@ -5078,3 +5078,612 @@ a {
     }
 
 }
+/* =========================================================
+   AWSZ — POSSIBILITIES SECTION
+========================================================= */
+
+.awsz-problems {
+
+    --lime: #A8D410;
+
+    position: relative;
+
+    padding: 150px 30px 130px;
+
+    background: #060606;
+
+    color: #fff;
+
+    overflow: hidden;
+}
+
+
+.problems-bg {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: .12;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 70px 70px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 15%,
+        black 85%,
+        transparent
+    );
+}
+
+
+.awsz-problems::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 600px;
+    height: 600px;
+
+    right: -250px;
+    top: 20%;
+
+    border-radius: 50%;
+
+    background: rgba(168,212,16,.035);
+
+    filter: blur(120px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.problems-container {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1150px, 100%);
+
+    margin: auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.problems-header {
+
+    max-width: 780px;
+
+    margin-bottom: 70px;
+}
+
+
+.problems-eyebrow {
+
+    margin-bottom: 20px;
+
+    color: var(--lime);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.problems-header h2 {
+
+    margin: 0;
+
+    font-size: clamp(48px, 5.5vw, 74px);
+
+    line-height: .95;
+
+    letter-spacing: -4px;
+
+    font-weight: 800;
+}
+
+
+.problems-header h2 span {
+
+    display: block;
+
+    color: #777;
+}
+
+
+.problems-header p {
+
+    max-width: 610px;
+
+    margin-top: 25px;
+
+    color: #6c6c6c;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   LIST
+========================================================= */
+
+.problems-list {
+
+    border-top: 1px solid rgba(255,255,255,.07);
+}
+
+
+/* =========================================================
+   ITEM
+========================================================= */
+
+.problem-item {
+
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns: 50px 1fr 220px 35px;
+
+    align-items: center;
+
+    gap: 25px;
+
+    min-height: 125px;
+
+    padding: 22px 10px;
+
+    border-bottom: 1px solid rgba(255,255,255,.07);
+
+    transition:
+        background .35s ease,
+        padding .35s ease;
+}
+
+
+.problem-item::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 0;
+    bottom: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(168,212,16,.045),
+            transparent 70%
+        );
+
+    opacity: 0;
+
+    transition: opacity .35s ease;
+
+    pointer-events: none;
+}
+
+
+.problem-item:hover {
+
+    padding-left: 20px;
+
+    padding-right: 20px;
+}
+
+
+.problem-item:hover::before {
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.problem-number {
+
+    color: #3d3d3d;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    transition: color .3s ease;
+}
+
+
+.problem-item:hover .problem-number {
+
+    color: var(--lime);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.problem-main {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.problem-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: #aaa;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    transition: color .3s ease;
+}
+
+
+.problem-item:hover .problem-title {
+
+    color: #fff;
+}
+
+
+.problem-icon {
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255,255,255,.07);
+
+    border-radius: 9px;
+
+    color: #666;
+
+    background: rgba(255,255,255,.025);
+
+    font-size: 11px;
+
+    transition: .35s ease;
+}
+
+
+.problem-item:hover .problem-icon {
+
+    color: var(--lime);
+
+    border-color: rgba(168,212,16,.25);
+
+    background: rgba(168,212,16,.06);
+
+    transform: rotate(8deg);
+}
+
+
+.problem-main p {
+
+    max-width: 470px;
+
+    margin: 9px 0 0 42px;
+
+    color: #555;
+
+    font-size: 9px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   FLOW
+========================================================= */
+
+.problem-flow {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    gap: 9px;
+
+    color: #555;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.problem-flow i {
+
+    color: #444;
+
+    font-style: normal;
+
+    transition: color .3s ease;
+}
+
+
+.problem-item:hover .problem-flow {
+
+    color: #888;
+}
+
+
+.problem-item:hover .problem-flow i {
+
+    color: var(--lime);
+}
+
+
+/* =========================================================
+   ARROW
+========================================================= */
+
+.problem-arrow {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 29px;
+    height: 29px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255,255,255,.07);
+
+    border-radius: 50%;
+
+    color: #555;
+
+    font-size: 10px;
+
+    transition: .35s ease;
+}
+
+
+.problem-item:hover .problem-arrow {
+
+    color: var(--lime);
+
+    border-color: rgba(168,212,16,.3);
+
+    transform: rotate(45deg);
+}
+
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.problems-bottom {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-top: 35px;
+}
+
+
+.problems-bottom > span {
+
+    color: #444;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+
+.problems-bottom a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #888;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    transition: color .3s ease;
+}
+
+
+.problems-bottom a:hover {
+
+    color: var(--lime);
+}
+
+
+.problems-bottom b {
+
+    font-size: 12px;
+
+    font-weight: 400;
+
+    transition: transform .3s ease;
+}
+
+
+.problems-bottom a:hover b {
+
+    transform: translate(3px,-3px);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .awsz-problems {
+
+        padding: 110px 20px;
+
+    }
+
+
+    .problem-item {
+
+        grid-template-columns:
+            40px 1fr 35px;
+
+        gap: 15px;
+
+    }
+
+
+    .problem-flow {
+
+        display: none;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .awsz-problems {
+
+        padding: 90px 15px;
+
+    }
+
+
+    .problems-header h2 {
+
+        font-size: 45px;
+
+        letter-spacing: -2.5px;
+
+    }
+
+
+    .problems-header p {
+
+        font-size: 12px;
+
+    }
+
+
+    .problem-item {
+
+        grid-template-columns:
+            30px 1fr 30px;
+
+        min-height: 115px;
+
+        padding: 18px 5px;
+
+    }
+
+
+    .problem-item:hover {
+
+        padding-left: 10px;
+
+        padding-right: 10px;
+
+    }
+
+
+    .problem-title {
+
+        font-size: 13px;
+
+    }
+
+
+    .problem-main p {
+
+        margin-left: 0;
+
+        font-size: 8px;
+
+    }
+
+
+    .problem-icon {
+
+        width: 27px;
+        height: 27px;
+
+    }
+
+
+    .problems-bottom {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+}
