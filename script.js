@@ -202,3 +202,53 @@ document.querySelectorAll(".faq-question").forEach((button) => {
     });
 
 });
+/* =========================================================
+   AWSZ — FINAL CTA PARALLAX
+========================================================= */
+
+const finalCTA = document.querySelector(".awsz-final-cta");
+
+if (finalCTA) {
+
+    finalCTA.addEventListener("mousemove", (e) => {
+
+        const rect = finalCTA.getBoundingClientRect();
+
+        const x =
+            (e.clientX - rect.left) / rect.width - 0.5;
+
+        const y =
+            (e.clientY - rect.top) / rect.height - 0.5;
+
+
+        const glow =
+            finalCTA.querySelector(".final-glow");
+
+        if (glow) {
+
+            glow.style.transform =
+                `translate(
+                    calc(-50% + ${x * 25}px),
+                    calc(-50% + ${y * 25}px)
+                )`;
+
+        }
+
+    });
+
+
+    finalCTA.addEventListener("mouseleave", () => {
+
+        const glow =
+            finalCTA.querySelector(".final-glow");
+
+        if (glow) {
+
+            glow.style.transform =
+                "translate(-50%, -50%)";
+
+        }
+
+    });
+
+}
