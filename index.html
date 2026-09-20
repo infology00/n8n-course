@@ -3805,1214 +3805,3638 @@ render("Overview");
 </html>
 
 <script>
-/* =========================================================
-   INDUSTRY-SPECIFIC CONVERSATION DATA
-   Everything else in the existing design stays unchanged.
-========================================================= */
-
-const cases = {
-
-  software: {
-    name: "Daniel Kim",
-    source: "LinkedIn",
-    industry: "Software",
-    requirement: "CRM Automation",
-    value: "$8,400",
-    firstContact: "Sep 08, 9:42 AM",
-    lastContact: "Sep 12, 3:18 PM",
-    buyingSignal: "Asked for final pricing",
-
-    messages: [
-      {
-        type: "client",
-        text: "Hi, we're looking for a CRM automation system for our sales team."
-      },
-      {
-        type: "team",
-        text: "Absolutely. We can connect your CRM, lead routing, follow-ups and reporting into one system."
-      },
-      {
-        type: "client",
-        text: "That sounds good. What would something like this cost?"
-      },
-      {
-        type: "team",
-        text: "For your current requirements, the implementation would be around $8,400."
-      },
-      {
-        type: "client",
-        text: "Okay. Can you send me the final breakdown?"
-      }
-    ],
-
-    email: {
-      from: "daniel@vertexsoftware.com",
-      to: "team@company.com",
-      subject: "CRM Automation — Final Pricing",
-      body: `
-        Hi,
-
-        Thanks for walking me through the automation system.
-
-        The CRM integration and automated follow-up process
-        look like exactly what our sales team needs.
-
-        Could you send me the final pricing breakdown and
-        implementation timeline?
-
-        Once I have that, I can review it internally.
-
-        Thanks,
-        Daniel
-      `
-    },
-
-    call: [
-      {
-        speaker: "client",
-        text: "Hi, I just wanted to confirm the final pricing."
-      },
-      {
-        speaker: "team",
-        text: "Sure. The total implementation would be around eight thousand four hundred dollars."
-      },
-      {
-        speaker: "client",
-        text: "Okay, that works. What would be the next step?"
-      },
-      {
-        speaker: "team",
-        text: "I'll send everything over and we'll take it from there."
-      },
-      {
-        speaker: "client",
-        text: "Perfect. I'll look out for it."
-      }
-    ],
-
-    outcome: {
-      title: "Lead did not close",
-      text: "The conversation was healthy and the buyer showed clear intent, but the promised final follow-up was never completed."
-    },
-
-    briefing: [
-      "Client showed strong buying intent.",
-      "Pricing was discussed without a major objection.",
-      "Final pricing follow-up was promised.",
-      "No owner or deadline was attached to the follow-up."
-    ]
-  },
-
-
-  beauty: {
-    name: "Emily Morgan",
-    source: "Instagram",
-    industry: "Beauty / Med Spa",
-    requirement: "Acne Treatment Package",
-    value: "$1,800",
-    firstContact: "Sep 10, 11:24 AM",
-    lastContact: "Sep 13, 2:05 PM",
-    buyingSignal: "Asked about booking",
-
-    messages: [
-      {
-        type: "client",
-        text: "Hi, I saw your acne treatment results on Instagram. How much is the package?"
-      },
-      {
-        type: "team",
-        text: "Hi Emily. Our acne treatment package is $1,800 and includes the full treatment plan."
-      },
-      {
-        type: "client",
-        text: "Okay. How many sessions does that include?"
-      },
-      {
-        type: "team",
-        text: "It includes six sessions with a consultation and progress monitoring."
-      },
-      {
-        type: "client",
-        text: "That sounds good. Can I book my consultation this week?"
-      },
-      {
-        type: "team",
-        text: "Yes. Let me check the available slots for you."
-      }
-    ],
-
-    email: {
-      from: "emily.morgan@gmail.com",
-      to: "appointments@medspa.com",
-      subject: "Acne Treatment Package — Consultation",
-      body: `
-        Hi,
-
-        I wanted to follow up regarding the acne treatment
-        package we discussed on Instagram.
-
-        I'm interested in starting and would like to book
-        the consultation this week.
-
-        Please let me know which appointments are available.
-
-        Thanks,
-        Emily
-      `
-    },
-
-    call: [
-      {
-        speaker: "client",
-        text: "Hi, I'm calling about the acne treatment package."
-      },
-      {
-        speaker: "team",
-        text: "Of course. I have your information here."
-      },
-      {
-        speaker: "client",
-        text: "Great. I think I'd like to go ahead with it."
-      },
-      {
-        speaker: "team",
-        text: "Perfect. I'll check the available consultation times."
-      },
-      {
-        speaker: "client",
-        text: "Okay, just let me know."
-      }
-    ],
-
-    outcome: {
-      title: "Lead did not book",
-      text: "The client was ready to move forward, but no appointment confirmation or booking link was sent after the call."
-    },
-
-    briefing: [
-      "Client clearly expressed intent to purchase.",
-      "Price objection was not present.",
-      "Client directly asked to book.",
-      "Appointment confirmation was never completed."
-    ]
-  },
-
-
-  mortgage: {
-    name: "Robert Harris",
-    source: "Facebook",
-    industry: "Mortgage",
-    requirement: "Reverse Mortgage",
-    value: "$285,000",
-    firstContact: "Sep 06, 10:12 AM",
-    lastContact: "Sep 11, 4:42 PM",
-    buyingSignal: "Asked about eligibility",
-
-    messages: [
-      {
-        type: "client",
-        text: "I'm interested in a reverse mortgage. Can you tell me if I might qualify?"
-      },
-      {
-        type: "team",
-        text: "Absolutely. We can review your property value, age and current mortgage situation."
-      },
-      {
-        type: "client",
-        text: "The property is worth around $285,000 and I don't have much left on the mortgage."
-      },
-      {
-        type: "team",
-        text: "That gives us a good starting point. We can arrange a qualification call."
-      },
-      {
-        type: "client",
-        text: "Sure. What information should I have ready?"
-      }
-    ],
-
-    email: {
-      from: "robert.harris@gmail.com",
-      to: "advisor@mortgagecompany.com",
-      subject: "Reverse Mortgage — Qualification",
-      body: `
-        Hello,
-
-        Following up on our conversation about the reverse mortgage.
-
-        I'm interested in understanding how much I may qualify
-        for and what the next steps would be.
-
-        Please let me know what documents you need from me.
-
-        Regards,
-        Robert
-      `
-    },
-
-    call: [
-      {
-        speaker: "client",
-        text: "Hi, I'm calling about the reverse mortgage information."
-      },
-      {
-        speaker: "team",
-        text: "Yes Robert, I have your details here."
-      },
-      {
-        speaker: "client",
-        text: "I'd like to understand what I could qualify for."
-      },
-      {
-        speaker: "team",
-        text: "We can definitely go through that. I'll have someone review the numbers."
-      },
-      {
-        speaker: "client",
-        text: "Okay, what happens next?"
-      }
-    ],
-
-    outcome: {
-      title: "Lead did not move forward",
-      text: "The prospect remained interested, but the qualification follow-up was not assigned to a specific person."
-    },
-
-    briefing: [
-      "Prospect provided meaningful financial information.",
-      "Qualification interest was clearly expressed.",
-      "The next step was discussed.",
-      "No clear owner was assigned after the call."
-    ]
-  },
-
-
-  realestate: {
-    name: "Andrew Lewis",
-    source: "Zillow",
-    industry: "Real Estate",
-    requirement: "Single Family Home",
-    value: "$625,000",
-    firstContact: "Sep 09, 8:46 AM",
-    lastContact: "Sep 13, 5:11 PM",
-    buyingSignal: "Requested property viewing",
-
-    messages: [
-      {
-        type: "client",
-        text: "Hi, is the property on Oak Street still available?"
-      },
-      {
-        type: "team",
-        text: "Yes, it's currently available. Are you looking to schedule a viewing?"
-      },
-      {
-        type: "client",
-        text: "Yes. I'm interested and would like to see it this weekend."
-      },
-      {
-        type: "team",
-        text: "Sure. What time works best for you?"
-      },
-      {
-        type: "client",
-        text: "Saturday afternoon would be ideal."
-      }
-    ],
-
-    email: {
-      from: "andrew.lewis@gmail.com",
-      to: "agent@realestate.com",
-      subject: "Oak Street Property — Viewing",
-      body: `
-        Hi,
-
-        Just following up regarding the Oak Street property.
-
-        I'm still interested in seeing it and Saturday afternoon
-        works well for me.
-
-        Please let me know what time is available.
-
-        Thanks,
-        Andrew
-      `
-    },
-
-    call: [
-      {
-        speaker: "client",
-        text: "Hi, I'm calling about the Oak Street property."
-      },
-      {
-        speaker: "team",
-        text: "Yes Andrew, I have the property details here."
-      },
-      {
-        speaker: "client",
-        text: "I really like what I've seen so far. I'd like to view it."
-      },
-      {
-        speaker: "team",
-        text: "Absolutely. Saturday should be possible."
-      },
-      {
-        speaker: "client",
-        text: "Great. Just send me the time."
-      }
-    ],
-
-    outcome: {
-      title: "Lead did not attend a viewing",
-      text: "The buyer requested a viewing and agreed to the next step, but the appointment time was never confirmed."
-    },
-
-    briefing: [
-      "Buyer showed strong property interest.",
-      "Viewing request was explicit.",
-      "Saturday availability was discussed.",
-      "No confirmed appointment was created."
-    ]
-  },
-
-
-  inspection: {
-    name: "Jason Smith",
-    source: "Google",
-    industry: "Home Inspection",
-    requirement: "Pre-Purchase Inspection",
-    value: "$650",
-    firstContact: "Sep 12, 9:15 AM",
-    lastContact: "Sep 14, 1:36 PM",
-    buyingSignal: "Asked for availability",
-
-    messages: [
-      {
-        type: "client",
-        text: "How much do you charge for a pre-purchase home inspection?"
-      },
-      {
-        type: "team",
-        text: "Our inspection starts at $650 depending on the property size."
-      },
-      {
-        type: "client",
-        text: "Okay. The house is around 2,400 square feet."
-      },
-      {
-        type: "team",
-        text: "That would fall within our standard inspection range."
-      },
-      {
-        type: "client",
-        text: "Can you do the inspection before Friday?"
-      }
-    ],
-
-    email: {
-      from: "jason.smith@gmail.com",
-      to: "bookings@inspectioncompany.com",
-      subject: "Inspection Availability",
-      body: `
-        Hi,
-
-        I'm purchasing a home and need a pre-purchase inspection.
-
-        The property is approximately 2,400 square feet.
-
-        Could you please confirm whether you have availability
-        before Friday?
-
-        Thanks,
-        Jason
-      `
-    },
-
-    call: [
-      {
-        speaker: "client",
-        text: "Hi, I wanted to check if you have an inspection slot available."
-      },
-      {
-        speaker: "team",
-        text: "Let me check the schedule for you."
-      },
-      {
-        speaker: "client",
-        text: "I need it completed before Friday if possible."
-      },
-      {
-        speaker: "team",
-        text: "That should be possible. I'll confirm the schedule."
-      },
-      {
-        speaker: "client",
-        text: "Perfect, I'll wait for your confirmation."
-      }
-    ],
-
-    outcome: {
-      title: "Lead did not book",
-      text: "The customer had a clear deadline and was ready to schedule, but availability was never confirmed."
-    },
-
-    briefing: [
-      "Customer had a specific purchase deadline.",
-      "Price was accepted.",
-      "Availability was the final decision point.",
-      "No confirmed slot was sent to the customer."
-    ]
-  },
-
-
-  insurance: {
-    name: "Michael Wilson",
-    source: "Google",
-    industry: "Insurance",
-    requirement: "Home Insurance Quote",
-    value: "$3,200/year",
-    firstContact: "Sep 07, 2:18 PM",
-    lastContact: "Sep 12, 11:27 AM",
-    buyingSignal: "Requested final quote",
-
-    messages: [
-      {
-        type: "client",
-        text: "I'd like to get a quote for home insurance."
-      },
-      {
-        type: "team",
-        text: "Sure. I can help with that. What is the approximate value of the property?"
-      },
-      {
-        type: "client",
-        text: "Around $520,000."
-      },
-      {
-        type: "team",
-        text: "Thanks. Based on the information you've provided, we can prepare a quote."
-      },
-      {
-        type: "client",
-        text: "Great. Please send me the final quote."
-      }
-    ],
-
-    email: {
-      from: "michael.wilson@gmail.com",
-      to: "quotes@insurancecompany.com",
-      subject: "Home Insurance Quote — Follow Up",
-      body: `
-        Hello,
-
-        I'm following up on the home insurance quote.
-
-        I'm ready to review the final premium and coverage
-        options before making a decision.
-
-        Please send the updated quote when available.
-
-        Regards,
-        Michael
-      `
-    },
-
-    call: [
-      {
-        speaker: "client",
-        text: "Hi, I'm following up on the home insurance quote."
-      },
-      {
-        speaker: "team",
-        text: "Yes Michael, we have your property information."
-      },
-      {
-        speaker: "client",
-        text: "I'm ready to compare the final coverage and premium."
-      },
-      {
-        speaker: "team",
-        text: "I'll make sure the quote is sent over."
-      },
-      {
-        speaker: "client",
-        text: "Okay, I'll keep an eye out for it."
-      }
-    ],
-
-    outcome: {
-      title: "Lead did not convert",
-      text: "The customer was actively comparing coverage and was ready for the final quote, but the quote was not followed through."
-    },
-
-    briefing: [
-      "Customer requested a final quote.",
-      "Buying intent was clear.",
-      "The customer was waiting for a decision document.",
-      "No completed quote follow-up was recorded."
-    ]
-  }
-
-};
-
-
-/* =========================================================
-   EXISTING ELEMENTS
-========================================================= */
-
-const dynamic = document.getElementById("dynamic");
-const contentTitle = document.getElementById("contentTitle");
-const contentDescription = document.getElementById("contentDescription");
-const contentLabel = document.getElementById("contentLabel");
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function escapeHTML(text) {
-  return String(text)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-
-function renderMessages(messages) {
-
-  return messages.map(message => {
-
-    const isClient = message.type === "client";
-
-    return `
-      <div class="message-row ${isClient ? "client" : "team"}">
-
-        <div class="message-avatar">
-          ${isClient ? "C" : "T"}
-        </div>
-
-        <div class="message-bubble">
-          <div class="message-name">
-            ${isClient ? "Client" : "Team"}
-          </div>
-
-          <div class="message-text">
-            ${escapeHTML(message.text)}
-          </div>
-        </div>
-
-      </div>
-    `;
-
-  }).join("");
-}
-
-
-function renderEmail(email) {
-
-  return `
-    <div class="email-window">
-
-      <div class="email-top">
-        <div class="email-dot"></div>
-        <div class="email-dot"></div>
-        <div class="email-dot"></div>
-      </div>
-
-      <div class="email-meta">
-
-        <div>
-          <strong>From:</strong>
-          ${escapeHTML(email.from)}
-        </div>
-
-        <div>
-          <strong>To:</strong>
-          ${escapeHTML(email.to)}
-        </div>
-
-        <div>
-          <strong>Subject:</strong>
-          ${escapeHTML(email.subject)}
-        </div>
-
-      </div>
-
-      <div class="email-body">
-        ${escapeHTML(email.body).replace(/\n/g, "<br>")}
-      </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- =========================================================
+     AWSZ — CONVERSATION INTELLIGENCE
+     SECTION 02
+     ========================================================= -->
+
+<section class="aws-conversation-section" id="conversation-intelligence">
+
+  <!-- INTRO -->
+  <div class="conversation-intro">
+
+    <div class="conversation-eyebrow">
+      02 · CONVERSATION INTELLIGENCE
     </div>
-  `;
-}
+
+    <h2>
+      You had the conversation.
+      <span>So why did you still lose the lead?</span>
+    </h2>
+
+    <p class="conversation-subtext">
+      Your CRM can capture every message, email and call. But after
+      deployment, most teams still struggle to understand what those
+      conversations actually mean. The real value is finding the
+      buying signal, identifying where the handoff broke, and turning
+      the conversation into a clear next action for the team.
+    </p>
+
+  </div>
 
 
-function renderCall(call) {
+  <!-- INDUSTRY SELECTOR -->
+  <div class="conversation-industries">
 
-  return `
-    <div class="call-recording">
+    <button class="industry-btn active" data-case="software">
+      Software
+    </button>
 
-      <div class="call-header">
+    <button class="industry-btn" data-case="beauty">
+      Beauty
+    </button>
 
-        <div class="call-icon">
-          ☎
+    <button class="industry-btn" data-case="mortgage">
+      Mortgage
+    </button>
+
+    <button class="industry-btn" data-case="realestate">
+      Real Estate
+    </button>
+
+    <button class="industry-btn" data-case="inspection">
+      Home Inspection
+    </button>
+
+    <button class="industry-btn" data-case="insurance">
+      Insurance
+    </button>
+
+  </div>
+
+
+  <!-- MAIN SYSTEM -->
+  <div class="conversation-system">
+
+
+    <!-- =====================================================
+         LEFT — LEAD
+         ===================================================== -->
+
+    <aside class="lead-panel">
+
+      <div class="lead-panel-label">
+        LEAD PROFILE
+      </div>
+
+      <div class="lead-person">
+
+        <div class="lead-avatar" id="caseAvatar">
+          DK
         </div>
 
         <div>
-          <div class="call-title">
-            Call Recording
-          </div>
+          <h3 id="caseName">
+            Daniel Kim
+          </h3>
 
-          <div class="call-status" id="callStatus">
-            Ready to play
-          </div>
+          <p id="caseSource">
+            LinkedIn · SaaS Demo Request
+          </p>
         </div>
 
       </div>
 
 
-      <div class="call-wave" id="callWave">
+      <div class="lead-result lost">
+        <span></span>
+        Lead Lost
+      </div>
 
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+
+      <div class="lead-details">
+
+        <div>
+          <small>Industry</small>
+          <strong id="caseIndustry">
+            Software
+          </strong>
+        </div>
+
+        <div>
+          <small>Requirement</small>
+          <strong id="caseRequirement">
+            CRM Automation
+          </strong>
+        </div>
+
+        <div>
+          <small>Potential Value</small>
+          <strong id="caseValue">
+            $8,400
+          </strong>
+        </div>
+
+        <div>
+          <small>First Contact</small>
+          <strong id="caseFirst">
+            9:14 AM
+          </strong>
+        </div>
+
+        <div>
+          <small>Last Contact</small>
+          <strong id="caseLast">
+            4:42 PM
+          </strong>
+        </div>
 
       </div>
 
 
-      <div class="call-controls">
+      <div class="lead-intent">
 
-        <button
-          type="button"
-          id="playCall"
-          class="call-control primary"
-        >
-          ▶ Play
+        <div class="intent-label">
+          BUYING SIGNAL
+        </div>
+
+        <p id="caseIntent">
+          “Can you show me how this would work with our current CRM?”
+        </p>
+
+      </div>
+
+
+      <div class="lead-alert">
+
+        <div class="lead-alert-icon">
+          !
+        </div>
+
+        <div>
+
+          <strong>
+            Conversation looked healthy.
+          </strong>
+
+          <p id="caseAlert">
+            The lead was interested, responded to follow-ups,
+            and still did not close.
+          </p>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         CENTER — TIMELINE
+         ===================================================== -->
+
+    <main class="conversation-panel">
+
+      <div class="conversation-panel-head">
+
+        <div>
+
+          <div class="conversation-panel-title">
+            Complete Conversation
+          </div>
+
+          <div class="conversation-panel-subtitle">
+            Message → Email → Call → Outcome
+          </div>
+
+        </div>
+
+        <div class="tracked-badge">
+          3 channels tracked
+        </div>
+
+      </div>
+
+
+      <!-- CHANNELS -->
+      <div class="channel-tabs">
+
+        <button class="channel-tab active">
+          <span class="channel-symbol message-symbol">
+            ≋
+          </span>
+          Messages
         </button>
 
-        <button
-          type="button"
-          id="pauseCall"
-          class="call-control"
-        >
-          ❚❚ Pause
+        <button class="channel-tab">
+          <span class="channel-symbol email-symbol">
+            ✉
+          </span>
+          Email
         </button>
 
-        <button
-          type="button"
-          id="stopCall"
-          class="call-control"
-        >
-          ■ Stop
+        <button class="channel-tab">
+          <span class="channel-symbol call-symbol">
+            ☎
+          </span>
+          Call
         </button>
 
       </div>
 
 
-      <div class="call-transcript">
+      <!-- SCROLLABLE CONVERSATION -->
+      <div class="conversation-scroll">
 
-        ${call.map(turn => {
 
-          const isClient = turn.speaker === "client";
+        <!-- =================================================
+             MESSAGE
+             ================================================= -->
 
-          return `
-            <div class="transcript-line">
+        <div class="timeline">
 
-              <div class="transcript-speaker ${isClient ? "client" : "team"}">
-                ${isClient ? "CLIENT" : "TEAM / AI"}
+          <div class="timeline-icon message-timeline-icon">
+            ≋
+          </div>
+
+          <div class="timeline-body">
+
+            <div class="timeline-head">
+
+              <strong>
+                MESSAGE
+              </strong>
+
+              <span>
+                9:14 AM
+              </span>
+
+            </div>
+
+
+            <div class="message-card">
+
+              <div class="message client-message">
+
+                <small>
+                  Daniel · Client
+                </small>
+
+                <div>
+                  Hi, I saw your automation platform.
+                  Can it connect with our current CRM?
+                </div>
+
               </div>
 
-              <div class="transcript-text">
-                ${escapeHTML(turn.text)}
+
+              <div class="message team-message">
+
+                <small>
+                  Sarah · Sales
+                </small>
+
+                <div>
+                  Yes. We can connect your CRM with your
+                  existing tools and automate the lead flow.
+                </div>
+
+              </div>
+
+
+              <div class="message client-message">
+
+                <small>
+                  Daniel · Client
+                </small>
+
+                <div>
+                  That's exactly what we're looking for.
+                  What would something like this cost?
+                </div>
+
+              </div>
+
+
+              <div class="message team-message">
+
+                <small>
+                  Sarah · Sales
+                </small>
+
+                <div>
+                  It depends on the workflow and integrations.
+                  I can send you the relevant options.
+                </div>
+
               </div>
 
             </div>
-          `;
 
-        }).join("")}
+
+            <div class="timeline-note positive">
+
+              <strong>
+                Buying signal
+              </strong>
+
+              <span>
+                Client asked about implementation and pricing.
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             EMAIL
+             ================================================= -->
+
+        <div class="timeline">
+
+          <div class="timeline-icon email-timeline-icon">
+            ✉
+          </div>
+
+          <div class="timeline-body">
+
+            <div class="timeline-head">
+
+              <strong>
+                EMAIL
+              </strong>
+
+              <span>
+                11:03 AM
+              </span>
+
+            </div>
+
+
+            <div class="email-window">
+
+              <div class="email-toolbar">
+
+                <div class="email-sender">
+
+                  <div class="email-logo">
+                    A
+                  </div>
+
+                  <div>
+
+                    <strong>
+                      Sarah Adams
+                    </strong>
+
+                    <span>
+                      to Daniel Kim
+                    </span>
+
+                  </div>
+
+                </div>
+
+                <span>
+                  11:03 AM
+                </span>
+
+              </div>
+
+
+              <div class="email-subject">
+                Automation options for your CRM
+              </div>
+
+
+              <div class="email-content">
+
+                <p>
+                  Hi Daniel,
+                </p>
+
+                <p>
+                  Based on our conversation, I've attached the
+                  relevant automation options for your CRM setup.
+                </p>
+
+                <p>
+                  For your current requirement, the implementation
+                  would likely involve CRM integration, lead routing,
+                  notifications and automated follow-ups.
+                </p>
+
+                <p>
+                  If you'd like, we can review the exact workflow
+                  together and determine the right scope.
+                </p>
+
+                <p>
+                  Regards,<br>
+                  Sarah
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="timeline-note positive">
+
+              <strong>
+                Follow-up completed
+              </strong>
+
+              <span>
+                Information was sent and the client was given
+                a clear opportunity to continue.
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CALL
+             ================================================= -->
+
+        <div class="timeline">
+
+          <div class="timeline-icon call-timeline-icon">
+            ☎
+          </div>
+
+          <div class="timeline-body">
+
+            <div class="timeline-head">
+
+              <strong>
+                CALL RECORDING
+              </strong>
+
+              <span>
+                4:18 PM · 03:42
+              </span>
+
+            </div>
+
+
+            <div class="call-recording">
+
+
+              <div class="recording-header">
+
+                <div class="recording-person">
+
+                  <div class="recording-avatar">
+                    DK
+                  </div>
+
+                  <div>
+
+                    <strong>
+                      Daniel Kim
+                    </strong>
+
+                    <span>
+                      Sales conversation
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                <div class="recording-status">
+                  Recorded
+                </div>
+
+              </div>
+
+
+              <!-- AUDIO CONTROLS -->
+
+              <div class="audio-controls">
+
+                <button
+                  class="audio-main-button"
+                  id="audioPlay"
+                  type="button"
+                >
+                  ▶
+                </button>
+
+
+                <button
+                  class="audio-small-button"
+                  id="audioPause"
+                  type="button"
+                >
+                  ❚❚
+                </button>
+
+
+                <button
+                  class="audio-small-button"
+                  id="audioStop"
+                  type="button"
+                >
+                  ■
+                </button>
+
+
+                <div class="audio-track">
+
+                  <div class="audio-waveform" id="audioWaveform">
+
+                    <i></i><i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i><i></i>
+
+                  </div>
+
+                  <div class="audio-time">
+
+                    <span id="audioStatus">
+                      Ready to play
+                    </span>
+
+                    <span>
+                      03:42
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- TRANSCRIPT -->
+
+              <div class="call-transcript">
+
+                <div class="speaker-line client">
+
+                  <div class="speaker-name">
+                    CLIENT
+                  </div>
+
+                  <p>
+                    Hi, yes. I wanted to understand the pricing
+                    before we move forward.
+                  </p>
+
+                </div>
+
+
+                <div class="speaker-line employee">
+
+                  <div class="speaker-name">
+                    SARAH · SALES
+                  </div>
+
+                  <p>
+                    Absolutely. Based on what you've described,
+                    we'd need to confirm the exact integrations
+                    before giving you a final number.
+                  </p>
+
+                </div>
+
+
+                <div class="speaker-line client">
+
+                  <div class="speaker-name">
+                    CLIENT
+                  </div>
+
+                  <p>
+                    Okay. That's fine. Can you send me the
+                    exact breakdown after the call?
+                  </p>
+
+                </div>
+
+
+                <div class="speaker-line employee">
+
+                  <div class="speaker-name">
+                    SARAH · SALES
+                  </div>
+
+                  <p>
+                    Yes. I'll send that over today.
+                  </p>
+
+                </div>
+
+
+                <div class="speaker-line client">
+
+                  <div class="speaker-name">
+                    CLIENT
+                  </div>
+
+                  <p>
+                    Perfect. Once I see that, I'll discuss it
+                    with my partner and get back to you.
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- LEAKAGE -->
+
+            <div class="timeline-note danger">
+
+              <strong>
+                ⚠ Lead leakage detected
+              </strong>
+
+              <span>
+                The client gave a clear next step: review the
+                breakdown with a partner. No owner, deadline or
+                follow-up sequence was attached to that signal.
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FINAL OUTCOME
+             ================================================= -->
+
+        <div class="timeline final-timeline">
+
+          <div class="timeline-icon lost-timeline-icon">
+            !
+          </div>
+
+          <div class="timeline-body">
+
+            <div class="timeline-head">
+
+              <strong>
+                OUTCOME
+              </strong>
+
+              <span>
+                5 days later
+              </span>
+
+            </div>
+
+
+            <div class="lost-outcome">
+
+              <div class="lost-outcome-title">
+                Conversation ended without a close.
+              </div>
+
+              <p>
+                There was a message. There was an email.
+                There was a successful call. The client was
+                interested and even told the team what would
+                happen next.
+              </p>
+
+              <div class="lost-question">
+                So where did the process break?
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
 
       </div>
 
-    </div>
-  `;
-}
+    </main>
 
 
-function renderOutcome(outcome) {
 
-  return `
-    <div class="outcome-card">
+    <!-- =====================================================
+         RIGHT — INTELLIGENCE
+         ===================================================== -->
 
-      <div class="outcome-label">
-        CONVERSATION OUTCOME
-      </div>
+    <aside class="intelligence-panel">
 
-      <div class="outcome-title">
-        ${escapeHTML(outcome.title)}
-      </div>
-
-      <div class="outcome-text">
-        ${escapeHTML(outcome.text)}
-      </div>
-
-      <div class="outcome-alert">
-        <span>!</span>
-        <strong>
-          This lead was not recovered.
-        </strong>
-      </div>
-
-    </div>
-  `;
-}
-
-
-/* =========================================================
-   INDUSTRY BRIEFING
-========================================================= */
-
-function renderBriefing(data) {
-
-  return `
-    <div class="briefing-content">
-
-      <div class="briefing-kicker">
+      <div class="intelligence-eyebrow">
         TEAM BRIEFING
       </div>
 
+
       <h3>
-        Don't just store the conversation.
+        Don't just store
+        <span>the conversation.</span>
       </h3>
 
-      <div class="briefing-list">
 
-        ${data.briefing.map((item, index) => `
-          <div class="briefing-item">
+      <p class="intelligence-intro">
+        Turn what happened inside the conversation into something
+        your team can actually act on.
+      </p>
 
-            <div class="briefing-number">
-              0${index + 1}
-            </div>
 
-            <div>
-              ${escapeHTML(item)}
-            </div>
+      <div class="briefing-card">
+
+        <div class="briefing-title">
+          WHAT THE TEAM SHOULD KNOW
+        </div>
+
+
+        <div class="briefing-item">
+
+          <div class="briefing-index">
+            01
+          </div>
+
+          <div>
+
+            <strong>
+              Client was interested.
+            </strong>
+
+            <p>
+              They asked about the solution, pricing and next steps.
+            </p>
 
           </div>
-        `).join("")}
+
+        </div>
+
+
+        <div class="briefing-item">
+
+          <div class="briefing-index">
+            02
+          </div>
+
+          <div>
+
+            <strong>
+              No objection stopped the sale.
+            </strong>
+
+            <p>
+              The client did not reject the offer. They asked
+              for more information before deciding.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="briefing-item">
+
+          <div class="briefing-index danger-index">
+            03
+          </div>
+
+          <div>
+
+            <strong class="danger-text">
+              The follow-up had no owner.
+            </strong>
+
+            <p>
+              The client said what they needed next, but the
+              system did not turn that statement into accountability.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="briefing-item">
+
+          <div class="briefing-index">
+            04
+          </div>
+
+          <div>
+
+            <strong>
+              This is what gets monitored.
+            </strong>
+
+            <p>
+              Buying signals, unanswered questions, objections,
+              promises, handoffs and missed follow-ups.
+            </p>
+
+          </div>
+
+        </div>
 
       </div>
 
 
-      <div class="monitor-box">
+      <!-- MONITORING CHECKLIST -->
 
-        <div class="monitor-title">
-          WHAT TO MONITOR
+      <div class="monitoring-box">
+
+        <div class="monitoring-title">
+          CONVERSATION MONITORING
         </div>
 
-        <div class="monitor-row">
-          <span>Message captured</span>
-          <strong class="yes">YES</strong>
-        </div>
 
         <div class="monitor-row">
-          <span>Email captured</span>
-          <strong class="yes">YES</strong>
+
+          <span>
+            Message captured
+          </span>
+
+          <strong class="yes">
+            YES
+          </strong>
+
         </div>
 
-        <div class="monitor-row">
-          <span>Call recorded</span>
-          <strong class="yes">YES</strong>
-        </div>
 
         <div class="monitor-row">
-          <span>Buying signal detected</span>
-          <strong class="yes">YES</strong>
+
+          <span>
+            Email captured
+          </span>
+
+          <strong class="yes">
+            YES
+          </strong>
+
         </div>
 
-        <div class="monitor-row">
-          <span>Follow-up owner</span>
-          <strong class="no">NO</strong>
-        </div>
 
         <div class="monitor-row">
-          <span>Follow-up deadline</span>
-          <strong class="no">NO</strong>
+
+          <span>
+            Call recorded
+          </span>
+
+          <strong class="yes">
+            YES
+          </strong>
+
+        </div>
+
+
+        <div class="monitor-row">
+
+          <span>
+            Buying signal detected
+          </span>
+
+          <strong class="yes">
+            YES
+          </strong>
+
+        </div>
+
+
+        <div class="monitor-row">
+
+          <span>
+            Follow-up owner
+          </span>
+
+          <strong class="no">
+            NO
+          </strong>
+
+        </div>
+
+
+        <div class="monitor-row">
+
+          <span>
+            Follow-up deadline
+          </span>
+
+          <strong class="no">
+            NO
+          </strong>
+
         </div>
 
       </div>
 
 
-      <div class="briefing-bottom">
-        Your automation worked.
-        <strong>Your process didn't.</strong>
+      <div class="intelligence-point">
+
+        <small>
+          THE REAL QUESTION
+        </small>
+
+        <p>
+          Your automation worked.
+          <strong>
+            Your process didn't.
+          </strong>
+        </p>
+
       </div>
+
+    </aside>
+
+  </div>
+
+
+
+  <!-- =======================================================
+       BOTTOM EXPLANATION
+       ======================================================= -->
+
+  <div class="conversation-bottom">
+
+    <div class="bottom-number">
+      02
+    </div>
+
+    <div>
+
+      <div class="bottom-eyebrow">
+        FROM CONVERSATION → ACTION
+      </div>
+
+      <h3>
+        This is how you find the leads
+        <span>you didn't know you were losing.</span>
+      </h3>
+
+      <p>
+        We don't only look at whether your CRM captured a conversation.
+        We look at what the conversation tells you: what the client
+        wanted, what your team promised, where interest changed,
+        what was left unanswered, and whether the right person actually
+        followed up. That intelligence can then be used to improve
+        the team, the workflow and the bot itself.
+      </p>
 
     </div>
-  `;
+
+  </div>
+
+</section>
+
+
+
+<style>
+
+/* =========================================================
+   ROOT
+   ========================================================= */
+
+.aws-conversation-section{
+
+  --cloud:#f4f8fc;
+  --cloud2:#eaf2fa;
+  --cloud3:#dceaf7;
+
+  --blue:#246bce;
+  --blue-dark:#123b70;
+  --deep:#0b2850;
+
+  --text:#20272e;
+  --muted:#66778a;
+
+  --line:#d8e4ef;
+  --white:#ffffff;
+
+  --green:#20855a;
+  --green-bg:#eaf7f0;
+
+  --amber:#b97918;
+  --amber-bg:#fff5df;
+
+  --red:#c33d3d;
+  --red-bg:#fff0f0;
+
+  width:100%;
+  padding:135px 7% 120px;
+
+  background:
+    radial-gradient(
+      circle at 8% 12%,
+      rgba(36,107,206,.08),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 70%,
+      rgba(36,107,206,.055),
+      transparent 30%
+    ),
+    var(--cloud);
+
+  color:var(--text);
+
+  overflow:hidden;
 }
 
 
 /* =========================================================
-   FULL INDUSTRY RENDER
-========================================================= */
+   INTRO
+   ========================================================= */
 
-function renderIndustry(key) {
+.conversation-intro{
 
-  const data = cases[key];
+  max-width:1000px;
 
-  if (!data) return;
+  margin:0 auto 55px;
 
+  text-align:center;
+}
 
-  /*
-    IMPORTANT:
+.conversation-eyebrow{
 
-    The existing Lead Profile HTML should stay exactly
-    as it already is.
+  color:var(--blue);
 
-    These values are updated through the existing IDs/classes.
-  */
+  font-size:13px;
 
-  const leadName = document.getElementById("leadName");
-  const leadSource = document.getElementById("leadSource");
-  const leadIndustry = document.getElementById("leadIndustry");
-  const leadRequirement = document.getElementById("leadRequirement");
-  const leadValue = document.getElementById("leadValue");
-  const leadFirstContact = document.getElementById("leadFirstContact");
-  const leadLastContact = document.getElementById("leadLastContact");
-  const leadBuyingSignal = document.getElementById("leadBuyingSignal");
+  font-weight:900;
 
+  letter-spacing:2.5px;
 
-  if (leadName) leadName.textContent = data.name;
-  if (leadSource) leadSource.textContent = data.source;
-  if (leadIndustry) leadIndustry.textContent = data.industry;
-  if (leadRequirement) leadRequirement.textContent = data.requirement;
-  if (leadValue) leadValue.textContent = data.value;
-  if (leadFirstContact) leadFirstContact.textContent = data.firstContact;
-  if (leadLastContact) leadLastContact.textContent = data.lastContact;
-  if (leadBuyingSignal) leadBuyingSignal.textContent = data.buyingSignal;
+  margin-bottom:18px;
+}
 
+.conversation-intro h2{
 
-  /*
-    Keep the existing heading/description untouched.
-    Only the dynamic conversation area changes.
-  */
+  margin:0;
 
+  font-size:clamp(42px,5vw,72px);
 
-  const messagePanel = document.getElementById("messagePanel");
-  const emailPanel = document.getElementById("emailPanel");
-  const callPanel = document.getElementById("callPanel");
-  const outcomePanel = document.getElementById("outcomePanel");
-  const briefingPanel = document.getElementById("briefingPanel");
+  line-height:.99;
+
+  letter-spacing:-3.5px;
+
+  font-weight:850;
+
+  color:var(--deep);
+}
+
+.conversation-intro h2 span{
+
+  display:block;
+
+  color:var(--blue);
+}
 
 
-  if (messagePanel) {
-    messagePanel.innerHTML = renderMessages(data.messages);
-  }
+/* USER REQUEST:
+   SUBTEXT MADE LARGER / MORE READABLE */
 
-  if (emailPanel) {
-    emailPanel.innerHTML = renderEmail(data.email);
-  }
+.conversation-subtext{
 
-  if (callPanel) {
-    callPanel.innerHTML = renderCall(data.call);
-  }
+  max-width:900px;
 
-  if (outcomePanel) {
-    outcomePanel.innerHTML = renderOutcome(data.outcome);
-  }
+  margin:30px auto 0;
 
-  if (briefingPanel) {
-    briefingPanel.innerHTML = renderBriefing(data);
-  }
+  font-size:21px;
+
+  line-height:1.7;
+
+  color:#56697e;
+
+  font-weight:450;
+}
 
 
-  /*
-    Reconnect audio controls after the new industry
-    content has been rendered.
-  */
+/* =========================================================
+   INDUSTRIES
+   ========================================================= */
 
-  setupCallAudio(data.call);
+.conversation-industries{
+
+  display:flex;
+
+  justify-content:center;
+
+  flex-wrap:wrap;
+
+  gap:8px;
+
+  margin-bottom:32px;
+}
+
+.industry-btn{
+
+  border:1px solid #ccd9e6;
+
+  background:rgba(255,255,255,.8);
+
+  color:#68798b;
+
+  padding:12px 20px;
+
+  border-radius:999px;
+
+  font-size:13px;
+
+  font-weight:850;
+
+  cursor:pointer;
+
+  transition:.22s ease;
+}
+
+.industry-btn:hover{
+
+  border-color:var(--blue);
+
+  color:var(--blue);
+
+  transform:translateY(-1px);
+}
+
+.industry-btn.active{
+
+  background:var(--blue);
+
+  border-color:var(--blue);
+
+  color:#fff;
+
+  box-shadow:
+    0 9px 24px rgba(36,107,206,.18);
+}
+
+
+/* =========================================================
+   SYSTEM
+   ========================================================= */
+
+.conversation-system{
+
+  max-width:1580px;
+
+  margin:auto;
+
+  display:grid;
+
+  grid-template-columns:270px minmax(520px,1fr) 340px;
+
+  gap:18px;
+
+  align-items:stretch;
+}
+
+
+/* PANELS */
+
+.lead-panel,
+.conversation-panel,
+.intelligence-panel{
+
+  background:rgba(255,255,255,.94);
+
+  border:1px solid var(--line);
+
+  border-radius:23px;
+
+  box-shadow:
+    0 20px 55px rgba(35,67,100,.065),
+    0 2px 5px rgba(35,67,100,.03);
+}
+
+
+/* =========================================================
+   LEAD
+   ========================================================= */
+
+.lead-panel{
+
+  padding:25px;
+}
+
+.lead-panel-label{
+
+  font-size:10px;
+
+  letter-spacing:1.8px;
+
+  color:#8492a2;
+
+  font-weight:900;
+
+  margin-bottom:20px;
+}
+
+.lead-person{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:13px;
+}
+
+.lead-avatar{
+
+  width:53px;
+
+  height:53px;
+
+  border-radius:15px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:var(--cloud2);
+
+  color:var(--blue-dark);
+
+  font-size:15px;
+
+  font-weight:900;
+}
+
+.lead-person h3{
+
+  margin:0;
+
+  color:var(--deep);
+
+  font-size:17px;
+}
+
+.lead-person p{
+
+  margin:4px 0 0;
+
+  color:var(--muted);
+
+  font-size:11px;
+
+  line-height:1.4;
+}
+
+.lead-result{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  margin-top:21px;
+
+  padding:8px 11px;
+
+  border-radius:8px;
+
+  font-size:11px;
+
+  font-weight:900;
+}
+
+.lead-result span{
+
+  width:7px;
+
+  height:7px;
+
+  border-radius:50%;
+}
+
+.lead-result.lost{
+
+  color:var(--red);
+
+  background:var(--red-bg);
+}
+
+.lead-result.lost span{
+
+  background:var(--red);
+}
+
+.lead-details{
+
+  border-top:1px solid var(--line);
+
+  margin-top:20px;
+
+  padding-top:7px;
+}
+
+.lead-details > div{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:12px;
+
+  padding:12px 0;
+
+  border-bottom:1px solid #edf1f5;
+}
+
+.lead-details small{
+
+  font-size:11px;
+
+  color:var(--muted);
+}
+
+.lead-details strong{
+
+  font-size:11px;
+
+  color:var(--deep);
+
+  text-align:right;
+}
+
+.lead-intent{
+
+  margin-top:21px;
+
+  padding:17px;
+
+  background:var(--cloud);
+
+  border:1px solid var(--line);
+
+  border-radius:13px;
+}
+
+.intent-label{
+
+  color:var(--blue);
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:1.4px;
+
+  margin-bottom:8px;
+}
+
+.lead-intent p{
+
+  margin:0;
+
+  font-size:14px;
+
+  line-height:1.6;
+
+  color:var(--deep);
+
+  font-weight:700;
+}
+
+.lead-alert{
+
+  display:flex;
+
+  gap:10px;
+
+  margin-top:18px;
+
+  padding:14px;
+
+  border-radius:12px;
+
+  background:var(--red-bg);
+
+  border:1px solid #f0cece;
+}
+
+.lead-alert-icon{
+
+  flex:none;
+
+  width:22px;
+
+  height:22px;
+
+  border-radius:50%;
+
+  background:var(--red);
+
+  color:#fff;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:12px;
+
+  font-weight:900;
+}
+
+.lead-alert strong{
+
+  display:block;
+
+  color:var(--red);
+
+  font-size:11px;
+
+  margin-bottom:4px;
+}
+
+.lead-alert p{
+
+  margin:0;
+
+  color:#795050;
+
+  font-size:11px;
+
+  line-height:1.55;
+}
+
+
+/* =========================================================
+   CONVERSATION PANEL
+   ========================================================= */
+
+.conversation-panel{
+
+  min-width:0;
+
+  overflow:hidden;
+}
+
+.conversation-panel-head{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:20px;
+
+  padding:25px;
+
+  border-bottom:1px solid var(--line);
+}
+
+.conversation-panel-title{
+
+  color:var(--deep);
+
+  font-size:20px;
+
+  font-weight:850;
+}
+
+.conversation-panel-subtitle{
+
+  margin-top:5px;
+
+  color:var(--muted);
+
+  font-size:13px;
+}
+
+.tracked-badge{
+
+  padding:9px 12px;
+
+  border-radius:8px;
+
+  background:var(--cloud);
+
+  color:#64768a;
+
+  font-size:11px;
+
+  font-weight:800;
+
+  white-space:nowrap;
+}
+
+
+/* =========================================================
+   CHANNEL TABS
+   ========================================================= */
+
+.channel-tabs{
+
+  display:flex;
+
+  gap:6px;
+
+  padding:13px 20px;
+
+  border-bottom:1px solid var(--line);
+
+  background:#fbfdff;
+}
+
+.channel-tab{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  padding:8px 11px;
+
+  border:0;
+
+  border-radius:8px;
+
+  background:transparent;
+
+  color:#7a8898;
+
+  font-size:12px;
+
+  font-weight:800;
+}
+
+.channel-tab.active{
+
+  background:var(--cloud2);
+
+  color:var(--blue-dark);
+}
+
+.channel-symbol{
+
+  width:25px;
+
+  height:25px;
+
+  border-radius:7px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-weight:900;
+}
+
+.message-symbol{
+
+  color:var(--blue);
+
+  background:#e8f1fc;
+}
+
+.email-symbol{
+
+  color:#596b7e;
+
+  background:#edf1f5;
+}
+
+.call-symbol{
+
+  color:var(--green);
+
+  background:#e9f7f0;
+}
+
+
+/* =========================================================
+   SCROLL
+   ========================================================= */
+
+.conversation-scroll{
+
+  height:790px;
+
+  overflow-y:auto;
+
+  padding:27px 25px 50px;
+}
+
+.conversation-scroll::-webkit-scrollbar{
+
+  width:7px;
+}
+
+.conversation-scroll::-webkit-scrollbar-track{
+
+  background:#f3f6f9;
+}
+
+.conversation-scroll::-webkit-scrollbar-thumb{
+
+  background:#c5d3e0;
+
+  border-radius:20px;
+}
+
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+
+.timeline{
+
+  position:relative;
+
+  display:grid;
+
+  grid-template-columns:34px minmax(0,1fr);
+
+  gap:13px;
+}
+
+.timeline:not(:last-child)::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:16px;
+
+  top:34px;
+
+  bottom:-15px;
+
+  width:1px;
+
+  background:#dce6ef;
+}
+
+.timeline-icon{
+
+  position:relative;
+
+  z-index:2;
+
+  width:34px;
+
+  height:34px;
+
+  border-radius:10px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:13px;
+
+  font-weight:900;
+}
+
+.message-timeline-icon{
+
+  color:var(--blue);
+
+  background:#e8f1fc;
+}
+
+.email-timeline-icon{
+
+  color:#596b7e;
+
+  background:#edf1f5;
+}
+
+.call-timeline-icon{
+
+  color:var(--green);
+
+  background:#e9f7f0;
+}
+
+.lost-timeline-icon{
+
+  color:var(--red);
+
+  background:var(--red-bg);
+}
+
+.timeline-body{
+
+  min-width:0;
+
+  padding-bottom:31px;
+}
+
+.timeline-head{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin:3px 0 10px;
+
+  font-size:11px;
+
+  color:#8794a3;
+}
+
+.timeline-head strong{
+
+  font-size:10px;
+
+  letter-spacing:1.3px;
+
+  color:var(--blue);
+}
+
+
+/* =========================================================
+   MESSAGES
+   ========================================================= */
+
+.message-card{
+
+  padding:17px;
+
+  border:1px solid var(--line);
+
+  border-radius:14px;
+
+  background:#fff;
+}
+
+.message{
+
+  display:flex;
+
+  flex-direction:column;
+
+  margin-bottom:16px;
+}
+
+.message:last-child{
+
+  margin-bottom:0;
+}
+
+.message.client-message{
+
+  align-items:flex-start;
+}
+
+.message.team-message{
+
+  align-items:flex-end;
+}
+
+.message small{
+
+  color:#8794a2;
+
+  font-size:10px;
+
+  font-weight:800;
+
+  margin-bottom:5px;
+}
+
+.message div{
+
+  max-width:85%;
+
+  padding:12px 15px;
+
+  font-size:14px;
+
+  line-height:1.6;
+
+  border-radius:13px;
+}
+
+.client-message div{
+
+  color:#273745;
+
+  background:#f0f4f8;
+
+  border-bottom-left-radius:4px;
+}
+
+.team-message div{
+
+  color:#173f70;
+
+  background:#e9f2fc;
+
+  border-bottom-right-radius:4px;
+}
+
+
+/* =========================================================
+   NOTES
+   ========================================================= */
+
+.timeline-note{
+
+  margin-top:9px;
+
+  padding:12px 14px;
+
+  border-radius:9px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:3px;
+}
+
+.timeline-note strong{
+
+  font-size:11px;
+
+  font-weight:900;
+}
+
+.timeline-note span{
+
+  font-size:11px;
+
+  line-height:1.55;
+}
+
+.timeline-note.positive{
+
+  color:#266a4c;
+
+  background:var(--green-bg);
+
+  border-left:3px solid var(--green);
+}
+
+.timeline-note.danger{
+
+  color:#8b3131;
+
+  background:var(--red-bg);
+
+  border-left:3px solid var(--red);
+}
+
+
+/* =========================================================
+   EMAIL
+   ========================================================= */
+
+.email-window{
+
+  overflow:hidden;
+
+  border:1px solid #d8e1e9;
+
+  border-radius:14px;
+
+  background:#fff;
+}
+
+.email-toolbar{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:16px;
+
+  background:#fafcfe;
+
+  border-bottom:1px solid #e2e8ee;
+
+  color:#8996a4;
+
+  font-size:10px;
+}
+
+.email-sender{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+}
+
+.email-logo{
+
+  width:34px;
+
+  height:34px;
+
+  border-radius:8px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:var(--deep);
+
+  color:#fff;
+
+  font-weight:900;
+}
+
+.email-sender strong{
+
+  display:block;
+
+  color:var(--deep);
+
+  font-size:12px;
+}
+
+.email-sender span{
+
+  display:block;
+
+  margin-top:2px;
+
+  font-size:10px;
+
+  color:var(--muted);
+}
+
+.email-subject{
+
+  padding:18px 18px 7px;
+
+  font-size:17px;
+
+  font-weight:850;
+
+  color:var(--deep);
+}
+
+.email-content{
+
+  padding:5px 18px 20px;
+}
+
+.email-content p{
+
+  margin:10px 0;
+
+  color:#536477;
+
+  font-size:13px;
+
+  line-height:1.7;
+}
+
+
+/* =========================================================
+   CALL
+   ========================================================= */
+
+.call-recording{
+
+  overflow:hidden;
+
+  border:1px solid #cfe4d8;
+
+  border-radius:14px;
+
+  background:#fff;
+}
+
+.recording-header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:15px 16px;
+
+  border-bottom:1px solid #e0ebe5;
+}
+
+.recording-person{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+}
+
+.recording-avatar{
+
+  width:37px;
+
+  height:37px;
+
+  border-radius:10px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:#e9f7f0;
+
+  color:var(--green);
+
+  font-size:11px;
+
+  font-weight:900;
+}
+
+.recording-person strong{
+
+  display:block;
+
+  font-size:12px;
+
+  color:var(--deep);
+}
+
+.recording-person span{
+
+  display:block;
+
+  margin-top:3px;
+
+  font-size:10px;
+
+  color:var(--muted);
+}
+
+.recording-status{
+
+  padding:6px 9px;
+
+  border-radius:7px;
+
+  background:var(--green-bg);
+
+  color:var(--green);
+
+  font-size:9px;
+
+  font-weight:900;
 }
 
 
 /* =========================================================
    AUDIO
-========================================================= */
+   ========================================================= */
 
-let speechIndex = 0;
-let speechPaused = false;
-let speechStopped = false;
-let currentCall = [];
+.audio-controls{
 
-let clientVoice = null;
-let teamVoice = null;
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  padding:17px;
+
+  background:#f7fbf9;
+
+  border-bottom:1px solid #e1ebe5;
+}
+
+.audio-main-button{
+
+  width:43px;
+
+  height:43px;
+
+  border:0;
+
+  border-radius:50%;
+
+  background:var(--green);
+
+  color:#fff;
+
+  cursor:pointer;
+
+  font-size:13px;
+
+  box-shadow:0 7px 18px rgba(32,133,90,.18);
+}
+
+.audio-small-button{
+
+  width:32px;
+
+  height:32px;
+
+  border:1px solid #cbdcd2;
+
+  border-radius:8px;
+
+  background:#fff;
+
+  color:#5c7668;
+
+  cursor:pointer;
+
+  font-size:10px;
+}
+
+.audio-track{
+
+  min-width:0;
+
+  flex:1;
+
+  margin-left:6px;
+}
+
+.audio-waveform{
+
+  height:34px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:3px;
+
+  overflow:hidden;
+}
+
+.audio-waveform i{
+
+  width:3px;
+
+  flex:none;
+
+  height:var(--height);
+
+  border-radius:4px;
+
+  background:#79ae93;
+
+  transition:.12s ease;
+}
+
+.audio-waveform i:nth-child(1){--height:11px}
+.audio-waveform i:nth-child(2){--height:20px}
+.audio-waveform i:nth-child(3){--height:15px}
+.audio-waveform i:nth-child(4){--height:28px}
+.audio-waveform i:nth-child(5){--height:18px}
+.audio-waveform i:nth-child(6){--height:12px}
+.audio-waveform i:nth-child(7){--height:25px}
+.audio-waveform i:nth-child(8){--height:31px}
+.audio-waveform i:nth-child(9){--height:18px}
+.audio-waveform i:nth-child(10){--height:26px}
+.audio-waveform i:nth-child(11){--height:13px}
+.audio-waveform i:nth-child(12){--height:29px}
+.audio-waveform i:nth-child(13){--height:21px}
+.audio-waveform i:nth-child(14){--height:15px}
+.audio-waveform i:nth-child(15){--height:27px}
+.audio-waveform i:nth-child(16){--height:19px}
+.audio-waveform i:nth-child(17){--height:30px}
+.audio-waveform i:nth-child(18){--height:14px}
+.audio-waveform i:nth-child(19){--height:23px}
+.audio-waveform i:nth-child(20){--height:17px}
+.audio-waveform i:nth-child(21){--height:28px}
+.audio-waveform i:nth-child(22){--height:12px}
+.audio-waveform i:nth-child(23){--height:24px}
+.audio-waveform i:nth-child(24){--height:17px}
+.audio-waveform i:nth-child(25){--height:29px}
+.audio-waveform i:nth-child(26){--height:15px}
+.audio-waveform i:nth-child(27){--height:22px}
+.audio-waveform i:nth-child(28){--height:13px}
+.audio-waveform i:nth-child(29){--height:27px}
+.audio-waveform i:nth-child(30){--height:18px}
+
+.audio-time{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  margin-top:3px;
+
+  color:#77898a;
+
+  font-size:10px;
+}
+
+.audio-time span:first-child{
+
+  color:var(--green);
+
+  font-weight:800;
+}
 
 
-function loadVoices() {
+/* =========================================================
+   TRANSCRIPT
+   ========================================================= */
 
-  const voices = window.speechSynthesis.getVoices();
+.call-transcript{
 
-  if (!voices.length) return;
+  padding:16px;
+}
+
+.speaker-line{
+
+  display:grid;
+
+  grid-template-columns:100px 1fr;
+
+  gap:10px;
+
+  padding:12px 0;
+
+  border-bottom:1px solid #edf2ef;
+}
+
+.speaker-line:last-child{
+
+  border-bottom:0;
+}
+
+.speaker-name{
+
+  font-size:9px;
+
+  letter-spacing:1px;
+
+  font-weight:900;
+}
+
+.speaker-line.client .speaker-name{
+
+  color:#788797;
+}
+
+.speaker-line.employee .speaker-name{
+
+  color:var(--green);
+}
+
+.speaker-line p{
+
+  margin:0;
+
+  color:#364755;
+
+  font-size:13px;
+
+  line-height:1.6;
+}
 
 
-  const englishVoices = voices.filter(v =>
-    /^en(-|_)/i.test(v.lang)
-  );
+/* =========================================================
+   LOST OUTCOME
+   ========================================================= */
+
+.lost-outcome{
+
+  padding:20px;
+
+  border-radius:14px;
+
+  background:var(--red-bg);
+
+  border:1px solid #efcece;
+}
+
+.lost-outcome-title{
+
+  color:var(--red);
+
+  font-size:17px;
+
+  font-weight:900;
+
+  margin-bottom:8px;
+}
+
+.lost-outcome p{
+
+  margin:0;
+
+  color:#754c4c;
+
+  font-size:13px;
+
+  line-height:1.65;
+}
+
+.lost-question{
+
+  margin-top:15px;
+
+  padding-top:13px;
+
+  border-top:1px solid #ebcccc;
+
+  color:var(--red);
+
+  font-size:13px;
+
+  font-weight:900;
+}
 
 
-  if (englishVoices.length) {
+/* =========================================================
+   RIGHT INTELLIGENCE
+   ========================================================= */
 
-    clientVoice =
-      englishVoices.find(v =>
-        /female|zira|samantha|karen|susan|ava|google us english/i.test(v.name)
-      ) ||
-      englishVoices[0];
+.intelligence-panel{
+
+  padding:26px;
+}
+
+.intelligence-eyebrow{
+
+  color:var(--blue);
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:1.7px;
+}
+
+.intelligence-panel h3{
+
+  margin:13px 0 13px;
+
+  color:var(--deep);
+
+  font-size:27px;
+
+  line-height:1.12;
+
+  letter-spacing:-1px;
+}
+
+.intelligence-panel h3 span{
+
+  color:var(--blue);
+
+  display:block;
+}
 
 
-    teamVoice =
-      englishVoices.find(v =>
-        /male|david|daniel|alex|mark|google uk english male/i.test(v.name)
-      ) ||
-      englishVoices[1] ||
-      englishVoices[0];
+/* LARGER SUPPORTING TEXT */
 
+.intelligence-intro{
+
+  margin:0 0 20px;
+
+  color:#607286;
+
+  font-size:15px;
+
+  line-height:1.65;
+}
+
+.briefing-card{
+
+  border:1px solid var(--line);
+
+  border-radius:13px;
+
+  overflow:hidden;
+}
+
+.briefing-title{
+
+  padding:13px 15px;
+
+  background:var(--cloud);
+
+  border-bottom:1px solid var(--line);
+
+  color:#8290a0;
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:1.4px;
+}
+
+.briefing-item{
+
+  display:grid;
+
+  grid-template-columns:29px 1fr;
+
+  gap:10px;
+
+  padding:17px 15px;
+
+  border-bottom:1px solid #e9eef3;
+}
+
+.briefing-item:last-child{
+
+  border-bottom:0;
+}
+
+.briefing-index{
+
+  width:25px;
+
+  height:25px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:7px;
+
+  background:var(--cloud2);
+
+  color:var(--blue);
+
+  font-size:9px;
+
+  font-weight:900;
+}
+
+.danger-index{
+
+  background:var(--red-bg);
+
+  color:var(--red);
+}
+
+.briefing-item strong{
+
+  display:block;
+
+  margin-bottom:5px;
+
+  color:var(--deep);
+
+  font-size:12px;
+}
+
+.danger-text{
+
+  color:var(--red)!important;
+}
+
+.briefing-item p{
+
+  margin:0;
+
+  color:#697a8d;
+
+  font-size:12px;
+
+  line-height:1.6;
+}
+
+
+/* =========================================================
+   MONITORING
+   ========================================================= */
+
+.monitoring-box{
+
+  margin-top:20px;
+
+  padding:15px;
+
+  border:1px solid var(--line);
+
+  border-radius:13px;
+
+  background:#fafcfe;
+}
+
+.monitoring-title{
+
+  margin-bottom:8px;
+
+  color:#8492a1;
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:1.4px;
+}
+
+.monitor-row{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  padding:9px 0;
+
+  border-bottom:1px solid #e9eef3;
+
+  font-size:11px;
+}
+
+.monitor-row:last-child{
+
+  border-bottom:0;
+}
+
+.monitor-row span{
+
+  color:#697a8d;
+}
+
+.monitor-row strong{
+
+  font-size:9px;
+}
+
+.monitor-row .yes{
+
+  color:var(--green);
+}
+
+.monitor-row .no{
+
+  color:var(--red);
+}
+
+
+/* =========================================================
+   POINT
+   ========================================================= */
+
+.intelligence-point{
+
+  margin-top:20px;
+
+  padding-top:18px;
+
+  border-top:1px solid var(--line);
+}
+
+.intelligence-point small{
+
+  color:#8390a0;
+
+  font-size:9px;
+
+  letter-spacing:1.5px;
+
+  font-weight:900;
+}
+
+.intelligence-point p{
+
+  margin:8px 0 0;
+
+  color:#68798b;
+
+  font-size:13px;
+
+  line-height:1.6;
+}
+
+.intelligence-point strong{
+
+  display:block;
+
+  color:var(--red);
+
+  font-size:16px;
+
+  margin-top:2px;
+}
+
+
+/* =========================================================
+   BOTTOM
+   ========================================================= */
+
+.conversation-bottom{
+
+  max-width:1100px;
+
+  margin:55px auto 0;
+
+  display:grid;
+
+  grid-template-columns:60px 1fr;
+
+  gap:22px;
+
+  padding:31px;
+
+  background:#fff;
+
+  border:1px solid var(--line);
+
+  border-radius:20px;
+
+  box-shadow:0 16px 42px rgba(35,67,100,.05);
+}
+
+.bottom-number{
+
+  color:var(--blue);
+
+  font-size:18px;
+
+  font-weight:900;
+}
+
+.bottom-eyebrow{
+
+  color:var(--blue);
+
+  font-size:10px;
+
+  letter-spacing:1.5px;
+
+  font-weight:900;
+}
+
+.conversation-bottom h3{
+
+  margin:10px 0 13px;
+
+  color:var(--deep);
+
+  font-size:31px;
+
+  line-height:1.15;
+
+  letter-spacing:-1.3px;
+}
+
+.conversation-bottom h3 span{
+
+  color:var(--blue);
+}
+
+.conversation-bottom p{
+
+  margin:0;
+
+  max-width:900px;
+
+  color:#647589;
+
+  font-size:17px;
+
+  line-height:1.72;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media(max-width:1200px){
+
+  .conversation-system{
+
+    grid-template-columns:250px minmax(450px,1fr);
+  }
+
+  .intelligence-panel{
+
+    grid-column:1/-1;
   }
 
 }
 
 
-window.speechSynthesis.onvoiceschanged = loadVoices;
-loadVoices();
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:800px){
+
+  .aws-conversation-section{
+
+    padding:90px 4% 75px;
+  }
+
+  .conversation-intro h2{
+
+    font-size:40px;
+
+    letter-spacing:-2px;
+  }
+
+  .conversation-subtext{
+
+    font-size:17px;
+
+    line-height:1.65;
+  }
+
+  .conversation-industries{
+
+    justify-content:flex-start;
+
+    overflow-x:auto;
+
+    flex-wrap:nowrap;
+
+    padding-bottom:5px;
+  }
+
+  .industry-btn{
+
+    flex:none;
+  }
+
+  .conversation-system{
+
+    display:flex;
+
+    flex-direction:column;
+  }
+
+  .lead-panel{
+
+    order:1;
+  }
+
+  .conversation-panel{
+
+    order:2;
+  }
+
+  .intelligence-panel{
+
+    order:3;
+  }
+
+  .conversation-scroll{
+
+    height:650px;
+
+    padding:20px 15px 40px;
+  }
+
+  .conversation-panel-head{
+
+    padding:20px 17px;
+  }
+
+  .tracked-badge{
+
+    display:none;
+  }
+
+  .channel-tabs{
+
+    overflow-x:auto;
+  }
+
+  .channel-tab{
+
+    white-space:nowrap;
+  }
+
+  .message div{
+
+    max-width:93%;
+
+    font-size:13px;
+  }
+
+  .email-toolbar{
+
+    align-items:flex-start;
+  }
+
+  .email-toolbar > span{
+
+    display:none;
+  }
+
+  .speaker-line{
+
+    grid-template-columns:1fr;
+
+    gap:5px;
+  }
+
+  .conversation-bottom{
+
+    grid-template-columns:1fr;
+
+    gap:10px;
+
+    padding:24px;
+
+    margin-top:35px;
+  }
+
+  .conversation-bottom h3{
+
+    font-size:25px;
+  }
+
+  .conversation-bottom p{
+
+    font-size:15px;
+  }
+
+}
+
+</style>
 
 
-function setupCallAudio(call) {
 
-  currentCall = call;
+<script>
 
-  speechIndex = 0;
-  speechPaused = false;
-  speechStopped = false;
+/* =========================================================
+   AWSZ — CONVERSATION INTELLIGENCE ENGINE
+   ========================================================= */
 
+(function(){
 
-  const play = document.getElementById("playCall");
-  const pause = document.getElementById("pauseCall");
-  const stop = document.getElementById("stopCall");
-  const status = document.getElementById("callStatus");
-  const wave = document.getElementById("callWave");
+  const cases = {
 
+    software:{
+      avatar:"DK",
+      name:"Daniel Kim",
+      source:"LinkedIn · SaaS Demo Request",
+      industry:"Software",
+      requirement:"CRM Automation",
+      value:"$8,400",
+      first:"9:14 AM",
+      last:"4:42 PM",
+      intent:"“Can you show me how this would work with our current CRM?”",
+      alert:"The lead was interested, responded to follow-ups, and still did not close."
+    },
 
-  if (!play || !pause || !stop) return;
+    beauty:{
+      avatar:"EM",
+      name:"Emily Morgan",
+      source:"Instagram · Skin Treatment Inquiry",
+      industry:"Beauty",
+      requirement:"Acne Treatment Package",
+      value:"$1,800",
+      first:"10:21 AM",
+      last:"5:16 PM",
+      intent:"“How much is the full treatment and can I book this week?”",
+      alert:"The client asked for price, availability and booking. The final follow-up never created a confirmed appointment."
+    },
 
+    mortgage:{
+      avatar:"RH",
+      name:"Robert Harris",
+      source:"Facebook · Reverse Mortgage",
+      industry:"Mortgage",
+      requirement:"Reverse Mortgage",
+      value:"$285,000",
+      first:"10:12 AM",
+      last:"4:18 PM",
+      intent:"“Can someone explain what my mother could qualify for?”",
+      alert:"The client completed qualification questions but the document follow-up was never assigned to a specific team member."
+    },
 
-  play.onclick = function() {
+    realestate:{
+      avatar:"AL",
+      name:"Andrew Lewis",
+      source:"Zillow · Property Inquiry",
+      industry:"Real Estate",
+      requirement:"Single Family Home",
+      value:"$625,000",
+      first:"8:47 AM",
+      last:"6:02 PM",
+      intent:"“I like the property. Can we arrange a viewing this weekend?”",
+      alert:"The buyer requested a viewing and responded to the agent, but nobody confirmed the appointment."
+    },
 
-    if (speechPaused) {
+    inspection:{
+      avatar:"JS",
+      name:"Jason Smith",
+      source:"Google · Home Inspection",
+      industry:"Home Inspection",
+      requirement:"Pre-Purchase Inspection",
+      value:"$650",
+      first:"11:03 AM",
+      last:"3:51 PM",
+      intent:"“Can you inspect the house before Friday?”",
+      alert:"The homeowner had a deadline and requested availability, but the scheduling handoff was never completed."
+    },
 
-      speechPaused = false;
-
-      window.speechSynthesis.resume();
-
-      if (status) {
-        status.textContent = "Call resumed";
-      }
-
-      if (wave) {
-        wave.classList.add("playing");
-      }
-
-      return;
+    insurance:{
+      avatar:"MW",
+      name:"Michael Wilson",
+      source:"Google · Insurance Quote",
+      industry:"Insurance",
+      requirement:"Home Insurance",
+      value:"$3,200 / year",
+      first:"9:38 AM",
+      last:"4:27 PM",
+      intent:"“Can you give me a quote and explain what is actually covered?”",
+      alert:"The client requested clarification before buying, but the conversation ended without a scheduled advisor follow-up."
     }
 
-
-    if (
-      window.speechSynthesis.speaking &&
-      !window.speechSynthesis.paused
-    ) {
-      return;
-    }
-
-
-    speechStopped = false;
-
-    if (speechIndex >= currentCall.length) {
-      speechIndex = 0;
-    }
-
-    speakNext();
   };
 
 
-  pause.onclick = function() {
+  const buttons =
+    document.querySelectorAll(".industry-btn");
 
-    if (window.speechSynthesis.speaking) {
 
-      window.speechSynthesis.pause();
+  function setCase(caseName){
 
-      speechPaused = true;
+    const data = cases[caseName];
 
-      if (status) {
-        status.textContent = "Call paused";
-      }
+    if(!data) return;
 
-      if (wave) {
-        wave.classList.remove("playing");
-      }
+
+    document.getElementById("caseAvatar").textContent =
+      data.avatar;
+
+    document.getElementById("caseName").textContent =
+      data.name;
+
+    document.getElementById("caseSource").textContent =
+      data.source;
+
+    document.getElementById("caseIndustry").textContent =
+      data.industry;
+
+    document.getElementById("caseRequirement").textContent =
+      data.requirement;
+
+    document.getElementById("caseValue").textContent =
+      data.value;
+
+    document.getElementById("caseFirst").textContent =
+      data.first;
+
+    document.getElementById("caseLast").textContent =
+      data.last;
+
+    document.getElementById("caseIntent").textContent =
+      data.intent;
+
+    document.getElementById("caseAlert").textContent =
+      data.alert;
+
+
+    buttons.forEach(button=>{
+
+      button.classList.toggle(
+        "active",
+        button.dataset.case === caseName
+      );
+
+    });
+
+  }
+
+
+  buttons.forEach(button=>{
+
+    button.addEventListener("click",function(){
+
+      setCase(this.dataset.case);
+
+    });
+
+  });
+
+
+  /* =======================================================
+     AUDIO ENGINE
+
+     Client and employee have DIFFERENT browser voices.
+     Play / Pause / Resume / Stop.
+     ======================================================= */
+
+  const playButton =
+    document.getElementById("audioPlay");
+
+  const pauseButton =
+    document.getElementById("audioPause");
+
+  const stopButton =
+    document.getElementById("audioStop");
+
+  const status =
+    document.getElementById("audioStatus");
+
+  const bars =
+    document.querySelectorAll(
+      "#audioWaveform i"
+    );
+
+
+  const conversation = [
+
+    {
+      speaker:"client",
+      text:
+        "Hi, yes. I wanted to understand the pricing before we move forward."
+    },
+
+    {
+      speaker:"employee",
+      text:
+        "Absolutely. Based on what you've described, we'd need to confirm the exact integrations before giving you a final number."
+    },
+
+    {
+      speaker:"client",
+      text:
+        "Okay. That's fine. Can you send me the exact breakdown after the call?"
+    },
+
+    {
+      speaker:"employee",
+      text:
+        "Yes. I'll send that over today."
+    },
+
+    {
+      speaker:"client",
+      text:
+        "Perfect. Once I see that, I'll discuss it with my partner and get back to you."
     }
 
-  };
+  ];
 
 
-  stop.onclick = function() {
+  let voices = [];
 
-    speechStopped = true;
-    speechPaused = false;
+  let currentIndex = 0;
 
-    window.speechSynthesis.cancel();
+  let currentUtterance = null;
 
-    speechIndex = 0;
+  let isPaused = false;
 
-    if (status) {
-      status.textContent = "Call stopped";
+  let waveformTimer = null;
+
+
+  function loadVoices(){
+
+    voices =
+      window.speechSynthesis.getVoices();
+
+  }
+
+
+  loadVoices();
+
+  if("onvoiceschanged" in window){
+
+    window.speechSynthesis.onvoiceschanged =
+      loadVoices;
+
+  }
+
+
+  function getVoice(type){
+
+    const english =
+      voices.filter(
+        voice =>
+          voice.lang &&
+          voice.lang.toLowerCase().startsWith("en")
+      );
+
+
+    if(!english.length){
+
+      return null;
+
     }
 
-    if (wave) {
-      wave.classList.remove("playing");
+
+    if(type === "client"){
+
+      return (
+        english.find(
+          voice =>
+            /female|zira|samantha|susan|google us english/i
+              .test(voice.name)
+        ) ||
+        english[0]
+      );
+
     }
 
-  };
+
+    return (
+      english.find(
+        voice =>
+          /male|david|daniel|alex|mark|google uk english/i
+            .test(voice.name)
+      ) ||
+      english[1] ||
+      english[0]
+    );
+
+  }
 
 
-  function speakNext() {
+  function animateWave(){
 
-    if (speechStopped || speechPaused) return;
+    clearInterval(waveformTimer);
+
+    let position = 0;
+
+    waveformTimer =
+      setInterval(()=>{
+
+        if(
+          window.speechSynthesis.paused ||
+          !window.speechSynthesis.speaking
+        ){
+
+          return;
+
+        }
 
 
-    if (speechIndex >= currentCall.length) {
+        bars.forEach((bar,index)=>{
 
-      if (status) {
-        status.textContent = "Call finished";
-      }
+          if(index === position % bars.length){
 
-      if (wave) {
-        wave.classList.remove("playing");
-      }
+            bar.style.transform =
+              "scaleY(1.7)";
+
+          }else{
+
+            bar.style.transform =
+              "scaleY(1)";
+
+          }
+
+        });
+
+
+        position++;
+
+      },110);
+
+  }
+
+
+  function resetWave(){
+
+    bars.forEach(bar=>{
+
+      bar.style.transform =
+        "scaleY(1)";
+
+    });
+
+  }
+
+
+  function speakNext(){
+
+    if(currentIndex >= conversation.length){
+
+      status.textContent =
+        "Recording finished";
+
+      playButton.textContent =
+        "▶";
+
+      currentIndex = 0;
+
+      clearInterval(waveformTimer);
+
+      resetWave();
 
       return;
-    }
-
-
-    const turn = currentCall[speechIndex];
-
-    const utterance =
-      new SpeechSynthesisUtterance(turn.text);
-
-
-    utterance.lang = "en-US";
-
-
-    if (turn.speaker === "client") {
-
-      utterance.voice = clientVoice;
-
-      utterance.rate = 0.98;
-      utterance.pitch = 1.05;
-
-      if (status) {
-        status.textContent = "Client speaking...";
-      }
-
-    } else {
-
-      utterance.voice = teamVoice;
-
-      utterance.rate = 0.96;
-      utterance.pitch = 0.95;
-
-      if (status) {
-        status.textContent = "Team / AI speaking...";
-      }
 
     }
 
 
-    if (wave) {
-      wave.classList.add("playing");
+    const part =
+      conversation[currentIndex];
+
+
+    currentUtterance =
+      new SpeechSynthesisUtterance(
+        part.text
+      );
+
+
+    currentUtterance.lang =
+      "en-US";
+
+
+    currentUtterance.rate =
+      .88;
+
+    currentUtterance.pitch =
+      part.speaker === "client"
+        ? 1.08
+        : .88;
+
+
+    const selectedVoice =
+      getVoice(part.speaker);
+
+
+    if(selectedVoice){
+
+      currentUtterance.voice =
+        selectedVoice;
+
     }
 
 
-    utterance.onend = function() {
+    currentUtterance.onstart = ()=>{
 
-      if (speechStopped || speechPaused) return;
+      status.textContent =
+        part.speaker === "client"
+          ? "Client speaking…"
+          : "Sales team speaking…";
 
-      speechIndex++;
+      playButton.textContent =
+        "❚❚";
 
-      setTimeout(() => {
-        speakNext();
-      }, 250);
+      animateWave();
 
     };
 
 
-    window.speechSynthesis.speak(utterance);
+    currentUtterance.onend = ()=>{
+
+      currentIndex++;
+
+      if(!isPaused){
+
+        setTimeout(
+          speakNext,
+          250
+        );
+
+      }
+
+    };
+
+
+    currentUtterance.onerror = ()=>{
+
+      status.textContent =
+        "Audio playback error";
+
+      playButton.textContent =
+        "▶";
+
+    };
+
+
+    window.speechSynthesis.speak(
+      currentUtterance
+    );
+
   }
 
-}
+
+  playButton.addEventListener(
+    "click",
+    function(){
+
+      if(
+        !("speechSynthesis" in window)
+      ){
+
+        status.textContent =
+          "Browser audio unavailable";
+
+        return;
+
+      }
 
 
-/* =========================================================
-   INDUSTRY BUTTONS
-   Existing industry buttons continue to work.
-========================================================= */
+      if(
+        window.speechSynthesis.paused
+      ){
 
-document.querySelectorAll("[data-industry]").forEach(button => {
+        window.speechSynthesis.resume();
 
-  button.addEventListener("click", function() {
+        isPaused = false;
 
-    const industry = this.dataset.industry;
+        status.textContent =
+          "Conversation playing…";
 
-    document
-      .querySelectorAll("[data-industry]")
-      .forEach(btn => btn.classList.remove("active"));
+        playButton.textContent =
+          "❚❚";
 
-    this.classList.add("active");
+        return;
 
-    /*
-      Stop current audio when changing industry.
-    */
-
-    window.speechSynthesis.cancel();
-
-    speechIndex = 0;
-    speechPaused = false;
-    speechStopped = true;
+      }
 
 
-    renderIndustry(industry);
+      if(
+        window.speechSynthesis.speaking
+      ){
 
-  });
+        window.speechSynthesis.pause();
 
-});
+        isPaused = true;
+
+        status.textContent =
+          "Conversation paused";
+
+        playButton.textContent =
+          "▶";
+
+        return;
+
+      }
 
 
-/* =========================================================
-   INITIAL STATE
-========================================================= */
+      currentIndex = 0;
 
-renderIndustry("software");
+      isPaused = false;
+
+      speakNext();
+
+    }
+  );
+
+
+  pauseButton.addEventListener(
+    "click",
+    function(){
+
+      if(
+        window.speechSynthesis.speaking
+      ){
+
+        window.speechSynthesis.pause();
+
+        isPaused = true;
+
+        status.textContent =
+          "Conversation paused";
+
+        playButton.textContent =
+          "▶";
+
+      }
+
+    }
+  );
+
+
+  stopButton.addEventListener(
+    "click",
+    function(){
+
+      window.speechSynthesis.cancel();
+
+      currentIndex = 0;
+
+      isPaused = false;
+
+      clearInterval(
+        waveformTimer
+      );
+
+      resetWave();
+
+      playButton.textContent =
+        "▶";
+
+      status.textContent =
+        "Ready to play";
+
+    }
+  );
+
+
+  /* INITIAL CASE */
+
+  setCase("software");
+
+})();
 
 </script>
