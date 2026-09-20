@@ -3803,3 +3803,3447 @@ render("Overview");
 
 </body>
 </html>
+
+<!-- =========================================================
+     AWSZ — CONVERSATION INTELLIGENCE
+     SECTION 02
+     ========================================================= -->
+
+<section class="aws-conversation-section" id="conversation-intelligence">
+
+  <!-- INTRO -->
+  <div class="conversation-intro">
+
+    <div class="conversation-eyebrow">
+      02 · CONVERSATION INTELLIGENCE
+    </div>
+
+    <h2>
+      You had the conversation.
+      <span>So why did you still lose the lead?</span>
+    </h2>
+
+    <p class="conversation-subtext">
+      Your CRM can capture every message, email and call. But after
+      deployment, most teams still struggle to understand what those
+      conversations actually mean. The real value is finding the
+      buying signal, identifying where the handoff broke, and turning
+      the conversation into a clear next action for the team.
+    </p>
+
+  </div>
+
+
+  <!-- INDUSTRY SELECTOR -->
+  <div class="conversation-industries">
+
+    <button class="industry-btn active" data-case="software">
+      Software
+    </button>
+
+    <button class="industry-btn" data-case="beauty">
+      Beauty
+    </button>
+
+    <button class="industry-btn" data-case="mortgage">
+      Mortgage
+    </button>
+
+    <button class="industry-btn" data-case="realestate">
+      Real Estate
+    </button>
+
+    <button class="industry-btn" data-case="inspection">
+      Home Inspection
+    </button>
+
+    <button class="industry-btn" data-case="insurance">
+      Insurance
+    </button>
+
+  </div>
+
+
+  <!-- MAIN SYSTEM -->
+  <div class="conversation-system">
+
+
+    <!-- =====================================================
+         LEFT — LEAD
+         ===================================================== -->
+
+    <aside class="lead-panel">
+
+      <div class="lead-panel-label">
+        LEAD PROFILE
+      </div>
+
+      <div class="lead-person">
+
+        <div class="lead-avatar" id="caseAvatar">
+          DK
+        </div>
+
+        <div>
+          <h3 id="caseName">
+            Daniel Kim
+          </h3>
+
+          <p id="caseSource">
+            LinkedIn · SaaS Demo Request
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="lead-result lost">
+        <span></span>
+        Lead Lost
+      </div>
+
+
+      <div class="lead-details">
+
+        <div>
+          <small>Industry</small>
+          <strong id="caseIndustry">
+            Software
+          </strong>
+        </div>
+
+        <div>
+          <small>Requirement</small>
+          <strong id="caseRequirement">
+            CRM Automation
+          </strong>
+        </div>
+
+        <div>
+          <small>Potential Value</small>
+          <strong id="caseValue">
+            $8,400
+          </strong>
+        </div>
+
+        <div>
+          <small>First Contact</small>
+          <strong id="caseFirst">
+            9:14 AM
+          </strong>
+        </div>
+
+        <div>
+          <small>Last Contact</small>
+          <strong id="caseLast">
+            4:42 PM
+          </strong>
+        </div>
+
+      </div>
+
+
+      <div class="lead-intent">
+
+        <div class="intent-label">
+          BUYING SIGNAL
+        </div>
+
+        <p id="caseIntent">
+          “Can you show me how this would work with our current CRM?”
+        </p>
+
+      </div>
+
+
+      <div class="lead-alert">
+
+        <div class="lead-alert-icon">
+          !
+        </div>
+
+        <div>
+
+          <strong>
+            Conversation looked healthy.
+          </strong>
+
+          <p id="caseAlert">
+            The lead was interested, responded to follow-ups,
+            and still did not close.
+          </p>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         CENTER — TIMELINE
+         ===================================================== -->
+
+    <main class="conversation-panel">
+
+      <div class="conversation-panel-head">
+
+        <div>
+
+          <div class="conversation-panel-title">
+            Complete Conversation
+          </div>
+
+          <div class="conversation-panel-subtitle">
+            Message → Email → Call → Outcome
+          </div>
+
+        </div>
+
+        <div class="tracked-badge">
+          3 channels tracked
+        </div>
+
+      </div>
+
+
+      <!-- CHANNELS -->
+      <div class="channel-tabs">
+
+        <button class="channel-tab active">
+          <span class="channel-symbol message-symbol">
+            ≋
+          </span>
+          Messages
+        </button>
+
+        <button class="channel-tab">
+          <span class="channel-symbol email-symbol">
+            ✉
+          </span>
+          Email
+        </button>
+
+        <button class="channel-tab">
+          <span class="channel-symbol call-symbol">
+            ☎
+          </span>
+          Call
+        </button>
+
+      </div>
+
+
+      <!-- SCROLLABLE CONVERSATION -->
+      <div class="conversation-scroll">
+
+
+        <!-- =================================================
+             MESSAGE
+             ================================================= -->
+
+        <div class="timeline">
+
+          <div class="timeline-icon message-timeline-icon">
+            ≋
+          </div>
+
+          <div class="timeline-body">
+
+            <div class="timeline-head">
+
+              <strong>
+                MESSAGE
+              </strong>
+
+              <span>
+                9:14 AM
+              </span>
+
+            </div>
+
+
+            <div class="message-card">
+
+              <div class="message client-message">
+
+                <small>
+                  Daniel · Client
+                </small>
+
+                <div>
+                  Hi, I saw your automation platform.
+                  Can it connect with our current CRM?
+                </div>
+
+              </div>
+
+
+              <div class="message team-message">
+
+                <small>
+                  Sarah · Sales
+                </small>
+
+                <div>
+                  Yes. We can connect your CRM with your
+                  existing tools and automate the lead flow.
+                </div>
+
+              </div>
+
+
+              <div class="message client-message">
+
+                <small>
+                  Daniel · Client
+                </small>
+
+                <div>
+                  That's exactly what we're looking for.
+                  What would something like this cost?
+                </div>
+
+              </div>
+
+
+              <div class="message team-message">
+
+                <small>
+                  Sarah · Sales
+                </small>
+
+                <div>
+                  It depends on the workflow and integrations.
+                  I can send you the relevant options.
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="timeline-note positive">
+
+              <strong>
+                Buying signal
+              </strong>
+
+              <span>
+                Client asked about implementation and pricing.
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             EMAIL
+             ================================================= -->
+
+        <div class="timeline">
+
+          <div class="timeline-icon email-timeline-icon">
+            ✉
+          </div>
+
+          <div class="timeline-body">
+
+            <div class="timeline-head">
+
+              <strong>
+                EMAIL
+              </strong>
+
+              <span>
+                11:03 AM
+              </span>
+
+            </div>
+
+
+            <div class="email-window">
+
+              <div class="email-toolbar">
+
+                <div class="email-sender">
+
+                  <div class="email-logo">
+                    A
+                  </div>
+
+                  <div>
+
+                    <strong>
+                      Sarah Adams
+                    </strong>
+
+                    <span>
+                      to Daniel Kim
+                    </span>
+
+                  </div>
+
+                </div>
+
+                <span>
+                  11:03 AM
+                </span>
+
+              </div>
+
+
+              <div class="email-subject">
+                Automation options for your CRM
+              </div>
+
+
+              <div class="email-content">
+
+                <p>
+                  Hi Daniel,
+                </p>
+
+                <p>
+                  Based on our conversation, I've attached the
+                  relevant automation options for your CRM setup.
+                </p>
+
+                <p>
+                  For your current requirement, the implementation
+                  would likely involve CRM integration, lead routing,
+                  notifications and automated follow-ups.
+                </p>
+
+                <p>
+                  If you'd like, we can review the exact workflow
+                  together and determine the right scope.
+                </p>
+
+                <p>
+                  Regards,<br>
+                  Sarah
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="timeline-note positive">
+
+              <strong>
+                Follow-up completed
+              </strong>
+
+              <span>
+                Information was sent and the client was given
+                a clear opportunity to continue.
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CALL
+             ================================================= -->
+
+        <div class="timeline">
+
+          <div class="timeline-icon call-timeline-icon">
+            ☎
+          </div>
+
+          <div class="timeline-body">
+
+            <div class="timeline-head">
+
+              <strong>
+                CALL RECORDING
+              </strong>
+
+              <span>
+                4:18 PM · 03:42
+              </span>
+
+            </div>
+
+
+            <div class="call-recording">
+
+
+              <div class="recording-header">
+
+                <div class="recording-person">
+
+                  <div class="recording-avatar">
+                    DK
+                  </div>
+
+                  <div>
+
+                    <strong>
+                      Daniel Kim
+                    </strong>
+
+                    <span>
+                      Sales conversation
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                <div class="recording-status">
+                  Recorded
+                </div>
+
+              </div>
+
+
+              <!-- AUDIO CONTROLS -->
+
+              <div class="audio-controls">
+
+                <button
+                  class="audio-main-button"
+                  id="audioPlay"
+                  type="button"
+                >
+                  ▶
+                </button>
+
+
+                <button
+                  class="audio-small-button"
+                  id="audioPause"
+                  type="button"
+                >
+                  ❚❚
+                </button>
+
+
+                <button
+                  class="audio-small-button"
+                  id="audioStop"
+                  type="button"
+                >
+                  ■
+                </button>
+
+
+                <div class="audio-track">
+
+                  <div class="audio-waveform" id="audioWaveform">
+
+                    <i></i><i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i><i></i>
+
+                  </div>
+
+                  <div class="audio-time">
+
+                    <span id="audioStatus">
+                      Ready to play
+                    </span>
+
+                    <span>
+                      03:42
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- TRANSCRIPT -->
+
+              <div class="call-transcript">
+
+                <div class="speaker-line client">
+
+                  <div class="speaker-name">
+                    CLIENT
+                  </div>
+
+                  <p>
+                    Hi, yes. I wanted to understand the pricing
+                    before we move forward.
+                  </p>
+
+                </div>
+
+
+                <div class="speaker-line employee">
+
+                  <div class="speaker-name">
+                    SARAH · SALES
+                  </div>
+
+                  <p>
+                    Absolutely. Based on what you've described,
+                    we'd need to confirm the exact integrations
+                    before giving you a final number.
+                  </p>
+
+                </div>
+
+
+                <div class="speaker-line client">
+
+                  <div class="speaker-name">
+                    CLIENT
+                  </div>
+
+                  <p>
+                    Okay. That's fine. Can you send me the
+                    exact breakdown after the call?
+                  </p>
+
+                </div>
+
+
+                <div class="speaker-line employee">
+
+                  <div class="speaker-name">
+                    SARAH · SALES
+                  </div>
+
+                  <p>
+                    Yes. I'll send that over today.
+                  </p>
+
+                </div>
+
+
+                <div class="speaker-line client">
+
+                  <div class="speaker-name">
+                    CLIENT
+                  </div>
+
+                  <p>
+                    Perfect. Once I see that, I'll discuss it
+                    with my partner and get back to you.
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- LEAKAGE -->
+
+            <div class="timeline-note danger">
+
+              <strong>
+                ⚠ Lead leakage detected
+              </strong>
+
+              <span>
+                The client gave a clear next step: review the
+                breakdown with a partner. No owner, deadline or
+                follow-up sequence was attached to that signal.
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FINAL OUTCOME
+             ================================================= -->
+
+        <div class="timeline final-timeline">
+
+          <div class="timeline-icon lost-timeline-icon">
+            !
+          </div>
+
+          <div class="timeline-body">
+
+            <div class="timeline-head">
+
+              <strong>
+                OUTCOME
+              </strong>
+
+              <span>
+                5 days later
+              </span>
+
+            </div>
+
+
+            <div class="lost-outcome">
+
+              <div class="lost-outcome-title">
+                Conversation ended without a close.
+              </div>
+
+              <p>
+                There was a message. There was an email.
+                There was a successful call. The client was
+                interested and even told the team what would
+                happen next.
+              </p>
+
+              <div class="lost-question">
+                So where did the process break?
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         RIGHT — INTELLIGENCE
+         ===================================================== -->
+
+    <aside class="intelligence-panel">
+
+      <div class="intelligence-eyebrow">
+        TEAM BRIEFING
+      </div>
+
+
+      <h3>
+        Don't just store
+        <span>the conversation.</span>
+      </h3>
+
+
+      <p class="intelligence-intro">
+        Turn what happened inside the conversation into something
+        your team can actually act on.
+      </p>
+
+
+      <div class="briefing-card">
+
+        <div class="briefing-title">
+          WHAT THE TEAM SHOULD KNOW
+        </div>
+
+
+        <div class="briefing-item">
+
+          <div class="briefing-index">
+            01
+          </div>
+
+          <div>
+
+            <strong>
+              Client was interested.
+            </strong>
+
+            <p>
+              They asked about the solution, pricing and next steps.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="briefing-item">
+
+          <div class="briefing-index">
+            02
+          </div>
+
+          <div>
+
+            <strong>
+              No objection stopped the sale.
+            </strong>
+
+            <p>
+              The client did not reject the offer. They asked
+              for more information before deciding.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="briefing-item">
+
+          <div class="briefing-index danger-index">
+            03
+          </div>
+
+          <div>
+
+            <strong class="danger-text">
+              The follow-up had no owner.
+            </strong>
+
+            <p>
+              The client said what they needed next, but the
+              system did not turn that statement into accountability.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="briefing-item">
+
+          <div class="briefing-index">
+            04
+          </div>
+
+          <div>
+
+            <strong>
+              This is what gets monitored.
+            </strong>
+
+            <p>
+              Buying signals, unanswered questions, objections,
+              promises, handoffs and missed follow-ups.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- MONITORING CHECKLIST -->
+
+      <div class="monitoring-box">
+
+        <div class="monitoring-title">
+          CONVERSATION MONITORING
+        </div>
+
+
+        <div class="monitor-row">
+
+          <span>
+            Message captured
+          </span>
+
+          <strong class="yes">
+            YES
+          </strong>
+
+        </div>
+
+
+        <div class="monitor-row">
+
+          <span>
+            Email captured
+          </span>
+
+          <strong class="yes">
+            YES
+          </strong>
+
+        </div>
+
+
+        <div class="monitor-row">
+
+          <span>
+            Call recorded
+          </span>
+
+          <strong class="yes">
+            YES
+          </strong>
+
+        </div>
+
+
+        <div class="monitor-row">
+
+          <span>
+            Buying signal detected
+          </span>
+
+          <strong class="yes">
+            YES
+          </strong>
+
+        </div>
+
+
+        <div class="monitor-row">
+
+          <span>
+            Follow-up owner
+          </span>
+
+          <strong class="no">
+            NO
+          </strong>
+
+        </div>
+
+
+        <div class="monitor-row">
+
+          <span>
+            Follow-up deadline
+          </span>
+
+          <strong class="no">
+            NO
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div class="intelligence-point">
+
+        <small>
+          THE REAL QUESTION
+        </small>
+
+        <p>
+          Your automation worked.
+          <strong>
+            Your process didn't.
+          </strong>
+        </p>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+
+
+  <!-- =======================================================
+       BOTTOM EXPLANATION
+       ======================================================= -->
+
+  <div class="conversation-bottom">
+
+    <div class="bottom-number">
+      02
+    </div>
+
+    <div>
+
+      <div class="bottom-eyebrow">
+        FROM CONVERSATION → ACTION
+      </div>
+
+      <h3>
+        This is how you find the leads
+        <span>you didn't know you were losing.</span>
+      </h3>
+
+      <p>
+        We don't only look at whether your CRM captured a conversation.
+        We look at what the conversation tells you: what the client
+        wanted, what your team promised, where interest changed,
+        what was left unanswered, and whether the right person actually
+        followed up. That intelligence can then be used to improve
+        the team, the workflow and the bot itself.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<style>
+
+/* =========================================================
+   ROOT
+   ========================================================= */
+
+.aws-conversation-section{
+
+  --cloud:#f4f8fc;
+  --cloud2:#eaf2fa;
+  --cloud3:#dceaf7;
+
+  --blue:#246bce;
+  --blue-dark:#123b70;
+  --deep:#0b2850;
+
+  --text:#20272e;
+  --muted:#66778a;
+
+  --line:#d8e4ef;
+  --white:#ffffff;
+
+  --green:#20855a;
+  --green-bg:#eaf7f0;
+
+  --amber:#b97918;
+  --amber-bg:#fff5df;
+
+  --red:#c33d3d;
+  --red-bg:#fff0f0;
+
+  width:100%;
+  padding:135px 7% 120px;
+
+  background:
+    radial-gradient(
+      circle at 8% 12%,
+      rgba(36,107,206,.08),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 70%,
+      rgba(36,107,206,.055),
+      transparent 30%
+    ),
+    var(--cloud);
+
+  color:var(--text);
+
+  overflow:hidden;
+}
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.conversation-intro{
+
+  max-width:1000px;
+
+  margin:0 auto 55px;
+
+  text-align:center;
+}
+
+.conversation-eyebrow{
+
+  color:var(--blue);
+
+  font-size:13px;
+
+  font-weight:900;
+
+  letter-spacing:2.5px;
+
+  margin-bottom:18px;
+}
+
+.conversation-intro h2{
+
+  margin:0;
+
+  font-size:clamp(42px,5vw,72px);
+
+  line-height:.99;
+
+  letter-spacing:-3.5px;
+
+  font-weight:850;
+
+  color:var(--deep);
+}
+
+.conversation-intro h2 span{
+
+  display:block;
+
+  color:var(--blue);
+}
+
+
+/* USER REQUEST:
+   SUBTEXT MADE LARGER / MORE READABLE */
+
+.conversation-subtext{
+
+  max-width:900px;
+
+  margin:30px auto 0;
+
+  font-size:21px;
+
+  line-height:1.7;
+
+  color:#56697e;
+
+  font-weight:450;
+}
+
+
+/* =========================================================
+   INDUSTRIES
+   ========================================================= */
+
+.conversation-industries{
+
+  display:flex;
+
+  justify-content:center;
+
+  flex-wrap:wrap;
+
+  gap:8px;
+
+  margin-bottom:32px;
+}
+
+.industry-btn{
+
+  border:1px solid #ccd9e6;
+
+  background:rgba(255,255,255,.8);
+
+  color:#68798b;
+
+  padding:12px 20px;
+
+  border-radius:999px;
+
+  font-size:13px;
+
+  font-weight:850;
+
+  cursor:pointer;
+
+  transition:.22s ease;
+}
+
+.industry-btn:hover{
+
+  border-color:var(--blue);
+
+  color:var(--blue);
+
+  transform:translateY(-1px);
+}
+
+.industry-btn.active{
+
+  background:var(--blue);
+
+  border-color:var(--blue);
+
+  color:#fff;
+
+  box-shadow:
+    0 9px 24px rgba(36,107,206,.18);
+}
+
+
+/* =========================================================
+   SYSTEM
+   ========================================================= */
+
+.conversation-system{
+
+  max-width:1580px;
+
+  margin:auto;
+
+  display:grid;
+
+  grid-template-columns:270px minmax(520px,1fr) 340px;
+
+  gap:18px;
+
+  align-items:stretch;
+}
+
+
+/* PANELS */
+
+.lead-panel,
+.conversation-panel,
+.intelligence-panel{
+
+  background:rgba(255,255,255,.94);
+
+  border:1px solid var(--line);
+
+  border-radius:23px;
+
+  box-shadow:
+    0 20px 55px rgba(35,67,100,.065),
+    0 2px 5px rgba(35,67,100,.03);
+}
+
+
+/* =========================================================
+   LEAD
+   ========================================================= */
+
+.lead-panel{
+
+  padding:25px;
+}
+
+.lead-panel-label{
+
+  font-size:10px;
+
+  letter-spacing:1.8px;
+
+  color:#8492a2;
+
+  font-weight:900;
+
+  margin-bottom:20px;
+}
+
+.lead-person{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:13px;
+}
+
+.lead-avatar{
+
+  width:53px;
+
+  height:53px;
+
+  border-radius:15px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:var(--cloud2);
+
+  color:var(--blue-dark);
+
+  font-size:15px;
+
+  font-weight:900;
+}
+
+.lead-person h3{
+
+  margin:0;
+
+  color:var(--deep);
+
+  font-size:17px;
+}
+
+.lead-person p{
+
+  margin:4px 0 0;
+
+  color:var(--muted);
+
+  font-size:11px;
+
+  line-height:1.4;
+}
+
+.lead-result{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  margin-top:21px;
+
+  padding:8px 11px;
+
+  border-radius:8px;
+
+  font-size:11px;
+
+  font-weight:900;
+}
+
+.lead-result span{
+
+  width:7px;
+
+  height:7px;
+
+  border-radius:50%;
+}
+
+.lead-result.lost{
+
+  color:var(--red);
+
+  background:var(--red-bg);
+}
+
+.lead-result.lost span{
+
+  background:var(--red);
+}
+
+.lead-details{
+
+  border-top:1px solid var(--line);
+
+  margin-top:20px;
+
+  padding-top:7px;
+}
+
+.lead-details > div{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:12px;
+
+  padding:12px 0;
+
+  border-bottom:1px solid #edf1f5;
+}
+
+.lead-details small{
+
+  font-size:11px;
+
+  color:var(--muted);
+}
+
+.lead-details strong{
+
+  font-size:11px;
+
+  color:var(--deep);
+
+  text-align:right;
+}
+
+.lead-intent{
+
+  margin-top:21px;
+
+  padding:17px;
+
+  background:var(--cloud);
+
+  border:1px solid var(--line);
+
+  border-radius:13px;
+}
+
+.intent-label{
+
+  color:var(--blue);
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:1.4px;
+
+  margin-bottom:8px;
+}
+
+.lead-intent p{
+
+  margin:0;
+
+  font-size:14px;
+
+  line-height:1.6;
+
+  color:var(--deep);
+
+  font-weight:700;
+}
+
+.lead-alert{
+
+  display:flex;
+
+  gap:10px;
+
+  margin-top:18px;
+
+  padding:14px;
+
+  border-radius:12px;
+
+  background:var(--red-bg);
+
+  border:1px solid #f0cece;
+}
+
+.lead-alert-icon{
+
+  flex:none;
+
+  width:22px;
+
+  height:22px;
+
+  border-radius:50%;
+
+  background:var(--red);
+
+  color:#fff;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:12px;
+
+  font-weight:900;
+}
+
+.lead-alert strong{
+
+  display:block;
+
+  color:var(--red);
+
+  font-size:11px;
+
+  margin-bottom:4px;
+}
+
+.lead-alert p{
+
+  margin:0;
+
+  color:#795050;
+
+  font-size:11px;
+
+  line-height:1.55;
+}
+
+
+/* =========================================================
+   CONVERSATION PANEL
+   ========================================================= */
+
+.conversation-panel{
+
+  min-width:0;
+
+  overflow:hidden;
+}
+
+.conversation-panel-head{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:20px;
+
+  padding:25px;
+
+  border-bottom:1px solid var(--line);
+}
+
+.conversation-panel-title{
+
+  color:var(--deep);
+
+  font-size:20px;
+
+  font-weight:850;
+}
+
+.conversation-panel-subtitle{
+
+  margin-top:5px;
+
+  color:var(--muted);
+
+  font-size:13px;
+}
+
+.tracked-badge{
+
+  padding:9px 12px;
+
+  border-radius:8px;
+
+  background:var(--cloud);
+
+  color:#64768a;
+
+  font-size:11px;
+
+  font-weight:800;
+
+  white-space:nowrap;
+}
+
+
+/* =========================================================
+   CHANNEL TABS
+   ========================================================= */
+
+.channel-tabs{
+
+  display:flex;
+
+  gap:6px;
+
+  padding:13px 20px;
+
+  border-bottom:1px solid var(--line);
+
+  background:#fbfdff;
+}
+
+.channel-tab{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  padding:8px 11px;
+
+  border:0;
+
+  border-radius:8px;
+
+  background:transparent;
+
+  color:#7a8898;
+
+  font-size:12px;
+
+  font-weight:800;
+}
+
+.channel-tab.active{
+
+  background:var(--cloud2);
+
+  color:var(--blue-dark);
+}
+
+.channel-symbol{
+
+  width:25px;
+
+  height:25px;
+
+  border-radius:7px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-weight:900;
+}
+
+.message-symbol{
+
+  color:var(--blue);
+
+  background:#e8f1fc;
+}
+
+.email-symbol{
+
+  color:#596b7e;
+
+  background:#edf1f5;
+}
+
+.call-symbol{
+
+  color:var(--green);
+
+  background:#e9f7f0;
+}
+
+
+/* =========================================================
+   SCROLL
+   ========================================================= */
+
+.conversation-scroll{
+
+  height:790px;
+
+  overflow-y:auto;
+
+  padding:27px 25px 50px;
+}
+
+.conversation-scroll::-webkit-scrollbar{
+
+  width:7px;
+}
+
+.conversation-scroll::-webkit-scrollbar-track{
+
+  background:#f3f6f9;
+}
+
+.conversation-scroll::-webkit-scrollbar-thumb{
+
+  background:#c5d3e0;
+
+  border-radius:20px;
+}
+
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+
+.timeline{
+
+  position:relative;
+
+  display:grid;
+
+  grid-template-columns:34px minmax(0,1fr);
+
+  gap:13px;
+}
+
+.timeline:not(:last-child)::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:16px;
+
+  top:34px;
+
+  bottom:-15px;
+
+  width:1px;
+
+  background:#dce6ef;
+}
+
+.timeline-icon{
+
+  position:relative;
+
+  z-index:2;
+
+  width:34px;
+
+  height:34px;
+
+  border-radius:10px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:13px;
+
+  font-weight:900;
+}
+
+.message-timeline-icon{
+
+  color:var(--blue);
+
+  background:#e8f1fc;
+}
+
+.email-timeline-icon{
+
+  color:#596b7e;
+
+  background:#edf1f5;
+}
+
+.call-timeline-icon{
+
+  color:var(--green);
+
+  background:#e9f7f0;
+}
+
+.lost-timeline-icon{
+
+  color:var(--red);
+
+  background:var(--red-bg);
+}
+
+.timeline-body{
+
+  min-width:0;
+
+  padding-bottom:31px;
+}
+
+.timeline-head{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin:3px 0 10px;
+
+  font-size:11px;
+
+  color:#8794a3;
+}
+
+.timeline-head strong{
+
+  font-size:10px;
+
+  letter-spacing:1.3px;
+
+  color:var(--blue);
+}
+
+
+/* =========================================================
+   MESSAGES
+   ========================================================= */
+
+.message-card{
+
+  padding:17px;
+
+  border:1px solid var(--line);
+
+  border-radius:14px;
+
+  background:#fff;
+}
+
+.message{
+
+  display:flex;
+
+  flex-direction:column;
+
+  margin-bottom:16px;
+}
+
+.message:last-child{
+
+  margin-bottom:0;
+}
+
+.message.client-message{
+
+  align-items:flex-start;
+}
+
+.message.team-message{
+
+  align-items:flex-end;
+}
+
+.message small{
+
+  color:#8794a2;
+
+  font-size:10px;
+
+  font-weight:800;
+
+  margin-bottom:5px;
+}
+
+.message div{
+
+  max-width:85%;
+
+  padding:12px 15px;
+
+  font-size:14px;
+
+  line-height:1.6;
+
+  border-radius:13px;
+}
+
+.client-message div{
+
+  color:#273745;
+
+  background:#f0f4f8;
+
+  border-bottom-left-radius:4px;
+}
+
+.team-message div{
+
+  color:#173f70;
+
+  background:#e9f2fc;
+
+  border-bottom-right-radius:4px;
+}
+
+
+/* =========================================================
+   NOTES
+   ========================================================= */
+
+.timeline-note{
+
+  margin-top:9px;
+
+  padding:12px 14px;
+
+  border-radius:9px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:3px;
+}
+
+.timeline-note strong{
+
+  font-size:11px;
+
+  font-weight:900;
+}
+
+.timeline-note span{
+
+  font-size:11px;
+
+  line-height:1.55;
+}
+
+.timeline-note.positive{
+
+  color:#266a4c;
+
+  background:var(--green-bg);
+
+  border-left:3px solid var(--green);
+}
+
+.timeline-note.danger{
+
+  color:#8b3131;
+
+  background:var(--red-bg);
+
+  border-left:3px solid var(--red);
+}
+
+
+/* =========================================================
+   EMAIL
+   ========================================================= */
+
+.email-window{
+
+  overflow:hidden;
+
+  border:1px solid #d8e1e9;
+
+  border-radius:14px;
+
+  background:#fff;
+}
+
+.email-toolbar{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:16px;
+
+  background:#fafcfe;
+
+  border-bottom:1px solid #e2e8ee;
+
+  color:#8996a4;
+
+  font-size:10px;
+}
+
+.email-sender{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+}
+
+.email-logo{
+
+  width:34px;
+
+  height:34px;
+
+  border-radius:8px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:var(--deep);
+
+  color:#fff;
+
+  font-weight:900;
+}
+
+.email-sender strong{
+
+  display:block;
+
+  color:var(--deep);
+
+  font-size:12px;
+}
+
+.email-sender span{
+
+  display:block;
+
+  margin-top:2px;
+
+  font-size:10px;
+
+  color:var(--muted);
+}
+
+.email-subject{
+
+  padding:18px 18px 7px;
+
+  font-size:17px;
+
+  font-weight:850;
+
+  color:var(--deep);
+}
+
+.email-content{
+
+  padding:5px 18px 20px;
+}
+
+.email-content p{
+
+  margin:10px 0;
+
+  color:#536477;
+
+  font-size:13px;
+
+  line-height:1.7;
+}
+
+
+/* =========================================================
+   CALL
+   ========================================================= */
+
+.call-recording{
+
+  overflow:hidden;
+
+  border:1px solid #cfe4d8;
+
+  border-radius:14px;
+
+  background:#fff;
+}
+
+.recording-header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:15px 16px;
+
+  border-bottom:1px solid #e0ebe5;
+}
+
+.recording-person{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+}
+
+.recording-avatar{
+
+  width:37px;
+
+  height:37px;
+
+  border-radius:10px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:#e9f7f0;
+
+  color:var(--green);
+
+  font-size:11px;
+
+  font-weight:900;
+}
+
+.recording-person strong{
+
+  display:block;
+
+  font-size:12px;
+
+  color:var(--deep);
+}
+
+.recording-person span{
+
+  display:block;
+
+  margin-top:3px;
+
+  font-size:10px;
+
+  color:var(--muted);
+}
+
+.recording-status{
+
+  padding:6px 9px;
+
+  border-radius:7px;
+
+  background:var(--green-bg);
+
+  color:var(--green);
+
+  font-size:9px;
+
+  font-weight:900;
+}
+
+
+/* =========================================================
+   AUDIO
+   ========================================================= */
+
+.audio-controls{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  padding:17px;
+
+  background:#f7fbf9;
+
+  border-bottom:1px solid #e1ebe5;
+}
+
+.audio-main-button{
+
+  width:43px;
+
+  height:43px;
+
+  border:0;
+
+  border-radius:50%;
+
+  background:var(--green);
+
+  color:#fff;
+
+  cursor:pointer;
+
+  font-size:13px;
+
+  box-shadow:0 7px 18px rgba(32,133,90,.18);
+}
+
+.audio-small-button{
+
+  width:32px;
+
+  height:32px;
+
+  border:1px solid #cbdcd2;
+
+  border-radius:8px;
+
+  background:#fff;
+
+  color:#5c7668;
+
+  cursor:pointer;
+
+  font-size:10px;
+}
+
+.audio-track{
+
+  min-width:0;
+
+  flex:1;
+
+  margin-left:6px;
+}
+
+.audio-waveform{
+
+  height:34px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:3px;
+
+  overflow:hidden;
+}
+
+.audio-waveform i{
+
+  width:3px;
+
+  flex:none;
+
+  height:var(--height);
+
+  border-radius:4px;
+
+  background:#79ae93;
+
+  transition:.12s ease;
+}
+
+.audio-waveform i:nth-child(1){--height:11px}
+.audio-waveform i:nth-child(2){--height:20px}
+.audio-waveform i:nth-child(3){--height:15px}
+.audio-waveform i:nth-child(4){--height:28px}
+.audio-waveform i:nth-child(5){--height:18px}
+.audio-waveform i:nth-child(6){--height:12px}
+.audio-waveform i:nth-child(7){--height:25px}
+.audio-waveform i:nth-child(8){--height:31px}
+.audio-waveform i:nth-child(9){--height:18px}
+.audio-waveform i:nth-child(10){--height:26px}
+.audio-waveform i:nth-child(11){--height:13px}
+.audio-waveform i:nth-child(12){--height:29px}
+.audio-waveform i:nth-child(13){--height:21px}
+.audio-waveform i:nth-child(14){--height:15px}
+.audio-waveform i:nth-child(15){--height:27px}
+.audio-waveform i:nth-child(16){--height:19px}
+.audio-waveform i:nth-child(17){--height:30px}
+.audio-waveform i:nth-child(18){--height:14px}
+.audio-waveform i:nth-child(19){--height:23px}
+.audio-waveform i:nth-child(20){--height:17px}
+.audio-waveform i:nth-child(21){--height:28px}
+.audio-waveform i:nth-child(22){--height:12px}
+.audio-waveform i:nth-child(23){--height:24px}
+.audio-waveform i:nth-child(24){--height:17px}
+.audio-waveform i:nth-child(25){--height:29px}
+.audio-waveform i:nth-child(26){--height:15px}
+.audio-waveform i:nth-child(27){--height:22px}
+.audio-waveform i:nth-child(28){--height:13px}
+.audio-waveform i:nth-child(29){--height:27px}
+.audio-waveform i:nth-child(30){--height:18px}
+
+.audio-time{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  margin-top:3px;
+
+  color:#77898a;
+
+  font-size:10px;
+}
+
+.audio-time span:first-child{
+
+  color:var(--green);
+
+  font-weight:800;
+}
+
+
+/* =========================================================
+   TRANSCRIPT
+   ========================================================= */
+
+.call-transcript{
+
+  padding:16px;
+}
+
+.speaker-line{
+
+  display:grid;
+
+  grid-template-columns:100px 1fr;
+
+  gap:10px;
+
+  padding:12px 0;
+
+  border-bottom:1px solid #edf2ef;
+}
+
+.speaker-line:last-child{
+
+  border-bottom:0;
+}
+
+.speaker-name{
+
+  font-size:9px;
+
+  letter-spacing:1px;
+
+  font-weight:900;
+}
+
+.speaker-line.client .speaker-name{
+
+  color:#788797;
+}
+
+.speaker-line.employee .speaker-name{
+
+  color:var(--green);
+}
+
+.speaker-line p{
+
+  margin:0;
+
+  color:#364755;
+
+  font-size:13px;
+
+  line-height:1.6;
+}
+
+
+/* =========================================================
+   LOST OUTCOME
+   ========================================================= */
+
+.lost-outcome{
+
+  padding:20px;
+
+  border-radius:14px;
+
+  background:var(--red-bg);
+
+  border:1px solid #efcece;
+}
+
+.lost-outcome-title{
+
+  color:var(--red);
+
+  font-size:17px;
+
+  font-weight:900;
+
+  margin-bottom:8px;
+}
+
+.lost-outcome p{
+
+  margin:0;
+
+  color:#754c4c;
+
+  font-size:13px;
+
+  line-height:1.65;
+}
+
+.lost-question{
+
+  margin-top:15px;
+
+  padding-top:13px;
+
+  border-top:1px solid #ebcccc;
+
+  color:var(--red);
+
+  font-size:13px;
+
+  font-weight:900;
+}
+
+
+/* =========================================================
+   RIGHT INTELLIGENCE
+   ========================================================= */
+
+.intelligence-panel{
+
+  padding:26px;
+}
+
+.intelligence-eyebrow{
+
+  color:var(--blue);
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:1.7px;
+}
+
+.intelligence-panel h3{
+
+  margin:13px 0 13px;
+
+  color:var(--deep);
+
+  font-size:27px;
+
+  line-height:1.12;
+
+  letter-spacing:-1px;
+}
+
+.intelligence-panel h3 span{
+
+  color:var(--blue);
+
+  display:block;
+}
+
+
+/* LARGER SUPPORTING TEXT */
+
+.intelligence-intro{
+
+  margin:0 0 20px;
+
+  color:#607286;
+
+  font-size:15px;
+
+  line-height:1.65;
+}
+
+.briefing-card{
+
+  border:1px solid var(--line);
+
+  border-radius:13px;
+
+  overflow:hidden;
+}
+
+.briefing-title{
+
+  padding:13px 15px;
+
+  background:var(--cloud);
+
+  border-bottom:1px solid var(--line);
+
+  color:#8290a0;
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:1.4px;
+}
+
+.briefing-item{
+
+  display:grid;
+
+  grid-template-columns:29px 1fr;
+
+  gap:10px;
+
+  padding:17px 15px;
+
+  border-bottom:1px solid #e9eef3;
+}
+
+.briefing-item:last-child{
+
+  border-bottom:0;
+}
+
+.briefing-index{
+
+  width:25px;
+
+  height:25px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:7px;
+
+  background:var(--cloud2);
+
+  color:var(--blue);
+
+  font-size:9px;
+
+  font-weight:900;
+}
+
+.danger-index{
+
+  background:var(--red-bg);
+
+  color:var(--red);
+}
+
+.briefing-item strong{
+
+  display:block;
+
+  margin-bottom:5px;
+
+  color:var(--deep);
+
+  font-size:12px;
+}
+
+.danger-text{
+
+  color:var(--red)!important;
+}
+
+.briefing-item p{
+
+  margin:0;
+
+  color:#697a8d;
+
+  font-size:12px;
+
+  line-height:1.6;
+}
+
+
+/* =========================================================
+   MONITORING
+   ========================================================= */
+
+.monitoring-box{
+
+  margin-top:20px;
+
+  padding:15px;
+
+  border:1px solid var(--line);
+
+  border-radius:13px;
+
+  background:#fafcfe;
+}
+
+.monitoring-title{
+
+  margin-bottom:8px;
+
+  color:#8492a1;
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:1.4px;
+}
+
+.monitor-row{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  padding:9px 0;
+
+  border-bottom:1px solid #e9eef3;
+
+  font-size:11px;
+}
+
+.monitor-row:last-child{
+
+  border-bottom:0;
+}
+
+.monitor-row span{
+
+  color:#697a8d;
+}
+
+.monitor-row strong{
+
+  font-size:9px;
+}
+
+.monitor-row .yes{
+
+  color:var(--green);
+}
+
+.monitor-row .no{
+
+  color:var(--red);
+}
+
+
+/* =========================================================
+   POINT
+   ========================================================= */
+
+.intelligence-point{
+
+  margin-top:20px;
+
+  padding-top:18px;
+
+  border-top:1px solid var(--line);
+}
+
+.intelligence-point small{
+
+  color:#8390a0;
+
+  font-size:9px;
+
+  letter-spacing:1.5px;
+
+  font-weight:900;
+}
+
+.intelligence-point p{
+
+  margin:8px 0 0;
+
+  color:#68798b;
+
+  font-size:13px;
+
+  line-height:1.6;
+}
+
+.intelligence-point strong{
+
+  display:block;
+
+  color:var(--red);
+
+  font-size:16px;
+
+  margin-top:2px;
+}
+
+
+/* =========================================================
+   BOTTOM
+   ========================================================= */
+
+.conversation-bottom{
+
+  max-width:1100px;
+
+  margin:55px auto 0;
+
+  display:grid;
+
+  grid-template-columns:60px 1fr;
+
+  gap:22px;
+
+  padding:31px;
+
+  background:#fff;
+
+  border:1px solid var(--line);
+
+  border-radius:20px;
+
+  box-shadow:0 16px 42px rgba(35,67,100,.05);
+}
+
+.bottom-number{
+
+  color:var(--blue);
+
+  font-size:18px;
+
+  font-weight:900;
+}
+
+.bottom-eyebrow{
+
+  color:var(--blue);
+
+  font-size:10px;
+
+  letter-spacing:1.5px;
+
+  font-weight:900;
+}
+
+.conversation-bottom h3{
+
+  margin:10px 0 13px;
+
+  color:var(--deep);
+
+  font-size:31px;
+
+  line-height:1.15;
+
+  letter-spacing:-1.3px;
+}
+
+.conversation-bottom h3 span{
+
+  color:var(--blue);
+}
+
+.conversation-bottom p{
+
+  margin:0;
+
+  max-width:900px;
+
+  color:#647589;
+
+  font-size:17px;
+
+  line-height:1.72;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media(max-width:1200px){
+
+  .conversation-system{
+
+    grid-template-columns:250px minmax(450px,1fr);
+  }
+
+  .intelligence-panel{
+
+    grid-column:1/-1;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:800px){
+
+  .aws-conversation-section{
+
+    padding:90px 4% 75px;
+  }
+
+  .conversation-intro h2{
+
+    font-size:40px;
+
+    letter-spacing:-2px;
+  }
+
+  .conversation-subtext{
+
+    font-size:17px;
+
+    line-height:1.65;
+  }
+
+  .conversation-industries{
+
+    justify-content:flex-start;
+
+    overflow-x:auto;
+
+    flex-wrap:nowrap;
+
+    padding-bottom:5px;
+  }
+
+  .industry-btn{
+
+    flex:none;
+  }
+
+  .conversation-system{
+
+    display:flex;
+
+    flex-direction:column;
+  }
+
+  .lead-panel{
+
+    order:1;
+  }
+
+  .conversation-panel{
+
+    order:2;
+  }
+
+  .intelligence-panel{
+
+    order:3;
+  }
+
+  .conversation-scroll{
+
+    height:650px;
+
+    padding:20px 15px 40px;
+  }
+
+  .conversation-panel-head{
+
+    padding:20px 17px;
+  }
+
+  .tracked-badge{
+
+    display:none;
+  }
+
+  .channel-tabs{
+
+    overflow-x:auto;
+  }
+
+  .channel-tab{
+
+    white-space:nowrap;
+  }
+
+  .message div{
+
+    max-width:93%;
+
+    font-size:13px;
+  }
+
+  .email-toolbar{
+
+    align-items:flex-start;
+  }
+
+  .email-toolbar > span{
+
+    display:none;
+  }
+
+  .speaker-line{
+
+    grid-template-columns:1fr;
+
+    gap:5px;
+  }
+
+  .conversation-bottom{
+
+    grid-template-columns:1fr;
+
+    gap:10px;
+
+    padding:24px;
+
+    margin-top:35px;
+  }
+
+  .conversation-bottom h3{
+
+    font-size:25px;
+  }
+
+  .conversation-bottom p{
+
+    font-size:15px;
+  }
+
+}
+
+</style>
+
+
+
+<script>
+
+/* =========================================================
+   AWSZ — CONVERSATION INTELLIGENCE ENGINE
+   ========================================================= */
+
+(function(){
+
+  const cases = {
+
+    software:{
+      avatar:"DK",
+      name:"Daniel Kim",
+      source:"LinkedIn · SaaS Demo Request",
+      industry:"Software",
+      requirement:"CRM Automation",
+      value:"$8,400",
+      first:"9:14 AM",
+      last:"4:42 PM",
+      intent:"“Can you show me how this would work with our current CRM?”",
+      alert:"The lead was interested, responded to follow-ups, and still did not close."
+    },
+
+    beauty:{
+      avatar:"EM",
+      name:"Emily Morgan",
+      source:"Instagram · Skin Treatment Inquiry",
+      industry:"Beauty",
+      requirement:"Acne Treatment Package",
+      value:"$1,800",
+      first:"10:21 AM",
+      last:"5:16 PM",
+      intent:"“How much is the full treatment and can I book this week?”",
+      alert:"The client asked for price, availability and booking. The final follow-up never created a confirmed appointment."
+    },
+
+    mortgage:{
+      avatar:"RH",
+      name:"Robert Harris",
+      source:"Facebook · Reverse Mortgage",
+      industry:"Mortgage",
+      requirement:"Reverse Mortgage",
+      value:"$285,000",
+      first:"10:12 AM",
+      last:"4:18 PM",
+      intent:"“Can someone explain what my mother could qualify for?”",
+      alert:"The client completed qualification questions but the document follow-up was never assigned to a specific team member."
+    },
+
+    realestate:{
+      avatar:"AL",
+      name:"Andrew Lewis",
+      source:"Zillow · Property Inquiry",
+      industry:"Real Estate",
+      requirement:"Single Family Home",
+      value:"$625,000",
+      first:"8:47 AM",
+      last:"6:02 PM",
+      intent:"“I like the property. Can we arrange a viewing this weekend?”",
+      alert:"The buyer requested a viewing and responded to the agent, but nobody confirmed the appointment."
+    },
+
+    inspection:{
+      avatar:"JS",
+      name:"Jason Smith",
+      source:"Google · Home Inspection",
+      industry:"Home Inspection",
+      requirement:"Pre-Purchase Inspection",
+      value:"$650",
+      first:"11:03 AM",
+      last:"3:51 PM",
+      intent:"“Can you inspect the house before Friday?”",
+      alert:"The homeowner had a deadline and requested availability, but the scheduling handoff was never completed."
+    },
+
+    insurance:{
+      avatar:"MW",
+      name:"Michael Wilson",
+      source:"Google · Insurance Quote",
+      industry:"Insurance",
+      requirement:"Home Insurance",
+      value:"$3,200 / year",
+      first:"9:38 AM",
+      last:"4:27 PM",
+      intent:"“Can you give me a quote and explain what is actually covered?”",
+      alert:"The client requested clarification before buying, but the conversation ended without a scheduled advisor follow-up."
+    }
+
+  };
+
+
+  const buttons =
+    document.querySelectorAll(".industry-btn");
+
+
+  function setCase(caseName){
+
+    const data = cases[caseName];
+
+    if(!data) return;
+
+
+    document.getElementById("caseAvatar").textContent =
+      data.avatar;
+
+    document.getElementById("caseName").textContent =
+      data.name;
+
+    document.getElementById("caseSource").textContent =
+      data.source;
+
+    document.getElementById("caseIndustry").textContent =
+      data.industry;
+
+    document.getElementById("caseRequirement").textContent =
+      data.requirement;
+
+    document.getElementById("caseValue").textContent =
+      data.value;
+
+    document.getElementById("caseFirst").textContent =
+      data.first;
+
+    document.getElementById("caseLast").textContent =
+      data.last;
+
+    document.getElementById("caseIntent").textContent =
+      data.intent;
+
+    document.getElementById("caseAlert").textContent =
+      data.alert;
+
+
+    buttons.forEach(button=>{
+
+      button.classList.toggle(
+        "active",
+        button.dataset.case === caseName
+      );
+
+    });
+
+  }
+
+
+  buttons.forEach(button=>{
+
+    button.addEventListener("click",function(){
+
+      setCase(this.dataset.case);
+
+    });
+
+  });
+
+
+  /* =======================================================
+     AUDIO ENGINE
+
+     Client and employee have DIFFERENT browser voices.
+     Play / Pause / Resume / Stop.
+     ======================================================= */
+
+  const playButton =
+    document.getElementById("audioPlay");
+
+  const pauseButton =
+    document.getElementById("audioPause");
+
+  const stopButton =
+    document.getElementById("audioStop");
+
+  const status =
+    document.getElementById("audioStatus");
+
+  const bars =
+    document.querySelectorAll(
+      "#audioWaveform i"
+    );
+
+
+  const conversation = [
+
+    {
+      speaker:"client",
+      text:
+        "Hi, yes. I wanted to understand the pricing before we move forward."
+    },
+
+    {
+      speaker:"employee",
+      text:
+        "Absolutely. Based on what you've described, we'd need to confirm the exact integrations before giving you a final number."
+    },
+
+    {
+      speaker:"client",
+      text:
+        "Okay. That's fine. Can you send me the exact breakdown after the call?"
+    },
+
+    {
+      speaker:"employee",
+      text:
+        "Yes. I'll send that over today."
+    },
+
+    {
+      speaker:"client",
+      text:
+        "Perfect. Once I see that, I'll discuss it with my partner and get back to you."
+    }
+
+  ];
+
+
+  let voices = [];
+
+  let currentIndex = 0;
+
+  let currentUtterance = null;
+
+  let isPaused = false;
+
+  let waveformTimer = null;
+
+
+  function loadVoices(){
+
+    voices =
+      window.speechSynthesis.getVoices();
+
+  }
+
+
+  loadVoices();
+
+  if("onvoiceschanged" in window){
+
+    window.speechSynthesis.onvoiceschanged =
+      loadVoices;
+
+  }
+
+
+  function getVoice(type){
+
+    const english =
+      voices.filter(
+        voice =>
+          voice.lang &&
+          voice.lang.toLowerCase().startsWith("en")
+      );
+
+
+    if(!english.length){
+
+      return null;
+
+    }
+
+
+    if(type === "client"){
+
+      return (
+        english.find(
+          voice =>
+            /female|zira|samantha|susan|google us english/i
+              .test(voice.name)
+        ) ||
+        english[0]
+      );
+
+    }
+
+
+    return (
+      english.find(
+        voice =>
+          /male|david|daniel|alex|mark|google uk english/i
+            .test(voice.name)
+      ) ||
+      english[1] ||
+      english[0]
+    );
+
+  }
+
+
+  function animateWave(){
+
+    clearInterval(waveformTimer);
+
+    let position = 0;
+
+    waveformTimer =
+      setInterval(()=>{
+
+        if(
+          window.speechSynthesis.paused ||
+          !window.speechSynthesis.speaking
+        ){
+
+          return;
+
+        }
+
+
+        bars.forEach((bar,index)=>{
+
+          if(index === position % bars.length){
+
+            bar.style.transform =
+              "scaleY(1.7)";
+
+          }else{
+
+            bar.style.transform =
+              "scaleY(1)";
+
+          }
+
+        });
+
+
+        position++;
+
+      },110);
+
+  }
+
+
+  function resetWave(){
+
+    bars.forEach(bar=>{
+
+      bar.style.transform =
+        "scaleY(1)";
+
+    });
+
+  }
+
+
+  function speakNext(){
+
+    if(currentIndex >= conversation.length){
+
+      status.textContent =
+        "Recording finished";
+
+      playButton.textContent =
+        "▶";
+
+      currentIndex = 0;
+
+      clearInterval(waveformTimer);
+
+      resetWave();
+
+      return;
+
+    }
+
+
+    const part =
+      conversation[currentIndex];
+
+
+    currentUtterance =
+      new SpeechSynthesisUtterance(
+        part.text
+      );
+
+
+    currentUtterance.lang =
+      "en-US";
+
+
+    currentUtterance.rate =
+      .88;
+
+    currentUtterance.pitch =
+      part.speaker === "client"
+        ? 1.08
+        : .88;
+
+
+    const selectedVoice =
+      getVoice(part.speaker);
+
+
+    if(selectedVoice){
+
+      currentUtterance.voice =
+        selectedVoice;
+
+    }
+
+
+    currentUtterance.onstart = ()=>{
+
+      status.textContent =
+        part.speaker === "client"
+          ? "Client speaking…"
+          : "Sales team speaking…";
+
+      playButton.textContent =
+        "❚❚";
+
+      animateWave();
+
+    };
+
+
+    currentUtterance.onend = ()=>{
+
+      currentIndex++;
+
+      if(!isPaused){
+
+        setTimeout(
+          speakNext,
+          250
+        );
+
+      }
+
+    };
+
+
+    currentUtterance.onerror = ()=>{
+
+      status.textContent =
+        "Audio playback error";
+
+      playButton.textContent =
+        "▶";
+
+    };
+
+
+    window.speechSynthesis.speak(
+      currentUtterance
+    );
+
+  }
+
+
+  playButton.addEventListener(
+    "click",
+    function(){
+
+      if(
+        !("speechSynthesis" in window)
+      ){
+
+        status.textContent =
+          "Browser audio unavailable";
+
+        return;
+
+      }
+
+
+      if(
+        window.speechSynthesis.paused
+      ){
+
+        window.speechSynthesis.resume();
+
+        isPaused = false;
+
+        status.textContent =
+          "Conversation playing…";
+
+        playButton.textContent =
+          "❚❚";
+
+        return;
+
+      }
+
+
+      if(
+        window.speechSynthesis.speaking
+      ){
+
+        window.speechSynthesis.pause();
+
+        isPaused = true;
+
+        status.textContent =
+          "Conversation paused";
+
+        playButton.textContent =
+          "▶";
+
+        return;
+
+      }
+
+
+      currentIndex = 0;
+
+      isPaused = false;
+
+      speakNext();
+
+    }
+  );
+
+
+  pauseButton.addEventListener(
+    "click",
+    function(){
+
+      if(
+        window.speechSynthesis.speaking
+      ){
+
+        window.speechSynthesis.pause();
+
+        isPaused = true;
+
+        status.textContent =
+          "Conversation paused";
+
+        playButton.textContent =
+          "▶";
+
+      }
+
+    }
+  );
+
+
+  stopButton.addEventListener(
+    "click",
+    function(){
+
+      window.speechSynthesis.cancel();
+
+      currentIndex = 0;
+
+      isPaused = false;
+
+      clearInterval(
+        waveformTimer
+      );
+
+      resetWave();
+
+      playButton.textContent =
+        "▶";
+
+      status.textContent =
+        "Ready to play";
+
+    }
+  );
+
+
+  /* INITIAL CASE */
+
+  setCase("software");
+
+})();
+
+</script>
