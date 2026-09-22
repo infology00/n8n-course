@@ -3806,3 +3806,4008 @@ render("Overview");
 
 <script>
 
+<section class="aws-conversation-section" id="conversationTracking">
+
+  <div class="aws-conversation-container">
+
+    <!-- =========================
+         INTRO
+    ========================== -->
+
+    <div class="aws-conversation-intro">
+
+      <div class="aws-section-kicker">
+        CONVERSATION INTELLIGENCE
+      </div>
+
+      <h2>
+        You had the conversation.<br>
+        <span>So why did you still lose the lead?</span>
+      </h2>
+
+      <p>
+        Your CRM can capture messages, emails and calls. But capturing a conversation
+        is not the same as understanding what happened inside it — or knowing where
+        the opportunity was lost.
+      </p>
+
+    </div>
+
+
+    <!-- =========================
+         INDUSTRY SELECTOR
+    ========================== -->
+
+    <div class="aws-industry-selector">
+
+      <button class="aws-industry-btn active" data-case="software">
+        <span>01</span>
+        Software
+      </button>
+
+      <button class="aws-industry-btn" data-case="beauty">
+        <span>02</span>
+        Beauty
+      </button>
+
+      <button class="aws-industry-btn" data-case="mortgage">
+        <span>03</span>
+        Mortgage
+      </button>
+
+      <button class="aws-industry-btn" data-case="realestate">
+        <span>04</span>
+        Real Estate
+      </button>
+
+      <button class="aws-industry-btn" data-case="inspection">
+        <span>05</span>
+        Home Inspection
+      </button>
+
+      <button class="aws-industry-btn" data-case="insurance">
+        <span>06</span>
+        Insurance
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         MAIN SYSTEM
+    ========================== -->
+
+    <div class="aws-conversation-system">
+
+
+      <!-- =========================
+           LEFT PROFILE
+      ========================== -->
+
+      <aside class="aws-lead-panel">
+
+        <div class="aws-panel-label">
+          LEAD PROFILE
+        </div>
+
+        <div class="aws-lead-avatar" id="leadAvatar">
+          DK
+        </div>
+
+        <h3 id="leadName">
+          Daniel Kim
+        </h3>
+
+        <div class="aws-lead-source" id="leadSource">
+          LinkedIn
+        </div>
+
+
+        <div class="aws-lead-divider"></div>
+
+
+        <div class="aws-lead-info">
+
+          <div class="aws-info-row">
+            <span>Industry</span>
+            <strong id="leadIndustry">Software</strong>
+          </div>
+
+          <div class="aws-info-row">
+            <span>Requirement</span>
+            <strong id="leadRequirement">CRM Automation</strong>
+          </div>
+
+          <div class="aws-info-row">
+            <span>Potential Value</span>
+            <strong id="leadValue">$8,400</strong>
+          </div>
+
+          <div class="aws-info-row">
+            <span>First Contact</span>
+            <strong id="leadFirstContact">09:14 AM</strong>
+          </div>
+
+          <div class="aws-info-row">
+            <span>Last Contact</span>
+            <strong id="leadLastContact">02:42 PM</strong>
+          </div>
+
+        </div>
+
+
+        <div class="aws-buying-signal">
+
+          <div class="aws-small-label">
+            BUYING SIGNAL
+          </div>
+
+          <div id="buyingSignal">
+            Asked about implementation timeline and pricing.
+          </div>
+
+        </div>
+
+
+        <div class="aws-lead-alert">
+
+          <div class="aws-alert-icon">
+            !
+          </div>
+
+          <div>
+            <strong>Lead Lost</strong>
+
+            <p id="leadAlert">
+              Conversation completed, but no follow-up owner was assigned.
+            </p>
+          </div>
+
+        </div>
+
+      </aside>
+
+
+      <!-- =========================
+           CENTER CONVERSATION
+      ========================== -->
+
+      <main class="aws-conversation-panel">
+
+        <div class="aws-conversation-header">
+
+          <div>
+
+            <div class="aws-panel-label">
+              CONVERSATION TIMELINE
+            </div>
+
+            <h3 id="conversationTitle">
+              Daniel Kim · CRM Automation
+            </h3>
+
+          </div>
+
+          <div class="aws-conversation-status">
+            CLOSED WITHOUT SALE
+          </div>
+
+        </div>
+
+
+        <!-- CHANNELS -->
+
+        <div class="aws-channel-tabs">
+
+          <button class="aws-channel-tab active" data-channel="messages">
+
+            <span class="aws-channel-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M20 11.5a7.5 7.5 0 0 1-8 7.45 8.4 8.4 0 0 1-3-.55L4 20l1.6-3.9A7.3 7.3 0 0 1 4.5 11.5 7.5 7.5 0 1 1 20 11.5Z"/>
+              </svg>
+            </span>
+
+            <span>Messages</span>
+
+          </button>
+
+
+          <button class="aws-channel-tab" data-channel="email">
+
+            <span class="aws-channel-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M3 5h18v14H3V5Z"/>
+                <path d="m3 6 9 7 9-7"/>
+              </svg>
+            </span>
+
+            <span>Email</span>
+
+          </button>
+
+
+          <button class="aws-channel-tab" data-channel="call">
+
+            <span class="aws-channel-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M6.5 3.5 9 3l2 5-2.2 1.8a14 14 0 0 0 5.9 5.9l1.8-2.2 5 2 .5 2.5c.2 1-.5 2-1.5 2.3-2.1.6-5.7-.4-9.4-4.1S5 9.9 5.7 7.8C6 6.8 6.5 5 6.5 3.5Z"/>
+              </svg>
+            </span>
+
+            <span>Call</span>
+
+          </button>
+
+        </div>
+
+
+        <!-- TIMELINE -->
+
+        <div class="aws-conversation-scroll" id="conversationContent">
+
+          <!-- Dynamic content inserted by JS -->
+
+        </div>
+
+      </main>
+
+
+      <!-- =========================
+           RIGHT INTELLIGENCE PANEL
+      ========================== -->
+
+      <aside class="aws-intelligence-panel">
+
+        <div class="aws-panel-label">
+          TEAM BRIEFING
+        </div>
+
+        <h3>
+          Don't just store<br>
+          the conversation.
+        </h3>
+
+        <p class="aws-intelligence-intro">
+          Turn every interaction into information your team can actually act on.
+        </p>
+
+
+        <div class="aws-brief-list">
+
+          <div class="aws-brief-item">
+
+            <div class="aws-brief-number">
+              01
+            </div>
+
+            <div>
+              <strong>Client was interested</strong>
+              <p id="briefInterest">
+                The lead asked about pricing and implementation.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="aws-brief-item">
+
+            <div class="aws-brief-number">
+              02
+            </div>
+
+            <div>
+              <strong>No clear objection</strong>
+              <p id="briefObjection">
+                Nothing in the conversation indicated that the client rejected the offer.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="aws-brief-item">
+
+            <div class="aws-brief-number">
+              03
+            </div>
+
+            <div>
+              <strong>Follow-up ownership missing</strong>
+              <p id="briefFollowup">
+                Nobody was clearly responsible for the next step.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="aws-brief-item">
+
+            <div class="aws-brief-number">
+              04
+            </div>
+
+            <div>
+              <strong>What should be monitored?</strong>
+              <p id="briefMonitor">
+                Buying signals, response time and follow-up completion.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- MONITORING -->
+
+        <div class="aws-monitor-box">
+
+          <div class="aws-monitor-title">
+            MONITORING
+          </div>
+
+
+          <div class="aws-monitor-row">
+            <span>Message captured</span>
+            <b class="yes">YES</b>
+          </div>
+
+
+          <div class="aws-monitor-row">
+            <span>Email captured</span>
+            <b class="yes">YES</b>
+          </div>
+
+
+          <div class="aws-monitor-row">
+            <span>Call recorded</span>
+            <b class="yes">YES</b>
+          </div>
+
+
+          <div class="aws-monitor-row">
+            <span>Buying signal detected</span>
+            <b class="yes">YES</b>
+          </div>
+
+
+          <div class="aws-monitor-row">
+            <span>Follow-up owner</span>
+            <b class="no">NO</b>
+          </div>
+
+
+          <div class="aws-monitor-row">
+            <span>Follow-up deadline</span>
+            <b class="no">NO</b>
+          </div>
+
+        </div>
+
+
+        <div class="aws-system-result">
+
+          <span class="aws-result-dot"></span>
+
+          <strong>
+            Your automation worked.<br>
+            Your process didn't.
+          </strong>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+
+    <!-- =========================
+         BOTTOM MESSAGE
+    ========================== -->
+
+    <div class="aws-conversation-bottom">
+
+      <div class="aws-bottom-kicker">
+        FROM CONVERSATION → ACTION
+      </div>
+
+      <h3>
+        This is how you find the leads<br>
+        you didn't know you were losing.
+      </h3>
+
+      <p>
+        Conversation tracking isn't about collecting more data.
+        It's about understanding what happened, identifying where
+        the process broke, and giving your team or AI system the
+        information needed to improve the next interaction.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+.aws-conversation-section{
+  --aws-cloud:#f4f8fc;
+  --aws-cloud-2:#eaf2fa;
+  --aws-cloud-3:#dceaf7;
+
+  --aws-blue:#246bce;
+  --aws-blue-dark:#123b70;
+  --aws-deep:#0b2850;
+
+  --aws-charcoal:#171a1d;
+  --aws-text:#252a2f;
+  --aws-muted:#66768a;
+
+  --aws-border:#d8e4ef;
+
+  --aws-red:#d93838;
+  --aws-red-soft:#fff1f1;
+
+  width:100%;
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(255,255,255,.95),
+      transparent 32%
+    ),
+    linear-gradient(
+      180deg,
+      #f7fbff 0%,
+      var(--aws-cloud) 100%
+    );
+
+  padding:130px 0 120px;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color:var(--aws-text);
+}
+
+
+.aws-conversation-container{
+  width:min(1480px,92%);
+  margin:0 auto;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.aws-conversation-intro{
+  max-width:920px;
+  margin:0 auto 58px;
+  text-align:center;
+}
+
+
+.aws-section-kicker{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:2.5px;
+
+  color:var(--aws-blue);
+
+  margin-bottom:20px;
+}
+
+
+.aws-conversation-intro h2{
+  margin:0;
+
+  font-size:clamp(42px,5vw,72px);
+
+  line-height:1.02;
+
+  letter-spacing:-3.5px;
+
+  font-weight:800;
+
+  color:var(--aws-charcoal);
+}
+
+
+.aws-conversation-intro h2 span{
+  color:var(--aws-blue);
+}
+
+
+.aws-conversation-intro p{
+  max-width:820px;
+
+  margin:27px auto 0;
+
+  font-size:20px;
+
+  line-height:1.7;
+
+  color:var(--aws-muted);
+}
+
+
+/* =========================================================
+   INDUSTRY SELECTOR
+========================================================= */
+
+.aws-industry-selector{
+  display:flex;
+
+  justify-content:center;
+
+  gap:8px;
+
+  flex-wrap:wrap;
+
+  margin-bottom:22px;
+}
+
+
+.aws-industry-btn{
+  appearance:none;
+
+  border:1px solid var(--aws-border);
+
+  background:#fff;
+
+  color:#66768a;
+
+  border-radius:999px;
+
+  padding:12px 17px;
+
+  font-size:13px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:
+    background .25s ease,
+    color .25s ease,
+    border-color .25s ease,
+    transform .25s ease;
+}
+
+
+.aws-industry-btn span{
+  opacity:.45;
+
+  margin-right:6px;
+
+  font-size:10px;
+}
+
+
+.aws-industry-btn:hover{
+  transform:translateY(-2px);
+
+  border-color:#b8cee4;
+
+  color:var(--aws-blue);
+}
+
+
+.aws-industry-btn.active{
+  background:var(--aws-deep);
+
+  color:#fff;
+
+  border-color:var(--aws-deep);
+}
+
+
+/* =========================================================
+   MAIN SYSTEM
+========================================================= */
+
+.aws-conversation-system{
+  display:grid;
+
+  grid-template-columns:
+    250px
+    minmax(500px,1fr)
+    315px;
+
+  min-height:720px;
+
+  background:#fff;
+
+  border:1px solid var(--aws-border);
+
+  border-radius:26px;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 30px 90px rgba(24,64,102,.10),
+    0 5px 20px rgba(24,64,102,.04);
+}
+
+
+/* =========================================================
+   LEFT LEAD PANEL
+========================================================= */
+
+.aws-lead-panel{
+  padding:28px 23px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f8fbfe 0%,
+      #eef5fb 100%
+    );
+
+  border-right:1px solid var(--aws-border);
+}
+
+
+.aws-panel-label{
+  font-size:10px;
+
+  letter-spacing:1.8px;
+
+  font-weight:800;
+
+  color:#8292a5;
+
+  margin-bottom:22px;
+}
+
+
+.aws-lead-avatar{
+  width:52px;
+  height:52px;
+
+  border-radius:16px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  background:var(--aws-blue);
+
+  color:#fff;
+
+  font-size:15px;
+
+  font-weight:800;
+
+  margin-bottom:14px;
+
+  box-shadow:
+    0 10px 25px rgba(36,107,206,.22);
+}
+
+
+.aws-lead-panel h3{
+  margin:0;
+
+  font-size:21px;
+
+  letter-spacing:-.5px;
+
+  color:var(--aws-charcoal);
+}
+
+
+.aws-lead-source{
+  margin-top:5px;
+
+  font-size:13px;
+
+  color:var(--aws-muted);
+}
+
+
+.aws-lead-divider{
+  height:1px;
+
+  background:var(--aws-border);
+
+  margin:23px 0;
+}
+
+
+.aws-lead-info{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:16px;
+}
+
+
+.aws-info-row{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:4px;
+}
+
+
+.aws-info-row span{
+  font-size:10px;
+
+  text-transform:uppercase;
+
+  letter-spacing:1px;
+
+  font-weight:700;
+
+  color:#8797a8;
+}
+
+
+.aws-info-row strong{
+  font-size:13px;
+
+  line-height:1.35;
+
+  color:var(--aws-charcoal);
+}
+
+
+.aws-buying-signal{
+  margin-top:24px;
+
+  padding:14px;
+
+  background:#fff;
+
+  border:1px solid var(--aws-border);
+
+  border-radius:13px;
+}
+
+
+.aws-small-label{
+  font-size:9px;
+
+  letter-spacing:1.5px;
+
+  font-weight:800;
+
+  color:var(--aws-blue);
+
+  margin-bottom:8px;
+}
+
+
+.aws-buying-signal div:last-child{
+  font-size:12px;
+
+  line-height:1.55;
+
+  color:#536477;
+}
+
+
+.aws-lead-alert{
+  display:flex;
+
+  gap:10px;
+
+  margin-top:15px;
+
+  padding:14px;
+
+  border-radius:13px;
+
+  background:var(--aws-red-soft);
+
+  border:1px solid #f1caca;
+
+  color:var(--aws-red);
+}
+
+
+.aws-alert-icon{
+  width:20px;
+  height:20px;
+
+  min-width:20px;
+
+  border-radius:50%;
+
+  background:var(--aws-red);
+
+  color:#fff;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  font-size:11px;
+
+  font-weight:900;
+}
+
+
+.aws-lead-alert strong{
+  display:block;
+
+  font-size:12px;
+
+  margin-bottom:4px;
+}
+
+
+.aws-lead-alert p{
+  margin:0;
+
+  font-size:11px;
+
+  line-height:1.5;
+
+  color:#a74a4a;
+}
+
+
+/* =========================================================
+   CENTER
+========================================================= */
+
+.aws-conversation-panel{
+  min-width:0;
+
+  display:flex;
+
+  flex-direction:column;
+
+  background:#fff;
+}
+
+
+.aws-conversation-header{
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:20px;
+
+  padding:27px 27px 21px;
+
+  border-bottom:1px solid var(--aws-border);
+}
+
+
+.aws-conversation-header .aws-panel-label{
+  margin-bottom:7px;
+}
+
+
+.aws-conversation-header h3{
+  margin:0;
+
+  font-size:19px;
+
+  letter-spacing:-.4px;
+
+  color:var(--aws-charcoal);
+}
+
+
+.aws-conversation-status{
+  flex-shrink:0;
+
+  padding:7px 10px;
+
+  border-radius:999px;
+
+  background:var(--aws-red-soft);
+
+  color:var(--aws-red);
+
+  border:1px solid #f0cccc;
+
+  font-size:9px;
+
+  font-weight:800;
+
+  letter-spacing:1px;
+}
+
+
+/* =========================================================
+   CHANNEL TABS
+========================================================= */
+
+.aws-channel-tabs{
+  display:flex;
+
+  gap:5px;
+
+  padding:12px 18px;
+
+  border-bottom:1px solid var(--aws-border);
+
+  background:#fbfdff;
+}
+
+
+.aws-channel-tab{
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  padding:9px 12px;
+
+  border:0;
+
+  border-radius:9px;
+
+  background:transparent;
+
+  color:#7b8998;
+
+  font-size:11px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.2s ease;
+}
+
+
+.aws-channel-tab:hover{
+  color:var(--aws-blue);
+
+  background:#f0f6fc;
+}
+
+
+.aws-channel-tab.active{
+  background:#e9f2fc;
+
+  color:var(--aws-blue);
+}
+
+
+.aws-channel-icon{
+  width:17px;
+  height:17px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+}
+
+
+.aws-channel-icon svg{
+  width:16px;
+  height:16px;
+
+  fill:none;
+
+  stroke:currentColor;
+
+  stroke-width:1.7;
+
+  stroke-linecap:round;
+
+  stroke-linejoin:round;
+}
+
+
+/* =========================================================
+   CONVERSATION SCROLL
+========================================================= */
+
+.aws-conversation-scroll{
+  flex:1;
+
+  min-height:0;
+
+  overflow-y:auto;
+
+  padding:22px 25px 28px;
+
+  scroll-behavior:smooth;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fbfdff 100%
+    );
+}
+
+
+.aws-conversation-scroll::-webkit-scrollbar{
+  width:6px;
+}
+
+
+.aws-conversation-scroll::-webkit-scrollbar-track{
+  background:transparent;
+}
+
+
+.aws-conversation-scroll::-webkit-scrollbar-thumb{
+  background:#ccd9e5;
+
+  border-radius:20px;
+}
+
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+.aws-timeline-item{
+  position:relative;
+
+  padding-left:24px;
+
+  margin-bottom:22px;
+}
+
+
+.aws-timeline-item::before{
+  content:"";
+
+  position:absolute;
+
+  left:6px;
+  top:23px;
+  bottom:-25px;
+
+  width:1px;
+
+  background:#dbe5ee;
+}
+
+
+.aws-timeline-item:last-child::before{
+  display:none;
+}
+
+
+.aws-timeline-dot{
+  position:absolute;
+
+  left:0;
+  top:8px;
+
+  width:13px;
+  height:13px;
+
+  border-radius:50%;
+
+  background:#fff;
+
+  border:3px solid var(--aws-blue);
+
+  z-index:2;
+}
+
+
+.aws-timeline-time{
+  font-size:10px;
+
+  color:#8a99a8;
+
+  margin-bottom:7px;
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.aws-message-card{
+  max-width:90%;
+
+  padding:14px 15px;
+
+  border:1px solid var(--aws-border);
+
+  border-radius:13px;
+
+  background:#fff;
+}
+
+
+.aws-message-card.client{
+  background:#f2f7fc;
+}
+
+
+.aws-message-card.team{
+  margin-left:auto;
+
+  background:#edf5ff;
+
+  border-color:#d3e4f7;
+}
+
+
+.aws-message-header{
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-bottom:7px;
+}
+
+
+.aws-message-person{
+  font-size:11px;
+
+  font-weight:800;
+
+  color:var(--aws-charcoal);
+}
+
+
+.aws-message-role{
+  font-size:9px;
+
+  color:#8292a2;
+
+  text-transform:uppercase;
+
+  letter-spacing:.7px;
+}
+
+
+.aws-message-card p{
+  margin:0;
+
+  font-size:13px;
+
+  line-height:1.6;
+
+  color:#536477;
+}
+
+
+/* =========================================================
+   EMAIL
+========================================================= */
+
+.aws-email-window{
+  border:1px solid #d7e2ec;
+
+  border-radius:14px;
+
+  overflow:hidden;
+
+  background:#fff;
+
+  box-shadow:0 7px 22px rgba(28,65,100,.05);
+}
+
+
+.aws-email-top{
+  padding:10px 13px;
+
+  background:#f3f7fb;
+
+  border-bottom:1px solid #dce5ed;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:6px;
+}
+
+
+.aws-email-dot{
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:#b7c5d2;
+}
+
+
+.aws-email-meta{
+  padding:14px;
+
+  border-bottom:1px solid #e1e8ef;
+}
+
+
+.aws-email-line{
+  display:flex;
+
+  gap:8px;
+
+  margin-bottom:5px;
+
+  font-size:11px;
+}
+
+
+.aws-email-line:last-child{
+  margin-bottom:0;
+}
+
+
+.aws-email-line span{
+  width:54px;
+
+  color:#8998a7;
+
+  font-weight:600;
+}
+
+
+.aws-email-line strong{
+  color:#344352;
+
+  font-weight:700;
+}
+
+
+.aws-email-body{
+  padding:17px;
+}
+
+
+.aws-email-subject{
+  font-size:14px;
+
+  font-weight:800;
+
+  color:var(--aws-charcoal);
+
+  margin-bottom:13px;
+}
+
+
+.aws-email-body p{
+  margin:0 0 11px;
+
+  font-size:12px;
+
+  line-height:1.7;
+
+  color:#56687b;
+}
+
+
+.aws-email-body p:last-child{
+  margin-bottom:0;
+}
+
+
+/* =========================================================
+   CALL
+========================================================= */
+
+.aws-call-card{
+  border:1px solid #d8e3ed;
+
+  border-radius:15px;
+
+  background:#fff;
+
+  overflow:hidden;
+}
+
+
+.aws-call-head{
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:13px 15px;
+
+  border-bottom:1px solid #e1e8ee;
+
+  background:#f7fafc;
+}
+
+
+.aws-call-title{
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  color:var(--aws-charcoal);
+}
+
+
+.aws-call-icon{
+  width:28px;
+  height:28px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  border-radius:9px;
+
+  background:#e8f2fc;
+
+  color:var(--aws-blue);
+}
+
+
+.aws-call-icon svg{
+  width:15px;
+  height:15px;
+
+  fill:none;
+
+  stroke:currentColor;
+
+  stroke-width:1.7;
+
+  stroke-linecap:round;
+
+  stroke-linejoin:round;
+}
+
+
+.aws-call-duration{
+  font-size:10px;
+
+  color:#8291a0;
+}
+
+
+.aws-call-body{
+  padding:18px;
+}
+
+
+.aws-call-player{
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  margin-bottom:16px;
+}
+
+
+.aws-call-control{
+  width:34px;
+  height:34px;
+
+  border-radius:50%;
+
+  border:1px solid #cfdeec;
+
+  background:#fff;
+
+  color:var(--aws-blue);
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  font-size:13px;
+
+  transition:.2s ease;
+}
+
+
+.aws-call-control:hover{
+  background:#edf5fd;
+
+  border-color:#a9c7e4;
+}
+
+
+.aws-call-control.primary{
+  width:42px;
+  height:42px;
+
+  background:var(--aws-blue);
+
+  color:#fff;
+
+  border-color:var(--aws-blue);
+}
+
+
+.aws-call-control.primary:hover{
+  background:var(--aws-blue-dark);
+}
+
+
+.aws-waveform{
+  flex:1;
+
+  height:34px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:3px;
+
+  overflow:hidden;
+}
+
+
+.aws-wave-bar{
+  width:3px;
+
+  min-width:3px;
+
+  height:8px;
+
+  border-radius:5px;
+
+  background:#a8bfd5;
+
+  transition:height .15s ease;
+}
+
+
+.aws-call-player.playing .aws-wave-bar{
+  animation:awsWave .75s ease-in-out infinite alternate;
+}
+
+
+.aws-call-player.playing .aws-wave-bar:nth-child(2n){
+  animation-delay:.15s;
+}
+
+
+.aws-call-player.playing .aws-wave-bar:nth-child(3n){
+  animation-delay:.3s;
+}
+
+
+.aws-call-player.playing .aws-wave-bar:nth-child(4n){
+  animation-delay:.45s;
+}
+
+
+@keyframes awsWave{
+  from{
+    height:6px;
+  }
+
+  to{
+    height:28px;
+  }
+}
+
+
+.aws-call-status{
+  margin-bottom:15px;
+
+  font-size:11px;
+
+  color:#708193;
+}
+
+
+.aws-call-transcript{
+  padding-top:14px;
+
+  border-top:1px solid #e3eaf0;
+}
+
+
+.aws-transcript-line{
+  display:grid;
+
+  grid-template-columns:75px 1fr;
+
+  gap:10px;
+
+  padding:8px 0;
+
+  font-size:11px;
+
+  line-height:1.55;
+}
+
+
+.aws-transcript-speaker{
+  font-weight:800;
+
+  color:var(--aws-blue);
+}
+
+
+.aws-transcript-line.client .aws-transcript-speaker{
+  color:#5c6c7d;
+}
+
+
+.aws-transcript-text{
+  color:#5c6c7d;
+}
+
+
+/* =========================================================
+   OUTCOME
+========================================================= */
+
+.aws-outcome-card{
+  padding:16px;
+
+  border-radius:14px;
+
+  border:1px solid #efcaca;
+
+  background:var(--aws-red-soft);
+}
+
+
+.aws-outcome-label{
+  font-size:9px;
+
+  letter-spacing:1.5px;
+
+  font-weight:800;
+
+  color:var(--aws-red);
+
+  margin-bottom:7px;
+}
+
+
+.aws-outcome-card strong{
+  display:block;
+
+  font-size:14px;
+
+  color:#9f2929;
+
+  margin-bottom:7px;
+}
+
+
+.aws-outcome-card p{
+  margin:0;
+
+  font-size:12px;
+
+  line-height:1.6;
+
+  color:#9b4b4b;
+}
+
+
+/* =========================================================
+   RIGHT INTELLIGENCE
+========================================================= */
+
+.aws-intelligence-panel{
+  padding:28px 22px;
+
+  background:#fbfdff;
+
+  border-left:1px solid var(--aws-border);
+}
+
+
+.aws-intelligence-panel .aws-panel-label{
+  margin-bottom:16px;
+}
+
+
+.aws-intelligence-panel h3{
+  margin:0;
+
+  font-size:25px;
+
+  line-height:1.12;
+
+  letter-spacing:-1px;
+
+  color:var(--aws-charcoal);
+}
+
+
+.aws-intelligence-intro{
+  margin:12px 0 25px;
+
+  font-size:12px;
+
+  line-height:1.6;
+
+  color:var(--aws-muted);
+}
+
+
+.aws-brief-list{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:15px;
+}
+
+
+.aws-brief-item{
+  display:grid;
+
+  grid-template-columns:28px 1fr;
+
+  gap:8px;
+}
+
+
+.aws-brief-number{
+  font-size:10px;
+
+  font-weight:800;
+
+  color:var(--aws-blue);
+
+  padding-top:2px;
+}
+
+
+.aws-brief-item strong{
+  display:block;
+
+  font-size:11px;
+
+  color:var(--aws-charcoal);
+
+  margin-bottom:4px;
+}
+
+
+.aws-brief-item p{
+  margin:0;
+
+  font-size:11px;
+
+  line-height:1.55;
+
+  color:#718195;
+}
+
+
+/* =========================================================
+   MONITOR BOX
+========================================================= */
+
+.aws-monitor-box{
+  margin-top:25px;
+
+  padding:14px;
+
+  border-radius:14px;
+
+  background:#fff;
+
+  border:1px solid var(--aws-border);
+}
+
+
+.aws-monitor-title{
+  font-size:9px;
+
+  font-weight:800;
+
+  letter-spacing:1.5px;
+
+  color:#8494a4;
+
+  margin-bottom:10px;
+}
+
+
+.aws-monitor-row{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  padding:7px 0;
+
+  border-bottom:1px solid #edf2f6;
+}
+
+
+.aws-monitor-row:last-child{
+  border-bottom:0;
+}
+
+
+.aws-monitor-row span{
+  font-size:10px;
+
+  color:#637487;
+}
+
+
+.aws-monitor-row b{
+  font-size:8px;
+
+  letter-spacing:.6px;
+}
+
+
+.aws-monitor-row b.yes{
+  color:#278454;
+}
+
+
+.aws-monitor-row b.no{
+  color:var(--aws-red);
+}
+
+
+.aws-system-result{
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  margin-top:16px;
+
+  padding-top:16px;
+
+  border-top:1px solid var(--aws-border);
+}
+
+
+.aws-result-dot{
+  width:8px;
+  height:8px;
+
+  border-radius:50%;
+
+  background:var(--aws-red);
+
+  box-shadow:
+    0 0 0 4px rgba(217,56,56,.08);
+}
+
+
+.aws-system-result strong{
+  font-size:10px;
+
+  line-height:1.5;
+
+  color:#667587;
+}
+
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.aws-conversation-bottom{
+  max-width:850px;
+
+  margin:80px auto 0;
+
+  text-align:center;
+}
+
+
+.aws-bottom-kicker{
+  font-size:11px;
+
+  font-weight:800;
+
+  letter-spacing:2px;
+
+  color:var(--aws-blue);
+
+  margin-bottom:17px;
+}
+
+
+.aws-conversation-bottom h3{
+  margin:0;
+
+  font-size:clamp(32px,4vw,53px);
+
+  line-height:1.08;
+
+  letter-spacing:-2.5px;
+
+  color:var(--aws-charcoal);
+}
+
+
+.aws-conversation-bottom p{
+  max-width:720px;
+
+  margin:22px auto 0;
+
+  font-size:18px;
+
+  line-height:1.7;
+
+  color:var(--aws-muted);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1200px){
+
+  .aws-conversation-system{
+    grid-template-columns:
+      220px
+      minmax(440px,1fr)
+      285px;
+  }
+
+  .aws-conversation-intro h2{
+    font-size:58px;
+  }
+
+}
+
+
+@media(max-width:1050px){
+
+  .aws-conversation-system{
+    grid-template-columns:
+      210px
+      minmax(400px,1fr);
+  }
+
+  .aws-intelligence-panel{
+    grid-column:1 / -1;
+
+    border-left:0;
+
+    border-top:1px solid var(--aws-border);
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:25px;
+  }
+
+  .aws-intelligence-panel .aws-panel-label{
+    grid-column:1 / -1;
+
+    margin-bottom:-12px;
+  }
+
+  .aws-intelligence-panel h3{
+    grid-column:1;
+  }
+
+  .aws-intelligence-intro{
+    grid-column:1;
+  }
+
+  .aws-brief-list{
+    grid-column:2;
+
+    grid-row:2 / span 2;
+  }
+
+  .aws-monitor-box{
+    grid-column:1;
+
+    margin-top:0;
+  }
+
+  .aws-system-result{
+    grid-column:2;
+
+    margin-top:0;
+  }
+
+}
+
+
+@media(max-width:800px){
+
+  .aws-conversation-section{
+    padding:85px 0 80px;
+  }
+
+
+  .aws-conversation-container{
+    width:94%;
+  }
+
+
+  .aws-conversation-intro{
+    margin-bottom:40px;
+  }
+
+
+  .aws-conversation-intro h2{
+    font-size:42px;
+
+    letter-spacing:-2px;
+  }
+
+
+  .aws-conversation-intro p{
+    font-size:17px;
+
+    line-height:1.65;
+  }
+
+
+  .aws-industry-selector{
+    justify-content:flex-start;
+
+    flex-wrap:nowrap;
+
+    overflow-x:auto;
+
+    padding-bottom:8px;
+
+    margin-bottom:14px;
+  }
+
+
+  .aws-industry-selector::-webkit-scrollbar{
+    height:3px;
+  }
+
+
+  .aws-industry-btn{
+    flex-shrink:0;
+  }
+
+
+  .aws-conversation-system{
+    display:flex;
+
+    flex-direction:column;
+
+    min-height:auto;
+
+    border-radius:20px;
+  }
+
+
+  .aws-lead-panel{
+    border-right:0;
+
+    border-bottom:1px solid var(--aws-border);
+
+    padding:23px 20px;
+  }
+
+
+  .aws-lead-info{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:14px;
+  }
+
+
+  .aws-buying-signal{
+    margin-top:18px;
+  }
+
+
+  .aws-lead-alert{
+    margin-top:12px;
+  }
+
+
+  .aws-conversation-header{
+    padding:21px 18px 17px;
+
+    align-items:flex-start;
+
+    flex-direction:column;
+  }
+
+
+  .aws-conversation-status{
+    align-self:flex-start;
+  }
+
+
+  .aws-channel-tabs{
+    padding:10px;
+
+    overflow-x:auto;
+  }
+
+
+  .aws-channel-tab{
+    flex-shrink:0;
+  }
+
+
+  .aws-conversation-scroll{
+    min-height:520px;
+
+    padding:18px 15px 25px;
+  }
+
+
+  .aws-intelligence-panel{
+    display:block;
+
+    padding:25px 20px;
+
+    border-top:1px solid var(--aws-border);
+  }
+
+
+  .aws-intelligence-panel .aws-panel-label{
+    margin-bottom:15px;
+  }
+
+
+  .aws-intelligence-panel h3{
+    font-size:27px;
+  }
+
+
+  .aws-intelligence-intro{
+    margin-bottom:22px;
+  }
+
+
+  .aws-monitor-box{
+    margin-top:22px;
+  }
+
+
+  .aws-system-result{
+    margin-top:16px;
+  }
+
+
+  .aws-conversation-bottom{
+    margin-top:55px;
+  }
+
+
+  .aws-conversation-bottom h3{
+    font-size:36px;
+
+    letter-spacing:-1.7px;
+  }
+
+
+  .aws-conversation-bottom p{
+    font-size:16px;
+  }
+
+}
+
+
+@media(max-width:500px){
+
+  .aws-conversation-section{
+    padding-top:70px;
+  }
+
+
+  .aws-conversation-intro h2{
+    font-size:35px;
+  }
+
+
+  .aws-conversation-intro p{
+    font-size:16px;
+  }
+
+
+  .aws-lead-info{
+    grid-template-columns:1fr;
+  }
+
+
+  .aws-message-card{
+    max-width:96%;
+  }
+
+
+  .aws-transcript-line{
+    grid-template-columns:65px 1fr;
+  }
+
+
+  .aws-conversation-bottom h3{
+    font-size:31px;
+  }
+
+}
+
+</style>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  /* =======================================================
+     DATA
+  ======================================================= */
+
+  const cases = {
+
+    software: {
+
+      avatar:"DK",
+      name:"Daniel Kim",
+      source:"LinkedIn",
+      industry:"Software",
+      requirement:"CRM Automation",
+      value:"$8,400",
+      firstContact:"09:14 AM",
+      lastContact:"02:42 PM",
+
+      buyingSignal:
+        "Asked about implementation timeline, pricing and whether the system could connect with their existing CRM.",
+
+      alert:
+        "The lead received answers across message, email and call — but nobody owned the next step.",
+
+      interest:
+        "Asked about pricing, implementation timeline and CRM integration.",
+
+      objection:
+        "No clear objection appeared in the conversation.",
+
+      followup:
+        "No team member was assigned to continue the opportunity.",
+
+      monitor:
+        "Buying signals, pricing questions, follow-up ownership and response timing.",
+
+      title:
+        "Daniel Kim · CRM Automation",
+
+      messages: [
+
+        {
+          time:"09:14 AM",
+          type:"client",
+          person:"Daniel Kim",
+          role:"Client",
+          text:
+            "Hi, we're looking at automating our CRM. Can your system connect our existing pipeline and follow up with leads automatically?"
+        },
+
+        {
+          time:"09:19 AM",
+          type:"team",
+          person:"AWSZ Team",
+          role:"Team",
+          text:
+            "Yes. We can connect your CRM, automate lead routing and create follow-up sequences based on the stage of each opportunity."
+        },
+
+        {
+          time:"09:24 AM",
+          type:"client",
+          person:"Daniel Kim",
+          role:"Client",
+          text:
+            "That sounds like what we need. What would something like this normally cost?"
+        },
+
+        {
+          time:"09:31 AM",
+          type:"team",
+          person:"AWSZ Team",
+          role:"Team",
+          text:
+            "For your setup, we'd first map the current process and then build the automation around your existing CRM."
+        }
+
+      ],
+
+      email: {
+
+        from:"Daniel Kim",
+        to:"sales@company.com",
+        subject:"Re: CRM automation",
+
+        body:[
+          "Thanks for explaining the workflow earlier.",
+
+          "We're mainly interested in lead routing, automatic follow-ups and keeping the sales team updated.",
+
+          "Can you also send me an estimated implementation cost and timeline?"
+        ]
+
+      },
+
+      call: {
+
+        duration:"06:42",
+
+        transcript:[
+
+          {
+            speaker:"client",
+            name:"Daniel",
+            text:
+              "The main thing for us is making sure no lead sits in the CRM without someone following up."
+          },
+
+          {
+            speaker:"team",
+            name:"AWSZ Team",
+            text:
+              "That's exactly the kind of process we can automate and monitor."
+          },
+
+          {
+            speaker:"client",
+            name:"Daniel",
+            text:
+              "Okay, that makes sense. Send me the next steps and pricing."
+          },
+
+          {
+            speaker:"team",
+            name:"AWSZ Team",
+            text:
+              "Absolutely. We'll follow up with the details."
+          }
+
+        ]
+
+      }
+
+    },
+
+
+    beauty: {
+
+      avatar:"EM",
+      name:"Emily Morgan",
+      source:"Instagram",
+      industry:"Beauty / Med Spa",
+      requirement:"Acne Treatment Package",
+      value:"$1,800",
+      firstContact:"10:08 AM",
+      lastContact:"04:18 PM",
+
+      buyingSignal:
+        "Asked about treatment price, availability and whether the package would work for her skin concerns.",
+
+      alert:
+        "The client received answers and showed buying intent, but no appointment follow-up was completed.",
+
+      interest:
+        "Asked about price, treatment suitability and available appointment times.",
+
+      objection:
+        "No direct objection. The conversation simply stopped after the information was provided.",
+
+      followup:
+        "No clear owner followed up after the client asked about booking.",
+
+      monitor:
+        "Treatment interest, pricing questions, appointment intent and booking follow-up.",
+
+      title:
+        "Emily Morgan · Acne Treatment",
+
+      messages:[
+
+        {
+          time:"10:08 AM",
+          type:"client",
+          person:"Emily Morgan",
+          role:"Client",
+          text:
+            "Hi, I saw your acne treatment package on Instagram. How much is it and how many sessions are included?"
+        },
+
+        {
+          time:"10:14 AM",
+          type:"team",
+          person:"Clinic Team",
+          role:"Team",
+          text:
+            "The package is $1,800 and includes multiple treatment sessions plus the consultation."
+        },
+
+        {
+          time:"10:18 AM",
+          type:"client",
+          person:"Emily Morgan",
+          role:"Client",
+          text:
+            "Okay. Would that be suitable if I've been dealing with acne for quite a while?"
+        },
+
+        {
+          time:"10:25 AM",
+          type:"team",
+          person:"Clinic Team",
+          role:"Team",
+          text:
+            "Yes, we'd first assess your skin during the consultation and then recommend the appropriate treatment plan."
+        },
+
+        {
+          time:"10:31 AM",
+          type:"client",
+          person:"Emily Morgan",
+          role:"Client",
+          text:
+            "Got it. What appointment times do you have this week?"
+        }
+
+      ],
+
+      email: {
+
+        from:"Emily Morgan",
+        to:"appointments@clinic.com",
+        subject:"Treatment availability",
+
+        body:[
+          "Hi,",
+
+          "I'm interested in the acne treatment package we discussed.",
+
+          "Could you let me know what appointment times are available this week?"
+        ]
+
+      },
+
+      call: {
+
+        duration:"04:18",
+
+        transcript:[
+
+          {
+            speaker:"client",
+            name:"Emily",
+            text:
+              "I just wanted to confirm the package includes the consultation as well."
+          },
+
+          {
+            speaker:"team",
+            name:"Clinic Team",
+            text:
+              "Yes, the consultation is included and we'll assess your skin before starting."
+          },
+
+          {
+            speaker:"client",
+            name:"Emily",
+            text:
+              "Perfect. I'd like to book. What should I do next?"
+          },
+
+          {
+            speaker:"team",
+            name:"Clinic Team",
+            text:
+              "We'll send you the available appointment options."
+          }
+
+        ]
+
+      }
+
+    },
+
+
+    mortgage: {
+
+      avatar:"RH",
+      name:"Robert Harris",
+      source:"Facebook",
+      industry:"Mortgage",
+      requirement:"Reverse Mortgage",
+      value:"$285,000",
+
+      firstContact:"08:46 AM",
+      lastContact:"03:27 PM",
+
+      buyingSignal:
+        "Asked about qualification, loan amount and what the next step would be.",
+
+      alert:
+        "The client was qualified enough to continue, but the next-step process was not clearly assigned.",
+
+      interest:
+        "Asked about qualification, estimated proceeds and application steps.",
+
+      objection:
+        "No major objection was expressed during the interaction.",
+
+      followup:
+        "No follow-up deadline was recorded after the call.",
+
+      monitor:
+        "Qualification questions, loan intent, document requests and application follow-up.",
+
+      title:
+        "Robert Harris · Reverse Mortgage",
+
+      messages:[
+
+        {
+          time:"08:46 AM",
+          type:"client",
+          person:"Robert Harris",
+          role:"Client",
+          text:
+            "I'm trying to understand how much I may qualify for with a reverse mortgage."
+        },
+
+        {
+          time:"08:53 AM",
+          type:"team",
+          person:"Mortgage Team",
+          role:"Team",
+          text:
+            "We can review the property and borrower details and give you an estimated range."
+        },
+
+        {
+          time:"09:02 AM",
+          type:"client",
+          person:"Robert Harris",
+          role:"Client",
+          text:
+            "Okay. What information would you need from me?"
+        },
+
+        {
+          time:"09:09 AM",
+          type:"team",
+          person:"Mortgage Team",
+          role:"Team",
+          text:
+            "We'll need some basic property and financial information before we can calculate the estimate."
+        },
+
+        {
+          time:"09:16 AM",
+          type:"client",
+          person:"Robert Harris",
+          role:"Client",
+          text:
+            "That's fine. Someone can call me this afternoon."
+        }
+
+      ],
+
+      email: {
+
+        from:"Robert Harris",
+        to:"mortgage@company.com",
+        subject:"Reverse mortgage information",
+
+        body:[
+          "Hi,",
+
+          "I wanted to follow up on our conversation about the reverse mortgage.",
+
+          "I'm interested in moving forward and would like to know what documents you need from me."
+        ]
+
+      },
+
+      call: {
+
+        duration:"07:11",
+
+        transcript:[
+
+          {
+            speaker:"client",
+            name:"Robert",
+            text:
+              "I'm comfortable moving forward. I mainly need to know what paperwork you need."
+          },
+
+          {
+            speaker:"team",
+            name:"Mortgage Team",
+            text:
+              "We'll send you the required documents and explain each step."
+          },
+
+          {
+            speaker:"client",
+            name:"Robert",
+            text:
+              "Okay, that's good. I'll look out for the email."
+          },
+
+          {
+            speaker:"team",
+            name:"Mortgage Team",
+            text:
+              "Absolutely."
+          }
+
+        ]
+
+      }
+
+    },
+
+
+    realestate: {
+
+      avatar:"AL",
+      name:"Andrew Lewis",
+      source:"Zillow",
+      industry:"Real Estate",
+      requirement:"Single Family Home",
+      value:"$625,000",
+
+      firstContact:"11:03 AM",
+      lastContact:"05:06 PM",
+
+      buyingSignal:
+        "Asked about the property, price, availability and requested information about the next viewing.",
+
+      alert:
+        "The buyer showed clear intent but the viewing follow-up was never completed.",
+
+      interest:
+        "Requested property information and asked to arrange a viewing.",
+
+      objection:
+        "No strong objection was mentioned.",
+
+      followup:
+        "Viewing request had no assigned owner or deadline.",
+
+      monitor:
+        "Property interest, viewing intent, price questions and showing follow-up.",
+
+      title:
+        "Andrew Lewis · Property Inquiry",
+
+      messages:[
+
+        {
+          time:"11:03 AM",
+          type:"client",
+          person:"Andrew Lewis",
+          role:"Buyer",
+          text:
+            "Hi, is the property on Oak Street still available?"
+        },
+
+        {
+          time:"11:09 AM",
+          type:"team",
+          person:"Real Estate Team",
+          role:"Team",
+          text:
+            "Yes, it's currently available. The asking price is $625,000."
+        },
+
+        {
+          time:"11:16 AM",
+          type:"client",
+          person:"Andrew Lewis",
+          role:"Buyer",
+          text:
+            "The price works for me. Can I arrange a viewing?"
+        },
+
+        {
+          time:"11:22 AM",
+          type:"team",
+          person:"Real Estate Team",
+          role:"Team",
+          text:
+            "Yes. We'll check the available viewing times."
+        }
+
+      ],
+
+      email: {
+
+        from:"Andrew Lewis",
+        to:"sales@realestate.com",
+        subject:"Oak Street property viewing",
+
+        body:[
+          "Hi,",
+
+          "Following up on the property we discussed.",
+
+          "I'd like to arrange a viewing. Please let me know what times are available."
+        ]
+
+      },
+
+      call: {
+
+        duration:"05:26",
+
+        transcript:[
+
+          {
+            speaker:"client",
+            name:"Andrew",
+            text:
+              "I like the property and the price is within my range."
+          },
+
+          {
+            speaker:"team",
+            name:"Real Estate Team",
+            text:
+              "Great. We'll coordinate a viewing time for you."
+          },
+
+          {
+            speaker:"client",
+            name:"Andrew",
+            text:
+              "Perfect. I'll wait for the confirmation."
+          },
+
+          {
+            speaker:"team",
+            name:"Real Estate Team",
+            text:
+              "We'll send that over."
+          }
+
+        ]
+
+      }
+
+    },
+
+
+    inspection: {
+
+      avatar:"JS",
+      name:"Jason Smith",
+      source:"Google",
+      industry:"Home Inspection",
+      requirement:"Pre-Purchase Inspection",
+      value:"$650",
+
+      firstContact:"09:38 AM",
+      lastContact:"01:54 PM",
+
+      buyingSignal:
+        "Asked about inspection availability, price and whether the report would be delivered before closing.",
+
+      alert:
+        "The client needed the inspection quickly, but no one confirmed the booking.",
+
+      interest:
+        "Asked about price, availability and turnaround time for the report.",
+
+      objection:
+        "No price objection was recorded.",
+
+      followup:
+        "No confirmation owner was assigned after the call.",
+
+      monitor:
+        "Urgency, appointment intent, inspection timing and booking confirmation.",
+
+      title:
+        "Jason Smith · Home Inspection",
+
+      messages:[
+
+        {
+          time:"09:38 AM",
+          type:"client",
+          person:"Jason Smith",
+          role:"Client",
+          text:
+            "I need a home inspection before Friday. Do you have anything available tomorrow?"
+        },
+
+        {
+          time:"09:45 AM",
+          type:"team",
+          person:"Inspection Team",
+          role:"Team",
+          text:
+            "We may have an opening tomorrow afternoon. The inspection would be $650."
+        },
+
+        {
+          time:"09:51 AM",
+          type:"client",
+          person:"Jason Smith",
+          role:"Client",
+          text:
+            "That works. How quickly do I get the report?"
+        },
+
+        {
+          time:"09:58 AM",
+          type:"team",
+          person:"Inspection Team",
+          role:"Team",
+          text:
+            "The report is normally delivered shortly after the inspection is completed."
+        }
+
+      ],
+
+      email: {
+
+        from:"Jason Smith",
+        to:"bookings@inspection.com",
+        subject:"Inspection availability",
+
+        body:[
+          "Hi,",
+
+          "I need the inspection completed before Friday because of my closing date.",
+
+          "Can you confirm whether tomorrow afternoon is still available?"
+        ]
+
+      },
+
+      call: {
+
+        duration:"03:52",
+
+        transcript:[
+
+          {
+            speaker:"client",
+            name:"Jason",
+            text:
+              "Tomorrow works for me. I just need confirmation because my closing date is coming up."
+          },
+
+          {
+            speaker:"team",
+            name:"Inspection Team",
+            text:
+              "Understood. We'll confirm the available slot."
+          },
+
+          {
+            speaker:"client",
+            name:"Jason",
+            text:
+              "Okay, I'll wait for the confirmation."
+          },
+
+          {
+            speaker:"team",
+            name:"Inspection Team",
+            text:
+              "We'll get back to you."
+          }
+
+        ]
+
+      }
+
+    },
+
+
+    insurance: {
+
+      avatar:"MW",
+      name:"Michael Wilson",
+      source:"Google",
+      industry:"Insurance",
+      requirement:"Home Insurance",
+      value:"$3,200 / year",
+
+      firstContact:"10:22 AM",
+      lastContact:"04:43 PM",
+
+      buyingSignal:
+        "Requested a quote and asked how quickly coverage could be activated.",
+
+      alert:
+        "The customer requested a quote and showed purchase intent, but the quote follow-up stopped.",
+
+      interest:
+        "Asked for pricing, coverage details and activation timing.",
+
+      objection:
+        "No clear objection or rejection was recorded.",
+
+      followup:
+        "Quote follow-up had no assigned owner.",
+
+      monitor:
+        "Quote request, coverage questions, urgency and follow-up completion.",
+
+      title:
+        "Michael Wilson · Home Insurance",
+
+      messages:[
+
+        {
+          time:"10:22 AM",
+          type:"client",
+          person:"Michael Wilson",
+          role:"Client",
+          text:
+            "I'd like to get a quote for home insurance. Can you help?"
+        },
+
+        {
+          time:"10:29 AM",
+          type:"team",
+          person:"Insurance Team",
+          role:"Team",
+          text:
+            "Absolutely. We'll need a few property details to prepare the quote."
+        },
+
+        {
+          time:"10:35 AM",
+          type:"client",
+          person:"Michael Wilson",
+          role:"Client",
+          text:
+            "Sure. Once I send those, how quickly can I get the quote?"
+        },
+
+        {
+          time:"10:42 AM",
+          type:"team",
+          person:"Insurance Team",
+          role:"Team",
+          text:
+            "We'll review the information and get the quote prepared."
+        }
+
+      ],
+
+      email: {
+
+        from:"Michael Wilson",
+        to:"quotes@insurance.com",
+        subject:"Home insurance quote",
+
+        body:[
+          "Hi,",
+
+          "I've attached the property information you requested.",
+
+          "Please let me know if you need anything else to prepare the quote."
+        ]
+
+      },
+
+      call: {
+
+        duration:"05:04",
+
+        transcript:[
+
+          {
+            speaker:"client",
+            name:"Michael",
+            text:
+              "I've sent everything you requested. I'm mainly looking for the best coverage before renewal."
+          },
+
+          {
+            speaker:"team",
+            name:"Insurance Team",
+            text:
+              "We'll review everything and prepare the quote."
+          },
+
+          {
+            speaker:"client",
+            name:"Michael",
+            text:
+              "Great. Please send it over when it's ready."
+          },
+
+          {
+            speaker:"team",
+            name:"Insurance Team",
+            text:
+              "Absolutely."
+          }
+
+        ]
+
+      }
+
+    }
+
+  };
+
+
+  /* =======================================================
+     ELEMENTS
+  ======================================================= */
+
+  const conversationContent =
+    document.getElementById("conversationContent");
+
+  const leadAvatar =
+    document.getElementById("leadAvatar");
+
+  const leadName =
+    document.getElementById("leadName");
+
+  const leadSource =
+    document.getElementById("leadSource");
+
+  const leadIndustry =
+    document.getElementById("leadIndustry");
+
+  const leadRequirement =
+    document.getElementById("leadRequirement");
+
+  const leadValue =
+    document.getElementById("leadValue");
+
+  const leadFirstContact =
+    document.getElementById("leadFirstContact");
+
+  const leadLastContact =
+    document.getElementById("leadLastContact");
+
+  const buyingSignal =
+    document.getElementById("buyingSignal");
+
+  const leadAlert =
+    document.getElementById("leadAlert");
+
+  const conversationTitle =
+    document.getElementById("conversationTitle");
+
+  const briefInterest =
+    document.getElementById("briefInterest");
+
+  const briefObjection =
+    document.getElementById("briefObjection");
+
+  const briefFollowup =
+    document.getElementById("briefFollowup");
+
+  const briefMonitor =
+    document.getElementById("briefMonitor");
+
+
+  /* =======================================================
+     RENDER PROFILE
+  ======================================================= */
+
+  function renderProfile(data){
+
+    leadAvatar.textContent = data.avatar;
+
+    leadName.textContent = data.name;
+
+    leadSource.textContent = data.source;
+
+    leadIndustry.textContent = data.industry;
+
+    leadRequirement.textContent = data.requirement;
+
+    leadValue.textContent = data.value;
+
+    leadFirstContact.textContent = data.firstContact;
+
+    leadLastContact.textContent = data.lastContact;
+
+    buyingSignal.textContent = data.buyingSignal;
+
+    leadAlert.textContent = data.alert;
+
+    conversationTitle.textContent = data.title;
+
+    briefInterest.textContent = data.interest;
+
+    briefObjection.textContent = data.objection;
+
+    briefFollowup.textContent = data.followup;
+
+    briefMonitor.textContent = data.monitor;
+
+  }
+
+
+  /* =======================================================
+     MESSAGE HTML
+  ======================================================= */
+
+  function renderMessages(data){
+
+    let html = "";
+
+    data.messages.forEach(item => {
+
+      html += `
+
+        <div class="aws-timeline-item">
+
+          <div class="aws-timeline-dot"></div>
+
+          <div class="aws-timeline-time">
+            ${item.time}
+          </div>
+
+          <div class="aws-message-card ${item.type}">
+
+            <div class="aws-message-header">
+
+              <span class="aws-message-person">
+                ${item.person}
+              </span>
+
+              <span class="aws-message-role">
+                ${item.role}
+              </span>
+
+            </div>
+
+            <p>
+              ${item.text}
+            </p>
+
+          </div>
+
+        </div>
+
+      `;
+
+    });
+
+
+    html += `
+
+      <div class="aws-timeline-item">
+
+        <div class="aws-timeline-dot"></div>
+
+        <div class="aws-timeline-time">
+          End of conversation
+        </div>
+
+        <div class="aws-outcome-card">
+
+          <div class="aws-outcome-label">
+            OUTCOME
+          </div>
+
+          <strong>
+            Lead did not close.
+          </strong>
+
+          <p>
+            The conversation contained buying signals,
+            questions and follow-up opportunities — but the
+            process did not create a clear next step.
+          </p>
+
+        </div>
+
+      </div>
+
+    `;
+
+    return html;
+
+  }
+
+
+  /* =======================================================
+     EMAIL HTML
+  ======================================================= */
+
+  function renderEmail(data){
+
+    return `
+
+      <div class="aws-timeline-item">
+
+        <div class="aws-timeline-dot"></div>
+
+        <div class="aws-timeline-time">
+          Email conversation
+        </div>
+
+        <div class="aws-email-window">
+
+          <div class="aws-email-top">
+
+            <span class="aws-email-dot"></span>
+            <span class="aws-email-dot"></span>
+            <span class="aws-email-dot"></span>
+
+          </div>
+
+
+          <div class="aws-email-meta">
+
+            <div class="aws-email-line">
+              <span>From</span>
+              <strong>${data.email.from}</strong>
+            </div>
+
+            <div class="aws-email-line">
+              <span>To</span>
+              <strong>${data.email.to}</strong>
+            </div>
+
+          </div>
+
+
+          <div class="aws-email-body">
+
+            <div class="aws-email-subject">
+              ${data.email.subject}
+            </div>
+
+            ${data.email.body.map(
+              paragraph => `<p>${paragraph}</p>`
+            ).join("")}
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="aws-timeline-item">
+
+        <div class="aws-timeline-dot"></div>
+
+        <div class="aws-timeline-time">
+          Final outcome
+        </div>
+
+        <div class="aws-outcome-card">
+
+          <div class="aws-outcome-label">
+            LEAD LOST
+          </div>
+
+          <strong>
+            Good conversation. No conversion.
+          </strong>
+
+          <p>
+            The customer asked for the next step,
+            but no accountable follow-up was completed.
+          </p>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* =======================================================
+     CALL HTML
+  ======================================================= */
+
+  function renderCall(data){
+
+    const transcript =
+      data.call.transcript.map(item => `
+
+        <div class="aws-transcript-line ${item.speaker}">
+
+          <div class="aws-transcript-speaker">
+            ${item.name}
+          </div>
+
+          <div class="aws-transcript-text">
+            ${item.text}
+          </div>
+
+        </div>
+
+      `).join("");
+
+
+    const bars =
+      Array.from(
+        {length:46},
+        (_,i) => `<span class="aws-wave-bar"
+          style="height:${7 + ((i * 13) % 20)}px"></span>`
+      ).join("");
+
+
+    return `
+
+      <div class="aws-timeline-item">
+
+        <div class="aws-timeline-dot"></div>
+
+        <div class="aws-timeline-time">
+          Call recording · ${data.call.duration}
+        </div>
+
+        <div class="aws-call-card">
+
+          <div class="aws-call-head">
+
+            <div class="aws-call-title">
+
+              <div class="aws-call-icon">
+
+                <svg viewBox="0 0 24 24">
+                  <path d="M6.5 3.5 9 3l2 5-2.2 1.8a14 14 0 0 0 5.9 5.9l1.8-2.2 5 2 .5 2.5c.2 1-.5 2-1.5 2.3-2.1.6-5.7-.4-9.4-4.1S5 9.9 5.7 7.8C6 6.8 6.5 5 6.5 3.5Z"/>
+                </svg>
+
+              </div>
+
+              Call Recording
+
+            </div>
+
+            <div class="aws-call-duration">
+              ${data.call.duration}
+            </div>
+
+          </div>
+
+
+          <div class="aws-call-body">
+
+            <div class="aws-call-player" id="awsCallPlayer">
+
+              <button
+                class="aws-call-control primary"
+                id="awsPlayButton"
+                aria-label="Play"
+              >
+                ▶
+              </button>
+
+              <button
+                class="aws-call-control"
+                id="awsPauseButton"
+                aria-label="Pause"
+              >
+                ❚❚
+              </button>
+
+              <button
+                class="aws-call-control"
+                id="awsStopButton"
+                aria-label="Stop"
+              >
+                ■
+              </button>
+
+
+              <div class="aws-waveform">
+                ${bars}
+              </div>
+
+            </div>
+
+
+            <div
+              class="aws-call-status"
+              id="awsCallStatus"
+            >
+              Ready to play recording
+            </div>
+
+
+            <div class="aws-call-transcript">
+
+              ${transcript}
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="aws-timeline-item">
+
+        <div class="aws-timeline-dot"></div>
+
+        <div class="aws-timeline-time">
+          Final outcome
+        </div>
+
+        <div class="aws-outcome-card">
+
+          <div class="aws-outcome-label">
+            LEAD LOST
+          </div>
+
+          <strong>
+            The call happened. The sale didn't.
+          </strong>
+
+          <p>
+            Conversation intelligence helps identify whether
+            the problem was the offer, the response, the
+            follow-up or the process after the call.
+          </p>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* =======================================================
+     AUDIO SYSTEM
+  ======================================================= */
+
+  let speechIndex = 0;
+
+  let currentCall = null;
+
+  let isSpeaking = false;
+
+  let isPaused = false;
+
+
+  function getVoice(preferClient){
+
+    if(!("speechSynthesis" in window)){
+      return null;
+    }
+
+
+    const voices =
+      window.speechSynthesis.getVoices();
+
+
+    if(!voices.length){
+      return null;
+    }
+
+
+    const english =
+      voices.filter(
+        voice =>
+          voice.lang &&
+          voice.lang.toLowerCase().startsWith("en")
+      );
+
+
+    const list =
+      english.length ? english : voices;
+
+
+    if(preferClient){
+
+      return (
+        list.find(v =>
+          /female|zira|samantha|susan|karen|aria/i
+            .test(v.name)
+        ) || list[0]
+      );
+
+    }
+
+
+    return (
+      list.find(v =>
+        /male|david|daniel|alex|mark/i
+          .test(v.name)
+      ) || list[1] || list[0]
+    );
+
+  }
+
+
+  function stopSpeech(){
+
+    if("speechSynthesis" in window){
+
+      window.speechSynthesis.cancel();
+
+    }
+
+    speechIndex = 0;
+
+    isSpeaking = false;
+
+    isPaused = false;
+
+    currentCall = null;
+
+    updatePlayerUI(false, false);
+
+  }
+
+
+  function speakCurrent(){
+
+    if(!currentCall) return;
+
+    if(
+      !("speechSynthesis" in window)
+    ){
+
+      const status =
+        document.getElementById("awsCallStatus");
+
+      if(status){
+        status.textContent =
+          "Speech playback is not supported in this browser.";
+      }
+
+      return;
+
+    }
+
+
+    if(isPaused){
+
+      window.speechSynthesis.resume();
+
+      isPaused = false;
+
+      isSpeaking = true;
+
+      updatePlayerUI(true, false);
+
+      const status =
+        document.getElementById("awsCallStatus");
+
+      if(status){
+        status.textContent =
+          "Recording playing...";
+      }
+
+      return;
+
+    }
+
+
+    window.speechSynthesis.cancel();
+
+    const item =
+      currentCall.transcript[speechIndex];
+
+
+    if(!item){
+
+      finishSpeech();
+
+      return;
+
+    }
+
+
+    const utterance =
+      new SpeechSynthesisUtterance(
+        item.text
+      );
+
+
+    utterance.rate = .92;
+
+    utterance.pitch =
+      item.speaker === "client"
+        ? 1.03
+        : .91;
+
+
+    utterance.volume = 1;
+
+
+    utterance.voice =
+      getVoice(
+        item.speaker === "client"
+      );
+
+
+    isSpeaking = true;
+
+    isPaused = false;
+
+    updatePlayerUI(true, false);
+
+
+    const status =
+      document.getElementById("awsCallStatus");
+
+
+    if(status){
+
+      status.textContent =
+        `${item.name} speaking...`;
+
+    }
+
+
+    utterance.onend = function(){
+
+      if(isPaused){
+        return;
+      }
+
+      speechIndex++;
+
+      if(
+        speechIndex <
+        currentCall.transcript.length
+      ){
+
+        setTimeout(
+          speakCurrent,
+          180
+        );
+
+      }else{
+
+        finishSpeech();
+
+      }
+
+    };
+
+
+    utterance.onerror = function(){
+
+      finishSpeech();
+
+    };
+
+
+    window.speechSynthesis.speak(
+      utterance
+    );
+
+  }
+
+
+  function finishSpeech(){
+
+    isSpeaking = false;
+
+    isPaused = false;
+
+    speechIndex = 0;
+
+    updatePlayerUI(false, false);
+
+
+    const status =
+      document.getElementById("awsCallStatus");
+
+
+    if(status){
+
+      status.textContent =
+        "Recording finished";
+
+    }
+
+  }
+
+
+  function updatePlayerUI(
+    playing,
+    paused
+  ){
+
+    const player =
+      document.getElementById("awsCallPlayer");
+
+    const playButton =
+      document.getElementById("awsPlayButton");
+
+    const status =
+      document.getElementById("awsCallStatus");
+
+
+    if(!player) return;
+
+
+    player.classList.toggle(
+      "playing",
+      playing && !paused
+    );
+
+
+    if(playButton){
+
+      playButton.textContent =
+        paused
+          ? "▶"
+          : playing
+            ? "❚❚"
+            : "▶";
+
+    }
+
+  }
+
+
+  function setupAudio(){
+
+    const playButton =
+      document.getElementById("awsPlayButton");
+
+    const pauseButton =
+      document.getElementById("awsPauseButton");
+
+    const stopButton =
+      document.getElementById("awsStopButton");
+
+
+    if(
+      !playButton ||
+      !pauseButton ||
+      !stopButton
+    ){
+      return;
+    }
+
+
+    playButton.onclick = function(){
+
+      if(
+        isSpeaking &&
+        !isPaused
+      ){
+
+        if("speechSynthesis" in window){
+
+          window.speechSynthesis.pause();
+
+          isPaused = true;
+
+          updatePlayerUI(
+            true,
+            true
+          );
+
+          const status =
+            document.getElementById(
+              "awsCallStatus"
+            );
+
+          if(status){
+            status.textContent =
+              "Recording paused";
+          }
+
+        }
+
+        return;
+
+      }
+
+
+      if(!currentCall){
+
+        const activeCase =
+          document.querySelector(
+            ".aws-industry-btn.active"
+          );
+
+
+        if(!activeCase) return;
+
+
+        currentCall =
+          cases[
+            activeCase.dataset.case
+          ].call;
+
+      }
+
+
+      speakCurrent();
+
+    };
+
+
+    pauseButton.onclick = function(){
+
+      if(
+        "speechSynthesis" in window &&
+        isSpeaking &&
+        !isPaused
+      ){
+
+        window.speechSynthesis.pause();
+
+        isPaused = true;
+
+        updatePlayerUI(
+          true,
+          true
+        );
+
+        const status =
+          document.getElementById(
+            "awsCallStatus"
+          );
+
+        if(status){
+          status.textContent =
+            "Recording paused";
+        }
+
+      }
+
+    };
+
+
+    stopButton.onclick = function(){
+
+      stopSpeech();
+
+      const status =
+        document.getElementById(
+          "awsCallStatus"
+        );
+
+      if(status){
+        status.textContent =
+          "Recording stopped";
+      }
+
+    };
+
+
+    if(
+      "speechSynthesis" in window
+    ){
+
+      window.speechSynthesis.onvoiceschanged =
+        function(){};
+
+    }
+
+  }
+
+
+  /* =======================================================
+     CHANNEL RENDER
+  ======================================================= */
+
+  function renderChannel(
+    data,
+    channel
+  ){
+
+    stopSpeech();
+
+
+    if(channel === "messages"){
+
+      conversationContent.innerHTML =
+        renderMessages(data);
+
+    }
+
+
+    if(channel === "email"){
+
+      conversationContent.innerHTML =
+        renderEmail(data);
+
+    }
+
+
+    if(channel === "call"){
+
+      conversationContent.innerHTML =
+        renderCall(data);
+
+      currentCall =
+        data.call;
+
+      speechIndex = 0;
+
+      setupAudio();
+
+    }
+
+
+    conversationContent.scrollTop = 0;
+
+  }
+
+
+  /* =======================================================
+     CASE SWITCH
+  ======================================================= */
+
+  function activateCase(caseName){
+
+    const data =
+      cases[caseName];
+
+    if(!data) return;
+
+
+    document
+      .querySelectorAll(".aws-industry-btn")
+      .forEach(button => {
+
+        button.classList.toggle(
+          "active",
+          button.dataset.case === caseName
+        );
+
+      });
+
+
+    renderProfile(data);
+
+
+    const activeChannel =
+      document.querySelector(
+        ".aws-channel-tab.active"
+      );
+
+
+    const channel =
+      activeChannel
+        ? activeChannel.dataset.channel
+        : "messages";
+
+
+    renderChannel(
+      data,
+      channel
+    );
+
+  }
+
+
+  /* =======================================================
+     INDUSTRY BUTTONS
+  ======================================================= */
+
+  document
+    .querySelectorAll(".aws-industry-btn")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          activateCase(
+            this.dataset.case
+          );
+
+        }
+      );
+
+    });
+
+
+  /* =======================================================
+     CHANNEL BUTTONS
+  ======================================================= */
+
+  document
+    .querySelectorAll(".aws-channel-tab")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          document
+            .querySelectorAll(
+              ".aws-channel-tab"
+            )
+            .forEach(tab => {
+
+              tab.classList.toggle(
+                "active",
+                tab === this
+              );
+
+            });
+
+
+          const activeCase =
+            document.querySelector(
+              ".aws-industry-btn.active"
+            );
+
+
+          if(!activeCase) return;
+
+
+          const data =
+            cases[
+              activeCase.dataset.case
+            ];
+
+
+          renderChannel(
+            data,
+            this.dataset.channel
+          );
+
+        }
+      );
+
+    });
+
+
+  /* =======================================================
+     INITIAL LOAD
+  ======================================================= */
+
+  activateCase("software");
+
+});
+
+</script>  
