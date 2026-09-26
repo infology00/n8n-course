@@ -1,0 +1,2507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AWSZ CRM</title>
+
+<style>
+:root{
+  --bg:#f4f6f8;
+  --card:#ffffff;
+  --text:#17202a;
+  --muted:#7b8490;
+  --border:#e5e7eb;
+  --dark:#111827;
+  --dark2:#1f2937;
+  --green:#16a34a;
+  --blue:#2563eb;
+  --orange:#ea580c;
+  --red:#dc2626;
+  --purple:#7c3aed;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  text-decoration:none;
+}
+
+.aws-crm{
+  max-width:1550px;
+  margin:auto;
+  padding:30px;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:28px;
+}
+
+.logo-area{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.logo{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:#111827;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:16px;
+  letter-spacing:-.5px;
+}
+
+.brand h1{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:-.7px;
+}
+
+.brand p{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:3px;
+}
+
+.header-actions{
+  display:flex;
+  gap:10px;
+}
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:12px 17px;
+  font-weight:650;
+  font-size:13px;
+  transition:.2s;
+}
+
+.btn-dark{
+  background:var(--dark);
+  color:#fff;
+}
+
+.btn-dark:hover{
+  background:#273244;
+  transform:translateY(-1px);
+}
+
+.btn-light{
+  background:#fff;
+  color:var(--text);
+  border:1px solid var(--border);
+}
+
+.btn-light:hover{
+  background:#f8fafc;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:14px;
+  margin-bottom:22px;
+}
+
+.stat{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:17px;
+  position:relative;
+  overflow:hidden;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:600;
+}
+
+.stat-number{
+  font-size:27px;
+  font-weight:800;
+  margin-top:8px;
+  letter-spacing:-.5px;
+}
+
+.stat-line{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:3px;
+  background:#111827;
+}
+
+.stat:nth-child(2) .stat-line{background:var(--blue)}
+.stat:nth-child(3) .stat-line{background:var(--orange)}
+.stat:nth-child(4) .stat-line{background:var(--purple)}
+.stat:nth-child(5) .stat-line{background:#ca8a04}
+.stat:nth-child(6) .stat-line{background:var(--green)}
+
+/* ================= TOOLBAR ================= */
+
+.toolbar{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:13px;
+  display:flex;
+  gap:10px;
+  margin-bottom:16px;
+}
+
+.search-box{
+  flex:1;
+  position:relative;
+}
+
+.search-box input{
+  width:100%;
+  height:42px;
+  padding:0 14px 0 40px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  outline:none;
+}
+
+.search-icon{
+  position:absolute;
+  left:14px;
+  top:12px;
+  color:#98a1ad;
+  font-size:15px;
+}
+
+.filter{
+  width:180px;
+}
+
+.filter select{
+  width:100%;
+  height:42px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:0 12px;
+  background:#fff;
+  outline:none;
+}
+
+/* ================= QUICK BAR ================= */
+
+.quick-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.quick-title{
+  font-size:14px;
+  font-weight:750;
+}
+
+.quick-info{
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* ================= TABLE ================= */
+
+.table-container{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:15px;
+  overflow:hidden;
+}
+
+.table-scroll{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1400px;
+}
+
+thead th{
+  background:#f8fafc;
+  color:#697586;
+  text-align:left;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  padding:13px 14px;
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+
+tbody td{
+  padding:13px 14px;
+  border-bottom:1px solid #edf0f3;
+  font-size:13px;
+  vertical-align:middle;
+}
+
+tbody tr:hover td{
+  background:#fafbfc;
+}
+
+.lead-name{
+  font-weight:700;
+}
+
+.company{
+  color:#8a94a3;
+  font-size:11px;
+  margin-top:3px;
+}
+
+.requirement{
+  max-width:190px;
+  line-height:1.4;
+}
+
+.date-cell{
+  white-space:nowrap;
+}
+
+.date-time{
+  font-weight:600;
+  font-size:12px;
+}
+
+.time{
+  color:#8a94a3;
+  font-size:10px;
+  margin-top:2px;
+}
+
+.lead-link{
+  color:var(--blue);
+  font-weight:600;
+  font-size:12px;
+}
+
+.meet-link{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  color:#15803d;
+  background:#ecfdf5;
+  padding:6px 8px;
+  border-radius:7px;
+  font-size:11px;
+  font-weight:700;
+}
+
+/* ================= BADGES ================= */
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:750;
+  white-space:nowrap;
+}
+
+.stage-new{
+  background:#eef2ff;
+  color:#4338ca;
+}
+
+.stage-contacted{
+  background:#f1f5f9;
+  color:#475569;
+}
+
+.stage-replied{
+  background:#ecfdf5;
+  color:#047857;
+}
+
+.stage-follow-up{
+  background:#fff7ed;
+  color:#c2410c;
+}
+
+.stage-meeting{
+  background:#eff6ff;
+  color:#1d4ed8;
+}
+
+.stage-proposal{
+  background:#fefce8;
+  color:#a16207;
+}
+
+.stage-won{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.stage-lost{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.due{
+  color:#c2410c;
+  font-weight:750;
+}
+
+.overdue{
+  color:#dc2626;
+  font-weight:750;
+}
+
+/* ================= ACTIONS ================= */
+
+.actions{
+  display:flex;
+  gap:5px;
+}
+
+.action{
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:7px;
+  padding:7px 9px;
+  font-size:11px;
+}
+
+.action:hover{
+  background:#f3f4f6;
+}
+
+.delete:hover{
+  color:#dc2626;
+}
+
+/* ================= EMPTY ================= */
+
+.empty{
+  padding:70px 20px;
+  text-align:center;
+  color:#8a94a3;
+}
+
+.empty strong{
+  display:block;
+  color:#374151;
+  margin-bottom:6px;
+}
+
+/* ================= MODAL ================= */
+
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:9999;
+}
+
+.modal-overlay.show{
+  display:flex;
+}
+
+.modal{
+  width:min(850px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 25px 80px rgba(0,0,0,.2);
+}
+
+.modal-header{
+  padding:22px 25px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.modal-header h2{
+  font-size:21px;
+}
+
+.modal-header p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
+}
+
+.close{
+  width:35px;
+  height:35px;
+  border:0;
+  border-radius:50%;
+  background:#f1f3f5;
+  font-size:20px;
+  color:#667085;
+}
+
+.modal-body{
+  padding:24px 25px;
+}
+
+.section-title{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  color:#697586;
+  font-weight:800;
+  margin:7px 0 13px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+.field label{
+  font-size:11px;
+  color:#667085;
+  font-weight:700;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  border:1px solid #dfe3e8;
+  border-radius:9px;
+  padding:10px 11px;
+  outline:none;
+  background:#fff;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:#111827;
+}
+
+.field textarea{
+  min-height:85px;
+  resize:vertical;
+}
+
+.meeting-box{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px;
+  grid-column:1/-1;
+}
+
+.meeting-box-title{
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:12px;
+}
+
+.meeting-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.video-box{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px;
+  grid-column:1/-1;
+}
+
+.modal-footer{
+  border-top:1px solid var(--border);
+  padding:16px 25px;
+  display:flex;
+  justify-content:flex-end;
+  gap:9px;
+}
+
+/* ================= DETAILS ================= */
+
+.details{
+  padding:25px;
+}
+
+.detail-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+  margin-bottom:22px;
+}
+
+.detail-name{
+  font-size:25px;
+  font-weight:800;
+}
+
+.detail-company{
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.detail-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:13px;
+}
+
+.detail-card{
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:14px;
+}
+
+.detail-label{
+  color:#8a94a3;
+  font-size:10px;
+  text-transform:uppercase;
+  font-weight:750;
+  letter-spacing:.05em;
+}
+
+.detail-value{
+  margin-top:6px;
+  font-weight:650;
+  font-size:13px;
+  word-break:break-word;
+}
+
+.notes-card{
+  margin-top:13px;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  background:#111827;
+  color:#fff;
+  padding:12px 17px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:650;
+  opacity:0;
+  transform:translateY(15px);
+  pointer-events:none;
+  transition:.25s;
+  z-index:20000;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1100px){
+
+  .stats{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+}
+
+@media(max-width:700px){
+
+  .aws-crm{
+    padding:17px;
+  }
+
+  .header{
+    align-items:flex-start;
+    gap:15px;
+  }
+
+  .header-actions{
+    flex-direction:column;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .toolbar{
+    flex-direction:column;
+  }
+
+  .filter{
+    width:100%;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .meeting-box,
+  .video-box{
+    grid-column:auto;
+  }
+
+  .meeting-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:450px){
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .brand h1{
+    font-size:22px;
+  }
+
+  .logo{
+    width:42px;
+    height:42px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="aws-crm">
+
+  <!-- HEADER -->
+
+  <header class="header">
+
+    <div class="logo-area">
+
+      <div class="logo">
+        AWSZ
+      </div>
+
+      <div class="brand">
+        <h1>AWSZ CRM</h1>
+        <p>Lead & Follow-Up Management</p>
+      </div>
+
+    </div>
+
+    <div class="header-actions">
+
+      <button class="btn btn-light" onclick="exportCSV()">
+        Export CSV
+      </button>
+
+      <button class="btn btn-dark" onclick="openLeadModal()">
+        + Add Lead
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- STATS -->
+
+  <section class="stats">
+
+    <div class="stat">
+      <div class="stat-label">Total Leads</div>
+      <div class="stat-number" id="totalCount">0</div>
+      <div class="stat-line"></div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">New Leads</div>
+      <div class="stat-number" id="newCount">0</div>
+      <div class="stat-line"></div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Follow-Ups</div>
+      <div class="stat-number" id="followCount">0</div>
+      <div class="stat-line"></div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Meetings</div>
+      <div class="stat-number" id="meetingCount">0</div>
+      <div class="stat-line"></div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Proposals</div>
+      <div class="stat-number" id="proposalCount">0</div>
+      <div class="stat-line"></div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">Won</div>
+      <div class="stat-number" id="wonCount">0</div>
+      <div class="stat-line"></div>
+    </div>
+
+  </section>
+
+
+  <!-- SEARCH / FILTER -->
+
+  <section class="toolbar">
+
+    <div class="search-box">
+
+      <span class="search-icon">⌕</span>
+
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Search lead, company or requirement..."
+        oninput="renderLeads()"
+      >
+
+    </div>
+
+    <div class="filter">
+
+      <select id="stageFilter" onchange="renderLeads()">
+
+        <option value="">All Stages</option>
+        <option value="New">New</option>
+        <option value="Contacted">Contacted</option>
+        <option value="Replied">Replied</option>
+        <option value="Follow-Up">Follow-Up</option>
+        <option value="Meeting">Meeting</option>
+        <option value="Proposal">Proposal</option>
+        <option value="Won">Won</option>
+        <option value="Lost">Lost</option>
+
+      </select>
+
+    </div>
+
+  </section>
+
+
+  <div class="quick-bar">
+
+    <div class="quick-title">
+      Your Leads
+    </div>
+
+    <div class="quick-info" id="quickInfo">
+      0 leads
+    </div>
+
+  </div>
+
+
+  <!-- TABLE -->
+
+  <section class="table-container">
+
+    <div class="table-scroll">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Created</th>
+
+            <th>Lead</th>
+
+            <th>Requirement</th>
+
+            <th>Stage</th>
+
+            <th>Next Follow-Up</th>
+
+            <th>Reply</th>
+
+            <th>Meeting</th>
+
+            <th>Video</th>
+
+            <th>Actions</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="leadTable"></tbody>
+
+      </table>
+
+    </div>
+
+    <div class="empty" id="emptyState">
+
+      <strong>No leads yet</strong>
+      Add your first Facebook lead to start tracking.
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- ================= ADD LEAD MODAL ================= -->
+
+<div class="modal-overlay" id="leadModal">
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div>
+        <h2 id="modalTitle">Add New Lead</h2>
+        <p>Save the lead and track every next step.</p>
+      </div>
+
+      <button class="close" onclick="closeLeadModal()">×</button>
+
+    </div>
+
+
+    <form id="leadForm">
+
+      <div class="modal-body">
+
+        <div class="section-title">
+          Lead Information
+        </div>
+
+        <div class="form-grid">
+
+          <div class="field">
+            <label>Lead Name *</label>
+            <input
+              id="leadName"
+              required
+              placeholder="John Smith"
+            >
+          </div>
+
+          <div class="field">
+            <label>Company</label>
+            <input
+              id="company"
+              placeholder="ABC Company"
+            >
+          </div>
+
+          <div class="field full">
+            <label>Lead / Facebook Link</label>
+            <input
+              id="leadLink"
+              type="url"
+              placeholder="https://facebook.com/..."
+            >
+          </div>
+
+          <div class="field full">
+            <label>Requirement</label>
+
+            <select id="requirement">
+
+              <option>Chatbot</option>
+              <option>Calling Agent</option>
+              <option>AI Voice Agent</option>
+              <option>SaaS Platform</option>
+              <option>CRM Automation</option>
+              <option>n8n Automation</option>
+              <option>GHL Automation</option>
+              <option>WhatsApp Automation</option>
+              <option>Email Automation</option>
+              <option>Training</option>
+              <option>Other</option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="section-title">
+          Sales Tracking
+        </div>
+
+        <div class="form-grid">
+
+          <div class="field">
+            <label>Lead Stage</label>
+
+            <select id="stage">
+
+              <option>New</option>
+              <option>Contacted</option>
+              <option>Replied</option>
+              <option>Follow-Up</option>
+              <option>Meeting</option>
+              <option>Proposal</option>
+              <option>Won</option>
+              <option>Lost</option>
+
+            </select>
+
+          </div>
+
+          <div class="field">
+            <label>Reply</label>
+
+            <select id="reply">
+
+              <option>No Reply</option>
+              <option>Replied</option>
+              <option>Interested</option>
+              <option>Not Interested</option>
+
+            </select>
+
+          </div>
+
+          <div class="field">
+            <label>Last Follow-Up</label>
+            <input type="date" id="lastFollow">
+          </div>
+
+          <div class="field">
+            <label>Next Follow-Up</label>
+            <input type="date" id="nextFollow">
+          </div>
+
+        </div>
+
+
+        <!-- MEETING -->
+
+        <div class="section-title">
+          Meeting
+        </div>
+
+        <div class="meeting-box">
+
+          <div class="meeting-box-title">
+            Meeting Details
+          </div>
+
+          <div class="meeting-grid">
+
+            <div class="field">
+
+              <label>Meeting Status</label>
+
+              <select id="meeting">
+
+                <option>No</option>
+                <option>Requested</option>
+                <option>Booked</option>
+                <option>Done</option>
+                <option>No Show</option>
+                <option>Cancelled</option>
+
+              </select>
+
+            </div>
+
+            <div class="field">
+
+              <label>Meeting Date & Time</label>
+
+              <input
+                type="datetime-local"
+                id="meetingDate"
+              >
+
+            </div>
+
+            <div class="field">
+
+              <label>Google Meet Link</label>
+
+              <input
+                id="meetLink"
+                type="url"
+                placeholder="https://meet.google.com/..."
+              >
+
+            </div>
+
+            <div class="field">
+
+              <label>Meeting ID</label>
+
+              <input
+                id="meetingId"
+                placeholder="abc-defg-hij"
+              >
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- VIDEO -->
+
+        <div class="section-title">
+          Personalized Video
+        </div>
+
+        <div class="video-box">
+
+          <div class="meeting-grid">
+
+            <div class="field">
+
+              <label>Video Status</label>
+
+              <select id="video">
+
+                <option>No</option>
+                <option>To Make</option>
+                <option>Recording</option>
+                <option>Sent</option>
+                <option>Watched</option>
+
+              </select>
+
+            </div>
+
+            <div class="field">
+
+              <label>Video Link</label>
+
+              <input
+                id="videoLink"
+                type="url"
+                placeholder="https://..."
+              >
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- NOTES -->
+
+        <div class="section-title">
+          Notes
+        </div>
+
+        <div class="form-grid">
+
+          <div class="field full">
+
+            <textarea
+              id="notes"
+              placeholder="Lead requirements, conversation details, next action..."
+            ></textarea>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="btn btn-light"
+          onclick="closeLeadModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-dark"
+        >
+          Save Lead
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- ================= DETAIL MODAL ================= -->
+
+<div class="modal-overlay" id="detailModal">
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div>
+        <h2>Lead Details</h2>
+        <p>Complete lead information</p>
+      </div>
+
+      <button class="close" onclick="closeDetail()">×</button>
+
+    </div>
+
+    <div class="details" id="detailContent"></div>
+
+  </div>
+
+</div>
+
+
+<div class="toast" id="toast">
+  Saved successfully
+</div>
+
+
+<script>
+
+/* ==========================================================
+   AWSZ CRM
+   Browser Storage CRM
+========================================================== */
+
+let leads =
+  JSON.parse(localStorage.getItem("AWSZ_CRM_LEADS")) || [];
+
+let editingId = null;
+
+
+/* ================= SAVE ================= */
+
+function saveData(){
+
+  localStorage.setItem(
+    "AWSZ_CRM_LEADS",
+    JSON.stringify(leads)
+  );
+
+}
+
+
+/* ================= CURRENT DATE/TIME ================= */
+
+function nowLocalDateTime(){
+
+  const d = new Date();
+
+  const pad = n =>
+    String(n).padStart(2,"0");
+
+  return (
+    d.getFullYear() +
+    "-" +
+    pad(d.getMonth()+1) +
+    "-" +
+    pad(d.getDate()) +
+    "T" +
+    pad(d.getHours()) +
+    ":" +
+    pad(d.getMinutes())
+  );
+
+}
+
+
+/* ================= OPEN ADD ================= */
+
+function openLeadModal(id=null){
+
+  editingId = id;
+
+  const modal =
+    document.getElementById("leadModal");
+
+  modal.classList.add("show");
+
+
+  if(id){
+
+    const lead =
+      leads.find(x => x.id === id);
+
+    if(!lead) return;
+
+    document.getElementById("modalTitle")
+      .innerText = "Edit Lead";
+
+    document.getElementById("leadName").value =
+      lead.name || "";
+
+    document.getElementById("company").value =
+      lead.company || "";
+
+    document.getElementById("leadLink").value =
+      lead.link || "";
+
+    document.getElementById("requirement").value =
+      lead.requirement || "Other";
+
+    document.getElementById("stage").value =
+      lead.stage || "New";
+
+    document.getElementById("reply").value =
+      lead.reply || "No Reply";
+
+    document.getElementById("lastFollow").value =
+      lead.lastFollow || "";
+
+    document.getElementById("nextFollow").value =
+      lead.nextFollow || "";
+
+    document.getElementById("meeting").value =
+      lead.meeting || "No";
+
+    document.getElementById("meetingDate").value =
+      lead.meetingDate || "";
+
+    document.getElementById("meetLink").value =
+      lead.meetLink || "";
+
+    document.getElementById("meetingId").value =
+      lead.meetingId || "";
+
+    document.getElementById("video").value =
+      lead.video || "No";
+
+    document.getElementById("videoLink").value =
+      lead.videoLink || "";
+
+    document.getElementById("notes").value =
+      lead.notes || "";
+
+  }else{
+
+    document.getElementById("modalTitle")
+      .innerText = "Add New Lead";
+
+    document.getElementById("leadForm").reset();
+
+  }
+
+}
+
+
+/* ================= CLOSE ================= */
+
+function closeLeadModal(){
+
+  document
+    .getElementById("leadModal")
+    .classList.remove("show");
+
+  editingId = null;
+
+}
+
+
+/* ================= SAVE LEAD ================= */
+
+document
+  .getElementById("leadForm")
+  .addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+
+    const oldLead =
+      editingId
+      ? leads.find(x => x.id === editingId)
+      : null;
+
+
+    const lead = {
+
+      id:
+        editingId ||
+        Date.now(),
+
+      createdAt:
+        oldLead?.createdAt ||
+        new Date().toISOString(),
+
+      name:
+        document.getElementById("leadName").value.trim(),
+
+      company:
+        document.getElementById("company").value.trim(),
+
+      link:
+        document.getElementById("leadLink").value.trim(),
+
+      requirement:
+        document.getElementById("requirement").value,
+
+      stage:
+        document.getElementById("stage").value,
+
+      reply:
+        document.getElementById("reply").value,
+
+      lastFollow:
+        document.getElementById("lastFollow").value,
+
+      nextFollow:
+        document.getElementById("nextFollow").value,
+
+      meeting:
+        document.getElementById("meeting").value,
+
+      meetingDate:
+        document.getElementById("meetingDate").value,
+
+      meetLink:
+        document.getElementById("meetLink").value.trim(),
+
+      meetingId:
+        document.getElementById("meetingId").value.trim(),
+
+      video:
+        document.getElementById("video").value,
+
+      videoLink:
+        document.getElementById("videoLink").value.trim(),
+
+      notes:
+        document.getElementById("notes").value.trim()
+
+    };
+
+
+    if(editingId){
+
+      const index =
+        leads.findIndex(x => x.id === editingId);
+
+      if(index !== -1){
+
+        leads[index] = lead;
+
+      }
+
+      showToast("Lead updated");
+
+    }else{
+
+      leads.unshift(lead);
+
+      showToast("Lead added");
+
+    }
+
+
+    saveData();
+
+    closeLeadModal();
+
+    renderLeads();
+
+  });
+
+
+/* ================= RENDER ================= */
+
+function renderLeads(){
+
+  const table =
+    document.getElementById("leadTable");
+
+  const empty =
+    document.getElementById("emptyState");
+
+  const search =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase()
+      .trim();
+
+  const filter =
+    document.getElementById("stageFilter").value;
+
+
+  const filtered =
+    leads.filter(lead => {
+
+      const searchable =
+        (
+          (lead.name || "") +
+          " " +
+          (lead.company || "") +
+          " " +
+          (lead.requirement || "") +
+          " " +
+          (lead.notes || "")
+        ).toLowerCase();
+
+
+      return (
+        (!search || searchable.includes(search)) &&
+        (!filter || lead.stage === filter)
+      );
+
+    });
+
+
+  table.innerHTML = "";
+
+
+  if(filtered.length === 0){
+
+    empty.style.display = "block";
+
+  }else{
+
+    empty.style.display = "none";
+
+  }
+
+
+  filtered.forEach(lead => {
+
+    const tr =
+      document.createElement("tr");
+
+
+    tr.innerHTML = `
+
+      <td class="date-cell">
+
+        <div class="date-time">
+          ${formatDate(lead.createdAt)}
+        </div>
+
+        <div class="time">
+          ${formatTime(lead.createdAt)}
+        </div>
+
+      </td>
+
+
+      <td>
+
+        <div class="lead-name">
+          ${escapeHTML(lead.name)}
+        </div>
+
+        <div class="company">
+          ${escapeHTML(lead.company)}
+        </div>
+
+      </td>
+
+
+      <td>
+
+        <div class="requirement">
+          ${escapeHTML(lead.requirement)}
+        </div>
+
+        ${
+          lead.link
+          ?
+          `<a
+            class="lead-link"
+            href="${safeURL(lead.link)}"
+            target="_blank"
+            rel="noopener"
+          >
+            Open Lead ↗
+          </a>`
+          :
+          ""
+        }
+
+      </td>
+
+
+      <td>
+
+        <select
+          class="small-select"
+          onchange="changeStage(${lead.id},this.value)"
+        >
+
+          ${stageOptions(lead.stage)}
+
+        </select>
+
+      </td>
+
+
+      <td>
+
+        ${followUpHTML(lead)}
+
+      </td>
+
+
+      <td>
+
+        <span class="badge ${replyClass(lead.reply)}">
+          ${escapeHTML(lead.reply)}
+        </span>
+
+      </td>
+
+
+      <td>
+
+        ${
+          lead.meeting === "Booked" ||
+          lead.meeting === "Done"
+
+          ?
+
+          `
+          <a
+            class="meet-link"
+            href="${safeURL(lead.meetLink || "#")}"
+            target="_blank"
+            rel="noopener"
+          >
+            Meet ↗
+          </a>
+
+          ${
+            lead.meetingId
+            ?
+            `<div class="time">${escapeHTML(lead.meetingId)}</div>`
+            :
+            ""
+          }
+
+          `
+
+          :
+
+          `<span class="badge stage-contacted">
+             ${escapeHTML(lead.meeting)}
+           </span>`
+
+        }
+
+      </td>
+
+
+      <td>
+
+        <span class="badge ${videoClass(lead.video)}">
+          ${escapeHTML(lead.video)}
+        </span>
+
+      </td>
+
+
+      <td>
+
+        <div class="actions">
+
+          <button
+            class="action"
+            onclick="viewLead(${lead.id})"
+          >
+            View
+          </button>
+
+          <button
+            class="action"
+            onclick="openLeadModal(${lead.id})"
+          >
+            Edit
+          </button>
+
+          <button
+            class="action delete"
+            onclick="deleteLead(${lead.id})"
+          >
+            Delete
+          </button>
+
+        </div>
+
+      </td>
+
+    `;
+
+
+    table.appendChild(tr);
+
+  });
+
+
+  updateStats();
+
+}
+
+
+/* ================= STAGE ================= */
+
+function stageOptions(selected){
+
+  const stages = [
+    "New",
+    "Contacted",
+    "Replied",
+    "Follow-Up",
+    "Meeting",
+    "Proposal",
+    "Won",
+    "Lost"
+  ];
+
+
+  return stages.map(stage => `
+
+    <option
+      value="${stage}"
+      ${stage === selected ? "selected" : ""}
+    >
+      ${stage}
+    </option>
+
+  `).join("");
+
+}
+
+
+function changeStage(id,value){
+
+  const lead =
+    leads.find(x => x.id === id);
+
+  if(!lead) return;
+
+  lead.stage = value;
+
+  if(value === "Meeting" &&
+     lead.meeting === "No"){
+
+    lead.meeting = "Requested";
+
+  }
+
+  saveData();
+
+  renderLeads();
+
+  showToast("Stage updated");
+
+}
+
+
+/* ================= FOLLOW-UP ================= */
+
+function followUpHTML(lead){
+
+  if(!lead.nextFollow){
+
+    return `<span class="time">Not set</span>`;
+
+  }
+
+
+  const today =
+    new Date();
+
+  today.setHours(0,0,0,0);
+
+
+  const date =
+    new Date(
+      lead.nextFollow + "T00:00:00"
+    );
+
+
+  let cls = "";
+
+  if(date < today){
+
+    cls = "overdue";
+
+  }else if(
+    date.getTime() === today.getTime()
+  ){
+
+    cls = "due";
+
+  }
+
+
+  return `
+
+    <div class="${cls}">
+
+      ${formatSimpleDate(lead.nextFollow)}
+
+    </div>
+
+  `;
+
+}
+
+
+/* ================= STATS ================= */
+
+function updateStats(){
+
+  document.getElementById("totalCount")
+    .innerText = leads.length;
+
+
+  document.getElementById("newCount")
+    .innerText =
+      leads.filter(
+        x => x.stage === "New"
+      ).length;
+
+
+  document.getElementById("followCount")
+    .innerText =
+      leads.filter(
+        x =>
+          x.stage === "Follow-Up" ||
+          isFollowUpDue(x)
+      ).length;
+
+
+  document.getElementById("meetingCount")
+    .innerText =
+      leads.filter(
+        x => x.meeting === "Booked"
+      ).length;
+
+
+  document.getElementById("proposalCount")
+    .innerText =
+      leads.filter(
+        x => x.stage === "Proposal"
+      ).length;
+
+
+  document.getElementById("wonCount")
+    .innerText =
+      leads.filter(
+        x => x.stage === "Won"
+      ).length;
+
+
+  document.getElementById("quickInfo")
+    .innerText =
+      `${leads.length} lead${leads.length === 1 ? "" : "s"}`;
+
+}
+
+
+function isFollowUpDue(lead){
+
+  if(!lead.nextFollow) return false;
+
+  const today =
+    new Date();
+
+  today.setHours(0,0,0,0);
+
+  const d =
+    new Date(
+      lead.nextFollow + "T00:00:00"
+    );
+
+  return d <= today;
+
+}
+
+
+/* ================= REPLY ================= */
+
+function replyClass(reply){
+
+  if(reply === "Interested")
+    return "stage-won";
+
+  if(reply === "Replied")
+    return "stage-replied";
+
+  if(reply === "Not Interested")
+    return "stage-lost";
+
+  return "stage-contacted";
+
+}
+
+
+/* ================= VIDEO ================= */
+
+function videoClass(video){
+
+  if(video === "Sent" || video === "Watched")
+    return "stage-won";
+
+  if(video === "Recording" || video === "To Make")
+    return "stage-follow-up";
+
+  return "stage-contacted";
+
+}
+
+
+/* ================= VIEW LEAD ================= */
+
+function viewLead(id){
+
+  const lead =
+    leads.find(x => x.id === id);
+
+  if(!lead) return;
+
+
+  document.getElementById("detailContent")
+    .innerHTML = `
+
+      <div class="detail-top">
+
+        <div>
+
+          <div class="detail-name">
+            ${escapeHTML(lead.name)}
+          </div>
+
+          <div class="detail-company">
+            ${escapeHTML(lead.company)}
+          </div>
+
+        </div>
+
+        <span class="badge ${stageClass(lead.stage)}">
+          ${escapeHTML(lead.stage)}
+        </span>
+
+      </div>
+
+
+      <div class="detail-grid">
+
+        ${detailCard(
+          "Requirement",
+          lead.requirement
+        )}
+
+        ${detailCard(
+          "Reply",
+          lead.reply
+        )}
+
+        ${detailCard(
+          "Last Follow-Up",
+          lead.lastFollow
+          ? formatSimpleDate(lead.lastFollow)
+          : "Not set"
+        )}
+
+        ${detailCard(
+          "Next Follow-Up",
+          lead.nextFollow
+          ? formatSimpleDate(lead.nextFollow)
+          : "Not set"
+        )}
+
+        ${detailCard(
+          "Meeting",
+          lead.meeting
+        )}
+
+        ${detailCard(
+          "Meeting Date",
+          lead.meetingDate
+          ? formatDateTimeLocal(lead.meetingDate)
+          : "Not set"
+        )}
+
+        ${detailCard(
+          "Meeting ID",
+          lead.meetingId || "Not set"
+        )}
+
+        ${detailCard(
+          "Video",
+          lead.video
+        )}
+
+      </div>
+
+
+      ${
+        lead.meetLink
+        ?
+        `
+        <div class="detail-card notes-card">
+
+          <div class="detail-label">
+            Google Meet
+          </div>
+
+          <div class="detail-value">
+
+            <a
+              class="lead-link"
+              href="${safeURL(lead.meetLink)}"
+              target="_blank"
+              rel="noopener"
+            >
+              Open Google Meet ↗
+            </a>
+
+          </div>
+
+        </div>
+        `
+        :
+        ""
+      }
+
+
+      ${
+        lead.videoLink
+        ?
+        `
+        <div class="detail-card notes-card">
+
+          <div class="detail-label">
+            Video
+          </div>
+
+          <div class="detail-value">
+
+            <a
+              class="lead-link"
+              href="${safeURL(lead.videoLink)}"
+              target="_blank"
+              rel="noopener"
+            >
+              Open Video ↗
+            </a>
+
+          </div>
+
+        </div>
+        `
+        :
+        ""
+      }
+
+
+      <div class="detail-card notes-card">
+
+        <div class="detail-label">
+          Notes
+        </div>
+
+        <div class="detail-value">
+          ${escapeHTML(lead.notes || "No notes")}
+        </div>
+
+      </div>
+
+
+      ${
+        lead.link
+        ?
+        `
+        <div class="detail-card notes-card">
+
+          <div class="detail-label">
+            Lead Source
+          </div>
+
+          <div class="detail-value">
+
+            <a
+              class="lead-link"
+              href="${safeURL(lead.link)}"
+              target="_blank"
+              rel="noopener"
+            >
+              Open Facebook / Lead Link ↗
+            </a>
+
+          </div>
+
+        </div>
+        `
+        :
+        ""
+      }
+
+    `;
+
+
+  document
+    .getElementById("detailModal")
+    .classList.add("show");
+
+}
+
+
+function detailCard(label,value){
+
+  return `
+
+    <div class="detail-card">
+
+      <div class="detail-label">
+        ${escapeHTML(label)}
+      </div>
+
+      <div class="detail-value">
+        ${escapeHTML(value || "Not set")}
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ================= DELETE ================= */
+
+function deleteLead(id){
+
+  const lead =
+    leads.find(x => x.id === id);
+
+  if(!lead) return;
+
+
+  const confirmed =
+    confirm(
+      `Delete ${lead.name}?`
+    );
+
+
+  if(!confirmed) return;
+
+
+  leads =
+    leads.filter(x => x.id !== id);
+
+
+  saveData();
+
+  renderLeads();
+
+  showToast("Lead deleted");
+
+}
+
+
+/* ================= CLOSE DETAIL ================= */
+
+function closeDetail(){
+
+  document
+    .getElementById("detailModal")
+    .classList.remove("show");
+
+}
+
+
+/* ================= DATE FORMATTING ================= */
+
+function formatDate(iso){
+
+  if(!iso) return "—";
+
+  const d =
+    new Date(iso);
+
+  if(isNaN(d)) return "—";
+
+  return d.toLocaleDateString(
+    "en-US",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+function formatTime(iso){
+
+  if(!iso) return "";
+
+  const d =
+    new Date(iso);
+
+  if(isNaN(d)) return "";
+
+  return d.toLocaleTimeString(
+    "en-US",
+    {
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+
+}
+
+
+function formatSimpleDate(date){
+
+  if(!date) return "—";
+
+  const d =
+    new Date(
+      date + "T00:00:00"
+    );
+
+  return d.toLocaleDateString(
+    "en-US",
+    {
+      day:"2-digit",
+      month:"short"
+    }
+  );
+
+}
+
+
+function formatDateTimeLocal(value){
+
+  if(!value) return "—";
+
+  const d =
+    new Date(value);
+
+  if(isNaN(d)) return "—";
+
+  return d.toLocaleString(
+    "en-US",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric",
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+
+}
+
+
+/* ================= CSV EXPORT ================= */
+
+function exportCSV(){
+
+  if(!leads.length){
+
+    showToast("No leads to export");
+
+    return;
+
+  }
+
+
+  const headers = [
+
+    "Created",
+    "Lead Name",
+    "Company",
+    "Lead Link",
+    "Requirement",
+    "Stage",
+    "Last Follow-Up",
+    "Next Follow-Up",
+    "Reply",
+    "Meeting",
+    "Meeting Date",
+    "Google Meet",
+    "Meeting ID",
+    "Video",
+    "Video Link",
+    "Notes"
+
+  ];
+
+
+  const rows =
+    leads.map(l => [
+
+      l.createdAt,
+      l.name,
+      l.company,
+      l.link,
+      l.requirement,
+      l.stage,
+      l.lastFollow,
+      l.nextFollow,
+      l.reply,
+      l.meeting,
+      l.meetingDate,
+      l.meetLink,
+      l.meetingId,
+      l.video,
+      l.videoLink,
+      l.notes
+
+    ]);
+
+
+  const csv = [
+
+    headers,
+
+    ...rows
+
+  ]
+  .map(row =>
+    row.map(value =>
+      `"${String(value || "")
+        .replaceAll('"','""')}"`
+    ).join(",")
+  )
+  .join("\n");
+
+
+  const blob =
+    new Blob(
+      [csv],
+      {
+        type:"text/csv;charset=utf-8;"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(blob);
+
+
+  const a =
+    document.createElement("a");
+
+  a.href = url;
+
+  a.download =
+    "AWSZ-CRM-Leads.csv";
+
+  a.click();
+
+  URL.revokeObjectURL(url);
+
+  showToast("CSV exported");
+
+}
+
+
+/* ================= TOAST ================= */
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.innerText = message;
+
+  toast.classList.add("show");
+
+  setTimeout(
+    () => toast.classList.remove("show"),
+    2200
+  );
+
+}
+
+
+/* ================= SECURITY ================= */
+
+function escapeHTML(value){
+
+  return String(value || "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+function safeURL(value){
+
+  if(!value) return "#";
+
+  try{
+
+    const url =
+      new URL(value);
+
+    if(
+      url.protocol === "http:" ||
+      url.protocol === "https:"
+    ){
+
+      return escapeHTML(url.href);
+
+    }
+
+  }catch(e){}
+
+  return "#";
+
+}
+
+
+function stageClass(stage){
+
+  return (
+    "stage-" +
+    String(stage || "new")
+      .toLowerCase()
+      .replaceAll(" ","-")
+  );
+
+}
+
+
+/* ================= MODAL OUTSIDE CLICK ================= */
+
+document
+  .getElementById("leadModal")
+  .addEventListener(
+    "click",
+    function(e){
+
+      if(e.target === this){
+
+        closeLeadModal();
+
+      }
+
+    }
+  );
+
+
+document
+  .getElementById("detailModal")
+  .addEventListener(
+    "click",
+    function(e){
+
+      if(e.target === this){
+
+        closeDetail();
+
+      }
+
+    }
+  );
+
+
+/* ================= ESCAPE ================= */
+
+document.addEventListener(
+  "keydown",
+  function(e){
+
+    if(e.key === "Escape"){
+
+      closeLeadModal();
+      closeDetail();
+
+    }
+
+  }
+);
+
+
+/* ================= START ================= */
+
+renderLeads();
+
+</script>
+
+</body>
+</html>
