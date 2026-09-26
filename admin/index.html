@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>AWSZ Admin Control Center</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AWSZ Admin Portal</title>
 <link rel="icon" href="data:,">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -26,151 +26,210 @@
   --amber-bg:#fff5df;
   --red:#c33d3d;
   --red-bg:#fff0f0;
-  --shadow:0 10px 30px rgba(25,60,100,.08);
-  --radius:18px;
+  --shadow:0 12px 35px rgba(18,59,112,.08);
+  --radius:16px;
 }
 
-*{box-sizing:border-box}
-body{
+*{
+  box-sizing:border-box;
+}
+
+html,body{
   margin:0;
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  padding:0;
+  min-height:100%;
+  font-family:Inter,Arial,Helvetica,sans-serif;
   background:var(--cloud);
   color:var(--text);
 }
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
 
-.app{display:flex;min-height:100vh}
+body{
+  font-size:15px;
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.app{
+  min-height:100vh;
+  display:flex;
+}
+
+/* SIDEBAR */
 
 .sidebar{
-  width:255px;
-  background:var(--white);
+  width:235px;
+  min-height:100vh;
+  background:#fff;
   border-right:1px solid var(--line);
-  padding:22px 16px;
+  padding:25px 14px;
   position:fixed;
-  left:0;top:0;bottom:0;
+  left:0;
+  top:0;
+  bottom:0;
   z-index:50;
-  overflow-y:auto;
 }
 
 .brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:7px 10px 25px;
+  padding:4px 13px 27px;
+  font-size:21px;
+  font-weight:700;
+  color:var(--deep);
+  letter-spacing:-.4px;
 }
-.brand-mark{
-  width:43px;height:43px;
-  border-radius:13px;
-  background:var(--deep);
-  color:white;
-  display:grid;
-  place-items:center;
-  font-weight:900;
-  letter-spacing:-1px;
-}
-.brand-title{font-weight:850;font-size:17px}
-.brand-sub{font-size:11px;color:var(--muted);margin-top:2px}
 
-.nav-title{
-  color:#93a2b1;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:1.2px;
-  padding:15px 11px 8px;
-  font-weight:800;
+.brand span{
+  color:var(--blue);
 }
+
+.nav{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
 .nav button{
-  width:100%;
   border:0;
   background:transparent;
-  color:#526477;
-  padding:12px 13px;
-  border-radius:12px;
+  width:100%;
   text-align:left;
+  padding:12px 14px;
+  border-radius:11px;
+  color:var(--muted);
   display:flex;
   align-items:center;
   gap:11px;
-  margin-bottom:4px;
-  font-weight:650;
+  transition:.2s;
 }
-.nav button:hover{background:var(--cloud)}
-.nav button.active{
-  background:#edf5ff;
-  color:var(--blue);
-}
-.nav-icon{width:20px;text-align:center}
 
-.sidebar-bottom{
-  border-top:1px solid var(--line);
-  margin-top:18px;
-  padding-top:16px;
-}
-.admin-user{
+.nav button:hover{
   background:var(--cloud);
-  padding:12px;
-  border-radius:13px;
-  font-size:12px;
-  color:var(--muted);
-  word-break:break-word;
+  color:var(--blue-dark);
 }
+
+.nav button.active{
+  background:var(--cloud2);
+  color:var(--blue-dark);
+}
+
+.nav-icon{
+  width:20px;
+  text-align:center;
+  font-size:16px;
+}
+
+.nav-label{
+  flex:1;
+}
+
+.badge{
+  min-width:20px;
+  height:20px;
+  padding:0 6px;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:20px;
+  background:#e9f2ff;
+  color:var(--blue);
+  font-size:11px;
+}
+
+/* MAIN */
 
 .main{
-  margin-left:255px;
-  width:calc(100% - 255px);
+  margin-left:235px;
+  width:calc(100% - 235px);
   min-height:100vh;
 }
 
 .topbar{
-  height:76px;
-  background:rgba(255,255,255,.93);
+  height:74px;
+  padding:0 30px;
+  background:rgba(255,255,255,.94);
   border-bottom:1px solid var(--line);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 30px;
   position:sticky;
   top:0;
   z-index:30;
-  backdrop-filter:blur(10px);
 }
-.top-title{font-size:20px;font-weight:850}
-.top-right{display:flex;align-items:center;gap:10px}
 
-.icon-btn{
-  width:42px;height:42px;
-  border:1px solid var(--line);
-  background:white;
-  border-radius:12px;
+.page-title{
+  font-size:22px;
+  font-weight:600;
   color:var(--deep);
 }
-.icon-btn:hover{background:var(--cloud)}
 
-.avatar{
-  width:38px;height:38px;
-  border-radius:50%;
-  background:var(--deep);
-  color:white;
-  display:grid;
-  place-items:center;
-  font-weight:800;
+.admin-area{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:var(--muted);
+  font-size:13px;
 }
 
-.content{padding:28px;max-width:1600px;margin:auto}
+.admin-dot{
+  width:8px;
+  height:8px;
+  background:var(--green);
+  border-radius:50%;
+}
 
-.page{display:none}
-.page.active{display:block}
+.content{
+  padding:30px;
+  max-width:1600px;
+  margin:auto;
+}
 
-.hero{
-  background:linear-gradient(135deg,#fff 0%,#eef6ff 100%);
+/* VIEWS */
+
+.view{
+  display:none;
+}
+
+.view.active{
+  display:block;
+}
+
+/* CARDS */
+
+.card{
+  background:#fff;
   border:1px solid var(--line);
-  border-radius:24px;
-  padding:26px;
-  margin-bottom:22px;
+  border-radius:var(--radius);
   box-shadow:var(--shadow);
 }
-.hero h1{margin:0 0 7px;font-size:28px}
-.hero p{margin:0;color:var(--muted)}
+
+.card-head{
+  padding:20px 22px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.card-title{
+  font-size:16px;
+  color:var(--deep);
+  font-weight:600;
+}
+
+.card-body{
+  padding:22px;
+}
+
+/* DASHBOARD */
 
 .stats{
   display:grid;
@@ -178,1373 +237,2154 @@ button{cursor:pointer}
   gap:16px;
   margin-bottom:22px;
 }
-.stat{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:20px;
-  box-shadow:var(--shadow);
-}
-.stat-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.stat-icon{
-  width:40px;height:40px;
-  border-radius:12px;
-  background:#edf5ff;
-  color:var(--blue);
-  display:grid;
-  place-items:center;
-}
-.stat-number{font-size:29px;font-weight:900;margin-top:12px}
-.stat-label{font-size:13px;color:var(--muted)}
 
-.grid-2{
+.stat{
+  padding:20px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:15px;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:10px;
+}
+
+.stat-value{
+  color:var(--deep);
+  font-size:28px;
+  font-weight:600;
+}
+
+.dashboard-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1.2fr .8fr;
   gap:20px;
 }
-.card{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:20px;
-  box-shadow:var(--shadow);
+
+.activity-item{
+  padding:13px 0;
+  border-bottom:1px solid var(--line);
 }
-.card-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  margin-bottom:17px;
+
+.activity-item:last-child{
+  border-bottom:0;
 }
-.card-head h3{margin:0;font-size:17px}
+
+.activity-action{
+  color:var(--deep);
+  font-size:14px;
+}
+
+.activity-time{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+/* TABLE */
 
 .table-wrap{
   overflow:auto;
-  border:1px solid var(--line);
-  border-radius:15px;
-  background:white;
 }
+
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:760px;
 }
-th,td{
-  padding:14px 15px;
-  border-bottom:1px solid var(--line);
-  text-align:left;
-  font-size:13px;
-}
+
 th{
-  color:#728395;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.7px;
+  text-align:left;
+  padding:13px 15px;
   background:#f8fbfe;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:500;
+  border-bottom:1px solid var(--line);
+  white-space:nowrap;
 }
-tr:last-child td{border-bottom:0}
-.click-row{cursor:pointer}
-.click-row:hover td{background:#f8fbff}
+
+td{
+  padding:15px;
+  border-bottom:1px solid var(--line);
+  font-size:14px;
+}
+
+tr:last-child td{
+  border-bottom:0;
+}
+
+.click-row{
+  cursor:pointer;
+}
+
+.click-row:hover td{
+  background:#fbfdff;
+}
+
+/* BUTTONS */
 
 .btn{
-  border:0;
-  border-radius:11px;
-  padding:10px 14px;
-  font-weight:750;
-  font-size:13px;
-  transition:.18s;
-}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--blue);color:white}
-.btn-secondary{background:var(--cloud2);color:var(--deep)}
-.btn-dark{background:var(--deep);color:white}
-.btn-danger{background:var(--red-bg);color:var(--red)}
-.btn-green{background:var(--green-bg);color:var(--green)}
-.btn-small{padding:7px 10px;font-size:12px}
-
-.toolbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  margin-bottom:16px;
-  flex-wrap:wrap;
-}
-.search{
-  width:300px;
-  max-width:100%;
-  padding:11px 13px;
   border:1px solid var(--line);
-  border-radius:12px;
-  outline:none;
-  background:white;
-}
-.search:focus,input:focus,textarea:focus,select:focus{
-  border-color:#8cb8ed;
-  box-shadow:0 0 0 3px #edf5ff;
+  background:#fff;
+  color:var(--deep);
+  padding:9px 14px;
+  border-radius:9px;
+  transition:.2s;
 }
 
-.badge{
-  display:inline-flex;
-  align-items:center;
-  padding:5px 9px;
-  border-radius:999px;
-  font-size:11px;
-  font-weight:800;
+.btn:hover{
+  border-color:#b7cce1;
+  background:#f8fbfe;
 }
-.badge-blue{background:#edf5ff;color:var(--blue)}
-.badge-green{background:var(--green-bg);color:var(--green)}
-.badge-amber{background:var(--amber-bg);color:var(--amber)}
-.badge-red{background:var(--red-bg);color:var(--red)}
-.badge-gray{background:#eef1f4;color:#647383}
 
-.progress{
-  width:120px;
-  height:7px;
-  background:#e8eef4;
-  border-radius:20px;
-  overflow:hidden;
-}
-.progress > span{
-  display:block;
-  height:100%;
+.btn-primary{
   background:var(--blue);
-  border-radius:20px;
+  color:#fff;
+  border-color:var(--blue);
 }
+
+.btn-primary:hover{
+  background:#1d5db5;
+  color:#fff;
+}
+
+.btn-danger{
+  background:var(--red-bg);
+  color:var(--red);
+  border-color:#f0cccc;
+}
+
+.btn-small{
+  padding:7px 10px;
+  font-size:12px;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.search{
+  width:280px;
+  max-width:100%;
+}
+
+/* FORM */
 
 .form-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:14px;
+  gap:15px;
 }
-.field{display:flex;flex-direction:column;gap:6px}
-.field.full{grid-column:1/-1}
-.field label{
-  font-size:11px;
-  font-weight:800;
-  color:#637486;
-  text-transform:uppercase;
-  letter-spacing:.5px;
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
 }
-.field input,.field textarea,.field select{
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+label{
+  color:var(--muted);
+  font-size:12px;
+}
+
+input,
+textarea,
+select{
   width:100%;
   border:1px solid var(--line);
-  border-radius:11px;
+  background:#fff;
+  border-radius:9px;
   padding:11px 12px;
-  background:white;
   outline:none;
+  color:var(--text);
 }
-.field textarea{min-height:100px;resize:vertical}
 
-.modal-bg{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(7,31,55,.42);
-  z-index:100;
-  padding:25px;
-  overflow:auto;
+textarea{
+  resize:vertical;
+  min-height:100px;
 }
-.modal-bg.open{display:flex;align-items:center;justify-content:center}
-.modal{
-  background:white;
-  width:min(900px,100%);
-  max-height:92vh;
-  overflow:auto;
-  border-radius:23px;
-  box-shadow:0 30px 90px rgba(0,0,0,.2);
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#9bbde2;
+  box-shadow:0 0 0 3px rgba(36,107,206,.08);
 }
-.modal-head{
-  padding:20px 22px;
-  border-bottom:1px solid var(--line);
+
+.form-actions{
+  margin-top:18px;
+  display:flex;
+  gap:9px;
+  justify-content:flex-end;
+}
+
+/* STATUS */
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+}
+
+.status-active,
+.status-paid,
+.status-completed{
+  color:var(--green);
+  background:var(--green-bg);
+}
+
+.status-pending,
+.status-draft{
+  color:var(--amber);
+  background:var(--amber-bg);
+}
+
+.status-overdue,
+.status-rejected{
+  color:var(--red);
+  background:var(--red-bg);
+}
+
+/* PROJECT */
+
+.project-header{
+  margin-bottom:20px;
+}
+
+.back-btn{
+  margin-bottom:12px;
+}
+
+.project-name{
+  font-size:25px;
+  color:var(--deep);
+  font-weight:600;
+}
+
+.project-meta{
+  color:var(--muted);
+  margin-top:5px;
+}
+
+.project-progress{
+  margin-top:17px;
+}
+
+.progress-line{
+  height:7px;
+  border-radius:10px;
+  background:var(--cloud3);
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  background:var(--blue);
+  border-radius:10px;
+}
+
+.progress-info{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  position:sticky;
-  top:0;
-  background:white;
-  z-index:2;
+  margin-bottom:7px;
+  font-size:12px;
+  color:var(--muted);
 }
-.modal-head h2{margin:0;font-size:19px}
-.modal-body{padding:22px}
-.modal-foot{
-  padding:17px 22px;
-  border-top:1px solid var(--line);
+
+/* PROJECT NAV */
+
+.project-tabs{
   display:flex;
-  justify-content:flex-end;
-  gap:9px;
-  position:sticky;
-  bottom:0;
-  background:white;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:17px;
+  padding:5px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
 }
 
-.close{
-  width:35px;height:35px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  background:white;
-}
-
-.project-layout{
-  display:grid;
-  grid-template-columns:270px 1fr;
-  gap:18px;
-}
-.project-side{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:14px;
-  height:max-content;
-  position:sticky;
-  top:96px;
-}
-.project-side button{
-  width:100%;
+.project-tab{
   border:0;
   background:transparent;
-  text-align:left;
-  padding:11px;
-  border-radius:10px;
-  margin-bottom:3px;
-  color:#617286;
-  font-weight:700;
-}
-.project-side button.active{
-  background:#edf5ff;
-  color:var(--blue);
-}
-.project-main{
-  min-width:0;
-}
-
-.project-title{
-  background:white;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:21px;
-  margin-bottom:18px;
-}
-.project-title-row{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  align-items:flex-start;
-}
-.project-title h1{margin:0 0 7px;font-size:25px}
-.project-title p{margin:0;color:var(--muted)}
-
-.detail-section{display:none}
-.detail-section.active{display:block}
-
-.info-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-.info{
-  background:var(--cloud);
-  border-radius:13px;
-  padding:13px;
-}
-.info label{
-  display:block;
+  padding:9px 13px;
+  border-radius:8px;
   color:var(--muted);
-  font-size:10px;
-  text-transform:uppercase;
-  font-weight:800;
-  margin-bottom:5px;
+  font-size:13px;
 }
-.info strong{font-size:14px}
+
+.project-tab.active{
+  background:var(--cloud2);
+  color:var(--blue-dark);
+}
+
+.project-panel{
+  display:none;
+}
+
+.project-panel.active{
+  display:block;
+}
+
+/* CHECKLIST */
+
+.checklist-input{
+  min-height:150px;
+}
+
+.help{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.6;
+  margin-top:5px;
+}
 
 .check-item{
   display:flex;
   align-items:center;
-  gap:11px;
-  padding:12px;
+  gap:12px;
+  padding:13px 2px;
+  border-bottom:1px solid var(--line);
+}
+
+.check-item:last-child{
+  border-bottom:0;
+}
+
+.check-item input{
+  width:17px;
+  height:17px;
+  flex:none;
+}
+
+.check-text{
+  flex:1;
+  font-size:14px;
+}
+
+.check-text.done{
+  text-decoration:line-through;
+  color:#8b98a5;
+}
+
+.check-delete{
+  border:0;
+  background:transparent;
+  color:#9aa8b5;
+}
+
+/* BRIEF */
+
+.brief-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.brief-box{
   border:1px solid var(--line);
   border-radius:12px;
+  padding:16px;
+  background:#fff;
+}
+
+.brief-box.full{
+  grid-column:1/-1;
+}
+
+.brief-label{
+  font-size:12px;
+  color:var(--muted);
   margin-bottom:8px;
 }
-.check-item.done{background:#f4fbf7}
-.check-item input{width:17px;height:17px}
-.check-name{flex:1;font-weight:650;font-size:13px}
-.check-item.done .check-name{text-decoration:line-through;color:#7c8b98}
 
-.chat-box{
-  height:450px;
-  overflow:auto;
-  background:#f6f9fc;
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:16px;
+.brief-value{
+  white-space:pre-wrap;
+  line-height:1.7;
+  font-size:14px;
 }
-.msg{
-  max-width:75%;
-  padding:11px 13px;
-  border-radius:14px;
-  margin-bottom:10px;
+
+/* REQUEST */
+
+.request{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:17px;
+  margin-bottom:12px;
+}
+
+.request.pending{
+  border-color:#edc9c9;
+  background:#fffafa;
+}
+
+.request-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.request-name{
+  font-size:15px;
+  color:var(--deep);
+}
+
+.request-body{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+  margin-top:9px;
+}
+
+/* CREDENTIAL */
+
+.credential{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:17px;
+  margin-bottom:12px;
+}
+
+.credential-row{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  gap:10px;
+  padding:6px 0;
   font-size:13px;
 }
-.msg.admin{
-  margin-left:auto;
-  background:var(--deep);
-  color:white;
-  border-bottom-right-radius:4px;
-}
-.msg.client{
-  background:white;
-  border:1px solid var(--line);
-  border-bottom-left-radius:4px;
-}
-.msg-meta{
-  font-size:10px;
-  opacity:.65;
-  margin-bottom:5px;
-}
-.chat-compose{
-  display:flex;
-  gap:9px;
-  margin-top:12px;
-}
-.chat-compose textarea{
-  flex:1;
-  min-height:48px;
-  max-height:120px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:11px;
-  resize:vertical;
-  outline:none;
-}
 
-.doc{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:13px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  margin-bottom:8px;
-}
-.doc-name{font-weight:700;font-size:13px}
-.doc-meta{font-size:11px;color:var(--muted);margin-top:3px}
-
-.invoice{
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:16px;
-  margin-bottom:10px;
-}
-.invoice-row{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  align-items:center;
-}
-.amount{font-size:20px;font-weight:900;color:var(--deep)}
-
-.activity{
-  border-left:2px solid var(--cloud3);
-  padding-left:16px;
-}
-.activity-item{
-  position:relative;
-  padding-bottom:18px;
-}
-.activity-item:before{
-  content:"";
-  width:9px;height:9px;
-  border-radius:50%;
-  background:var(--blue);
-  position:absolute;
-  left:-21px;
-  top:5px;
-}
-.activity-action{font-weight:800;font-size:13px}
-.activity-desc{font-size:12px;color:var(--muted);margin-top:3px}
-.activity-time{font-size:10px;color:#9aa8b5;margin-top:4px}
-
-.empty{
-  padding:35px;
-  text-align:center;
+.credential-label{
   color:var(--muted);
 }
 
-.toast{
-  position:fixed;
-  right:22px;
-  bottom:22px;
-  background:var(--deep);
-  color:white;
-  padding:13px 16px;
-  border-radius:12px;
-  box-shadow:var(--shadow);
-  z-index:300;
-  display:none;
-  max-width:380px;
+/* DOCUMENT */
+
+.document{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  margin-bottom:10px;
+}
+
+.document-info{
+  flex:1;
+}
+
+.document-name{
+  font-size:14px;
+}
+
+.document-date{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+
+/* INVOICE */
+
+.invoice{
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:18px;
+  margin-bottom:13px;
+}
+
+.invoice-top{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.invoice-number{
+  color:var(--deep);
+  font-size:15px;
+}
+
+.invoice-title{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:5px;
+}
+
+.invoice-amount{
+  font-size:21px;
+  color:var(--deep);
+}
+
+.invoice-details{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:16px;
+}
+
+.invoice-detail{
+  padding:10px;
+  background:#f8fbfe;
+  border-radius:8px;
+}
+
+.invoice-detail-label{
+  color:var(--muted);
+  font-size:11px;
+  margin-bottom:4px;
+}
+
+.invoice-detail-value{
   font-size:13px;
 }
-.toast.show{display:block}
-.toast.error{background:#a82f2f}
 
-.mobile-menu{
-  display:none;
-  width:42px;height:42px;
+/* PAYMENT */
+
+.payment-box{
   border:1px solid var(--line);
   border-radius:12px;
-  background:white;
+  padding:17px;
+  margin-top:15px;
+  background:#fbfdff;
 }
 
-@media(max-width:1100px){
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .grid-2{grid-template-columns:1fr}
+.payment-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:9px 0;
+  border-bottom:1px solid var(--line);
+  font-size:13px;
 }
-@media(max-width:800px){
+
+.payment-row:last-child{
+  border-bottom:0;
+}
+
+.payment-label{
+  color:var(--muted);
+}
+
+/* CHAT */
+
+.messages-layout{
+  display:grid;
+  grid-template-columns:310px 1fr;
+  height:650px;
+  min-height:500px;
+  overflow:hidden;
+}
+
+.chat-list{
+  border-right:1px solid var(--line);
+  overflow:auto;
+  background:#fff;
+}
+
+.chat-list-head{
+  padding:17px;
+  border-bottom:1px solid var(--line);
+}
+
+.chat-contact{
+  padding:15px 17px;
+  border-bottom:1px solid #edf2f7;
+  cursor:pointer;
+  position:relative;
+}
+
+.chat-contact:hover{
+  background:#f8fbfe;
+}
+
+.chat-contact.active{
+  background:#eef6ff;
+}
+
+.chat-contact-name{
+  color:var(--deep);
+  font-size:14px;
+  padding-right:15px;
+}
+
+.chat-contact-project{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+
+.unread-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#246bce;
+  position:absolute;
+  right:17px;
+  top:20px;
+}
+
+.chat-window{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+.chat-head{
+  padding:15px 18px;
+  border-bottom:1px solid var(--line);
+  background:#fff;
+}
+
+.chat-head-name{
+  color:var(--deep);
+  font-size:15px;
+}
+
+.chat-head-sub{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+
+.chat-body{
+  flex:1;
+  overflow:auto;
+  padding:22px;
+  background:#eef4f8;
+}
+
+.chat-empty{
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.message-row{
+  display:flex;
+  margin-bottom:9px;
+}
+
+.message-row.admin{
+  justify-content:flex-end;
+}
+
+.bubble{
+  max-width:72%;
+  padding:9px 12px;
+  border-radius:11px;
+  background:#fff;
+  box-shadow:0 1px 2px rgba(0,0,0,.04);
+}
+
+.message-row.admin .bubble{
+  background:#dcecff;
+}
+
+.message-text{
+  font-size:13px;
+  line-height:1.55;
+  white-space:pre-wrap;
+}
+
+.message-time{
+  font-size:9px;
+  color:#7d8b98;
+  text-align:right;
+  margin-top:4px;
+}
+
+.message-file{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--blue);
+  text-decoration:none;
+  font-size:12px;
+}
+
+.chat-compose{
+  padding:11px;
+  border-top:1px solid var(--line);
+  background:#fff;
+}
+
+.compose-row{
+  display:flex;
+  align-items:flex-end;
+  gap:7px;
+}
+
+.compose-text{
+  flex:1;
+  min-height:42px;
+  max-height:120px;
+  resize:none;
+  border-radius:20px;
+  padding:11px 15px;
+}
+
+.compose-btn{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--deep);
+  flex:none;
+}
+
+.compose-btn:hover{
+  background:var(--cloud);
+}
+
+.compose-send{
+  background:var(--blue);
+  border-color:var(--blue);
+  color:#fff;
+}
+
+.recording{
+  color:#d33131!important;
+  border-color:#edcccc!important;
+  background:#fff5f5!important;
+}
+
+/* LOGIN */
+
+.login-screen{
+  position:fixed;
+  inset:0;
+  background:var(--cloud);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.login-box{
+  width:410px;
+  max-width:calc(100% - 30px);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:0 25px 70px rgba(18,59,112,.12);
+  padding:32px;
+}
+
+.login-brand{
+  font-size:24px;
+  color:var(--deep);
+  margin-bottom:7px;
+}
+
+.login-sub{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:25px;
+}
+
+.login-error{
+  color:var(--red);
+  background:var(--red-bg);
+  padding:10px;
+  border-radius:8px;
+  font-size:12px;
+  margin-bottom:13px;
+  display:none;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(11,40,80,.28);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:100;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:680px;
+  max-width:100%;
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:17px;
+  box-shadow:0 25px 80px rgba(11,40,80,.2);
+}
+
+.modal-head{
+  padding:18px 21px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.modal-title{
+  color:var(--deep);
+  font-size:17px;
+}
+
+.modal-close{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-size:20px;
+}
+
+.modal-body{
+  padding:21px;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  background:var(--deep);
+  color:#fff;
+  padding:12px 17px;
+  border-radius:9px;
+  font-size:13px;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(10px);
+  transition:.25s;
+  z-index:500;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* MOBILE */
+
+.mobile-top{
+  display:none;
+}
+
+@media(max-width:1000px){
+
   .sidebar{
-    transform:translateX(-100%);
-    transition:.25s;
+    width:210px;
   }
-  .sidebar.open{transform:translateX(0)}
+
+  .main{
+    margin-left:210px;
+    width:calc(100% - 210px);
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
+
+  .messages-layout{
+    grid-template-columns:250px 1fr;
+  }
+}
+
+@media(max-width:760px){
+
+  .sidebar{
+    display:none;
+  }
+
   .main{
     margin-left:0;
     width:100%;
   }
-  .mobile-menu{display:block}
-  .top-title{font-size:16px}
-  .content{padding:17px}
-  .stats{grid-template-columns:1fr 1fr}
-  .project-layout{grid-template-columns:1fr}
-  .project-side{position:static}
-  .info-grid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:520px){
-  .stats{grid-template-columns:1fr}
-  .form-grid{grid-template-columns:1fr}
-  .field.full{grid-column:auto}
-  .info-grid{grid-template-columns:1fr}
-  .topbar{padding:0 15px}
+
+  .topbar{
+    padding:0 17px;
+  }
+
+  .content{
+    padding:17px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .form-grid,
+  .brief-grid{
+    grid-template-columns:1fr;
+  }
+
+  .brief-box.full{
+    grid-column:auto;
+  }
+
+  .messages-layout{
+    grid-template-columns:1fr;
+    height:auto;
+  }
+
+  .chat-list{
+    max-height:250px;
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
+
+  .chat-window{
+    min-height:500px;
+  }
+
+  .project-tabs{
+    overflow:auto;
+    flex-wrap:nowrap;
+  }
+
+  .project-tab{
+    white-space:nowrap;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<!-- LOGIN -->
 
-<aside class="sidebar" id="sidebar">
+<div id="loginScreen" class="login-screen">
+  <div class="login-box">
+    <div class="login-brand">AWSZ Admin</div>
+    <div class="login-sub">Client operations control center</div>
 
-  <div class="brand">
-    <div class="brand-mark">AWSZ</div>
-    <div>
-      <div class="brand-title">AWSZ Admin</div>
-      <div class="brand-sub">Control Center</div>
+    <div id="loginError" class="login-error"></div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input id="loginEmail" type="email" placeholder="Admin email">
     </div>
-  </div>
 
-  <div class="nav">
-    <div class="nav-title">Workspace</div>
+    <div class="form-group" style="margin-top:13px">
+      <label>Password</label>
+      <input id="loginPassword" type="password" placeholder="Password">
+    </div>
 
-    <button class="active" data-page="dashboard">
-      <span class="nav-icon">⌂</span> Dashboard
-    </button>
-
-    <button data-page="clients">
-      <span class="nav-icon">♙</span> Clients
-    </button>
-
-    <button data-page="projects">
-      <span class="nav-icon">▣</span> Projects
-    </button>
-
-    <button data-page="messages">
-      <span class="nav-icon">✉</span> Messages
-      <span id="msgBadge" class="badge badge-red" style="margin-left:auto;display:none">0</span>
-    </button>
-
-    <button data-page="invoices">
-      <span class="nav-icon">$</span> Invoices
-    </button>
-
-    <button data-page="activity">
-      <span class="nav-icon">◷</span> Activity
-    </button>
-
-    <div class="nav-title">Account</div>
-
-    <button onclick="sendResetEmail()">
-      <span class="nav-icon">↻</span> Reset My Password
-    </button>
-
-    <button onclick="logout()">
-      <span class="nav-icon">↪</span> Logout
+    <button class="btn btn-primary" style="width:100%;margin-top:18px" onclick="login()">
+      Sign in
     </button>
   </div>
+</div>
 
-  <div class="sidebar-bottom">
-    <div class="admin-user" id="adminEmail">Checking admin...</div>
-  </div>
+<!-- APP -->
 
-</aside>
+<div id="app" class="app" style="display:none">
 
-<main class="main">
+  <aside class="sidebar">
 
-<header class="topbar">
-  <div style="display:flex;align-items:center;gap:10px">
-    <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
-    <div class="top-title" id="topTitle">Dashboard</div>
-  </div>
+    <div class="brand">
+      AWSZ <span>Admin</span>
+    </div>
 
-  <div class="top-right">
-    <button class="icon-btn" onclick="refreshAll()" title="Refresh">↻</button>
-    <div class="avatar" id="avatar">A</div>
-  </div>
-</header>
+    <div class="nav">
 
-<div class="content">
+      <button id="navDashboard" class="active" onclick="showView('dashboard')">
+        <span class="nav-icon">⌂</span>
+        <span class="nav-label">Dashboard</span>
+      </button>
 
-<!-- DASHBOARD -->
+      <button id="navClients" onclick="showView('clients')">
+        <span class="nav-icon">◯</span>
+        <span class="nav-label">Clients</span>
+      </button>
 
-<section class="page active" id="page-dashboard">
+      <button id="navProjects" onclick="showView('projects')">
+        <span class="nav-icon">▣</span>
+        <span class="nav-label">Projects</span>
+      </button>
 
-  <div class="hero">
-    <h1>Good to see you, Sajjad.</h1>
-    <p>Manage clients, projects, communication, payments and delivery from one place.</p>
-  </div>
+      <button id="navMessages" onclick="showView('messages')">
+        <span class="nav-icon">◌</span>
+        <span class="nav-label">Messages</span>
+        <span id="messageBadge" class="badge" style="display:none">0</span>
+      </button>
 
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-top">
-        <div class="stat-label">Total Clients</div>
-        <div class="stat-icon">♙</div>
+      <button id="navInvoices" onclick="showView('invoices')">
+        <span class="nav-icon">□</span>
+        <span class="nav-label">Invoices</span>
+      </button>
+
+      <button id="navActivity" onclick="showView('activity')">
+        <span class="nav-icon">◷</span>
+        <span class="nav-label">Activity</span>
+      </button>
+
+    </div>
+
+    <div style="position:absolute;bottom:20px;left:14px;right:14px">
+      <button class="btn" style="width:100%" onclick="logout()">Sign out</button>
+    </div>
+
+  </aside>
+
+  <main class="main">
+
+    <header class="topbar">
+      <div id="pageTitle" class="page-title">Dashboard</div>
+
+      <div class="admin-area">
+        <span class="admin-dot"></span>
+        <span id="adminEmail">Admin</span>
       </div>
-      <div class="stat-number" id="statClients">0</div>
-      <div class="stat-label">Registered client accounts</div>
-    </div>
+    </header>
 
-    <div class="stat">
-      <div class="stat-top">
-        <div class="stat-label">Active Projects</div>
-        <div class="stat-icon">▣</div>
-      </div>
-      <div class="stat-number" id="statProjects">0</div>
-      <div class="stat-label">Currently in progress</div>
-    </div>
+    <div class="content">
 
-    <div class="stat">
-      <div class="stat-top">
-        <div class="stat-label">Pending Invoices</div>
-        <div class="stat-icon">$</div>
-      </div>
-      <div class="stat-number" id="statInvoices">0</div>
-      <div class="stat-label">Draft / sent / overdue</div>
-    </div>
+      <!-- DASHBOARD -->
 
-    <div class="stat">
-      <div class="stat-top">
-        <div class="stat-label">Messages</div>
-        <div class="stat-icon">✉</div>
-      </div>
-      <div class="stat-number" id="statMessages">0</div>
-      <div class="stat-label">Total project messages</div>
-    </div>
-  </div>
+      <section id="view-dashboard" class="view active">
 
-  <div class="grid-2">
+        <div class="stats">
 
-    <div class="card">
-      <div class="card-head">
-        <h3>Recent Projects</h3>
-        <button class="btn btn-secondary btn-small" onclick="goPage('projects')">View all</button>
-      </div>
-      <div id="recentProjects"></div>
-    </div>
-
-    <div class="card">
-      <div class="card-head">
-        <h3>Recent Activity</h3>
-        <button class="btn btn-secondary btn-small" onclick="goPage('activity')">View all</button>
-      </div>
-      <div id="recentActivity"></div>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- CLIENTS -->
-
-<section class="page" id="page-clients">
-
-  <div class="toolbar">
-    <div>
-      <h2 style="margin:0 0 4px">Clients</h2>
-      <div style="color:var(--muted);font-size:13px">All registered client accounts</div>
-    </div>
-
-    <input class="search" id="clientSearch" placeholder="Search clients..." oninput="renderClients()">
-  </div>
-
-  <div class="card" style="padding:0">
-    <div class="table-wrap" style="border:0">
-      <table>
-        <thead>
-          <tr>
-            <th>Client</th>
-            <th>Company</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Joined</th>
-            <th>Projects</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="clientsTable"></tbody>
-      </table>
-    </div>
-  </div>
-
-</section>
-
-
-<!-- PROJECTS -->
-
-<section class="page" id="page-projects">
-
-  <div class="toolbar">
-    <div>
-      <h2 style="margin:0 0 4px">Projects</h2>
-      <div style="color:var(--muted);font-size:13px">Click any project to control its complete delivery</div>
-    </div>
-
-    <div style="display:flex;gap:9px;flex-wrap:wrap">
-      <input class="search" id="projectSearch" placeholder="Search projects..." oninput="renderProjects()">
-      <button class="btn btn-primary" onclick="openCreateProject()">+ New Project</button>
-    </div>
-  </div>
-
-  <div class="card" style="padding:0">
-    <div class="table-wrap" style="border:0">
-      <table>
-        <thead>
-          <tr>
-            <th>Project</th>
-            <th>Client</th>
-            <th>Stage</th>
-            <th>Progress</th>
-            <th>Status</th>
-            <th>Price</th>
-            <th>Updated</th>
-          </tr>
-        </thead>
-        <tbody id="projectsTable"></tbody>
-      </table>
-    </div>
-  </div>
-
-</section>
-
-
-<!-- MESSAGES -->
-
-<section class="page" id="page-messages">
-
-  <div class="toolbar">
-    <div>
-      <h2 style="margin:0 0 4px">Messages</h2>
-      <div style="color:var(--muted);font-size:13px">Client communication across projects</div>
-    </div>
-  </div>
-
-  <div class="card" style="padding:0">
-    <div class="table-wrap" style="border:0">
-      <table>
-        <thead>
-          <tr>
-            <th>Project</th>
-            <th>Sender</th>
-            <th>Message</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody id="messagesTable"></tbody>
-      </table>
-    </div>
-  </div>
-
-</section>
-
-
-<!-- INVOICES -->
-
-<section class="page" id="page-invoices">
-
-  <div class="toolbar">
-    <div>
-      <h2 style="margin:0 0 4px">Invoices</h2>
-      <div style="color:var(--muted);font-size:13px">Manage project billing and payment status</div>
-    </div>
-  </div>
-
-  <div id="invoicesPage"></div>
-
-</section>
-
-
-<!-- ACTIVITY -->
-
-<section class="page" id="page-activity">
-
-  <div class="toolbar">
-    <div>
-      <h2 style="margin:0 0 4px">Activity Log</h2>
-      <div style="color:var(--muted);font-size:13px">Everything happening across your projects</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="activity" id="activityPage"></div>
-  </div>
-
-</section>
-
-
-<!-- PROJECT DETAIL -->
-
-<section class="page" id="page-project-detail">
-
-  <div class="project-title">
-    <div class="project-title-row">
-      <div>
-        <button class="btn btn-secondary btn-small" onclick="goPage('projects')" style="margin-bottom:12px">← Projects</button>
-        <h1 id="detailProjectName">Project</h1>
-        <p id="detailProjectClient"></p>
-      </div>
-
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn btn-primary" onclick="openEditProject()">Edit Project</button>
-        <button class="btn btn-danger" onclick="deleteCurrentProject()">Delete</button>
-      </div>
-    </div>
-
-    <div style="margin-top:18px">
-      <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:800;margin-bottom:6px">
-        <span id="detailStage">Onboarding</span>
-        <span id="detailProgressText">0%</span>
-      </div>
-      <div class="progress" style="width:100%;height:9px">
-        <span id="detailProgress" style="width:0%"></span>
-      </div>
-    </div>
-  </div>
-
-  <div class="project-layout">
-
-    <div class="project-side">
-
-      <button class="active" data-detail="overview">Overview</button>
-      <button data-detail="checklist">Checklist</button>
-      <button data-detail="brief">Project Brief</button>
-      <button data-detail="access">Access Requests</button>
-      <button data-detail="credentials">Credentials</button>
-      <button data-detail="documents">Documents</button>
-      <button data-detail="messages">Messages</button>
-      <button data-detail="invoice">Invoices</button>
-      <button data-detail="activity">Activity</button>
-
-    </div>
-
-    <div class="project-main">
-
-      <!-- OVERVIEW -->
-
-      <div class="detail-section active" id="detail-overview">
-
-        <div class="card">
-          <div class="card-head">
-            <h3>Project Overview</h3>
+          <div class="stat">
+            <div class="stat-label">Total Clients</div>
+            <div id="statClients" class="stat-value">0</div>
           </div>
 
-          <div class="info-grid">
-            <div class="info">
-              <label>Client</label>
-              <strong id="ovClient">—</strong>
-            </div>
-
-            <div class="info">
-              <label>Status</label>
-              <strong id="ovStatus">—</strong>
-            </div>
-
-            <div class="info">
-              <label>Stage</label>
-              <strong id="ovStage">—</strong>
-            </div>
-
-            <div class="info">
-              <label>Quoted Price</label>
-              <strong id="ovPrice">—</strong>
-            </div>
-
-            <div class="info">
-              <label>Start Date</label>
-              <strong id="ovStart">—</strong>
-            </div>
-
-            <div class="info">
-              <label>Expected Completion</label>
-              <strong id="ovEnd">—</strong>
-            </div>
+          <div class="stat">
+            <div class="stat-label">Projects</div>
+            <div id="statProjects" class="stat-value">0</div>
           </div>
 
-          <div style="margin-top:18px">
-            <div style="font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;margin-bottom:6px">
-              Description
-            </div>
-            <div id="ovDescription" style="line-height:1.7;color:#566879"></div>
-          </div>
-        </div>
-
-      </div>
-
-
-      <!-- CHECKLIST -->
-
-      <div class="detail-section" id="detail-checklist">
-
-        <div class="card">
-
-          <div class="card-head">
-            <h3>Project Checklist</h3>
-            <button class="btn btn-primary btn-small" onclick="openAddTask()">+ Add Task</button>
+          <div class="stat">
+            <div class="stat-label">Pending Requests</div>
+            <div id="statRequests" class="stat-value">0</div>
           </div>
 
-          <div id="checklist"></div>
+          <div class="stat">
+            <div class="stat-label">Unpaid Invoices</div>
+            <div id="statInvoices" class="stat-value">0</div>
+          </div>
 
         </div>
 
-      </div>
+        <div class="dashboard-grid">
 
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">Recent Projects</div>
+              <button class="btn btn-small" onclick="showView('projects')">View all</button>
+            </div>
 
-      <!-- BRIEF -->
-
-      <div class="detail-section" id="detail-brief">
-
-        <div class="card">
-
-          <div class="card-head">
-            <h3>Project Brief</h3>
-            <button class="btn btn-primary btn-small" onclick="openBriefModal()">Edit Brief</button>
+            <div id="dashboardProjects" class="card-body">
+              Loading...
+            </div>
           </div>
 
-          <div id="briefContent"></div>
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">Recent Activity</div>
+            </div>
+
+            <div id="dashboardActivity" class="card-body">
+              Loading...
+            </div>
+          </div>
 
         </div>
 
-      </div>
+      </section>
 
+      <!-- CLIENTS -->
 
-      <!-- ACCESS -->
-
-      <div class="detail-section" id="detail-access">
+      <section id="view-clients" class="view">
 
         <div class="card">
 
           <div class="card-head">
-            <h3>Access Requests</h3>
-            <button class="btn btn-primary btn-small" onclick="openAccessModal()">+ Request Access</button>
+            <div class="card-title">Clients</div>
+
+            <input
+              id="clientSearch"
+              class="search"
+              placeholder="Search clients..."
+              oninput="renderClients()"
+            >
           </div>
 
-          <div id="accessList"></div>
+          <div class="table-wrap">
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Company</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Joined</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody id="clientsTable"></tbody>
+
+            </table>
+          </div>
 
         </div>
 
-      </div>
+      </section>
 
+      <!-- PROJECTS -->
 
-      <!-- CREDENTIALS -->
-
-      <div class="detail-section" id="detail-credentials">
+      <section id="view-projects" class="view">
 
         <div class="card">
 
           <div class="card-head">
-            <h3>Project Credentials</h3>
-            <button class="btn btn-primary btn-small" onclick="openCredentialModal()">+ Add Credential</button>
+
+            <div class="card-title">Projects</div>
+
+            <div class="actions">
+              <input
+                id="projectSearch"
+                class="search"
+                placeholder="Search projects..."
+                oninput="renderProjects()"
+              >
+
+              <button class="btn btn-primary" onclick="openProjectModal()">
+                + New Project
+              </button>
+            </div>
+
           </div>
 
-          <div id="credentialsList"></div>
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Project</th>
+                  <th>Client</th>
+                  <th>Stage</th>
+                  <th>Progress</th>
+                  <th>Status</th>
+                  <th>Updated</th>
+                </tr>
+              </thead>
+
+              <tbody id="projectsTable"></tbody>
+
+            </table>
+
+          </div>
 
         </div>
 
-      </div>
+      </section>
 
+      <!-- PROJECT DETAIL -->
 
-      <!-- DOCUMENTS -->
+      <section id="view-project-detail" class="view">
 
-      <div class="detail-section" id="detail-documents">
+        <div class="project-header">
 
-        <div class="card">
+          <button class="btn btn-small back-btn" onclick="showView('projects')">
+            ← Projects
+          </button>
 
-          <div class="card-head">
-            <div>
-              <h3>Project Documents</h3>
-              <div style="font-size:12px;color:var(--muted);margin-top:3px">
-                Upload files for this client project
+          <div id="detailProjectName" class="project-name"></div>
+          <div id="detailProjectMeta" class="project-meta"></div>
+
+          <div class="project-progress">
+
+            <div class="progress-info">
+              <span id="detailStage"></span>
+              <span id="detailProgressText"></span>
+            </div>
+
+            <div class="progress-line">
+              <div id="detailProgress" class="progress-fill"></div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="project-tabs">
+
+          <button class="project-tab active" onclick="projectTab('overview',this)">
+            Overview
+          </button>
+
+          <button class="project-tab" onclick="projectTab('checklist',this)">
+            Checklist
+          </button>
+
+          <button class="project-tab" onclick="projectTab('brief',this)">
+            Project Brief
+          </button>
+
+          <button class="project-tab" onclick="projectTab('requests',this)">
+            Access Requests
+          </button>
+
+          <button class="project-tab" onclick="projectTab('credentials',this)">
+            Credentials
+          </button>
+
+          <button class="project-tab" onclick="projectTab('documents',this)">
+            Documents
+          </button>
+
+          <button class="project-tab" onclick="projectTab('invoices',this)">
+            Invoices
+          </button>
+
+          <button class="project-tab" onclick="projectTab('messages',this)">
+            Messages
+          </button>
+
+          <button class="project-tab" onclick="projectTab('activity',this)">
+            Activity
+          </button>
+
+        </div>
+
+        <!-- OVERVIEW -->
+
+        <div id="panel-overview" class="project-panel active">
+
+          <div class="card">
+
+            <div class="card-head">
+              <div class="card-title">Project Overview</div>
+
+              <div class="actions">
+                <button class="btn" onclick="openProjectModal(currentProject)">
+                  Edit
+                </button>
+
+                <button class="btn btn-danger" onclick="deleteCurrentProject()">
+                  Delete
+                </button>
               </div>
             </div>
 
-            <label class="btn btn-primary">
-              + Upload
-              <input type="file" id="documentInput" hidden onchange="uploadDocument()">
-            </label>
-          </div>
+            <div class="card-body">
 
-          <div id="documentsList"></div>
+              <div class="form-grid">
+
+                <div class="form-group">
+                  <label>Client</label>
+                  <div id="overviewClient"></div>
+                </div>
+
+                <div class="form-group">
+                  <label>Quoted Price</label>
+                  <div id="overviewPrice"></div>
+                </div>
+
+                <div class="form-group">
+                  <label>Start Date</label>
+                  <div id="overviewStart"></div>
+                </div>
+
+                <div class="form-group">
+                  <label>Expected Completion</label>
+                  <div id="overviewCompletion"></div>
+                </div>
+
+                <div class="form-group full">
+                  <label>Description</label>
+                  <div id="overviewDescription"></div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
 
         </div>
 
-      </div>
+        <!-- CHECKLIST -->
 
+        <div id="panel-checklist" class="project-panel">
 
-      <!-- MESSAGES -->
+          <div class="card">
 
-      <div class="detail-section" id="detail-messages">
+            <div class="card-head">
+
+              <div>
+                <div class="card-title">Project Checklist</div>
+
+                <div class="help">
+                  Paste the complete task list below. One task per line.
+                  The system will automatically create the checklist.
+                </div>
+              </div>
+
+            </div>
+
+            <div class="card-body">
+
+              <textarea
+                id="bulkChecklist"
+                class="checklist-input"
+                placeholder="GHL account access
+Phone number connected
+Voice provider selected
+Agent prompt finalized
+Knowledge base added
+Call routing configured
+CRM integration
+Test calls
+Client approval
+Production deployment"
+              ></textarea>
+
+              <div class="form-actions">
+                <button class="btn btn-primary" onclick="createBulkChecklist()">
+                  Create Checklist
+                </button>
+              </div>
+
+              <div style="height:15px"></div>
+
+              <div id="checklistItems"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- BRIEF -->
+
+        <div id="panel-brief" class="project-panel">
+
+          <div class="card">
+
+            <div class="card-head">
+
+              <div class="card-title">Project Brief</div>
+
+              <button class="btn btn-primary btn-small" onclick="saveBrief()">
+                Save Brief
+              </button>
+
+            </div>
+
+            <div class="card-body">
+
+              <div class="form-grid">
+
+                <div class="form-group full">
+                  <label>Summary</label>
+                  <textarea id="briefSummary" placeholder="Short summary of the project"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>Objective</label>
+                  <textarea id="briefObjective"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>Scope</label>
+                  <textarea id="briefScope"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>Requirements</label>
+                  <textarea id="briefRequirements"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>Deliverables</label>
+                  <textarea id="briefDeliverables"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>Timeline</label>
+                  <textarea id="briefTimeline"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>Notes</label>
+                  <textarea id="briefNotes"></textarea>
+                </div>
+
+              </div>
+
+              <div style="margin-top:22px">
+
+                <div class="card-title" style="margin-bottom:12px">
+                  Project Documents
+                </div>
+
+                <input
+                  id="briefDocumentInput"
+                  type="file"
+                  multiple
+                  onchange="uploadBriefDocuments(this.files)"
+                >
+
+                <div class="help">
+                  Upload proposals, PDFs, requirements, screenshots or other project documents.
+                </div>
+
+              </div>
+
+              <div id="briefDocuments" style="margin-top:15px"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ACCESS REQUESTS -->
+
+        <div id="panel-requests" class="project-panel">
+
+          <div class="card">
+
+            <div class="card-head">
+
+              <div>
+                <div class="card-title">Access Requests</div>
+                <div class="help">
+                  Pending client requests remain highlighted until the client submits the required information.
+                </div>
+              </div>
+
+              <button class="btn btn-primary btn-small" onclick="openRequestModal()">
+                + Request Access
+              </button>
+
+            </div>
+
+            <div id="requestsList" class="card-body"></div>
+
+          </div>
+
+        </div>
+
+        <!-- CREDENTIALS -->
+
+        <div id="panel-credentials" class="project-panel">
+
+          <div class="card">
+
+            <div class="card-head">
+
+              <div>
+                <div class="card-title">Credentials</div>
+                <div class="help">
+                  Project-specific access information.
+                </div>
+              </div>
+
+              <button class="btn btn-primary btn-small" onclick="openCredentialModal()">
+                + Add Credential
+              </button>
+
+            </div>
+
+            <div id="credentialsList" class="card-body"></div>
+
+          </div>
+
+        </div>
+
+        <!-- DOCUMENTS -->
+
+        <div id="panel-documents" class="project-panel">
+
+          <div class="card">
+
+            <div class="card-head">
+
+              <div class="card-title">Documents</div>
+
+              <input
+                id="projectDocumentInput"
+                type="file"
+                multiple
+                onchange="uploadDocuments(this.files)"
+              >
+
+            </div>
+
+            <div id="documentsList" class="card-body"></div>
+
+          </div>
+
+        </div>
+
+        <!-- INVOICES -->
+
+        <div id="panel-invoices" class="project-panel">
+
+          <div class="card">
+
+            <div class="card-head">
+
+              <div class="card-title">Project Invoices</div>
+
+              <button class="btn btn-primary btn-small" onclick="openInvoiceModal()">
+                + Create Invoice
+              </button>
+
+            </div>
+
+            <div id="projectInvoices" class="card-body"></div>
+
+          </div>
+
+        </div>
+
+        <!-- MESSAGES -->
+
+        <div id="panel-messages" class="project-panel">
+
+          <div class="card messages-layout">
+
+            <div class="chat-list">
+
+              <div class="chat-list-head">
+                <div class="card-title">Conversation</div>
+              </div>
+
+              <div style="padding:14px">
+                <div class="chat-contact active">
+                  <div id="projectChatClientName" class="chat-contact-name">
+                    Client
+                  </div>
+
+                  <div id="projectChatProjectName" class="chat-contact-project">
+                    Project
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="chat-window">
+
+              <div class="chat-head">
+
+                <div id="chatHeadName" class="chat-head-name">
+                  Client
+                </div>
+
+                <div id="chatHeadSub" class="chat-head-sub">
+                  Project
+                </div>
+
+              </div>
+
+              <div id="projectChatBody" class="chat-body"></div>
+
+              <div class="chat-compose">
+
+                <div class="compose-row">
+
+                  <input
+                    id="chatFileInput"
+                    type="file"
+                    style="display:none"
+                    onchange="sendChatFile(this.files[0])"
+                  >
+
+                  <button
+                    class="compose-btn"
+                    title="Attach file"
+                    onclick="document.getElementById('chatFileInput').click()"
+                  >
+                    +
+                  </button>
+
+                  <button
+                    id="voiceButton"
+                    class="compose-btn"
+                    title="Record voice"
+                    onclick="toggleVoiceRecording()"
+                  >
+                    🎙
+                  </button>
+
+                  <textarea
+                    id="projectChatInput"
+                    class="compose-text"
+                    placeholder="Type a message..."
+                    rows="1"
+                    onkeydown="chatKeyDown(event)"
+                  ></textarea>
+
+                  <button
+                    class="compose-btn compose-send"
+                    title="Send"
+                    onclick="sendProjectMessage()"
+                  >
+                    ➤
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ACTIVITY -->
+
+        <div id="panel-activity" class="project-panel">
+
+          <div class="card">
+
+            <div class="card-head">
+              <div class="card-title">Project Activity</div>
+            </div>
+
+            <div id="projectActivity" class="card-body"></div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- GLOBAL MESSAGES -->
+
+      <section id="view-messages" class="view">
+
+        <div class="card messages-layout">
+
+          <div class="chat-list">
+
+            <div class="chat-list-head">
+              <div class="card-title">Client Messages</div>
+            </div>
+
+            <div id="globalChatList"></div>
+
+          </div>
+
+          <div class="chat-window">
+
+            <div class="chat-head">
+
+              <div id="globalChatName" class="chat-head-name">
+                Select a conversation
+              </div>
+
+              <div id="globalChatSub" class="chat-head-sub">
+                —
+              </div>
+
+            </div>
+
+            <div id="globalChatBody" class="chat-body">
+
+              <div class="chat-empty">
+                Select a client conversation
+              </div>
+
+            </div>
+
+            <div class="chat-compose">
+
+              <div class="compose-row">
+
+                <input
+                  id="globalFileInput"
+                  type="file"
+                  style="display:none"
+                  onchange="sendGlobalFile(this.files[0])"
+                >
+
+                <button
+                  class="compose-btn"
+                  onclick="document.getElementById('globalFileInput').click()"
+                >
+                  +
+                </button>
+
+                <button
+                  id="globalVoiceButton"
+                  class="compose-btn"
+                  onclick="toggleGlobalVoiceRecording()"
+                >
+                  🎙
+                </button>
+
+                <textarea
+                  id="globalChatInput"
+                  class="compose-text"
+                  placeholder="Type a message..."
+                  rows="1"
+                  onkeydown="globalChatKeyDown(event)"
+                ></textarea>
+
+                <button
+                  class="compose-btn compose-send"
+                  onclick="sendGlobalMessage()"
+                >
+                  ➤
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- INVOICES -->
+
+      <section id="view-invoices" class="view">
 
         <div class="card">
 
           <div class="card-head">
-            <h3>Project Conversation</h3>
+
+            <div class="card-title">Invoices</div>
+
+            <button class="btn btn-primary" onclick="openInvoiceModal()">
+              + New Invoice
+            </button>
+
           </div>
 
-          <div class="chat-box" id="projectChat"></div>
+          <div class="table-wrap">
 
-          <div class="chat-compose">
-            <textarea id="adminMessage" placeholder="Write a message to the client..."></textarea>
-            <button class="btn btn-primary" onclick="sendProjectMessage()">Send</button>
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Invoice</th>
+                  <th>Client</th>
+                  <th>Project</th>
+                  <th>Amount</th>
+                  <th>Due</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody id="invoicesTable"></tbody>
+
+            </table>
+
           </div>
 
         </div>
 
-      </div>
-
-
-      <!-- INVOICE -->
-
-      <div class="detail-section" id="detail-invoice">
-
-        <div class="card">
-
-          <div class="card-head">
-            <h3>Project Invoices</h3>
-            <button class="btn btn-primary btn-small" onclick="openInvoiceModal()">+ Create Invoice</button>
-          </div>
-
-          <div id="projectInvoices"></div>
-
-        </div>
-
-      </div>
-
+      </section>
 
       <!-- ACTIVITY -->
 
-      <div class="detail-section" id="detail-activity">
+      <section id="view-activity" class="view">
 
         <div class="card">
 
           <div class="card-head">
-            <h3>Project Activity</h3>
+            <div class="card-title">Activity</div>
           </div>
 
-          <div class="activity" id="projectActivity"></div>
+          <div id="activityList" class="card-body"></div>
 
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+</div>
+
+<!-- PROJECT MODAL -->
+
+<div id="projectModal" class="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <div id="projectModalTitle" class="modal-title">
+        New Project
+      </div>
+
+      <button class="modal-close" onclick="closeModal('projectModal')">
+        ×
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <div class="form-grid">
+
+        <div class="form-group full">
+          <label>Client</label>
+          <select id="projectClient"></select>
+        </div>
+
+        <div class="form-group full">
+          <label>Project Name</label>
+          <input id="projectName" placeholder="AI Calling Bot">
+        </div>
+
+        <div class="form-group full">
+          <label>Description</label>
+          <textarea id="projectDescription"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Quoted Price</label>
+          <input id="projectPrice" type="number" step="0.01">
+        </div>
+
+        <div class="form-group">
+          <label>Status</label>
+          <select id="projectStatus">
+            <option value="Active">Active</option>
+            <option value="On Hold">On Hold</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Stage</label>
+          <select id="projectStage">
+            <option>01 Onboarding</option>
+            <option>02 Requirements</option>
+            <option>03 Access Collection</option>
+            <option>04 Setup</option>
+            <option>05 Development</option>
+            <option>06 Integration</option>
+            <option>07 Testing</option>
+            <option>08 Client Review</option>
+            <option>09 Revisions</option>
+            <option>10 Final Approval</option>
+            <option>11 Completed</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Progress %</label>
+          <input id="projectProgress" type="number" min="0" max="100" value="0">
+        </div>
+
+        <div class="form-group">
+          <label>Start Date</label>
+          <input id="projectStart" type="date">
+        </div>
+
+        <div class="form-group">
+          <label>Expected Completion</label>
+          <input id="projectCompletion" type="date">
         </div>
 
       </div>
 
-    </div>
+      <div class="form-actions">
 
-  </div>
+        <button class="btn" onclick="closeModal('projectModal')">
+          Cancel
+        </button>
 
-</section>
+        <button class="btn btn-primary" onclick="saveProject()">
+          Save Project
+        </button>
 
-</div>
-</main>
-</div>
-
-
-<!-- PROJECT MODAL -->
-
-<div class="modal-bg" id="projectModal">
-
-<div class="modal">
-
-  <div class="modal-head">
-    <h2 id="projectModalTitle">Create Project</h2>
-    <button class="close" onclick="closeModal('projectModal')">×</button>
-  </div>
-
-  <div class="modal-body">
-
-    <div class="form-grid">
-
-      <div class="field">
-        <label>Client</label>
-        <select id="projectClient"></select>
-      </div>
-
-      <div class="field">
-        <label>Project Name</label>
-        <input id="projectName" placeholder="e.g. AI Receptionist">
-      </div>
-
-      <div class="field full">
-        <label>Description</label>
-        <textarea id="projectDescription"></textarea>
-      </div>
-
-      <div class="field">
-        <label>Quoted Price</label>
-        <input id="projectPrice" type="number" step="0.01">
-      </div>
-
-      <div class="field">
-        <label>Status</label>
-        <select id="projectStatus">
-          <option>Active</option>
-          <option>On Hold</option>
-          <option>Completed</option>
-          <option>Cancelled</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Stage</label>
-        <select id="projectStage"></select>
-      </div>
-
-      <div class="field">
-        <label>Progress %</label>
-        <input id="projectProgress" type="number" min="0" max="100">
-      </div>
-
-      <div class="field">
-        <label>Start Date</label>
-        <input id="projectStart" type="date">
-      </div>
-
-      <div class="field">
-        <label>Expected Completion</label>
-        <input id="projectEnd" type="date">
       </div>
 
     </div>
 
   </div>
 
-  <div class="modal-foot">
-    <button class="btn btn-secondary" onclick="closeModal('projectModal')">Cancel</button>
-    <button class="btn btn-primary" onclick="saveProject()">Save Project</button>
-  </div>
-
-</div>
 </div>
 
+<!-- REQUEST MODAL -->
 
-<!-- TASK MODAL -->
+<div id="requestModal" class="modal">
 
-<div class="modal-bg" id="taskModal">
+  <div class="modal-box">
 
-<div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">Access Request</div>
+      <button class="modal-close" onclick="closeModal('requestModal')">×</button>
+    </div>
 
-  <div class="modal-head">
-    <h2>Add Checklist Task</h2>
-    <button class="close" onclick="closeModal('taskModal')">×</button>
-  </div>
+    <div class="modal-body">
 
-  <div class="modal-body">
+      <div class="form-grid">
 
-    <div class="form-grid">
+        <div class="form-group">
+          <label>System</label>
+          <input id="requestSystem" placeholder="GHL">
+        </div>
 
-      <div class="field full">
-        <label>Task Name</label>
-        <input id="taskName">
+        <div class="form-group">
+          <label>Access Type</label>
+          <input id="requestType" placeholder="Admin access">
+        </div>
+
+        <div class="form-group full">
+          <label>Instructions</label>
+          <textarea id="requestInstructions" placeholder="Tell the client exactly what access is required."></textarea>
+        </div>
+
       </div>
 
-      <div class="field full">
-        <label>Description</label>
-        <textarea id="taskDescription"></textarea>
-      </div>
+      <div class="form-actions">
 
-      <div class="field">
-        <label>Assigned To</label>
-        <input id="taskAssigned">
-      </div>
+        <button class="btn" onclick="closeModal('requestModal')">
+          Cancel
+        </button>
 
-      <div class="field">
-        <label>Due Date</label>
-        <input id="taskDue" type="date">
+        <button class="btn btn-primary" onclick="saveAccessRequest()">
+          Send Request
+        </button>
+
       </div>
 
     </div>
 
   </div>
 
-  <div class="modal-foot">
-    <button class="btn btn-secondary" onclick="closeModal('taskModal')">Cancel</button>
-    <button class="btn btn-primary" onclick="saveTask()">Add Task</button>
-  </div>
-
 </div>
-</div>
-
-
-<!-- BRIEF MODAL -->
-
-<div class="modal-bg" id="briefModal">
-
-<div class="modal">
-
-  <div class="modal-head">
-    <h2>Project Brief</h2>
-    <button class="close" onclick="closeModal('briefModal')">×</button>
-  </div>
-
-  <div class="modal-body">
-
-    <div class="form-grid">
-
-      <div class="field full">
-        <label>Objective</label>
-        <textarea id="briefObjective"></textarea>
-      </div>
-
-      <div class="field full">
-        <label>Scope</label>
-        <textarea id="briefScope"></textarea>
-      </div>
-
-      <div class="field full">
-        <label>Requirements</label>
-        <textarea id="briefRequirements"></textarea>
-      </div>
-
-      <div class="field full">
-        <label>Deliverables</label>
-        <textarea id="briefDeliverables"></textarea>
-      </div>
-
-      <div class="field full">
-        <label>Timeline</label>
-        <textarea id="briefTimeline"></textarea>
-      </div>
-
-      <div class="field full">
-        <label>Notes</label>
-        <textarea id="briefNotes"></textarea>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="modal-foot">
-    <button class="btn btn-secondary" onclick="closeModal('briefModal')">Cancel</button>
-    <button class="btn btn-primary" onclick="saveBrief()">Save Brief</button>
-  </div>
-
-</div>
-</div>
-
-
-<!-- ACCESS MODAL -->
-
-<div class="modal-bg" id="accessModal">
-
-<div class="modal">
-
-  <div class="modal-head">
-    <h2>Access Request</h2>
-    <button class="close" onclick="closeModal('accessModal')">×</button>
-  </div>
-
-  <div class="modal-body">
-
-    <div class="form-grid">
-
-      <div class="field">
-        <label>System</label>
-        <input id="accessSystem" placeholder="GHL / Meta / n8n">
-      </div>
-
-      <div class="field">
-        <label>Access Type</label>
-        <input id="accessType" placeholder="Admin / Team Member">
-      </div>
-
-      <div class="field full">
-        <label>Instructions</label>
-        <textarea id="accessInstructions"></textarea>
-      </div>
-
-      <div class="field">
-        <label>Status</label>
-        <select id="accessStatus">
-          <option>Pending</option>
-          <option>Requested</option>
-          <option>Completed</option>
-          <option>Rejected</option>
-        </select>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="modal-foot">
-    <button class="btn btn-secondary" onclick="closeModal('accessModal')">Cancel</button>
-    <button class="btn btn-primary" onclick="saveAccess()">Save Request</button>
-  </div>
-
-</div>
-</div>
-
 
 <!-- CREDENTIAL MODAL -->
 
-<div class="modal-bg" id="credentialModal">
+<div id="credentialModal" class="modal">
 
-<div class="modal">
+  <div class="modal-box">
 
-  <div class="modal-head">
-    <h2>Project Credential</h2>
-    <button class="close" onclick="closeModal('credentialModal')">×</button>
-  </div>
+    <div class="modal-head">
+      <div class="modal-title">Credential</div>
+      <button class="modal-close" onclick="closeModal('credentialModal')">×</button>
+    </div>
 
-  <div class="modal-body">
+    <div class="modal-body">
 
-    <div class="form-grid">
+      <input id="credentialId" type="hidden">
 
-      <div class="field">
-        <label>Service</label>
-        <input id="credService">
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Service</label>
+          <input id="credentialService" placeholder="GHL">
+        </div>
+
+        <div class="form-group">
+          <label>Login URL</label>
+          <input id="credentialUrl" placeholder="https://...">
+        </div>
+
+        <div class="form-group">
+          <label>Username / Email</label>
+          <input id="credentialUsername">
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input id="credentialPassword" type="text">
+        </div>
+
+        <div class="form-group full">
+          <label>Notes</label>
+          <textarea id="credentialNotes"></textarea>
+        </div>
+
       </div>
 
-      <div class="field">
-        <label>Login URL</label>
-        <input id="credUrl">
-      </div>
+      <div class="form-actions">
 
-      <div class="field">
-        <label>Username</label>
-        <input id="credUsername">
-      </div>
+        <button class="btn" onclick="closeModal('credentialModal')">
+          Cancel
+        </button>
 
-      <div class="field">
-        <label>Password</label>
-        <input id="credPassword" type="password">
-      </div>
+        <button class="btn btn-primary" onclick="saveCredential()">
+          Save Credential
+        </button>
 
-      <div class="field full">
-        <label>Notes</label>
-        <textarea id="credNotes"></textarea>
       </div>
 
     </div>
 
   </div>
 
-  <div class="modal-foot">
-    <button class="btn btn-secondary" onclick="closeModal('credentialModal')">Cancel</button>
-    <button class="btn btn-primary" onclick="saveCredential()">Save Credential</button>
-  </div>
-
 </div>
-</div>
-
 
 <!-- INVOICE MODAL -->
 
-<div class="modal-bg" id="invoiceModal">
+<div id="invoiceModal" class="modal">
 
-<div class="modal">
+  <div class="modal-box">
 
-  <div class="modal-head">
-    <h2>Create Invoice</h2>
-    <button class="close" onclick="closeModal('invoiceModal')">×</button>
-  </div>
+    <div class="modal-head">
 
-  <div class="modal-body">
+      <div class="modal-title">Create Invoice</div>
 
-    <div class="form-grid">
+      <button class="modal-close" onclick="closeModal('invoiceModal')">
+        ×
+      </button>
 
-      <div class="field">
-        <label>Invoice Number</label>
-        <input id="invoiceNumber">
+    </div>
+
+    <div class="modal-body">
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Client</label>
+          <select id="invoiceClient"></select>
+        </div>
+
+        <div class="form-group">
+          <label>Project</label>
+          <select id="invoiceProject"></select>
+        </div>
+
+        <div class="form-group">
+          <label>Invoice Number</label>
+          <input id="invoiceNumber">
+        </div>
+
+        <div class="form-group">
+          <label>Title</label>
+          <input id="invoiceTitle" value="Project Invoice">
+        </div>
+
+        <div class="form-group">
+          <label>Amount</label>
+          <input id="invoiceAmount" type="number" step="0.01">
+        </div>
+
+        <div class="form-group">
+          <label>Currency</label>
+          <select id="invoiceCurrency">
+            <option>USD</option>
+            <option>PKR</option>
+            <option>GBP</option>
+            <option>EUR</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Due Date</label>
+          <input id="invoiceDue" type="date">
+        </div>
+
+        <div class="form-group">
+          <label>Status</label>
+          <select id="invoiceStatus">
+            <option value="draft">Draft</option>
+            <option value="pending">Pending</option>
+            <option value="paid">Paid</option>
+            <option value="overdue">Overdue</option>
+          </select>
+        </div>
+
+        <div class="form-group full">
+          <label>Description</label>
+          <textarea id="invoiceDescription"></textarea>
+        </div>
+
+        <div class="form-group full">
+          <label>Payment URL</label>
+          <input id="invoicePaymentUrl" placeholder="Payment link if available">
+        </div>
+
+        <div class="form-group full">
+          <label>Invoice Notes</label>
+          <textarea id="invoiceNotes"></textarea>
+        </div>
+
       </div>
 
-      <div class="field">
-        <label>Title</label>
-        <input id="invoiceTitle" value="Project Invoice">
+      <div class="payment-box">
+
+        <div class="card-title" style="margin-bottom:10px">
+          Payment Details
+        </div>
+
+        <div class="payment-row">
+          <span class="payment-label">Bank / Method</span>
+          <span id="paymentMethod">Add your payment details</span>
+        </div>
+
+        <div class="payment-row">
+          <span class="payment-label">Account Name</span>
+          <span id="paymentAccountName">—</span>
+        </div>
+
+        <div class="payment-row">
+          <span class="payment-label">Account / IBAN</span>
+          <span id="paymentAccount">—</span>
+        </div>
+
+        <div class="payment-row">
+          <span class="payment-label">Instructions</span>
+          <span id="paymentInstructions">—</span>
+        </div>
+
       </div>
 
-      <div class="field full">
-        <label>Description</label>
-        <textarea id="invoiceDescription"></textarea>
-      </div>
+      <div class="form-actions">
 
-      <div class="field">
-        <label>Amount</label>
-        <input id="invoiceAmount" type="number" step="0.01">
-      </div>
+        <button class="btn" onclick="closeModal('invoiceModal')">
+          Cancel
+        </button>
 
-      <div class="field">
-        <label>Currency</label>
-        <select id="invoiceCurrency">
-          <option>USD</option>
-          <option>PKR</option>
-          <option>GBP</option>
-          <option>EUR</option>
-        </select>
-      </div>
+        <button class="btn btn-primary" onclick="saveInvoice()">
+          Create Invoice
+        </button>
 
-      <div class="field">
-        <label>Due Date</label>
-        <input id="invoiceDue" type="date">
-      </div>
-
-      <div class="field">
-        <label>Payment URL</label>
-        <input id="invoicePaymentUrl" placeholder="https://...">
-      </div>
-
-      <div class="field full">
-        <label>Notes</label>
-        <textarea id="invoiceNotes"></textarea>
       </div>
 
     </div>
 
   </div>
 
-  <div class="modal-foot">
-    <button class="btn btn-secondary" onclick="closeModal('invoiceModal')">Cancel</button>
-    <button class="btn btn-primary" onclick="saveInvoice()">Create Invoice</button>
-  </div>
-
-</div>
 </div>
 
-
-<div class="toast" id="toast"></div>
-
+<div id="toast" class="toast"></div>
 
 <script>
 
@@ -1552,51 +2392,59 @@ tr:last-child td{border-bottom:0}
    SUPABASE
 ========================================================= */
 
-const SUPABASE_URL = "https://ausocdplliuftdqxbvwa.supabase.co";
+const SUPABASE_URL =
+  "https://ausocdplliuftdqxbvwa.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
+  "sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
 
 const supabaseClient =
-window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
 
 /* =========================================================
-   GLOBAL DATA
+   STATE
 ========================================================= */
-
-const STAGES = [
-  "01 Onboarding",
-  "02 Requirements",
-  "03 Access Collection",
-  "04 Setup",
-  "05 Development",
-  "06 Integration",
-  "07 Testing",
-  "08 Client Review",
-  "09 Revisions",
-  "10 Final Approval",
-  "11 Completed"
-];
 
 let currentUser = null;
 let currentProject = null;
-let editingProjectId = null;
-let editingCredentialId = null;
 
 let clients = [];
 let projects = [];
 let tasks = [];
 let messages = [];
 let invoices = [];
-let activities = [];
-let briefs = [];
-let accessRequests = [];
-let credentials = [];
-let documents = [];
+let activity = [];
+
+let selectedGlobalProject = null;
+
+let mediaRecorder = null;
+let recordedChunks = [];
+let recordingStream = null;
+
+let globalMediaRecorder = null;
+let globalRecordedChunks = [];
+let globalRecordingStream = null;
+
+
+/* =========================================================
+   PAYMENT DETAILS
+========================================================= */
+
+const PAYMENT_DETAILS = {
+
+  method: "Add your payment method",
+
+  accountName: "",
+
+  account: "",
+
+  instructions: ""
+
+};
 
 
 /* =========================================================
@@ -1604,48 +2452,107 @@ let documents = [];
 ========================================================= */
 
 function esc(value){
+
   if(value === null || value === undefined) return "";
+
   return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
 }
 
-function money(amount,currency="USD"){
-  return `${currency} ${Number(amount || 0).toLocaleString(undefined,{
-    minimumFractionDigits:2,
-    maximumFractionDigits:2
-  })}`;
-}
 
-function dateFormat(value){
+function formatDate(value){
+
   if(!value) return "—";
-  return new Date(value).toLocaleDateString();
+
+  try{
+
+    return new Date(value).toLocaleDateString(
+      undefined,
+      {
+        year:"numeric",
+        month:"short",
+        day:"numeric"
+      }
+    );
+
+  }catch(e){
+
+    return value;
+
+  }
+
 }
 
-function timeFormat(value){
-  if(!value) return "";
-  return new Date(value).toLocaleString();
+
+function formatMoney(amount,currency="USD"){
+
+  if(amount === null || amount === undefined || amount === "")
+    return "—";
+
+  return `${currency} ${Number(amount).toLocaleString()}`;
+
 }
 
-function toast(message,error=false){
-  const el=document.getElementById("toast");
-  el.textContent=message;
-  el.className="toast show"+(error?" error":"");
-  clearTimeout(window.toastTimer);
-  window.toastTimer=setTimeout(()=>{
-    el.className="toast";
-  },3500);
+
+function toast(message){
+
+  const el = document.getElementById("toast");
+
+  el.textContent = message;
+
+  el.classList.add("show");
+
+  setTimeout(()=>{
+    el.classList.remove("show");
+  },2600);
+
 }
+
+
+function playMessageSound(){
+
+  try{
+
+    const ctx =
+      new (window.AudioContext || window.webkitAudioContext)();
+
+    const osc = ctx.createOscillator();
+
+    const gain = ctx.createGain();
+
+    osc.frequency.value = 720;
+
+    gain.gain.value = .055;
+
+    osc.connect(gain);
+
+    gain.connect(ctx.destination);
+
+    osc.start();
+
+    osc.stop(ctx.currentTime + .09);
+
+  }catch(e){}
+
+}
+
 
 function closeModal(id){
-  document.getElementById(id).classList.remove("open");
+
+  document.getElementById(id).classList.remove("show");
+
 }
 
+
 function openModal(id){
-  document.getElementById(id).classList.add("open");
+
+  document.getElementById(id).classList.add("show");
+
 }
 
 
@@ -1653,48 +2560,68 @@ function openModal(id){
    AUTH
 ========================================================= */
 
-async function init(){
+async function login(){
 
-  const {
-    data:{session}
-  } = await supabaseClient.auth.getSession();
+  const email =
+    document.getElementById("loginEmail").value.trim();
 
-  if(!session){
-    location.href="/client-portal/";
+  const password =
+    document.getElementById("loginPassword").value;
+
+  const error =
+    document.getElementById("loginError");
+
+  error.style.display = "none";
+
+  if(!email || !password){
+
+    error.textContent = "Please enter email and password.";
+
+    error.style.display = "block";
+
     return;
+
   }
 
-  currentUser=session.user;
+  const {data,error:authError} =
+    await supabaseClient.auth.signInWithPassword({
+      email,
+      password
+    });
 
-  document.getElementById("adminEmail").textContent =
-    currentUser.email || "Admin";
+  if(authError){
 
-  document.getElementById("avatar").textContent =
-    (currentUser.email || "A").charAt(0).toUpperCase();
+    error.textContent = authError.message;
 
-  const {data:role,error} =
+    error.style.display = "block";
+
+    return;
+
+  }
+
+  currentUser = data.user;
+
+  const {data:role,error:roleError} =
     await supabaseClient
       .from("user_roles")
       .select("role")
       .eq("user_id",currentUser.id)
       .maybeSingle();
 
-  if(error || !role || String(role.role).toLowerCase()!=="admin"){
-    toast("This account does not have admin access.",true);
+  if(roleError || !role || String(role.role).toLowerCase() !== "admin"){
 
     await supabaseClient.auth.signOut();
 
-    setTimeout(()=>{
-      location.href="/client-portal/";
-    },1500);
+    error.textContent = "This account does not have admin access.";
+
+    error.style.display = "block";
 
     return;
+
   }
 
-  setupNavigation();
-  setupRealtime();
+  await startApp();
 
-  await refreshAll();
 }
 
 
@@ -1702,32 +2629,143 @@ async function logout(){
 
   await supabaseClient.auth.signOut();
 
-  location.href="/client-portal/";
+  location.reload();
+
 }
 
 
-async function sendResetEmail(){
+async function startApp(){
 
-  if(!currentUser?.email){
-    toast("Admin email not available.",true);
-    return;
+  document.getElementById("loginScreen").style.display = "none";
+
+  document.getElementById("app").style.display = "flex";
+
+  document.getElementById("adminEmail").textContent =
+    currentUser.email || "Admin";
+
+  await loadAll();
+
+  setupRealtime();
+
+}
+
+
+async function checkSession(){
+
+  const {data} =
+    await supabaseClient.auth.getSession();
+
+  if(!data.session) return;
+
+  currentUser = data.session.user;
+
+  const {data:role} =
+    await supabaseClient
+      .from("user_roles")
+      .select("role")
+      .eq("user_id",currentUser.id)
+      .maybeSingle();
+
+  if(role && String(role.role).toLowerCase() === "admin"){
+
+    await startApp();
+
   }
 
-  const {error} =
-    await supabaseClient.auth.resetPasswordForEmail(
-      currentUser.email,
-      {
-        redirectTo:
-        location.origin + "/admin/"
-      }
-    );
+}
 
-  if(error){
-    toast(error.message,true);
-    return;
-  }
 
-  toast("Password reset email sent to your admin email.");
+/* =========================================================
+   LOAD
+========================================================= */
+
+async function loadAll(){
+
+  await Promise.all([
+    loadClients(),
+    loadProjects(),
+    loadInvoices(),
+    loadMessages(),
+    loadActivity()
+  ]);
+
+  renderDashboard();
+  renderClients();
+  renderProjects();
+  renderInvoices();
+  renderGlobalMessages();
+
+}
+
+
+async function loadClients(){
+
+  const {data,error} =
+    await supabaseClient
+      .from("clients")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+  if(!error)
+    clients = data || [];
+
+}
+
+
+async function loadProjects(){
+
+  const {data,error} =
+    await supabaseClient
+      .from("projects")
+      .select("*")
+      .order("updated_at",{ascending:false});
+
+  if(!error)
+    projects = data || [];
+
+}
+
+
+async function loadInvoices(){
+
+  const {data,error} =
+    await supabaseClient
+      .from("invoices")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+  if(!error)
+    invoices = data || [];
+
+}
+
+
+async function loadMessages(){
+
+  const {data,error} =
+    await supabaseClient
+      .from("messages")
+      .select("*")
+      .order("created_at",{ascending:true});
+
+  if(!error)
+    messages = data || [];
+
+}
+
+
+async function loadActivity(){
+
+  const {data,error} =
+    await supabaseClient
+      .from("activity_logs")
+      .select("*")
+      .order("created_at",{ascending:false})
+      .limit(100);
+
+  if(!error)
+    activity = data || [];
+
 }
 
 
@@ -1735,248 +2773,47 @@ async function sendResetEmail(){
    NAVIGATION
 ========================================================= */
 
-function setupNavigation(){
+function showView(view){
 
-  document.querySelectorAll(".nav button[data-page]")
-    .forEach(btn=>{
+  document.querySelectorAll(".view")
+    .forEach(el=>el.classList.remove("active"));
 
-      btn.addEventListener("click",()=>{
+  const target =
+    document.getElementById("view-"+view);
 
-        goPage(btn.dataset.page);
+  if(target)
+    target.classList.add("active");
 
-        document.querySelectorAll(".nav button[data-page]")
-          .forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".nav button")
+    .forEach(el=>el.classList.remove("active"));
 
-        btn.classList.add("active");
+  const nav =
+    document.getElementById("nav"+capitalize(view));
 
-        document.getElementById("sidebar")
-          .classList.remove("open");
-      });
+  if(nav)
+    nav.classList.add("active");
 
-    });
+  const titles = {
 
-  document.querySelectorAll(".project-side button")
-    .forEach(btn=>{
-
-      btn.addEventListener("click",()=>{
-
-        document.querySelectorAll(".project-side button")
-          .forEach(x=>x.classList.remove("active"));
-
-        document.querySelectorAll(".detail-section")
-          .forEach(x=>x.classList.remove("active"));
-
-        btn.classList.add("active");
-
-        const target=
-          document.getElementById(
-            "detail-"+btn.dataset.detail
-          );
-
-        if(target) target.classList.add("active");
-
-        if(btn.dataset.detail==="messages"){
-          renderProjectMessages();
-        }
-
-      });
-
-    });
-
-  fillStageSelect();
-
-}
-
-
-function goPage(page){
-
-  document.querySelectorAll(".page")
-    .forEach(x=>x.classList.remove("active"));
-
-  const el=document.getElementById("page-"+page);
-
-  if(el) el.classList.add("active");
-
-  const titles={
     dashboard:"Dashboard",
     clients:"Clients",
     projects:"Projects",
     messages:"Messages",
     invoices:"Invoices",
     activity:"Activity",
-    "project-detail":"Project Control"
+    "project-detail":"Project"
+
   };
 
-  document.getElementById("topTitle").textContent =
-    titles[page] || "Admin";
-
-  if(page==="dashboard") renderDashboard();
-  if(page==="clients") renderClients();
-  if(page==="projects") renderProjects();
-  if(page==="messages") renderMessages();
-  if(page==="invoices") renderInvoices();
-  if(page==="activity") renderActivity();
-}
-
-
-function toggleSidebar(){
-  document.getElementById("sidebar").classList.toggle("open");
-}
-
-
-/* =========================================================
-   DATA LOADING
-========================================================= */
-
-async function refreshAll(){
-
-  try{
-
-    const results=await Promise.all([
-
-      supabaseClient
-        .from("clients")
-        .select("*")
-        .order("created_at",{ascending:false}),
-
-      supabaseClient
-        .from("projects")
-        .select("*")
-        .order("updated_at",{ascending:false}),
-
-      supabaseClient
-        .from("tasks")
-        .select("*")
-        .order("created_at",{ascending:false}),
-
-      supabaseClient
-        .from("messages")
-        .select("*")
-        .order("created_at",{ascending:false}),
-
-      supabaseClient
-        .from("invoices")
-        .select("*")
-        .order("created_at",{ascending:false}),
-
-      supabaseClient
-        .from("activity_logs")
-        .select("*")
-        .order("created_at",{ascending:false}),
-
-      supabaseClient
-        .from("project_briefs")
-        .select("*"),
-
-      supabaseClient
-        .from("access_requests")
-        .select("*")
-        .order("requested_at",{ascending:false}),
-
-      supabaseClient
-        .from("project_credentials")
-        .select("*")
-        .order("created_at",{ascending:false}),
-
-      supabaseClient
-        .from("documents")
-        .select("*")
-        .order("created_at",{ascending:false})
-
-    ]);
-
-    const [
-      c,p,t,m,i,a,b,ar,cr,d
-    ]=results;
-
-    if(c.error) throw c.error;
-    if(p.error) throw p.error;
-    if(t.error) throw t.error;
-    if(m.error) throw m.error;
-    if(i.error) throw i.error;
-    if(a.error) throw a.error;
-    if(b.error) throw b.error;
-    if(ar.error) throw ar.error;
-    if(cr.error) throw cr.error;
-    if(d.error) throw d.error;
-
-    clients=c.data||[];
-    projects=p.data||[];
-    tasks=t.data||[];
-    messages=m.data||[];
-    invoices=i.data||[];
-    activities=a.data||[];
-    briefs=b.data||[];
-    accessRequests=ar.data||[];
-    credentials=cr.data||[];
-    documents=d.data||[];
-
-    renderDashboard();
-    renderClients();
-    renderProjects();
-    renderMessages();
-    renderInvoices();
-    renderActivity();
-
-    if(currentProject){
-      const fresh=projects.find(
-        p=>Number(p.id)===Number(currentProject.id)
-      );
-
-      if(fresh){
-        currentProject=fresh;
-        renderProjectDetail();
-      }
-    }
-
-    updateStats();
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      "Could not load admin data: "+error.message,
-      true
-    );
-
-  }
+  document.getElementById("pageTitle").textContent =
+    titles[view] || "AWSZ Admin";
 
 }
 
 
-/* =========================================================
-   STATS
-========================================================= */
+function capitalize(value){
 
-function updateStats(){
-
-  document.getElementById("statClients").textContent=
-    clients.length;
-
-  document.getElementById("statProjects").textContent=
-    projects.filter(
-      p=>String(p.status||"").toLowerCase()==="active"
-    ).length;
-
-  document.getElementById("statInvoices").textContent=
-    invoices.filter(
-      i=>!["paid","cancelled"].includes(
-        String(i.status||"").toLowerCase()
-      )
-    ).length;
-
-  document.getElementById("statMessages").textContent=
-    messages.length;
-
-  const badge=document.getElementById("msgBadge");
-
-  if(messages.length){
-    badge.style.display="inline-flex";
-    badge.textContent=messages.length;
-  }else{
-    badge.style.display="none";
-  }
+  return value.charAt(0).toUpperCase()+value.slice(1);
 
 }
 
@@ -1987,59 +2824,75 @@ function updateStats(){
 
 function renderDashboard(){
 
-  const recent=
-    projects.slice(0,6);
+  document.getElementById("statClients").textContent =
+    clients.length;
 
-  document.getElementById("recentProjects").innerHTML=
+  document.getElementById("statProjects").textContent =
+    projects.length;
+
+  const pendingRequests =
+    0;
+
+  document.getElementById("statRequests").textContent =
+    pendingRequests;
+
+  const unpaid =
+    invoices.filter(i =>
+      !["paid","draft"].includes(String(i.status).toLowerCase())
+    ).length;
+
+  document.getElementById("statInvoices").textContent =
+    unpaid;
+
+  const recent =
+    projects.slice(0,5);
+
+  document.getElementById("dashboardProjects").innerHTML =
     recent.length
     ? recent.map(p=>{
 
-        const client=clients.find(
-          c=>c.id===p.client_id
-        );
+        const client =
+          clients.find(c=>c.id===p.client_id);
 
         return `
-        <div
-          class="click-row"
-          onclick="openProject(${p.id})"
-          style="padding:12px 4px;border-bottom:1px solid var(--line)"
-        >
-          <div style="display:flex;justify-content:space-between;gap:10px">
-            <div>
-              <strong>${esc(p.project_name)}</strong>
-              <div style="font-size:11px;color:var(--muted)">
-                ${esc(client?.company_name||client?.full_name||"Client")}
-              </div>
+          <div class="activity-item click-row"
+               onclick="openProject(${p.id})">
+
+            <div class="activity-action">
+              ${esc(p.project_name)}
             </div>
 
-            <span class="badge badge-blue">
-              ${Number(p.progress||0)}%
-            </span>
+            <div class="activity-time">
+              ${esc(client?.full_name || client?.email || "Client")}
+              · ${esc(p.stage || "—")}
+              · ${Number(p.progress || 0)}%
+            </div>
+
           </div>
-        </div>
         `;
 
       }).join("")
-    : `<div class="empty">No projects yet.</div>`;
+    : `<div class="help">No projects yet.</div>`;
 
+  document.getElementById("dashboardActivity").innerHTML =
+    activity.length
+    ? activity.slice(0,7).map(a=>`
 
-  const recentActivity=
-    activities.slice(0,6);
+        <div class="activity-item">
 
-  document.getElementById("recentActivity").innerHTML=
-    recentActivity.length
-    ? recentActivity.map(a=>`
-        <div style="padding:10px 0;border-bottom:1px solid var(--line)">
-          <strong style="font-size:12px">${esc(a.action)}</strong>
-          <div style="font-size:11px;color:var(--muted)">
-            ${esc(a.description)}
+          <div class="activity-action">
+            ${esc(a.action || "Activity")}
           </div>
-          <div style="font-size:10px;color:#9aa8b5">
-            ${timeFormat(a.created_at)}
+
+          <div class="activity-time">
+            ${esc(a.description || "")}
+            · ${formatDate(a.created_at)}
           </div>
+
         </div>
+
       `).join("")
-    : `<div class="empty">No activity yet.</div>`;
+    : `<div class="help">No activity yet.</div>`;
 
 }
 
@@ -2050,82 +2903,102 @@ function renderDashboard(){
 
 function renderClients(){
 
-  const q=
-    (document.getElementById("clientSearch")?.value||"")
-      .toLowerCase()
-      .trim();
+  const q =
+    (document.getElementById("clientSearch")?.value || "")
+      .toLowerCase();
 
-  const rows=
-    clients.filter(c=>
-      !q ||
-      [
-        c.full_name,
-        c.company_name,
-        c.email,
-        c.phone
-      ].join(" ").toLowerCase().includes(q)
-    );
+  const filtered =
+    clients.filter(c=>{
 
-  document.getElementById("clientsTable").innerHTML=
-    rows.length
-    ? rows.map(c=>{
+      const text =
+        `${c.full_name||""}
+         ${c.company_name||""}
+         ${c.email||""}
+         ${c.phone||""}`.toLowerCase();
 
-        const count=
-          projects.filter(
-            p=>p.client_id===c.id
-          ).length;
+      return text.includes(q);
 
-        return `
-        <tr>
-          <td>
-            <strong>${esc(c.full_name||"—")}</strong>
-          </td>
+    });
 
-          <td>${esc(c.company_name||"—")}</td>
+  document.getElementById("clientsTable").innerHTML =
+    filtered.length
+    ? filtered.map(c=>`
 
-          <td>${esc(c.email||"—")}</td>
+      <tr>
 
-          <td>${esc(c.phone||"—")}</td>
+        <td>${esc(c.full_name || "—")}</td>
 
-          <td>${dateFormat(c.created_at)}</td>
+        <td>${esc(c.company_name || "—")}</td>
 
-          <td>
-            <span class="badge badge-blue">${count}</span>
-          </td>
+        <td>${esc(c.email || "—")}</td>
 
-          <td>
-            <button
-              class="btn btn-secondary btn-small"
-              onclick="showClientProjects('${c.id}')"
-            >
-              Projects
-            </button>
-          </td>
-        </tr>
-        `;
+        <td>${esc(c.phone || "—")}</td>
 
-      }).join("")
-    : `<tr><td colspan="7"><div class="empty">No clients found.</div></td></tr>`;
+        <td>${formatDate(c.created_at)}</td>
+
+        <td>
+          <button
+            class="btn btn-small"
+            onclick="resetClientPassword('${esc(c.email || "")}')">
+            Reset Password
+          </button>
+        </td>
+
+      </tr>
+
+    `).join("")
+    : `
+      <tr>
+        <td colspan="6">
+          <div class="help" style="padding:20px">
+            No clients found.
+          </div>
+        </td>
+      </tr>
+    `;
 
 }
 
 
-function showClientProjects(clientId){
+/* =========================================================
+   CLIENT PASSWORD RESET
+========================================================= */
 
-  const client=
-    clients.find(c=>c.id===clientId);
+async function resetClientPassword(email){
 
-  if(!client) return;
+  if(!email){
 
-  const list=
-    projects.filter(p=>p.client_id===clientId);
+    toast("Client email not available.");
 
-  document.getElementById("projectSearch").value=
-    client.company_name||client.full_name||"";
+    return;
 
-  goPage("projects");
+  }
 
-  renderProjects();
+  const ok =
+    confirm(
+      `Send a secure password reset email to ${email}?`
+    );
+
+  if(!ok) return;
+
+  const {error} =
+    await supabaseClient.auth.resetPasswordForEmail(
+      email,
+      {
+        redirectTo:
+          "https://automationwithsajjadzaidi.com/client-portal/"
+      }
+    );
+
+  if(error){
+
+    toast(error.message);
+
+    return;
+
+  }
+
+  toast("Password reset email sent to client.");
 
 }
 
@@ -2136,189 +3009,167 @@ function showClientProjects(clientId){
 
 function renderProjects(){
 
-  const q=
-    (document.getElementById("projectSearch")?.value||"")
-      .toLowerCase()
-      .trim();
+  const q =
+    (document.getElementById("projectSearch")?.value || "")
+      .toLowerCase();
 
-  const rows=
+  const filtered =
     projects.filter(p=>{
 
-      const client=
+      const client =
         clients.find(c=>c.id===p.client_id);
 
-      return !q ||
-        [
-          p.project_name,
-          p.status,
-          p.stage,
-          client?.full_name,
-          client?.company_name,
-          client?.email
-        ].join(" ").toLowerCase().includes(q);
+      const text =
+        `${p.project_name||""}
+         ${client?.full_name||""}
+         ${client?.company_name||""}
+         ${p.stage||""}`.toLowerCase();
+
+      return text.includes(q);
 
     });
 
-  document.getElementById("projectsTable").innerHTML=
-    rows.length
-    ? rows.map(p=>{
+  document.getElementById("projectsTable").innerHTML =
+    filtered.length
+    ? filtered.map(p=>{
 
-        const client=
+        const client =
           clients.find(c=>c.id===p.client_id);
 
-        const status=
-          String(p.status||"").toLowerCase();
-
-        let badge="badge-blue";
-
-        if(status==="completed")
-          badge="badge-green";
-
-        if(status==="on hold")
-          badge="badge-amber";
-
-        if(status==="cancelled")
-          badge="badge-red";
-
         return `
-        <tr class="click-row" onclick="openProject(${p.id})">
 
-          <td>
-            <strong>${esc(p.project_name)}</strong>
-            <div style="font-size:10px;color:var(--muted)">
-              #${p.id}
-            </div>
-          </td>
+          <tr class="click-row"
+              onclick="openProject(${p.id})">
 
-          <td>
-            ${esc(client?.company_name||client?.full_name||"Unknown")}
-          </td>
+            <td>
+              ${esc(p.project_name)}
+            </td>
 
-          <td>
-            <span class="badge badge-blue">
-              ${esc(p.stage||"—")}
-            </span>
-          </td>
+            <td>
+              ${esc(client?.full_name || client?.email || "—")}
+            </td>
 
-          <td>
-            <div style="display:flex;align-items:center;gap:8px">
-              <div class="progress">
-                <span style="width:${Math.max(0,Math.min(100,Number(p.progress||0)))}%"></span>
-              </div>
-              <strong style="font-size:11px">${Number(p.progress||0)}%</strong>
-            </div>
-          </td>
+            <td>
+              ${esc(p.stage || "—")}
+            </td>
 
-          <td>
-            <span class="badge ${badge}">
-              ${esc(p.status||"—")}
-            </span>
-          </td>
+            <td>
+              ${Number(p.progress || 0)}%
+            </td>
 
-          <td>${money(p.quoted_price)}</td>
+            <td>
+              <span class="status
+                ${statusClass(p.status)}">
+                ${esc(p.status || "Active")}
+              </span>
+            </td>
 
-          <td>${dateFormat(p.updated_at||p.created_at)}</td>
+            <td>
+              ${formatDate(p.updated_at || p.created_at)}
+            </td>
 
-        </tr>
+          </tr>
+
         `;
 
       }).join("")
-    : `<tr><td colspan="7"><div class="empty">No projects found.</div></td></tr>`;
+    : `
+
+      <tr>
+        <td colspan="6">
+          <div class="help" style="padding:20px">
+            No projects found.
+          </div>
+        </td>
+      </tr>
+
+    `;
+
+}
+
+
+function statusClass(status){
+
+  const s =
+    String(status || "").toLowerCase();
+
+  if(s==="active") return "status-active";
+
+  if(s==="completed") return "status-completed";
+
+  if(s==="paid") return "status-paid";
+
+  if(s==="pending") return "status-pending";
+
+  if(s==="draft") return "status-draft";
+
+  if(s==="overdue") return "status-overdue";
+
+  return "status-pending";
 
 }
 
 
 /* =========================================================
-   CREATE / EDIT PROJECT
+   PROJECT MODAL
 ========================================================= */
 
-function fillStageSelect(){
+function populateClientSelect(){
 
-  const el=document.getElementById("projectStage");
-
-  el.innerHTML=
-    STAGES.map(s=>`
-      <option value="${esc(s)}">${esc(s)}</option>
-    `).join("");
-
-}
-
-
-function fillClientSelect(){
-
-  const el=document.getElementById("projectClient");
-
-  el.innerHTML=
-    `<option value="">Select client</option>`+
+  const html =
     clients.map(c=>`
+
       <option value="${c.id}">
-        ${esc(c.company_name||c.full_name||c.email)}
+        ${esc(c.full_name || c.email)}
+        ${c.company_name ? " · "+esc(c.company_name) : ""}
       </option>
+
     `).join("");
 
+  document.getElementById("projectClient").innerHTML =
+    html || `<option value="">No clients</option>`;
+
 }
 
 
-function openCreateProject(){
+function openProjectModal(project=null){
 
-  editingProjectId=null;
+  populateClientSelect();
 
-  document.getElementById("projectModalTitle").textContent=
-    "Create Project";
+  document.getElementById("projectModalTitle").textContent =
+    project ? "Edit Project" : "New Project";
 
-  fillClientSelect();
+  document.getElementById("projectName").value =
+    project?.project_name || "";
 
-  document.getElementById("projectClient").value="";
-  document.getElementById("projectName").value="";
-  document.getElementById("projectDescription").value="";
-  document.getElementById("projectPrice").value="";
-  document.getElementById("projectStatus").value="Active";
-  document.getElementById("projectStage").value=STAGES[0];
-  document.getElementById("projectProgress").value="0";
-  document.getElementById("projectStart").value="";
-  document.getElementById("projectEnd").value="";
+  document.getElementById("projectDescription").value =
+    project?.description || "";
 
-  openModal("projectModal");
-}
+  document.getElementById("projectPrice").value =
+    project?.quoted_price ?? "";
 
+  document.getElementById("projectStatus").value =
+    project?.status || "Active";
 
-function openEditProject(){
+  document.getElementById("projectStage").value =
+    project?.stage || "01 Onboarding";
 
-  if(!currentProject) return;
+  document.getElementById("projectProgress").value =
+    project?.progress ?? 0;
 
-  editingProjectId=currentProject.id;
+  document.getElementById("projectStart").value =
+    project?.start_date || "";
 
-  document.getElementById("projectModalTitle").textContent=
-    "Edit Project";
+  document.getElementById("projectCompletion").value =
+    project?.expected_completion || "";
 
-  fillClientSelect();
+  document.getElementById("projectClient").value =
+    project?.client_id || clients[0]?.id || "";
 
-  document.getElementById("projectClient").value=
-    currentProject.client_id||"";
-
-  document.getElementById("projectName").value=
-    currentProject.project_name||"";
-
-  document.getElementById("projectDescription").value=
-    currentProject.description||"";
-
-  document.getElementById("projectPrice").value=
-    currentProject.quoted_price||"";
-
-  document.getElementById("projectStatus").value=
-    currentProject.status||"Active";
-
-  document.getElementById("projectStage").value=
-    currentProject.stage||STAGES[0];
-
-  document.getElementById("projectProgress").value=
-    currentProject.progress||0;
-
-  document.getElementById("projectStart").value=
-    currentProject.start_date||"";
-
-  document.getElementById("projectEnd").value=
-    currentProject.expected_completion||"";
+  document
+    .getElementById("projectModal")
+    .dataset.projectId =
+      project?.id || "";
 
   openModal("projectModal");
 
@@ -2327,30 +3178,24 @@ function openEditProject(){
 
 async function saveProject(){
 
-  const clientId=
-    document.getElementById("projectClient").value;
+  const projectId =
+    document
+      .getElementById("projectModal")
+      .dataset.projectId;
 
-  const name=
-    document.getElementById("projectName").value.trim();
+  const payload = {
 
-  if(!clientId){
-    toast("Please select a client.",true);
-    return;
-  }
+    client_id:
+      document.getElementById("projectClient").value,
 
-  if(!name){
-    toast("Please enter project name.",true);
-    return;
-  }
+    project_name:
+      document.getElementById("projectName").value.trim(),
 
-  const payload={
-    client_id:clientId,
-    project_name:name,
     description:
       document.getElementById("projectDescription").value.trim(),
 
     quoted_price:
-      Number(document.getElementById("projectPrice").value||0),
+      Number(document.getElementById("projectPrice").value || 0),
 
     status:
       document.getElementById("projectStatus").value,
@@ -2359,153 +3204,100 @@ async function saveProject(){
       document.getElementById("projectStage").value,
 
     progress:
-      Math.max(
-        0,
-        Math.min(
-          100,
-          Number(
-            document.getElementById("projectProgress").value||0
-          )
+      Math.min(
+        100,
+        Math.max(
+          0,
+          Number(document.getElementById("projectProgress").value || 0)
         )
       ),
 
     start_date:
-      document.getElementById("projectStart").value||null,
+      document.getElementById("projectStart").value || null,
 
     expected_completion:
-      document.getElementById("projectEnd").value||null,
+      document.getElementById("projectCompletion").value || null,
 
-    updated_at:new Date().toISOString()
+    updated_at:
+      new Date().toISOString()
+
   };
 
+  let result;
 
-  let data,error;
+  if(projectId){
 
-  if(editingProjectId){
-
-    ({data,error}=
+    result =
       await supabaseClient
         .from("projects")
         .update(payload)
-        .eq("id",editingProjectId)
+        .eq("id",projectId)
         .select()
-        .single()
-    );
+        .single();
 
   }else{
 
-    ({data,error}=
+    result =
       await supabaseClient
         .from("projects")
         .insert(payload)
         .select()
-        .single()
-    );
+        .single();
 
   }
 
-  if(error){
-    toast(error.message,true);
+  if(result.error){
+
+    toast(result.error.message);
+
     return;
-  }
 
-  await logActivity(
-    data.id,
-    editingProjectId
-      ? "Project Updated"
-      : "Project Created",
-    editingProjectId
-      ? `Project "${data.project_name}" was updated.`
-      : `Project "${data.project_name}" was created.`
-  );
+  }
 
   closeModal("projectModal");
 
-  toast(
-    editingProjectId
-      ? "Project updated."
-      : "Project created."
-  );
+  await loadProjects();
 
-  await refreshAll();
+  renderProjects();
 
-  if(editingProjectId){
-    currentProject=data;
+  renderDashboard();
+
+  toast(projectId ? "Project updated." : "Project created.");
+
+  if(currentProject && projectId){
+
+    currentProject =
+      projects.find(p=>String(p.id)===String(projectId));
+
     renderProjectDetail();
-  }else{
-    openProject(data.id);
+
   }
-
-}
-
-
-async function deleteCurrentProject(){
-
-  if(!currentProject) return;
-
-  const ok=
-    confirm(
-      `Delete "${currentProject.project_name}"?\n\nThis will remove the project record.`
-    );
-
-  if(!ok) return;
-
-  const id=currentProject.id;
-
-  const {error}=
-    await supabaseClient
-      .from("projects")
-      .delete()
-      .eq("id",id);
-
-  if(error){
-    toast(error.message,true);
-    return;
-  }
-
-  currentProject=null;
-
-  toast("Project deleted.");
-
-  await refreshAll();
-
-  goPage("projects");
 
 }
 
 
 /* =========================================================
-   OPEN PROJECT
+   PROJECT DETAIL
 ========================================================= */
 
 async function openProject(id){
 
-  const project=
-    projects.find(p=>Number(p.id)===Number(id));
+  currentProject =
+    projects.find(p=>String(p.id)===String(id));
 
-  if(!project){
-    toast("Project not found.",true);
+  if(!currentProject){
+
+    toast("Project not found.");
+
     return;
+
   }
 
-  currentProject=project;
-
-  goPage("project-detail");
-
-  document.querySelectorAll(".project-side button")
-    .forEach(x=>x.classList.remove("active"));
-
-  document.querySelectorAll(".detail-section")
-    .forEach(x=>x.classList.remove("active"));
-
-  document.querySelector(
-    '.project-side button[data-detail="overview"]'
-  ).classList.add("active");
-
-  document.getElementById("detail-overview")
-    .classList.add("active");
+  showView("project-detail");
 
   renderProjectDetail();
+
+  await loadProjectData();
 
 }
 
@@ -2514,694 +3306,416 @@ function renderProjectDetail(){
 
   if(!currentProject) return;
 
-  const p=currentProject;
+  const client =
+    clients.find(c=>c.id===currentProject.client_id);
 
-  const client=
-    clients.find(c=>c.id===p.client_id);
+  document.getElementById("detailProjectName").textContent =
+    currentProject.project_name || "Project";
 
-  document.getElementById("detailProjectName").textContent=
-    p.project_name||"Project";
+  document.getElementById("detailProjectMeta").textContent =
+    `${client?.full_name || client?.email || "Client"}${client?.company_name ? " · "+client.company_name : ""}`;
 
-  document.getElementById("detailProjectClient").textContent=
-    `${client?.company_name||client?.full_name||"Client"} · ${client?.email||""}`;
+  document.getElementById("detailStage").textContent =
+    currentProject.stage || "—";
 
-  document.getElementById("detailStage").textContent=
-    p.stage||"—";
+  document.getElementById("detailProgressText").textContent =
+    `${Number(currentProject.progress || 0)}%`;
 
-  document.getElementById("detailProgressText").textContent=
-    `${Number(p.progress||0)}%`;
+  document.getElementById("detailProgress").style.width =
+    `${Number(currentProject.progress || 0)}%`;
 
-  document.getElementById("detailProgress").style.width=
-    `${Math.max(0,Math.min(100,Number(p.progress||0)))}%`;
+  document.getElementById("overviewClient").textContent =
+    client?.full_name || client?.email || "—";
 
-  document.getElementById("ovClient").textContent=
-    client?.company_name||client?.full_name||"—";
+  document.getElementById("overviewPrice").textContent =
+    formatMoney(currentProject.quoted_price);
 
-  document.getElementById("ovStatus").textContent=
-    p.status||"—";
+  document.getElementById("overviewStart").textContent =
+    formatDate(currentProject.start_date);
 
-  document.getElementById("ovStage").textContent=
-    p.stage||"—";
+  document.getElementById("overviewCompletion").textContent =
+    formatDate(currentProject.expected_completion);
 
-  document.getElementById("ovPrice").textContent=
-    money(p.quoted_price);
+  document.getElementById("overviewDescription").textContent =
+    currentProject.description || "No description.";
 
-  document.getElementById("ovStart").textContent=
-    dateFormat(p.start_date);
+  document.getElementById("projectChatClientName").textContent =
+    client?.full_name || client?.email || "Client";
 
-  document.getElementById("ovEnd").textContent=
-    dateFormat(p.expected_completion);
+  document.getElementById("projectChatProjectName").textContent =
+    currentProject.project_name || "Project";
 
-  document.getElementById("ovDescription").textContent=
-    p.description||"No description added.";
+  document.getElementById("chatHeadName").textContent =
+    client?.full_name || client?.email || "Client";
 
-  renderChecklist();
-  renderBrief();
-  renderAccess();
-  renderCredentials();
-  renderDocuments();
-  renderProjectMessages();
-  renderProjectInvoices();
-  renderProjectActivity();
+  document.getElementById("chatHeadSub").textContent =
+    currentProject.project_name || "Project";
+
+}
+
+
+async function loadProjectData(){
+
+  if(!currentProject) return;
+
+  await Promise.all([
+    loadTasks(),
+    loadBrief(),
+    loadRequests(),
+    loadCredentials(),
+    loadDocuments(),
+    loadProjectInvoices(),
+    loadProjectMessages(),
+    loadProjectActivity()
+  ]);
 
 }
 
 
 /* =========================================================
-   TASKS / CHECKLIST
+   PROJECT TABS
 ========================================================= */
 
-function openAddTask(){
+function projectTab(tab,button){
 
-  document.getElementById("taskName").value="";
-  document.getElementById("taskDescription").value="";
-  document.getElementById("taskAssigned").value="";
-  document.getElementById("taskDue").value="";
+  document.querySelectorAll(".project-panel")
+    .forEach(el=>el.classList.remove("active"));
 
-  openModal("taskModal");
+  document.querySelectorAll(".project-tab")
+    .forEach(el=>el.classList.remove("active"));
+
+  document.getElementById("panel-"+tab)
+    ?.classList.add("active");
+
+  button.classList.add("active");
+
 }
 
 
-async function saveTask(){
+/* =========================================================
+   DELETE PROJECT
+========================================================= */
+
+async function deleteCurrentProject(){
 
   if(!currentProject) return;
 
-  const name=
-    document.getElementById("taskName").value.trim();
+  const ok =
+    confirm(
+      `Delete "${currentProject.project_name}"?`
+    );
 
-  if(!name){
-    toast("Enter task name.",true);
-    return;
-  }
+  if(!ok) return;
 
-  const payload={
-    project_id:currentProject.id,
-    task_name:name,
-    description:
-      document.getElementById("taskDescription").value.trim(),
-    assigned_to:
-      document.getElementById("taskAssigned").value.trim(),
-    due_date:
-      document.getElementById("taskDue").value||null,
-    is_completed:false
-  };
-
-  const {data,error}=
+  const {error} =
     await supabaseClient
-      .from("tasks")
-      .insert(payload)
-      .select()
-      .single();
+      .from("projects")
+      .delete()
+      .eq("id",currentProject.id);
 
   if(error){
-    toast(error.message,true);
+
+    toast(error.message);
+
     return;
+
   }
 
-  await logActivity(
-    currentProject.id,
-    "Checklist Added",
-    `Task "${data.task_name}" was added.`
-  );
+  currentProject = null;
 
-  closeModal("taskModal");
+  await loadProjects();
 
-  await refreshAll();
+  renderProjects();
 
-  toast("Checklist task added.");
+  renderDashboard();
+
+  showView("projects");
+
+  toast("Project deleted.");
+
+}
+
+
+/* =========================================================
+   CHECKLIST
+========================================================= */
+
+async function loadTasks(){
+
+  const {data,error} =
+    await supabaseClient
+      .from("tasks")
+      .select("*")
+      .eq("project_id",currentProject.id)
+      .order("id",{ascending:true});
+
+  if(!error){
+
+    tasks = data || [];
+
+    renderChecklist();
+
+  }
 
 }
 
 
 function renderChecklist(){
 
-  if(!currentProject) return;
+  const container =
+    document.getElementById("checklistItems");
 
-  const list=
-    tasks.filter(
-      t=>Number(t.project_id)===Number(currentProject.id)
-    );
+  if(!tasks.length){
 
-  document.getElementById("checklist").innerHTML=
-    list.length
-    ? list.map(t=>`
-      <div class="check-item ${t.is_completed?"done":""}">
+    container.innerHTML =
+      `<div class="help">No checklist items yet.</div>`;
+
+    return;
+
+  }
+
+  container.innerHTML =
+    tasks.map(task=>`
+
+      <div class="check-item">
 
         <input
           type="checkbox"
-          ${t.is_completed?"checked":""}
-          onchange="toggleTask(${t.id},this.checked)"
+          ${task.is_completed ? "checked" : ""}
+          onchange="toggleTask(${task.id},this.checked)"
         >
 
-        <div class="check-name">
-          ${esc(t.task_name)}
-          ${
-            t.description
-            ? `<div style="font-size:11px;color:var(--muted);font-weight:400;margin-top:3px">
-                ${esc(t.description)}
-              </div>`
-            :""
-          }
-        </div>
-
-        <div style="text-align:right">
-          ${
-            t.assigned_to
-            ? `<div style="font-size:10px;color:var(--muted)">
-                ${esc(t.assigned_to)}
-              </div>`
-            :""
-          }
-
-          ${
-            t.due_date
-            ? `<div style="font-size:10px;color:var(--muted)">
-                Due ${dateFormat(t.due_date)}
-              </div>`
-            :""
-          }
+        <div class="check-text ${task.is_completed ? "done" : ""}">
+          ${esc(task.task_name)}
         </div>
 
         <button
-          class="btn btn-danger btn-small"
-          onclick="deleteTask(${t.id})"
-        >
+          class="check-delete"
+          onclick="deleteTask(${task.id})"
+          title="Delete">
           ×
         </button>
 
       </div>
-    `).join("")
-    : `<div class="empty">No checklist items yet.</div>`;
+
+    `).join("");
 
 }
 
 
-async function toggleTask(id,checked){
+async function createBulkChecklist(){
 
-  const task=
-    tasks.find(t=>Number(t.id)===Number(id));
+  const raw =
+    document.getElementById("bulkChecklist").value;
 
-  if(!task) return;
+  const names =
+    raw
+      .split(/\r?\n/)
+      .map(x=>x.trim())
+      .filter(Boolean);
 
-  const {error}=
+  if(!names.length){
+
+    toast("Paste at least one task.");
+
+    return;
+
+  }
+
+  const payload =
+    names.map(name=>({
+
+      project_id:currentProject.id,
+
+      task_name:name,
+
+      description:null,
+
+      is_completed:false,
+
+      assigned_to:null,
+
+      due_date:null
+
+    }));
+
+  const {error} =
+    await supabaseClient
+      .from("tasks")
+      .insert(payload);
+
+  if(error){
+
+    toast(error.message);
+
+    return;
+
+  }
+
+  document.getElementById("bulkChecklist").value = "";
+
+  await loadTasks();
+
+  await logActivity(
+    "Checklist Created",
+    `${names.length} checklist items added.`
+  );
+
+  toast(`${names.length} checklist items created.`);
+
+}
+
+
+async function toggleTask(id,completed){
+
+  const {error} =
     await supabaseClient
       .from("tasks")
       .update({
-        is_completed:checked,
-        completed_at:
-          checked
+        is_completed:completed,
+        completed_at:completed
           ? new Date().toISOString()
           : null
       })
       .eq("id",id);
 
   if(error){
-    toast(error.message,true);
+
+    toast(error.message);
+
     return;
+
   }
 
-  await logActivity(
-    currentProject.id,
-    checked
-      ? "Task Completed"
-      : "Task Reopened",
-    `${task.task_name} ${checked?"completed":"reopened"}.`
-  );
-
-  await refreshAll();
+  await loadTasks();
 
 }
 
 
 async function deleteTask(id){
 
-  if(!confirm("Delete this checklist item?")) return;
+  const ok = confirm("Delete this checklist item?");
 
-  const task=
-    tasks.find(t=>Number(t.id)===Number(id));
+  if(!ok) return;
 
-  const {error}=
+  const {error} =
     await supabaseClient
       .from("tasks")
       .delete()
       .eq("id",id);
 
   if(error){
-    toast(error.message,true);
+
+    toast(error.message);
+
     return;
+
   }
 
-  await logActivity(
-    currentProject.id,
-    "Task Deleted",
-    `Task "${task?.task_name||""}" was deleted.`
-  );
-
-  await refreshAll();
-
-  toast("Task deleted.");
+  await loadTasks();
 
 }
 
 
 /* =========================================================
-   PROJECT BRIEF
+   BRIEF
 ========================================================= */
 
-function renderBrief(){
+async function loadBrief(){
 
-  if(!currentProject) return;
+  const {data,error} =
+    await supabaseClient
+      .from("project_briefs")
+      .select("*")
+      .eq("project_id",currentProject.id)
+      .maybeSingle();
 
-  const brief=
-    briefs.find(
-      b=>Number(b.project_id)===Number(currentProject.id)
-    );
+  if(error) return;
 
-  if(!brief){
+  document.getElementById("briefSummary").value =
+    data?.summary || "";
 
-    document.getElementById("briefContent").innerHTML=
-      `<div class="empty">No project brief added yet.</div>`;
+  document.getElementById("briefObjective").value =
+    data?.objective || "";
 
-    return;
-  }
+  document.getElementById("briefScope").value =
+    data?.scope || "";
 
-  document.getElementById("briefContent").innerHTML=`
+  document.getElementById("briefRequirements").value =
+    data?.requirements || "";
 
-    <div style="display:grid;gap:15px">
+  document.getElementById("briefDeliverables").value =
+    data?.deliverables || "";
 
-      <div class="info">
-        <label>Objective</label>
-        <div style="white-space:pre-wrap">${esc(brief.objective||"—")}</div>
-      </div>
+  document.getElementById("briefTimeline").value =
+    data?.timeline || "";
 
-      <div class="info">
-        <label>Scope</label>
-        <div style="white-space:pre-wrap">${esc(brief.scope||"—")}</div>
-      </div>
+  document.getElementById("briefNotes").value =
+    data?.notes || "";
 
-      <div class="info">
-        <label>Requirements</label>
-        <div style="white-space:pre-wrap">${esc(brief.requirements||"—")}</div>
-      </div>
+  await loadBriefDocuments();
 
-      <div class="info">
-        <label>Deliverables</label>
-        <div style="white-space:pre-wrap">${esc(brief.deliverables||"—")}</div>
-      </div>
-
-      <div class="info">
-        <label>Timeline</label>
-        <div style="white-space:pre-wrap">${esc(brief.timeline||"—")}</div>
-      </div>
-
-      <div class="info">
-        <label>Notes</label>
-        <div style="white-space:pre-wrap">${esc(brief.notes||"—")}</div>
-      </div>
-
-    </div>
-  `;
-
-}
-
-
-function openBriefModal(){
-
-  const brief=
-    briefs.find(
-      b=>Number(b.project_id)===Number(currentProject.id)
-    );
-
-  document.getElementById("briefObjective").value=
-    brief?.objective||"";
-
-  document.getElementById("briefScope").value=
-    brief?.scope||"";
-
-  document.getElementById("briefRequirements").value=
-    brief?.requirements||"";
-
-  document.getElementById("briefDeliverables").value=
-    brief?.deliverables||"";
-
-  document.getElementById("briefTimeline").value=
-    brief?.timeline||"";
-
-  document.getElementById("briefNotes").value=
-    brief?.notes||"";
-
-  openModal("briefModal");
 }
 
 
 async function saveBrief(){
 
-  const payload={
+  const payload = {
+
     project_id:currentProject.id,
-    objective:document.getElementById("briefObjective").value,
-    scope:document.getElementById("briefScope").value,
-    requirements:document.getElementById("briefRequirements").value,
-    deliverables:document.getElementById("briefDeliverables").value,
-    timeline:document.getElementById("briefTimeline").value,
-    notes:document.getElementById("briefNotes").value,
-    updated_at:new Date().toISOString()
+
+    objective:
+      document.getElementById("briefObjective").value.trim(),
+
+    scope:
+      document.getElementById("briefScope").value.trim(),
+
+    requirements:
+      document.getElementById("briefRequirements").value.trim(),
+
+    deliverables:
+      document.getElementById("briefDeliverables").value.trim(),
+
+    timeline:
+      document.getElementById("briefTimeline").value.trim(),
+
+    notes:
+      (
+        "Summary:\n" +
+        document.getElementById("briefSummary").value.trim() +
+        "\n\n" +
+        document.getElementById("briefNotes").value.trim()
+      ).trim(),
+
+    updated_at:
+      new Date().toISOString()
+
   };
 
-  const existing=
-    briefs.find(
-      b=>Number(b.project_id)===Number(currentProject.id)
-    );
-
-  let error;
-
-  if(existing){
-
-    ({error}=
-      await supabaseClient
-        .from("project_briefs")
-        .update(payload)
-        .eq("id",existing.id)
-    );
-
-  }else{
-
-    ({error}=
-      await supabaseClient
-        .from("project_briefs")
-        .insert(payload)
-    );
-
-  }
+  const {error} =
+    await supabaseClient
+      .from("project_briefs")
+      .upsert(
+        payload,
+        {
+          onConflict:"project_id"
+        }
+      );
 
   if(error){
-    toast(error.message,true);
+
+    toast(error.message);
+
     return;
+
   }
 
   await logActivity(
-    currentProject.id,
     "Project Brief Updated",
     "Project brief was updated."
   );
 
-  closeModal("briefModal");
-
-  await refreshAll();
-
   toast("Project brief saved.");
-
-}
-
-
-/* =========================================================
-   ACCESS REQUESTS
-========================================================= */
-
-function openAccessModal(){
-
-  document.getElementById("accessSystem").value="";
-  document.getElementById("accessType").value="";
-  document.getElementById("accessInstructions").value="";
-  document.getElementById("accessStatus").value="Pending";
-
-  openModal("accessModal");
-}
-
-
-async function saveAccess(){
-
-  const payload={
-    project_id:currentProject.id,
-    system_name:
-      document.getElementById("accessSystem").value.trim(),
-
-    access_type:
-      document.getElementById("accessType").value.trim(),
-
-    instructions:
-      document.getElementById("accessInstructions").value.trim(),
-
-    status:
-      document.getElementById("accessStatus").value
-  };
-
-  if(!payload.system_name){
-    toast("Enter system name.",true);
-    return;
-  }
-
-  const {error}=
-    await supabaseClient
-      .from("access_requests")
-      .insert(payload);
-
-  if(error){
-    toast(error.message,true);
-    return;
-  }
-
-  await logActivity(
-    currentProject.id,
-    "Access Requested",
-    `Access requested for ${payload.system_name}.`
-  );
-
-  closeModal("accessModal");
-
-  await refreshAll();
-
-  toast("Access request added.");
-
-}
-
-
-function renderAccess(){
-
-  const list=
-    accessRequests.filter(
-      a=>Number(a.project_id)===Number(currentProject.id)
-    );
-
-  document.getElementById("accessList").innerHTML=
-    list.length
-    ? list.map(a=>{
-
-        let cls="badge-amber";
-
-        if(a.status==="Completed") cls="badge-green";
-        if(a.status==="Rejected") cls="badge-red";
-
-        return `
-        <div class="doc">
-
-          <div>
-            <div class="doc-name">${esc(a.system_name)}</div>
-            <div class="doc-meta">
-              ${esc(a.access_type||"")} ·
-              ${esc(a.instructions||"")}
-            </div>
-          </div>
-
-          <span class="badge ${cls}">
-            ${esc(a.status||"Pending")}
-          </span>
-
-        </div>
-        `;
-
-      }).join("")
-    : `<div class="empty">No access requests.</div>`;
-
-}
-
-
-/* =========================================================
-   CREDENTIALS
-========================================================= */
-
-function openCredentialModal(id=null){
-
-  editingCredentialId=id;
-
-  const item=
-    id
-    ? credentials.find(
-        c=>Number(c.id)===Number(id)
-      )
-    : null;
-
-  document.getElementById("credService").value=
-    item?.service_name||"";
-
-  document.getElementById("credUrl").value=
-    item?.login_url||"";
-
-  document.getElementById("credUsername").value=
-    item?.username||"";
-
-  document.getElementById("credPassword").value=
-    item?.password||"";
-
-  document.getElementById("credNotes").value=
-    item?.notes||"";
-
-  openModal("credentialModal");
-}
-
-
-async function saveCredential(){
-
-  const payload={
-    project_id:currentProject.id,
-    client_id:currentProject.client_id,
-
-    service_name:
-      document.getElementById("credService").value.trim(),
-
-    login_url:
-      document.getElementById("credUrl").value.trim(),
-
-    username:
-      document.getElementById("credUsername").value.trim(),
-
-    password:
-      document.getElementById("credPassword").value,
-
-    notes:
-      document.getElementById("credNotes").value.trim(),
-
-    updated_at:new Date().toISOString()
-  };
-
-  if(!payload.service_name){
-    toast("Enter service name.",true);
-    return;
-  }
-
-  let error;
-
-  if(editingCredentialId){
-
-    ({error}=
-      await supabaseClient
-        .from("project_credentials")
-        .update(payload)
-        .eq("id",editingCredentialId)
-    );
-
-  }else{
-
-    ({error}=
-      await supabaseClient
-        .from("project_credentials")
-        .insert(payload)
-    );
-
-  }
-
-  if(error){
-    toast(error.message,true);
-    return;
-  }
-
-  await logActivity(
-    currentProject.id,
-    editingCredentialId
-      ? "Credential Updated"
-      : "Credential Added",
-    `${payload.service_name} credential was ${editingCredentialId?"updated":"added"}.`
-  );
-
-  closeModal("credentialModal");
-
-  await refreshAll();
-
-  toast("Credential saved.");
-
-}
-
-
-function renderCredentials(){
-
-  const list=
-    credentials.filter(
-      c=>Number(c.project_id)===Number(currentProject.id)
-    );
-
-  document.getElementById("credentialsList").innerHTML=
-    list.length
-    ? list.map(c=>`
-
-      <div class="doc">
-
-        <div style="min-width:0">
-          <div class="doc-name">${esc(c.service_name)}</div>
-
-          <div class="doc-meta">
-            ${esc(c.username||"No username")}
-          </div>
-
-          ${
-            c.login_url
-            ? `<div class="doc-meta">${esc(c.login_url)}</div>`
-            :""
-          }
-
-        </div>
-
-        <div style="display:flex;gap:6px">
-
-          <button
-            class="btn btn-secondary btn-small"
-            onclick="openCredentialModal(${c.id})"
-          >
-            Edit
-          </button>
-
-          <button
-            class="btn btn-danger btn-small"
-            onclick="deleteCredential(${c.id})"
-          >
-            Delete
-          </button>
-
-        </div>
-
-      </div>
-
-    `).join("")
-    : `<div class="empty">No credentials added.</div>`;
-
-}
-
-
-async function deleteCredential(id){
-
-  if(!confirm("Delete this credential?")) return;
-
-  const item=
-    credentials.find(c=>Number(c.id)===Number(id));
-
-  const {error}=
-    await supabaseClient
-      .from("project_credentials")
-      .delete()
-      .eq("id",id);
-
-  if(error){
-    toast(error.message,true);
-    return;
-  }
-
-  await logActivity(
-    currentProject.id,
-    "Credential Deleted",
-    `${item?.service_name||"Credential"} was deleted.`
-  );
-
-  await refreshAll();
-
-  toast("Credential deleted.");
 
 }
 
@@ -3210,114 +3724,67 @@ async function deleteCredential(id){
    DOCUMENTS
 ========================================================= */
 
-async function uploadDocument(){
+async function loadDocuments(){
 
-  const input=
-    document.getElementById("documentInput");
+  const {data,error} =
+    await supabaseClient
+      .from("documents")
+      .select("*")
+      .eq("project_id",currentProject.id)
+      .order("created_at",{ascending:false});
 
-  const file=input.files?.[0];
+  if(error) return;
 
-  if(!file || !currentProject) return;
-
-  try{
-
-    const safeName=
-      file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-
-    const path=
-      `${currentProject.id}/${Date.now()}_${safeName}`;
-
-    const {error:uploadError}=
-      await supabaseClient
-        .storage
-        .from("project-documents")
-        .upload(path,file,{
-          upsert:false
-        });
-
-    if(uploadError){
-      throw uploadError;
-    }
-
-    const {data:urlData}=
-      supabaseClient
-        .storage
-        .from("project-documents")
-        .getPublicUrl(path);
-
-    const {error:dbError}=
-      await supabaseClient
-        .from("documents")
-        .insert({
-          project_id:currentProject.id,
-          file_name:file.name,
-          file_url:urlData.publicUrl,
-          uploaded_by:currentUser.email
-        });
-
-    if(dbError) throw dbError;
-
-    await logActivity(
-      currentProject.id,
-      "Document Uploaded",
-      `${file.name} was uploaded.`
-    );
-
-    input.value="";
-
-    await refreshAll();
-
-    toast("Document uploaded.");
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      "Document upload failed: "+error.message,
-      true
-    );
-
-  }
+  renderDocuments(data || []);
 
 }
 
 
-function renderDocuments(){
+function renderDocuments(data){
 
-  const list=
-    documents.filter(
-      d=>Number(d.project_id)===Number(currentProject.id)
-    );
+  const el =
+    document.getElementById("documentsList");
 
-  document.getElementById("documentsList").innerHTML=
-    list.length
-    ? list.map(d=>`
+  if(!data.length){
 
-      <div class="doc">
+    el.innerHTML =
+      `<div class="help">No documents uploaded.</div>`;
 
-        <div>
-          <div class="doc-name">${esc(d.file_name)}</div>
-          <div class="doc-meta">
-            Uploaded ${dateFormat(d.created_at)}
+    return;
+
+  }
+
+  el.innerHTML =
+    data.map(d=>`
+
+      <div class="document">
+
+        <div style="font-size:22px">□</div>
+
+        <div class="document-info">
+
+          <div class="document-name">
+            ${esc(d.file_name)}
           </div>
+
+          <div class="document-date">
+            ${formatDate(d.created_at)}
+          </div>
+
         </div>
 
-        <div style="display:flex;gap:7px">
+        <div class="actions">
 
           <a
-            class="btn btn-secondary btn-small"
+            class="btn btn-small"
             href="${esc(d.file_url)}"
-            target="_blank"
-            rel="noopener"
-          >
+            target="_blank">
             Open
           </a>
 
           <button
             class="btn btn-danger btn-small"
-            onclick="deleteDocument(${d.id})"
-          >
+            onclick="deleteDocument(${d.id})">
             Delete
           </button>
 
@@ -3325,234 +3792,858 @@ function renderDocuments(){
 
       </div>
 
-    `).join("")
-    : `<div class="empty">No documents uploaded.</div>`;
+    `).join("");
+
+}
+
+
+async function uploadDocuments(files){
+
+  if(!files || !files.length) return;
+
+  for(const file of files){
+
+    await uploadSingleDocument(file);
+
+  }
+
+  await loadDocuments();
+
+}
+
+
+async function uploadSingleDocument(file){
+
+  const path =
+    `${currentProject.id}/${Date.now()}-${file.name}`;
+
+  const {error:uploadError} =
+    await supabaseClient.storage
+      .from("project-documents")
+      .upload(path,file,{
+        upsert:false
+      });
+
+  if(uploadError){
+
+    toast(
+      "Document upload failed. Check the project-documents bucket."
+    );
+
+    return;
+
+  }
+
+  const {data:urlData} =
+    supabaseClient.storage
+      .from("project-documents")
+      .getPublicUrl(path);
+
+  const {error} =
+    await supabaseClient
+      .from("documents")
+      .insert({
+        project_id:currentProject.id,
+        file_name:file.name,
+        file_url:urlData.publicUrl,
+        uploaded_by:currentUser.id
+      });
+
+  if(error){
+
+    toast(error.message);
+
+    return;
+
+  }
+
+  await logActivity(
+    "Document Uploaded",
+    file.name
+  );
 
 }
 
 
 async function deleteDocument(id){
 
-  if(!confirm("Delete this document record?")) return;
+  if(!confirm("Delete this document?")) return;
 
-  const item=
-    documents.find(d=>Number(d.id)===Number(id));
-
-  const {error}=
+  const {error} =
     await supabaseClient
       .from("documents")
       .delete()
       .eq("id",id);
 
   if(error){
-    toast(error.message,true);
+
+    toast(error.message);
+
     return;
+
   }
 
-  await logActivity(
-    currentProject.id,
-    "Document Deleted",
-    `${item?.file_name||"Document"} was deleted.`
-  );
+  await loadDocuments();
 
-  await refreshAll();
-
-  toast("Document removed.");
+  toast("Document deleted.");
 
 }
 
 
 /* =========================================================
-   MESSAGES
+   BRIEF DOCUMENTS
 ========================================================= */
 
-function renderMessages(){
+async function loadBriefDocuments(){
 
-  const rows=
-    messages.slice(0,150);
+  const {data,error} =
+    await supabaseClient
+      .from("documents")
+      .select("*")
+      .eq("project_id",currentProject.id)
+      .order("created_at",{ascending:false});
 
-  document.getElementById("messagesTable").innerHTML=
-    rows.length
-    ? rows.map(m=>{
+  if(error) return;
 
-        const p=
-          projects.find(
-            x=>Number(x.id)===Number(m.project_id)
-          );
+  document.getElementById("briefDocuments").innerHTML =
+    (data || []).map(d=>`
 
-        return `
-        <tr class="click-row"
-            onclick="openProject(${m.project_id})">
+      <div class="document">
 
-          <td>
-            <strong>${esc(p?.project_name||"Unknown Project")}</strong>
-          </td>
+        <div style="font-size:21px">□</div>
 
-          <td>
-            <span class="badge ${
-              m.sender_type==="admin"
-              ?"badge-blue"
-              :"badge-green"
-            }">
-              ${esc(m.sender_name||m.sender_type||"")}
-            </span>
-          </td>
+        <div class="document-info">
 
-          <td>
-            ${esc(
-              String(m.message||"").length>100
-              ?String(m.message).slice(0,100)+"..."
-              :m.message
-            )}
-          </td>
+          <div class="document-name">
+            ${esc(d.file_name)}
+          </div>
 
-          <td>${timeFormat(m.created_at)}</td>
+          <div class="document-date">
+            ${formatDate(d.created_at)}
+          </div>
 
-        </tr>
-        `;
+        </div>
 
-      }).join("")
-    : `<tr><td colspan="4"><div class="empty">No messages yet.</div></td></tr>`;
+        <a
+          class="btn btn-small"
+          href="${esc(d.file_url)}"
+          target="_blank">
+          Open
+        </a>
+
+      </div>
+
+    `).join("")
+    ||
+    `<div class="help">No project documents yet.</div>`;
 
 }
 
 
-function renderProjectMessages(){
+async function uploadBriefDocuments(files){
 
-  if(!currentProject) return;
+  await uploadDocuments(files);
 
-  const list=
-    messages
-      .filter(
-        m=>Number(m.project_id)===Number(currentProject.id)
-      )
-      .sort(
-        (a,b)=>
-          new Date(a.created_at)-
-          new Date(b.created_at)
-      );
+  await loadBriefDocuments();
 
-  const box=
-    document.getElementById("projectChat");
+}
 
-  if(!list.length){
 
-    box.innerHTML=
-      `<div class="empty">No messages yet. Start the conversation.</div>`;
+/* =========================================================
+   ACCESS REQUESTS
+========================================================= */
+
+async function loadRequests(){
+
+  const {data,error} =
+    await supabaseClient
+      .from("access_requests")
+      .select("*")
+      .eq("project_id",currentProject.id)
+      .order("requested_at",{ascending:false});
+
+  if(error) return;
+
+  renderRequests(data || []);
+
+}
+
+
+function renderRequests(data){
+
+  const el =
+    document.getElementById("requestsList");
+
+  if(!data.length){
+
+    el.innerHTML =
+      `<div class="help">No access requests.</div>`;
 
     return;
+
   }
 
-  box.innerHTML=
-    list.map(m=>`
+  el.innerHTML =
+    data.map(r=>`
 
-      <div class="msg ${
-        m.sender_type==="admin"
-        ?"admin"
-        :"client"
-      }">
+      <div class="request ${r.status==="pending" ? "pending" : ""}">
 
-        <div class="msg-meta">
-          ${esc(m.sender_name||m.sender_type)}
-          ·
-          ${timeFormat(m.created_at)}
+        <div class="request-head">
+
+          <div class="request-name">
+            ${esc(r.system_name || "Access Request")}
+          </div>
+
+          <span class="status
+            ${r.status==="pending" ? "status-overdue" : "status-completed"}">
+            ${esc(r.status || "pending")}
+          </span>
+
         </div>
 
-        <div style="white-space:pre-wrap">
-          ${esc(m.message||"")}
+        <div class="request-body">
+
+          <div>
+            <strong>Access:</strong>
+            ${esc(r.access_type || "—")}
+          </div>
+
+          <div style="margin-top:5px">
+            ${esc(r.instructions || "")}
+          </div>
+
+        </div>
+
+        <div class="actions" style="margin-top:13px">
+
+          ${
+            r.status==="pending"
+            ? `
+              <button
+                class="btn btn-primary btn-small"
+                onclick="completeRequest(${r.id})">
+                Mark Complete
+              </button>
+            `
+            : ""
+          }
+
         </div>
 
       </div>
 
     `).join("");
 
-  box.scrollTop=box.scrollHeight;
+}
+
+
+function openRequestModal(){
+
+  document.getElementById("requestSystem").value = "";
+
+  document.getElementById("requestType").value = "";
+
+  document.getElementById("requestInstructions").value = "";
+
+  openModal("requestModal");
 
 }
 
 
-async function sendProjectMessage(){
+async function saveAccessRequest(){
 
-  if(!currentProject) return;
+  const payload = {
 
-  const textarea=
-    document.getElementById("adminMessage");
-
-  const text=
-    textarea.value.trim();
-
-  if(!text){
-    toast("Write a message first.",true);
-    return;
-  }
-
-  const payload={
     project_id:currentProject.id,
-    sender_type:"admin",
-    sender_name:
-      currentUser.email||"Admin",
-    message:text
+
+    system_name:
+      document.getElementById("requestSystem").value.trim(),
+
+    access_type:
+      document.getElementById("requestType").value.trim(),
+
+    instructions:
+      document.getElementById("requestInstructions").value.trim(),
+
+    status:"pending",
+
+    requested_at:new Date().toISOString()
+
   };
 
-  const {error}=
+  const {error} =
     await supabaseClient
-      .from("messages")
+      .from("access_requests")
       .insert(payload);
 
   if(error){
-    toast(error.message,true);
+
+    toast(error.message);
+
     return;
+
   }
 
-  textarea.value="";
+  closeModal("requestModal");
 
-  await logActivity(
-    currentProject.id,
-    "Message Sent",
-    "Admin sent a message to the client."
-  );
+  await loadRequests();
 
-  await refreshAll();
+  toast("Access request sent.");
 
-  renderProjectMessages();
+}
 
-  toast("Message sent.");
+
+async function completeRequest(id){
+
+  const {error} =
+    await supabaseClient
+      .from("access_requests")
+      .update({
+        status:"completed",
+        completed_at:new Date().toISOString()
+      })
+      .eq("id",id);
+
+  if(error){
+
+    toast(error.message);
+
+    return;
+
+  }
+
+  await loadRequests();
 
 }
 
 
 /* =========================================================
-   INVOICES
+   CREDENTIALS
 ========================================================= */
+
+async function loadCredentials(){
+
+  const {data,error} =
+    await supabaseClient
+      .from("project_credentials")
+      .select("*")
+      .eq("project_id",currentProject.id)
+      .order("created_at",{ascending:false});
+
+  if(error) return;
+
+  renderCredentials(data || []);
+
+}
+
+
+function renderCredentials(data){
+
+  const el =
+    document.getElementById("credentialsList");
+
+  if(!data.length){
+
+    el.innerHTML =
+      `<div class="help">No credentials added.</div>`;
+
+    return;
+
+  }
+
+  el.innerHTML =
+    data.map(c=>`
+
+      <div class="credential">
+
+        <div class="credential-row">
+          <div class="credential-label">Service</div>
+          <div>${esc(c.service_name)}</div>
+        </div>
+
+        <div class="credential-row">
+          <div class="credential-label">Login URL</div>
+          <div>
+            ${
+              c.login_url
+              ? `<a href="${esc(c.login_url)}" target="_blank">${esc(c.login_url)}</a>`
+              : "—"
+            }
+          </div>
+        </div>
+
+        <div class="credential-row">
+          <div class="credential-label">Username</div>
+          <div>${esc(c.username || "—")}</div>
+        </div>
+
+        <div class="credential-row">
+          <div class="credential-label">Password</div>
+          <div>${esc(c.password || "—")}</div>
+        </div>
+
+        <div class="credential-row">
+          <div class="credential-label">Notes</div>
+          <div>${esc(c.notes || "—")}</div>
+        </div>
+
+        <div class="actions" style="margin-top:12px">
+
+          <button
+            class="btn btn-small"
+            onclick='editCredential(${JSON.stringify(c)})'>
+            Edit
+          </button>
+
+          <button
+            class="btn btn-danger btn-small"
+            onclick="deleteCredential(${c.id})">
+            Delete
+          </button>
+
+        </div>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+function openCredentialModal(data=null){
+
+  document.getElementById("credentialId").value =
+    data?.id || "";
+
+  document.getElementById("credentialService").value =
+    data?.service_name || "";
+
+  document.getElementById("credentialUrl").value =
+    data?.login_url || "";
+
+  document.getElementById("credentialUsername").value =
+    data?.username || "";
+
+  document.getElementById("credentialPassword").value =
+    data?.password || "";
+
+  document.getElementById("credentialNotes").value =
+    data?.notes || "";
+
+  openModal("credentialModal");
+
+}
+
+
+function editCredential(data){
+
+  openCredentialModal(data);
+
+}
+
+
+async function saveCredential(){
+
+  const id =
+    document.getElementById("credentialId").value;
+
+  const payload = {
+
+    project_id:currentProject.id,
+
+    client_id:currentProject.client_id,
+
+    service_name:
+      document.getElementById("credentialService").value.trim(),
+
+    login_url:
+      document.getElementById("credentialUrl").value.trim(),
+
+    username:
+      document.getElementById("credentialUsername").value.trim(),
+
+    password:
+      document.getElementById("credentialPassword").value,
+
+    notes:
+      document.getElementById("credentialNotes").value.trim(),
+
+    updated_at:new Date().toISOString()
+
+  };
+
+  let result;
+
+  if(id){
+
+    result =
+      await supabaseClient
+        .from("project_credentials")
+        .update(payload)
+        .eq("id",id);
+
+  }else{
+
+    result =
+      await supabaseClient
+        .from("project_credentials")
+        .insert(payload);
+
+  }
+
+  if(result.error){
+
+    toast(result.error.message);
+
+    return;
+
+  }
+
+  closeModal("credentialModal");
+
+  await loadCredentials();
+
+  toast("Credential saved.");
+
+}
+
+
+async function deleteCredential(id){
+
+  if(!confirm("Delete this credential?")) return;
+
+  const {error} =
+    await supabaseClient
+      .from("project_credentials")
+      .delete()
+      .eq("id",id);
+
+  if(error){
+
+    toast(error.message);
+
+    return;
+
+  }
+
+  await loadCredentials();
+
+}
+
+
+/* =========================================================
+   PROJECT INVOICES
+========================================================= */
+
+async function loadProjectInvoices(){
+
+  const {data,error} =
+    await supabaseClient
+      .from("invoices")
+      .select("*")
+      .eq("project_id",currentProject.id)
+      .order("created_at",{ascending:false});
+
+  if(error) return;
+
+  renderProjectInvoices(data || []);
+
+}
+
+
+function renderProjectInvoices(data){
+
+  const el =
+    document.getElementById("projectInvoices");
+
+  if(!data.length){
+
+    el.innerHTML =
+      `<div class="help">No invoices for this project.</div>`;
+
+    return;
+
+  }
+
+  el.innerHTML =
+    data.map(i=>invoiceCard(i)).join("");
+
+}
+
+
+function invoiceCard(i){
+
+  return `
+
+    <div class="invoice">
+
+      <div class="invoice-top">
+
+        <div>
+
+          <div class="invoice-number">
+            ${esc(i.invoice_number)}
+          </div>
+
+          <div class="invoice-title">
+            ${esc(i.title || "Project Invoice")}
+          </div>
+
+        </div>
+
+        <div>
+
+          <div class="invoice-amount">
+            ${formatMoney(i.amount,i.currency)}
+          </div>
+
+          <div style="margin-top:5px;text-align:right">
+
+            <span class="status ${statusClass(i.status)}">
+              ${esc(i.status)}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="invoice-details">
+
+        <div class="invoice-detail">
+          <div class="invoice-detail-label">Due Date</div>
+          <div class="invoice-detail-value">
+            ${formatDate(i.due_date)}
+          </div>
+        </div>
+
+        <div class="invoice-detail">
+          <div class="invoice-detail-label">Payment</div>
+          <div class="invoice-detail-value">
+            ${i.payment_url ? "Payment Link Added" : "Payment Details"}
+          </div>
+        </div>
+
+        <div class="invoice-detail">
+          <div class="invoice-detail-label">Created</div>
+          <div class="invoice-detail-value">
+            ${formatDate(i.created_at)}
+          </div>
+        </div>
+
+      </div>
+
+      ${
+        i.description
+        ? `
+          <div class="help" style="margin-top:13px">
+            ${esc(i.description)}
+          </div>
+        `
+        : ""
+      }
+
+      <div class="payment-box">
+
+        <div class="card-title" style="margin-bottom:8px">
+          Payment Details
+        </div>
+
+        <div class="payment-row">
+          <span class="payment-label">Method</span>
+          <span>${esc(PAYMENT_DETAILS.method || "—")}</span>
+        </div>
+
+        <div class="payment-row">
+          <span class="payment-label">Account Name</span>
+          <span>${esc(PAYMENT_DETAILS.accountName || "—")}</span>
+        </div>
+
+        <div class="payment-row">
+          <span class="payment-label">Account / IBAN</span>
+          <span>${esc(PAYMENT_DETAILS.account || "—")}</span>
+        </div>
+
+        <div class="payment-row">
+          <span class="payment-label">Instructions</span>
+          <span>${esc(PAYMENT_DETAILS.instructions || "—")}</span>
+        </div>
+
+      </div>
+
+      <div class="actions" style="margin-top:14px">
+
+        ${
+          String(i.status).toLowerCase() !== "paid"
+          ? `
+            <button
+              class="btn btn-small"
+              onclick="markInvoicePaid(${i.id})">
+              Mark Paid
+            </button>
+
+            <button
+              class="btn btn-small"
+              onclick="sendPaymentReminder(${i.id})">
+              Payment Reminder
+            </button>
+          `
+          : ""
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   GLOBAL INVOICES
+========================================================= */
+
+function renderInvoices(){
+
+  const el =
+    document.getElementById("invoicesTable");
+
+  el.innerHTML =
+    invoices.length
+    ? invoices.map(i=>{
+
+        const client =
+          clients.find(c=>c.id===i.client_id);
+
+        const project =
+          projects.find(p=>String(p.id)===String(i.project_id));
+
+        return `
+
+          <tr>
+
+            <td>${esc(i.invoice_number)}</td>
+
+            <td>${esc(client?.full_name || "—")}</td>
+
+            <td>${esc(project?.project_name || "—")}</td>
+
+            <td>${formatMoney(i.amount,i.currency)}</td>
+
+            <td>${formatDate(i.due_date)}</td>
+
+            <td>
+              <span class="status ${statusClass(i.status)}">
+                ${esc(i.status)}
+              </span>
+            </td>
+
+            <td>
+
+              ${
+                String(i.status).toLowerCase() !== "paid"
+                ? `
+                  <button
+                    class="btn btn-small"
+                    onclick="markInvoicePaid(${i.id})">
+                    Paid
+                  </button>
+                `
+                : ""
+              }
+
+            </td>
+
+          </tr>
+
+        `;
+
+      }).join("")
+    : `
+
+      <tr>
+        <td colspan="7">
+          <div class="help" style="padding:20px">
+            No invoices yet.
+          </div>
+        </td>
+      </tr>
+
+    `;
+
+}
+
 
 function openInvoiceModal(){
 
-  const client=
-    clients.find(c=>c.id===currentProject.client_id);
+  const clientSelect =
+    document.getElementById("invoiceClient");
 
-  const random=
-    Math.floor(100000+Math.random()*900000);
+  clientSelect.innerHTML =
+    clients.map(c=>`
 
-  document.getElementById("invoiceNumber").value=
-    "AWSZ-"+random;
+      <option value="${c.id}">
+        ${esc(c.full_name || c.email)}
+      </option>
 
-  document.getElementById("invoiceTitle").value=
+    `).join("");
+
+  const projectSelect =
+    document.getElementById("invoiceProject");
+
+  projectSelect.innerHTML =
+    projects.map(p=>`
+
+      <option value="${p.id}">
+        ${esc(p.project_name)}
+      </option>
+
+    `).join("");
+
+  if(currentProject){
+
+    projectSelect.value =
+      currentProject.id;
+
+    clientSelect.value =
+      currentProject.client_id;
+
+  }
+
+  document.getElementById("invoiceNumber").value =
+    "AWSZ-"+Date.now().toString().slice(-6);
+
+  document.getElementById("invoiceTitle").value =
     "Project Invoice";
 
-  document.getElementById("invoiceDescription").value=
-    currentProject.project_name||"";
+  document.getElementById("invoiceAmount").value =
+    currentProject?.quoted_price || "";
 
-  document.getElementById("invoiceAmount").value=
-    currentProject.quoted_price||"";
+  document.getElementById("invoiceDue").value =
+    "";
 
-  document.getElementById("invoiceCurrency").value=
-    "USD";
+  document.getElementById("invoiceDescription").value =
+    "";
 
-  document.getElementById("invoiceDue").value="";
+  document.getElementById("invoicePaymentUrl").value =
+    "";
 
-  document.getElementById("invoicePaymentUrl").value="";
+  document.getElementById("invoiceNotes").value =
+    "";
 
-  document.getElementById("invoiceNotes").value="";
+  document.getElementById("paymentMethod").textContent =
+    PAYMENT_DETAILS.method || "—";
+
+  document.getElementById("paymentAccountName").textContent =
+    PAYMENT_DETAILS.accountName || "—";
+
+  document.getElementById("paymentAccount").textContent =
+    PAYMENT_DETAILS.account || "—";
+
+  document.getElementById("paymentInstructions").textContent =
+    PAYMENT_DETAILS.instructions || "—";
 
   openModal("invoiceModal");
 
@@ -3561,44 +4652,38 @@ function openInvoiceModal(){
 
 async function saveInvoice(){
 
-  const invoiceNumber=
-    document.getElementById("invoiceNumber").value.trim();
+  const projectId =
+    Number(document.getElementById("invoiceProject").value);
 
-  if(!invoiceNumber){
-    toast("Invoice number is required.",true);
-    return;
-  }
+  const clientId =
+    document.getElementById("invoiceClient").value;
 
-  const amount=
-    Number(
-      document.getElementById("invoiceAmount").value||0
-    );
+  const payload = {
 
-  if(amount<=0){
-    toast("Enter a valid invoice amount.",true);
-    return;
-  }
+    project_id:projectId,
 
-  const payload={
-    project_id:currentProject.id,
-    client_id:currentProject.client_id,
-    invoice_number:invoiceNumber,
+    client_id:clientId,
+
+    invoice_number:
+      document.getElementById("invoiceNumber").value.trim(),
+
     title:
-      document.getElementById("invoiceTitle").value.trim()
-      ||"Project Invoice",
+      document.getElementById("invoiceTitle").value.trim(),
 
     description:
       document.getElementById("invoiceDescription").value.trim(),
 
-    amount,
+    amount:
+      Number(document.getElementById("invoiceAmount").value || 0),
 
     currency:
       document.getElementById("invoiceCurrency").value,
 
     due_date:
-      document.getElementById("invoiceDue").value||null,
+      document.getElementById("invoiceDue").value || null,
 
-    status:"draft",
+    status:
+      document.getElementById("invoiceStatus").value,
 
     payment_url:
       document.getElementById("invoicePaymentUrl").value.trim(),
@@ -3606,187 +4691,41 @@ async function saveInvoice(){
     notes:
       document.getElementById("invoiceNotes").value.trim(),
 
-    updated_at:new Date().toISOString()
+    updated_at:
+      new Date().toISOString()
+
   };
 
-  const {data,error}=
+  const {error} =
     await supabaseClient
       .from("invoices")
-      .insert(payload)
-      .select()
-      .single();
+      .insert(payload);
 
   if(error){
-    toast(error.message,true);
-    return;
-  }
 
-  await logActivity(
-    currentProject.id,
-    "Invoice Created",
-    `${data.invoice_number} was created for ${money(data.amount,data.currency)}.`
-  );
+    toast(error.message);
+
+    return;
+
+  }
 
   closeModal("invoiceModal");
 
-  await refreshAll();
+  await loadInvoices();
+
+  renderInvoices();
+
+  if(currentProject)
+    await loadProjectInvoices();
 
   toast("Invoice created.");
 
 }
 
 
-function renderInvoices(){
-
-  const rows=invoices;
-
-  document.getElementById("invoicesPage").innerHTML=
-    rows.length
-    ? rows.map(i=>{
-
-        const p=
-          projects.find(
-            x=>Number(x.id)===Number(i.project_id)
-          );
-
-        const c=
-          clients.find(
-            x=>x.id===i.client_id
-          );
-
-        return invoiceCard(i,p,c);
-
-      }).join("")
-    : `<div class="card"><div class="empty">No invoices yet.</div></div>`;
-
-}
-
-
-function renderProjectInvoices(){
-
-  if(!currentProject) return;
-
-  const list=
-    invoices.filter(
-      i=>Number(i.project_id)===Number(currentProject.id)
-    );
-
-  document.getElementById("projectInvoices").innerHTML=
-    list.length
-    ? list.map(i=>invoiceCard(
-        i,
-        currentProject,
-        clients.find(c=>c.id===i.client_id)
-      )).join("")
-    : `<div class="empty">No invoices for this project.</div>`;
-
-}
-
-
-function invoiceCard(i,p,c){
-
-  let cls="badge-amber";
-
-  if(i.status==="paid") cls="badge-green";
-  if(i.status==="overdue") cls="badge-red";
-
-  return `
-    <div class="invoice">
-
-      <div class="invoice-row">
-
-        <div>
-          <div style="font-weight:850;font-size:15px">
-            ${esc(i.invoice_number)}
-          </div>
-
-          <div style="font-size:12px;color:var(--muted)">
-            ${esc(i.title||"Project Invoice")}
-            ·
-            ${esc(p?.project_name||"Project")}
-          </div>
-
-          <div style="font-size:11px;color:var(--muted);margin-top:4px">
-            Client:
-            ${esc(c?.company_name||c?.full_name||"—")}
-          </div>
-        </div>
-
-        <div style="text-align:right">
-          <div class="amount">
-            ${money(i.amount,i.currency)}
-          </div>
-
-          <span class="badge ${cls}">
-            ${esc(i.status||"draft")}
-          </span>
-        </div>
-
-      </div>
-
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px;flex-wrap:wrap">
-
-        <div style="font-size:11px;color:var(--muted)">
-          Due: ${dateFormat(i.due_date)}
-        </div>
-
-        <div style="display:flex;gap:7px;flex-wrap:wrap">
-
-          ${
-            i.payment_url
-            ? `
-              <a
-                href="${esc(i.payment_url)}"
-                target="_blank"
-                rel="noopener"
-                class="btn btn-secondary btn-small"
-              >
-                Payment Link
-              </a>
-            `
-            :""
-          }
-
-          ${
-            i.status!=="paid"
-            ? `
-              <button
-                class="btn btn-green btn-small"
-                onclick="markInvoicePaid(${i.id})"
-              >
-                Mark Paid
-              </button>
-
-              <button
-                class="btn btn-primary btn-small"
-                onclick="sendPaymentReminder(${i.id})"
-              >
-                Payment Reminder
-              </button>
-            `
-            :""
-          }
-
-        </div>
-
-      </div>
-
-    </div>
-  `;
-
-}
-
-
 async function markInvoicePaid(id){
 
-  const invoice=
-    invoices.find(
-      i=>Number(i.id)===Number(id)
-    );
-
-  if(!invoice) return;
-
-  const {error}=
+  const {error} =
     await supabaseClient
       .from("invoices")
       .update({
@@ -3796,17 +4735,19 @@ async function markInvoicePaid(id){
       .eq("id",id);
 
   if(error){
-    toast(error.message,true);
+
+    toast(error.message);
+
     return;
+
   }
 
-  await logActivity(
-    invoice.project_id,
-    "Invoice Paid",
-    `${invoice.invoice_number} was marked as paid.`
-  );
+  await loadInvoices();
 
-  await refreshAll();
+  renderInvoices();
+
+  if(currentProject)
+    await loadProjectInvoices();
 
   toast("Invoice marked as paid.");
 
@@ -3815,61 +4756,887 @@ async function markInvoicePaid(id){
 
 async function sendPaymentReminder(id){
 
-  const invoice=
-    invoices.find(
-      i=>Number(i.id)===Number(id)
-    );
+  const invoice =
+    invoices.find(i=>String(i.id)===String(id));
 
-  if(!invoice) return;
+  if(!invoice){
 
-  const title=
-    `Payment Reminder — ${invoice.invoice_number}`;
+    toast("Invoice not found.");
 
-  const message=
-    `Your invoice ${invoice.invoice_number} for ${money(invoice.amount,invoice.currency)} is due on ${dateFormat(invoice.due_date)}.`;
+    return;
 
-  const {error:reminderError}=
+  }
+
+  const title =
+    "Payment Reminder";
+
+  const message =
+    `Payment reminder for invoice ${invoice.invoice_number}. Amount: ${formatMoney(invoice.amount,invoice.currency)}. Due date: ${formatDate(invoice.due_date)}.`;
+
+  const {error} =
     await supabaseClient
       .from("payment_reminders")
       .insert({
+
         invoice_id:invoice.id,
+
         client_id:invoice.client_id,
+
         reminder_title:title,
+
         reminder_message:message,
+
         due_date:invoice.due_date,
+
         is_active:true
+
       });
 
-  if(reminderError){
-    toast(reminderError.message,true);
+  if(error){
+
+    toast(error.message);
+
     return;
+
   }
 
-  const {error:notificationError}=
+  await supabaseClient
+    .from("project_notifications")
+    .insert({
+
+      project_id:invoice.project_id,
+
+      client_id:invoice.client_id,
+
+      title:title,
+
+      message:message,
+
+      notification_type:"payment",
+
+      is_read:false
+
+    });
+
+  toast("Payment reminder sent to client portal.");
+
+}
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+async function loadProjectMessages(){
+
+  const {data,error} =
     await supabaseClient
-      .from("project_notifications")
-      .insert({
-        project_id:invoice.project_id,
-        client_id:invoice.client_id,
-        title:title,
-        message:message,
-        notification_type:"payment"
-      });
+      .from("messages")
+      .select("*")
+      .eq("project_id",currentProject.id)
+      .order("created_at",{ascending:true});
 
-  if(notificationError){
-    toast(notificationError.message,true);
+  if(error) return;
+
+  renderProjectMessages(data || []);
+
+}
+
+
+function renderProjectMessages(data){
+
+  const el =
+    document.getElementById("projectChatBody");
+
+  if(!data.length){
+
+    el.innerHTML =
+      `<div class="chat-empty">
+        No messages yet.
+      </div>`;
+
     return;
+
   }
 
-  await logActivity(
-    invoice.project_id,
-    "Payment Reminder Sent",
-    `Payment reminder created for ${invoice.invoice_number}.`
-  );
+  el.innerHTML =
+    data.map(m=>`
 
-  toast(
-    "Payment reminder sent to the client portal."
-  );
+      <div class="message-row ${m.sender_type==="admin" ? "admin" : ""}">
+
+        <div class="bubble">
+
+          ${
+            m.message
+            ? `<div class="message-text">${esc(m.message)}</div>`
+            : ""
+          }
+
+          ${
+            m.file_url
+            ? `
+              <a
+                class="message-file"
+                href="${esc(m.file_url)}"
+                target="_blank">
+                📎 ${esc(m.file_name || "Attachment")}
+              </a>
+            `
+            : ""
+          }
+
+          <div class="message-time">
+            ${formatDateTime(m.created_at)}
+          </div>
+
+        </div>
+
+      </div>
+
+    `).join("");
+
+  el.scrollTop = el.scrollHeight;
+
+}
+
+
+function formatDateTime(value){
+
+  if(!value) return "";
+
+  return new Date(value)
+    .toLocaleString([],{
+      month:"short",
+      day:"numeric",
+      hour:"numeric",
+      minute:"2-digit"
+    });
+
+}
+
+
+async function sendProjectMessage(){
+
+  if(!currentProject) return;
+
+  const input =
+    document.getElementById("projectChatInput");
+
+  const text =
+    input.value.trim();
+
+  if(!text) return;
+
+  const payload = {
+
+    project_id:currentProject.id,
+
+    sender_type:"admin",
+
+    sender_name:
+      currentUser.email || "AWSZ Admin",
+
+    message:text
+
+  };
+
+  const {error} =
+    await supabaseClient
+      .from("messages")
+      .insert(payload);
+
+  if(error){
+
+    toast(error.message);
+
+    return;
+
+  }
+
+  input.value = "";
+
+  await loadProjectMessages();
+
+  await loadMessages();
+
+}
+
+
+function chatKeyDown(event){
+
+  if(event.key==="Enter" && !event.shiftKey){
+
+    event.preventDefault();
+
+    sendProjectMessage();
+
+  }
+
+}
+
+
+async function sendChatFile(file){
+
+  if(!file || !currentProject) return;
+
+  const path =
+    `${currentProject.id}/chat-${Date.now()}-${file.name}`;
+
+  const {error:uploadError} =
+    await supabaseClient.storage
+      .from("project-documents")
+      .upload(path,file,{
+        upsert:false
+      });
+
+  if(uploadError){
+
+    toast("File upload failed. Check Storage bucket.");
+
+    return;
+
+  }
+
+  const {data:urlData} =
+    supabaseClient.storage
+      .from("project-documents")
+      .getPublicUrl(path);
+
+  const {error} =
+    await supabaseClient
+      .from("messages")
+      .insert({
+
+        project_id:currentProject.id,
+
+        sender_type:"admin",
+
+        sender_name:
+          currentUser.email || "AWSZ Admin",
+
+        message:"",
+
+        file_url:urlData.publicUrl,
+
+        file_name:file.name
+
+      });
+
+  if(error){
+
+    toast(error.message);
+
+    return;
+
+  }
+
+  await loadProjectMessages();
+
+  await loadMessages();
+
+}
+
+
+/* =========================================================
+   VOICE
+========================================================= */
+
+async function toggleVoiceRecording(){
+
+  const button =
+    document.getElementById("voiceButton");
+
+  if(mediaRecorder && mediaRecorder.state==="recording"){
+
+    mediaRecorder.stop();
+
+    button.classList.remove("recording");
+
+    button.textContent = "🎙";
+
+    return;
+
+  }
+
+  try{
+
+    recordingStream =
+      await navigator.mediaDevices.getUserMedia({
+        audio:true
+      });
+
+    recordedChunks = [];
+
+    mediaRecorder =
+      new MediaRecorder(recordingStream);
+
+    mediaRecorder.ondataavailable =
+      event=>{
+
+        if(event.data.size>0)
+          recordedChunks.push(event.data);
+
+      };
+
+    mediaRecorder.onstop =
+      async()=>{
+
+        const blob =
+          new Blob(
+            recordedChunks,
+            {type:"audio/webm"}
+          );
+
+        recordingStream
+          .getTracks()
+          .forEach(t=>t.stop());
+
+        await sendVoiceBlob(blob);
+
+      };
+
+    mediaRecorder.start();
+
+    button.classList.add("recording");
+
+    button.textContent = "■";
+
+  }catch(e){
+
+    toast("Microphone permission is required.");
+
+  }
+
+}
+
+
+async function sendVoiceBlob(blob){
+
+  if(!currentProject) return;
+
+  const path =
+    `${currentProject.id}/voice-${Date.now()}.webm`;
+
+  const {error:uploadError} =
+    await supabaseClient.storage
+      .from("project-documents")
+      .upload(path,blob,{
+        contentType:"audio/webm",
+        upsert:false
+      });
+
+  if(uploadError){
+
+    toast("Voice upload failed.");
+
+    return;
+
+  }
+
+  const {data:urlData} =
+    supabaseClient.storage
+      .from("project-documents")
+      .getPublicUrl(path);
+
+  const {error} =
+    await supabaseClient
+      .from("messages")
+      .insert({
+
+        project_id:currentProject.id,
+
+        sender_type:"admin",
+
+        sender_name:
+          currentUser.email || "AWSZ Admin",
+
+        message:"Voice message",
+
+        file_url:urlData.publicUrl,
+
+        file_name:"Voice message.webm"
+
+      });
+
+  if(error){
+
+    toast(error.message);
+
+    return;
+
+  }
+
+  await loadProjectMessages();
+
+  await loadMessages();
+
+}
+
+
+/* =========================================================
+   GLOBAL MESSAGE LIST
+========================================================= */
+
+function renderGlobalMessages(){
+
+  const el =
+    document.getElementById("globalChatList");
+
+  const grouped = {};
+
+  messages.forEach(m=>{
+
+    if(!grouped[m.project_id])
+      grouped[m.project_id]=[];
+
+    grouped[m.project_id].push(m);
+
+  });
+
+  const projectIds =
+    Object.keys(grouped);
+
+  if(!projectIds.length){
+
+    el.innerHTML =
+      `<div class="help" style="padding:18px">
+        No client messages yet.
+      </div>`;
+
+    return;
+
+  }
+
+  el.innerHTML =
+    projectIds.map(projectId=>{
+
+      const project =
+        projects.find(p=>String(p.id)===String(projectId));
+
+      if(!project) return "";
+
+      const client =
+        clients.find(c=>c.id===project.client_id);
+
+      const arr =
+        grouped[projectId];
+
+      const hasUnread =
+        arr.some(m=>m.sender_type==="client" && !m.admin_read);
+
+      return `
+
+        <div
+          class="chat-contact"
+          onclick="selectGlobalConversation(${project.id})">
+
+          ${
+            hasUnread
+            ? `<span class="unread-dot"></span>`
+            : ""
+          }
+
+          <div class="chat-contact-name">
+            ${esc(client?.full_name || client?.email || "Client")}
+          </div>
+
+          <div class="chat-contact-project">
+            ${esc(project.project_name)}
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+  updateUnreadBadge();
+
+}
+
+
+function updateUnreadBadge(){
+
+  const count =
+    messages.filter(
+      m=>m.sender_type==="client" && !m.admin_read
+    ).length;
+
+  const badge =
+    document.getElementById("messageBadge");
+
+  if(count){
+
+    badge.style.display="inline-flex";
+
+    badge.textContent =
+      count>99 ? "99+" : count;
+
+  }else{
+
+    badge.style.display="none";
+
+  }
+
+}
+
+
+async function selectGlobalConversation(projectId){
+
+  selectedGlobalProject =
+    projects.find(p=>String(p.id)===String(projectId));
+
+  if(!selectedGlobalProject) return;
+
+  const client =
+    clients.find(
+      c=>c.id===selectedGlobalProject.client_id
+    );
+
+  document.getElementById("globalChatName").textContent =
+    client?.full_name || client?.email || "Client";
+
+  document.getElementById("globalChatSub").textContent =
+    selectedGlobalProject.project_name;
+
+  const projectMessages =
+    messages.filter(
+      m=>String(m.project_id)===String(projectId)
+    );
+
+  document.getElementById("globalChatBody").innerHTML =
+    projectMessages.length
+    ? projectMessages.map(m=>`
+
+      <div class="message-row ${m.sender_type==="admin" ? "admin" : ""}">
+
+        <div class="bubble">
+
+          ${
+            m.message
+            ? `<div class="message-text">${esc(m.message)}</div>`
+            : ""
+          }
+
+          ${
+            m.file_url
+            ? `
+              <a
+                class="message-file"
+                href="${esc(m.file_url)}"
+                target="_blank">
+                📎 ${esc(m.file_name || "Attachment")}
+              </a>
+            `
+            : ""
+          }
+
+          <div class="message-time">
+            ${formatDateTime(m.created_at)}
+          </div>
+
+        </div>
+
+      </div>
+
+    `).join("")
+    : `<div class="chat-empty">No messages yet.</div>`;
+
+  const body =
+    document.getElementById("globalChatBody");
+
+  body.scrollTop = body.scrollHeight;
+
+  const unread =
+    projectMessages.filter(
+      m=>m.sender_type==="client" && !m.admin_read
+    );
+
+  for(const m of unread){
+
+    await supabaseClient
+      .from("messages")
+      .update({
+        admin_read:true
+      })
+      .eq("id",m.id);
+
+    m.admin_read = true;
+
+  }
+
+  updateUnreadBadge();
+
+  renderGlobalMessages();
+
+}
+
+
+async function sendGlobalMessage(){
+
+  if(!selectedGlobalProject){
+
+    toast("Select a conversation first.");
+
+    return;
+
+  }
+
+  const input =
+    document.getElementById("globalChatInput");
+
+  const text =
+    input.value.trim();
+
+  if(!text) return;
+
+  const {error} =
+    await supabaseClient
+      .from("messages")
+      .insert({
+
+        project_id:selectedGlobalProject.id,
+
+        sender_type:"admin",
+
+        sender_name:
+          currentUser.email || "AWSZ Admin",
+
+        message:text
+
+      });
+
+  if(error){
+
+    toast(error.message);
+
+    return;
+
+  }
+
+  input.value="";
+
+  await loadMessages();
+
+  selectGlobalConversation(selectedGlobalProject.id);
+
+}
+
+
+function globalChatKeyDown(event){
+
+  if(event.key==="Enter" && !event.shiftKey){
+
+    event.preventDefault();
+
+    sendGlobalMessage();
+
+  }
+
+}
+
+
+async function sendGlobalFile(file){
+
+  if(!file || !selectedGlobalProject) return;
+
+  const path =
+    `${selectedGlobalProject.id}/chat-${Date.now()}-${file.name}`;
+
+  const {error:uploadError} =
+    await supabaseClient.storage
+      .from("project-documents")
+      .upload(path,file,{
+        upsert:false
+      });
+
+  if(uploadError){
+
+    toast("File upload failed.");
+
+    return;
+
+  }
+
+  const {data:urlData} =
+    supabaseClient.storage
+      .from("project-documents")
+      .getPublicUrl(path);
+
+  const {error} =
+    await supabaseClient
+      .from("messages")
+      .insert({
+
+        project_id:selectedGlobalProject.id,
+
+        sender_type:"admin",
+
+        sender_name:
+          currentUser.email || "AWSZ Admin",
+
+        message:"",
+
+        file_url:urlData.publicUrl,
+
+        file_name:file.name
+
+      });
+
+  if(error){
+
+    toast(error.message);
+
+    return;
+
+  }
+
+  await loadMessages();
+
+  selectGlobalConversation(selectedGlobalProject.id);
+
+}
+
+
+/* =========================================================
+   GLOBAL VOICE
+========================================================= */
+
+async function toggleGlobalVoiceRecording(){
+
+  const button =
+    document.getElementById("globalVoiceButton");
+
+  if(globalMediaRecorder &&
+     globalMediaRecorder.state==="recording"){
+
+    globalMediaRecorder.stop();
+
+    button.classList.remove("recording");
+
+    button.textContent="🎙";
+
+    return;
+
+  }
+
+  if(!selectedGlobalProject){
+
+    toast("Select a conversation first.");
+
+    return;
+
+  }
+
+  try{
+
+    globalRecordingStream =
+      await navigator.mediaDevices.getUserMedia({
+        audio:true
+      });
+
+    globalRecordedChunks=[];
+
+    globalMediaRecorder =
+      new MediaRecorder(globalRecordingStream);
+
+    globalMediaRecorder.ondataavailable =
+      event=>{
+
+        if(event.data.size>0)
+          globalRecordedChunks.push(event.data);
+
+      };
+
+    globalMediaRecorder.onstop =
+      async()=>{
+
+        const blob =
+          new Blob(
+            globalRecordedChunks,
+            {type:"audio/webm"}
+          );
+
+        globalRecordingStream
+          .getTracks()
+          .forEach(t=>t.stop());
+
+        await sendGlobalVoice(blob);
+
+      };
+
+    globalMediaRecorder.start();
+
+    button.classList.add("recording");
+
+    button.textContent="■";
+
+  }catch(e){
+
+    toast("Microphone permission is required.");
+
+  }
+
+}
+
+
+async function sendGlobalVoice(blob){
+
+  const path =
+    `${selectedGlobalProject.id}/voice-${Date.now()}.webm`;
+
+  const {error:uploadError} =
+    await supabaseClient.storage
+      .from("project-documents")
+      .upload(path,blob,{
+        contentType:"audio/webm",
+        upsert:false
+      });
+
+  if(uploadError){
+
+    toast("Voice upload failed.");
+
+    return;
+
+  }
+
+  const {data:urlData} =
+    supabaseClient.storage
+      .from("project-documents")
+      .getPublicUrl(path);
+
+  const {error} =
+    await supabaseClient
+      .from("messages")
+      .insert({
+
+        project_id:selectedGlobalProject.id,
+
+        sender_type:"admin",
+
+        sender_name:
+          currentUser.email || "AWSZ Admin",
+
+        message:"Voice message",
+
+        file_url:urlData.publicUrl,
+
+        file_name:"Voice message.webm"
+
+      });
+
+  if(error){
+
+    toast(error.message);
+
+    return;
+
+  }
+
+  await loadMessages();
+
+  selectGlobalConversation(selectedGlobalProject.id);
 
 }
 
@@ -3878,91 +5645,56 @@ async function sendPaymentReminder(id){
    ACTIVITY
 ========================================================= */
 
-async function logActivity(
-  projectId,
-  action,
-  description
-){
+async function logActivity(action,description){
 
-  try{
+  if(!currentProject) return;
 
+  const {error} =
     await supabaseClient.rpc(
       "log_project_activity",
       {
-        p_project_id:projectId,
+        p_project_id:currentProject.id,
         p_action:action,
         p_description:description
       }
     );
 
-  }catch(error){
-
-    console.error("Activity log:",error);
-
-  }
+  if(!error)
+    await loadActivity();
 
 }
 
 
-function renderActivity(){
+async function loadProjectActivity(){
 
-  document.getElementById("activityPage").innerHTML=
-    activities.length
-    ? activities.slice(0,200).map(a=>`
+  const {data,error} =
+    await supabaseClient
+      .from("activity_logs")
+      .select("*")
+      .eq("project_id",currentProject.id)
+      .order("created_at",{ascending:false});
+
+  if(error) return;
+
+  document.getElementById("projectActivity").innerHTML =
+    (data || []).length
+    ? data.map(a=>`
 
       <div class="activity-item">
 
         <div class="activity-action">
-          ${esc(a.action)}
-        </div>
-
-        <div class="activity-desc">
-          ${esc(a.description)}
+          ${esc(a.action || "Activity")}
         </div>
 
         <div class="activity-time">
-          ${timeFormat(a.created_at)}
+          ${esc(a.description || "")}
+          · ${formatDateTime(a.created_at)}
         </div>
 
       </div>
 
     `).join("")
-    : `<div class="empty">No activity yet.</div>`;
-
-}
-
-
-function renderProjectActivity(){
-
-  if(!currentProject) return;
-
-  const list=
-    activities.filter(
-      a=>Number(a.project_id)===Number(currentProject.id)
-    );
-
-  document.getElementById("projectActivity").innerHTML=
-    list.length
-    ? list.map(a=>`
-
-      <div class="activity-item">
-
-        <div class="activity-action">
-          ${esc(a.action)}
-        </div>
-
-        <div class="activity-desc">
-          ${esc(a.description)}
-        </div>
-
-        <div class="activity-time">
-          ${timeFormat(a.created_at)}
-        </div>
-
-      </div>
-
-    `).join("")
-    : `<div class="empty">No activity for this project yet.</div>`;
+    : `<div class="help">No project activity yet.</div>`;
 
 }
 
@@ -3980,10 +5712,30 @@ function setupRealtime(){
       {
         event:"*",
         schema:"public",
-        table:"projects"
+        table:"messages"
       },
-      async()=>{
-        await refreshAll();
+      async payload=>{
+
+        const wasClientMessage =
+          payload.eventType==="INSERT" &&
+          payload.new?.sender_type==="client";
+
+        await loadMessages();
+
+        renderGlobalMessages();
+
+        if(currentProject){
+
+          await loadProjectMessages();
+
+        }
+
+        if(wasClientMessage){
+
+          playMessageSound();
+
+        }
+
       }
     )
     .on(
@@ -3991,10 +5743,12 @@ function setupRealtime(){
       {
         event:"*",
         schema:"public",
-        table:"messages"
+        table:"projects"
       },
       async()=>{
-        await refreshAll();
+        await loadProjects();
+        renderProjects();
+        renderDashboard();
       }
     )
     .on(
@@ -4005,7 +5759,12 @@ function setupRealtime(){
         table:"invoices"
       },
       async()=>{
-        await refreshAll();
+        await loadInvoices();
+        renderInvoices();
+
+        if(currentProject)
+          await loadProjectInvoices();
+
       }
     )
     .on(
@@ -4016,7 +5775,12 @@ function setupRealtime(){
         table:"activity_logs"
       },
       async()=>{
-        await refreshAll();
+        await loadActivity();
+        renderDashboard();
+
+        if(currentProject)
+          await loadProjectActivity();
+
       }
     )
     .subscribe();
@@ -4025,10 +5789,10 @@ function setupRealtime(){
 
 
 /* =========================================================
-   START
+   INIT
 ========================================================= */
 
-init();
+checkSession();
 
 </script>
 
