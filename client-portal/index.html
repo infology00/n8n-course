@@ -17,7 +17,6 @@
     }
 
     :root{
-
       --cloud:#f4f8fc;
       --cloud2:#eaf2fa;
       --cloud3:#dceaf7;
@@ -39,11 +38,18 @@
       --red:#c33d3d;
       --red-bg:#fff0f0;
 
+      --amber:#b97918;
+      --amber-bg:#fff5df;
+    }
+
+
+    html,
+    body{
+      min-height:100%;
     }
 
 
     body{
-
       min-height:100vh;
 
       font-family:
@@ -68,33 +74,29 @@
         var(--cloud);
 
       color:var(--text);
-
     }
 
 
     /* =====================================================
-       PAGE
+       MAIN PAGE
        ===================================================== */
 
     .portal-page{
-
       min-height:100vh;
 
       display:grid;
 
       grid-template-columns:
-        minmax(420px, .9fr)
-        minmax(500px, 1.1fr);
-
+        minmax(420px,.9fr)
+        minmax(500px,1.1fr);
     }
 
 
     /* =====================================================
-       LEFT BRAND PANEL
+       LEFT BRAND AREA
        ===================================================== */
 
     .brand-panel{
-
       position:relative;
 
       min-height:100vh;
@@ -102,9 +104,7 @@
       padding:55px 7vw;
 
       display:flex;
-
       flex-direction:column;
-
       justify-content:space-between;
 
       background:
@@ -124,12 +124,10 @@
       border-right:1px solid var(--line);
 
       overflow:hidden;
-
     }
 
 
     .brand-panel::before{
-
       content:"";
 
       position:absolute;
@@ -142,14 +140,11 @@
       border:1px solid rgba(36,107,206,.08);
 
       right:-210px;
-
       top:16%;
-
     }
 
 
     .brand-panel::after{
-
       content:"";
 
       position:absolute;
@@ -162,69 +157,57 @@
       background:rgba(36,107,206,.035);
 
       right:-100px;
-
       bottom:10%;
-
     }
 
 
     .brand-content,
     .brand-footer{
-
       position:relative;
-
       z-index:2;
-
     }
 
 
-    /* LOGO */
+    /* =====================================================
+       LOGO
+       ===================================================== */
 
     .logo{
-
       display:inline-flex;
-
       align-items:center;
-
       gap:3px;
 
       color:var(--deep);
 
       font-size:25px;
-
       font-weight:900;
 
       letter-spacing:-1px;
-
     }
 
 
     .logo span{
-
       color:var(--blue);
-
     }
 
 
-    /* EYEBROW */
+    /* =====================================================
+       LEFT CONTENT
+       ===================================================== */
 
     .brand-eyebrow{
-
       margin-top:105px;
 
       color:var(--blue);
 
       font-size:11px;
-
       font-weight:900;
 
       letter-spacing:2.2px;
-
     }
 
 
     .brand-title{
-
       margin-top:18px;
 
       max-width:620px;
@@ -239,21 +222,17 @@
       letter-spacing:-3.5px;
 
       font-weight:850;
-
     }
 
 
     .brand-title span{
-
       display:block;
 
       color:var(--blue);
-
     }
 
 
     .brand-description{
-
       max-width:530px;
 
       margin-top:28px;
@@ -263,14 +242,14 @@
       font-size:18px;
 
       line-height:1.7;
-
     }
 
 
-    /* TRUST CARDS */
+    /* =====================================================
+       TRUST CARDS
+       ===================================================== */
 
     .trust-grid{
-
       display:grid;
 
       grid-template-columns:
@@ -281,36 +260,33 @@
       max-width:520px;
 
       margin-top:42px;
-
     }
 
 
     .trust-card{
-
       padding:17px;
 
-      background:rgba(255,255,255,.8);
+      background:rgba(255,255,255,.82);
 
       border:1px solid var(--line);
 
       border-radius:14px;
 
+      box-shadow:
+        0 5px 18px rgba(35,67,100,.025);
     }
 
 
     .trust-number{
-
       color:var(--blue);
 
       font-size:19px;
 
       font-weight:900;
-
     }
 
 
     .trust-card p{
-
       margin-top:5px;
 
       color:var(--muted);
@@ -318,12 +294,14 @@
       font-size:11px;
 
       line-height:1.5;
-
     }
 
 
-    .brand-footer{
+    /* =====================================================
+       FOOTER
+       ===================================================== */
 
+    .brand-footer{
       display:flex;
 
       align-items:center;
@@ -335,12 +313,10 @@
       font-size:11px;
 
       font-weight:700;
-
     }
 
 
     .status-dot{
-
       width:7px;
       height:7px;
 
@@ -350,16 +326,14 @@
 
       box-shadow:
         0 0 0 5px var(--green-bg);
-
     }
 
 
     /* =====================================================
-       RIGHT AUTH PANEL
+       RIGHT AUTH AREA
        ===================================================== */
 
     .auth-panel{
-
       min-height:100vh;
 
       display:flex;
@@ -369,22 +343,17 @@
       justify-content:center;
 
       padding:45px 6vw;
-
     }
 
 
     .auth-wrapper{
-
       width:100%;
-
       max-width:480px;
-
     }
 
 
     .auth-card{
-
-      background:rgba(255,255,255,.96);
+      background:rgba(255,255,255,.97);
 
       border:1px solid var(--line);
 
@@ -397,19 +366,19 @@
         0 25px 65px rgba(35,67,100,.08),
 
         0 3px 8px rgba(35,67,100,.03);
-
     }
 
 
+    /* =====================================================
+       AUTH HEADER
+       ===================================================== */
+
     .auth-header{
-
       margin-bottom:28px;
-
     }
 
 
     .auth-eyebrow{
-
       color:var(--blue);
 
       font-size:10px;
@@ -419,12 +388,10 @@
       letter-spacing:1.8px;
 
       margin-bottom:12px;
-
     }
 
 
     .auth-header h1{
-
       color:var(--deep);
 
       font-size:30px;
@@ -432,12 +399,10 @@
       letter-spacing:-1px;
 
       line-height:1.1;
-
     }
 
 
     .auth-header p{
-
       margin-top:9px;
 
       color:var(--muted);
@@ -445,7 +410,6 @@
       font-size:13px;
 
       line-height:1.6;
-
     }
 
 
@@ -454,7 +418,6 @@
        ===================================================== */
 
     .auth-tabs{
-
       display:grid;
 
       grid-template-columns:1fr 1fr;
@@ -470,12 +433,10 @@
       border-radius:11px;
 
       margin-bottom:25px;
-
     }
 
 
     .auth-tab{
-
       border:0;
 
       background:transparent;
@@ -493,49 +454,48 @@
       cursor:pointer;
 
       transition:.2s ease;
+    }
 
+
+    .auth-tab:hover{
+      color:var(--blue-dark);
     }
 
 
     .auth-tab.active{
-
       background:#ffffff;
 
       color:var(--blue-dark);
 
       box-shadow:
         0 3px 10px rgba(35,67,100,.07);
-
     }
 
 
     /* =====================================================
-       FORM
+       FORM PANELS
        ===================================================== */
 
     .form-panel{
-
       display:none;
-
     }
 
 
     .form-panel.active{
-
       display:block;
-
     }
 
 
+    /* =====================================================
+       FIELDS
+       ===================================================== */
+
     .field{
-
       margin-bottom:17px;
-
     }
 
 
     .field label{
-
       display:block;
 
       margin-bottom:7px;
@@ -545,12 +505,10 @@
       font-size:11px;
 
       font-weight:850;
-
     }
 
 
     .field input{
-
       width:100%;
 
       height:48px;
@@ -570,46 +528,43 @@
       font-size:13px;
 
       transition:.2s ease;
-
     }
 
 
     .field input::placeholder{
-
       color:#9aa7b5;
+    }
 
+
+    .field input:hover{
+      border-color:#b8cada;
     }
 
 
     .field input:focus{
-
       background:#ffffff;
 
       border-color:var(--blue);
 
       box-shadow:
         0 0 0 3px rgba(36,107,206,.08);
-
     }
 
 
     .field-row{
-
       display:grid;
 
       grid-template-columns:1fr 1fr;
 
       gap:12px;
-
     }
 
 
     /* =====================================================
-       BUTTON
+       PRIMARY BUTTON
        ===================================================== */
 
     .primary-button{
-
       width:100%;
 
       height:50px;
@@ -634,27 +589,32 @@
         0 10px 25px rgba(36,107,206,.18);
 
       transition:.2s ease;
-
     }
 
 
     .primary-button:hover{
-
       background:var(--blue-dark);
 
       transform:translateY(-1px);
 
+      box-shadow:
+        0 13px 28px rgba(36,107,206,.22);
+    }
+
+
+    .primary-button:active{
+      transform:translateY(0);
     }
 
 
     .primary-button:disabled{
-
       opacity:.6;
 
       cursor:not-allowed;
 
       transform:none;
 
+      box-shadow:none;
     }
 
 
@@ -663,7 +623,6 @@
        ===================================================== */
 
     .form-message{
-
       display:none;
 
       margin-top:15px;
@@ -675,45 +634,46 @@
       font-size:11px;
 
       line-height:1.5;
-
     }
 
 
     .form-message.show{
-
       display:block;
-
     }
 
 
     .form-message.error{
-
       color:#8b3131;
 
       background:var(--red-bg);
 
       border:1px solid #efcece;
-
     }
 
 
     .form-message.success{
-
       color:#266a4c;
 
       background:var(--green-bg);
 
       border:1px solid #cce7d9;
+    }
 
+
+    .form-message.info{
+      color:#7a5b22;
+
+      background:var(--amber-bg);
+
+      border:1px solid #ecdcb9;
     }
 
 
     /* =====================================================
-       FOOT NOTE
+       NOTE
        ===================================================== */
 
     .auth-note{
-
       margin-top:22px;
 
       text-align:center;
@@ -723,7 +683,6 @@
       font-size:10px;
 
       line-height:1.6;
-
     }
 
 
@@ -734,14 +693,11 @@
     @media(max-width:900px){
 
       .portal-page{
-
         grid-template-columns:1fr;
-
       }
 
 
       .brand-panel{
-
         min-height:auto;
 
         padding:35px 6vw 40px;
@@ -749,44 +705,33 @@
         border-right:0;
 
         border-bottom:1px solid var(--line);
-
       }
 
 
       .brand-eyebrow{
-
         margin-top:65px;
-
       }
 
 
       .brand-title{
-
         font-size:48px;
-
       }
 
 
       .trust-grid{
-
         margin-top:30px;
-
       }
 
 
       .brand-footer{
-
         margin-top:35px;
-
       }
 
 
       .auth-panel{
-
         min-height:auto;
 
         padding:45px 6vw 60px;
-
       }
 
     }
@@ -795,64 +740,48 @@
     @media(max-width:520px){
 
       .brand-panel{
-
         padding:28px 20px 35px;
-
       }
 
 
       .brand-eyebrow{
-
         margin-top:55px;
-
       }
 
 
       .brand-title{
-
         font-size:40px;
 
         letter-spacing:-2px;
-
       }
 
 
       .brand-description{
-
         font-size:16px;
-
       }
 
 
       .trust-grid{
-
         grid-template-columns:1fr;
-
       }
 
 
       .auth-panel{
-
         padding:30px 18px 45px;
-
       }
 
 
       .auth-card{
-
         padding:26px 20px;
 
         border-radius:19px;
-
       }
 
 
       .field-row{
-
         grid-template-columns:1fr;
 
         gap:0;
-
       }
 
     }
@@ -868,9 +797,9 @@
   <div class="portal-page">
 
 
-    <!-- ===================================================
-         LEFT
-         =================================================== -->
+    <!-- =================================================
+         LEFT BRAND PANEL
+         ================================================= -->
 
     <section class="brand-panel">
 
@@ -975,9 +904,9 @@
 
 
 
-    <!-- ===================================================
-         RIGHT
-         =================================================== -->
+    <!-- =================================================
+         RIGHT AUTH PANEL
+         ================================================= -->
 
     <section class="auth-panel">
 
@@ -1007,9 +936,12 @@
 
 
 
-          <!-- TABS -->
+          <!-- =================================================
+               AUTH TABS
+               ================================================= -->
 
           <div class="auth-tabs">
+
 
             <button
               class="auth-tab active"
@@ -1028,12 +960,13 @@
               Create Account
             </button>
 
+
           </div>
 
 
 
           <!-- =================================================
-               LOGIN
+               LOGIN FORM
                ================================================= -->
 
           <form
@@ -1096,7 +1029,7 @@
 
 
           <!-- =================================================
-               SIGN UP
+               SIGNUP FORM
                ================================================= -->
 
           <form
@@ -1238,6 +1171,7 @@
           </form>
 
 
+
           <div class="auth-note">
 
             Your account is securely authenticated through
@@ -1262,7 +1196,7 @@
   <script>
 
     /* =====================================================
-       SUPABASE
+       SUPABASE CONFIG
        ===================================================== */
 
     const SUPABASE_URL =
@@ -1435,7 +1369,6 @@
 
         try{
 
-
           const {
             data,
             error
@@ -1449,7 +1382,7 @@
             });
 
 
-          if (error){
+          if(error){
 
             showMessage(
               message,
@@ -1462,7 +1395,7 @@
           }
 
 
-          if (!data.user){
+          if(!data.user){
 
             showMessage(
               message,
@@ -1503,6 +1436,13 @@
 
     /* =====================================================
        CREATE ACCOUNT
+       
+       IMPORTANT:
+       We DO NOT insert into clients here.
+
+       Supabase trigger created in the database will
+       automatically create the clients profile when
+       auth.users receives the new user.
        ===================================================== */
 
     signupForm.addEventListener(
@@ -1563,9 +1503,9 @@
         clearMessage(message);
 
 
-        /* PASSWORD CHECK */
+        /* PASSWORD MATCH */
 
-        if (password !== confirmPassword){
+        if(password !== confirmPassword){
 
           showMessage(
             message,
@@ -1578,7 +1518,9 @@
         }
 
 
-        if (password.length < 6){
+        /* PASSWORD LENGTH */
+
+        if(password.length < 6){
 
           showMessage(
             message,
@@ -1599,9 +1541,8 @@
 
         try{
 
-
           /* =============================================
-             CREATE AUTH USER
+             CREATE SUPABASE AUTH ACCOUNT
              ============================================= */
 
           const {
@@ -1631,7 +1572,7 @@
             });
 
 
-          if (error){
+          if(error){
 
             showMessage(
               message,
@@ -1644,7 +1585,7 @@
           }
 
 
-          if (!data.user){
+          if(!data.user){
 
             showMessage(
               message,
@@ -1658,53 +1599,10 @@
 
 
           /* =============================================
-             CREATE CLIENT PROFILE
-             ============================================= */
-
-          const {
-            error:clientError
-          } =
-            await supabaseClient
-              .from("clients")
-              .insert({
-
-                id:data.user.id,
-
-                full_name:fullName,
-
-                company_name:companyName,
-
-                email:email,
-
-                phone:phone
-
-              });
-
-
-          if (clientError){
-
-            /*
-             * The Auth account was created.
-             * If profile creation is blocked by RLS,
-             * show the actual message instead of hiding it.
-             */
-
-            showMessage(
-              message,
-              "Account created, but your client profile could not be saved yet. Please contact AWSZ.",
-              "error"
-            );
-
-            return;
-
-          }
-
-
-          /* =============================================
              SUCCESS
              ============================================= */
 
-          if (data.session){
+          if(data.session){
 
             showMessage(
               message,
@@ -1727,7 +1625,7 @@
 
             showMessage(
               message,
-              "Account created. Please check your email to confirm your account, then sign in.",
+              "Account created successfully. Please check your email to confirm your account, then sign in.",
               "success"
             );
 
@@ -1735,6 +1633,12 @@
 
 
         }catch(error){
+
+          console.error(
+            "Signup error:",
+            error
+          );
+
 
           showMessage(
             message,
