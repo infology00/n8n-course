@@ -3,43 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>AWSZ Admin Portal</title>
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23246bce'/%3E%3Ctext x='50' y='63' text-anchor='middle' font-family='Arial' font-size='35' font-weight='800' fill='white'%3EA%3C/text%3E%3C/svg%3E">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 :root{
   --cloud:#f4f8fc;
   --cloud2:#eaf2fa;
+  --cloud3:#dceaf7;
+
   --blue:#246bce;
   --blue-dark:#123b70;
   --deep:#0b2850;
+
   --text:#20272e;
   --muted:#66778a;
+
   --line:#d8e4ef;
-  --white:#fff;
+  --white:#ffffff;
+
   --green:#20855a;
   --green-bg:#eaf7f0;
+
   --amber:#b97918;
   --amber-bg:#fff5df;
+
   --red:#c33d3d;
   --red-bg:#fff0f0;
-  --shadow:0 10px 30px rgba(30,65,100,.08);
+
+  --shadow:0 12px 35px rgba(22,55,90,.08);
   --radius:18px;
 }
 
 *{
   box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-  margin:0;
-  font-family:Inter,Arial,sans-serif;
+  font-family:Inter,Arial,Helvetica,sans-serif;
   background:var(--cloud);
   color:var(--text);
 }
 
-button,input,textarea,select{
+button,
+input,
+textarea,
+select{
   font:inherit;
 }
 
@@ -47,208 +63,123 @@ button{
   cursor:pointer;
 }
 
-.hidden{
-  display:none!important;
-}
-
-/* LOGIN */
-
-#loginScreen{
-  min-height:100vh;
+.app{
   display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:30px;
-  background:
-    radial-gradient(circle at 15% 15%,#dceaf7 0,transparent 30%),
-    radial-gradient(circle at 85% 85%,#eaf2fa 0,transparent 30%),
-    var(--cloud);
-}
-
-.login-card{
-  width:100%;
-  max-width:460px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:26px;
-  padding:42px;
-  box-shadow:0 25px 70px rgba(18,59,112,.12);
-}
-
-.logo{
-  font-size:32px;
-  font-weight:900;
-  letter-spacing:-1px;
-  color:var(--deep);
-}
-
-.logo span{
-  color:var(--blue);
-}
-
-.login-card h1{
-  margin:30px 0 8px;
-  font-size:30px;
-  color:var(--deep);
-}
-
-.login-card p{
-  color:var(--muted);
-  line-height:1.6;
-  margin-bottom:28px;
-}
-
-.field{
-  margin-bottom:18px;
-}
-
-.field label{
-  display:block;
-  font-size:14px;
-  font-weight:700;
-  margin-bottom:8px;
-}
-
-.field input,
-.field textarea,
-.field select{
-  width:100%;
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:12px;
-  padding:14px 15px;
-  outline:none;
-  color:var(--text);
-}
-
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(36,107,206,.1);
-}
-
-.primary-btn{
-  border:0;
-  background:var(--blue);
-  color:#fff;
-  border-radius:12px;
-  padding:14px 18px;
-  font-weight:800;
-  width:100%;
-}
-
-.primary-btn:hover{
-  background:var(--blue-dark);
-}
-
-.error{
-  margin-top:15px;
-  background:var(--red-bg);
-  color:var(--red);
-  border:1px solid #f2caca;
-  border-radius:12px;
-  padding:12px 14px;
-  font-size:14px;
-}
-
-/* APP */
-
-#app{
   min-height:100vh;
-  display:flex;
 }
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
 
 .sidebar{
-  width:255px;
+  width:250px;
   background:#fff;
   border-right:1px solid var(--line);
-  padding:25px 15px;
+  padding:24px 16px;
   position:fixed;
   left:0;
   top:0;
   bottom:0;
-  overflow-y:auto;
-  z-index:20;
+  z-index:100;
+  display:flex;
+  flex-direction:column;
 }
 
-.brand{
-  padding:8px 12px 25px;
-  font-size:26px;
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:4px 10px 28px;
+}
+
+.logo-mark{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  background:var(--blue);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   font-weight:900;
+  font-size:18px;
+}
+
+.logo-text strong{
+  display:block;
   color:var(--deep);
+  font-size:17px;
 }
 
-.brand span{
-  color:var(--blue);
-}
-
-.nav-title{
+.logo-text span{
+  display:block;
+  color:var(--muted);
   font-size:11px;
-  font-weight:800;
-  color:#94a3b8;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  padding:12px 12px 8px;
+  margin-top:2px;
 }
 
-.nav-btn{
-  width:100%;
+.nav{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.nav button{
   border:0;
   background:transparent;
-  color:#536577;
-  padding:12px;
+  width:100%;
+  padding:12px 13px;
   border-radius:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#617286;
   text-align:left;
-  margin-bottom:3px;
+  font-size:14px;
   font-weight:650;
 }
 
-.nav-btn:hover{
+.nav button:hover{
   background:var(--cloud);
   color:var(--blue);
 }
 
-.nav-btn.active{
-  background:#eaf2fa;
+.nav button.active{
+  background:#eaf3ff;
   color:var(--blue);
-  font-weight:800;
 }
 
-.logout-btn{
-  margin-top:20px;
-  color:var(--red);
+.nav-icon{
+  width:22px;
+  text-align:center;
+  font-size:17px;
 }
 
-.main{
-  margin-left:255px;
-  width:calc(100% - 255px);
-  min-height:100vh;
-}
-
-.topbar{
-  height:78px;
-  background:#fff;
-  border-bottom:1px solid var(--line);
+.nav-badge{
+  margin-left:auto;
+  min-width:21px;
+  height:21px;
+  border-radius:20px;
+  background:var(--red);
+  color:#fff;
+  font-size:10px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  padding:0 30px;
-  position:sticky;
-  top:0;
-  z-index:15;
+  justify-content:center;
 }
 
-.topbar h2{
-  margin:0;
-  color:var(--deep);
-  font-size:23px;
+.sidebar-bottom{
+  margin-top:auto;
 }
 
-.admin-info{
+.admin-profile{
+  border-top:1px solid var(--line);
+  padding-top:16px;
   display:flex;
+  gap:10px;
   align-items:center;
-  gap:12px;
 }
 
 .avatar{
@@ -258,19 +189,207 @@ button{
   background:var(--blue);
   color:#fff;
   display:flex;
-  align-items:center;
   justify-content:center;
-  font-weight:900;
+  align-items:center;
+  font-weight:800;
 }
 
-.admin-email{
+.admin-profile strong{
+  display:block;
   font-size:13px;
+}
+
+.admin-profile span{
   color:var(--muted);
+  font-size:11px;
+}
+
+.logout{
+  border:0;
+  background:transparent;
+  color:var(--red);
+  font-size:12px;
+  margin-top:8px;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main{
+  margin-left:250px;
+  width:calc(100% - 250px);
+  min-height:100vh;
+}
+
+.topbar{
+  height:76px;
+  background:rgba(255,255,255,.94);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 32px;
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter:blur(10px);
+}
+
+.topbar-title h1{
+  font-size:21px;
+  color:var(--deep);
+}
+
+.topbar-title p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.icon-btn{
+  position:relative;
+  width:40px;
+  height:40px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:12px;
+}
+
+.icon-btn:hover{
+  border-color:#b8d2ee;
+  background:var(--cloud);
+}
+
+.notification-dot{
+  position:absolute;
+  right:8px;
+  top:7px;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--red);
+  border:2px solid white;
+  display:none;
 }
 
 .content{
-  padding:30px;
+  padding:30px 32px 50px;
 }
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+.login-screen{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 15% 20%,#e8f3ff 0,transparent 30%),
+    radial-gradient(circle at 90% 80%,#dcecff 0,transparent 30%),
+    var(--cloud);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:25px;
+}
+
+.login-box{
+  width:420px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:25px;
+  box-shadow:0 25px 70px rgba(25,66,110,.13);
+  padding:38px;
+}
+
+.login-brand{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.login-brand .logo-mark{
+  margin:auto;
+}
+
+.login-brand h1{
+  margin-top:15px;
+  font-size:24px;
+  color:var(--deep);
+}
+
+.login-brand p{
+  margin-top:6px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.form-group{
+  margin-bottom:16px;
+}
+
+.form-group label{
+  display:block;
+  font-size:12px;
+  font-weight:750;
+  color:#42566c;
+  margin-bottom:7px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:12px 13px;
+  outline:none;
+  background:#fbfdff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+  border-color:#8bb7e8;
+  box-shadow:0 0 0 3px rgba(36,107,206,.08);
+}
+
+.login-btn{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:12px;
+  background:var(--blue);
+  color:white;
+  font-weight:750;
+  margin-top:5px;
+}
+
+.login-btn:hover{
+  background:#185bad;
+}
+
+.login-error{
+  background:var(--red-bg);
+  color:var(--red);
+  padding:11px 13px;
+  border-radius:10px;
+  font-size:12px;
+  margin-bottom:15px;
+  display:none;
+}
+
+
+/* =====================================================
+   COMMON
+===================================================== */
 
 .page{
   display:none;
@@ -280,69 +399,115 @@ button{
   display:block;
 }
 
-/* STATS */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-  margin-bottom:25px;
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
 }
 
-.stat{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:22px;
-  box-shadow:var(--shadow);
+.section-head h2{
+  font-size:20px;
+  color:var(--deep);
 }
 
-.stat-label{
-  font-size:13px;
+.section-head p{
   color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+.primary-btn{
+  border:0;
+  background:var(--blue);
+  color:#fff;
+  border-radius:11px;
+  padding:11px 15px;
+  font-size:12px;
+  font-weight:750;
+}
+
+.primary-btn:hover{
+  background:#185bad;
+}
+
+.secondary-btn{
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--deep);
+  border-radius:11px;
+  padding:10px 14px;
+  font-size:12px;
   font-weight:700;
 }
-
-.stat-number{
-  font-size:34px;
-  font-weight:900;
-  color:var(--deep);
-  margin-top:8px;
-}
-
-/* CARDS */
 
 .card{
   background:#fff;
   border:1px solid var(--line);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
-  margin-bottom:22px;
-  overflow:hidden;
 }
 
-.card-head{
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:24px;
+}
+
+.stat{
+  padding:20px;
+}
+
+.stat-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20px 22px;
-  border-bottom:1px solid var(--line);
 }
 
-.card-head h3{
-  margin:0;
-  font-size:17px;
+.stat-label{
+  font-size:12px;
+  color:var(--muted);
+  font-weight:650;
+}
+
+.stat-icon{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  background:#edf5ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--blue);
+}
+
+.stat-number{
+  font-size:28px;
+  font-weight:850;
   color:var(--deep);
+  margin-top:12px;
 }
 
-.card-body{
-  padding:22px;
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
 }
 
-/* TABLE */
+.panel{
+  padding:20px;
+}
+
+.panel-title{
+  font-size:15px;
+  color:var(--deep);
+  font-weight:800;
+  margin-bottom:16px;
+}
 
 .table-wrap{
-  overflow-x:auto;
+  overflow:auto;
 }
 
 table{
@@ -352,37 +517,75 @@ table{
 
 th{
   text-align:left;
-  font-size:12px;
+  font-size:11px;
+  color:#718195;
+  font-weight:750;
   text-transform:uppercase;
-  letter-spacing:.5px;
-  color:#8190a0;
-  padding:13px 15px;
+  letter-spacing:.04em;
+  padding:12px 14px;
   background:#f8fbfe;
   border-bottom:1px solid var(--line);
 }
 
 td{
-  padding:15px;
+  padding:14px;
+  font-size:12px;
   border-bottom:1px solid #edf2f7;
-  font-size:14px;
+  vertical-align:middle;
 }
 
 tr:last-child td{
   border-bottom:0;
 }
 
+.client-cell{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.client-mini{
+  width:36px;
+  height:36px;
+  border-radius:11px;
+  background:#eaf3ff;
+  color:var(--blue);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+
+.client-cell strong{
+  display:block;
+  color:var(--deep);
+  font-size:12px;
+}
+
+.client-cell span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:2px;
+}
+
 .badge{
   display:inline-flex;
   align-items:center;
-  padding:6px 10px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:800;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:750;
 }
 
 .badge.green{
   color:var(--green);
   background:var(--green-bg);
+}
+
+.badge.blue{
+  color:var(--blue);
+  background:#edf5ff;
 }
 
 .badge.amber{
@@ -395,159 +598,489 @@ tr:last-child td{
   background:var(--red-bg);
 }
 
-.badge.blue{
-  color:var(--blue);
-  background:#eaf2fa;
-}
-
-/* BUTTONS */
-
-.small-btn{
-  border:1px solid var(--line);
-  background:#fff;
-  color:var(--blue-dark);
-  padding:8px 11px;
-  border-radius:9px;
-  font-size:12px;
-  font-weight:800;
-}
-
-.small-btn:hover{
-  background:var(--cloud);
-}
-
-.small-btn.primary{
-  color:#fff;
-  background:var(--blue);
-  border-color:var(--blue);
-}
-
-.small-btn.danger{
-  color:var(--red);
-  border-color:#f0cccc;
-  background:var(--red-bg);
-}
-
-.add-btn{
-  border:0;
-  background:var(--blue);
-  color:#fff;
-  border-radius:10px;
-  padding:10px 14px;
-  font-size:13px;
-  font-weight:800;
-}
-
-/* GRID */
-
-.grid-2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:22px;
-}
-
-.grid-3{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-}
-
-/* PROJECT */
-
-.project-card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:18px;
-}
-
-.project-card h4{
-  margin:0 0 7px;
-  color:var(--deep);
-}
-
-.project-meta{
+.empty{
+  padding:45px 20px;
+  text-align:center;
   color:var(--muted);
   font-size:13px;
 }
 
+
+/* =====================================================
+   CLIENTS
+===================================================== */
+
+.search-box{
+  position:relative;
+}
+
+.search-box input{
+  width:280px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:10px 13px 10px 36px;
+  outline:none;
+}
+
+.search-icon{
+  position:absolute;
+  left:12px;
+  top:9px;
+  color:var(--muted);
+}
+
+.clients-layout{
+  display:grid;
+  grid-template-columns:1fr 370px;
+  gap:18px;
+}
+
+.client-list-card{
+  min-height:500px;
+}
+
+.client-row{
+  padding:15px 18px;
+  border-bottom:1px solid #edf2f7;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+}
+
+.client-row:hover{
+  background:#f8fbff;
+}
+
+.client-row.selected{
+  background:#edf5ff;
+}
+
+.client-main{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.client-main .client-mini{
+  width:43px;
+  height:43px;
+}
+
+.client-info strong{
+  display:block;
+  font-size:13px;
+  color:var(--deep);
+}
+
+.client-info span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+
+.client-arrow{
+  color:#9badbf;
+}
+
+.client-detail{
+  padding:22px;
+  position:sticky;
+  top:100px;
+  height:max-content;
+}
+
+.detail-avatar{
+  width:62px;
+  height:62px;
+  border-radius:18px;
+  background:#eaf3ff;
+  color:var(--blue);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:850;
+  margin-bottom:13px;
+}
+
+.detail-name{
+  font-size:20px;
+  color:var(--deep);
+  font-weight:850;
+}
+
+.detail-company{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.detail-meta{
+  margin-top:20px;
+  border-top:1px solid var(--line);
+}
+
+.meta-row{
+  padding:12px 0;
+  border-bottom:1px solid #edf2f7;
+}
+
+.meta-row small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-bottom:4px;
+}
+
+.meta-row strong{
+  font-size:12px;
+  color:var(--deep);
+  word-break:break-word;
+}
+
+.project-list{
+  margin-top:20px;
+}
+
+.project-item{
+  border:1px solid var(--line);
+  padding:12px;
+  border-radius:12px;
+  margin-bottom:9px;
+}
+
+.project-item strong{
+  display:block;
+  font-size:12px;
+}
+
+.project-item span{
+  display:block;
+  font-size:10px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
 .progress{
-  height:8px;
-  background:#eaf0f5;
-  border-radius:20px;
+  height:6px;
+  border-radius:10px;
+  background:#e8eff6;
+  margin-top:9px;
   overflow:hidden;
-  margin:13px 0 8px;
 }
 
 .progress-bar{
   height:100%;
   background:var(--blue);
-  border-radius:20px;
+  border-radius:10px;
 }
 
-/* ACTIVITY */
 
-.activity{
-  display:flex;
-  gap:13px;
-  padding:14px 0;
-  border-bottom:1px solid #edf2f7;
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+.messages-layout{
+  display:grid;
+  grid-template-columns:310px 1fr;
+  height:calc(100vh - 145px);
+  min-height:550px;
+  overflow:hidden;
 }
 
-.activity:last-child{
-  border-bottom:0;
+.conversation-list{
+  border-right:1px solid var(--line);
+  overflow:auto;
 }
 
-.activity-dot{
-  width:9px;
-  height:9px;
-  background:var(--blue);
-  border-radius:50%;
-  margin-top:6px;
-  flex:none;
+.conversation-search{
+  padding:15px;
+  border-bottom:1px solid var(--line);
 }
 
-.activity strong{
-  display:block;
-  font-size:14px;
-}
-
-.activity span{
-  display:block;
-  color:var(--muted);
+.conversation-search input{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px;
+  outline:none;
   font-size:12px;
+}
+
+.conversation-item{
+  padding:15px;
+  border-bottom:1px solid #edf2f7;
+  cursor:pointer;
+  position:relative;
+}
+
+.conversation-item:hover{
+  background:#f8fbff;
+}
+
+.conversation-item.active{
+  background:#edf5ff;
+}
+
+.conversation-item.unread{
+  background:#fff9f0;
+}
+
+.conversation-item strong{
+  display:block;
+  color:var(--deep);
+  font-size:13px;
+}
+
+.conversation-item .company{
+  color:var(--muted);
+  font-size:10px;
   margin-top:3px;
 }
 
-/* MODAL */
+.last-message{
+  color:#6c7c8d;
+  font-size:11px;
+  margin-top:7px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:230px;
+}
 
-.modal{
+.message-time{
+  position:absolute;
+  right:13px;
+  top:15px;
+  color:#9aa8b6;
+  font-size:9px;
+}
+
+.unread-dot{
+  position:absolute;
+  right:13px;
+  bottom:15px;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--red);
+}
+
+.chat{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+.chat-head{
+  padding:16px 20px;
+  border-bottom:1px solid var(--line);
+  background:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.chat-person{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.chat-person .client-mini{
+  width:40px;
+  height:40px;
+}
+
+.chat-person strong{
+  display:block;
+  font-size:13px;
+}
+
+.chat-person span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
+}
+
+.chat-project{
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:8px 10px;
+  font-size:10px;
+  color:var(--muted);
+}
+
+.chat-project strong{
+  color:var(--deep);
+}
+
+.messages{
+  flex:1;
+  overflow:auto;
+  padding:22px;
+  background:
+    linear-gradient(rgba(244,248,252,.7),rgba(244,248,252,.7)),
+    #f7fafd;
+}
+
+.day-divider{
+  text-align:center;
+  margin:10px 0 18px;
+  color:#9aa9b8;
+  font-size:10px;
+}
+
+.message{
+  display:flex;
+  margin-bottom:13px;
+}
+
+.message.client{
+  justify-content:flex-start;
+}
+
+.message.admin{
+  justify-content:flex-end;
+}
+
+.message-bubble{
+  max-width:70%;
+  padding:11px 13px;
+  border-radius:15px;
+  font-size:12px;
+  line-height:1.55;
+  position:relative;
+}
+
+.message.client .message-bubble{
+  background:#fff;
+  border:1px solid var(--line);
+  border-bottom-left-radius:5px;
+}
+
+.message.admin .message-bubble{
+  background:var(--blue);
+  color:#fff;
+  border-bottom-right-radius:5px;
+}
+
+.message-sender{
+  font-size:9px;
+  font-weight:750;
+  margin-bottom:4px;
+  opacity:.75;
+}
+
+.message-meta{
+  margin-top:5px;
+  font-size:8px;
+  opacity:.65;
+  text-align:right;
+}
+
+.chat-compose{
+  border-top:1px solid var(--line);
+  background:#fff;
+  padding:14px;
+}
+
+.compose-row{
+  display:flex;
+  gap:10px;
+  align-items:flex-end;
+}
+
+.compose-row textarea{
+  flex:1;
+  resize:none;
+  min-height:46px;
+  max-height:120px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:12px;
+  outline:none;
+}
+
+.compose-row textarea:focus{
+  border-color:#8bb7e8;
+}
+
+.send-btn{
+  width:48px;
+  height:46px;
+  border:0;
+  border-radius:12px;
+  background:var(--blue);
+  color:#fff;
+  font-size:17px;
+}
+
+.send-btn:hover{
+  background:#185bad;
+}
+
+.chat-empty{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  color:var(--muted);
+  background:#f7fafd;
+}
+
+.chat-empty-icon{
+  width:60px;
+  height:60px;
+  background:#eaf3ff;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  margin-bottom:12px;
+}
+
+.chat-empty strong{
+  color:var(--deep);
+  font-size:15px;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal-backdrop{
   position:fixed;
   inset:0;
-  background:rgba(11,40,80,.35);
+  background:rgba(10,32,58,.35);
   display:none;
   align-items:center;
   justify-content:center;
+  z-index:500;
   padding:20px;
-  z-index:100;
 }
 
-.modal.show{
+.modal-backdrop.show{
   display:flex;
 }
 
-.modal-card{
+.modal{
+  width:550px;
+  max-width:100%;
   background:#fff;
-  width:100%;
-  max-width:600px;
-  max-height:90vh;
-  overflow:auto;
-  border-radius:22px;
+  border-radius:20px;
   box-shadow:0 30px 80px rgba(0,0,0,.2);
+  overflow:hidden;
 }
 
 .modal-head{
-  padding:20px 22px;
+  padding:18px 20px;
   border-bottom:1px solid var(--line);
   display:flex;
   justify-content:space-between;
@@ -555,132 +1088,115 @@ tr:last-child td{
 }
 
 .modal-head h3{
-  margin:0;
   color:var(--deep);
+  font-size:16px;
 }
 
-.close{
+.modal-close{
   border:0;
   background:var(--cloud);
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  font-size:20px;
+  width:32px;
+  height:32px;
+  border-radius:9px;
 }
 
 .modal-body{
-  padding:22px;
-}
-
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-}
-
-.full{
-  grid-column:1/-1;
-}
-
-/* MESSAGES */
-
-.message-layout{
-  display:grid;
-  grid-template-columns:300px 1fr;
-  min-height:520px;
-}
-
-.conversations{
-  border-right:1px solid var(--line);
-}
-
-.conversation{
-  padding:15px;
-  border-bottom:1px solid #edf2f7;
-  cursor:pointer;
-}
-
-.conversation:hover,
-.conversation.active{
-  background:var(--cloud);
-}
-
-.conversation strong{
-  display:block;
-}
-
-.conversation span{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.message-thread{
   padding:20px;
 }
 
-.bubble{
-  max-width:75%;
-  padding:12px 15px;
-  border-radius:14px;
-  margin-bottom:12px;
-  background:var(--cloud);
+.modal-footer{
+  padding:15px 20px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
 }
 
-.bubble.admin{
-  margin-left:auto;
-  background:#eaf2fa;
-}
 
-.bubble small{
-  display:block;
-  color:var(--muted);
-  margin-top:5px;
-}
+/* =====================================================
+   NOTIFICATION PANEL
+===================================================== */
 
-/* NOTIFICATION */
-
-.notification-dot{
-  position:relative;
-}
-
-.notification-dot::after{
-  content:"";
-  position:absolute;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:var(--red);
-  top:7px;
-  right:7px;
+.notification-panel{
+  position:fixed;
+  right:25px;
+  top:75px;
+  width:360px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:17px;
+  box-shadow:0 20px 60px rgba(20,55,90,.16);
+  z-index:300;
   display:none;
 }
 
-.notification-dot.has-notifications::after{
+.notification-panel.show{
   display:block;
 }
 
-/* MOBILE */
+.notification-head{
+  padding:15px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+}
+
+.notification-list{
+  max-height:430px;
+  overflow:auto;
+}
+
+.notification{
+  padding:14px;
+  border-bottom:1px solid #edf2f7;
+}
+
+.notification strong{
+  display:block;
+  font-size:12px;
+  color:var(--deep);
+}
+
+.notification p{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.notification time{
+  font-size:9px;
+  color:#9aa8b6;
+  display:block;
+  margin-top:6px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 .mobile-menu{
   display:none;
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:10px;
-  width:40px;
-  height:40px;
 }
 
 @media(max-width:1100px){
+
   .stats{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .grid-3{
-    grid-template-columns:1fr 1fr;
+  .clients-layout{
+    grid-template-columns:1fr;
   }
+
+  .client-detail{
+    position:static;
+  }
+
 }
 
 @media(max-width:800px){
+
   .sidebar{
     transform:translateX(-100%);
     transition:.25s;
@@ -697,586 +1213,716 @@ tr:last-child td{
 
   .mobile-menu{
     display:block;
+    width:40px;
+    height:40px;
+    border:1px solid var(--line);
+    background:#fff;
+    border-radius:11px;
   }
 
   .topbar{
-    padding:0 18px;
+    padding:0 16px;
   }
 
   .content{
-    padding:18px;
+    padding:20px 15px 40px;
   }
 
-  .stats,
-  .grid-2,
-  .grid-3{
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .grid-2{
     grid-template-columns:1fr;
   }
 
-  .form-grid{
+  .messages-layout{
     grid-template-columns:1fr;
+    height:auto;
   }
 
-  .full{
-    grid-column:auto;
-  }
-
-  .message-layout{
-    grid-template-columns:1fr;
-  }
-
-  .conversations{
+  .conversation-list{
+    max-height:280px;
     border-right:0;
     border-bottom:1px solid var(--line);
   }
 
-  .admin-email{
-    display:none;
+  .chat{
+    min-height:600px;
   }
+
+  .search-box input{
+    width:100%;
+  }
+
 }
+
+@media(max-width:500px){
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .section-head{
+    align-items:flex-start;
+    gap:12px;
+    flex-direction:column;
+  }
+
+  .login-box{
+    padding:25px;
+  }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
-<!-- LOGIN -->
-<div id="loginScreen">
-  <div class="login-card">
 
-    <div class="logo">AWS<span>Z</span></div>
+<!-- =====================================================
+     LOGIN
+===================================================== -->
 
-    <h1>Admin Portal</h1>
-    <p>Sign in to manage clients, projects, tasks, documents and account activity.</p>
+<div id="loginScreen" class="login-screen">
+
+  <div class="login-box">
+
+    <div class="login-brand">
+
+      <div class="logo-mark">
+        A
+      </div>
+
+      <h1>AWSZ Admin Portal</h1>
+
+      <p>Secure administration & client operations</p>
+
+    </div>
+
+    <div id="loginError" class="login-error"></div>
 
     <form id="loginForm">
 
-      <div class="field">
+      <div class="form-group">
         <label>Email</label>
-        <input id="loginEmail" type="email" placeholder="admin@example.com" required>
+        <input
+          id="loginEmail"
+          type="email"
+          placeholder="admin@example.com"
+          required
+        >
       </div>
 
-      <div class="field">
+      <div class="form-group">
         <label>Password</label>
-        <input id="loginPassword" type="password" placeholder="Enter password" required>
+        <input
+          id="loginPassword"
+          type="password"
+          placeholder="Enter your password"
+          required
+        >
       </div>
 
-      <button class="primary-btn" type="submit">
-        Sign In
+      <button class="login-btn" type="submit">
+        Sign In to Admin
       </button>
 
-      <div id="loginError" class="error hidden"></div>
-
     </form>
+
   </div>
+
 </div>
 
 
-<!-- APP -->
-<div id="app" class="hidden">
+<!-- =====================================================
+     APP
+===================================================== -->
 
-  <aside class="sidebar" id="sidebar">
+<div id="app" class="app" style="display:none;">
 
-    <div class="brand">AWS<span>Z</span></div>
 
-    <div class="nav-title">Main</div>
+<!-- SIDEBAR -->
 
-    <button class="nav-btn active" data-page="dashboard">Dashboard</button>
-    <button class="nav-btn" data-page="clients">Clients</button>
-    <button class="nav-btn" data-page="projects">Projects</button>
-    <button class="nav-btn" data-page="tasks">Tasks & Checklist</button>
+<aside id="sidebar" class="sidebar">
 
-    <div class="nav-title">Communication</div>
+  <div class="logo">
 
-    <button class="nav-btn notification-dot" id="messagesNav" data-page="messages">
-      Client Messages
+    <div class="logo-mark">
+      A
+    </div>
+
+    <div class="logo-text">
+      <strong>AWSZ</strong>
+      <span>Admin Control Center</span>
+    </div>
+
+  </div>
+
+
+  <nav class="nav">
+
+    <button class="active" data-page="dashboard">
+      <span class="nav-icon">⌂</span>
+      Dashboard
     </button>
 
-    <button class="nav-btn notification-dot" id="accessNav" data-page="access">
+    <button data-page="clients">
+      <span class="nav-icon">♙</span>
+      Clients
+    </button>
+
+    <button data-page="projects">
+      <span class="nav-icon">▣</span>
+      Projects
+    </button>
+
+    <button data-page="tasks">
+      <span class="nav-icon">✓</span>
+      Tasks & Checklist
+    </button>
+
+    <button data-page="messages">
+      <span class="nav-icon">◌</span>
+      Messages
+      <span id="messageBadge" class="nav-badge" style="display:none;">0</span>
+    </button>
+
+    <button data-page="access">
+      <span class="nav-icon">⌁</span>
       Access Requests
     </button>
 
-    <div class="nav-title">Files & Finance</div>
-
-    <button class="nav-btn" data-page="documents">Documents</button>
-    <button class="nav-btn" data-page="invoices">Invoices</button>
-
-    <div class="nav-title">System</div>
-
-    <button class="nav-btn notification-dot" id="notificationsNav" data-page="notifications">
-      Notifications
+    <button data-page="documents">
+      <span class="nav-icon">□</span>
+      Documents
     </button>
 
-    <button class="nav-btn" data-page="activity">Activity Logs</button>
-    <button class="nav-btn" data-page="settings">Settings</button>
-
-    <button class="nav-btn logout-btn" id="logoutBtn">
-      Logout
+    <button data-page="invoices">
+      <span class="nav-icon">$</span>
+      Invoices
     </button>
 
-  </aside>
+    <button data-page="activity">
+      <span class="nav-icon">◷</span>
+      Activity
+    </button>
+
+  </nav>
 
 
-  <main class="main">
+  <div class="sidebar-bottom">
 
-    <header class="topbar">
+    <div class="admin-profile">
 
-      <div style="display:flex;align-items:center;gap:12px;">
-        <button class="mobile-menu" id="mobileMenu">☰</button>
-        <h2 id="pageTitle">Dashboard</h2>
+      <div class="avatar">
+        S
       </div>
 
-      <div class="admin-info">
-        <div>
-          <div style="font-weight:800;font-size:13px;">AWSZ Admin</div>
-          <div class="admin-email" id="adminEmail"></div>
-        </div>
-
-        <div class="avatar" id="avatar">A</div>
+      <div>
+        <strong>Sajjad</strong>
+        <span>Administrator</span>
       </div>
-
-    </header>
-
-
-    <div class="content">
-
-
-      <!-- DASHBOARD -->
-      <section class="page active" id="page-dashboard">
-
-        <div class="stats">
-
-          <div class="stat">
-            <div class="stat-label">Total Clients</div>
-            <div class="stat-number" id="statClients">0</div>
-          </div>
-
-          <div class="stat">
-            <div class="stat-label">Active Projects</div>
-            <div class="stat-number" id="statProjects">0</div>
-          </div>
-
-          <div class="stat">
-            <div class="stat-label">Pending Tasks</div>
-            <div class="stat-number" id="statTasks">0</div>
-          </div>
-
-          <div class="stat">
-            <div class="stat-label">Access Requests</div>
-            <div class="stat-number" id="statAccess">0</div>
-          </div>
-
-        </div>
-
-
-        <div class="grid-2">
-
-          <div class="card">
-
-            <div class="card-head">
-              <h3>Recent Projects</h3>
-              <button class="small-btn" onclick="showPage('projects')">
-                View All
-              </button>
-            </div>
-
-            <div class="card-body" id="recentProjects">
-              Loading...
-            </div>
-
-          </div>
-
-
-          <div class="card">
-
-            <div class="card-head">
-              <h3>Recent Activity</h3>
-              <button class="small-btn" onclick="showPage('activity')">
-                View All
-              </button>
-            </div>
-
-            <div class="card-body" id="recentActivity">
-              Loading...
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- CLIENTS -->
-      <section class="page" id="page-clients">
-
-        <div class="card">
-
-          <div class="card-head">
-            <h3>Clients</h3>
-            <button class="add-btn" onclick="openClientModal()">
-              + Add Client
-            </button>
-          </div>
-
-          <div class="table-wrap">
-
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Company</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Created</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-
-              <tbody id="clientsTable"></tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- PROJECTS -->
-      <section class="page" id="page-projects">
-
-        <div class="card">
-
-          <div class="card-head">
-            <h3>Projects</h3>
-            <button class="add-btn" onclick="openProjectModal()">
-              + New Project
-            </button>
-          </div>
-
-          <div class="table-wrap">
-
-            <table>
-              <thead>
-                <tr>
-                  <th>Project</th>
-                  <th>Client</th>
-                  <th>Stage</th>
-                  <th>Progress</th>
-                  <th>Status</th>
-                  <th>Updated</th>
-                </tr>
-              </thead>
-
-              <tbody id="projectsTable"></tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- TASKS -->
-      <section class="page" id="page-tasks">
-
-        <div class="card">
-
-          <div class="card-head">
-            <h3>Tasks & Checklist</h3>
-          </div>
-
-          <div class="table-wrap">
-
-            <table>
-
-              <thead>
-                <tr>
-                  <th>Task</th>
-                  <th>Project</th>
-                  <th>Assigned To</th>
-                  <th>Due</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-
-              <tbody id="tasksTable"></tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- MESSAGES -->
-      <section class="page" id="page-messages">
-
-        <div class="card">
-
-          <div class="message-layout">
-
-            <div class="conversations" id="conversations">
-              Loading...
-            </div>
-
-            <div class="message-thread" id="messageThread">
-              Select a conversation.
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ACCESS -->
-      <section class="page" id="page-access">
-
-        <div class="card">
-
-          <div class="card-head">
-            <h3>Access Requests</h3>
-          </div>
-
-          <div class="table-wrap">
-
-            <table>
-
-              <thead>
-                <tr>
-                  <th>System</th>
-                  <th>Access Type</th>
-                  <th>Project</th>
-                  <th>Status</th>
-                  <th>Requested</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-
-              <tbody id="accessTable"></tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- DOCUMENTS -->
-      <section class="page" id="page-documents">
-
-        <div class="card">
-
-          <div class="card-head">
-            <h3>Documents</h3>
-          </div>
-
-          <div class="table-wrap">
-
-            <table>
-
-              <thead>
-                <tr>
-                  <th>File</th>
-                  <th>Project</th>
-                  <th>Uploaded By</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-
-              <tbody id="documentsTable"></tbody>
-
-            </table>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- INVOICES -->
-      <section class="page" id="page-invoices">
-
-        <div class="card">
-
-          <div class="card-head">
-            <h3>Invoices</h3>
-            <button class="add-btn" onclick="openInvoiceModal()">
-              + Create Invoice
-            </button>
-          </div>
-
-          <div class="card-body">
-
-            <p style="color:var(--muted);margin:0;">
-              Invoice management UI is ready. Database saving will be connected when the invoices table is created.
-            </p>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- NOTIFICATIONS -->
-      <section class="page" id="page-notifications">
-
-        <div class="card">
-
-          <div class="card-head">
-            <h3>Notifications</h3>
-          </div>
-
-          <div class="card-body" id="notificationsList">
-            No new notifications.
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ACTIVITY -->
-      <section class="page" id="page-activity">
-
-        <div class="card">
-
-          <div class="card-head">
-            <h3>Activity Logs</h3>
-          </div>
-
-          <div class="card-body" id="activityList">
-            Loading...
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- SETTINGS -->
-      <section class="page" id="page-settings">
-
-        <div class="card">
-
-          <div class="card-head">
-            <h3>Settings</h3>
-          </div>
-
-          <div class="card-body">
-
-            <h4 style="margin-top:0;color:var(--deep);">
-              Admin Account
-            </h4>
-
-            <p id="settingsEmail" style="color:var(--muted);"></p>
-
-            <p style="color:var(--muted);line-height:1.6;">
-              This portal is restricted to users with the
-              <strong>admin</strong> role in the Supabase
-              <strong>user_roles</strong> table.
-            </p>
-
-          </div>
-
-        </div>
-
-      </section>
 
     </div>
 
-  </main>
+    <button id="logoutBtn" class="logout">
+      Logout
+    </button>
+
+  </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+
+  <header class="topbar">
+
+    <div style="display:flex;align-items:center;gap:12px;">
+
+      <button id="mobileMenu" class="mobile-menu">
+        ☰
+      </button>
+
+      <div class="topbar-title">
+        <h1 id="pageTitle">Dashboard</h1>
+        <p id="pageSubtitle">AWSZ client operations overview</p>
+      </div>
+
+    </div>
+
+
+    <div class="top-actions">
+
+      <button id="notificationBtn" class="icon-btn">
+        🔔
+        <span id="notificationDot" class="notification-dot"></span>
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <div class="content">
+
+
+    <!-- =================================================
+         DASHBOARD
+    ================================================= -->
+
+    <section id="page-dashboard" class="page active">
+
+      <div class="stats">
+
+        <div class="card stat">
+          <div class="stat-top">
+            <span class="stat-label">Total Clients</span>
+            <span class="stat-icon">♙</span>
+          </div>
+          <div id="statClients" class="stat-number">0</div>
+        </div>
+
+        <div class="card stat">
+          <div class="stat-top">
+            <span class="stat-label">Active Projects</span>
+            <span class="stat-icon">▣</span>
+          </div>
+          <div id="statProjects" class="stat-number">0</div>
+        </div>
+
+        <div class="card stat">
+          <div class="stat-top">
+            <span class="stat-label">Pending Tasks</span>
+            <span class="stat-icon">✓</span>
+          </div>
+          <div id="statTasks" class="stat-number">0</div>
+        </div>
+
+        <div class="card stat">
+          <div class="stat-top">
+            <span class="stat-label">Unread Messages</span>
+            <span class="stat-icon">◌</span>
+          </div>
+          <div id="statMessages" class="stat-number">0</div>
+        </div>
+
+      </div>
+
+
+      <div class="grid-2">
+
+        <div class="card panel">
+
+          <div class="panel-title">
+            Recent Clients
+          </div>
+
+          <div id="recentClients"></div>
+
+        </div>
+
+
+        <div class="card panel">
+
+          <div class="panel-title">
+            Recent Projects
+          </div>
+
+          <div id="recentProjects"></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         CLIENTS
+    ================================================= -->
+
+    <section id="page-clients" class="page">
+
+      <div class="section-head">
+
+        <div>
+          <h2>All Clients</h2>
+          <p>Every client account connected to AWSZ</p>
+        </div>
+
+        <div class="search-box">
+
+          <span class="search-icon">⌕</span>
+
+          <input
+            id="clientSearch"
+            placeholder="Search clients..."
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="clients-layout">
+
+        <div class="card client-list-card">
+
+          <div id="clientsList"></div>
+
+        </div>
+
+
+        <div id="clientDetail" class="card client-detail">
+
+          <div class="empty">
+            Select a client to view details.
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         PROJECTS
+    ================================================= -->
+
+    <section id="page-projects" class="page">
+
+      <div class="section-head">
+
+        <div>
+          <h2>Projects</h2>
+          <p>Manage client projects and progress</p>
+        </div>
+
+        <button id="newProjectBtn" class="primary-btn">
+          + New Project
+        </button>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Project</th>
+                <th>Client</th>
+                <th>Stage</th>
+                <th>Progress</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="projectsTable"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         TASKS
+    ================================================= -->
+
+    <section id="page-tasks" class="page">
+
+      <div class="section-head">
+
+        <div>
+          <h2>Tasks & Checklist</h2>
+          <p>Track project implementation tasks</p>
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Project</th>
+                <th>Assigned</th>
+                <th>Due</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="tasksTable"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         MESSAGES
+    ================================================= -->
+
+    <section id="page-messages" class="page">
+
+      <div class="section-head">
+
+        <div>
+          <h2>Client Messages</h2>
+          <p>Communicate directly with your clients</p>
+        </div>
+
+      </div>
+
+
+      <div class="card messages-layout">
+
+        <div class="conversation-list">
+
+          <div class="conversation-search">
+
+            <input
+              id="conversationSearch"
+              placeholder="Search conversations..."
+            >
+
+          </div>
+
+          <div id="conversationList"></div>
+
+        </div>
+
+
+        <div id="chatArea" class="chat">
+
+          <div class="chat-empty">
+
+            <div class="chat-empty-icon">
+              ◌
+            </div>
+
+            <strong>Select a conversation</strong>
+
+            <p style="font-size:11px;margin-top:5px;">
+              Choose a client to start chatting.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         ACCESS
+    ================================================= -->
+
+    <section id="page-access" class="page">
+
+      <div class="section-head">
+
+        <div>
+          <h2>Access Requests</h2>
+          <p>Client systems and credentials requested for projects</p>
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>System</th>
+                <th>Project</th>
+                <th>Access Type</th>
+                <th>Status</th>
+                <th>Requested</th>
+              </tr>
+            </thead>
+
+            <tbody id="accessTable"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         DOCUMENTS
+    ================================================= -->
+
+    <section id="page-documents" class="page">
+
+      <div class="section-head">
+
+        <div>
+          <h2>Documents</h2>
+          <p>Project briefs, requirements and uploaded files</p>
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>File</th>
+                <th>Project</th>
+                <th>Uploaded By</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+
+            <tbody id="documentsTable"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         INVOICES
+    ================================================= -->
+
+    <section id="page-invoices" class="page">
+
+      <div class="section-head">
+
+        <div>
+          <h2>Invoices</h2>
+          <p>Create and manage client invoices</p>
+        </div>
+
+        <button id="invoiceBtn" class="primary-btn">
+          + Create Invoice
+        </button>
+
+      </div>
+
+      <div class="card panel">
+
+        <div class="empty">
+          Invoice database connection will be added when the invoices table is created.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         ACTIVITY
+    ================================================= -->
+
+    <section id="page-activity" class="page">
+
+      <div class="section-head">
+
+        <div>
+          <h2>Activity Log</h2>
+          <p>Recent activity across client projects</p>
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Action</th>
+                <th>Description</th>
+                <th>Performed By</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+
+            <tbody id="activityTable"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </div>
+
+</main>
 
 </div>
 
 
-<!-- PROJECT MODAL -->
+<!-- =====================================================
+     NOTIFICATION PANEL
+===================================================== -->
 
-<div class="modal" id="projectModal">
+<div id="notificationPanel" class="notification-panel">
 
-  <div class="modal-card">
+  <div class="notification-head">
 
-    <div class="modal-head">
-      <h3>Create New Project</h3>
-      <button class="close" onclick="closeModal('projectModal')">×</button>
-    </div>
+    <strong>Notifications</strong>
 
-    <div class="modal-body">
+    <button
+      id="clearNotifications"
+      style="border:0;background:none;color:#246bce;font-size:10px;"
+    >
+      Clear
+    </button>
 
-      <form id="projectForm">
+  </div>
 
-        <div class="form-grid">
+  <div id="notificationList" class="notification-list">
 
-          <div class="field">
-            <label>Client</label>
-            <select id="projectClient" required></select>
-          </div>
-
-          <div class="field">
-            <label>Project Name</label>
-            <input id="projectName" required placeholder="AI Voice Receptionist">
-          </div>
-
-          <div class="field full">
-            <label>Description</label>
-            <textarea id="projectDescription" rows="4" placeholder="Project description"></textarea>
-          </div>
-
-          <div class="field">
-            <label>Quoted Price</label>
-            <input id="projectPrice" type="number" placeholder="2500">
-          </div>
-
-          <div class="field">
-            <label>Stage</label>
-            <select id="projectStage">
-              <option>Onboarding</option>
-              <option>Requirements</option>
-              <option>Access Collection</option>
-              <option>Setup</option>
-              <option>Development</option>
-              <option>Integration</option>
-              <option>Testing</option>
-              <option>Client Review</option>
-              <option>Revisions</option>
-              <option>Final Approval</option>
-              <option>Completed</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label>Progress %</label>
-            <input id="projectProgress" type="number" min="0" max="100" value="0">
-          </div>
-
-          <div class="field">
-            <label>Status</label>
-            <select id="projectStatus">
-              <option>Active</option>
-              <option>On Hold</option>
-              <option>Completed</option>
-            </select>
-          </div>
-
-        </div>
-
-        <button class="primary-btn" type="submit">
-          Create Project
-        </button>
-
-      </form>
-
+    <div class="empty">
+      No notifications yet.
     </div>
 
   </div>
@@ -1284,50 +1930,111 @@ tr:last-child td{
 </div>
 
 
-<!-- INVOICE MODAL -->
+<!-- =====================================================
+     NEW PROJECT MODAL
+===================================================== -->
 
-<div class="modal" id="invoiceModal">
+<div id="projectModal" class="modal-backdrop">
 
-  <div class="modal-card">
+  <div class="modal">
 
     <div class="modal-head">
-      <h3>Create Invoice</h3>
-      <button class="close" onclick="closeModal('invoiceModal')">×</button>
+
+      <h3>Create New Project</h3>
+
+      <button class="modal-close" data-close="projectModal">
+        ×
+      </button>
+
     </div>
+
 
     <div class="modal-body">
 
-      <div class="form-grid">
+      <div class="form-group">
 
-        <div class="field">
-          <label>Client Name</label>
-          <input placeholder="Client name">
+        <label>Client</label>
+
+        <select id="projectClient"></select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Project Name</label>
+
+        <input
+          id="projectName"
+          placeholder="e.g. AI Voice Receptionist"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>Description</label>
+
+        <textarea
+          id="projectDescription"
+          rows="4"
+          placeholder="Project description..."
+        ></textarea>
+
+      </div>
+
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+
+        <div class="form-group">
+
+          <label>Quoted Price</label>
+
+          <input
+            id="projectPrice"
+            type="number"
+            placeholder="0"
+          >
+
         </div>
 
-        <div class="field">
-          <label>Amount</label>
-          <input type="number" placeholder="2500">
-        </div>
 
-        <div class="field">
-          <label>Payment Method</label>
-          <input placeholder="Bank Transfer / PayPal">
-        </div>
+        <div class="form-group">
 
-        <div class="field">
-          <label>Terms</label>
-          <input placeholder="50% upfront">
-        </div>
+          <label>Stage</label>
 
-        <div class="field full">
-          <label>Description</label>
-          <textarea rows="4" placeholder="Invoice details"></textarea>
+          <select id="projectStage">
+
+            <option>Onboarding</option>
+            <option>Requirements</option>
+            <option>Access Collection</option>
+            <option>Setup</option>
+            <option>Development</option>
+            <option>Integration</option>
+            <option>Testing</option>
+            <option>Client Review</option>
+            <option>Revisions</option>
+            <option>Final Approval</option>
+            <option>Completed</option>
+
+          </select>
+
         </div>
 
       </div>
 
-      <button class="primary-btn" onclick="alert('Invoice database will be connected after the invoices table is created.')">
-        Generate Invoice
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button class="secondary-btn" data-close="projectModal">
+        Cancel
+      </button>
+
+      <button id="saveProjectBtn" class="primary-btn">
+        Create Project
       </button>
 
     </div>
@@ -1339,184 +2046,128 @@ tr:last-child td{
 
 <script>
 
-/* =========================
+/* =====================================================
    SUPABASE
-========================= */
+===================================================== */
 
-const SUPABASE_URL = "https://ausocdplliuftdqxbvwa.supabase.co";
+const SUPABASE_URL =
+  "https://ausocdplliuftdqxbvwa.supabase.co";
 
-const SUPABASE_KEY = "sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
+const SUPABASE_KEY =
+  "sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
 
 const supabaseClient =
-  window.supabase.createClient(
+  supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
   );
 
 
-/* =========================
-   GLOBAL
-========================= */
+/* =====================================================
+   STATE
+===================================================== */
 
 let currentUser = null;
-let clientsData = [];
-let projectsData = [];
-let tasksData = [];
-let messagesData = [];
-let accessData = [];
-let documentsData = [];
-let activitiesData = [];
+
+let clients = [];
+let projects = [];
+let tasks = [];
+let messages = [];
+let documents = [];
+let accessRequests = [];
+let activities = [];
+
+let selectedClient = null;
+let selectedProject = null;
+
+let realtimeChannel = null;
+
+let notifications = [];
 
 
-/* =========================
-   LOGIN
-========================= */
+/* =====================================================
+   HELPERS
+===================================================== */
 
-document
-  .getElementById("loginForm")
-  .addEventListener("submit", async function(e){
+function esc(value){
 
-    e.preventDefault();
-
-    const email =
-      document.getElementById("loginEmail").value.trim();
-
-    const password =
-      document.getElementById("loginPassword").value;
-
-    const errorBox =
-      document.getElementById("loginError");
-
-    errorBox.classList.add("hidden");
-    errorBox.textContent = "";
-
-    const {
-      data,
-      error
-    } = await supabaseClient.auth.signInWithPassword({
-      email,
-      password
-    });
-
-    if(error){
-
-      errorBox.textContent =
-        error.message;
-
-      errorBox.classList.remove("hidden");
-
-      return;
-    }
-
-    if(!data || !data.user){
-
-      errorBox.textContent =
-        "Login failed. Please try again.";
-
-      errorBox.classList.remove("hidden");
-
-      return;
-    }
-
-    await checkAdmin(data.user);
-
-  });
-
-
-/* =========================
-   CHECK ADMIN
-========================= */
-
-async function checkAdmin(user){
-
-  currentUser = user;
-
-  console.log("Logged in UID:", user.id);
-
-  const {
-    data: roleData,
-    error: roleError
-  } = await supabaseClient
-    .from("user_roles")
-    .select("user_id, role")
-    .eq("user_id", user.id)
-    .maybeSingle();
-
-  console.log("Role data:", roleData);
-  console.log("Role error:", roleError);
-
-  if(roleError){
-
-    await supabaseClient.auth.signOut();
-
-    showLoginError(
-      "Admin role check failed: " +
-      roleError.message
-    );
-
-    return;
+  if(value === null || value === undefined){
+    return "";
   }
 
-  if(!roleData){
-
-    await supabaseClient.auth.signOut();
-
-    showLoginError(
-      "This account is not an admin account."
-    );
-
-    return;
-  }
-
-  if(
-    String(roleData.role).toLowerCase().trim()
-    !== "admin"
-  ){
-
-    await supabaseClient.auth.signOut();
-
-    showLoginError(
-      "This account is not an admin account."
-    );
-
-    return;
-  }
-
-  /* ADMIN VERIFIED */
-
-  document
-    .getElementById("loginScreen")
-    .classList.add("hidden");
-
-  document
-    .getElementById("app")
-    .classList.remove("hidden");
-
-  document
-    .getElementById("adminEmail")
-    .textContent = user.email || "";
-
-  document
-    .getElementById("settingsEmail")
-    .textContent = user.email || "";
-
-  document
-    .getElementById("avatar")
-    .textContent =
-      (user.email || "A")
-      .charAt(0)
-      .toUpperCase();
-
-  await loadAllData();
-
-  setupRealtime();
-
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
 
 
-/* =========================
-   ERROR
-========================= */
+function initials(name){
+
+  if(!name){
+    return "?";
+  }
+
+  return String(name)
+    .trim()
+    .split(/\s+/)
+    .slice(0,2)
+    .map(x => x[0])
+    .join("")
+    .toUpperCase();
+}
+
+
+function formatDate(date){
+
+  if(!date){
+    return "-";
+  }
+
+  return new Date(date).toLocaleDateString(
+    "en-US",
+    {
+      month:"short",
+      day:"numeric",
+      year:"numeric"
+    }
+  );
+}
+
+
+function formatTime(date){
+
+  if(!date){
+    return "";
+  }
+
+  return new Date(date).toLocaleTimeString(
+    "en-US",
+    {
+      hour:"numeric",
+      minute:"2-digit"
+    }
+  );
+}
+
+
+function projectFor(id){
+
+  return projects.find(
+    p => Number(p.id) === Number(id)
+  );
+}
+
+
+function clientFor(id){
+
+  return clients.find(
+    c => c.id === id
+  );
+}
+
 
 function showLoginError(message){
 
@@ -1524,14 +2175,87 @@ function showLoginError(message){
     document.getElementById("loginError");
 
   box.textContent = message;
-
-  box.classList.remove("hidden");
+  box.style.display = "block";
 }
 
 
-/* =========================
-   SESSION CHECK
-========================= */
+/* =====================================================
+   AUTH
+===================================================== */
+
+async function login(email,password){
+
+  const {
+    data,
+    error
+  } = await supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if(error){
+
+    showLoginError(error.message);
+
+    return;
+  }
+
+  currentUser = data.user;
+
+  await checkAdmin();
+
+}
+
+
+async function checkAdmin(){
+
+  const {
+    data,
+    error
+  } = await supabaseClient.rpc("is_admin");
+
+  if(error){
+
+    await supabaseClient.auth.signOut();
+
+    showLoginError(
+      "Admin role check failed: " +
+      error.message
+    );
+
+    return;
+  }
+
+  if(data !== true){
+
+    await supabaseClient.auth.signOut();
+
+    showLoginError(
+      "This account is not an admin account."
+    );
+
+    return;
+  }
+
+  document.getElementById("loginScreen").style.display =
+    "none";
+
+  document.getElementById("app").style.display =
+    "flex";
+
+  await initializeAdmin();
+
+}
+
+
+async function logout(){
+
+  await supabaseClient.auth.signOut();
+
+  location.reload();
+
+}
+
 
 async function checkExistingSession(){
 
@@ -1539,891 +2263,170 @@ async function checkExistingSession(){
     data
   } = await supabaseClient.auth.getSession();
 
-  if(
-    data &&
-    data.session &&
-    data.session.user
-  ){
-
-    await checkAdmin(
-      data.session.user
-    );
-
+  if(!data.session){
+    return;
   }
+
+  currentUser = data.session.user;
+
+  await checkAdmin();
 
 }
 
 
-/* =========================
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+async function initializeAdmin(){
+
+  await loadAllData();
+
+  renderDashboard();
+
+  setupRealtime();
+
+  updateUnreadMessages();
+
+}
+
+
+/* =====================================================
    LOAD DATA
-========================= */
+===================================================== */
 
 async function loadAllData(){
 
-  await Promise.all([
-    loadClients(),
-    loadProjects(),
-    loadTasks(),
-    loadMessages(),
-    loadAccessRequests(),
-    loadDocuments(),
-    loadActivities()
-  ]);
+  const results =
+    await Promise.all([
 
-  updateStats();
+      supabaseClient
+        .from("clients")
+        .select("*")
+        .order("created_at",{ascending:false}),
+
+      supabaseClient
+        .from("projects")
+        .select("*")
+        .order("created_at",{ascending:false}),
+
+      supabaseClient
+        .from("tasks")
+        .select("*")
+        .order("created_at",{ascending:false}),
+
+      supabaseClient
+        .from("messages")
+        .select("*")
+        .order("created_at",{ascending:true}),
+
+      supabaseClient
+        .from("documents")
+        .select("*")
+        .order("created_at",{ascending:false}),
+
+      supabaseClient
+        .from("access_requests")
+        .select("*")
+        .order("requested_at",{ascending:false}),
+
+      supabaseClient
+        .from("activity_logs")
+        .select("*")
+        .order("created_at",{ascending:false})
+
+    ]);
+
+
+  clients =
+    results[0].data || [];
+
+  projects =
+    results[1].data || [];
+
+  tasks =
+    results[2].data || [];
+
+  messages =
+    results[3].data || [];
+
+  documents =
+    results[4].data || [];
+
+  accessRequests =
+    results[5].data || [];
+
+  activities =
+    results[6].data || [];
+
+
   renderDashboard();
-}
-
-
-/* =========================
-   CLIENTS
-========================= */
-
-async function loadClients(){
-
-  const {
-    data,
-    error
-  } = await supabaseClient
-    .from("clients")
-    .select("*")
-    .order("created_at", {
-      ascending:false
-    });
-
-  if(error){
-
-    console.error("Clients:",error);
-    return;
-  }
-
-  clientsData = data || [];
-
-  renderClients();
-}
-
-
-/* =========================
-   PROJECTS
-========================= */
-
-async function loadProjects(){
-
-  const {
-    data,
-    error
-  } = await supabaseClient
-    .from("projects")
-    .select("*")
-    .order("created_at", {
-      ascending:false
-    });
-
-  if(error){
-
-    console.error("Projects:",error);
-    return;
-  }
-
-  projectsData = data || [];
-
-  renderProjects();
-}
-
-
-/* =========================
-   TASKS
-========================= */
-
-async function loadTasks(){
-
-  const {
-    data,
-    error
-  } = await supabaseClient
-    .from("tasks")
-    .select("*")
-    .order("created_at", {
-      ascending:false
-    });
-
-  if(error){
-
-    console.error("Tasks:",error);
-    return;
-  }
-
-  tasksData = data || [];
-
-  renderTasks();
-}
-
-
-/* =========================
-   MESSAGES
-========================= */
-
-async function loadMessages(){
-
-  const {
-    data,
-    error
-  } = await supabaseClient
-    .from("messages")
-    .select("*")
-    .order("created_at", {
-      ascending:true
-    });
-
-  if(error){
-
-    console.error("Messages:",error);
-    return;
-  }
-
-  messagesData = data || [];
-
-  renderMessages();
-}
-
-
-/* =========================
-   ACCESS
-========================= */
-
-async function loadAccessRequests(){
-
-  const {
-    data,
-    error
-  } = await supabaseClient
-    .from("access_requests")
-    .select("*")
-    .order("requested_at", {
-      ascending:false
-    });
-
-  if(error){
-
-    console.error("Access:",error);
-    return;
-  }
-
-  accessData = data || [];
-
-  renderAccess();
-}
-
-
-/* =========================
-   DOCUMENTS
-========================= */
-
-async function loadDocuments(){
-
-  const {
-    data,
-    error
-  } = await supabaseClient
-    .from("documents")
-    .select("*")
-    .order("created_at", {
-      ascending:false
-    });
-
-  if(error){
-
-    console.error("Documents:",error);
-    return;
-  }
-
-  documentsData = data || [];
-
-  renderDocuments();
-}
-
-
-/* =========================
-   ACTIVITY
-========================= */
-
-async function loadActivities(){
-
-  const {
-    data,
-    error
-  } = await supabaseClient
-    .from("activity_logs")
-    .select("*")
-    .order("created_at", {
-      ascending:false
-    });
-
-  if(error){
-
-    console.error("Activity:",error);
-    return;
-  }
-
-  activitiesData = data || [];
-
-  renderActivity();
-}
-
-
-/* =========================
-   STATS
-========================= */
-
-function updateStats(){
-
-  document.getElementById("statClients")
-    .textContent =
-      clientsData.length;
-
-  document.getElementById("statProjects")
-    .textContent =
-      projectsData.filter(
-        p =>
-          String(p.status || "")
-          .toLowerCase()
-          !== "completed"
-      ).length;
-
-  document.getElementById("statTasks")
-    .textContent =
-      tasksData.filter(
-        t => !t.is_completed
-      ).length;
-
-  document.getElementById("statAccess")
-    .textContent =
-      accessData.filter(
-        a =>
-          String(a.status || "")
-          .toLowerCase()
-          !== "completed"
-      ).length;
-}
-
-
-/* =========================
-   CLIENT TABLE
-========================= */
-
-function renderClients(){
-
-  const tbody =
-    document.getElementById("clientsTable");
-
-  if(!clientsData.length){
-
-    tbody.innerHTML =
-      `<tr><td colspan="6">No clients found.</td></tr>`;
-
-    return;
-  }
-
-  tbody.innerHTML =
-    clientsData.map(client => `
-
-      <tr>
-
-        <td>
-          <strong>${escapeHtml(client.full_name || "-")}</strong>
-        </td>
-
-        <td>${escapeHtml(client.company_name || "-")}</td>
-
-        <td>${escapeHtml(client.email || "-")}</td>
-
-        <td>${escapeHtml(client.phone || "-")}</td>
-
-        <td>${formatDate(client.created_at)}</td>
-
-        <td>
-          <button class="small-btn danger"
-            onclick="deleteClient('${client.id}')">
-            Delete
-          </button>
-        </td>
-
-      </tr>
-
-    `).join("");
-}
-
-
-/* =========================
-   PROJECT TABLE
-========================= */
-
-function renderProjects(){
-
-  const tbody =
-    document.getElementById("projectsTable");
-
-  if(!projectsData.length){
-
-    tbody.innerHTML =
-      `<tr><td colspan="6">No projects found.</td></tr>`;
-
-    return;
-  }
-
-  tbody.innerHTML =
-    projectsData.map(project => {
-
-      const client =
-        clientsData.find(
-          c => c.id === project.client_id
-        );
-
-      const progress =
-        Number(project.progress || 0);
-
-      return `
-
-        <tr>
-
-          <td>
-            <strong>
-              ${escapeHtml(project.project_name || "-")}
-            </strong>
-          </td>
-
-          <td>
-            ${escapeHtml(
-              client?.company_name ||
-              client?.full_name ||
-              "-"
-            )}
-          </td>
-
-          <td>
-            <span class="badge blue">
-              ${escapeHtml(project.stage || "-")}
-            </span>
-          </td>
-
-          <td style="min-width:150px;">
-
-            <div class="progress">
-              <div
-                class="progress-bar"
-                style="width:${progress}%">
-              </div>
-            </div>
-
-            <strong>${progress}%</strong>
-
-          </td>
-
-          <td>
-            ${statusBadge(project.status)}
-          </td>
-
-          <td>
-            ${formatDate(project.updated_at || project.created_at)}
-          </td>
-
-        </tr>
-
-      `;
-
-    }).join("");
-}
-
-
-/* =========================
-   TASK TABLE
-========================= */
-
-function renderTasks(){
-
-  const tbody =
-    document.getElementById("tasksTable");
-
-  if(!tasksData.length){
-
-    tbody.innerHTML =
-      `<tr><td colspan="5">No tasks found.</td></tr>`;
-
-    return;
-  }
-
-  tbody.innerHTML =
-    tasksData.map(task => {
-
-      const project =
-        projectsData.find(
-          p => p.id === task.project_id
-        );
-
-      return `
-
-        <tr>
-
-          <td>
-            <strong>
-              ${escapeHtml(task.task_name || "-")}
-            </strong>
-          </td>
-
-          <td>
-            ${escapeHtml(
-              project?.project_name || "-"
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(task.assigned_to || "-")}
-          </td>
-
-          <td>
-            ${task.due_date || "-"}
-          </td>
-
-          <td>
-            ${
-              task.is_completed
-              ? '<span class="badge green">Completed</span>'
-              : '<span class="badge amber">Pending</span>'
-            }
-          </td>
-
-        </tr>
-
-      `;
-
-    }).join("");
-}
-
-
-/* =========================
-   ACCESS TABLE
-========================= */
-
-function renderAccess(){
-
-  const tbody =
-    document.getElementById("accessTable");
-
-  if(!accessData.length){
-
-    tbody.innerHTML =
-      `<tr><td colspan="6">No access requests found.</td></tr>`;
-
-    return;
-  }
-
-  tbody.innerHTML =
-    accessData.map(item => {
-
-      const project =
-        projectsData.find(
-          p => p.id === item.project_id
-        );
-
-      const complete =
-        String(item.status || "")
-        .toLowerCase()
-        === "completed";
-
-      return `
-
-        <tr>
-
-          <td>
-            <strong>
-              ${escapeHtml(item.system_name || "-")}
-            </strong>
-          </td>
-
-          <td>
-            ${escapeHtml(item.access_type || "-")}
-          </td>
-
-          <td>
-            ${escapeHtml(project?.project_name || "-")}
-          </td>
-
-          <td>
-            ${
-              complete
-              ? '<span class="badge green">Completed</span>'
-              : '<span class="badge amber">Pending</span>'
-            }
-          </td>
-
-          <td>
-            ${formatDate(item.requested_at)}
-          </td>
-
-          <td>
-
-            ${
-              complete
-              ? "-"
-              :
-              `<button
-                class="small-btn primary"
-                onclick="completeAccess(${item.id})">
-                Complete
-              </button>`
-            }
-
-          </td>
-
-        </tr>
-
-      `;
-
-    }).join("");
-}
-
-
-/* =========================
-   DOCUMENTS
-========================= */
-
-function renderDocuments(){
-
-  const tbody =
-    document.getElementById("documentsTable");
-
-  if(!documentsData.length){
-
-    tbody.innerHTML =
-      `<tr><td colspan="4">No documents found.</td></tr>`;
-
-    return;
-  }
-
-  tbody.innerHTML =
-    documentsData.map(doc => {
-
-      const project =
-        projectsData.find(
-          p => p.id === doc.project_id
-        );
-
-      return `
-
-        <tr>
-
-          <td>
-            <strong>
-              ${escapeHtml(doc.file_name || "-")}
-            </strong>
-          </td>
-
-          <td>
-            ${escapeHtml(project?.project_name || "-")}
-          </td>
-
-          <td>
-            ${escapeHtml(doc.uploaded_by || "-")}
-          </td>
-
-          <td>
-            ${formatDate(doc.created_at)}
-          </td>
-
-        </tr>
-
-      `;
-
-    }).join("");
-}
-
-
-/* =========================
-   ACTIVITY
-========================= */
-
-function renderActivity(){
-
-  const box =
-    document.getElementById("activityList");
-
-  if(!activitiesData.length){
-
-    box.innerHTML =
-      "No activity found.";
-
-    return;
-  }
-
-  box.innerHTML =
-    activitiesData.map(item => `
-
-      <div class="activity">
-
-        <div class="activity-dot"></div>
-
-        <div>
-
-          <strong>
-            ${escapeHtml(item.action || "Activity")}
-          </strong>
-
-          <span>
-            ${escapeHtml(item.description || "")}
-          </span>
-
-          <span>
-            ${escapeHtml(item.performed_by || "System")}
-            ·
-            ${formatDate(item.created_at)}
-          </span>
-
-        </div>
-
-      </div>
-
-    `).join("");
-}
-
-
-/* =========================
-   MESSAGES
-========================= */
-
-function renderMessages(){
-
-  const box =
-    document.getElementById("conversations");
-
-  const projectsWithMessages =
-    [...new Set(
-      messagesData.map(
-        m => m.project_id
-      )
-    )];
-
-  if(!projectsWithMessages.length){
-
-    box.innerHTML =
-      `<div style="padding:20px;color:var(--muted);">
-        No conversations yet.
-      </div>`;
-
-    return;
-  }
-
-  box.innerHTML =
-    projectsWithMessages.map(projectId => {
-
-      const project =
-        projectsData.find(
-          p => p.id === projectId
-        );
-
-      const last =
-        messagesData
-          .filter(
-            m => m.project_id === projectId
-          )
-          .slice(-1)[0];
-
-      return `
-
-        <div
-          class="conversation"
-          onclick="openConversation(${projectId})">
-
-          <strong>
-            ${escapeHtml(
-              project?.project_name ||
-              "Project"
-            )}
-          </strong>
-
-          <span>
-            ${escapeHtml(
-              last?.message ||
-              "No message"
-            )}
-          </span>
-
-        </div>
-
-      `;
-
-    }).join("");
-}
-
-
-function openConversation(projectId){
-
-  const thread =
-    document.getElementById("messageThread");
-
-  const messages =
-    messagesData.filter(
-      m => m.project_id === projectId
-    );
-
-  thread.innerHTML =
-    messages.map(m => `
-
-      <div class="bubble ${
-        m.sender_type === "admin"
-        ? "admin"
-        : ""
-      }">
-
-        <strong>
-          ${escapeHtml(m.sender_name || "User")}
-        </strong>
-
-        <div style="margin-top:5px;">
-          ${escapeHtml(m.message || "")}
-        </div>
-
-        <small>
-          ${formatDate(m.created_at)}
-        </small>
-
-      </div>
-
-    `).join("");
 
 }
 
 
-/* =========================
-   DASHBOARD
-========================= */
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
-function renderDashboard(){
+const pageTitles = {
 
-  const projectsBox =
-    document.getElementById("recentProjects");
+  dashboard:[
+    "Dashboard",
+    "AWSZ client operations overview"
+  ],
 
-  const recentProjects =
-    projectsData.slice(0,5);
+  clients:[
+    "Clients",
+    "All connected client accounts"
+  ],
 
-  if(!recentProjects.length){
+  projects:[
+    "Projects",
+    "Manage client projects and progress"
+  ],
 
-    projectsBox.innerHTML =
-      `<div style="color:var(--muted);">
-        No projects yet.
-      </div>`;
+  tasks:[
+    "Tasks & Checklist",
+    "Track project implementation"
+  ],
 
-  }else{
+  messages:[
+    "Client Messages",
+    "Communicate directly with your clients"
+  ],
 
-    projectsBox.innerHTML =
-      recentProjects.map(p => `
+  access:[
+    "Access Requests",
+    "Systems and credentials required"
+  ],
 
-        <div class="project-card" style="margin-bottom:12px;">
+  documents:[
+    "Documents",
+    "Project files and documents"
+  ],
 
-          <h4>
-            ${escapeHtml(p.project_name || "-")}
-          </h4>
+  invoices:[
+    "Invoices",
+    "Client billing and invoices"
+  ],
 
-          <div class="project-meta">
-            ${escapeHtml(p.stage || "No stage")}
-          </div>
+  activity:[
+    "Activity",
+    "Recent system activity"
+  ]
 
-          <div class="progress">
-            <div
-              class="progress-bar"
-              style="width:${Number(p.progress || 0)}%">
-            </div>
-          </div>
-
-          <div style="display:flex;justify-content:space-between;">
-
-            <span class="project-meta">
-              ${Number(p.progress || 0)}%
-            </span>
-
-            ${statusBadge(p.status)}
-
-          </div>
-
-        </div>
-
-      `).join("");
-
-  }
+};
 
 
-  const activityBox =
-    document.getElementById("recentActivity");
-
-  const recentActivity =
-    activitiesData.slice(0,5);
-
-  if(!recentActivity.length){
-
-    activityBox.innerHTML =
-      `<div style="color:var(--muted);">
-        No activity yet.
-      </div>`;
-
-  }else{
-
-    activityBox.innerHTML =
-      recentActivity.map(item => `
-
-        <div class="activity">
-
-          <div class="activity-dot"></div>
-
-          <div>
-
-            <strong>
-              ${escapeHtml(item.action || "Activity")}
-            </strong>
-
-            <span>
-              ${escapeHtml(item.description || "")}
-            </span>
-
-            <span>
-              ${formatDate(item.created_at)}
-            </span>
-
-          </div>
-
-        </div>
-
-      `).join("");
-
-  }
-
-}
-
-
-/* =========================
-   PAGE NAVIGATION
-========================= */
-
-document
-  .querySelectorAll(".nav-btn[data-page]")
-  .forEach(button => {
-
-    button.addEventListener("click",function(){
-
-      showPage(
-        this.dataset.page
-      );
-
-    });
-
-  });
-
-
-function showPage(page){
+function openPage(page){
 
   document
     .querySelectorAll(".page")
-    .forEach(p =>
-      p.classList.remove("active")
-    );
+    .forEach(el => {
+      el.classList.remove("active");
+    });
+
 
   const target =
     document.getElementById(
@@ -2434,38 +2437,64 @@ function showPage(page){
     target.classList.add("active");
   }
 
+
   document
-    .querySelectorAll(".nav-btn")
-    .forEach(btn =>
-      btn.classList.remove("active")
-    );
+    .querySelectorAll(".nav button")
+    .forEach(btn => {
 
-  const nav =
-    document.querySelector(
-      `.nav-btn[data-page="${page}"]`
-    );
+      btn.classList.toggle(
+        "active",
+        btn.dataset.page === page
+      );
 
-  if(nav){
-    nav.classList.add("active");
+    });
+
+
+  const title =
+    pageTitles[page] ||
+    ["Admin","AWSZ"];
+
+  document.getElementById("pageTitle").textContent =
+    title[0];
+
+  document.getElementById("pageSubtitle").textContent =
+    title[1];
+
+
+  if(page === "clients"){
+    renderClients();
   }
 
-  const titles = {
-    dashboard:"Dashboard",
-    clients:"Clients",
-    projects:"Projects",
-    tasks:"Tasks & Checklist",
-    messages:"Client Messages",
-    access:"Access Requests",
-    documents:"Documents",
-    invoices:"Invoices",
-    notifications:"Notifications",
-    activity:"Activity Logs",
-    settings:"Settings"
-  };
+  if(page === "projects"){
+    renderProjects();
+  }
 
-  document.getElementById("pageTitle")
-    .textContent =
-      titles[page] || "Admin Portal";
+  if(page === "tasks"){
+    renderTasks();
+  }
+
+  if(page === "messages"){
+    renderConversations();
+
+    if(selectedProject){
+      openConversation(
+        selectedProject.id
+      );
+    }
+  }
+
+  if(page === "access"){
+    renderAccess();
+  }
+
+  if(page === "documents"){
+    renderDocuments();
+  }
+
+  if(page === "activity"){
+    renderActivity();
+  }
+
 
   document
     .getElementById("sidebar")
@@ -2474,393 +2503,2043 @@ function showPage(page){
 }
 
 
-/* =========================
-   PROJECT MODAL
-========================= */
-
-function openProjectModal(){
-
-  const select =
-    document.getElementById("projectClient");
-
-  select.innerHTML =
-    `<option value="">Select client</option>` +
-    clientsData.map(c => `
-      <option value="${c.id}">
-        ${escapeHtml(
-          c.company_name ||
-          c.full_name ||
-          c.email
-        )}
-      </option>
-    `).join("");
-
-  document
-    .getElementById("projectModal")
-    .classList.add("show");
-}
-
-
 document
-  .getElementById("projectForm")
-  .addEventListener("submit", async function(e){
+  .querySelectorAll(".nav button")
+  .forEach(btn => {
 
-    e.preventDefault();
-
-    const project = {
-
-      client_id:
-        document.getElementById("projectClient").value,
-
-      project_name:
-        document.getElementById("projectName").value.trim(),
-
-      description:
-        document.getElementById("projectDescription").value.trim(),
-
-      quoted_price:
-        Number(
-          document.getElementById("projectPrice").value
-        ) || 0,
-
-      stage:
-        document.getElementById("projectStage").value,
-
-      progress:
-        Number(
-          document.getElementById("projectProgress").value
-        ) || 0,
-
-      status:
-        document.getElementById("projectStatus").value
-
-    };
-
-    const {
-      error
-    } = await supabaseClient
-      .from("projects")
-      .insert(project);
-
-    if(error){
-
-      alert(error.message);
-      return;
-
-    }
-
-    closeModal("projectModal");
-
-    this.reset();
-
-    await loadProjects();
-    updateStats();
-    renderDashboard();
-
-  });
-
-
-/* =========================
-   DELETE CLIENT
-========================= */
-
-async function deleteClient(id){
-
-  const ok =
-    confirm(
-      "Delete this client account/profile?"
+    btn.addEventListener(
+      "click",
+      () => openPage(btn.dataset.page)
     );
 
-  if(!ok) return;
-
-  const {
-    error
-  } = await supabaseClient
-    .from("clients")
-    .delete()
-    .eq("id",id);
-
-  if(error){
-
-    alert(error.message);
-    return;
-
-  }
-
-  await loadClients();
-  await loadProjects();
-
-  updateStats();
-  renderDashboard();
-}
-
-
-/* =========================
-   COMPLETE ACCESS
-========================= */
-
-async function completeAccess(id){
-
-  const {
-    error
-  } = await supabaseClient
-    .from("access_requests")
-    .update({
-      status:"completed",
-      completed_at:new Date().toISOString()
-    })
-    .eq("id",id);
-
-  if(error){
-
-    alert(error.message);
-    return;
-
-  }
-
-  await loadAccessRequests();
-
-  updateStats();
-}
-
-
-/* =========================
-   REALTIME
-========================= */
-
-function setupRealtime(){
-
-  const tables = [
-    "clients",
-    "projects",
-    "tasks",
-    "messages",
-    "documents",
-    "access_requests",
-    "activity_logs"
-  ];
-
-  tables.forEach(table => {
-
-    supabaseClient
-      .channel("admin-" + table)
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table
-        },
-        async () => {
-
-          if(table === "clients")
-            await loadClients();
-
-          if(table === "projects")
-            await loadProjects();
-
-          if(table === "tasks")
-            await loadTasks();
-
-          if(table === "messages")
-            await loadMessages();
-
-          if(table === "documents")
-            await loadDocuments();
-
-          if(table === "access_requests")
-            await loadAccessRequests();
-
-          if(table === "activity_logs")
-            await loadActivities();
-
-          updateStats();
-          renderDashboard();
-
-          showNotificationDot(table);
-
-        }
-      )
-      .subscribe();
-
-  });
-
-}
-
-
-/* =========================
-   NOTIFICATION DOT
-========================= */
-
-function showNotificationDot(table){
-
-  let element = null;
-
-  if(table === "messages"){
-    element =
-      document.getElementById("messagesNav");
-  }
-
-  if(table === "access_requests"){
-    element =
-      document.getElementById("accessNav");
-  }
-
-  if(table === "clients"){
-    element =
-      document.getElementById("notificationsNav");
-  }
-
-  if(!element) return;
-
-  element.classList.add(
-    "has-notifications"
-  );
-
-}
-
-
-/* =========================
-   MODALS
-========================= */
-
-function closeModal(id){
-
-  document
-    .getElementById(id)
-    .classList.remove("show");
-
-}
-
-function openInvoiceModal(){
-
-  document
-    .getElementById("invoiceModal")
-    .classList.add("show");
-
-}
-
-function openClientModal(){
-
-  alert(
-    "Client accounts are currently created through the Client Portal signup."
-  );
-
-}
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-document
-  .getElementById("logoutBtn")
-  .addEventListener("click", async function(){
-
-    await supabaseClient.auth.signOut();
-
-    location.reload();
-
   });
 
 
-/* =========================
-   MOBILE MENU
-========================= */
+/* =====================================================
+   DASHBOARD
+===================================================== */
 
-document
-  .getElementById("mobileMenu")
-  .addEventListener("click",function(){
+function renderDashboard(){
 
+  document.getElementById("statClients").textContent =
+    clients.length;
+
+  document.getElementById("statProjects").textContent =
+    projects.filter(
+      p => String(p.status || "").toLowerCase() !== "completed"
+    ).length;
+
+  document.getElementById("statTasks").textContent =
+    tasks.filter(
+      t => !t.is_completed
+    ).length;
+
+  document.getElementById("statMessages").textContent =
+    getUnreadCount();
+
+
+  const recentClients =
+    clients.slice(0,5);
+
+
+  document.getElementById("recentClients").innerHTML =
+    recentClients.length
+
+      ? recentClients.map(c => `
+
+        <div class="client-row">
+
+          <div class="client-main">
+
+            <div class="client-mini">
+              ${esc(initials(c.full_name))}
+            </div>
+
+            <div class="client-info">
+
+              <strong>
+                ${esc(c.full_name || "Unnamed Client")}
+              </strong>
+
+              <span>
+                ${esc(c.company_name || c.email || "")}
+              </span>
+
+            </div>
+
+          </div>
+
+          <span style="font-size:10px;color:#9aa8b6;">
+            ${formatDate(c.created_at)}
+          </span>
+
+        </div>
+
+      `).join("")
+
+      : `<div class="empty">No clients yet.</div>`;
+
+
+  const recentProjects =
+    projects.slice(0,5);
+
+
+  document.getElementById("recentProjects").innerHTML =
+    recentProjects.length
+
+      ? recentProjects.map(p => {
+
+          const client =
+            clientFor(p.client_id);
+
+          return `
+
+            <div class="project-item">
+
+              <strong>
+                ${esc(p.project_name || "Untitled Project")}
+              </strong>
+
+              <span>
+                ${esc(client?.company_name || client?.full_name || "Client")}
+                ·
+                ${esc(p.stage || "Not set")}
+              </span>
+
+              <div class="progress">
+
+                <div
+                  class="progress-bar"
+                  style="width:${Math.min(
+                    100,
+                    Math.max(0,Number(p.progress)||0)
+                  )}%"
+                ></div>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }).join("")
+
+      : `<div class="empty">No projects yet.</div>`;
+
+}
+
+
+/* =====================================================
+   CLIENTS
+===================================================== */
+
+function renderClients(){
+
+  const search =
     document
-      .getElementById("sidebar")
-      .classList.toggle("open");
+      .getElementById("clientSearch")
+      .value
+      .trim()
+      .toLowerCase();
 
-  });
+
+  const filtered =
+    clients.filter(c => {
+
+      const text = [
+
+        c.full_name,
+        c.company_name,
+        c.email,
+        c.phone
+
+      ].join(" ").toLowerCase();
+
+      return text.includes(search);
+
+    });
 
 
-/* =========================
-   HELPERS
-========================= */
+  document.getElementById("clientsList").innerHTML =
+    filtered.length
 
-function formatDate(date){
+      ? filtered.map(c => `
 
-  if(!date) return "-";
+        <div
+          class="client-row ${
+            selectedClient?.id === c.id
+              ? "selected"
+              : ""
+          }"
+          data-client-id="${esc(c.id)}"
+        >
 
-  try{
+          <div class="client-main">
 
-    return new Date(date)
-      .toLocaleDateString(
-        "en-US",
-        {
-          month:"short",
-          day:"numeric",
-          year:"numeric"
+            <div class="client-mini">
+              ${esc(initials(c.full_name))}
+            </div>
+
+            <div class="client-info">
+
+              <strong>
+                ${esc(c.full_name || "Unnamed")}
+              </strong>
+
+              <span>
+                ${esc(c.company_name || c.email || "")}
+              </span>
+
+            </div>
+
+          </div>
+
+          <span class="client-arrow">›</span>
+
+        </div>
+
+      `).join("")
+
+      : `<div class="empty">No clients found.</div>`;
+
+
+  document
+    .querySelectorAll("[data-client-id]")
+    .forEach(row => {
+
+      row.addEventListener(
+        "click",
+        () => {
+
+          selectedClient =
+            clients.find(
+              c => c.id === row.dataset.clientId
+            );
+
+          renderClients();
+
+          renderClientDetail();
+
         }
       );
 
-  }catch(e){
+    });
 
-    return "-";
 
+  if(!selectedClient && filtered.length){
+    selectedClient = filtered[0];
+    renderClients();
+    renderClientDetail();
   }
 
 }
 
 
-function statusBadge(status){
+function renderClientDetail(){
 
-  const value =
-    String(status || "Active")
-      .toLowerCase();
+  const box =
+    document.getElementById("clientDetail");
 
-  if(value === "completed"){
 
-    return `
-      <span class="badge green">
-        Completed
-      </span>
+  if(!selectedClient){
+
+    box.innerHTML = `
+      <div class="empty">
+        Select a client to view details.
+      </div>
     `;
 
+    return;
   }
 
-  if(
-    value === "on hold" ||
-    value === "pending"
-  ){
 
-    return `
-      <span class="badge amber">
-        ${escapeHtml(status)}
-      </span>
-    `;
+  const clientProjects =
+    projects.filter(
+      p => p.client_id === selectedClient.id
+    );
 
-  }
 
-  return `
-    <span class="badge blue">
-      ${escapeHtml(status || "Active")}
-    </span>
+  box.innerHTML = `
+
+    <div class="detail-avatar">
+      ${esc(initials(selectedClient.full_name))}
+    </div>
+
+    <div class="detail-name">
+      ${esc(selectedClient.full_name || "Unnamed Client")}
+    </div>
+
+    <div class="detail-company">
+      ${esc(selectedClient.company_name || "No company")}
+    </div>
+
+
+    <div class="detail-meta">
+
+      <div class="meta-row">
+
+        <small>Email</small>
+
+        <strong>
+          ${esc(selectedClient.email || "-")}
+        </strong>
+
+      </div>
+
+
+      <div class="meta-row">
+
+        <small>Phone</small>
+
+        <strong>
+          ${esc(selectedClient.phone || "-")}
+        </strong>
+
+      </div>
+
+
+      <div class="meta-row">
+
+        <small>Client Since</small>
+
+        <strong>
+          ${formatDate(selectedClient.created_at)}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="project-list">
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          margin-bottom:10px;
+        "
+      >
+
+        <strong style="font-size:13px;">
+          Projects
+        </strong>
+
+        <span class="badge blue">
+          ${clientProjects.length}
+        </span>
+
+      </div>
+
+
+      ${
+        clientProjects.length
+
+          ? clientProjects.map(p => `
+
+              <div
+                class="project-item"
+                style="cursor:pointer;"
+                onclick="startClientConversation(${Number(p.id)})"
+              >
+
+                <strong>
+                  ${esc(p.project_name || "Untitled")}
+                </strong>
+
+                <span>
+                  ${esc(p.stage || "No stage")}
+                  ·
+                  ${Number(p.progress)||0}% complete
+                </span>
+
+                <div class="progress">
+
+                  <div
+                    class="progress-bar"
+                    style="width:${Math.min(
+                      100,
+                      Math.max(0,Number(p.progress)||0)
+                    )}%"
+                  ></div>
+
+                </div>
+
+              </div>
+
+            `).join("")
+
+          : `
+            <div class="empty" style="padding:20px;">
+              No projects for this client yet.
+            </div>
+          `
+      }
+
+    </div>
+
+
+    ${
+      clientProjects.length
+
+      ? `
+        <button
+          class="primary-btn"
+          style="width:100%;margin-top:12px;"
+          onclick="startClientConversation(${Number(clientProjects[0].id)})"
+        >
+          Open Client Conversation
+        </button>
+      `
+
+      : ""
+    }
+
   `;
 
 }
 
 
-function escapeHtml(value){
+/* =====================================================
+   PROJECTS
+===================================================== */
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+function renderProjects(){
+
+  const tbody =
+    document.getElementById("projectsTable");
+
+
+  if(!projects.length){
+
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5">
+          <div class="empty">
+            No projects yet.
+          </div>
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  tbody.innerHTML =
+    projects.map(p => {
+
+      const client =
+        clientFor(p.client_id);
+
+      const progress =
+        Number(p.progress) || 0;
+
+
+      return `
+
+        <tr>
+
+          <td>
+            <strong>
+              ${esc(p.project_name || "Untitled")}
+            </strong>
+          </td>
+
+          <td>
+            ${esc(
+              client?.company_name ||
+              client?.full_name ||
+              "-"
+            )}
+          </td>
+
+          <td>
+            <span class="badge blue">
+              ${esc(p.stage || "Not set")}
+            </span>
+          </td>
+
+          <td style="min-width:150px;">
+
+            <div style="font-size:10px;margin-bottom:5px;">
+              ${progress}%
+            </div>
+
+            <div class="progress">
+
+              <div
+                class="progress-bar"
+                style="width:${Math.min(100,Math.max(0,progress))}%"
+              ></div>
+
+            </div>
+
+          </td>
+
+          <td>
+
+            <span class="badge ${
+              String(p.status).toLowerCase() === "completed"
+                ? "green"
+                : "blue"
+            }">
+
+              ${esc(p.status || "Active")}
+
+            </span>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }).join("");
 
 }
 
 
-/* =========================
+/* =====================================================
+   TASKS
+===================================================== */
+
+function renderTasks(){
+
+  const tbody =
+    document.getElementById("tasksTable");
+
+
+  if(!tasks.length){
+
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5">
+          <div class="empty">
+            No tasks yet.
+          </div>
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  tbody.innerHTML =
+    tasks.map(t => {
+
+      const project =
+        projectFor(t.project_id);
+
+
+      return `
+
+        <tr>
+
+          <td>
+            <strong>
+              ${esc(t.task_name || "Task")}
+            </strong>
+          </td>
+
+          <td>
+            ${esc(project?.project_name || "-")}
+          </td>
+
+          <td>
+            ${esc(t.assigned_to || "-")}
+          </td>
+
+          <td>
+            ${formatDate(t.due_date)}
+          </td>
+
+          <td>
+
+            <span class="badge ${
+              t.is_completed
+                ? "green"
+                : "amber"
+            }">
+
+              ${
+                t.is_completed
+                  ? "Completed"
+                  : "Pending"
+              }
+
+            </span>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+function getUnreadCount(){
+
+  /*
+    For now unread is calculated as messages
+    that are from clients.
+
+    Later we can add a dedicated read_at column
+    for exact per-admin unread tracking.
+  */
+
+  return messages.filter(
+    m =>
+      String(m.sender_type).toLowerCase()
+      === "client"
+  ).length;
+
+}
+
+
+function updateUnreadMessages(){
+
+  const count =
+    getUnreadCount();
+
+
+  const badge =
+    document.getElementById("messageBadge");
+
+  const dot =
+    document.getElementById("notificationDot");
+
+
+  if(count > 0){
+
+    badge.textContent =
+      count > 99 ? "99+" : count;
+
+    badge.style.display =
+      "flex";
+
+    dot.style.display =
+      "block";
+
+  }else{
+
+    badge.style.display =
+      "none";
+
+    dot.style.display =
+      "none";
+
+  }
+
+}
+
+
+function getConversationProjects(){
+
+  /*
+    A conversation is currently grouped
+    by project.
+
+    This allows client + project-specific
+    communication.
+  */
+
+  const ids =
+    [...new Set(
+      messages
+        .map(m => Number(m.project_id))
+        .filter(Boolean)
+    )];
+
+
+  return ids
+    .map(id => projectFor(id))
+    .filter(Boolean)
+    .sort(
+      (a,b) =>
+        Number(b.updated_at || 0) -
+        Number(a.updated_at || 0)
+    );
+
+}
+
+
+function renderConversations(){
+
+  const box =
+    document.getElementById("conversationList");
+
+  const search =
+    (
+      document.getElementById("conversationSearch")?.value ||
+      ""
+    ).toLowerCase().trim();
+
+
+  const conversationProjects =
+    getConversationProjects()
+      .filter(p => {
+
+        const client =
+          clientFor(p.client_id);
+
+        const text = [
+
+          client?.full_name,
+          client?.company_name,
+          client?.email,
+          p.project_name
+
+        ].join(" ").toLowerCase();
+
+        return text.includes(search);
+
+      });
+
+
+  if(!conversationProjects.length){
+
+    box.innerHTML = `
+      <div class="empty">
+        No conversations yet.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  box.innerHTML =
+    conversationProjects.map(p => {
+
+      const client =
+        clientFor(p.client_id);
+
+      const projectMessages =
+        messages.filter(
+          m =>
+            Number(m.project_id)
+            === Number(p.id)
+        );
+
+
+      const last =
+        projectMessages[
+          projectMessages.length - 1
+        ];
+
+
+      const hasClientMessage =
+        projectMessages.some(
+          m =>
+            String(m.sender_type).toLowerCase()
+            === "client"
+        );
+
+
+      return `
+
+        <div
+          class="
+            conversation-item
+            ${
+              selectedProject &&
+              Number(selectedProject.id) === Number(p.id)
+                ? "active"
+                : ""
+            }
+            ${
+              hasClientMessage
+                ? "unread"
+                : ""
+            }
+          "
+          data-conversation-project="${Number(p.id)}"
+        >
+
+          <strong>
+            ${esc(
+              client?.company_name ||
+              client?.full_name ||
+              "Client"
+            )}
+          </strong>
+
+          <div class="company">
+            ${esc(p.project_name || "Project")}
+          </div>
+
+          <div class="last-message">
+            ${esc(
+              last?.message ||
+              "No messages yet"
+            )}
+          </div>
+
+          ${
+            last
+            ? `
+              <span class="message-time">
+                ${formatTime(last.created_at)}
+              </span>
+            `
+            : ""
+          }
+
+          ${
+            hasClientMessage
+            ? `<span class="unread-dot"></span>`
+            : ""
+          }
+
+        </div>
+
+      `;
+
+    }).join("");
+
+
+  document
+    .querySelectorAll(
+      "[data-conversation-project]"
+    )
+    .forEach(item => {
+
+      item.addEventListener(
+        "click",
+        () => {
+
+          openConversation(
+            Number(
+              item.dataset.conversationProject
+            )
+          );
+
+        }
+      );
+
+    });
+
+}
+
+
+function openConversation(projectId){
+
+  selectedProject =
+    projectFor(projectId);
+
+
+  if(!selectedProject){
+    return;
+  }
+
+
+  const client =
+    clientFor(
+      selectedProject.client_id
+    );
+
+
+  const chat =
+    document.getElementById("chatArea");
+
+
+  const projectMessages =
+    messages.filter(
+      m =>
+        Number(m.project_id)
+        === Number(projectId)
+    );
+
+
+  chat.innerHTML = `
+
+    <div class="chat-head">
+
+      <div class="chat-person">
+
+        <div class="client-mini">
+          ${esc(initials(client?.full_name))}
+        </div>
+
+        <div>
+
+          <strong>
+            ${esc(
+              client?.full_name ||
+              "Client"
+            )}
+          </strong>
+
+          <span>
+            ${esc(
+              client?.company_name ||
+              client?.email ||
+              ""
+            )}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="chat-project">
+
+        Project<br>
+
+        <strong>
+          ${esc(
+            selectedProject.project_name ||
+            "Project"
+          )}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div id="messageScroll" class="messages">
+
+      ${
+        projectMessages.length
+
+        ? projectMessages.map(renderMessage).join("")
+
+        : `
+          <div class="empty">
+            No messages yet. Start the conversation.
+          </div>
+        `
+      }
+
+    </div>
+
+
+    <div class="chat-compose">
+
+      <div class="compose-row">
+
+        <textarea
+          id="adminMessageInput"
+          placeholder="Write a message to the client..."
+          rows="1"
+        ></textarea>
+
+        <button
+          id="sendMessageBtn"
+          class="send-btn"
+          title="Send message"
+        >
+          ➤
+        </button>
+
+      </div>
+
+      <div
+        style="
+          font-size:9px;
+          color:#9aa8b6;
+          margin-top:6px;
+          padding-left:3px;
+        "
+      >
+        Press Enter to send · Shift + Enter for new line
+      </div>
+
+    </div>
+
+  `;
+
+
+  const sendButton =
+    document.getElementById(
+      "sendMessageBtn"
+    );
+
+  const input =
+    document.getElementById(
+      "adminMessageInput"
+    );
+
+
+  sendButton.addEventListener(
+    "click",
+    sendAdminMessage
+  );
+
+
+  input.addEventListener(
+    "keydown",
+    e => {
+
+      if(
+        e.key === "Enter" &&
+        !e.shiftKey
+      ){
+
+        e.preventDefault();
+
+        sendAdminMessage();
+
+      }
+
+    }
+  );
+
+
+  scrollMessagesToBottom();
+
+}
+
+
+function renderMessage(m){
+
+  const isAdmin =
+    String(m.sender_type).toLowerCase()
+    === "admin";
+
+
+  return `
+
+    <div class="message ${
+      isAdmin
+        ? "admin"
+        : "client"
+    }">
+
+      <div class="message-bubble">
+
+        <div class="message-sender">
+
+          ${
+            isAdmin
+              ? "AWSZ / Sajjad"
+              : esc(m.sender_name || "Client")
+          }
+
+        </div>
+
+        <div>
+          ${esc(m.message)}
+        </div>
+
+        <div class="message-meta">
+          ${formatTime(m.created_at)}
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+async function sendAdminMessage(){
+
+  if(!selectedProject){
+    return;
+  }
+
+
+  const input =
+    document.getElementById(
+      "adminMessageInput"
+    );
+
+
+  if(!input){
+    return;
+  }
+
+
+  const text =
+    input.value.trim();
+
+
+  if(!text){
+    return;
+  }
+
+
+  input.disabled = true;
+
+
+  const client =
+    clientFor(
+      selectedProject.client_id
+    );
+
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from("messages")
+    .insert({
+
+      project_id:
+        selectedProject.id,
+
+      sender_type:
+        "admin",
+
+      sender_name:
+        "Sajjad",
+
+      message:
+        text
+
+    })
+    .select()
+    .single();
+
+
+  input.disabled = false;
+
+
+  if(error){
+
+    alert(
+      "Message could not be sent:\n\n" +
+      error.message
+    );
+
+    return;
+  }
+
+
+  if(data){
+
+    messages.push(data);
+
+  }
+
+
+  input.value = "";
+
+  openConversation(
+    selectedProject.id
+  );
+
+  renderConversations();
+
+}
+
+
+function startClientConversation(projectId){
+
+  selectedProject =
+    projectFor(projectId);
+
+  openPage("messages");
+
+}
+
+
+function scrollMessagesToBottom(){
+
+  setTimeout(() => {
+
+    const box =
+      document.getElementById(
+        "messageScroll"
+      );
+
+    if(box){
+      box.scrollTop =
+        box.scrollHeight;
+    }
+
+  },50);
+
+}
+
+
+/* =====================================================
+   ACCESS
+===================================================== */
+
+function renderAccess(){
+
+  const tbody =
+    document.getElementById("accessTable");
+
+
+  if(!accessRequests.length){
+
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5">
+          <div class="empty">
+            No access requests yet.
+          </div>
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  tbody.innerHTML =
+    accessRequests.map(a => {
+
+      const project =
+        projectFor(a.project_id);
+
+
+      return `
+
+        <tr>
+
+          <td>
+            <strong>
+              ${esc(a.system_name || "-")}
+            </strong>
+          </td>
+
+          <td>
+            ${esc(project?.project_name || "-")}
+          </td>
+
+          <td>
+            ${esc(a.access_type || "-")}
+          </td>
+
+          <td>
+
+            <span class="badge ${
+              String(a.status).toLowerCase() === "completed"
+                ? "green"
+                : "amber"
+            }">
+
+              ${esc(a.status || "Pending")}
+
+            </span>
+
+          </td>
+
+          <td>
+            ${formatDate(a.requested_at)}
+          </td>
+
+        </tr>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =====================================================
+   DOCUMENTS
+===================================================== */
+
+function renderDocuments(){
+
+  const tbody =
+    document.getElementById(
+      "documentsTable"
+    );
+
+
+  if(!documents.length){
+
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="4">
+          <div class="empty">
+            No documents yet.
+          </div>
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  tbody.innerHTML =
+    documents.map(d => {
+
+      const project =
+        projectFor(d.project_id);
+
+
+      return `
+
+        <tr>
+
+          <td>
+
+            <strong>
+              ${esc(d.file_name || "Document")}
+            </strong>
+
+          </td>
+
+          <td>
+            ${esc(project?.project_name || "-")}
+          </td>
+
+          <td>
+            ${esc(d.uploaded_by || "-")}
+          </td>
+
+          <td>
+            ${formatDate(d.created_at)}
+          </td>
+
+        </tr>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =====================================================
+   ACTIVITY
+===================================================== */
+
+function renderActivity(){
+
+  const tbody =
+    document.getElementById(
+      "activityTable"
+    );
+
+
+  if(!activities.length){
+
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="4">
+          <div class="empty">
+            No activity yet.
+          </div>
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  tbody.innerHTML =
+    activities.map(a => `
+
+      <tr>
+
+        <td>
+          <span class="badge blue">
+            ${esc(a.action || "Activity")}
+          </span>
+        </td>
+
+        <td>
+          ${esc(a.description || "-")}
+        </td>
+
+        <td>
+          ${esc(a.performed_by || "-")}
+        </td>
+
+        <td>
+          ${formatDate(a.created_at)}
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+
+/* =====================================================
+   REALTIME
+===================================================== */
+
+function setupRealtime(){
+
+  if(realtimeChannel){
+
+    supabaseClient
+      .removeChannel(realtimeChannel);
+
+  }
+
+
+  realtimeChannel =
+    supabaseClient
+      .channel("awsz-admin-realtime")
+
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"clients"
+        },
+        async () => {
+
+          await refreshClients();
+
+          showNotification(
+            "Client update",
+            "Client information was updated."
+          );
+
+        }
+      )
+
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"projects"
+        },
+        async () => {
+
+          await refreshProjects();
+
+          renderDashboard();
+
+        }
+      )
+
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"tasks"
+        },
+        async () => {
+
+          await refreshTasks();
+
+          renderDashboard();
+
+        }
+      )
+
+
+      .on(
+        "postgres_changes",
+        {
+          event:"INSERT",
+          schema:"public",
+          table:"messages"
+        },
+        async payload => {
+
+          const newMessage =
+            payload.new;
+
+
+          const exists =
+            messages.some(
+              m =>
+                Number(m.id)
+                === Number(newMessage.id)
+            );
+
+
+          if(!exists){
+
+            messages.push(
+              newMessage
+            );
+
+          }
+
+
+          updateUnreadMessages();
+
+          renderDashboard();
+
+          renderConversations();
+
+
+          if(
+            selectedProject &&
+            Number(selectedProject.id)
+            === Number(newMessage.project_id)
+          ){
+
+            openConversation(
+              selectedProject.id
+            );
+
+          }
+
+
+          if(
+            String(newMessage.sender_type)
+              .toLowerCase()
+            === "client"
+          ){
+
+            const project =
+              projectFor(
+                newMessage.project_id
+              );
+
+            const client =
+              project
+                ? clientFor(project.client_id)
+                : null;
+
+
+            showNotification(
+
+              client?.company_name ||
+              client?.full_name ||
+              "Client",
+
+              newMessage.message
+
+            );
+
+          }
+
+        }
+      )
+
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"documents"
+        },
+        async () => {
+
+          await refreshDocuments();
+
+        }
+      )
+
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"access_requests"
+        },
+        async () => {
+
+          await refreshAccess();
+
+        }
+      )
+
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"activity_logs"
+        },
+        async () => {
+
+          await refreshActivity();
+
+        }
+      )
+
+
+      .subscribe();
+
+}
+
+
+/* =====================================================
+   REFRESH HELPERS
+===================================================== */
+
+async function refreshClients(){
+
+  const {data} =
+    await supabaseClient
+      .from("clients")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+  clients =
+    data || [];
+
+  renderClients();
+
+}
+
+
+async function refreshProjects(){
+
+  const {data} =
+    await supabaseClient
+      .from("projects")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+  projects =
+    data || [];
+
+  renderProjects();
+
+}
+
+
+async function refreshTasks(){
+
+  const {data} =
+    await supabaseClient
+      .from("tasks")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+  tasks =
+    data || [];
+
+  renderTasks();
+
+}
+
+
+async function refreshDocuments(){
+
+  const {data} =
+    await supabaseClient
+      .from("documents")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+  documents =
+    data || [];
+
+  renderDocuments();
+
+}
+
+
+async function refreshAccess(){
+
+  const {data} =
+    await supabaseClient
+      .from("access_requests")
+      .select("*")
+      .order("requested_at",{ascending:false});
+
+  accessRequests =
+    data || [];
+
+  renderAccess();
+
+}
+
+
+async function refreshActivity(){
+
+  const {data} =
+    await supabaseClient
+      .from("activity_logs")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+  activities =
+    data || [];
+
+  renderActivity();
+
+}
+
+
+/* =====================================================
+   NOTIFICATIONS
+===================================================== */
+
+function showNotification(title,message){
+
+  notifications.unshift({
+
+    title,
+    message,
+    created_at:new Date()
+
+  });
+
+
+  notifications =
+    notifications.slice(0,20);
+
+
+  renderNotifications();
+
+}
+
+
+function renderNotifications(){
+
+  const box =
+    document.getElementById(
+      "notificationList"
+    );
+
+
+  if(!notifications.length){
+
+    box.innerHTML = `
+      <div class="empty">
+        No notifications yet.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  box.innerHTML =
+    notifications.map(n => `
+
+      <div class="notification">
+
+        <strong>
+          ${esc(n.title)}
+        </strong>
+
+        <p>
+          ${esc(n.message)}
+        </p>
+
+        <time>
+          ${formatDate(n.created_at)}
+          ·
+          ${formatTime(n.created_at)}
+        </time>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+/* =====================================================
+   EVENTS
+===================================================== */
+
+document
+  .getElementById("loginForm")
+  .addEventListener(
+    "submit",
+    async e => {
+
+      e.preventDefault();
+
+      const email =
+        document
+          .getElementById("loginEmail")
+          .value
+          .trim();
+
+      const password =
+        document
+          .getElementById("loginPassword")
+          .value;
+
+      await login(
+        email,
+        password
+      );
+
+    }
+  );
+
+
+document
+  .getElementById("logoutBtn")
+  .addEventListener(
+    "click",
+    logout
+  );
+
+
+document
+  .getElementById("clientSearch")
+  .addEventListener(
+    "input",
+    renderClients
+  );
+
+
+document
+  .getElementById("conversationSearch")
+  .addEventListener(
+    "input",
+    renderConversations
+  );
+
+
+document
+  .getElementById("notificationBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById(
+          "notificationPanel"
+        )
+        .classList.toggle("show");
+
+    }
+  );
+
+
+document
+  .getElementById("clearNotifications")
+  .addEventListener(
+    "click",
+    () => {
+
+      notifications = [];
+
+      renderNotifications();
+
+    }
+  );
+
+
+document
+  .getElementById("mobileMenu")
+  .addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+    }
+  );
+
+
+document
+  .querySelectorAll("[data-close]")
+  .forEach(btn => {
+
+    btn.addEventListener(
+      "click",
+      () => {
+
+        document
+          .getElementById(
+            btn.dataset.close
+          )
+          .classList.remove("show");
+
+      }
+    );
+
+  });
+
+
+/* =====================================================
+   PROJECT MODAL
+===================================================== */
+
+document
+  .getElementById("newProjectBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      const select =
+        document.getElementById(
+          "projectClient"
+        );
+
+
+      select.innerHTML =
+        clients.map(c => `
+
+          <option value="${esc(c.id)}">
+            ${esc(
+              c.company_name ||
+              c.full_name ||
+              c.email
+            )}
+          </option>
+
+        `).join("");
+
+
+      document
+        .getElementById("projectModal")
+        .classList.add("show");
+
+    }
+  );
+
+
+document
+  .getElementById("saveProjectBtn")
+  .addEventListener(
+    "click",
+    async () => {
+
+      const clientId =
+        document
+          .getElementById("projectClient")
+          .value;
+
+      const projectName =
+        document
+          .getElementById("projectName")
+          .value
+          .trim();
+
+      const description =
+        document
+          .getElementById("projectDescription")
+          .value
+          .trim();
+
+      const price =
+        document
+          .getElementById("projectPrice")
+          .value;
+
+      const stage =
+        document
+          .getElementById("projectStage")
+          .value;
+
+
+      if(!clientId || !projectName){
+
+        alert(
+          "Please select a client and enter a project name."
+        );
+
+        return;
+      }
+
+
+      const {
+        error
+      } = await supabaseClient
+        .from("projects")
+        .insert({
+
+          client_id:
+            clientId,
+
+          project_name:
+            projectName,
+
+          description:
+            description,
+
+          quoted_price:
+            price
+              ? Number(price)
+              : null,
+
+          stage:
+            stage,
+
+          progress:
+            0,
+
+          status:
+            "Active"
+
+        });
+
+
+      if(error){
+
+        alert(
+          "Project could not be created:\n\n" +
+          error.message
+        );
+
+        return;
+      }
+
+
+      document
+        .getElementById("projectModal")
+        .classList.remove("show");
+
+
+      document
+        .getElementById("projectName")
+        .value = "";
+
+      document
+        .getElementById("projectDescription")
+        .value = "";
+
+      document
+        .getElementById("projectPrice")
+        .value = "";
+
+
+      await refreshProjects();
+
+      renderDashboard();
+
+    }
+  );
+
+
+/* =====================================================
+   INVOICE BUTTON
+===================================================== */
+
+document
+  .getElementById("invoiceBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      alert(
+        "Invoice database is the next module. The UI is ready, but the invoices table has not been created yet."
+      );
+
+    }
+  );
+
+
+/* =====================================================
    START
-========================= */
+===================================================== */
 
 checkExistingSession();
 
