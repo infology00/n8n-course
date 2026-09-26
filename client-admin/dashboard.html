@@ -1,4 +1,3 @@
-```html id="m4x8qp"
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -251,23 +250,58 @@
 
 
     // ==========================================
-    // CHECK LOGIN
+    // CHECK LOGIN + ADMIN ROLE
     // ==========================================
 
     async function checkUser() {
 
       const {
-        data: { user }
+        data: { user },
+        error: userError
       } = await supabaseClient.auth.getUser();
 
 
-      if (!user) {
+      // User is not logged in
+      if (userError || !user) {
 
         window.location.href = "index.html";
 
         return;
       }
 
+
+      // ==========================================
+      // CHECK ADMIN ROLE
+      // ==========================================
+
+      const {
+        data: roleData,
+        error: roleError
+      } = await supabaseClient
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.id)
+        .single();
+
+
+      // User is not an admin
+      if (
+        roleError ||
+        !roleData ||
+        roleData.role !== "admin"
+      ) {
+
+        await supabaseClient.auth.signOut();
+
+        window.location.href = "index.html";
+
+        return;
+      }
+
+
+      // ==========================================
+      // ADMIN VERIFIED
+      // ==========================================
 
       document.getElementById("adminEmail").textContent =
         user.email;
@@ -427,4 +461,3 @@
 
 </body>
 </html>
-```
