@@ -3,27 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AWSZ Client Portal</title>
+
+<title>Client Portal</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root{
-  --bg:#f4f8fc;
-  --bg2:#eaf2fa;
+  --cloud:#f4f8fc;
+  --cloud2:#eaf2fa;
+  --cloud3:#dceaf7;
   --blue:#246bce;
   --blue-dark:#123b70;
+  --deep:#0b2850;
   --text:#20272e;
   --muted:#66778a;
   --line:#d8e4ef;
-  --white:#fff;
+  --white:#ffffff;
   --green:#20855a;
   --green-bg:#eaf7f0;
   --amber:#b97918;
   --amber-bg:#fff5df;
   --red:#c33d3d;
   --red-bg:#fff0f0;
-  --shadow:0 12px 35px rgba(24,61,99,.08);
+  --shadow:0 12px 35px rgba(20,55,90,.08);
   --radius:18px;
 }
 
@@ -31,17 +34,22 @@
   box-sizing:border-box;
 }
 
-html,body{
+html{
+  scroll-behavior:smooth;
+}
+
+body{
   margin:0;
-  padding:0;
-  min-height:100%;
-  font-family:Inter,Arial,sans-serif;
-  background:var(--bg);
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  background:var(--cloud);
   color:var(--text);
 }
 
-button,input,textarea,select{
-  font:inherit;
+button,
+input,
+textarea,
+select{
+  font-family:inherit;
 }
 
 button{
@@ -49,169 +57,202 @@ button{
 }
 
 .hidden{
-  display:none!important;
+  display:none !important;
 }
 
-/* ================= AUTH ================= */
+/* =========================
+   LOGIN
+========================= */
 
-.auth{
+#loginScreen{
   min-height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
-  padding:25px;
+  justify-content:center;
+  padding:24px;
   background:
-    radial-gradient(circle at 15% 10%,#fff,transparent 35%),
-    linear-gradient(135deg,#f7fbff,#e9f3fc);
+    radial-gradient(circle at top right,#dceaf7 0,transparent 35%),
+    linear-gradient(135deg,#f7fbff,#edf5fc);
 }
 
-.auth-card{
-  width:min(430px,100%);
+.login-card{
+  width:100%;
+  max-width:430px;
   background:#fff;
   border:1px solid var(--line);
-  border-radius:25px;
+  border-radius:24px;
   padding:38px;
   box-shadow:var(--shadow);
 }
 
-.logo{
-  font-size:30px;
-  font-weight:900;
-  color:var(--blue-dark);
-  letter-spacing:-1.5px;
-}
-
-.logo span{
-  color:var(--blue);
-}
-
-.auth-card h1{
-  margin:35px 0 8px;
-  font-size:28px;
-}
-
-.auth-card p{
-  color:var(--muted);
-  line-height:1.6;
-}
-
-.field{
-  margin:18px 0;
-}
-
-.field label{
-  display:block;
-  font-size:13px;
+.login-logo{
+  width:54px;
+  height:54px;
+  border-radius:15px;
+  background:var(--deep);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   font-weight:800;
-  margin-bottom:8px;
+  font-size:17px;
+  margin-bottom:22px;
 }
 
-.field input,
-.field textarea,
-.field select{
+.login-card h1{
+  margin:0 0 8px;
+  font-size:30px;
+}
+
+.login-card p{
+  color:var(--muted);
+  margin:0 0 28px;
+}
+
+.form-group{
+  margin-bottom:17px;
+}
+
+.form-group label{
+  display:block;
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:7px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
   width:100%;
   border:1px solid var(--line);
-  border-radius:11px;
-  padding:13px;
-  outline:none;
   background:#fff;
+  border-radius:12px;
+  padding:13px 14px;
+  font-size:15px;
+  outline:none;
+  transition:.2s;
 }
 
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
   border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(36,107,206,.1);
+  box-shadow:0 0 0 3px rgba(36,107,206,.08);
 }
 
-.btn{
-  border:0;
-  border-radius:11px;
-  padding:12px 17px;
-  font-weight:800;
-}
-
-.btn-primary{
-  background:var(--blue);
-  color:white;
-}
-
-.btn-secondary{
-  background:var(--bg2);
-  color:var(--blue-dark);
-}
-
-.btn-full{
+.primary-btn{
   width:100%;
+  border:0;
+  border-radius:12px;
+  padding:14px 18px;
+  background:var(--blue);
+  color:#fff;
+  font-weight:700;
+  font-size:15px;
 }
 
-.auth-error{
-  margin-top:14px;
+.primary-btn:hover{
+  background:var(--blue-dark);
+}
+
+.error-box{
+  background:var(--red-bg);
   color:var(--red);
-  font-size:13px;
+  border:1px solid #f2cccc;
+  border-radius:12px;
+  padding:12px 14px;
+  font-size:14px;
+  margin-bottom:16px;
 }
 
-/* ================= APP ================= */
+/* =========================
+   APP
+========================= */
 
-.app{
+#app{
   min-height:100vh;
-  display:flex;
 }
+
+.app-layout{
+  display:flex;
+  min-height:100vh;
+}
+
+/* SIDEBAR */
 
 .sidebar{
-  position:fixed;
-  left:0;
-  top:0;
-  bottom:0;
   width:255px;
   background:#fff;
   border-right:1px solid var(--line);
-  padding:24px 15px;
-  z-index:100;
+  position:fixed;
+  top:0;
+  left:0;
+  bottom:0;
+  z-index:50;
+  display:flex;
+  flex-direction:column;
 }
 
-.sidebar-logo{
-  padding:8px 12px 32px;
+.brand{
+  padding:25px 22px;
+  border-bottom:1px solid var(--line);
 }
 
-.nav-label{
-  font-size:10px;
-  font-weight:900;
-  color:#9aa8b6;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  padding:0 12px;
-  margin:15px 0 8px;
+.brand-mark{
+  display:inline-flex;
+  width:46px;
+  height:46px;
+  align-items:center;
+  justify-content:center;
+  background:var(--deep);
+  color:#fff;
+  border-radius:13px;
+  font-size:14px;
+  font-weight:800;
+}
+
+.brand-name{
+  margin-top:11px;
+  font-weight:800;
+  font-size:17px;
+}
+
+.brand-sub{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
 }
 
 .nav{
-  display:flex;
-  flex-direction:column;
-  gap:4px;
+  padding:17px 12px;
+  flex:1;
+  overflow-y:auto;
 }
 
-.nav button{
+.nav-btn{
+  width:100%;
   border:0;
   background:transparent;
-  color:#5e6f80;
-  padding:13px 12px;
-  border-radius:11px;
   text-align:left;
-  font-weight:750;
   display:flex;
   align-items:center;
-  gap:12px;
-  width:100%;
+  gap:11px;
+  padding:12px 13px;
+  margin-bottom:4px;
+  border-radius:11px;
+  color:#4b5d70;
+  font-size:14px;
+  font-weight:600;
 }
 
-.nav button:hover{
-  background:var(--bg);
+.nav-btn:hover{
+  background:var(--cloud);
+  color:var(--deep);
+}
+
+.nav-btn.active{
+  background:var(--cloud2);
   color:var(--blue-dark);
-}
-
-.nav button.active{
-  background:var(--bg2);
-  color:var(--blue);
 }
 
 .nav-icon{
@@ -220,70 +261,60 @@ button{
   font-size:17px;
 }
 
-.badge{
+.nav-badge{
   margin-left:auto;
-  background:var(--blue);
-  color:#fff;
   min-width:20px;
   height:20px;
-  border-radius:20px;
-  font-size:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
   padding:0 6px;
-}
-
-.sidebar-user{
-  position:absolute;
-  left:15px;
-  right:15px;
-  bottom:20px;
-  padding:15px 10px;
-  border-top:1px solid var(--line);
+  border-radius:20px;
+  background:var(--red);
+  color:white;
+  font-size:11px;
   display:flex;
-  gap:10px;
   align-items:center;
-}
-
-.avatar{
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  background:var(--bg2);
-  color:var(--blue-dark);
-  display:flex;
   justify-content:center;
+}
+
+.sidebar-bottom{
+  padding:15px;
+  border-top:1px solid var(--line);
+}
+
+.connection-status{
+  display:flex;
   align-items:center;
-  font-weight:900;
-}
-
-.user-name{
+  gap:8px;
   font-size:12px;
-  font-weight:850;
-}
-
-.user-email{
-  font-size:10px;
   color:var(--muted);
-  margin-top:3px;
-  max-width:150px;
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow:ellipsis;
 }
 
-/* ================= MAIN ================= */
+.connection-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#bbb;
+}
+
+.connection-dot.online{
+  background:#22a66b;
+  box-shadow:0 0 0 4px rgba(34,166,107,.1);
+}
+
+.connection-dot.offline{
+  background:#d64a4a;
+}
+
+/* MAIN */
 
 .main{
   margin-left:255px;
   width:calc(100% - 255px);
-  min-height:100vh;
+  min-width:0;
 }
 
 .topbar{
-  height:75px;
-  background:rgba(255,255,255,.94);
+  height:76px;
+  background:#fff;
   border-bottom:1px solid var(--line);
   display:flex;
   align-items:center;
@@ -291,62 +322,115 @@ button{
   padding:0 32px;
   position:sticky;
   top:0;
-  z-index:50;
+  z-index:30;
 }
 
-.top-title{
-  font-size:20px;
-  font-weight:900;
+.topbar-title{
+  font-size:18px;
+  font-weight:800;
 }
 
-.top-actions{
+.topbar-right{
   display:flex;
-  gap:9px;
+  align-items:center;
+  gap:12px;
 }
 
-.icon-btn{
-  width:40px;
-  height:40px;
-  border:1px solid var(--line);
-  border-radius:11px;
-  background:#fff;
-  position:relative;
+.live-indicator{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:12px;
+  color:var(--muted);
 }
 
-.dot{
-  position:absolute;
-  right:6px;
-  top:6px;
-  width:7px;
-  height:7px;
-  background:var(--blue);
+.live-dot{
+  width:8px;
+  height:8px;
   border-radius:50%;
-  border:2px solid white;
+  background:#20a36a;
+  animation:pulse 1.8s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:1}
+  50%{opacity:.35}
+}
+
+.sound-btn{
+  border:1px solid var(--line);
+  background:white;
+  border-radius:10px;
+  padding:8px 11px;
+  font-size:13px;
+  color:var(--deep);
+}
+
+.sound-btn.enabled{
+  background:var(--green-bg);
+  color:var(--green);
+  border-color:#c8e7d8;
+}
+
+.mobile-menu{
+  display:none;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:10px;
+  padding:8px 10px;
 }
 
 .content{
-  padding:32px;
-  max-width:1450px;
-  margin:auto;
+  padding:30px;
+  max-width:1400px;
+  margin:0 auto;
 }
 
-.heading{
+/* =========================
+   PAGE
+========================= */
+
+.page-header{
   margin-bottom:25px;
 }
 
-.heading h1{
-  margin:0 0 7px;
-  font-size:30px;
-  letter-spacing:-.7px;
+.page-header h1{
+  margin:0 0 6px;
+  font-size:28px;
 }
 
-.heading p{
+.page-header p{
   margin:0;
   color:var(--muted);
-  line-height:1.6;
+  font-size:14px;
 }
 
-/* ================= CARDS ================= */
+/* CARDS */
+
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:0 7px 25px rgba(30,65,100,.035);
+}
+
+.card-header{
+  padding:19px 21px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.card-header h3{
+  margin:0;
+  font-size:16px;
+}
+
+.card-body{
+  padding:21px;
+}
 
 .grid{
   display:grid;
@@ -365,428 +449,349 @@ button{
   grid-template-columns:repeat(2,1fr);
 }
 
-.card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  box-shadow:0 7px 25px rgba(25,60,95,.04);
-}
-
-.card-pad{
-  padding:22px;
-}
-
-.stat{
-  padding:22px;
+.stat-card{
+  padding:21px;
 }
 
 .stat-label{
   color:var(--muted);
-  font-size:12px;
-  font-weight:750;
+  font-size:13px;
+  margin-bottom:10px;
 }
 
 .stat-value{
-  font-size:29px;
-  font-weight:900;
-  color:var(--blue-dark);
-  margin-top:8px;
+  font-size:27px;
+  font-weight:800;
+  color:var(--deep);
 }
 
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-bottom:17px;
-}
-
-.section-title h2{
-  margin:0;
-  font-size:18px;
-}
-
-.link{
-  color:var(--blue);
+.stat-small{
+  color:var(--muted);
   font-size:12px;
-  font-weight:850;
-  border:0;
-  background:none;
+  margin-top:6px;
 }
 
-/* ================= STATUS ================= */
-
-.status{
-  display:inline-flex;
-  border-radius:30px;
-  padding:6px 10px;
-  font-size:10px;
-  font-weight:900;
-}
-
-.active{
-  background:var(--green-bg);
-  color:var(--green);
-}
-
-.pending{
-  background:var(--amber-bg);
-  color:var(--amber);
-}
-
-.paid{
-  background:var(--green-bg);
-  color:var(--green);
-}
-
-.overdue{
-  background:var(--red-bg);
-  color:var(--red);
-}
-
-/* ================= PROJECT ================= */
-
-.project-card{
-  padding:23px;
-}
+/* PROJECT */
 
 .project-title{
-  font-size:20px;
-  font-weight:900;
+  font-size:22px;
+  font-weight:800;
+  margin-bottom:7px;
 }
 
-.project-desc{
+.project-description{
   color:var(--muted);
-  font-size:13px;
   line-height:1.6;
-  margin:9px 0 20px;
+  font-size:14px;
+}
+
+.progress-wrap{
+  margin-top:20px;
+}
+
+.progress-top{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+  font-size:13px;
+  font-weight:700;
 }
 
 .progress{
-  height:9px;
+  height:11px;
+  background:#e7eef5;
   border-radius:20px;
   overflow:hidden;
-  background:var(--bg2);
 }
 
 .progress-bar{
   height:100%;
-  background:var(--blue);
+  background:linear-gradient(90deg,var(--blue),#4f91e9);
   border-radius:20px;
+  transition:width .5s ease;
 }
 
-.progress-info{
+.badge{
+  display:inline-flex;
+  align-items:center;
+  border-radius:30px;
+  padding:6px 10px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.badge.green{
+  background:var(--green-bg);
+  color:var(--green);
+}
+
+.badge.blue{
+  background:#eaf2ff;
+  color:var(--blue-dark);
+}
+
+.badge.amber{
+  background:var(--amber-bg);
+  color:var(--amber);
+}
+
+.badge.red{
+  background:var(--red-bg);
+  color:var(--red);
+}
+
+.info-list{
+  display:grid;
+  gap:0;
+}
+
+.info-row{
   display:flex;
   justify-content:space-between;
-  font-size:11px;
-  color:var(--muted);
-  margin-top:7px;
-}
-
-.stage{
-  margin-top:18px;
-  padding:13px;
-  background:var(--bg);
-  border-radius:11px;
-}
-
-.stage-label{
-  color:var(--muted);
-  font-size:10px;
-  text-transform:uppercase;
-  font-weight:900;
-}
-
-.stage-value{
-  margin-top:5px;
+  gap:20px;
+  padding:13px 0;
+  border-bottom:1px solid #edf2f6;
   font-size:14px;
-  font-weight:850;
 }
 
-/* ================= PROJECT TABS ================= */
-
-.project-tabs{
-  display:flex;
-  gap:5px;
-  padding:6px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:13px;
-  margin-bottom:20px;
-  overflow-x:auto;
+.info-row:last-child{
+  border-bottom:0;
 }
 
-.project-tab{
-  border:0;
-  background:transparent;
-  padding:10px 15px;
-  border-radius:9px;
+.info-label{
   color:var(--muted);
-  font-size:12px;
-  font-weight:850;
-  white-space:nowrap;
 }
 
-.project-tab.active{
-  background:var(--bg2);
-  color:var(--blue);
+.info-value{
+  font-weight:700;
+  text-align:right;
 }
 
-/* ================= CHAT ================= */
+/* CHAT */
 
-.chat-wrapper{
-  height:calc(100vh - 145px);
-  min-height:550px;
+.chat-shell{
   display:flex;
   flex-direction:column;
+  height:calc(100vh - 136px);
+  min-height:550px;
 }
 
-.chat-header{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:16px 16px 0 0;
-  padding:16px 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.chat-header-title{
-  font-size:16px;
-  font-weight:900;
-}
-
-.chat-header-sub{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:3px;
-}
-
-.chat-area{
+.chat-messages{
   flex:1;
   overflow-y:auto;
-  padding:25px;
-  background:#eaf2f9;
-  border-left:1px solid var(--line);
-  border-right:1px solid var(--line);
+  padding:22px;
+  background:#f8fbfe;
 }
 
-.chat-empty{
-  height:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  color:var(--muted);
-}
-
-.chat-empty-icon{
-  font-size:42px;
-  margin-bottom:12px;
-}
-
-.message{
+.message-row{
   display:flex;
   margin-bottom:13px;
 }
 
-.message.client{
+.message-row.client{
   justify-content:flex-end;
 }
 
-.message.admin{
+.message-row.admin{
   justify-content:flex-start;
 }
 
-.bubble{
-  max-width:min(70%,600px);
+.message-bubble{
+  max-width:72%;
+  border-radius:17px;
   padding:12px 14px;
-  border-radius:15px;
-  background:#fff;
-  box-shadow:0 2px 5px rgba(0,0,0,.04);
-}
-
-.client .bubble{
-  background:var(--blue);
-  color:#fff;
-  border-bottom-right-radius:4px;
-}
-
-.admin .bubble{
-  border-bottom-left-radius:4px;
-}
-
-.sender{
-  font-size:9px;
-  font-weight:900;
-  opacity:.65;
-  margin-bottom:5px;
-}
-
-.message-text{
   font-size:14px;
   line-height:1.5;
-  white-space:pre-wrap;
-  word-break:break-word;
+}
+
+.message-row.client .message-bubble{
+  background:var(--blue);
+  color:#fff;
+  border-bottom-right-radius:5px;
+}
+
+.message-row.admin .message-bubble{
+  background:#fff;
+  border:1px solid var(--line);
+  color:var(--text);
+  border-bottom-left-radius:5px;
+}
+
+.message-name{
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:4px;
+  opacity:.7;
 }
 
 .message-time{
-  font-size:9px;
-  opacity:.6;
-  text-align:right;
+  font-size:10px;
   margin-top:5px;
+  opacity:.65;
 }
 
-.chat-compose{
+.chat-input{
+  border-top:1px solid var(--line);
   background:#fff;
-  border:1px solid var(--line);
-  border-radius:0 0 16px 16px;
-  padding:12px;
+  padding:15px;
   display:flex;
-  align-items:flex-end;
-  gap:8px;
+  gap:10px;
 }
 
-.chat-compose textarea{
+.chat-input textarea{
   flex:1;
   resize:none;
-  min-height:45px;
-  max-height:120px;
+  min-height:48px;
+  max-height:130px;
   border:1px solid var(--line);
-  border-radius:11px;
-  padding:12px;
+  border-radius:13px;
+  padding:13px;
   outline:none;
 }
 
-.send{
-  width:45px;
-  height:45px;
+.chat-input textarea:focus{
+  border-color:var(--blue);
+}
+
+.send-btn{
   border:0;
-  border-radius:11px;
   background:var(--blue);
-  color:#fff;
+  color:white;
+  border-radius:12px;
+  padding:0 21px;
+  font-weight:700;
 }
 
-/* ================= CREDENTIALS ================= */
+/* DOCUMENTS */
 
-.credential-form{
-  background:var(--bg);
-  padding:20px;
-  border-radius:15px;
-  margin-bottom:20px;
-}
-
+.document-row,
+.invoice-row,
 .credential-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-}
-
-.credential-item{
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:18px;
-  margin-bottom:12px;
-}
-
-.credential-name{
-  font-weight:900;
-  font-size:16px;
-  margin-bottom:12px;
-}
-
-.credential-value{
-  background:var(--bg);
-  border-radius:8px;
-  padding:9px;
-  margin-top:5px;
-  font-size:12px;
-  word-break:break-all;
-}
-
-.credential-label{
-  color:var(--muted);
-  font-size:10px;
-  font-weight:800;
-  text-transform:uppercase;
-  margin-top:9px;
-}
-
-/* ================= DOCUMENTS / INVOICES ================= */
-
-.row{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:15px;
   padding:16px 0;
-  border-bottom:1px solid var(--line);
+  border-bottom:1px solid #edf2f6;
 }
 
-.row:last-child{
+.document-row:last-child,
+.invoice-row:last-child,
+.credential-row:last-child{
   border-bottom:0;
 }
 
-.row-left{
-  display:flex;
-  align-items:center;
-  gap:12px;
+.item-main{
+  min-width:0;
 }
 
-.file-icon{
-  width:42px;
-  height:42px;
-  background:var(--bg2);
-  color:var(--blue);
-  border-radius:10px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+.item-title{
+  font-size:14px;
+  font-weight:800;
+  margin-bottom:5px;
 }
 
-.row-title{
-  font-size:13px;
-  font-weight:850;
-}
-
-.row-sub{
+.item-meta{
   color:var(--muted);
-  font-size:10px;
-  margin-top:4px;
+  font-size:12px;
 }
 
-/* ================= ACCOUNT ================= */
-
-.account-form{
-  max-width:800px;
+.secondary-btn{
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--deep);
+  border-radius:9px;
+  padding:8px 12px;
+  font-size:12px;
+  font-weight:700;
+  text-decoration:none;
+  white-space:nowrap;
 }
 
-.account-form .field{
-  margin-bottom:18px;
+.secondary-btn:hover{
+  background:var(--cloud);
 }
 
-/* ================= MOBILE ================= */
+/* EMPTY */
 
-.mobile-header{
-  display:none;
+.empty{
+  text-align:center;
+  padding:45px 20px;
+  color:var(--muted);
 }
 
-.bottom-nav{
-  display:none;
+.empty-icon{
+  font-size:34px;
+  margin-bottom:12px;
 }
 
-@media(max-width:1050px){
+/* TOAST */
 
-  .grid-4{
-    grid-template-columns:repeat(2,1fr);
+.toast-container{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  pointer-events:none;
+}
+
+.toast{
+  min-width:290px;
+  max-width:370px;
+  background:#fff;
+  border:1px solid var(--line);
+  box-shadow:0 15px 40px rgba(0,0,0,.14);
+  border-radius:15px;
+  padding:14px 16px;
+  animation:toastIn .25s ease;
+  pointer-events:auto;
+}
+
+@keyframes toastIn{
+  from{
+    opacity:0;
+    transform:translateY(15px);
   }
-
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
-@media(max-width:760px){
+.toast-title{
+  font-weight:800;
+  font-size:14px;
+  margin-bottom:4px;
+}
+
+.toast-text{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.4;
+}
+
+/* ACCOUNT */
+
+.profile-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:17px;
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
 
   .sidebar{
-    display:none;
+    transform:translateX(-100%);
+    transition:.25s ease;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
   }
 
   .main{
@@ -794,345 +799,379 @@ button{
     width:100%;
   }
 
-  .topbar{
-    display:none;
+  .mobile-menu{
+    display:block;
   }
 
-  .mobile-header{
-    display:flex;
-    height:62px;
-    background:#fff;
-    border-bottom:1px solid var(--line);
-    align-items:center;
-    justify-content:space-between;
-    padding:0 15px;
-    position:sticky;
-    top:0;
-    z-index:50;
+  .topbar{
+    padding:0 16px;
   }
 
   .content{
-    padding:20px 15px 90px;
+    padding:20px 15px;
   }
 
-  .grid-4,
-  .grid-3,
+  .grid-4{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .grid-3{
+    grid-template-columns:1fr;
+  }
+
   .grid-2{
     grid-template-columns:1fr;
   }
+}
 
-  .heading h1{
-    font-size:26px;
+@media(max-width:600px){
+
+  .topbar-title{
+    font-size:15px;
   }
 
-  .credential-row{
+  .live-indicator{
+    display:none;
+  }
+
+  .sound-btn{
+    font-size:11px;
+  }
+
+  .page-header h1{
+    font-size:24px;
+  }
+
+  .grid-4{
     grid-template-columns:1fr;
   }
 
-  .chat-wrapper{
-    height:calc(100vh - 110px);
+  .profile-grid{
+    grid-template-columns:1fr;
+  }
+
+  .chat-shell{
+    height:calc(100vh - 115px);
     min-height:500px;
   }
 
-  .bubble{
-    max-width:85%;
+  .message-bubble{
+    max-width:86%;
   }
 
-  .bottom-nav{
-    position:fixed;
-    left:0;
-    right:0;
-    bottom:0;
-    height:66px;
-    background:#fff;
-    border-top:1px solid var(--line);
-    z-index:100;
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
+  .chat-input{
+    padding:10px;
   }
 
-  .bottom-nav button{
-    border:0;
-    background:none;
-    color:var(--muted);
-    font-size:9px;
-    font-weight:850;
+  .send-btn{
+    padding:0 15px;
   }
 
-  .bottom-nav button.active{
-    color:var(--blue);
+  .document-row,
+  .invoice-row,
+  .credential-row{
+    align-items:flex-start;
+    flex-direction:column;
   }
 
-  .bottom-icon{
-    display:block;
-    font-size:18px;
-    margin-bottom:3px;
+  .toast-container{
+    left:12px;
+    right:12px;
+    bottom:12px;
   }
 
+  .toast{
+    min-width:0;
+    width:100%;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= LOGIN ================= -->
+<!-- =========================
+     LOGIN
+========================= -->
 
-<div id="auth" class="auth">
+<div id="loginScreen">
 
-  <div class="auth-card">
+  <div class="login-card">
 
-    <div class="logo">AWSZ<span>.</span></div>
+    <div class="login-logo">
+      AWSZ
+    </div>
 
     <h1>Client Portal</h1>
 
     <p>
-      Access your project, credentials, messages,
-      documents and invoices in one place.
+      Sign in to view your project, documents, invoices and communicate with your team.
     </p>
+
+    <div id="loginError" class="error-box hidden"></div>
 
     <form id="loginForm">
 
-      <div class="field">
+      <div class="form-group">
         <label>Email</label>
         <input
-          id="email"
+          id="loginEmail"
           type="email"
-          required
           placeholder="you@example.com"
+          required
         >
       </div>
 
-      <div class="field">
+      <div class="form-group">
         <label>Password</label>
         <input
-          id="password"
+          id="loginPassword"
           type="password"
-          required
           placeholder="Your password"
+          required
         >
       </div>
 
-      <button class="btn btn-primary btn-full">
+      <button
+        id="loginBtn"
+        class="primary-btn"
+        type="submit"
+      >
         Sign In
       </button>
 
     </form>
-
-    <div id="loginError" class="auth-error"></div>
 
   </div>
 
 </div>
 
 
-<!-- ================= APP ================= -->
+<!-- =========================
+     APP
+========================= -->
 
-<div id="app" class="app hidden">
+<div id="app" class="hidden">
 
-  <!-- SIDEBAR -->
+  <div class="app-layout">
 
-  <aside class="sidebar">
+    <!-- SIDEBAR -->
 
-    <div class="sidebar-logo">
-      <div class="logo">AWSZ<span>.</span></div>
-    </div>
+    <aside id="sidebar" class="sidebar">
 
-    <div class="nav-label">Portal</div>
+      <div class="brand">
 
-    <nav class="nav">
+        <div class="brand-mark">
+          AWSZ
+        </div>
 
-      <button data-view="dashboard">
-        <span class="nav-icon">⌂</span>
-        Dashboard
-      </button>
+        <div class="brand-name">
+          Client Portal
+        </div>
 
-      <button data-view="project">
-        <span class="nav-icon">▦</span>
-        My Project
-      </button>
+        <div class="brand-sub">
+          Automation with Sajjad Zaidi
+        </div>
 
-      <button data-view="credentials">
-        <span class="nav-icon">🔐</span>
-        Credentials
-      </button>
-
-      <button data-view="chat">
-        <span class="nav-icon">◌</span>
-        Chat
-        <span id="chatBadge" class="badge hidden">0</span>
-      </button>
-
-      <button data-view="documents">
-        <span class="nav-icon">▤</span>
-        Documents
-      </button>
-
-      <button data-view="invoices">
-        <span class="nav-icon">$</span>
-        Invoices
-      </button>
-
-    </nav>
-
-    <div class="nav-label">Account</div>
-
-    <nav class="nav">
-
-      <button data-view="account">
-        <span class="nav-icon">◉</span>
-        Account
-      </button>
-
-      <button id="logout">
-        <span class="nav-icon">↪</span>
-        Sign Out
-      </button>
-
-    </nav>
-
-    <div class="sidebar-user">
-
-      <div id="avatar" class="avatar">C</div>
-
-      <div>
-        <div id="userName" class="user-name">Client</div>
-        <div id="userEmail" class="user-email">—</div>
       </div>
 
-    </div>
+      <nav class="nav">
 
-  </aside>
-
-
-  <!-- MAIN -->
-
-  <main class="main">
-
-    <header class="mobile-header">
-
-      <div class="logo">AWSZ<span>.</span></div>
-
-      <button
-        class="icon-btn"
-        onclick="navigate('account')"
-      >
-        ◉
-      </button>
-
-    </header>
-
-
-    <header class="topbar">
-
-      <div id="topTitle" class="top-title">
-        Dashboard
-      </div>
-
-      <div class="top-actions">
-
-        <button
-          class="icon-btn"
-          onclick="navigate('chat')"
-        >
-          ◌
-          <span id="messageDot" class="dot hidden"></span>
+        <button class="nav-btn active" data-view="dashboard">
+          <span class="nav-icon">⌂</span>
+          <span>Dashboard</span>
         </button>
 
-        <button
-          class="icon-btn"
-          onclick="navigate('account')"
-        >
-          ◉
+        <button class="nav-btn" data-view="project">
+          <span class="nav-icon">◫</span>
+          <span>My Project</span>
         </button>
+
+        <button class="nav-btn" data-view="credentials">
+          <span class="nav-icon">🔐</span>
+          <span>Credentials</span>
+        </button>
+
+        <button class="nav-btn" data-view="chat">
+          <span class="nav-icon">💬</span>
+          <span>Chat</span>
+          <span id="chatBadge" class="nav-badge hidden">0</span>
+        </button>
+
+        <button class="nav-btn" data-view="documents">
+          <span class="nav-icon">▤</span>
+          <span>Documents</span>
+        </button>
+
+        <button class="nav-btn" data-view="invoices">
+          <span class="nav-icon">▣</span>
+          <span>Invoices</span>
+        </button>
+
+        <button class="nav-btn" data-view="account">
+          <span class="nav-icon">◯</span>
+          <span>Account</span>
+        </button>
+
+      </nav>
+
+      <div class="sidebar-bottom">
+
+        <div class="connection-status">
+
+          <span id="connectionDot" class="connection-dot"></span>
+
+          <span id="connectionText">
+            Connecting...
+          </span>
+
+        </div>
 
       </div>
 
-    </header>
+    </aside>
 
 
-    <section id="content" class="content"></section>
+    <!-- MAIN -->
 
-  </main>
+    <main class="main">
+
+      <header class="topbar">
+
+        <div style="display:flex;align-items:center;gap:12px;">
+
+          <button
+            id="mobileMenu"
+            class="mobile-menu"
+          >
+            ☰
+          </button>
+
+          <div id="topbarTitle" class="topbar-title">
+            Dashboard
+          </div>
+
+        </div>
+
+        <div class="topbar-right">
+
+          <div class="live-indicator">
+            <span class="live-dot"></span>
+            Live
+          </div>
+
+          <button
+            id="soundBtn"
+            class="sound-btn"
+            type="button"
+          >
+            🔔 Enable Sound
+          </button>
+
+        </div>
+
+      </header>
 
 
-  <!-- MOBILE -->
+      <div id="content" class="content"></div>
 
-  <nav class="bottom-nav">
+    </main>
 
-    <button data-mobile="dashboard">
-      <span class="bottom-icon">⌂</span>
-      Home
-    </button>
-
-    <button data-mobile="project">
-      <span class="bottom-icon">▦</span>
-      Project
-    </button>
-
-    <button data-mobile="chat">
-      <span class="bottom-icon">◌</span>
-      Chat
-    </button>
-
-    <button data-mobile="invoices">
-      <span class="bottom-icon">$</span>
-      Bills
-    </button>
-
-    <button data-mobile="account">
-      <span class="bottom-icon">◉</span>
-      Account
-    </button>
-
-  </nav>
+  </div>
 
 </div>
 
 
+<div id="toastContainer" class="toast-container"></div>
+
+
 <script>
-/* =========================================================
-   CONFIG
-========================================================= */
+
+/* ============================================================
+   SUPABASE
+============================================================ */
 
 const SUPABASE_URL =
-"https://ausocdplliuftdqxbvwa.supabase.co";
+  "https://ausocdplliuftdqxbvwa.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
+  "sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
 
 const supabaseClient =
-window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY,
+    {
+      auth:{
+        persistSession:true,
+        autoRefreshToken:true,
+        detectSessionInUrl:true
+      }
+    }
+  );
 
 
-/* =========================================================
+/* ============================================================
    STATE
-========================================================= */
+============================================================ */
 
-const state = {
-  user:null,
-  client:null,
-  project:null,
-  messages:[],
-  credentials:[],
-  documents:[],
-  invoices:[],
-  currentView:"dashboard",
-  messageChannel:null
-};
+let user = null;
+let client = null;
+let project = null;
+
+let messages = [];
+let credentials = [];
+let documents = [];
+let invoices = [];
+
+let currentView = "dashboard";
+
+let realtimeChannel = null;
+
+let soundEnabled = false;
+let audioContext = null;
+
+let unreadMessages = 0;
 
 
-/* =========================================================
+/* ============================================================
+   DOM
+============================================================ */
+
+const loginScreen =
+  document.getElementById("loginScreen");
+
+const app =
+  document.getElementById("app");
+
+const content =
+  document.getElementById("content");
+
+const topbarTitle =
+  document.getElementById("topbarTitle");
+
+const loginError =
+  document.getElementById("loginError");
+
+const chatBadge =
+  document.getElementById("chatBadge");
+
+const soundBtn =
+  document.getElementById("soundBtn");
+
+const connectionDot =
+  document.getElementById("connectionDot");
+
+const connectionText =
+  document.getElementById("connectionText");
+
+const sidebar =
+  document.getElementById("sidebar");
+
+
+/* ============================================================
    HELPERS
-========================================================= */
-
-function $(id){
-  return document.getElementById(id);
-}
-
+============================================================ */
 
 function escapeHtml(value){
 
@@ -1141,31 +1180,15 @@ function escapeHtml(value){
   }
 
   return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 }
 
 
-function initials(name){
-
-  if(!name){
-    return "C";
-  }
-
-  return name
-    .split(" ")
-    .filter(Boolean)
-    .slice(0,2)
-    .map(x => x[0])
-    .join("")
-    .toUpperCase();
-}
-
-
-function date(value){
+function formatDate(value){
 
   if(!value){
     return "—";
@@ -1174,23 +1197,26 @@ function date(value){
   return new Date(value).toLocaleDateString(
     undefined,
     {
-      day:"numeric",
+      year:"numeric",
       month:"short",
-      year:"numeric"
+      day:"numeric"
     }
   );
 }
 
 
-function time(value){
+function formatDateTime(value){
 
   if(!value){
-    return "";
+    return "—";
   }
 
-  return new Date(value).toLocaleTimeString(
+  return new Date(value).toLocaleString(
     undefined,
     {
+      year:"numeric",
+      month:"short",
+      day:"numeric",
       hour:"numeric",
       minute:"2-digit"
     }
@@ -1198,434 +1224,1100 @@ function time(value){
 }
 
 
-function toast(message){
+function money(amount,currency="USD"){
 
-  const el =
-    document.createElement("div");
+  if(amount === null || amount === undefined){
+    return "—";
+  }
 
-  el.style.cssText = `
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    z-index:9999;
-    background:#fff;
-    border:1px solid #d8e4ef;
-    border-left:4px solid #246bce;
-    border-radius:12px;
-    padding:14px 17px;
-    box-shadow:0 12px 35px rgba(24,61,99,.12);
-    font-size:13px;
-    font-weight:750;
-  `;
+  try{
 
-  el.textContent = message;
+    return new Intl.NumberFormat(
+      undefined,
+      {
+        style:"currency",
+        currency:currency || "USD"
+      }
+    ).format(Number(amount));
 
-  document.body.appendChild(el);
+  }catch{
 
-  setTimeout(
-    () => el.remove(),
-    3000
-  );
+    return `${currency || "USD"} ${amount}`;
+  }
 }
 
 
-/* =========================================================
-   AUTH
-========================================================= */
+function showError(message){
 
-async function init(){
+  loginError.textContent = message;
+  loginError.classList.remove("hidden");
 
-  const {
-    data
-  } =
-  await supabaseClient.auth.getSession();
+}
 
-  if(data.session){
 
-    state.user =
-      data.session.user;
+function hideError(){
 
-    await startPortal();
+  loginError.classList.add("hidden");
+  loginError.textContent = "";
 
-  }else{
+}
 
-    showLogin();
+
+function showToast(title,text){
+
+  const container =
+    document.getElementById("toastContainer");
+
+  const toast =
+    document.createElement("div");
+
+  toast.className = "toast";
+
+  toast.innerHTML = `
+    <div class="toast-title">
+      ${escapeHtml(title)}
+    </div>
+
+    <div class="toast-text">
+      ${escapeHtml(text)}
+    </div>
+  `;
+
+  container.appendChild(toast);
+
+  setTimeout(()=>{
+
+    toast.style.opacity = "0";
+    toast.style.transform = "translateY(10px)";
+
+    setTimeout(()=>{
+      toast.remove();
+    },250);
+
+  },5000);
+}
+
+
+/* ============================================================
+   SOUND
+============================================================ */
+
+async function enableSound(){
+
+  try{
+
+    if(!audioContext){
+
+      audioContext =
+        new (
+          window.AudioContext ||
+          window.webkitAudioContext
+        )();
+
+    }
+
+    if(audioContext.state === "suspended"){
+      await audioContext.resume();
+    }
+
+    /*
+      Small silent/very-low interaction to unlock
+      browser audio permission.
+    */
+
+    const oscillator =
+      audioContext.createOscillator();
+
+    const gain =
+      audioContext.createGain();
+
+    gain.gain.value = 0.0001;
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start();
+
+    oscillator.stop(
+      audioContext.currentTime + 0.03
+    );
+
+    soundEnabled = true;
+
+    soundBtn.textContent =
+      "🔔 Sound On";
+
+    soundBtn.classList.add("enabled");
+
+  }catch(error){
+
+    console.warn(
+      "Sound could not be enabled:",
+      error
+    );
 
   }
 }
 
 
-function showLogin(){
+function playNotificationSound(){
 
-  $("auth").classList.remove("hidden");
+  if(!soundEnabled){
+    return;
+  }
 
-  $("app").classList.add("hidden");
+  try{
 
+    if(
+      !audioContext ||
+      audioContext.state === "suspended"
+    ){
+      return;
+    }
+
+    const now =
+      audioContext.currentTime;
+
+    const oscillator =
+      audioContext.createOscillator();
+
+    const gain =
+      audioContext.createGain();
+
+    oscillator.type = "sine";
+
+    oscillator.frequency.setValueAtTime(
+      880,
+      now
+    );
+
+    oscillator.frequency.setValueAtTime(
+      1174,
+      now + 0.12
+    );
+
+    gain.gain.setValueAtTime(
+      0.0001,
+      now
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      0.16,
+      now + 0.015
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      0.0001,
+      now + 0.35
+    );
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start(now);
+    oscillator.stop(now + 0.36);
+
+  }catch(error){
+
+    console.warn(
+      "Notification sound error:",
+      error
+    );
+
+  }
 }
 
+
+/* ============================================================
+   CONNECTION
+============================================================ */
+
+function setConnectionStatus(status){
+
+  if(status === "SUBSCRIBED"){
+
+    connectionDot.className =
+      "connection-dot online";
+
+    connectionText.textContent =
+      "Realtime connected";
+
+  }
+
+  else if(
+    status === "CHANNEL_ERROR" ||
+    status === "TIMED_OUT" ||
+    status === "CLOSED"
+  ){
+
+    connectionDot.className =
+      "connection-dot offline";
+
+    connectionText.textContent =
+      "Realtime disconnected";
+
+  }
+
+  else{
+
+    connectionDot.className =
+      "connection-dot";
+
+    connectionText.textContent =
+      "Connecting...";
+
+  }
+}
+
+
+/* ============================================================
+   AUTH
+============================================================ */
+
+document
+  .getElementById("loginForm")
+  .addEventListener(
+    "submit",
+    async function(event){
+
+      event.preventDefault();
+
+      hideError();
+
+      const email =
+        document.getElementById("loginEmail")
+          .value
+          .trim();
+
+      const password =
+        document.getElementById("loginPassword")
+          .value;
+
+      const button =
+        document.getElementById("loginBtn");
+
+      button.disabled = true;
+      button.textContent = "Signing in...";
+
+      try{
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth
+            .signInWithPassword({
+              email,
+              password
+            });
+
+        if(error){
+          throw error;
+        }
+
+        user = data.user;
+
+        await startPortal();
+
+      }catch(error){
+
+        showError(
+          error.message ||
+          "Unable to sign in."
+        );
+
+      }finally{
+
+        button.disabled = false;
+        button.textContent = "Sign In";
+
+      }
+
+    }
+  );
+
+
+/* ============================================================
+   SESSION
+============================================================ */
+
+supabaseClient.auth.onAuthStateChange(
+  async (event,session)=>{
+
+    if(session?.user){
+
+      user = session.user;
+
+      if(event === "SIGNED_IN"){
+
+        await startPortal();
+
+      }
+
+    }else{
+
+      user = null;
+
+      app.classList.add("hidden");
+      loginScreen.classList.remove("hidden");
+
+      cleanupRealtime();
+
+    }
+
+  }
+);
+
+
+/* ============================================================
+   START PORTAL
+============================================================ */
 
 async function startPortal(){
 
-  $("auth").classList.add("hidden");
+  loginScreen.classList.add("hidden");
+  app.classList.remove("hidden");
 
-  $("app").classList.remove("hidden");
+  await loadAllData();
 
-  await loadAll();
+  setupRealtime();
 
-  updateUserUI();
-
-  navigate("dashboard");
-
-  subscribeToMessages();
+  renderCurrentView();
 
 }
 
 
-$("loginForm").addEventListener(
-  "submit",
-  async e => {
+/* ============================================================
+   LOAD ALL DATA
+============================================================ */
 
-    e.preventDefault();
+async function loadAllData(){
 
-    $("loginError").textContent =
-      "Signing in...";
+  if(!user){
+    return;
+  }
 
-    const {
-      data,
-      error
-    } =
-    await supabaseClient.auth.signInWithPassword({
-      email:$("email").value.trim(),
-      password:$("password").value
-    });
+  /*
+    Load client profile
+  */
 
-    if(error){
+  const {
+    data:clientData,
+    error:clientError
+  } =
+    await supabaseClient
+      .from("clients")
+      .select("*")
+      .eq("id",user.id)
+      .maybeSingle();
 
-      $("loginError").textContent =
-        error.message;
+  if(clientError){
+    console.error(
+      "Client load error:",
+      clientError
+    );
+  }
 
-      return;
+  client = clientData || {
+    id:user.id,
+    full_name:user.user_metadata?.full_name || "",
+    company_name:user.user_metadata?.company_name || "",
+    email:user.email || "",
+    phone:user.user_metadata?.phone || ""
+  };
 
-    }
 
-    state.user = data.user;
+  /*
+    Load latest project
+  */
 
-    await startPortal();
+  const {
+    data:projectData,
+    error:projectError
+  } =
+    await supabaseClient
+      .from("projects")
+      .select("*")
+      .eq("client_id",user.id)
+      .order("created_at",{ascending:false})
+      .limit(1)
+      .maybeSingle();
+
+  if(projectError){
+
+    console.error(
+      "Project load error:",
+      projectError
+    );
 
   }
-);
+
+  project = projectData || null;
 
 
-$("logout").addEventListener(
-  "click",
-  async () => {
+  if(!project){
 
-    if(state.messageChannel){
+    messages = [];
+    credentials = [];
+    documents = [];
+    invoices = [];
 
-      await supabaseClient.removeChannel(
-        state.messageChannel
+    return;
+  }
+
+
+  /*
+    Load messages
+  */
+
+  const {
+    data:messageData,
+    error:messageError
+  } =
+    await supabaseClient
+      .from("messages")
+      .select("*")
+      .eq("project_id",project.id)
+      .order("created_at",{ascending:true});
+
+  if(messageError){
+
+    console.error(
+      "Messages load error:",
+      messageError
+    );
+
+  }
+
+  messages = messageData || [];
+
+
+  /*
+    Credentials
+  */
+
+  const {
+    data:credentialData,
+    error:credentialError
+  } =
+    await supabaseClient
+      .from("project_credentials")
+      .select("*")
+      .eq("project_id",project.id)
+      .eq("client_id",user.id)
+      .order("created_at",{ascending:false});
+
+  if(credentialError){
+
+    console.error(
+      "Credentials load error:",
+      credentialError
+    );
+
+  }
+
+  credentials =
+    credentialData || [];
+
+
+  /*
+    Documents
+  */
+
+  const {
+    data:documentData,
+    error:documentError
+  } =
+    await supabaseClient
+      .from("documents")
+      .select("*")
+      .eq("project_id",project.id)
+      .order("created_at",{ascending:false});
+
+  if(documentError){
+
+    console.error(
+      "Documents load error:",
+      documentError
+    );
+
+  }
+
+  documents =
+    documentData || [];
+
+
+  /*
+    Invoices
+  */
+
+  const {
+    data:invoiceData,
+    error:invoiceError
+  } =
+    await supabaseClient
+      .from("invoices")
+      .select("*")
+      .eq("client_id",user.id)
+      .order("created_at",{ascending:false});
+
+  if(invoiceError){
+
+    console.error(
+      "Invoices load error:",
+      invoiceError
+    );
+
+  }
+
+  invoices =
+    invoiceData || [];
+
+}
+
+
+/* ============================================================
+   REALTIME
+============================================================ */
+
+function cleanupRealtime(){
+
+  if(realtimeChannel){
+
+    supabaseClient
+      .removeChannel(realtimeChannel);
+
+    realtimeChannel = null;
+
+  }
+
+  setConnectionStatus("CLOSED");
+}
+
+
+function setupRealtime(){
+
+  cleanupRealtime();
+
+  if(!user || !project){
+    return;
+  }
+
+  const projectId =
+    project.id;
+
+  realtimeChannel =
+    supabaseClient
+      .channel(
+        `client-portal-${user.id}-${projectId}`
+      )
+
+
+      /* =========================
+         MESSAGES
+      ========================= */
+
+      .on(
+        "postgres_changes",
+        {
+          event:"INSERT",
+          schema:"public",
+          table:"messages",
+          filter:`project_id=eq.${projectId}`
+        },
+        payload => {
+
+          const newMessage =
+            payload.new;
+
+          /*
+            Prevent duplicate
+          */
+
+          const alreadyExists =
+            messages.some(
+              m => String(m.id) === String(newMessage.id)
+            );
+
+          if(!alreadyExists){
+
+            messages.push(newMessage);
+
+            messages.sort(
+              (a,b)=>
+                new Date(a.created_at) -
+                new Date(b.created_at)
+            );
+
+          }
+
+
+          /*
+            If admin sent message,
+            notify client.
+          */
+
+          if(
+            newMessage.sender_type === "admin"
+          ){
+
+            unreadMessages++;
+
+            updateChatBadge();
+
+            playNotificationSound();
+
+            showToast(
+              "New message",
+              newMessage.message || "You received a new message."
+            );
+
+            /*
+              If currently on chat,
+              render immediately.
+            */
+
+            if(currentView === "chat"){
+              renderChat();
+              scrollChatToBottom();
+              unreadMessages = 0;
+              updateChatBadge();
+            }
+
+          }
+
+          else{
+
+            /*
+              Client's own message can appear
+              instantly as well.
+            */
+
+            if(currentView === "chat"){
+              renderChat();
+              scrollChatToBottom();
+            }
+
+          }
+
+        }
+      )
+
+
+      /* =========================
+         PROJECT
+      ========================= */
+
+      .on(
+        "postgres_changes",
+        {
+          event:"UPDATE",
+          schema:"public",
+          table:"projects",
+          filter:`id=eq.${projectId}`
+        },
+        payload => {
+
+          project = {
+            ...project,
+            ...payload.new
+          };
+
+          /*
+            Re-render current page
+          */
+
+          renderCurrentView();
+
+          showToast(
+            "Project updated",
+            "Your project information has been updated."
+          );
+
+        }
+      )
+
+
+      /* =========================
+         DOCUMENTS
+      ========================= */
+
+      .on(
+        "postgres_changes",
+        {
+          event:"INSERT",
+          schema:"public",
+          table:"documents",
+          filter:`project_id=eq.${projectId}`
+        },
+        payload => {
+
+          const item =
+            payload.new;
+
+          if(
+            !documents.some(
+              d => String(d.id) === String(item.id)
+            )
+          ){
+
+            documents.unshift(item);
+
+          }
+
+          if(currentView === "documents"){
+            renderDocuments();
+          }
+
+          playNotificationSound();
+
+          showToast(
+            "New document",
+            item.file_name || "A new document was added."
+          );
+
+        }
+      )
+
+
+      .on(
+        "postgres_changes",
+        {
+          event:"UPDATE",
+          schema:"public",
+          table:"documents",
+          filter:`project_id=eq.${projectId}`
+        },
+        payload => {
+
+          const index =
+            documents.findIndex(
+              d =>
+                String(d.id) ===
+                String(payload.new.id)
+            );
+
+          if(index !== -1){
+
+            documents[index] = {
+              ...documents[index],
+              ...payload.new
+            };
+
+          }
+
+          if(currentView === "documents"){
+            renderDocuments();
+          }
+
+        }
+      )
+
+
+      .on(
+        "postgres_changes",
+        {
+          event:"DELETE",
+          schema:"public",
+          table:"documents",
+          filter:`project_id=eq.${projectId}`
+        },
+        payload => {
+
+          documents =
+            documents.filter(
+              d =>
+                String(d.id) !==
+                String(payload.old.id)
+            );
+
+          if(currentView === "documents"){
+            renderDocuments();
+          }
+
+        }
+      )
+
+
+      /* =========================
+         INVOICES
+      ========================= */
+
+      .on(
+        "postgres_changes",
+        {
+          event:"INSERT",
+          schema:"public",
+          table:"invoices",
+          filter:`client_id=eq.${user.id}`
+        },
+        payload => {
+
+          const item =
+            payload.new;
+
+          if(
+            !invoices.some(
+              i =>
+                String(i.id) ===
+                String(item.id)
+            )
+          ){
+
+            invoices.unshift(item);
+
+          }
+
+          if(currentView === "invoices"){
+            renderInvoices();
+          }
+
+          playNotificationSound();
+
+          showToast(
+            "New invoice",
+            item.title ||
+            item.invoice_number ||
+            "A new invoice is available."
+          );
+
+        }
+      )
+
+
+      .on(
+        "postgres_changes",
+        {
+          event:"UPDATE",
+          schema:"public",
+          table:"invoices",
+          filter:`client_id=eq.${user.id}`
+        },
+        payload => {
+
+          const index =
+            invoices.findIndex(
+              i =>
+                String(i.id) ===
+                String(payload.new.id)
+            );
+
+          if(index !== -1){
+
+            invoices[index] = {
+              ...invoices[index],
+              ...payload.new
+            };
+
+          }
+
+          if(currentView === "invoices"){
+            renderInvoices();
+          }
+
+          showToast(
+            "Invoice updated",
+            payload.new.title ||
+            payload.new.invoice_number ||
+            "An invoice was updated."
+          );
+
+        }
+      )
+
+
+      .on(
+        "postgres_changes",
+        {
+          event:"DELETE",
+          schema:"public",
+          table:"invoices",
+          filter:`client_id=eq.${user.id}`
+        },
+        payload => {
+
+          invoices =
+            invoices.filter(
+              i =>
+                String(i.id) !==
+                String(payload.old.id)
+            );
+
+          if(currentView === "invoices"){
+            renderInvoices();
+          }
+
+        }
+      )
+
+
+      /* =========================
+         CREDENTIALS
+      ========================= */
+
+      .on(
+        "postgres_changes",
+        {
+          event:"INSERT",
+          schema:"public",
+          table:"project_credentials",
+          filter:`project_id=eq.${projectId}`
+        },
+        payload => {
+
+          const item =
+            payload.new;
+
+          /*
+            Only accept credentials
+            belonging to this client.
+          */
+
+          if(
+            String(item.client_id) !==
+            String(user.id)
+          ){
+            return;
+          }
+
+          if(
+            !credentials.some(
+              c =>
+                String(c.id) ===
+                String(item.id)
+            )
+          ){
+
+            credentials.unshift(item);
+
+          }
+
+          if(currentView === "credentials"){
+            renderCredentials();
+          }
+
+        }
+      )
+
+
+      .on(
+        "postgres_changes",
+        {
+          event:"UPDATE",
+          schema:"public",
+          table:"project_credentials",
+          filter:`project_id=eq.${projectId}`
+        },
+        payload => {
+
+          if(
+            String(payload.new.client_id) !==
+            String(user.id)
+          ){
+            return;
+          }
+
+          const index =
+            credentials.findIndex(
+              c =>
+                String(c.id) ===
+                String(payload.new.id)
+            );
+
+          if(index !== -1){
+
+            credentials[index] = {
+              ...credentials[index],
+              ...payload.new
+            };
+
+          }
+
+          if(currentView === "credentials"){
+            renderCredentials();
+          }
+
+        }
+      )
+
+
+      .on(
+        "postgres_changes",
+        {
+          event:"DELETE",
+          schema:"public",
+          table:"project_credentials",
+          filter:`project_id=eq.${projectId}`
+        },
+        payload => {
+
+          credentials =
+            credentials.filter(
+              c =>
+                String(c.id) !==
+                String(payload.old.id)
+            );
+
+          if(currentView === "credentials"){
+            renderCredentials();
+          }
+
+        }
+      )
+
+
+      .subscribe(
+        status => {
+
+          setConnectionStatus(status);
+
+          console.log(
+            "Realtime status:",
+            status
+          );
+
+        }
       );
 
-    }
-
-    await supabaseClient.auth.signOut();
-
-    location.reload();
-
-  }
-);
-
-
-/* =========================================================
-   LOAD CLIENT
-========================================================= */
-
-async function loadClient(){
-
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from("clients")
-    .select("*")
-    .eq("id",state.user.id)
-    .maybeSingle();
-
-  if(error){
-
-    console.error(error);
-
-    return;
-
-  }
-
-  state.client = data;
-
 }
 
 
-/* =========================================================
-   LOAD PROJECT
-========================================================= */
-
-async function loadProject(){
-
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from("projects")
-    .select("*")
-    .eq("client_id",state.user.id)
-    .order("created_at",{ascending:false})
-    .limit(1)
-    .maybeSingle();
-
-  if(error){
-
-    console.error(
-      "Project:",
-      error
-    );
-
-    state.project = null;
-
-    return;
-
-  }
-
-  state.project = data;
-
-}
-
-
-/* =========================================================
-   LOAD CREDENTIALS
-========================================================= */
-
-async function loadCredentials(){
-
-  if(!state.project){
-
-    state.credentials=[];
-
-    return;
-
-  }
-
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from("project_credentials")
-    .select("*")
-    .eq("project_id",state.project.id)
-    .eq("client_id",state.user.id)
-    .order("created_at",{ascending:false});
-
-  if(error){
-
-    console.error(
-      "Credentials:",
-      error
-    );
-
-    state.credentials=[];
-
-    return;
-
-  }
-
-  state.credentials=data || [];
-
-}
-
-
-/* =========================================================
-   LOAD DOCUMENTS
-========================================================= */
-
-async function loadDocuments(){
-
-  if(!state.project){
-
-    state.documents=[];
-
-    return;
-
-  }
-
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from("documents")
-    .select("*")
-    .eq("project_id",state.project.id)
-    .order("created_at",{ascending:false});
-
-  if(error){
-
-    console.error(
-      "Documents:",
-      error
-    );
-
-    state.documents=[];
-
-    return;
-
-  }
-
-  state.documents=data || [];
-
-}
-
-
-/* =========================================================
-   LOAD INVOICES
-========================================================= */
-
-async function loadInvoices(){
-
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from("invoices")
-    .select("*")
-    .eq("client_id",state.user.id)
-    .order("created_at",{ascending:false});
-
-  if(error){
-
-    console.error(
-      "Invoices:",
-      error
-    );
-
-    state.invoices=[];
-
-    return;
-
-  }
-
-  state.invoices=data || [];
-
-}
-
-
-/* =========================================================
-   LOAD MESSAGES
-========================================================= */
-
-async function loadMessages(){
-
-  if(!state.project){
-
-    state.messages=[];
-
-    return;
-
-  }
-
-  const {
-    data,
-    error
-  } =
-  await supabaseClient
-    .from("messages")
-    .select("*")
-    .eq("project_id",state.project.id)
-    .order("created_at",{ascending:true});
-
-  if(error){
-
-    console.error(
-      "Messages:",
-      error
-    );
-
-    state.messages=[];
-
-    return;
-
-  }
-
-  state.messages=data || [];
-
-}
-
-
-/* =========================================================
-   LOAD EVERYTHING
-========================================================= */
-
-async function loadAll(){
-
-  await loadClient();
-
-  await loadProject();
-
-  await Promise.all([
-    loadCredentials(),
-    loadDocuments(),
-    loadInvoices(),
-    loadMessages()
-  ]);
-
-}
-
-
-/* =========================================================
-   USER UI
-========================================================= */
-
-function updateUserUI(){
-
-  const name =
-    state.client?.full_name ||
-    state.user?.user_metadata?.full_name ||
-    "Client";
-
-  $("userName").textContent =
-    name;
-
-  $("userEmail").textContent =
-    state.user.email || "";
-
-  $("avatar").textContent =
-    initials(name);
-
-}
-
-
-/* =========================================================
+/* ============================================================
    NAVIGATION
-========================================================= */
+============================================================ */
 
-const titles = {
-  dashboard:"Dashboard",
-  project:"My Project",
-  credentials:"Credentials",
-  chat:"Chat",
-  documents:"Documents",
-  invoices:"Invoices",
-  account:"Account"
-};
+document
+  .querySelectorAll(".nav-btn")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        const view =
+          button.dataset.view;
+
+        navigate(view);
+
+        sidebar.classList.remove("open");
+
+      }
+    );
+
+  });
 
 
 function navigate(view){
 
-  state.currentView=view;
+  currentView =
+    view;
+
+  unreadMessages = 0;
+
+  updateChatBadge();
 
   document
-    .querySelectorAll(".nav button[data-view]")
+    .querySelectorAll(".nav-btn")
     .forEach(button => {
 
       button.classList.toggle(
@@ -1635,327 +2327,296 @@ function navigate(view){
 
     });
 
-  document
-    .querySelectorAll(".bottom-nav button[data-mobile]")
-    .forEach(button => {
+  renderCurrentView();
 
-      button.classList.toggle(
-        "active",
-        button.dataset.mobile === view
-      );
+}
 
-    });
 
-  $("topTitle").textContent =
-    titles[view] || "Client Portal";
+function renderCurrentView(){
 
-  switch(view){
+  const titles = {
+    dashboard:"Dashboard",
+    project:"My Project",
+    credentials:"Credentials",
+    chat:"Chat",
+    documents:"Documents",
+    invoices:"Invoices",
+    account:"Account"
+  };
 
-    case "dashboard":
-      renderDashboard();
-      break;
+  topbarTitle.textContent =
+    titles[currentView] || "Client Portal";
 
-    case "project":
-      renderProject();
-      break;
 
-    case "credentials":
-      renderCredentials();
-      break;
+  if(currentView === "dashboard"){
+    renderDashboard();
+  }
 
-    case "chat":
-      renderChat();
-      break;
+  else if(currentView === "project"){
+    renderProject();
+  }
 
-    case "documents":
-      renderDocuments();
-      break;
+  else if(currentView === "credentials"){
+    renderCredentials();
+  }
 
-    case "invoices":
-      renderInvoices();
-      break;
+  else if(currentView === "chat"){
+    renderChat();
+  }
 
-    case "account":
-      renderAccount();
-      break;
+  else if(currentView === "documents"){
+    renderDocuments();
+  }
 
+  else if(currentView === "invoices"){
+    renderInvoices();
+  }
+
+  else if(currentView === "account"){
+    renderAccount();
   }
 
 }
 
 
-document
-  .querySelectorAll(".nav button[data-view]")
-  .forEach(button => {
-
-    button.addEventListener(
-      "click",
-      () => navigate(button.dataset.view)
-    );
-
-  });
-
-
-document
-  .querySelectorAll(".bottom-nav button[data-mobile]")
-  .forEach(button => {
-
-    button.addEventListener(
-      "click",
-      () => navigate(button.dataset.mobile)
-    );
-
-  });
-
-
-/* =========================================================
+/* ============================================================
    DASHBOARD
-========================================================= */
+============================================================ */
 
 function renderDashboard(){
 
-  const p =
-    state.project;
+  if(!project){
 
-  if(!p){
-
-    $("content").innerHTML = `
-      <div class="heading">
-        <h1>Welcome to your portal</h1>
-        <p>Your project information will appear here.</p>
+    content.innerHTML = `
+      <div class="page-header">
+        <h1>Dashboard</h1>
+        <p>Welcome to your client portal.</p>
       </div>
 
-      <div class="card card-pad">
-        No project has been assigned yet.
+      <div class="card">
+        <div class="empty">
+          <div class="empty-icon">◫</div>
+          <strong>No project assigned yet.</strong>
+          <p>Your project information will appear here once it is created.</p>
+        </div>
       </div>
     `;
 
     return;
-
   }
 
-  const unread =
-    state.messages.filter(
-      m =>
-        String(m.sender_type).toLowerCase() !== "client"
-    ).length;
 
-  $("content").innerHTML = `
+  const progress =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        Number(project.progress || 0)
+      )
+    );
 
-    <div class="heading">
-      <h1>Welcome back, ${escapeHtml(
-        state.client?.full_name || "Client"
-      )}</h1>
+
+  content.innerHTML = `
+
+    <div class="page-header">
+
+      <h1>
+        Welcome, ${escapeHtml(
+          client?.full_name ||
+          user?.email ||
+          "Client"
+        )}
+      </h1>
 
       <p>
-        Here you can track your project,
-        communicate with the AWSZ team and manage
-        your project information.
+        Here is the latest live status of your project.
       </p>
+
     </div>
 
 
     <div class="grid grid-4">
 
-      <div class="card stat">
-        <div class="stat-label">Project</div>
-        <div class="stat-value" style="font-size:19px">
-          ${escapeHtml(p.project_name)}
+      <div class="card stat-card">
+
+        <div class="stat-label">
+          Project
         </div>
+
+        <div class="stat-value"
+             style="font-size:19px;">
+          ${escapeHtml(project.project_name || "—")}
+        </div>
+
+        <div class="stat-small">
+          Current project
+        </div>
+
       </div>
 
-      <div class="card stat">
-        <div class="stat-label">Progress</div>
+
+      <div class="card stat-card">
+
+        <div class="stat-label">
+          Progress
+        </div>
+
         <div class="stat-value">
-          ${Number(p.progress || 0)}%
+          ${progress}%
         </div>
+
+        <div class="stat-small">
+          Live updated
+        </div>
+
       </div>
 
-      <div class="card stat">
-        <div class="stat-label">Current Stage</div>
-        <div class="stat-value" style="font-size:18px">
-          ${escapeHtml(p.stage || "—")}
+
+      <div class="card stat-card">
+
+        <div class="stat-label">
+          Stage
         </div>
+
+        <div class="stat-value"
+             style="font-size:19px;">
+          ${escapeHtml(project.stage || "—")}
+        </div>
+
+        <div class="stat-small">
+          Current stage
+        </div>
+
       </div>
 
-      <div class="card stat">
-        <div class="stat-label">Messages</div>
-        <div class="stat-value">
-          ${state.messages.length}
+
+      <div class="card stat-card">
+
+        <div class="stat-label">
+          Status
         </div>
+
+        <div class="stat-value"
+             style="font-size:19px;">
+          ${escapeHtml(project.status || "—")}
+        </div>
+
+        <div class="stat-small">
+          Project status
+        </div>
+
       </div>
 
     </div>
 
 
-    <div style="height:18px"></div>
+    <div style="height:18px;"></div>
 
 
     <div class="grid grid-2">
 
-      <div class="card card-pad">
+      <div class="card">
 
-        <div class="section-title">
-          <h2>Project Progress</h2>
-
-          <button
-            class="link"
-            onclick="navigate('project')"
-          >
-            View Project
-          </button>
+        <div class="card-header">
+          <h3>Project Progress</h3>
+          <span class="badge blue">
+            Live
+          </span>
         </div>
 
-        <div class="project-title">
-          ${escapeHtml(p.project_name)}
-        </div>
+        <div class="card-body">
 
-        <div class="project-desc">
-          ${escapeHtml(
-            p.description ||
-            "Your project is currently being handled by the AWSZ team."
-          )}
-        </div>
-
-        <div class="progress">
-          <div
-            class="progress-bar"
-            style="width:${Math.min(
-              100,
-              Math.max(0,Number(p.progress || 0))
-            )}%"
-          ></div>
-        </div>
-
-        <div class="progress-info">
-          <span>Project progress</span>
-          <strong>${Number(p.progress || 0)}%</strong>
-        </div>
-
-        <div class="stage">
-
-          <div class="stage-label">
-            Current Stage
+          <div class="progress-top">
+            <span>${escapeHtml(project.stage || "Progress")}</span>
+            <strong>${progress}%</strong>
           </div>
 
-          <div class="stage-value">
-            ${escapeHtml(p.stage || "—")}
+          <div class="progress">
+            <div
+              class="progress-bar"
+              style="width:${progress}%"
+            ></div>
           </div>
 
+          <p class="project-description"
+             style="margin-top:18px;">
+            ${escapeHtml(
+              project.description ||
+              "Your project details will appear here."
+            )}
+          </p>
+
         </div>
 
       </div>
 
 
-      <div class="card card-pad">
+      <div class="card">
 
-        <div class="section-title">
-          <h2>Need Help?</h2>
-
-          <button
-            class="link"
-            onclick="navigate('chat')"
-          >
-            Open Chat
-          </button>
+        <div class="card-header">
+          <h3>Quick Overview</h3>
         </div>
 
-        <p style="
-          color:var(--muted);
-          line-height:1.7;
-          font-size:14px;
-        ">
-          If you have a question, issue or need to
-          provide information about your project,
-          send a message directly to the AWSZ team.
-        </p>
+        <div class="card-body">
 
-        <button
-          class="btn btn-primary"
-          onclick="navigate('chat')"
-        >
-          Message AWSZ
-        </button>
+          <div class="info-list">
 
-      </div>
+            <div class="info-row">
+              <span class="info-label">
+                Start Date
+              </span>
 
-    </div>
+              <span class="info-value">
+                ${formatDate(project.start_date)}
+              </span>
+            </div>
 
 
-    <div style="height:18px"></div>
+            <div class="info-row">
+              <span class="info-label">
+                Expected Completion
+              </span>
+
+              <span class="info-value">
+                ${formatDate(project.expected_completion)}
+              </span>
+            </div>
 
 
-    <div class="grid grid-3">
+            <div class="info-row">
+              <span class="info-label">
+                Messages
+              </span>
 
-      <div class="card card-pad">
-
-        <div class="section-title">
-          <h2>Credentials</h2>
-
-          <button
-            class="link"
-            onclick="navigate('credentials')"
-          >
-            Manage
-          </button>
-        </div>
-
-        <strong>
-          ${state.credentials.length}
-        </strong>
-
-        <div class="row-sub">
-          Credentials submitted for this project
-        </div>
-
-      </div>
+              <span class="info-value">
+                ${messages.length}
+              </span>
+            </div>
 
 
-      <div class="card card-pad">
+            <div class="info-row">
+              <span class="info-label">
+                Documents
+              </span>
 
-        <div class="section-title">
-          <h2>Documents</h2>
-
-          <button
-            class="link"
-            onclick="navigate('documents')"
-          >
-            View
-          </button>
-
-        </div>
-
-        <strong>
-          ${state.documents.length}
-        </strong>
-
-        <div class="row-sub">
-          Project documents available
-        </div>
-
-      </div>
+              <span class="info-value">
+                ${documents.length}
+              </span>
+            </div>
 
 
-      <div class="card card-pad">
+            <div class="info-row">
+              <span class="info-label">
+                Invoices
+              </span>
 
-        <div class="section-title">
-          <h2>Invoices</h2>
+              <span class="info-value">
+                ${invoices.length}
+              </span>
+            </div>
 
-          <button
-            class="link"
-            onclick="navigate('invoices')"
-          >
-            View
-          </button>
+          </div>
 
-        </div>
-
-        <strong>
-          ${state.invoices.length}
-        </strong>
-
-        <div class="row-sub">
-          Your project invoices
         </div>
 
       </div>
@@ -1967,146 +2628,173 @@ function renderDashboard(){
 }
 
 
-/* =========================================================
-   MY PROJECT
-========================================================= */
+/* ============================================================
+   PROJECT
+============================================================ */
 
 function renderProject(){
 
-  const p =
-    state.project;
+  if(!project){
 
-  if(!p){
+    content.innerHTML = `
+      <div class="page-header">
+        <h1>My Project</h1>
+      </div>
 
-    $("content").innerHTML =
-      `<div class="card card-pad">
-        No project found.
-      </div>`;
+      <div class="card">
+        <div class="empty">
+          No project assigned yet.
+        </div>
+      </div>
+    `;
 
     return;
-
   }
 
-  $("content").innerHTML = `
 
-    <div class="heading">
+  const progress =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        Number(project.progress || 0)
+      )
+    );
+
+
+  content.innerHTML = `
+
+    <div class="page-header">
       <h1>My Project</h1>
       <p>
-        View your project information and progress.
+        Your project information is updated in real time.
       </p>
     </div>
 
 
-    <div class="card project-card">
+    <div class="card">
 
-      <div class="project-title">
-        ${escapeHtml(p.project_name)}
-      </div>
+      <div class="card-body">
 
-      <div class="project-desc">
-        ${escapeHtml(
-          p.description || "No project description available."
-        )}
-      </div>
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          align-items:flex-start;
+          gap:20px;
+          flex-wrap:wrap;
+        ">
 
-      <div class="progress">
-        <div
-          class="progress-bar"
-          style="width:${Number(p.progress || 0)}%"
-        ></div>
-      </div>
-
-      <div class="progress-info">
-        <span>Project Progress</span>
-        <strong>${Number(p.progress || 0)}%</strong>
-      </div>
-
-      <div class="stage">
-
-        <div class="stage-label">
-          Current Stage
-        </div>
-
-        <div class="stage-value">
-          ${escapeHtml(p.stage || "—")}
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div style="height:18px"></div>
-
-
-    <div class="grid grid-2">
-
-      <div class="card card-pad">
-
-        <div class="section-title">
-          <h2>Project Details</h2>
-        </div>
-
-        <div class="row">
           <div>
-            <div class="row-title">Status</div>
+
+            <div class="project-title">
+              ${escapeHtml(
+                project.project_name || "Project"
+              )}
+            </div>
+
+            <div class="project-description">
+              ${escapeHtml(
+                project.description ||
+                "No project description available."
+              )}
+            </div>
+
           </div>
 
-          <span class="status active">
-            ${escapeHtml(p.status || "Active")}
+
+          <span class="badge green">
+            ${escapeHtml(project.status || "Active")}
           </span>
+
         </div>
 
-        <div class="row">
-          <div>
-            <div class="row-title">Start Date</div>
+
+        <div class="progress-wrap">
+
+          <div class="progress-top">
+
+            <span>
+              ${escapeHtml(project.stage || "Current Stage")}
+            </span>
+
+            <strong>
+              ${progress}%
+            </strong>
+
           </div>
-          <div class="row-sub">
-            ${date(p.start_date)}
+
+          <div class="progress">
+
+            <div
+              class="progress-bar"
+              style="width:${progress}%"
+            ></div>
+
           </div>
+
         </div>
 
-        <div class="row">
-          <div>
-            <div class="row-title">Expected Completion</div>
+
+        <div style="height:25px;"></div>
+
+
+        <div class="info-list">
+
+          <div class="info-row">
+            <span class="info-label">
+              Project Stage
+            </span>
+
+            <span class="info-value">
+              ${escapeHtml(project.stage || "—")}
+            </span>
           </div>
-          <div class="row-sub">
-            ${date(p.expected_completion)}
+
+
+          <div class="info-row">
+            <span class="info-label">
+              Status
+            </span>
+
+            <span class="info-value">
+              ${escapeHtml(project.status || "—")}
+            </span>
           </div>
+
+
+          <div class="info-row">
+            <span class="info-label">
+              Start Date
+            </span>
+
+            <span class="info-value">
+              ${formatDate(project.start_date)}
+            </span>
+          </div>
+
+
+          <div class="info-row">
+            <span class="info-label">
+              Expected Completion
+            </span>
+
+            <span class="info-value">
+              ${formatDate(project.expected_completion)}
+            </span>
+          </div>
+
+
+          <div class="info-row">
+            <span class="info-label">
+              Last Updated
+            </span>
+
+            <span class="info-value">
+              ${formatDateTime(project.updated_at)}
+            </span>
+          </div>
+
         </div>
-
-      </div>
-
-
-      <div class="card card-pad">
-
-        <div class="section-title">
-          <h2>Project Actions</h2>
-        </div>
-
-        <button
-          class="btn btn-secondary"
-          onclick="navigate('credentials')"
-          style="margin:4px"
-        >
-          Submit Credentials
-        </button>
-
-        <button
-          class="btn btn-secondary"
-          onclick="navigate('chat')"
-          style="margin:4px"
-        >
-          Open Chat
-        </button>
-
-        <button
-          class="btn btn-secondary"
-          onclick="navigate('documents')"
-          style="margin:4px"
-        >
-          View Documents
-        </button>
 
       </div>
 
@@ -2117,302 +2805,342 @@ function renderProject(){
 }
 
 
-/* =========================================================
+/* ============================================================
    CREDENTIALS
-========================================================= */
+============================================================ */
 
 function renderCredentials(){
 
-  const items =
-    state.credentials;
+  content.innerHTML = `
 
-  $("content").innerHTML = `
-
-    <div class="heading">
+    <div class="page-header">
 
       <h1>Credentials</h1>
 
       <p>
-        Submit the access information required
-        for your project.
+        Securely provide the access information needed for your project.
       </p>
 
     </div>
 
 
-    <div class="card card-pad">
+    <div class="grid grid-2">
 
-      <div class="section-title">
+      <div class="card">
 
-        <h2>Submit Credentials</h2>
-
-      </div>
-
-      <div class="credential-form">
-
-        <div class="credential-row">
-
-          <div class="field">
-            <label>Service / Platform</label>
-
-            <input
-              id="credService"
-              placeholder="e.g. GoHighLevel"
-            >
-          </div>
-
-          <div class="field">
-            <label>Login URL</label>
-
-            <input
-              id="credUrl"
-              placeholder="https://..."
-            >
-          </div>
-
+        <div class="card-header">
+          <h3>Add Credential</h3>
         </div>
 
+        <div class="card-body">
 
-        <div class="credential-row">
+          <form id="credentialForm">
 
-          <div class="field">
-            <label>Username / Email</label>
+            <div class="form-group">
 
-            <input
-              id="credUsername"
-              placeholder="Username or email"
-            >
-          </div>
+              <label>
+                Service / Platform
+              </label>
 
-          <div class="field">
-            <label>Password</label>
+              <input
+                id="credentialService"
+                required
+                placeholder="e.g. GoHighLevel"
+              >
 
-            <input
-              id="credPassword"
-              type="password"
-              placeholder="Password"
-            >
-          </div>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>Notes</label>
-
-          <textarea
-            id="credNotes"
-            rows="3"
-            placeholder="Anything the AWSZ team should know..."
-          ></textarea>
-
-        </div>
-
-
-        <button
-          class="btn btn-primary"
-          onclick="submitCredential()"
-        >
-          Submit Credential
-        </button>
-
-      </div>
-
-
-      <div class="section-title">
-        <h2>Submitted Credentials</h2>
-      </div>
-
-
-      ${
-        items.length
-        ?
-        items.map(credential => `
-
-          <div class="credential-item">
-
-            <div class="credential-name">
-              ${escapeHtml(
-                credential.service_name || "Credential"
-              )}
             </div>
 
-            ${
-              credential.login_url
-              ?
-              `
-              <div class="credential-label">
+
+            <div class="form-group">
+
+              <label>
                 Login URL
-              </div>
+              </label>
 
-              <div class="credential-value">
-                ${escapeHtml(credential.login_url)}
-              </div>
-              `
-              :
-              ""
-            }
+              <input
+                id="credentialUrl"
+                type="url"
+                placeholder="https://..."
+              >
 
-
-            ${
-              credential.username
-              ?
-              `
-              <div class="credential-label">
-                Username
-              </div>
-
-              <div class="credential-value">
-                ${escapeHtml(credential.username)}
-              </div>
-              `
-              :
-              ""
-            }
+            </div>
 
 
-            ${
-              credential.password
-              ?
-              `
-              <div class="credential-label">
+            <div class="form-group">
+
+              <label>
+                Username / Email
+              </label>
+
+              <input
+                id="credentialUsername"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
                 Password
-              </div>
+              </label>
 
-              <div class="credential-value">
-                ••••••••••
-              </div>
-              `
-              :
-              ""
-            }
+              <input
+                id="credentialPassword"
+                type="password"
+                required
+              >
+
+            </div>
 
 
-            ${
-              credential.notes
-              ?
-              `
-              <div class="credential-label">
+            <div class="form-group">
+
+              <label>
                 Notes
-              </div>
+              </label>
 
-              <div class="credential-value">
-                ${escapeHtml(credential.notes)}
-              </div>
-              `
-              :
-              ""
-            }
+              <textarea
+                id="credentialNotes"
+                rows="4"
+                placeholder="Anything else we should know?"
+              ></textarea>
 
+            </div>
+
+
+            <button
+              class="primary-btn"
+              type="submit"
+            >
+              Save Credential
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-header">
+          <h3>Submitted Credentials</h3>
+        </div>
+
+        <div class="card-body">
+
+          <div id="credentialsList">
+            ${credentialsHtml()}
           </div>
 
-        `).join("")
-        :
-        `
-          <div class="card-pad" style="
-            background:var(--bg);
-            border-radius:12px;
-            color:var(--muted);
-          ">
-            No credentials submitted yet.
-          </div>
-        `
-      }
+        </div>
+
+      </div>
 
     </div>
 
   `;
 
-}
+
+  const form =
+    document.getElementById("credentialForm");
 
 
-async function submitCredential(){
+  if(form){
 
-  if(!state.project){
-
-    toast("No project found.");
-
-    return;
-
-  }
-
-  const service =
-    $("credService").value.trim();
-
-  if(!service){
-
-    toast("Please enter the service name.");
-
-    return;
-
-  }
-
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("project_credentials")
-    .insert({
-
-      project_id:state.project.id,
-
-      client_id:state.user.id,
-
-      service_name:service,
-
-      login_url:
-        $("credUrl").value.trim(),
-
-      username:
-        $("credUsername").value.trim(),
-
-      password:
-        $("credPassword").value,
-
-      notes:
-        $("credNotes").value.trim()
-
-    });
-
-  if(error){
-
-    console.error(error);
-
-    toast(
-      "Credential could not be submitted: " +
-      error.message
+    form.addEventListener(
+      "submit",
+      saveCredential
     );
 
-    return;
-
   }
-
-  toast("Credential submitted.");
-
-  await loadCredentials();
-
-  renderCredentials();
 
 }
 
 
-/* =========================================================
+function credentialsHtml(){
+
+  if(!credentials.length){
+
+    return `
+      <div class="empty">
+        <div class="empty-icon">🔐</div>
+        No credentials submitted yet.
+      </div>
+    `;
+
+  }
+
+
+  return credentials.map(item => `
+
+    <div class="credential-row">
+
+      <div class="item-main">
+
+        <div class="item-title">
+          ${escapeHtml(
+            item.service_name || "Service"
+          )}
+        </div>
+
+        <div class="item-meta">
+          ${escapeHtml(
+            item.username || ""
+          )}
+        </div>
+
+        ${
+          item.login_url
+          ? `
+            <div class="item-meta">
+              ${escapeHtml(item.login_url)}
+            </div>
+          `
+          : ""
+        }
+
+      </div>
+
+      <span class="badge green">
+        Saved
+      </span>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+async function saveCredential(event){
+
+  event.preventDefault();
+
+  if(!project || !user){
+    return;
+  }
+
+
+  const button =
+    event.target.querySelector(
+      "button[type='submit']"
+    );
+
+  button.disabled = true;
+  button.textContent = "Saving...";
+
+
+  try{
+
+    const payload = {
+
+      project_id:project.id,
+
+      client_id:user.id,
+
+      service_name:
+        document.getElementById(
+          "credentialService"
+        ).value.trim(),
+
+      login_url:
+        document.getElementById(
+          "credentialUrl"
+        ).value.trim(),
+
+      username:
+        document.getElementById(
+          "credentialUsername"
+        ).value.trim(),
+
+      password:
+        document.getElementById(
+          "credentialPassword"
+        ).value,
+
+      notes:
+        document.getElementById(
+          "credentialNotes"
+        ).value.trim()
+
+    };
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("project_credentials")
+        .insert(payload)
+        .select()
+        .single();
+
+
+    if(error){
+      throw error;
+    }
+
+
+    /*
+      Add locally immediately.
+      Realtime will ignore duplicate.
+    */
+
+    if(data){
+
+      credentials.unshift(data);
+
+    }
+
+
+    renderCredentials();
+
+    showToast(
+      "Credential saved",
+      "The credential has been added successfully."
+    );
+
+
+  }catch(error){
+
+    showToast(
+      "Unable to save",
+      error.message ||
+      "Could not save credential."
+    );
+
+  }finally{
+
+    button.disabled = false;
+    button.textContent = "Save Credential";
+
+  }
+
+}
+
+
+/* ============================================================
    CHAT
-========================================================= */
+============================================================ */
 
 function renderChat(){
 
-  if(!state.project){
+  if(!project){
 
-    $("content").innerHTML = `
-      <div class="heading">
+    content.innerHTML = `
+      <div class="page-header">
         <h1>Chat</h1>
-        <p>Contact the AWSZ team.</p>
       </div>
 
-      <div class="card card-pad">
-        No active project is available for chat.
+      <div class="card">
+        <div class="empty">
+          A project is required before chat can be used.
+        </div>
       </div>
     `;
 
@@ -2421,90 +3149,47 @@ function renderChat(){
   }
 
 
-  $("content").innerHTML = `
+  content.innerHTML = `
 
-    <div class="heading">
+    <div class="page-header">
+
       <h1>Chat</h1>
+
       <p>
-        Message the AWSZ team about your project.
+        Chat directly with your project team. Messages appear in real time.
       </p>
+
     </div>
 
 
-    <div class="chat-wrapper">
+    <div class="card chat-shell">
 
-      <div class="chat-header">
+      <div
+        id="chatMessages"
+        class="chat-messages"
+      >
 
-        <div>
-
-          <div class="chat-header-title">
-            ${escapeHtml(state.project.project_name)}
-          </div>
-
-          <div class="chat-header-sub">
-            AWSZ Project Support
-          </div>
-
-        </div>
-
-        <span class="status active">
-          Project Chat
-        </span>
-
-      </div>
-
-
-      <div id="chatArea" class="chat-area">
-
-        ${
-          state.messages.length
-          ?
-          state.messages
-            .map(messageHtml)
-            .join("")
-          :
-          `
-            <div class="chat-empty">
-
-              <div>
-
-                <div class="chat-empty-icon">
-                  ◌
-                </div>
-
-                <strong>
-                  Start the conversation
-                </strong>
-
-                <div style="margin-top:6px">
-                  Send a message to the AWSZ team.
-                </div>
-
-              </div>
-
-            </div>
-          `
-        }
+        ${messagesHtml()}
 
       </div>
 
 
       <form
         id="chatForm"
-        class="chat-compose"
+        class="chat-input"
       >
 
         <textarea
           id="messageInput"
-          placeholder="Write a message..."
+          placeholder="Write your message..."
           rows="1"
         ></textarea>
 
         <button
+          class="send-btn"
           type="submit"
-          class="send"
         >
-          ➤
+          Send
         </button>
 
       </form>
@@ -2514,469 +3199,312 @@ function renderChat(){
   `;
 
 
-  scrollChat();
+  const form =
+    document.getElementById("chatForm");
+
+  const textarea =
+    document.getElementById("messageInput");
 
 
-  $("chatForm").addEventListener(
-    "submit",
-    sendMessage
-  );
+  if(form){
+
+    form.addEventListener(
+      "submit",
+      sendMessage
+    );
+
+  }
 
 
-  $("messageInput").addEventListener(
-    "keydown",
-    e => {
+  if(textarea){
 
-      if(
-        e.key === "Enter" &&
-        !e.shiftKey
-      ){
+    textarea.addEventListener(
+      "keydown",
+      event => {
 
-        e.preventDefault();
+        if(
+          event.key === "Enter" &&
+          !event.shiftKey
+        ){
 
-        $("chatForm").requestSubmit();
+          event.preventDefault();
+
+          form.requestSubmit();
+
+        }
 
       }
+    );
 
-    }
+  }
+
+
+  requestAnimationFrame(
+    scrollChatToBottom
   );
 
 }
 
 
-function messageHtml(message){
+function messagesHtml(){
 
-  const sender =
-    String(message.sender_type || "")
-      .toLowerCase();
+  if(!messages.length){
 
-  const client =
-    sender === "client";
+    return `
+      <div class="empty">
+        <div class="empty-icon">💬</div>
+        No messages yet.
+        <p>Start the conversation below.</p>
+      </div>
+    `;
+
+  }
 
 
-  return `
+  return messages.map(message => {
 
-    <div class="message ${
-      client ? "client" : "admin"
-    }">
+    const isClient =
+      message.sender_type === "client";
 
-      <div class="bubble">
+    return `
 
-        <div class="sender">
-          ${
-            client
-            ? "You"
-            : escapeHtml(
-                message.sender_name ||
-                "AWSZ Team"
-              )
-          }
-        </div>
+      <div class="message-row ${
+        isClient
+        ? "client"
+        : "admin"
+      }">
 
-        <div class="message-text">
-          ${escapeHtml(message.message)}
-        </div>
+        <div class="message-bubble">
 
-        <div class="message-time">
-          ${time(message.created_at)}
+          <div class="message-name">
+            ${escapeHtml(
+              message.sender_name ||
+              (isClient ? "You" : "Admin")
+            )}
+          </div>
+
+          <div>
+            ${escapeHtml(
+              message.message || ""
+            ).replace(/\n/g,"<br>")}
+          </div>
+
+          <div class="message-time">
+            ${formatDateTime(message.created_at)}
+          </div>
+
         </div>
 
       </div>
 
-    </div>
+    `;
 
-  `;
+  }).join("");
 
 }
 
 
-function scrollChat(){
+function scrollChatToBottom(){
 
-  const area =
-    $("chatArea");
+  const box =
+    document.getElementById(
+      "chatMessages"
+    );
 
-  if(area){
+  if(box){
 
-    area.scrollTop =
-      area.scrollHeight;
+    box.scrollTop =
+      box.scrollHeight;
 
   }
 
 }
 
 
-async function sendMessage(e){
+async function sendMessage(event){
 
-  e.preventDefault();
+  event.preventDefault();
+
+  if(!project || !user){
+    return;
+  }
+
 
   const input =
-    $("messageInput");
+    document.getElementById(
+      "messageInput"
+    );
+
+  const button =
+    event.target.querySelector(
+      "button[type='submit']"
+    );
 
   const message =
     input.value.trim();
+
 
   if(!message){
     return;
   }
 
-  if(!state.project){
-    return;
-  }
 
-  input.disabled=true;
-
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("messages")
-    .insert({
-
-      project_id:
-        state.project.id,
-
-      sender_type:
-        "client",
-
-      sender_name:
-        state.client?.full_name ||
-        state.user.email ||
-        "Client",
-
-      message:
-        message
-
-    });
+  button.disabled = true;
+  button.textContent = "...";
 
 
-  input.disabled=false;
+  try{
 
-
-  if(error){
-
-    console.error(
-      "MESSAGE INSERT ERROR:",
+    const {
+      data,
       error
+    } =
+      await supabaseClient
+        .from("messages")
+        .insert({
+          project_id:project.id,
+          sender_type:"client",
+          sender_name:
+            client?.full_name ||
+            user.email ||
+            "Client",
+          message:message
+        })
+        .select()
+        .single();
+
+
+    if(error){
+      throw error;
+    }
+
+
+    /*
+      Add instantly.
+      Realtime duplicate will be ignored.
+    */
+
+    if(data){
+
+      if(
+        !messages.some(
+          m =>
+            String(m.id) ===
+            String(data.id)
+        )
+      ){
+
+        messages.push(data);
+
+        messages.sort(
+          (a,b)=>
+            new Date(a.created_at) -
+            new Date(b.created_at)
+        );
+
+      }
+
+    }
+
+
+    input.value = "";
+
+    renderChat();
+
+    scrollChatToBottom();
+
+
+  }catch(error){
+
+    showToast(
+      "Message failed",
+      error.message ||
+      "Unable to send message."
     );
 
-    toast(
-      "Message could not be sent: " +
-      error.message
-    );
+  }finally{
 
-    return;
+    button.disabled = false;
+    button.textContent = "Send";
 
   }
-
-
-  input.value="";
-
-  await loadMessages();
-
-  renderChat();
 
 }
 
 
-/* =========================================================
-   REALTIME CHAT
-========================================================= */
+/* ============================================================
+   CHAT BADGE
+============================================================ */
 
-function subscribeToMessages(){
+function updateChatBadge(){
 
-  if(!state.project){
-    return;
-  }
+  if(unreadMessages > 0){
 
-  if(state.messageChannel){
+    chatBadge.textContent =
+      unreadMessages > 99
+      ? "99+"
+      : unreadMessages;
 
-    supabaseClient.removeChannel(
-      state.messageChannel
-    );
-
-  }
-
-
-  state.messageChannel =
-    supabaseClient
-      .channel(
-        "client-project-chat-" +
-        state.project.id
-      )
-      .on(
-        "postgres_changes",
-        {
-          event:"INSERT",
-          schema:"public",
-          table:"messages",
-          filter:
-            "project_id=eq." +
-            state.project.id
-        },
-        async payload => {
-
-          await loadMessages();
-
-          if(state.currentView === "chat"){
-
-            renderChat();
-
-          }
-
-          updateMessageBadge();
-
-        }
-      )
-      .subscribe();
-
-}
-
-
-function updateMessageBadge(){
-
-  const count =
-    state.messages.filter(
-      m =>
-        String(m.sender_type)
-          .toLowerCase() !== "client"
-    ).length;
-
-  const badge =
-    $("chatBadge");
-
-  if(count > 0){
-
-    badge.classList.remove("hidden");
-
-    badge.textContent =
-      count > 99 ? "99+" : count;
-
-    $("messageDot")
-      .classList.remove("hidden");
+    chatBadge.classList.remove("hidden");
 
   }else{
 
-    badge.classList.add("hidden");
-
-    $("messageDot")
-      .classList.add("hidden");
+    chatBadge.classList.add("hidden");
 
   }
 
 }
 
 
-/* =========================================================
+/* ============================================================
    DOCUMENTS
-========================================================= */
+============================================================ */
 
 function renderDocuments(){
 
-  $("content").innerHTML = `
+  content.innerHTML = `
 
-    <div class="heading">
+    <div class="page-header">
+
       <h1>Documents</h1>
 
       <p>
-        Documents shared with you by the AWSZ team.
+        Documents shared with you by the project team.
       </p>
+
     </div>
 
 
-    <div class="card card-pad">
+    <div class="card">
 
-      <div class="section-title">
-        <h2>Project Documents</h2>
+      <div class="card-header">
+        <h3>Shared Documents</h3>
+
+        <span class="badge blue">
+          ${documents.length}
+        </span>
       </div>
 
+      <div class="card-body">
 
-      ${
-        state.documents.length
-        ?
-        state.documents.map(document => `
+        ${
+          documents.length
+          ? documents.map(document => `
 
-          <div class="row">
+            <div class="document-row">
 
-            <div class="row-left">
+              <div class="item-main">
 
-              <div class="file-icon">
-                ▤
-              </div>
-
-              <div>
-
-                <div class="row-title">
+                <div class="item-title">
                   ${escapeHtml(
                     document.file_name ||
                     "Document"
                   )}
                 </div>
 
-                <div class="row-sub">
-                  ${date(document.created_at)}
-                </div>
-
-              </div>
-
-            </div>
-
-
-            ${
-              document.file_url
-              ?
-              `
-                <a
-                  href="${escapeHtml(document.file_url)}"
-                  target="_blank"
-                  rel="noopener"
-                  class="btn btn-secondary"
-                >
-                  Download
-                </a>
-              `
-              :
-              `
-                <span class="row-sub">
-                  No file
-                </span>
-              `
-            }
-
-          </div>
-
-        `).join("")
-        :
-        `
-          <div class="card-pad"
-            style="
-              background:var(--bg);
-              border-radius:12px;
-              color:var(--muted);
-            "
-          >
-            No documents have been shared yet.
-          </div>
-        `
-      }
-
-    </div>
-
-  `;
-
-}
-
-
-/* =========================================================
-   INVOICES
-========================================================= */
-
-function invoiceStatus(status){
-
-  const s =
-    String(status || "pending")
-      .toLowerCase();
-
-  let cls="pending";
-
-  if(s === "paid"){
-    cls="paid";
-  }
-
-  if(s === "overdue"){
-    cls="overdue";
-  }
-
-  return `
-    <span class="status ${cls}">
-      ${escapeHtml(status || "Pending")}
-    </span>
-  `;
-
-}
-
-
-function renderInvoices(){
-
-  $("content").innerHTML = `
-
-    <div class="heading">
-
-      <h1>Invoices</h1>
-
-      <p>
-        View and download your project invoices.
-      </p>
-
-    </div>
-
-
-    <div class="card card-pad">
-
-      ${
-        state.invoices.length
-        ?
-        state.invoices.map(invoice => `
-
-          <div class="row">
-
-            <div class="row-left">
-
-              <div class="file-icon">
-                $
-              </div>
-
-              <div>
-
-                <div class="row-title">
-                  ${escapeHtml(
-                    invoice.invoice_number
-                  )}
-                </div>
-
-                <div class="row-sub">
-                  ${escapeHtml(
-                    invoice.title ||
-                    "Project Invoice"
-                  )}
-                  ${
-                    invoice.due_date
-                    ?
-                    " • Due " +
-                    date(invoice.due_date)
-                    :
-                    ""
-                  }
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <div style="
-              text-align:right;
-              display:flex;
-              align-items:center;
-              gap:12px;
-            ">
-
-              <div>
-
-                <div style="
-                  font-size:15px;
-                  font-weight:900;
-                ">
-                  ${escapeHtml(
-                    invoice.currency || "USD"
-                  )}
-                  ${Number(
-                    invoice.amount || 0
-                  ).toFixed(2)}
-                </div>
-
-                <div style="margin-top:5px">
-                  ${invoiceStatus(
-                    invoice.status
+                <div class="item-meta">
+                  Added ${formatDate(
+                    document.created_at
                   )}
                 </div>
 
@@ -2984,42 +3512,38 @@ function renderInvoices(){
 
 
               ${
-                invoice.payment_url
-                ?
-                `
+                document.file_url
+                ? `
                   <a
+                    class="secondary-btn"
                     href="${escapeHtml(
-                      invoice.payment_url
+                      document.file_url
                     )}"
                     target="_blank"
                     rel="noopener"
-                    class="btn btn-primary"
                   >
-                    Pay
+                    Download
                   </a>
                 `
-                :
-                ""
+                : `
+                  <span class="badge amber">
+                    File unavailable
+                  </span>
+                `
               }
 
             </div>
 
-          </div>
+          `).join("")
+          : `
+            <div class="empty">
+              <div class="empty-icon">▤</div>
+              No documents have been shared yet.
+            </div>
+          `
+        }
 
-        `).join("")
-        :
-        `
-          <div class="card-pad"
-            style="
-              background:var(--bg);
-              border-radius:12px;
-              color:var(--muted);
-            "
-          >
-            No invoices available yet.
-          </div>
-        `
-      }
+      </div>
 
     </div>
 
@@ -3028,93 +3552,141 @@ function renderInvoices(){
 }
 
 
-/* =========================================================
-   ACCOUNT
-========================================================= */
+/* ============================================================
+   INVOICES
+============================================================ */
 
-function renderAccount(){
+function renderInvoices(){
 
-  const name =
-    state.client?.full_name || "";
+  content.innerHTML = `
 
-  const company =
-    state.client?.company_name || "";
+    <div class="page-header">
 
-  const phone =
-    state.client?.phone || "";
-
-  $("content").innerHTML = `
-
-    <div class="heading">
-
-      <h1>Account</h1>
+      <h1>Invoices</h1>
 
       <p>
-        Manage your basic account information.
+        View your project invoices and payment information.
       </p>
 
     </div>
 
 
-    <div class="card card-pad account-form">
+    <div class="card">
 
-      <div class="field">
+      <div class="card-header">
 
-        <label>Full Name</label>
+        <h3>
+          Your Invoices
+        </h3>
 
-        <input
-          id="accountName"
-          value="${escapeHtml(name)}"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Company</label>
-
-        <input
-          id="accountCompany"
-          value="${escapeHtml(company)}"
-        >
+        <span class="badge blue">
+          ${invoices.length}
+        </span>
 
       </div>
 
 
-      <div class="field">
+      <div class="card-body">
 
-        <label>Phone</label>
+        ${
+          invoices.length
+          ? invoices.map(invoice => `
 
-        <input
-          id="accountPhone"
-          value="${escapeHtml(phone)}"
-        >
+            <div class="invoice-row">
+
+              <div class="item-main">
+
+                <div class="item-title">
+
+                  ${
+                    escapeHtml(
+                      invoice.invoice_number ||
+                      "Invoice"
+                    )
+                  }
+
+                  ${
+                    invoice.title
+                    ? ` — ${escapeHtml(invoice.title)}`
+                    : ""
+                  }
+
+                </div>
+
+                <div class="item-meta">
+
+                  ${
+                    money(
+                      invoice.amount,
+                      invoice.currency
+                    )
+                  }
+
+                  ${
+                    invoice.due_date
+                    ? ` • Due ${formatDate(invoice.due_date)}`
+                    : ""
+                  }
+
+                </div>
+
+              </div>
+
+
+              <div style="
+                display:flex;
+                align-items:center;
+                gap:9px;
+                flex-wrap:wrap;
+              ">
+
+                <span class="badge ${
+                  invoice.status === "paid"
+                  ? "green"
+                  : invoice.status === "overdue"
+                  ? "red"
+                  : "amber"
+                }">
+
+                  ${escapeHtml(
+                    invoice.status ||
+                    "draft"
+                  )}
+
+                </span>
+
+
+                ${
+                  invoice.payment_url
+                  ? `
+                    <a
+                      class="secondary-btn"
+                      href="${escapeHtml(
+                        invoice.payment_url
+                      )}"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Pay
+                    </a>
+                  `
+                  : ""
+                }
+
+              </div>
+
+            </div>
+
+          `).join("")
+          : `
+            <div class="empty">
+              <div class="empty-icon">▣</div>
+              No invoices available yet.
+            </div>
+          `
+        }
 
       </div>
-
-
-      <div class="field">
-
-        <label>Email</label>
-
-        <input
-          class="readonly"
-          readonly
-          value="${escapeHtml(
-            state.user.email || ""
-          )}"
-        >
-
-      </div>
-
-
-      <button
-        class="btn btn-primary"
-        onclick="saveAccount()"
-      >
-        Save Changes
-      </button>
 
     </div>
 
@@ -3123,83 +3695,386 @@ function renderAccount(){
 }
 
 
-async function saveAccount(){
+/* ============================================================
+   ACCOUNT
+============================================================ */
 
-  const {
-    error
-  } =
-  await supabaseClient
-    .from("clients")
-    .update({
+function renderAccount(){
 
-      full_name:
-        $("accountName").value.trim(),
+  const fullName =
+    client?.full_name || "";
 
-      company_name:
-        $("accountCompany").value.trim(),
+  const company =
+    client?.company_name || "";
 
-      phone:
-        $("accountPhone").value.trim()
+  const phone =
+    client?.phone || "";
 
-    })
-    .eq("id",state.user.id);
+  const email =
+    client?.email ||
+    user?.email ||
+    "";
 
 
-  if(error){
+  content.innerHTML = `
 
-    console.error(error);
+    <div class="page-header">
 
-    toast(
-      "Account could not be updated."
+      <h1>Account</h1>
+
+      <p>
+        Manage your basic profile information.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-header">
+
+        <h3>
+          Profile Information
+        </h3>
+
+      </div>
+
+
+      <div class="card-body">
+
+        <form id="accountForm">
+
+          <div class="profile-grid">
+
+            <div class="form-group">
+
+              <label>
+                Full Name
+              </label>
+
+              <input
+                id="accountName"
+                value="${escapeHtml(fullName)}"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Company
+              </label>
+
+              <input
+                id="accountCompany"
+                value="${escapeHtml(company)}"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Email
+              </label>
+
+              <input
+                value="${escapeHtml(email)}"
+                disabled
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Phone
+              </label>
+
+              <input
+                id="accountPhone"
+                value="${escapeHtml(phone)}"
+              >
+
+            </div>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="primary-btn"
+            style="max-width:220px;"
+          >
+            Save Changes
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+
+    <div style="height:18px;"></div>
+
+
+    <div class="card">
+
+      <div class="card-header">
+        <h3>Account</h3>
+      </div>
+
+      <div class="card-body">
+
+        <button
+          id="logoutBtn"
+          class="secondary-btn"
+          type="button"
+        >
+          Sign Out
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  const form =
+    document.getElementById(
+      "accountForm"
     );
 
-    return;
+  if(form){
+
+    form.addEventListener(
+      "submit",
+      saveAccount
+    );
 
   }
 
 
-  await loadClient();
+  const logout =
+    document.getElementById(
+      "logoutBtn"
+    );
 
-  updateUserUI();
+  if(logout){
 
-  toast("Account updated.");
+    logout.addEventListener(
+      "click",
+      async ()=>{
+
+        cleanupRealtime();
+
+        await supabaseClient.auth.signOut();
+
+      }
+    );
+
+  }
 
 }
 
 
-/* =========================================================
-   AUTH STATE
-========================================================= */
+async function saveAccount(event){
 
-supabaseClient.auth.onAuthStateChange(
-  async (event,session) => {
+  event.preventDefault();
 
-    if(!session){
+  if(!user){
+    return;
+  }
 
-      showLogin();
 
-      return;
+  const button =
+    event.target.querySelector(
+      "button[type='submit']"
+    );
+
+  button.disabled = true;
+  button.textContent = "Saving...";
+
+
+  try{
+
+    const fullName =
+      document.getElementById(
+        "accountName"
+      ).value.trim();
+
+    const company =
+      document.getElementById(
+        "accountCompany"
+      ).value.trim();
+
+    const phone =
+      document.getElementById(
+        "accountPhone"
+      ).value.trim();
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("clients")
+        .update({
+          full_name:fullName,
+          company_name:company,
+          phone:phone
+        })
+        .eq("id",user.id)
+        .select()
+        .single();
+
+
+    if(error){
+      throw error;
+    }
+
+
+    client = {
+      ...client,
+      ...data
+    };
+
+
+    showToast(
+      "Profile updated",
+      "Your account information has been saved."
+    );
+
+
+    renderAccount();
+
+
+  }catch(error){
+
+    showToast(
+      "Update failed",
+      error.message ||
+      "Could not update your profile."
+    );
+
+  }finally{
+
+    button.disabled = false;
+    button.textContent = "Save Changes";
+
+  }
+
+}
+
+
+/* ============================================================
+   SOUND BUTTON
+============================================================ */
+
+soundBtn.addEventListener(
+  "click",
+  enableSound
+);
+
+
+/*
+  Any first interaction can unlock
+  sound after user clicks somewhere.
+*/
+
+document.addEventListener(
+  "click",
+  async function unlockAudio(){
+
+    if(!soundEnabled){
+
+      try{
+
+        if(!audioContext){
+
+          audioContext =
+            new (
+              window.AudioContext ||
+              window.webkitAudioContext
+            )();
+
+        }
+
+        if(
+          audioContext.state ===
+          "suspended"
+        ){
+
+          await audioContext.resume();
+
+        }
+
+      }catch{}
 
     }
 
-    if(!state.user){
+  },
+  {
+    once:false,
+    passive:true
+  }
+);
 
-      state.user =
-        session.user;
+
+/* ============================================================
+   MOBILE MENU
+============================================================ */
+
+document
+  .getElementById("mobileMenu")
+  .addEventListener(
+    "click",
+    ()=>{
+      sidebar.classList.toggle("open");
+    }
+  );
+
+
+/* ============================================================
+   INITIAL SESSION CHECK
+============================================================ */
+
+(async function(){
+
+  try{
+
+    const {
+      data
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
+
+    if(data?.session?.user){
+
+      user =
+        data.session.user;
 
       await startPortal();
 
     }
 
+  }catch(error){
+
+    console.error(
+      "Session check failed:",
+      error
+    );
+
   }
-);
 
-
-/* =========================================================
-   START
-========================================================= */
-
-init();
+})();
 
 </script>
 
