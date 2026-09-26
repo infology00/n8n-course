@@ -1,0 +1,430 @@
+```html id="m4x8qp"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AWSZ Admin Dashboard</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fa;
+      color: #111827;
+    }
+
+    .topbar {
+      height: 76px;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #8dbd18;
+    }
+
+    .admin {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .admin-email {
+      color: #667085;
+      font-size: 14px;
+    }
+
+    .logout {
+      border: 1px solid #d9dee7;
+      background: #ffffff;
+      padding: 9px 14px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 45px 30px;
+    }
+
+    .heading {
+      margin-bottom: 32px;
+    }
+
+    .heading h1 {
+      font-size: 36px;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .heading p {
+      color: #667085;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 35px;
+    }
+
+    .stat {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .stat-label {
+      color: #667085;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .stat-number {
+      font-size: 32px;
+      font-weight: 800;
+    }
+
+    .section {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 23px 25px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .section-header h2 {
+      font-size: 20px;
+    }
+
+    .empty {
+      padding: 65px 25px;
+      text-align: center;
+      color: #667085;
+    }
+
+    @media (max-width: 850px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .topbar {
+        padding: 0 20px;
+      }
+
+      .admin-email {
+        display: none;
+      }
+
+      .container {
+        padding: 30px 20px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+
+    <div class="logo">
+      AWSZ<span>.</span>
+    </div>
+
+    <div class="admin">
+
+      <div class="admin-email" id="adminEmail">
+        Loading...
+      </div>
+
+      <button class="logout" id="logoutButton">
+        Logout
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main class="container">
+
+    <section class="heading">
+
+      <h1>Operations Overview</h1>
+
+      <p>
+        Manage your clients, projects and delivery progress.
+      </p>
+
+    </section>
+
+
+    <section class="stats">
+
+      <div class="stat">
+        <div class="stat-label">Total Clients</div>
+        <div class="stat-number" id="clientsCount">0</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Total Projects</div>
+        <div class="stat-number" id="projectsCount">0</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Pending Tasks</div>
+        <div class="stat-number" id="tasksCount">0</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Access Requests</div>
+        <div class="stat-number" id="requestsCount">0</div>
+      </div>
+
+    </section>
+
+
+    <section class="section">
+
+      <div class="section-header">
+        <h2>Recent Projects</h2>
+      </div>
+
+      <div class="empty" id="projectsList">
+        Loading projects...
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    // ==========================================
+    // SUPABASE
+    // ==========================================
+
+    const SUPABASE_URL =
+      "https://ausocdplliuftdqxbvwa.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
+
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    // ==========================================
+    // CHECK LOGIN
+    // ==========================================
+
+    async function checkUser() {
+
+      const {
+        data: { user }
+      } = await supabaseClient.auth.getUser();
+
+
+      if (!user) {
+
+        window.location.href = "index.html";
+
+        return;
+      }
+
+
+      document.getElementById("adminEmail").textContent =
+        user.email;
+
+
+      loadDashboard();
+
+    }
+
+
+    // ==========================================
+    // LOAD DASHBOARD DATA
+    // ==========================================
+
+    async function loadDashboard() {
+
+      const clients =
+        await supabaseClient
+          .from("clients")
+          .select("*", { count: "exact", head: true });
+
+
+      const projects =
+        await supabaseClient
+          .from("projects")
+          .select("*", { count: "exact", head: true });
+
+
+      const tasks =
+        await supabaseClient
+          .from("tasks")
+          .select("*", { count: "exact", head: true })
+          .eq("is_completed", false);
+
+
+      const requests =
+        await supabaseClient
+          .from("access_requests")
+          .select("*", { count: "exact", head: true })
+          .neq("status", "completed");
+
+
+      document.getElementById("clientsCount").textContent =
+        clients.count || 0;
+
+      document.getElementById("projectsCount").textContent =
+        projects.count || 0;
+
+      document.getElementById("tasksCount").textContent =
+        tasks.count || 0;
+
+      document.getElementById("requestsCount").textContent =
+        requests.count || 0;
+
+
+      loadProjects();
+
+    }
+
+
+    // ==========================================
+    // LOAD PROJECTS
+    // ==========================================
+
+    async function loadProjects() {
+
+      const {
+        data,
+        error
+      } = await supabaseClient
+        .from("projects")
+        .select("*")
+        .order("created_at", {
+          ascending: false
+        })
+        .limit(10);
+
+
+      const projectsList =
+        document.getElementById("projectsList");
+
+
+      if (error) {
+
+        projectsList.textContent =
+          "Unable to load projects.";
+
+        return;
+      }
+
+
+      if (!data || data.length === 0) {
+
+        projectsList.textContent =
+          "No projects available yet.";
+
+        return;
+      }
+
+
+      projectsList.innerHTML =
+        data.map(function(project) {
+
+          return `
+            <div style="
+              padding:20px 25px;
+              border-bottom:1px solid #e5e7eb;
+              text-align:left;
+            ">
+
+              <strong style="
+                font-size:16px;
+              ">
+                ${project.project_name || "Unnamed Project"}
+              </strong>
+
+              <div style="
+                color:#667085;
+                font-size:14px;
+                margin-top:7px;
+              ">
+                Stage: ${project.stage || "Not set"}
+                &nbsp; • &nbsp;
+                Progress: ${project.progress || 0}%
+              </div>
+
+            </div>
+          `;
+
+        }).join("");
+
+    }
+
+
+    // ==========================================
+    // LOGOUT
+    // ==========================================
+
+    document
+      .getElementById("logoutButton")
+      .addEventListener("click", async function() {
+
+        await supabaseClient.auth.signOut();
+
+        window.location.href = "index.html";
+
+      });
+
+
+    // ==========================================
+    // START
+    // ==========================================
+
+    checkUser();
+
+  </script>
+
+</body>
+</html>
+```
