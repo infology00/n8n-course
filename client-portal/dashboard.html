@@ -1,14 +1,25 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
 <title>AWSZ Client Portal</title>
+
+<link
+  rel="icon"
+  href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23123b70'/%3E%3Ctext x='50' y='64' text-anchor='middle' font-size='42' fill='white' font-family='Arial'%3EA%3C/text%3E%3C/svg%3E"
+>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 :root{
   --cloud:#f4f8fc;
   --cloud2:#eaf2fa;
@@ -26,12 +37,14 @@
   --amber-bg:#fff5df;
   --red:#c33d3d;
   --red-bg:#fff0f0;
-  --shadow:0 12px 35px rgba(18,59,112,.08);
-  --radius:18px;
 }
 
 *{
   box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
@@ -58,14 +71,18 @@ button{
 
 /* LOGIN */
 
-#loginScreen{
+.login-screen{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:25px;
+  padding:30px;
   background:
-    radial-gradient(circle at top right,#dceaf7 0,transparent 35%),
+    radial-gradient(
+      circle at top right,
+      #dceaf7 0,
+      transparent 38%
+    ),
     var(--cloud);
 }
 
@@ -74,50 +91,45 @@ button{
   max-width:440px;
   background:#fff;
   border:1px solid var(--line);
-  border-radius:24px;
-  padding:38px;
-  box-shadow:var(--shadow);
+  border-radius:22px;
+  padding:34px;
+  box-shadow:
+    0 20px 60px rgba(18,59,112,.08);
 }
 
-.login-logo{
-  font-size:28px;
-  font-weight:800;
+.login-brand{
   color:var(--deep);
-  letter-spacing:-1px;
-  margin-bottom:8px;
+  font-size:27px;
+  font-weight:700;
+  letter-spacing:-.5px;
 }
 
-.login-sub{
+.login-subtitle{
   color:var(--muted);
-  margin-bottom:28px;
+  font-size:14px;
+  margin-top:7px;
+  margin-bottom:25px;
 }
 
-.field{
-  margin-bottom:16px;
-}
-
-.field label{
+.form-label{
   display:block;
-  font-size:13px;
-  color:var(--muted);
+  color:var(--deep);
+  font-size:12px;
   margin-bottom:7px;
 }
 
-.field input,
-.field textarea,
-.field select{
+.form-input{
   width:100%;
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:12px;
   padding:13px 14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#fff;
   outline:none;
   color:var(--text);
+  margin-bottom:14px;
 }
 
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
+.form-input:focus{
   border-color:var(--blue);
   box-shadow:0 0 0 3px rgba(36,107,206,.08);
 }
@@ -126,116 +138,117 @@ button{
   border:0;
   background:var(--blue);
   color:#fff;
-  border-radius:12px;
-  padding:12px 18px;
+  border-radius:10px;
+  padding:12px 17px;
+  font-size:13px;
   font-weight:600;
+  transition:.2s;
 }
 
 .primary-btn:hover{
   background:var(--blue-dark);
+  transform:translateY(-1px);
 }
 
 .secondary-btn{
   border:1px solid var(--line);
   background:#fff;
   color:var(--deep);
-  border-radius:12px;
-  padding:11px 16px;
-  font-weight:600;
-}
-
-.danger-btn{
-  border:0;
-  background:var(--red-bg);
-  color:var(--red);
   border-radius:10px;
-  padding:9px 13px;
-}
-
-.login-error{
-  color:var(--red);
-  background:var(--red-bg);
-  padding:11px 13px;
-  border-radius:10px;
-  margin-bottom:15px;
+  padding:11px 15px;
   font-size:13px;
+}
+
+.error-box{
+  background:var(--red-bg);
+  border:1px solid #f2cccc;
+  color:var(--red);
+  padding:11px;
+  border-radius:10px;
+  font-size:12px;
+  margin-bottom:15px;
 }
 
 /* APP */
 
-#app{
+.app{
   min-height:100vh;
   display:flex;
 }
-
-/* SIDEBAR */
 
 .sidebar{
   width:245px;
   background:#fff;
   border-right:1px solid var(--line);
-  min-height:100vh;
-  padding:25px 15px;
+  padding:24px 15px;
   position:fixed;
   left:0;
   top:0;
   bottom:0;
-  z-index:20;
+  z-index:50;
+  overflow-y:auto;
 }
 
 .brand{
-  padding:0 13px 25px;
-  border-bottom:1px solid var(--line);
-  margin-bottom:18px;
+  padding:3px 12px 28px;
 }
 
-.brand-main{
-  font-size:24px;
-  font-weight:800;
+.brand-name{
   color:var(--deep);
+  font-size:22px;
+  font-weight:700;
 }
 
 .brand-small{
-  font-size:12px;
   color:var(--muted);
+  font-size:11px;
   margin-top:4px;
 }
 
-.nav{
-  display:flex;
-  flex-direction:column;
-  gap:5px;
+.nav-title{
+  color:#8a99a8;
+  font-size:10px;
+  letter-spacing:.08em;
+  padding:0 12px 8px;
 }
 
-.nav button{
+.nav-btn{
   width:100%;
-  text-align:left;
   border:0;
   background:transparent;
-  color:var(--muted);
-  padding:12px 13px;
-  border-radius:11px;
-  font-weight:600;
+  color:#506174;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:11px 12px;
+  border-radius:10px;
+  margin-bottom:3px;
+  text-align:left;
+  font-size:13px;
 }
 
-.nav button:hover{
+.nav-btn:hover{
   background:var(--cloud);
   color:var(--deep);
 }
 
-.nav button.active{
+.nav-btn.active{
   background:var(--cloud2);
-  color:var(--blue);
+  color:var(--blue-dark);
+}
+
+.nav-icon{
+  width:22px;
+  text-align:center;
+  font-size:15px;
 }
 
 .sidebar-bottom{
   position:absolute;
   left:15px;
   right:15px;
-  bottom:20px;
+  bottom:18px;
 }
-
-/* MAIN */
 
 .main{
   margin-left:245px;
@@ -244,144 +257,145 @@ button{
 }
 
 .topbar{
-  height:76px;
-  background:#fff;
+  height:72px;
+  background:rgba(255,255,255,.95);
   border-bottom:1px solid var(--line);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 34px;
+  padding:0 30px;
   position:sticky;
   top:0;
-  z-index:10;
+  z-index:40;
 }
 
 .page-title{
-  font-size:22px;
-  font-weight:700;
   color:var(--deep);
+  font-size:19px;
+  font-weight:600;
 }
 
-.user-area{
+.top-user{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:10px;
 }
 
-.user-avatar{
-  width:38px;
-  height:38px;
+.avatar{
+  width:36px;
+  height:36px;
   border-radius:50%;
   background:var(--cloud2);
-  color:var(--blue);
+  color:var(--blue-dark);
   display:flex;
   align-items:center;
   justify-content:center;
-  font-weight:700;
+  font-weight:600;
+  font-size:13px;
 }
 
-.content{
-  padding:30px;
-  max-width:1500px;
+.top-user-name{
+  font-size:12px;
+  color:var(--deep);
 }
 
-/* SECTIONS */
+.top-user-email{
+  font-size:10px;
+  color:var(--muted);
+  margin-top:2px;
+}
+
+.mobile-menu{
+  display:none;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:8px;
+  padding:7px 10px;
+}
+
+/* PAGES */
 
 .page{
   display:none;
+  padding:30px;
+  max-width:1450px;
+  margin:auto;
 }
 
 .page.active{
   display:block;
 }
 
-.welcome{
-  margin-bottom:24px;
-}
-
-.welcome h1{
-  margin:0 0 7px;
-  color:var(--deep);
-  font-size:30px;
-}
-
-.welcome p{
-  margin:0;
-  color:var(--muted);
-}
-
 /* CARDS */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  margin-bottom:24px;
-}
 
 .card{
   background:#fff;
   border:1px solid var(--line);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
+  border-radius:16px;
+  padding:20px;
 }
 
-.stat{
+.grid{
+  display:grid;
+  gap:15px;
+}
+
+.stats-grid{
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+  margin-bottom:20px;
+}
+
+.stat-card{
   padding:20px;
 }
 
 .stat-label{
   color:var(--muted);
-  font-size:13px;
+  font-size:12px;
 }
 
-.stat-value{
-  font-size:28px;
-  font-weight:750;
+.stat-number{
   color:var(--deep);
-  margin-top:7px;
-}
-
-.section-card{
-  padding:22px;
-  margin-bottom:20px;
+  font-size:27px;
+  font-weight:600;
+  margin-top:8px;
 }
 
 .section-head{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:15px;
-  margin-bottom:18px;
+  margin-bottom:16px;
 }
 
 .section-head h2{
   margin:0;
-  font-size:18px;
   color:var(--deep);
+  font-size:17px;
+  font-weight:600;
 }
 
-.muted{
+.section-head p{
+  margin:5px 0 0;
   color:var(--muted);
+  font-size:12px;
 }
-
-/* PROJECTS */
 
 .project-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:18px;
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
 }
 
 .project-card{
-  padding:21px;
-  transition:.2s ease;
   cursor:pointer;
+  transition:.2s;
 }
 
 .project-card:hover{
+  border-color:#bdd3e8;
   transform:translateY(-2px);
-  border-color:#bfd4e8;
 }
 
 .project-top{
@@ -391,25 +405,27 @@ button{
 }
 
 .project-name{
-  font-size:18px;
-  font-weight:700;
   color:var(--deep);
+  font-size:15px;
+  font-weight:600;
 }
 
 .project-description{
   color:var(--muted);
-  font-size:14px;
-  margin-top:8px;
-  line-height:1.55;
+  font-size:12px;
+  margin-top:6px;
+  line-height:1.5;
 }
 
 .status{
   display:inline-flex;
   align-items:center;
-  padding:6px 9px;
-  border-radius:8px;
-  font-size:11px;
-  font-weight:700;
+  justify-content:center;
+  padding:5px 9px;
+  border-radius:20px;
+  background:var(--cloud2);
+  color:var(--blue-dark);
+  font-size:10px;
   white-space:nowrap;
 }
 
@@ -434,43 +450,34 @@ button{
 }
 
 .progress-wrap{
-  margin-top:20px;
+  margin-top:18px;
 }
 
 .progress-info{
   display:flex;
   justify-content:space-between;
-  font-size:12px;
   color:var(--muted);
+  font-size:11px;
   margin-bottom:7px;
 }
 
 .progress{
-  height:8px;
-  background:var(--cloud2);
-  border-radius:10px;
+  height:7px;
+  border-radius:20px;
+  background:var(--cloud3);
   overflow:hidden;
 }
 
 .progress-bar{
   height:100%;
   background:var(--blue);
-  border-radius:10px;
+  border-radius:20px;
+  transition:.3s;
 }
 
-/* PROJECT DETAIL */
-
-.back-btn{
-  border:0;
-  background:transparent;
-  color:var(--blue);
-  padding:0;
-  margin-bottom:18px;
-  font-weight:600;
-}
+/* DETAIL */
 
 .project-detail-header{
-  padding:25px;
   margin-bottom:18px;
 }
 
@@ -482,72 +489,66 @@ button{
 }
 
 .detail-title h1{
-  margin:0;
   color:var(--deep);
-  font-size:27px;
-}
-
-.detail-title p{
-  margin:8px 0 0;
-  color:var(--muted);
-}
-
-.stage-line{
-  display:flex;
-  gap:7px;
-  margin-top:22px;
-  overflow-x:auto;
-  padding-bottom:5px;
-}
-
-.stage{
-  min-width:95px;
-  padding:9px;
-  border-radius:9px;
-  background:var(--cloud);
-  color:var(--muted);
-  text-align:center;
-  font-size:10px;
+  font-size:24px;
+  margin:0;
   font-weight:600;
 }
 
+.detail-title p{
+  color:var(--muted);
+  font-size:13px;
+  margin:7px 0 0;
+  line-height:1.5;
+}
+
+.stage-line{
+  display:grid;
+  grid-template-columns:
+    repeat(11,minmax(0,1fr));
+  gap:4px;
+  margin-top:22px;
+}
+
+.stage{
+  font-size:9px;
+  color:#9aa8b5;
+  padding-top:7px;
+  border-top:2px solid var(--line);
+  text-align:center;
+}
+
 .stage.done{
-  background:var(--green-bg);
   color:var(--green);
+  border-color:var(--green);
 }
 
 .stage.current{
-  background:var(--cloud2);
   color:var(--blue);
+  border-color:var(--blue);
 }
-
-/* TABS */
 
 .tabs{
   display:flex;
-  gap:5px;
+  gap:4px;
   overflow-x:auto;
-  background:#fff;
-  border:1px solid var(--line);
-  padding:7px;
-  border-radius:14px;
-  margin-bottom:18px;
+  margin-bottom:15px;
+  border-bottom:1px solid var(--line);
 }
 
 .tab{
   border:0;
   background:transparent;
   color:var(--muted);
-  padding:10px 13px;
-  border-radius:9px;
+  padding:11px 13px;
   white-space:nowrap;
-  font-size:13px;
-  font-weight:600;
+  border-bottom:2px solid transparent;
+  font-size:12px;
 }
 
 .tab.active{
-  background:var(--cloud2);
   color:var(--blue);
+  border-bottom-color:var(--blue);
 }
 
 .tab-content{
@@ -558,257 +559,212 @@ button{
   display:block;
 }
 
-/* INFO GRID */
+.section-card{
+  margin-bottom:15px;
+}
 
 .info-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
+  gap:12px;
 }
 
 .info-box{
   border:1px solid var(--line);
+  border-radius:11px;
+  padding:13px;
   background:var(--cloud);
-  border-radius:13px;
-  padding:16px;
 }
 
 .info-box span{
   display:block;
-  font-size:12px;
   color:var(--muted);
-  margin-bottom:7px;
+  font-size:10px;
+  margin-bottom:6px;
 }
 
 .info-box strong{
-  font-size:14px;
   color:var(--deep);
+  font-size:13px;
+  font-weight:600;
 }
-
-/* CHECKLIST */
 
 .checklist{
   display:flex;
   flex-direction:column;
-  gap:9px;
+  gap:8px;
 }
 
 .check-item{
   display:flex;
   align-items:center;
-  gap:12px;
-  padding:13px 14px;
+  gap:11px;
+  padding:12px;
   border:1px solid var(--line);
-  border-radius:11px;
+  border-radius:10px;
   background:#fff;
+}
+
+.check-item.done{
+  background:var(--green-bg);
+  border-color:#cce8d9;
 }
 
 .check-box{
   width:19px;
   height:19px;
+  border:1px solid #b8c8d6;
   border-radius:5px;
-  border:1px solid #b9c9d8;
   display:flex;
   align-items:center;
   justify-content:center;
-  flex:none;
-}
-
-.check-item.done{
-  background:var(--green-bg);
-  border-color:#cce8da;
+  color:var(--green);
+  font-size:12px;
+  flex-shrink:0;
 }
 
 .check-item.done .check-box{
-  background:var(--green);
   border-color:var(--green);
-  color:#fff;
 }
 
 .check-text{
-  font-size:14px;
+  font-size:13px;
+  color:var(--deep);
 }
 
-.check-item.done .check-text{
+.empty{
   color:var(--muted);
-  text-decoration:line-through;
+  font-size:13px;
+  padding:20px 10px;
+  text-align:center;
 }
 
-/* BRIEF */
+.muted{
+  color:var(--muted);
+}
 
 .brief-block{
-  margin-bottom:18px;
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.brief-block:last-child{
+  border-bottom:0;
 }
 
 .brief-block h3{
   margin:0 0 7px;
   color:var(--deep);
-  font-size:14px;
+  font-size:13px;
+  font-weight:600;
 }
 
 .brief-block p{
   margin:0;
   color:var(--muted);
+  font-size:13px;
   line-height:1.65;
   white-space:pre-wrap;
 }
 
-.upload-area{
-  border:1.5px dashed #b9cce0;
-  background:var(--cloud);
-  padding:25px;
-  text-align:center;
-  border-radius:14px;
-}
-
-.upload-area input{
-  margin-top:10px;
-}
-
-/* TABLE */
-
-.table-wrap{
-  overflow:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-}
-
-th,
-td{
-  padding:13px 11px;
-  text-align:left;
-  border-bottom:1px solid var(--line);
-  font-size:13px;
-}
-
-th{
-  color:var(--muted);
-  font-weight:600;
-  background:var(--cloud);
-}
-
-td{
-  color:var(--text);
-}
-
-/* CREDENTIALS */
-
-.credential-card{
+.request-card,
+.credential-card,
+.document-card{
   border:1px solid var(--line);
-  padding:17px;
-  border-radius:13px;
-  margin-bottom:12px;
+  border-radius:12px;
+  padding:15px;
+  margin-bottom:10px;
 }
 
-.credential-head{
+.request-status{
+  background:var(--red-bg);
+  color:var(--red);
+  padding:5px 8px;
+  border-radius:20px;
+  font-size:10px;
+}
+
+.credential-head,
+.document-card{
   display:flex;
   justify-content:space-between;
-  gap:10px;
+  align-items:center;
+  gap:15px;
 }
 
-.credential-name{
+.credential-name,
+.document-name{
   color:var(--deep);
-  font-weight:700;
+  font-size:13px;
+  font-weight:600;
 }
 
 .credential-row{
   display:grid;
-  grid-template-columns:130px 1fr auto;
-  gap:10px;
+  grid-template-columns:80px 1fr auto;
   align-items:center;
-  margin-top:10px;
+  gap:10px;
+  margin-top:12px;
 }
 
-.credential-row span:first-child{
+.credential-row > span{
   color:var(--muted);
-  font-size:12px;
+  font-size:11px;
 }
 
 .credential-value{
+  border:1px solid var(--line);
   background:var(--cloud);
+  padding:8px 10px;
   border-radius:8px;
-  padding:9px;
-  font-size:13px;
-  word-break:break-all;
+  font-size:12px;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .small-btn{
   border:1px solid var(--line);
   background:#fff;
-  border-radius:8px;
-  padding:7px 10px;
-  font-size:11px;
-}
-
-/* ACCESS */
-
-.request-card{
-  padding:17px;
-  border:1px solid var(--line);
-  border-radius:13px;
-  margin-bottom:12px;
-}
-
-.request-status{
-  display:inline-block;
-  padding:5px 8px;
-  border-radius:7px;
-  background:var(--amber-bg);
-  color:var(--amber);
-  font-size:11px;
-  font-weight:700;
-}
-
-/* DOCUMENT */
-
-.document-card{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  padding:15px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  margin-bottom:10px;
-}
-
-.document-name{
   color:var(--deep);
-  font-weight:600;
+  padding:7px 9px;
+  border-radius:8px;
+  font-size:10px;
+  white-space:nowrap;
+}
+
+.small-btn:hover{
+  background:var(--cloud);
 }
 
 .document-meta{
-  font-size:11px;
   color:var(--muted);
+  font-size:10px;
   margin-top:4px;
 }
 
-/* EMPTY */
-
-.empty{
+.upload-area{
+  border:1px dashed #b9ccdf;
+  background:var(--cloud);
+  border-radius:12px;
+  padding:18px;
   text-align:center;
-  padding:45px 20px;
-  color:var(--muted);
+}
+
+.upload-area input{
+  margin-top:12px;
+  font-size:11px;
 }
 
 /* MOBILE */
-
-.mobile-menu{
-  display:none;
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:9px;
-  padding:8px 10px;
-}
 
 @media(max-width:900px){
 
   .sidebar{
     transform:translateX(-100%);
     transition:.25s;
+    box-shadow:
+      10px 0 30px rgba(18,59,112,.08);
   }
 
   .sidebar.open{
@@ -825,40 +781,54 @@ td{
   }
 
   .topbar{
-    padding:0 17px;
+    padding:0 16px;
   }
 
-  .content{
-    padding:20px 15px;
+  .page{
+    padding:18px;
   }
 
-  .stats{
-    grid-template-columns:repeat(2,1fr);
+  .stats-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
   }
 
-  .project-grid,
-  .info-grid{
+  .project-grid{
     grid-template-columns:1fr;
   }
+
+  .info-grid{
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+  }
+
+  .stage-line{
+    overflow-x:auto;
+    display:flex;
+  }
+
+  .stage{
+    min-width:80px;
+  }
+
 }
 
-@media(max-width:600px){
+@media(max-width:560px){
 
-  .stats{
+  .top-user-email{
+    display:none;
+  }
+
+  .page-title{
+    font-size:16px;
+  }
+
+  .stats-grid{
     grid-template-columns:1fr 1fr;
-    gap:10px;
   }
 
-  .stat{
-    padding:15px;
-  }
-
-  .stat-value{
-    font-size:23px;
-  }
-
-  .welcome h1{
-    font-size:25px;
+  .info-grid{
+    grid-template-columns:1fr;
   }
 
   .detail-title{
@@ -868,99 +838,201 @@ td{
   .credential-row{
     grid-template-columns:1fr;
   }
+
+  .login-card{
+    padding:25px;
+  }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
-<!-- LOGIN -->
 
-<div id="loginScreen">
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<div
+  id="loginScreen"
+  class="login-screen"
+>
 
   <div class="login-card">
 
-    <div class="login-logo">AWSZ</div>
+    <div class="login-brand">
+      AWSZ
+    </div>
 
-    <div class="login-sub">
+    <div class="login-subtitle">
       Client Portal
     </div>
 
-    <div id="loginError" class="login-error hidden"></div>
+    <div
+      id="loginError"
+      class="error-box hidden"
+    ></div>
 
-    <div class="field">
-      <label>Email</label>
-      <input id="loginEmail" type="email" placeholder="Enter your email">
-    </div>
+    <label class="form-label">
+      Email
+    </label>
 
-    <div class="field">
-      <label>Password</label>
-      <input id="loginPassword" type="password" placeholder="Enter your password">
-    </div>
+    <input
+      id="loginEmail"
+      class="form-input"
+      type="email"
+      placeholder="Enter your email"
+    >
 
-    <button class="primary-btn" style="width:100%" onclick="login()">
+    <label class="form-label">
+      Password
+    </label>
+
+    <input
+      id="loginPassword"
+      class="form-input"
+      type="password"
+      placeholder="Enter your password"
+      onkeydown="
+        if(event.key==='Enter')
+        login()
+      "
+    >
+
+    <button
+      class="primary-btn"
+      style="width:100%"
+      onclick="login()"
+    >
       Sign In
     </button>
 
-    <div style="text-align:center;margin-top:18px;">
-      <button
-        class="secondary-btn"
-        style="border:0;background:transparent;color:var(--blue)"
-        onclick="forgotPassword()">
-        Forgot password?
-      </button>
-    </div>
+    <button
+      class="secondary-btn"
+      style="
+        width:100%;
+        margin-top:10px;
+      "
+      onclick="forgotPassword()"
+    >
+      Forgot Password?
+    </button>
 
   </div>
 
 </div>
 
 
-<!-- APP -->
+<!-- =====================================================
+     APP
+===================================================== -->
 
-<div id="app" class="hidden">
+<div
+  id="app"
+  class="app hidden"
+>
+
 
   <!-- SIDEBAR -->
 
-  <aside class="sidebar" id="sidebar">
+  <aside
+    id="sidebar"
+    class="sidebar"
+  >
 
     <div class="brand">
-      <div class="brand-main">AWSZ</div>
-      <div class="brand-small">Client Portal</div>
+
+      <div class="brand-name">
+        AWSZ
+      </div>
+
+      <div class="brand-small">
+        Client Portal
+      </div>
+
     </div>
 
-    <nav class="nav">
 
-      <button class="nav-btn active" data-page="overview" onclick="showPage('overview')">
-        Overview
-      </button>
+    <div class="nav-title">
+      MAIN
+    </div>
 
-      <button class="nav-btn" data-page="projects" onclick="showPage('projects')">
-        Projects
-      </button>
 
-      <button class="nav-btn" data-page="tasks" onclick="showPage('tasks')">
-        Tasks
-      </button>
+    <button
+      class="nav-btn active"
+      data-page="overview"
+      onclick="showPage('overview')"
+    >
+      <span class="nav-icon">⌂</span>
+      Overview
+    </button>
 
-      <button class="nav-btn" data-page="messages" onclick="showPage('messages')">
-        Messages
-      </button>
 
-      <button class="nav-btn" data-page="invoices" onclick="showPage('invoices')">
-        Invoices
-      </button>
+    <button
+      class="nav-btn"
+      data-page="projects"
+      onclick="showPage('projects')"
+    >
+      <span class="nav-icon">▣</span>
+      Projects
+    </button>
 
-      <button class="nav-btn" data-page="account" onclick="showPage('account')">
-        Account
-      </button>
 
-    </nav>
+    <button
+      class="nav-btn"
+      data-page="tasks"
+      onclick="showPage('tasks')"
+    >
+      <span class="nav-icon">✓</span>
+      Tasks
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-page="messages"
+      onclick="showPage('messages')"
+    >
+      <span class="nav-icon">◌</span>
+      Messages
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-page="invoices"
+      onclick="showPage('invoices')"
+    >
+      <span class="nav-icon">$</span>
+      Invoices
+    </button>
+
+
+    <button
+      class="nav-btn"
+      data-page="account"
+      onclick="showPage('account')"
+    >
+      <span class="nav-icon">◎</span>
+      Account
+    </button>
+
 
     <div class="sidebar-bottom">
-      <button class="secondary-btn" style="width:100%" onclick="logout()">
+
+      <button
+        class="nav-btn"
+        onclick="logout()"
+      >
+        <span class="nav-icon">
+          ↪
+        </span>
         Sign Out
       </button>
+
     </div>
 
   </aside>
@@ -970,29 +1042,58 @@ td{
 
   <main class="main">
 
+
+    <!-- TOPBAR -->
+
     <header class="topbar">
 
-      <div style="display:flex;align-items:center;gap:12px">
+      <div
+        style="
+          display:flex;
+          align-items:center;
+          gap:12px;
+        "
+      >
 
-        <button class="mobile-menu" onclick="toggleSidebar()">
+        <button
+          class="mobile-menu"
+          onclick="toggleSidebar()"
+        >
           ☰
         </button>
 
-        <div class="page-title" id="pageTitle">
+        <div
+          id="pageTitle"
+          class="page-title"
+        >
           Overview
         </div>
 
       </div>
 
-      <div class="user-area">
 
-        <div>
-          <div id="topUserName" style="font-size:13px;font-weight:600"></div>
-          <div id="topUserEmail" style="font-size:11px;color:var(--muted)"></div>
+      <div class="top-user">
+
+        <div class="avatar" id="avatar">
+          A
         </div>
 
-        <div class="user-avatar" id="avatar">
-          A
+        <div>
+
+          <div
+            id="topUserName"
+            class="top-user-name"
+          >
+            Client
+          </div>
+
+          <div
+            id="topUserEmail"
+            class="top-user-email"
+          >
+            client@example.com
+          </div>
+
         </div>
 
       </div>
@@ -1000,218 +1101,440 @@ td{
     </header>
 
 
-    <div class="content">
+    <!-- =================================================
+         OVERVIEW
+    ================================================= -->
+
+    <section
+      id="page-overview"
+      class="page active"
+    >
+
+      <div
+        style="
+          margin-bottom:22px;
+        "
+      >
+
+        <h1
+          id="welcomeName"
+          style="
+            margin:0;
+            color:var(--deep);
+            font-size:25px;
+            font-weight:600;
+          "
+        >
+          Welcome
+        </h1>
+
+        <p
+          style="
+            color:var(--muted);
+            font-size:13px;
+            margin:7px 0 0;
+          "
+        >
+          Here is an overview of your projects and activity.
+        </p>
+
+      </div>
 
 
-      <!-- OVERVIEW -->
+      <div
+        class="grid stats-grid"
+      >
 
-      <section id="page-overview" class="page active">
+        <div class="card stat-card">
 
-        <div class="welcome">
-          <h1 id="welcomeName">Welcome</h1>
-          <p>Your project activity and updates in one place.</p>
+          <div class="stat-label">
+            Active Projects
+          </div>
+
+          <div
+            id="statProjects"
+            class="stat-number"
+          >
+            0
+          </div>
+
         </div>
 
-        <div class="stats">
 
-          <div class="card stat">
-            <div class="stat-label">Active Projects</div>
-            <div class="stat-value" id="statProjects">0</div>
+        <div class="card stat-card">
+
+          <div class="stat-label">
+            Total Tasks
           </div>
 
-          <div class="card stat">
-            <div class="stat-label">Tasks</div>
-            <div class="stat-value" id="statTasks">0</div>
-          </div>
-
-          <div class="card stat">
-            <div class="stat-label">Completed Tasks</div>
-            <div class="stat-value" id="statCompleted">0</div>
-          </div>
-
-          <div class="card stat">
-            <div class="stat-label">Open Invoices</div>
-            <div class="stat-value" id="statInvoices">0</div>
+          <div
+            id="statTasks"
+            class="stat-number"
+          >
+            0
           </div>
 
         </div>
 
-        <div class="card section-card">
+
+        <div class="card stat-card">
+
+          <div class="stat-label">
+            Completed Tasks
+          </div>
+
+          <div
+            id="statCompleted"
+            class="stat-number"
+          >
+            0
+          </div>
+
+        </div>
+
+
+        <div class="card stat-card">
+
+          <div class="stat-label">
+            Open Invoices
+          </div>
+
+          <div
+            id="statInvoices"
+            class="stat-number"
+          >
+            0
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Your Projects
+            </h2>
+
+            <p>
+              Click a project to view its details.
+            </p>
+
+          </div>
+
+          <button
+            class="secondary-btn"
+            onclick="showPage('projects')"
+          >
+            View All
+          </button>
+
+        </div>
+
+
+        <div
+          id="overviewProjects"
+          class="grid project-grid"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         PROJECTS
+    ================================================= -->
+
+    <section
+      id="page-projects"
+      class="page"
+    >
+
+      <div
+        class="card"
+      >
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Projects
+            </h2>
+
+            <p>
+              All projects assigned to your account.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="projectsGrid"
+          class="grid project-grid"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         TASKS
+    ================================================= -->
+
+    <section
+      id="page-tasks"
+      class="page"
+    >
+
+      <div class="card">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Tasks
+            </h2>
+
+            <p>
+              Track the progress of your project tasks.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div id="allTasks"></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         PROJECT DETAIL
+    ================================================= -->
+
+    <section
+      id="page-project-detail"
+      class="page"
+    >
+
+      <div id="projectDetail"></div>
+
+    </section>
+
+
+    <!-- =================================================
+         MESSAGES
+    ================================================= -->
+
+    <section
+      id="page-messages"
+      class="page"
+    >
+
+      <div class="card">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Messages
+            </h2>
+
+            <p>
+              Communicate directly with the AWSZ project team.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div
+          id="messagesPlaceholder"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         INVOICES
+    ================================================= -->
+
+    <section
+      id="page-invoices"
+      class="page"
+    >
+
+      <div class="card">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Invoices
+            </h2>
+
+            <p>
+              View invoices, payment details and payment status.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div
+          id="invoicesPlaceholder"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         ACCOUNT
+    ================================================= -->
+
+    <section
+      id="page-account"
+      class="page"
+    >
+
+      <div
+        class="grid"
+        style="
+          grid-template-columns:
+          minmax(0,1fr)
+          minmax(0,1fr);
+        "
+      >
+
+        <div class="card">
 
           <div class="section-head">
-            <h2>My Projects</h2>
-
-            <button class="secondary-btn" onclick="showPage('projects')">
-              View all
-            </button>
-          </div>
-
-          <div id="overviewProjects" class="project-grid"></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- PROJECTS -->
-
-      <section id="page-projects" class="page">
-
-        <div class="section-card card">
-
-          <div class="section-head">
-            <div>
-              <h2>Projects</h2>
-              <div class="muted" style="font-size:13px;margin-top:4px">
-                Your active and completed projects
-              </div>
-            </div>
-          </div>
-
-          <div id="projectsGrid" class="project-grid"></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- PROJECT DETAIL -->
-
-      <section id="page-project-detail" class="page">
-
-        <button class="back-btn" onclick="showPage('projects')">
-          ← Back to Projects
-        </button>
-
-        <div id="projectDetail"></div>
-
-      </section>
-
-
-      <!-- TASKS -->
-
-      <section id="page-tasks" class="page">
-
-        <div class="card section-card">
-
-          <div class="section-head">
-            <h2>Tasks</h2>
-          </div>
-
-          <div id="allTasks"></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- MESSAGES -->
-
-      <section id="page-messages" class="page">
-
-        <div class="card section-card">
-
-          <div class="section-head">
-            <div>
-              <h2>Messages</h2>
-              <div class="muted" style="font-size:13px">
-                Project communication
-              </div>
-            </div>
-          </div>
-
-          <div id="messagesPlaceholder" class="empty">
-            Messages UI will be connected in Part 2.
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- INVOICES -->
-
-      <section id="page-invoices" class="page">
-
-        <div class="card section-card">
-
-          <div class="section-head">
-            <div>
-              <h2>Invoices</h2>
-              <div class="muted" style="font-size:13px">
-                Your invoices and payment information
-              </div>
-            </div>
-          </div>
-
-          <div id="invoicesPlaceholder" class="empty">
-            Invoice interface will be connected in Part 2.
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ACCOUNT -->
-
-      <section id="page-account" class="page">
-
-        <div class="card section-card">
-
-          <div class="section-head">
-            <h2>Account</h2>
+            <h2>
+              Account Details
+            </h2>
           </div>
 
           <div class="info-grid">
 
             <div class="info-box">
-              <span>Name</span>
-              <strong id="accountName">—</strong>
+
+              <span>
+                Full Name
+              </span>
+
+              <strong id="accountName">
+                —
+              </strong>
+
             </div>
+
 
             <div class="info-box">
-              <span>Email</span>
-              <strong id="accountEmail">—</strong>
+
+              <span>
+                Email
+              </span>
+
+              <strong id="accountEmail">
+                —
+              </strong>
+
             </div>
+
 
             <div class="info-box">
-              <span>Company</span>
-              <strong id="accountCompany">—</strong>
+
+              <span>
+                Company
+              </span>
+
+              <strong id="accountCompany">
+                —
+              </strong>
+
             </div>
+
 
             <div class="info-box">
-              <span>Phone</span>
-              <strong id="accountPhone">—</strong>
+
+              <span>
+                Phone
+              </span>
+
+              <strong id="accountPhone">
+                —
+              </strong>
+
             </div>
-
-          </div>
-
-          <div style="margin-top:22px">
-
-            <button class="secondary-btn" onclick="forgotPassword()">
-              Reset Password
-            </button>
 
           </div>
 
         </div>
 
-      </section>
 
+        <div class="card">
 
-    </div>
+          <div class="section-head">
+
+            <div>
+
+              <h2>
+                Security
+              </h2>
+
+              <p>
+                Manage your client account password.
+              </p>
+
+            </div>
+
+          </div>
+
+          <button
+            class="primary-btn"
+            onclick="forgotPassword()"
+          >
+            Send Password Reset Email
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
 
   </main>
 
 </div>
 
 
-<script>
+<!-- =====================================================
+     PART 2 STARTS BELOW
+===================================================== -->
+  <script>
 
-/* ================================
+/* =====================================================
    SUPABASE
-================================ */
+===================================================== */
 
 const SUPABASE_URL =
   "https://ausocdplliuftdqxbvwa.supabase.co";
@@ -1220,77 +1543,216 @@ const SUPABASE_KEY =
   "sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
 
 const supabaseClient =
-  window.supabase.createClient(
+  supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
   );
 
 
-/* ================================
-   STATE
-================================ */
+/* =====================================================
+   GLOBAL VARIABLES
+===================================================== */
 
 let currentUser = null;
 let clientProfile = null;
 let projects = [];
-let tasks = [];
-let currentProject = null;
+let selectedProject = null;
+let projectTasks = [];
+let projectBrief = null;
+let projectAccess = [];
+let projectCredentials = [];
+let projectDocuments = [];
+let invoices = [];
+let messages = [];
+
+let realtimeChannels = [];
 
 
-/* ================================
-   AUTH CHECK
-================================ */
+/* =====================================================
+   HELPERS
+===================================================== */
 
-async function init(){
+function esc(value){
+  if(value === null || value === undefined){
+    return "";
+  }
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+function formatDate(date){
+  if(!date){
+    return "—";
+  }
+
+  return new Date(date).toLocaleDateString(
+    "en-US",
+    {
+      year:"numeric",
+      month:"short",
+      day:"numeric"
+    }
+  );
+}
+
+
+function money(amount,currency="USD"){
+  const n = Number(amount || 0);
+
+  return new Intl.NumberFormat(
+    "en-US",
+    {
+      style:"currency",
+      currency:currency || "USD"
+    }
+  ).format(n);
+}
+
+
+function initials(name){
+  if(!name){
+    return "A";
+  }
+
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0,2)
+    .map(x => x[0])
+    .join("")
+    .toUpperCase();
+}
+
+
+function statusClass(status){
+  const s =
+    String(status || "")
+      .toLowerCase();
+
+  if(
+    s.includes("complete") ||
+    s.includes("paid")
+  ){
+    return "completed";
+  }
+
+  if(
+    s.includes("pending") ||
+    s.includes("draft")
+  ){
+    return "pending";
+  }
+
+  if(
+    s.includes("cancel")
+  ){
+    return "cancelled";
+  }
+
+  return "active";
+}
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+async function checkSession(){
 
   const {
-    data:{session}
+    data,
+    error
   } = await supabaseClient.auth.getSession();
 
-  if(session){
+  if(error){
+    showLoginError(error.message);
+    return;
+  }
 
-    currentUser = session.user;
+  if(data.session){
 
-    await loadClient();
+    currentUser =
+      data.session.user;
 
-    showApp();
+    await startPortal();
 
   }else{
 
     showLogin();
 
   }
-
 }
 
 
-/* ================================
-   LOGIN
-================================ */
+supabaseClient.auth.onAuthStateChange(
+  async (event,session) => {
+
+    if(
+      event === "PASSWORD_RECOVERY"
+    ){
+
+      showPasswordReset();
+
+      return;
+    }
+
+    if(
+      event === "SIGNED_IN" &&
+      session
+    ){
+
+      currentUser =
+        session.user;
+
+      await startPortal();
+
+    }
+
+    if(
+      event === "SIGNED_OUT"
+    ){
+
+      currentUser = null;
+      clientProfile = null;
+      projects = [];
+
+      showLogin();
+
+    }
+
+  }
+);
+
 
 async function login(){
 
   const email =
-    document.getElementById("loginEmail").value.trim();
+    document
+      .getElementById("loginEmail")
+      .value
+      .trim();
 
   const password =
-    document.getElementById("loginPassword").value;
-
-  const errorBox =
-    document.getElementById("loginError");
-
-  errorBox.classList.add("hidden");
+    document
+      .getElementById("loginPassword")
+      .value;
 
   if(!email || !password){
 
-    errorBox.textContent =
-      "Please enter your email and password.";
-
-    errorBox.classList.remove("hidden");
+    showLoginError(
+      "Please enter your email and password."
+    );
 
     return;
-
   }
+
+  hideLoginError();
 
   const {
     data,
@@ -1303,49 +1765,49 @@ async function login(){
 
   if(error){
 
-    errorBox.textContent = error.message;
-
-    errorBox.classList.remove("hidden");
+    showLoginError(
+      error.message
+    );
 
     return;
-
   }
 
-  currentUser = data.user;
+  currentUser =
+    data.user;
 
-  await loadClient();
-
-  showApp();
-
+  await startPortal();
 }
 
-
-/* ================================
-   FORGOT PASSWORD
-================================ */
 
 async function forgotPassword(){
 
   const email =
-    currentUser?.email ||
-    document.getElementById("loginEmail").value.trim();
+    document
+      .getElementById("loginEmail")
+      ?.value
+      ?.trim();
 
   if(!email){
 
-    alert("Please enter your email first.");
+    alert(
+      "Please enter your email first."
+    );
 
     return;
-
   }
 
-  const {error} =
+  const redirectUrl =
+    window.location.origin +
+    window.location.pathname;
+
+  const {
+    error
+  } =
     await supabaseClient.auth
       .resetPasswordForEmail(
         email,
         {
-          redirectTo:
-            window.location.origin +
-            window.location.pathname
+          redirectTo:redirectUrl
         }
       );
 
@@ -1353,42 +1815,236 @@ async function forgotPassword(){
 
     alert(error.message);
 
-  }else{
-
-    alert(
-      "Password reset email has been sent. Please check your inbox."
-    );
-
+    return;
   }
 
+  alert(
+    "Password reset email sent. Please check your inbox."
+  );
 }
 
 
-/* ================================
-   LOGOUT
-================================ */
+function showPasswordReset(){
+
+  const box =
+    document.createElement("div");
+
+  box.id =
+    "passwordResetModal";
+
+  box.style.cssText = `
+    position:fixed;
+    inset:0;
+    background:rgba(11,40,80,.35);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    padding:20px;
+  `;
+
+  box.innerHTML = `
+
+    <div style="
+      width:100%;
+      max-width:420px;
+      background:#fff;
+      border-radius:18px;
+      padding:25px;
+      border:1px solid var(--line);
+      box-shadow:0 20px 60px rgba(0,0,0,.12);
+    ">
+
+      <h2 style="
+        margin:0 0 7px;
+        color:var(--deep);
+        font-size:20px;
+        font-weight:600;
+      ">
+        Create New Password
+      </h2>
+
+      <p style="
+        color:var(--muted);
+        font-size:12px;
+        margin-bottom:18px;
+      ">
+        Enter your new client portal password.
+      </p>
+
+      <input
+        id="newPassword"
+        class="form-input"
+        type="password"
+        placeholder="New password"
+      >
+
+      <input
+        id="newPasswordConfirm"
+        class="form-input"
+        type="password"
+        placeholder="Confirm new password"
+      >
+
+      <button
+        class="primary-btn"
+        style="width:100%"
+        onclick="saveNewPassword()"
+      >
+        Update Password
+      </button>
+
+    </div>
+
+  `;
+
+  document.body.appendChild(box);
+}
+
+
+async function saveNewPassword(){
+
+  const password =
+    document
+      .getElementById("newPassword")
+      .value;
+
+  const confirm =
+    document
+      .getElementById("newPasswordConfirm")
+      .value;
+
+  if(password.length < 6){
+
+    alert(
+      "Password should be at least 6 characters."
+    );
+
+    return;
+  }
+
+  if(password !== confirm){
+
+    alert(
+      "Passwords do not match."
+    );
+
+    return;
+  }
+
+  const {
+    error
+  } =
+    await supabaseClient.auth
+      .updateUser({
+        password
+      });
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+  }
+
+  document
+    .getElementById(
+      "passwordResetModal"
+    )
+    ?.remove();
+
+  alert(
+    "Password updated successfully."
+  );
+}
+
 
 async function logout(){
 
   await supabaseClient.auth.signOut();
 
-  currentUser = null;
-  clientProfile = null;
-  projects = [];
-  tasks = [];
-
   showLogin();
+}
+
+
+function showLogin(){
+
+  document
+    .getElementById("loginScreen")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("app")
+    .classList.add("hidden");
+}
+
+
+function showLoginError(message){
+
+  const el =
+    document.getElementById(
+      "loginError"
+    );
+
+  if(!el){
+    return;
+  }
+
+  el.textContent =
+    message;
+
+  el.classList.remove("hidden");
+}
+
+
+function hideLoginError(){
+
+  document
+    .getElementById("loginError")
+    ?.classList.add("hidden");
+}
+
+
+/* =====================================================
+   START PORTAL
+===================================================== */
+
+async function startPortal(){
+
+  document
+    .getElementById("loginScreen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("app")
+    .classList.remove("hidden");
+
+  await loadClientProfile();
+
+  await loadProjects();
+
+  await loadInvoices();
+
+  renderOverview();
+
+  renderProjects();
+
+  renderTasks();
+
+  setupRealtime();
 
 }
 
 
-/* ================================
-   CLIENT
-================================ */
+/* =====================================================
+   CLIENT PROFILE
+===================================================== */
 
-async function loadClient(){
+async function loadClientProfile(){
 
-  if(!currentUser) return;
+  if(!currentUser){
+    return;
+  }
 
   const {
     data,
@@ -1402,42 +2058,96 @@ async function loadClient(){
 
   if(error){
 
-    console.error(error);
+    console.error(
+      "Client profile error:",
+      error
+    );
 
   }
 
-  clientProfile = data || {
-
-    id:currentUser.id,
-
-    full_name:
-      currentUser.user_metadata?.full_name ||
-      currentUser.email?.split("@")[0] ||
-      "Client",
-
-    company_name:
-      currentUser.user_metadata?.company_name || "",
-
-    email:
-      currentUser.email,
-
-    phone:
-      currentUser.user_metadata?.phone || ""
-
-  };
+  clientProfile =
+    data || {
+      id:currentUser.id,
+      full_name:
+        currentUser.user_metadata?.full_name ||
+        currentUser.email?.split("@")[0] ||
+        "Client",
+      company_name:
+        currentUser.user_metadata?.company_name ||
+        "",
+      email:
+        currentUser.email,
+      phone:
+        currentUser.user_metadata?.phone ||
+        ""
+    };
 
   updateUserUI();
-
-  await loadProjects();
-
 }
 
 
-/* ================================
+function updateUserUI(){
+
+  const name =
+    clientProfile?.full_name ||
+    "Client";
+
+  const email =
+    clientProfile?.email ||
+    currentUser?.email ||
+    "";
+
+  document
+    .getElementById("topUserName")
+    .textContent =
+      name;
+
+  document
+    .getElementById("topUserEmail")
+    .textContent =
+      email;
+
+  document
+    .getElementById("avatar")
+    .textContent =
+      initials(name);
+
+  document
+    .getElementById("welcomeName")
+    .textContent =
+      `Welcome, ${name}`;
+
+  document
+    .getElementById("accountName")
+    .textContent =
+      name;
+
+  document
+    .getElementById("accountEmail")
+    .textContent =
+      email;
+
+  document
+    .getElementById("accountCompany")
+    .textContent =
+      clientProfile?.company_name || "—";
+
+  document
+    .getElementById("accountPhone")
+    .textContent =
+      clientProfile?.phone || "—";
+}
+
+
+/* =====================================================
    PROJECTS
-================================ */
+===================================================== */
 
 async function loadProjects(){
+
+  if(!currentUser){
+    return;
+  }
 
   const {
     data,
@@ -1447,314 +2157,672 @@ async function loadProjects(){
       .from("projects")
       .select("*")
       .eq("client_id",currentUser.id)
-      .order("created_at",{ascending:false});
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
 
   if(error){
 
-    console.error("Projects error:",error);
+    console.error(
+      "Projects error:",
+      error
+    );
 
     projects = [];
 
-  }else{
-
-    projects = data || [];
-
-  }
-
-  await loadTasks();
-
-  renderProjects();
-
-}
-
-
-/* ================================
-   TASKS
-================================ */
-
-async function loadTasks(){
-
-  if(!projects.length){
-
-    tasks = [];
-
-    updateStats();
-
     return;
-
   }
 
-  const ids =
-    projects.map(p => p.id);
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("tasks")
-      .select("*")
-      .in("project_id",ids)
-      .order("created_at",{ascending:true});
-
-  if(error){
-
-    console.error("Tasks error:",error);
-
-    tasks = [];
-
-  }else{
-
-    tasks = data || [];
-
-  }
-
-  updateStats();
-
+  projects =
+    data || [];
 }
 
 
-/* ================================
-   STATS
-================================ */
+function projectCard(project){
 
-async function updateStats(){
+  const progress =
+    Math.min(
+      100,
+      Math.max(
+        0,
+        Number(project.progress || 0)
+      )
+    );
 
-  const activeProjects =
-    projects.filter(
-      p =>
-        String(p.status || "")
-          .toLowerCase() !== "completed"
-    ).length;
+  return `
 
-  const completed =
-    tasks.filter(
-      t => t.is_completed === true
-    ).length;
+    <div
+      class="card project-card"
+      onclick="openProject('${esc(project.id)}')"
+    >
 
-  document.getElementById("statProjects")
-    .textContent = activeProjects;
+      <div class="project-top">
 
-  document.getElementById("statTasks")
-    .textContent = tasks.length;
+        <div>
 
-  document.getElementById("statCompleted")
-    .textContent = completed;
+          <div class="project-name">
+            ${esc(project.project_name)}
+          </div>
 
-  /*
-    Invoice count will be connected
-    in Part 2.
-  */
+          <div class="project-description">
+            ${
+              esc(
+                project.description ||
+                "No project description available."
+              )
+            }
+          </div>
 
+        </div>
+
+        <span
+          class="status ${statusClass(project.status)}"
+        >
+          ${esc(project.status || "Active")}
+        </span>
+
+      </div>
+
+
+      <div class="progress-wrap">
+
+        <div class="progress-info">
+
+          <span>
+            ${esc(project.stage || "Onboarding")}
+          </span>
+
+          <span>
+            ${progress}%
+          </span>
+
+        </div>
+
+        <div class="progress">
+
+          <div
+            class="progress-bar"
+            style="width:${progress}%"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
 }
 
-
-/* ================================
-   USER UI
-================================ */
-
-function updateUserUI(){
-
-  const name =
-    clientProfile?.full_name ||
-    currentUser?.email ||
-    "Client";
-
-  document.getElementById("welcomeName")
-    .textContent =
-      "Welcome, " + name.split(" ")[0];
-
-  document.getElementById("topUserName")
-    .textContent = name;
-
-  document.getElementById("topUserEmail")
-    .textContent =
-      currentUser?.email || "";
-
-  document.getElementById("avatar")
-    .textContent =
-      name.charAt(0).toUpperCase();
-
-  document.getElementById("accountName")
-    .textContent =
-      clientProfile?.full_name || "—";
-
-  document.getElementById("accountEmail")
-    .textContent =
-      clientProfile?.email ||
-      currentUser?.email ||
-      "—";
-
-  document.getElementById("accountCompany")
-    .textContent =
-      clientProfile?.company_name || "—";
-
-  document.getElementById("accountPhone")
-    .textContent =
-      clientProfile?.phone || "—";
-
-}
-
-
-/* ================================
-   PROJECT RENDER
-================================ */
 
 function renderProjects(){
 
-  renderProjectContainer(
-    document.getElementById("overviewProjects"),
-    projects.slice(0,4)
-  );
+  const grid =
+    document.getElementById(
+      "projectsGrid"
+    );
 
-  renderProjectContainer(
-    document.getElementById("projectsGrid"),
-    projects
-  );
+  if(!grid){
+    return;
+  }
 
-}
+  if(!projects.length){
 
-
-/* ================================
-   PROJECT CARDS
-================================ */
-
-function renderProjectContainer(container,list){
-
-  if(!container) return;
-
-  if(!list.length){
-
-    container.innerHTML = `
-      <div class="empty" style="grid-column:1/-1">
-        No projects available yet.
+    grid.innerHTML = `
+      <div class="empty">
+        No projects have been assigned to your account yet.
       </div>
     `;
 
     return;
-
   }
 
-  container.innerHTML =
-    list.map(project => {
+  grid.innerHTML =
+    projects
+      .map(projectCard)
+      .join("");
+}
 
-      const progress =
-        Number(project.progress || 0);
 
-      const status =
-        String(project.status || "Active")
-          .toLowerCase();
+function renderOverview(){
 
-      const safeStatus =
-        ["active","pending","completed","cancelled"]
-          .includes(status)
-          ? status
-          : "active";
+  const grid =
+    document.getElementById(
+      "overviewProjects"
+    );
 
-      return `
+  if(grid){
 
-        <div
-          class="card project-card"
-          onclick="openProject(${project.id})"
-        >
+    if(!projects.length){
 
-          <div class="project-top">
-
-            <div>
-
-              <div class="project-name">
-                ${escapeHTML(project.project_name || "Untitled Project")}
-              </div>
-
-              <div class="project-description">
-                ${escapeHTML(project.description || "No project description available.")}
-              </div>
-
-            </div>
-
-            <span class="status ${safeStatus}">
-              ${escapeHTML(project.status || "Active")}
-            </span>
-
-          </div>
-
-          <div class="progress-wrap">
-
-            <div class="progress-info">
-
-              <span>
-                ${escapeHTML(project.stage || "Onboarding")}
-              </span>
-
-              <span>
-                ${progress}%
-              </span>
-
-            </div>
-
-            <div class="progress">
-
-              <div
-                class="progress-bar"
-                style="width:${Math.max(0,Math.min(100,progress))}%"
-              ></div>
-
-            </div>
-
-          </div>
-
+      grid.innerHTML = `
+        <div class="empty">
+          No projects available yet.
         </div>
       `;
 
-    }).join("");
+    }else{
 
+      grid.innerHTML =
+        projects
+          .slice(0,4)
+          .map(projectCard)
+          .join("");
+
+    }
+
+  }
+
+  document
+    .getElementById("statProjects")
+    .textContent =
+      projects.length;
 }
 
 
-/* ================================
-   OPEN PROJECT
-================================ */
+/* =====================================================
+   PROJECT DETAIL
+===================================================== */
 
-async function openProject(id){
+async function openProject(projectId){
 
-  currentProject =
+  selectedProject =
     projects.find(
-      p => Number(p.id) === Number(id)
+      p =>
+        String(p.id) ===
+        String(projectId)
     );
 
-  if(!currentProject) return;
+  if(!selectedProject){
 
-  showPage("project-detail");
+    alert(
+      "Project could not be found."
+    );
+
+    return;
+  }
+
+  showPage(
+    "project-detail"
+  );
+
+  await loadProjectData();
 
   renderProjectDetail();
-
 }
 
 
-/* ================================
-   PROJECT DETAIL
-================================ */
+async function loadProjectData(){
 
-async function renderProjectDetail(){
+  if(!selectedProject){
+    return;
+  }
 
-  const p = currentProject;
+  const id =
+    selectedProject.id;
+
+
+  const [
+    taskResult,
+    briefResult,
+    accessResult,
+    credentialResult,
+    documentResult
+  ] =
+    await Promise.all([
+
+      supabaseClient
+        .from("tasks")
+        .select("*")
+        .eq("project_id",id)
+        .order(
+          "created_at",
+          {
+            ascending:true
+          }
+        ),
+
+      supabaseClient
+        .from("project_briefs")
+        .select("*")
+        .eq("project_id",id)
+        .maybeSingle(),
+
+      supabaseClient
+        .from("access_requests")
+        .select("*")
+        .eq("project_id",id)
+        .order(
+          "requested_at",
+          {
+            ascending:false
+          }
+        ),
+
+      supabaseClient
+        .from("project_credentials")
+        .select("*")
+        .eq("project_id",id)
+        .order(
+          "created_at",
+          {
+            ascending:false
+          }
+        ),
+
+      supabaseClient
+        .from("documents")
+        .select("*")
+        .eq("project_id",id)
+        .order(
+          "created_at",
+          {
+            ascending:false
+          }
+        )
+
+    ]);
+
+
+  projectTasks =
+    taskResult.data || [];
+
+  projectBrief =
+    briefResult.data || null;
+
+  projectAccess =
+    accessResult.data || [];
+
+  projectCredentials =
+    credentialResult.data || [];
+
+  projectDocuments =
+    documentResult.data || [];
+}
+
+
+/* =====================================================
+   PROJECT DETAIL UI
+===================================================== */
+
+function renderProjectDetail(){
+
+  const p =
+    selectedProject;
 
   const progress =
     Number(p.progress || 0);
 
-  const projectTasks =
-    tasks.filter(
-      t =>
-        Number(t.project_id) ===
-        Number(p.id)
+  const detail =
+    document.getElementById(
+      "projectDetail"
     );
 
-  const completedTasks =
-    projectTasks.filter(
-      t => t.is_completed
-    ).length;
+  detail.innerHTML = `
+
+    <div class="project-detail-header">
+
+      <div class="detail-title">
+
+        <div>
+
+          <h1>
+            ${esc(p.project_name)}
+          </h1>
+
+          <p>
+            ${
+              esc(
+                p.description ||
+                "Project details"
+              )
+            }
+          </p>
+
+        </div>
+
+        <span
+          class="status ${statusClass(p.status)}"
+        >
+          ${esc(p.status || "Active")}
+        </span>
+
+      </div>
+
+
+      <div class="stage-line">
+
+        ${renderStages(p.stage)}
+
+      </div>
+
+    </div>
+
+
+    <div class="tabs">
+
+      <button
+        class="tab active"
+        onclick="projectTab('overview',this)"
+      >
+        Overview
+      </button>
+
+      <button
+        class="tab"
+        onclick="projectTab('tasks',this)"
+      >
+        Checklist
+      </button>
+
+      <button
+        class="tab"
+        onclick="projectTab('brief',this)"
+      >
+        Project Brief
+      </button>
+
+      <button
+        class="tab"
+        onclick="projectTab('access',this)"
+      >
+        Access Requests
+      </button>
+
+      <button
+        class="tab"
+        onclick="projectTab('credentials',this)"
+      >
+        Credentials
+      </button>
+
+      <button
+        class="tab"
+        onclick="projectTab('documents',this)"
+      >
+        Documents
+      </button>
+
+    </div>
+
+
+    <div
+      id="project-tab-overview"
+      class="tab-content active"
+    >
+
+      <div class="card section-card">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Project Overview
+            </h2>
+
+            <p>
+              Current project status and timeline.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="info-grid">
+
+          <div class="info-box">
+
+            <span>
+              Current Stage
+            </span>
+
+            <strong>
+              ${esc(p.stage || "Onboarding")}
+            </strong>
+
+          </div>
+
+
+          <div class="info-box">
+
+            <span>
+              Progress
+            </span>
+
+            <strong>
+              ${progress}%
+            </strong>
+
+          </div>
+
+
+          <div class="info-box">
+
+            <span>
+              Status
+            </span>
+
+            <strong>
+              ${esc(p.status || "Active")}
+            </strong>
+
+          </div>
+
+
+          <div class="info-box">
+
+            <span>
+              Start Date
+            </span>
+
+            <strong>
+              ${formatDate(p.start_date)}
+            </strong>
+
+          </div>
+
+
+          <div class="info-box">
+
+            <span>
+              Expected Completion
+            </span>
+
+            <strong>
+              ${formatDate(p.expected_completion)}
+            </strong>
+
+          </div>
+
+
+          <div class="info-box">
+
+            <span>
+              Project Value
+            </span>
+
+            <strong>
+              ${money(p.quoted_price)}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="project-tab-tasks"
+      class="tab-content"
+    >
+
+      <div class="card section-card">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Project Checklist
+            </h2>
+
+            <p>
+              Your project requirements and completed work.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div id="projectChecklist"></div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="project-tab-brief"
+      class="tab-content"
+    >
+
+      <div class="card section-card">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Project Brief
+            </h2>
+
+            <p>
+              Important project information provided by AWSZ.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div id="projectBrief"></div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="project-tab-access"
+      class="tab-content"
+    >
+
+      <div class="card section-card">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Access Requests
+            </h2>
+
+            <p>
+              Complete the requested access items for your project.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div id="projectAccess"></div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="project-tab-credentials"
+      class="tab-content"
+    >
+
+      <div class="card section-card">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Credentials
+            </h2>
+
+            <p>
+              Access information shared for this project.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div id="projectCredentials"></div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="project-tab-documents"
+      class="tab-content"
+    >
+
+      <div class="card section-card">
+
+        <div class="section-head">
+
+          <div>
+
+            <h2>
+              Project Documents
+            </h2>
+
+            <p>
+              Documents uploaded by the AWSZ team.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div id="projectDocuments"></div>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  renderProjectChecklist();
+  renderProjectBrief();
+  renderProjectAccess();
+  renderProjectCredentials();
+  renderProjectDocuments();
+}
+
+
+function renderStages(currentStage){
 
   const stages = [
+
     "01 Onboarding",
     "02 Requirements",
     "03 Access Collection",
@@ -1766,1182 +2834,1755 @@ async function renderProjectDetail(){
     "09 Revisions",
     "10 Final Approval",
     "11 Completed"
+
   ];
 
-  let currentStageIndex =
+  const currentIndex =
     stages.findIndex(
-      s =>
-        s.toLowerCase() ===
-        String(p.stage || "")
-          .toLowerCase()
+      x =>
+        x.toLowerCase() ===
+        String(
+          currentStage || ""
+        ).toLowerCase()
     );
 
-  if(currentStageIndex < 0){
+  return stages
+    .map(
+      (stage,index) => {
 
-    currentStageIndex = 0;
+        let cls = "";
 
-  }
+        if(
+          currentIndex >= 0 &&
+          index < currentIndex
+        ){
+          cls = "done";
+        }
 
-  document.getElementById("projectDetail")
-    .innerHTML = `
+        if(
+          currentIndex === index
+        ){
+          cls = "current";
+        }
 
-      <div class="card project-detail-header">
-
-        <div class="detail-title">
-
-          <div>
-
-            <h1>
-              ${escapeHTML(p.project_name || "Project")}
-            </h1>
-
-            <p>
-              ${escapeHTML(p.description || "No description available.")}
-            </p>
-
+        return `
+          <div class="stage ${cls}">
+            ${esc(
+              stage
+                .replace(/^\d+\s/,"")
+            )}
           </div>
-
-          <span class="status active">
-            ${escapeHTML(p.status || "Active")}
-          </span>
-
-        </div>
-
-        <div class="progress-wrap">
-
-          <div class="progress-info">
-
-            <span>
-              ${escapeHTML(p.stage || "Onboarding")}
-            </span>
-
-            <span>
-              ${progress}%
-            </span>
-
-          </div>
-
-          <div class="progress">
-            <div
-              class="progress-bar"
-              style="width:${progress}%"
-            ></div>
-          </div>
-
-        </div>
-
-        <div class="stage-line">
-
-          ${stages.map((stage,index)=>`
-
-            <div class="stage ${
-              index < currentStageIndex
-                ? "done"
-                : index === currentStageIndex
-                ? "current"
-                : ""
-            }">
-
-              ${escapeHTML(
-                stage.replace(/^\d+\s/,"")
-              )}
-
-            </div>
-
-          `).join("")}
-
-        </div>
-
-      </div>
-
-
-      <div class="tabs">
-
-        <button class="tab active"
-          onclick="openTab('overviewTab',this)">
-          Overview
-        </button>
-
-        <button class="tab"
-          onclick="openTab('checklistTab',this)">
-          Checklist
-        </button>
-
-        <button class="tab"
-          onclick="openTab('briefTab',this)">
-          Project Brief
-        </button>
-
-        <button class="tab"
-          onclick="openTab('accessTab',this)">
-          Access Requests
-        </button>
-
-        <button class="tab"
-          onclick="openTab('credentialsTab',this)">
-          Credentials
-        </button>
-
-        <button class="tab"
-          onclick="openTab('documentsTab',this)">
-          Documents
-        </button>
-
-      </div>
-
-
-      <!-- OVERVIEW -->
-
-      <div id="overviewTab" class="tab-content active">
-
-        <div class="card section-card">
-
-          <div class="section-head">
-            <h2>Project Overview</h2>
-          </div>
-
-          <div class="info-grid">
-
-            <div class="info-box">
-              <span>Project Stage</span>
-              <strong>
-                ${escapeHTML(p.stage || "Onboarding")}
-              </strong>
-            </div>
-
-            <div class="info-box">
-              <span>Progress</span>
-              <strong>
-                ${progress}%
-              </strong>
-            </div>
-
-            <div class="info-box">
-              <span>Tasks</span>
-              <strong>
-                ${completedTasks} / ${projectTasks.length} completed
-              </strong>
-            </div>
-
-            <div class="info-box">
-              <span>Project Status</span>
-              <strong>
-                ${escapeHTML(p.status || "Active")}
-              </strong>
-            </div>
-
-            <div class="info-box">
-              <span>Start Date</span>
-              <strong>
-                ${formatDate(p.start_date)}
-              </strong>
-            </div>
-
-            <div class="info-box">
-              <span>Expected Completion</span>
-              <strong>
-                ${formatDate(p.expected_completion)}
-              </strong>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- CHECKLIST -->
-
-      <div id="checklistTab" class="tab-content">
-
-        <div class="card section-card">
-
-          <div class="section-head">
-
-            <div>
-
-              <h2>Project Checklist</h2>
-
-              <div class="muted" style="font-size:13px;margin-top:4px">
-                ${completedTasks} of ${projectTasks.length} completed
-              </div>
-
-            </div>
-
-          </div>
-
-          <div class="checklist">
-
-            ${
-              projectTasks.length
-              ?
-              projectTasks.map(task => `
-
-                <div class="check-item ${
-                  task.is_completed ? "done" : ""
-                }">
-
-                  <div class="check-box">
-                    ${task.is_completed ? "✓" : ""}
-                  </div>
-
-                  <div class="check-text">
-                    ${escapeHTML(task.task_name || "Task")}
-                  </div>
-
-                </div>
-
-              `).join("")
-              :
-              `
-                <div class="empty">
-                  No checklist items have been added yet.
-                </div>
-              `
-            }
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- BRIEF -->
-
-      <div id="briefTab" class="tab-content">
-
-        <div class="card section-card">
-
-          <div class="section-head">
-            <h2>Project Brief</h2>
-          </div>
-
-          <div id="briefContent">
-
-            <div class="empty">
-              Loading project brief...
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ACCESS -->
-
-      <div id="accessTab" class="tab-content">
-
-        <div class="card section-card">
-
-          <div class="section-head">
-
-            <div>
-
-              <h2>Access Requests</h2>
-
-              <div class="muted" style="font-size:13px;margin-top:4px">
-                Complete the requested access forms here.
-              </div>
-
-            </div>
-
-          </div>
-
-          <div id="accessContent">
-            Loading access requests...
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- CREDENTIALS -->
-
-      <div id="credentialsTab" class="tab-content">
-
-        <div class="card section-card">
-
-          <div class="section-head">
-
-            <div>
-
-              <h2>Credentials</h2>
-
-              <div class="muted" style="font-size:13px">
-                Credentials shared for this project.
-              </div>
-
-            </div>
-
-          </div>
-
-          <div id="credentialsContent">
-            Loading credentials...
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- DOCUMENTS -->
-
-      <div id="documentsTab" class="tab-content">
-
-        <div class="card section-card">
-
-          <div class="section-head">
-
-            <div>
-
-              <h2>Documents</h2>
-
-              <div class="muted" style="font-size:13px">
-                Project documents and files.
-              </div>
-
-            </div>
-
-          </div>
-
-          <div id="documentsContent">
-            Loading documents...
-          </div>
-
-        </div>
-
-      </div>
-
-    `;
-
-  await loadProjectExtraData();
-
+        `;
+      }
+    )
+    .join("");
 }
 
 
-/* ================================
-   PROJECT EXTRA DATA
-================================ */
+/* =====================================================
+   PROJECT TABS
+===================================================== */
 
-async function loadProjectExtraData(){
-
-  if(!currentProject) return;
-
-  await Promise.all([
-    loadBrief(),
-    loadAccessRequests(),
-    loadCredentials(),
-    loadDocuments()
-  ]);
-
-}
-
-
-/* ================================
-   TABS
-================================ */
-
-function openTab(id,button){
-
-  document
-    .querySelectorAll(".tab-content")
-    .forEach(el =>
-      el.classList.remove("active")
-    );
+function projectTab(name,button){
 
   document
     .querySelectorAll(".tab")
-    .forEach(el =>
-      el.classList.remove("active")
+    .forEach(
+      x =>
+        x.classList.remove("active")
     );
 
-  const target =
-    document.getElementById(id);
+  document
+    .querySelectorAll(".tab-content")
+    .forEach(
+      x =>
+        x.classList.remove("active")
+    );
 
-  if(target)
-    target.classList.add("active");
+  button
+    .classList.add("active");
 
-  if(button)
-    button.classList.add("active");
-
+  document
+    .getElementById(
+      `project-tab-${name}`
+    )
+    ?.classList.add("active");
 }
 
 
-/* ================================
-   BRIEF
-================================ */
+/* =====================================================
+   CHECKLIST
+===================================================== */
 
-async function loadBrief(){
+function renderProjectChecklist(){
 
-  const box =
-    document.getElementById("briefContent");
+  const el =
+    document.getElementById(
+      "projectChecklist"
+    );
 
-  if(!box || !currentProject) return;
+  if(!el){
+    return;
+  }
+
+  if(!projectTasks.length){
+
+    el.innerHTML = `
+      <div class="empty">
+        No checklist items have been added yet.
+      </div>
+    `;
+
+    return;
+  }
+
+  el.innerHTML = `
+
+    <div class="checklist">
+
+      ${
+        projectTasks
+          .map(
+            task => `
+
+              <div
+                class="check-item ${
+                  task.is_completed
+                    ? "done"
+                    : ""
+                }"
+              >
+
+                <div class="check-box">
+
+                  ${
+                    task.is_completed
+                      ? "✓"
+                      : ""
+                  }
+
+                </div>
+
+                <div>
+
+                  <div class="check-text">
+                    ${esc(task.task_name)}
+                  </div>
+
+                  ${
+                    task.description
+                      ? `
+                        <div style="
+                          color:var(--muted);
+                          font-size:11px;
+                          margin-top:4px;
+                        ">
+                          ${esc(task.description)}
+                        </div>
+                      `
+                      : ""
+                  }
+
+                </div>
+
+              </div>
+
+            `
+          )
+          .join("")
+      }
+
+    </div>
+
+  `;
+}
+
+
+/* =====================================================
+   TASKS PAGE
+===================================================== */
+
+async function loadAllTasks(){
+
+  if(!projects.length){
+
+    renderTasks();
+
+    return;
+  }
+
+  const ids =
+    projects.map(
+      p => p.id
+    );
 
   const {
     data,
     error
   } =
     await supabaseClient
-      .from("project_briefs")
+      .from("tasks")
       .select("*")
-      .eq("project_id",currentProject.id)
-      .maybeSingle();
+      .in("project_id",ids)
+      .order(
+        "created_at",
+        {
+          ascending:true
+        }
+      );
 
   if(error){
 
-    console.error("Brief:",error);
+    console.error(error);
 
-    box.innerHTML = `
+    return;
+  }
+
+  projectTasks =
+    data || [];
+
+  renderTasks();
+}
+
+
+function renderTasks(){
+
+  const el =
+    document.getElementById(
+      "allTasks"
+    );
+
+  if(!el){
+    return;
+  }
+
+  if(!projects.length){
+
+    el.innerHTML = `
       <div class="empty">
-        Project brief is not available yet.
+        No projects available.
       </div>
     `;
 
     return;
-
   }
 
-  if(!data){
+  el.innerHTML =
+    projects
+      .map(
+        project => `
 
-    box.innerHTML = `
+          <div
+            class="card"
+            style="
+              margin-bottom:12px;
+              cursor:pointer;
+            "
+            onclick="openProject('${esc(project.id)}')"
+          >
+
+            <div class="section-head">
+
+              <div>
+
+                <h2>
+                  ${esc(project.project_name)}
+                </h2>
+
+                <p>
+                  ${esc(project.stage || "Onboarding")}
+                </p>
+
+              </div>
+
+              <span class="
+                status
+                ${statusClass(project.status)}
+              ">
+                ${esc(project.status || "Active")}
+              </span>
+
+            </div>
+
+            <div
+              style="
+                color:var(--muted);
+                font-size:12px;
+              "
+            >
+              Open project checklist →
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("");
+}
+
+
+/* =====================================================
+   PROJECT BRIEF
+===================================================== */
+
+function renderProjectBrief(){
+
+  const el =
+    document.getElementById(
+      "projectBrief"
+    );
+
+  if(!el){
+    return;
+  }
+
+  if(!projectBrief){
+
+    el.innerHTML = `
       <div class="empty">
         Project brief has not been added yet.
       </div>
     `;
 
     return;
-
   }
 
   const fields = [
 
-    ["Objective",data.objective],
-    ["Scope",data.scope],
-    ["Requirements",data.requirements],
-    ["Deliverables",data.deliverables],
-    ["Timeline",data.timeline],
-    ["Notes",data.notes]
+    ["Objective",projectBrief.objective],
+    ["Scope",projectBrief.scope],
+    ["Requirements",projectBrief.requirements],
+    ["Deliverables",projectBrief.deliverables],
+    ["Timeline",projectBrief.timeline],
+    ["Notes",projectBrief.notes]
 
   ];
 
-  box.innerHTML = `
+  el.innerHTML =
+    fields
+      .filter(
+        x =>
+          x[1] &&
+          String(x[1]).trim()
+      )
+      .map(
+        x => `
 
-    ${fields.map(([title,value])=>`
+          <div class="brief-block">
 
-      <div class="brief-block">
+            <h3>
+              ${esc(x[0])}
+            </h3>
 
-        <h3>${title}</h3>
+            <p>
+              ${esc(x[1])}
+            </p>
 
-        <p>
-          ${escapeHTML(value || "Not provided.")}
-        </p>
+          </div>
 
+        `
+      )
+      .join("") ||
+
+    `
+      <div class="empty">
+        No project brief details available.
       </div>
-
-    `).join("")}
-
-  `;
-
+    `;
 }
 
 
-/* ================================
+/* =====================================================
    ACCESS REQUESTS
-================================ */
+===================================================== */
 
-async function loadAccessRequests(){
-
-  const box =
-    document.getElementById("accessContent");
-
-  if(!box || !currentProject) return;
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("access_requests")
-      .select("*")
-      .eq("project_id",currentProject.id)
-      .order("requested_at",{ascending:false});
-
-  if(error){
-
-    console.error("Access requests:",error);
-
-    box.innerHTML = `
-      <div class="empty">
-        Unable to load access requests.
-      </div>
-    `;
-
-    return;
-
-  }
-
-  if(!data?.length){
-
-    box.innerHTML = `
-      <div class="empty">
-        No access requests at the moment.
-      </div>
-    `;
-
-    return;
-
-  }
-
-  box.innerHTML =
-    data.map(request => `
-
-      <div class="request-card">
-
-        <div style="display:flex;justify-content:space-between;gap:10px">
-
-          <div>
-
-            <div style="font-weight:700;color:var(--deep)">
-              ${escapeHTML(request.system_name || "Access Request")}
-            </div>
-
-            <div class="muted" style="font-size:12px;margin-top:5px">
-              ${escapeHTML(request.access_type || "")}
-            </div>
-
-          </div>
-
-          <span class="request-status">
-            ${escapeHTML(request.status || "Pending")}
-          </span>
-
-        </div>
-
-        <div style="margin-top:12px;color:var(--muted);font-size:13px;line-height:1.55">
-          ${escapeHTML(request.instructions || "Please provide the requested access.")}
-        </div>
-
-        ${
-          String(request.status || "").toLowerCase() === "pending"
-          ?
-          `
-          <div style="margin-top:15px">
-
-            <button
-              class="primary-btn"
-              onclick="completeAccessRequest(${request.id})"
-            >
-              Submit Access
-            </button>
-
-          </div>
-          `
-          :
-          ""
-        }
-
-      </div>
-
-    `).join("");
-
-}
-
-
-/* ================================
-   ACCESS REQUEST COMPLETE
-================================ */
-
-async function completeAccessRequest(id){
-
-  const value =
-    prompt(
-      "Enter the requested access/details:"
-    );
-
-  if(value === null) return;
-
-  if(!value.trim()){
-
-    alert("Please enter the requested information.");
-
-    return;
-
-  }
-
-  /*
-    The current access_requests table does not
-    have a client_response column.
-
-    For now we mark the request completed and
-    log the submission in activity_logs.
-
-    Part 2 can add a dedicated response field
-    if required.
-  */
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .from("access_requests")
-      .update({
-        status:"Completed",
-        completed_at:new Date().toISOString()
-      })
-      .eq("id",id)
-      .eq("project_id",currentProject.id);
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-
-  }
-
-  await supabaseClient.rpc(
-    "log_project_activity",
-    {
-      p_project_id:currentProject.id,
-      p_action:"Access Request Completed",
-      p_description:
-        "Client submitted requested access information."
-    }
-  );
-
-  alert("Access request submitted.");
-
-  await loadAccessRequests();
-
-}
-
-
-/* ================================
-   CREDENTIALS
-================================ */
-
-async function loadCredentials(){
-
-  const box =
-    document.getElementById("credentialsContent");
-
-  if(!box || !currentProject) return;
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("project_credentials")
-      .select("*")
-      .eq("project_id",currentProject.id)
-      .eq("client_id",currentUser.id)
-      .order("created_at",{ascending:false});
-
-  if(error){
-
-    console.error("Credentials:",error);
-
-    box.innerHTML = `
-      <div class="empty">
-        Unable to load credentials.
-      </div>
-    `;
-
-    return;
-
-  }
-
-  if(!data?.length){
-
-    box.innerHTML = `
-      <div class="empty">
-        No credentials have been shared yet.
-      </div>
-    `;
-
-    return;
-
-  }
-
-  box.innerHTML =
-    data.map((credential,index)=>`
-
-      <div class="credential-card">
-
-        <div class="credential-head">
-
-          <div class="credential-name">
-            ${escapeHTML(credential.service_name || "Service")}
-          </div>
-
-          ${
-            credential.login_url
-            ?
-            `
-            <a
-              href="${escapeAttr(credential.login_url)}"
-              target="_blank"
-              rel="noopener"
-              class="small-btn"
-              style="text-decoration:none;color:var(--blue)"
-            >
-              Open Login
-            </a>
-            `
-            :
-            ""
-          }
-
-        </div>
-
-        <div class="credential-row">
-
-          <span>Username</span>
-
-          <div class="credential-value">
-            ${escapeHTML(credential.username || "—")}
-          </div>
-
-          <button
-            class="small-btn"
-            onclick="copyText(${JSON.stringify(credential.username || "")})"
-          >
-            Copy
-          </button>
-
-        </div>
-
-
-        <div class="credential-row">
-
-          <span>Password</span>
-
-          <div
-            class="credential-value"
-            id="password-${index}"
-          >
-            ••••••••
-          </div>
-
-          <div style="display:flex;gap:5px">
-
-            <button
-              class="small-btn"
-              onclick="toggleCredentialPassword(
-                ${index},
-                ${JSON.stringify(credential.password || "")}
-              )"
-            >
-              Show
-            </button>
-
-            <button
-              class="small-btn"
-              onclick="copyText(${JSON.stringify(credential.password || "")})"
-            >
-              Copy
-            </button>
-
-          </div>
-
-        </div>
-
-
-        ${
-          credential.notes
-          ?
-          `
-          <div style="margin-top:13px;color:var(--muted);font-size:12px">
-            ${escapeHTML(credential.notes)}
-          </div>
-          `
-          :
-          ""
-        }
-
-      </div>
-
-    `).join("");
-
-}
-
-
-/* ================================
-   PASSWORD SHOW/HIDE
-================================ */
-
-function toggleCredentialPassword(index,password){
+function renderProjectAccess(){
 
   const el =
     document.getElementById(
-      "password-" + index
+      "projectAccess"
     );
 
-  if(!el) return;
+  if(!el){
+    return;
+  }
 
-  if(el.dataset.visible === "1"){
+  if(!projectAccess.length){
 
-    el.textContent = "••••••••";
-    el.dataset.visible = "0";
+    el.innerHTML = `
+      <div class="empty">
+        No access requests are pending for this project.
+      </div>
+    `;
+
+    return;
+  }
+
+  el.innerHTML =
+    projectAccess
+      .map(
+        req => {
+
+          const completed =
+            String(req.status || "")
+              .toLowerCase()
+              .includes("complete");
+
+          return `
+
+            <div class="request-card">
+
+              <div style="
+                display:flex;
+                justify-content:space-between;
+                gap:10px;
+                align-items:flex-start;
+              ">
+
+                <div>
+
+                  <div style="
+                    color:var(--deep);
+                    font-size:13px;
+                    font-weight:600;
+                  ">
+                    ${esc(req.system_name)}
+                  </div>
+
+                  <div style="
+                    color:var(--muted);
+                    font-size:11px;
+                    margin-top:4px;
+                  ">
+                    ${esc(req.access_type || "Access")}
+                  </div>
+
+                </div>
+
+                <span
+                  class="request-status"
+                  style="
+                    ${
+                      completed
+                        ? `
+                          background:var(--green-bg);
+                          color:var(--green);
+                        `
+                        : ""
+                    }
+                  "
+                >
+                  ${
+                    completed
+                      ? "Completed"
+                      : "Pending"
+                  }
+                </span>
+
+              </div>
+
+              ${
+                req.instructions
+                  ? `
+                    <div style="
+                      color:var(--muted);
+                      font-size:12px;
+                      line-height:1.6;
+                      margin-top:12px;
+                    ">
+                      ${esc(req.instructions)}
+                    </div>
+                  `
+                  : ""
+              }
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
+}
+
+
+/* =====================================================
+   CREDENTIALS
+===================================================== */
+
+function renderProjectCredentials(){
+
+  const el =
+    document.getElementById(
+      "projectCredentials"
+    );
+
+  if(!el){
+    return;
+  }
+
+  if(!projectCredentials.length){
+
+    el.innerHTML = `
+      <div class="empty">
+        No credentials have been shared for this project.
+      </div>
+    `;
+
+    return;
+  }
+
+  el.innerHTML =
+    projectCredentials
+      .map(
+        (cred,index) => `
+
+          <div class="credential-card">
+
+            <div class="credential-head">
+
+              <div>
+
+                <div class="credential-name">
+                  ${esc(cred.service_name)}
+                </div>
+
+                ${
+                  cred.notes
+                    ? `
+                      <div class="document-meta">
+                        ${esc(cred.notes)}
+                      </div>
+                    `
+                    : ""
+                }
+
+              </div>
+
+              ${
+                cred.login_url
+                  ? `
+                    <a
+                      href="${esc(cred.login_url)}"
+                      target="_blank"
+                      class="small-btn"
+                    >
+                      Open
+                    </a>
+                  `
+                  : ""
+              }
+
+            </div>
+
+
+            <div class="credential-row">
+
+              <span>
+                Username
+              </span>
+
+              <div
+                id="username-${index}"
+                class="credential-value"
+              >
+                ${esc(cred.username || "—")}
+              </div>
+
+              <button
+                class="small-btn"
+                onclick="
+                  copyText(
+                    '${esc(cred.username || "")}'
+                  )
+                "
+              >
+                Copy
+              </button>
+
+            </div>
+
+
+            <div class="credential-row">
+
+              <span>
+                Password
+              </span>
+
+              <div
+                id="password-${index}"
+                class="credential-value"
+              >
+                ••••••••••
+              </div>
+
+              <button
+                class="small-btn"
+                onclick="
+                  toggleCredentialPassword(
+                    ${index},
+                    '${esc(cred.password || "")}'
+                  )
+                "
+              >
+                Show
+              </button>
+
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("");
+}
+
+
+function toggleCredentialPassword(
+  index,
+  password
+){
+
+  const el =
+    document.getElementById(
+      `password-${index}`
+    );
+
+  if(!el){
+    return;
+  }
+
+  if(
+    el.dataset.visible === "true"
+  ){
+
+    el.textContent =
+      "••••••••••";
+
+    el.dataset.visible =
+      "false";
 
   }else{
 
     el.textContent =
       password || "—";
 
-    el.dataset.visible = "1";
-
+    el.dataset.visible =
+      "true";
   }
-
 }
 
-
-/* ================================
-   COPY
-================================ */
 
 async function copyText(text){
 
-  if(!text){
-
-    alert("Nothing to copy.");
-
-    return;
-
-  }
-
   try{
 
-    await navigator.clipboard.writeText(text);
+    await navigator.clipboard.writeText(
+      text
+    );
 
-    alert("Copied.");
+    alert(
+      "Copied."
+    );
 
-  }catch(e){
+  }catch(error){
 
-    alert("Copy failed.");
+    alert(
+      "Copy failed. Please copy it manually."
+    );
 
   }
-
 }
 
 
-/* ================================
+/* =====================================================
    DOCUMENTS
-================================ */
+===================================================== */
 
-async function loadDocuments(){
+function renderProjectDocuments(){
 
-  const box =
-    document.getElementById("documentsContent");
+  const el =
+    document.getElementById(
+      "projectDocuments"
+    );
 
-  if(!box || !currentProject) return;
+  if(!el){
+    return;
+  }
 
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("documents")
-      .select("*")
-      .eq("project_id",currentProject.id)
-      .order("created_at",{ascending:false});
+  if(!projectDocuments.length){
 
-  if(error){
-
-    console.error("Documents:",error);
-
-    box.innerHTML = `
+    el.innerHTML = `
       <div class="empty">
-        Unable to load documents.
+        No documents have been uploaded yet.
       </div>
     `;
 
     return;
-
   }
 
-  box.innerHTML = `
-
-    <div class="upload-area">
-
-      <div style="color:var(--deep);font-weight:600">
-        Upload a project document
-      </div>
-
-      <div class="muted" style="font-size:12px;margin-top:5px">
-        Select a file to upload.
-      </div>
-
-      <input
-        type="file"
-        id="clientDocumentInput"
-        onchange="uploadClientDocument(event)"
-      >
-
-    </div>
-
-    <div style="margin-top:20px">
-
-      ${
-        data?.length
-        ?
-        data.map(doc=>`
+  el.innerHTML =
+    projectDocuments
+      .map(
+        doc => `
 
           <div class="document-card">
 
             <div>
 
               <div class="document-name">
-                ${escapeHTML(doc.file_name || "Document")}
+                ${esc(doc.file_name)}
               </div>
 
               <div class="document-meta">
-                ${formatDateTime(doc.created_at)}
+                Uploaded ${formatDate(doc.created_at)}
               </div>
 
             </div>
 
             <a
-              href="${escapeAttr(doc.file_url || "#")}"
+              href="${esc(doc.file_url)}"
               target="_blank"
-              rel="noopener"
               class="small-btn"
-              style="text-decoration:none;color:var(--blue)"
             >
               Open
             </a>
 
           </div>
 
-        `).join("")
-        :
         `
-          <div class="empty">
-            No documents available yet.
-          </div>
-        `
-      }
-
-    </div>
-  `;
-
+      )
+      .join("");
 }
 
 
-/* ================================
-   CLIENT DOCUMENT UPLOAD
-================================ */
+/* =====================================================
+   INVOICES
+===================================================== */
 
-async function uploadClientDocument(event){
+async function loadInvoices(){
 
-  const file =
-    event.target.files?.[0];
-
-  if(!file || !currentProject) return;
-
-  /*
-    This uses the existing project-documents
-    Storage bucket.
-
-    If the bucket/policies are not created yet,
-    Part 2 will finish that setup.
-  */
-
-  const safeName =
-    file.name.replace(
-      /[^a-zA-Z0-9._-]/g,
-      "_"
-    );
-
-  const path =
-    `${currentUser.id}/${currentProject.id}/${Date.now()}_${safeName}`;
-
-  const {
-    error:uploadError
-  } =
-    await supabaseClient
-      .storage
-      .from("project-documents")
-      .upload(path,file,{
-        upsert:false
-      });
-
-  if(uploadError){
-
-    alert(
-      "Upload failed: " +
-      uploadError.message
-    );
-
+  if(!currentUser){
     return;
-
   }
 
   const {
-    data:urlData
-  } =
-    supabaseClient
-      .storage
-      .from("project-documents")
-      .getPublicUrl(path);
-
-  const {
-    error:dbError
+    data,
+    error
   } =
     await supabaseClient
-      .from("documents")
-      .insert({
+      .from("invoices")
+      .select("*")
+      .eq(
+        "client_id",
+        currentUser.id
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
 
-        project_id:
-          currentProject.id,
+  if(error){
 
-        file_name:
-          file.name,
+    console.error(
+      "Invoice error:",
+      error
+    );
 
-        file_url:
-          urlData.publicUrl,
-
-        uploaded_by:
-          currentUser.id
-
-      });
-
-  if(dbError){
-
-    alert(dbError.message);
+    invoices = [];
 
     return;
-
   }
 
-  await supabaseClient.rpc(
-    "log_project_activity",
-    {
-      p_project_id:currentProject.id,
-      p_action:"Document Uploaded",
-      p_description:
-        "Client uploaded a project document."
-    }
-  );
+  invoices =
+    data || [];
 
-  alert("Document uploaded.");
-
-  await loadDocuments();
-
+  renderInvoices();
 }
 
 
-/* ================================
-   ALL TASKS
-================================ */
+function renderInvoices(){
 
-function renderAllTasks(){
+  const el =
+    document.getElementById(
+      "invoicesPlaceholder"
+    );
 
-  const box =
-    document.getElementById("allTasks");
+  if(!el){
+    return;
+  }
 
-  if(!box) return;
+  const openInvoices =
+    invoices.filter(
+      invoice =>
+        !["paid","completed"]
+          .includes(
+            String(
+              invoice.status || ""
+            ).toLowerCase()
+          )
+    );
 
-  if(!tasks.length){
+  document
+    .getElementById(
+      "statInvoices"
+    )
+    .textContent =
+      openInvoices.length;
 
-    box.innerHTML = `
+
+  if(!invoices.length){
+
+    el.innerHTML = `
       <div class="empty">
-        No tasks available.
+        No invoices are available.
       </div>
     `;
 
     return;
-
   }
 
-  box.innerHTML =
-    tasks.map(task=>{
 
-      const project =
-        projects.find(
-          p =>
-            Number(p.id) ===
-            Number(task.project_id)
-        );
+  el.innerHTML =
+    invoices
+      .map(
+        invoice => `
 
-      return `
+          <div
+            class="card"
+            style="
+              margin-bottom:12px;
+            "
+          >
 
-        <div class="check-item ${
-          task.is_completed ? "done" : ""
-        }"
-        style="margin-bottom:9px">
+            <div class="section-head">
 
-          <div class="check-box">
-            ${task.is_completed ? "✓" : ""}
-          </div>
+              <div>
 
-          <div style="flex:1">
+                <h2>
+                  ${esc(invoice.title || "Project Invoice")}
+                </h2>
 
-            <div class="check-text">
-              ${escapeHTML(task.task_name || "Task")}
+                <p>
+                  Invoice #${esc(invoice.invoice_number)}
+                </p>
+
+              </div>
+
+              <span
+                class="
+                  status
+                  ${statusClass(invoice.status)}
+                "
+              >
+                ${esc(invoice.status || "Draft")}
+              </span>
+
             </div>
 
-            <div style="font-size:11px;color:var(--muted);margin-top:3px">
-              ${escapeHTML(project?.project_name || "Project")}
+
+            <div class="info-grid">
+
+              <div class="info-box">
+
+                <span>
+                  Amount
+                </span>
+
+                <strong>
+                  ${money(
+                    invoice.amount,
+                    invoice.currency
+                  )}
+                </strong>
+
+              </div>
+
+
+              <div class="info-box">
+
+                <span>
+                  Due Date
+                </span>
+
+                <strong>
+                  ${formatDate(invoice.due_date)}
+                </strong>
+
+              </div>
+
+
+              <div class="info-box">
+
+                <span>
+                  Created
+                </span>
+
+                <strong>
+                  ${formatDate(invoice.created_at)}
+                </strong>
+
+              </div>
+
             </div>
 
+
+            ${
+              invoice.description
+                ? `
+                  <div style="
+                    color:var(--muted);
+                    font-size:12px;
+                    line-height:1.6;
+                    margin-top:15px;
+                  ">
+                    ${esc(invoice.description)}
+                  </div>
+                `
+                : ""
+            }
+
+
+            ${
+              invoice.notes
+                ? `
+                  <div
+                    style="
+                      margin-top:14px;
+                      background:var(--cloud);
+                      border:1px solid var(--line);
+                      border-radius:10px;
+                      padding:13px;
+                    "
+                  >
+
+                    <div style="
+                      color:var(--deep);
+                      font-size:11px;
+                      font-weight:600;
+                      margin-bottom:5px;
+                    ">
+                      Payment Details
+                    </div>
+
+                    <div style="
+                      color:var(--muted);
+                      font-size:12px;
+                      line-height:1.6;
+                      white-space:pre-wrap;
+                    ">
+                      ${esc(invoice.notes)}
+                    </div>
+
+                  </div>
+                `
+                : ""
+            }
+
+
+            ${
+              invoice.payment_url &&
+              String(
+                invoice.status || ""
+              ).toLowerCase() !== "paid"
+                ? `
+                  <div style="
+                    margin-top:15px;
+                  ">
+
+                    <a
+                      href="${esc(invoice.payment_url)}"
+                      target="_blank"
+                      class="primary-btn"
+                      style="
+                        display:inline-block;
+                        text-decoration:none;
+                      "
+                    >
+                      Pay Invoice
+                    </a>
+
+                  </div>
+                `
+                : ""
+            }
+
           </div>
+
+        `
+      )
+      .join("");
+}
+
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+async function loadMessages(){
+
+  if(!currentUser){
+    return;
+  }
+
+  if(!projects.length){
+
+    messages = [];
+
+    renderMessages();
+
+    return;
+  }
+
+  const projectIds =
+    projects.map(
+      p => p.id
+    );
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("messages")
+      .select("*")
+      .in(
+        "project_id",
+        projectIds
+      )
+      .order(
+        "created_at",
+        {
+          ascending:true
+        }
+      );
+
+  if(error){
+
+    console.error(
+      "Messages error:",
+      error
+    );
+
+    messages = [];
+
+    renderMessages();
+
+    return;
+  }
+
+  messages =
+    data || [];
+
+  renderMessages();
+}
+
+
+function renderMessages(){
+
+  const el =
+    document.getElementById(
+      "messagesPlaceholder"
+    );
+
+  if(!el){
+    return;
+  }
+
+  if(!messages.length){
+
+    el.innerHTML = `
+
+      <div class="empty">
+
+        No messages yet.
+
+        <div style="
+          margin-top:12px;
+        ">
+
+          <button
+            class="primary-btn"
+            onclick="openMessageComposer()"
+          >
+            Send Message
+          </button>
 
         </div>
 
-      `;
+      </div>
 
-    }).join("");
+    `;
+
+    return;
+  }
+
+
+  el.innerHTML = `
+
+    <div
+      style="
+        height:430px;
+        overflow-y:auto;
+        background:var(--cloud);
+        border:1px solid var(--line);
+        border-radius:14px;
+        padding:15px;
+      "
+      id="messageList"
+    >
+
+      ${
+        messages
+          .map(
+            msg => {
+
+              const mine =
+                msg.sender_type ===
+                "client";
+
+              return `
+
+                <div
+                  style="
+                    display:flex;
+                    justify-content:
+                      ${mine
+                        ? "flex-end"
+                        : "flex-start"};
+                    margin-bottom:10px;
+                  "
+                >
+
+                  <div
+                    style="
+                      max-width:75%;
+                      background:
+                        ${
+                          mine
+                            ? "var(--blue)"
+                            : "#fff"
+                        };
+                      color:
+                        ${
+                          mine
+                            ? "#fff"
+                            : "var(--text)"
+                        };
+                      border:
+                        ${
+                          mine
+                            ? "0"
+                            : "1px solid var(--line)"
+                        };
+                      border-radius:14px;
+                      padding:10px 12px;
+                    "
+                  >
+
+                    <div style="
+                      font-size:10px;
+                      opacity:.7;
+                      margin-bottom:4px;
+                    ">
+                      ${esc(
+                        msg.sender_name ||
+                        (
+                          mine
+                            ? "You"
+                            : "AWSZ Team"
+                        )
+                      )}
+                    </div>
+
+                    <div style="
+                      font-size:12px;
+                      line-height:1.5;
+                      white-space:pre-wrap;
+                    ">
+                      ${esc(msg.message)}
+                    </div>
+
+                    <div style="
+                      font-size:9px;
+                      opacity:.65;
+                      margin-top:5px;
+                      text-align:right;
+                    ">
+                      ${formatDateTime(msg.created_at)}
+                    </div>
+
+                  </div>
+
+                </div>
+
+              `;
+
+            }
+          )
+          .join("")
+      }
+
+    </div>
+
+
+    <div
+      style="
+        display:flex;
+        gap:8px;
+        margin-top:10px;
+      "
+    >
+
+      <button
+        class="secondary-btn"
+        onclick="openMessageComposer()"
+      >
+        + Message
+      </button>
+
+    </div>
+
+  `;
+
+
+  const list =
+    document.getElementById(
+      "messageList"
+    );
+
+  if(list){
+
+    list.scrollTop =
+      list.scrollHeight;
+
+  }
+}
+
+
+function formatDateTime(date){
+
+  if(!date){
+    return "";
+  }
+
+  return new Date(date)
+    .toLocaleString(
+      "en-US",
+      {
+        month:"short",
+        day:"numeric",
+        hour:"numeric",
+        minute:"2-digit"
+      }
+    );
+}
+
+
+function openMessageComposer(){
+
+  if(!projects.length){
+
+    alert(
+      "You need to have a project before sending a message."
+    );
+
+    return;
+  }
+
+
+  const existing =
+    document.getElementById(
+      "messageModal"
+    );
+
+  if(existing){
+    existing.remove();
+  }
+
+
+  const modal =
+    document.createElement("div");
+
+  modal.id =
+    "messageModal";
+
+  modal.style.cssText = `
+    position:fixed;
+    inset:0;
+    background:rgba(11,40,80,.35);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    padding:20px;
+  `;
+
+
+  modal.innerHTML = `
+
+    <div style="
+      width:100%;
+      max-width:500px;
+      background:#fff;
+      border-radius:18px;
+      padding:22px;
+      border:1px solid var(--line);
+    ">
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:15px;
+      ">
+
+        <div style="
+          color:var(--deep);
+          font-size:17px;
+          font-weight:600;
+        ">
+          Send Message
+        </div>
+
+        <button
+          class="small-btn"
+          onclick="
+            document
+              .getElementById('messageModal')
+              .remove()
+          "
+        >
+          Close
+        </button>
+
+      </div>
+
+
+      <label class="form-label">
+        Project
+      </label>
+
+      <select
+        id="messageProject"
+        class="form-input"
+      >
+
+        ${
+          projects
+            .map(
+              p => `
+                <option value="${esc(p.id)}">
+                  ${esc(p.project_name)}
+                </option>
+              `
+            )
+            .join("")
+        }
+
+      </select>
+
+
+      <label class="form-label">
+        Message
+      </label>
+
+      <textarea
+        id="messageText"
+        class="form-input"
+        rows="6"
+        placeholder="Write your message..."
+      ></textarea>
+
+
+      <button
+        class="primary-btn"
+        style="width:100%"
+        onclick="sendMessage()"
+      >
+        Send Message
+      </button>
+
+    </div>
+
+  `;
+
+
+  document.body.appendChild(modal);
+}
+
+
+async function sendMessage(){
+
+  const projectId =
+    document.getElementById(
+      "messageProject"
+    ).value;
+
+  const text =
+    document.getElementById(
+      "messageText"
+    ).value
+    .trim();
+
+
+  if(!text){
+
+    alert(
+      "Please write a message."
+    );
+
+    return;
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("messages")
+      .insert({
+
+        project_id:
+          projectId,
+
+        sender_type:
+          "client",
+
+        sender_name:
+          clientProfile?.full_name ||
+          currentUser?.email ||
+          "Client",
+
+        message:
+          text
+
+      });
+
+
+  if(error){
+
+    alert(
+      error.message
+    );
+
+    return;
+  }
+
+
+  document
+    .getElementById(
+      "messageModal"
+    )
+    ?.remove();
+
+
+  await loadMessages();
+
+  showPage("messages");
+}
+
+
+/* =====================================================
+   REALTIME
+===================================================== */
+
+function setupRealtime(){
+
+  realtimeChannels.forEach(
+    channel => {
+
+      try{
+        supabaseClient
+          .removeChannel(channel);
+      }catch(e){}
+
+    }
+  );
+
+  realtimeChannels = [];
+
+
+  const messageChannel =
+    supabaseClient
+      .channel(
+        "client-messages-realtime"
+      )
+      .on(
+        "postgres_changes",
+        {
+          event:"INSERT",
+          schema:"public",
+          table:"messages"
+        },
+        async payload => {
+
+          if(
+            payload.new.sender_type ===
+            "client"
+          ){
+            return;
+          }
+
+          const projectExists =
+            projects.some(
+              p =>
+                String(p.id) ===
+                String(
+                  payload.new.project_id
+                )
+            );
+
+          if(!projectExists){
+            return;
+          }
+
+          playMessageSound();
+
+          showBrowserNotification(
+            "New AWSZ Message",
+            payload.new.message ||
+            "You received a new message."
+          );
+
+          await loadMessages();
+
+        }
+      )
+      .subscribe();
+
+
+  realtimeChannels.push(
+    messageChannel
+  );
+
+
+  const projectChannel =
+    supabaseClient
+      .channel(
+        "client-projects-realtime"
+      )
+      .on(
+        "postgres_changes",
+        {
+          event:"UPDATE",
+          schema:"public",
+          table:"projects"
+        },
+        async payload => {
+
+          const exists =
+            projects.some(
+              p =>
+                String(p.id) ===
+                String(payload.new.id)
+            );
+
+          if(!exists){
+            return;
+          }
+
+          await loadProjects();
+
+          renderOverview();
+
+          renderProjects();
+
+          if(
+            selectedProject &&
+            String(
+              selectedProject.id
+            ) ===
+            String(payload.new.id)
+          ){
+
+            selectedProject =
+              payload.new;
+
+            await loadProjectData();
+
+            renderProjectDetail();
+
+          }
+
+        }
+      )
+      .subscribe();
+
+
+  realtimeChannels.push(
+    projectChannel
+  );
 
 }
 
 
-/* ================================
+/* =====================================================
+   SOUND
+===================================================== */
+
+function playMessageSound(){
+
+  try{
+
+    const AudioContext =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
+    if(!AudioContext){
+      return;
+    }
+
+    const ctx =
+      new AudioContext();
+
+    const oscillator =
+      ctx.createOscillator();
+
+    const gain =
+      ctx.createGain();
+
+    oscillator.type =
+      "sine";
+
+    oscillator.frequency.value =
+      740;
+
+    gain.gain.setValueAtTime(
+      .001,
+      ctx.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      .12,
+      ctx.currentTime + .02
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      .001,
+      ctx.currentTime + .45
+    );
+
+    oscillator.connect(gain);
+
+    gain.connect(ctx.destination);
+
+    oscillator.start();
+
+    oscillator.stop(
+      ctx.currentTime + .45
+    );
+
+  }catch(error){
+
+    console.log(
+      "Sound unavailable."
+    );
+
+  }
+}
+
+
+/* =====================================================
+   BROWSER NOTIFICATION
+===================================================== */
+
+async function showBrowserNotification(
+  title,
+  body
+){
+
+  if(
+    !("Notification" in window)
+  ){
+    return;
+  }
+
+  if(
+    Notification.permission ===
+    "default"
+  ){
+
+    try{
+      await Notification.requestPermission();
+    }catch(e){}
+
+  }
+
+  if(
+    Notification.permission ===
+    "granted"
+  ){
+
+    try{
+
+      new Notification(
+        title,
+        {
+          body
+        }
+      );
+
+    }catch(e){}
+
+  }
+
+}
+
+
+/* =====================================================
    PAGE NAVIGATION
-================================ */
+===================================================== */
 
 function showPage(page){
 
   document
     .querySelectorAll(".page")
-    .forEach(el =>
-      el.classList.remove("active")
+    .forEach(
+      el =>
+        el.classList.remove("active")
     );
 
-  document
-    .querySelectorAll(".nav-btn")
-    .forEach(el =>
-      el.classList.remove("active")
-    );
 
   const target =
     document.getElementById(
-      "page-" + page
+      `page-${page}`
     );
 
   if(target){
 
-    target.classList.add("active");
-
-  }
-
-  const button =
-    document.querySelector(
-      `.nav-btn[data-page="${page}"]`
+    target.classList.add(
+      "active"
     );
 
-  if(button){
-
-    button.classList.add("active");
-
   }
+
+
+  document
+    .querySelectorAll(".nav-btn[data-page]")
+    .forEach(
+      btn => {
+
+        btn.classList.remove(
+          "active"
+        );
+
+        if(
+          btn.dataset.page ===
+          page
+        ){
+
+          btn.classList.add(
+            "active"
+          );
+
+        }
+
+      }
+    );
+
 
   const titles = {
 
@@ -2951,196 +4592,84 @@ function showPage(page){
     messages:"Messages",
     invoices:"Invoices",
     account:"Account",
-    "project-detail":"Project"
+    "project-detail":"Project Details"
 
   };
 
-  document.getElementById("pageTitle")
+
+  document
+    .getElementById(
+      "pageTitle"
+    )
     .textContent =
-      titles[page] || "AWSZ";
+      titles[page] ||
+      "Client Portal";
+
+
+  const sidebar =
+    document.getElementById(
+      "sidebar"
+    );
+
+  sidebar?.classList.remove(
+    "open"
+  );
+
 
   if(page === "tasks"){
 
-    renderAllTasks();
+    loadAllTasks();
 
   }
 
-  document
-    .getElementById("sidebar")
-    .classList.remove("open");
+
+  if(page === "messages"){
+
+    loadMessages();
+
+  }
+
+
+  if(page === "invoices"){
+
+    loadInvoices();
+
+  }
 
 }
 
 
-/* ================================
-   APP / LOGIN VISIBILITY
-================================ */
-
-function showApp(){
-
-  document
-    .getElementById("loginScreen")
-    .classList.add("hidden");
-
-  document
-    .getElementById("app")
-    .classList.remove("hidden");
-
-}
-
-
-function showLogin(){
-
-  document
-    .getElementById("app")
-    .classList.add("hidden");
-
-  document
-    .getElementById("loginScreen")
-    .classList.remove("hidden");
-
-}
-
-
-/* ================================
-   MOBILE
-================================ */
+/* =====================================================
+   MOBILE SIDEBAR
+===================================================== */
 
 function toggleSidebar(){
 
   document
-    .getElementById("sidebar")
-    .classList.toggle("open");
+    .getElementById(
+      "sidebar"
+    )
+    ?.classList.toggle(
+      "open"
+    );
 
 }
 
 
-/* ================================
-   HELPERS
-================================ */
-
-function escapeHTML(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-function escapeAttr(value){
-
-  return escapeHTML(value);
-
-}
-
-
-function formatDate(value){
-
-  if(!value) return "—";
-
-  try{
-
-    return new Date(value)
-      .toLocaleDateString();
-
-  }catch(e){
-
-    return value;
-
-  }
-
-}
-
-
-function formatDateTime(value){
-
-  if(!value) return "—";
-
-  try{
-
-    return new Date(value)
-      .toLocaleString();
-
-  }catch(e){
-
-    return value;
-
-  }
-
-}
-
-
-/* ================================
-   REALTIME PROJECT UPDATES
-================================ */
-
-supabaseClient
-  .channel("client-project-updates")
-  .on(
-    "postgres_changes",
-    {
-      event:"*",
-      schema:"public",
-      table:"projects"
-    },
-    async payload => {
-
-      if(!currentUser) return;
-
-      await loadProjects();
-
-      if(
-        currentProject &&
-        Number(payload.new?.id) ===
-        Number(currentProject.id)
-      ){
-
-        currentProject =
-          projects.find(
-            p =>
-              Number(p.id) ===
-              Number(currentProject.id)
-          ) || currentProject;
-
-        renderProjectDetail();
-
-      }
-
-    }
-  )
-  .subscribe();
-
-
-/* ================================
-   AUTH STATE
-================================ */
-
-supabaseClient.auth
-  .onAuthStateChange(
-    async (event,session)=>{
-
-      if(event === "SIGNED_OUT"){
-
-        showLogin();
-
-      }
-
-    }
-  );
-
-
-/* ================================
+/* =====================================================
    START
-================================ */
+===================================================== */
 
-init();
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    checkSession();
+
+  }
+);
 
 </script>
 
 </body>
 </html>
-```
