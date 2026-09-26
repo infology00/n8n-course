@@ -1,10 +1,8 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>AWSZ Client Portal</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -20,27 +18,19 @@
   --text:#20272e;
   --muted:#66778a;
   --line:#d8e4ef;
-  --white:#fff;
-
+  --white:#ffffff;
   --green:#20855a;
   --green-bg:#eaf7f0;
-
   --amber:#b97918;
   --amber-bg:#fff5df;
-
   --red:#c33d3d;
   --red-bg:#fff0f0;
-
-  --shadow:0 10px 30px rgba(20,60,100,.07);
-  --shadow-hover:0 16px 40px rgba(20,60,100,.11);
-
+  --shadow:0 14px 40px rgba(26,62,100,.09);
   --radius:18px;
 }
 
 *{
   box-sizing:border-box;
-  margin:0;
-  padding:0;
 }
 
 html{
@@ -48,12 +38,10 @@ html{
 }
 
 body{
-  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  background:
-    radial-gradient(circle at 90% -10%,rgba(36,107,206,.09),transparent 30%),
-    var(--cloud);
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--cloud);
   color:var(--text);
-  font-size:14px;
 }
 
 button,
@@ -67,35 +55,35 @@ button{
   cursor:pointer;
 }
 
-a{
-  color:inherit;
-  text-decoration:none;
+.app{
+  min-height:100vh;
+  display:flex;
 }
 
-
-/* =========================================================
+/* =========================
    SIDEBAR
-========================================================= */
+========================= */
 
 .sidebar{
-  position:fixed;
-  inset:0 auto 0 0;
-  width:252px;
-  background:rgba(255,255,255,.96);
+  width:250px;
+  background:#fff;
   border-right:1px solid var(--line);
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
   z-index:100;
+  padding:24px 16px;
   display:flex;
   flex-direction:column;
-  padding:24px 16px 18px;
 }
 
 .logo{
-  padding:4px 13px 30px;
-  font-size:27px;
-  line-height:1;
+  font-size:28px;
   font-weight:900;
-  letter-spacing:-1.4px;
+  letter-spacing:-1.5px;
   color:var(--deep);
+  padding:4px 14px 26px;
 }
 
 .logo span{
@@ -105,150 +93,125 @@ a{
 .nav{
   display:flex;
   flex-direction:column;
-  gap:4px;
+  gap:5px;
 }
 
 .nav button{
-  width:100%;
   border:0;
   background:transparent;
-  color:#68798b;
-  padding:12px 13px;
-  border-radius:11px;
+  color:#607186;
   text-align:left;
-  font-size:13px;
+  padding:12px 14px;
+  border-radius:12px;
+  font-size:14px;
   font-weight:650;
-  transition:.18s ease;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  transition:.2s;
 }
 
 .nav button:hover{
-  color:var(--blue);
-  background:#f2f7fc;
+  background:var(--cloud);
+  color:var(--deep);
 }
 
 .nav button.active{
+  background:#eaf2ff;
   color:var(--blue);
-  background:#eaf3ff;
-  font-weight:750;
+  font-weight:800;
+}
+
+.nav-icon{
+  width:22px;
+  text-align:center;
+  font-size:17px;
 }
 
 .sidebar-bottom{
   margin-top:auto;
 }
 
-.user-mini{
-  padding:12px;
-  border:1px solid var(--line);
-  border-radius:13px;
-  background:#f8fbfe;
-  margin-bottom:9px;
-}
-
-.user-mini strong{
-  display:block;
-  color:var(--deep);
-  font-size:12px;
-  font-weight:750;
-  margin-bottom:3px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.user-mini small{
-  color:var(--muted);
-  font-size:11px;
-  display:block;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
 .logout{
   width:100%;
-  border:1px solid #f0d2d2;
-  background:#fff;
-  color:var(--red);
-  border-radius:11px;
-  padding:10px;
-  font-size:12px;
+  border:1px solid var(--line);
+  background:white;
+  color:var(--muted);
+  border-radius:12px;
+  padding:12px;
   font-weight:700;
-  transition:.18s;
 }
 
 .logout:hover{
-  background:var(--red-bg);
+  border-color:#c5d6e8;
+  color:var(--red);
 }
 
-
-/* =========================================================
+/* =========================
    MAIN
-========================================================= */
+========================= */
 
 .main{
-  margin-left:252px;
+  margin-left:250px;
+  width:calc(100% - 250px);
   min-height:100vh;
 }
 
 .topbar{
-  position:sticky;
-  top:0;
-  z-index:80;
-  height:72px;
-  background:rgba(255,255,255,.9);
-  backdrop-filter:blur(15px);
+  height:76px;
+  background:rgba(255,255,255,.94);
   border-bottom:1px solid var(--line);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 30px;
+  padding:0 34px;
+  position:sticky;
+  top:0;
+  z-index:80;
+  backdrop-filter:blur(10px);
 }
 
-.topbar-left{
+.top-title{
+  font-size:18px;
+  font-weight:850;
+  color:var(--deep);
+}
+
+.status{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:8px;
+  font-size:13px;
+  color:var(--green);
+  font-weight:750;
 }
 
-.topbar-title{
-  color:var(--deep);
-  font-size:15px;
-  font-weight:750;
+.status-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#35a66e;
+}
+
+.content{
+  padding:32px;
+  max-width:1500px;
+  margin:auto;
 }
 
 .mobile-menu{
   display:none;
+  border:0;
+  background:white;
+  width:42px;
+  height:42px;
+  border-radius:11px;
   border:1px solid var(--line);
-  background:#fff;
-  width:37px;
-  height:37px;
-  border-radius:10px;
-  font-size:17px;
-  color:var(--deep);
 }
 
-.connection{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  color:var(--muted);
-  font-size:11px;
-  font-weight:650;
-}
-
-.connection-dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#28a56c;
-  box-shadow:0 0 0 4px #e9f7f0;
-}
-
-.content{
-  max-width:1450px;
-  margin:auto;
-  padding:30px;
-}
+/* =========================
+   PAGES
+========================= */
 
 .page{
   display:none;
@@ -258,1063 +221,747 @@ a{
   display:block;
 }
 
-
-/* =========================================================
-   TYPOGRAPHY
-========================================================= */
-
-.page-heading{
-  margin-bottom:22px;
+.page-header{
+  margin-bottom:26px;
 }
 
-.page-heading h1{
+.page-header h1{
+  margin:0 0 7px;
   color:var(--deep);
-  font-size:25px;
-  line-height:1.2;
-  letter-spacing:-.5px;
-  font-weight:800;
-  margin-bottom:5px;
+  font-size:30px;
+  letter-spacing:-.7px;
 }
 
-.page-heading p{
+.page-header p{
+  margin:0;
   color:var(--muted);
-  font-size:13px;
+  font-size:15px;
   line-height:1.6;
 }
 
-.section-title{
-  color:var(--deep);
-  font-size:17px;
-  line-height:1.3;
-  font-weight:760;
-}
-
-.section-description{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.55;
-  margin-top:3px;
-}
-
-
-/* =========================================================
+/* =========================
    WELCOME
-========================================================= */
+========================= */
 
 .welcome{
-  position:relative;
-  overflow:hidden;
-  padding:28px;
-  border:1px solid var(--line);
-  border-radius:22px;
   background:
-    radial-gradient(circle at 90% 10%,rgba(36,107,206,.13),transparent 29%),
-    linear-gradient(135deg,#fff,#f4f9ff);
+    radial-gradient(circle at 90% 10%,rgba(36,107,206,.14),transparent 30%),
+    linear-gradient(135deg,#fff,#edf5fd);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:32px;
+  margin-bottom:24px;
   box-shadow:var(--shadow);
-  margin-bottom:20px;
-}
-
-.welcome:after{
-  content:"";
-  position:absolute;
-  width:180px;
-  height:180px;
-  right:-80px;
-  bottom:-90px;
-  border-radius:50%;
-  background:#eaf3ff;
 }
 
 .welcome h1{
-  position:relative;
-  z-index:2;
+  margin:0 0 9px;
+  font-size:34px;
   color:var(--deep);
-  font-size:27px;
-  line-height:1.25;
-  letter-spacing:-.7px;
-  font-weight:820;
-  margin-bottom:6px;
+  letter-spacing:-1px;
 }
 
 .welcome p{
-  position:relative;
-  z-index:2;
-  max-width:680px;
+  margin:0;
   color:var(--muted);
-  font-size:13px;
-  line-height:1.65;
+  font-size:15px;
+  line-height:1.7;
+  max-width:720px;
 }
 
-
-/* =========================================================
+/* =========================
    CARDS
-========================================================= */
-
-.card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-}
+========================= */
 
 .stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:14px;
-  margin-bottom:20px;
+  gap:16px;
+  margin-bottom:24px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:0 8px 28px rgba(25,62,98,.055);
 }
 
 .stat-card{
-  padding:18px;
+  padding:22px;
 }
 
 .stat-label{
   color:var(--muted);
-  font-size:11px;
+  font-size:13px;
   font-weight:700;
-  margin-bottom:8px;
+  margin-bottom:12px;
 }
 
-.stat-number{
-  color:var(--deep);
-  font-size:25px;
+.stat-value{
+  font-size:30px;
   line-height:1;
-  font-weight:820;
+  font-weight:900;
+  color:var(--deep);
 }
 
-.section-header{
+.section-card{
+  padding:24px;
+  margin-bottom:20px;
+}
+
+.section-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:15px;
-  margin-bottom:14px;
+  margin-bottom:18px;
 }
 
+.section-head h2{
+  margin:0;
+  font-size:19px;
+  color:var(--deep);
+}
 
-/* =========================================================
+.section-head p{
+  margin:5px 0 0;
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+  border:0;
+  border-radius:11px;
+  padding:11px 16px;
+  font-weight:800;
+  font-size:13px;
+  transition:.2s;
+}
+
+.btn-primary{
+  background:var(--blue);
+  color:white;
+}
+
+.btn-primary:hover{
+  background:#195bae;
+  transform:translateY(-1px);
+}
+
+.btn-secondary{
+  background:white;
+  color:var(--deep);
+  border:1px solid var(--line);
+}
+
+.btn-danger{
+  background:var(--red-bg);
+  color:var(--red);
+}
+
+/* =========================
    PROJECT
-========================================================= */
+========================= */
 
-.project-card{
-  padding:22px;
-  margin-bottom:20px;
-}
-
-.project-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:18px;
+.project-box{
+  padding:24px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#fff;
 }
 
 .project-name{
+  font-size:21px;
+  font-weight:850;
   color:var(--deep);
-  font-size:18px;
-  font-weight:780;
-  line-height:1.35;
 }
 
-.project-description{
+.project-stage{
+  margin-top:6px;
   color:var(--muted);
+  font-size:14px;
+}
+
+.progress{
+  height:9px;
+  background:#e8eef5;
+  border-radius:99px;
+  overflow:hidden;
+  margin-top:20px;
+}
+
+.progress-bar{
+  height:100%;
+  background:linear-gradient(90deg,#246bce,#4c92e9);
+  border-radius:99px;
+  transition:width .5s;
+}
+
+.progress-meta{
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
   font-size:12px;
-  line-height:1.6;
-  margin-top:5px;
+  color:var(--muted);
+  font-weight:700;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th{
+  text-align:left;
+  padding:13px 12px;
+  background:#f7fafd;
+  color:#6b7b8d;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+
+td{
+  padding:15px 12px;
+  border-top:1px solid var(--line);
+  font-size:14px;
 }
 
 .badge{
   display:inline-flex;
   align-items:center;
-  justify-content:center;
-  padding:6px 10px;
-  border-radius:999px;
-  background:#edf5ff;
+  padding:6px 9px;
+  border-radius:99px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.badge-green{
+  background:var(--green-bg);
+  color:var(--green);
+}
+
+.badge-blue{
+  background:#eaf2ff;
   color:var(--blue);
-  font-size:10px;
-  font-weight:750;
-  white-space:nowrap;
 }
 
-.progress-area{
-  margin-top:21px;
+.badge-amber{
+  background:var(--amber-bg);
+  color:var(--amber);
 }
 
-.progress-row{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:7px;
-}
-
-.progress-row span{
-  color:var(--muted);
-  font-size:11px;
-  font-weight:650;
-}
-
-.progress-row strong{
-  color:var(--deep);
-  font-size:11px;
-  font-weight:750;
-}
-
-.progress-track{
-  height:8px;
-  border-radius:999px;
-  background:#e9f0f6;
-  overflow:hidden;
-}
-
-.progress-fill{
-  height:100%;
-  border-radius:999px;
-  background:linear-gradient(90deg,#246bce,#62a8ff);
-}
-
-
-/* =========================================================
-   EMPTY
-========================================================= */
-
-.empty{
-  padding:28px 20px;
-  border:1px dashed #cddce9;
-  background:#fbfdff;
-  border-radius:14px;
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.6;
-}
-
-
-/* =========================================================
-   ACCESS CREDENTIALS
-========================================================= */
-
-.access-intro{
-  padding:24px;
-  margin-bottom:18px;
-  background:
-    radial-gradient(circle at 100% 0%,rgba(36,107,206,.10),transparent 30%),
-    #fff;
-}
-
-.access-intro h2{
-  color:var(--deep);
-  font-size:19px;
-  font-weight:790;
-  margin-bottom:5px;
-}
-
-.access-intro p{
-  color:var(--muted);
-  max-width:700px;
-  font-size:12px;
-  line-height:1.65;
-}
-
-.security-strip{
-  margin-top:15px;
-  display:flex;
-  align-items:flex-start;
-  gap:9px;
-  padding:11px 13px;
-  background:#f2f8ff;
-  border:1px solid #d7e8f9;
-  border-radius:11px;
-  color:#41647f;
-  font-size:11px;
-  line-height:1.55;
-}
-
-.add-button{
-  border:0;
-  background:var(--blue);
-  color:#fff;
-  border-radius:10px;
-  padding:10px 14px;
-  font-size:12px;
-  font-weight:750;
-  transition:.18s;
-  box-shadow:0 6px 15px rgba(36,107,206,.16);
-}
-
-.add-button:hover{
-  background:#1959ae;
-  transform:translateY(-1px);
-}
-
-
-/* CREDENTIAL FORM */
-
-.credential-form{
-  display:none;
-  padding:22px;
-  margin-bottom:18px;
-}
-
-.credential-form.open{
-  display:block;
-}
-
-.form-heading{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
-}
-
-.form-heading h3{
-  color:var(--deep);
-  font-size:16px;
-  font-weight:780;
-}
-
-.close-form{
-  width:32px;
-  height:32px;
-  border:1px solid var(--line);
-  background:#fff;
-  color:var(--muted);
-  border-radius:9px;
-  font-size:16px;
-}
+/* =========================
+   FORM
+========================= */
 
 .form-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:15px;
+  gap:16px;
 }
 
-.form-field{
+.form-group{
   display:flex;
   flex-direction:column;
-  gap:6px;
+  gap:7px;
 }
 
-.form-field.full{
-  grid-column:1 / -1;
+.form-group.full{
+  grid-column:1/-1;
 }
 
-.form-field label{
-  color:#52677b;
-  font-size:11px;
-  font-weight:750;
+.form-group label{
+  font-size:12px;
+  font-weight:800;
+  color:#506175;
 }
 
-.form-field input,
-.form-field textarea{
+.form-group input,
+.form-group textarea,
+.form-group select{
   width:100%;
   border:1px solid var(--line);
   background:#fbfdff;
-  border-radius:10px;
-  padding:11px 12px;
   color:var(--text);
+  border-radius:11px;
+  padding:12px 13px;
   outline:none;
-  font-size:12px;
-  transition:.15s;
 }
 
-.form-field input{
-  height:42px;
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+  border-color:#8ab4e7;
+  box-shadow:0 0 0 3px rgba(36,107,206,.08);
 }
 
-.form-field textarea{
-  min-height:80px;
+.form-group textarea{
+  min-height:110px;
   resize:vertical;
 }
 
-.form-field input::placeholder,
-.form-field textarea::placeholder{
-  color:#9aa9b7;
-}
+/* =========================
+   CREDENTIALS
+========================= */
 
-.form-field input:focus,
-.form-field textarea:focus{
-  border-color:#8bb9ea;
-  background:#fff;
-  box-shadow:0 0 0 3px rgba(36,107,206,.07);
-}
-
-.password-input{
-  position:relative;
-}
-
-.password-input input{
-  padding-right:70px;
-}
-
-.show-password{
-  position:absolute;
-  right:7px;
-  top:7px;
-  height:28px;
-  padding:0 8px;
-  border:0;
-  background:#eef5fc;
-  color:var(--blue);
-  border-radius:7px;
-  font-size:10px;
-  font-weight:750;
-}
-
-.form-actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  margin-top:18px;
-}
-
-.secondary-button{
-  border:1px solid var(--line);
-  background:#fff;
-  color:#536b81;
-  border-radius:10px;
-  padding:10px 14px;
-  font-size:12px;
-  font-weight:700;
-}
-
-.primary-button{
-  border:0;
-  background:var(--blue);
-  color:#fff;
-  border-radius:10px;
-  padding:10px 17px;
-  font-size:12px;
-  font-weight:750;
-}
-
-
-/* CREDENTIAL CARDS */
-
-.credentials-grid{
+.credential-list{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:15px;
+  gap:16px;
 }
 
-.credential-card{
-  padding:19px;
-  transition:.18s;
+.credential{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:20px;
+  background:#fff;
 }
 
-.credential-card:hover{
-  box-shadow:var(--shadow-hover);
-}
-
-.credential-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:10px;
-  padding-bottom:14px;
-  border-bottom:1px solid #edf2f6;
-  margin-bottom:14px;
-}
-
-.platform-info{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  min-width:0;
-}
-
-.platform-icon{
-  width:38px;
-  height:38px;
-  flex-shrink:0;
-  border-radius:10px;
-  background:#edf5ff;
-  color:var(--blue);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:13px;
+.credential-title{
   font-weight:850;
-}
-
-.platform-name{
   color:var(--deep);
-  font-size:14px;
-  font-weight:780;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.platform-type{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:2px;
-}
-
-.card-menu{
-  display:flex;
-  gap:5px;
-}
-
-.icon-btn{
-  width:30px;
-  height:30px;
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:8px;
-  color:#718294;
-  font-size:12px;
-}
-
-.icon-btn:hover{
-  color:var(--blue);
-  background:#f3f8fd;
-}
-
-.icon-btn.delete:hover{
-  color:var(--red);
-  background:var(--red-bg);
-}
-
-.credential-line{
-  margin-bottom:10px;
-}
-
-.credential-line:last-child{
-  margin-bottom:0;
-}
-
-.credential-label{
-  color:#8292a1;
-  text-transform:uppercase;
-  letter-spacing:.45px;
-  font-size:9px;
-  font-weight:800;
-  margin-bottom:5px;
-}
-
-.value-row{
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.value-box{
-  flex:1;
-  min-width:0;
-  background:#f7fafc;
-  border:1px solid #e4ebf1;
-  border-radius:8px;
-  padding:9px 10px;
-  color:#34495d;
-  font-size:11px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.copy-btn{
-  border:1px solid var(--line);
-  background:#fff;
-  color:var(--blue);
-  border-radius:8px;
-  padding:8px 9px;
-  font-size:9px;
-  font-weight:750;
-  white-space:nowrap;
-}
-
-.copy-btn:hover{
-  background:#eef6ff;
-}
-
-.card-actions{
-  display:flex;
-  gap:7px;
-  margin-top:15px;
-  padding-top:13px;
-  border-top:1px solid #edf2f6;
-}
-
-.card-actions button{
-  flex:1;
-}
-
-
-/* =========================================================
-   CHAT HOME WIDGET
-========================================================= */
-
-.chat-widget{
-  position:fixed;
-  right:25px;
-  bottom:25px;
-  z-index:200;
-}
-
-.chat-launcher{
-  width:56px;
-  height:56px;
-  border:0;
-  border-radius:18px;
-  background:var(--blue);
-  color:#fff;
-  box-shadow:0 12px 30px rgba(36,107,206,.27);
-  font-size:21px;
-  transition:.2s;
-}
-
-.chat-launcher:hover{
-  transform:translateY(-2px);
-  background:#1959ae;
-}
-
-.chat-panel{
-  position:absolute;
-  right:0;
-  bottom:68px;
-  width:370px;
-  height:520px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:18px;
-  box-shadow:0 25px 70px rgba(17,52,84,.17);
-  overflow:hidden;
-  display:none;
-  flex-direction:column;
-}
-
-.chat-panel.open{
-  display:flex;
-}
-
-.chat-panel-header{
-  padding:15px 16px;
-  background:#fff;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.chat-person{
-  display:flex;
-  align-items:center;
-  gap:9px;
-}
-
-.chat-avatar{
-  width:34px;
-  height:34px;
-  border-radius:10px;
-  background:#eaf3ff;
-  color:var(--blue);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:12px;
-  font-weight:850;
-}
-
-.chat-person strong{
-  display:block;
-  color:var(--deep);
-  font-size:12px;
-  font-weight:780;
-}
-
-.chat-person small{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  color:var(--green);
-  font-size:9px;
-  font-weight:700;
-  margin-top:2px;
-}
-
-.chat-person small i{
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:var(--green);
-}
-
-.chat-close{
-  width:29px;
-  height:29px;
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:8px;
-  color:var(--muted);
-}
-
-.widget-messages{
-  flex:1;
-  overflow-y:auto;
-  padding:15px;
-  background:#f7fafd;
-}
-
-.widget-message{
-  max-width:82%;
+  font-size:17px;
   margin-bottom:12px;
 }
 
-.widget-message.client{
-  margin-left:auto;
+.credential-row{
+  margin:9px 0;
 }
 
-.widget-bubble{
-  padding:9px 11px;
-  border-radius:11px;
+.credential-label{
+  color:var(--muted);
   font-size:11px;
-  line-height:1.55;
+  font-weight:800;
+  text-transform:uppercase;
 }
 
-.widget-message.admin .widget-bubble{
+.credential-value{
+  margin-top:3px;
+  font-size:14px;
+  word-break:break-word;
+}
+
+.credential-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
+
+/* =========================
+   CHAT
+========================= */
+
+.chat-window{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  width:390px;
+  max-width:calc(100vw - 30px);
+  height:570px;
   background:#fff;
   border:1px solid var(--line);
-  color:#43576a;
+  border-radius:22px;
+  box-shadow:0 24px 70px rgba(11,40,80,.20);
+  z-index:999;
+  display:none;
+  overflow:hidden;
+  flex-direction:column;
 }
 
-.widget-message.client .widget-bubble{
-  background:#e5f0ff;
-  color:#244d77;
+.chat-window.open{
+  display:flex;
 }
 
-.widget-time{
-  color:#9aa7b3;
-  font-size:8px;
-  margin-top:3px;
+.chat-header{
+  padding:17px 18px;
+  background:linear-gradient(135deg,#123b70,#246bce);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
-.widget-message.client .widget-time{
-  text-align:right;
+.chat-header-left{
+  display:flex;
+  align-items:center;
+  gap:11px;
 }
 
-.chat-composer{
+.chat-avatar{
+  width:39px;
+  height:39px;
+  background:#fff;
+  color:var(--blue);
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+}
+
+.chat-title{
+  font-size:14px;
+  font-weight:850;
+}
+
+.chat-status{
+  font-size:11px;
+  opacity:.8;
+  margin-top:2px;
+}
+
+.chat-close{
+  width:32px;
+  height:32px;
+  border:0;
+  background:rgba(255,255,255,.14);
+  color:#fff;
+  border-radius:9px;
+}
+
+.chat-messages{
+  flex:1;
+  padding:17px;
+  overflow-y:auto;
+  background:#f6f9fc;
+}
+
+.chat-empty{
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.6;
+  padding:60px 25px;
+}
+
+.message{
+  display:flex;
+  margin-bottom:13px;
+}
+
+.message.client{
+  justify-content:flex-end;
+}
+
+.message.admin{
+  justify-content:flex-start;
+}
+
+.message-bubble{
+  max-width:82%;
+  padding:11px 13px;
+  border-radius:15px;
+  font-size:15px;
+  line-height:1.55;
+  word-break:break-word;
+}
+
+.message.client .message-bubble{
+  background:#246bce;
+  color:white;
+  border-bottom-right-radius:5px;
+}
+
+.message.admin .message-bubble{
+  background:#fff;
+  border:1px solid var(--line);
+  color:var(--text);
+  border-bottom-left-radius:5px;
+}
+
+.message-time{
+  font-size:10px;
+  opacity:.65;
+  margin-top:5px;
+}
+
+.attachment-chip{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin-top:8px;
+  padding:7px 9px;
+  border-radius:9px;
+  background:rgba(255,255,255,.16);
+  font-size:11px;
+}
+
+.message.admin .attachment-chip{
+  background:#edf4fb;
+}
+
+.chat-compose{
   border-top:1px solid var(--line);
   background:#fff;
-  padding:10px;
+  padding:11px;
 }
 
-.attachment-preview{
+.selected-file{
   display:none;
   align-items:center;
   justify-content:space-between;
   gap:8px;
-  padding:7px 9px;
-  background:#f1f6fb;
-  border:1px solid var(--line);
-  border-radius:8px;
-  margin-bottom:7px;
+  background:#edf4fb;
+  border:1px solid #d7e5f2;
+  padding:8px 10px;
+  border-radius:10px;
+  margin-bottom:8px;
+  font-size:12px;
+  color:var(--deep);
 }
 
-.attachment-preview.show{
+.selected-file.show{
   display:flex;
 }
 
-.attachment-name{
-  color:#506579;
-  font-size:9px;
+.selected-file-name{
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
 }
 
-.remove-attachment{
+.remove-file{
   border:0;
   background:transparent;
   color:var(--red);
-  font-size:11px;
+  font-weight:900;
+  font-size:16px;
 }
 
-.composer-row{
+.compose-row{
   display:flex;
   align-items:flex-end;
-  gap:7px;
-}
-
-.attach-btn{
-  width:35px;
-  height:35px;
-  flex-shrink:0;
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:9px;
-  color:#5d748a;
-  font-size:15px;
-}
-
-.attach-btn:hover{
-  color:var(--blue);
-  background:#f3f8fd;
+  gap:8px;
 }
 
 .chat-textarea{
   flex:1;
-  min-width:0;
-  min-height:35px;
-  max-height:80px;
+  min-height:48px;
+  max-height:130px;
   resize:none;
   border:1px solid var(--line);
-  border-radius:9px;
-  padding:9px 10px;
+  border-radius:13px;
+  padding:11px 12px;
   outline:none;
-  color:var(--text);
-  font-size:10px;
+  font-size:15px;
+  line-height:1.45;
 }
 
 .chat-textarea:focus{
-  border-color:#8bb9ea;
+  border-color:#8ab4e7;
+  box-shadow:0 0 0 3px rgba(36,107,206,.08);
 }
 
-.chat-send{
-  width:35px;
-  height:35px;
-  flex-shrink:0;
-  border:0;
-  border-radius:9px;
-  background:var(--blue);
-  color:#fff;
-  font-size:13px;
+/* proper attachment button */
+.attach-label{
+  width:46px;
+  height:46px;
+  flex:0 0 46px;
+  border:1px solid var(--line);
+  background:#f7fafd;
+  color:var(--blue);
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.chat-file-input{
+.attach-label:hover{
+  background:#eaf2ff;
+  border-color:#b8d1ee;
+}
+
+.attach-label input{
   display:none;
 }
 
-
-/* =========================================================
-   TASKS / DOCUMENTS
-========================================================= */
-
-.list-card{
-  padding:20px;
-}
-
-.list{
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-}
-
-.list-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:14px;
-  padding:13px;
-  border:1px solid var(--line);
-  border-radius:11px;
-  background:#fff;
-}
-
-.task-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.task-check{
-  width:20px;
-  height:20px;
-  border-radius:6px;
-  border:2px solid #c9d8e7;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
-  font-size:10px;
-  font-weight:800;
-}
-
-.task-check.done{
-  background:var(--green);
-  border-color:var(--green);
-}
-
-.task-name{
-  color:#34495b;
-  font-size:12px;
-  font-weight:700;
-}
-
-.task-name.done{
-  color:#94a0ab;
-  text-decoration:line-through;
-}
-
-.task-description{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:3px;
-}
-
-.document-item{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.document-icon{
-  width:36px;
-  height:36px;
-  border-radius:9px;
-  background:#eef5fc;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.document-info{
-  min-width:0;
-  flex:1;
-}
-
-.document-info strong{
-  display:block;
-  color:var(--deep);
-  font-size:12px;
-  font-weight:700;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.document-info small{
-  color:var(--muted);
-  font-size:9px;
-}
-
-
-/* =========================================================
-   FULL CHAT PAGE
-========================================================= */
-
-.full-chat{
-  overflow:hidden;
-}
-
-.full-chat-messages{
-  height:440px;
-  overflow-y:auto;
-  background:#f7fafd;
-  padding:20px;
-}
-
-.full-chat-input{
-  display:flex;
-  gap:8px;
-  padding:13px;
-  border-top:1px solid var(--line);
-}
-
-.full-chat-input textarea{
-  flex:1;
-  min-height:44px;
-  resize:vertical;
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:10px;
-  outline:none;
-  font-size:12px;
-}
-
-.full-send{
+.send-btn{
+  width:46px;
+  height:46px;
+  flex:0 0 46px;
   border:0;
   background:var(--blue);
   color:#fff;
-  padding:0 17px;
-  border-radius:10px;
-  font-size:12px;
-  font-weight:750;
+  border-radius:12px;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-
-/* =========================================================
-   ACCOUNT
-========================================================= */
-
-.account-card{
-  padding:22px;
+.send-btn:hover{
+  background:#195bae;
 }
 
-.account-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
+.send-btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
 }
 
-.account-field label{
-  display:block;
-  color:#627589;
+.chat-launcher{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  width:58px;
+  height:58px;
+  border-radius:18px;
+  border:0;
+  background:linear-gradient(135deg,#123b70,#246bce);
+  color:white;
+  box-shadow:0 15px 35px rgba(36,107,206,.3);
+  z-index:998;
+  font-size:23px;
+}
+
+.chat-launcher.hidden{
+  display:none;
+}
+
+.notification-badge{
+  position:absolute;
+  right:-5px;
+  top:-5px;
+  min-width:21px;
+  height:21px;
+  padding:0 5px;
+  background:#d92f3f;
+  border:2px solid white;
+  color:white;
+  border-radius:99px;
   font-size:10px;
-  font-weight:750;
-  margin-bottom:6px;
+  font-weight:900;
+  display:none;
+  align-items:center;
+  justify-content:center;
 }
 
-.account-field input{
-  width:100%;
-  height:42px;
-  border:1px solid var(--line);
-  background:#f8fbfd;
+.notification-badge.show{
+  display:flex;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(9,30,55,.38);
+  z-index:1200;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  background:white;
+  width:650px;
+  max-width:100%;
+  max-height:90vh;
+  overflow:auto;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 30px 80px rgba(0,0,0,.2);
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+.modal-head h2{
+  margin:0;
+  color:var(--deep);
+}
+
+.close-modal{
+  border:0;
+  background:#f3f6f9;
+  width:35px;
+  height:35px;
   border-radius:10px;
-  padding:0 11px;
-  outline:none;
-  color:#526679;
-  font-size:12px;
 }
 
-
-/* =========================================================
+/* =========================
    TOAST
-========================================================= */
+========================= */
 
 .toast{
   position:fixed;
-  left:50%;
-  bottom:25px;
-  transform:translate(-50%,20px);
-  z-index:500;
-  padding:10px 15px;
-  border-radius:10px;
-  background:var(--deep);
-  color:#fff;
-  font-size:11px;
-  font-weight:650;
+  right:25px;
+  top:90px;
+  z-index:2000;
+  background:#123b70;
+  color:white;
+  padding:13px 17px;
+  border-radius:12px;
+  box-shadow:0 15px 40px rgba(0,0,0,.16);
+  font-size:13px;
+  font-weight:700;
+  transform:translateY(-15px);
   opacity:0;
   pointer-events:none;
-  transition:.2s;
-  box-shadow:0 12px 35px rgba(0,0,0,.18);
+  transition:.25s;
 }
 
 .toast.show{
+  transform:translateY(0);
   opacity:1;
-  transform:translate(-50%,0);
 }
 
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:1100px){
-
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .credentials-grid{
-    grid-template-columns:1fr;
-  }
-
+.toast.error{
+  background:#a92f39;
 }
 
-@media(max-width:800px){
+/* =========================
+   LOADING
+========================= */
 
+.loading{
+  color:var(--muted);
+  padding:25px 0;
+  text-align:center;
+}
+
+.empty{
+  color:var(--muted);
+  padding:25px 0;
+  text-align:center;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:1000px){
   .sidebar{
     transform:translateX(-100%);
-    transition:.22s ease;
-    box-shadow:15px 0 40px rgba(0,0,0,.08);
+    transition:.25s;
   }
 
   .sidebar.open{
@@ -1323,6 +970,7 @@ a{
 
   .main{
     margin-left:0;
+    width:100%;
   }
 
   .mobile-menu{
@@ -1330,446 +978,543 @@ a{
   }
 
   .topbar{
-    padding:0 16px;
+    padding:0 18px;
   }
 
   .content{
-    padding:20px 15px;
+    padding:20px;
   }
-
-  .form-grid,
-  .account-grid{
-    grid-template-columns:1fr;
-  }
-
-  .form-field.full{
-    grid-column:auto;
-  }
-
-  .chat-panel{
-    position:fixed;
-    right:12px;
-    left:12px;
-    bottom:76px;
-    width:auto;
-    height:calc(100vh - 105px);
-    max-height:580px;
-  }
-
-}
-
-@media(max-width:520px){
 
   .stats{
-    grid-template-columns:1fr 1fr;
-    gap:9px;
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .stat-card{
-    padding:14px;
+  .credential-list{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:650px){
+  .top-title{
+    font-size:15px;
   }
 
-  .stat-number{
-    font-size:22px;
+  .content{
+    padding:15px;
   }
 
   .welcome{
-    padding:21px;
+    padding:23px;
   }
 
   .welcome h1{
-    font-size:23px;
+    font-size:27px;
   }
 
-  .section-header{
-    align-items:flex-start;
+  .page-header h1{
+    font-size:25px;
   }
 
-  .access-intro{
-    padding:19px;
+  .stats{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
   }
 
-  .access-intro .section-header{
-    flex-direction:column;
+  .stat-card{
+    padding:16px;
   }
 
-  .add-button{
-    width:100%;
+  .stat-value{
+    font-size:24px;
   }
 
-  .project-top{
-    flex-direction:column;
+  .section-card{
+    padding:17px;
   }
 
-  .list-item{
-    align-items:flex-start;
+  .form-grid{
+    grid-template-columns:1fr;
   }
 
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .chat-window{
+    right:10px;
+    bottom:10px;
+    width:calc(100vw - 20px);
+    height:calc(100vh - 90px);
+    max-height:700px;
+  }
+
+  .chat-launcher{
+    right:15px;
+    bottom:15px;
+  }
 }
 </style>
 </head>
-
 
 <body>
 
 <div class="app">
 
-<!-- =====================================================
-     SIDEBAR
-===================================================== -->
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
 
-<aside class="sidebar" id="sidebar">
-
-  <div class="logo">
-    AWSZ<span>.</span>
-  </div>
-
-  <nav class="nav">
-
-    <button class="active"
-      onclick="showPage('overview',this)">
-      Overview
-    </button>
-
-    <button
-      onclick="showPage('projects',this)">
-      Projects
-    </button>
-
-    <button
-      onclick="showPage('tasks',this)">
-      Tasks
-    </button>
-
-    <button
-      onclick="showPage('access',this)">
-      Access & Credentials
-    </button>
-
-    <button
-      onclick="showPage('documents',this)">
-      Documents
-    </button>
-
-    <button
-      onclick="showPage('invoices',this)">
-      Invoices
-    </button>
-
-    <button
-      onclick="showPage('messages',this)">
-      Messages
-    </button>
-
-    <button
-      onclick="showPage('account',this)">
-      Account
-    </button>
-
-  </nav>
-
-
-  <div class="sidebar-bottom">
-
-    <div class="user-mini">
-
-      <strong id="sideUserName">
-        Loading...
-      </strong>
-
-      <small id="sideUserEmail">
-        Loading...
-      </small>
-
+    <div class="logo">
+      AWSZ<span>.</span>
     </div>
 
-    <button
-      class="logout"
-      onclick="logout()">
-      Logout
-    </button>
+    <nav class="nav">
 
-  </div>
+      <button class="active" data-page="overview">
+        <span class="nav-icon">⌂</span>
+        Overview
+      </button>
 
-</aside>
+      <button data-page="projects">
+        <span class="nav-icon">▦</span>
+        Projects
+      </button>
 
+      <button data-page="tasks">
+        <span class="nav-icon">✓</span>
+        Tasks
+      </button>
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+      <button data-page="credentials">
+        <span class="nav-icon">🔐</span>
+        Access & Credentials
+      </button>
 
-<main class="main">
-
-<header class="topbar">
-
-  <div class="topbar-left">
-
-    <button
-      class="mobile-menu"
-      onclick="toggleSidebar()">
-      ☰
-    </button>
-
-    <div class="topbar-title">
-      AWSZ Client Portal
-    </div>
-
-  </div>
-
-
-  <div class="connection">
-
-    <span class="connection-dot"></span>
-
-    Portal Connected
-
-  </div>
-
-</header>
-
-
-<div class="content">
-
-
-<!-- =====================================================
-     OVERVIEW
-===================================================== -->
-
-<section
-  class="page active"
-  id="overview">
-
-  <div class="welcome">
-
-    <h1>
-      Welcome, <span id="welcomeName">Client</span>
-    </h1>
-
-    <p>
-      Everything related to your AWSZ project is organized here — progress, access, files and communication.
-    </p>
-
-  </div>
-
-
-  <div class="stats">
-
-    <div class="card stat-card">
-
-      <div class="stat-label">
-        Active Projects
-      </div>
-
-      <div
-        class="stat-number"
-        id="statProjects">
-        0
-      </div>
-
-    </div>
-
-
-    <div class="card stat-card">
-
-      <div class="stat-label">
-        Completed Tasks
-      </div>
-
-      <div
-        class="stat-number"
-        id="statTasks">
-        0
-      </div>
-
-    </div>
-
-
-    <div class="card stat-card">
-
-      <div class="stat-label">
-        Access Requests
-      </div>
-
-      <div
-        class="stat-number"
-        id="statAccess">
-        0
-      </div>
-
-    </div>
-
-
-    <div class="card stat-card">
-
-      <div class="stat-label">
+      <button data-page="documents">
+        <span class="nav-icon">▤</span>
         Documents
+      </button>
+
+      <button data-page="invoices">
+        <span class="nav-icon">▣</span>
+        Invoices
+      </button>
+
+      <button data-page="messages">
+        <span class="nav-icon">💬</span>
+        Messages
+        <span id="sidebarMessageBadge" class="badge badge-blue" style="display:none;margin-left:auto;">0</span>
+      </button>
+
+      <button data-page="account">
+        <span class="nav-icon">◉</span>
+        Account
+      </button>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="logout" id="logoutBtn">
+        Logout
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <header class="topbar">
+
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="mobile-menu" id="mobileMenu">☰</button>
+        <div class="top-title">AWSZ Client Portal</div>
       </div>
 
-      <div
-        class="stat-number"
-        id="statDocuments">
-        0
+      <div class="status">
+        <span class="status-dot"></span>
+        Portal Connected
       </div>
 
+    </header>
+
+    <div class="content">
+
+      <!-- ================= OVERVIEW ================= -->
+
+      <section class="page active" id="page-overview">
+
+        <div class="welcome">
+          <h1 id="welcomeTitle">Welcome, Client</h1>
+          <p>
+            Everything related to your AWSZ project is organized here —
+            progress, access, files and communication.
+          </p>
+        </div>
+
+        <div class="stats">
+
+          <div class="card stat-card">
+            <div class="stat-label">Active Projects</div>
+            <div class="stat-value" id="statProjects">0</div>
+          </div>
+
+          <div class="card stat-card">
+            <div class="stat-label">Completed Tasks</div>
+            <div class="stat-value" id="statTasks">0</div>
+          </div>
+
+          <div class="card stat-card">
+            <div class="stat-label">Access Requests</div>
+            <div class="stat-value" id="statAccess">0</div>
+          </div>
+
+          <div class="card stat-card">
+            <div class="stat-label">Documents</div>
+            <div class="stat-value" id="statDocuments">0</div>
+          </div>
+
+        </div>
+
+        <div class="card section-card">
+
+          <div class="section-head">
+            <div>
+              <h2>Current Project</h2>
+              <p>Your latest active AWSZ project.</p>
+            </div>
+          </div>
+
+          <div id="currentProject">
+            <div class="loading">Loading project...</div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= PROJECTS ================= -->
+
+      <section class="page" id="page-projects">
+
+        <div class="page-header">
+          <h1>Projects</h1>
+          <p>View the progress and current stage of your AWSZ projects.</p>
+        </div>
+
+        <div id="projectsList">
+          <div class="loading">Loading projects...</div>
+        </div>
+
+      </section>
+
+
+      <!-- ================= TASKS ================= -->
+
+      <section class="page" id="page-tasks">
+
+        <div class="page-header">
+          <h1>Tasks</h1>
+          <p>See what has been completed and what still needs attention.</p>
+        </div>
+
+        <div class="card section-card">
+
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Status</th>
+                  <th>Assigned To</th>
+                  <th>Due Date</th>
+                </tr>
+              </thead>
+
+              <tbody id="tasksBody">
+                <tr>
+                  <td colspan="4" class="loading">Loading tasks...</td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= CREDENTIALS ================= -->
+
+      <section class="page" id="page-credentials">
+
+        <div class="page-header">
+
+          <div class="section-head">
+
+            <div>
+              <h1>Access & Credentials</h1>
+              <p>
+                Keep the systems and login information required for your project organized in one place.
+              </p>
+            </div>
+
+            <button class="btn btn-primary" id="addCredentialBtn">
+              + Add New
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="card section-card">
+
+          <div style="
+            background:#fff8e8;
+            border:1px solid #f1dfb8;
+            color:#76571c;
+            padding:13px 15px;
+            border-radius:12px;
+            font-size:13px;
+            line-height:1.6;
+            margin-bottom:20px;
+          ">
+            🔐 Credentials are sensitive information. AWSZ will connect this area to secure server-side credential storage before real passwords are persisted.
+          </div>
+
+          <div id="credentialList" class="credential-list">
+            <div class="empty">No platforms added yet.</div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= DOCUMENTS ================= -->
+
+      <section class="page" id="page-documents">
+
+        <div class="page-header">
+          <h1>Documents</h1>
+          <p>Project files shared between you and AWSZ.</p>
+        </div>
+
+        <div class="card section-card">
+          <div id="documentsList">
+            <div class="loading">Loading documents...</div>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ================= INVOICES ================= -->
+
+      <section class="page" id="page-invoices">
+
+        <div class="page-header">
+          <h1>Invoices</h1>
+          <p>Project billing and payment information.</p>
+        </div>
+
+        <div class="card section-card">
+
+          <div class="empty">
+            Invoice management will be connected here.
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= MESSAGES ================= -->
+
+      <section class="page" id="page-messages">
+
+        <div class="page-header">
+          <h1>Messages</h1>
+          <p>Full project communication with the AWSZ team.</p>
+        </div>
+
+        <div class="card section-card">
+
+          <div id="messagesPageList">
+            <div class="loading">Loading messages...</div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= ACCOUNT ================= -->
+
+      <section class="page" id="page-account">
+
+        <div class="page-header">
+          <h1>Account</h1>
+          <p>Your client profile information.</p>
+        </div>
+
+        <div class="card section-card">
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label>Full Name</label>
+              <input id="accountName" readonly>
+            </div>
+
+            <div class="form-group">
+              <label>Company</label>
+              <input id="accountCompany" readonly>
+            </div>
+
+            <div class="form-group">
+              <label>Email</label>
+              <input id="accountEmail" readonly>
+            </div>
+
+            <div class="form-group">
+              <label>Phone</label>
+              <input id="accountPhone" readonly>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
     </div>
 
-  </div>
+  </main>
+
+</div>
 
 
-  <div class="section-header">
+<!-- ================= CHAT ================= -->
 
-    <div>
+<button class="chat-launcher" id="chatLauncher" title="Open messages">
 
-      <div class="section-title">
-        Current Project
+  💬
+
+  <span id="notificationBadge" class="notification-badge">
+    0
+  </span>
+
+</button>
+
+
+<div class="chat-window" id="chatWindow">
+
+  <div class="chat-header">
+
+    <div class="chat-header-left">
+
+      <div class="chat-avatar">
+        A
       </div>
-
-      <div class="section-description">
-        Your latest active AWSZ project.
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div
-    id="overviewProject">
-    <div class="empty">
-      Loading project...
-    </div>
-  </div>
-
-
-</section>
-
-
-<!-- =====================================================
-     PROJECTS
-===================================================== -->
-
-<section
-  class="page"
-  id="projects">
-
-  <div class="page-heading">
-
-    <h1>
-      Projects
-    </h1>
-
-    <p>
-      View the progress and current stage of your AWSZ projects.
-    </p>
-
-  </div>
-
-
-  <div
-    id="projectsList">
-    <div class="empty">
-      Loading projects...
-    </div>
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     TASKS
-===================================================== -->
-
-<section
-  class="page"
-  id="tasks">
-
-  <div class="page-heading">
-
-    <h1>
-      Tasks
-    </h1>
-
-    <p>
-      See what has been completed and what still needs attention.
-    </p>
-
-  </div>
-
-
-  <div
-    id="tasksList">
-    <div class="empty">
-      Loading tasks...
-    </div>
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     ACCESS
-===================================================== -->
-
-<section
-  class="page"
-  id="access">
-
-  <div class="card access-intro">
-
-    <div class="section-header">
 
       <div>
+        <div class="chat-title">
+          AWSZ Project Team
+        </div>
 
-        <h2 class="section-title">
-          Access & Credentials
-        </h2>
-
-        <p class="section-description">
-          Keep the systems and login information required for your project organized in one place.
-        </p>
-
+        <div class="chat-status">
+          Available
+        </div>
       </div>
 
+    </div>
 
-      <button
-        class="add-button"
-        onclick="openCredentialForm()">
+    <button class="chat-close" id="chatClose">
+      ×
+    </button>
 
-        + Add New
+  </div>
 
+
+  <div class="chat-messages" id="chatMessages">
+
+    <div class="chat-empty">
+      Loading messages...
+    </div>
+
+  </div>
+
+
+  <div class="chat-compose">
+
+    <div class="selected-file" id="selectedFile">
+
+      <span class="selected-file-name" id="selectedFileName"></span>
+
+      <button class="remove-file" id="removeFile">
+        ×
       </button>
 
     </div>
 
 
-    <div class="security-strip">
+    <div class="compose-row">
 
-      <span>🔐</span>
+      <!-- REAL FILE BUTTON -->
+      <label class="attach-label" title="Attach file">
 
-      <span>
-        Credentials are sensitive information. AWSZ will connect this area to secure server-side credential storage before real passwords are persisted.
-      </span>
+        📎
+
+        <input
+          type="file"
+          id="chatFile"
+          accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.png,.jpg,.jpeg,.webp,.txt,.zip"
+        >
+
+      </label>
+
+
+      <textarea
+        id="chatInput"
+        class="chat-textarea"
+        placeholder="Write your message..."
+        rows="1"
+      ></textarea>
+
+
+      <button
+        class="send-btn"
+        id="sendMessageBtn"
+        title="Send message"
+      >
+        ↑
+      </button>
 
     </div>
 
   </div>
 
+</div>
 
-  <!-- ADD / EDIT FORM -->
 
-  <div
-    class="card credential-form"
-    id="credentialForm">
+<!-- ================= CREDENTIAL MODAL ================= -->
 
-    <div class="form-heading">
+<div class="modal" id="credentialModal">
 
-      <h3 id="credentialFormTitle">
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h2 id="credentialModalTitle">
         Add New Platform
-      </h3>
+      </h2>
 
-      <button
-        class="close-form"
-        onclick="closeCredentialForm()">
+      <button class="close-modal" id="closeCredentialModal">
         ×
       </button>
 
@@ -1778,468 +1523,87 @@ a{
 
     <div class="form-grid">
 
-      <div class="form-field">
+      <div class="form-group full">
 
-        <label>
-          Platform Name
-        </label>
+        <label>Platform Name</label>
 
         <input
           id="credentialPlatform"
-          type="text"
-          placeholder="e.g. GHL, Heggisfield, Flow, Meta">
+          placeholder="e.g. GHL, Heggisfield, Flow, Meta"
+        >
 
       </div>
 
 
-      <div class="form-field">
+      <div class="form-group full">
 
-        <label>
-          Account / Login URL
-        </label>
+        <label>Account / Login URL</label>
 
         <input
           id="credentialUrl"
-          type="url"
-          placeholder="e.g. https://app.gohighlevel.com">
+          placeholder="e.g. https://app.gohighlevel.com"
+        >
 
       </div>
 
 
-      <div class="form-field">
+      <div class="form-group">
 
-        <label>
-          Login ID / Email
-        </label>
+        <label>Login ID / Email</label>
 
         <input
           id="credentialLogin"
-          type="text"
-          placeholder="e.g. admin@company.com">
+          placeholder="e.g. admin@company.com"
+        >
 
       </div>
 
 
-      <div class="form-field">
+      <div class="form-group">
 
-        <label>
-          Password
-        </label>
+        <label>Password</label>
 
-        <div class="password-input">
-
-          <input
-            id="credentialPassword"
-            type="password"
-            placeholder="e.g. Enter platform password">
-
-          <button
-            type="button"
-            class="show-password"
-            onclick="toggleCredentialPassword()">
-            Show
-          </button>
-
-        </div>
+        <input
+          id="credentialPassword"
+          type="password"
+          placeholder="e.g. Enter platform password"
+        >
 
       </div>
 
 
-      <div class="form-field full">
+      <div class="form-group full">
 
-        <label>
-          Notes
-        </label>
+        <label>Notes</label>
 
         <textarea
           id="credentialNotes"
-          placeholder="e.g. Use this login for the client's main GHL location."></textarea>
+          placeholder="Add any important notes..."
+        ></textarea>
 
       </div>
 
     </div>
 
 
-    <div class="form-actions">
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px;">
 
-      <button
-        class="secondary-button"
-        onclick="closeCredentialForm()">
+      <button class="btn btn-secondary" id="cancelCredential">
         Cancel
       </button>
 
-      <button
-        class="primary-button"
-        onclick="saveCredential()">
-
-        <span id="saveCredentialText">
-          Add Platform
-        </span>
-
+      <button class="btn btn-primary" id="saveCredential">
+        Add Platform
       </button>
 
     </div>
 
   </div>
 
-
-  <!-- CREDENTIAL CARDS -->
-
-  <div
-    class="credentials-grid"
-    id="credentialsGrid">
-
-    <div class="empty">
-      No platforms added yet.<br>
-      Click <strong>+ Add New</strong> to add GHL, Heggisfield, Flow, Meta or another system.
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     DOCUMENTS
-===================================================== -->
-
-<section
-  class="page"
-  id="documents">
-
-  <div class="page-heading">
-
-    <h1>
-      Documents
-    </h1>
-
-    <p>
-      Project files shared between you and AWSZ.
-    </p>
-
-  </div>
-
-
-  <div class="card list-card">
-
-    <div
-      class="list"
-      id="documentsList">
-
-      <div class="empty">
-        Loading documents...
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     INVOICES
-===================================================== -->
-
-<section
-  class="page"
-  id="invoices">
-
-  <div class="page-heading">
-
-    <h1>
-      Invoices
-    </h1>
-
-    <p>
-      Project billing and payment information.
-    </p>
-
-  </div>
-
-
-  <div class="card list-card">
-
-    <div class="empty">
-      Invoice management will be connected here.
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     MESSAGES
-===================================================== -->
-
-<section
-  class="page"
-  id="messages">
-
-  <div class="page-heading">
-
-    <h1>
-      Messages
-    </h1>
-
-    <p>
-      Full project communication with the AWSZ team.
-    </p>
-
-  </div>
-
-
-  <div class="card full-chat">
-
-    <div
-      class="full-chat-messages"
-      id="fullChatMessages">
-
-      <div class="empty">
-        Loading messages...
-      </div>
-
-    </div>
-
-
-    <div class="full-chat-input">
-
-      <textarea
-        id="fullMessageInput"
-        placeholder="Write a message to AWSZ..."></textarea>
-
-      <button
-        class="full-send"
-        onclick="sendFullMessage()">
-        Send
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     ACCOUNT
-===================================================== -->
-
-<section
-  class="page"
-  id="account">
-
-  <div class="page-heading">
-
-    <h1>
-      Account
-    </h1>
-
-    <p>
-      Your client profile information.
-    </p>
-
-  </div>
-
-
-  <div class="card account-card">
-
-    <div class="account-grid">
-
-      <div class="account-field">
-
-        <label>
-          Full Name
-        </label>
-
-        <input
-          id="accountName"
-          readonly>
-
-      </div>
-
-
-      <div class="account-field">
-
-        <label>
-          Company
-        </label>
-
-        <input
-          id="accountCompany"
-          readonly>
-
-      </div>
-
-
-      <div class="account-field">
-
-        <label>
-          Email
-        </label>
-
-        <input
-          id="accountEmail"
-          readonly>
-
-      </div>
-
-
-      <div class="account-field">
-
-        <label>
-          Phone
-        </label>
-
-        <input
-          id="accountPhone"
-          readonly>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-</div>
-
-</main>
-
 </div>
 
 
-<!-- =====================================================
-     FLOATING CHAT WIDGET
-===================================================== -->
-
-<div class="chat-widget">
-
-  <div
-    class="chat-panel"
-    id="chatPanel">
-
-    <div class="chat-panel-header">
-
-      <div class="chat-person">
-
-        <div class="chat-avatar">
-          A
-        </div>
-
-        <div>
-
-          <strong>
-            AWSZ Project Team
-          </strong>
-
-          <small>
-            <i></i>
-            Available
-          </small>
-
-        </div>
-
-      </div>
-
-
-      <button
-        class="chat-close"
-        onclick="toggleChat()">
-        ×
-      </button>
-
-    </div>
-
-
-    <div
-      class="widget-messages"
-      id="widgetMessages">
-
-      <div class="empty">
-        Loading...
-      </div>
-
-    </div>
-
-
-    <div class="chat-composer">
-
-      <div
-        class="attachment-preview"
-        id="attachmentPreview">
-
-        <span
-          class="attachment-name"
-          id="attachmentName">
-        </span>
-
-        <button
-          class="remove-attachment"
-          onclick="removeAttachment()">
-          ×
-        </button>
-
-      </div>
-
-
-      <div class="composer-row">
-
-        <label
-          class="attach-btn"
-          title="Attach file">
-
-          📎
-
-          <input
-            class="chat-file-input"
-            type="file"
-            id="chatFileInput"
-            onchange="selectChatFile(this)">
-
-        </label>
-
-
-        <textarea
-          class="chat-textarea"
-          id="widgetMessageInput"
-          placeholder="Write a message..."></textarea>
-
-
-        <button
-          class="chat-send"
-          onclick="sendWidgetMessage()">
-          ↑
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <button
-    class="chat-launcher"
-    onclick="toggleChat()"
-    title="Open project chat">
-
-    💬
-
-  </button>
-
-</div>
-
-
-<!-- TOAST -->
-
-<div
-  class="toast"
-  id="toast">
-</div>
+<div class="toast" id="toast"></div>
 
 
 <script>
@@ -2249,147 +1613,489 @@ a{
 ========================================================= */
 
 const SUPABASE_URL =
-"https://ausocdplliuftdqxbvwa.supabase.co";
+  "https://ausocdplliuftdqxbvwa.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
+  "sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
 
 const supabaseClient =
-supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
 
 /* =========================================================
-   STATE
+   GLOBAL STATE
 ========================================================= */
 
 let currentUser = null;
 let clientProfile = null;
-
+let currentProject = null;
 let projects = [];
 let tasks = [];
-let documents = [];
-let accessRequests = [];
 let messages = [];
-
 let credentials = [];
+let editingCredentialIndex = null;
 
-let editingCredentialIndex = -1;
+let realtimeChannel = null;
 
-let selectedChatFile = null;
+let unreadCount = 0;
+let selectedAttachment = null;
 
 
 /* =========================================================
-   INIT
+   ELEMENTS
 ========================================================= */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  init
-);
+const chatWindow =
+  document.getElementById("chatWindow");
+
+const chatLauncher =
+  document.getElementById("chatLauncher");
+
+const chatClose =
+  document.getElementById("chatClose");
+
+const chatMessages =
+  document.getElementById("chatMessages");
+
+const chatInput =
+  document.getElementById("chatInput");
+
+const sendMessageBtn =
+  document.getElementById("sendMessageBtn");
+
+const chatFile =
+  document.getElementById("chatFile");
+
+const selectedFile =
+  document.getElementById("selectedFile");
+
+const selectedFileName =
+  document.getElementById("selectedFileName");
+
+const removeFile =
+  document.getElementById("removeFile");
 
 
-async function init(){
+/* =========================================================
+   TOAST
+========================================================= */
 
-  const {
-    data:{
-      user
+function showToast(message, error=false){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.classList.toggle("error", error);
+
+  toast.classList.add("show");
+
+  setTimeout(()=>{
+    toast.classList.remove("show");
+  },3000);
+}
+
+
+/* =========================================================
+   NOTIFICATION SOUND
+========================================================= */
+
+let audioContext = null;
+
+function playNotificationSound(){
+
+  try{
+
+    if(!audioContext){
+      audioContext =
+        new (window.AudioContext ||
+        window.webkitAudioContext)();
     }
-  } =
-  await supabaseClient.auth.getUser();
 
+    const oscillator =
+      audioContext.createOscillator();
 
-  if(!user){
+    const gain =
+      audioContext.createGain();
 
-    window.location.href =
-    "index.html";
+    oscillator.type = "sine";
 
-    return;
+    oscillator.frequency.setValueAtTime(
+      740,
+      audioContext.currentTime
+    );
+
+    oscillator.frequency.exponentialRampToValueAtTime(
+      1100,
+      audioContext.currentTime + 0.12
+    );
+
+    gain.gain.setValueAtTime(
+      0.0001,
+      audioContext.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      0.16,
+      audioContext.currentTime + 0.02
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      0.0001,
+      audioContext.currentTime + 0.45
+    );
+
+    oscillator.connect(gain);
+
+    gain.connect(audioContext.destination);
+
+    oscillator.start();
+
+    oscillator.stop(
+      audioContext.currentTime + 0.45
+    );
+
+  }catch(e){
+
+    console.log(
+      "Notification sound unavailable",
+      e
+    );
 
   }
-
-
-  currentUser = user;
-
-  await loadClient();
-
-  await loadProjects();
-
-  await loadTasks();
-
-  await loadDocuments();
-
-  await loadAccessRequests();
-
-  await loadMessages();
-
-  renderCredentials();
-
-  updateStats();
-
-  updateAccount();
 
 }
 
 
 /* =========================================================
-   CLIENT
+   FAVICON NOTIFICATION
 ========================================================= */
 
-async function loadClient(){
+const originalTitle =
+  document.title;
+
+function updateDocumentNotification(){
+
+  if(unreadCount > 0){
+
+    document.title =
+      "(" + unreadCount + ") New Message • AWSZ";
+
+  }else{
+
+    document.title =
+      originalTitle;
+
+  }
+
+}
+
+
+/* =========================================================
+   UNREAD BADGE
+========================================================= */
+
+function updateUnreadBadge(){
+
+  const badge =
+    document.getElementById("notificationBadge");
+
+  const sidebarBadge =
+    document.getElementById("sidebarMessageBadge");
+
+  if(unreadCount > 0){
+
+    badge.textContent =
+      unreadCount > 99
+      ? "99+"
+      : unreadCount;
+
+    badge.classList.add("show");
+
+    sidebarBadge.style.display =
+      "inline-flex";
+
+    sidebarBadge.textContent =
+      unreadCount > 99
+      ? "99+"
+      : unreadCount;
+
+  }else{
+
+    badge.classList.remove("show");
+
+    sidebarBadge.style.display =
+      "none";
+
+  }
+
+  updateDocumentNotification();
+
+}
+
+
+/* =========================================================
+   CHAT OPEN / CLOSE
+========================================================= */
+
+chatLauncher.addEventListener(
+  "click",
+  ()=>{
+    openChat();
+  }
+);
+
+chatClose.addEventListener(
+  "click",
+  ()=>{
+    closeChat();
+  }
+);
+
+function openChat(){
+
+  chatWindow.classList.add("open");
+
+  chatLauncher.classList.add("hidden");
+
+  unreadCount = 0;
+
+  updateUnreadBadge();
+
+  renderMessages();
+
+  setTimeout(()=>{
+    chatInput.focus();
+  },100);
+
+}
+
+function closeChat(){
+
+  chatWindow.classList.remove("open");
+
+  chatLauncher.classList.remove("hidden");
+
+}
+
+
+/* =========================================================
+   FILE ATTACHMENT
+========================================================= */
+
+chatFile.addEventListener(
+  "change",
+  function(){
+
+    const file =
+      this.files && this.files[0];
+
+    if(!file){
+
+      clearAttachment();
+
+      return;
+    }
+
+    selectedAttachment =
+      file;
+
+    selectedFileName.textContent =
+      file.name;
+
+    selectedFile.classList.add(
+      "show"
+    );
+
+  }
+);
+
+
+removeFile.addEventListener(
+  "click",
+  ()=>{
+    clearAttachment();
+  }
+);
+
+
+function clearAttachment(){
+
+  selectedAttachment =
+    null;
+
+  chatFile.value =
+    "";
+
+  selectedFileName.textContent =
+    "";
+
+  selectedFile.classList.remove(
+    "show"
+  );
+
+}
+
+
+/* =========================================================
+   AUTO RESIZE TEXTAREA
+========================================================= */
+
+chatInput.addEventListener(
+  "input",
+  ()=>{
+    chatInput.style.height =
+      "auto";
+
+    chatInput.style.height =
+      Math.min(
+        chatInput.scrollHeight,
+        130
+      ) + "px";
+  }
+);
+
+
+/* =========================================================
+   ENTER TO SEND
+========================================================= */
+
+chatInput.addEventListener(
+  "keydown",
+  e=>{
+
+    if(
+      e.key === "Enter" &&
+      !e.shiftKey
+    ){
+
+      e.preventDefault();
+
+      sendMessage();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+async function checkAuth(){
 
   const {
     data,
     error
   } =
-  await supabaseClient
-  .from("clients")
-  .select("*")
-  .eq("id",currentUser.id)
-  .maybeSingle();
-
+    await supabaseClient.auth.getSession();
 
   if(error){
 
     console.error(error);
 
-    return;
+    location.href =
+      "index.html";
+
+    return false;
 
   }
 
+  if(!data.session){
 
-  clientProfile = data;
+    location.href =
+      "index.html";
 
+    return false;
 
-  const name =
-    data?.full_name ||
-    currentUser.email ||
-    "Client";
+  }
 
+  currentUser =
+    data.session.user;
 
-  document.getElementById(
-    "welcomeName"
-  ).textContent = name;
-
-
-  document.getElementById(
-    "sideUserName"
-  ).textContent = name;
-
-
-  document.getElementById(
-    "sideUserEmail"
-  ).textContent =
-    data?.email ||
-    currentUser.email;
+  return true;
 
 }
 
 
 /* =========================================================
-   PROJECTS
+   LOAD CLIENT PROFILE
+========================================================= */
+
+async function loadClientProfile(){
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("clients")
+      .select("*")
+      .eq(
+        "id",
+        currentUser.id
+      )
+      .maybeSingle();
+
+  if(error){
+
+    console.error(
+      "Client profile error:",
+      error
+    );
+
+    return;
+
+  }
+
+  clientProfile =
+    data;
+
+  if(clientProfile){
+
+    document.getElementById(
+      "welcomeTitle"
+    ).textContent =
+      "Welcome, " +
+      (
+        clientProfile.full_name ||
+        "Client"
+      );
+
+    document.getElementById(
+      "accountName"
+    ).value =
+      clientProfile.full_name || "";
+
+    document.getElementById(
+      "accountCompany"
+    ).value =
+      clientProfile.company_name || "";
+
+    document.getElementById(
+      "accountEmail"
+    ).value =
+      clientProfile.email ||
+      currentUser.email ||
+      "";
+
+    document.getElementById(
+      "accountPhone"
+    ).value =
+      clientProfile.phone || "";
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD PROJECTS
 ========================================================= */
 
 async function loadProjects(){
@@ -2398,191 +2104,137 @@ async function loadProjects(){
     data,
     error
   } =
-  await supabaseClient
-  .from("projects")
-  .select("*")
-  .eq("client_id",currentUser.id)
-  .order("created_at",{ascending:false});
-
+    await supabaseClient
+      .from("projects")
+      .select("*")
+      .eq(
+        "client_id",
+        currentUser.id
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
 
   if(error){
 
-    console.error(error);
+    console.error(
+      "Projects error:",
+      error
+    );
 
-    projects = [];
+    document.getElementById(
+      "projectsList"
+    ).innerHTML =
+      '<div class="empty">Projects could not be loaded.</div>';
 
-  }else{
-
-    projects = data || [];
+    return;
 
   }
 
+  projects =
+    data || [];
+
+  currentProject =
+    projects.length
+    ? projects[0]
+    : null;
+
+  document.getElementById(
+    "statProjects"
+  ).textContent =
+    projects.filter(
+      p =>
+        String(p.status || "")
+        .toLowerCase()
+        !== "completed"
+    ).length;
+
+  renderCurrentProject();
 
   renderProjects();
 
-  renderOverviewProject();
+  await loadTasks();
+
+  await loadDocuments();
+
+  await loadAccessRequests();
 
 }
 
 
 /* =========================================================
-   PROJECT RENDER
+   CURRENT PROJECT
 ========================================================= */
 
-function renderProjects(){
+function renderCurrentProject(){
 
   const box =
     document.getElementById(
-      "projectsList"
+      "currentProject"
     );
 
+  if(!currentProject){
 
-  if(!projects.length){
-
-    box.innerHTML =
-    `<div class="empty">
-      No projects have been assigned yet.
-    </div>`;
+    box.innerHTML = `
+      <div class="empty">
+        No project has been assigned to your account yet.
+      </div>
+    `;
 
     return;
 
   }
 
-
-  box.innerHTML =
-  projects.map(project => `
-
-    <div class="card project-card">
-
-      <div class="project-top">
-
-        <div>
-
-          <div class="project-name">
-            ${esc(project.project_name || "Untitled Project")}
-          </div>
-
-          <div class="project-description">
-            ${esc(project.description || "No project description available.")}
-          </div>
-
-        </div>
-
-        <span class="badge">
-          ${esc(project.stage || project.status || "Active")}
-        </span>
-
-      </div>
-
-
-      <div class="progress-area">
-
-        <div class="progress-row">
-
-          <span>
-            Project Progress
-          </span>
-
-          <strong>
-            ${Number(project.progress || 0)}%
-          </strong>
-
-        </div>
-
-
-        <div class="progress-track">
-
-          <div
-            class="progress-fill"
-            style="width:${Number(project.progress || 0)}%">
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  `).join("");
-
-}
-
-
-/* =========================================================
-   OVERVIEW
-========================================================= */
-
-function renderOverviewProject(){
-
-  const box =
-    document.getElementById(
-      "overviewProject"
+  const progress =
+    Number(
+      currentProject.progress || 0
     );
-
-
-  if(!projects.length){
-
-    box.innerHTML =
-    `<div class="empty">
-      No active project found.
-    </div>`;
-
-    return;
-
-  }
-
-
-  const project =
-    projects[0];
-
 
   box.innerHTML = `
 
-    <div class="card project-card">
+    <div class="project-box">
 
-      <div class="project-top">
+      <div class="project-name">
+        ${escapeHtml(
+          currentProject.project_name ||
+          "AWSZ Project"
+        )}
+      </div>
 
-        <div>
+      <div class="project-stage">
+        Current Stage:
+        <strong>
+          ${escapeHtml(
+            currentProject.stage ||
+            "Not specified"
+          )}
+        </strong>
+      </div>
 
-          <div class="project-name">
-            ${esc(project.project_name || "Untitled Project")}
-          </div>
+      <div class="progress">
 
-          <div class="project-description">
-            ${esc(project.description || "No description available.")}
-          </div>
-
-        </div>
-
-        <span class="badge">
-          ${esc(project.stage || project.status || "Active")}
-        </span>
+        <div
+          class="progress-bar"
+          style="width:${Math.min(
+            Math.max(progress,0),
+            100
+          )}%"
+        ></div>
 
       </div>
 
+      <div class="progress-meta">
 
-      <div class="progress-area">
+        <span>
+          Project Progress
+        </span>
 
-        <div class="progress-row">
-
-          <span>
-            Progress
-          </span>
-
-          <strong>
-            ${Number(project.progress || 0)}%
-          </strong>
-
-        </div>
-
-        <div class="progress-track">
-
-          <div
-            class="progress-fill"
-            style="width:${Number(project.progress || 0)}%">
-          </div>
-
-        </div>
+        <span>
+          ${progress}%
+        </span>
 
       </div>
 
@@ -2594,7 +2246,108 @@ function renderOverviewProject(){
 
 
 /* =========================================================
-   TASKS
+   PROJECTS
+========================================================= */
+
+function renderProjects(){
+
+  const box =
+    document.getElementById(
+      "projectsList"
+    );
+
+  if(!projects.length){
+
+    box.innerHTML = `
+      <div class="card section-card">
+        <div class="empty">
+          No projects have been assigned to your account yet.
+        </div>
+      </div>
+    `;
+
+    return;
+
+  }
+
+  box.innerHTML =
+    projects.map(
+      project=>{
+
+        const progress =
+          Number(
+            project.progress || 0
+          );
+
+        return `
+
+          <div class="card section-card">
+
+            <div class="section-head">
+
+              <div>
+
+                <h2>
+                  ${escapeHtml(
+                    project.project_name ||
+                    "AWSZ Project"
+                  )}
+                </h2>
+
+                <p>
+                  ${escapeHtml(
+                    project.description ||
+                    "AWSZ project"
+                  )}
+                </p>
+
+              </div>
+
+              <span class="badge badge-blue">
+                ${escapeHtml(
+                  project.stage ||
+                  "Not specified"
+                )}
+              </span>
+
+            </div>
+
+            <div class="progress">
+
+              <div
+                class="progress-bar"
+                style="width:${Math.min(
+                  Math.max(progress,0),
+                  100
+                )}%"
+              ></div>
+
+            </div>
+
+            <div class="progress-meta">
+
+              <span>
+                Progress
+              </span>
+
+              <span>
+                ${progress}%
+              </span>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+/* =========================================================
+   LOAD TASKS
 ========================================================= */
 
 async function loadTasks(){
@@ -2609,219 +2362,296 @@ async function loadTasks(){
 
   }
 
-
   const projectIds =
-    projects.map(p => p.id);
-
+    projects.map(
+      p => p.id
+    );
 
   const {
     data,
     error
   } =
-  await supabaseClient
-  .from("tasks")
-  .select("*")
-  .in("project_id",projectIds)
-  .order("created_at",{ascending:false});
-
+    await supabaseClient
+      .from("tasks")
+      .select("*")
+      .in(
+        "project_id",
+        projectIds
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
 
   if(error){
 
-    console.error(error);
-
-    tasks = [];
-
-  }else{
-
-    tasks = data || [];
-
-  }
-
-
-  renderTasks();
-
-}
-
-
-function renderTasks(){
-
-  const box =
-    document.getElementById(
-      "tasksList"
+    console.error(
+      "Tasks error:",
+      error
     );
-
-
-  if(!tasks.length){
-
-    box.innerHTML =
-    `<div class="empty">
-      No tasks available yet.
-    </div>`;
 
     return;
 
   }
 
+  tasks =
+    data || [];
 
-  box.innerHTML = `
+  renderTasks();
 
-    <div class="card list-card">
+  const completed =
+    tasks.filter(
+      t => t.is_completed
+    ).length;
 
-      <div class="list">
-
-        ${tasks.map(task => `
-
-          <div class="list-item">
-
-            <div class="task-left">
-
-              <div class="task-check ${task.is_completed ? "done" : ""}">
-                ${task.is_completed ? "✓" : ""}
-              </div>
-
-              <div>
-
-                <div class="task-name ${task.is_completed ? "done" : ""}">
-                  ${esc(task.task_name || "Task")}
-                </div>
-
-                <div class="task-description">
-                  ${esc(task.description || "")}
-                </div>
-
-              </div>
-
-            </div>
-
-            <span class="badge">
-              ${task.is_completed ? "Completed" : "Pending"}
-            </span>
-
-          </div>
-
-        `).join("")}
-
-      </div>
-
-    </div>
-
-  `;
+  document.getElementById(
+    "statTasks"
+  ).textContent =
+    completed;
 
 }
 
 
 /* =========================================================
-   DOCUMENTS
+   RENDER TASKS
+========================================================= */
+
+function renderTasks(){
+
+  const body =
+    document.getElementById(
+      "tasksBody"
+    );
+
+  if(!tasks.length){
+
+    body.innerHTML = `
+      <tr>
+        <td colspan="4" class="empty">
+          No tasks available yet.
+        </td>
+      </tr>
+    `;
+
+    return;
+
+  }
+
+  body.innerHTML =
+    tasks.map(
+      task=>`
+
+        <tr>
+
+          <td>
+            <strong>
+              ${escapeHtml(
+                task.task_name ||
+                "Task"
+              )}
+            </strong>
+          </td>
+
+          <td>
+
+            ${
+              task.is_completed
+
+              ?
+
+              `<span class="badge badge-green">
+                Completed
+              </span>`
+
+              :
+
+              `<span class="badge badge-amber">
+                Pending
+              </span>`
+            }
+
+          </td>
+
+          <td>
+            ${escapeHtml(
+              task.assigned_to ||
+              "—"
+            )}
+          </td>
+
+          <td>
+            ${task.due_date || "—"}
+          </td>
+
+        </tr>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   LOAD DOCUMENTS
 ========================================================= */
 
 async function loadDocuments(){
 
   if(!projects.length){
 
-    documents = [];
-
-    renderDocuments();
+    renderDocuments([]);
 
     return;
 
   }
 
-
   const ids =
-    projects.map(p => p.id);
-
+    projects.map(
+      p=>p.id
+    );
 
   const {
     data,
     error
   } =
-  await supabaseClient
-  .from("documents")
-  .select("*")
-  .in("project_id",ids)
-  .order("created_at",{ascending:false});
-
+    await supabaseClient
+      .from("documents")
+      .select("*")
+      .in(
+        "project_id",
+        ids
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
 
   if(error){
 
-    console.error(error);
+    console.error(
+      "Documents error:",
+      error
+    );
 
-    documents = [];
+    renderDocuments([]);
 
-  }else{
-
-    documents = data || [];
+    return;
 
   }
 
-
-  renderDocuments();
+  renderDocuments(
+    data || []
+  );
 
 }
 
 
-function renderDocuments(){
+/* =========================================================
+   DOCUMENTS UI
+========================================================= */
+
+function renderDocuments(
+  docs
+){
 
   const box =
     document.getElementById(
       "documentsList"
     );
 
+  if(!docs.length){
 
-  if(!documents.length){
+    box.innerHTML = `
+      <div class="empty">
+        No documents shared yet.
+      </div>
+    `;
 
-    box.innerHTML =
-    `<div class="empty">
-      No documents uploaded yet.
-    </div>`;
+    document.getElementById(
+      "statDocuments"
+    ).textContent =
+      "0";
 
     return;
 
   }
 
+  document.getElementById(
+    "statDocuments"
+  ).textContent =
+    docs.length;
 
   box.innerHTML =
-  documents.map(doc => `
+    docs.map(
+      doc=>`
 
-    <div class="list-item">
+        <div
+          style="
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:15px;
+            padding:15px 0;
+            border-bottom:1px solid var(--line);
+          "
+        >
 
-      <div class="document-item">
+          <div>
 
-        <div class="document-icon">
-          📄
+            <strong>
+              📄
+              ${escapeHtml(
+                doc.file_name ||
+                "Document"
+              )}
+            </strong>
+
+            <div
+              style="
+                color:var(--muted);
+                font-size:12px;
+                margin-top:4px;
+              "
+            >
+              ${doc.created_at
+                ? new Date(
+                    doc.created_at
+                  ).toLocaleString()
+                : ""
+              }
+            </div>
+
+          </div>
+
+          ${
+            doc.file_url
+
+            ?
+
+            `<a
+              class="btn btn-secondary"
+              href="${escapeAttribute(
+                doc.file_url
+              )}"
+              target="_blank"
+              rel="noopener"
+            >
+              Open
+            </a>`
+
+            :
+
+            ""
+          }
+
         </div>
 
-        <div class="document-info">
-
-          <strong>
-            ${esc(doc.file_name || "Document")}
-          </strong>
-
-          <small>
-            ${formatDate(doc.created_at)}
-          </small>
-
-        </div>
-
-      </div>
-
-
-      ${
-        doc.file_url
-        ?
-        `<a
-          href="${attr(doc.file_url)}"
-          target="_blank"
-          class="copy-btn">
-          Open
-        </a>`
-        :
-        ""
-      }
-
-    </div>
-
-  `).join("");
+      `
+    ).join("");
 
 }
 
@@ -2834,44 +2664,59 @@ async function loadAccessRequests(){
 
   if(!projects.length){
 
-    accessRequests = [];
+    document.getElementById(
+      "statAccess"
+    ).textContent =
+      "0";
 
     return;
 
   }
 
-
   const ids =
-    projects.map(p => p.id);
-
+    projects.map(
+      p=>p.id
+    );
 
   const {
     data,
     error
   } =
-  await supabaseClient
-  .from("access_requests")
-  .select("*")
-  .in("project_id",ids);
-
+    await supabaseClient
+      .from("access_requests")
+      .select("*")
+      .in(
+        "project_id",
+        ids
+      );
 
   if(error){
 
-    console.error(error);
+    console.error(
+      "Access request error:",
+      error
+    );
 
-    accessRequests = [];
-
-  }else{
-
-    accessRequests = data || [];
+    return;
 
   }
+
+  document.getElementById(
+    "statAccess"
+  ).textContent =
+    (data || []).filter(
+      x =>
+        String(
+          x.status || ""
+        ).toLowerCase()
+        !== "completed"
+    ).length;
 
 }
 
 
 /* =========================================================
-   MESSAGES
+   LOAD MESSAGES
 ========================================================= */
 
 async function loadMessages(){
@@ -2880,466 +2725,500 @@ async function loadMessages(){
 
     messages = [];
 
-    renderWidgetMessages();
+    renderMessages();
 
-    renderFullMessages();
+    renderMessagesPage();
 
     return;
 
   }
 
-
   const ids =
-    projects.map(p => p.id);
-
+    projects.map(
+      p=>p.id
+    );
 
   const {
     data,
     error
   } =
-  await supabaseClient
-  .from("messages")
-  .select("*")
-  .in("project_id",ids)
-  .order("created_at",{ascending:true});
-
+    await supabaseClient
+      .from("messages")
+      .select("*")
+      .in(
+        "project_id",
+        ids
+      )
+      .order(
+        "created_at",
+        {
+          ascending:true
+        }
+      );
 
   if(error){
 
-    console.error(error);
-
-    messages = [];
-
-  }else{
-
-    messages = data || [];
-
-  }
-
-
-  renderWidgetMessages();
-
-  renderFullMessages();
-
-}
-
-
-/* =========================================================
-   CHAT WIDGET
-========================================================= */
-
-function toggleChat(){
-
-  document
-  .getElementById("chatPanel")
-  .classList.toggle("open");
-
-}
-
-
-function renderWidgetMessages(){
-
-  const box =
-    document.getElementById(
-      "widgetMessages"
+    console.error(
+      "Messages error:",
+      error
     );
 
-
-  if(!messages.length){
-
-    box.innerHTML =
-    `<div class="empty">
-      Start a conversation with the AWSZ team.
-    </div>`;
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-  messages.slice(-30).map(renderWidgetMessage).join("");
-
-
-  box.scrollTop =
-  box.scrollHeight;
-
-}
-
-
-function renderWidgetMessage(msg){
-
-  const client =
-    msg.sender_type === "client";
-
-
-  return `
-
-    <div class="widget-message ${client ? "client" : "admin"}">
-
-      <div class="widget-bubble">
-        ${esc(msg.message || "")}
+    chatMessages.innerHTML = `
+      <div class="chat-empty">
+        Messages could not be loaded.
       </div>
-
-      <div class="widget-time">
-        ${esc(msg.sender_name || (client ? "You" : "AWSZ"))}
-        ·
-        ${formatDate(msg.created_at)}
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-/* =========================================================
-   FULL CHAT
-========================================================= */
-
-function renderFullMessages(){
-
-  const box =
-    document.getElementById(
-      "fullChatMessages"
-    );
-
-
-  if(!messages.length){
-
-    box.innerHTML =
-    `<div class="empty">
-      No messages yet.
-    </div>`;
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-  messages.map(msg => {
-
-    const client =
-      msg.sender_type === "client";
-
-
-    return `
-
-      <div
-        class="widget-message ${client ? "client" : "admin"}">
-
-        <div class="widget-bubble">
-          ${esc(msg.message || "")}
-        </div>
-
-        <div class="widget-time">
-          ${esc(msg.sender_name || (client ? "You" : "AWSZ"))}
-          ·
-          ${formatDate(msg.created_at)}
-        </div>
-
-      </div>
-
     `;
 
-  }).join("");
+    return;
+
+  }
+
+  messages =
+    data || [];
+
+  renderMessages();
+
+  renderMessagesPage();
 
 }
 
 
-async function sendWidgetMessage(){
+/* =========================================================
+   RENDER CHAT
+========================================================= */
 
-  const input =
+function renderMessages(){
+
+  if(!messages.length){
+
+    chatMessages.innerHTML = `
+      <div class="chat-empty">
+        <strong style="color:var(--deep);">
+          Start a conversation
+        </strong>
+        <br><br>
+        Send a message to the AWSZ Project Team.
+      </div>
+    `;
+
+    return;
+
+  }
+
+  chatMessages.innerHTML =
+    messages.map(
+      msg=>{
+
+        const mine =
+          String(
+            msg.sender_type || ""
+          ).toLowerCase()
+          === "client";
+
+        const sender =
+          mine
+          ? "You"
+          : (
+              msg.sender_name ||
+              "AWSZ Project Team"
+            );
+
+        return `
+
+          <div
+            class="message ${
+              mine
+              ? "client"
+              : "admin"
+            }"
+          >
+
+            <div>
+
+              <div class="message-bubble">
+
+                <div
+                  style="
+                    font-size:10px;
+                    font-weight:800;
+                    opacity:.7;
+                    margin-bottom:3px;
+                  "
+                >
+                  ${escapeHtml(sender)}
+                </div>
+
+                ${
+                  msg.message
+                  ?
+                  escapeHtml(
+                    msg.message
+                  ).replace(
+                    /\n/g,
+                    "<br>"
+                  )
+                  :
+                  ""
+                }
+
+                ${
+                  msg.file_name
+
+                  ?
+
+                  `
+                    <div class="attachment-chip">
+                      📎
+                      ${escapeHtml(
+                        msg.file_name
+                      )}
+                    </div>
+                  `
+
+                  :
+
+                  ""
+                }
+
+                <div class="message-time">
+                  ${
+                    msg.created_at
+                    ?
+                    new Date(
+                      msg.created_at
+                    ).toLocaleString(
+                      [],
+                      {
+                        month:"short",
+                        day:"numeric",
+                        hour:"numeric",
+                        minute:"2-digit"
+                      }
+                    )
+                    :
+                    ""
+                  }
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
+
+  requestAnimationFrame(
+    ()=>{
+      chatMessages.scrollTop =
+        chatMessages.scrollHeight;
+    }
+  );
+
+}
+
+
+/* =========================================================
+   FULL MESSAGES PAGE
+========================================================= */
+
+function renderMessagesPage(){
+
+  const box =
     document.getElementById(
-      "widgetMessageInput"
+      "messagesPageList"
+    );
+
+  if(!messages.length){
+
+    box.innerHTML = `
+      <div class="empty">
+        No messages yet.
+      </div>
+    `;
+
+    return;
+
+  }
+
+  box.innerHTML =
+    messages.map(
+      msg=>`
+
+        <div
+          style="
+            padding:15px 0;
+            border-bottom:1px solid var(--line);
+          "
+        >
+
+          <div
+            style="
+              display:flex;
+              justify-content:space-between;
+              gap:15px;
+            "
+          >
+
+            <strong>
+              ${escapeHtml(
+                msg.sender_name ||
+                (
+                  String(
+                    msg.sender_type || ""
+                  ).toLowerCase()
+                  === "client"
+                  ? "You"
+                  : "AWSZ Project Team"
+                )
+              )}
+            </strong>
+
+            <span
+              style="
+                color:var(--muted);
+                font-size:11px;
+              "
+            >
+              ${
+                msg.created_at
+                ?
+                new Date(
+                  msg.created_at
+                ).toLocaleString()
+                :
+                ""
+              }
+            </span>
+
+          </div>
+
+          <div
+            style="
+              margin-top:7px;
+              font-size:15px;
+              line-height:1.6;
+            "
+          >
+            ${escapeHtml(
+              msg.message || ""
+            )}
+          </div>
+
+          ${
+            msg.file_name
+            ?
+            `
+              <div
+                style="
+                  margin-top:8px;
+                  color:var(--blue);
+                  font-size:12px;
+                  font-weight:700;
+                "
+              >
+                📎
+                ${escapeHtml(
+                  msg.file_name
+                )}
+              </div>
+            `
+            :
+            ""
+          }
+
+        </div>
+
+      `
+    ).join("");
+
+}
+
+
+/* =========================================================
+   SEND MESSAGE
+========================================================= */
+
+sendMessageBtn.addEventListener(
+  "click",
+  sendMessage
+);
+
+
+async function sendMessage(){
+
+  if(
+    !currentUser ||
+    !currentProject
+  ){
+
+    showToast(
+      "No active project is connected to this account.",
+      true
+    );
+
+    return;
+
+  }
+
+  const text =
+    chatInput.value.trim();
+
+  const hasFile =
+    !!selectedAttachment;
+
+  if(!text && !hasFile){
+
+    showToast(
+      "Write a message or attach a file.",
+      true
+    );
+
+    return;
+
+  }
+
+  sendMessageBtn.disabled =
+    true;
+
+  const originalText =
+    sendMessageBtn.innerHTML;
+
+  sendMessageBtn.innerHTML =
+    "…";
+
+
+  try{
+
+    /*
+      IMPORTANT:
+
+      Current messages table contains:
+      id
+      project_id
+      sender_type
+      sender_name
+      message
+      created_at
+
+      We insert exactly these fields.
+    */
+
+    const payload = {
+
+      project_id:
+        currentProject.id,
+
+      sender_type:
+        "client",
+
+      sender_name:
+        clientProfile?.full_name ||
+        currentUser.email ||
+        "Client",
+
+      message:
+        text ||
+        (
+          hasFile
+          ? "Attachment sent"
+          : ""
+        )
+
+    };
+
+
+    /*
+      If the messages table later gets
+      file_name / file_url columns,
+      the attachment can be persisted there.
+
+      For now we safely send the text message.
+    */
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("messages")
+        .insert(payload)
+        .select()
+        .single();
+
+
+    if(error){
+
+      console.error(
+        "SEND MESSAGE ERROR:",
+        error
+      );
+
+      throw error;
+
+    }
+
+
+    if(data){
+
+      messages.push(
+        data
+      );
+
+      renderMessages();
+
+      renderMessagesPage();
+
+    }
+
+
+    chatInput.value =
+      "";
+
+    chatInput.style.height =
+      "auto";
+
+    clearAttachment();
+
+    showToast(
+      "Message sent successfully."
     );
 
 
-  const message =
-    input.value.trim();
+    /*
+      Attachment is selected and displayed
+      locally for now. Permanent storage
+      will require Supabase Storage bucket.
+    */
 
-
-  if(!message){
-
-    if(selectedChatFile){
+    if(hasFile){
 
       showToast(
-        "File selected. Secure file upload will be connected next."
+        "Message sent. File selected locally; permanent file storage will be connected next."
       );
 
     }
 
-    return;
 
-  }
-
-
-  await createMessage(message);
-
-  input.value = "";
-
-}
-
-
-async function sendFullMessage(){
-
-  const input =
-    document.getElementById(
-      "fullMessageInput"
-    );
-
-
-  const message =
-    input.value.trim();
-
-
-  if(!message){
-
-    return;
-
-  }
-
-
-  await createMessage(message);
-
-  input.value = "";
-
-}
-
-
-async function createMessage(message){
-
-  if(!projects.length){
-
-    showToast(
-      "No project is available."
-    );
-
-    return;
-
-  }
-
-
-  const {
-    error
-  } =
-  await supabaseClient
-  .from("messages")
-  .insert({
-
-    project_id:projects[0].id,
-
-    sender_type:"client",
-
-    sender_name:
-      clientProfile?.full_name ||
-      currentUser.email ||
-      "Client",
-
-    message:message
-
-  });
-
-
-  if(error){
+  }catch(error){
 
     console.error(error);
 
     showToast(
-      "Message could not be sent."
+      "Message could not be sent. Please try again.",
+      true
     );
 
-    return;
+  }finally{
 
-  }
+    sendMessageBtn.disabled =
+      false;
 
-
-  await loadMessages();
-
-  showToast(
-    "Message sent."
-  );
-
-}
-
-
-/* =========================================================
-   CHAT FILE
-========================================================= */
-
-function selectChatFile(input){
-
-  const file =
-    input.files[0];
-
-
-  if(!file){
-
-    return;
-
-  }
-
-
-  selectedChatFile =
-    file;
-
-
-  document.getElementById(
-    "attachmentName"
-  ).textContent =
-    file.name;
-
-
-  document
-  .getElementById(
-    "attachmentPreview"
-  )
-  .classList.add("show");
-
-
-  showToast(
-    "File selected."
-  );
-
-}
-
-
-function removeAttachment(){
-
-  selectedChatFile = null;
-
-  document.getElementById(
-    "chatFileInput"
-  ).value = "";
-
-
-  document
-  .getElementById(
-    "attachmentPreview"
-  )
-  .classList.remove("show");
-
-}
-
-
-/* =========================================================
-   CREDENTIAL FORM
-========================================================= */
-
-function openCredentialForm(){
-
-  editingCredentialIndex = -1;
-
-  clearCredentialForm();
-
-  document.getElementById(
-    "credentialFormTitle"
-  ).textContent =
-    "Add New Platform";
-
-
-  document.getElementById(
-    "saveCredentialText"
-  ).textContent =
-    "Add Platform";
-
-
-  document
-  .getElementById(
-    "credentialForm"
-  )
-  .classList.add("open");
-
-
-  setTimeout(() => {
-
-    document
-    .getElementById(
-      "credentialPlatform"
-    )
-    .focus();
-
-  },100);
-
-}
-
-
-function closeCredentialForm(){
-
-  document
-  .getElementById(
-    "credentialForm"
-  )
-  .classList.remove("open");
-
-  clearCredentialForm();
-
-  editingCredentialIndex = -1;
-
-}
-
-
-function clearCredentialForm(){
-
-  document.getElementById(
-    "credentialPlatform"
-  ).value = "";
-
-  document.getElementById(
-    "credentialUrl"
-  ).value = "";
-
-  document.getElementById(
-    "credentialLogin"
-  ).value = "";
-
-  document.getElementById(
-    "credentialPassword"
-  ).value = "";
-
-  document.getElementById(
-    "credentialNotes"
-  ).value = "";
-
-  document.getElementById(
-    "credentialPassword"
-  ).type = "password";
-
-  document.querySelector(
-    ".show-password"
-  ).textContent = "Show";
-
-}
-
-
-function toggleCredentialPassword(){
-
-  const input =
-    document.getElementById(
-      "credentialPassword"
-    );
-
-  const button =
-    document.querySelector(
-      ".show-password"
-    );
-
-
-  if(input.type === "password"){
-
-    input.type = "text";
-
-    button.textContent =
-      "Hide";
-
-  }else{
-
-    input.type = "password";
-
-    button.textContent =
-      "Show";
+    sendMessageBtn.innerHTML =
+      originalText;
 
   }
 
@@ -3347,870 +3226,808 @@ function toggleCredentialPassword(){
 
 
 /* =========================================================
-   SAVE / EDIT CREDENTIAL
+   REALTIME MESSAGES
 ========================================================= */
 
-function saveCredential(){
+function setupRealtime(){
 
-  const platform =
-    document.getElementById(
-      "credentialPlatform"
-    ).value.trim();
+  if(realtimeChannel){
 
-
-  const url =
-    document.getElementById(
-      "credentialUrl"
-    ).value.trim();
-
-
-  const login =
-    document.getElementById(
-      "credentialLogin"
-    ).value.trim();
-
-
-  const password =
-    document.getElementById(
-      "credentialPassword"
-    ).value;
-
-
-  const notes =
-    document.getElementById(
-      "credentialNotes"
-    ).value.trim();
-
-
-  if(!platform){
-
-    showToast(
-      "Please enter the platform name."
-    );
-
-    return;
+    supabaseClient
+      .removeChannel(
+        realtimeChannel
+      );
 
   }
 
+  realtimeChannel =
+    supabaseClient
+      .channel(
+        "client-portal-messages-" +
+        currentUser.id
+      )
+      .on(
+        "postgres_changes",
+        {
+          event:"INSERT",
+          schema:"public",
+          table:"messages"
+        },
+        async payload=>{
 
-  if(!login){
+          const newMessage =
+            payload.new;
 
-    showToast(
-      "Please enter the login ID."
-    );
+          if(
+            !currentProject ||
+            Number(
+              newMessage.project_id
+            )
+            !==
+            Number(
+              currentProject.id
+            )
+          ){
 
-    return;
+            return;
+
+          }
+
+
+          /*
+            Avoid duplicate because
+            own sent message is already
+            pushed locally.
+          */
+
+          const exists =
+            messages.some(
+              m =>
+                String(m.id)
+                ===
+                String(
+                  newMessage.id
+                )
+            );
+
+          if(exists){
+
+            return;
+
+          }
+
+
+          messages.push(
+            newMessage
+          );
+
+          renderMessages();
+
+          renderMessagesPage();
+
+
+          /*
+            If message came from AWSZ/admin,
+            notify client.
+          */
+
+          if(
+            String(
+              newMessage.sender_type ||
+              ""
+            ).toLowerCase()
+            !== "client"
+          ){
+
+            if(
+              !chatWindow.classList.contains(
+                "open"
+              )
+            ){
+
+              unreadCount++;
+
+              updateUnreadBadge();
+
+              playNotificationSound();
+
+              showToast(
+                "New message from AWSZ Project Team."
+              );
+
+            }
+
+          }
+
+        }
+      )
+      .subscribe();
+
+}
+
+
+/* =========================================================
+   CREDENTIALS
+========================================================= */
+
+function loadCredentials(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(
+        "awsz_client_credentials"
+      );
+
+    credentials =
+      saved
+      ? JSON.parse(saved)
+      : [];
+
+  }catch(e){
+
+    credentials = [];
 
   }
-
-
-  if(!password){
-
-    showToast(
-      "Please enter the password."
-    );
-
-    return;
-
-  }
-
-
-  const item = {
-
-    platform,
-
-    url,
-
-    login,
-
-    password,
-
-    notes,
-
-    updatedAt:new Date().toISOString()
-
-  };
-
-
-  if(editingCredentialIndex >= 0){
-
-    credentials[
-      editingCredentialIndex
-    ] = item;
-
-    showToast(
-      "Platform updated."
-    );
-
-  }else{
-
-    credentials.push(item);
-
-    showToast(
-      "Platform added."
-    );
-
-  }
-
 
   renderCredentials();
 
-  closeCredentialForm();
-
 }
 
 
-/* =========================================================
-   RENDER CREDENTIALS
-========================================================= */
+function saveCredentialsLocal(){
+
+  localStorage.setItem(
+    "awsz_client_credentials",
+    JSON.stringify(
+      credentials
+    )
+  );
+
+}
+
 
 function renderCredentials(){
 
   const box =
     document.getElementById(
-      "credentialsGrid"
+      "credentialList"
     );
-
 
   if(!credentials.length){
 
-    box.innerHTML =
-    `<div class="empty">
-      No platforms added yet.<br>
-      Click <strong>+ Add New</strong> to add GHL, Heggisfield, Flow, Meta or another system.
-    </div>`;
+    box.innerHTML = `
+      <div class="empty">
+        No platforms added yet.<br>
+        Click <strong>+ Add New</strong> to add GHL, Heggisfield, Flow, Meta or another system.
+      </div>
+    `;
 
     return;
 
   }
 
-
   box.innerHTML =
-  credentials.map((credential,index) => `
+    credentials.map(
+      (c,index)=>`
 
-    <div class="card credential-card">
+        <div class="credential">
 
-      <div class="credential-head">
-
-        <div class="platform-info">
-
-          <div class="platform-icon">
-            ${getInitials(credential.platform)}
+          <div class="credential-title">
+            ${escapeHtml(
+              c.platform ||
+              "Platform"
+            )}
           </div>
 
-          <div>
+          <div class="credential-row">
 
-            <div class="platform-name">
-              ${esc(credential.platform)}
+            <div class="credential-label">
+              Login URL
             </div>
 
-            <div class="platform-type">
-              Project access
+            <div class="credential-value">
+              ${
+                c.url
+                ?
+                `<a
+                  href="${escapeAttribute(
+                    c.url
+                  )}"
+                  target="_blank"
+                  rel="noopener"
+                  style="color:var(--blue);"
+                >
+                  ${escapeHtml(c.url)}
+                </a>`
+                :
+                "—"
+              }
             </div>
 
           </div>
 
-        </div>
 
+          <div class="credential-row">
 
-        <div class="card-menu">
-
-          <button
-            class="icon-btn"
-            title="Edit"
-            onclick="editCredential(${index})">
-            ✎
-          </button>
-
-          <button
-            class="icon-btn delete"
-            title="Delete"
-            onclick="deleteCredential(${index})">
-            ×
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <div class="credential-line">
-
-        <div class="credential-label">
-          Login ID
-        </div>
-
-        <div class="value-row">
-
-          <div class="value-box">
-            ${esc(credential.login)}
-          </div>
-
-          <button
-            class="copy-btn"
-            onclick="copyValue(${index},'login')">
-            Copy
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <div class="credential-line">
-
-        <div class="credential-label">
-          Password
-        </div>
-
-        <div class="value-row">
-
-          <div
-            class="value-box"
-            id="password-${index}">
-            ••••••••••••
-          </div>
-
-          <button
-            class="copy-btn"
-            onclick="toggleCardPassword(${index})">
-            Show
-          </button>
-
-        </div>
-
-      </div>
-
-
-      ${
-        credential.url
-        ?
-        `
-        <div class="credential-line">
-
-          <div class="credential-label">
-            Login URL
-          </div>
-
-          <div class="value-row">
-
-            <div class="value-box">
-              ${esc(credential.url)}
+            <div class="credential-label">
+              Login ID / Email
             </div>
+
+            <div class="credential-value">
+              ${escapeHtml(
+                c.login ||
+                "—"
+              )}
+            </div>
+
+          </div>
+
+
+          <div class="credential-row">
+
+            <div class="credential-label">
+              Password
+            </div>
+
+            <div class="credential-value">
+              ${
+                c.password
+                ? "••••••••••"
+                : "—"
+              }
+            </div>
+
+          </div>
+
+
+          ${
+            c.notes
+            ?
+            `
+              <div class="credential-row">
+
+                <div class="credential-label">
+                  Notes
+                </div>
+
+                <div class="credential-value">
+                  ${escapeHtml(
+                    c.notes
+                  )}
+                </div>
+
+              </div>
+            `
+            :
+            ""
+          }
+
+
+          <div class="credential-actions">
 
             <button
-              class="copy-btn"
-              onclick="copyText('${safeJS(credential.url)}')">
-              Copy
+              class="btn btn-secondary"
+              onclick="copyCredential(${index},'login')"
+            >
+              Copy ID
+            </button>
+
+            <button
+              class="btn btn-secondary"
+              onclick="copyCredential(${index},'password')"
+            >
+              Copy Password
+            </button>
+
+            <button
+              class="btn btn-secondary"
+              onclick="editCredential(${index})"
+            >
+              Edit
+            </button>
+
+            <button
+              class="btn btn-danger"
+              onclick="deleteCredential(${index})"
+            >
+              Delete
             </button>
 
           </div>
 
         </div>
-        `
-        :
-        ""
-      }
 
-
-      ${
-        credential.notes
-        ?
-        `
-        <div class="credential-line">
-
-          <div class="credential-label">
-            Notes
-          </div>
-
-          <div
-            class="value-box"
-            style="white-space:normal;line-height:1.5">
-            ${esc(credential.notes)}
-          </div>
-
-        </div>
-        `
-        :
-        ""
-      }
-
-
-      <div class="card-actions">
-
-        <button
-          class="copy-btn"
-          onclick="copyValue(${index},'login')">
-          Copy ID
-        </button>
-
-        <button
-          class="copy-btn"
-          onclick="copyValue(${index},'password')">
-          Copy Password
-        </button>
-
-        <button
-          class="copy-btn"
-          onclick="copyAllCredential(${index})">
-          Copy All
-        </button>
-
-      </div>
-
-    </div>
-
-  `).join("");
+      `
+    ).join("");
 
 }
 
 
-/* =========================================================
-   EDIT CREDENTIAL
-========================================================= */
+function openCredentialModal(){
 
-function editCredential(index){
+  document.getElementById(
+    "credentialModal"
+  ).classList.add("show");
 
-  const item =
-    credentials[index];
+}
 
 
-  if(!item){
+function closeCredentialModal(){
 
-    return;
+  document.getElementById(
+    "credentialModal"
+  ).classList.remove("show");
 
-  }
+}
 
+
+function resetCredentialForm(){
 
   editingCredentialIndex =
-    index;
+    null;
 
+  document.getElementById(
+    "credentialModalTitle"
+  ).textContent =
+    "Add New Platform";
 
   document.getElementById(
     "credentialPlatform"
-  ).value =
-    item.platform || "";
-
+  ).value = "";
 
   document.getElementById(
     "credentialUrl"
-  ).value =
-    item.url || "";
-
+  ).value = "";
 
   document.getElementById(
     "credentialLogin"
-  ).value =
-    item.login || "";
-
+  ).value = "";
 
   document.getElementById(
     "credentialPassword"
-  ).value =
-    item.password || "";
-
+  ).value = "";
 
   document.getElementById(
     "credentialNotes"
-  ).value =
-    item.notes || "";
-
+  ).value = "";
 
   document.getElementById(
-    "credentialFormTitle"
+    "saveCredential"
   ).textContent =
-    "Edit Platform";
-
-
-  document.getElementById(
-    "saveCredentialText"
-  ).textContent =
-    "Save Changes";
-
-
-  document
-  .getElementById(
-    "credentialForm"
-  )
-  .classList.add("open");
-
-
-  document
-  .getElementById(
-    "credentialForm"
-  )
-  .scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
+    "Add Platform";
 
 }
 
 
-/* =========================================================
-   DELETE CREDENTIAL
-========================================================= */
+document.getElementById(
+  "addCredentialBtn"
+).addEventListener(
+  "click",
+  ()=>{
+    resetCredentialForm();
+    openCredentialModal();
+  }
+);
 
-function deleteCredential(index){
 
-  const item =
-    credentials[index];
+document.getElementById(
+  "closeCredentialModal"
+).addEventListener(
+  "click",
+  closeCredentialModal
+);
 
 
-  if(!item){
+document.getElementById(
+  "cancelCredential"
+).addEventListener(
+  "click",
+  closeCredentialModal
+);
 
-    return;
+
+document.getElementById(
+  "saveCredential"
+).addEventListener(
+  "click",
+  ()=>{
+
+    const platform =
+      document.getElementById(
+        "credentialPlatform"
+      ).value.trim();
+
+    const url =
+      document.getElementById(
+        "credentialUrl"
+      ).value.trim();
+
+    const login =
+      document.getElementById(
+        "credentialLogin"
+      ).value.trim();
+
+    const password =
+      document.getElementById(
+        "credentialPassword"
+      ).value;
+
+    const notes =
+      document.getElementById(
+        "credentialNotes"
+      ).value.trim();
+
+
+    if(!platform){
+
+      showToast(
+        "Please enter the platform name.",
+        true
+      );
+
+      return;
+
+    }
+
+
+    const record = {
+      platform,
+      url,
+      login,
+      password,
+      notes
+    };
+
+
+    if(
+      editingCredentialIndex !== null
+    ){
+
+      credentials[
+        editingCredentialIndex
+      ] = record;
+
+      showToast(
+        "Platform updated."
+      );
+
+    }else{
+
+      credentials.push(
+        record
+      );
+
+      showToast(
+        "Platform added."
+      );
+
+    }
+
+
+    saveCredentialsLocal();
+
+    renderCredentials();
+
+    closeCredentialModal();
 
   }
+);
 
 
-  const confirmed =
-    confirm(
-      `Delete ${item.platform} access?`
-    );
+window.editCredential =
+  function(index){
 
+    const c =
+      credentials[index];
 
-  if(!confirmed){
+    if(!c) return;
 
-    return;
+    editingCredentialIndex =
+      index;
 
-  }
-
-
-  credentials.splice(
-    index,
-    1
-  );
-
-
-  renderCredentials();
-
-  showToast(
-    "Platform removed."
-  );
-
-}
-
-
-/* =========================================================
-   CREDENTIAL COPY
-========================================================= */
-
-function copyValue(index,type){
-
-  const item =
-    credentials[index];
-
-
-  if(!item){
-
-    return;
-
-  }
-
-
-  const value =
-    item[type] || "";
-
-
-  copyText(value);
-
-}
-
-
-function copyAllCredential(index){
-
-  const item =
-    credentials[index];
-
-
-  if(!item){
-
-    return;
-
-  }
-
-
-  const text =
-`Platform: ${item.platform}
-Login ID: ${item.login}
-Password: ${item.password}
-${item.url ? `Login URL: ${item.url}` : ""}
-${item.notes ? `Notes: ${item.notes}` : ""}`;
-
-
-  copyText(text);
-
-}
-
-
-function toggleCardPassword(index){
-
-  const item =
-    credentials[index];
-
-
-  const box =
     document.getElementById(
-      `password-${index}`
+      "credentialModalTitle"
+    ).textContent =
+      "Edit Platform";
+
+    document.getElementById(
+      "credentialPlatform"
+    ).value =
+      c.platform || "";
+
+    document.getElementById(
+      "credentialUrl"
+    ).value =
+      c.url || "";
+
+    document.getElementById(
+      "credentialLogin"
+    ).value =
+      c.login || "";
+
+    document.getElementById(
+      "credentialPassword"
+    ).value =
+      c.password || "";
+
+    document.getElementById(
+      "credentialNotes"
+    ).value =
+      c.notes || "";
+
+    document.getElementById(
+      "saveCredential"
+    ).textContent =
+      "Save Changes";
+
+    openCredentialModal();
+
+  };
+
+
+window.deleteCredential =
+  function(index){
+
+    if(
+      !confirm(
+        "Delete this platform?"
+      )
+    ){
+
+      return;
+
+    }
+
+    credentials.splice(
+      index,
+      1
     );
 
+    saveCredentialsLocal();
 
-  if(!item || !box){
+    renderCredentials();
 
-    return;
+    showToast(
+      "Platform deleted."
+    );
 
-  }
-
-
-  if(box.dataset.visible === "true"){
-
-    box.textContent =
-      "••••••••••••";
-
-    box.dataset.visible =
-      "false";
-
-  }else{
-
-    box.textContent =
-      item.password;
-
-    box.dataset.visible =
-      "true";
-
-  }
-
-}
+  };
 
 
-/* =========================================================
-   ACCOUNT
-========================================================= */
+window.copyCredential =
+  async function(index,type){
 
-function updateAccount(){
+    const c =
+      credentials[index];
 
-  if(!clientProfile){
+    if(!c) return;
 
-    return;
+    const value =
+      type === "login"
+      ? c.login
+      : c.password;
 
-  }
+    if(!value){
 
+      showToast(
+        "Nothing to copy.",
+        true
+      );
 
-  document.getElementById(
-    "accountName"
-  ).value =
-    clientProfile.full_name || "";
+      return;
 
+    }
 
-  document.getElementById(
-    "accountCompany"
-  ).value =
-    clientProfile.company_name || "";
+    try{
 
+      await navigator.clipboard.writeText(
+        value
+      );
 
-  document.getElementById(
-    "accountEmail"
-  ).value =
-    clientProfile.email ||
-    currentUser.email ||
-    "";
+      showToast(
+        type === "login"
+        ? "Login ID copied."
+        : "Password copied."
+      );
 
+    }catch(e){
 
-  document.getElementById(
-    "accountPhone"
-  ).value =
-    clientProfile.phone || "";
+      showToast(
+        "Copy failed.",
+        true
+      );
 
-}
+    }
 
-
-/* =========================================================
-   STATS
-========================================================= */
-
-function updateStats(){
-
-  document.getElementById(
-    "statProjects"
-  ).textContent =
-    projects.length;
-
-
-  document.getElementById(
-    "statTasks"
-  ).textContent =
-    tasks.filter(
-      t => t.is_completed
-    ).length;
-
-
-  document.getElementById(
-    "statAccess"
-  ).textContent =
-    accessRequests.length;
-
-
-  document.getElementById(
-    "statDocuments"
-  ).textContent =
-    documents.length;
-
-}
+  };
 
 
 /* =========================================================
    NAVIGATION
 ========================================================= */
 
-function showPage(
-  pageId,
-  button
-){
+document.querySelectorAll(
+  ".nav button[data-page]"
+).forEach(
+  button=>{
 
-  document
-  .querySelectorAll(".page")
-  .forEach(page => {
+    button.addEventListener(
+      "click",
+      ()=>{
 
-    page.classList.remove(
-      "active"
-    );
+        const page =
+          button.dataset.page;
 
-  });
+        document.querySelectorAll(
+          ".nav button"
+        ).forEach(
+          b =>
+            b.classList.remove(
+              "active"
+            )
+        );
 
+        button.classList.add(
+          "active"
+        );
 
-  const page =
-    document.getElementById(
-      pageId
-    );
+        document.querySelectorAll(
+          ".page"
+        ).forEach(
+          p =>
+            p.classList.remove(
+              "active"
+            )
+        );
 
+        const target =
+          document.getElementById(
+            "page-" + page
+          );
 
-  if(page){
+        if(target){
 
-    page.classList.add(
-      "active"
+          target.classList.add(
+            "active"
+          );
+
+        }
+
+        document.getElementById(
+          "sidebar"
+        ).classList.remove(
+          "open"
+        );
+
+        if(page === "messages"){
+
+          unreadCount = 0;
+
+          updateUnreadBadge();
+
+          renderMessagesPage();
+
+        }
+
+      }
     );
 
   }
-
-
-  document
-  .querySelectorAll(".nav button")
-  .forEach(btn => {
-
-    btn.classList.remove(
-      "active"
-    );
-
-  });
-
-
-  if(button){
-
-    button.classList.add(
-      "active"
-    );
-
-  }
-
-
-  document
-  .getElementById(
-    "sidebar"
-  )
-  .classList.remove(
-    "open"
-  );
-
-}
+);
 
 
 /* =========================================================
-   MOBILE SIDEBAR
+   MOBILE MENU
 ========================================================= */
 
-function toggleSidebar(){
-
-  document
-  .getElementById(
-    "sidebar"
-  )
-  .classList.toggle(
-    "open"
-  );
-
-}
+document.getElementById(
+  "mobileMenu"
+).addEventListener(
+  "click",
+  ()=>{
+    document.getElementById(
+      "sidebar"
+    ).classList.toggle(
+      "open"
+    );
+  }
+);
 
 
 /* =========================================================
    LOGOUT
 ========================================================= */
 
-async function logout(){
+document.getElementById(
+  "logoutBtn"
+).addEventListener(
+  "click",
+  async ()=>{
 
-  await supabaseClient
-    .auth
-    .signOut();
+    await supabaseClient.auth.signOut();
 
-  window.location.href =
-    "index.html";
-
-}
-
-
-/* =========================================================
-   COPY
-========================================================= */
-
-async function copyText(value){
-
-  try{
-
-    await navigator.clipboard.writeText(
-      value
-    );
-
-    showToast(
-      "Copied to clipboard."
-    );
-
-  }catch(error){
-
-    showToast(
-      "Copy failed."
-    );
+    location.href =
+      "index.html";
 
   }
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-let toastTimer;
-
-
-function showToast(message){
-
-  const toast =
-    document.getElementById(
-      "toast"
-    );
-
-
-  toast.textContent =
-    message;
-
-
-  toast.classList.add(
-    "show"
-  );
-
-
-  clearTimeout(
-    toastTimer
-  );
-
-
-  toastTimer =
-    setTimeout(() => {
-
-      toast.classList.remove(
-        "show"
-      );
-
-    },2300);
-
-}
+);
 
 
 /* =========================================================
    HELPERS
 ========================================================= */
 
-function esc(value){
+function escapeHtml(value){
 
   return String(
     value ?? ""
   )
-  .replace(/&/g,"&amp;")
-  .replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;")
-  .replace(/"/g,"&quot;")
-  .replace(/'/g,"&#039;");
-
-}
-
-
-function attr(value){
-
-  return String(
-    value ?? ""
+  .replace(
+    /&/g,
+    "&amp;"
   )
-  .replace(/"/g,"%22")
-  .replace(/</g,"%3C")
-  .replace(/>/g,"%3E");
-
-}
-
-
-function safeJS(value){
-
-  return String(
-    value ?? ""
+  .replace(
+    /</g,
+    "&lt;"
   )
-  .replace(/\\/g,"\\\\")
-  .replace(/'/g,"\\'")
-  .replace(/\n/g,"\\n")
-  .replace(/\r/g,"\\r");
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 
 }
 
 
-function getInitials(name){
+function escapeAttribute(value){
 
-  const words =
-    String(name || "P")
-    .trim()
-    .split(/\s+/)
-    .slice(0,2);
-
-
-  return words
-    .map(
-      word => word.charAt(0).toUpperCase()
-    )
-    .join("");
+  return escapeHtml(
+    value
+  );
 
 }
 
 
-function formatDate(date){
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
-  if(!date){
+async function initialize(){
 
-    return "";
+  const authenticated =
+    await checkAuth();
+
+  if(!authenticated){
+
+    return;
 
   }
 
 
-  try{
+  await loadClientProfile();
 
-    return new Date(date)
-      .toLocaleString();
+  await loadProjects();
 
-  }catch(e){
+  await loadMessages();
 
-    return "";
+  loadCredentials();
 
-  }
+  setupRealtime();
 
 }
+
+
+initialize();
 
 </script>
 
 </body>
 </html>
-```
