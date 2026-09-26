@@ -1,0 +1,211 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AWSZ Admin Portal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fa;
+      color: #111827;
+    }
+
+    .topbar {
+      height: 76px;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #8dbd18;
+    }
+
+    .admin-label {
+      color: #667085;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 45px 30px;
+    }
+
+    .heading {
+      margin-bottom: 35px;
+    }
+
+    .heading h1 {
+      font-size: 36px;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .heading p {
+      color: #667085;
+      font-size: 16px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 35px;
+    }
+
+    .stat {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .stat-label {
+      color: #667085;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .stat-number {
+      font-size: 32px;
+      font-weight: 800;
+    }
+
+    .projects {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .projects-header {
+      padding: 25px;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .projects-header h2 {
+      font-size: 20px;
+    }
+
+    .view-all {
+      color: #648d00;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .empty {
+      padding: 70px 25px;
+      text-align: center;
+      color: #667085;
+    }
+
+    @media (max-width: 850px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .topbar {
+        padding: 0 20px;
+      }
+
+      .container {
+        padding: 30px 20px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+
+    <div class="logo">
+      AWSZ<span>.</span>
+    </div>
+
+    <div class="admin-label">
+      Admin Portal
+    </div>
+
+  </header>
+
+
+  <main class="container">
+
+    <section class="heading">
+      <h1>Operations Overview</h1>
+      <p>Manage clients, projects and delivery progress.</p>
+    </section>
+
+
+    <section class="stats">
+
+      <div class="stat">
+        <div class="stat-label">Total Clients</div>
+        <div class="stat-number">0</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Active Projects</div>
+        <div class="stat-number">0</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Pending Tasks</div>
+        <div class="stat-number">0</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Access Requests</div>
+        <div class="stat-number">0</div>
+      </div>
+
+    </section>
+
+
+    <section class="projects">
+
+      <div class="projects-header">
+        <h2>Recent Projects</h2>
+        <div class="view-all">View All</div>
+      </div>
+
+      <div class="empty">
+        No projects available yet.
+      </div>
+
+    </section>
+
+  </main>
+
+</body>
+</html>
+```
