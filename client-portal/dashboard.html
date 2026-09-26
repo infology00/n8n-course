@@ -20,14 +20,20 @@
   --text:#20272e;
   --muted:#66778a;
   --line:#d8e4ef;
-  --white:#ffffff;
+  --white:#fff;
+
   --green:#20855a;
   --green-bg:#eaf7f0;
+
   --amber:#b97918;
   --amber-bg:#fff5df;
+
   --red:#c33d3d;
   --red-bg:#fff0f0;
-  --shadow:0 12px 35px rgba(30,72,110,.08);
+
+  --shadow:0 10px 30px rgba(20,60,100,.07);
+  --shadow-hover:0 16px 40px rgba(20,60,100,.11);
+
   --radius:18px;
 }
 
@@ -37,12 +43,17 @@
   padding:0;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
-  font-family:Inter,Arial,Helvetica,sans-serif;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   background:
-    radial-gradient(circle at 80% 0%,rgba(36,107,206,.09),transparent 30%),
+    radial-gradient(circle at 90% -10%,rgba(36,107,206,.09),transparent 30%),
     var(--cloud);
   color:var(--text);
+  font-size:14px;
 }
 
 button,
@@ -56,30 +67,34 @@ button{
   cursor:pointer;
 }
 
-.app{
-  display:flex;
-  min-height:100vh;
+a{
+  color:inherit;
+  text-decoration:none;
 }
 
-/* SIDEBAR */
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
 .sidebar{
-  width:250px;
-  background:#fff;
-  border-right:1px solid var(--line);
-  padding:24px 16px;
   position:fixed;
-  left:0;
-  top:0;
-  bottom:0;
-  z-index:20;
+  inset:0 auto 0 0;
+  width:252px;
+  background:rgba(255,255,255,.96);
+  border-right:1px solid var(--line);
+  z-index:100;
+  display:flex;
+  flex-direction:column;
+  padding:24px 16px 18px;
 }
 
 .logo{
-  padding:8px 12px 28px;
+  padding:4px 13px 30px;
   font-size:27px;
+  line-height:1;
   font-weight:900;
-  letter-spacing:-1px;
+  letter-spacing:-1.4px;
   color:var(--deep);
 }
 
@@ -90,117 +105,149 @@ button{
 .nav{
   display:flex;
   flex-direction:column;
-  gap:6px;
+  gap:4px;
 }
 
 .nav button{
+  width:100%;
   border:0;
   background:transparent;
-  color:var(--muted);
-  padding:13px 14px;
-  border-radius:12px;
+  color:#68798b;
+  padding:12px 13px;
+  border-radius:11px;
   text-align:left;
-  font-weight:700;
-  transition:.2s;
+  font-size:13px;
+  font-weight:650;
+  transition:.18s ease;
 }
 
 .nav button:hover{
-  background:var(--cloud);
   color:var(--blue);
+  background:#f2f7fc;
 }
 
 .nav button.active{
-  background:#eaf3ff;
   color:var(--blue);
+  background:#eaf3ff;
+  font-weight:750;
 }
 
 .sidebar-bottom{
-  position:absolute;
-  bottom:22px;
-  left:16px;
-  right:16px;
+  margin-top:auto;
 }
 
 .user-mini{
-  padding:13px;
+  padding:12px;
   border:1px solid var(--line);
-  border-radius:14px;
-  background:var(--cloud);
-  margin-bottom:10px;
+  border-radius:13px;
+  background:#f8fbfe;
+  margin-bottom:9px;
 }
 
 .user-mini strong{
   display:block;
-  font-size:13px;
   color:var(--deep);
-  word-break:break-word;
+  font-size:12px;
+  font-weight:750;
+  margin-bottom:3px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
 .user-mini small{
   color:var(--muted);
+  font-size:11px;
+  display:block;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
 .logout{
   width:100%;
-  border:1px solid var(--line);
+  border:1px solid #f0d2d2;
   background:#fff;
   color:var(--red);
-  padding:11px;
-  border-radius:12px;
+  border-radius:11px;
+  padding:10px;
+  font-size:12px;
   font-weight:700;
+  transition:.18s;
 }
 
-/* MAIN */
+.logout:hover{
+  background:var(--red-bg);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
 
 .main{
-  margin-left:250px;
-  width:calc(100% - 250px);
+  margin-left:252px;
   min-height:100vh;
 }
 
 .topbar{
-  height:76px;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(12px);
+  position:sticky;
+  top:0;
+  z-index:80;
+  height:72px;
+  background:rgba(255,255,255,.9);
+  backdrop-filter:blur(15px);
   border-bottom:1px solid var(--line);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 32px;
-  position:sticky;
-  top:0;
-  z-index:10;
+  padding:0 30px;
+}
+
+.topbar-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
 
 .topbar-title{
-  font-size:18px;
-  font-weight:800;
+  color:var(--deep);
+  font-size:15px;
+  font-weight:750;
+}
+
+.mobile-menu{
+  display:none;
+  border:1px solid var(--line);
+  background:#fff;
+  width:37px;
+  height:37px;
+  border-radius:10px;
+  font-size:17px;
   color:var(--deep);
 }
 
-.topbar-right{
+.connection{
   display:flex;
   align-items:center;
-  gap:10px;
-}
-
-.status-dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:var(--green);
-}
-
-.topbar-right span{
+  gap:7px;
   color:var(--muted);
-  font-size:13px;
-  font-weight:700;
+  font-size:11px;
+  font-weight:650;
+}
+
+.connection-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#28a56c;
+  box-shadow:0 0 0 4px #e9f7f0;
 }
 
 .content{
-  padding:32px;
-  max-width:1500px;
+  max-width:1450px;
   margin:auto;
+  padding:30px;
 }
 
 .page{
@@ -211,39 +258,97 @@ button{
   display:block;
 }
 
-/* WELCOME */
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
+.page-heading{
+  margin-bottom:22px;
+}
+
+.page-heading h1{
+  color:var(--deep);
+  font-size:25px;
+  line-height:1.2;
+  letter-spacing:-.5px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.page-heading p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+}
+
+.section-title{
+  color:var(--deep);
+  font-size:17px;
+  line-height:1.3;
+  font-weight:760;
+}
+
+.section-description{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.55;
+  margin-top:3px;
+}
+
+
+/* =========================================================
+   WELCOME
+========================================================= */
 
 .welcome{
-  background:
-    radial-gradient(circle at 90% 20%,rgba(36,107,206,.16),transparent 30%),
-    linear-gradient(135deg,#fff,#f0f7ff);
+  position:relative;
+  overflow:hidden;
+  padding:28px;
   border:1px solid var(--line);
-  border-radius:24px;
-  padding:30px;
-  margin-bottom:24px;
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 90% 10%,rgba(36,107,206,.13),transparent 29%),
+    linear-gradient(135deg,#fff,#f4f9ff);
   box-shadow:var(--shadow);
+  margin-bottom:20px;
+}
+
+.welcome:after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-80px;
+  bottom:-90px;
+  border-radius:50%;
+  background:#eaf3ff;
 }
 
 .welcome h1{
-  font-size:32px;
+  position:relative;
+  z-index:2;
   color:var(--deep);
-  margin-bottom:8px;
-  letter-spacing:-1px;
+  font-size:27px;
+  line-height:1.25;
+  letter-spacing:-.7px;
+  font-weight:820;
+  margin-bottom:6px;
 }
 
 .welcome p{
+  position:relative;
+  z-index:2;
+  max-width:680px;
   color:var(--muted);
-  font-size:15px;
+  font-size:13px;
+  line-height:1.65;
 }
 
-/* CARDS */
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-  margin-bottom:24px;
-}
+/* =========================================================
+   CARDS
+========================================================= */
 
 .card{
   background:#fff;
@@ -252,532 +357,226 @@ button{
   box-shadow:var(--shadow);
 }
 
-.stat{
-  padding:21px;
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.stat-card{
+  padding:18px;
 }
 
 .stat-label{
-  font-size:13px;
   color:var(--muted);
+  font-size:11px;
   font-weight:700;
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 
-.stat-value{
-  font-size:29px;
+.stat-number{
   color:var(--deep);
-  font-weight:900;
+  font-size:25px;
+  line-height:1;
+  font-weight:820;
 }
 
-.section-head{
+.section-header{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:12px;
-  margin-bottom:15px;
+  align-items:center;
+  gap:15px;
+  margin-bottom:14px;
 }
 
-.section-head h2{
-  color:var(--deep);
-  font-size:20px;
-}
 
-.section-head p{
-  color:var(--muted);
-  font-size:13px;
-}
-
-/* PROJECT */
+/* =========================================================
+   PROJECT
+========================================================= */
 
 .project-card{
-  padding:25px;
-  margin-bottom:24px;
+  padding:22px;
+  margin-bottom:20px;
 }
 
 .project-top{
   display:flex;
-  align-items:flex-start;
   justify-content:space-between;
-  gap:20px;
+  align-items:flex-start;
+  gap:18px;
 }
 
-.project-title{
-  font-size:22px;
+.project-name{
   color:var(--deep);
-  font-weight:900;
+  font-size:18px;
+  font-weight:780;
+  line-height:1.35;
 }
 
 .project-description{
   color:var(--muted);
-  margin-top:6px;
+  font-size:12px;
   line-height:1.6;
+  margin-top:5px;
 }
 
 .badge{
   display:inline-flex;
   align-items:center;
-  padding:7px 11px;
+  justify-content:center;
+  padding:6px 10px;
   border-radius:999px;
-  font-size:12px;
-  font-weight:800;
-  background:#eaf3ff;
+  background:#edf5ff;
   color:var(--blue);
+  font-size:10px;
+  font-weight:750;
+  white-space:nowrap;
 }
 
-.progress-wrap{
-  margin-top:25px;
+.progress-area{
+  margin-top:21px;
 }
 
-.progress-info{
+.progress-row{
   display:flex;
   justify-content:space-between;
-  margin-bottom:8px;
-  font-size:13px;
-  font-weight:800;
+  margin-bottom:7px;
 }
 
-.progress{
-  height:10px;
-  background:#e8eef5;
+.progress-row span{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:650;
+}
+
+.progress-row strong{
+  color:var(--deep);
+  font-size:11px;
+  font-weight:750;
+}
+
+.progress-track{
+  height:8px;
   border-radius:999px;
+  background:#e9f0f6;
   overflow:hidden;
 }
 
-.progress-bar{
+.progress-fill{
   height:100%;
-  background:linear-gradient(90deg,var(--blue),#54a0ff);
   border-radius:999px;
+  background:linear-gradient(90deg,#246bce,#62a8ff);
 }
 
-/* LIST */
 
-.list{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.list-item{
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:15px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  background:#fff;
-}
-
-.list-left{
-  min-width:0;
-}
-
-.list-title{
-  font-weight:800;
-  color:var(--deep);
-  margin-bottom:4px;
-}
-
-.list-meta{
-  color:var(--muted);
-  font-size:12px;
-}
+/* =========================================================
+   EMPTY
+========================================================= */
 
 .empty{
-  padding:35px 20px;
+  padding:28px 20px;
+  border:1px dashed #cddce9;
+  background:#fbfdff;
+  border-radius:14px;
   text-align:center;
   color:var(--muted);
-  border:1px dashed var(--line);
-  border-radius:15px;
-  background:#fbfdff;
-}
-
-/* TASK */
-
-.task{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.task-check{
-  width:21px;
-  height:21px;
-  border-radius:6px;
-  border:2px solid #c9d8e7;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
-}
-
-.task-check.done{
-  background:var(--green);
-  border-color:var(--green);
-  color:#fff;
-}
-
-.task-name{
-  font-weight:700;
-}
-
-.task-name.done{
-  text-decoration:line-through;
-  color:#8a98a6;
-}
-
-/* ACCESS VAULT */
-
-.access-hero{
-  background:
-    radial-gradient(circle at 90% 0%,rgba(36,107,206,.15),transparent 30%),
-    #fff;
-  border:1px solid var(--line);
-  border-radius:22px;
-  padding:26px;
-  margin-bottom:20px;
-  box-shadow:var(--shadow);
-}
-
-.access-hero h2{
-  color:var(--deep);
-  margin-bottom:8px;
-}
-
-.access-hero p{
-  color:var(--muted);
+  font-size:12px;
   line-height:1.6;
 }
 
-.security-note{
-  margin-top:15px;
-  background:#eef7ff;
-  border:1px solid #cfe3fa;
-  color:#35617e;
-  padding:12px 14px;
-  border-radius:12px;
-  font-size:13px;
-}
 
-.credentials-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:18px;
-}
+/* =========================================================
+   ACCESS CREDENTIALS
+========================================================= */
 
-.credential-card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:21px;
-  box-shadow:var(--shadow);
-}
-
-.credential-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.access-intro{
+  padding:24px;
   margin-bottom:18px;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(36,107,206,.10),transparent 30%),
+    #fff;
 }
 
-.platform{
-  display:flex;
-  align-items:center;
-  gap:11px;
-}
-
-.platform-icon{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  background:#eaf3ff;
-  color:var(--blue);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:900;
-}
-
-.platform strong{
-  display:block;
+.access-intro h2{
   color:var(--deep);
+  font-size:19px;
+  font-weight:790;
+  margin-bottom:5px;
 }
 
-.platform small{
+.access-intro p{
   color:var(--muted);
-}
-
-.credential-field{
-  margin-bottom:13px;
-}
-
-.credential-label{
-  font-size:11px;
-  color:var(--muted);
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:.5px;
-  margin-bottom:6px;
-}
-
-.secret-row{
-  display:flex;
-  align-items:center;
-  gap:7px;
-}
-
-.secret-box{
-  flex:1;
-  min-width:0;
-  border:1px solid var(--line);
-  background:#f8fbfe;
-  border-radius:10px;
-  padding:11px;
-  font-size:13px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.small-btn{
-  border:1px solid var(--line);
-  background:#fff;
-  color:var(--blue);
-  border-radius:9px;
-  padding:9px 10px;
+  max-width:700px;
   font-size:12px;
-  font-weight:800;
-  white-space:nowrap;
+  line-height:1.65;
 }
 
-.small-btn:hover{
-  background:#eef6ff;
-}
-
-.credential-actions{
+.security-strip{
+  margin-top:15px;
   display:flex;
-  gap:8px;
-  margin-top:16px;
-}
-
-.credential-actions button{
-  flex:1;
-}
-
-/* UPLOAD */
-
-.upload-card{
-  padding:22px;
-  margin-top:22px;
-}
-
-.upload-zone{
-  border:2px dashed #c9dced;
-  background:#f8fbfe;
-  border-radius:16px;
-  padding:30px;
-  text-align:center;
-  transition:.2s;
-}
-
-.upload-zone:hover{
-  border-color:var(--blue);
-  background:#f1f7ff;
-}
-
-.upload-icon{
-  font-size:30px;
-  margin-bottom:10px;
-}
-
-.upload-zone h3{
-  color:var(--deep);
-  margin-bottom:6px;
-}
-
-.upload-zone p{
-  color:var(--muted);
-  font-size:13px;
-  margin-bottom:15px;
-}
-
-.upload-button{
-  display:inline-block;
-  background:var(--blue);
-  color:#fff;
-  padding:11px 18px;
-  border-radius:10px;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.upload-button input{
-  display:none;
-}
-
-.file-name{
-  margin-top:12px;
-  font-size:13px;
-  color:var(--green);
-  font-weight:700;
-}
-
-/* CHAT */
-
-.chat-card{
-  overflow:hidden;
-}
-
-.chat-header{
-  padding:18px 20px;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.chat-header strong{
-  color:var(--deep);
-}
-
-.online{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  color:var(--green);
-  font-size:12px;
-  font-weight:800;
-}
-
-.online i{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--green);
-}
-
-.chat-messages{
-  min-height:320px;
-  max-height:430px;
-  overflow:auto;
-  padding:20px;
-  background:#f8fbfe;
-}
-
-.chat-message{
-  margin-bottom:14px;
-  max-width:78%;
-}
-
-.chat-message.admin{
-  margin-right:auto;
-}
-
-.chat-message.client{
-  margin-left:auto;
-}
-
-.chat-bubble{
-  padding:11px 13px;
-  border-radius:13px;
-  line-height:1.5;
-  font-size:13px;
-}
-
-.chat-message.admin .chat-bubble{
-  background:#fff;
-  border:1px solid var(--line);
-}
-
-.chat-message.client .chat-bubble{
-  background:#e7f1ff;
-  color:#163d68;
-}
-
-.chat-meta{
-  font-size:10px;
-  color:#8a98a6;
-  margin-top:4px;
-}
-
-.chat-input{
-  display:flex;
+  align-items:flex-start;
   gap:9px;
-  padding:15px;
-  border-top:1px solid var(--line);
-  background:#fff;
-}
-
-.chat-input textarea{
-  flex:1;
-  min-height:45px;
-  max-height:100px;
-  resize:vertical;
-  border:1px solid var(--line);
+  padding:11px 13px;
+  background:#f2f8ff;
+  border:1px solid #d7e8f9;
   border-radius:11px;
-  padding:12px;
-  outline:none;
+  color:#41647f;
+  font-size:11px;
+  line-height:1.55;
 }
 
-.chat-input textarea:focus{
-  border-color:var(--blue);
-}
-
-.send-btn{
+.add-button{
   border:0;
   background:var(--blue);
   color:#fff;
-  padding:0 18px;
-  border-radius:11px;
-  font-weight:800;
-}
-
-/* DOCUMENTS */
-
-.document-card{
-  padding:22px;
-}
-
-.doc-item{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  border:1px solid var(--line);
-  padding:13px;
-  border-radius:12px;
-}
-
-.doc-icon{
-  width:38px;
-  height:38px;
   border-radius:10px;
-  background:#eef5fc;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  padding:10px 14px;
+  font-size:12px;
+  font-weight:750;
+  transition:.18s;
+  box-shadow:0 6px 15px rgba(36,107,206,.16);
 }
 
-.doc-info{
-  flex:1;
-  min-width:0;
+.add-button:hover{
+  background:#1959ae;
+  transform:translateY(-1px);
 }
 
-.doc-info strong{
+
+/* CREDENTIAL FORM */
+
+.credential-form{
+  display:none;
+  padding:22px;
+  margin-bottom:18px;
+}
+
+.credential-form.open{
   display:block;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
 }
 
-.doc-info small{
+.form-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.form-heading h3{
+  color:var(--deep);
+  font-size:16px;
+  font-weight:780;
+}
+
+.close-form{
+  width:32px;
+  height:32px;
+  border:1px solid var(--line);
+  background:#fff;
   color:var(--muted);
-}
-
-/* ACCOUNT */
-
-.account-card{
-  padding:24px;
+  border-radius:9px;
+  font-size:16px;
 }
 
 .form-grid{
@@ -786,68 +585,736 @@ button{
   gap:15px;
 }
 
-.form-group label{
-  display:block;
-  font-size:12px;
-  color:var(--muted);
-  font-weight:800;
-  margin-bottom:6px;
+.form-field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
 }
 
-.form-group input{
+.form-field.full{
+  grid-column:1 / -1;
+}
+
+.form-field label{
+  color:#52677b;
+  font-size:11px;
+  font-weight:750;
+}
+
+.form-field input,
+.form-field textarea{
   width:100%;
   border:1px solid var(--line);
+  background:#fbfdff;
   border-radius:10px;
-  padding:12px;
+  padding:11px 12px;
+  color:var(--text);
   outline:none;
-  background:#f9fbfd;
+  font-size:12px;
+  transition:.15s;
 }
 
-/* TOAST */
+.form-field input{
+  height:42px;
+}
 
-.toast{
+.form-field textarea{
+  min-height:80px;
+  resize:vertical;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder{
+  color:#9aa9b7;
+}
+
+.form-field input:focus,
+.form-field textarea:focus{
+  border-color:#8bb9ea;
+  background:#fff;
+  box-shadow:0 0 0 3px rgba(36,107,206,.07);
+}
+
+.password-input{
+  position:relative;
+}
+
+.password-input input{
+  padding-right:70px;
+}
+
+.show-password{
+  position:absolute;
+  right:7px;
+  top:7px;
+  height:28px;
+  padding:0 8px;
+  border:0;
+  background:#eef5fc;
+  color:var(--blue);
+  border-radius:7px;
+  font-size:10px;
+  font-weight:750;
+}
+
+.form-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:18px;
+}
+
+.secondary-button{
+  border:1px solid var(--line);
+  background:#fff;
+  color:#536b81;
+  border-radius:10px;
+  padding:10px 14px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.primary-button{
+  border:0;
+  background:var(--blue);
+  color:#fff;
+  border-radius:10px;
+  padding:10px 17px;
+  font-size:12px;
+  font-weight:750;
+}
+
+
+/* CREDENTIAL CARDS */
+
+.credentials-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.credential-card{
+  padding:19px;
+  transition:.18s;
+}
+
+.credential-card:hover{
+  box-shadow:var(--shadow-hover);
+}
+
+.credential-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+  padding-bottom:14px;
+  border-bottom:1px solid #edf2f6;
+  margin-bottom:14px;
+}
+
+.platform-info{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  min-width:0;
+}
+
+.platform-icon{
+  width:38px;
+  height:38px;
+  flex-shrink:0;
+  border-radius:10px;
+  background:#edf5ff;
+  color:var(--blue);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  font-weight:850;
+}
+
+.platform-name{
+  color:var(--deep);
+  font-size:14px;
+  font-weight:780;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.platform-type{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:2px;
+}
+
+.card-menu{
+  display:flex;
+  gap:5px;
+}
+
+.icon-btn{
+  width:30px;
+  height:30px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:8px;
+  color:#718294;
+  font-size:12px;
+}
+
+.icon-btn:hover{
+  color:var(--blue);
+  background:#f3f8fd;
+}
+
+.icon-btn.delete:hover{
+  color:var(--red);
+  background:var(--red-bg);
+}
+
+.credential-line{
+  margin-bottom:10px;
+}
+
+.credential-line:last-child{
+  margin-bottom:0;
+}
+
+.credential-label{
+  color:#8292a1;
+  text-transform:uppercase;
+  letter-spacing:.45px;
+  font-size:9px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+
+.value-row{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.value-box{
+  flex:1;
+  min-width:0;
+  background:#f7fafc;
+  border:1px solid #e4ebf1;
+  border-radius:8px;
+  padding:9px 10px;
+  color:#34495d;
+  font-size:11px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.copy-btn{
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--blue);
+  border-radius:8px;
+  padding:8px 9px;
+  font-size:9px;
+  font-weight:750;
+  white-space:nowrap;
+}
+
+.copy-btn:hover{
+  background:#eef6ff;
+}
+
+.card-actions{
+  display:flex;
+  gap:7px;
+  margin-top:15px;
+  padding-top:13px;
+  border-top:1px solid #edf2f6;
+}
+
+.card-actions button{
+  flex:1;
+}
+
+
+/* =========================================================
+   CHAT HOME WIDGET
+========================================================= */
+
+.chat-widget{
   position:fixed;
   right:25px;
   bottom:25px;
+  z-index:200;
+}
+
+.chat-launcher{
+  width:56px;
+  height:56px;
+  border:0;
+  border-radius:18px;
+  background:var(--blue);
+  color:#fff;
+  box-shadow:0 12px 30px rgba(36,107,206,.27);
+  font-size:21px;
+  transition:.2s;
+}
+
+.chat-launcher:hover{
+  transform:translateY(-2px);
+  background:#1959ae;
+}
+
+.chat-panel{
+  position:absolute;
+  right:0;
+  bottom:68px;
+  width:370px;
+  height:520px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:0 25px 70px rgba(17,52,84,.17);
+  overflow:hidden;
+  display:none;
+  flex-direction:column;
+}
+
+.chat-panel.open{
+  display:flex;
+}
+
+.chat-panel-header{
+  padding:15px 16px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.chat-person{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.chat-avatar{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  background:#eaf3ff;
+  color:var(--blue);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:850;
+}
+
+.chat-person strong{
+  display:block;
+  color:var(--deep);
+  font-size:12px;
+  font-weight:780;
+}
+
+.chat-person small{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  color:var(--green);
+  font-size:9px;
+  font-weight:700;
+  margin-top:2px;
+}
+
+.chat-person small i{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:var(--green);
+}
+
+.chat-close{
+  width:29px;
+  height:29px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:8px;
+  color:var(--muted);
+}
+
+.widget-messages{
+  flex:1;
+  overflow-y:auto;
+  padding:15px;
+  background:#f7fafd;
+}
+
+.widget-message{
+  max-width:82%;
+  margin-bottom:12px;
+}
+
+.widget-message.client{
+  margin-left:auto;
+}
+
+.widget-bubble{
+  padding:9px 11px;
+  border-radius:11px;
+  font-size:11px;
+  line-height:1.55;
+}
+
+.widget-message.admin .widget-bubble{
+  background:#fff;
+  border:1px solid var(--line);
+  color:#43576a;
+}
+
+.widget-message.client .widget-bubble{
+  background:#e5f0ff;
+  color:#244d77;
+}
+
+.widget-time{
+  color:#9aa7b3;
+  font-size:8px;
+  margin-top:3px;
+}
+
+.widget-message.client .widget-time{
+  text-align:right;
+}
+
+.chat-composer{
+  border-top:1px solid var(--line);
+  background:#fff;
+  padding:10px;
+}
+
+.attachment-preview{
+  display:none;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:7px 9px;
+  background:#f1f6fb;
+  border:1px solid var(--line);
+  border-radius:8px;
+  margin-bottom:7px;
+}
+
+.attachment-preview.show{
+  display:flex;
+}
+
+.attachment-name{
+  color:#506579;
+  font-size:9px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.remove-attachment{
+  border:0;
+  background:transparent;
+  color:var(--red);
+  font-size:11px;
+}
+
+.composer-row{
+  display:flex;
+  align-items:flex-end;
+  gap:7px;
+}
+
+.attach-btn{
+  width:35px;
+  height:35px;
+  flex-shrink:0;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:9px;
+  color:#5d748a;
+  font-size:15px;
+}
+
+.attach-btn:hover{
+  color:var(--blue);
+  background:#f3f8fd;
+}
+
+.chat-textarea{
+  flex:1;
+  min-width:0;
+  min-height:35px;
+  max-height:80px;
+  resize:none;
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:9px 10px;
+  outline:none;
+  color:var(--text);
+  font-size:10px;
+}
+
+.chat-textarea:focus{
+  border-color:#8bb9ea;
+}
+
+.chat-send{
+  width:35px;
+  height:35px;
+  flex-shrink:0;
+  border:0;
+  border-radius:9px;
+  background:var(--blue);
+  color:#fff;
+  font-size:13px;
+}
+
+.chat-file-input{
+  display:none;
+}
+
+
+/* =========================================================
+   TASKS / DOCUMENTS
+========================================================= */
+
+.list-card{
+  padding:20px;
+}
+
+.list{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.list-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:#fff;
+}
+
+.task-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.task-check{
+  width:20px;
+  height:20px;
+  border-radius:6px;
+  border:2px solid #c9d8e7;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:10px;
+  font-weight:800;
+}
+
+.task-check.done{
+  background:var(--green);
+  border-color:var(--green);
+}
+
+.task-name{
+  color:#34495b;
+  font-size:12px;
+  font-weight:700;
+}
+
+.task-name.done{
+  color:#94a0ab;
+  text-decoration:line-through;
+}
+
+.task-description{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
+}
+
+.document-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.document-icon{
+  width:36px;
+  height:36px;
+  border-radius:9px;
+  background:#eef5fc;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.document-info{
+  min-width:0;
+  flex:1;
+}
+
+.document-info strong{
+  display:block;
+  color:var(--deep);
+  font-size:12px;
+  font-weight:700;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.document-info small{
+  color:var(--muted);
+  font-size:9px;
+}
+
+
+/* =========================================================
+   FULL CHAT PAGE
+========================================================= */
+
+.full-chat{
+  overflow:hidden;
+}
+
+.full-chat-messages{
+  height:440px;
+  overflow-y:auto;
+  background:#f7fafd;
+  padding:20px;
+}
+
+.full-chat-input{
+  display:flex;
+  gap:8px;
+  padding:13px;
+  border-top:1px solid var(--line);
+}
+
+.full-chat-input textarea{
+  flex:1;
+  min-height:44px;
+  resize:vertical;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:10px;
+  outline:none;
+  font-size:12px;
+}
+
+.full-send{
+  border:0;
+  background:var(--blue);
+  color:#fff;
+  padding:0 17px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:750;
+}
+
+
+/* =========================================================
+   ACCOUNT
+========================================================= */
+
+.account-card{
+  padding:22px;
+}
+
+.account-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.account-field label{
+  display:block;
+  color:#627589;
+  font-size:10px;
+  font-weight:750;
+  margin-bottom:6px;
+}
+
+.account-field input{
+  width:100%;
+  height:42px;
+  border:1px solid var(--line);
+  background:#f8fbfd;
+  border-radius:10px;
+  padding:0 11px;
+  outline:none;
+  color:#526679;
+  font-size:12px;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,20px);
+  z-index:500;
+  padding:10px 15px;
+  border-radius:10px;
   background:var(--deep);
   color:#fff;
-  padding:13px 17px;
-  border-radius:12px;
-  box-shadow:0 15px 40px rgba(0,0,0,.18);
+  font-size:11px;
+  font-weight:650;
   opacity:0;
-  transform:translateY(15px);
   pointer-events:none;
-  transition:.25s;
-  z-index:100;
-  font-size:13px;
-  font-weight:700;
+  transition:.2s;
+  box-shadow:0 12px 35px rgba(0,0,0,.18);
 }
 
 .toast.show{
   opacity:1;
-  transform:translateY(0);
+  transform:translate(-50%,0);
 }
 
-/* MOBILE */
 
-.mobile-menu{
-  display:none;
-}
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
 @media(max-width:1100px){
-  .grid{
+
+  .stats{
     grid-template-columns:repeat(2,1fr);
   }
 
   .credentials-grid{
     grid-template-columns:1fr;
   }
+
 }
 
 @media(max-width:800px){
+
   .sidebar{
     transform:translateX(-100%);
-    transition:.25s;
+    transition:.22s ease;
+    box-shadow:15px 0 40px rgba(0,0,0,.08);
   }
 
   .sidebar.open{
@@ -856,692 +1323,967 @@ button{
 
   .main{
     margin-left:0;
-    width:100%;
   }
 
   .mobile-menu{
     display:block;
-    border:1px solid var(--line);
-    background:#fff;
-    border-radius:10px;
-    padding:8px 11px;
-    font-size:18px;
   }
 
   .topbar{
-    padding:0 15px;
+    padding:0 16px;
   }
 
   .content{
-    padding:18px;
+    padding:20px 15px;
   }
 
-  .grid{
+  .form-grid,
+  .account-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-field.full{
+    grid-column:auto;
+  }
+
+  .chat-panel{
+    position:fixed;
+    right:12px;
+    left:12px;
+    bottom:76px;
+    width:auto;
+    height:calc(100vh - 105px);
+    max-height:580px;
+  }
+
+}
+
+@media(max-width:520px){
+
+  .stats{
     grid-template-columns:1fr 1fr;
-    gap:10px;
+    gap:9px;
   }
 
-  .stat{
-    padding:16px;
+  .stat-card{
+    padding:14px;
   }
 
-  .stat-value{
-    font-size:24px;
+  .stat-number{
+    font-size:22px;
   }
 
   .welcome{
-    padding:22px;
+    padding:21px;
   }
 
   .welcome h1{
-    font-size:26px;
+    font-size:23px;
+  }
+
+  .section-header{
+    align-items:flex-start;
+  }
+
+  .access-intro{
+    padding:19px;
+  }
+
+  .access-intro .section-header{
+    flex-direction:column;
+  }
+
+  .add-button{
+    width:100%;
   }
 
   .project-top{
     flex-direction:column;
   }
 
-  .form-grid{
-    grid-template-columns:1fr;
-  }
-}
-
-@media(max-width:500px){
-  .grid{
-    grid-template-columns:1fr;
+  .list-item{
+    align-items:flex-start;
   }
 
-  .credential-actions{
-    flex-direction:column;
-  }
-
-  .chat-input{
-    flex-direction:column;
-  }
-
-  .send-btn{
-    padding:12px;
-  }
 }
 </style>
 </head>
+
 
 <body>
 
 <div class="app">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
 
-    <div class="logo">
-      AWSZ<span>.</span>
+<aside class="sidebar" id="sidebar">
+
+  <div class="logo">
+    AWSZ<span>.</span>
+  </div>
+
+  <nav class="nav">
+
+    <button class="active"
+      onclick="showPage('overview',this)">
+      Overview
+    </button>
+
+    <button
+      onclick="showPage('projects',this)">
+      Projects
+    </button>
+
+    <button
+      onclick="showPage('tasks',this)">
+      Tasks
+    </button>
+
+    <button
+      onclick="showPage('access',this)">
+      Access & Credentials
+    </button>
+
+    <button
+      onclick="showPage('documents',this)">
+      Documents
+    </button>
+
+    <button
+      onclick="showPage('invoices',this)">
+      Invoices
+    </button>
+
+    <button
+      onclick="showPage('messages',this)">
+      Messages
+    </button>
+
+    <button
+      onclick="showPage('account',this)">
+      Account
+    </button>
+
+  </nav>
+
+
+  <div class="sidebar-bottom">
+
+    <div class="user-mini">
+
+      <strong id="sideUserName">
+        Loading...
+      </strong>
+
+      <small id="sideUserEmail">
+        Loading...
+      </small>
+
     </div>
 
-    <nav class="nav">
+    <button
+      class="logout"
+      onclick="logout()">
+      Logout
+    </button>
 
-      <button class="active" onclick="showPage('overview',this)">
-        Overview
-      </button>
+  </div>
 
-      <button onclick="showPage('projects',this)">
-        Projects
-      </button>
+</aside>
 
-      <button onclick="showPage('tasks',this)">
-        Tasks
-      </button>
 
-      <button onclick="showPage('access',this)">
-        Access & Credentials
-      </button>
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
-      <button onclick="showPage('documents',this)">
+<main class="main">
+
+<header class="topbar">
+
+  <div class="topbar-left">
+
+    <button
+      class="mobile-menu"
+      onclick="toggleSidebar()">
+      ☰
+    </button>
+
+    <div class="topbar-title">
+      AWSZ Client Portal
+    </div>
+
+  </div>
+
+
+  <div class="connection">
+
+    <span class="connection-dot"></span>
+
+    Portal Connected
+
+  </div>
+
+</header>
+
+
+<div class="content">
+
+
+<!-- =====================================================
+     OVERVIEW
+===================================================== -->
+
+<section
+  class="page active"
+  id="overview">
+
+  <div class="welcome">
+
+    <h1>
+      Welcome, <span id="welcomeName">Client</span>
+    </h1>
+
+    <p>
+      Everything related to your AWSZ project is organized here — progress, access, files and communication.
+    </p>
+
+  </div>
+
+
+  <div class="stats">
+
+    <div class="card stat-card">
+
+      <div class="stat-label">
+        Active Projects
+      </div>
+
+      <div
+        class="stat-number"
+        id="statProjects">
+        0
+      </div>
+
+    </div>
+
+
+    <div class="card stat-card">
+
+      <div class="stat-label">
+        Completed Tasks
+      </div>
+
+      <div
+        class="stat-number"
+        id="statTasks">
+        0
+      </div>
+
+    </div>
+
+
+    <div class="card stat-card">
+
+      <div class="stat-label">
+        Access Requests
+      </div>
+
+      <div
+        class="stat-number"
+        id="statAccess">
+        0
+      </div>
+
+    </div>
+
+
+    <div class="card stat-card">
+
+      <div class="stat-label">
         Documents
-      </button>
-
-      <button onclick="showPage('invoices',this)">
-        Invoices
-      </button>
-
-      <button onclick="showPage('messages',this)">
-        Messages
-      </button>
-
-      <button onclick="showPage('account',this)">
-        Account
-      </button>
-
-    </nav>
-
-    <div class="sidebar-bottom">
-
-      <div class="user-mini">
-        <strong id="sideUserName">Loading...</strong>
-        <small id="sideUserEmail">Loading...</small>
       </div>
 
-      <button class="logout" onclick="logout()">
-        Logout
+      <div
+        class="stat-number"
+        id="statDocuments">
+        0
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="section-header">
+
+    <div>
+
+      <div class="section-title">
+        Current Project
+      </div>
+
+      <div class="section-description">
+        Your latest active AWSZ project.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="overviewProject">
+    <div class="empty">
+      Loading project...
+    </div>
+  </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     PROJECTS
+===================================================== -->
+
+<section
+  class="page"
+  id="projects">
+
+  <div class="page-heading">
+
+    <h1>
+      Projects
+    </h1>
+
+    <p>
+      View the progress and current stage of your AWSZ projects.
+    </p>
+
+  </div>
+
+
+  <div
+    id="projectsList">
+    <div class="empty">
+      Loading projects...
+    </div>
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     TASKS
+===================================================== -->
+
+<section
+  class="page"
+  id="tasks">
+
+  <div class="page-heading">
+
+    <h1>
+      Tasks
+    </h1>
+
+    <p>
+      See what has been completed and what still needs attention.
+    </p>
+
+  </div>
+
+
+  <div
+    id="tasksList">
+    <div class="empty">
+      Loading tasks...
+    </div>
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     ACCESS
+===================================================== -->
+
+<section
+  class="page"
+  id="access">
+
+  <div class="card access-intro">
+
+    <div class="section-header">
+
+      <div>
+
+        <h2 class="section-title">
+          Access & Credentials
+        </h2>
+
+        <p class="section-description">
+          Keep the systems and login information required for your project organized in one place.
+        </p>
+
+      </div>
+
+
+      <button
+        class="add-button"
+        onclick="openCredentialForm()">
+
+        + Add New
+
       </button>
 
     </div>
 
-  </aside>
 
+    <div class="security-strip">
 
-  <!-- MAIN -->
-  <main class="main">
+      <span>🔐</span>
 
-    <header class="topbar">
-
-      <div style="display:flex;align-items:center;gap:12px">
-
-        <button
-          class="mobile-menu"
-          onclick="toggleSidebar()"
-        >
-          ☰
-        </button>
-
-        <div class="topbar-title">
-          AWSZ Client Portal
-        </div>
-
-      </div>
-
-      <div class="topbar-right">
-        <div class="status-dot"></div>
-        <span>Portal Connected</span>
-      </div>
-
-    </header>
-
-
-    <div class="content">
-
-      <!-- ================= OVERVIEW ================= -->
-
-      <section class="page active" id="overview">
-
-        <div class="welcome">
-
-          <h1>
-            Welcome, <span id="welcomeName">Client</span>
-          </h1>
-
-          <p>
-            Manage your projects, access details, documents and communication with AWSZ from one place.
-          </p>
-
-        </div>
-
-
-        <div class="grid">
-
-          <div class="card stat">
-            <div class="stat-label">
-              Active Projects
-            </div>
-            <div class="stat-value" id="statProjects">
-              0
-            </div>
-          </div>
-
-          <div class="card stat">
-            <div class="stat-label">
-              Completed Tasks
-            </div>
-            <div class="stat-value" id="statTasks">
-              0
-            </div>
-          </div>
-
-          <div class="card stat">
-            <div class="stat-label">
-              Access Requests
-            </div>
-            <div class="stat-value" id="statAccess">
-              0
-            </div>
-          </div>
-
-          <div class="card stat">
-            <div class="stat-label">
-              Documents
-            </div>
-            <div class="stat-value" id="statDocuments">
-              0
-            </div>
-          </div>
-
-        </div>
-
-
-        <div class="card project-card">
-
-          <div class="section-head">
-
-            <div>
-              <h2>Current Project</h2>
-              <p>Your latest active AWSZ project.</p>
-            </div>
-
-          </div>
-
-          <div id="overviewProject">
-            <div class="empty">
-              Loading project...
-            </div>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= PROJECTS ================= -->
-
-      <section class="page" id="projects">
-
-        <div class="section-head">
-
-          <div>
-            <h2>Your Projects</h2>
-            <p>All projects assigned to your account.</p>
-          </div>
-
-        </div>
-
-        <div id="projectsList">
-          <div class="empty">
-            Loading projects...
-          </div>
-        </div>
-
-      </section>
-
-
-      <!-- ================= TASKS ================= -->
-
-      <section class="page" id="tasks">
-
-        <div class="section-head">
-
-          <div>
-            <h2>Project Tasks</h2>
-            <p>Track everything AWSZ is working on.</p>
-          </div>
-
-        </div>
-
-        <div id="tasksList">
-          <div class="empty">
-            Loading tasks...
-          </div>
-        </div>
-
-      </section>
-
-
-      <!-- ================= ACCESS ================= -->
-
-      <section class="page" id="access">
-
-        <div class="access-hero">
-
-          <h2>
-            Secure Access Vault
-          </h2>
-
-          <p>
-            Your project access information is organized here by platform so AWSZ can work with the systems connected to your project.
-          </p>
-
-          <div class="security-note">
-            🔐 Sensitive passwords should only be stored through the secure AWSZ credential system. This portal UI is prepared for that secure connection.
-          </div>
-
-        </div>
-
-
-        <div class="credentials-grid" id="credentialsGrid">
-
-          <!-- DEMO STRUCTURE -->
-          <div class="credential-card">
-
-            <div class="credential-header">
-
-              <div class="platform">
-
-                <div class="platform-icon">
-                  G
-                </div>
-
-                <div>
-                  <strong>GHL</strong>
-                  <small>CRM / Automation</small>
-                </div>
-
-              </div>
-
-              <span class="badge">
-                Access
-              </span>
-
-            </div>
-
-
-            <div class="credential-field">
-
-              <div class="credential-label">
-                Login ID
-              </div>
-
-              <div class="secret-row">
-
-                <div class="secret-box">
-                  admin@example.com
-                </div>
-
-                <button
-                  class="small-btn"
-                  onclick="copyText('admin@example.com')"
-                >
-                  Copy
-                </button>
-
-              </div>
-
-            </div>
-
-
-            <div class="credential-field">
-
-              <div class="credential-label">
-                Password
-              </div>
-
-              <div class="secret-row">
-
-                <div
-                  class="secret-box"
-                  id="demoPassword"
-                >
-                  ••••••••••••
-                </div>
-
-                <button
-                  class="small-btn"
-                  onclick="toggleDemoPassword()"
-                >
-                  Show
-                </button>
-
-              </div>
-
-            </div>
-
-
-            <div class="credential-actions">
-
-              <button
-                class="small-btn"
-                onclick="copyText('demo-password')"
-              >
-                Copy Password
-              </button>
-
-              <button
-                class="small-btn"
-                onclick="copyAllDemo()"
-              >
-                Copy All
-              </button>
-
-            </div>
-
-          </div>
-
-
-          <div class="empty">
-            Additional platform credentials such as Heggisfield, Flow, Meta, Shopify, etc. will appear here when securely added from the admin side.
-          </div>
-
-        </div>
-
-
-        <!-- FILE UPLOAD -->
-
-        <div class="card upload-card">
-
-          <div class="section-head">
-
-            <div>
-              <h2>Upload Project File</h2>
-              <p>
-                Send documents, screenshots, PDFs or other project files to AWSZ.
-              </p>
-            </div>
-
-          </div>
-
-
-          <div class="upload-zone">
-
-            <div class="upload-icon">
-              📁
-            </div>
-
-            <h3>
-              Drop your file here
-            </h3>
-
-            <p>
-              PDF, DOCX, PNG, JPG, ZIP and other project files.
-            </p>
-
-            <label class="upload-button">
-
-              Choose File
-
-              <input
-                type="file"
-                id="fileInput"
-                onchange="handleFileSelect(this)"
-              >
-
-            </label>
-
-            <div
-              class="file-name"
-              id="selectedFile"
-            ></div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= DOCUMENTS ================= -->
-
-      <section class="page" id="documents">
-
-        <div class="section-head">
-
-          <div>
-            <h2>Documents</h2>
-            <p>Files shared between you and AWSZ.</p>
-          </div>
-
-        </div>
-
-        <div class="card document-card">
-
-          <div
-            id="documentsList"
-            class="list"
-          >
-            <div class="empty">
-              Loading documents...
-            </div>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= INVOICES ================= -->
-
-      <section class="page" id="invoices">
-
-        <div class="section-head">
-
-          <div>
-            <h2>Invoices</h2>
-            <p>Project billing and payment information.</p>
-          </div>
-
-        </div>
-
-        <div class="card document-card">
-
-          <div class="empty">
-            Invoice management will appear here once billing is connected.
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= MESSAGES ================= -->
-
-      <section class="page" id="messages">
-
-        <div class="section-head">
-
-          <div>
-            <h2>Project Chat</h2>
-            <p>Talk directly with the AWSZ project team.</p>
-          </div>
-
-        </div>
-
-
-        <div class="card chat-card">
-
-          <div class="chat-header">
-
-            <strong>
-              AWSZ Project Team
-            </strong>
-
-            <div class="online">
-              <i></i>
-              Available
-            </div>
-
-          </div>
-
-
-          <div
-            class="chat-messages"
-            id="chatMessages"
-          >
-            <div class="empty">
-              Loading messages...
-            </div>
-          </div>
-
-
-          <div class="chat-input">
-
-            <textarea
-              id="messageInput"
-              placeholder="Write a message..."
-            ></textarea>
-
-            <button
-              class="send-btn"
-              onclick="sendMessage()"
-            >
-              Send
-            </button>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= ACCOUNT ================= -->
-
-      <section class="page" id="account">
-
-        <div class="section-head">
-
-          <div>
-            <h2>Account</h2>
-            <p>Your AWSZ client information.</p>
-          </div>
-
-        </div>
-
-
-        <div class="card account-card">
-
-          <div class="form-grid">
-
-            <div class="form-group">
-              <label>Full Name</label>
-              <input
-                id="accountName"
-                readonly
-              >
-            </div>
-
-            <div class="form-group">
-              <label>Company</label>
-              <input
-                id="accountCompany"
-                readonly
-              >
-            </div>
-
-            <div class="form-group">
-              <label>Email</label>
-              <input
-                id="accountEmail"
-                readonly
-              >
-            </div>
-
-            <div class="form-group">
-              <label>Phone</label>
-              <input
-                id="accountPhone"
-                readonly
-              >
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
+      <span>
+        Credentials are sensitive information. AWSZ will connect this area to secure server-side credential storage before real passwords are persisted.
+      </span>
 
     </div>
 
-  </main>
+  </div>
+
+
+  <!-- ADD / EDIT FORM -->
+
+  <div
+    class="card credential-form"
+    id="credentialForm">
+
+    <div class="form-heading">
+
+      <h3 id="credentialFormTitle">
+        Add New Platform
+      </h3>
+
+      <button
+        class="close-form"
+        onclick="closeCredentialForm()">
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="form-field">
+
+        <label>
+          Platform Name
+        </label>
+
+        <input
+          id="credentialPlatform"
+          type="text"
+          placeholder="e.g. GHL, Heggisfield, Flow, Meta">
+
+      </div>
+
+
+      <div class="form-field">
+
+        <label>
+          Account / Login URL
+        </label>
+
+        <input
+          id="credentialUrl"
+          type="url"
+          placeholder="e.g. https://app.gohighlevel.com">
+
+      </div>
+
+
+      <div class="form-field">
+
+        <label>
+          Login ID / Email
+        </label>
+
+        <input
+          id="credentialLogin"
+          type="text"
+          placeholder="e.g. admin@company.com">
+
+      </div>
+
+
+      <div class="form-field">
+
+        <label>
+          Password
+        </label>
+
+        <div class="password-input">
+
+          <input
+            id="credentialPassword"
+            type="password"
+            placeholder="e.g. Enter platform password">
+
+          <button
+            type="button"
+            class="show-password"
+            onclick="toggleCredentialPassword()">
+            Show
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-field full">
+
+        <label>
+          Notes
+        </label>
+
+        <textarea
+          id="credentialNotes"
+          placeholder="e.g. Use this login for the client's main GHL location."></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        class="secondary-button"
+        onclick="closeCredentialForm()">
+        Cancel
+      </button>
+
+      <button
+        class="primary-button"
+        onclick="saveCredential()">
+
+        <span id="saveCredentialText">
+          Add Platform
+        </span>
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- CREDENTIAL CARDS -->
+
+  <div
+    class="credentials-grid"
+    id="credentialsGrid">
+
+    <div class="empty">
+      No platforms added yet.<br>
+      Click <strong>+ Add New</strong> to add GHL, Heggisfield, Flow, Meta or another system.
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     DOCUMENTS
+===================================================== -->
+
+<section
+  class="page"
+  id="documents">
+
+  <div class="page-heading">
+
+    <h1>
+      Documents
+    </h1>
+
+    <p>
+      Project files shared between you and AWSZ.
+    </p>
+
+  </div>
+
+
+  <div class="card list-card">
+
+    <div
+      class="list"
+      id="documentsList">
+
+      <div class="empty">
+        Loading documents...
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     INVOICES
+===================================================== -->
+
+<section
+  class="page"
+  id="invoices">
+
+  <div class="page-heading">
+
+    <h1>
+      Invoices
+    </h1>
+
+    <p>
+      Project billing and payment information.
+    </p>
+
+  </div>
+
+
+  <div class="card list-card">
+
+    <div class="empty">
+      Invoice management will be connected here.
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     MESSAGES
+===================================================== -->
+
+<section
+  class="page"
+  id="messages">
+
+  <div class="page-heading">
+
+    <h1>
+      Messages
+    </h1>
+
+    <p>
+      Full project communication with the AWSZ team.
+    </p>
+
+  </div>
+
+
+  <div class="card full-chat">
+
+    <div
+      class="full-chat-messages"
+      id="fullChatMessages">
+
+      <div class="empty">
+        Loading messages...
+      </div>
+
+    </div>
+
+
+    <div class="full-chat-input">
+
+      <textarea
+        id="fullMessageInput"
+        placeholder="Write a message to AWSZ..."></textarea>
+
+      <button
+        class="full-send"
+        onclick="sendFullMessage()">
+        Send
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     ACCOUNT
+===================================================== -->
+
+<section
+  class="page"
+  id="account">
+
+  <div class="page-heading">
+
+    <h1>
+      Account
+    </h1>
+
+    <p>
+      Your client profile information.
+    </p>
+
+  </div>
+
+
+  <div class="card account-card">
+
+    <div class="account-grid">
+
+      <div class="account-field">
+
+        <label>
+          Full Name
+        </label>
+
+        <input
+          id="accountName"
+          readonly>
+
+      </div>
+
+
+      <div class="account-field">
+
+        <label>
+          Company
+        </label>
+
+        <input
+          id="accountCompany"
+          readonly>
+
+      </div>
+
+
+      <div class="account-field">
+
+        <label>
+          Email
+        </label>
+
+        <input
+          id="accountEmail"
+          readonly>
+
+      </div>
+
+
+      <div class="account-field">
+
+        <label>
+          Phone
+        </label>
+
+        <input
+          id="accountPhone"
+          readonly>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</div>
+
+</main>
 
 </div>
 
 
+<!-- =====================================================
+     FLOATING CHAT WIDGET
+===================================================== -->
+
+<div class="chat-widget">
+
+  <div
+    class="chat-panel"
+    id="chatPanel">
+
+    <div class="chat-panel-header">
+
+      <div class="chat-person">
+
+        <div class="chat-avatar">
+          A
+        </div>
+
+        <div>
+
+          <strong>
+            AWSZ Project Team
+          </strong>
+
+          <small>
+            <i></i>
+            Available
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="chat-close"
+        onclick="toggleChat()">
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="widget-messages"
+      id="widgetMessages">
+
+      <div class="empty">
+        Loading...
+      </div>
+
+    </div>
+
+
+    <div class="chat-composer">
+
+      <div
+        class="attachment-preview"
+        id="attachmentPreview">
+
+        <span
+          class="attachment-name"
+          id="attachmentName">
+        </span>
+
+        <button
+          class="remove-attachment"
+          onclick="removeAttachment()">
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="composer-row">
+
+        <label
+          class="attach-btn"
+          title="Attach file">
+
+          📎
+
+          <input
+            class="chat-file-input"
+            type="file"
+            id="chatFileInput"
+            onchange="selectChatFile(this)">
+
+        </label>
+
+
+        <textarea
+          class="chat-textarea"
+          id="widgetMessageInput"
+          placeholder="Write a message..."></textarea>
+
+
+        <button
+          class="chat-send"
+          onclick="sendWidgetMessage()">
+          ↑
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="chat-launcher"
+    onclick="toggleChat()"
+    title="Open project chat">
+
+    💬
+
+  </button>
+
+</div>
+
+
+<!-- TOAST -->
+
 <div
   class="toast"
-  id="toast"
-></div>
+  id="toast">
+</div>
 
 
 <script>
 
-/* =====================================================
+/* =========================================================
    SUPABASE
-===================================================== */
+========================================================= */
 
 const SUPABASE_URL =
-  "https://ausocdplliuftdqxbvwa.supabase.co";
+"https://ausocdplliuftdqxbvwa.supabase.co";
 
 const SUPABASE_KEY =
-  "sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
+"sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
 
 const supabaseClient =
-  supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 
-/* =====================================================
-   GLOBAL DATA
-===================================================== */
+/* =========================================================
+   STATE
+========================================================= */
 
 let currentUser = null;
 let clientProfile = null;
+
 let projects = [];
 let tasks = [];
 let documents = [];
 let accessRequests = [];
 let messages = [];
 
+let credentials = [];
 
-/* =====================================================
-   START
-===================================================== */
+let editingCredentialIndex = -1;
+
+let selectedChatFile = null;
+
+
+/* =========================================================
+   INIT
+========================================================= */
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -1562,7 +2304,7 @@ async function init(){
   if(!user){
 
     window.location.href =
-      "index.html";
+    "index.html";
 
     return;
 
@@ -1583,6 +2325,8 @@ async function init(){
 
   await loadMessages();
 
+  renderCredentials();
+
   updateStats();
 
   updateAccount();
@@ -1590,9 +2334,9 @@ async function init(){
 }
 
 
-/* =====================================================
+/* =========================================================
    CLIENT
-===================================================== */
+========================================================= */
 
 async function loadClient(){
 
@@ -1619,38 +2363,34 @@ async function loadClient(){
   clientProfile = data;
 
 
-  if(data){
-
-    const name =
-      data.full_name ||
-      currentUser.email ||
-      "Client";
+  const name =
+    data?.full_name ||
+    currentUser.email ||
+    "Client";
 
 
-    document.getElementById(
-      "welcomeName"
-    ).textContent = name;
+  document.getElementById(
+    "welcomeName"
+  ).textContent = name;
 
 
-    document.getElementById(
-      "sideUserName"
-    ).textContent = name;
+  document.getElementById(
+    "sideUserName"
+  ).textContent = name;
 
 
-    document.getElementById(
-      "sideUserEmail"
-    ).textContent =
-      data.email ||
-      currentUser.email;
-
-  }
+  document.getElementById(
+    "sideUserEmail"
+  ).textContent =
+    data?.email ||
+    currentUser.email;
 
 }
 
 
-/* =====================================================
+/* =========================================================
    PROJECTS
-===================================================== */
+========================================================= */
 
 async function loadProjects(){
 
@@ -1669,19 +2409,14 @@ async function loadProjects(){
 
     console.error(error);
 
-    document.getElementById(
-      "projectsList"
-    ).innerHTML =
-      `<div class="empty">
-        Could not load projects.
-      </div>`;
+    projects = [];
 
-    return;
+  }else{
+
+    projects = data || [];
 
   }
 
-
-  projects = data || [];
 
   renderProjects();
 
@@ -1690,9 +2425,9 @@ async function loadProjects(){
 }
 
 
-/* =====================================================
-   RENDER PROJECTS
-===================================================== */
+/* =========================================================
+   PROJECT RENDER
+========================================================= */
 
 function renderProjects(){
 
@@ -1705,9 +2440,9 @@ function renderProjects(){
   if(!projects.length){
 
     box.innerHTML =
-      `<div class="empty">
-        No projects have been assigned yet.
-      </div>`;
+    `<div class="empty">
+      No projects have been assigned yet.
+    </div>`;
 
     return;
 
@@ -1715,66 +2450,67 @@ function renderProjects(){
 
 
   box.innerHTML =
-    projects.map(project => `
+  projects.map(project => `
 
-      <div class="card project-card">
+    <div class="card project-card">
 
-        <div class="project-top">
+      <div class="project-top">
 
-          <div>
+        <div>
 
-            <div class="project-title">
-              ${escapeHTML(project.project_name || "Untitled Project")}
-            </div>
-
-            <div class="project-description">
-              ${escapeHTML(project.description || "No project description available.")}
-            </div>
-
+          <div class="project-name">
+            ${esc(project.project_name || "Untitled Project")}
           </div>
 
-          <span class="badge">
-            ${escapeHTML(project.stage || project.status || "Active")}
+          <div class="project-description">
+            ${esc(project.description || "No project description available.")}
+          </div>
+
+        </div>
+
+        <span class="badge">
+          ${esc(project.stage || project.status || "Active")}
+        </span>
+
+      </div>
+
+
+      <div class="progress-area">
+
+        <div class="progress-row">
+
+          <span>
+            Project Progress
           </span>
+
+          <strong>
+            ${Number(project.progress || 0)}%
+          </strong>
 
         </div>
 
 
-        <div class="progress-wrap">
+        <div class="progress-track">
 
-          <div class="progress-info">
-
-            <span>
-              Project Progress
-            </span>
-
-            <span>
-              ${Number(project.progress || 0)}%
-            </span>
-
-          </div>
-
-          <div class="progress">
-
-            <div
-              class="progress-bar"
-              style="width:${Number(project.progress || 0)}%"
-            ></div>
-
+          <div
+            class="progress-fill"
+            style="width:${Number(project.progress || 0)}%">
           </div>
 
         </div>
 
       </div>
 
-    `).join("");
+    </div>
+
+  `).join("");
 
 }
 
 
-/* =====================================================
-   OVERVIEW PROJECT
-===================================================== */
+/* =========================================================
+   OVERVIEW
+========================================================= */
 
 function renderOverviewProject(){
 
@@ -1787,9 +2523,9 @@ function renderOverviewProject(){
   if(!projects.length){
 
     box.innerHTML =
-      `<div class="empty">
-        No active project found.
-      </div>`;
+    `<div class="empty">
+      No active project found.
+    </div>`;
 
     return;
 
@@ -1802,47 +2538,51 @@ function renderOverviewProject(){
 
   box.innerHTML = `
 
-    <div class="project-top">
+    <div class="card project-card">
 
-      <div>
+      <div class="project-top">
 
-        <div class="project-title">
-          ${escapeHTML(project.project_name || "Untitled Project")}
+        <div>
+
+          <div class="project-name">
+            ${esc(project.project_name || "Untitled Project")}
+          </div>
+
+          <div class="project-description">
+            ${esc(project.description || "No description available.")}
+          </div>
+
         </div>
 
-        <div class="project-description">
-          ${escapeHTML(project.description || "No description available.")}
-        </div>
-
-      </div>
-
-      <span class="badge">
-        ${escapeHTML(project.stage || project.status || "Active")}
-      </span>
-
-    </div>
-
-
-    <div class="progress-wrap">
-
-      <div class="progress-info">
-
-        <span>
-          Progress
-        </span>
-
-        <span>
-          ${Number(project.progress || 0)}%
+        <span class="badge">
+          ${esc(project.stage || project.status || "Active")}
         </span>
 
       </div>
 
-      <div class="progress">
 
-        <div
-          class="progress-bar"
-          style="width:${Number(project.progress || 0)}%"
-        ></div>
+      <div class="progress-area">
+
+        <div class="progress-row">
+
+          <span>
+            Progress
+          </span>
+
+          <strong>
+            ${Number(project.progress || 0)}%
+          </strong>
+
+        </div>
+
+        <div class="progress-track">
+
+          <div
+            class="progress-fill"
+            style="width:${Number(project.progress || 0)}%">
+          </div>
+
+        </div>
 
       </div>
 
@@ -1853,9 +2593,9 @@ function renderOverviewProject(){
 }
 
 
-/* =====================================================
+/* =========================================================
    TASKS
-===================================================== */
+========================================================= */
 
 async function loadTasks(){
 
@@ -1870,7 +2610,7 @@ async function loadTasks(){
   }
 
 
-  const ids =
+  const projectIds =
     projects.map(p => p.id);
 
 
@@ -1881,7 +2621,7 @@ async function loadTasks(){
   await supabaseClient
   .from("tasks")
   .select("*")
-  .in("project_id",ids)
+  .in("project_id",projectIds)
   .order("created_at",{ascending:false});
 
 
@@ -1889,21 +2629,19 @@ async function loadTasks(){
 
     console.error(error);
 
-    return;
+    tasks = [];
+
+  }else{
+
+    tasks = data || [];
 
   }
 
-
-  tasks = data || [];
 
   renderTasks();
 
 }
 
-
-/* =====================================================
-   RENDER TASKS
-===================================================== */
 
 function renderTasks(){
 
@@ -1916,68 +2654,65 @@ function renderTasks(){
   if(!tasks.length){
 
     box.innerHTML =
-      `<div class="empty">
-        No tasks available.
-      </div>`;
+    `<div class="empty">
+      No tasks available yet.
+    </div>`;
 
     return;
 
   }
 
 
-  box.innerHTML =
-    `<div class="card document-card">
+  box.innerHTML = `
+
+    <div class="card list-card">
 
       <div class="list">
 
-        ${
-          tasks.map(task => `
+        ${tasks.map(task => `
 
-            <div class="list-item">
+          <div class="list-item">
 
-              <div class="task">
+            <div class="task-left">
 
-                <div
-                  class="task-check ${task.is_completed ? "done" : ""}"
-                >
-                  ${task.is_completed ? "✓" : ""}
+              <div class="task-check ${task.is_completed ? "done" : ""}">
+                ${task.is_completed ? "✓" : ""}
+              </div>
+
+              <div>
+
+                <div class="task-name ${task.is_completed ? "done" : ""}">
+                  ${esc(task.task_name || "Task")}
                 </div>
 
-                <div>
-
-                  <div
-                    class="task-name ${task.is_completed ? "done" : ""}"
-                  >
-                    ${escapeHTML(task.task_name || "Task")}
-                  </div>
-
-                  <div class="list-meta">
-                    ${escapeHTML(task.description || "")}
-                  </div>
-
+                <div class="task-description">
+                  ${esc(task.description || "")}
                 </div>
 
               </div>
 
-              <span class="badge">
-                ${task.is_completed ? "Completed" : "Pending"}
-              </span>
-
             </div>
 
-          `).join("")
-        }
+            <span class="badge">
+              ${task.is_completed ? "Completed" : "Pending"}
+            </span>
+
+          </div>
+
+        `).join("")}
 
       </div>
 
-    </div>`;
+    </div>
+
+  `;
 
 }
 
 
-/* =====================================================
+/* =========================================================
    DOCUMENTS
-===================================================== */
+========================================================= */
 
 async function loadDocuments(){
 
@@ -2011,21 +2746,19 @@ async function loadDocuments(){
 
     console.error(error);
 
-    return;
+    documents = [];
+
+  }else{
+
+    documents = data || [];
 
   }
 
-
-  documents = data || [];
 
   renderDocuments();
 
 }
 
-
-/* =====================================================
-   RENDER DOCUMENTS
-===================================================== */
 
 function renderDocuments(){
 
@@ -2038,9 +2771,9 @@ function renderDocuments(){
   if(!documents.length){
 
     box.innerHTML =
-      `<div class="empty">
-        No documents uploaded yet.
-      </div>`;
+    `<div class="empty">
+      No documents uploaded yet.
+    </div>`;
 
     return;
 
@@ -2048,18 +2781,20 @@ function renderDocuments(){
 
 
   box.innerHTML =
-    documents.map(doc => `
+  documents.map(doc => `
 
-      <div class="doc-item">
+    <div class="list-item">
 
-        <div class="doc-icon">
+      <div class="document-item">
+
+        <div class="document-icon">
           📄
         </div>
 
-        <div class="doc-info">
+        <div class="document-info">
 
           <strong>
-            ${escapeHTML(doc.file_name || "Document")}
+            ${esc(doc.file_name || "Document")}
           </strong>
 
           <small>
@@ -2068,38 +2803,38 @@ function renderDocuments(){
 
         </div>
 
-        ${
-          doc.file_url
-          ?
-          `<a
-            href="${escapeAttribute(doc.file_url)}"
-            target="_blank"
-            class="small-btn"
-          >
-            Open
-          </a>`
-          :
-          ""
-        }
-
       </div>
 
-    `).join("");
+
+      ${
+        doc.file_url
+        ?
+        `<a
+          href="${attr(doc.file_url)}"
+          target="_blank"
+          class="copy-btn">
+          Open
+        </a>`
+        :
+        ""
+      }
+
+    </div>
+
+  `).join("");
 
 }
 
 
-/* =====================================================
+/* =========================================================
    ACCESS REQUESTS
-===================================================== */
+========================================================= */
 
 async function loadAccessRequests(){
 
   if(!projects.length){
 
     accessRequests = [];
-
-    updateStats();
 
     return;
 
@@ -2117,29 +2852,27 @@ async function loadAccessRequests(){
   await supabaseClient
   .from("access_requests")
   .select("*")
-  .in("project_id",ids)
-  .order("requested_at",{ascending:false});
+  .in("project_id",ids);
 
 
   if(error){
 
     console.error(error);
 
-    return;
+    accessRequests = [];
+
+  }else{
+
+    accessRequests = data || [];
 
   }
-
-
-  accessRequests = data || [];
-
-  updateStats();
 
 }
 
 
-/* =====================================================
+/* =========================================================
    MESSAGES
-===================================================== */
+========================================================= */
 
 async function loadMessages(){
 
@@ -2147,7 +2880,9 @@ async function loadMessages(){
 
     messages = [];
 
-    renderMessages();
+    renderWidgetMessages();
+
+    renderFullMessages();
 
     return;
 
@@ -2173,36 +2908,49 @@ async function loadMessages(){
 
     console.error(error);
 
-    return;
+    messages = [];
+
+  }else{
+
+    messages = data || [];
 
   }
 
 
-  messages = data || [];
+  renderWidgetMessages();
 
-  renderMessages();
+  renderFullMessages();
 
 }
 
 
-/* =====================================================
-   RENDER CHAT
-===================================================== */
+/* =========================================================
+   CHAT WIDGET
+========================================================= */
 
-function renderMessages(){
+function toggleChat(){
+
+  document
+  .getElementById("chatPanel")
+  .classList.toggle("open");
+
+}
+
+
+function renderWidgetMessages(){
 
   const box =
     document.getElementById(
-      "chatMessages"
+      "widgetMessages"
     );
 
 
   if(!messages.length){
 
     box.innerHTML =
-      `<div class="empty">
-        No messages yet. Start the conversation with AWSZ.
-      </div>`;
+    `<div class="empty">
+      Start a conversation with the AWSZ team.
+    </div>`;
 
     return;
 
@@ -2210,75 +2958,168 @@ function renderMessages(){
 
 
   box.innerHTML =
-    messages.map(msg => {
-
-      const isClient =
-        msg.sender_type === "client";
-
-
-      return `
-
-        <div class="chat-message ${isClient ? "client" : "admin"}">
-
-          <div class="chat-bubble">
-            ${escapeHTML(msg.message || "")}
-          </div>
-
-          <div class="chat-meta">
-            ${escapeHTML(msg.sender_name || (isClient ? "You" : "AWSZ Team"))}
-            •
-            ${formatDate(msg.created_at)}
-          </div>
-
-        </div>
-
-      `;
-
-    }).join("");
+  messages.slice(-30).map(renderWidgetMessage).join("");
 
 
   box.scrollTop =
-    box.scrollHeight;
+  box.scrollHeight;
 
 }
 
 
-/* =====================================================
-   SEND MESSAGE
-===================================================== */
+function renderWidgetMessage(msg){
 
-async function sendMessage(){
+  const client =
+    msg.sender_type === "client";
 
-  const input =
+
+  return `
+
+    <div class="widget-message ${client ? "client" : "admin"}">
+
+      <div class="widget-bubble">
+        ${esc(msg.message || "")}
+      </div>
+
+      <div class="widget-time">
+        ${esc(msg.sender_name || (client ? "You" : "AWSZ"))}
+        ·
+        ${formatDate(msg.created_at)}
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   FULL CHAT
+========================================================= */
+
+function renderFullMessages(){
+
+  const box =
     document.getElementById(
-      "messageInput"
+      "fullChatMessages"
     );
 
 
-  const text =
-    input.value.trim();
+  if(!messages.length){
 
-
-  if(!text){
+    box.innerHTML =
+    `<div class="empty">
+      No messages yet.
+    </div>`;
 
     return;
 
   }
 
+
+  box.innerHTML =
+  messages.map(msg => {
+
+    const client =
+      msg.sender_type === "client";
+
+
+    return `
+
+      <div
+        class="widget-message ${client ? "client" : "admin"}">
+
+        <div class="widget-bubble">
+          ${esc(msg.message || "")}
+        </div>
+
+        <div class="widget-time">
+          ${esc(msg.sender_name || (client ? "You" : "AWSZ"))}
+          ·
+          ${formatDate(msg.created_at)}
+        </div>
+
+      </div>
+
+    `;
+
+  }).join("");
+
+}
+
+
+async function sendWidgetMessage(){
+
+  const input =
+    document.getElementById(
+      "widgetMessageInput"
+    );
+
+
+  const message =
+    input.value.trim();
+
+
+  if(!message){
+
+    if(selectedChatFile){
+
+      showToast(
+        "File selected. Secure file upload will be connected next."
+      );
+
+    }
+
+    return;
+
+  }
+
+
+  await createMessage(message);
+
+  input.value = "";
+
+}
+
+
+async function sendFullMessage(){
+
+  const input =
+    document.getElementById(
+      "fullMessageInput"
+    );
+
+
+  const message =
+    input.value.trim();
+
+
+  if(!message){
+
+    return;
+
+  }
+
+
+  await createMessage(message);
+
+  input.value = "";
+
+}
+
+
+async function createMessage(message){
 
   if(!projects.length){
 
     showToast(
-      "No project is available for messaging."
+      "No project is available."
     );
 
     return;
 
   }
-
-
-  const project =
-    projects[0];
 
 
   const {
@@ -2288,7 +3129,7 @@ async function sendMessage(){
   .from("messages")
   .insert({
 
-    project_id:project.id,
+    project_id:projects[0].id,
 
     sender_type:"client",
 
@@ -2297,7 +3138,7 @@ async function sendMessage(){
       currentUser.email ||
       "Client",
 
-    message:text
+    message:message
 
   });
 
@@ -2315,8 +3156,6 @@ async function sendMessage(){
   }
 
 
-  input.value = "";
-
   await loadMessages();
 
   showToast(
@@ -2326,9 +3165,728 @@ async function sendMessage(){
 }
 
 
-/* =====================================================
+/* =========================================================
+   CHAT FILE
+========================================================= */
+
+function selectChatFile(input){
+
+  const file =
+    input.files[0];
+
+
+  if(!file){
+
+    return;
+
+  }
+
+
+  selectedChatFile =
+    file;
+
+
+  document.getElementById(
+    "attachmentName"
+  ).textContent =
+    file.name;
+
+
+  document
+  .getElementById(
+    "attachmentPreview"
+  )
+  .classList.add("show");
+
+
+  showToast(
+    "File selected."
+  );
+
+}
+
+
+function removeAttachment(){
+
+  selectedChatFile = null;
+
+  document.getElementById(
+    "chatFileInput"
+  ).value = "";
+
+
+  document
+  .getElementById(
+    "attachmentPreview"
+  )
+  .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   CREDENTIAL FORM
+========================================================= */
+
+function openCredentialForm(){
+
+  editingCredentialIndex = -1;
+
+  clearCredentialForm();
+
+  document.getElementById(
+    "credentialFormTitle"
+  ).textContent =
+    "Add New Platform";
+
+
+  document.getElementById(
+    "saveCredentialText"
+  ).textContent =
+    "Add Platform";
+
+
+  document
+  .getElementById(
+    "credentialForm"
+  )
+  .classList.add("open");
+
+
+  setTimeout(() => {
+
+    document
+    .getElementById(
+      "credentialPlatform"
+    )
+    .focus();
+
+  },100);
+
+}
+
+
+function closeCredentialForm(){
+
+  document
+  .getElementById(
+    "credentialForm"
+  )
+  .classList.remove("open");
+
+  clearCredentialForm();
+
+  editingCredentialIndex = -1;
+
+}
+
+
+function clearCredentialForm(){
+
+  document.getElementById(
+    "credentialPlatform"
+  ).value = "";
+
+  document.getElementById(
+    "credentialUrl"
+  ).value = "";
+
+  document.getElementById(
+    "credentialLogin"
+  ).value = "";
+
+  document.getElementById(
+    "credentialPassword"
+  ).value = "";
+
+  document.getElementById(
+    "credentialNotes"
+  ).value = "";
+
+  document.getElementById(
+    "credentialPassword"
+  ).type = "password";
+
+  document.querySelector(
+    ".show-password"
+  ).textContent = "Show";
+
+}
+
+
+function toggleCredentialPassword(){
+
+  const input =
+    document.getElementById(
+      "credentialPassword"
+    );
+
+  const button =
+    document.querySelector(
+      ".show-password"
+    );
+
+
+  if(input.type === "password"){
+
+    input.type = "text";
+
+    button.textContent =
+      "Hide";
+
+  }else{
+
+    input.type = "password";
+
+    button.textContent =
+      "Show";
+
+  }
+
+}
+
+
+/* =========================================================
+   SAVE / EDIT CREDENTIAL
+========================================================= */
+
+function saveCredential(){
+
+  const platform =
+    document.getElementById(
+      "credentialPlatform"
+    ).value.trim();
+
+
+  const url =
+    document.getElementById(
+      "credentialUrl"
+    ).value.trim();
+
+
+  const login =
+    document.getElementById(
+      "credentialLogin"
+    ).value.trim();
+
+
+  const password =
+    document.getElementById(
+      "credentialPassword"
+    ).value;
+
+
+  const notes =
+    document.getElementById(
+      "credentialNotes"
+    ).value.trim();
+
+
+  if(!platform){
+
+    showToast(
+      "Please enter the platform name."
+    );
+
+    return;
+
+  }
+
+
+  if(!login){
+
+    showToast(
+      "Please enter the login ID."
+    );
+
+    return;
+
+  }
+
+
+  if(!password){
+
+    showToast(
+      "Please enter the password."
+    );
+
+    return;
+
+  }
+
+
+  const item = {
+
+    platform,
+
+    url,
+
+    login,
+
+    password,
+
+    notes,
+
+    updatedAt:new Date().toISOString()
+
+  };
+
+
+  if(editingCredentialIndex >= 0){
+
+    credentials[
+      editingCredentialIndex
+    ] = item;
+
+    showToast(
+      "Platform updated."
+    );
+
+  }else{
+
+    credentials.push(item);
+
+    showToast(
+      "Platform added."
+    );
+
+  }
+
+
+  renderCredentials();
+
+  closeCredentialForm();
+
+}
+
+
+/* =========================================================
+   RENDER CREDENTIALS
+========================================================= */
+
+function renderCredentials(){
+
+  const box =
+    document.getElementById(
+      "credentialsGrid"
+    );
+
+
+  if(!credentials.length){
+
+    box.innerHTML =
+    `<div class="empty">
+      No platforms added yet.<br>
+      Click <strong>+ Add New</strong> to add GHL, Heggisfield, Flow, Meta or another system.
+    </div>`;
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+  credentials.map((credential,index) => `
+
+    <div class="card credential-card">
+
+      <div class="credential-head">
+
+        <div class="platform-info">
+
+          <div class="platform-icon">
+            ${getInitials(credential.platform)}
+          </div>
+
+          <div>
+
+            <div class="platform-name">
+              ${esc(credential.platform)}
+            </div>
+
+            <div class="platform-type">
+              Project access
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="card-menu">
+
+          <button
+            class="icon-btn"
+            title="Edit"
+            onclick="editCredential(${index})">
+            ✎
+          </button>
+
+          <button
+            class="icon-btn delete"
+            title="Delete"
+            onclick="deleteCredential(${index})">
+            ×
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="credential-line">
+
+        <div class="credential-label">
+          Login ID
+        </div>
+
+        <div class="value-row">
+
+          <div class="value-box">
+            ${esc(credential.login)}
+          </div>
+
+          <button
+            class="copy-btn"
+            onclick="copyValue(${index},'login')">
+            Copy
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="credential-line">
+
+        <div class="credential-label">
+          Password
+        </div>
+
+        <div class="value-row">
+
+          <div
+            class="value-box"
+            id="password-${index}">
+            ••••••••••••
+          </div>
+
+          <button
+            class="copy-btn"
+            onclick="toggleCardPassword(${index})">
+            Show
+          </button>
+
+        </div>
+
+      </div>
+
+
+      ${
+        credential.url
+        ?
+        `
+        <div class="credential-line">
+
+          <div class="credential-label">
+            Login URL
+          </div>
+
+          <div class="value-row">
+
+            <div class="value-box">
+              ${esc(credential.url)}
+            </div>
+
+            <button
+              class="copy-btn"
+              onclick="copyText('${safeJS(credential.url)}')">
+              Copy
+            </button>
+
+          </div>
+
+        </div>
+        `
+        :
+        ""
+      }
+
+
+      ${
+        credential.notes
+        ?
+        `
+        <div class="credential-line">
+
+          <div class="credential-label">
+            Notes
+          </div>
+
+          <div
+            class="value-box"
+            style="white-space:normal;line-height:1.5">
+            ${esc(credential.notes)}
+          </div>
+
+        </div>
+        `
+        :
+        ""
+      }
+
+
+      <div class="card-actions">
+
+        <button
+          class="copy-btn"
+          onclick="copyValue(${index},'login')">
+          Copy ID
+        </button>
+
+        <button
+          class="copy-btn"
+          onclick="copyValue(${index},'password')">
+          Copy Password
+        </button>
+
+        <button
+          class="copy-btn"
+          onclick="copyAllCredential(${index})">
+          Copy All
+        </button>
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+/* =========================================================
+   EDIT CREDENTIAL
+========================================================= */
+
+function editCredential(index){
+
+  const item =
+    credentials[index];
+
+
+  if(!item){
+
+    return;
+
+  }
+
+
+  editingCredentialIndex =
+    index;
+
+
+  document.getElementById(
+    "credentialPlatform"
+  ).value =
+    item.platform || "";
+
+
+  document.getElementById(
+    "credentialUrl"
+  ).value =
+    item.url || "";
+
+
+  document.getElementById(
+    "credentialLogin"
+  ).value =
+    item.login || "";
+
+
+  document.getElementById(
+    "credentialPassword"
+  ).value =
+    item.password || "";
+
+
+  document.getElementById(
+    "credentialNotes"
+  ).value =
+    item.notes || "";
+
+
+  document.getElementById(
+    "credentialFormTitle"
+  ).textContent =
+    "Edit Platform";
+
+
+  document.getElementById(
+    "saveCredentialText"
+  ).textContent =
+    "Save Changes";
+
+
+  document
+  .getElementById(
+    "credentialForm"
+  )
+  .classList.add("open");
+
+
+  document
+  .getElementById(
+    "credentialForm"
+  )
+  .scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+/* =========================================================
+   DELETE CREDENTIAL
+========================================================= */
+
+function deleteCredential(index){
+
+  const item =
+    credentials[index];
+
+
+  if(!item){
+
+    return;
+
+  }
+
+
+  const confirmed =
+    confirm(
+      `Delete ${item.platform} access?`
+    );
+
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  credentials.splice(
+    index,
+    1
+  );
+
+
+  renderCredentials();
+
+  showToast(
+    "Platform removed."
+  );
+
+}
+
+
+/* =========================================================
+   CREDENTIAL COPY
+========================================================= */
+
+function copyValue(index,type){
+
+  const item =
+    credentials[index];
+
+
+  if(!item){
+
+    return;
+
+  }
+
+
+  const value =
+    item[type] || "";
+
+
+  copyText(value);
+
+}
+
+
+function copyAllCredential(index){
+
+  const item =
+    credentials[index];
+
+
+  if(!item){
+
+    return;
+
+  }
+
+
+  const text =
+`Platform: ${item.platform}
+Login ID: ${item.login}
+Password: ${item.password}
+${item.url ? `Login URL: ${item.url}` : ""}
+${item.notes ? `Notes: ${item.notes}` : ""}`;
+
+
+  copyText(text);
+
+}
+
+
+function toggleCardPassword(index){
+
+  const item =
+    credentials[index];
+
+
+  const box =
+    document.getElementById(
+      `password-${index}`
+    );
+
+
+  if(!item || !box){
+
+    return;
+
+  }
+
+
+  if(box.dataset.visible === "true"){
+
+    box.textContent =
+      "••••••••••••";
+
+    box.dataset.visible =
+      "false";
+
+  }else{
+
+    box.textContent =
+      item.password;
+
+    box.dataset.visible =
+      "true";
+
+  }
+
+}
+
+
+/* =========================================================
    ACCOUNT
-===================================================== */
+========================================================= */
 
 function updateAccount(){
 
@@ -2367,9 +3925,9 @@ function updateAccount(){
 }
 
 
-/* =====================================================
+/* =========================================================
    STATS
-===================================================== */
+========================================================= */
 
 function updateStats(){
 
@@ -2401,9 +3959,9 @@ function updateStats(){
 }
 
 
-/* =====================================================
+/* =========================================================
    NAVIGATION
-===================================================== */
+========================================================= */
 
 function showPage(
   pageId,
@@ -2411,98 +3969,105 @@ function showPage(
 ){
 
   document
-    .querySelectorAll(".page")
-    .forEach(page => {
-      page.classList.remove("active");
-    });
+  .querySelectorAll(".page")
+  .forEach(page => {
+
+    page.classList.remove(
+      "active"
+    );
+
+  });
 
 
   const page =
-    document.getElementById(pageId);
-
-
-  if(page){
-    page.classList.add("active");
-  }
-
-
-  document
-    .querySelectorAll(".nav button")
-    .forEach(btn => {
-      btn.classList.remove("active");
-    });
-
-
-  if(button){
-    button.classList.add("active");
-  }
-
-
-  document
-    .getElementById("sidebar")
-    .classList.remove("open");
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-function toggleSidebar(){
-
-  document
-    .getElementById("sidebar")
-    .classList.toggle("open");
-
-}
-
-
-/* =====================================================
-   FILE SELECT
-===================================================== */
-
-function handleFileSelect(input){
-
-  const file =
-    input.files[0];
-
-
-  const output =
     document.getElementById(
-      "selectedFile"
+      pageId
     );
 
 
-  if(!file){
+  if(page){
 
-    output.textContent = "";
-
-    return;
+    page.classList.add(
+      "active"
+    );
 
   }
 
 
-  output.textContent =
-    `Selected: ${file.name}`;
+  document
+  .querySelectorAll(".nav button")
+  .forEach(btn => {
 
-  showToast(
-    "File selected. Secure upload connection will be connected next."
+    btn.classList.remove(
+      "active"
+    );
+
+  });
+
+
+  if(button){
+
+    button.classList.add(
+      "active"
+    );
+
+  }
+
+
+  document
+  .getElementById(
+    "sidebar"
+  )
+  .classList.remove(
+    "open"
   );
 
 }
 
 
-/* =====================================================
-   COPY
-===================================================== */
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
 
-async function copyText(text){
+function toggleSidebar(){
+
+  document
+  .getElementById(
+    "sidebar"
+  )
+  .classList.toggle(
+    "open"
+  );
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logout(){
+
+  await supabaseClient
+    .auth
+    .signOut();
+
+  window.location.href =
+    "index.html";
+
+}
+
+
+/* =========================================================
+   COPY
+========================================================= */
+
+async function copyText(value){
 
   try{
 
     await navigator.clipboard.writeText(
-      text
+      value
     );
 
     showToast(
@@ -2520,61 +4085,9 @@ async function copyText(text){
 }
 
 
-function copyAllDemo(){
-
-  const text =
-    "GHL\nLogin ID: admin@example.com\nPassword: demo-password";
-
-  copyText(text);
-
-}
-
-
-function toggleDemoPassword(){
-
-  const box =
-    document.getElementById(
-      "demoPassword"
-    );
-
-
-  if(
-    box.textContent.includes("•")
-  ){
-
-    box.textContent =
-      "demo-password";
-
-  }else{
-
-    box.textContent =
-      "••••••••••••";
-
-  }
-
-}
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-async function logout(){
-
-  await supabaseClient
-    .auth
-    .signOut();
-
-
-  window.location.href =
-    "index.html";
-
-}
-
-
-/* =====================================================
+/* =========================================================
    TOAST
-===================================================== */
+========================================================= */
 
 let toastTimer;
 
@@ -2591,7 +4104,9 @@ function showToast(message){
     message;
 
 
-  toast.classList.add("show");
+  toast.classList.add(
+    "show"
+  );
 
 
   clearTimeout(
@@ -2606,33 +4121,68 @@ function showToast(message){
         "show"
       );
 
-    },2500);
+    },2300);
 
 }
 
 
-/* =====================================================
+/* =========================================================
    HELPERS
-===================================================== */
+========================================================= */
 
-function escapeHTML(value){
+function esc(value){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  return String(
+    value ?? ""
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 
 }
 
 
-function escapeAttribute(value){
+function attr(value){
 
-  return String(value ?? "")
-    .replace(/"/g,"%22")
-    .replace(/</g,"%3C")
-    .replace(/>/g,"%3E");
+  return String(
+    value ?? ""
+  )
+  .replace(/"/g,"%22")
+  .replace(/</g,"%3C")
+  .replace(/>/g,"%3E");
+
+}
+
+
+function safeJS(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(/\\/g,"\\\\")
+  .replace(/'/g,"\\'")
+  .replace(/\n/g,"\\n")
+  .replace(/\r/g,"\\r");
+
+}
+
+
+function getInitials(name){
+
+  const words =
+    String(name || "P")
+    .trim()
+    .split(/\s+/)
+    .slice(0,2);
+
+
+  return words
+    .map(
+      word => word.charAt(0).toUpperCase()
+    )
+    .join("");
 
 }
 
@@ -2640,8 +4190,11 @@ function escapeAttribute(value){
 function formatDate(date){
 
   if(!date){
+
     return "";
+
   }
+
 
   try{
 
@@ -2650,7 +4203,7 @@ function formatDate(date){
 
   }catch(e){
 
-    return date;
+    return "";
 
   }
 
