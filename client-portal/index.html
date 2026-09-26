@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,354 +9,1752 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f6f8fa;
-      color: #111827;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+    :root{
+
+      --cloud:#f4f8fc;
+      --cloud2:#eaf2fa;
+      --cloud3:#dceaf7;
+
+      --blue:#246bce;
+      --blue-dark:#123b70;
+      --deep:#0b2850;
+
+      --text:#20272e;
+      --muted:#66778a;
+
+      --line:#d8e4ef;
+
+      --white:#ffffff;
+
+      --green:#20855a;
+      --green-bg:#eaf7f0;
+
+      --red:#c33d3d;
+      --red-bg:#fff0f0;
+
     }
 
-    .portal {
-      width: 100%;
-      max-width: 1050px;
-      min-height: 620px;
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-      border-radius: 24px;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      box-shadow: 0 20px 60px rgba(17, 24, 39, 0.08);
+
+    body{
+
+      min-height:100vh;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      background:
+
+        radial-gradient(
+          circle at 10% 15%,
+          rgba(36,107,206,.09),
+          transparent 28%
+        ),
+
+        radial-gradient(
+          circle at 90% 80%,
+          rgba(36,107,206,.06),
+          transparent 30%
+        ),
+
+        var(--cloud);
+
+      color:var(--text);
+
     }
 
-    .left {
-      padding: 55px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background: #111827;
-      color: white;
+
+    /* =====================================================
+       PAGE
+       ===================================================== */
+
+    .portal-page{
+
+      min-height:100vh;
+
+      display:grid;
+
+      grid-template-columns:
+        minmax(420px, .9fr)
+        minmax(500px, 1.1fr);
+
     }
 
-    .logo {
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: -1px;
+
+    /* =====================================================
+       LEFT BRAND PANEL
+       ===================================================== */
+
+    .brand-panel{
+
+      position:relative;
+
+      min-height:100vh;
+
+      padding:55px 7vw;
+
+      display:flex;
+
+      flex-direction:column;
+
+      justify-content:space-between;
+
+      background:
+
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(36,107,206,.10),
+          transparent 35%
+        ),
+
+        linear-gradient(
+          145deg,
+          #ffffff,
+          #eef5fb
+        );
+
+      border-right:1px solid var(--line);
+
+      overflow:hidden;
+
     }
 
-    .logo span {
-      color: #c8ff4f;
+
+    .brand-panel::before{
+
+      content:"";
+
+      position:absolute;
+
+      width:420px;
+      height:420px;
+
+      border-radius:50%;
+
+      border:1px solid rgba(36,107,206,.08);
+
+      right:-210px;
+
+      top:16%;
+
     }
 
-    .left-content {
-      max-width: 420px;
+
+    .brand-panel::after{
+
+      content:"";
+
+      position:absolute;
+
+      width:280px;
+      height:280px;
+
+      border-radius:50%;
+
+      background:rgba(36,107,206,.035);
+
+      right:-100px;
+
+      bottom:10%;
+
     }
 
-    .eyebrow {
-      color: #c8ff4f;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
+
+    .brand-content,
+    .brand-footer{
+
+      position:relative;
+
+      z-index:2;
+
     }
 
-    h1 {
-      font-size: 46px;
-      line-height: 1.05;
-      letter-spacing: -1.8px;
-      margin-bottom: 20px;
+
+    /* LOGO */
+
+    .logo{
+
+      display:inline-flex;
+
+      align-items:center;
+
+      gap:3px;
+
+      color:var(--deep);
+
+      font-size:25px;
+
+      font-weight:900;
+
+      letter-spacing:-1px;
+
     }
 
-    .left p {
-      color: #cbd5e1;
-      font-size: 17px;
-      line-height: 1.7;
+
+    .logo span{
+
+      color:var(--blue);
+
     }
 
-    .secure {
-      color: #94a3b8;
-      font-size: 13px;
+
+    /* EYEBROW */
+
+    .brand-eyebrow{
+
+      margin-top:105px;
+
+      color:var(--blue);
+
+      font-size:11px;
+
+      font-weight:900;
+
+      letter-spacing:2.2px;
+
     }
 
-    .right {
-      padding: 55px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+
+    .brand-title{
+
+      margin-top:18px;
+
+      max-width:620px;
+
+      color:var(--deep);
+
+      font-size:
+        clamp(42px,5vw,72px);
+
+      line-height:.98;
+
+      letter-spacing:-3.5px;
+
+      font-weight:850;
+
     }
 
-    .form-box {
-      width: 100%;
-      max-width: 390px;
+
+    .brand-title span{
+
+      display:block;
+
+      color:var(--blue);
+
     }
 
-    .form-box h2 {
-      font-size: 32px;
-      margin-bottom: 8px;
-      letter-spacing: -1px;
+
+    .brand-description{
+
+      max-width:530px;
+
+      margin-top:28px;
+
+      color:#607286;
+
+      font-size:18px;
+
+      line-height:1.7;
+
     }
 
-    .subtitle {
-      color: #667085;
-      margin-bottom: 30px;
-      line-height: 1.5;
+
+    /* TRUST CARDS */
+
+    .trust-grid{
+
+      display:grid;
+
+      grid-template-columns:
+        repeat(2,1fr);
+
+      gap:12px;
+
+      max-width:520px;
+
+      margin-top:42px;
+
     }
 
-    .field {
-      margin-bottom: 18px;
+
+    .trust-card{
+
+      padding:17px;
+
+      background:rgba(255,255,255,.8);
+
+      border:1px solid var(--line);
+
+      border-radius:14px;
+
     }
 
-    label {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 8px;
+
+    .trust-number{
+
+      color:var(--blue);
+
+      font-size:19px;
+
+      font-weight:900;
+
     }
 
-    input {
-      width: 100%;
-      height: 52px;
-      border: 1px solid #d9dee7;
-      border-radius: 12px;
-      padding: 0 15px;
-      font-size: 15px;
-      outline: none;
-      transition: 0.2s;
+
+    .trust-card p{
+
+      margin-top:5px;
+
+      color:var(--muted);
+
+      font-size:11px;
+
+      line-height:1.5;
+
     }
 
-    input:focus {
-      border-color: #9bbf32;
-      box-shadow: 0 0 0 4px rgba(200, 255, 79, 0.15);
+
+    .brand-footer{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:9px;
+
+      color:#8190a0;
+
+      font-size:11px;
+
+      font-weight:700;
+
     }
 
-    button {
-      width: 100%;
-      height: 54px;
-      border: 0;
-      border-radius: 12px;
-      background: #c8ff4f;
-      color: #111827;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: 0.2s;
-      margin-top: 5px;
+
+    .status-dot{
+
+      width:7px;
+      height:7px;
+
+      border-radius:50%;
+
+      background:var(--green);
+
+      box-shadow:
+        0 0 0 5px var(--green-bg);
+
     }
 
-    button:hover {
-      transform: translateY(-1px);
-      filter: brightness(0.97);
+
+    /* =====================================================
+       RIGHT AUTH PANEL
+       ===================================================== */
+
+    .auth-panel{
+
+      min-height:100vh;
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+      padding:45px 6vw;
+
     }
 
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
+
+    .auth-wrapper{
+
+      width:100%;
+
+      max-width:480px;
+
     }
 
-    .message {
-      margin-top: 16px;
-      padding: 12px 14px;
-      border-radius: 10px;
-      display: none;
-      font-size: 14px;
-      line-height: 1.5;
+
+    .auth-card{
+
+      background:rgba(255,255,255,.96);
+
+      border:1px solid var(--line);
+
+      border-radius:24px;
+
+      padding:38px;
+
+      box-shadow:
+
+        0 25px 65px rgba(35,67,100,.08),
+
+        0 3px 8px rgba(35,67,100,.03);
+
     }
 
-    .message.error {
-      display: block;
-      background: #fff1f2;
-      color: #be123c;
+
+    .auth-header{
+
+      margin-bottom:28px;
+
     }
 
-    .message.success {
-      display: block;
-      background: #f0fdf4;
-      color: #15803d;
+
+    .auth-eyebrow{
+
+      color:var(--blue);
+
+      font-size:10px;
+
+      font-weight:900;
+
+      letter-spacing:1.8px;
+
+      margin-bottom:12px;
+
     }
 
-    @media (max-width: 800px) {
-      .portal {
-        grid-template-columns: 1fr;
+
+    .auth-header h1{
+
+      color:var(--deep);
+
+      font-size:30px;
+
+      letter-spacing:-1px;
+
+      line-height:1.1;
+
+    }
+
+
+    .auth-header p{
+
+      margin-top:9px;
+
+      color:var(--muted);
+
+      font-size:13px;
+
+      line-height:1.6;
+
+    }
+
+
+    /* =====================================================
+       TABS
+       ===================================================== */
+
+    .auth-tabs{
+
+      display:grid;
+
+      grid-template-columns:1fr 1fr;
+
+      gap:5px;
+
+      padding:5px;
+
+      background:var(--cloud);
+
+      border:1px solid var(--line);
+
+      border-radius:11px;
+
+      margin-bottom:25px;
+
+    }
+
+
+    .auth-tab{
+
+      border:0;
+
+      background:transparent;
+
+      color:#788899;
+
+      padding:11px;
+
+      border-radius:8px;
+
+      font-size:12px;
+
+      font-weight:850;
+
+      cursor:pointer;
+
+      transition:.2s ease;
+
+    }
+
+
+    .auth-tab.active{
+
+      background:#ffffff;
+
+      color:var(--blue-dark);
+
+      box-shadow:
+        0 3px 10px rgba(35,67,100,.07);
+
+    }
+
+
+    /* =====================================================
+       FORM
+       ===================================================== */
+
+    .form-panel{
+
+      display:none;
+
+    }
+
+
+    .form-panel.active{
+
+      display:block;
+
+    }
+
+
+    .field{
+
+      margin-bottom:17px;
+
+    }
+
+
+    .field label{
+
+      display:block;
+
+      margin-bottom:7px;
+
+      color:var(--deep);
+
+      font-size:11px;
+
+      font-weight:850;
+
+    }
+
+
+    .field input{
+
+      width:100%;
+
+      height:48px;
+
+      padding:0 14px;
+
+      border:1px solid #ccd9e6;
+
+      border-radius:10px;
+
+      outline:none;
+
+      background:#fbfdff;
+
+      color:var(--deep);
+
+      font-size:13px;
+
+      transition:.2s ease;
+
+    }
+
+
+    .field input::placeholder{
+
+      color:#9aa7b5;
+
+    }
+
+
+    .field input:focus{
+
+      background:#ffffff;
+
+      border-color:var(--blue);
+
+      box-shadow:
+        0 0 0 3px rgba(36,107,206,.08);
+
+    }
+
+
+    .field-row{
+
+      display:grid;
+
+      grid-template-columns:1fr 1fr;
+
+      gap:12px;
+
+    }
+
+
+    /* =====================================================
+       BUTTON
+       ===================================================== */
+
+    .primary-button{
+
+      width:100%;
+
+      height:50px;
+
+      margin-top:5px;
+
+      border:0;
+
+      border-radius:10px;
+
+      background:var(--blue);
+
+      color:#ffffff;
+
+      font-size:13px;
+
+      font-weight:900;
+
+      cursor:pointer;
+
+      box-shadow:
+        0 10px 25px rgba(36,107,206,.18);
+
+      transition:.2s ease;
+
+    }
+
+
+    .primary-button:hover{
+
+      background:var(--blue-dark);
+
+      transform:translateY(-1px);
+
+    }
+
+
+    .primary-button:disabled{
+
+      opacity:.6;
+
+      cursor:not-allowed;
+
+      transform:none;
+
+    }
+
+
+    /* =====================================================
+       MESSAGE
+       ===================================================== */
+
+    .form-message{
+
+      display:none;
+
+      margin-top:15px;
+
+      padding:12px 14px;
+
+      border-radius:9px;
+
+      font-size:11px;
+
+      line-height:1.5;
+
+    }
+
+
+    .form-message.show{
+
+      display:block;
+
+    }
+
+
+    .form-message.error{
+
+      color:#8b3131;
+
+      background:var(--red-bg);
+
+      border:1px solid #efcece;
+
+    }
+
+
+    .form-message.success{
+
+      color:#266a4c;
+
+      background:var(--green-bg);
+
+      border:1px solid #cce7d9;
+
+    }
+
+
+    /* =====================================================
+       FOOT NOTE
+       ===================================================== */
+
+    .auth-note{
+
+      margin-top:22px;
+
+      text-align:center;
+
+      color:#8a98a7;
+
+      font-size:10px;
+
+      line-height:1.6;
+
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+       ===================================================== */
+
+    @media(max-width:900px){
+
+      .portal-page{
+
+        grid-template-columns:1fr;
+
       }
 
-      .left {
-        padding: 35px;
-        min-height: 330px;
+
+      .brand-panel{
+
+        min-height:auto;
+
+        padding:35px 6vw 40px;
+
+        border-right:0;
+
+        border-bottom:1px solid var(--line);
+
       }
 
-      .left h1 {
-        font-size: 36px;
+
+      .brand-eyebrow{
+
+        margin-top:65px;
+
       }
 
-      .secure {
-        margin-top: 30px;
+
+      .brand-title{
+
+        font-size:48px;
+
       }
 
-      .right {
-        padding: 35px 25px;
+
+      .trust-grid{
+
+        margin-top:30px;
+
       }
+
+
+      .brand-footer{
+
+        margin-top:35px;
+
+      }
+
+
+      .auth-panel{
+
+        min-height:auto;
+
+        padding:45px 6vw 60px;
+
+      }
+
     }
+
+
+    @media(max-width:520px){
+
+      .brand-panel{
+
+        padding:28px 20px 35px;
+
+      }
+
+
+      .brand-eyebrow{
+
+        margin-top:55px;
+
+      }
+
+
+      .brand-title{
+
+        font-size:40px;
+
+        letter-spacing:-2px;
+
+      }
+
+
+      .brand-description{
+
+        font-size:16px;
+
+      }
+
+
+      .trust-grid{
+
+        grid-template-columns:1fr;
+
+      }
+
+
+      .auth-panel{
+
+        padding:30px 18px 45px;
+
+      }
+
+
+      .auth-card{
+
+        padding:26px 20px;
+
+        border-radius:19px;
+
+      }
+
+
+      .field-row{
+
+        grid-template-columns:1fr;
+
+        gap:0;
+
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <div class="portal">
 
-    <section class="left">
-      <div class="logo">
-        AWSZ<span>.</span>
-      </div>
+  <div class="portal-page">
 
-      <div class="left-content">
-        <div class="eyebrow">Client Portal</div>
 
-        <h1>
-          Your project,<br>
-          in one place.
-        </h1>
+    <!-- ===================================================
+         LEFT
+         =================================================== -->
 
-        <p>
-          Track your project, share documents, complete requested actions,
-          and communicate with our team from one secure workspace.
+    <section class="brand-panel">
+
+
+      <div class="brand-content">
+
+
+        <div class="logo">
+          AWSZ<span>.</span>
+        </div>
+
+
+        <div class="brand-eyebrow">
+          CLIENT OPERATIONS PORTAL
+        </div>
+
+
+        <h2 class="brand-title">
+          Your project.
+          <span>One clear view.</span>
+        </h2>
+
+
+        <p class="brand-description">
+          Stay connected with your project, track progress,
+          complete requested actions, share documents and
+          communicate with the AWSZ team from one place.
         </p>
+
+
+        <div class="trust-grid">
+
+
+          <div class="trust-card">
+
+            <div class="trust-number">
+              01
+            </div>
+
+            <p>
+              Project progress and current stage
+            </p>
+
+          </div>
+
+
+          <div class="trust-card">
+
+            <div class="trust-number">
+              02
+            </div>
+
+            <p>
+              Tasks and actions that need your attention
+            </p>
+
+          </div>
+
+
+          <div class="trust-card">
+
+            <div class="trust-number">
+              03
+            </div>
+
+            <p>
+              Documents, access requests and updates
+            </p>
+
+          </div>
+
+
+          <div class="trust-card">
+
+            <div class="trust-number">
+              04
+            </div>
+
+            <p>
+              Direct project communication
+            </p>
+
+          </div>
+
+
+        </div>
+
+
       </div>
 
-      <div class="secure">
-        Secure client access
+
+      <div class="brand-footer">
+
+        <span class="status-dot"></span>
+
+        AWSZ Client Operations
+
       </div>
+
+
     </section>
 
 
-    <section class="right">
 
-      <div class="form-box">
+    <!-- ===================================================
+         RIGHT
+         =================================================== -->
 
-        <h2>Welcome back</h2>
+    <section class="auth-panel">
 
-        <p class="subtitle">
-          Sign in to access your project workspace.
-        </p>
 
-        <form id="loginForm">
+      <div class="auth-wrapper">
 
-          <div class="field">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="you@company.com"
-              required
-            >
+
+        <div class="auth-card">
+
+
+          <div class="auth-header">
+
+            <div class="auth-eyebrow">
+              SECURE CLIENT ACCESS
+            </div>
+
+            <h1 id="authTitle">
+              Welcome back
+            </h1>
+
+            <p id="authDescription">
+              Sign in to view your project and continue
+              where you left off.
+            </p>
+
           </div>
 
-          <div class="field">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter your password"
-              required
+
+
+          <!-- TABS -->
+
+          <div class="auth-tabs">
+
+            <button
+              class="auth-tab active"
+              id="loginTab"
+              type="button"
             >
+              Sign In
+            </button>
+
+
+            <button
+              class="auth-tab"
+              id="signupTab"
+              type="button"
+            >
+              Create Account
+            </button>
+
           </div>
 
-          <button type="submit" id="loginButton">
-            Sign In
-          </button>
 
-        </form>
 
-        <div id="message" class="message"></div>
+          <!-- =================================================
+               LOGIN
+               ================================================= -->
+
+          <form
+            class="form-panel active"
+            id="loginForm"
+          >
+
+
+            <div class="field">
+
+              <label for="loginEmail">
+                Email Address
+              </label>
+
+              <input
+                id="loginEmail"
+                type="email"
+                placeholder="you@company.com"
+                autocomplete="email"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="loginPassword">
+                Password
+              </label>
+
+              <input
+                id="loginPassword"
+                type="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+              >
+
+            </div>
+
+
+            <button
+              class="primary-button"
+              id="loginButton"
+              type="submit"
+            >
+              Sign In
+            </button>
+
+
+            <div
+              class="form-message"
+              id="loginMessage"
+            ></div>
+
+
+          </form>
+
+
+
+          <!-- =================================================
+               SIGN UP
+               ================================================= -->
+
+          <form
+            class="form-panel"
+            id="signupForm"
+          >
+
+
+            <div class="field-row">
+
+
+              <div class="field">
+
+                <label for="signupName">
+                  Full Name
+                </label>
+
+                <input
+                  id="signupName"
+                  type="text"
+                  placeholder="Your name"
+                  autocomplete="name"
+                  required
+                >
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="signupCompany">
+                  Company
+                </label>
+
+                <input
+                  id="signupCompany"
+                  type="text"
+                  placeholder="Company name"
+                  autocomplete="organization"
+                  required
+                >
+
+              </div>
+
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="signupEmail">
+                Email Address
+              </label>
+
+              <input
+                id="signupEmail"
+                type="email"
+                placeholder="you@company.com"
+                autocomplete="email"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="signupPhone">
+                Phone Number
+              </label>
+
+              <input
+                id="signupPhone"
+                type="tel"
+                placeholder="+1 000 000 0000"
+                autocomplete="tel"
+              >
+
+            </div>
+
+
+            <div class="field-row">
+
+
+              <div class="field">
+
+                <label for="signupPassword">
+                  Password
+                </label>
+
+                <input
+                  id="signupPassword"
+                  type="password"
+                  placeholder="Create password"
+                  autocomplete="new-password"
+                  minlength="6"
+                  required
+                >
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="signupConfirm">
+                  Confirm Password
+                </label>
+
+                <input
+                  id="signupConfirm"
+                  type="password"
+                  placeholder="Repeat password"
+                  autocomplete="new-password"
+                  minlength="6"
+                  required
+                >
+
+              </div>
+
+
+            </div>
+
+
+            <button
+              class="primary-button"
+              id="signupButton"
+              type="submit"
+            >
+              Create Client Account
+            </button>
+
+
+            <div
+              class="form-message"
+              id="signupMessage"
+            ></div>
+
+
+          </form>
+
+
+          <div class="auth-note">
+
+            Your account is securely authenticated through
+            AWSZ's client portal.
+
+          </div>
+
+
+        </div>
+
 
       </div>
 
+
     </section>
+
 
   </div>
 
 
+
   <script>
 
-    // ==========================================
-    // SUPABASE CONFIGURATION
-    // ==========================================
+    /* =====================================================
+       SUPABASE
+       ===================================================== */
 
-    const SUPABASE_URL = "https://ausocdplliuftdqxbvwa.supabase.co";
+    const SUPABASE_URL =
+      "https://ausocdplliuftdqxbvwa.supabase.co";
 
-    const SUPABASE_KEY = "sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
 
-    const supabaseClient = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
+    const SUPABASE_KEY =
+      "sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
+
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+
+    /* =====================================================
+       ELEMENTS
+       ===================================================== */
+
+    const loginTab =
+      document.getElementById("loginTab");
+
+    const signupTab =
+      document.getElementById("signupTab");
+
+    const loginForm =
+      document.getElementById("loginForm");
+
+    const signupForm =
+      document.getElementById("signupForm");
+
+    const authTitle =
+      document.getElementById("authTitle");
+
+    const authDescription =
+      document.getElementById("authDescription");
+
+
+
+    /* =====================================================
+       SWITCH TO LOGIN
+       ===================================================== */
+
+    loginTab.addEventListener(
+      "click",
+      function(){
+
+        loginTab.classList.add("active");
+
+        signupTab.classList.remove("active");
+
+        loginForm.classList.add("active");
+
+        signupForm.classList.remove("active");
+
+        authTitle.textContent =
+          "Welcome back";
+
+        authDescription.textContent =
+          "Sign in to view your project and continue where you left off.";
+
+      }
     );
 
 
-    // ==========================================
-    // LOGIN
-    // ==========================================
 
-    const loginForm = document.getElementById("loginForm");
-    const loginButton = document.getElementById("loginButton");
-    const message = document.getElementById("message");
+    /* =====================================================
+       SWITCH TO SIGNUP
+       ===================================================== */
 
-    loginForm.addEventListener("submit", async function(event) {
+    signupTab.addEventListener(
+      "click",
+      function(){
 
-      event.preventDefault();
+        signupTab.classList.add("active");
 
-      message.className = "message";
-      message.textContent = "";
+        loginTab.classList.remove("active");
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
+        signupForm.classList.add("active");
 
-      loginButton.disabled = true;
-      loginButton.textContent = "Signing in...";
+        loginForm.classList.remove("active");
 
-      const { data, error } =
-        await supabaseClient.auth.signInWithPassword({
-          email: email,
-          password: password
-        });
+        authTitle.textContent =
+          "Create your account";
 
-      if (error) {
+        authDescription.textContent =
+          "Create your secure client account to access your AWSZ project.";
 
-        message.className = "message error";
-        message.textContent = error.message;
-
-        loginButton.disabled = false;
-        loginButton.textContent = "Sign In";
-
-        return;
       }
+    );
 
 
-      message.className = "message success";
-      message.textContent = "Login successful. Opening your portal...";
+
+    /* =====================================================
+       MESSAGE HELPERS
+       ===================================================== */
+
+    function showMessage(
+      element,
+      message,
+      type
+    ){
+
+      element.textContent =
+        message;
+
+      element.className =
+        "form-message show " + type;
+
+    }
 
 
-      // Temporary redirect.
-      // Baad mein isko actual dashboard page se connect karenge.
+    function clearMessage(element){
 
-      setTimeout(function() {
-        window.location.href = "dashboard.html";
-      }, 800);
+      element.textContent = "";
 
-    });
+      element.className =
+        "form-message";
+
+    }
+
+
+
+    /* =====================================================
+       LOGIN
+       ===================================================== */
+
+    loginForm.addEventListener(
+      "submit",
+      async function(event){
+
+        event.preventDefault();
+
+
+        const email =
+          document.getElementById(
+            "loginEmail"
+          ).value.trim();
+
+
+        const password =
+          document.getElementById(
+            "loginPassword"
+          ).value;
+
+
+        const button =
+          document.getElementById(
+            "loginButton"
+          );
+
+
+        const message =
+          document.getElementById(
+            "loginMessage"
+          );
+
+
+        clearMessage(message);
+
+
+        button.disabled = true;
+
+        button.textContent =
+          "Signing In...";
+
+
+        try{
+
+
+          const {
+            data,
+            error
+          } =
+            await supabaseClient.auth.signInWithPassword({
+
+              email:email,
+
+              password:password
+
+            });
+
+
+          if (error){
+
+            showMessage(
+              message,
+              error.message,
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          if (!data.user){
+
+            showMessage(
+              message,
+              "Unable to sign in. Please try again.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          window.location.href =
+            "dashboard.html";
+
+
+        }catch(error){
+
+          showMessage(
+            message,
+            "Something went wrong. Please try again.",
+            "error"
+          );
+
+        }finally{
+
+          button.disabled = false;
+
+          button.textContent =
+            "Sign In";
+
+        }
+
+      }
+    );
+
+
+
+    /* =====================================================
+       CREATE ACCOUNT
+       ===================================================== */
+
+    signupForm.addEventListener(
+      "submit",
+      async function(event){
+
+        event.preventDefault();
+
+
+        const fullName =
+          document.getElementById(
+            "signupName"
+          ).value.trim();
+
+
+        const companyName =
+          document.getElementById(
+            "signupCompany"
+          ).value.trim();
+
+
+        const email =
+          document.getElementById(
+            "signupEmail"
+          ).value.trim();
+
+
+        const phone =
+          document.getElementById(
+            "signupPhone"
+          ).value.trim();
+
+
+        const password =
+          document.getElementById(
+            "signupPassword"
+          ).value;
+
+
+        const confirmPassword =
+          document.getElementById(
+            "signupConfirm"
+          ).value;
+
+
+        const button =
+          document.getElementById(
+            "signupButton"
+          );
+
+
+        const message =
+          document.getElementById(
+            "signupMessage"
+          );
+
+
+        clearMessage(message);
+
+
+        /* PASSWORD CHECK */
+
+        if (password !== confirmPassword){
+
+          showMessage(
+            message,
+            "Passwords do not match.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (password.length < 6){
+
+          showMessage(
+            message,
+            "Password must be at least 6 characters.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        button.disabled = true;
+
+        button.textContent =
+          "Creating Account...";
+
+
+        try{
+
+
+          /* =============================================
+             CREATE AUTH USER
+             ============================================= */
+
+          const {
+            data,
+            error
+          } =
+            await supabaseClient.auth.signUp({
+
+              email:email,
+
+              password:password,
+
+              options:{
+
+                data:{
+
+                  full_name:fullName,
+
+                  company_name:companyName,
+
+                  phone:phone
+
+                }
+
+              }
+
+            });
+
+
+          if (error){
+
+            showMessage(
+              message,
+              error.message,
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          if (!data.user){
+
+            showMessage(
+              message,
+              "Account could not be created. Please try again.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          /* =============================================
+             CREATE CLIENT PROFILE
+             ============================================= */
+
+          const {
+            error:clientError
+          } =
+            await supabaseClient
+              .from("clients")
+              .insert({
+
+                id:data.user.id,
+
+                full_name:fullName,
+
+                company_name:companyName,
+
+                email:email,
+
+                phone:phone
+
+              });
+
+
+          if (clientError){
+
+            /*
+             * The Auth account was created.
+             * If profile creation is blocked by RLS,
+             * show the actual message instead of hiding it.
+             */
+
+            showMessage(
+              message,
+              "Account created, but your client profile could not be saved yet. Please contact AWSZ.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          /* =============================================
+             SUCCESS
+             ============================================= */
+
+          if (data.session){
+
+            showMessage(
+              message,
+              "Account created successfully. Opening your portal...",
+              "success"
+            );
+
+
+            setTimeout(
+              function(){
+
+                window.location.href =
+                  "dashboard.html";
+
+              },
+              900
+            );
+
+          }else{
+
+            showMessage(
+              message,
+              "Account created. Please check your email to confirm your account, then sign in.",
+              "success"
+            );
+
+          }
+
+
+        }catch(error){
+
+          showMessage(
+            message,
+            "Something went wrong. Please try again.",
+            "error"
+          );
+
+        }finally{
+
+          button.disabled = false;
+
+          button.textContent =
+            "Create Client Account";
+
+        }
+
+      }
+    );
 
   </script>
 
 </body>
 </html>
-```
