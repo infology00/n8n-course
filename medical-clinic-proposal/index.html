@@ -1,0 +1,4170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Confidential production-ready private clinic platform proposal.">
+<title>Private Clinic Platform — Interactive Proposal</title>
+
+<style>
+:root{
+  --blue:#155eef;
+  --blue2:#2563eb;
+  --sky:#65aaf7;
+  --ink:#0c1728;
+  --text:#26364b;
+  --muted:#66768b;
+  --line:#dbe8f6;
+  --soft:#f4f9ff;
+  --soft2:#eaf4ff;
+  --white:#fff;
+  --green:#138a5b;
+  --greenbg:#eaf9f2;
+  --amber:#b56c11;
+  --amberbg:#fff6e6;
+  --red:#c33d4d;
+  --shadow:0 24px 70px rgba(26,76,130,.11);
+  --shadow-sm:0 8px 26px rgba(26,76,130,.08);
+  --r:22px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:#f8fbff;
+  color:var(--ink);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:17px;
+  line-height:1.6;
+}
+button,a{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+
+.container{
+  width:min(1190px,calc(100% - 40px));
+  margin:auto;
+}
+
+.topbar{
+  background:#0b1b31;
+  color:#dceaff;
+  text-align:center;
+  padding:9px 15px;
+  font-size:12px;
+  letter-spacing:.05em;
+}
+
+.topbar b{color:#fff}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav{
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-weight:700;
+  letter-spacing:-.025em;
+}
+
+.brandmark{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  color:#fff;
+  background:linear-gradient(135deg,#155eef,#79baff);
+  box-shadow:0 8px 20px rgba(21,94,239,.25);
+}
+
+.navlinks{
+  display:flex;
+  gap:19px;
+  color:#596b80;
+  font-size:13px;
+}
+
+.navlinks a:hover{color:var(--blue)}
+
+.btn{
+  border:0;
+  border-radius:12px;
+  padding:12px 18px;
+  font-weight:650;
+  transition:.2s ease;
+}
+
+.btn.primary{
+  color:#fff;
+  background:var(--blue);
+  box-shadow:0 8px 22px rgba(21,94,239,.2);
+}
+
+.btn.primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 13px 30px rgba(21,94,239,.26);
+}
+
+.btn.secondary{
+  background:#fff;
+  color:var(--ink);
+  border:1px solid var(--line);
+}
+
+.btn.secondary:hover{
+  border-color:#abcbed;
+  background:#f7fbff;
+}
+
+.hero{
+  padding:82px 0 65px;
+  background:
+    radial-gradient(circle at 85% 15%,rgba(101,170,247,.20),transparent 30%),
+    radial-gradient(circle at 10% 25%,rgba(21,94,239,.08),transparent 30%),
+    #f8fbff;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.04fr .96fr;
+  gap:54px;
+  align-items:center;
+}
+
+.eyebrow{
+  display:inline-flex;
+  padding:7px 11px;
+  border-radius:999px;
+  color:var(--blue);
+  background:#e9f3ff;
+  border:1px solid #cfe3fb;
+  font-size:11px;
+  font-weight:750;
+  letter-spacing:.08em;
+}
+
+h1{
+  font-size:clamp(42px,5vw,66px);
+  line-height:1.03;
+  letter-spacing:-.055em;
+  font-weight:680;
+  margin:20px 0;
+}
+
+h2{
+  font-size:clamp(30px,3.4vw,44px);
+  line-height:1.08;
+  letter-spacing:-.04em;
+  font-weight:680;
+  margin:0 0 14px;
+}
+
+h3{
+  font-size:20px;
+  line-height:1.25;
+  font-weight:680;
+  margin:0 0 9px;
+}
+
+.hero-copy,
+.lead{
+  color:var(--muted);
+  font-size:18px;
+}
+
+.hero-copy{max-width:690px}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:27px 0;
+}
+
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:9px;
+  margin-top:28px;
+}
+
+.metric{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:13px;
+  box-shadow:var(--shadow-sm);
+}
+
+.metric strong{
+  display:block;
+  font-size:23px;
+  letter-spacing:-.04em;
+}
+
+.metric span{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.browser{
+  border:1px solid #cfe0f1;
+  border-radius:24px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:var(--shadow);
+}
+
+.browserbar{
+  height:46px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:0 15px;
+  background:#f3f7fb;
+  border-bottom:1px solid var(--line);
+}
+
+.dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#c8d5e3;
+}
+
+.url{
+  flex:1;
+  margin-left:8px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:5px 9px;
+  color:#7a899b;
+  font-size:10px;
+}
+
+.clinic{
+  padding:24px;
+  background:linear-gradient(145deg,#fff,#f0f7ff);
+}
+
+.clinic-nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:11px;
+  margin-bottom:28px;
+}
+
+.logo{
+  font-weight:750;
+  font-size:16px;
+}
+
+.book-mini{
+  color:#fff;
+  background:var(--blue);
+  border-radius:999px;
+  padding:7px 11px;
+}
+
+.doctor-hero{
+  display:grid;
+  grid-template-columns:1fr 145px;
+  gap:18px;
+  background:#e8f4ff;
+  border-radius:19px;
+  padding:20px;
+  overflow:hidden;
+}
+
+.doctor-hero h3{font-size:24px}
+
+.doctor-hero p{
+  color:#66788d;
+  font-size:12px;
+}
+
+.doctor-img{
+  width:145px;
+  height:165px;
+  object-fit:cover;
+  border-radius:18px 18px 0 0;
+}
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:5px 8px;
+  border-radius:8px;
+  font-size:10px;
+  font-weight:700;
+}
+
+.ok{
+  color:var(--green);
+  background:var(--greenbg);
+}
+
+.warn{
+  color:var(--amber);
+  background:var(--amberbg);
+}
+
+.section{
+  padding:82px 0;
+}
+
+.section.alt{
+  background:#eef6ff;
+  border-top:1px solid #e0eefc;
+  border-bottom:1px solid #e0eefc;
+}
+
+.section-head{
+  max-width:800px;
+  margin-bottom:34px;
+}
+
+.kicker{
+  color:var(--blue);
+  font-size:11px;
+  font-weight:750;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  margin-bottom:9px;
+}
+
+.problem{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:13px;
+  align-items:start;
+  padding:17px 18px;
+  margin-bottom:23px;
+  border:1px solid #f0d9bd;
+  border-radius:16px;
+  background:#fffaf4;
+}
+
+.problem-icon{
+  width:35px;
+  height:35px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  color:#a65d09;
+  background:#ffedd3;
+  font-weight:800;
+}
+
+.problem b{
+  display:block;
+  color:#6e481c;
+  margin-bottom:2px;
+}
+
+.problem span{
+  color:#866e52;
+  font-size:14px;
+}
+
+.response{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:13px;
+  align-items:start;
+  padding:17px 18px;
+  margin-bottom:24px;
+  border:1px solid #cfe5fb;
+  border-radius:16px;
+  background:#f4f9ff;
+}
+
+.response-icon{
+  width:35px;
+  height:35px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  color:var(--blue);
+  background:#e1efff;
+  font-weight:800;
+}
+
+.response b{
+  display:block;
+  color:#18395f;
+  margin-bottom:2px;
+}
+
+.response span{
+  color:#60738b;
+  font-size:14px;
+}
+
+.requirements{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.req{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+}
+
+.req-head{
+  padding:20px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.req-code{
+  width:37px;
+  height:37px;
+  display:grid;
+  place-items:center;
+  flex:none;
+  border-radius:11px;
+  color:var(--blue);
+  background:#eaf3ff;
+  font-weight:750;
+}
+
+.req-copy{flex:1}
+
+.req-copy p{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.req-toggle{
+  border:1px solid var(--line);
+  background:#fff;
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  color:var(--blue);
+}
+
+.req-body{
+  display:none;
+  padding:0 20px 20px;
+  border-top:1px solid var(--line);
+  background:#fbfdff;
+}
+
+.req.open .req-body{display:block}
+
+.req-body ul{
+  margin:15px 0 0;
+  padding-left:20px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.req-body li{margin:7px 0}
+
+.visual{
+  margin-top:26px;
+  border:1px solid var(--line);
+  border-radius:23px;
+  background:#fff;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.visual-top{
+  padding:12px 17px;
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+  background:#f8fbfe;
+  color:#6a7b90;
+  font-size:11px;
+}
+
+.visual-body{padding:25px}
+
+.tabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+
+.tab{
+  border:1px solid var(--line);
+  background:#fff;
+  color:#607187;
+  border-radius:10px;
+  padding:9px 12px;
+  font-size:12px;
+  font-weight:650;
+}
+
+.tab.active{
+  background:var(--blue);
+  color:#fff;
+  border-color:var(--blue);
+}
+
+/* APPOINTMENT */
+.appointment{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:18px;
+}
+
+.call{
+  position:relative;
+  min-height:420px;
+  border-radius:20px;
+  overflow:hidden;
+  background:#0b1626;
+}
+
+.call-bg{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg,transparent 45%,rgba(0,0,0,.75)),
+    url("https://images.unsplash.com/photo-1550831107-1553da8c8464?auto=format&fit=crop&w=1100&q=85")
+    center/cover;
+}
+
+.self{
+  position:absolute;
+  top:15px;
+  right:15px;
+  width:145px;
+  height:108px;
+  border-radius:14px;
+  overflow:hidden;
+  background:#17283d;
+  border:2px solid rgba(255,255,255,.8);
+}
+
+.self video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
+}
+
+.camera-placeholder{
+  height:100%;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  color:#a9bbcf;
+  font-size:11px;
+  padding:10px;
+}
+
+.call-info{
+  position:absolute;
+  left:19px;
+  bottom:20px;
+  color:#fff;
+}
+
+.call-info strong{
+  display:block;
+  font-size:20px;
+}
+
+.call-info span{
+  font-size:11px;
+  opacity:.82;
+}
+
+.call-buttons{
+  position:absolute;
+  right:18px;
+  bottom:17px;
+  display:flex;
+  gap:7px;
+}
+
+.call-btn{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.12);
+  color:#fff;
+}
+
+.call-btn.end{
+  background:#d84b59;
+  border-color:#d84b59;
+}
+
+.booking{
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:20px;
+}
+
+.step{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px;
+  margin:8px 0;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:#fbfdff;
+  font-size:13px;
+}
+
+.step.active{
+  background:#edf6ff;
+  border-color:#acd0f4;
+}
+
+/* CMS */
+.cms{
+  display:grid;
+  grid-template-columns:185px 1fr;
+  min-height:430px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.cms-side{
+  padding:14px;
+  background:#f4f8fc;
+  border-right:1px solid var(--line);
+}
+
+.cms-side button{
+  width:100%;
+  text-align:left;
+  border:0;
+  background:transparent;
+  color:#65758a;
+  border-radius:8px;
+  padding:8px;
+  font-size:11px;
+}
+
+.cms-side button.active{
+  background:#e4f0ff;
+  color:var(--blue);
+  font-weight:700;
+}
+
+.cms-main{padding:20px}
+
+.cms-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:16px;
+}
+
+.table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:11px;
+}
+
+.table th,
+.table td{
+  padding:10px;
+  text-align:left;
+  border-bottom:1px solid var(--line);
+}
+
+.editor{
+  display:none;
+  margin-top:17px;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.editor.show{display:grid}
+
+.field{
+  padding:11px;
+  border:1px solid var(--line);
+  border-radius:10px;
+}
+
+.field small{
+  display:block;
+  color:#8492a4;
+}
+
+/* SEARCH */
+.search{
+  max-width:790px;
+  margin:auto;
+}
+
+.searchbox{
+  border:1px solid #ccd9e8;
+  border-radius:25px;
+  padding:11px 16px;
+  color:#52647a;
+  margin-bottom:24px;
+}
+
+.google-result{
+  padding:15px 0 25px;
+  border-bottom:1px solid var(--line);
+}
+
+.google-url{
+  color:#168038;
+  font-size:12px;
+}
+
+.google-title{
+  color:#1a0dab;
+  font-size:21px;
+  margin:3px 0;
+}
+
+.google-desc{
+  color:#4f5660;
+  font-size:13px;
+}
+
+.rich-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:11px;
+}
+
+.rich-tags span{
+  padding:5px 7px;
+  border:1px solid var(--line);
+  border-radius:7px;
+  font-size:9px;
+}
+
+/* DASHBOARD */
+.dash{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:11px;
+}
+
+.dash-card{
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:17px;
+}
+
+.dash-card strong{
+  display:block;
+  font-size:26px;
+  margin:5px 0;
+}
+
+.bars{
+  height:125px;
+  display:flex;
+  align-items:end;
+  gap:7px;
+  margin-top:22px;
+}
+
+.bar{
+  flex:1;
+  background:linear-gradient(#63aaf8,#d9ecff);
+  border-radius:5px 5px 0 0;
+}
+
+/* REDIRECT TESTER */
+.redirect-tester{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:10px;
+  align-items:center;
+}
+
+.url-input{
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:12px;
+  width:100%;
+  outline:none;
+}
+
+.url-input:focus{
+  border-color:#8dbef1;
+  box-shadow:0 0 0 3px #e8f3ff;
+}
+
+.redirect-result{
+  margin-top:14px;
+  padding:15px;
+  border-radius:13px;
+  background:#f3fbf6;
+  color:#24664a;
+  border:1px solid #cfeadc;
+  display:none;
+}
+
+/* QA */
+.qa{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:11px;
+}
+
+.qa-card{
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:17px;
+  background:#fff;
+}
+
+.qa-card strong{
+  display:block;
+  font-size:26px;
+  margin:5px 0;
+}
+
+/* CODE */
+.code{
+  background:#0b1729;
+  border-radius:17px;
+  padding:21px;
+  color:#cde4ff;
+  font:12px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;
+  overflow:auto;
+}
+
+.c1{color:#77b9ff}
+.c2{color:#7ee0ac}
+.c3{color:#ffd477}
+
+/* ARCH */
+.arch{
+  display:grid;
+  grid-template-columns:1fr 40px 1fr 40px 1fr 40px 1fr;
+  align-items:center;
+  gap:7px;
+}
+
+.node{
+  padding:20px 13px;
+  text-align:center;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:var(--shadow-sm);
+}
+
+.node strong{display:block}
+.node small{color:var(--muted);font-size:11px}
+
+.arrow{
+  color:var(--blue);
+  font-size:22px;
+  text-align:center;
+}
+
+/* FLOW */
+.flow{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+
+.flow-card{
+  position:relative;
+  padding:18px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:17px;
+}
+
+.flow-card b{display:block}
+.flow-card small{color:var(--muted)}
+
+/* TIMELINE */
+.timeline{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.phase{
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:#fff;
+  box-shadow:var(--shadow-sm);
+}
+
+.day{
+  color:var(--blue);
+  font-size:11px;
+  font-weight:750;
+  letter-spacing:.05em;
+}
+
+.phase ul{
+  padding-left:19px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* TEAM */
+.team{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px;
+}
+
+.person{
+  padding:21px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:19px;
+}
+
+.avatar{
+  width:47px;
+  height:47px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  background:#e8f2ff;
+  color:var(--blue);
+  font-weight:750;
+  margin-bottom:14px;
+}
+
+.person p{
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* COMMERCIAL */
+.commercial{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:18px;
+}
+
+.price-box{
+  background:#0c1b31;
+  color:#fff;
+  border-radius:24px;
+  padding:28px;
+  box-shadow:var(--shadow);
+}
+
+.price{
+  font-size:57px;
+  line-height:1;
+  font-weight:680;
+  letter-spacing:-.05em;
+}
+
+.price-box p{color:#afbed0}
+
+.costs{
+  margin-top:24px;
+  display:grid;
+}
+
+.cost{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:12px 0;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  color:#dce7f4;
+  font-size:13px;
+}
+
+.payment{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.pay{
+  padding:19px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#fff;
+}
+
+.pay strong{
+  display:block;
+  font-size:23px;
+}
+
+/* RISKS */
+.risks{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+
+.risk{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:17px;
+}
+
+.risk b{display:block}
+.risk span{font-size:12px;color:var(--muted)}
+
+/* FAQ */
+.faq{
+  display:grid;
+  gap:9px;
+}
+
+details{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:17px 19px;
+}
+
+summary{
+  cursor:pointer;
+  font-weight:650;
+}
+
+details p{
+  color:var(--muted);
+  font-size:14px;
+  margin:11px 0 0;
+}
+
+/* FINAL */
+.final{
+  padding:90px 0;
+  text-align:center;
+  background:
+    radial-gradient(circle at 50% 0,rgba(101,170,247,.21),transparent 37%),
+    #eef7ff;
+}
+
+.final .lead{
+  max-width:670px;
+  margin:0 auto 25px;
+}
+
+footer{
+  padding:28px 0;
+  background:#0b1b31;
+  color:#aebed0;
+  text-align:center;
+  font-size:11px;
+}
+
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:500;
+  background:rgba(4,14,28,.75);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.open{display:flex}
+
+.modal-card{
+  width:min(620px,100%);
+  background:#fff;
+  border-radius:23px;
+  padding:23px;
+  box-shadow:0 30px 100px rgba(0,0,0,.28);
+}
+
+.full-camera{
+  width:100%;
+  aspect-ratio:16/9;
+  border-radius:16px;
+  background:#0c1728;
+  overflow:hidden;
+  margin:15px 0;
+}
+
+.full-camera video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* REVEAL */
+.reveal{
+  opacity:0;
+  transform:translateY(17px);
+  transition:.6s ease;
+}
+
+.reveal.show{
+  opacity:1;
+  transform:none;
+}
+
+/* MOBILE */
+@media(max-width:950px){
+  .navlinks{display:none}
+  .hero-grid,
+  .appointment,
+  .commercial{grid-template-columns:1fr}
+  .metrics{grid-template-columns:repeat(3,1fr)}
+  .requirements{grid-template-columns:1fr}
+  .arch{grid-template-columns:1fr}
+  .arrow{transform:rotate(90deg)}
+  .flow{grid-template-columns:repeat(2,1fr)}
+  .timeline{grid-template-columns:1fr}
+  .team{grid-template-columns:repeat(2,1fr)}
+  .risks{grid-template-columns:repeat(2,1fr)}
+  .qa{grid-template-columns:repeat(2,1fr)}
+  .dash{grid-template-columns:repeat(2,1fr)}
+  .payment{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:620px){
+  body{font-size:16px}
+  .container{width:calc(100% - 28px)}
+  .section{padding:58px 0}
+  .hero{padding:55px 0}
+  h1{font-size:40px}
+  h2{font-size:31px}
+  .metrics,
+  .team,
+  .risks,
+  .qa,
+  .dash,
+  .payment,
+  .flow{grid-template-columns:1fr}
+  .doctor-hero{grid-template-columns:1fr}
+  .doctor-img{width:100%;height:220px}
+  .cms{grid-template-columns:1fr}
+  .cms-side{border-right:0;border-bottom:1px solid var(--line)}
+  .redirect-tester{grid-template-columns:1fr}
+}
+
+/* PRINT */
+@media print{
+  @page{
+    size:A4;
+    margin:11mm;
+  }
+
+  html,body{
+    background:#fff!important;
+    color:#000!important;
+    font-size:10.5pt;
+  }
+
+  header,
+  .topbar,
+  .navlinks,
+  .print-btn,
+  .actions,
+  .tabs,
+  .modal,
+  .call-buttons,
+  .req-toggle{
+    display:none!important;
+  }
+
+  .hero,
+  .section,
+  .section.alt,
+  .final{
+    background:#fff!important;
+  }
+
+  .hero{padding:30px 0}
+  .section{padding:30px 0}
+
+  .reveal{
+    opacity:1!important;
+    transform:none!important;
+  }
+
+  .problem,
+  .response,
+  .req,
+  .visual,
+  .phase,
+  .person,
+  .risk,
+  .qa-card,
+  .pay,
+  .price-box,
+  details{
+    break-inside:avoid;
+    box-shadow:none!important;
+  }
+
+  .req-body{
+    display:block!important;
+  }
+
+  .visual{
+    break-inside:avoid;
+  }
+
+  footer{
+    background:#fff!important;
+    color:#555!important;
+    border-top:1px solid #ddd;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <b>CONFIDENTIAL BID PREVIEW</b>
+  &nbsp;•&nbsp; PRIVATE CLINIC PLATFORM
+  &nbsp;•&nbsp; 20 WORKING DAYS
+  &nbsp;•&nbsp; €8,700 FIXED PRICE
+</div>
+
+<header>
+  <div class="container nav">
+
+    <a href="#overview" class="brand">
+      <span class="brandmark">A</span>
+      <span>AWSZ Proposal Studio</span>
+    </a>
+
+    <nav class="navlinks">
+      <a href="#scope">Requirements</a>
+      <a href="#experience">Experience</a>
+      <a href="#preview">Build Preview</a>
+      <a href="#delivery">Delivery</a>
+      <a href="#acceptance">QA</a>
+      <a href="#commercial">Commercial</a>
+    </nav>
+
+    <button class="btn primary" type="button" onclick="printProposal()">
+      Print Proposal
+    </button>
+
+  </div>
+</header>
+
+
+<!-- HERO -->
+<section class="hero" id="overview">
+  <div class="container hero-grid">
+
+    <div>
+
+      <span class="eyebrow">PRODUCTION-READY CLINIC PLATFORM</span>
+
+      <h1>
+        A clinic platform that can be understood before it is built.
+      </h1>
+
+      <p class="hero-copy">
+        This proposal turns the requested scope into a visible product:
+        public clinic experience, doctors, programmes, treatments,
+        patient booking, video-consultation interaction, CMS,
+        migration, security, QA and handover.
+      </p>
+
+      <div class="actions">
+        <a href="#preview" class="btn primary">Explore the Build</a>
+        <a href="#scope" class="btn secondary">See the Problems First</a>
+      </div>
+
+      <div class="metrics">
+        <div class="metric"><strong>26</strong><span>Templates</span></div>
+        <div class="metric"><strong>14</strong><span>CMS types</span></div>
+        <div class="metric"><strong>~103</strong><span>Redirects</span></div>
+        <div class="metric"><strong>20</strong><span>Working days</span></div>
+        <div class="metric"><strong>€8.7k</strong><span>Fixed price</span></div>
+      </div>
+
+    </div>
+
+
+    <div class="browser">
+
+      <div class="browserbar">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <div class="url">
+          clinic.pt / professionals / cardiology
+        </div>
+      </div>
+
+      <div class="clinic">
+
+        <div class="clinic-nav">
+          <div class="logo">CLINIC / LISBOA</div>
+          <div class="book-mini">Book Consultation</div>
+        </div>
+
+        <div class="doctor-hero">
+
+          <div>
+            <small>MEDICAL SPECIALIST</small>
+
+            <h3>Dr. Ana Martins</h3>
+
+            <p>
+              Cardiology · Consultations · Diagnostics
+            </p>
+
+            <span class="status ok">
+              ● Available for booking
+            </span>
+          </div>
+
+          <img
+            class="doctor-img"
+            src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=85"
+            alt="Doctor profile preview">
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- SECTION 01 -->
+<section class="section" id="scope">
+
+  <div class="container">
+
+    <div class="section-head reveal">
+
+      <div class="kicker">01 / UNDERSTANDING THE REQUEST</div>
+
+      <h2>
+        First, the problems the platform needs to solve.
+      </h2>
+
+      <p class="lead">
+        The RFP is not simply asking for a collection of attractive pages.
+        It describes a complex clinical content, booking and operational
+        platform. The implementation below answers those problems one by one.
+      </p>
+
+    </div>
+
+
+    <div class="problem">
+
+      <div class="problem-icon">!</div>
+
+      <div>
+        <b>Problem identified from the brief</b>
+        <span>
+          A large number of public page types can become difficult to maintain
+          if each page is treated as an independent build.
+        </span>
+      </div>
+
+    </div>
+
+    <div class="response">
+
+      <div class="response-icon">✓</div>
+
+      <div>
+        <b>Our response</b>
+        <span>
+          Build reusable templates powered by a relational content model,
+          so the same underlying data can generate consistent experiences
+          across the clinic.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="requirements">
+
+      <div class="req open">
+
+        <div class="req-head">
+
+          <div class="req-code">A</div>
+
+          <div class="req-copy">
+            <h3>Design System & Global Experience</h3>
+            <p>
+              One consistent experience across the whole clinic.
+            </p>
+          </div>
+
+          <button class="req-toggle" onclick="toggleReq(this)">−</button>
+
+        </div>
+
+        <div class="req-body">
+
+          <ul>
+            <li>Header and navigation architecture</li>
+            <li>Mega menu and breadcrumbs</li>
+            <li>Search and sticky booking CTA</li>
+            <li>WhatsApp access</li>
+            <li>Heroes, cards, FAQs, reviews and CTAs</li>
+            <li>Mobile-first WCAG-oriented interface</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <div class="req">
+
+        <div class="req-head">
+
+          <div class="req-code">B</div>
+
+          <div class="req-copy">
+            <h3>Relational CMS</h3>
+            <p>
+              The editor needs control without developer dependency.
+            </p>
+          </div>
+
+          <button class="req-toggle" onclick="toggleReq(this)">+</button>
+
+        </div>
+
+        <div class="req-body">
+
+          <ul>
+            <li>14 content types</li>
+            <li>Relationships between entities</li>
+            <li>Draft / preview / publish</li>
+            <li>Revision history</li>
+            <li>Media and alt-text management</li>
+            <li>CSV / JSON import</li>
+            <li>Audit trail</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <div class="req">
+
+        <div class="req-head">
+
+          <div class="req-code">C</div>
+
+          <div class="req-copy">
+            <h3>26 Public Templates</h3>
+            <p>
+              Every important clinical route needs a reusable structure.
+            </p>
+          </div>
+
+          <button class="req-toggle" onclick="toggleReq(this)">+</button>
+
+        </div>
+
+        <div class="req-body">
+
+          <ul>
+            <li>Homepage</li>
+            <li>Symptoms and symptom clusters</li>
+            <li>Programmes and subpages</li>
+            <li>Consultations and treatments</li>
+            <li>Diagnostics</li>
+            <li>Professionals</li>
+            <li>Articles, guides, FAQs, media and reviews</li>
+            <li>Institutional and legal pages</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <div class="req">
+
+        <div class="req-head">
+
+          <div class="req-code">D</div>
+
+          <div class="req-copy">
+            <h3>Booking & Patient Journey</h3>
+            <p>
+              A patient must always know what to do next.
+            </p>
+          </div>
+
+          <button class="req-toggle" onclick="toggleReq(this)">+</button>
+
+        </div>
+
+        <div class="req-body">
+
+          <ul>
+            <li>Consultation / treatment / programme selection</li>
+            <li>Professional selection where API supports it</li>
+            <li>Availability</li>
+            <li>Confirmation</li>
+            <li>Error and downtime handling</li>
+            <li>WhatsApp / phone / email / form fallbacks</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <div class="req">
+
+        <div class="req-head">
+
+          <div class="req-code">E</div>
+
+          <div class="req-copy">
+            <h3>SEO, SSR & Migration</h3>
+            <p>
+              Discoverability and migration need technical foundations.
+            </p>
+          </div>
+
+          <button class="req-toggle" onclick="toggleReq(this)">+</button>
+
+        </div>
+
+        <div class="req-body">
+
+          <ul>
+            <li>Server-side rendering</li>
+            <li>Metadata and Open Graph</li>
+            <li>Canonical URLs</li>
+            <li>JSON-LD</li>
+            <li>Dynamic sitemap and robots</li>
+            <li>~103 1:1 legacy redirects</li>
+            <li>Core Web Vitals optimisation</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <div class="req">
+
+        <div class="req-head">
+
+          <div class="req-code">F</div>
+
+          <div class="req-copy">
+            <h3>QA & Acceptance</h3>
+            <p>
+              The platform needs evidence, not assumptions.
+            </p>
+          </div>
+
+          <button class="req-toggle" onclick="toggleReq(this)">+</button>
+
+        </div>
+
+        <div class="req-body">
+
+          <ul>
+            <li>360–1920px testing</li>
+            <li>Mobile and desktop browsers</li>
+            <li>Accessibility audits</li>
+            <li>Lighthouse thresholds</li>
+            <li>Core Web Vitals</li>
+            <li>Console-error checks</li>
+            <li>Acceptance evidence</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <div class="req">
+
+        <div class="req-head">
+
+          <div class="req-code">G</div>
+
+          <div class="req-copy">
+            <h3>Handover & Warranty</h3>
+            <p>
+              Knowledge needs to remain with the client.
+            </p>
+          </div>
+
+          <button class="req-toggle" onclick="toggleReq(this)">+</button>
+
+        </div>
+
+        <div class="req-body">
+
+          <ul>
+            <li>Technical README</li>
+            <li>Editor manual</li>
+            <li>Two recorded training sessions</li>
+            <li>Known-issues backlog</li>
+            <li>30-day warranty</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- EXPERIENCE / UI -->
+<section class="section alt" id="experience">
+
+  <div class="container">
+
+    <div class="section-head reveal">
+
+      <div class="kicker">02 / THE EXPERIENCE</div>
+
+      <h2>
+        What the patient actually sees.
+      </h2>
+
+      <p class="lead">
+        A medical website should not feel like a database exposed to a patient.
+        The data model stays behind the scenes while the front-end keeps the
+        journey simple.
+      </p>
+
+    </div>
+
+
+    <div class="problem">
+      <div class="problem-icon">!</div>
+      <div>
+        <b>Patient problem</b>
+        <span>
+          Patients can arrive through a symptom, a doctor, a treatment,
+          a programme or a search result. They still need a clear route
+          toward the right action.
+        </span>
+      </div>
+    </div>
+
+
+    <div class="response">
+      <div class="response-icon">✓</div>
+      <div>
+        <b>Platform response</b>
+        <span>
+          Related-content blocks connect the clinical journey:
+          symptom → programme → professional → consultation → booking.
+        </span>
+      </div>
+    </div>
+
+
+    <div class="visual">
+
+      <div class="visual-top">
+        <span>PUBLIC WEBSITE / INTERACTIVE PREVIEW</span>
+        <span>SIMULATION</span>
+      </div>
+
+      <div class="visual-body">
+
+        <div class="browser">
+
+          <div class="browserbar">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <div class="url">
+              clinic.pt / programmes / heart-health
+            </div>
+          </div>
+
+          <div class="clinic">
+
+            <div class="clinic-nav">
+              <div class="logo">CLINIC / LISBOA</div>
+
+              <div style="display:flex;gap:10px;align-items:center">
+                <span>Symptoms</span>
+                <span>Doctors</span>
+                <span>Programmes</span>
+                <span class="book-mini">Book</span>
+              </div>
+            </div>
+
+            <div class="doctor-hero">
+
+              <div>
+
+                <small>HEALTH PROGRAMME</small>
+
+                <h3>
+                  Preventive Heart Health Programme
+                </h3>
+
+                <p>
+                  A connected pathway combining consultation,
+                  diagnostics and specialist care.
+                </p>
+
+                <div style="display:flex;gap:7px;flex-wrap:wrap">
+
+                  <span class="status ok">✓ Doctors</span>
+                  <span class="status ok">✓ Diagnostics</span>
+                  <span class="status ok">✓ FAQ</span>
+                  <span class="status ok">✓ Booking</span>
+
+                </div>
+
+                <br>
+
+                <button class="btn primary">
+                  Start Booking
+                </button>
+
+              </div>
+
+              <img
+                class="doctor-img"
+                src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=85"
+                alt="Doctor">
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- LIVE BUILD -->
+<section class="section" id="preview">
+
+  <div class="container">
+
+    <div class="section-head reveal">
+
+      <div class="kicker">03 / LIVE BUILD PREVIEW</div>
+
+      <h2>
+        Click the part you want to inspect.
+      </h2>
+
+      <p class="lead">
+        Each tab below demonstrates a different part of the requested
+        platform. This is where the proposal becomes a product walkthrough.
+      </p>
+
+    </div>
+
+
+    <div class="problem">
+      <div class="problem-icon">!</div>
+      <div>
+        <b>Implementation problem</b>
+        <span>
+          A written proposal cannot easily show how booking, CMS,
+          redirects, QA and server-rendering behave together.
+        </span>
+      </div>
+    </div>
+
+
+    <div class="response">
+      <div class="response-icon">✓</div>
+      <div>
+        <b>Our response</b>
+        <span>
+          Replace abstract descriptions with interactive UI simulations
+          that demonstrate the intended implementation.
+        </span>
+      </div>
+    </div>
+
+
+    <div class="tabs">
+
+      <button class="tab active" data-tab="site">Website</button>
+      <button class="tab" data-tab="call">Doctor Call</button>
+      <button class="tab" data-tab="cms">CMS</button>
+      <button class="tab" data-tab="booking">Booking</button>
+      <button class="tab" data-tab="google">Google</button>
+      <button class="tab" data-tab="redirect">Redirect Tester</button>
+      <button class="tab" data-tab="qa">QA</button>
+      <button class="tab" data-tab="ssr">SSR</button>
+
+    </div>
+
+
+    <div class="visual">
+
+      <div class="visual-top">
+        <span>BUILD SIMULATION</span>
+        <span>NO REAL PATIENT DATA</span>
+      </div>
+
+
+      <!-- WEBSITE -->
+      <div class="visual-body panel active" id="panel-site">
+
+        <div class="browser">
+
+          <div class="browserbar">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+
+            <div class="url">
+              clinic.pt / professionals / ana-martins
+            </div>
+          </div>
+
+          <div class="clinic">
+
+            <div class="clinic-nav">
+              <div class="logo">CLINIC / LISBOA</div>
+              <div class="book-mini">Book Consultation</div>
+            </div>
+
+            <div class="doctor-hero">
+
+              <div>
+
+                <small>PROFESSIONAL PROFILE</small>
+
+                <h3>Dr. Ana Martins</h3>
+
+                <p>
+                  Cardiology · Consultation · Diagnostic pathways
+                </p>
+
+                <span class="status ok">
+                  ● Booking available
+                </span>
+
+                <br><br>
+
+                <button class="btn primary">
+                  Book with Dr. Martins
+                </button>
+
+              </div>
+
+              <img
+                class="doctor-img"
+                src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=85"
+                alt="Doctor">
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- CALL -->
+      <div class="visual-body panel" id="panel-call" style="display:none">
+
+        <div class="appointment">
+
+          <div class="call">
+
+            <div class="call-bg"></div>
+
+            <div class="self">
+
+              <div
+                class="camera-placeholder"
+                id="smallCameraPlaceholder">
+                Patient camera<br>
+                permission not requested
+              </div>
+
+              <video
+                id="patientCamera"
+                autoplay
+                muted
+                playsinline>
+              </video>
+
+            </div>
+
+            <div class="call-info">
+              <strong>Dr. Ana Martins</strong>
+              <span>
+                Cardiology · Secure consultation interface
+              </span>
+            </div>
+
+            <div class="call-buttons">
+
+              <button
+                class="call-btn"
+                title="Enable camera"
+                onclick="requestCamera()">
+                ◉
+              </button>
+
+              <button class="call-btn">
+                🎙
+              </button>
+
+              <button class="call-btn end">
+                ×
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="booking">
+
+            <span class="eyebrow">PATIENT EXPERIENCE</span>
+
+            <h3 style="margin-top:15px">
+              Video consultation interaction
+            </h3>
+
+            <p style="color:var(--muted);font-size:13px">
+              The visual demonstrates how a future consultation interface
+              can request patient camera access.
+            </p>
+
+            <div class="step active">
+              <span>Doctor joined</span>
+              <span>✓</span>
+            </div>
+
+            <div class="step">
+              <span>Patient camera</span>
+              <span>Permission</span>
+            </div>
+
+            <div class="step">
+              <span>Microphone</span>
+              <span>Permission</span>
+            </div>
+
+            <div class="step">
+              <span>Consultation</span>
+              <span>Secure</span>
+            </div>
+
+            <button
+              class="btn primary"
+              style="width:100%;margin-top:10px"
+              onclick="requestCamera()">
+              Allow Camera for Consultation
+            </button>
+
+            <p style="font-size:11px;color:#7a899c">
+              Demo only. Camera video stays local and is not uploaded.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- CMS -->
+      <div class="visual-body panel" id="panel-cms" style="display:none">
+
+        <div class="cms">
+
+          <aside class="cms-side">
+
+            <button class="active">Dashboard</button>
+            <button>Symptoms</button>
+            <button>Programmes</button>
+            <button>Consultations</button>
+            <button>Treatments</button>
+            <button>Diagnostics</button>
+            <button>Professionals</button>
+            <button>Articles</button>
+            <button>Guides</button>
+            <button>FAQs</button>
+            <button>Media</button>
+            <button>Reviews</button>
+            <button>Institutional</button>
+            <button>Legal</button>
+
+          </aside>
+
+          <div class="cms-main">
+
+            <div class="cms-title">
+
+              <div>
+                <small style="color:#7b8a9c">
+                  CONTENT MANAGEMENT
+                </small>
+
+                <h3>Professionals</h3>
+              </div>
+
+              <button
+                class="btn primary"
+                onclick="showEditor()">
+                Edit Record
+              </button>
+
+            </div>
+
+
+            <table class="table">
+
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Specialty</th>
+                  <th>Relations</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr>
+                  <td>Dr. Ana Martins</td>
+                  <td>Cardiology</td>
+                  <td>5</td>
+                  <td><span class="status ok">Published</span></td>
+                </tr>
+
+                <tr>
+                  <td>Dr. João Silva</td>
+                  <td>Orthopaedics</td>
+                  <td>7</td>
+                  <td><span class="status ok">Published</span></td>
+                </tr>
+
+                <tr>
+                  <td>Dr. Sofia Costa</td>
+                  <td>Dermatology</td>
+                  <td>4</td>
+                  <td><span class="status warn">Draft</span></td>
+                </tr>
+
+              </tbody>
+
+            </table>
+
+
+            <div class="editor" id="cmsEditor">
+
+              <div class="field">
+                <small>Name</small>
+                Dr. Ana Martins
+              </div>
+
+              <div class="field">
+                <small>Specialty</small>
+                Cardiology
+              </div>
+
+              <div class="field">
+                <small>Related consultation</small>
+                Cardiology Consultation
+              </div>
+
+              <div class="field">
+                <small>SEO title</small>
+                Cardiology Consultation
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- BOOKING -->
+      <div class="visual-body panel" id="panel-booking" style="display:none">
+
+        <div class="appointment">
+
+          <div class="booking">
+
+            <span class="eyebrow">BOOKING FLOW</span>
+
+            <h3 style="margin-top:15px">
+              From service to confirmation
+            </h3>
+
+            <div class="step active">
+              <span>1. Choose service</span>
+              <b>✓</b>
+            </div>
+
+            <div class="step">
+              <span>2. Choose professional</span>
+              <span>2</span>
+            </div>
+
+            <div class="step">
+              <span>3. Check availability</span>
+              <span>API</span>
+            </div>
+
+            <div class="step">
+              <span>4. Confirm patient request</span>
+              <span>4</span>
+            </div>
+
+            <div class="step">
+              <span>5. Confirmation</span>
+              <span>✓</span>
+            </div>
+
+          </div>
+
+
+          <div class="booking">
+
+            <span class="eyebrow">RELIABILITY</span>
+
+            <h3 style="margin-top:15px">
+              What happens when something fails?
+            </h3>
+
+            <div class="step">
+              <span>API available</span>
+              <span class="status ok">Continue</span>
+            </div>
+
+            <div class="step">
+              <span>No availability</span>
+              <span class="status warn">Fallback</span>
+            </div>
+
+            <div class="step">
+              <span>API downtime</span>
+              <span class="status warn">Fallback</span>
+            </div>
+
+            <hr style="border:0;border-top:1px solid var(--line)">
+
+            <p style="font-size:13px;color:var(--muted)">
+              Alternative patient routes:
+            </p>
+
+            <div class="flow">
+
+              <div class="flow-card">
+                <b>WhatsApp</b>
+                <small>Direct contact</small>
+              </div>
+
+              <div class="flow-card">
+                <b>Phone</b>
+                <small>Call route</small>
+              </div>
+
+              <div class="flow-card">
+                <b>Email</b>
+                <small>Request route</small>
+              </div>
+
+              <div class="flow-card">
+                <b>Form</b>
+                <small>Fallback</small>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- GOOGLE -->
+      <div class="visual-body panel" id="panel-google" style="display:none">
+
+        <div class="search">
+
+          <div class="searchbox">
+            🔍 cardiology consultation Lisbon
+          </div>
+
+          <div class="google-result">
+
+            <div class="google-url">
+              https://clinic.pt/consultations/cardiology
+            </div>
+
+            <div class="google-title">
+              Cardiology Consultation | Private Clinic Lisbon
+            </div>
+
+            <div class="google-desc">
+              Consultation information, professionals, related diagnostics,
+              FAQs and appointment options.
+            </div>
+
+            <div class="rich-tags">
+              <span>MedicalProcedure</span>
+              <span>Physician</span>
+              <span>FAQPage</span>
+              <span>BreadcrumbList</span>
+              <span>AggregateRating</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- REDIRECT -->
+      <div class="visual-body panel" id="panel-redirect" style="display:none">
+
+        <h3>Legacy URL tester</h3>
+
+        <p style="color:var(--muted);font-size:14px">
+          Enter a sample legacy URL and inspect the intended migration result.
+        </p>
+
+        <div class="redirect-tester">
+
+          <input
+            id="redirectInput"
+            class="url-input"
+            value="/old/consulta.php">
+
+          <button
+            class="btn primary"
+            onclick="testRedirect()">
+            Test
+          </button>
+
+          <input
+            id="redirectOutput"
+            class="url-input"
+            readonly
+            value="/consultations">
+
+        </div>
+
+        <div class="redirect-result" id="redirectResult">
+          ✓ HTTP 301 mapped successfully.
+        </div>
+
+        <br>
+
+        <div class="flow">
+
+          <div class="flow-card">
+            <b>Old URL</b>
+            <small>Legacy address</small>
+          </div>
+
+          <div class="flow-card">
+            <b>301</b>
+            <small>Permanent redirect</small>
+          </div>
+
+          <div class="flow-card">
+            <b>New route</b>
+            <small>Canonical destination</small>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- QA -->
+      <div class="visual-body panel" id="panel-qa" style="display:none">
+
+        <div class="qa">
+
+          <div class="qa-card">
+            <small>Performance</small>
+            <strong>≥85</strong>
+            <span class="status ok">Target</span>
+          </div>
+
+          <div class="qa-card">
+            <small>Accessibility</small>
+            <strong>≥95</strong>
+            <span class="status ok">Target</span>
+          </div>
+
+          <div class="qa-card">
+            <small>Best Practices</small>
+            <strong>≥95</strong>
+            <span class="status ok">Target</span>
+          </div>
+
+          <div class="qa-card">
+            <small>SEO</small>
+            <strong>100</strong>
+            <span class="status ok">Target</span>
+          </div>
+
+          <div class="qa-card">
+            <small>LCP</small>
+            <strong>≤2.5s</strong>
+            <span class="status ok">Target</span>
+          </div>
+
+          <div class="qa-card">
+            <small>CLS</small>
+            <strong>≤0.1</strong>
+            <span class="status ok">Target</span>
+          </div>
+
+          <div class="qa-card">
+            <small>INP</small>
+            <strong>≤200ms</strong>
+            <span class="status ok">Target</span>
+          </div>
+
+          <div class="qa-card">
+            <small>Responsive</small>
+            <strong>360–1920</strong>
+            <span class="status ok">Target</span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- SSR -->
+      <div class="visual-body panel" id="panel-ssr" style="display:none">
+
+        <div class="code">
+
+          <span class="c1">&lt;title&gt;</span>
+          Cardiology Consultation | Private Clinic
+          <span class="c1">&lt;/title&gt;</span><br>
+
+          <span class="c1">&lt;meta description&gt;</span>
+          Consultation information...
+          <span class="c1">&lt;/meta&gt;</span><br><br>
+
+          <span class="c2">&lt;script type="application/ld+json"&gt;</span><br>
+
+          {<br>
+          &nbsp;&nbsp;"@type": "MedicalProcedure",<br>
+          &nbsp;&nbsp;"name": "Cardiology Consultation",<br>
+          &nbsp;&nbsp;"physician": "Dr. Ana Martins"<br>
+          }<br>
+
+          <span class="c2">&lt;/script&gt;</span><br><br>
+
+          <span class="c3">
+          // JS disabled → core content remains available
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ARCHITECTURE -->
+<section class="section alt">
+
+  <div class="container">
+
+    <div class="section-head reveal">
+
+      <div class="kicker">04 / HOW EVERYTHING CONNECTS</div>
+
+      <h2>
+        The patient journey is connected to the data model.
+      </h2>
+
+      <p class="lead">
+        This prevents the website from becoming a collection of disconnected
+        pages and makes related information reusable.
+      </p>
+
+    </div>
+
+
+    <div class="problem">
+
+      <div class="problem-icon">!</div>
+
+      <div>
+        <b>System problem</b>
+        <span>
+          Symptoms, doctors, programmes, treatments, diagnostics and
+          booking can easily become disconnected experiences.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="response">
+
+      <div class="response-icon">✓</div>
+
+      <div>
+        <b>System response</b>
+        <span>
+          Build relationships at the CMS level so the public interface
+          can automatically present relevant next steps.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="arch">
+
+      <div class="node">
+        <strong>Patient</strong>
+        <small>Search / referral / WhatsApp</small>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <div class="node">
+        <strong>SSR Website</strong>
+        <small>TanStack Start / React</small>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <div class="node">
+        <strong>CMS</strong>
+        <small>Supabase / PostgreSQL</small>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <div class="node">
+        <strong>Booking Service</strong>
+        <small>Protected API</small>
+      </div>
+
+    </div>
+
+
+    <br>
+
+    <div class="flow">
+
+      <div class="flow-card">
+        <b>Symptoms</b>
+        <small>Lead to programmes</small>
+      </div>
+
+      <div class="flow-card">
+        <b>Programmes</b>
+        <small>Lead to treatments</small>
+      </div>
+
+      <div class="flow-card">
+        <b>Professionals</b>
+        <small>Lead to consultations</small>
+      </div>
+
+      <div class="flow-card">
+        <b>Diagnostics</b>
+        <small>Support clinical pathways</small>
+      </div>
+
+      <div class="flow-card">
+        <b>Booking</b>
+        <small>Converts intent into action</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CMS -->
+<section class="section">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="kicker">05 / CONTENT OPERATIONS</div>
+
+      <h2>
+        The editor should be able to operate the platform.
+      </h2>
+
+    </div>
+
+
+    <div class="problem">
+
+      <div class="problem-icon">!</div>
+
+      <div>
+        <b>Editor problem</b>
+        <span>
+          A growing clinic site becomes expensive to maintain when every
+          new professional, article, treatment or FAQ requires development.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="response">
+
+      <div class="response-icon">✓</div>
+
+      <div>
+        <b>Our response</b>
+        <span>
+          Provide structured content types, relationships, publishing
+          controls, imports, revisions and audit history.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="visual">
+
+      <div class="visual-top">
+        <span>EDITOR EXPERIENCE</span>
+        <span>14 CONTENT TYPES</span>
+      </div>
+
+      <div class="visual-body">
+
+        <div class="flow">
+
+          <div class="flow-card">
+            <b>Create</b>
+            <small>New content item</small>
+          </div>
+
+          <div class="flow-card">
+            <b>Relate</b>
+            <small>Connect entities</small>
+          </div>
+
+          <div class="flow-card">
+            <b>Preview</b>
+            <small>Review before publish</small>
+          </div>
+
+          <div class="flow-card">
+            <b>Publish</b>
+            <small>Controlled release</small>
+          </div>
+
+          <div class="flow-card">
+            <b>Audit</b>
+            <small>Who published what</small>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- BOOKING -->
+<section class="section alt">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="kicker">06 / BOOKING</div>
+
+      <h2>
+        Booking is treated as a patient journey, not just a button.
+      </h2>
+
+    </div>
+
+
+    <div class="problem">
+
+      <div class="problem-icon">!</div>
+
+      <div>
+        <b>Booking problem</b>
+        <span>
+          A booking integration can fail because of unavailable slots,
+          API downtime, invalid requests or external service issues.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="response">
+
+      <div class="response-icon">✓</div>
+
+      <div>
+        <b>Our response</b>
+        <span>
+          Model success, no-availability, error and fallback states
+          as first-class parts of the user experience.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="flow">
+
+      <div class="flow-card">
+        <b>1 · Service</b>
+        <small>Consultation / treatment / programme</small>
+      </div>
+
+      <div class="flow-card">
+        <b>2 · Professional</b>
+        <small>Where supported by API</small>
+      </div>
+
+      <div class="flow-card">
+        <b>3 · Availability</b>
+        <small>Live API response</small>
+      </div>
+
+      <div class="flow-card">
+        <b>4 · Confirmation</b>
+        <small>Patient request</small>
+      </div>
+
+      <div class="flow-card">
+        <b>5 · Fallback</b>
+        <small>WhatsApp / phone / email / form</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- MIGRATION -->
+<section class="section">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="kicker">07 / MIGRATION</div>
+
+      <h2>
+        Old URLs should not become dead ends.
+      </h2>
+
+    </div>
+
+
+    <div class="problem">
+
+      <div class="problem-icon">!</div>
+
+      <div>
+        <b>Migration problem</b>
+        <span>
+          Existing addresses can include legacy structures, .php paths
+          and accented URLs that need to reach the correct new destination.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="response">
+
+      <div class="response-icon">✓</div>
+
+      <div>
+        <b>Our response</b>
+        <span>
+          Create a documented 1:1 redirect map, test every supplied URL
+          and ensure unknown content returns a real HTTP 404.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="visual">
+
+      <div class="visual-body">
+
+        <h3>Try the redirect simulation</h3>
+
+        <div class="redirect-tester">
+
+          <input
+            class="url-input"
+            id="redirectInput2"
+            value="/old/consulta.php">
+
+          <button
+            class="btn primary"
+            onclick="testRedirect2()">
+            Check URL
+          </button>
+
+          <input
+            class="url-input"
+            id="redirectOutput2"
+            readonly
+            value="/consultations">
+
+        </div>
+
+        <div
+          class="redirect-result"
+          id="redirectResult2">
+          ✓ HTTP 301 mapped successfully.
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SEO -->
+<section class="section alt">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="kicker">08 / DISCOVERABILITY</div>
+
+      <h2>
+        Search visibility is connected to the platform.
+      </h2>
+
+    </div>
+
+
+    <div class="problem">
+
+      <div class="problem-icon">!</div>
+
+      <div>
+        <b>Discoverability problem</b>
+        <span>
+          Metadata, structured data and indexing can become inconsistent
+          when they are manually maintained across many templates.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="response">
+
+      <div class="response-icon">✓</div>
+
+      <div>
+        <b>Our response</b>
+        <span>
+          Generate route-level metadata and schema from the underlying
+          content model while keeping canonical, sitemap and robots
+          behaviour controlled.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="flow">
+
+      <div class="flow-card">
+        <b>Route</b>
+        <small>Clean public URL</small>
+      </div>
+
+      <div class="flow-card">
+        <b>Metadata</b>
+        <small>Title / description / OG</small>
+      </div>
+
+      <div class="flow-card">
+        <b>Structured Data</b>
+        <small>Medical / FAQ / physician</small>
+      </div>
+
+      <div class="flow-card">
+        <b>Canonical</b>
+        <small>Preferred route</small>
+      </div>
+
+      <div class="flow-card">
+        <b>Sitemap</b>
+        <small>Published routes only</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SECURITY -->
+<section class="section">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="kicker">09 / SECURITY & GOVERNANCE</div>
+
+      <h2>
+        Patient-facing simplicity with controlled technical foundations.
+      </h2>
+
+    </div>
+
+
+    <div class="problem">
+
+      <div class="problem-icon">!</div>
+
+      <div>
+        <b>Security problem</b>
+        <span>
+          A clinic platform contains sensitive workflows and external
+          integrations, so credentials, permissions and database access
+          need deliberate controls.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="response">
+
+      <div class="response-icon">✓</div>
+
+      <div>
+        <b>Our response</b>
+        <span>
+          Use client-owned workspace controls, RLS, protected secrets,
+          least privilege, documented migrations and test data only.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="requirements">
+
+      <div class="req open">
+        <div class="req-head">
+          <div class="req-code">01</div>
+          <div class="req-copy">
+            <h3>RLS</h3>
+            <p>Database-level access policies.</p>
+          </div>
+        </div>
+        <div class="req-body" style="display:block">
+          <ul>
+            <li>Policies applied to database tables</li>
+            <li>Access designed around least privilege</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="req open">
+        <div class="req-head">
+          <div class="req-code">02</div>
+          <div class="req-copy">
+            <h3>Secrets</h3>
+            <p>Credentials remain outside source code.</p>
+          </div>
+        </div>
+        <div class="req-body" style="display:block">
+          <ul>
+            <li>Approved secret store</li>
+            <li>No credentials hard-coded into UI</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="req open">
+        <div class="req-head">
+          <div class="req-code">03</div>
+          <div class="req-copy">
+            <h3>Test Data</h3>
+            <p>No real patient data in development.</p>
+          </div>
+        </div>
+        <div class="req-body" style="display:block">
+          <ul>
+            <li>Test data only</li>
+            <li>Data-minimisation principles for forms</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="req open">
+        <div class="req-head">
+          <div class="req-code">04</div>
+          <div class="req-copy">
+            <h3>Change Control</h3>
+            <p>Additive, non-breaking implementation.</p>
+          </div>
+        </div>
+        <div class="req-body" style="display:block">
+          <ul>
+            <li>No unapproved route/table/component removal</li>
+            <li>Reproducible migrations</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- QA -->
+<section class="section alt" id="acceptance">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="kicker">10 / QA & ACCEPTANCE</div>
+
+      <h2>
+        “Done” has measurable evidence.
+      </h2>
+
+    </div>
+
+
+    <div class="problem">
+
+      <div class="problem-icon">!</div>
+
+      <div>
+        <b>Acceptance problem</b>
+        <span>
+          A production website can look correct while still failing
+          performance, accessibility, responsive, routing or integration
+          requirements.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="response">
+
+      <div class="response-icon">✓</div>
+
+      <div>
+        <b>Our response</b>
+        <span>
+          Build acceptance evidence around the thresholds defined in
+          the requested delivery criteria.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="qa">
+
+      <div class="qa-card">
+        <small>Performance</small>
+        <strong>≥85</strong>
+        <span class="status ok">Target</span>
+      </div>
+
+      <div class="qa-card">
+        <small>Accessibility</small>
+        <strong>≥95</strong>
+        <span class="status ok">Target</span>
+      </div>
+
+      <div class="qa-card">
+        <small>Best Practices</small>
+        <strong>≥95</strong>
+        <span class="status ok">Target</span>
+      </div>
+
+      <div class="qa-card">
+        <small>SEO</small>
+        <strong>100</strong>
+        <span class="status ok">Target</span>
+      </div>
+
+      <div class="qa-card">
+        <small>LCP</small>
+        <strong>≤2.5s</strong>
+        <span class="status ok">Target</span>
+      </div>
+
+      <div class="qa-card">
+        <small>CLS</small>
+        <strong>≤0.1</strong>
+        <span class="status ok">Target</span>
+      </div>
+
+      <div class="qa-card">
+        <small>INP</small>
+        <strong>≤200ms</strong>
+        <span class="status ok">Target</span>
+      </div>
+
+      <div class="qa-card">
+        <small>Responsive</small>
+        <strong>360–1920</strong>
+        <span class="status ok">Target</span>
+      </div>
+
+    </div>
+
+
+    <br>
+
+    <div class="flow">
+
+      <div class="flow-card">
+        <b>Mobile</b>
+        <small>iOS Safari / Android Chrome</small>
+      </div>
+
+      <div class="flow-card">
+        <b>Desktop</b>
+        <small>Chrome / Safari / Edge / Firefox</small>
+      </div>
+
+      <div class="flow-card">
+        <b>Accessibility</b>
+        <small>Audit + remediation</small>
+      </div>
+
+      <div class="flow-card">
+        <b>Integration</b>
+        <small>Booking sandbox</small>
+      </div>
+
+      <div class="flow-card">
+        <b>Evidence</b>
+        <small>Acceptance package</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- DELIVERY -->
+<section class="section" id="delivery">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="kicker">11 / DELIVERY PLAN</div>
+
+      <h2>
+        Four weeks with visible gates.
+      </h2>
+
+    </div>
+
+
+    <div class="problem">
+
+      <div class="problem-icon">!</div>
+
+      <div>
+        <b>Delivery problem</b>
+        <span>
+          A complex 26-template platform can accumulate risk if major
+          architecture decisions are postponed until the final week.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="response">
+
+      <div class="response-icon">✓</div>
+
+      <div>
+        <b>Our response</b>
+        <span>
+          Validate architecture early, prove the CMS at midpoint,
+          then complete templates, booking, migration and QA.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="timeline">
+
+      <div class="phase">
+
+        <div class="day">DAYS 1–4 · M1</div>
+
+        <h3>
+          Foundation
+        </h3>
+
+        <ul>
+          <li>SSR foundation</li>
+          <li>Architecture</li>
+          <li>301 mapping</li>
+          <li>404 handling</li>
+          <li>JSON-LD foundation</li>
+          <li>Booking sandbox call</li>
+        </ul>
+
+        <span class="status ok">
+          Technical gate
+        </span>
+
+      </div>
+
+
+      <div class="phase">
+
+        <div class="day">DAYS 5–10 · M2</div>
+
+        <h3>
+          CMS + Design System
+        </h3>
+
+        <ul>
+          <li>Design approval</li>
+          <li>14 content types</li>
+          <li>Editor workflows</li>
+          <li>10 public templates</li>
+          <li>Real staging data</li>
+          <li>Midpoint demo</li>
+        </ul>
+
+        <span class="status ok">
+          Midpoint gate
+        </span>
+
+      </div>
+
+
+      <div class="phase">
+
+        <div class="day">DAYS 11–20 · M3</div>
+
+        <h3>
+          Complete Platform
+        </h3>
+
+        <ul>
+          <li>Remaining templates</li>
+          <li>Booking flow</li>
+          <li>Migration package</li>
+          <li>QA evidence</li>
+          <li>Documentation</li>
+          <li>Training</li>
+        </ul>
+
+        <span class="status ok">
+          Final gate
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <br>
+
+    <div class="response">
+
+      <div class="response-icon">+</div>
+
+      <div>
+        <b>Contingency protection</b>
+        <span>
+          20 working days remains the committed baseline. A +4–5 working-day
+          contingency can be used only for a documented client dependency,
+          approval delay or external integration issue, with written alignment.
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- TEAM -->
+<section class="section alt">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="kicker">12 / DELIVERY TEAM</div>
+
+      <h2>
+        Clear ownership from kickoff to acceptance.
+      </h2>
+
+    </div>
+
+
+    <div class="problem">
+
+      <div class="problem-icon">!</div>
+
+      <div>
+        <b>Team problem</b>
+        <span>
+          Complex builds can become difficult to manage when ownership
+          is unclear between development, QA and client communication.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="response">
+
+      <div class="response-icon">✓</div>
+
+      <div>
+        <b>Our response</b>
+        <span>
+          Assign a named lead, two builders and a QA/migration owner
+          against the responsibilities requested in the brief.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="team">
+
+      <div class="person">
+        <div class="avatar">SZ</div>
+        <h3>Sajjad Zaidi</h3>
+        <strong>Project Supervisor / Lead</strong>
+        <p>
+          Client coordination, architecture oversight,
+          delivery control and acceptance alignment.
+        </p>
+      </div>
+
+      <div class="person">
+        <div class="avatar">RY</div>
+        <h3>Raiyan</h3>
+        <strong>Senior Full-Stack Builder</strong>
+        <p>
+          Public templates, interface implementation,
+          responsive UI and platform build.
+        </p>
+      </div>
+
+      <div class="person">
+        <div class="avatar">JF</div>
+        <h3>Jaffer</h3>
+        <strong>Full-Stack / CMS & Integration</strong>
+        <p>
+          CMS structures, relationships, integrations
+          and application implementation.
+        </p>
+      </div>
+
+      <div class="person">
+        <div class="avatar">AB</div>
+        <h3>Abuzar</h3>
+        <strong>QA / SEO / Migration</strong>
+        <p>
+          QA evidence, migration checks, performance,
+          SEO implementation and documentation.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- COMMERCIAL -->
+<section class="section" id="commercial">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="kicker">13 / COMMERCIAL</div>
+
+      <h2>
+        Fixed price with the work visible behind it.
+      </h2>
+
+    </div>
+
+
+    <div class="commercial">
+
+      <div class="price-box">
+
+        <div class="price">€8,700</div>
+
+        <p>
+          Fixed project price · VAT excluded
+        </p>
+
+        <div class="costs">
+
+          <div class="cost">
+            <span>Design system / global UI</span>
+            <b>€850</b>
+          </div>
+
+          <div class="cost">
+            <span>Relational CMS</span>
+            <b>€1,650</b>
+          </div>
+
+          <div class="cost">
+            <span>26 public templates</span>
+            <b>€2,500</b>
+          </div>
+
+          <div class="cost">
+            <span>Booking</span>
+            <b>€1,200</b>
+          </div>
+
+          <div class="cost">
+            <span>SEO / migration</span>
+            <b>€1,050</b>
+          </div>
+
+          <div class="cost">
+            <span>QA / performance</span>
+            <b>€950</b>
+          </div>
+
+          <div class="cost">
+            <span>Handover / training</span>
+            <b>€500</b>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div>
+
+        <div class="problem">
+
+          <div class="problem-icon">!</div>
+
+          <div>
+            <b>Commercial problem</b>
+            <span>
+              A fixed-price proposal can feel risky if the client cannot
+              see what the number actually represents.
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="response">
+
+          <div class="response-icon">✓</div>
+
+          <div>
+            <b>Our response</b>
+            <span>
+              Break the fixed price into the same workstreams that
+              appear throughout the technical plan.
+            </span>
+          </div>
+
+        </div>
+
+
+        <div class="payment">
+
+          <div class="pay">
+            <strong>25%</strong>
+            <small>Kick-off · €2,175</small>
+          </div>
+
+          <div class="pay">
+            <strong>35%</strong>
+            <small>M2 · €3,045</small>
+          </div>
+
+          <div class="pay">
+            <strong>30%</strong>
+            <small>M3 · €2,610</small>
+          </div>
+
+          <div class="pay">
+            <strong>10%</strong>
+            <small>Warranty · €870</small>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- RISKS -->
+<section class="section alt">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="kicker">14 / RISK CONTROL</div>
+
+      <h2>
+        The risky parts are visible before kickoff.
+      </h2>
+
+    </div>
+
+
+    <div class="problem">
+
+      <div class="problem-icon">!</div>
+
+      <div>
+        <b>Project risk</b>
+        <span>
+          External API dependencies, migration, CMS complexity,
+          approvals and performance can all affect delivery.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="response">
+
+      <div class="response-icon">✓</div>
+
+      <div>
+        <b>Mitigation</b>
+        <span>
+          Validate critical dependencies early and attach a defined
+          response to each major risk.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="risks">
+
+      <div class="risk">
+        <b>API downtime</b>
+        <span>Fallback routes preserve contact options.</span>
+      </div>
+
+      <div class="risk">
+        <b>Approval delay</b>
+        <span>Milestone gates surface blockers early.</span>
+      </div>
+
+      <div class="risk">
+        <b>Migration</b>
+        <span>URL-by-URL validation and evidence.</span>
+      </div>
+
+      <div class="risk">
+        <b>CMS complexity</b>
+        <span>Relationships modelled before scale.</span>
+      </div>
+
+      <div class="risk">
+        <b>Performance</b>
+        <span>Thresholds checked before acceptance.</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- HANDOVER -->
+<section class="section">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="kicker">15 / HANDOVER</div>
+
+      <h2>
+        The client receives a system they can continue operating.
+      </h2>
+
+    </div>
+
+
+    <div class="response">
+
+      <div class="response-icon">✓</div>
+
+      <div>
+        <b>Handover response</b>
+        <span>
+          Documentation, training, known issues and a 30-day warranty
+          form part of the delivery rather than an afterthought.
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="flow">
+
+      <div class="flow-card">
+        <b>README</b>
+        <small>Technical project knowledge</small>
+      </div>
+
+      <div class="flow-card">
+        <b>Editor Manual</b>
+        <small>Content operations</small>
+      </div>
+
+      <div class="flow-card">
+        <b>Training ×2</b>
+        <small>Recorded sessions</small>
+      </div>
+
+      <div class="flow-card">
+        <b>Backlog</b>
+        <small>Known issues</small>
+      </div>
+
+      <div class="flow-card">
+        <b>30-Day Warranty</b>
+        <small>Defined response targets</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FAQ -->
+<section class="section alt">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div class="kicker">16 / FINAL QUESTIONS</div>
+
+      <h2>
+        The important questions, answered before kickoff.
+      </h2>
+
+    </div>
+
+
+    <div class="faq">
+
+      <details>
+        <summary>
+          Will the site still work meaningfully if JavaScript is disabled?
+        </summary>
+        <p>
+          The proposed SSR architecture keeps core route content,
+          metadata and structured data available in server-rendered HTML.
+        </p>
+      </details>
+
+
+      <details>
+        <summary>
+          What happens when no appointment is available?
+        </summary>
+        <p>
+          The experience can expose a no-availability state and provide
+          agreed fallback routes such as WhatsApp, phone, email or form.
+        </p>
+      </details>
+
+
+      <details>
+        <summary>
+          Can the editor manage all 14 content types?
+        </summary>
+        <p>
+          The acceptance target includes creating, relating, previewing
+          and publishing one item of each content type without developer
+          assistance.
+        </p>
+      </details>
+
+
+      <details>
+        <summary>
+          Will legacy URLs be redirected?
+        </summary>
+        <p>
+          The supplied legacy URL set is intended to be mapped through
+          documented 1:1 HTTP 301 redirects, with unknown routes returning
+          a real HTTP 404.
+        </p>
+      </details>
+
+
+      <details>
+        <summary>
+          Is the doctor video consultation already connected to a real
+          medical video provider?
+        </summary>
+        <p>
+          The video interface shown here is an interactive proposal
+          prototype. Actual clinical video infrastructure would require
+          the approved integration and agreed scope.
+        </p>
+      </details>
+
+
+      <details>
+        <summary>
+          Where will the work be developed?
+        </summary>
+        <p>
+          The implementation is structured around the designated
+          client-owned Lovable workspace and the stated technical,
+          security and change-control requirements.
+        </p>
+      </details>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FINAL -->
+<section class="final">
+
+  <div class="container">
+
+    <span class="eyebrow">
+      READY FOR KICKOFF
+    </span>
+
+    <h2 style="margin-top:18px">
+      From requirements<br>
+      to a working clinic platform.
+    </h2>
+
+    <p class="lead">
+      A structured 20-working-day delivery covering the public experience,
+      CMS, booking, migration, QA, documentation and training.
+    </p>
+
+    <div class="actions" style="justify-content:center">
+
+      <a href="#overview" class="btn primary">
+        Review Again
+      </a>
+
+      <button
+        class="btn primary"
+        type="button"
+        onclick="printProposal()">
+        Print Proposal
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<footer>
+  Confidential bid preview · Public version intentionally omits confidential
+  client identifiers and private procurement details.
+</footer>
+
+
+<!-- CAMERA MODAL -->
+<div class="modal" id="cameraModal">
+
+  <div class="modal-card">
+
+    <div style="display:flex;justify-content:space-between;align-items:center">
+
+      <div>
+        <div class="kicker">INTERACTIVE PROTOTYPE</div>
+        <h3>Patient Camera Access</h3>
+      </div>
+
+      <button
+        class="btn secondary"
+        onclick="closeCamera()">
+        Close
+      </button>
+
+    </div>
+
+    <p style="color:var(--muted);font-size:13px">
+      This demo requests browser camera permission and displays
+      the local camera only. No video is uploaded or stored.
+    </p>
+
+    <div class="full-camera">
+
+      <video
+        id="fullCamera"
+        autoplay
+        muted
+        playsinline>
+      </video>
+
+    </div>
+
+    <span
+      id="cameraStatus"
+      class="status warn">
+      Camera permission not requested
+    </span>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   PRINT
+========================= */
+
+function printProposal(){
+  window.focus();
+
+  setTimeout(function(){
+    window.print();
+  },80);
+}
+
+
+/* =========================
+   REQUIREMENT ACCORDIONS
+========================= */
+
+function toggleReq(button){
+
+  const card=button.closest(".req");
+
+  if(!card)return;
+
+  card.classList.toggle("open");
+
+  button.textContent=
+    card.classList.contains("open") ? "−" : "+";
+}
+
+
+/* =========================
+   LIVE PREVIEW TABS
+========================= */
+
+const tabs=document.querySelectorAll(".tab");
+const panels=document.querySelectorAll(".panel");
+
+tabs.forEach(tab=>{
+
+  tab.addEventListener("click",function(){
+
+    const target=this.dataset.tab;
+
+    tabs.forEach(t=>t.classList.remove("active"));
+    this.classList.add("active");
+
+    panels.forEach(panel=>{
+      panel.style.display="none";
+      panel.classList.remove("active");
+    });
+
+    const selected=document.getElementById("panel-"+target);
+
+    if(selected){
+      selected.style.display="block";
+      selected.classList.add("active");
+    }
+
+  });
+
+});
+
+
+/* =========================
+   CMS EDITOR
+========================= */
+
+function showEditor(){
+
+  const editor=document.getElementById("cmsEditor");
+
+  if(editor){
+    editor.classList.toggle("show");
+  }
+
+}
+
+
+/* =========================
+   CAMERA DEMO
+========================= */
+
+let cameraStream=null;
+
+async function requestCamera(){
+
+  const modal=document.getElementById("cameraModal");
+  const fullVideo=document.getElementById("fullCamera");
+  const patientVideo=document.getElementById("patientCamera");
+  const placeholder=document.getElementById("smallCameraPlaceholder");
+  const status=document.getElementById("cameraStatus");
+
+  modal.classList.add("open");
+
+  try{
+
+    if(!navigator.mediaDevices ||
+       !navigator.mediaDevices.getUserMedia){
+
+      throw new Error("Camera API unavailable");
+
+    }
+
+    cameraStream=
+      await navigator.mediaDevices.getUserMedia({
+        video:true,
+        audio:false
+      });
+
+    fullVideo.srcObject=cameraStream;
+
+    if(patientVideo){
+
+      patientVideo.srcObject=cameraStream;
+      patientVideo.style.display="block";
+
+    }
+
+    if(placeholder){
+      placeholder.style.display="none";
+    }
+
+    status.className="status ok";
+    status.textContent="● Camera permission granted";
+
+  }catch(error){
+
+    status.className="status warn";
+    status.textContent=
+      "Camera permission was not granted";
+
+  }
+
+}
+
+
+function closeCamera(){
+
+  const modal=document.getElementById("cameraModal");
+
+  modal.classList.remove("open");
+
+  if(cameraStream){
+
+    cameraStream.getTracks().forEach(track=>{
+      track.stop();
+    });
+
+    cameraStream=null;
+
+  }
+
+  const fullVideo=document.getElementById("fullCamera");
+  const patientVideo=document.getElementById("patientCamera");
+  const placeholder=document.getElementById("smallCameraPlaceholder");
+
+  if(fullVideo){
+    fullVideo.srcObject=null;
+  }
+
+  if(patientVideo){
+
+    patientVideo.srcObject=null;
+    patientVideo.style.display="none";
+
+  }
+
+  if(placeholder){
+    placeholder.style.display="grid";
+  }
+
+}
+
+
+document.getElementById("cameraModal")
+.addEventListener("click",function(event){
+
+  if(event.target===this){
+    closeCamera();
+  }
+
+});
+
+
+/* =========================
+   REDIRECT TESTER
+========================= */
+
+function testRedirect(){
+
+  const input=
+    document.getElementById("redirectInput");
+
+  const output=
+    document.getElementById("redirectOutput");
+
+  const result=
+    document.getElementById("redirectResult");
+
+  const value=input.value.toLowerCase();
+
+  if(value.includes(".php") ||
+     value.includes("old") ||
+     value.includes("consulta")){
+
+    output.value="/consultations";
+
+    result.style.display="block";
+    result.textContent=
+      "✓ HTTP 301 mapped successfully.";
+
+  }else{
+
+    output.value="/404";
+
+    result.style.display="block";
+    result.textContent=
+      "✓ Unknown route → HTTP 404.";
+
+  }
+
+}
+
+
+function testRedirect2(){
+
+  const input=
+    document.getElementById("redirectInput2");
+
+  const output=
+    document.getElementById("redirectOutput2");
+
+  const result=
+    document.getElementById("redirectResult2");
+
+  const value=input.value.toLowerCase();
+
+  if(value.includes(".php") ||
+     value.includes("old") ||
+     value.includes("consulta")){
+
+    output.value="/consultations";
+
+    result.style.display="block";
+    result.textContent=
+      "✓ HTTP 301 mapped successfully.";
+
+  }else{
+
+    output.value="/404";
+
+    result.style.display="block";
+    result.textContent=
+      "✓ Unknown route → HTTP 404.";
+
+  }
+
+}
+
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+const observer=
+  new IntersectionObserver(
+    entries=>{
+
+      entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+          entry.target.classList.add("show");
+        }
+
+      });
+
+    },
+    {threshold:.12}
+  );
+
+document
+  .querySelectorAll(".reveal")
+  .forEach(element=>{
+    observer.observe(element);
+  });
+
+
+/* =========================
+   ESCAPE CAMERA
+========================= */
+
+document.addEventListener("keydown",function(event){
+
+  if(event.key==="Escape"){
+    closeCamera();
+  }
+
+});
+
+</script>
+
+</body>
+</html>
