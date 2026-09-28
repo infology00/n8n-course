@@ -1,479 +1,2034 @@
-<!-- =========================================================
-     AWSZ — CONVERSATION INTELLIGENCE
-     SECTION 02
-     PART 1 — HTML + CSS
-     ========================================================= -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="AWSZ by Sajjad Zaidi — AI automation consultancy, training, websites, CRM, ERP, AI agents, 3D web experiences and technical maintenance.">
+<title>AWSZ — Automation & Digital Systems by Sajjad Zaidi</title>
 
-<section class="aws-conversation-section" id="conversation-intelligence">
+<style>
+:root{
+  --ink:#111315;
+  --ink2:#20252B;
+  --blue:#155EEF;
+  --blue2:#2563EB;
+  --sky:#60A5FA;
+  --pale:#EAF4FF;
+  --pale2:#F5FAFF;
+  --line:#D9E7F5;
+  --muted:#627188;
+  --white:#fff;
+  --green:#19A35A;
+  --shadow:0 24px 70px rgba(22,65,110,.10);
+  --shadow-sm:0 12px 35px rgba(22,65,110,.08);
+  --radius:26px;
+}
 
-  <!-- INTRO -->
-  <div class="conversation-intro">
+*{
+  box-sizing:border-box;
+}
 
-    <div class="conversation-eyebrow">
-      02 · CONVERSATION INTELLIGENCE
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  color:#172033;
+  background:#F7FBFF;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:17px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font:inherit;
+}
+
+::selection{
+  background:#C8DEFF;
+  color:#0B1220;
+}
+
+.container{
+  width:min(1180px,calc(100% - 40px));
+  margin:auto;
+}
+
+.section{
+  padding:115px 0;
+  position:relative;
+}
+
+.white{
+  background:#fff;
+}
+
+.blue-bg{
+  background:linear-gradient(180deg,#F2F8FF 0%,#EAF4FF 100%);
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  color:var(--blue);
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:12px;
+  font-weight:850;
+  margin-bottom:18px;
+}
+
+.eyebrow:before{
+  content:"";
+  width:25px;
+  height:2px;
+  background:var(--blue);
+  border-radius:10px;
+}
+
+h1,h2,h3,h4{
+  margin:0;
+  color:var(--ink);
+  letter-spacing:-.04em;
+}
+
+h1{
+  font-size:clamp(54px,7vw,88px);
+  line-height:.96;
+  font-weight:760;
+}
+
+h2{
+  font-size:clamp(40px,5vw,63px);
+  line-height:1;
+  font-weight:730;
+}
+
+h3{
+  font-size:27px;
+  line-height:1.1;
+  font-weight:720;
+}
+
+p{
+  margin:0;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+.intro{
+  max-width:780px;
+  margin-bottom:60px;
+}
+
+.intro p{
+  color:var(--muted);
+  font-size:19px;
+  max-width:700px;
+  margin-top:22px;
+}
+
+.btn{
+  min-height:54px;
+  padding:0 22px;
+  border-radius:14px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  font-size:15px;
+  font-weight:800;
+  border:1px solid transparent;
+  transition:.25s ease;
+}
+
+.btn-dark{
+  background:var(--ink);
+  color:#fff;
+}
+
+.btn-dark:hover{
+  background:var(--blue);
+  transform:translateY(-2px);
+}
+
+.btn-white{
+  background:#fff;
+  border-color:#D9E7F5;
+  color:var(--ink);
+}
+
+.btn-white:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-sm);
+}
+
+.btn-blue{
+  background:var(--blue);
+  color:#fff;
+}
+
+.btn-blue:hover{
+  background:#0D4FD1;
+  transform:translateY(-2px);
+}
+
+/* =========================================
+   TOP BRAND
+========================================= */
+
+.top{
+  padding:25px 0 0;
+}
+
+.top-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  color:#17191B;
+  font-size:31px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:-.09em;
+}
+
+.top-right{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.location{
+  color:#69788C;
+  font-size:14px;
+  font-weight:650;
+}
+
+.wa-mini{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 15px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:800;
+  transition:.25s;
+}
+
+.wa-mini:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-sm);
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero{
+  min-height:780px;
+  padding:85px 0 100px;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.02fr .98fr;
+  gap:65px;
+  align-items:center;
+}
+
+.hero-copy{
+  position:relative;
+  z-index:2;
+}
+
+.hero-copy h1 span{
+  color:var(--blue);
+}
+
+.hero-copy>p{
+  max-width:680px;
+  color:var(--muted);
+  font-size:20px;
+  margin-top:28px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:34px;
+}
+
+.hero-proof{
+  display:flex;
+  flex-wrap:wrap;
+  gap:22px;
+  margin-top:40px;
+}
+
+.proof{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#58677B;
+  font-size:13px;
+  font-weight:700;
+}
+
+.proof i{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--blue);
+}
+
+/* HERO VISUAL */
+
+.hero-visual{
+  min-height:590px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.hero-circle{
+  width:510px;
+  height:510px;
+  border-radius:50%;
+  background:radial-gradient(circle,#DCEEFF 0%,#EEF7FF 48%,rgba(247,251,255,0) 70%);
+  position:absolute;
+}
+
+.hero-dashboard{
+  width:min(510px,100%);
+  position:relative;
+  z-index:3;
+  border:1px solid #D6E6F6;
+  background:rgba(255,255,255,.9);
+  border-radius:28px;
+  padding:16px;
+  box-shadow:0 35px 90px rgba(24,73,120,.15);
+  transform:rotate(1deg);
+}
+
+.dash-top{
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 8px 10px;
+}
+
+.dots{
+  display:flex;
+  gap:5px;
+}
+
+.dots i{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#CCD9E7;
+}
+
+.dash-label{
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:.09em;
+  color:#8290A2;
+  text-transform:uppercase;
+}
+
+.dash-main{
+  border:1px solid #E1EBF5;
+  border-radius:19px;
+  overflow:hidden;
+}
+
+.dash-head{
+  padding:19px;
+  background:#F7FBFF;
+  border-bottom:1px solid #E1EBF5;
+}
+
+.dash-head small{
+  color:#728197;
+  font-size:10px;
+  font-weight:800;
+}
+
+.dash-head h4{
+  font-size:23px;
+  margin-top:4px;
+}
+
+.dash-grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+}
+
+.dash-left{
+  padding:20px;
+  border-right:1px solid #E5EDF5;
+}
+
+.metric{
+  padding:15px;
+  border:1px solid #E4EDF5;
+  border-radius:12px;
+  margin-bottom:10px;
+}
+
+.metric small{
+  display:block;
+  color:#8190A3;
+  font-size:9px;
+}
+
+.metric strong{
+  display:block;
+  font-size:23px;
+  margin-top:2px;
+}
+
+.metric span{
+  display:block;
+  color:var(--green);
+  font-size:9px;
+  font-weight:800;
+  margin-top:2px;
+}
+
+.dash-right{
+  padding:20px;
+}
+
+.activity-title{
+  font-size:11px;
+  font-weight:850;
+  margin-bottom:13px;
+}
+
+.activity{
+  display:flex;
+  gap:9px;
+  margin-bottom:15px;
+}
+
+.activity-dot{
+  flex:none;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#60A5FA;
+  margin-top:5px;
+}
+
+.activity b{
+  display:block;
+  font-size:9px;
+}
+
+.activity span{
+  display:block;
+  color:#8593A5;
+  font-size:8px;
+}
+
+.hero-hand{
+  position:absolute;
+  right:-35px;
+  bottom:10px;
+  z-index:5;
+  width:150px;
+  height:190px;
+  transform:rotate(-13deg);
+  filter:drop-shadow(0 20px 15px rgba(0,0,0,.12));
+}
+
+.hero-hand .palm{
+  position:absolute;
+  width:102px;
+  height:120px;
+  left:23px;
+  bottom:7px;
+  background:linear-gradient(145deg,#F7C9A9,#EFAF8E);
+  border:3px solid #D89270;
+  border-radius:45px 48px 30px 32px;
+}
+
+.hero-hand .finger{
+  position:absolute;
+  background:linear-gradient(145deg,#F9CEAF,#EFB18E);
+  border:3px solid #D89270;
+  border-radius:25px;
+}
+
+.hero-hand .f1{
+  width:29px;
+  height:112px;
+  left:31px;
+  top:0;
+  transform:rotate(-7deg);
+}
+
+.hero-hand .f2{
+  width:30px;
+  height:128px;
+  left:58px;
+  top:-10px;
+}
+
+.hero-hand .f3{
+  width:29px;
+  height:117px;
+  left:84px;
+  top:0;
+  transform:rotate(8deg);
+}
+
+.hero-hand .f4{
+  width:28px;
+  height:96px;
+  left:108px;
+  top:19px;
+  transform:rotate(15deg);
+}
+
+.hero-hand .thumb{
+  position:absolute;
+  width:47px;
+  height:76px;
+  left:4px;
+  bottom:45px;
+  background:linear-gradient(145deg,#F7C9A9,#EFAF8E);
+  border:3px solid #D89270;
+  border-radius:30px 14px 30px 25px;
+  transform:rotate(-40deg);
+}
+
+/* floating labels */
+
+.float-card{
+  position:absolute;
+  z-index:7;
+  background:#fff;
+  border:1px solid #DCE9F6;
+  border-radius:14px;
+  box-shadow:var(--shadow-sm);
+  padding:11px 13px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.float-card span{
+  display:block;
+  color:#8290A2;
+  font-size:9px;
+  font-weight:600;
+  margin-top:2px;
+}
+
+.fc1{
+  left:-5px;
+  top:70px;
+}
+
+.fc2{
+  right:-15px;
+  top:110px;
+}
+
+.fc3{
+  left:10px;
+  bottom:100px;
+}
+
+/* =========================================
+   SERVICE OVERVIEW
+========================================= */
+
+.services-overview{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.service-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:25px;
+  min-height:205px;
+  transition:.3s;
+}
+
+.service-card:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow-sm);
+  border-color:#BCD5EF;
+}
+
+.service-icon{
+  width:45px;
+  height:45px;
+  border-radius:13px;
+  background:#EAF3FF;
+  color:var(--blue);
+  display:grid;
+  place-items:center;
+  margin-bottom:25px;
+}
+
+.service-card h3{
+  font-size:20px;
+  margin-bottom:9px;
+}
+
+.service-card p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* =========================================
+   FEATURE SECTIONS
+========================================= */
+
+.feature{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:70px;
+  align-items:center;
+}
+
+.feature.reverse{
+  grid-template-columns:1.1fr .9fr;
+}
+
+.feature.reverse .feature-copy{
+  order:2;
+}
+
+.feature.reverse .feature-visual{
+  order:1;
+}
+
+.feature-copy p{
+  color:var(--muted);
+  font-size:18px;
+  margin-top:20px;
+  max-width:580px;
+}
+
+.feature-list{
+  list-style:none;
+  margin:28px 0 0;
+  padding:0;
+  display:grid;
+  gap:12px;
+}
+
+.feature-list li{
+  display:flex;
+  align-items:flex-start;
+  gap:11px;
+  color:#3D4D62;
+  font-size:15px;
+}
+
+.check{
+  flex:none;
+  width:22px;
+  height:22px;
+  border-radius:7px;
+  background:#E7F1FF;
+  color:var(--blue);
+  display:grid;
+  place-items:center;
+  font-size:12px;
+  font-weight:900;
+}
+
+.feature-visual{
+  min-height:450px;
+  background:#EEF7FF;
+  border:1px solid #D6E8FA;
+  border-radius:28px;
+  padding:18px;
+}
+
+/* =========================================
+   AUTOMATION VISUAL
+========================================= */
+
+.automation-box{
+  height:100%;
+  min-height:410px;
+  background:#fff;
+  border:1px solid #D9E6F2;
+  border-radius:19px;
+  padding:23px;
+}
+
+.visual-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.visual-title{
+  font-size:15px;
+  font-weight:850;
+}
+
+.status{
+  padding:6px 9px;
+  border-radius:8px;
+  background:#EAF8EF;
+  color:#16833A;
+  font-size:9px;
+  font-weight:850;
+}
+
+.flow{
+  display:grid;
+  grid-template-columns:1fr 30px 1fr 30px 1fr;
+  align-items:center;
+  gap:5px;
+}
+
+.flow-node{
+  padding:16px 10px;
+  border:1px solid #DCE8F4;
+  background:#F8FBFE;
+  border-radius:12px;
+  text-align:center;
+}
+
+.flow-node .icon{
+  width:31px;
+  height:31px;
+  display:grid;
+  place-items:center;
+  border-radius:9px;
+  background:#E7F1FF;
+  color:var(--blue);
+  margin:0 auto 8px;
+  font-size:12px;
+  font-weight:900;
+}
+
+.flow-node strong{
+  display:block;
+  font-size:10px;
+}
+
+.flow-node span{
+  display:block;
+  color:#8492A4;
+  font-size:8px;
+  margin-top:3px;
+}
+
+.arrow{
+  color:var(--blue);
+  text-align:center;
+  font-weight:900;
+}
+
+.logs{
+  border-top:1px solid #E7EEF5;
+  margin-top:25px;
+  padding-top:18px;
+  display:grid;
+  gap:8px;
+}
+
+.log{
+  display:flex;
+  justify-content:space-between;
+  background:#F7FAFD;
+  border-radius:8px;
+  padding:9px 11px;
+  font-size:9px;
+}
+
+.log span:last-child{
+  color:var(--green);
+  font-weight:850;
+}
+
+/* =========================================
+   CONSULTANCY VISUAL
+========================================= */
+
+.consult-box{
+  height:100%;
+  min-height:410px;
+  background:#fff;
+  border:1px solid #D9E6F2;
+  border-radius:19px;
+  padding:25px;
+}
+
+.audit-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.audit-card{
+  border:1px solid #E0EAF3;
+  border-radius:12px;
+  padding:14px;
+}
+
+.audit-card small{
+  color:#8290A2;
+  font-size:9px;
+  display:block;
+}
+
+.audit-card strong{
+  display:block;
+  font-size:15px;
+  margin-top:3px;
+}
+
+.audit-bar{
+  height:7px;
+  background:#EAF0F6;
+  border-radius:20px;
+  margin-top:12px;
+  overflow:hidden;
+}
+
+.audit-bar i{
+  display:block;
+  height:100%;
+  background:#60A5FA;
+  border-radius:20px;
+}
+
+.roadmap{
+  margin-top:16px;
+  border:1px solid #E0EAF3;
+  border-radius:12px;
+  padding:15px;
+}
+
+.roadmap-head{
+  display:flex;
+  justify-content:space-between;
+  font-size:10px;
+  font-weight:850;
+  margin-bottom:13px;
+}
+
+.roadmap-line{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:5px;
+}
+
+.road-step{
+  text-align:center;
+  font-size:8px;
+  color:#7A899D;
+}
+
+.road-dot{
+  width:20px;
+  height:20px;
+  background:#E8F2FF;
+  color:var(--blue);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  margin:auto auto 5px;
+  font-size:8px;
+  font-weight:900;
+}
+
+/* =========================================
+   TRAINING VISUAL
+========================================= */
+
+.training-box{
+  height:100%;
+  min-height:410px;
+  background:#111820;
+  border-radius:19px;
+  padding:24px;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+
+.training-box:after{
+  content:"";
+  position:absolute;
+  width:260px;
+  height:260px;
+  right:-100px;
+  bottom:-120px;
+  border-radius:50%;
+  background:rgba(96,165,250,.18);
+}
+
+.lesson{
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;
+  background:rgba(255,255,255,.04);
+  padding:14px;
+  margin-bottom:9px;
+  position:relative;
+  z-index:2;
+}
+
+.lesson-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.lesson b{
+  font-size:11px;
+}
+
+.lesson span{
+  font-size:8px;
+  color:#91A0B2;
+}
+
+.lesson-bar{
+  height:5px;
+  background:#293541;
+  border-radius:20px;
+  margin-top:10px;
+}
+
+.lesson-bar i{
+  display:block;
+  height:100%;
+  border-radius:20px;
+  background:#60A5FA;
+}
+
+/* =========================================
+   WEBSITE VISUAL
+========================================= */
+
+.browser{
+  height:100%;
+  min-height:410px;
+  background:#fff;
+  border:1px solid #D8E6F3;
+  border-radius:19px;
+  overflow:hidden;
+}
+
+.browser-bar{
+  height:43px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:0 14px;
+  border-bottom:1px solid #E3ECF4;
+}
+
+.url{
+  flex:1;
+  height:25px;
+  border-radius:7px;
+  background:#F4F7FA;
+  display:flex;
+  align-items:center;
+  padding:0 9px;
+  color:#8794A5;
+  font-size:8px;
+}
+
+.site{
+  padding:22px;
+}
+
+.site-nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
+}
+
+.site-logo{
+  font-size:14px;
+  font-weight:900;
+}
+
+.site-links{
+  display:flex;
+  gap:11px;
+  font-size:8px;
+  color:#758398;
+}
+
+.site-hero{
+  background:linear-gradient(135deg,#EAF4FF,#F8FBFF);
+  border-radius:14px;
+  padding:21px;
+  display:grid;
+  grid-template-columns:1fr .65fr;
+  gap:15px;
+  align-items:center;
+}
+
+.site-hero h4{
+  font-size:23px;
+  line-height:1.03;
+}
+
+.site-hero p{
+  color:#748398;
+  font-size:8px;
+  margin:8px 0 11px;
+}
+
+.site-cta{
+  display:inline-block;
+  background:var(--blue);
+  color:#fff;
+  padding:7px 9px;
+  border-radius:6px;
+  font-size:8px;
+  font-weight:850;
+}
+
+.site-image{
+  height:120px;
+  background:#CDE3F8;
+  border-radius:11px;
+  position:relative;
+  overflow:hidden;
+}
+
+.site-person{
+  position:absolute;
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  background:#EFB18D;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.site-body{
+  position:absolute;
+  width:100px;
+  height:72px;
+  border-radius:50px 50px 0 0;
+  background:#fff;
+  bottom:-12px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.site-cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:10px;
+}
+
+.site-card{
+  border:1px solid #E1EAF2;
+  padding:12px;
+  border-radius:9px;
+}
+
+.site-card i{
+  display:block;
+  width:21px;
+  height:21px;
+  background:#E8F2FF;
+  border-radius:6px;
+  margin-bottom:7px;
+}
+
+.site-card b{
+  display:block;
+  font-size:8px;
+}
+
+.site-card span{
+  display:block;
+  color:#8794A6;
+  font-size:7px;
+}
+
+/* =========================================
+   CRM VISUAL
+========================================= */
+
+.crm-box{
+  height:100%;
+  min-height:410px;
+  display:grid;
+  grid-template-columns:95px 1fr;
+  background:#fff;
+  border:1px solid #D9E6F2;
+  border-radius:19px;
+  overflow:hidden;
+}
+
+.crm-side{
+  padding:18px 9px;
+  background:#F7FAFD;
+  border-right:1px solid #E3ECF5;
+}
+
+.crm-side b{
+  display:block;
+  font-size:13px;
+  margin-bottom:20px;
+}
+
+.crm-side span{
+  display:block;
+  padding:7px;
+  font-size:8px;
+  color:#78879B;
+  border-radius:6px;
+  margin-bottom:2px;
+}
+
+.crm-side span.active{
+  color:var(--blue);
+  background:#E7F1FF;
+  font-weight:850;
+}
+
+.crm-content{
+  padding:20px;
+}
+
+.crm-content h4{
+  font-size:19px;
+  margin-bottom:16px;
+}
+
+.columns{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+}
+
+.column{
+  background:#F7FAFD;
+  border-radius:8px;
+  padding:8px;
+}
+
+.column-title{
+  font-size:8px;
+  font-weight:850;
+  margin-bottom:8px;
+}
+
+.lead{
+  background:#fff;
+  border:1px solid #E3EBF3;
+  border-radius:7px;
+  padding:8px;
+  margin-bottom:6px;
+}
+
+.lead-avatar{
+  width:19px;
+  height:19px;
+  background:#C6DCF3;
+  border-radius:50%;
+  margin-bottom:5px;
+}
+
+.lead b{
+  display:block;
+  font-size:8px;
+}
+
+.lead span{
+  display:block;
+  color:#8794A6;
+  font-size:7px;
+}
+
+/* =========================================
+   AI VISUAL
+========================================= */
+
+.ai-box{
+  height:100%;
+  min-height:410px;
+  background:#fff;
+  border:1px solid #D9E6F2;
+  border-radius:19px;
+  padding:20px;
+}
+
+.chat{
+  max-width:430px;
+  margin:auto;
+}
+
+.chat-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border-bottom:1px solid #E5EDF5;
+  padding-bottom:14px;
+  margin-bottom:18px;
+}
+
+.ai-avatar{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#E7F1FF;
+  display:grid;
+  place-items:center;
+  color:var(--blue);
+  font-size:12px;
+  font-weight:900;
+}
+
+.chat-head b{
+  display:block;
+  font-size:11px;
+}
+
+.chat-head span{
+  display:block;
+  font-size:8px;
+  color:var(--green);
+}
+
+.message{
+  padding:11px 13px;
+  border-radius:12px;
+  margin-bottom:9px;
+  font-size:9px;
+  max-width:80%;
+}
+
+.message.client{
+  background:#F0F4F8;
+  color:#4E5E72;
+}
+
+.message.ai{
+  background:#EAF3FF;
+  color:#31557E;
+  margin-left:auto;
+}
+
+.ai-action{
+  margin-top:17px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+}
+
+.ai-action div{
+  padding:11px;
+  text-align:center;
+  border:1px solid #E1EAF3;
+  border-radius:9px;
+  font-size:8px;
+  font-weight:800;
+}
+
+/* =========================================
+   ERP / 3D
+========================================= */
+
+.erp-visual{
+  height:100%;
+  min-height:410px;
+  background:#fff;
+  border:1px solid #D9E6F2;
+  border-radius:19px;
+  padding:20px;
+}
+
+.erp-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.erp-stat{
+  border:1px solid #E2EBF4;
+  border-radius:9px;
+  padding:11px;
+}
+
+.erp-stat small{
+  color:#8492A4;
+  font-size:8px;
+}
+
+.erp-stat strong{
+  display:block;
+  font-size:17px;
+}
+
+.erp-table{
+  margin-top:13px;
+  border:1px solid #E1EAF3;
+  border-radius:9px;
+  overflow:hidden;
+}
+
+.erp-row{
+  display:grid;
+  grid-template-columns:1.3fr 1fr .7fr;
+  padding:9px;
+  border-bottom:1px solid #EAF0F5;
+  font-size:8px;
+}
+
+.erp-row:last-child{
+  border:0;
+}
+
+.erp-row.head{
+  background:#F6F9FC;
+  color:#758398;
+  font-weight:850;
+}
+
+.three-visual{
+  height:100%;
+  min-height:410px;
+  border-radius:19px;
+  background:linear-gradient(135deg,#0F1B2A,#173B62);
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.three-grid{
+  position:absolute;
+  inset:-20%;
+  background-image:
+    linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
+  background-size:30px 30px;
+  transform:perspective(350px) rotateX(60deg);
+  transform-origin:center bottom;
+}
+
+.object{
+  width:120px;
+  height:120px;
+  border:1px solid rgba(255,255,255,.5);
+  background:rgba(96,165,250,.14);
+  transform:rotateX(55deg) rotateZ(45deg);
+  box-shadow:
+    30px 30px 0 rgba(96,165,250,.07),
+    -30px -30px 0 rgba(255,255,255,.04);
+  animation:float3d 5s ease-in-out infinite;
+  position:relative;
+  z-index:3;
+}
+
+@keyframes float3d{
+  50%{
+    transform:rotateX(45deg) rotateZ(50deg) translateY(-15px);
+  }
+}
+
+.three-copy{
+  position:absolute;
+  left:20px;
+  bottom:18px;
+  color:#fff;
+  z-index:5;
+}
+
+.three-copy b{
+  display:block;
+  font-size:14px;
+}
+
+.three-copy span{
+  font-size:9px;
+  color:#AEBFD1;
+}
+
+/* =========================================
+   MAINTENANCE
+========================================= */
+
+.maintenance{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.monitor{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:24px;
+}
+
+.monitor-icon{
+  width:43px;
+  height:43px;
+  background:#EAF3FF;
+  color:var(--blue);
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  margin-bottom:20px;
+}
+
+.monitor h3{
+  font-size:21px;
+  margin-bottom:8px;
+}
+
+.monitor p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.monitor-status{
+  margin-top:20px;
+  padding-top:14px;
+  border-top:1px solid #E8EEF4;
+  display:flex;
+  justify-content:space-between;
+  font-size:10px;
+}
+
+.monitor-status span:last-child{
+  color:var(--green);
+  font-weight:850;
+}
+
+/* =========================================
+   PROCESS
+========================================= */
+
+.process{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.process-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:27px;
+  position:relative;
+}
+
+.process-number{
+  color:var(--blue);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.1em;
+  margin-bottom:35px;
+}
+
+.process-card h3{
+  font-size:22px;
+  margin-bottom:9px;
+}
+
+.process-card p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* =========================================
+   FINAL CTA
+========================================= */
+
+.cta{
+  padding:105px 0;
+}
+
+.cta-box{
+  background:var(--ink);
+  border-radius:32px;
+  padding:65px;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+
+.cta-box:after{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  right:-180px;
+  top:-220px;
+  background:radial-gradient(circle,rgba(96,165,250,.35),transparent 68%);
+}
+
+.cta-box h2{
+  color:#fff;
+  max-width:800px;
+}
+
+.cta-box p{
+  color:#AAB7C6;
+  max-width:680px;
+  font-size:18px;
+  margin-top:20px;
+}
+
+.cta-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:32px;
+}
+
+.cta-box .btn-dark{
+  background:#fff;
+  color:var(--ink);
+}
+
+.cta-box .btn-dark:hover{
+  background:#EAF4FF;
+}
+
+.cta-box .btn-white{
+  background:transparent;
+  border-color:#48515B;
+  color:#fff;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer{
+  padding:30px 0 45px;
+}
+
+.footer-row{
+  border-top:1px solid var(--line);
+  padding-top:25px;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  color:#7A899D;
+  font-size:13px;
+}
+
+.footer-logo{
+  font-size:21px;
+  font-weight:950;
+  color:#17191B;
+}
+
+/* =========================================
+   FLOATING WHATSAPP
+========================================= */
+
+.floating-wa{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:100;
+  width:57px;
+  height:57px;
+  display:grid;
+  place-items:center;
+  background:var(--ink);
+  color:#fff;
+  border-radius:50%;
+  box-shadow:0 16px 40px rgba(17,19,21,.2);
+  transition:.25s;
+}
+
+.floating-wa:hover{
+  background:var(--blue);
+  transform:translateY(-4px);
+}
+
+/* =========================================
+   REVEAL
+========================================= */
+
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity .75s ease,transform .75s ease;
+}
+
+.reveal.show{
+  opacity:1;
+  transform:none;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:1050px){
+
+  .hero-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero-copy{
+    text-align:center;
+  }
+
+  .hero-copy>p{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .hero-actions,
+  .hero-proof{
+    justify-content:center;
+  }
+
+  .hero-visual{
+    max-width:620px;
+    width:100%;
+    margin:auto;
+  }
+
+  .services-overview{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .feature,
+  .feature.reverse{
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+
+  .feature.reverse .feature-copy,
+  .feature.reverse .feature-visual{
+    order:initial;
+  }
+
+  .process{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .maintenance{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:700px){
+
+  .container{
+    width:calc(100% - 28px);
+  }
+
+  .section{
+    padding:80px 0;
+  }
+
+  h1{
+    font-size:46px;
+  }
+
+  h2{
+    font-size:40px;
+  }
+
+  .top{
+    padding-top:18px;
+  }
+
+  .location{
+    display:none;
+  }
+
+  .hero{
+    padding:70px 0 75px;
+    min-height:auto;
+  }
+
+  .hero-copy>p{
+    font-size:17px;
+  }
+
+  .hero-visual{
+    min-height:500px;
+  }
+
+  .hero-circle{
+    width:400px;
+    height:400px;
+  }
+
+  .hero-dashboard{
+    width:100%;
+  }
+
+  .hero-hand{
+    right:-12px;
+    bottom:5px;
+    transform:scale(.78) rotate(-13deg);
+  }
+
+  .float-card{
+    transform:scale(.85);
+  }
+
+  .fc1{
+    left:-10px;
+  }
+
+  .fc2{
+    right:-10px;
+  }
+
+  .services-overview{
+    grid-template-columns:1fr;
+  }
+
+  .feature-copy p{
+    font-size:17px;
+  }
+
+  .feature-visual{
+    padding:12px;
+  }
+
+  .flow{
+    grid-template-columns:1fr;
+  }
+
+  .arrow{
+    transform:rotate(90deg);
+  }
+
+  .site-hero{
+    grid-template-columns:1fr;
+  }
+
+  .site-links{
+    display:none;
+  }
+
+  .dash-grid{
+    grid-template-columns:1fr;
+  }
+
+  .dash-left{
+    border-right:0;
+    border-bottom:1px solid #E5EDF5;
+  }
+
+  .columns{
+    grid-template-columns:1fr;
+  }
+
+  .crm-box{
+    grid-template-columns:75px 1fr;
+  }
+
+  .erp-stats{
+    grid-template-columns:1fr;
+  }
+
+  .process{
+    grid-template-columns:1fr;
+  }
+
+  .cta-box{
+    padding:40px 25px;
+    border-radius:25px;
+  }
+
+  .footer-row{
+    flex-direction:column;
+  }
+
+  .floating-wa{
+    right:17px;
+    bottom:17px;
+    width:53px;
+    height:53px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *:before,
+  *:after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     BRAND
+===================================================== -->
+
+<div class="top">
+  <div class="container top-row">
+
+    <div class="logo">AWSZ</div>
+
+    <div class="top-right">
+
+      <div class="location">
+        Karachi, Pakistan
+      </div>
+
+      <a
+        class="wa-mini"
+        href="https://wa.me/923346694427"
+        target="_blank"
+        rel="noopener"
+      >
+        <span>WhatsApp</span>
+        <span>↗</span>
+      </a>
+
     </div>
-
-    <h2>
-      You had the conversation.
-      <span>So why did you still lose the lead?</span>
-    </h2>
-
-    <p class="conversation-subtext">
-      Your CRM can capture every message, email and call. But after
-      deployment, most teams still struggle to understand what those
-      conversations actually mean. The real value is finding the
-      buying signal, identifying where the handoff broke, and turning
-      the conversation into a clear next action for the team.
-    </p>
-
   </div>
+</div>
 
 
-  <!-- INDUSTRY SELECTOR -->
-  <div class="conversation-industries">
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-    <button class="industry-btn active" data-case="software">
-      Software
-    </button>
+<section class="hero">
 
-    <button class="industry-btn" data-case="beauty">
-      Beauty
-    </button>
+  <div class="container hero-grid">
 
-    <button class="industry-btn" data-case="mortgage">
-      Mortgage
-    </button>
+    <div class="hero-copy reveal">
 
-    <button class="industry-btn" data-case="realestate">
-      Real Estate
-    </button>
-
-    <button class="industry-btn" data-case="inspection">
-      Home Inspection
-    </button>
-
-    <button class="industry-btn" data-case="insurance">
-      Insurance
-    </button>
-
-  </div>
-
-
-  <!-- MAIN SYSTEM -->
-  <div class="conversation-system">
-
-
-    <!-- =====================================================
-         LEFT — LEAD
-         ===================================================== -->
-
-    <aside class="lead-panel">
-
-      <div class="lead-panel-label">
-        LEAD PROFILE
+      <div class="eyebrow">
+        AI AUTOMATION & DIGITAL SYSTEMS
       </div>
 
-      <div class="lead-person">
-
-        <div class="lead-avatar" id="caseAvatar">
-          DK
-        </div>
-
-        <div>
-          <h3 id="caseName">
-            Daniel Kim
-          </h3>
-
-          <p id="caseSource">
-            LinkedIn · SaaS Demo Request
-          </p>
-        </div>
-
-      </div>
-
-
-      <div class="lead-result lost">
-        <span></span>
-        Lead Lost
-      </div>
-
-
-      <div class="lead-details">
-
-        <div>
-          <small>Industry</small>
-          <strong id="caseIndustry">
-            Software
-          </strong>
-        </div>
-
-        <div>
-          <small>Requirement</small>
-          <strong id="caseRequirement">
-            CRM Automation
-          </strong>
-        </div>
-
-        <div>
-          <small>Potential Value</small>
-          <strong id="caseValue">
-            $8,400
-          </strong>
-        </div>
-
-        <div>
-          <small>First Contact</small>
-          <strong id="caseFirst">
-            9:14 AM
-          </strong>
-        </div>
-
-        <div>
-          <small>Last Contact</small>
-          <strong id="caseLast">
-            4:42 PM
-          </strong>
-        </div>
-
-      </div>
-
-
-      <div class="lead-intent">
-
-        <div class="intent-label">
-          BUYING SIGNAL
-        </div>
-
-        <p id="caseIntent">
-          “Can you show me how this would work with our current CRM?”
-        </p>
-
-      </div>
-
-
-      <div class="lead-alert">
-
-        <div class="lead-alert-icon">
-          !
-        </div>
-
-        <div>
-
-          <strong>
-            Conversation looked healthy.
-          </strong>
-
-          <p id="caseAlert">
-            The lead was interested, responded to follow-ups,
-            and still did not close.
-          </p>
-
-        </div>
-
-      </div>
-
-    </aside>
-
-
-
-    <!-- =====================================================
-         CENTER — CONVERSATION
-         ===================================================== -->
-
-    <main class="conversation-panel">
-
-      <div class="conversation-panel-head">
-
-        <div>
-
-          <div class="conversation-panel-title">
-            Complete Conversation
-          </div>
-
-          <div class="conversation-panel-subtitle">
-            Message → Email → Call → Outcome
-          </div>
-
-        </div>
-
-        <div class="tracked-badge">
-          3 channels tracked
-        </div>
-
-      </div>
-
-
-      <!-- CHANNELS -->
-
-      <div class="channel-tabs">
-
-        <button
-          class="channel-tab active"
-          type="button"
-          data-channel="message"
-        >
-
-          <span class="channel-symbol message-symbol">
-            ≋
-          </span>
-
-          Messages
-
-        </button>
-
-
-        <button
-          class="channel-tab"
-          type="button"
-          data-channel="email"
-        >
-
-          <span class="channel-symbol email-symbol">
-            ✉
-          </span>
-
-          Email
-
-        </button>
-
-
-        <button
-          class="channel-tab"
-          type="button"
-          data-channel="call"
-        >
-
-          <span class="channel-symbol call-symbol">
-            ☎
-          </span>
-
-          Call
-
-        </button>
-
-      </div>
-
-
-      <!-- DYNAMIC CONVERSATION -->
-      <div
-        class="conversation-scroll"
-        id="conversationContent"
-      ></div>
-
-    </main>
-
-
-
-    <!-- =====================================================
-         RIGHT — INTELLIGENCE
-         ===================================================== -->
-
-    <aside class="intelligence-panel">
-
-      <div class="intelligence-eyebrow">
-        TEAM BRIEFING
-      </div>
-
-
-      <h3>
-        Don't just store
-        <span>the conversation.</span>
-      </h3>
-
-
-      <p class="intelligence-intro">
-        Turn what happened inside the conversation into something
-        your team can actually act on.
-      </p>
-
-
-      <div class="briefing-card">
-
-        <div class="briefing-title">
-          WHAT THE TEAM SHOULD KNOW
-        </div>
-
-
-        <div class="briefing-item">
-
-          <div class="briefing-index">
-            01
-          </div>
-
-          <div>
-
-            <strong>
-              Client was interested.
-            </strong>
-
-            <p id="briefInterest">
-              They asked about the solution, pricing and next steps.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="briefing-item">
-
-          <div class="briefing-index">
-            02
-          </div>
-
-          <div>
-
-            <strong>
-              No objection stopped the sale.
-            </strong>
-
-            <p id="briefObjection">
-              The client did not reject the offer.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="briefing-item">
-
-          <div class="briefing-index danger-index">
-            03
-          </div>
-
-          <div>
-
-            <strong class="danger-text">
-              The follow-up had no owner.
-            </strong>
-
-            <p id="briefFollowup">
-              Nobody was clearly responsible for the next step.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="briefing-item">
-
-          <div class="briefing-index">
-            04
-          </div>
-
-          <div>
-
-            <strong>
-              This is what gets monitored.
-            </strong>
-
-            <p id="briefMonitor">
-              Buying signals, unanswered questions, objections,
-              promises, handoffs and missed follow-ups.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- MONITORING -->
-
-      <div class="monitoring-box">
-
-        <div class="monitoring-title">
-          CONVERSATION MONITORING
-        </div>
-
-
-        <div class="monitor-row">
-          <span>Message captured</span>
-          <strong class="yes">YES</strong>
-        </div>
-
-
-        <div class="monitor-row">
-          <span>Email captured</span>
-          <strong class="yes">YES</strong>
-        </div>
-
-
-        <div class="monitor-row">
-          <span>Call recorded</span>
-          <strong class="yes">YES</strong>
-        </div>
-
-
-        <div class="monitor-row">
-          <span>Buying signal detected</span>
-          <strong class="yes">YES</strong>
-        </div>
-
-
-        <div class="monitor-row">
-          <span>Follow-up owner</span>
-          <strong class="no">NO</strong>
-        </div>
-
-
-        <div class="monitor-row">
-          <span>Follow-up deadline</span>
-          <strong class="no">NO</strong>
-        </div>
-
-      </div>
-
-
-      <div class="intelligence-point">
-
-        <small>
-          THE REAL QUESTION
-        </small>
-
-        <p>
-          Your automation worked.
-          <strong>
-            Your process didn't.
-          </strong>
-        </p>
-
-      </div>
-
-    </aside>
-
-  </div>
-
-
-  <!-- BOTTOM -->
-  <div class="conversation-bottom">
-
-    <div class="bottom-number">
-      02
-    </div>
-
-    <div>
-
-      <div class="bottom-eyebrow">
-        FROM CONVERSATION → ACTION
-      </div>
-
-      <h3>
-        This is how you find the leads
-        <span>you didn't know you were losing.</span>
-      </h3>
+      <h1>
+        Build less manually.
+        <span>Run smarter.</span>
+      </h1>
 
       <p>
-        We don't only look at whether your CRM captured a conversation.
-        We look at what the conversation tells you: what the client
-        wanted, what your team promised, where interest changed,
-        what was left unanswered, and whether the right person actually
-        followed up. That intelligence can then be used to improve
-        the team, the workflow and the bot itself.
+        I help businesses design, build and maintain the digital systems
+        behind their operations — from AI automation and CRM workflows
+        to websites, ERP solutions, integrations and interactive experiences.
       </p>
+
+      <div class="hero-actions">
+
+        <a
+          href="https://wa.me/923346694427?text=Hello%20Sajjad%2C%20I%27d%20like%20to%20discuss%20my%20business%20system."
+          target="_blank"
+          rel="noopener"
+          class="btn btn-dark"
+        >
+          Discuss Your System →
+        </a>
+
+        <a href="#services" class="btn btn-white">
+          See What I Do
+        </a>
+
+      </div>
+
+      <div class="hero-proof">
+
+        <div class="proof">
+          <i></i>
+          Automation & AI
+        </div>
+
+        <div class="proof">
+          <i></i>
+          Websites & Web Apps
+        </div>
+
+        <div class="proof">
+          <i></i>
+          CRM / ERP Systems
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- HERO DASHBOARD -->
+
+    <div class="hero-visual reveal">
+
+      <div class="hero-circle"></div>
+
+      <div class="float-card fc1">
+        Automation
+        <span>Workflow connected</span>
+      </div>
+
+      <div class="float-card fc2">
+        CRM
+        <span>Lead journey automated</span>
+      </div>
+
+      <div class="float-card fc3">
+        AI Agent
+        <span>Human handoff available</span>
+      </div>
+
+      <div class="hero-dashboard">
+
+        <div class="dash-top">
+
+          <div class="dots">
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+
+          <div class="dash-label">
+            Business Operations
+          </div>
+
+        </div>
+
+        <div class="dash-main">
+
+          <div class="dash-head">
+            <small>SYSTEM OVERVIEW</small>
+            <h4>Everything connected.</h4>
+          </div>
+
+          <div class="dash-grid">
+
+            <div class="dash-left">
+
+              <div class="metric">
+                <small>Automated Workflows</small>
+                <strong>24</strong>
+                <span>Running smoothly</span>
+              </div>
+
+              <div class="metric">
+                <small>CRM Processes</small>
+                <strong>18</strong>
+                <span>Connected</span>
+              </div>
+
+              <div class="metric">
+                <small>Integrations</small>
+                <strong>11</strong>
+                <span>Active</span>
+              </div>
+
+            </div>
+
+            <div class="dash-right">
+
+              <div class="activity-title">
+                SYSTEM ACTIVITY
+              </div>
+
+              <div class="activity">
+                <i class="activity-dot"></i>
+                <div>
+                  <b>New lead routed</b>
+                  <span>CRM → Sales</span>
+                </div>
+              </div>
+
+              <div class="activity">
+                <i class="activity-dot"></i>
+                <div>
+                  <b>Follow-up triggered</b>
+                  <span>SMS automation</span>
+                </div>
+              </div>
+
+              <div class="activity">
+                <i class="activity-dot"></i>
+                <div>
+                  <b>Appointment updated</b>
+                  <span>Calendar → CRM</span>
+                </div>
+              </div>
+
+              <div class="activity">
+                <i class="activity-dot"></i>
+                <div>
+                  <b>AI qualification complete</b>
+                  <span>Agent → Pipeline</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- HAND GESTURE -->
+
+      <div class="hero-hand">
+
+        <div class="palm"></div>
+        <div class="thumb"></div>
+
+        <div class="finger f1"></div>
+        <div class="finger f2"></div>
+        <div class="finger f3"></div>
+        <div class="finger f4"></div>
+
+      </div>
 
     </div>
 
@@ -482,3042 +2037,377 @@
 </section>
 
 
-<style>
+<!-- =====================================================
+     SERVICES OVERVIEW
+===================================================== -->
+
+<section class="section white" id="services">
+
+  <div class="container">
+
+    <div class="intro reveal">
+
+      <div class="eyebrow">
+        WHAT I DO
+      </div>
+
+      <h2>
+        Technology built around your business.
+      </h2>
+
+      <p>
+        I work across the strategy, development and automation layers —
+        so you don't have to piece together different specialists for every
+        part of your digital operation.
+      </p>
+
+    </div>
+
+
+    <div class="services-overview">
+
+      <div class="service-card reveal">
+        <div class="service-icon">AI</div>
+        <h3>AI Automation</h3>
+        <p>
+          Automate repetitive work, lead handling, communication,
+          data movement and operational workflows.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">C</div>
+        <h3>Consultancy</h3>
+        <p>
+          Audit your processes and create an automation and technology
+          roadmap before development begins.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">W</div>
+        <h3>Web Development</h3>
+        <p>
+          Build business websites and web applications that connect
+          directly to the systems behind them.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">CRM</div>
+        <h3>CRM Automation</h3>
+        <p>
+          Connect pipelines, follow-ups, tasks, appointments,
+          communication and reporting.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">ERP</div>
+        <h3>ERP Solutions</h3>
+        <p>
+          Organise operational data, workflows, teams, processes
+          and internal business information.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">3D</div>
+        <h3>3D & Interactive Web</h3>
+        <p>
+          Create interactive product experiences, animated interfaces
+          and immersive web presentations.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">AI+</div>
+        <h3>AI Agents</h3>
+        <p>
+          Build AI-powered voice and chat experiences connected to
+          your business workflows.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">↻</div>
+        <h3>Monthly Maintenance</h3>
+        <p>
+          Keep websites, automations and integrations healthy with
+          ongoing technical support and improvements.
+        </p>
+      </div>
+
+    </div>
 
-/* =========================================================
-   AWSZ — CONVERSATION INTELLIGENCE
-   ========================================================= */
+  </div>
 
-.aws-conversation-section{
+</section>
 
-  --cloud:#f4f8fc;
-  --cloud2:#eaf2fa;
-  --cloud3:#dceaf7;
 
-  --blue:#246bce;
-  --blue-dark:#123b70;
-  --deep:#0b2850;
+<!-- =====================================================
+     AUTOMATION
+===================================================== -->
 
-  --text:#20272e;
-  --muted:#66778a;
+<section class="section blue-bg">
 
-  --line:#d8e4ef;
-  --white:#ffffff;
+  <div class="container feature">
 
-  --green:#20855a;
-  --green-bg:#eaf7f0;
+    <div class="feature-copy reveal">
 
-  --amber:#b97918;
-  --amber-bg:#fff5df;
+      <div class="eyebrow">
+        01 / AUTOMATION
+      </div>
 
-  --red:#c33d3d;
-  --red-bg:#fff0f0;
+      <h2>
+        If your team keeps doing it manually, we should look at it.
+      </h2>
 
-  width:100%;
+      <p>
+        I design automation systems that connect the steps between
+        your customer, team and software. Instead of moving information
+        from one place to another manually, the system handles the flow.
+      </p>
 
-  padding:135px 7% 120px;
+      <ul class="feature-list">
 
-  background:
-    radial-gradient(
-      circle at 8% 12%,
-      rgba(36,107,206,.08),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 90% 70%,
-      rgba(36,107,206,.055),
-      transparent 30%
-    ),
-    var(--cloud);
+        <li>
+          <span class="check">✓</span>
+          Lead capture, qualification and routing
+        </li>
 
-  color:var(--text);
+        <li>
+          <span class="check">✓</span>
+          Email, SMS and WhatsApp automation
+        </li>
 
-  overflow:hidden;
+        <li>
+          <span class="check">✓</span>
+          CRM updates and follow-up sequences
+        </li>
 
-  box-sizing:border-box;
-}
+        <li>
+          <span class="check">✓</span>
+          Webhooks and API integrations
+        </li>
 
-.aws-conversation-section *,
-.aws-conversation-section *::before,
-.aws-conversation-section *::after{
-  box-sizing:border-box;
-}
+        <li>
+          <span class="check">✓</span>
+          n8n, GoHighLevel, Make, Zapier and custom workflows
+        </li>
 
+      </ul>
 
-/* =========================================================
-   INTRO
-   ========================================================= */
+    </div>
 
-.conversation-intro{
 
-  max-width:1000px;
+    <div class="feature-visual reveal">
 
-  margin:0 auto 55px;
+      <div class="automation-box">
 
-  text-align:center;
-}
-
-.conversation-eyebrow{
-
-  color:var(--blue);
-
-  font-size:13px;
-
-  font-weight:900;
-
-  letter-spacing:2.5px;
-
-  margin-bottom:18px;
-}
-
-.conversation-intro h2{
-
-  margin:0;
-
-  font-size:clamp(42px,5vw,72px);
-
-  line-height:.99;
-
-  letter-spacing:-3.5px;
-
-  font-weight:850;
-
-  color:var(--deep);
-}
-
-.conversation-intro h2 span{
-
-  display:block;
-
-  color:var(--blue);
-}
-
-.conversation-subtext{
-
-  max-width:900px;
-
-  margin:30px auto 0;
-
-  font-size:21px;
-
-  line-height:1.7;
-
-  color:#56697e;
-
-  font-weight:450;
-}
-
-
-/* =========================================================
-   INDUSTRIES
-   ========================================================= */
-
-.conversation-industries{
-
-  display:flex;
-
-  justify-content:center;
-
-  flex-wrap:wrap;
-
-  gap:8px;
-
-  margin-bottom:32px;
-}
-
-.industry-btn{
-
-  border:1px solid #ccd9e6;
-
-  background:rgba(255,255,255,.8);
-
-  color:#68798b;
-
-  padding:12px 20px;
-
-  border-radius:999px;
-
-  font-size:13px;
-
-  font-weight:850;
-
-  cursor:pointer;
-
-  transition:.22s ease;
-}
-
-.industry-btn:hover{
-
-  border-color:var(--blue);
-
-  color:var(--blue);
-
-  transform:translateY(-1px);
-}
-
-.industry-btn.active{
-
-  background:var(--blue);
-
-  border-color:var(--blue);
-
-  color:#fff;
-
-  box-shadow:
-    0 9px 24px rgba(36,107,206,.18);
-}
-
-
-/* =========================================================
-   SYSTEM
-   ========================================================= */
-
-.conversation-system{
-
-  max-width:1580px;
-
-  margin:auto;
-
-  display:grid;
-
-  grid-template-columns:
-    270px
-    minmax(520px,1fr)
-    340px;
-
-  gap:18px;
-
-  align-items:stretch;
-}
-
-
-/* PANELS */
-
-.lead-panel,
-.conversation-panel,
-.intelligence-panel{
-
-  background:rgba(255,255,255,.94);
-
-  border:1px solid var(--line);
-
-  border-radius:23px;
-
-  box-shadow:
-    0 20px 55px rgba(35,67,100,.065),
-    0 2px 5px rgba(35,67,100,.03);
-}
-
-
-/* =========================================================
-   LEAD
-   ========================================================= */
-
-.lead-panel{
-
-  padding:25px;
-}
-
-.lead-panel-label{
-
-  font-size:10px;
-
-  letter-spacing:1.8px;
-
-  color:#8492a2;
-
-  font-weight:900;
-
-  margin-bottom:20px;
-}
-
-.lead-person{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:13px;
-}
-
-.lead-avatar{
-
-  width:53px;
-  height:53px;
-
-  border-radius:15px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  background:var(--cloud2);
-
-  color:var(--blue-dark);
-
-  font-size:15px;
-
-  font-weight:900;
-
-  flex:none;
-}
-
-.lead-person h3{
-
-  margin:0;
-
-  color:var(--deep);
-
-  font-size:17px;
-}
-
-.lead-person p{
-
-  margin:4px 0 0;
-
-  color:var(--muted);
-
-  font-size:11px;
-
-  line-height:1.4;
-}
-
-.lead-result{
-
-  display:inline-flex;
-
-  align-items:center;
-
-  gap:7px;
-
-  margin-top:21px;
-
-  padding:8px 11px;
-
-  border-radius:8px;
-
-  font-size:11px;
-
-  font-weight:900;
-}
-
-.lead-result span{
-
-  width:7px;
-  height:7px;
-
-  border-radius:50%;
-}
-
-.lead-result.lost{
-
-  color:var(--red);
-
-  background:var(--red-bg);
-}
-
-.lead-result.lost span{
-
-  background:var(--red);
-}
-
-.lead-details{
-
-  border-top:1px solid var(--line);
-
-  margin-top:20px;
-
-  padding-top:7px;
-}
-
-.lead-details > div{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  gap:12px;
-
-  padding:12px 0;
-
-  border-bottom:1px solid #edf1f5;
-}
-
-.lead-details small{
-
-  font-size:11px;
-
-  color:var(--muted);
-}
-
-.lead-details strong{
-
-  font-size:11px;
-
-  color:var(--deep);
-
-  text-align:right;
-}
-
-.lead-intent{
-
-  margin-top:21px;
-
-  padding:17px;
-
-  background:var(--cloud);
-
-  border:1px solid var(--line);
-
-  border-radius:13px;
-}
-
-.intent-label{
-
-  color:var(--blue);
-
-  font-size:9px;
-
-  font-weight:900;
-
-  letter-spacing:1.4px;
-
-  margin-bottom:8px;
-}
-
-.lead-intent p{
-
-  margin:0;
-
-  font-size:14px;
-
-  line-height:1.6;
-
-  color:var(--deep);
-
-  font-weight:700;
-}
-
-.lead-alert{
-
-  display:flex;
-
-  gap:10px;
-
-  margin-top:18px;
-
-  padding:14px;
-
-  border-radius:12px;
-
-  background:var(--red-bg);
-
-  border:1px solid #f0cece;
-}
-
-.lead-alert-icon{
-
-  flex:none;
-
-  width:22px;
-  height:22px;
-
-  border-radius:50%;
-
-  background:var(--red);
-
-  color:#fff;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  font-size:12px;
-
-  font-weight:900;
-}
-
-.lead-alert strong{
-
-  display:block;
-
-  color:var(--red);
-
-  font-size:11px;
-
-  margin-bottom:4px;
-}
-
-.lead-alert p{
-
-  margin:0;
-
-  color:#795050;
-
-  font-size:11px;
-
-  line-height:1.55;
-}
-
-
-/* =========================================================
-   CONVERSATION PANEL
-   ========================================================= */
-
-.conversation-panel{
-
-  min-width:0;
-
-  overflow:hidden;
-}
-
-.conversation-panel-head{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  gap:20px;
-
-  padding:25px;
-
-  border-bottom:1px solid var(--line);
-}
-
-.conversation-panel-title{
-
-  color:var(--deep);
-
-  font-size:20px;
-
-  font-weight:850;
-}
-
-.conversation-panel-subtitle{
-
-  margin-top:5px;
-
-  color:var(--muted);
-
-  font-size:13px;
-}
-
-.tracked-badge{
-
-  padding:9px 12px;
-
-  border-radius:8px;
-
-  background:var(--cloud);
-
-  color:#64768a;
-
-  font-size:11px;
-
-  font-weight:800;
-
-  white-space:nowrap;
-}
-
-
-/* =========================================================
-   CHANNEL TABS
-   ========================================================= */
-
-.channel-tabs{
-
-  display:flex;
-
-  gap:6px;
-
-  padding:13px 20px;
-
-  border-bottom:1px solid var(--line);
-
-  background:#fbfdff;
-}
-
-.channel-tab{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:8px;
-
-  padding:8px 11px;
-
-  border:0;
-
-  border-radius:8px;
-
-  background:transparent;
-
-  color:#7a8898;
-
-  font-size:12px;
-
-  font-weight:800;
-
-  cursor:pointer;
-}
-
-.channel-tab.active{
-
-  background:var(--cloud2);
-
-  color:var(--blue-dark);
-}
-
-.channel-symbol{
-
-  width:25px;
-  height:25px;
-
-  border-radius:7px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  font-weight:900;
-}
-
-.message-symbol{
-
-  color:var(--blue);
-
-  background:#e8f1fc;
-}
-
-.email-symbol{
-
-  color:#596b7e;
-
-  background:#edf1f5;
-}
-
-.call-symbol{
-
-  color:var(--green);
-
-  background:#e9f7f0;
-}
-
-
-/* =========================================================
-   SCROLL
-   ========================================================= */
-
-.conversation-scroll{
-
-  height:790px;
-
-  overflow-y:auto;
-
-  padding:27px 25px 50px;
-}
-
-.conversation-scroll::-webkit-scrollbar{
-
-  width:7px;
-}
-
-.conversation-scroll::-webkit-scrollbar-track{
-
-  background:#f3f6f9;
-}
-
-.conversation-scroll::-webkit-scrollbar-thumb{
-
-  background:#c5d3e0;
-
-  border-radius:20px;
-}
-
-
-/* =========================================================
-   TIMELINE
-   ========================================================= */
-
-.timeline{
-
-  position:relative;
-
-  display:grid;
-
-  grid-template-columns:34px minmax(0,1fr);
-
-  gap:13px;
-}
-
-.timeline:not(:last-child)::after{
-
-  content:"";
-
-  position:absolute;
-
-  left:16px;
-
-  top:34px;
-
-  bottom:-15px;
-
-  width:1px;
-
-  background:#dce6ef;
-}
-
-.timeline-icon{
-
-  position:relative;
-
-  z-index:2;
-
-  width:34px;
-  height:34px;
-
-  border-radius:10px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  font-size:13px;
-
-  font-weight:900;
-}
-
-.message-timeline-icon{
-
-  color:var(--blue);
-
-  background:#e8f1fc;
-}
-
-.email-timeline-icon{
-
-  color:#596b7e;
-
-  background:#edf1f5;
-}
-
-.call-timeline-icon{
-
-  color:var(--green);
-
-  background:#e9f7f0;
-}
-
-.lost-timeline-icon{
-
-  color:var(--red);
-
-  background:var(--red-bg);
-}
-
-.timeline-body{
-
-  min-width:0;
-
-  padding-bottom:31px;
-}
-
-.timeline-head{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  margin:3px 0 10px;
-
-  font-size:11px;
-
-  color:#8794a3;
-}
-
-.timeline-head strong{
-
-  font-size:10px;
-
-  letter-spacing:1.3px;
-
-  color:var(--blue);
-}
-
-
-/* =========================================================
-   MESSAGES
-   ========================================================= */
-
-.message-card{
-
-  padding:17px;
-
-  border:1px solid var(--line);
-
-  border-radius:14px;
-
-  background:#fff;
-}
-
-.message{
-
-  display:flex;
-
-  flex-direction:column;
-
-  margin-bottom:16px;
-}
-
-.message:last-child{
-
-  margin-bottom:0;
-}
-
-.message.client-message{
-
-  align-items:flex-start;
-}
-
-.message.team-message{
-
-  align-items:flex-end;
-}
-
-.message small{
-
-  color:#8794a2;
-
-  font-size:10px;
-
-  font-weight:800;
-
-  margin-bottom:5px;
-}
-
-.message div{
-
-  max-width:85%;
-
-  padding:12px 15px;
-
-  font-size:14px;
-
-  line-height:1.6;
-
-  border-radius:13px;
-}
-
-.client-message div{
-
-  color:#273745;
-
-  background:#f0f4f8;
-
-  border-bottom-left-radius:4px;
-}
-
-.team-message div{
-
-  color:#173f70;
-
-  background:#e9f2fc;
-
-  border-bottom-right-radius:4px;
-}
-
-
-/* =========================================================
-   NOTES
-   ========================================================= */
-
-.timeline-note{
-
-  margin-top:9px;
-
-  padding:12px 14px;
-
-  border-radius:9px;
-
-  display:flex;
-
-  flex-direction:column;
-
-  gap:3px;
-}
-
-.timeline-note strong{
-
-  font-size:11px;
-
-  font-weight:900;
-}
-
-.timeline-note span{
-
-  font-size:11px;
-
-  line-height:1.55;
-}
-
-.timeline-note.positive{
-
-  color:#266a4c;
-
-  background:var(--green-bg);
-
-  border-left:3px solid var(--green);
-}
-
-.timeline-note.danger{
-
-  color:#8b3131;
-
-  background:var(--red-bg);
-
-  border-left:3px solid var(--red);
-}
-
-
-/* =========================================================
-   EMAIL
-   ========================================================= */
-
-.email-window{
-
-  overflow:hidden;
-
-  border:1px solid #d8e1e9;
-
-  border-radius:14px;
-
-  background:#fff;
-}
-
-.email-toolbar{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  padding:16px;
-
-  background:#fafcfe;
-
-  border-bottom:1px solid #e2e8ee;
-
-  color:#8996a4;
-
-  font-size:10px;
-}
-
-.email-sender{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-}
-
-.email-logo{
-
-  width:34px;
-  height:34px;
-
-  border-radius:8px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  background:var(--deep);
-
-  color:#fff;
-
-  font-weight:900;
-}
-
-.email-sender strong{
-
-  display:block;
-
-  color:var(--deep);
-
-  font-size:12px;
-}
-
-.email-sender span{
-
-  display:block;
-
-  margin-top:2px;
-
-  font-size:10px;
-
-  color:var(--muted);
-}
-
-.email-subject{
-
-  padding:18px 18px 7px;
-
-  font-size:17px;
-
-  font-weight:850;
-
-  color:var(--deep);
-}
-
-.email-content{
-
-  padding:5px 18px 20px;
-}
-
-.email-content p{
-
-  margin:10px 0;
-
-  color:#536477;
-
-  font-size:13px;
-
-  line-height:1.7;
-}
-
-
-/* =========================================================
-   CALL
-   ========================================================= */
-
-.call-recording{
-
-  overflow:hidden;
-
-  border:1px solid #cfe4d8;
-
-  border-radius:14px;
-
-  background:#fff;
-}
-
-.recording-header{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  padding:15px 16px;
-
-  border-bottom:1px solid #e0ebe5;
-}
-
-.recording-person{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-}
-
-.recording-avatar{
-
-  width:37px;
-  height:37px;
-
-  border-radius:10px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  background:#e9f7f0;
-
-  color:var(--green);
-
-  font-size:11px;
-
-  font-weight:900;
-}
-
-.recording-person strong{
-
-  display:block;
-
-  font-size:12px;
-
-  color:var(--deep);
-}
-
-.recording-person span{
-
-  display:block;
-
-  margin-top:3px;
-
-  font-size:10px;
-
-  color:var(--muted);
-}
-
-.recording-status{
-
-  padding:6px 9px;
-
-  border-radius:7px;
-
-  background:var(--green-bg);
-
-  color:var(--green);
-
-  font-size:9px;
-
-  font-weight:900;
-}
-
-
-/* =========================================================
-   AUDIO
-   ========================================================= */
-
-.audio-controls{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:7px;
-
-  padding:17px;
-
-  background:#f7fbf9;
-
-  border-bottom:1px solid #e1ebe5;
-}
-
-.audio-main-button{
-
-  width:43px;
-  height:43px;
-
-  border:0;
-
-  border-radius:50%;
-
-  background:var(--green);
-
-  color:#fff;
-
-  cursor:pointer;
-
-  font-size:13px;
-
-  box-shadow:0 7px 18px rgba(32,133,90,.18);
-}
-
-.audio-small-button{
-
-  width:32px;
-  height:32px;
-
-  border:1px solid #cbdcd2;
-
-  border-radius:8px;
-
-  background:#fff;
-
-  color:#5c7668;
-
-  cursor:pointer;
-
-  font-size:10px;
-}
-
-.audio-track{
-
-  min-width:0;
-
-  flex:1;
-
-  margin-left:6px;
-}
-
-.audio-waveform{
-
-  height:34px;
-
-  display:flex;
-
-  align-items:center;
-
-  gap:3px;
-
-  overflow:hidden;
-}
-
-.audio-waveform i{
-
-  width:3px;
-
-  flex:none;
-
-  height:var(--height);
-
-  border-radius:4px;
-
-  background:#79ae93;
-
-  transition:.12s ease;
-}
-
-.audio-waveform i:nth-child(1){--height:11px}
-.audio-waveform i:nth-child(2){--height:20px}
-.audio-waveform i:nth-child(3){--height:15px}
-.audio-waveform i:nth-child(4){--height:28px}
-.audio-waveform i:nth-child(5){--height:18px}
-.audio-waveform i:nth-child(6){--height:12px}
-.audio-waveform i:nth-child(7){--height:25px}
-.audio-waveform i:nth-child(8){--height:31px}
-.audio-waveform i:nth-child(9){--height:18px}
-.audio-waveform i:nth-child(10){--height:26px}
-.audio-waveform i:nth-child(11){--height:13px}
-.audio-waveform i:nth-child(12){--height:29px}
-.audio-waveform i:nth-child(13){--height:21px}
-.audio-waveform i:nth-child(14){--height:15px}
-.audio-waveform i:nth-child(15){--height:27px}
-.audio-waveform i:nth-child(16){--height:19px}
-.audio-waveform i:nth-child(17){--height:30px}
-.audio-waveform i:nth-child(18){--height:14px}
-.audio-waveform i:nth-child(19){--height:23px}
-.audio-waveform i:nth-child(20){--height:17px}
-.audio-waveform i:nth-child(21){--height:28px}
-.audio-waveform i:nth-child(22){--height:12px}
-.audio-waveform i:nth-child(23){--height:24px}
-.audio-waveform i:nth-child(24){--height:17px}
-.audio-waveform i:nth-child(25){--height:29px}
-.audio-waveform i:nth-child(26){--height:15px}
-.audio-waveform i:nth-child(27){--height:22px}
-.audio-waveform i:nth-child(28){--height:13px}
-.audio-waveform i:nth-child(29){--height:27px}
-.audio-waveform i:nth-child(30){--height:18px}
-
-.audio-time{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  margin-top:3px;
-
-  color:#77898a;
-
-  font-size:10px;
-}
-
-.audio-time span:first-child{
-
-  color:var(--green);
-
-  font-weight:800;
-}
-
-
-/* =========================================================
-   TRANSCRIPT
-   ========================================================= */
-
-.call-transcript{
-
-  padding:16px;
-}
-
-.speaker-line{
-
-  display:grid;
-
-  grid-template-columns:100px 1fr;
-
-  gap:10px;
-
-  padding:12px 0;
-
-  border-bottom:1px solid #edf2ef;
-}
-
-.speaker-line:last-child{
-
-  border-bottom:0;
-}
-
-.speaker-name{
-
-  font-size:9px;
-
-  letter-spacing:1px;
-
-  font-weight:900;
-}
-
-.speaker-line.client .speaker-name{
-
-  color:#788797;
-}
-
-.speaker-line.employee .speaker-name{
-
-  color:var(--green);
-}
-
-.speaker-line p{
-
-  margin:0;
-
-  color:#364755;
-
-  font-size:13px;
-
-  line-height:1.6;
-}
-
-
-/* =========================================================
-   LOST OUTCOME
-   ========================================================= */
-
-.lost-outcome{
-
-  padding:20px;
-
-  border-radius:14px;
-
-  background:var(--red-bg);
-
-  border:1px solid #efcece;
-}
-
-.lost-outcome-title{
-
-  color:var(--red);
-
-  font-size:17px;
-
-  font-weight:900;
-
-  margin-bottom:8px;
-}
-
-.lost-outcome p{
-
-  margin:0;
-
-  color:#754c4c;
-
-  font-size:13px;
-
-  line-height:1.65;
-}
-
-.lost-question{
-
-  margin-top:15px;
-
-  padding-top:13px;
-
-  border-top:1px solid #ebcccc;
-
-  color:var(--red);
-
-  font-size:13px;
-
-  font-weight:900;
-}
-
-
-/* =========================================================
-   RIGHT INTELLIGENCE
-   ========================================================= */
-
-.intelligence-panel{
-
-  padding:26px;
-}
-
-.intelligence-eyebrow{
-
-  color:var(--blue);
-
-  font-size:10px;
-
-  font-weight:900;
-
-  letter-spacing:1.7px;
-}
-
-.intelligence-panel h3{
-
-  margin:13px 0;
-
-  color:var(--deep);
-
-  font-size:27px;
-
-  line-height:1.12;
-
-  letter-spacing:-1px;
-}
-
-.intelligence-panel h3 span{
-
-  color:var(--blue);
-
-  display:block;
-}
-
-.intelligence-intro{
-
-  margin:0 0 20px;
-
-  color:#607286;
-
-  font-size:15px;
-
-  line-height:1.65;
-}
-
-.briefing-card{
-
-  border:1px solid var(--line);
-
-  border-radius:13px;
-
-  overflow:hidden;
-}
-
-.briefing-title{
-
-  padding:13px 15px;
-
-  background:var(--cloud);
-
-  border-bottom:1px solid var(--line);
-
-  color:#8290a0;
-
-  font-size:9px;
-
-  font-weight:900;
-
-  letter-spacing:1.4px;
-}
-
-.briefing-item{
-
-  display:grid;
-
-  grid-template-columns:29px 1fr;
-
-  gap:10px;
-
-  padding:17px 15px;
-
-  border-bottom:1px solid #e9eef3;
-}
-
-.briefing-item:last-child{
-
-  border-bottom:0;
-}
-
-.briefing-index{
-
-  width:25px;
-  height:25px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  border-radius:7px;
-
-  background:var(--cloud2);
-
-  color:var(--blue);
-
-  font-size:9px;
-
-  font-weight:900;
-}
-
-.danger-index{
-
-  background:var(--red-bg);
-
-  color:var(--red);
-}
-
-.briefing-item strong{
-
-  display:block;
-
-  margin-bottom:5px;
-
-  color:var(--deep);
-
-  font-size:12px;
-}
-
-.danger-text{
-
-  color:var(--red)!important;
-}
-
-.briefing-item p{
-
-  margin:0;
-
-  color:#697a8d;
-
-  font-size:12px;
-
-  line-height:1.6;
-}
-
-
-/* =========================================================
-   MONITORING
-   ========================================================= */
-
-.monitoring-box{
-
-  margin-top:20px;
-
-  padding:15px;
-
-  border:1px solid var(--line);
-
-  border-radius:13px;
-
-  background:#fafcfe;
-}
-
-.monitoring-title{
-
-  margin-bottom:8px;
-
-  color:#8492a1;
-
-  font-size:9px;
-
-  font-weight:900;
-
-  letter-spacing:1.4px;
-}
-
-.monitor-row{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  gap:10px;
-
-  padding:9px 0;
-
-  border-bottom:1px solid #e9eef3;
-
-  font-size:11px;
-}
-
-.monitor-row:last-child{
-
-  border-bottom:0;
-}
-
-.monitor-row span{
-
-  color:#697a8d;
-}
-
-.monitor-row strong{
-
-  font-size:9px;
-}
-
-.monitor-row .yes{
-
-  color:var(--green);
-}
-
-.monitor-row .no{
-
-  color:var(--red);
-}
-
-
-/* =========================================================
-   POINT
-   ========================================================= */
-
-.intelligence-point{
-
-  margin-top:20px;
-
-  padding-top:18px;
-
-  border-top:1px solid var(--line);
-}
-
-.intelligence-point small{
-
-  color:#8390a0;
-
-  font-size:9px;
-
-  letter-spacing:1.5px;
-
-  font-weight:900;
-}
-
-.intelligence-point p{
-
-  margin:8px 0 0;
-
-  color:#68798b;
-
-  font-size:13px;
-
-  line-height:1.6;
-}
-
-.intelligence-point strong{
-
-  display:block;
-
-  color:var(--red);
-
-  font-size:16px;
-
-  margin-top:2px;
-}
-
-
-/* =========================================================
-   BOTTOM
-   ========================================================= */
-
-.conversation-bottom{
-
-  max-width:1100px;
-
-  margin:55px auto 0;
-
-  display:grid;
-
-  grid-template-columns:60px 1fr;
-
-  gap:22px;
-
-  padding:31px;
-
-  background:#fff;
-
-  border:1px solid var(--line);
-
-  border-radius:20px;
-
-  box-shadow:0 16px 42px rgba(35,67,100,.05);
-}
-
-.bottom-number{
-
-  color:var(--blue);
-
-  font-size:18px;
-
-  font-weight:900;
-}
-
-.bottom-eyebrow{
-
-  color:var(--blue);
-
-  font-size:10px;
-
-  letter-spacing:1.5px;
-
-  font-weight:900;
-}
-
-.conversation-bottom h3{
-
-  margin:10px 0 13px;
-
-  color:var(--deep);
-
-  font-size:31px;
-
-  line-height:1.15;
-
-  letter-spacing:-1.3px;
-}
-
-.conversation-bottom h3 span{
-
-  color:var(--blue);
-}
-
-.conversation-bottom p{
-
-  margin:0;
-
-  max-width:900px;
-
-  color:#647589;
-
-  font-size:17px;
-
-  line-height:1.72;
-}
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media(max-width:1200px){
-
-  .conversation-system{
-
-    grid-template-columns:
-      250px
-      minmax(450px,1fr);
-  }
-
-  .intelligence-panel{
-
-    grid-column:1/-1;
-  }
-
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media(max-width:800px){
-
-  .aws-conversation-section{
-
-    padding:90px 4% 75px;
-  }
-
-  .conversation-intro h2{
-
-    font-size:40px;
-
-    letter-spacing:-2px;
-  }
-
-  .conversation-subtext{
-
-    font-size:17px;
-
-    line-height:1.65;
-  }
-
-  .conversation-industries{
-
-    justify-content:flex-start;
-
-    overflow-x:auto;
-
-    flex-wrap:nowrap;
-
-    padding-bottom:5px;
-  }
-
-  .industry-btn{
-
-    flex:none;
-  }
-
-  .conversation-system{
-
-    display:flex;
-
-    flex-direction:column;
-  }
-
-  .lead-panel{
-
-    order:1;
-  }
-
-  .conversation-panel{
-
-    order:2;
-  }
-
-  .intelligence-panel{
-
-    order:3;
-  }
-
-  .conversation-scroll{
-
-    height:650px;
-
-    padding:20px 15px 40px;
-  }
-
-  .conversation-panel-head{
-
-    padding:20px 17px;
-  }
-
-  .tracked-badge{
-
-    display:none;
-  }
-
-  .channel-tabs{
-
-    overflow-x:auto;
-  }
-
-  .channel-tab{
-
-    white-space:nowrap;
-  }
-
-  .message div{
-
-    max-width:93%;
-
-    font-size:13px;
-  }
-
-  .email-toolbar{
-
-    align-items:flex-start;
-  }
-
-  .email-toolbar > span{
-
-    display:none;
-  }
-
-  .speaker-line{
-
-    grid-template-columns:1fr;
-
-    gap:5px;
-  }
-
-  .conversation-bottom{
-
-    grid-template-columns:1fr;
-
-    gap:10px;
-
-    padding:24px;
-
-    margin-top:35px;
-  }
-
-  .conversation-bottom h3{
-
-    font-size:25px;
-  }
-
-  .conversation-bottom p{
-
-    font-size:15px;
-  }
-
-}
-
-</style>
-<script>
-(function () {
-
-  /* =========================================================
-     AWSZ — CONVERSATION INTELLIGENCE
-     PART 2 — JAVASCRIPT
-     ========================================================= */
-
-  const root = document.getElementById("conversation-intelligence");
-
-  if (!root) return;
-
-
-  /* =========================================================
-     CASE DATA
-     ========================================================= */
-
-  const cases = {
-
-    /* ---------------------------------------------------------
-       SOFTWARE
-       --------------------------------------------------------- */
-
-    software: {
-
-      avatar: "DK",
-
-      name: "Daniel Kim",
-
-      source: "LinkedIn · SaaS Demo Request",
-
-      industry: "Software",
-
-      requirement: "CRM Automation",
-
-      value: "$8,400",
-
-      first: "9:14 AM",
-
-      last: "4:42 PM",
-
-      intent:
-        "“Can you show me how this would work with our current CRM?”",
-
-      alert:
-        "The lead asked about implementation and pricing, responded to follow-ups, and still did not close.",
-
-      interest:
-        "Daniel asked about CRM integration, implementation and pricing — clear buying intent.",
-
-      objection:
-        "No major objection was raised. The conversation remained positive.",
-
-      followup:
-        "Sarah offered to send options, but no specific owner or deadline was recorded.",
-
-      monitor:
-        "CRM integration, pricing intent, unanswered next-step ownership and follow-up timing.",
-
-      messages: [
-
-        {
-          type: "client",
-          name: "Daniel · Client",
-          time: "9:14 AM",
-          text:
-            "Hi, I saw your automation platform. Can it connect with our current CRM?"
-        },
-
-        {
-          type: "team",
-          name: "Sarah · Sales",
-          time: "9:18 AM",
-          text:
-            "Yes. We can connect your CRM with your existing tools and automate the lead flow."
-        },
-
-        {
-          type: "client",
-          name: "Daniel · Client",
-          time: "9:26 AM",
-          text:
-            "That's exactly what we're looking for. What would something like this cost?"
-        },
-
-        {
-          type: "team",
-          name: "Sarah · Sales",
-          time: "9:31 AM",
-          text:
-            "It depends on the workflow and integrations. I can send you the relevant options."
-        },
-
-        {
-          type: "client",
-          name: "Daniel · Client",
-          time: "9:37 AM",
-          text:
-            "Perfect. Send those over and I'll review them with my partner."
-        }
-
-      ],
-
-      email: {
-
-        from: "Sarah Morgan",
-        email: "sarah@company.com",
-        to: "Daniel Kim",
-
-        subject:
-          "CRM automation options for your team",
-
-        body: [
-          "Hi Daniel,",
-          "Following up on our conversation, I've attached the relevant automation options based on the CRM workflow you described.",
-          "The implementation can be structured around your existing CRM and lead process.",
-          "If everything looks right, we can schedule a short implementation call and map the next steps."
-        ]
-
-      },
-
-      call: {
-
-        duration: "04:18",
-
-        client: "Daniel Kim",
-
-        employee: "Sarah Morgan",
-
-        transcript: [
-
-          {
-            speaker: "client",
-            name: "Daniel",
-            text:
-              "Yes, I received the options. The CRM integration is exactly what we're looking for."
-          },
-
-          {
-            speaker: "employee",
-            name: "Sarah",
-            text:
-              "Great. We can walk through the implementation and answer anything that comes up."
-          },
-
-          {
-            speaker: "client",
-            name: "Daniel",
-            text:
-              "Sounds good. I'll discuss it internally and get back to you."
-          },
-
-          {
-            speaker: "employee",
-            name: "Sarah",
-            text:
-              "Absolutely. I'll wait for your update."
-          }
-
-        ]
-
-      },
-
-      lost:
-        "The client showed buying intent across all three channels, but the final next step was left open. There was no clear owner or deadline for the follow-up."
-
-    },
-
-
-    /* ---------------------------------------------------------
-       BEAUTY
-       --------------------------------------------------------- */
-
-    beauty: {
-
-      avatar: "AM",
-
-      name: "Ariana Miller",
-
-      source: "Instagram · Med Spa Inquiry",
-
-      industry: "Beauty",
-
-      requirement: "Laser Treatment",
-
-      value: "$2,400",
-
-      first: "10:07 AM",
-
-      last: "5:11 PM",
-
-      intent:
-        "“If I book the package this week, can I get the promotional price?”",
-
-      alert:
-        "The prospect asked about pricing, availability and the package, but the booking step was never completed.",
-
-      interest:
-        "Ariana asked about the package price, treatment availability and booking options.",
-
-      objection:
-        "No treatment concern was raised. The lead appeared comfortable moving forward.",
-
-      followup:
-        "The team answered the questions but did not create a firm booking follow-up.",
-
-      monitor:
-        "Price inquiry, appointment intent, promotional deadline and booking ownership.",
-
-      messages: [
-
-        {
-          type: "client",
-          name: "Ariana · Client",
-          time: "10:07 AM",
-          text:
-            "Hi! I'm interested in your laser treatment package. How much is it?"
-        },
-
-        {
-          type: "team",
-          name: "Mia · Front Desk",
-          time: "10:12 AM",
-          text:
-            "The package is $2,400 and includes the full treatment plan."
-        },
-
-        {
-          type: "client",
-          name: "Ariana · Client",
-          time: "10:19 AM",
-          text:
-            "Okay, that's what I was looking for. Do you have anything available this week?"
-        },
-
-        {
-          type: "team",
-          name: "Mia · Front Desk",
-          time: "10:23 AM",
-          text:
-            "We have Thursday afternoon and Friday morning available."
-        },
-
-        {
-          type: "client",
-          name: "Ariana · Client",
-          time: "10:28 AM",
-          text:
-            "Thursday could work. Can you hold that while I check my schedule?"
-        }
-
-      ],
-
-      email: {
-
-        from: "Mia Rodriguez",
-        email: "appointments@medspa.com",
-        to: "Ariana Miller",
-
-        subject:
-          "Your laser treatment package",
-
-        body: [
-          "Hi Ariana,",
-          "I wanted to follow up regarding the treatment package we discussed today.",
-          "Thursday afternoon is still available at the moment.",
-          "Let us know if you'd like us to reserve the appointment for you."
-        ]
-
-      },
-
-      call: {
-
-        duration: "03:42",
-
-        client: "Ariana Miller",
-
-        employee: "Mia Rodriguez",
-
-        transcript: [
-
-          {
-            speaker: "client",
-            name: "Ariana",
-            text:
-              "I just wanted to make sure the package price was still the same."
-          },
-
-          {
-            speaker: "employee",
-            name: "Mia",
-            text:
-              "Yes, the package is still available at the promotional price."
-          },
-
-          {
-            speaker: "client",
-            name: "Ariana",
-            text:
-              "Great. I just need to confirm my schedule first."
-          },
-
-          {
-            speaker: "employee",
-            name: "Mia",
-            text:
-              "No problem. Just let us know when you're ready."
-          }
-
-        ]
-
-      },
-
-      lost:
-        "The lead had price confirmation, treatment availability and a positive call. The missing piece was a structured booking follow-up with a clear owner and deadline."
-
-    },
-
-
-    /* ---------------------------------------------------------
-       MORTGAGE
-       --------------------------------------------------------- */
-
-    mortgage: {
-
-      avatar: "JM",
-
-      name: "James Miller",
-
-      source: "Facebook · Mortgage Lead",
-
-      industry: "Mortgage",
-
-      requirement: "Reverse Mortgage",
-
-      value: "$185,000",
-
-      first: "8:41 AM",
-
-      last: "3:56 PM",
-
-      intent:
-        "“Based on my situation, approximately how much could I qualify for?”",
-
-      alert:
-        "The lead provided useful qualification information and stayed engaged, but the application step was not completed.",
-
-      interest:
-        "James shared his situation and asked for an estimate based on his property and age.",
-
-      objection:
-        "He did not object to the program. He simply needed more clarity before taking the next step.",
-
-      followup:
-        "The conversation ended with an open promise to review the numbers.",
-
-      monitor:
-        "Qualification signals, financial questions, promised documents and application follow-up.",
-
-      messages: [
-
-        {
-          type: "client",
-          name: "James · Client",
-          time: "8:41 AM",
-          text:
-            "I'm looking into a reverse mortgage. Can someone explain how much I might qualify for?"
-        },
-
-        {
-          type: "team",
-          name: "Vanessa · Advisor",
-          time: "8:47 AM",
-          text:
-            "Absolutely. We can review your age, property value and existing mortgage to give you a clearer estimate."
-        },
-
-        {
-          type: "client",
-          name: "James · Client",
-          time: "8:55 AM",
-          text:
-            "The home is worth around $650,000 and I still owe about $90,000."
-        },
-
-        {
-          type: "team",
-          name: "Vanessa · Advisor",
-          time: "9:03 AM",
-          text:
-            "That gives us enough to start the initial discussion. I'll have the advisor review the numbers."
-        },
-
-        {
-          type: "client",
-          name: "James · Client",
-          time: "9:12 AM",
-          text:
-            "Okay. I'd definitely like to know what the numbers look like."
-        }
-
-      ],
-
-      email: {
-
-        from: "Vanessa Bell",
-        email: "advisors@mortgagecompany.com",
-        to: "James Miller",
-
-        subject:
-          "Your reverse mortgage information",
-
-        body: [
-          "Hi James,",
-          "Thanks for taking the time to discuss your situation.",
-          "We've noted the property value and current mortgage balance you provided.",
-          "The next step is to review the available figures and discuss the options with you."
-        ]
-
-      },
-
-      call: {
-
-        duration: "05:06",
-
-        client: "James Miller",
-
-        employee: "Vanessa Bell",
-
-        transcript: [
-
-          {
-            speaker: "client",
-            name: "James",
-            text:
-              "I mainly want to understand whether this actually makes sense for my situation."
-          },
-
-          {
-            speaker: "employee",
-            name: "Vanessa",
-            text:
-              "That's exactly what the review is for. We'll go through the numbers with you."
-          },
-
-          {
-            speaker: "client",
-            name: "James",
-            text:
-              "Okay. Send me whatever you have and I'll take a look."
-          },
-
-          {
-            speaker: "employee",
-            name: "Vanessa",
-            text:
-              "Absolutely. We'll send that over."
-          }
-
-        ]
-
-      },
-
-      lost:
-        "The lead was qualified and engaged, but the handoff from initial discussion to the actual advisor/application process was not assigned a clear next action."
-
-    },
-
-
-    /* ---------------------------------------------------------
-       REAL ESTATE
-       --------------------------------------------------------- */
-
-    realestate: {
-
-      avatar: "SC",
-
-      name: "Sophia Carter",
-
-      source: "Google · Buyer Inquiry",
-
-      industry: "Real Estate",
-
-      requirement: "Home Purchase",
-
-      value: "$720,000",
-
-      first: "11:16 AM",
-
-      last: "6:03 PM",
-
-      intent:
-        "“Can you send me the details for the property and arrange a showing?”",
-
-      alert:
-        "The buyer requested property information and a showing, but the showing was never firmly scheduled.",
-
-      interest:
-        "Sophia asked for property details and explicitly requested a showing.",
-
-      objection:
-        "There was no price objection or rejection of the property.",
-
-      followup:
-        "The agent sent information but left the showing confirmation open.",
-
-      monitor:
-        "Property inquiry, showing intent, listing engagement and appointment conversion.",
-
-      messages: [
-
-        {
-          type: "client",
-          name: "Sophia · Buyer",
-          time: "11:16 AM",
-          text:
-            "Hi, is the house on Oak Street still available?"
-        },
-
-        {
-          type: "team",
-          name: "James · Agent",
-          time: "11:20 AM",
-          text:
-            "Yes, it's currently available. I can send you the listing details."
-        },
-
-        {
-          type: "client",
-          name: "Sophia · Buyer",
-          time: "11:27 AM",
-          text:
-            "Thanks. I really like the property from the photos. Can I see it this weekend?"
-        },
-
-        {
-          type: "team",
-          name: "James · Agent",
-          time: "11:31 AM",
-          text:
-            "Absolutely. Saturday afternoon should be possible."
-        },
-
-        {
-          type: "client",
-          name: "Sophia · Buyer",
-          time: "11:39 AM",
-          text:
-            "Saturday works for me. What time?"
-        }
-
-      ],
-
-      email: {
-
-        from: "James Carter",
-        email: "james@realtygroup.com",
-        to: "Sophia Carter",
-
-        subject:
-          "Oak Street property details",
-
-        body: [
-          "Hi Sophia,",
-          "Here are the details for the Oak Street property we discussed.",
-          "The property is still available and Saturday afternoon should work for a showing.",
-          "Please let me know which time works best for you."
-        ]
-
-      },
-
-      call: {
-
-        duration: "04:01",
-
-        client: "Sophia Carter",
-
-        employee: "James Carter",
-
-        transcript: [
-
-          {
-            speaker: "client",
-            name: "Sophia",
-            text:
-              "I really like the property. I just need to know what time Saturday works."
-          },
-
-          {
-            speaker: "employee",
-            name: "James",
-            text:
-              "We're checking the exact showing schedule now."
-          },
-
-          {
-            speaker: "client",
-            name: "Sophia",
-            text:
-              "Okay, just send me the time once you confirm it."
-          },
-
-          {
-            speaker: "employee",
-            name: "James",
-            text:
-              "Will do."
-          }
-
-        ]
-
-      },
-
-      lost:
-        "The buyer had clear intent and asked for a showing. The lead was lost between the conversation and the actual appointment confirmation."
-
-    },
-
-
-    /* ---------------------------------------------------------
-       HOME INSPECTION
-       --------------------------------------------------------- */
-
-    inspection: {
-
-      avatar: "RB",
-
-      name: "Ryan Brooks",
-
-      source: "Google · Inspection Request",
-
-      industry: "Home Inspection",
-
-      requirement: "Pre-Purchase Inspection",
-
-      value: "$575",
-
-      first: "1:24 PM",
-
-      last: "4:38 PM",
-
-      intent:
-        "“The inspection would be for Friday morning. Do you have anything available?”",
-
-      alert:
-        "The customer was ready to schedule but the appointment was not locked in.",
-
-      interest:
-        "Ryan had a property under contract and asked directly about Friday availability.",
-
-      objection:
-        "No objection was raised. Timing was the main factor.",
-
-      followup:
-        "Availability was discussed but the final appointment confirmation was not completed.",
-
-      monitor:
-        "Urgency, property status, inspection timing and appointment confirmation.",
-
-      messages: [
-
-        {
-          type: "client",
-          name: "Ryan · Client",
-          time: "1:24 PM",
-          text:
-            "Hi, I need a home inspection for a property I'm buying."
-        },
-
-        {
-          type: "team",
-          name: "Mark · Office",
-          time: "1:29 PM",
-          text:
-            "Sure. What day are you looking for?"
-        },
-
-        {
-          type: "client",
-          name: "Ryan · Client",
-          time: "1:34 PM",
-          text:
-            "Friday morning if possible. We're trying to move quickly."
-        },
-
-        {
-          type: "team",
-          name: "Mark · Office",
-          time: "1:41 PM",
-          text:
-            "We may have a Friday morning opening. I'll confirm it for you."
-        },
-
-        {
-          type: "client",
-          name: "Ryan · Client",
-          time: "1:46 PM",
-          text:
-            "Perfect. Please let me know as soon as you confirm."
-        }
-
-      ],
-
-      email: {
-
-        from: "Mark Davis",
-        email: "office@inspectioncompany.com",
-        to: "Ryan Brooks",
-
-        subject:
-          "Friday inspection availability",
-
-        body: [
-          "Hi Ryan,",
-          "Thanks for reaching out about the property inspection.",
-          "We're checking the Friday morning schedule and will confirm the available time.",
-          "Once confirmed, we'll send you the appointment details."
-        ]
-
-      },
-
-      call: {
-
-        duration: "02:54",
-
-        client: "Ryan Brooks",
-
-        employee: "Mark Davis",
-
-        transcript: [
-
-          {
-            speaker: "client",
-            name: "Ryan",
-            text:
-              "We're under contract, so Friday is pretty important for us."
-          },
-
-          {
-            speaker: "employee",
-            name: "Mark",
-            text:
-              "Understood. We're checking the inspector schedule right now."
-          },
-
-          {
-            speaker: "client",
-            name: "Ryan",
-            text:
-              "Okay, I'll keep an eye out for the confirmation."
-          },
-
-          {
-            speaker: "employee",
-            name: "Mark",
-            text:
-              "Absolutely."
-          }
-
-        ]
-
-      },
-
-      lost:
-        "The customer had urgency and was ready to schedule. The missed opportunity happened because availability confirmation was not converted into a completed booking."
-
-    },
-
-
-    /* ---------------------------------------------------------
-       INSURANCE
-       --------------------------------------------------------- */
-
-    insurance: {
-
-      avatar: "ET",
-
-      name: "Emily Thompson",
-
-      source: "Facebook · Insurance Inquiry",
-
-      industry: "Insurance",
-
-      requirement: "Commercial Coverage",
-
-      value: "$14,800",
-
-      first: "9:52 AM",
-
-      last: "5:26 PM",
-
-      intent:
-        "“Can you compare the options and tell me which coverage would fit our business?”",
-
-      alert:
-        "The prospect requested a comparison and was willing to continue, but the quote follow-up was not completed.",
-
-      interest:
-        "Emily shared business details and asked for a coverage comparison.",
-
-      objection:
-        "No clear objection was recorded. The prospect wanted help choosing between options.",
-
-      followup:
-        "The team promised a comparison but did not create a defined quote-review follow-up.",
-
-      monitor:
-        "Coverage needs, quote intent, comparison request and quote-review ownership.",
-
-      messages: [
-
-        {
-          type: "client",
-          name: "Emily · Client",
-          time: "9:52 AM",
-          text:
-            "We're reviewing our commercial insurance. Can someone help compare the options?"
-        },
-
-        {
-          type: "team",
-          name: "Alex · Advisor",
-          time: "9:59 AM",
-          text:
-            "Absolutely. If you give me a few details about the business, we can narrow down the right coverage."
-        },
-
-        {
-          type: "client",
-          name: "Emily · Client",
-          time: "10:08 AM",
-          text:
-            "We're a small construction company with about 12 employees."
-        },
-
-        {
-          type: "team",
-          name: "Alex · Advisor",
-          time: "10:16 AM",
-          text:
-            "That helps. We can prepare a few coverage options based on the business profile."
-        },
-
-        {
-          type: "client",
-          name: "Emily · Client",
-          time: "10:24 AM",
-          text:
-            "Great. I'd like to compare them before our renewal date."
-        }
-
-      ],
-
-      email: {
-
-        from: "Alex Wilson",
-        email: "alex@insurancegroup.com",
-        to: "Emily Thompson",
-
-        subject:
-          "Commercial insurance options",
-
-        body: [
-          "Hi Emily,",
-          "Thanks for sharing the information about your construction company.",
-          "We're putting together the relevant coverage options for your renewal.",
-          "I'll send the comparison once the quote information has been reviewed."
-        ]
-
-      },
-
-      call: {
-
-        duration: "04:36",
-
-        client: "Emily Thompson",
-
-        employee: "Alex Wilson",
-
-        transcript: [
-
-          {
-            speaker: "client",
-            name: "Emily",
-            text:
-              "The main thing for us is making sure we're properly covered without paying for things we don't need."
-          },
-
-          {
-            speaker: "employee",
-            name: "Alex",
-            text:
-              "Understood. We'll compare the coverage and explain the differences clearly."
-          },
-
-          {
-            speaker: "client",
-            name: "Emily",
-            text:
-              "That would be helpful. Send me the comparison and I'll review it."
-          },
-
-          {
-            speaker: "employee",
-            name: "Alex",
-            text:
-              "Sounds good. We'll send it over."
-          }
-
-        ]
-
-      },
-
-      lost:
-        "The prospect was qualified and requested a comparison. The opportunity was lost because the promised quote-review step had no clear ownership or deadline."
-
-    }
-
-  };
-
-
-  /* =========================================================
-     ELEMENTS
-     ========================================================= */
-
-  const industryButtons =
-    root.querySelectorAll(".industry-btn");
-
-  const channelButtons =
-    root.querySelectorAll(".channel-tab");
-
-  const conversationContent =
-    root.querySelector("#conversationContent");
-
-
-  const caseAvatar =
-    root.querySelector("#caseAvatar");
-
-  const caseName =
-    root.querySelector("#caseName");
-
-  const caseSource =
-    root.querySelector("#caseSource");
-
-  const caseIndustry =
-    root.querySelector("#caseIndustry");
-
-  const caseRequirement =
-    root.querySelector("#caseRequirement");
-
-  const caseValue =
-    root.querySelector("#caseValue");
-
-  const caseFirst =
-    root.querySelector("#caseFirst");
-
-  const caseLast =
-    root.querySelector("#caseLast");
-
-  const caseIntent =
-    root.querySelector("#caseIntent");
-
-  const caseAlert =
-    root.querySelector("#caseAlert");
-
-  const briefInterest =
-    root.querySelector("#briefInterest");
-
-  const briefObjection =
-    root.querySelector("#briefObjection");
-
-  const briefFollowup =
-    root.querySelector("#briefFollowup");
-
-  const briefMonitor =
-    root.querySelector("#briefMonitor");
-
-
-  /* =========================================================
-     STATE
-     ========================================================= */
-
-  let currentCase = "software";
-
-  let currentChannel = "message";
-
-  let speechQueue = [];
-
-  let speechIndex = 0;
-
-  let isSpeaking = false;
-
-
-  /* =========================================================
-     ESCAPE HTML
-     ========================================================= */
-
-  function escapeHTML(value){
-
-    return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
-
-
-  /* =========================================================
-     UPDATE LEAD PROFILE
-     ========================================================= */
-
-  function updateProfile(data){
-
-    caseAvatar.textContent =
-      data.avatar;
-
-    caseName.textContent =
-      data.name;
-
-    caseSource.textContent =
-      data.source;
-
-    caseIndustry.textContent =
-      data.industry;
-
-    caseRequirement.textContent =
-      data.requirement;
-
-    caseValue.textContent =
-      data.value;
-
-    caseFirst.textContent =
-      data.first;
-
-    caseLast.textContent =
-      data.last;
-
-    caseIntent.textContent =
-      data.intent;
-
-    caseAlert.textContent =
-      data.alert;
-
-    briefInterest.textContent =
-      data.interest;
-
-    briefObjection.textContent =
-      data.objection;
-
-    briefFollowup.textContent =
-      data.followup;
-
-    briefMonitor.textContent =
-      data.monitor;
-
-  }
-
-
-  /* =========================================================
-     MESSAGE CHANNEL
-     ========================================================= */
-
-  function renderMessages(data){
-
-    let html = "";
-
-    html += `
-      <div class="timeline">
-
-        <div class="timeline-icon message-timeline-icon">
-          ≋
-        </div>
-
-        <div class="timeline-body">
-
-          <div class="timeline-head">
-            <strong>MESSAGE THREAD</strong>
-            <span>${escapeHTML(data.first)}</span>
+        <div class="visual-top">
+          <div class="visual-title">
+            Lead Automation
           </div>
 
-          <div class="message-card">
-    `;
+          <div class="status">
+            ● RUNNING
+          </div>
+        </div>
 
+        <div class="flow">
 
-    data.messages.forEach(function(message){
+          <div class="flow-node">
+            <div class="icon">01</div>
+            <strong>New Lead</strong>
+            <span>Website / Ad</span>
+          </div>
 
-      const messageClass =
-        message.type === "team"
-          ? "team-message"
-          : "client-message";
+          <div class="arrow">→</div>
 
+          <div class="flow-node">
+            <div class="icon">AI</div>
+            <strong>Qualification</strong>
+            <span>AI / Rules</span>
+          </div>
 
-      html += `
-        <div class="message ${messageClass}">
+          <div class="arrow">→</div>
 
-          <small>
-            ${escapeHTML(message.name)}
-            ·
-            ${escapeHTML(message.time)}
-          </small>
-
-          <div>
-            ${escapeHTML(message.text)}
+          <div class="flow-node">
+            <div class="icon">CRM</div>
+            <strong>CRM</strong>
+            <span>Record created</span>
           </div>
 
         </div>
-      `;
 
-    });
+        <div class="logs">
 
-
-    html += `
+          <div class="log">
+            <span>Contact created</span>
+            <span>Completed</span>
           </div>
 
-          <div class="timeline-note positive">
+          <div class="log">
+            <span>Lead assigned</span>
+            <span>Completed</span>
+          </div>
 
-            <strong>
-              BUYING SIGNAL DETECTED
-            </strong>
+          <div class="log">
+            <span>Follow-up scheduled</span>
+            <span>Queued</span>
+          </div>
 
-            <span>
-              The client asked questions that indicate genuine
-              interest and movement toward a purchase.
-            </span>
-
+          <div class="log">
+            <span>Team notification</span>
+            <span>Sent</span>
           </div>
 
         </div>
 
       </div>
 
+    </div>
 
-      <div class="timeline">
+  </div>
 
-        <div class="timeline-icon lost-timeline-icon">
-          !
-        </div>
+</section>
 
-        <div class="timeline-body">
 
-          <div class="timeline-head">
-            <strong style="color:#c33d3d;">
-              OUTCOME
-            </strong>
-            <span>
-              Lead Lost
-            </span>
+<!-- =====================================================
+     CONSULTANCY
+===================================================== -->
+
+<section class="section white">
+
+  <div class="container feature reverse">
+
+    <div class="feature-copy reveal">
+
+      <div class="eyebrow">
+        02 / CONSULTANCY
+      </div>
+
+      <h2>
+        Don't automate the wrong process.
+      </h2>
+
+      <p>
+        My consultancy starts before the build. I look at how your business
+        actually operates, where time is being lost, what your existing
+        systems are doing and where automation can create the most practical
+        improvement.
+      </p>
+
+      <ul class="feature-list">
+
+        <li>
+          <span class="check">✓</span>
+          Business process and workflow audit
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          Automation opportunity mapping
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          CRM and software architecture review
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          Integration planning
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          Practical implementation roadmap
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <div class="feature-visual reveal">
+
+      <div class="consult-box">
+
+        <div class="visual-top">
+          <div class="visual-title">
+            Automation Opportunity Audit
           </div>
 
-          <div class="lost-outcome">
+          <div class="status">
+            ANALYSIS
+          </div>
+        </div>
 
-            <div class="lost-outcome-title">
-              Conversation looked healthy.
+        <div class="audit-grid">
+
+          <div class="audit-card">
+            <small>Manual Work</small>
+            <strong>High</strong>
+            <div class="audit-bar">
+              <i style="width:82%"></i>
+            </div>
+          </div>
+
+          <div class="audit-card">
+            <small>Integration Gaps</small>
+            <strong>Medium</strong>
+            <div class="audit-bar">
+              <i style="width:58%"></i>
+            </div>
+          </div>
+
+          <div class="audit-card">
+            <small>CRM Efficiency</small>
+            <strong>Improve</strong>
+            <div class="audit-bar">
+              <i style="width:67%"></i>
+            </div>
+          </div>
+
+          <div class="audit-card">
+            <small>Automation Potential</small>
+            <strong>High</strong>
+            <div class="audit-bar">
+              <i style="width:90%"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="roadmap">
+
+          <div class="roadmap-head">
+            <span>IMPLEMENTATION ROADMAP</span>
+            <span>4 PHASES</span>
+          </div>
+
+          <div class="roadmap-line">
+
+            <div class="road-step">
+              <div class="road-dot">1</div>
+              Audit
             </div>
 
-            <p>
-              ${escapeHTML(data.lost)}
-            </p>
+            <div class="road-step">
+              <div class="road-dot">2</div>
+              Design
+            </div>
 
-            <div class="lost-question">
-              Where did the process break?
+            <div class="road-step">
+              <div class="road-dot">3</div>
+              Build
+            </div>
+
+            <div class="road-step">
+              <div class="road-dot">4</div>
+              Improve
             </div>
 
           </div>
@@ -3525,160 +2415,263 @@
         </div>
 
       </div>
-    `;
+
+    </div>
+
+  </div>
+
+</section>
 
 
-    conversationContent.innerHTML =
-      html;
+<!-- =====================================================
+     TRAINING
+===================================================== -->
 
-  }
+<section class="section blue-bg">
+
+  <div class="container feature">
+
+    <div class="feature-copy reveal">
+
+      <div class="eyebrow">
+        03 / AUTOMATION TRAINING
+      </div>
+
+      <h2>
+        I don't just build automation. I teach teams how to understand it.
+      </h2>
+
+      <p>
+        If your team wants to become more capable with automation,
+        I provide practical training around the tools and workflows
+        they actually need — from fundamentals to building real systems.
+      </p>
+
+      <ul class="feature-list">
+
+        <li>
+          <span class="check">✓</span>
+          Automation fundamentals
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          n8n workflow building
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          CRM automation concepts
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          APIs, webhooks and integrations
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          Practical project-based learning
+        </li>
+
+      </ul>
+
+    </div>
 
 
-  /* =========================================================
-     EMAIL CHANNEL
-     ========================================================= */
+    <div class="feature-visual reveal">
 
-  function renderEmail(data){
+      <div class="training-box">
 
-    const email = data.email;
-
-
-    conversationContent.innerHTML = `
-
-      <div class="timeline">
-
-        <div class="timeline-icon email-timeline-icon">
-          ✉
-        </div>
-
-        <div class="timeline-body">
-
-          <div class="timeline-head">
-
-            <strong>
-              EMAIL
-            </strong>
-
-            <span>
-              ${escapeHTML(data.last)}
-            </span>
-
+        <div class="visual-top">
+          <div class="visual-title" style="color:#fff">
+            Automation Training
           </div>
 
+          <div class="status">
+            LEARNING
+          </div>
+        </div>
 
-          <div class="email-window">
+        <div class="lesson">
+          <div class="lesson-top">
+            <b>01 · Automation Fundamentals</b>
+            <span>Complete</span>
+          </div>
 
-            <div class="email-toolbar">
+          <div class="lesson-bar">
+            <i style="width:100%"></i>
+          </div>
+        </div>
 
-              <div class="email-sender">
+        <div class="lesson">
+          <div class="lesson-top">
+            <b>02 · Triggers & Workflows</b>
+            <span>Complete</span>
+          </div>
 
-                <div class="email-logo">
-                  ${escapeHTML(
-                    email.from
-                      .split(" ")
-                      .map(function(x){
-                        return x[0];
-                      })
-                      .join("")
-                      .slice(0,2)
-                      .toUpperCase()
-                  )}
-                </div>
+          <div class="lesson-bar">
+            <i style="width:100%"></i>
+          </div>
+        </div>
 
-                <div>
+        <div class="lesson">
+          <div class="lesson-top">
+            <b>03 · APIs & Webhooks</b>
+            <span>In progress</span>
+          </div>
 
-                  <strong>
-                    ${escapeHTML(email.from)}
-                  </strong>
+          <div class="lesson-bar">
+            <i style="width:72%"></i>
+          </div>
+        </div>
 
-                  <span>
-                    ${escapeHTML(email.email)}
-                  </span>
+        <div class="lesson">
+          <div class="lesson-top">
+            <b>04 · Build a Real Workflow</b>
+            <span>Next</span>
+          </div>
 
-                </div>
+          <div class="lesson-bar">
+            <i style="width:25%"></i>
+          </div>
+        </div>
 
-              </div>
+      </div>
 
-              <span>
-                TO ${escapeHTML(email.to)}
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     WEBSITE DEVELOPMENT
+===================================================== -->
+
+<section class="section white">
+
+  <div class="container feature reverse">
+
+    <div class="feature-copy reveal">
+
+      <div class="eyebrow">
+        04 / WEBSITE DEVELOPMENT
+      </div>
+
+      <h2>
+        Your website should connect to your business.
+      </h2>
+
+      <p>
+        I build websites and web applications with the business operation
+        in mind. The website can become the starting point for lead capture,
+        booking, CRM automation, customer communication and internal workflows.
+      </p>
+
+      <ul class="feature-list">
+
+        <li>
+          <span class="check">✓</span>
+          Business and corporate websites
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          Custom web applications
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          CMS-powered websites
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          Forms, booking and CRM integrations
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          Responsive and performance-focused interfaces
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <div class="feature-visual reveal">
+
+      <div class="browser">
+
+        <div class="browser-bar">
+
+          <div class="dots">
+            <i></i><i></i><i></i>
+          </div>
+
+          <div class="url">
+            yourbusiness.com
+          </div>
+
+        </div>
+
+        <div class="site">
+
+          <div class="site-nav">
+            <div class="site-logo">YOUR BRAND</div>
+
+            <div class="site-links">
+              <span>Services</span>
+              <span>About</span>
+              <span>Team</span>
+              <span>Contact</span>
+            </div>
+          </div>
+
+          <div class="site-hero">
+
+            <div>
+              <h4>
+                A website built around the customer journey.
+              </h4>
+
+              <p>
+                Clear information, strong actions and connected systems.
+              </p>
+
+              <span class="site-cta">
+                Book / Contact
               </span>
-
             </div>
 
-
-            <div class="email-subject">
-              ${escapeHTML(email.subject)}
-            </div>
-
-
-            <div class="email-content">
-
-              ${email.body.map(function(paragraph){
-
-                return `
-                  <p>
-                    ${escapeHTML(paragraph)}
-                  </p>
-                `;
-
-              }).join("")}
-
+            <div class="site-image">
+              <div class="site-person"></div>
+              <div class="site-body"></div>
             </div>
 
           </div>
 
+          <div class="site-cards">
 
-          <div class="timeline-note positive">
-
-            <strong>
-              EMAIL CAPTURED
-            </strong>
-
-            <span>
-              The CRM successfully recorded the follow-up.
-              The problem is what happened after the email.
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="timeline">
-
-        <div class="timeline-icon lost-timeline-icon">
-          !
-        </div>
-
-        <div class="timeline-body">
-
-          <div class="timeline-head">
-
-            <strong style="color:#c33d3d;">
-              OUTCOME
-            </strong>
-
-            <span>
-              Lead Lost
-            </span>
-
-          </div>
-
-
-          <div class="lost-outcome">
-
-            <div class="lost-outcome-title">
-              The email was sent.
+            <div class="site-card">
+              <i></i>
+              <b>Services</b>
+              <span>Clear information</span>
             </div>
 
-            <p>
-              ${escapeHTML(data.lost)}
-            </p>
+            <div class="site-card">
+              <i></i>
+              <b>Experts</b>
+              <span>Build trust</span>
+            </div>
 
-            <div class="lost-question">
-              Sending the email was not the same as completing the next step.
+            <div class="site-card">
+              <i></i>
+              <b>Contact</b>
+              <span>Convert visitors</span>
             </div>
 
           </div>
@@ -3687,220 +2680,143 @@
 
       </div>
 
-    `;
+    </div>
 
-  }
+  </div>
 
-
-  /* =========================================================
-     CALL CHANNEL
-     ========================================================= */
-
-  function renderCall(data){
-
-    const call = data.call;
+</section>
 
 
-    conversationContent.innerHTML = `
+<!-- =====================================================
+     CRM + ERP
+===================================================== -->
 
-      <div class="timeline">
+<section class="section blue-bg">
 
-        <div class="timeline-icon call-timeline-icon">
-          ☎
+  <div class="container feature">
+
+    <div class="feature-copy reveal">
+
+      <div class="eyebrow">
+        05 / CRM & ERP
+      </div>
+
+      <h2>
+        Give your team one connected view of the operation.
+      </h2>
+
+      <p>
+        I can automate CRM processes and build connected operational systems
+        that make customer information, tasks, sales activity and internal
+        processes easier to manage.
+      </p>
+
+      <ul class="feature-list">
+
+        <li>
+          <span class="check">✓</span>
+          CRM pipeline automation
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          Lead assignment and follow-up
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          Appointment and task workflows
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          Operational dashboards
+        </li>
+
+        <li>
+          <span class="check">✓</span>
+          Internal ERP-style systems
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <div class="feature-visual reveal">
+
+      <div class="crm-box">
+
+        <div class="crm-side">
+
+          <b>CRM</b>
+
+          <span class="active">Pipeline</span>
+          <span>Contacts</span>
+          <span>Tasks</span>
+          <span>Messages</span>
+          <span>Reports</span>
+
         </div>
 
-        <div class="timeline-body">
+        <div class="crm-content">
 
-          <div class="timeline-head">
+          <h4>Sales Pipeline</h4>
 
-            <strong>
-              CALL RECORDING
-            </strong>
+          <div class="columns">
 
-            <span>
-              ${escapeHTML(call.duration)}
-            </span>
+            <div class="column">
 
-          </div>
-
-
-          <div class="call-recording">
-
-            <div class="recording-header">
-
-              <div class="recording-person">
-
-                <div class="recording-avatar">
-                  AI
-                </div>
-
-                <div>
-
-                  <strong>
-                    ${escapeHTML(call.client)}
-                  </strong>
-
-                  <span>
-                    with ${escapeHTML(call.employee)}
-                  </span>
-
-                </div>
-
+              <div class="column-title">
+                NEW · 08
               </div>
 
+              <div class="lead">
+                <div class="lead-avatar"></div>
+                <b>Sarah Wilson</b>
+                <span>Website lead</span>
+              </div>
 
-              <div class="recording-status">
-                RECORDED
+              <div class="lead">
+                <div class="lead-avatar"></div>
+                <b>James Lee</b>
+                <span>Facebook lead</span>
               </div>
 
             </div>
 
+            <div class="column">
 
-            <div class="audio-controls">
+              <div class="column-title">
+                FOLLOW-UP · 05
+              </div>
 
-              <button
-                type="button"
-                class="audio-main-button"
-                id="audioPlay"
-                aria-label="Play"
-              >
-                ▶
-              </button>
+              <div class="lead">
+                <div class="lead-avatar"></div>
+                <b>David Smith</b>
+                <span>SMS scheduled</span>
+              </div>
 
-              <button
-                type="button"
-                class="audio-small-button"
-                id="audioPause"
-                aria-label="Pause"
-              >
-                ❚❚
-              </button>
-
-              <button
-                type="button"
-                class="audio-small-button"
-                id="audioStop"
-                aria-label="Stop"
-              >
-                ■
-              </button>
-
-
-              <div class="audio-track">
-
-                <div class="audio-waveform">
-
-                  ${Array.from(
-                    {length:30},
-                    function(){
-                      return "<i></i>";
-                    }
-                  ).join("")}
-
-                </div>
-
-
-                <div class="audio-time">
-
-                  <span id="audioStatus">
-                    Ready
-                  </span>
-
-                  <span>
-                    ${escapeHTML(call.duration)}
-                  </span>
-
-                </div>
-
+              <div class="lead">
+                <div class="lead-avatar"></div>
+                <b>Maria Khan</b>
+                <span>Call pending</span>
               </div>
 
             </div>
 
+            <div class="column">
 
-            <div class="call-transcript">
+              <div class="column-title">
+                WON · 12
+              </div>
 
-              ${call.transcript.map(function(line){
+              <div class="lead">
+                <div class="lead-avatar"></div>
+                <b>Alex Brown</b>
+                <span>Appointment booked</span>
+              </div>
 
-                const cls =
-                  line.speaker === "employee"
-                    ? "employee"
-                    : "client";
-
-
-                return `
-
-                  <div class="speaker-line ${cls}">
-
-                    <div class="speaker-name">
-                      ${escapeHTML(line.name)}
-                    </div>
-
-                    <p>
-                      ${escapeHTML(line.text)}
-                    </p>
-
-                  </div>
-
-                `;
-
-              }).join("")}
-
-            </div>
-
-          </div>
-
-
-          <div class="timeline-note positive">
-
-            <strong>
-              CALL RECORDED
-            </strong>
-
-            <span>
-              The conversation was captured. The important question
-              is whether the call created a clearly owned next action.
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="timeline">
-
-        <div class="timeline-icon lost-timeline-icon">
-          !
-        </div>
-
-        <div class="timeline-body">
-
-          <div class="timeline-head">
-
-            <strong style="color:#c33d3d;">
-              OUTCOME
-            </strong>
-
-            <span>
-              Lead Lost
-            </span>
-
-          </div>
-
-
-          <div class="lost-outcome">
-
-            <div class="lost-outcome-title">
-              Good call. No completed next step.
-            </div>
-
-            <p>
-              ${escapeHTML(data.lost)}
-            </p>
-
-            <div class="lost-question">
-              The call happened. The process still failed to move the lead forward.
             </div>
 
           </div>
@@ -3909,617 +2825,655 @@
 
       </div>
 
-    `;
+    </div>
 
+  </div>
 
-    setupAudio(data);
+</section>
 
-  }
 
+<!-- =====================================================
+     AI AGENTS
+===================================================== -->
 
-  /* =========================================================
-     AUDIO / TWO VOICES
-     ========================================================= */
+<section class="section white">
 
-  function getVoice(preferFemale){
+  <div class="container feature reverse">
 
-    if (
-      !("speechSynthesis" in window)
-    ){
-      return null;
-    }
+    <div class="feature-copy reveal">
 
+      <div class="eyebrow">
+        06 / AI AGENTS & INTEGRATIONS
+      </div>
 
-    const voices =
-      window.speechSynthesis.getVoices();
+      <h2>
+        Put AI where it can actually do useful work.
+      </h2>
 
+      <p>
+        AI becomes more useful when it is connected to your actual business.
+        I build AI-powered chat and voice workflows that can understand
+        enquiries, collect information, qualify leads and trigger the next step.
+      </p>
 
-    if (!voices.length){
-      return null;
-    }
+      <ul class="feature-list">
 
+        <li>
+          <span class="check">✓</span>
+          AI chat and voice workflows
+        </li>
 
-    const english =
-      voices.filter(function(voice){
+        <li>
+          <span class="check">✓</span>
+          AI lead qualification
+        </li>
 
-        return /^en(-|_)/i.test(
-          voice.lang || ""
-        );
+        <li>
+          <span class="check">✓</span>
+          AI receptionist-style workflows
+        </li>
 
-      });
+        <li>
+          <span class="check">✓</span>
+          CRM-connected AI agents
+        </li>
 
+        <li>
+          <span class="check">✓</span>
+          Human handoff when required
+        </li>
 
-    const pool =
-      english.length
-        ? english
-        : voices;
+      </ul>
 
+    </div>
 
-    const femaleHints = [
-      "samantha",
-      "zira",
-      "susan",
-      "karen",
-      "female",
-      "google us english"
-    ];
 
+    <div class="feature-visual reveal">
 
-    const maleHints = [
-      "david",
-      "daniel",
-      "alex",
-      "mark",
-      "male",
-      "george"
-    ];
+      <div class="ai-box">
 
+        <div class="chat">
 
-    const hints =
-      preferFemale
-        ? femaleHints
-        : maleHints;
+          <div class="chat-head">
 
+            <div class="ai-avatar">
+              AI
+            </div>
 
-    for (
-      let i = 0;
-      i < hints.length;
-      i++
-    ){
+            <div>
+              <b>Business AI Assistant</b>
+              <span>● Online</span>
+            </div>
 
-      const found =
-        pool.find(function(voice){
+          </div>
 
-          return voice.name
-            .toLowerCase()
-            .includes(hints[i]);
+          <div class="message client">
+            I need to book an appointment for next week.
+          </div>
 
-        });
+          <div class="message ai">
+            I can help with that. Which service would you like to book?
+          </div>
 
+          <div class="message client">
+            A consultation.
+          </div>
 
-      if (found) return found;
+          <div class="message ai">
+            Understood. I'll check the available consultation slots.
+          </div>
 
-    }
+          <div class="ai-action">
 
+            <div>Check CRM</div>
+            <div>Check Calendar</div>
+            <div>Book</div>
 
-    return pool[
-      preferFemale ? 0 : Math.min(1, pool.length - 1)
-    ];
+          </div>
 
-  }
+        </div>
 
+      </div>
 
-  function speakLine(line){
+    </div>
 
-    if (
-      !("speechSynthesis" in window)
-    ){
-      return;
-    }
+  </div>
 
+</section>
 
-    const utterance =
-      new SpeechSynthesisUtterance(
-        line.text
-      );
 
+<!-- =====================================================
+     ERP + 3D
+===================================================== -->
 
-    utterance.lang = "en-US";
+<section class="section blue-bg">
 
+  <div class="container">
 
-    utterance.rate =
-      line.speaker === "employee"
-        ? 0.96
-        : 0.91;
+    <div class="intro reveal">
 
+      <div class="eyebrow">
+        07 / ADVANCED DIGITAL EXPERIENCES
+      </div>
 
-    utterance.pitch =
-      line.speaker === "employee"
-        ? 1.05
-        : 0.94;
+      <h2>
+        From internal systems to experiences customers remember.
+      </h2>
 
+      <p>
+        Some projects need operational software. Others need a stronger
+        digital presentation. I work across both sides.
+      </p>
 
-    utterance.volume = 1;
+    </div>
 
 
-    const voice =
-      getVoice(
-        line.speaker === "employee"
-      );
+    <div class="feature" style="margin-bottom:45px">
 
+      <div class="feature-copy reveal">
 
-    if (voice){
+        <div class="eyebrow">
+          ERP / INTERNAL TOOLS
+        </div>
 
-      utterance.voice =
-        voice;
+        <h3>
+          Build around how your team actually works.
+        </h3>
 
-    }
+        <p>
+          Custom operational dashboards and ERP-style tools can bring
+          scattered business information into one clearer workflow.
+        </p>
 
+      </div>
 
-    utterance.onstart =
-      function(){
 
-        isSpeaking = true;
+      <div class="feature-visual reveal">
 
-        updateAudioStatus(
-          "Playing " +
-          line.name
-        );
+        <div class="erp-visual">
 
-        animateWaveform(true);
+          <div class="visual-top">
+            <div class="visual-title">
+              Operations Dashboard
+            </div>
 
-      };
+            <div class="status">
+              LIVE
+            </div>
+          </div>
 
+          <div class="erp-stats">
 
-    utterance.onend =
-      function(){
+            <div class="erp-stat">
+              <small>Orders</small>
+              <strong>248</strong>
+            </div>
 
-        speechIndex++;
+            <div class="erp-stat">
+              <small>Processing</small>
+              <strong>34</strong>
+            </div>
 
-        if (
-          speechIndex <
-          speechQueue.length
-        ){
+            <div class="erp-stat">
+              <small>Complete</small>
+              <strong>214</strong>
+            </div>
 
-          speakLine(
-            speechQueue[speechIndex]
-          );
+          </div>
 
-        }else{
+          <div class="erp-table">
 
-          isSpeaking = false;
+            <div class="erp-row head">
+              <span>Process</span>
+              <span>Owner</span>
+              <span>Status</span>
+            </div>
 
-          updateAudioStatus(
-            "Finished"
-          );
+            <div class="erp-row">
+              <span>New Order</span>
+              <span>Operations</span>
+              <span>Active</span>
+            </div>
 
-          animateWaveform(false);
+            <div class="erp-row">
+              <span>Inventory</span>
+              <span>Warehouse</span>
+              <span>Done</span>
+            </div>
 
-        }
+            <div class="erp-row">
+              <span>Approval</span>
+              <span>Sales</span>
+              <span>Waiting</span>
+            </div>
 
-      };
+            <div class="erp-row">
+              <span>Dispatch</span>
+              <span>Logistics</span>
+              <span>Ready</span>
+            </div>
 
+          </div>
 
-    utterance.onerror =
-      function(){
+        </div>
 
-        isSpeaking = false;
+      </div>
 
-        updateAudioStatus(
-          "Audio unavailable"
-        );
+    </div>
 
-        animateWaveform(false);
 
-      };
+    <div class="feature reverse">
 
+      <div class="feature-copy reveal">
 
-    window.speechSynthesis.speak(
-      utterance
-    );
+        <div class="eyebrow">
+          3D / INTERACTIVE WEB
+        </div>
 
-  }
+        <h3>
+          When a normal website isn't enough.
+        </h3>
 
+        <p>
+          I can add interactive 3D, animated product presentation,
+          scroll-driven storytelling and immersive web sections where
+          the experience itself is part of the value.
+        </p>
 
-  function setupAudio(data){
+      </div>
 
-    speechQueue =
-      data.call.transcript.slice();
 
-    speechIndex = 0;
+      <div class="feature-visual reveal">
 
-    isSpeaking = false;
+        <div class="three-visual">
 
+          <div class="three-grid"></div>
 
-    const play =
-      root.querySelector("#audioPlay");
+          <div class="object"></div>
 
-    const pause =
-      root.querySelector("#audioPause");
+          <div class="three-copy">
+            <b>Interactive 3D Experience</b>
+            <span>Product / brand / digital presentation</span>
+          </div>
 
-    const stop =
-      root.querySelector("#audioStop");
+        </div>
 
+      </div>
 
-    if (!play || !pause || !stop){
-      return;
-    }
+    </div>
 
+  </div>
 
-    play.addEventListener(
-      "click",
-      function(){
+</section>
 
-        if (
-          !("speechSynthesis" in window)
-        ){
 
-          updateAudioStatus(
-            "Browser audio unavailable"
-          );
+<!-- =====================================================
+     MAINTENANCE
+===================================================== -->
 
-          return;
-        }
+<section class="section white">
 
+  <div class="container">
 
-        if (
-          window.speechSynthesis.paused
-        ){
+    <div class="intro reveal">
 
-          window.speechSynthesis.resume();
+      <div class="eyebrow">
+        08 / MONTHLY MAINTENANCE
+      </div>
 
-          updateAudioStatus(
-            "Playing"
-          );
+      <h2>
+        Launching is not the end of the project.
+      </h2>
 
-          animateWaveform(true);
+      <p>
+        Websites, integrations and automations need attention as the
+        business changes. Ongoing maintenance keeps the systems useful,
+        monitored and ready for improvement.
+      </p>
 
-          return;
-        }
+    </div>
 
 
-        if (isSpeaking){
+    <div class="maintenance">
 
-          return;
+      <div class="monitor reveal">
 
-        }
+        <div class="monitor-icon">W</div>
 
+        <h3>Website Care</h3>
 
-        window.speechSynthesis.cancel();
+        <p>
+          Technical fixes, updates, improvements and ongoing website support.
+        </p>
 
-        speechIndex = 0;
+        <div class="monitor-status">
+          <span>Website</span>
+          <span>Healthy</span>
+        </div>
 
-        speakLine(
-          speechQueue[0]
-        );
+      </div>
 
+
+      <div class="monitor reveal">
+
+        <div class="monitor-icon">A</div>
+
+        <h3>Automation Monitoring</h3>
+
+        <p>
+          Monitor workflows, integrations and important automation failures.
+        </p>
+
+        <div class="monitor-status">
+          <span>Automations</span>
+          <span>Running</span>
+        </div>
+
+      </div>
+
+
+      <div class="monitor reveal">
+
+        <div class="monitor-icon">+</div>
+
+        <h3>Continuous Improvement</h3>
+
+        <p>
+          Improve existing systems as your team, customers and processes evolve.
+        </p>
+
+        <div class="monitor-status">
+          <span>System</span>
+          <span>Improving</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     HOW I WORK
+===================================================== -->
+
+<section class="section blue-bg">
+
+  <div class="container">
+
+    <div class="intro reveal">
+
+      <div class="eyebrow">
+        MY APPROACH
+      </div>
+
+      <h2>
+        Understand first. Build second.
+      </h2>
+
+      <p>
+        Good automation isn't about adding more tools. It's about creating
+        a system that makes the business easier to operate.
+      </p>
+
+    </div>
+
+
+    <div class="process">
+
+      <div class="process-card reveal">
+
+        <div class="process-number">
+          01 / UNDERSTAND
+        </div>
+
+        <h3>
+          Map the business
+        </h3>
+
+        <p>
+          Understand the current workflow, people, tools, data and
+          bottlenecks before deciding what should change.
+        </p>
+
+      </div>
+
+
+      <div class="process-card reveal">
+
+        <div class="process-number">
+          02 / DESIGN
+        </div>
+
+        <h3>
+          Design the system
+        </h3>
+
+        <p>
+          Decide what should be automated, what should stay human and
+          how the systems should communicate.
+        </p>
+
+      </div>
+
+
+      <div class="process-card reveal">
+
+        <div class="process-number">
+          03 / BUILD
+        </div>
+
+        <h3>
+          Build & connect
+        </h3>
+
+        <p>
+          Develop the workflows, website, integrations, CRM, AI or
+          internal system required by the project.
+        </p>
+
+      </div>
+
+
+      <div class="process-card reveal">
+
+        <div class="process-number">
+          04 / SUPPORT
+        </div>
+
+        <h3>
+          Improve over time
+        </h3>
+
+        <p>
+          Monitor what has been built, solve issues and improve the system
+          as the business continues to grow.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     FINAL CTA
+===================================================== -->
+
+<section class="cta white">
+
+  <div class="container">
+
+    <div class="cta-box reveal">
+
+      <div class="eyebrow" style="color:#60A5FA">
+        LET'S TALK ABOUT YOUR OPERATION
+      </div>
+
+      <h2>
+        Tell me what takes too much time.
+        I'll help you find a better system.
+      </h2>
+
+      <p>
+        Whether you need automation consultancy, team training,
+        a connected website, CRM automation, an ERP-style solution,
+        an AI agent or ongoing technical support — let's start with
+        the problem and work backwards to the right solution.
+      </p>
+
+      <div class="cta-actions">
+
+        <a
+          href="https://wa.me/923346694427?text=Hello%20Sajjad%2C%20I%27d%20like%20to%20discuss%20a%20project."
+          target="_blank"
+          rel="noopener"
+          class="btn btn-dark"
+        >
+          WhatsApp Sajjad →
+        </a>
+
+        <a href="#services" class="btn btn-white">
+          Review Services
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+  <div class="container footer-row">
+
+    <div>
+      <div class="footer-logo">AWSZ</div>
+      <div>
+        Automation · Consultancy · Development · Systems
+      </div>
+    </div>
+
+    <div>
+      Karachi, Pakistan · +92 334 6694427
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- =====================================================
+     WHATSAPP
+===================================================== -->
+
+<a
+  class="floating-wa"
+  href="https://wa.me/923346694427"
+  target="_blank"
+  rel="noopener"
+  aria-label="WhatsApp Sajjad"
+>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+    <path d="M21 11.5a8.5 8.5 0 0 1-12.7 7.4L3 20l1.2-5A8.5 8.5 0 1 1 21 11.5Z"/>
+    <path d="M8.5 8.5c.3-.6.6-.6.9-.6h.6c.2 0 .4.1.5.4l.8 1.9c.1.2 0 .4-.1.6l-.6.7c.6 1.1 1.5 2 2.6 2.6l.7-.6c.2-.2.4-.2.7-.1l1.8.8c.3.1.4.3.4.5v.6c0 .3-.1.7-.6.9"/>
+  </svg>
+</a>
+
+
+<script>
+
+/* =========================================
+   SCROLL REVEAL
+========================================= */
+
+const revealObserver = new IntersectionObserver(
+  (entries)=>{
+    entries.forEach((entry)=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("show");
+        revealObserver.unobserve(entry.target);
       }
-    );
-
-
-    pause.addEventListener(
-      "click",
-      function(){
-
-        if (
-          !("speechSynthesis" in window)
-        ){
-          return;
-        }
-
-
-        if (
-          window.speechSynthesis.speaking
-        ){
-
-          window.speechSynthesis.pause();
-
-          updateAudioStatus(
-            "Paused"
-          );
-
-          animateWaveform(false);
-
-        }
-
-      }
-    );
-
-
-    stop.addEventListener(
-      "click",
-      function(){
-
-        stopAudio();
-
-      }
-    );
-
+    });
+  },
+  {
+    threshold:.10
   }
+);
 
+document.querySelectorAll(".reveal").forEach((element)=>{
+  revealObserver.observe(element);
+});
 
-  function stopAudio(){
 
-    if (
-      "speechSynthesis" in window
-    ){
+/* =========================================
+   HERO HAND MOVEMENT
+========================================= */
 
-      window.speechSynthesis.cancel();
+const hand = document.querySelector(".hero-hand");
 
-    }
+if(hand){
 
+  document.addEventListener("mousemove",(event)=>{
 
-    speechIndex = 0;
+    const x = (event.clientX / window.innerWidth) - .5;
+    const y = (event.clientY / window.innerHeight) - .5;
 
-    isSpeaking = false;
+    hand.style.transform =
+      `translate(${x * 12}px,${y * 8}px) rotate(-13deg)`;
 
-    updateAudioStatus(
-      "Stopped"
-    );
+  });
 
-    animateWaveform(false);
+}
 
-  }
 
+/* =========================================
+   SERVICE CARD MICRO INTERACTION
+========================================= */
 
-  function updateAudioStatus(text){
+document.querySelectorAll(".service-card").forEach((card)=>{
 
-    const status =
-      root.querySelector("#audioStatus");
+  card.addEventListener("mousemove",(event)=>{
 
-    if (status){
+    const rect = card.getBoundingClientRect();
 
-      status.textContent =
-        text;
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
 
-    }
+    const rotateY =
+      ((x / rect.width) - .5) * 3;
 
-  }
+    const rotateX =
+      ((y / rect.height) - .5) * -3;
 
+    card.style.transform =
+      `translateY(-5px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
-  function animateWaveform(active){
+  });
 
-    const bars =
-      root.querySelectorAll(
-        ".audio-waveform i"
-      );
+  card.addEventListener("mouseleave",()=>{
 
+    card.style.transform =
+      "";
 
-    bars.forEach(
-      function(bar,index){
+  });
 
-        if (active){
+});
 
-          bar.style.transform =
-            "scaleY(" +
-            (
-              0.7 +
-              Math.sin(
-                Date.now() / 130 +
-                index
-              ) * 0.3
-            ) +
-            ")";
-
-        }else{
-
-          bar.style.transform =
-            "scaleY(1)";
-
-        }
-
-      }
-    );
-
-
-    if (
-      active &&
-      isSpeaking
-    ){
-
-      window.requestAnimationFrame(
-        function(){
-
-          animateWaveform(true);
-
-        }
-      );
-
-    }
-
-  }
-
-
-  /* =========================================================
-     CHANNEL RENDER
-     ========================================================= */
-
-  function renderChannel(){
-
-    const data =
-      cases[currentCase];
-
-
-    if (!data){
-      return;
-    }
-
-
-    if (
-      currentChannel === "message"
-    ){
-
-      renderMessages(data);
-
-    }
-
-
-    if (
-      currentChannel === "email"
-    ){
-
-      renderEmail(data);
-
-    }
-
-
-    if (
-      currentChannel === "call"
-    ){
-
-      renderCall(data);
-
-    }
-
-  }
-
-
-  /* =========================================================
-     SWITCH INDUSTRY
-     ========================================================= */
-
-  function switchIndustry(caseName){
-
-    if (!cases[caseName]){
-      return;
-    }
-
-
-    stopAudio();
-
-
-    currentCase =
-      caseName;
-
-
-    industryButtons.forEach(
-      function(button){
-
-        button.classList.toggle(
-          "active",
-          button.dataset.case === caseName
-        );
-
-      }
-    );
-
-
-    updateProfile(
-      cases[caseName]
-    );
-
-
-    renderChannel();
-
-  }
-
-
-  /* =========================================================
-     SWITCH CHANNEL
-     ========================================================= */
-
-  function switchChannel(channel){
-
-    stopAudio();
-
-
-    currentChannel =
-      channel;
-
-
-    channelButtons.forEach(
-      function(button){
-
-        button.classList.toggle(
-          "active",
-          button.dataset.channel === channel
-        );
-
-      }
-    );
-
-
-    renderChannel();
-
-  }
-
-
-  /* =========================================================
-     INDUSTRY EVENTS
-     ========================================================= */
-
-  industryButtons.forEach(
-    function(button){
-
-      button.addEventListener(
-        "click",
-        function(){
-
-          switchIndustry(
-            button.dataset.case
-          );
-
-        }
-      );
-
-    }
-  );
-
-
-  /* =========================================================
-     CHANNEL EVENTS
-     ========================================================= */
-
-  channelButtons.forEach(
-    function(button){
-
-      button.addEventListener(
-        "click",
-        function(){
-
-          switchChannel(
-            button.dataset.channel
-          );
-
-        }
-      );
-
-    }
-  );
-
-
-  /* =========================================================
-     BROWSER VOICE LOAD
-     ========================================================= */
-
-  if (
-    "speechSynthesis" in window
-  ){
-
-    window.speechSynthesis.onvoiceschanged =
-      function(){
-
-        /*
-         * Voices are loaded by the browser.
-         * Nothing else needs to happen here.
-         */
-
-      };
-
-  }
-
-
-  /* =========================================================
-     INITIAL LOAD
-     ========================================================= */
-
-  updateProfile(
-    cases.software
-  );
-
-
-  renderChannel();
-
-
-})();
 </script>
+
+</body>
+</html>
