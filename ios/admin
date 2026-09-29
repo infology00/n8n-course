@@ -1,0 +1,3928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScreenFlow Admin Portal</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--blue:#2563eb;
+--blue2:#1d4ed8;
+--blueLight:#eff6ff;
+--green:#16a34a;
+--greenBg:#ecfdf3;
+--red:#dc2626;
+--redBg:#fef2f2;
+--orange:#d97706;
+--orangeBg:#fff7ed;
+--purple:#7c3aed;
+--text:#172033;
+--muted:#6b7280;
+--border:#e5e7eb;
+--bg:#f5f7fb;
+--white:#fff;
+--shadow:0 8px 30px rgba(15,23,42,.055)
+}
+body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app{display:flex;min-height:100vh}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:260px;background:#fff;border-right:1px solid var(--border);z-index:100;display:flex;flex-direction:column}
+.brand{height:76px;padding:0 21px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:11px}
+.logo{height:40px;width:40px;border-radius:11px;background:linear-gradient(135deg,#2563eb,#4f46e5);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:19px}
+.brand b{font-size:16px}
+.brand small{display:block;font-size:9px;color:#8b93a1;letter-spacing:1px;margin-top:2px}
+.side-scroll{overflow:auto;flex:1;padding:18px 12px}
+.nav-title{font-size:9px;font-weight:800;color:#9ca3af;letter-spacing:1px;padding:12px}
+.nav{width:100%;border:0;background:transparent;text-align:left;color:#596273;padding:10px 12px;border-radius:8px;margin-bottom:2px;font-size:12px;font-weight:650;display:flex;gap:11px;align-items:center}
+.nav:hover{background:#f7f9fc;color:var(--blue)}
+.nav.active{background:var(--blueLight);color:var(--blue);font-weight:800}
+.nav i{width:18px;text-align:center;font-style:normal;font-size:15px}
+.side-user{border-top:1px solid var(--border);padding:14px}
+.userbox{display:flex;gap:9px;align-items:center;background:#f8fafc;border-radius:9px;padding:9px}
+.avatar{height:34px;width:34px;border-radius:50%;background:#dbeafe;color:#1d4ed8;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px}
+.userbox b{font-size:11px}.userbox small{display:block;color:#8b93a1;font-size:9px;margin-top:2px}
+.main{margin-left:260px;width:calc(100% - 260px);min-height:100vh}
+.topbar{height:76px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:50}
+.top-title h1{font-size:19px}.top-title small{font-size:10px;color:var(--muted)}
+.top-right{display:flex;align-items:center;gap:9px}
+.search{position:relative}.search input{height:37px;width:230px;border:1px solid var(--border);border-radius:8px;padding:0 10px 0 33px;outline:0;font-size:11px;background:#fafbfc}
+.search span{position:absolute;left:11px;top:9px;color:#9ca3af}
+.icon-btn{width:37px;height:37px;background:#fff;border:1px solid var(--border);border-radius:8px}
+.content{padding:27px 28px 50px}
+.page{display:none}.page.active{display:block}
+.page-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.page-head h2{font-size:15px}.page-head p{font-size:10px;color:var(--muted);margin-top:4px}
+.btn{border:0;border-radius:7px;padding:9px 13px;font-size:11px;font-weight:750;display:inline-flex;align-items:center;gap:6px}
+.primary{background:var(--blue);color:#fff}.primary:hover{background:var(--blue2)}
+.secondary{background:#fff;color:#374151;border:1px solid var(--border)}
+.green{background:var(--green);color:#fff}.danger{background:var(--red);color:#fff}.orange{background:#f59e0b;color:#fff}
+.small{padding:6px 8px;font-size:9px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:13px;margin-bottom:18px}
+.stat{background:#fff;border:1px solid var(--border);border-radius:11px;padding:16px;box-shadow:var(--shadow)}
+.stat-label{font-size:10px;color:var(--muted);font-weight:650}
+.stat-number{font-size:23px;font-weight:850;margin-top:9px;letter-spacing:-.5px}
+.stat-foot{font-size:9px;color:#9ca3af;margin-top:5px}
+.card{background:#fff;border:1px solid var(--border);border-radius:11px;box-shadow:var(--shadow);margin-bottom:17px}
+.card-head{padding:15px 17px;border-bottom:1px solid #eef0f3;display:flex;align-items:center;justify-content:space-between}
+.card-head h3{font-size:12px}.card-head p{font-size:9px;color:var(--muted);margin-top:3px}
+.card-body{padding:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:750px}
+th{text-align:left;background:#fafbfc;color:#6b7280;font-size:9px;text-transform:uppercase;letter-spacing:.4px;padding:11px 15px;border-bottom:1px solid var(--border)}
+td{padding:12px 15px;border-bottom:1px solid #f0f1f3;font-size:10px}
+tr:hover td{background:#fcfdff}
+.badge{display:inline-flex;border-radius:100px;padding:4px 8px;font-size:8px;font-weight:800}
+.b-green{color:#15803d;background:var(--greenBg)}
+.b-red{color:#b91c1c;background:var(--redBg)}
+.b-orange{color:#b45309;background:var(--orangeBg)}
+.b-blue{color:#1d4ed8;background:var(--blueLight)}
+.b-purple{color:#6d28d9;background:#f5f3ff}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+.form-grid.three{grid-template-columns:repeat(3,1fr)}
+.field label{display:block;font-size:9px;font-weight:800;color:#4b5563;margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--border);border-radius:7px;padding:9px 10px;font-size:10px;outline:0;background:#fff}
+.field textarea{min-height:70px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#93c5fd}
+.full{grid-column:1/-1}
+.checks{display:flex;flex-wrap:wrap;gap:9px}
+.check{border:1px solid var(--border);padding:8px 10px;border-radius:7px;font-size:10px;background:#fff}
+.check input{margin-right:5px}
+.toolbar{display:flex;justify-content:space-between;gap:10px;margin-bottom:14px}
+.filters{display:flex;gap:7px;flex-wrap:wrap}
+.filters select,.filters input{height:35px;border:1px solid var(--border);border-radius:7px;background:#fff;padding:0 9px;font-size:10px;outline:0}
+.dashboard-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:17px}
+.chart{height:240px;padding:18px;position:relative}
+.chart-lines{position:absolute;left:18px;right:18px;top:20px;bottom:35px}
+.chart-lines div{position:absolute;left:0;right:0;border-top:1px dashed #e5e7eb}
+.chart-lines div:nth-child(1){top:20%}.chart-lines div:nth-child(2){top:40%}.chart-lines div:nth-child(3){top:60%}.chart-lines div:nth-child(4){top:80%}
+.chart svg{position:absolute;left:18px;right:18px;top:20px;width:calc(100% - 36px);height:185px}
+.chart-labels{position:absolute;left:22px;right:22px;bottom:14px;display:flex;justify-content:space-between;font-size:8px;color:#9ca3af}
+.monitor-list{padding:8px 17px 13px}
+.monitor{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f0f1f3}
+.monitor:last-child{border:0}
+.monitor-left{display:flex;align-items:center;gap:9px}.dot{height:8px;width:8px;border-radius:50%}.dot.green{background:#22c55e}.dot.red{background:#ef4444}.dot.orange{background:#f59e0b}
+.monitor b{font-size:10px}.monitor small{display:block;color:#9ca3af;font-size:8px;margin-top:2px}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.quick{background:#fff;border:1px solid var(--border);padding:17px;border-radius:10px;cursor:pointer}
+.quick:hover{border-color:#bfdbfe}.quick-icon{height:35px;width:35px;border-radius:9px;background:var(--blueLight);color:var(--blue);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.quick b{font-size:11px}.quick p{font-size:9px;color:var(--muted);margin-top:4px;line-height:1.5}
+.modal-bg{position:fixed;inset:0;background:rgba(15,23,42,.48);display:none;align-items:center;justify-content:center;z-index:500;padding:18px}
+.modal-bg.show{display:flex}
+.modal{background:#fff;border-radius:12px;width:100%;max-width:680px;max-height:92vh;overflow:auto}
+.modal-head{padding:16px 19px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.modal-head h2{font-size:14px}.close{border:0;background:#f3f4f6;width:29px;height:29px;border-radius:6px;font-size:17px}
+.modal-body{padding:19px}.modal-foot{border-top:1px solid var(--border);padding:12px 19px;display:flex;justify-content:flex-end;gap:7px}
+.section-title{font-size:10px;font-weight:850;color:var(--blue);text-transform:uppercase;letter-spacing:.7px;margin:17px 0 10px;border-bottom:1px solid #edf0f4;padding-bottom:7px}
+.info-box{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:11px;font-size:9px;line-height:1.6}
+.money{font-weight:850}
+.upload-box{border:1px dashed #bfdbfe;background:#f8fbff;padding:20px;text-align:center;border-radius:9px}
+.upload-box b{font-size:11px}.upload-box p{font-size:9px;color:var(--muted);margin:5px 0 10px}
+.camera-box{border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#111;text-align:center}
+.camera-box video{width:100%;max-height:260px;display:block}.camera-placeholder{height:170px;color:#aaa;display:flex;align-items:center;justify-content:center;font-size:10px}
+.proof{display:flex;gap:8px;flex-wrap:wrap}
+.proof-item{border:1px solid var(--border);border-radius:7px;padding:8px;font-size:9px;background:#fafafa}
+.timeline{border-left:2px solid #dbeafe;margin:15px 0;padding-left:15px}
+.timeline-item{margin-bottom:15px;position:relative}.timeline-item:before{content:"";position:absolute;left:-21px;top:3px;width:8px;height:8px;border-radius:50%;background:var(--blue)}
+.timeline-item b{font-size:10px}.timeline-item p{font-size:9px;color:var(--muted);margin-top:3px}
+.empty{text-align:center;padding:35px;color:#9ca3af;font-size:11px}
+.toggle{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border);padding:11px;border-radius:8px;font-size:10px}
+.switch{width:35px;height:19px;background:#d1d5db;border-radius:30px;position:relative}.switch:after{content:"";position:absolute;height:15px;width:15px;background:#fff;border-radius:50%;top:2px;left:2px}.switch.on{background:var(--blue)}.switch.on:after{left:18px}
+.toast{position:fixed;right:20px;bottom:20px;background:#172033;color:#fff;padding:11px 15px;border-radius:8px;font-size:10px;font-weight:700;opacity:0;transform:translateY(20px);transition:.25s;z-index:1000}.toast.show{opacity:1;transform:translateY(0)}
+.mobile{display:none}
+@media(max-width:1200px){.stats{grid-template-columns:repeat(3,1fr)}.grid4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.sidebar{transform:translateX(-100%);transition:.25s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;width:100%}.mobile{display:block}.dashboard-grid,.grid2{grid-template-columns:1fr}.quick-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.content{padding:20px 14px}.topbar{padding:0 14px}.search{display:none}.stats{grid-template-columns:1fr 1fr}.form-grid,.form-grid.three{grid-template-columns:1fr}.quick-grid,.grid3,.grid4{grid-template-columns:1fr}.page-head{gap:10px;align-items:flex-start}.page-head .btn{white-space:nowrap}}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+<div class="brand">
+<div class="logo">S</div>
+<div>
+<b>ScreenFlow</b>
+<small>DOOH NETWORK</small>
+</div>
+</div>
+
+<div class="side-scroll">
+
+<div class="nav-title">OVERVIEW</div>
+
+<button class="nav active" data-page="dashboard"><i>▦</i>Dashboard</button>
+
+<div class="nav-title">NETWORK</div>
+<button class="nav" data-page="areas"><i>⌖</i>Areas / Blocks</button>
+<button class="nav" data-page="shops"><i>⌂</i>Shops & Screens</button>
+<button class="nav" data-page="shopkeepers"><i>♙</i>Shopkeepers</button>
+<button class="nav" data-page="monitor"><i>●</i>Screen Monitoring</button>
+<button class="nav" data-page="categories"><i>≡</i>Categories</button>
+
+<div class="nav-title">ADVERTISING</div>
+<button class="nav" data-page="clients"><i>◉</i>Clients</button>
+<button class="nav" data-page="ads"><i>▣</i>Ads</button>
+<button class="nav" data-page="approvals"><i>✓</i>Approvals</button>
+<button class="nav" data-page="campaigns"><i>◈</i>Campaigns</button>
+<button class="nav" data-page="upcoming"><i>◷</i>Upcoming Ads</button>
+<button class="nav" data-page="packages"><i>▤</i>Packages</button>
+
+<div class="nav-title">FINANCE</div>
+<button class="nav" data-page="withdrawals"><i>₨</i>Withdrawals</button>
+<button class="nav" data-page="payments"><i>⇄</i>Payments</button>
+<button class="nav" data-page="commissions"><i>%</i>Booker Commissions</button>
+
+<div class="nav-title">SYSTEM</div>
+<button class="nav" data-page="complaints"><i>!</i>Complaints</button>
+<button class="nav" data-page="vendor-form"><i>↗</i>Vendor Form</button>
+<button class="nav" data-page="customize"><i>⚙</i>Form Customize</button>
+<button class="nav" data-page="reports"><i>▤</i>Reports</button>
+
+</div>
+
+<div class="side-user">
+<div class="userbox">
+<div class="avatar">SA</div>
+<div><b>Super Admin</b><small>Network Administrator</small></div>
+</div>
+</div>
+
+</aside>
+
+
+<!-- MAIN -->
+<main class="main">
+
+<header class="topbar">
+
+<div style="display:flex;align-items:center;gap:10px">
+<button class="icon-btn mobile" onclick="toggleSidebar()">☰</button>
+<div class="top-title">
+<h1 id="pageTitle">Dashboard</h1>
+<small>Admin Portal / <span id="crumb">Dashboard</span></small>
+</div>
+</div>
+
+<div class="top-right">
+
+<div class="search">
+<span>⌕</span>
+<input id="globalSearch" placeholder="Search anything...">
+</div>
+
+<button class="icon-btn" onclick="showToast('You have 3 new notifications')">♢</button>
+
+<div class="avatar">SA</div>
+
+</div>
+
+</header>
+
+
+<div class="content">
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section class="page active" id="page-dashboard">
+
+<div class="page-head">
+<div>
+<h2>Network Overview</h2>
+<p>Real-time overview of your DOOH network.</p>
+</div>
+<button class="btn primary" onclick="openModal('campaign')">＋ New Campaign</button>
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+<div class="stat-label">TODAY INCOME</div>
+<div class="stat-number">₨<span id="todayIncome">0</span></div>
+<div class="stat-foot">Advertiser revenue</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">TODAY WITHDRAWALS</div>
+<div class="stat-number">₨<span id="todayWithdrawal">0</span></div>
+<div class="stat-foot">Vendor withdrawal requests</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">ONLINE SCREENS</div>
+<div class="stat-number" id="onlineCount">39</div>
+<div class="stat-foot"><span class="badge b-green">Live</span></div>
+</div>
+
+<div class="stat">
+<div class="stat-label">OFFLINE SCREENS</div>
+<div class="stat-number" id="offlineCount">2</div>
+<div class="stat-foot"><span class="badge b-red">Attention</span></div>
+</div>
+
+<div class="stat">
+<div class="stat-label">LATE SCREENS</div>
+<div class="stat-number" id="lateCount">1</div>
+<div class="stat-foot">Opening-time monitoring</div>
+</div>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+<div class="stat-label">NEW VENDORS</div>
+<div class="stat-number" id="vendorCount">0</div>
+<div class="stat-foot">Total onboarded</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">NEW CLIENTS</div>
+<div class="stat-number" id="clientCount">0</div>
+<div class="stat-foot">Registered advertisers</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">PENDING APPROVALS</div>
+<div class="stat-number" id="approvalCount">3</div>
+<div class="stat-foot">Ads waiting for review</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">PENDING WITHDRAWALS</div>
+<div class="stat-number" id="pendingWithdrawalCount">0</div>
+<div class="stat-foot">Need payment action</div>
+</div>
+
+<div class="stat">
+<div class="stat-label">COMPLAINTS</div>
+<div class="stat-number">3</div>
+<div class="stat-foot">Open complaints</div>
+</div>
+
+</div>
+
+
+<div class="dashboard-grid">
+
+<div class="card">
+
+<div class="card-head">
+<div>
+<h3>Network Performance</h3>
+<p>Verified ad plays — last 7 days</p>
+</div>
+<span class="badge b-blue">Live Data</span>
+</div>
+
+<div class="chart">
+
+<div class="chart-lines">
+<div></div><div></div><div></div><div></div>
+</div>
+
+<svg viewBox="0 0 700 190" preserveAspectRatio="none">
+
+<defs>
+<linearGradient id="area" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0" stop-color="#2563eb" stop-opacity=".20"/>
+<stop offset="1" stop-color="#2563eb" stop-opacity="0"/>
+</linearGradient>
+</defs>
+
+<path d="M0 155 C70 145 90 130 140 137 C195 145 205 100 265 111 C315 121 345 82 395 94 C445 106 470 64 520 73 C575 82 625 38 700 49 L700 190 L0 190Z" fill="url(#area)"/>
+
+<path d="M0 155 C70 145 90 130 140 137 C195 145 205 100 265 111 C315 121 345 82 395 94 C445 106 470 64 520 73 C575 82 625 38 700 49" fill="none" stroke="#2563eb" stroke-width="3"/>
+
+</svg>
+
+<div class="chart-labels">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-head">
+<div>
+<h3>Screen Status</h3>
+<p>Current network health</p>
+</div>
+<button class="btn secondary small" onclick="go('monitor')">View</button>
+</div>
+
+<div class="monitor-list">
+
+<div class="monitor">
+<div class="monitor-left">
+<span class="dot green"></span>
+<div><b>Online</b><small>Active and playing</small></div>
+</div>
+<strong id="dashOnline">39</strong>
+</div>
+
+<div class="monitor">
+<div class="monitor-left">
+<span class="dot orange"></span>
+<div><b>Late</b><small>Opened after scheduled time</small></div>
+</div>
+<strong id="dashLate">1</strong>
+</div>
+
+<div class="monitor">
+<div class="monitor-left">
+<span class="dot red"></span>
+<div><b>Offline</b><small>No heartbeat</small></div>
+</div>
+<strong id="dashOffline">2</strong>
+</div>
+
+<div class="monitor">
+<div class="monitor-left">
+<div><b>Total Screens</b><small>All registered screens</small></div>
+</div>
+<strong>42</strong>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-head">
+<div>
+<h3>Recent Activity</h3>
+<p>Latest network events</p>
+</div>
+<button class="btn secondary small" onclick="go('reports')">Reports</button>
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Time</th>
+<th>Activity</th>
+<th>Reference</th>
+<th>User</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>10:42 AM</td>
+<td>Ad approved</td>
+<td>AD-1024</td>
+<td>Super Admin</td>
+<td><span class="badge b-green">Approved</span></td>
+</tr>
+
+<tr>
+<td>10:30 AM</td>
+<td>Vendor withdrawal</td>
+<td>WD-0091</td>
+<td>Ali Raza</td>
+<td><span class="badge b-orange">Pending</span></td>
+</tr>
+
+<tr>
+<td>10:15 AM</td>
+<td>Screen came online</td>
+<td>SCR-031</td>
+<td>System</td>
+<td><span class="badge b-green">Online</span></td>
+</tr>
+
+<tr>
+<td>09:55 AM</td>
+<td>New client registered</td>
+<td>CL-0042</td>
+<td>System</td>
+<td><span class="badge b-blue">New</span></td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+</div>
+
+
+<div class="quick-grid">
+
+<div class="quick" onclick="openModal('shop')">
+<div class="quick-icon">＋</div>
+<b>Add Shop</b>
+<p>Onboard a new shop and LCD screen.</p>
+</div>
+
+<div class="quick" onclick="openModal('vendor')">
+<div class="quick-icon">♙</div>
+<b>Add Vendor</b>
+<p>Create vendor/shopkeeper record.</p>
+</div>
+
+<div class="quick" onclick="openModal('area')">
+<div class="quick-icon">⌖</div>
+<b>Add Area</b>
+<p>Create area, sub-area, block or phase.</p>
+</div>
+
+<div class="quick" onclick="openModal('package')">
+<div class="quick-icon">▤</div>
+<b>Create Package</b>
+<p>Create and publish advertising package.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= AREAS ================= -->
+
+<section class="page" id="page-areas">
+
+<div class="page-head">
+<div>
+<h2>Areas / Sub Areas / Blocks</h2>
+<p>Create flexible locations such as DHA, Phase, Block, Sector or Percent.</p>
+</div>
+<button class="btn primary" onclick="openModal('area')">＋ Add Location</button>
+</div>
+
+<div class="card">
+
+<div class="card-head">
+<div><h3>Location Structure</h3><p>Hierarchical advertising locations</p></div>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Parent</th>
+<th>Shops</th>
+<th>Screens</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="areasTable"></tbody>
+
+</table>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SHOPS ================= -->
+
+<section class="page" id="page-shops">
+
+<div class="page-head">
+<div>
+<h2>Shops & Screens</h2>
+<p>Complete shop onboarding and LCD information.</p>
+</div>
+<button class="btn primary" onclick="openModal('shop')">＋ Add Shop</button>
+</div>
+
+<div class="toolbar">
+<div class="filters">
+<select id="shopStatusFilter" onchange="renderShops()">
+<option value="">All Screens</option>
+<option value="online">Online</option>
+<option value="offline">Offline</option>
+<option value="late">Late</option>
+<option value="pending">LCD Pending</option>
+</select>
+</div>
+</div>
+
+<div class="card">
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Shop</th>
+<th>Owner / Representative</th>
+<th>Category</th>
+<th>Location</th>
+<th>Footfall</th>
+<th>LCD</th>
+<th>Opening</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="shopsTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SHOPKEEPERS ================= -->
+
+<section class="page" id="page-shopkeepers">
+
+<div class="page-head">
+<div>
+<h2>Shopkeepers / Vendors</h2>
+<p>Vendor onboarding, assigned booker and history.</p>
+</div>
+<button class="btn primary" onclick="openModal('vendor')">＋ Add Vendor</button>
+</div>
+
+<div class="card">
+
+<div class="table-wrap">
+<table>
+
+<thead>
+<tr>
+<th>Vendor</th>
+<th>Shop</th>
+<th>Phone</th>
+<th>Assigned By</th>
+<th>Commission</th>
+<th>Status</th>
+<th>Joined</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="vendorsTable"></tbody>
+
+</table>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= MONITOR ================= -->
+
+<section class="page" id="page-monitor">
+
+<div class="page-head">
+<div>
+<h2>Screen Monitoring</h2>
+<p>Opening time vs actual LCD activation.</p>
+</div>
+<button class="btn secondary" onclick="showToast('Monitoring refreshed')">↻ Refresh</button>
+</div>
+
+<div class="stats">
+
+<div class="stat"><div class="stat-label">TOTAL SCREENS</div><div class="stat-number">42</div></div>
+<div class="stat"><div class="stat-label">ONLINE</div><div class="stat-number" style="color:#16a34a">39</div></div>
+<div class="stat"><div class="stat-label">OFFLINE</div><div class="stat-number" style="color:#dc2626">2</div></div>
+<div class="stat"><div class="stat-label">LATE</div><div class="stat-number" style="color:#d97706">1</div></div>
+<div class="stat"><div class="stat-label">WITHIN 15 MIN</div><div class="stat-number">41</div></div>
+
+</div>
+
+<div class="card">
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Screen</th>
+<th>Shop</th>
+<th>Opening Time</th>
+<th>LCD On Time</th>
+<th>Delay</th>
+<th>Internet</th>
+<th>Status</th>
+<th>Details</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>SCR-001</td>
+<td>Al Madina Store</td>
+<td>09:00</td>
+<td>09:04</td>
+<td>4 min</td>
+<td>WiFi</td>
+<td><span class="badge b-green">Active</span></td>
+<td><button class="small-btn secondary small" onclick="showScreenDetails('SCR-001')">View</button></td>
+</tr>
+
+<tr>
+<td>SCR-002</td>
+<td>City Mart</td>
+<td>09:00</td>
+<td>09:09</td>
+<td>9 min</td>
+<td>4G</td>
+<td><span class="badge b-green">Active</span></td>
+<td><button class="small-btn secondary small" onclick="showScreenDetails('SCR-002')">View</button></td>
+</tr>
+
+<tr>
+<td>SCR-003</td>
+<td>Style Point</td>
+<td>09:00</td>
+<td>10:00</td>
+<td>60 min</td>
+<td>WiFi</td>
+<td><span class="badge b-orange">Late</span></td>
+<td><button class="small-btn secondary small" onclick="showScreenDetails('SCR-003')">View</button></td>
+</tr>
+
+<tr>
+<td>SCR-004</td>
+<td>Smart Electronics</td>
+<td>09:00</td>
+<td>—</td>
+<td>—</td>
+<td>WiFi</td>
+<td><span class="badge b-red">Offline</span></td>
+<td><button class="small-btn secondary small" onclick="showScreenDetails('SCR-004')">View</button></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+</div>
+
+<div class="info-box">
+<strong>Monitoring Rule:</strong> LCD should become active within <strong>15 minutes</strong> of the registered shop opening time. After 15 minutes the screen appears as <strong>Late</strong>. No heartbeat appears as <strong>Offline</strong>.
+</div>
+
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section class="page" id="page-categories">
+
+<div class="page-head">
+<div>
+<h2>Shop Categories</h2>
+<p>Categories created here automatically appear in shop forms.</p>
+</div>
+<button class="btn primary" onclick="openModal('category')">＋ Add Category</button>
+</div>
+
+<div class="card">
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Category</th><th>Created</th><th>Shops</th><th>Status</th><th>Action</th></tr>
+</thead>
+<tbody id="categoriesTable"></tbody>
+</table>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CLIENTS ================= -->
+
+<section class="page" id="page-clients">
+
+<div class="page-head">
+<div>
+<h2>Clients</h2>
+<p>Advertiser/company records.</p>
+</div>
+<button class="btn primary" onclick="openModal('client')">＋ Add Client</button>
+</div>
+
+<div class="card">
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Company</th>
+<th>Representative</th>
+<th>Phone</th>
+<th>Address</th>
+<th>Category</th>
+<th>Campaigns</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="clientsTable"></tbody>
+</table>
+</div>
+</div>
+
+</section>
+
+
+<!-- ================= ADS ================= -->
+
+<section class="page" id="page-ads">
+
+<div class="page-head">
+<div>
+<h2>Advertisements</h2>
+<p>Uploaded client creatives and verification information.</p>
+</div>
+<button class="btn primary" onclick="openModal('ad')">＋ Add Advertisement</button>
+</div>
+
+<div class="card">
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>Client</th>
+<th>Type</th>
+<th>Duration</th>
+<th>Package</th>
+<th>Area</th>
+<th>Campaign</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="adsTable"></tbody>
+
+</table>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= APPROVALS ================= -->
+
+<section class="page" id="page-approvals">
+
+<div class="page-head">
+<div>
+<h2>Ad Approval Center</h2>
+<p>Duration, size, policy and campaign validation before publishing.</p>
+</div>
+<span class="badge b-orange">3 Pending</span>
+</div>
+
+<div class="card">
+
+<div class="table-wrap">
+
+<table>
+<thead>
+<tr>
+<th>Advertisement</th>
+<th>Client</th>
+<th>Creative Check</th>
+<th>Area</th>
+<th>Campaign</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td><b>Eid Mega Sale</b><br><small>Video</small></td>
+<td>Fashion House</td>
+<td><span class="badge b-green">30 sec ✓</span></td>
+<td>DHA Phase 1</td>
+<td>01 Sep — 30 Sep</td>
+<td><span class="badge b-orange">Pending</span></td>
+<td>
+<button class="small-btn approve-btn small green" onclick="approve('Eid Mega Sale')">Approve</button>
+<button class="small-btn reject-btn small danger" onclick="openCorrection('Eid Mega Sale')">Review</button>
+</td>
+</tr>
+
+<tr>
+<td><b>Medical Awareness</b><br><small>Poster</small></td>
+<td>Health Plus</td>
+<td><span class="badge b-orange">Size Check</span></td>
+<td>Gulshan Block 4</td>
+<td>05 Sep — 20 Sep</td>
+<td><span class="badge b-orange">Pending</span></td>
+<td>
+<button class="small-btn approve-btn small green" onclick="approve('Medical Awareness')">Approve</button>
+<button class="small-btn reject-btn small danger" onclick="openCorrection('Medical Awareness')">Review</button>
+</td>
+</tr>
+
+<tr>
+<td><b>Weekend Offer</b><br><small>Video</small></td>
+<td>Food Corner</td>
+<td><span class="badge b-green">15 sec ✓</span></td>
+<td>Johar Block 1</td>
+<td>10 Sep — 25 Sep</td>
+<td><span class="badge b-orange">Pending</span></td>
+<td>
+<button class="small-btn approve-btn small green" onclick="approve('Weekend Offer')">Approve</button>
+<button class="small-btn reject-btn small danger" onclick="openCorrection('Weekend Offer')">Review</button>
+</td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+
+<div class="grid3">
+
+<div class="card">
+<div class="card-body">
+<b style="font-size:11px">Video Validation</b>
+<p style="font-size:9px;color:#6b7280;margin-top:5px">System checks uploaded video duration against selected package.</p>
+<div style="margin-top:10px" class="badge b-green">15 / 30 / 60 sec</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-body">
+<b style="font-size:11px">Poster Validation</b>
+<p style="font-size:9px;color:#6b7280;margin-top:5px">Poster dimensions and supported format checked before admin review.</p>
+<div style="margin-top:10px" class="badge b-blue">Auto Check</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-body">
+<b style="font-size:11px">Policy Validation</b>
+<p style="font-size:9px;color:#6b7280;margin-top:5px">Irrelevant data, policy violations and prohibited content can be declined.</p>
+<div style="margin-top:10px" class="badge b-red">Policy Rules</div>
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CAMPAIGNS ================= -->
+
+<section class="page" id="page-campaigns">
+
+<div class="page-head">
+<div>
+<h2>Campaigns</h2>
+<p>Client campaigns, locations, packages and dates.</p>
+</div>
+<button class="btn primary" onclick="openModal('campaign')">＋ New Campaign</button>
+</div>
+
+<div class="card">
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Campaign</th>
+<th>Company</th>
+<th>Category</th>
+<th>Locations</th>
+<th>Start</th>
+<th>End</th>
+<th>Package</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Summer Promotion</td>
+<td>Brand Karachi</td>
+<td>Retail</td>
+<td>DHA P1 + P2</td>
+<td>01 Sep</td>
+<td>30 Sep</td>
+<td>60 sec Premium</td>
+<td><span class="badge b-green">Active</span></td>
+</tr>
+
+<tr>
+<td>Weekend Offer</td>
+<td>Food Corner</td>
+<td>Grocery</td>
+<td>Johar B1</td>
+<td>10 Sep</td>
+<td>25 Sep</td>
+<td>30 sec Standard</td>
+<td><span class="badge b-orange">Scheduled</span></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= UPCOMING ================= -->
+
+<section class="page" id="page-upcoming">
+
+<div class="page-head">
+<div>
+<h2>Upcoming Ads</h2>
+<p>See all future advertisements and target them by location.</p>
+</div>
+</div>
+
+<div class="toolbar">
+
+<div class="filters">
+
+<select id="upcomingArea" onchange="filterUpcoming()">
+<option value="">All Locations</option>
+<option>DHA Phase 1</option>
+<option>DHA Phase 2</option>
+<option>Johar Block 1</option>
+<option>Gulshan Block 4</option>
+<option>PECHS Block 2</option>
+</select>
+
+<select id="upcomingCategory" onchange="filterUpcoming()">
+<option value="">All Categories</option>
+<option>Grocery</option>
+<option>Medical</option>
+<option>Fashion</option>
+<option>Electronics</option>
+</select>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="table-wrap">
+
+<table>
+<thead>
+<tr>
+<th>Ad</th>
+<th>Company</th>
+<th>Category</th>
+<th>Target Location</th>
+<th>Starts</th>
+<th>Ends</th>
+<th>Duration</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="upcomingTable">
+
+<tr data-area="DHA Phase 1" data-category="Fashion">
+<td>Eid Collection</td>
+<td>Fashion House</td>
+<td>Fashion</td>
+<td>DHA Phase 1</td>
+<td>01 Oct</td>
+<td>15 Oct</td>
+<td>30 sec</td>
+<td><span class="badge b-blue">Upcoming</span></td>
+</tr>
+
+<tr data-area="Johar Block 1" data-category="Grocery">
+<td>Monthly Grocery Deal</td>
+<td>City Mart</td>
+<td>Grocery</td>
+<td>Johar Block 1</td>
+<td>05 Oct</td>
+<td>25 Oct</td>
+<td>15 sec</td>
+<td><span class="badge b-blue">Upcoming</span></td>
+</tr>
+
+<tr data-area="Gulshan Block 4" data-category="Medical">
+<td>Health Package</td>
+<td>Health Plus</td>
+<td>Medical</td>
+<td>Gulshan Block 4</td>
+<td>07 Oct</td>
+<td>20 Oct</td>
+<td>60 sec</td>
+<td><span class="badge b-blue">Upcoming</span></td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PACKAGES ================= -->
+
+<section class="page" id="page-packages">
+
+<div class="page-head">
+<div>
+<h2>Advertising Packages</h2>
+<p>Create packages and publish them on the client website.</p>
+</div>
+<button class="btn primary" onclick="openModal('package')">＋ Create Package</button>
+</div>
+
+<div class="grid3" id="packagesGrid"></div>
+
+</section>
+
+
+<!-- ================= WITHDRAWALS ================= -->
+
+<section class="page" id="page-withdrawals">
+
+<div class="page-head">
+<div>
+<h2>Vendor Withdrawals</h2>
+<p>Review bank details and complete payment verification.</p>
+</div>
+</div>
+
+<div class="stats">
+
+<div class="stat"><div class="stat-label">PENDING</div><div class="stat-number" id="wdPending">0</div></div>
+<div class="stat"><div class="stat-label">TODAY REQUESTED</div><div class="stat-number">₨125K</div></div>
+<div class="stat"><div class="stat-label">TODAY PAID</div><div class="stat-number">₨80K</div></div>
+<div class="stat"><div class="stat-label">THIS MONTH</div><div class="stat-number">₨540K</div></div>
+<div class="stat"><div class="stat-label">VENDORS</div><div class="stat-number">42</div></div>
+
+</div>
+
+<div class="card">
+
+<div class="table-wrap">
+<table>
+
+<thead>
+<tr>
+<th>Withdrawal</th>
+<th>Vendor</th>
+<th>Amount</th>
+<th>Bank Details</th>
+<th>Requested</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="withdrawalsTable"></tbody>
+
+</table>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PAYMENTS ================= -->
+
+<section class="page" id="page-payments">
+
+<div class="page-head">
+<div>
+<h2>Payment Verification</h2>
+<p>Every vendor payment keeps a complete audit history.</p>
+</div>
+</div>
+
+<div class="card">
+
+<div class="card-body">
+
+<div class="section-title">Payment Verification Workflow</div>
+
+<div class="grid3">
+
+<div class="info-box">
+<strong>1. Withdrawal Requested</strong><br>
+Vendor submits amount + bank details.<br>
+Status = Pending.
+</div>
+
+<div class="info-box">
+<strong>2. Admin Pays</strong><br>
+Team member selects "Pay Vendor", records payment reference and proof.
+</div>
+
+<div class="info-box">
+<strong>3. Payment Verified</strong><br>
+Member name + webcam/photo + screenshot/proof saved. Status becomes Paid.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-head">
+<div><h3>Payment History</h3><p>Complete vendor payment trail</p></div>
+</div>
+
+<div class="table-wrap">
+
+<table>
+<thead>
+<tr>
+<th>Vendor</th>
+<th>Amount</th>
+<th>Paid By</th>
+<th>Payment Ref</th>
+<th>Proof</th>
+<th>Date</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Ahmed Raza</td>
+<td>₨25,000</td>
+<td>Super Admin</td>
+<td>TXN-88421</td>
+<td><span class="badge b-green">Captured</span></td>
+<td>Today</td>
+<td><span class="badge b-green">Paid</span></td>
+</tr>
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= COMMISSIONS ================= -->
+
+<section class="page" id="page-commissions">
+
+<div class="page-head">
+<div>
+<h2>Order Booker Commissions</h2>
+<p>Track who onboarded each vendor and their commission.</p>
+</div>
+<button class="btn primary" onclick="openModal('booker')">＋ Add Booker</button>
+</div>
+
+<div class="card">
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Booker</th>
+<th>Vendor</th>
+<th>Shop</th>
+<th>Commission Type</th>
+<th>Rate</th>
+<th>Earned</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Usman Khan</td>
+<td>Ahmed Raza</td>
+<td>Al Madina Store</td>
+<td>Per Verified Play</td>
+<td>5%</td>
+<td>₨2,850</td>
+<td><span class="badge b-green">Active</span></td>
+</tr>
+
+<tr>
+<td>Bilal Ahmed</td>
+<td>City Mart Vendor</td>
+<td>City Mart</td>
+<td>Monthly</td>
+<td>₨1,500</td>
+<td>₨1,500</td>
+<td><span class="badge b-green">Active</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= COMPLAINTS ================= -->
+
+<section class="page" id="page-complaints">
+
+<div class="page-head">
+<div>
+<h2>Complaints</h2>
+<p>Vendor and client complaints.</p>
+</div>
+</div>
+
+<div class="card">
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Ticket</th>
+<th>Raised By</th>
+<th>Type</th>
+<th>Issue</th>
+<th>Date</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>COMP-001</td>
+<td>City Mart</td>
+<td>Screen</td>
+<td>LCD not turning on</td>
+<td>Today</td>
+<td><span class="badge b-orange">Open</span></td>
+<td><button class="btn secondary small" onclick="showToast('Complaint opened')">Open</button></td>
+</tr>
+
+<tr>
+<td>COMP-002</td>
+<td>Fashion House</td>
+<td>Campaign</td>
+<td>Ad schedule question</td>
+<td>Yesterday</td>
+<td><span class="badge b-blue">In Review</span></td>
+<td><button class="btn secondary small" onclick="showToast('Complaint opened')">Open</button></td>
+</tr>
+</tbody>
+
+</table>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= VENDOR FORM ================= -->
+
+<section class="page" id="page-vendor-form">
+
+<div class="page-head">
+<div>
+<h2>Vendor Onboarding Form</h2>
+<p>Generate a shareable vendor/shopkeeper registration link.</p>
+</div>
+<button class="btn primary" onclick="copyVendorLink()">⛓ Copy Form Link</button>
+</div>
+
+<div class="card">
+
+<div class="card-head">
+<div><h3>Public Vendor Form</h3><p>This is the form vendors receive.</p></div>
+<span class="badge b-green">Ready</span>
+</div>
+
+<div class="card-body">
+
+<div class="form-grid">
+
+<div class="field">
+<label>Shop Name *</label>
+<input placeholder="Shop name">
+</div>
+
+<div class="field">
+<label>Owner / Representative Name *</label>
+<input placeholder="Name">
+</div>
+
+<div class="field">
+<label>Registered Phone *</label>
+<input placeholder="+92">
+</div>
+
+<div class="field">
+<label>CNIC / Registration</label>
+<input placeholder="Optional">
+</div>
+
+<div class="field">
+<label>Shop Category *</label>
+<select id="vendorCategorySelect"></select>
+</div>
+
+<div class="field">
+<label>Average Daily Footfall</label>
+<input type="number" placeholder="e.g. 300">
+</div>
+
+<div class="field">
+<label>Shop Opening</label>
+<input type="time" value="09:00">
+</div>
+
+<div class="field">
+<label>Shop Closing</label>
+<input type="time" value="00:00">
+</div>
+
+<div class="field full">
+<label>Internet Available</label>
+
+<div class="checks">
+<label class="check"><input type="checkbox"> WiFi</label>
+<label class="check"><input type="checkbox"> 4G</label>
+<label class="check"><input type="checkbox"> Fiber</label>
+<label class="check"><input type="checkbox"> None</label>
+</div>
+
+</div>
+
+<div class="field">
+<label>LCD Installed?</label>
+<select><option>Yes</option><option>Pending</option><option>No</option></select>
+</div>
+
+<div class="field">
+<label>Air Conditioner</label>
+<select><option>Yes</option><option>No</option></select>
+</div>
+
+<div class="field">
+<label>Ice Cream Fridge</label>
+<select><option>Yes</option><option>No</option></select>
+</div>
+
+<div class="field">
+<label>Load Shedding Schedule</label>
+<input placeholder="e.g. 2pm - 4pm">
+</div>
+
+<div class="field">
+<label>Assigned By / Order Booker</label>
+<select>
+<option>Usman Khan</option>
+<option>Bilal Ahmed</option>
+<option>Direct Admin</option>
+</select>
+</div>
+
+<div class="field">
+<label>Vendor Commission</label>
+<input placeholder="e.g. 5%">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-head">
+<div><h3>Share Link</h3><p>Send this link through WhatsApp or SMS.</p></div>
+</div>
+
+<div class="card-body">
+<div class="info-box" id="vendorLink">
+https://screenflow.local/vendor-register
+</div>
+<br>
+<button class="btn primary" onclick="copyVendorLink()">Copy Vendor Form Link</button>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CUSTOMIZE ================= -->
+
+<section class="page" id="page-customize">
+
+<div class="page-head">
+<div>
+<h2>Form Customize</h2>
+<p>Add your own fields to the vendor/shop onboarding form.</p>
+</div>
+<button class="btn primary" onclick="openModal('customfield')">＋ Add Custom Field</button>
+</div>
+
+<div class="card">
+
+<div class="card-head">
+<div><h3>Custom Fields</h3><p>These fields will appear in the form.</p></div>
+</div>
+
+<div class="table-wrap">
+
+<table>
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Show In Form</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="customFieldsTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-head">
+<div><h3>Built-in Vendor Fields</h3><p>Core fields cannot be removed.</p></div>
+</div>
+
+<div class="card-body">
+
+<div class="checks">
+<span class="check">Shop Name</span>
+<span class="check">Owner Name</span>
+<span class="check">Phone</span>
+<span class="check">Category</span>
+<span class="check">Footfall</span>
+<span class="check">Opening Time</span>
+<span class="check">Closing Time</span>
+<span class="check">LCD Status</span>
+<span class="check">Internet</span>
+<span class="check">AC</span>
+<span class="check">Ice Cream Fridge</span>
+<span class="check">Load Shedding</span>
+<span class="check">Assigned By</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= REPORTS ================= -->
+
+<section class="page" id="page-reports">
+
+<div class="page-head">
+<div>
+<h2>Reports</h2>
+<p>Network, revenue, playback and vendor reports.</p>
+</div>
+<button class="btn primary" onclick="showToast('Report generated successfully')">Generate Report</button>
+</div>
+
+<div class="grid3">
+
+<div class="card"><div class="card-body"><div class="quick-icon">₨</div><h3 style="font-size:12px">Revenue Report</h3><p style="font-size:9px;color:#6b7280;margin-top:5px">Income, advertiser payments, vendor payouts and margins.</p></div></div>
+
+<div class="card"><div class="card-body"><div class="quick-icon">▶</div><h3 style="font-size:12px">Proof of Play</h3><p style="font-size:9px;color:#6b7280;margin-top:5px">Verified ad plays by screen, client and campaign.</p></div></div>
+
+<div class="card"><div class="card-body"><div class="quick-icon">●</div><h3 style="font-size:12px">Screen Health</h3><p style="font-size:9px;color:#6b7280;margin-top:5px">Online, offline, late and sync status.</p></div></div>
+
+<div class="card"><div class="card-body"><div class="quick-icon">♙</div><h3 style="font-size:12px">Vendor Report</h3><p style="font-size:9px;color:#6b7280;margin-top:5px">Vendor earnings and withdrawal history.</p></div></div>
+
+<div class="card"><div class="card-body"><div class="quick-icon">⌖</div><h3 style="font-size:12px">Area Report</h3><p style="font-size:9px;color:#6b7280;margin-top:5px">Screen coverage and advertising inventory by location.</p></div></div>
+
+<div class="card"><div class="card-body"><div class="quick-icon">◈</div><h3 style="font-size:12px">Campaign Report</h3><p style="font-size:9px;color:#6b7280;margin-top:5px">Campaign performance and location targeting.</p></div></div>
+
+</div>
+
+</section>
+
+
+</div>
+</main>
+</div>
+
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg">
+
+<div class="modal">
+
+<div class="modal-head">
+<h2 id="modalTitle">Add New</h2>
+<button class="close" onclick="closeModal()">×</button>
+</div>
+
+<div class="modal-body" id="modalBody"></div>
+
+<div class="modal-foot">
+<button class="btn secondary" onclick="closeModal()">Cancel</button>
+<button class="btn primary" id="modalSave">Save</button>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   LOCAL STORAGE
+========================================================= */
+
+const store = {
+
+get(key, fallback){
+
+try{
+return JSON.parse(localStorage.getItem("screenflow_"+key)) ?? fallback;
+}catch(e){
+return fallback;
+}
+
+},
+
+set(key,value){
+localStorage.setItem("screenflow_"+key,JSON.stringify(value));
+}
+
+};
+
+
+/* =========================================================
+   DEFAULT DATA
+========================================================= */
+
+let categories = store.get("categories",[
+"Retail",
+"Grocery",
+"Medical",
+"Fashion",
+"Electronics",
+"Restaurant",
+"Mobile Shop",
+"General Store"
+]);
+
+let areas = store.get("areas",[
+{name:"DHA",type:"Area",parent:"—",shops:24,screens:22},
+{name:"Phase 1",type:"Phase",parent:"DHA",shops:12,screens:11},
+{name:"Phase 2",type:"Phase",parent:"DHA",shops:12,screens:11},
+{name:"Johar Block 1",type:"Block",parent:"Gulistan-e-Johar",shops:12,screens:12},
+{name:"Gulshan Block 4",type:"Block",parent:"Gulshan",shops:18,screens:18}
+]);
+
+let shops = store.get("shops",[
+{
+name:"Al Madina Store",
+owner:"Ahmed Raza",
+phone:"03001234567",
+category:"Grocery",
+area:"Johar Block 1",
+footfall:"350",
+size:"1200 sq ft",
+lcd:"Installed",
+opening:"09:00",
+closing:"00:00",
+status:"online",
+internet:"WiFi",
+ac:"Yes",
+fridge:"Yes",
+load:"2pm - 4pm"
+},
+{
+name:"City Mart",
+owner:"Usman Ali",
+phone:"03111234567",
+category:"Grocery",
+area:"Johar Block 1",
+footfall:"420",
+size:"1800 sq ft",
+lcd:"Installed",
+opening:"09:00",
+closing:"00:00",
+status:"online",
+internet:"4G",
+ac:"Yes",
+fridge:"Yes",
+load:"1pm - 3pm"
+},
+{
+name:"Style Point",
+owner:"Hassan Khan",
+phone:"03221234567",
+category:"Fashion",
+area:"Gulshan Block 4",
+footfall:"250",
+size:"900 sq ft",
+lcd:"Installed",
+opening:"09:00",
+closing:"23:00",
+status:"late",
+internet:"WiFi",
+ac:"Yes",
+fridge:"No",
+load:""
+}
+]);
+
+let vendors = store.get("vendors",[
+{
+name:"Ahmed Raza",
+shop:"Al Madina Store",
+phone:"03001234567",
+booker:"Usman Khan",
+commission:"5%",
+status:"Active",
+joined:"Today"
+},
+{
+name:"Usman Ali",
+shop:"City Mart",
+phone:"03111234567",
+booker:"Bilal Ahmed",
+commission:"5%",
+status:"Active",
+joined:"Yesterday"
+}
+]);
+
+let clients = store.get("clients",[
+{
+company:"Brand Karachi",
+rep:"Ahmed Khan",
+phone:"03009998888",
+address:"DHA Karachi",
+category:"Retail",
+campaigns:4
+},
+{
+company:"Food Corner",
+rep:"Usman Ali",
+phone:"03118887777",
+address:"Johar Karachi",
+category:"Restaurant",
+campaigns:2
+}
+]);
+
+let ads = store.get("ads",[
+{
+name:"Summer Promotion",
+client:"Brand Karachi",
+type:"Video",
+duration:"30 sec",
+package:"Standard",
+area:"DHA Phase 1",
+campaign:"Summer 2026",
+status:"Approved"
+},
+{
+name:"Weekend Offer",
+client:"Food Corner",
+type:"Video",
+duration:"15 sec",
+package:"Basic",
+area:"Johar Block 1",
+campaign:"Weekend",
+status:"Pending"
+}
+]);
+
+let packages = store.get("packages",[
+{
+name:"Basic 15 Sec",
+duration:"15 sec",
+price:"500",
+period:"Day",
+plays:"20",
+published:true
+},
+{
+name:"Standard 30 Sec",
+duration:"30 sec",
+price:"1000",
+period:"Day",
+plays:"20",
+published:true
+},
+{
+name:"Premium 60 Sec",
+duration:"60 sec",
+price:"1500",
+period:"Day",
+plays:"20",
+published:true
+}
+]);
+
+let withdrawals = store.get("withdrawals",[]);
+
+let customFields = store.get("customFields",[
+{name:"Shop WhatsApp",type:"Phone",required:false,show:true},
+{name:"Google Maps Link",type:"URL",required:false,show:true}
+]);
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+const pageNames = {};
+
+document.querySelectorAll(".nav").forEach(btn=>{
+
+pageNames[btn.dataset.page] =
+btn.textContent.trim();
+
+btn.addEventListener("click",()=>{
+go(btn.dataset.page);
+});
+
+});
+
+function go(page){
+
+document.querySelectorAll(".nav").forEach(n=>{
+n.classList.toggle("active",n.dataset.page===page);
+});
+
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("active");
+});
+
+const target=document.getElementById("page-"+page);
+
+if(target) target.classList.add("active");
+
+const title=pageNames[page] || "Dashboard";
+
+document.getElementById("pageTitle").textContent=title;
+document.getElementById("crumb").textContent=title;
+
+document.getElementById("sidebar").classList.remove("open");
+
+if(page==="areas") renderAreas();
+if(page==="shops") renderShops();
+if(page==="shopkeepers") renderVendors();
+if(page==="categories") renderCategories();
+if(page==="clients") renderClients();
+if(page==="ads") renderAds();
+if(page==="packages") renderPackages();
+if(page==="withdrawals") renderWithdrawals();
+if(page==="customize") renderCustomFields();
+if(page==="vendor-form") renderVendorCategory();
+
+window.scrollTo({top:0,behavior:"smooth"});
+
+}
+
+function toggleSidebar(){
+document.getElementById("sidebar").classList.toggle("open");
+}
+
+
+/* =========================================================
+   RENDER AREAS
+========================================================= */
+
+function renderAreas(){
+
+const body=document.getElementById("areasTable");
+
+body.innerHTML="";
+
+areas.forEach((a,i)=>{
+
+body.innerHTML+=`
+
+<tr>
+
+<td><b>${a.name}</b></td>
+
+<td><span class="badge b-blue">${a.type}</span></td>
+
+<td>${a.parent}</td>
+
+<td>${a.shops}</td>
+
+<td>${a.screens}</td>
+
+<td><span class="badge b-green">Active</span></td>
+
+<td>
+<button class="btn secondary small" onclick="showToast('Location ${a.name} selected')">View</button>
+<button class="btn danger small" onclick="deleteArea(${i})">Delete</button>
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+function deleteArea(i){
+
+if(confirm("Delete this location?")){
+
+areas.splice(i,1);
+store.set("areas",areas);
+renderAreas();
+
+showToast("Location deleted");
+
+}
+
+}
+
+
+/* =========================================================
+   RENDER SHOPS
+========================================================= */
+
+function renderShops(){
+
+const body=document.getElementById("shopsTable");
+
+const filter=document.getElementById("shopStatusFilter")?.value || "";
+
+body.innerHTML="";
+
+shops
+.filter(s=>!filter || s.status===filter || (filter==="pending" && s.lcd==="Pending"))
+.forEach((s,i)=>{
+
+let badge =
+s.status==="online"
+? `<span class="badge b-green">Online</span>`
+: s.status==="offline"
+? `<span class="badge b-red">Offline</span>`
+: `<span class="badge b-orange">Late</span>`;
+
+body.innerHTML+=`
+
+<tr>
+
+<td><b>${s.name}</b><small style="display:block;color:#9ca3af">${s.size}</small></td>
+
+<td>${s.owner}<small style="display:block;color:#9ca3af">${s.phone}</small></td>
+
+<td>${s.category}</td>
+
+<td>${s.area}</td>
+
+<td>${s.footfall}/day</td>
+
+<td>
+<span class="badge ${s.lcd==="Installed"?"b-green":"b-orange"}">
+${s.lcd}
+</span>
+</td>
+
+<td>${s.opening}</td>
+
+<td>${badge}</td>
+
+<td>
+<button class="btn secondary small" onclick="viewShop(${i})">Details</button>
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+function viewShop(i){
+
+const s=shops[i];
+
+openCustomModal(
+"Shop Details",
+`
+
+<div class="grid2">
+
+<div class="info-box"><b>Shop</b><br>${s.name}</div>
+<div class="info-box"><b>Owner</b><br>${s.owner}</div>
+<div class="info-box"><b>Phone</b><br>${s.phone}</div>
+<div class="info-box"><b>Category</b><br>${s.category}</div>
+<div class="info-box"><b>Location</b><br>${s.area}</div>
+<div class="info-box"><b>Footfall</b><br>${s.footfall} / day</div>
+<div class="info-box"><b>Shop Size</b><br>${s.size}</div>
+<div class="info-box"><b>LCD</b><br>${s.lcd}</div>
+<div class="info-box"><b>Internet</b><br>${s.internet}</div>
+<div class="info-box"><b>Opening</b><br>${s.opening}</div>
+<div class="info-box"><b>Closing</b><br>${s.closing}</div>
+<div class="info-box"><b>Load Shedding</b><br>${s.load || "Not specified"}</div>
+<div class="info-box"><b>AC</b><br>${s.ac}</div>
+<div class="info-box"><b>Ice Cream Fridge</b><br>${s.fridge}</div>
+
+</div>
+
+<div class="section-title">LCD Status</div>
+
+<div class="toggle">
+<span>Current Screen Status</span>
+<strong>${s.status.toUpperCase()}</strong>
+</div>
+
+`
+);
+
+}
+
+
+/* =========================================================
+   VENDORS
+========================================================= */
+
+function renderVendors(){
+
+const body=document.getElementById("vendorsTable");
+
+body.innerHTML="";
+
+vendors.forEach((v,i)=>{
+
+body.innerHTML+=`
+
+<tr>
+
+<td><b>${v.name}</b></td>
+
+<td>${v.shop}</td>
+
+<td>${v.phone}</td>
+
+<td>${v.booker}</td>
+
+<td>${v.commission}</td>
+
+<td><span class="badge b-green">${v.status}</span></td>
+
+<td>${v.joined}</td>
+
+<td>
+<button class="btn secondary small" onclick="vendorHistory(${i})">History</button>
+</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById("vendorCount").textContent=vendors.length;
+
+}
+
+function vendorHistory(i){
+
+const v=vendors[i];
+
+openCustomModal(
+"Vendor Complete History",
+`
+
+<div class="info-box">
+<b>${v.name}</b><br>
+${v.shop}<br>
+${v.phone}
+</div>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<b>Vendor Onboarded</b>
+<p>${v.joined} · Assigned by ${v.booker}</p>
+</div>
+
+<div class="timeline-item">
+<b>Shop Verified</b>
+<p>Shop information and registered phone verified.</p>
+</div>
+
+<div class="timeline-item">
+<b>LCD Installation</b>
+<p>Screen linked to vendor shop.</p>
+</div>
+
+<div class="timeline-item">
+<b>Advertising Started</b>
+<p>Verified plays started accumulating.</p>
+</div>
+
+<div class="timeline-item">
+<b>Withdrawal History</b>
+<p>All future withdrawal requests and payment proofs remain attached to this vendor.</p>
+</div>
+
+</div>
+`
+);
+
+}
+
+
+/* =========================================================
+   CATEGORIES
+========================================================= */
+
+function renderCategories(){
+
+const body=document.getElementById("categoriesTable");
+
+body.innerHTML="";
+
+categories.forEach((c,i)=>{
+
+const count=shops.filter(s=>s.category===c).length;
+
+body.innerHTML+=`
+
+<tr>
+
+<td><b>${c}</b></td>
+<td>Today</td>
+<td>${count}</td>
+<td><span class="badge b-green">Active</span></td>
+
+<td>
+<button class="btn danger small" onclick="deleteCategory(${i})">Delete</button>
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+function deleteCategory(i){
+
+if(confirm("Delete category?")){
+
+categories.splice(i,1);
+store.set("categories",categories);
+
+renderCategories();
+
+}
+
+}
+
+
+/* =========================================================
+   CLIENTS
+========================================================= */
+
+function renderClients(){
+
+const body=document.getElementById("clientsTable");
+
+body.innerHTML="";
+
+clients.forEach(c=>{
+
+body.innerHTML+=`
+
+<tr>
+
+<td><b>${c.company}</b></td>
+<td>${c.rep}</td>
+<td>${c.phone}</td>
+<td>${c.address}</td>
+<td>${c.category}</td>
+<td>${c.campaigns}</td>
+<td><span class="badge b-green">Active</span></td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById("clientCount").textContent=clients.length;
+
+}
+
+
+/* =========================================================
+   ADS
+========================================================= */
+
+function renderAds(){
+
+const body=document.getElementById("adsTable");
+
+body.innerHTML="";
+
+ads.forEach(a=>{
+
+const badge=a.status==="Approved"
+? "b-green"
+: a.status==="Declined"
+? "b-red"
+: "b-orange";
+
+body.innerHTML+=`
+
+<tr>
+
+<td><b>${a.name}</b></td>
+<td>${a.client}</td>
+<td>${a.type}</td>
+<td>${a.duration}</td>
+<td>${a.package}</td>
+<td>${a.area}</td>
+<td>${a.campaign}</td>
+<td><span class="badge ${badge}">${a.status}</span></td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+
+/* =========================================================
+   PACKAGES
+========================================================= */
+
+function renderPackages(){
+
+const grid=document.getElementById("packagesGrid");
+
+grid.innerHTML="";
+
+packages.forEach((p,i)=>{
+
+grid.innerHTML+=`
+
+<div class="card">
+
+<div class="card-head">
+
+<div>
+<h3>${p.name}</h3>
+<p>${p.duration} creative</p>
+</div>
+
+<span class="badge ${p.published?"b-green":"b-red"}">
+${p.published?"Published":"Draft"}
+</span>
+
+</div>
+
+<div class="card-body">
+
+<div style="font-size:25px;font-weight:850;margin-bottom:7px">
+₨${Number(p.price).toLocaleString()}
+<small style="font-size:9px;color:#9ca3af"> / ${p.period}</small>
+</div>
+
+<div class="grid2">
+
+<div class="info-box"><b>Duration</b><br>${p.duration}</div>
+<div class="info-box"><b>Plays</b><br>${p.plays} / day</div>
+
+</div>
+
+<br>
+
+<button class="btn secondary small" onclick="togglePackage(${i})">
+${p.published?"Unpublish":"Publish"}
+</button>
+
+<button class="btn danger small" onclick="deletePackage(${i})">Delete</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================================================
+   WITHDRAWALS
+========================================================= */
+
+function renderWithdrawals(){
+
+const body=document.getElementById("withdrawalsTable");
+
+body.innerHTML="";
+
+withdrawals.forEach((w,i)=>{
+
+body.innerHTML+=`
+
+<tr>
+
+<td>${w.id}</td>
+
+<td><b>${w.vendor}</b><small style="display:block;color:#9ca3af">${w.phone}</small></td>
+
+<td class="money">₨${Number(w.amount).toLocaleString()}</td>
+
+<td>${w.bank}<br><small>${w.account}</small></td>
+
+<td>${w.date}</td>
+
+<td>
+<span class="badge ${w.status==="Paid"?"b-green":"b-orange"}">
+${w.status}
+</span>
+</td>
+
+<td>
+
+${
+w.status==="Pending"
+?
+`<button class="btn primary small" onclick="payWithdrawal(${i})">Pay Vendor</button>`
+:
+`<button class="btn secondary small" onclick="viewPaymentProof(${i})">View Proof</button>`
+}
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById("pendingWithdrawalCount").textContent =
+withdrawals.filter(w=>w.status==="Pending").length;
+
+document.getElementById("wdPending").textContent =
+withdrawals.filter(w=>w.status==="Pending").length;
+
+}
+
+
+function payWithdrawal(i){
+
+const w=withdrawals[i];
+
+openCustomModal(
+
+"Complete Vendor Payment",
+
+`
+
+<div class="info-box">
+
+<strong>Vendor:</strong> ${w.vendor}<br>
+<strong>Amount:</strong> ₨${Number(w.amount).toLocaleString()}<br>
+<strong>Bank:</strong> ${w.bank}<br>
+<strong>Account:</strong> ${w.account}
+
+</div>
+
+<div class="section-title">Payment Details</div>
+
+<div class="form-grid">
+
+<div class="field">
+<label>Paid By Team Member *</label>
+<select id="paidBy">
+<option>Super Admin</option>
+<option>Usman Khan</option>
+<option>Bilal Ahmed</option>
+</select>
+</div>
+
+<div class="field">
+<label>Transaction Reference *</label>
+<input id="paymentRef" placeholder="TXN-XXXXXX">
+</div>
+
+<div class="field full">
+<label>Payment Screenshot</label>
+<input id="paymentScreenshot" type="file" accept="image/*">
+</div>
+
+</div>
+
+<div class="section-title">Payment Member Verification</div>
+
+<div class="camera-box">
+
+<video id="cameraVideo" autoplay playsinline style="display:none"></video>
+
+<div class="camera-placeholder" id="cameraPlaceholder">
+Camera preview will appear here
+</div>
+
+</div>
+
+<br>
+
+<button class="btn secondary" onclick="startCamera()">Open Webcam</button>
+<button class="btn primary" onclick="capturePhoto()">Capture Photo</button>
+
+<canvas id="cameraCanvas" style="display:none"></canvas>
+
+<div id="capturedPhoto" style="margin-top:10px"></div>
+
+<div class="info-box" style="margin-top:12px">
+<strong>Important:</strong> Vendor status should change from Pending to Paid only after payment reference, member identity and proof have been recorded.
+</div>
+
+`,
+
+()=>{
+
+const ref=document.getElementById("paymentRef").value.trim();
+
+if(!ref){
+showToast("Payment reference required");
+return;
+}
+
+withdrawals[i].status="Paid";
+withdrawals[i].paidBy=document.getElementById("paidBy").value;
+withdrawals[i].reference=ref;
+withdrawals[i].paidDate=new Date().toLocaleString();
+withdrawals[i].proof="Payment screenshot + member photo";
+
+store.set("withdrawals",withdrawals);
+
+closeModal();
+renderWithdrawals();
+
+showToast("Vendor payment marked as Paid");
+
+}
+
+);
+
+}
+
+
+function viewPaymentProof(i){
+
+const w=withdrawals[i];
+
+openCustomModal(
+"Payment Proof",
+`
+
+<div class="grid2">
+
+<div class="info-box"><b>Vendor</b><br>${w.vendor}</div>
+<div class="info-box"><b>Amount</b><br>₨${Number(w.amount).toLocaleString()}</div>
+<div class="info-box"><b>Paid By</b><br>${w.paidBy}</div>
+<div class="info-box"><b>Reference</b><br>${w.reference}</div>
+<div class="info-box"><b>Paid Date</b><br>${w.paidDate}</div>
+<div class="info-box"><b>Status</b><br><span class="badge b-green">Paid</span></div>
+
+</div>
+
+<div class="section-title">Attached Proof</div>
+
+<div class="proof">
+<div class="proof-item">📷 Member Photo Captured</div>
+<div class="proof-item">🖼 Payment Screenshot</div>
+<div class="proof-item">✓ Transaction Reference</div>
+</div>
+
+`
+);
+
+}
+
+
+/* =========================================================
+   CUSTOM FIELDS
+========================================================= */
+
+function renderCustomFields(){
+
+const body=document.getElementById("customFieldsTable");
+
+body.innerHTML="";
+
+customFields.forEach((f,i)=>{
+
+body.innerHTML+=`
+
+<tr>
+
+<td><b>${f.name}</b></td>
+<td>${f.type}</td>
+<td>${f.required?"Yes":"No"}</td>
+<td>
+<span class="badge ${f.show?"b-green":"b-red"}">
+${f.show?"Visible":"Hidden"}
+</span>
+</td>
+
+<td>
+
+<button class="btn secondary small" onclick="toggleCustomField(${i})">
+Toggle
+</button>
+
+<button class="btn danger small" onclick="deleteCustomField(${i})">
+Delete
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+
+/* =========================================================
+   VENDOR CATEGORY DROPDOWN
+========================================================= */
+
+function renderVendorCategory(){
+
+const select=document.getElementById("vendorCategorySelect");
+
+if(!select)return;
+
+select.innerHTML=categories
+.map(c=>`<option>${c}</option>`)
+.join("");
+
+}
+
+
+/* =========================================================
+   MODAL SYSTEM
+========================================================= */
+
+function openModal(type){
+
+let title="";
+let html="";
+let save=null;
+
+if(type==="area"){
+
+title="Add Area / Sub Area / Block";
+
+html=`
+
+<div class="section-title">Location Information</div>
+
+<div class="form-grid">
+
+<div class="field">
+<label>Name *</label>
+<input id="mName" placeholder="e.g. Phase 1">
+</div>
+
+<div class="field">
+<label>Location Type *</label>
+
+<select id="mType">
+<option>Area</option>
+<option>Sub Area</option>
+<option>Block</option>
+<option>Sector</option>
+<option>Phase</option>
+<option>Percent</option>
+</select>
+
+</div>
+
+<div class="field">
+<label>Parent Location</label>
+<select id="mParent">
+<option>—</option>
+${areas.map(a=>`<option>${a.name}</option>`).join("")}
+</select>
+</div>
+
+<div class="field">
+<label>Status</label>
+<select><option>Active</option><option>Draft</option></select>
+</div>
+
+</div>
+
+<div class="info-box" style="margin-top:12px">
+You can create any structure: <b>DHA → Phase 1 → Block A</b> or <b>Gulshan → Sector → Block</b>.
+</div>
+
+`;
+
+save=()=>{
+
+const name=document.getElementById("mName").value.trim();
+
+if(!name){
+showToast("Location name required");
+return;
+}
+
+areas.push({
+name,
+type:document.getElementById("mType").value,
+parent:document.getElementById("mParent").value,
+shops:0,
+screens:0
+});
+
+store.set("areas",areas);
+
+closeModal();
+renderAreas();
+
+showToast("Location created successfully");
+
+};
+
+}
+
+
+else if(type==="category"){
+
+title="Add Shop Category";
+
+html=`
+
+<div class="field">
+<label>Category Name *</label>
+<input id="mCategory" placeholder="e.g. Pharmacy">
+</div>
+
+`;
+
+save=()=>{
+
+const c=document.getElementById("mCategory").value.trim();
+
+if(!c){
+showToast("Category name required");
+return;
+}
+
+if(categories.includes(c)){
+showToast("Category already exists");
+return;
+}
+
+categories.push(c);
+
+store.set("categories",categories);
+
+closeModal();
+
+renderCategories();
+
+showToast("Category saved and added to dropdowns");
+
+};
+
+}
+
+
+else if(type==="shop"){
+
+title="Complete Shop Onboarding Form";
+
+html=`
+
+<div class="section-title">Shop Information</div>
+
+<div class="form-grid">
+
+<div class="field">
+<label>Shop Name *</label>
+<input id="mShopName" placeholder="Shop name">
+</div>
+
+<div class="field">
+<label>Owner / Representative *</label>
+<input id="mOwner" placeholder="Name">
+</div>
+
+<div class="field">
+<label>Registered Phone *</label>
+<input id="mPhone" placeholder="+92">
+</div>
+
+<div class="field">
+<label>Category *</label>
+<select id="mShopCategory">
+${categories.map(c=>`<option>${c}</option>`).join("")}
+</select>
+</div>
+
+<div class="field">
+<label>Area / Block *</label>
+<select id="mShopArea">
+${areas.map(a=>`<option>${a.name}</option>`).join("")}
+</select>
+</div>
+
+<div class="field">
+<label>Average Daily Footfall</label>
+<input id="mFootfall" type="number" placeholder="e.g. 350">
+</div>
+
+<div class="field">
+<label>Shop Size</label>
+<input id="mSize" placeholder="e.g. 1200 sq ft">
+</div>
+
+<div class="field">
+<label>Opening Time *</label>
+<input id="mOpening" type="time" value="09:00">
+</div>
+
+<div class="field">
+<label>Closing Time *</label>
+<input id="mClosing" type="time" value="00:00">
+</div>
+
+</div>
+
+
+<div class="section-title">LCD / Screen</div>
+
+<div class="form-grid">
+
+<div class="field">
+<label>LCD Status</label>
+<select id="mLCD">
+<option>Installed</option>
+<option>Pending</option>
+<option>Not Required</option>
+</select>
+</div>
+
+<div class="field">
+<label>LCD Monthly Installment?</label>
+<select id="mInstallment">
+<option>No</option>
+<option>Yes</option>
+</select>
+</div>
+
+<div class="field">
+<label>LCD Price</label>
+<input id="mLCDPrice" type="number" placeholder="60000">
+</div>
+
+<div class="field">
+<label>Down Payment</label>
+<input id="mDown" type="number" placeholder="0">
+</div>
+
+<div class="field">
+<label>Installment Months</label>
+<input id="mMonths" type="number" placeholder="12">
+</div>
+
+<div class="field">
+<label>Monthly Installment</label>
+<input id="mMonthly" readonly placeholder="Auto calculated">
+</div>
+
+</div>
+
+
+<div class="section-title">Shop Facilities</div>
+
+<div class="form-grid">
+
+<div class="field">
+<label>Internet Available</label>
+<select id="mInternet">
+<option>WiFi</option>
+<option>4G</option>
+<option>Fiber</option>
+<option>None</option>
+</select>
+</div>
+
+<div class="field">
+<label>Air Conditioner</label>
+<select id="mAC"><option>Yes</option><option>No</option></select>
+</div>
+
+<div class="field">
+<label>Ice Cream Fridge</label>
+<select id="mFridge"><option>Yes</option><option>No</option></select>
+</div>
+
+<div class="field">
+<label>Load Shedding Schedule</label>
+<input id="mLoad" placeholder="e.g. 2pm - 4pm">
+</div>
+
+</div>
+
+<div class="section-title">Order Booker</div>
+
+<div class="form-grid">
+
+<div class="field">
+<label>Assigned By</label>
+<select id="mBooker">
+<option>Direct Admin</option>
+<option>Usman Khan</option>
+<option>Bilal Ahmed</option>
+</select>
+</div>
+
+<div class="field">
+<label>Commission</label>
+<input id="mCommission" placeholder="5%">
+</div>
+
+</div>
+
+`;
+
+setTimeout(()=>{
+
+const price=document.getElementById("mLCDPrice");
+const down=document.getElementById("mDown");
+const months=document.getElementById("mMonths");
+const monthly=document.getElementById("mMonthly");
+
+function calc(){
+
+const p=Number(price.value)||0;
+const d=Number(down.value)||0;
+const m=Number(months.value)||0;
+
+monthly.value =
+m>0
+? Math.ceil(Math.max(0,p-d)/m).toLocaleString()
+: "";
+
+}
+
+price.addEventListener("input",calc);
+down.addEventListener("input",calc);
+months.addEventListener("input",calc);
+
+},50);
+
+save=()=>{
+
+const name=document.getElementById("mShopName").value.trim();
+
+if(!name){
+showToast("Shop name required");
+return;
+}
+
+shops.push({
+name,
+owner:document.getElementById("mOwner").value,
+phone:document.getElementById("mPhone").value,
+category:document.getElementById("mShopCategory").value,
+area:document.getElementById("mShopArea").value,
+footfall:document.getElementById("mFootfall").value || 0,
+size:document.getElementById("mSize").value || "Not specified",
+lcd:document.getElementById("mLCD").value,
+opening:document.getElementById("mOpening").value,
+closing:document.getElementById("mClosing").value,
+status:document.getElementById("mLCD").value==="Installed"?"online":"pending",
+internet:document.getElementById("mInternet").value,
+ac:document.getElementById("mAC").value,
+fridge:document.getElementById("mFridge").value,
+load:document.getElementById("mLoad").value
+});
+
+store.set("shops",shops);
+
+closeModal();
+renderShops();
+
+showToast("Shop onboarded successfully");
+
+};
+
+}
+
+
+else if(type==="vendor"){
+
+title="Add Vendor / Shopkeeper";
+
+html=`
+
+<div class="form-grid">
+
+<div class="field">
+<label>Vendor Name *</label>
+<input id="mVendorName">
+</div>
+
+<div class="field">
+<label>Shop Name *</label>
+<input id="mVendorShop">
+</div>
+
+<div class="field">
+<label>Registered Phone *</label>
+<input id="mVendorPhone">
+</div>
+
+<div class="field">
+<label>Category</label>
+<select>
+${categories.map(c=>`<option>${c}</option>`).join("")}
+</select>
+</div>
+
+<div class="field">
+<label>Assigned By / Order Booker</label>
+<select id="mVendorBooker">
+<option>Direct Admin</option>
+<option>Usman Khan</option>
+<option>Bilal Ahmed</option>
+</select>
+</div>
+
+<div class="field">
+<label>Commission</label>
+<input id="mVendorCommission" value="5%">
+</div>
+
+</div>
+
+<div class="info-box" style="margin-top:14px">
+Vendor history will remain attached from onboarding through every verified play, earning, withdrawal and payment.
+</div>
+
+`;
+
+save=()=>{
+
+const name=document.getElementById("mVendorName").value.trim();
+
+if(!name){
+showToast("Vendor name required");
+return;
+}
+
+vendors.push({
+name,
+shop:document.getElementById("mVendorShop").value,
+phone:document.getElementById("mVendorPhone").value,
+booker:document.getElementById("mVendorBooker").value,
+commission:document.getElementById("mVendorCommission").value,
+status:"Active",
+joined:new Date().toLocaleDateString()
+});
+
+store.set("vendors",vendors);
+
+closeModal();
+renderVendors();
+
+showToast("Vendor onboarded");
+
+};
+
+}
+
+
+else if(type==="client"){
+
+title="Add Client / Company";
+
+html=`
+
+<div class="form-grid">
+
+<div class="field">
+<label>Company Name *</label>
+<input id="mCompany">
+</div>
+
+<div class="field">
+<label>Representative Name *</label>
+<input id="mRep">
+</div>
+
+<div class="field">
+<label>Registered Phone *</label>
+<input id="mClientPhone">
+</div>
+
+<div class="field">
+<label>Company Category</label>
+<select>
+${categories.map(c=>`<option>${c}</option>`).join("")}
+</select>
+</div>
+
+<div class="field full">
+<label>Company Address</label>
+<textarea id="mAddress"></textarea>
+</div>
+
+</div>
+
+`;
+
+save=()=>{
+
+const company=document.getElementById("mCompany").value.trim();
+
+if(!company){
+showToast("Company name required");
+return;
+}
+
+clients.push({
+company,
+rep:document.getElementById("mRep").value,
+phone:document.getElementById("mClientPhone").value,
+address:document.getElementById("mAddress").value,
+category:"Retail",
+campaigns:0
+});
+
+store.set("clients",clients);
+
+closeModal();
+renderClients();
+
+showToast("Client created");
+
+};
+
+}
+
+
+else if(type==="ad"){
+
+title="Add Advertisement";
+
+html=`
+
+<div class="section-title">Creative Upload</div>
+
+<div class="upload-box">
+
+<b>Upload Video / Poster</b>
+<p>System will validate format, duration and size before admin review.</p>
+
+<input id="mAdFile" type="file" accept="video/*,image/*">
+
+</div>
+
+<br>
+
+<div class="form-grid">
+
+<div class="field">
+<label>Ad Name *</label>
+<input id="mAdName">
+</div>
+
+<div class="field">
+<label>Client</label>
+<select id="mAdClient">
+${clients.map(c=>`<option>${c.company}</option>`).join("")}
+</select>
+</div>
+
+<div class="field">
+<label>Creative Type</label>
+<select id="mAdType">
+<option>Video</option>
+<option>Poster</option>
+</select>
+</div>
+
+<div class="field">
+<label>Selected Package</label>
+<select id="mAdPackage">
+${packages.map(p=>`<option>${p.name} — ${p.duration}</option>`).join("")}
+</select>
+</div>
+
+<div class="field">
+<label>Target Area</label>
+<select id="mAdArea">
+${areas.map(a=>`<option>${a.name}</option>`).join("")}
+</select>
+</div>
+
+<div class="field">
+<label>Campaign Category</label>
+<select>
+${categories.map(c=>`<option>${c}</option>`).join("")}
+</select>
+</div>
+
+<div class="field">
+<label>Start Date</label>
+<input type="date">
+</div>
+
+<div class="field">
+<label>End Date</label>
+<input type="date">
+</div>
+
+</div>
+
+<div class="info-box" style="margin-top:13px">
+<strong>Validation:</strong> If a client chooses a 15-second package, uploaded video must meet the package duration rule. Poster creatives must pass the configured size/format check before entering the admin approval queue.
+</div>
+
+`;
+
+save=()=>{
+
+const name=document.getElementById("mAdName").value.trim();
+
+if(!name){
+showToast("Ad name required");
+return;
+}
+
+const pkg=document.getElementById("mAdPackage").value;
+
+ads.push({
+name,
+client:document.getElementById("mAdClient").value,
+type:document.getElementById("mAdType").value,
+duration:pkg.split("—")[1]?.trim() || "15 sec",
+package:pkg,
+area:document.getElementById("mAdArea").value,
+campaign:"New Campaign",
+status:"Pending"
+});
+
+store.set("ads",ads);
+
+closeModal();
+renderAds();
+
+showToast("Ad added to validation queue");
+
+};
+
+}
+
+
+else if(type==="campaign"){
+
+title="Create Campaign";
+
+html=`
+
+<div class="form-grid">
+
+<div class="field">
+<label>Campaign Name *</label>
+<input id="mCampaignName">
+</div>
+
+<div class="field">
+<label>Client</label>
+<select>
+${clients.map(c=>`<option>${c.company}</option>`).join("")}
+</select>
+</div>
+
+<div class="field">
+<label>Campaign Category</label>
+<select>
+${categories.map(c=>`<option>${c}</option>`).join("")}
+</select>
+</div>
+
+<div class="field">
+<label>Package</label>
+<select>
+${packages.map(p=>`<option>${p.name}</option>`).join("")}
+</select>
+</div>
+
+<div class="field full">
+<label>Target Locations — Multiple allowed</label>
+
+<div class="checks">
+
+${areas.map(a=>`
+<label class="check">
+<input type="checkbox" value="${a.name}">
+${a.name}
+</label>
+`).join("")}
+
+</div>
+
+</div>
+
+<div class="field">
+<label>Start Date</label>
+<input type="date">
+</div>
+
+<div class="field">
+<label>End Date</label>
+<input type="date">
+</div>
+
+<div class="field full">
+<label>Client Notes</label>
+<textarea placeholder="Campaign instructions"></textarea>
+</div>
+
+</div>
+
+`;
+
+save=()=>{
+
+if(!document.getElementById("mCampaignName").value.trim()){
+showToast("Campaign name required");
+return;
+}
+
+closeModal();
+showToast("Campaign created successfully");
+
+};
+
+}
+
+
+else if(type==="package"){
+
+title="Create Advertising Package";
+
+html=`
+
+<div class="form-grid">
+
+<div class="field">
+<label>Package Name *</label>
+<input id="mPkgName" placeholder="Premium 60 Sec">
+</div>
+
+<div class="field">
+<label>Ad Duration</label>
+<select id="mPkgDuration">
+<option>15 sec</option>
+<option>30 sec</option>
+<option>60 sec</option>
+</select>
+</div>
+
+<div class="field">
+<label>Price</label>
+<input id="mPkgPrice" type="number" placeholder="1500">
+</div>
+
+<div class="field">
+<label>Billing Period</label>
+<select id="mPkgPeriod">
+<option>Day</option>
+<option>Week</option>
+<option>Month</option>
+</select>
+</div>
+
+<div class="field">
+<label>Guaranteed Plays / Day</label>
+<input id="mPkgPlays" value="20">
+</div>
+
+<div class="field">
+<label>Package Status</label>
+<select id="mPkgPublished">
+<option value="yes">Publish on Website</option>
+<option value="no">Save as Draft</option>
+</select>
+</div>
+
+<div class="field full">
+<label>Description</label>
+<textarea placeholder="Package details shown to clients"></textarea>
+</div>
+
+</div>
+
+<div class="info-box">
+Published packages can be shown on the client website and used during campaign booking.
+</div>
+
+`;
+
+save=()=>{
+
+const name=document.getElementById("mPkgName").value.trim();
+
+if(!name){
+showToast("Package name required");
+return;
+}
+
+packages.push({
+name,
+duration:document.getElementById("mPkgDuration").value,
+price:document.getElementById("mPkgPrice").value || 0,
+period:document.getElementById("mPkgPeriod").value,
+plays:document.getElementById("mPkgPlays").value || 20,
+published:document.getElementById("mPkgPublished").value==="yes"
+});
+
+store.set("packages",packages);
+
+closeModal();
+renderPackages();
+
+showToast("Package created successfully");
+
+};
+
+}
+
+
+else if(type==="booker"){
+
+title="Add Order Booker";
+
+html=`
+
+<div class="form-grid">
+
+<div class="field">
+<label>Booker Name *</label>
+<input id="mBookerName">
+</div>
+
+<div class="field">
+<label>Phone</label>
+<input id="mBookerPhone">
+</div>
+
+<div class="field">
+<label>Commission Type</label>
+<select id="mCommissionType">
+<option>Percentage</option>
+<option>Fixed Per Vendor</option>
+<option>Per Verified Play</option>
+</select>
+</div>
+
+<div class="field">
+<label>Commission Rate</label>
+<input id="mBookerRate" placeholder="5%">
+</div>
+
+</div>
+
+`;
+
+save=()=>{
+
+closeModal();
+showToast("Order Booker added");
+
+};
+
+}
+
+
+else if(type==="customfield"){
+
+title="Add Custom Form Field";
+
+html=`
+
+<div class="form-grid">
+
+<div class="field">
+<label>Field Name *</label>
+<input id="mFieldName" placeholder="e.g. Google Maps Link">
+</div>
+
+<div class="field">
+<label>Field Type</label>
+<select id="mFieldType">
+<option>Text</option>
+<option>Number</option>
+<option>Phone</option>
+<option>Email</option>
+<option>URL</option>
+<option>Date</option>
+<option>Dropdown</option>
+<option>Checkbox</option>
+</select>
+</div>
+
+<div class="field">
+<label>Required?</label>
+<select id="mFieldRequired">
+<option value="no">No</option>
+<option value="yes">Yes</option>
+</select>
+</div>
+
+<div class="field">
+<label>Show in Form?</label>
+<select id="mFieldShow">
+<option value="yes">Yes</option>
+<option value="no">No</option>
+</select>
+</div>
+
+</div>
+
+`;
+
+save=()=>{
+
+const name=document.getElementById("mFieldName").value.trim();
+
+if(!name){
+showToast("Field name required");
+return;
+}
+
+customFields.push({
+name,
+type:document.getElementById("mFieldType").value,
+required:document.getElementById("mFieldRequired").value==="yes",
+show:document.getElementById("mFieldShow").value==="yes"
+});
+
+store.set("customFields",customFields);
+
+closeModal();
+renderCustomFields();
+
+showToast("Custom field added");
+
+};
+
+}
+
+else{
+
+return;
+
+}
+
+
+document.getElementById("modalTitle").textContent=title;
+document.getElementById("modalBody").innerHTML=html;
+
+document.getElementById("modalSave").onclick=save;
+
+document.getElementById("modalBg").classList.add("show");
+
+}
+
+
+/* =========================================================
+   CUSTOM MODAL
+========================================================= */
+
+function openCustomModal(title,html,save=null){
+
+document.getElementById("modalTitle").textContent=title;
+document.getElementById("modalBody").innerHTML=html;
+
+document.getElementById("modalSave").onclick =
+save || closeModal;
+
+document.getElementById("modalBg").classList.add("show");
+
+}
+
+function closeModal(){
+
+document.getElementById("modalBg").classList.remove("show");
+
+}
+
+document.getElementById("modalBg").addEventListener("click",e=>{
+
+if(e.target.id==="modalBg"){
+closeModal();
+}
+
+});
+
+
+/* =========================================================
+   PACKAGE ACTIONS
+========================================================= */
+
+function togglePackage(i){
+
+packages[i].published=!packages[i].published;
+
+store.set("packages",packages);
+
+renderPackages();
+
+showToast(
+packages[i].published
+? "Package published"
+: "Package unpublished"
+);
+
+}
+
+function deletePackage(i){
+
+if(confirm("Delete this package?")){
+
+packages.splice(i,1);
+
+store.set("packages",packages);
+
+renderPackages();
+
+}
+
+}
+
+
+/* =========================================================
+   CUSTOM FIELD ACTIONS
+========================================================= */
+
+function toggleCustomField(i){
+
+customFields[i].show=!customFields[i].show;
+
+store.set("customFields",customFields);
+
+renderCustomFields();
+
+}
+
+function deleteCustomField(i){
+
+if(confirm("Delete custom field?")){
+
+customFields.splice(i,1);
+
+store.set("customFields",customFields);
+
+renderCustomFields();
+
+}
+
+}
+
+
+/* =========================================================
+   APPROVAL
+========================================================= */
+
+function approve(name){
+
+showToast(name+" approved and ready for scheduling");
+
+document.getElementById("approvalCount").textContent =
+Math.max(0,Number(document.getElementById("approvalCount").textContent)-1);
+
+}
+
+function openCorrection(name){
+
+openCustomModal(
+"Ad Review — "+name,
+
+`
+
+<div class="info-box">
+
+<strong>Possible Correction Reasons</strong>
+
+<ul style="margin:8px 0 0 18px;line-height:1.8">
+
+<li>Creative duration does not match selected package.</li>
+<li>Poster dimensions or format are invalid.</li>
+<li>Irrelevant data / campaign information.</li>
+<li>Policy guideline violation.</li>
+<li>Required company information missing.</li>
+<li>Location or campaign dates need correction.</li>
+
+</ul>
+
+</div>
+
+<div class="section-title">Admin Decision</div>
+
+<div class="field">
+<label>Decision</label>
+
+<select id="reviewDecision">
+
+<option>Correction Required</option>
+<option>Declined</option>
+<option>Approved</option>
+
+</select>
+
+</div>
+
+<br>
+
+<div class="field">
+<label>Reason / Correction Instructions</label>
+
+<textarea id="reviewReason" placeholder="Write exact correction or decline reason. This will appear in client portal."></textarea>
+
+</div>
+
+`,
+
+()=>{
+
+const decision=document.getElementById("reviewDecision").value;
+const reason=document.getElementById("reviewReason").value.trim();
+
+if(!reason){
+showToast("Please enter reason/instructions");
+return;
+}
+
+closeModal();
+
+showToast(
+decision+" sent to client portal"
+);
+
+}
+
+);
+
+}
+
+
+/* =========================================================
+   SCREEN DETAILS
+========================================================= */
+
+function showScreenDetails(id){
+
+openCustomModal(
+"Screen Details — "+id,
+
+`
+
+<div class="grid2">
+
+<div class="info-box"><b>Screen ID</b><br>${id}</div>
+<div class="info-box"><b>Device</b><br>43" Android Display</div>
+<div class="info-box"><b>Player</b><br>ScreenFlow Player</div>
+<div class="info-box"><b>Internet</b><br>WiFi</div>
+<div class="info-box"><b>Last Heartbeat</b><br>2 minutes ago</div>
+<div class="info-box"><b>Last Sync</b><br>3 minutes ago</div>
+<div class="info-box"><b>Current Ad</b><br>Summer Promotion</div>
+<div class="info-box"><b>Offline Mode</b><br>Ready</div>
+
+</div>
+
+<div class="section-title">Today's Playback</div>
+
+<div class="info-box">
+09:00 — Ad A — Verified<br>
+09:01 — Ad B — Verified<br>
+09:02 — Ad C — Verified<br>
+09:03 — Ad A — Verified
+</div>
+
+`
+);
+
+}
+
+
+/* =========================================================
+   FILTER UPCOMING
+========================================================= */
+
+function filterUpcoming(){
+
+const area=document.getElementById("upcomingArea").value;
+const category=document.getElementById("upcomingCategory").value;
+
+document.querySelectorAll("#upcomingTable tr").forEach(row=>{
+
+const matchArea=!area || row.dataset.area===area;
+const matchCategory=!category || row.dataset.category===category;
+
+row.style.display =
+matchArea && matchCategory ? "" : "none";
+
+});
+
+}
+
+
+/* =========================================================
+   CAMERA
+========================================================= */
+
+let cameraStream=null;
+
+async function startCamera(){
+
+try{
+
+cameraStream=await navigator.mediaDevices.getUserMedia({
+video:true
+});
+
+const video=document.getElementById("cameraVideo");
+
+video.srcObject=cameraStream;
+video.style.display="block";
+
+document.getElementById("cameraPlaceholder").style.display="none";
+
+showToast("Webcam opened");
+
+}catch(e){
+
+showToast("Camera permission required");
+
+}
+
+}
+
+function capturePhoto(){
+
+const video=document.getElementById("cameraVideo");
+const canvas=document.getElementById("cameraCanvas");
+
+if(!video.srcObject){
+
+showToast("Open webcam first");
+return;
+
+}
+
+canvas.width=video.videoWidth;
+canvas.height=video.videoHeight;
+
+canvas.getContext("2d").drawImage(
+video,
+0,
+0
+);
+
+const img=document.createElement("img");
+
+img.src=canvas.toDataURL("image/png");
+
+img.style.width="140px";
+img.style.borderRadius="8px";
+
+const box=document.getElementById("capturedPhoto");
+
+box.innerHTML="";
+box.appendChild(img);
+
+showToast("Member photo captured");
+
+}
+
+
+/* =========================================================
+   VENDOR LINK
+========================================================= */
+
+function copyVendorLink(){
+
+const link="https://screenflow.local/vendor-register";
+
+navigator.clipboard?.writeText(link);
+
+showToast("Vendor form link copied");
+
+}
+
+
+/* =========================================================
+   GLOBAL SEARCH
+========================================================= */
+
+document.getElementById("globalSearch").addEventListener("input",function(){
+
+const q=this.value.toLowerCase().trim();
+
+document.querySelectorAll("tbody tr").forEach(row=>{
+
+row.style.display =
+!q || row.textContent.toLowerCase().includes(q)
+? ""
+: "none";
+
+});
+
+});
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+function showToast(message){
+
+const toast=document.getElementById("toast");
+
+toast.textContent=message;
+
+toast.classList.add("show");
+
+clearTimeout(toastTimer);
+
+toastTimer=setTimeout(()=>{
+toast.classList.remove("show");
+},2500);
+
+}
+
+
+/* =========================================================
+   INITIAL DASHBOARD
+========================================================= */
+
+function updateDashboard(){
+
+document.getElementById("vendorCount").textContent=vendors.length;
+document.getElementById("clientCount").textContent=clients.length;
+
+document.getElementById("onlineCount").textContent=39;
+document.getElementById("offlineCount").textContent=2;
+document.getElementById("lateCount").textContent=1;
+
+document.getElementById("dashOnline").textContent=39;
+document.getElementById("dashOffline").textContent=2;
+document.getElementById("dashLate").textContent=1;
+
+document.getElementById("todayIncome").textContent="84200";
+document.getElementById("todayWithdrawal").textContent="0";
+
+}
+
+updateDashboard();
+renderAreas();
+renderShops();
+renderVendors();
+renderCategories();
+renderClients();
+renderAds();
+renderPackages();
+renderWithdrawals();
+renderCustomFields();
+renderVendorCategory();
+
+</script>
+
+</body>
+</html>
