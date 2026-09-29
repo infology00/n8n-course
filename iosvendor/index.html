@@ -1,0 +1,3064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spotly — Vendor Portal</title>
+
+<style>
+:root{
+  --yellow:#f5c400;
+  --yellow-light:#fff4b8;
+  --yellow-soft:#fff9dc;
+  --white:#ffffff;
+  --bg:#f1f2f4;
+  --text:#202124;
+  --muted:#777;
+  --border:#e6e6e6;
+  --success:#2e9d57;
+  --danger:#d94b4b;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+button,input,select,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* ================= NAV ================= */
+
+.navbar{
+  height:70px;
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 35px;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:23px;
+  font-weight:800;
+}
+
+.brand-mark{
+  width:34px;
+  height:34px;
+  background:var(--yellow);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  border-radius:9px;
+}
+
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.btn{
+  border:0;
+  padding:11px 18px;
+  border-radius:8px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+}
+
+.btn-yellow{
+  background:var(--yellow);
+  color:#111;
+}
+
+.btn-white{
+  background:white;
+  border:1px solid var(--border);
+  color:#222;
+}
+
+.btn-dark{
+  background:#222;
+  color:white;
+}
+
+.btn-danger{
+  background:#fff0f0;
+  color:var(--danger);
+}
+
+/* ================= LANDING ================= */
+
+.landing{
+  min-height:calc(100vh - 70px);
+}
+
+.hero{
+  max-width:1200px;
+  margin:auto;
+  padding:70px 25px 50px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+
+.hero h1{
+  font-size:54px;
+  line-height:1.05;
+  margin-bottom:22px;
+}
+
+.hero h1 span{
+  background:var(--yellow-light);
+  padding:0 8px;
+}
+
+.hero p{
+  color:#666;
+  font-size:18px;
+  line-height:1.7;
+  max-width:540px;
+  margin-bottom:30px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.hero-image{
+  height:420px;
+  border-radius:20px;
+  background:
+    linear-gradient(0deg,rgba(0,0,0,.08),rgba(0,0,0,.02)),
+    url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1000&q=80")
+    center/cover;
+  border:8px solid white;
+  box-shadow:0 10px 35px rgba(0,0,0,.08);
+}
+
+/* ================= STATS ================= */
+
+.stats{
+  max-width:1200px;
+  margin:0 auto 70px;
+  padding:0 25px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.stat{
+  background:white;
+  border:1px solid var(--border);
+  padding:28px;
+  border-radius:14px;
+}
+
+.stat-number{
+  font-size:32px;
+  font-weight:800;
+}
+
+.stat-label{
+  color:#777;
+  margin-top:5px;
+}
+
+/* ================= SECTIONS ================= */
+
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:65px 25px;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.section-title h2{
+  font-size:34px;
+  margin-bottom:8px;
+}
+
+.section-title p{
+  color:#777;
+}
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.step{
+  background:white;
+  padding:30px;
+  border:1px solid var(--border);
+  border-radius:14px;
+}
+
+.step-number{
+  width:42px;
+  height:42px;
+  background:var(--yellow-light);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+  font-weight:800;
+  margin-bottom:20px;
+}
+
+.step h3{
+  margin-bottom:10px;
+}
+
+.step p{
+  color:#777;
+  line-height:1.6;
+}
+
+.benefits{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.benefit{
+  background:white;
+  padding:25px;
+  border:1px solid var(--border);
+  border-radius:14px;
+}
+
+.benefit-icon{
+  width:45px;
+  height:45px;
+  background:var(--yellow-light);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:9px;
+  font-size:20px;
+  margin-bottom:17px;
+}
+
+.benefit p{
+  color:#777;
+  line-height:1.5;
+  margin-top:7px;
+}
+
+/* ================= CTA ================= */
+
+.cta{
+  max-width:1150px;
+  margin:40px auto 70px;
+  background:var(--yellow);
+  padding:50px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.cta h2{
+  font-size:34px;
+  margin-bottom:8px;
+}
+
+.cta p{
+  color:#4d4300;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  background:white;
+  border-top:1px solid var(--border);
+  padding:25px;
+  text-align:center;
+  color:#777;
+}
+
+/* ================= PORTAL ================= */
+
+.portal{
+  display:none;
+  min-height:calc(100vh - 70px);
+}
+
+.portal.active{
+  display:flex;
+}
+
+.sidebar{
+  width:235px;
+  background:white;
+  border-right:1px solid var(--border);
+  padding:25px 15px;
+  flex-shrink:0;
+}
+
+.sidebar-brand{
+  padding:0 12px 25px;
+  font-size:19px;
+  font-weight:800;
+}
+
+.menu{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+
+.menu button{
+  border:0;
+  background:transparent;
+  padding:13px 14px;
+  text-align:left;
+  border-radius:8px;
+  color:#555;
+  font-weight:600;
+}
+
+.menu button:hover,
+.menu button.active{
+  background:var(--yellow-light);
+  color:#222;
+}
+
+.portal-content{
+  flex:1;
+  padding:30px;
+  overflow:auto;
+}
+
+.portal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:25px;
+}
+
+.portal-header h1{
+  font-size:28px;
+}
+
+.profile-mini{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:white;
+  padding:8px 13px;
+  border:1px solid var(--border);
+  border-radius:8px;
+}
+
+.avatar{
+  width:34px;
+  height:34px;
+  background:var(--yellow);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+
+/* ================= DASHBOARD ================= */
+
+.dashboard-cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:25px;
+}
+
+.dashboard-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:22px;
+}
+
+.card-label{
+  color:#777;
+  font-size:14px;
+}
+
+.card-value{
+  font-size:28px;
+  font-weight:800;
+  margin-top:9px;
+}
+
+.card-small{
+  color:var(--success);
+  font-size:13px;
+  margin-top:5px;
+}
+
+.content-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:18px;
+}
+
+.panel{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:23px;
+}
+
+.panel-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.panel-title h3{
+  font-size:18px;
+}
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 9px;
+  border-radius:6px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.status.online{
+  background:#eaf8ef;
+  color:var(--success);
+}
+
+.status.pending{
+  background:var(--yellow-light);
+  color:#765f00;
+}
+
+.status.offline{
+  background:#fceeee;
+  color:var(--danger);
+}
+
+/* ================= TABLE ================= */
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:13px 10px;
+  text-align:left;
+  border-bottom:1px solid #eee;
+  font-size:14px;
+}
+
+th{
+  color:#777;
+  font-weight:600;
+}
+
+/* ================= FORMS ================= */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+.form-group label{
+  font-size:13px;
+  font-weight:700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  border:1px solid #ddd;
+  background:white;
+  border-radius:8px;
+  padding:12px 13px;
+  outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:var(--yellow);
+  box-shadow:0 0 0 3px rgba(245,196,0,.13);
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+.form-section{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:25px;
+  margin-bottom:18px;
+}
+
+.form-section h3{
+  margin-bottom:20px;
+}
+
+.form-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:20px;
+}
+
+/* ================= LOCATION ================= */
+
+.location-box{
+  background:var(--yellow-soft);
+  border:1px solid #f0df8a;
+  border-radius:9px;
+  padding:16px;
+}
+
+.location-status{
+  font-size:13px;
+  margin-bottom:10px;
+  color:#666;
+}
+
+.gps-row{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+/* ================= LOAD SHEDDING ================= */
+
+.load-row{
+  display:grid;
+  grid-template-columns:1fr 1fr auto;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:500;
+}
+
+.modal.active{
+  display:flex;
+}
+
+.modal-box{
+  background:white;
+  width:100%;
+  max-width:520px;
+  max-height:90vh;
+  overflow:auto;
+  border-radius:15px;
+  padding:28px;
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
+}
+
+.close{
+  border:0;
+  background:#f2f2f2;
+  width:32px;
+  height:32px;
+  border-radius:7px;
+  font-size:20px;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#222;
+  color:white;
+  padding:14px 18px;
+  border-radius:8px;
+  display:none;
+  z-index:1000;
+  font-size:14px;
+}
+
+.toast.show{
+  display:block;
+}
+
+/* ================= MOBILE ================= */
+
+.mobile-menu{
+  display:none;
+  border:0;
+  background:var(--yellow-light);
+  padding:9px 12px;
+  border-radius:7px;
+}
+
+@media(max-width:950px){
+
+  .hero{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:42px;
+  }
+
+  .stats,
+  .steps{
+    grid-template-columns:1fr;
+  }
+
+  .benefits{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .dashboard-cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .content-grid{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    width:210px;
+  }
+}
+
+@media(max-width:700px){
+
+  .navbar{
+    padding:0 15px;
+  }
+
+  .nav-actions .btn-white{
+    display:none;
+  }
+
+  .hero{
+    padding-top:45px;
+  }
+
+  .hero h1{
+    font-size:36px;
+  }
+
+  .hero-image{
+    height:300px;
+  }
+
+  .benefits{
+    grid-template-columns:1fr;
+  }
+
+  .cta{
+    margin:25px 15px 50px;
+    padding:30px;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .portal.active{
+    display:block;
+  }
+
+  .sidebar{
+    position:fixed;
+    left:-250px;
+    top:70px;
+    bottom:0;
+    z-index:200;
+    transition:.25s;
+  }
+
+  .sidebar.open{
+    left:0;
+  }
+
+  .mobile-menu{
+    display:block;
+  }
+
+  .portal-content{
+    padding:20px 15px;
+  }
+
+  .dashboard-cards{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .load-row{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .load-row button{
+    grid-column:1/-1;
+  }
+
+  .profile-mini{
+    display:none;
+  }
+}
+
+@media(max-width:450px){
+
+  .dashboard-cards{
+    grid-template-columns:1fr;
+  }
+
+  .hero-actions{
+    flex-direction:column;
+  }
+
+  .hero-actions .btn{
+    width:100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+  <div class="brand">
+    <div class="brand-mark">S</div>
+    Spotly
+  </div>
+
+  <div class="nav-actions" id="landingNav">
+    <button class="btn btn-white" onclick="openLogin()">Login as Vendor</button>
+    <button class="btn btn-yellow" onclick="openRegister()">Register as Vendor</button>
+  </div>
+
+  <div class="nav-actions hidden" id="portalNav">
+    <button class="btn btn-white" onclick="logout()">Logout</button>
+  </div>
+</nav>
+
+
+<!-- ================= LANDING PAGE ================= -->
+
+<main class="landing" id="landingPage">
+
+  <section class="hero">
+
+    <div>
+      <h1>
+        Turn Your Shop Into A
+        <span>Smart Advertising Space.</span>
+      </h1>
+
+      <p>
+        Partner with Spotly and earn by displaying local advertisements
+        on your shop's digital screen.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn btn-yellow" onclick="openRegister()">
+          Register as Vendor
+        </button>
+
+        <button class="btn btn-white" onclick="openLogin()">
+          Login as Vendor
+        </button>
+      </div>
+    </div>
+
+    <div class="hero-image"></div>
+
+  </section>
+
+
+  <section class="stats">
+
+    <div class="stat">
+      <div class="stat-number">15 hrs</div>
+      <div class="stat-label">Daily advertising window</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number">600+</div>
+      <div class="stat-label">Potential ad plays per day</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">Portal access</div>
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <div class="section-title">
+      <h2>How Spotly Works</h2>
+      <p>Simple process for every vendor.</p>
+    </div>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-number">01</div>
+        <h3>Register</h3>
+        <p>
+          Submit your shop, contact, location and payment details.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">02</div>
+        <h3>Get Approved</h3>
+        <p>
+          Spotly reviews your application and confirms your onboarding.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">03</div>
+        <h3>Earn</h3>
+        <p>
+          Your screen displays approved ads and verified plays contribute
+          towards your earnings.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <div class="section-title">
+      <h2>Vendor Benefits</h2>
+      <p>Everything you need in one simple portal.</p>
+    </div>
+
+    <div class="benefits">
+
+      <div class="benefit">
+        <div class="benefit-icon">₹</div>
+        <h3>Earn Money</h3>
+        <p>Receive earnings for verified advertising plays.</p>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon">▣</div>
+        <h3>Digital Screen</h3>
+        <p>Turn unused shop space into a digital advertising channel.</p>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon">✓</div>
+        <h3>Easy Tracking</h3>
+        <p>Monitor screen status, plays and earnings from your portal.</p>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon">?</div>
+        <h3>Support</h3>
+        <p>Submit complaints and support requests directly.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="cta">
+
+    <div>
+      <h2>Ready to become a Spotly Vendor?</h2>
+      <p>Register your shop and start your onboarding.</p>
+    </div>
+
+    <button class="btn btn-dark" onclick="openRegister()">
+      Register Now
+    </button>
+
+  </section>
+
+</main>
+
+
+<!-- ================= VENDOR PORTAL ================= -->
+
+<section class="portal" id="vendorPortal">
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-brand">
+      Vendor Portal
+    </div>
+
+    <div class="menu">
+
+      <button class="active" onclick="showPortalPage('dashboard',this)">
+        Dashboard
+      </button>
+
+      <button onclick="showPortalPage('profile',this)">
+        My Profile
+      </button>
+
+      <button onclick="showPortalPage('screen',this)">
+        Screen / LCD
+      </button>
+
+      <button onclick="showPortalPage('earnings',this)">
+        Earnings
+      </button>
+
+      <button onclick="showPortalPage('plays',this)">
+        Play History
+      </button>
+
+      <button onclick="showPortalPage('withdrawals',this)">
+        Withdrawals
+      </button>
+
+      <button onclick="showPortalPage('bank',this)">
+        Bank Details
+      </button>
+
+      <button onclick="showPortalPage('support',this)">
+        Support / Complaints
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div class="portal-content">
+
+    <div class="portal-header">
+
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
+
+        <div>
+          <h1 id="portalTitle">Dashboard</h1>
+        </div>
+      </div>
+
+      <div class="profile-mini">
+        <div class="avatar" id="avatar">V</div>
+        <div>
+          <strong id="miniName">Vendor</strong>
+          <div style="font-size:12px;color:#777;">Vendor Account</div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- DASHBOARD -->
+
+    <div id="page-dashboard">
+
+      <div class="dashboard-cards">
+
+        <div class="dashboard-card">
+          <div class="card-label">Total Earnings</div>
+          <div class="card-value" id="dashEarnings">Rs. 0</div>
+          <div class="card-small">Verified plays</div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-label">Total Plays</div>
+          <div class="card-value" id="dashPlays">0</div>
+          <div class="card-small">Completed</div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-label">Available Balance</div>
+          <div class="card-value" id="dashBalance">Rs. 0</div>
+          <div class="card-small">Available for withdrawal</div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-label">Screen Status</div>
+          <div class="card-value" style="font-size:20px;margin-top:15px;">
+            <span class="status online">● Online</span>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="content-grid">
+
+        <div class="panel">
+
+          <div class="panel-title">
+            <h3>Recent Ad Plays</h3>
+            <button class="btn btn-white" onclick="showPortalPage('plays')">
+              View All
+            </button>
+          </div>
+
+          <div class="table-wrap">
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Ad</th>
+                  <th>Date</th>
+                  <th>Duration</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              <tbody id="recentPlays"></tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+
+        <div class="panel">
+
+          <div class="panel-title">
+            <h3>Onboarding Status</h3>
+          </div>
+
+          <div style="padding:15px;background:var(--yellow-soft);border-radius:8px;">
+
+            <strong id="onboardingStatus">
+              Application Pending
+            </strong>
+
+            <p style="color:#777;font-size:13px;margin-top:7px;">
+              Your vendor application is being reviewed.
+            </p>
+
+          </div>
+
+          <div style="margin-top:20px;">
+
+            <div style="display:flex;justify-content:space-between;font-size:13px;">
+              <span>Profile Completion</span>
+              <strong id="profilePercent">0%</strong>
+            </div>
+
+            <div style="height:8px;background:#eee;border-radius:20px;margin-top:8px;overflow:hidden;">
+              <div id="profileProgress"
+                   style="height:100%;width:0%;background:var(--yellow);">
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PROFILE -->
+
+    <div id="page-profile" class="hidden">
+
+      <div class="form-section">
+
+        <h3>Vendor Profile</h3>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Shop / Vendor Name</label>
+            <input id="profileShopName">
+          </div>
+
+          <div class="form-group">
+            <label>Owner / Representative Name</label>
+            <input id="profileOwner">
+          </div>
+
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input id="profilePhone">
+          </div>
+
+          <div class="form-group">
+            <label>Email</label>
+            <input id="profileEmail">
+          </div>
+
+          <div class="form-group">
+            <label>Shop Category</label>
+
+            <select id="profileCategory">
+              <option value="">Select Category</option>
+              <option>Grocery</option>
+              <option>Pharmacy</option>
+              <option>Restaurant</option>
+              <option>Clothing</option>
+              <option>Electronics</option>
+              <option>Salon</option>
+              <option>Other</option>
+            </select>
+
+          </div>
+
+          <div class="form-group">
+            <label>Area / Location</label>
+
+            <select id="profileArea">
+              <option value="">Select Area</option>
+              <option>Johar Block 1</option>
+              <option>Johar Block 2</option>
+              <option>Gulshan</option>
+              <option>North Nazimabad</option>
+              <option>Other</option>
+            </select>
+
+          </div>
+
+          <div class="form-group full">
+            <label>Full Written Address</label>
+            <textarea id="profileAddress"></textarea>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-yellow" onclick="saveProfile()">
+            Save Profile
+          </button>
+        </div>
+
+      </div>
+
+
+      <div class="form-section">
+
+        <h3>Live Location</h3>
+
+        <div class="location-box">
+
+          <div class="location-status" id="locationStatus">
+            Live location has not been captured yet.
+          </div>
+
+          <div class="gps-row">
+
+            <button class="btn btn-yellow" onclick="captureLocation()">
+              Use My Current Location
+            </button>
+
+            <span id="locationCoordinates" style="font-size:13px;color:#777;">
+              Not available
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-section">
+
+        <h3>Shop Information</h3>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Average Daily Footfall</label>
+            <input id="profileFootfall" type="number">
+          </div>
+
+          <div class="form-group">
+            <label>Shop Size</label>
+            <input id="profileSize" placeholder="e.g. 500 sq ft">
+          </div>
+
+          <div class="form-group">
+            <label>LCD Status</label>
+            <select id="profileLCD">
+              <option>Pending</option>
+              <option>Installed</option>
+              <option>Replacement Required</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>LCD Installment</label>
+            <select id="profileInstallment" onchange="toggleInstallment()">
+              <option>No</option>
+              <option>Yes</option>
+            </select>
+          </div>
+
+          <div class="form-group hidden" id="installmentBox">
+            <label>Monthly Installment</label>
+            <input id="profileInstallmentAmount" type="number" placeholder="Rs.">
+          </div>
+
+          <div class="form-group">
+            <label>Sub Meter</label>
+            <select id="profileSubMeter">
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Internet Available</label>
+            <select id="profileInternet">
+              <option>Yes</option>
+              <option>No</option>
+              <option>Spotly Internet Required</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Opening Time</label>
+            <input id="profileOpen" type="time">
+          </div>
+
+          <div class="form-group">
+            <label>Closing Time</label>
+            <input id="profileClose" type="time">
+          </div>
+
+          <div class="form-group">
+            <label>Ice Cream Fridge</label>
+            <select id="profileFridge">
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-section">
+
+        <h3>Load Shedding Slots</h3>
+
+        <div id="loadSheddingList"></div>
+
+        <button class="btn btn-white" onclick="addLoadSlot()">
+          + Add Load Shedding Slot
+        </button>
+
+      </div>
+
+
+      <div class="form-section">
+
+        <h3>Order Booker</h3>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Assigned Order Booker</label>
+
+            <select id="profileBooker">
+              <option value="">Select Employee</option>
+              <option>Ahmed Khan</option>
+              <option>Ali Raza</option>
+              <option>Sara Ahmed</option>
+            </select>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SCREEN -->
+
+    <div id="page-screen" class="hidden">
+
+      <div class="dashboard-cards">
+
+        <div class="dashboard-card">
+          <div class="card-label">Screen ID</div>
+          <div class="card-value" style="font-size:21px;">SPT-SCR-001</div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-label">Status</div>
+          <div class="card-value" style="font-size:20px;">
+            <span class="status online">● Online</span>
+          </div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-label">Today's Plays</div>
+          <div class="card-value">47</div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-label">Last Sync</div>
+          <div class="card-value" style="font-size:18px;">Just now</div>
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-title">
+          <h3>Screen Information</h3>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Screen Model</label>
+            <input value="43-inch Android Display" readonly>
+          </div>
+
+          <div class="form-group">
+            <label>Screen Resolution</label>
+            <input value="1920 × 1080" readonly>
+          </div>
+
+          <div class="form-group">
+            <label>Installation Date</label>
+            <input value="01 Sep 2026" readonly>
+          </div>
+
+          <div class="form-group">
+            <label>Software Status</label>
+            <input value="Up to date" readonly>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- EARNINGS -->
+
+    <div id="page-earnings" class="hidden">
+
+      <div class="dashboard-cards">
+
+        <div class="dashboard-card">
+          <div class="card-label">Total Earnings</div>
+          <div class="card-value">Rs. 12,450</div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-label">Paid</div>
+          <div class="card-value">Rs. 9,000</div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-label">Pending</div>
+          <div class="card-value">Rs. 3,450</div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-label">Total Verified Plays</div>
+          <div class="card-value">2,490</div>
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-title">
+          <h3>Earning History</h3>
+        </div>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Verified Plays</th>
+                <th>Rate</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>28 Sep 2026</td>
+                <td>350</td>
+                <td>Rs. 2.00</td>
+                <td>Rs. 700</td>
+                <td><span class="status pending">Pending</span></td>
+              </tr>
+
+              <tr>
+                <td>27 Sep 2026</td>
+                <td>410</td>
+                <td>Rs. 2.00</td>
+                <td>Rs. 820</td>
+                <td><span class="status online">Paid</span></td>
+              </tr>
+
+              <tr>
+                <td>26 Sep 2026</td>
+                <td>390</td>
+                <td>Rs. 2.00</td>
+                <td>Rs. 780</td>
+                <td><span class="status online">Paid</span></td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PLAYS -->
+
+    <div id="page-plays" class="hidden">
+
+      <div class="panel">
+
+        <div class="panel-title">
+          <h3>Advertising Play History</h3>
+        </div>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Ad</th>
+                <th>Screen</th>
+                <th>Date</th>
+                <th>Start</th>
+                <th>Duration</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td>Fresh Mart</td>
+                <td>SPT-SCR-001</td>
+                <td>29 Sep 2026</td>
+                <td>10:20 AM</td>
+                <td>30 sec</td>
+                <td><span class="status online">Verified</span></td>
+              </tr>
+
+              <tr>
+                <td>Pizza House</td>
+                <td>SPT-SCR-001</td>
+                <td>29 Sep 2026</td>
+                <td>10:21 AM</td>
+                <td>15 sec</td>
+                <td><span class="status online">Verified</span></td>
+              </tr>
+
+              <tr>
+                <td>Mobile World</td>
+                <td>SPT-SCR-001</td>
+                <td>29 Sep 2026</td>
+                <td>10:22 AM</td>
+                <td>30 sec</td>
+                <td><span class="status online">Verified</span></td>
+              </tr>
+
+              <tr>
+                <td>Fashion Point</td>
+                <td>SPT-SCR-001</td>
+                <td>29 Sep 2026</td>
+                <td>10:23 AM</td>
+                <td>60 sec</td>
+                <td><span class="status online">Verified</span></td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- WITHDRAWALS -->
+
+    <div id="page-withdrawals" class="hidden">
+
+      <div class="dashboard-cards">
+
+        <div class="dashboard-card">
+          <div class="card-label">Available Balance</div>
+          <div class="card-value">Rs. 3,450</div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="card-label">Pending Withdrawal</div>
+          <div class="card-value">Rs. 0</div>
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-title">
+          <h3>Request Withdrawal</h3>
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Amount</label>
+            <input id="withdrawAmount" type="number" placeholder="Enter amount">
+          </div>
+
+          <div class="form-group">
+            <label>Payment Method</label>
+
+            <select id="withdrawMethod">
+              <option>Bank Transfer</option>
+              <option>Other</option>
+            </select>
+
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+
+          <button class="btn btn-yellow" onclick="requestWithdrawal()">
+            Request Withdrawal
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="panel" style="margin-top:18px;">
+
+        <div class="panel-title">
+          <h3>Withdrawal History</h3>
+        </div>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Method</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="withdrawalHistory">
+
+              <tr>
+                <td>20 Sep 2026</td>
+                <td>Rs. 5,000</td>
+                <td>Bank Transfer</td>
+                <td><span class="status online">Paid</span></td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- BANK -->
+
+    <div id="page-bank" class="hidden">
+
+      <div class="form-section">
+
+        <h3>Bank / Payment Details</h3>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Bank Name</label>
+            <input id="bankName" placeholder="e.g. Meezan Bank">
+          </div>
+
+          <div class="form-group">
+            <label>Account Title</label>
+            <input id="bankTitle" placeholder="Account holder name">
+          </div>
+
+          <div class="form-group">
+            <label>IBAN</label>
+            <input id="bankIBAN" placeholder="PK00XXXX0000000000000000">
+          </div>
+
+          <div class="form-group">
+            <label>Account Number</label>
+            <input id="bankAccount">
+          </div>
+
+          <div class="form-group">
+            <label>Payment Method</label>
+
+            <select id="bankMethod">
+              <option>Bank Transfer</option>
+              <option>JazzCash</option>
+              <option>EasyPaisa</option>
+            </select>
+
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+
+          <button class="btn btn-yellow" onclick="saveBankDetails()">
+            Save Bank Details
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SUPPORT -->
+
+    <div id="page-support" class="hidden">
+
+      <div class="form-section">
+
+        <h3>Submit Complaint / Support Request</h3>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Subject</label>
+            <input id="supportSubject" placeholder="What do you need help with?">
+          </div>
+
+          <div class="form-group">
+            <label>Category</label>
+
+            <select id="supportCategory">
+              <option>Screen Issue</option>
+              <option>Payment Issue</option>
+              <option>Advertisement Issue</option>
+              <option>Internet Issue</option>
+              <option>Other</option>
+            </select>
+
+          </div>
+
+          <div class="form-group full">
+            <label>Message</label>
+            <textarea id="supportMessage"
+                      placeholder="Describe your issue..."></textarea>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+
+          <button class="btn btn-yellow" onclick="submitSupport()">
+            Submit Request
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-title">
+          <h3>My Support Requests</h3>
+        </div>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="supportHistory"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= LOGIN MODAL ================= -->
+
+<div class="modal" id="loginModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h2>Vendor Login</h2>
+      <button class="close" onclick="closeModal('loginModal')">×</button>
+    </div>
+
+    <div class="form-group" style="margin-bottom:15px;">
+      <label>Email / Phone</label>
+      <input id="loginEmail" placeholder="Enter email or phone">
+    </div>
+
+    <div class="form-group" style="margin-bottom:20px;">
+      <label>Password</label>
+      <input id="loginPassword" type="password" placeholder="Enter password">
+    </div>
+
+    <button class="btn btn-yellow" style="width:100%;" onclick="loginVendor()">
+      Login
+    </button>
+
+    <div style="text-align:center;margin-top:18px;color:#777;font-size:13px;">
+      Don't have an account?
+      <button style="border:0;background:none;font-weight:700;"
+              onclick="closeModal('loginModal');openRegister();">
+        Register
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= REGISTER MODAL ================= -->
+
+<div class="modal" id="registerModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h2>Register as Vendor</h2>
+      <button class="close" onclick="closeModal('registerModal')">×</button>
+    </div>
+
+    <div class="form-grid">
+
+      <div class="form-group full">
+        <label>Shop / Vendor Name *</label>
+        <input id="regShop" placeholder="Enter shop name">
+      </div>
+
+      <div class="form-group">
+        <label>Owner Name *</label>
+        <input id="regOwner" placeholder="Enter owner name">
+      </div>
+
+      <div class="form-group">
+        <label>Phone *</label>
+        <input id="regPhone" placeholder="03XXXXXXXXX">
+      </div>
+
+      <div class="form-group">
+        <label>Email *</label>
+        <input id="regEmail" type="email" placeholder="vendor@email.com">
+      </div>
+
+      <div class="form-group">
+        <label>Password *</label>
+        <input id="regPassword" type="password" placeholder="Create password">
+      </div>
+
+      <div class="form-group">
+        <label>Shop Category *</label>
+
+        <select id="regCategory">
+          <option value="">Select Category</option>
+          <option>Grocery</option>
+          <option>Pharmacy</option>
+          <option>Restaurant</option>
+          <option>Clothing</option>
+          <option>Electronics</option>
+          <option>Salon</option>
+          <option>Other</option>
+        </select>
+
+      </div>
+
+      <div class="form-group">
+        <label>Area *</label>
+
+        <select id="regArea">
+          <option value="">Select Area</option>
+          <option>Johar Block 1</option>
+          <option>Johar Block 2</option>
+          <option>Gulshan</option>
+          <option>North Nazimabad</option>
+          <option>Other</option>
+        </select>
+
+      </div>
+
+      <div class="form-group full">
+        <label>Written Shop Address *</label>
+        <textarea id="regAddress"
+                  placeholder="Enter complete shop address"></textarea>
+      </div>
+
+    </div>
+
+    <div class="location-box" style="margin-top:18px;">
+
+      <strong>Live Location *</strong>
+
+      <div class="location-status" style="margin-top:8px;">
+        Vendor must capture their own current location.
+      </div>
+
+      <button class="btn btn-yellow"
+              onclick="captureRegisterLocation()">
+        Use My Current Location
+      </button>
+
+      <div id="registerLocation"
+           style="font-size:12px;color:#777;margin-top:8px;">
+        Location not captured
+      </div>
+
+    </div>
+
+    <div style="margin-top:18px;">
+
+      <label style="display:flex;gap:9px;align-items:flex-start;font-size:13px;">
+        <input type="checkbox" id="regConsent">
+        <span>
+          I confirm that the information provided is correct and agree to
+          Spotly vendor terms.
+        </span>
+      </label>
+
+    </div>
+
+    <button class="btn btn-yellow"
+            style="width:100%;margin-top:20px;"
+            onclick="registerVendor()">
+      Create Vendor Account
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   SPOTLY VENDOR PORTAL
+   Prototype storage: localStorage
+========================================================= */
+
+const STORAGE_KEY = "spotly_vendor_data_v1";
+
+let vendorData = JSON.parse(
+  localStorage.getItem(STORAGE_KEY) || "null"
+);
+
+let registerLocationData = null;
+
+
+/* ================= DEFAULT DATA ================= */
+
+function defaultVendor(){
+
+  return {
+    registered:false,
+
+    shopName:"",
+    owner:"",
+    phone:"",
+    email:"",
+    password:"",
+    category:"",
+    area:"",
+    address:"",
+
+    location:{
+      latitude:"",
+      longitude:"",
+      capturedAt:""
+    },
+
+    footfall:"",
+    shopSize:"",
+    lcdStatus:"Pending",
+    installment:"No",
+    installmentAmount:"",
+    subMeter:"Yes",
+    internet:"Yes",
+    openTime:"09:00",
+    closeTime:"00:00",
+    fridge:"No",
+    orderBooker:"",
+
+    loadShedding:[],
+
+    bank:{
+      bankName:"",
+      accountTitle:"",
+      iban:"",
+      accountNumber:"",
+      method:"Bank Transfer"
+    },
+
+    support:[],
+
+    withdrawals:[],
+
+    onboardingStatus:"Pending"
+  };
+
+}
+
+
+/* ================= STORAGE ================= */
+
+function saveData(){
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(vendorData)
+  );
+
+}
+
+
+function showToast(message){
+
+  const toast=document.getElementById("toast");
+
+  toast.textContent=message;
+  toast.classList.add("show");
+
+  setTimeout(()=>{
+    toast.classList.remove("show");
+  },2500);
+
+}
+
+
+/* ================= MODALS ================= */
+
+function openLogin(){
+
+  document.getElementById("loginModal")
+    .classList.add("active");
+
+}
+
+
+function openRegister(){
+
+  document.getElementById("registerModal")
+    .classList.add("active");
+
+}
+
+
+function closeModal(id){
+
+  document.getElementById(id)
+    .classList.remove("active");
+
+}
+
+
+/* ================= REGISTER LOCATION ================= */
+
+function captureRegisterLocation(){
+
+  const output=document.getElementById("registerLocation");
+
+  if(!navigator.geolocation){
+
+    output.textContent="Geolocation is not supported.";
+    return;
+
+  }
+
+  output.textContent="Capturing location...";
+
+  navigator.geolocation.getCurrentPosition(
+
+    position=>{
+
+      registerLocationData={
+        latitude:position.coords.latitude,
+        longitude:position.coords.longitude,
+        capturedAt:new Date().toISOString()
+      };
+
+      output.textContent=
+        "Location captured: "+
+        registerLocationData.latitude.toFixed(6)+
+        ", "+
+        registerLocationData.longitude.toFixed(6);
+
+      showToast("Live location captured");
+
+    },
+
+    error=>{
+
+      output.textContent=
+        "Location permission required.";
+
+      showToast("Please allow location access");
+
+    },
+
+    {
+      enableHighAccuracy:true,
+      timeout:15000,
+      maximumAge:0
+    }
+
+  );
+
+}
+
+
+/* ================= REGISTER ================= */
+
+function registerVendor(){
+
+  const shop=document.getElementById("regShop").value.trim();
+  const owner=document.getElementById("regOwner").value.trim();
+  const phone=document.getElementById("regPhone").value.trim();
+  const email=document.getElementById("regEmail").value.trim();
+  const password=document.getElementById("regPassword").value;
+  const category=document.getElementById("regCategory").value;
+  const area=document.getElementById("regArea").value;
+  const address=document.getElementById("regAddress").value.trim();
+  const consent=document.getElementById("regConsent").checked;
+
+  if(
+    !shop ||
+    !owner ||
+    !phone ||
+    !email ||
+    !password ||
+    !category ||
+    !area ||
+    !address
+  ){
+
+    showToast("Please complete all required fields");
+    return;
+
+  }
+
+  if(!registerLocationData){
+
+    showToast("Please capture your live location");
+    return;
+
+  }
+
+  if(!consent){
+
+    showToast("Please accept the terms");
+    return;
+
+  }
+
+  vendorData=defaultVendor();
+
+  vendorData.registered=true;
+
+  vendorData.shopName=shop;
+  vendorData.owner=owner;
+  vendorData.phone=phone;
+  vendorData.email=email;
+  vendorData.password=password;
+  vendorData.category=category;
+  vendorData.area=area;
+  vendorData.address=address;
+
+  vendorData.location=registerLocationData;
+
+  saveData();
+
+  closeModal("registerModal");
+
+  showToast("Vendor account created successfully");
+
+  setTimeout(()=>{
+    openPortal();
+  },500);
+
+}
+
+
+/* ================= LOGIN ================= */
+
+function loginVendor(){
+
+  const email=document.getElementById("loginEmail")
+    .value.trim();
+
+  const password=document.getElementById("loginPassword")
+    .value;
+
+  if(!vendorData || !vendorData.registered){
+
+    showToast("No vendor account found. Please register first.");
+    return;
+
+  }
+
+  if(
+    email !== vendorData.email &&
+    email !== vendorData.phone
+  ){
+
+    showToast("Email or phone is incorrect");
+    return;
+
+  }
+
+  if(password !== vendorData.password){
+
+    showToast("Password is incorrect");
+    return;
+
+  }
+
+  closeModal("loginModal");
+
+  openPortal();
+
+}
+
+
+/* ================= PORTAL ================= */
+
+function openPortal(){
+
+  document.getElementById("landingPage")
+    .style.display="none";
+
+  document.getElementById("vendorPortal")
+    .classList.add("active");
+
+  document.getElementById("landingNav")
+    .classList.add("hidden");
+
+  document.getElementById("portalNav")
+    .classList.remove("hidden");
+
+  loadVendorData();
+
+}
+
+
+function logout(){
+
+  document.getElementById("vendorPortal")
+    .classList.remove("active");
+
+  document.getElementById("landingPage")
+    .style.display="block";
+
+  document.getElementById("portalNav")
+    .classList.add("hidden");
+
+  document.getElementById("landingNav")
+    .classList.remove("hidden");
+
+  showToast("Logged out");
+
+}
+
+
+/* ================= PORTAL NAVIGATION ================= */
+
+function showPortalPage(page,button){
+
+  const pages=[
+    "dashboard",
+    "profile",
+    "screen",
+    "earnings",
+    "plays",
+    "withdrawals",
+    "bank",
+    "support"
+  ];
+
+  pages.forEach(p=>{
+
+    const element=document.getElementById("page-"+p);
+
+    if(element){
+      element.classList.add("hidden");
+    }
+
+  });
+
+  document.getElementById("page-"+page)
+    .classList.remove("hidden");
+
+  const titles={
+    dashboard:"Dashboard",
+    profile:"My Profile",
+    screen:"Screen / LCD",
+    earnings:"Earnings",
+    plays:"Play History",
+    withdrawals:"Withdrawals",
+    bank:"Bank Details",
+    support:"Support / Complaints"
+  };
+
+  document.getElementById("portalTitle")
+    .textContent=titles[page];
+
+  document.querySelectorAll(".menu button")
+    .forEach(btn=>btn.classList.remove("active"));
+
+  if(button){
+    button.classList.add("active");
+  }
+
+  document.getElementById("sidebar")
+    .classList.remove("open");
+
+}
+
+
+/* ================= MOBILE SIDEBAR ================= */
+
+function toggleSidebar(){
+
+  document.getElementById("sidebar")
+    .classList.toggle("open");
+
+}
+
+
+/* ================= LOAD VENDOR ================= */
+
+function loadVendorData(){
+
+  if(!vendorData) return;
+
+  document.getElementById("miniName")
+    .textContent=vendorData.owner || "Vendor";
+
+  document.getElementById("avatar")
+    .textContent=(vendorData.owner || "V")
+      .charAt(0)
+      .toUpperCase();
+
+  /* Profile */
+
+  document.getElementById("profileShopName").value=
+    vendorData.shopName || "";
+
+  document.getElementById("profileOwner").value=
+    vendorData.owner || "";
+
+  document.getElementById("profilePhone").value=
+    vendorData.phone || "";
+
+  document.getElementById("profileEmail").value=
+    vendorData.email || "";
+
+  document.getElementById("profileCategory").value=
+    vendorData.category || "";
+
+  document.getElementById("profileArea").value=
+    vendorData.area || "";
+
+  document.getElementById("profileAddress").value=
+    vendorData.address || "";
+
+  document.getElementById("profileFootfall").value=
+    vendorData.footfall || "";
+
+  document.getElementById("profileSize").value=
+    vendorData.shopSize || "";
+
+  document.getElementById("profileLCD").value=
+    vendorData.lcdStatus || "Pending";
+
+  document.getElementById("profileInstallment").value=
+    vendorData.installment || "No";
+
+  document.getElementById("profileInstallmentAmount").value=
+    vendorData.installmentAmount || "";
+
+  document.getElementById("profileSubMeter").value=
+    vendorData.subMeter || "Yes";
+
+  document.getElementById("profileInternet").value=
+    vendorData.internet || "Yes";
+
+  document.getElementById("profileOpen").value=
+    vendorData.openTime || "09:00";
+
+  document.getElementById("profileClose").value=
+    vendorData.closeTime || "00:00";
+
+  document.getElementById("profileFridge").value=
+    vendorData.fridge || "No";
+
+  document.getElementById("profileBooker").value=
+    vendorData.orderBooker || "";
+
+  /* Bank */
+
+  document.getElementById("bankName").value=
+    vendorData.bank.bankName || "";
+
+  document.getElementById("bankTitle").value=
+    vendorData.bank.accountTitle || "";
+
+  document.getElementById("bankIBAN").value=
+    vendorData.bank.iban || "";
+
+  document.getElementById("bankAccount").value=
+    vendorData.bank.accountNumber || "";
+
+  document.getElementById("bankMethod").value=
+    vendorData.bank.method || "Bank Transfer";
+
+  /* Location */
+
+  if(vendorData.location.latitude){
+
+    document.getElementById("locationStatus")
+      .textContent="Live location captured.";
+
+    document.getElementById("locationCoordinates")
+      .textContent=
+      vendorData.location.latitude.toFixed(6)+
+      ", "+
+      vendorData.location.longitude.toFixed(6);
+
+  }
+
+  renderLoadSlots();
+
+  renderSupport();
+
+  renderWithdrawals();
+
+  calculateProfileCompletion();
+
+  renderDashboard();
+
+  toggleInstallment();
+
+}
+
+
+/* ================= SAVE PROFILE ================= */
+
+function saveProfile(){
+
+  vendorData.shopName=
+    document.getElementById("profileShopName").value.trim();
+
+  vendorData.owner=
+    document.getElementById("profileOwner").value.trim();
+
+  vendorData.phone=
+    document.getElementById("profilePhone").value.trim();
+
+  vendorData.email=
+    document.getElementById("profileEmail").value.trim();
+
+  vendorData.category=
+    document.getElementById("profileCategory").value;
+
+  vendorData.area=
+    document.getElementById("profileArea").value;
+
+  vendorData.address=
+    document.getElementById("profileAddress").value.trim();
+
+  vendorData.footfall=
+    document.getElementById("profileFootfall").value;
+
+  vendorData.shopSize=
+    document.getElementById("profileSize").value;
+
+  vendorData.lcdStatus=
+    document.getElementById("profileLCD").value;
+
+  vendorData.installment=
+    document.getElementById("profileInstallment").value;
+
+  vendorData.installmentAmount=
+    document.getElementById("profileInstallmentAmount").value;
+
+  vendorData.subMeter=
+    document.getElementById("profileSubMeter").value;
+
+  vendorData.internet=
+    document.getElementById("profileInternet").value;
+
+  vendorData.openTime=
+    document.getElementById("profileOpen").value;
+
+  vendorData.closeTime=
+    document.getElementById("profileClose").value;
+
+  vendorData.fridge=
+    document.getElementById("profileFridge").value;
+
+  vendorData.orderBooker=
+    document.getElementById("profileBooker").value;
+
+  saveData();
+
+  calculateProfileCompletion();
+
+  renderDashboard();
+
+  showToast("Profile saved successfully");
+
+}
+
+
+/* ================= GPS ================= */
+
+function captureLocation(){
+
+  if(!navigator.geolocation){
+
+    showToast("Geolocation is not supported");
+    return;
+
+  }
+
+  document.getElementById("locationStatus")
+    .textContent="Capturing current location...";
+
+  navigator.geolocation.getCurrentPosition(
+
+    position=>{
+
+      vendorData.location={
+        latitude:position.coords.latitude,
+        longitude:position.coords.longitude,
+        capturedAt:new Date().toISOString()
+      };
+
+      saveData();
+
+      document.getElementById("locationStatus")
+        .textContent="Live location captured.";
+
+      document.getElementById("locationCoordinates")
+        .textContent=
+        vendorData.location.latitude.toFixed(6)+
+        ", "+
+        vendorData.location.longitude.toFixed(6);
+
+      calculateProfileCompletion();
+
+      showToast("Location updated");
+
+    },
+
+    ()=>{
+      document.getElementById("locationStatus")
+        .textContent="Location permission required.";
+
+      showToast("Please allow location access");
+    },
+
+    {
+      enableHighAccuracy:true,
+      timeout:15000,
+      maximumAge:0
+    }
+
+  );
+
+}
+
+
+/* ================= INSTALLMENT ================= */
+
+function toggleInstallment(){
+
+  const yes=
+    document.getElementById("profileInstallment").value==="Yes";
+
+  document.getElementById("installmentBox")
+    .classList.toggle("hidden",!yes);
+
+}
+
+
+/* ================= LOAD SHEDDING ================= */
+
+function addLoadSlot(){
+
+  vendorData.loadShedding.push({
+    start:"",
+    end:""
+  });
+
+  saveData();
+
+  renderLoadSlots();
+
+}
+
+
+function removeLoadSlot(index){
+
+  vendorData.loadShedding.splice(index,1);
+
+  saveData();
+
+  renderLoadSlots();
+
+}
+
+
+function updateLoadSlot(index,type,value){
+
+  vendorData.loadShedding[index][type]=value;
+
+  saveData();
+
+}
+
+
+function renderLoadSlots(){
+
+  const container=
+    document.getElementById("loadSheddingList");
+
+  container.innerHTML="";
+
+  vendorData.loadShedding.forEach((slot,index)=>{
+
+    const row=document.createElement("div");
+
+    row.className="load-row";
+
+    row.innerHTML=`
+
+      <input
+        type="time"
+        value="${slot.start || ""}"
+        onchange="updateLoadSlot(${index},'start',this.value)"
+      >
+
+      <input
+        type="time"
+        value="${slot.end || ""}"
+        onchange="updateLoadSlot(${index},'end',this.value)"
+      >
+
+      <button
+        class="btn btn-danger"
+        onclick="removeLoadSlot(${index})"
+      >
+        Remove
+      </button>
+
+    `;
+
+    container.appendChild(row);
+
+  });
+
+}
+
+
+/* ================= BANK ================= */
+
+function saveBankDetails(){
+
+  vendorData.bank={
+    bankName:document.getElementById("bankName").value.trim(),
+    accountTitle:document.getElementById("bankTitle").value.trim(),
+    iban:document.getElementById("bankIBAN").value.trim(),
+    accountNumber:document.getElementById("bankAccount").value.trim(),
+    method:document.getElementById("bankMethod").value
+  };
+
+  saveData();
+
+  calculateProfileCompletion();
+
+  showToast("Bank details saved");
+
+}
+
+
+/* ================= WITHDRAWAL ================= */
+
+function requestWithdrawal(){
+
+  const amount=
+    Number(document.getElementById("withdrawAmount").value);
+
+  if(!amount || amount<=0){
+
+    showToast("Enter a valid amount");
+    return;
+
+  }
+
+  if(amount>3450){
+
+    showToast("Amount exceeds available balance");
+    return;
+
+  }
+
+  vendorData.withdrawals.unshift({
+
+    date:new Date().toLocaleDateString(
+      "en-GB",
+      {
+        day:"2-digit",
+        month:"short",
+        year:"numeric"
+      }
+    ),
+
+    amount:amount,
+
+    method:document.getElementById("withdrawMethod").value,
+
+    status:"Pending"
+
+  });
+
+  saveData();
+
+  document.getElementById("withdrawAmount").value="";
+
+  renderWithdrawals();
+
+  showToast("Withdrawal request submitted");
+
+}
+
+
+function renderWithdrawals(){
+
+  const tbody=
+    document.getElementById("withdrawalHistory");
+
+  if(!tbody) return;
+
+  let html="";
+
+  vendorData.withdrawals.forEach(item=>{
+
+    html+=`
+
+      <tr>
+
+        <td>${item.date}</td>
+
+        <td>Rs. ${Number(item.amount).toLocaleString()}</td>
+
+        <td>${item.method}</td>
+
+        <td>
+          <span class="status pending">
+            ${item.status}
+          </span>
+        </td>
+
+      </tr>
+
+    `;
+
+  });
+
+  tbody.innerHTML=html || `
+
+    <tr>
+      <td colspan="4" style="text-align:center;color:#777;">
+        No withdrawal requests yet.
+      </td>
+    </tr>
+
+  `;
+
+}
+
+
+/* ================= SUPPORT ================= */
+
+function submitSupport(){
+
+  const subject=
+    document.getElementById("supportSubject")
+      .value.trim();
+
+  const category=
+    document.getElementById("supportCategory").value;
+
+  const message=
+    document.getElementById("supportMessage")
+      .value.trim();
+
+  if(!subject || !message){
+
+    showToast("Please enter subject and message");
+    return;
+
+  }
+
+  vendorData.support.unshift({
+
+    subject,
+    category,
+    message,
+
+    date:new Date().toLocaleDateString(
+      "en-GB",
+      {
+        day:"2-digit",
+        month:"short",
+        year:"numeric"
+      }
+    ),
+
+    status:"Pending"
+
+  });
+
+  saveData();
+
+  document.getElementById("supportSubject").value="";
+  document.getElementById("supportMessage").value="";
+
+  renderSupport();
+
+  showToast("Support request submitted");
+
+}
+
+
+function renderSupport(){
+
+  const tbody=
+    document.getElementById("supportHistory");
+
+  if(!tbody) return;
+
+  let html="";
+
+  vendorData.support.forEach(item=>{
+
+    html+=`
+
+      <tr>
+
+        <td>${escapeHtml(item.subject)}</td>
+
+        <td>${escapeHtml(item.category)}</td>
+
+        <td>${item.date}</td>
+
+        <td>
+          <span class="status pending">
+            ${item.status}
+          </span>
+        </td>
+
+      </tr>
+
+    `;
+
+  });
+
+  tbody.innerHTML=html || `
+
+    <tr>
+      <td colspan="4" style="text-align:center;color:#777;">
+        No support requests yet.
+      </td>
+    </tr>
+
+  `;
+
+}
+
+
+/* ================= PROFILE COMPLETION ================= */
+
+function calculateProfileCompletion(){
+
+  if(!vendorData) return;
+
+  const checks=[
+
+    vendorData.shopName,
+    vendorData.owner,
+    vendorData.phone,
+    vendorData.email,
+    vendorData.category,
+    vendorData.area,
+    vendorData.address,
+    vendorData.location.latitude,
+    vendorData.footfall,
+    vendorData.shopSize,
+    vendorData.lcdStatus,
+    vendorData.internet,
+    vendorData.openTime,
+    vendorData.closeTime,
+    vendorData.bank.bankName,
+    vendorData.bank.accountTitle,
+    vendorData.bank.iban
+
+  ];
+
+  const completed=
+    checks.filter(Boolean).length;
+
+  const percent=
+    Math.round((completed/checks.length)*100);
+
+  document.getElementById("profilePercent")
+    .textContent=percent+"%";
+
+  document.getElementById("profileProgress")
+    .style.width=percent+"%";
+
+}
+
+
+/* ================= DASHBOARD ================= */
+
+function renderDashboard(){
+
+  const totalEarnings=12450;
+
+  const plays=2490;
+
+  const balance=3450;
+
+  document.getElementById("dashEarnings")
+    .textContent=
+    "Rs. "+totalEarnings.toLocaleString();
+
+  document.getElementById("dashPlays")
+    .textContent=plays.toLocaleString();
+
+  document.getElementById("dashBalance")
+    .textContent=
+    "Rs. "+balance.toLocaleString();
+
+  document.getElementById("onboardingStatus")
+    .textContent=
+    "Application "+vendorData.onboardingStatus;
+
+  const recent=document.getElementById("recentPlays");
+
+  recent.innerHTML=`
+
+    <tr>
+      <td>Fresh Mart</td>
+      <td>29 Sep 2026</td>
+      <td>30 sec</td>
+      <td><span class="status online">Verified</span></td>
+    </tr>
+
+    <tr>
+      <td>Pizza House</td>
+      <td>29 Sep 2026</td>
+      <td>15 sec</td>
+      <td><span class="status online">Verified</span></td>
+    </tr>
+
+    <tr>
+      <td>Mobile World</td>
+      <td>29 Sep 2026</td>
+      <td>30 sec</td>
+      <td><span class="status online">Verified</span></td>
+    </tr>
+
+  `;
+
+}
+
+
+/* ================= ESCAPE ================= */
+
+function escapeHtml(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ================= INIT ================= */
+
+if(!vendorData){
+
+  vendorData=defaultVendor();
+
+}
+
+</script>
+
+</body>
+</html>
