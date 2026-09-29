@@ -3,55 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spotly — Vendor Portal</title>
+<title>Spotly Vendor Portal</title>
 
 <style>
 :root{
   --yellow:#f5c400;
-  --yellow-light:#fff4b8;
-  --yellow-soft:#fff9dc;
-  --white:#ffffff;
-  --bg:#f1f2f4;
+  --yellow2:#ffd92f;
+  --light-yellow:#fff7c7;
+  --soft-yellow:#fffbe8;
+  --white:#fff;
+  --grey:#f1f2f4;
+  --border:#e4e4e4;
   --text:#202124;
   --muted:#777;
-  --border:#e6e6e6;
-  --success:#2e9d57;
-  --danger:#d94b4b;
+  --green:#299653;
+  --red:#d94b4b;
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
   font-family:Inter,Arial,sans-serif;
-  background:var(--bg);
+  background:var(--grey);
   color:var(--text);
 }
 
-button,input,select,textarea{
-  font:inherit;
-}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
 
-button{
-  cursor:pointer;
-}
+.hidden{display:none!important}
 
-.hidden{
-  display:none!important;
-}
-
-/* ================= NAV ================= */
+/* ================= NAVBAR ================= */
 
 .navbar{
   height:70px;
-  background:var(--white);
+  background:#fff;
   border-bottom:1px solid var(--border);
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   padding:0 35px;
   position:sticky;
   top:0;
@@ -67,33 +57,30 @@ button{
 }
 
 .brand-mark{
-  width:34px;
-  height:34px;
+  width:35px;
+  height:35px;
   background:var(--yellow);
+  border-radius:9px;
   display:flex;
   align-items:center;
   justify-content:center;
   font-weight:900;
-  border-radius:9px;
 }
 
 .nav-actions{
   display:flex;
-  align-items:center;
   gap:10px;
 }
 
 .btn{
   border:0;
-  padding:11px 18px;
   border-radius:8px;
+  padding:11px 18px;
   font-weight:700;
   transition:.2s;
 }
 
-.btn:hover{
-  transform:translateY(-1px);
-}
+.btn:hover{transform:translateY(-1px)}
 
 .btn-yellow{
   background:var(--yellow);
@@ -101,19 +88,19 @@ button{
 }
 
 .btn-white{
-  background:white;
+  background:#fff;
   border:1px solid var(--border);
   color:#222;
 }
 
 .btn-dark{
   background:#222;
-  color:white;
+  color:#fff;
 }
 
 .btn-danger{
   background:#fff0f0;
-  color:var(--danger);
+  color:var(--red);
 }
 
 /* ================= LANDING ================= */
@@ -125,21 +112,21 @@ button{
 .hero{
   max-width:1200px;
   margin:auto;
-  padding:70px 25px 50px;
+  padding:65px 25px 50px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:50px;
+  gap:45px;
   align-items:center;
 }
 
 .hero h1{
-  font-size:54px;
-  line-height:1.05;
-  margin-bottom:22px;
+  font-size:52px;
+  line-height:1.06;
+  margin-bottom:20px;
 }
 
 .hero h1 span{
-  background:var(--yellow-light);
+  background:var(--light-yellow);
   padding:0 8px;
 }
 
@@ -147,47 +134,43 @@ button{
   color:#666;
   font-size:18px;
   line-height:1.7;
-  max-width:540px;
-  margin-bottom:30px;
+  max-width:550px;
+  margin-bottom:28px;
 }
 
 .hero-actions{
   display:flex;
-  gap:12px;
-  flex-wrap:wrap;
+  gap:10px;
 }
 
 .hero-image{
   height:420px;
-  border-radius:20px;
+  border-radius:18px;
+  border:8px solid white;
   background:
-    linear-gradient(0deg,rgba(0,0,0,.08),rgba(0,0,0,.02)),
     url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1000&q=80")
     center/cover;
-  border:8px solid white;
-  box-shadow:0 10px 35px rgba(0,0,0,.08);
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
-
-/* ================= STATS ================= */
 
 .stats{
   max-width:1200px;
-  margin:0 auto 70px;
   padding:0 25px;
+  margin:0 auto 65px;
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:18px;
 }
 
 .stat{
-  background:white;
+  background:#fff;
   border:1px solid var(--border);
-  padding:28px;
-  border-radius:14px;
+  padding:25px;
+  border-radius:12px;
 }
 
 .stat-number{
-  font-size:32px;
+  font-size:31px;
   font-weight:800;
 }
 
@@ -196,60 +179,56 @@ button{
   margin-top:5px;
 }
 
-/* ================= SECTIONS ================= */
-
 .section{
   max-width:1200px;
   margin:auto;
-  padding:65px 25px;
+  padding:60px 25px;
 }
 
 .section-title{
   text-align:center;
-  margin-bottom:40px;
+  margin-bottom:35px;
 }
 
 .section-title h2{
-  font-size:34px;
+  font-size:33px;
   margin-bottom:8px;
 }
 
-.section-title p{
-  color:#777;
-}
+.section-title p{color:#777}
 
 .steps{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:20px;
+  gap:18px;
 }
 
-.step{
-  background:white;
-  padding:30px;
+.step,
+.benefit{
+  background:#fff;
   border:1px solid var(--border);
-  border-radius:14px;
+  border-radius:12px;
+  padding:28px;
 }
 
-.step-number{
-  width:42px;
-  height:42px;
-  background:var(--yellow-light);
+.step-number,
+.benefit-icon{
+  width:43px;
+  height:43px;
+  background:var(--light-yellow);
+  border-radius:8px;
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:8px;
   font-weight:800;
-  margin-bottom:20px;
+  margin-bottom:17px;
 }
 
-.step h3{
-  margin-bottom:10px;
-}
-
-.step p{
+.step p,
+.benefit p{
   color:#777;
   line-height:1.6;
+  margin-top:7px;
 }
 
 .benefits{
@@ -258,61 +237,29 @@ button{
   gap:18px;
 }
 
-.benefit{
-  background:white;
-  padding:25px;
-  border:1px solid var(--border);
-  border-radius:14px;
-}
-
-.benefit-icon{
-  width:45px;
-  height:45px;
-  background:var(--yellow-light);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:9px;
-  font-size:20px;
-  margin-bottom:17px;
-}
-
-.benefit p{
-  color:#777;
-  line-height:1.5;
-  margin-top:7px;
-}
-
-/* ================= CTA ================= */
-
 .cta{
   max-width:1150px;
-  margin:40px auto 70px;
+  margin:30px auto 70px;
   background:var(--yellow);
-  padding:50px;
-  border-radius:18px;
+  padding:45px;
+  border-radius:16px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:30px;
+  align-items:center;
 }
 
 .cta h2{
-  font-size:34px;
-  margin-bottom:8px;
+  font-size:32px;
+  margin-bottom:7px;
 }
 
-.cta p{
-  color:#4d4300;
-}
-
-/* ================= FOOTER ================= */
+.cta p{color:#554900}
 
 footer{
-  background:white;
+  background:#fff;
   border-top:1px solid var(--border);
-  padding:25px;
   text-align:center;
+  padding:25px;
   color:#777;
 }
 
@@ -323,22 +270,20 @@ footer{
   min-height:calc(100vh - 70px);
 }
 
-.portal.active{
-  display:flex;
-}
+.portal.active{display:flex}
 
 .sidebar{
   width:235px;
-  background:white;
+  background:#fff;
   border-right:1px solid var(--border);
   padding:25px 15px;
   flex-shrink:0;
 }
 
-.sidebar-brand{
-  padding:0 12px 25px;
+.sidebar-title{
   font-size:19px;
   font-weight:800;
+  padding:0 12px 25px;
 }
 
 .menu{
@@ -350,8 +295,8 @@ footer{
 .menu button{
   border:0;
   background:transparent;
-  padding:13px 14px;
   text-align:left;
+  padding:13px 14px;
   border-radius:8px;
   color:#555;
   font-weight:600;
@@ -359,13 +304,13 @@ footer{
 
 .menu button:hover,
 .menu button.active{
-  background:var(--yellow-light);
+  background:var(--light-yellow);
   color:#222;
 }
 
 .portal-content{
   flex:1;
-  padding:30px;
+  padding:28px;
   overflow:auto;
 }
 
@@ -376,17 +321,15 @@ footer{
   margin-bottom:25px;
 }
 
-.portal-header h1{
-  font-size:28px;
-}
+.portal-header h1{font-size:28px}
 
 .profile-mini{
   display:flex;
   align-items:center;
   gap:10px;
-  background:white;
-  padding:8px 13px;
+  background:#fff;
   border:1px solid var(--border);
+  padding:7px 12px;
   border-radius:8px;
 }
 
@@ -401,117 +344,246 @@ footer{
   font-weight:800;
 }
 
+.notification{
+  position:relative;
+  border:1px solid var(--border);
+  background:#fff;
+  width:40px;
+  height:40px;
+  border-radius:8px;
+  font-size:18px;
+}
+
+.notification-dot{
+  position:absolute;
+  top:8px;
+  right:8px;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#d33;
+}
+
 /* ================= DASHBOARD ================= */
 
 .dashboard-cards{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  margin-bottom:25px;
+  gap:15px;
+  margin-bottom:18px;
 }
 
 .dashboard-card{
-  background:white;
+  background:#fff;
   border:1px solid var(--border);
-  border-radius:12px;
-  padding:22px;
+  border-radius:11px;
+  padding:20px;
 }
 
 .card-label{
   color:#777;
-  font-size:14px;
+  font-size:13px;
 }
 
 .card-value{
-  font-size:28px;
+  font-size:27px;
   font-weight:800;
   margin-top:9px;
 }
 
 .card-small{
-  color:var(--success);
-  font-size:13px;
+  color:var(--green);
+  font-size:12px;
   margin-top:5px;
+}
+
+.panel{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:22px;
 }
 
 .content-grid{
   display:grid;
-  grid-template-columns:1.4fr 1fr;
-  gap:18px;
-}
-
-.panel{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:23px;
+  grid-template-columns:1.5fr 1fr;
+  gap:17px;
 }
 
 .panel-title{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
 
-.panel-title h3{
-  font-size:18px;
-}
+.panel-title h3{font-size:18px}
 
 .status{
   display:inline-flex;
   align-items:center;
-  gap:6px;
-  padding:5px 9px;
+  gap:5px;
   border-radius:6px;
+  padding:5px 9px;
   font-size:12px;
   font-weight:700;
 }
 
 .status.online{
-  background:#eaf8ef;
-  color:var(--success);
-}
-
-.status.pending{
-  background:var(--yellow-light);
-  color:#765f00;
+  background:#eaf7ee;
+  color:var(--green);
 }
 
 .status.offline{
-  background:#fceeee;
-  color:var(--danger);
+  background:#fdeeee;
+  color:var(--red);
 }
 
-/* ================= TABLE ================= */
-
-.table-wrap{
-  overflow-x:auto;
+.status.pending{
+  background:var(--light-yellow);
+  color:#755e00;
 }
 
-table{
-  width:100%;
-  border-collapse:collapse;
+.status.approved{
+  background:#eaf7ee;
+  color:var(--green);
 }
 
-th,td{
-  padding:13px 10px;
-  text-align:left;
-  border-bottom:1px solid #eee;
-  font-size:14px;
+.review-box{
+  background:var(--light-yellow);
+  border:1px solid #ead56d;
+  padding:18px;
+  border-radius:9px;
 }
 
-th{
+.review-box strong{
+  display:block;
+  margin-bottom:7px;
+}
+
+.review-box p{
+  color:#665b19;
+  font-size:13px;
+  line-height:1.5;
+}
+
+/* ================= ONLINE SWITCH ================= */
+
+.online-control{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.switch{
+  width:50px;
+  height:27px;
+  background:#ccc;
+  border-radius:30px;
+  position:relative;
+  border:0;
+}
+
+.switch:after{
+  content:"";
+  position:absolute;
+  width:21px;
+  height:21px;
+  top:3px;
+  left:4px;
+  background:#fff;
+  border-radius:50%;
+  transition:.2s;
+}
+
+.switch.on{
+  background:var(--yellow);
+}
+
+.switch.on:after{
+  left:25px;
+}
+
+/* ================= DIGITAL ELECTRIC METER ================= */
+
+.energy-box{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+  align-items:center;
+}
+
+.meter{
+  height:190px;
+  width:190px;
+  border-radius:50%;
+  margin:auto;
+  background:
+    conic-gradient(
+      var(--yellow) var(--meter-progress),
+      #eee var(--meter-progress)
+    );
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.meter-inner{
+  width:145px;
+  height:145px;
+  border-radius:50%;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.meter-number{
+  font-size:27px;
+  font-weight:800;
+}
+
+.meter-label{
+  font-size:12px;
   color:#777;
-  font-weight:600;
 }
+
+.energy-info{
+  display:grid;
+  gap:12px;
+}
+
+.energy-row{
+  display:flex;
+  justify-content:space-between;
+  padding:13px;
+  background:#fafafa;
+  border:1px solid #eee;
+  border-radius:8px;
+}
+
+.energy-row span:first-child{color:#777}
 
 /* ================= FORMS ================= */
+
+.form-section{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:24px;
+  margin-bottom:17px;
+}
+
+.form-section h3{
+  margin-bottom:20px;
+  font-size:18px;
+}
 
 .form-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:18px;
+  gap:17px;
 }
 
 .form-group{
@@ -529,14 +601,16 @@ th{
   font-weight:700;
 }
 
+.required{color:#d33}
+
 .form-group input,
 .form-group select,
 .form-group textarea{
   width:100%;
   border:1px solid #ddd;
-  background:white;
+  background:#fff;
   border-radius:8px;
-  padding:12px 13px;
+  padding:12px;
   outline:none;
 }
 
@@ -544,24 +618,18 @@ th{
 .form-group select:focus,
 .form-group textarea:focus{
   border-color:var(--yellow);
-  box-shadow:0 0 0 3px rgba(245,196,0,.13);
+  box-shadow:0 0 0 3px rgba(245,196,0,.12);
 }
 
 textarea{
-  min-height:100px;
+  min-height:95px;
   resize:vertical;
 }
 
-.form-section{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:25px;
-  margin-bottom:18px;
-}
-
-.form-section h3{
-  margin-bottom:20px;
+.add-select{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
 }
 
 .form-actions{
@@ -574,23 +642,16 @@ textarea{
 /* ================= LOCATION ================= */
 
 .location-box{
-  background:var(--yellow-soft);
-  border:1px solid #f0df8a;
+  background:var(--soft-yellow);
+  border:1px solid #ebda78;
   border-radius:9px;
-  padding:16px;
+  padding:17px;
 }
 
-.location-status{
+.location-text{
+  color:#777;
   font-size:13px;
-  margin-bottom:10px;
-  color:#666;
-}
-
-.gps-row{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  flex-wrap:wrap;
+  margin:7px 0 12px;
 }
 
 /* ================= LOAD SHEDDING ================= */
@@ -598,8 +659,35 @@ textarea{
 .load-row{
   display:grid;
   grid-template-columns:1fr 1fr auto;
-  gap:10px;
+  gap:9px;
   margin-bottom:10px;
+}
+
+.load-row input{
+  border:1px solid #ddd;
+  padding:11px;
+  border-radius:8px;
+}
+
+/* ================= TABLE ================= */
+
+.table-wrap{overflow-x:auto}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:12px 9px;
+  text-align:left;
+  border-bottom:1px solid #eee;
+  font-size:13px;
+}
+
+th{
+  color:#777;
+  font-weight:600;
 }
 
 /* ================= MODAL ================= */
@@ -615,35 +703,101 @@ textarea{
   z-index:500;
 }
 
-.modal.active{
-  display:flex;
-}
+.modal.active{display:flex}
 
 .modal-box{
-  background:white;
+  background:#fff;
   width:100%;
-  max-width:520px;
-  max-height:90vh;
+  max-width:900px;
+  max-height:94vh;
   overflow:auto;
-  border-radius:15px;
+  border-radius:13px;
   padding:28px;
+}
+
+.modal-small{
+  max-width:470px;
 }
 
 .modal-head{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   margin-bottom:22px;
 }
 
 .close{
   border:0;
-  background:#f2f2f2;
+  background:#f1f1f1;
   width:32px;
   height:32px;
   border-radius:7px;
   font-size:20px;
 }
+
+/* ================= REGISTRATION STEPS ================= */
+
+.register-progress{
+  display:flex;
+  gap:7px;
+  margin-bottom:25px;
+}
+
+.progress-step{
+  flex:1;
+  height:5px;
+  background:#eee;
+  border-radius:10px;
+}
+
+.progress-step.active{
+  background:var(--yellow);
+}
+
+.register-page{display:none}
+.register-page.active{display:block}
+
+.register-actions{
+  display:flex;
+  justify-content:space-between;
+  margin-top:25px;
+}
+
+/* ================= NOTIFICATION PANEL ================= */
+
+.notification-panel{
+  position:fixed;
+  top:76px;
+  right:25px;
+  width:330px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  box-shadow:0 12px 35px rgba(0,0,0,.12);
+  z-index:300;
+  display:none;
+}
+
+.notification-panel.active{display:block}
+
+.notification-header{
+  padding:15px;
+  border-bottom:1px solid #eee;
+  font-weight:800;
+}
+
+.notification-item{
+  padding:14px 15px;
+  border-bottom:1px solid #eee;
+  font-size:13px;
+}
+
+.notification-item strong{
+  display:block;
+  margin-bottom:4px;
+}
+
+.notification-item span{color:#777}
 
 /* ================= TOAST ================= */
 
@@ -652,95 +806,53 @@ textarea{
   right:20px;
   bottom:20px;
   background:#222;
-  color:white;
-  padding:14px 18px;
+  color:#fff;
+  padding:13px 17px;
   border-radius:8px;
   display:none;
   z-index:1000;
-  font-size:14px;
+  font-size:13px;
 }
 
-.toast.show{
-  display:block;
-}
+.toast.show{display:block}
 
 /* ================= MOBILE ================= */
 
 .mobile-menu{
   display:none;
   border:0;
-  background:var(--yellow-light);
+  background:var(--light-yellow);
   padding:9px 12px;
   border-radius:7px;
 }
 
-@media(max-width:950px){
-
-  .hero{
-    grid-template-columns:1fr;
-  }
-
-  .hero h1{
-    font-size:42px;
-  }
-
-  .stats,
-  .steps{
-    grid-template-columns:1fr;
-  }
-
-  .benefits{
-    grid-template-columns:repeat(2,1fr);
-  }
+@media(max-width:1000px){
 
   .dashboard-cards{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .content-grid{
-    grid-template-columns:1fr;
+  .benefits{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .sidebar{
-    width:210px;
+  .energy-box{
+    grid-template-columns:1fr;
   }
 }
 
-@media(max-width:700px){
-
-  .navbar{
-    padding:0 15px;
-  }
-
-  .nav-actions .btn-white{
-    display:none;
-  }
+@media(max-width:800px){
 
   .hero{
-    padding-top:45px;
-  }
-
-  .hero h1{
-    font-size:36px;
-  }
-
-  .hero-image{
-    height:300px;
-  }
-
-  .benefits{
     grid-template-columns:1fr;
   }
 
-  .cta{
-    margin:25px 15px 50px;
-    padding:30px;
-    flex-direction:column;
-    align-items:flex-start;
+  .steps{
+    grid-template-columns:1fr;
   }
 
-  .portal.active{
-    display:block;
+  .content-grid{
+    grid-template-columns:1fr;
   }
 
   .sidebar{
@@ -752,20 +864,51 @@ textarea{
     transition:.25s;
   }
 
-  .sidebar.open{
-    left:0;
-  }
+  .sidebar.open{left:0}
 
-  .mobile-menu{
-    display:block;
-  }
+  .mobile-menu{display:block}
+
+  .portal.active{display:block}
 
   .portal-content{
     padding:20px 15px;
   }
+}
+
+@media(max-width:600px){
+
+  .navbar{
+    padding:0 15px;
+  }
+
+  .nav-actions .btn-white{display:none}
+
+  .hero{
+    padding-top:45px;
+  }
+
+  .hero h1{
+    font-size:37px;
+  }
+
+  .hero-actions{
+    flex-direction:column;
+  }
+
+  .hero-image{
+    height:300px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .benefits{
+    grid-template-columns:1fr;
+  }
 
   .dashboard-cards{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr;
   }
 
   .form-grid{
@@ -784,23 +927,13 @@ textarea{
     grid-column:1/-1;
   }
 
-  .profile-mini{
-    display:none;
-  }
-}
+  .profile-mini{display:none}
 
-@media(max-width:450px){
-
-  .dashboard-cards{
-    grid-template-columns:1fr;
-  }
-
-  .hero-actions{
+  .cta{
+    margin:25px 15px 50px;
+    padding:30px;
     flex-direction:column;
-  }
-
-  .hero-actions .btn{
-    width:100%;
+    align-items:flex-start;
   }
 }
 </style>
@@ -808,51 +941,81 @@ textarea{
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
 
 <nav class="navbar">
+
   <div class="brand">
     <div class="brand-mark">S</div>
     Spotly
   </div>
 
-  <div class="nav-actions" id="landingNav">
-    <button class="btn btn-white" onclick="openLogin()">Login as Vendor</button>
-    <button class="btn btn-yellow" onclick="openRegister()">Register as Vendor</button>
+  <div class="nav-actions" id="publicNav">
+
+    <button class="btn btn-white" onclick="openLogin()">
+      Login as Vendor
+    </button>
+
+    <button class="btn btn-yellow" onclick="openRegistration()">
+      Register as Vendor
+    </button>
+
   </div>
 
   <div class="nav-actions hidden" id="portalNav">
-    <button class="btn btn-white" onclick="logout()">Logout</button>
+
+    <button class="notification"
+            onclick="toggleNotifications()">
+      ♢
+      <span class="notification-dot"></span>
+    </button>
+
+    <button class="btn btn-white" onclick="logout()">
+      Logout
+    </button>
+
   </div>
+
 </nav>
 
 
-<!-- ================= LANDING PAGE ================= -->
+<!-- =========================================================
+     LANDING PAGE
+========================================================= -->
 
 <main class="landing" id="landingPage">
 
   <section class="hero">
 
     <div>
+
       <h1>
         Turn Your Shop Into A
         <span>Smart Advertising Space.</span>
       </h1>
 
       <p>
-        Partner with Spotly and earn by displaying local advertisements
-        on your shop's digital screen.
+        Join Spotly and earn from verified advertising plays
+        while giving local businesses a digital advertising space
+        inside your shop.
       </p>
 
       <div class="hero-actions">
-        <button class="btn btn-yellow" onclick="openRegister()">
+
+        <button class="btn btn-yellow"
+                onclick="openRegistration()">
           Register as Vendor
         </button>
 
-        <button class="btn btn-white" onclick="openLogin()">
+        <button class="btn btn-white"
+                onclick="openLogin()">
           Login as Vendor
         </button>
+
       </div>
+
     </div>
 
     <div class="hero-image"></div>
@@ -874,7 +1037,7 @@ textarea{
 
     <div class="stat">
       <div class="stat-number">24/7</div>
-      <div class="stat-label">Portal access</div>
+      <div class="stat-label">Vendor portal access</div>
     </div>
 
   </section>
@@ -884,16 +1047,17 @@ textarea{
 
     <div class="section-title">
       <h2>How Spotly Works</h2>
-      <p>Simple process for every vendor.</p>
+      <p>Simple process for every shop owner.</p>
     </div>
 
     <div class="steps">
 
       <div class="step">
         <div class="step-number">01</div>
-        <h3>Register</h3>
+        <h3>Register Your Shop</h3>
         <p>
-          Submit your shop, contact, location and payment details.
+          Complete your shop, location, LCD, internet,
+          timings and bank information.
         </p>
       </div>
 
@@ -901,16 +1065,17 @@ textarea{
         <div class="step-number">02</div>
         <h3>Get Approved</h3>
         <p>
-          Spotly reviews your application and confirms your onboarding.
+          Spotly reviews your information before your shop
+          starts receiving advertising schedules.
         </p>
       </div>
 
       <div class="step">
         <div class="step-number">03</div>
-        <h3>Earn</h3>
+        <h3>Start Earning</h3>
         <p>
-          Your screen displays approved ads and verified plays contribute
-          towards your earnings.
+          Verified advertisements played on your LCD contribute
+          towards your vendor earnings.
         </p>
       </div>
 
@@ -923,33 +1088,41 @@ textarea{
 
     <div class="section-title">
       <h2>Vendor Benefits</h2>
-      <p>Everything you need in one simple portal.</p>
+      <p>Everything important stays inside your portal.</p>
     </div>
 
     <div class="benefits">
 
       <div class="benefit">
         <div class="benefit-icon">₹</div>
-        <h3>Earn Money</h3>
-        <p>Receive earnings for verified advertising plays.</p>
+        <h3>Earn From Plays</h3>
+        <p>
+          Track verified advertisement plays and earnings.
+        </p>
       </div>
 
       <div class="benefit">
         <div class="benefit-icon">▣</div>
-        <h3>Digital Screen</h3>
-        <p>Turn unused shop space into a digital advertising channel.</p>
+        <h3>LCD Monitoring</h3>
+        <p>
+          See your LCD status and operating information.
+        </p>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-icon">⚡</div>
+        <h3>Electricity Meter</h3>
+        <p>
+          Monitor estimated LCD electricity usage and cost.
+        </p>
       </div>
 
       <div class="benefit">
         <div class="benefit-icon">✓</div>
-        <h3>Easy Tracking</h3>
-        <p>Monitor screen status, plays and earnings from your portal.</p>
-      </div>
-
-      <div class="benefit">
-        <div class="benefit-icon">?</div>
-        <h3>Support</h3>
-        <p>Submit complaints and support requests directly.</p>
+        <h3>Easy Payments</h3>
+        <p>
+          Maintain bank details and request withdrawals.
+        </p>
       </div>
 
     </div>
@@ -960,61 +1133,74 @@ textarea{
   <section class="cta">
 
     <div>
-      <h2>Ready to become a Spotly Vendor?</h2>
-      <p>Register your shop and start your onboarding.</p>
+      <h2>Become a Spotly Vendor</h2>
+      <p>Register your shop and complete your onboarding.</p>
     </div>
 
-    <button class="btn btn-dark" onclick="openRegister()">
+    <button class="btn btn-dark"
+            onclick="openRegistration()">
       Register Now
     </button>
 
   </section>
 
+
+  <footer>
+    © 2026 Spotly. Vendor Portal.
+  </footer>
+
 </main>
 
 
-<!-- ================= VENDOR PORTAL ================= -->
+<!-- =========================================================
+     VENDOR PORTAL
+========================================================= -->
 
 <section class="portal" id="vendorPortal">
 
   <aside class="sidebar" id="sidebar">
 
-    <div class="sidebar-brand">
+    <div class="sidebar-title">
       Vendor Portal
     </div>
 
     <div class="menu">
 
-      <button class="active" onclick="showPortalPage('dashboard',this)">
+      <button class="active"
+              onclick="showPage('dashboard',this)">
         Dashboard
       </button>
 
-      <button onclick="showPortalPage('profile',this)">
-        My Profile
+      <button onclick="showPage('profile',this)">
+        My Store
       </button>
 
-      <button onclick="showPortalPage('screen',this)">
-        Screen / LCD
+      <button onclick="showPage('ads',this)">
+        Today's Ads
       </button>
 
-      <button onclick="showPortalPage('earnings',this)">
+      <button onclick="showPage('plays',this)">
+        Ad History
+      </button>
+
+      <button onclick="showPage('energy',this)">
+        Electricity
+      </button>
+
+      <button onclick="showPage('earnings',this)">
         Earnings
       </button>
 
-      <button onclick="showPortalPage('plays',this)">
-        Play History
-      </button>
-
-      <button onclick="showPortalPage('withdrawals',this)">
+      <button onclick="showPage('withdrawals',this)">
         Withdrawals
       </button>
 
-      <button onclick="showPortalPage('bank',this)">
+      <button onclick="showPage('bank',this)">
         Bank Details
       </button>
 
-      <button onclick="showPortalPage('support',this)">
-        Support / Complaints
+      <button onclick="showPage('support',this)">
+        Support
       </button>
 
     </div>
@@ -1027,53 +1213,136 @@ textarea{
     <div class="portal-header">
 
       <div style="display:flex;align-items:center;gap:12px;">
-        <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
 
-        <div>
-          <h1 id="portalTitle">Dashboard</h1>
-        </div>
+        <button class="mobile-menu"
+                onclick="toggleSidebar()">
+          ☰
+        </button>
+
+        <h1 id="portalTitle">Dashboard</h1>
+
       </div>
 
-      <div class="profile-mini">
-        <div class="avatar" id="avatar">V</div>
-        <div>
-          <strong id="miniName">Vendor</strong>
-          <div style="font-size:12px;color:#777;">Vendor Account</div>
+
+      <div style="display:flex;align-items:center;gap:10px;">
+
+        <button class="notification"
+                onclick="toggleNotifications()">
+          ♢
+          <span class="notification-dot"></span>
+        </button>
+
+        <div class="profile-mini">
+
+          <div class="avatar" id="avatar">V</div>
+
+          <div>
+            <strong id="miniName">Vendor</strong>
+            <div style="font-size:12px;color:#777;">
+              Vendor Account
+            </div>
+          </div>
+
         </div>
+
       </div>
 
     </div>
 
 
-    <!-- DASHBOARD -->
+    <!-- ================= DASHBOARD ================= -->
 
     <div id="page-dashboard">
+
+      <div id="reviewBanner" class="review-box"
+           style="margin-bottom:18px;">
+
+        <strong id="reviewTitle">
+          Your store is under review
+        </strong>
+
+        <p id="reviewText">
+          Your information has been submitted successfully.
+          Once Spotly approves your store, advertising schedules
+          and earnings will appear here.
+        </p>
+
+      </div>
+
 
       <div class="dashboard-cards">
 
         <div class="dashboard-card">
-          <div class="card-label">Total Earnings</div>
-          <div class="card-value" id="dashEarnings">Rs. 0</div>
-          <div class="card-small">Verified plays</div>
-        </div>
 
-        <div class="dashboard-card">
-          <div class="card-label">Total Plays</div>
-          <div class="card-value" id="dashPlays">0</div>
-          <div class="card-small">Completed</div>
-        </div>
-
-        <div class="dashboard-card">
-          <div class="card-label">Available Balance</div>
-          <div class="card-value" id="dashBalance">Rs. 0</div>
-          <div class="card-small">Available for withdrawal</div>
-        </div>
-
-        <div class="dashboard-card">
-          <div class="card-label">Screen Status</div>
-          <div class="card-value" style="font-size:20px;margin-top:15px;">
-            <span class="status online">● Online</span>
+          <div class="card-label">
+            Today's Ads
           </div>
+
+          <div class="card-value" id="todayAds">
+            —
+          </div>
+
+          <div class="card-small">
+            After approval
+          </div>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+          <div class="card-label">
+            Today's Earning
+          </div>
+
+          <div class="card-value" id="todayEarning">
+            —
+          </div>
+
+          <div class="card-small">
+            Verified plays
+          </div>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+          <div class="card-label">
+            LCD On Today
+          </div>
+
+          <div class="card-value" id="todayLCDTime">
+            —
+          </div>
+
+          <div class="card-small">
+            Total operating time
+          </div>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+          <div class="card-label">
+            Store Status
+          </div>
+
+          <div style="margin-top:14px;"
+               class="online-control">
+
+            <button id="onlineSwitch"
+                    class="switch"
+                    onclick="toggleStoreStatus()">
+            </button>
+
+            <strong id="onlineText">
+              Offline
+            </strong>
+
+          </div>
+
         </div>
 
       </div>
@@ -1084,29 +1353,17 @@ textarea{
         <div class="panel">
 
           <div class="panel-title">
-            <h3>Recent Ad Plays</h3>
-            <button class="btn btn-white" onclick="showPortalPage('plays')">
-              View All
+
+            <h3>Today's Advertisement Schedule</h3>
+
+            <button class="btn btn-white"
+                    onclick="showPage('ads')">
+              View Schedule
             </button>
-          </div>
-
-          <div class="table-wrap">
-
-            <table>
-              <thead>
-                <tr>
-                  <th>Ad</th>
-                  <th>Date</th>
-                  <th>Duration</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-
-              <tbody id="recentPlays"></tbody>
-
-            </table>
 
           </div>
+
+          <div id="dashboardAds"></div>
 
         </div>
 
@@ -1114,32 +1371,24 @@ textarea{
         <div class="panel">
 
           <div class="panel-title">
-            <h3>Onboarding Status</h3>
+            <h3>Store Timings</h3>
           </div>
 
-          <div style="padding:15px;background:var(--yellow-soft);border-radius:8px;">
+          <div class="energy-info">
 
-            <strong id="onboardingStatus">
-              Application Pending
-            </strong>
-
-            <p style="color:#777;font-size:13px;margin-top:7px;">
-              Your vendor application is being reviewed.
-            </p>
-
-          </div>
-
-          <div style="margin-top:20px;">
-
-            <div style="display:flex;justify-content:space-between;font-size:13px;">
-              <span>Profile Completion</span>
-              <strong id="profilePercent">0%</strong>
+            <div class="energy-row">
+              <span>Opening</span>
+              <strong id="dashOpen">—</strong>
             </div>
 
-            <div style="height:8px;background:#eee;border-radius:20px;margin-top:8px;overflow:hidden;">
-              <div id="profileProgress"
-                   style="height:100%;width:0%;background:var(--yellow);">
-              </div>
+            <div class="energy-row">
+              <span>Closing</span>
+              <strong id="dashClose">—</strong>
+            </div>
+
+            <div class="energy-row">
+              <span>LCD Size</span>
+              <strong>45 inch</strong>
             </div>
 
           </div>
@@ -1151,77 +1400,208 @@ textarea{
     </div>
 
 
-    <!-- PROFILE -->
+    <!-- ================= MY STORE ================= -->
 
     <div id="page-profile" class="hidden">
 
       <div class="form-section">
 
-        <h3>Vendor Profile</h3>
+        <h3>Store Information</h3>
 
         <div class="form-grid">
 
           <div class="form-group">
-            <label>Shop / Vendor Name</label>
-            <input id="profileShopName">
+            <label>
+              Shop / Store Name <span class="required">*</span>
+            </label>
+            <input id="storeName" required>
           </div>
 
           <div class="form-group">
-            <label>Owner / Representative Name</label>
-            <input id="profileOwner">
+            <label>
+              Owner Name <span class="required">*</span>
+            </label>
+            <input id="storeOwner" required>
           </div>
 
           <div class="form-group">
-            <label>Phone Number</label>
-            <input id="profilePhone">
+            <label>
+              Phone Number <span class="required">*</span>
+            </label>
+            <input id="storePhone" required>
           </div>
 
           <div class="form-group">
-            <label>Email</label>
-            <input id="profileEmail">
+            <label>
+              Email <span class="required">*</span>
+            </label>
+            <input id="storeEmail" type="email" required>
           </div>
+
 
           <div class="form-group">
-            <label>Shop Category</label>
 
-            <select id="profileCategory">
-              <option value="">Select Category</option>
-              <option>Grocery</option>
-              <option>Pharmacy</option>
-              <option>Restaurant</option>
-              <option>Clothing</option>
-              <option>Electronics</option>
-              <option>Salon</option>
-              <option>Other</option>
-            </select>
+            <label>
+              Category <span class="required">*</span>
+            </label>
+
+            <div class="add-select">
+
+              <select id="storeCategory">
+                <option value="">Select Category</option>
+              </select>
+
+              <button class="btn btn-white"
+                      onclick="addCategory()">
+                + Add New
+              </button>
+
+            </div>
 
           </div>
+
 
           <div class="form-group">
-            <label>Area / Location</label>
 
-            <select id="profileArea">
-              <option value="">Select Area</option>
-              <option>Johar Block 1</option>
-              <option>Johar Block 2</option>
-              <option>Gulshan</option>
-              <option>North Nazimabad</option>
-              <option>Other</option>
-            </select>
+            <label>
+              Area <span class="required">*</span>
+            </label>
+
+            <div class="add-select">
+
+              <select id="storeArea">
+                <option value="">Select Area</option>
+              </select>
+
+              <button class="btn btn-white"
+                      onclick="addArea()">
+                + Add New
+              </button>
+
+            </div>
 
           </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Phase <span class="required">*</span>
+            </label>
+
+            <div class="add-select">
+
+              <select id="storePhase">
+                <option value="">Select Phase</option>
+                <option>Phase 1</option>
+                <option>Phase 2</option>
+                <option>Phase 3</option>
+                <option>Phase 4</option>
+                <option>Other</option>
+              </select>
+
+              <button class="btn btn-white"
+                      onclick="addPhase()">
+                + Add New
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Precinct <span class="required">*</span>
+            </label>
+
+            <div class="add-select">
+
+              <select id="storePrecinct">
+                <option value="">Select Precinct</option>
+                <option>Precinct 1</option>
+                <option>Precinct 2</option>
+                <option>Precinct 3</option>
+                <option>Precinct 4</option>
+                <option>Other</option>
+              </select>
+
+              <button class="btn btn-white"
+                      onclick="addPrecinct()">
+                + Add New
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Sector <span class="required">*</span>
+            </label>
+
+            <div class="add-select">
+
+              <select id="storeSector">
+                <option value="">Select Sector</option>
+                <option>Sector A</option>
+                <option>Sector B</option>
+                <option>Sector C</option>
+                <option>Sector D</option>
+                <option>Other</option>
+              </select>
+
+              <button class="btn btn-white"
+                      onclick="addSector()">
+                + Add New
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Block <span class="required">*</span>
+            </label>
+
+            <div class="add-select">
+
+              <select id="storeBlock">
+                <option value="">Select Block</option>
+                <option>Block A</option>
+                <option>Block B</option>
+                <option>Block C</option>
+                <option>Block D</option>
+                <option>Other</option>
+              </select>
+
+              <button class="btn btn-white"
+                      onclick="addBlock()">
+                + Add New
+              </button>
+
+            </div>
+
+          </div>
+
 
           <div class="form-group full">
-            <label>Full Written Address</label>
-            <textarea id="profileAddress"></textarea>
+
+            <label>
+              Complete Written Address <span class="required">*</span>
+            </label>
+
+            <textarea id="storeAddress"
+                      required></textarea>
+
           </div>
 
-        </div>
-
-        <div class="form-actions">
-          <button class="btn btn-yellow" onclick="saveProfile()">
-            Save Profile
-          </button>
         </div>
 
       </div>
@@ -1229,23 +1609,180 @@ textarea{
 
       <div class="form-section">
 
-        <h3>Live Location</h3>
+        <h3>Vendor Live Location</h3>
 
         <div class="location-box">
 
-          <div class="location-status" id="locationStatus">
-            Live location has not been captured yet.
+          <strong>Current Shop Location</strong>
+
+          <div class="location-text" id="locationStatus">
+            Location has not been captured.
           </div>
 
-          <div class="gps-row">
+          <button class="btn btn-yellow"
+                  onclick="captureLocation()">
+            Use My Current Location
+          </button>
 
-            <button class="btn btn-yellow" onclick="captureLocation()">
-              Use My Current Location
-            </button>
+          <div id="coordinates"
+               style="font-size:12px;color:#777;margin-top:10px;">
+            —
+          </div>
 
-            <span id="locationCoordinates" style="font-size:13px;color:#777;">
-              Not available
-            </span>
+        </div>
+
+      </div>
+
+
+      <div class="form-section">
+
+        <h3>Shop Details</h3>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>
+              Average Daily Footfall <span class="required">*</span>
+            </label>
+            <input id="storeFootfall" type="number">
+          </div>
+
+          <div class="form-group">
+            <label>
+              Shop Size <span class="required">*</span>
+            </label>
+            <input id="storeSize"
+                   placeholder="e.g. 500 sq ft">
+          </div>
+
+          <div class="form-group">
+            <label>
+              Ice Cream Fridge <span class="required">*</span>
+            </label>
+            <select id="storeFridge">
+              <option value="">Select</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-section">
+
+        <h3>LCD Installation</h3>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label>
+              LCD Status <span class="required">*</span>
+            </label>
+
+            <select id="lcdStatus"
+                    onchange="changeLCDStatus()">
+
+              <option value="">
+                Select LCD Status
+              </option>
+
+              <option value="Already Have LCD">
+                Already Have LCD
+              </option>
+
+              <option value="Purchase From Spotly">
+                Purchase From Spotly
+              </option>
+
+              <option value="Need Installation">
+                Need Installation
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              LCD Size <span class="required">*</span>
+            </label>
+
+            <select id="lcdSize">
+              <option value="">Select Size</option>
+              <option>45 inch</option>
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div id="installmentArea"
+             class="hidden"
+             style="margin-top:20px;">
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label>
+                Purchase Method
+              </label>
+
+              <select id="purchaseMethod"
+                      onchange="calculateInstallment()">
+
+                <option>Cash</option>
+                <option>Installment</option>
+
+              </select>
+
+            </div>
+
+            <div class="form-group">
+              <label>
+                LCD Price
+              </label>
+
+              <input id="lcdPrice"
+                     type="number"
+                     value="60000"
+                     oninput="calculateInstallment()">
+
+            </div>
+
+            <div class="form-group"
+                 id="installmentMonthsGroup">
+
+              <label>
+                Installment Months
+              </label>
+
+              <select id="installmentMonths"
+                      onchange="calculateInstallment()">
+                <option value="3">3 Months</option>
+                <option value="6">6 Months</option>
+                <option value="12">12 Months</option>
+              </select>
+
+            </div>
+
+            <div class="form-group">
+
+              <label>
+                Monthly Amount
+              </label>
+
+              <input id="monthlyInstallment"
+                     readonly
+                     placeholder="Rs. 0">
+
+            </div>
 
           </div>
 
@@ -1256,75 +1793,73 @@ textarea{
 
       <div class="form-section">
 
-        <h3>Shop Information</h3>
+        <h3>Internet & Electricity</h3>
 
         <div class="form-grid">
 
           <div class="form-group">
-            <label>Average Daily Footfall</label>
-            <input id="profileFootfall" type="number">
-          </div>
 
-          <div class="form-group">
-            <label>Shop Size</label>
-            <input id="profileSize" placeholder="e.g. 500 sq ft">
-          </div>
+            <label>
+              Internet Availability <span class="required">*</span>
+            </label>
 
-          <div class="form-group">
-            <label>LCD Status</label>
-            <select id="profileLCD">
-              <option>Pending</option>
-              <option>Installed</option>
-              <option>Replacement Required</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>LCD Installment</label>
-            <select id="profileInstallment" onchange="toggleInstallment()">
-              <option>No</option>
-              <option>Yes</option>
-            </select>
-          </div>
-
-          <div class="form-group hidden" id="installmentBox">
-            <label>Monthly Installment</label>
-            <input id="profileInstallmentAmount" type="number" placeholder="Rs.">
-          </div>
-
-          <div class="form-group">
-            <label>Sub Meter</label>
-            <select id="profileSubMeter">
-              <option>Yes</option>
-              <option>No</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Internet Available</label>
-            <select id="profileInternet">
-              <option>Yes</option>
-              <option>No</option>
+            <select id="internetStatus">
+              <option value="">Select</option>
+              <option>Internet Available</option>
+              <option>No Internet</option>
               <option>Spotly Internet Required</option>
             </select>
+
           </div>
 
-          <div class="form-group">
-            <label>Opening Time</label>
-            <input id="profileOpen" type="time">
-          </div>
 
           <div class="form-group">
-            <label>Closing Time</label>
-            <input id="profileClose" type="time">
-          </div>
 
-          <div class="form-group">
-            <label>Ice Cream Fridge</label>
-            <select id="profileFridge">
+            <label>
+              Sub Meter <span class="required">*</span>
+            </label>
+
+            <select id="subMeter">
+              <option value="">Select</option>
               <option>Yes</option>
               <option>No</option>
             </select>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-section">
+
+        <h3>Shop Opening & Closing</h3>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label>
+              Opening Time <span class="required">*</span>
+            </label>
+
+            <input id="openingTime"
+                   type="time"
+                   value="09:00">
+
+          </div>
+
+          <div class="form-group">
+
+            <label>
+              Closing Time <span class="required">*</span>
+            </label>
+
+            <input id="closingTime"
+                   type="time"
+                   value="00:00">
+
           </div>
 
         </div>
@@ -1336,9 +1871,14 @@ textarea{
 
         <h3>Load Shedding Slots</h3>
 
-        <div id="loadSheddingList"></div>
+        <p style="color:#777;font-size:13px;margin-bottom:15px;">
+          Add all expected load-shedding periods.
+        </p>
 
-        <button class="btn btn-white" onclick="addLoadSlot()">
+        <div id="loadSlots"></div>
+
+        <button class="btn btn-white"
+                onclick="addLoadSlot()">
           + Add Load Shedding Slot
         </button>
 
@@ -1347,18 +1887,67 @@ textarea{
 
       <div class="form-section">
 
-        <h3>Order Booker</h3>
+        <h3>Bank Details</h3>
 
         <div class="form-grid">
 
           <div class="form-group">
-            <label>Assigned Order Booker</label>
 
-            <select id="profileBooker">
-              <option value="">Select Employee</option>
-              <option>Ahmed Khan</option>
-              <option>Ali Raza</option>
-              <option>Sara Ahmed</option>
+            <label>
+              Bank Name <span class="required">*</span>
+            </label>
+
+            <input id="bankName">
+
+          </div>
+
+          <div class="form-group">
+
+            <label>
+              Account Title <span class="required">*</span>
+            </label>
+
+            <input id="bankTitle">
+
+          </div>
+
+          <div class="form-group">
+
+            <label>
+              IBAN <span class="required">*</span>
+            </label>
+
+            <input id="bankIBAN"
+                   placeholder="PK00XXXX0000000000000000">
+
+          </div>
+
+          <div class="form-group">
+
+            <label>
+              Account Number <span class="required">*</span>
+            </label>
+
+            <input id="bankAccount">
+
+          </div>
+
+          <div class="form-group">
+
+            <label>
+              Payment Method <span class="required">*</span>
+            </label>
+
+            <select id="bankMethod">
+
+              <option value="">
+                Select Payment Method
+              </option>
+
+              <option>Bank Transfer</option>
+              <option>JazzCash</option>
+              <option>EasyPaisa</option>
+
             </select>
 
           </div>
@@ -1367,67 +1956,52 @@ textarea{
 
       </div>
 
-    </div>
 
+      <div class="form-actions">
 
-    <!-- SCREEN -->
-
-    <div id="page-screen" class="hidden">
-
-      <div class="dashboard-cards">
-
-        <div class="dashboard-card">
-          <div class="card-label">Screen ID</div>
-          <div class="card-value" style="font-size:21px;">SPT-SCR-001</div>
-        </div>
-
-        <div class="dashboard-card">
-          <div class="card-label">Status</div>
-          <div class="card-value" style="font-size:20px;">
-            <span class="status online">● Online</span>
-          </div>
-        </div>
-
-        <div class="dashboard-card">
-          <div class="card-label">Today's Plays</div>
-          <div class="card-value">47</div>
-        </div>
-
-        <div class="dashboard-card">
-          <div class="card-label">Last Sync</div>
-          <div class="card-value" style="font-size:18px;">Just now</div>
-        </div>
+        <button class="btn btn-yellow"
+                onclick="saveStoreProfile()">
+          Save Store Information
+        </button>
 
       </div>
 
+    </div>
+
+
+    <!-- ================= TODAY'S ADS ================= -->
+
+    <div id="page-ads" class="hidden">
+
+      <div id="adsApprovalMessage"
+           class="review-box"
+           style="margin-bottom:18px;">
+      </div>
 
       <div class="panel">
 
         <div class="panel-title">
-          <h3>Screen Information</h3>
+          <h3>Today's Advertisement Schedule</h3>
+          <span id="adsDate"></span>
         </div>
 
-        <div class="form-grid">
+        <div class="table-wrap">
 
-          <div class="form-group">
-            <label>Screen Model</label>
-            <input value="43-inch Android Display" readonly>
-          </div>
+          <table>
 
-          <div class="form-group">
-            <label>Screen Resolution</label>
-            <input value="1920 × 1080" readonly>
-          </div>
+            <thead>
+              <tr>
+                <th>Advertisement</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Duration</th>
+                <th>Status</th>
+              </tr>
+            </thead>
 
-          <div class="form-group">
-            <label>Installation Date</label>
-            <input value="01 Sep 2026" readonly>
-          </div>
+            <tbody id="todayAdsTable"></tbody>
 
-          <div class="form-group">
-            <label>Software Status</label>
-            <input value="Up to date" readonly>
-          </div>
+          </table>
 
         </div>
 
@@ -1436,11 +2010,154 @@ textarea{
     </div>
 
 
-    <!-- EARNINGS -->
+    <!-- ================= PLAY HISTORY ================= -->
+
+    <div id="page-plays" class="hidden">
+
+      <div class="panel">
+
+        <div class="panel-title">
+          <h3>Complete Advertisement History</h3>
+        </div>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Date</th>
+                <th>Advertisement</th>
+                <th>Start</th>
+                <th>Duration</th>
+                <th>Status</th>
+                <th>Verified</th>
+              </tr>
+
+            </thead>
+
+            <tbody id="playHistory"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= ENERGY ================= -->
+
+    <div id="page-energy" class="hidden">
+
+      <div class="panel">
+
+        <div class="panel-title">
+
+          <h3>45-inch LCD Electricity Meter</h3>
+
+          <span>
+            Rate: <strong>Rs. 80 / Unit</strong>
+          </span>
+
+        </div>
+
+
+        <div class="energy-box">
+
+          <div>
+
+            <div class="meter"
+                 id="electricMeter"
+                 style="--meter-progress:0deg;">
+
+              <div class="meter-inner">
+
+                <div class="meter-number"
+                     id="meterUnits">
+                  0.00
+                </div>
+
+                <div class="meter-label">
+                  Units Today
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="energy-info">
+
+            <div class="energy-row">
+              <span>LCD</span>
+              <strong>45 inch</strong>
+            </div>
+
+            <div class="energy-row">
+              <span>Estimated Power</span>
+              <strong>80 W</strong>
+            </div>
+
+            <div class="energy-row">
+              <span>LCD On Time</span>
+              <strong id="energyHours">0 hrs</strong>
+            </div>
+
+            <div class="energy-row">
+              <span>Estimated Units</span>
+              <strong id="energyUnitText">0.00</strong>
+            </div>
+
+            <div class="energy-row"
+                 style="background:var(--light-yellow);">
+
+              <span>Estimated Electricity Bill</span>
+
+              <strong id="energyBill">
+                Rs. 0
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="panel" style="margin-top:17px;">
+
+        <div class="panel-title">
+          <h3>Electricity Calculation</h3>
+        </div>
+
+        <p style="color:#777;font-size:13px;line-height:1.7;">
+          Estimated bill = LCD power consumption × LCD operating
+          hours × Rs. 80 per unit. The actual electricity bill may
+          differ from this estimate.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= EARNINGS ================= -->
 
     <div id="page-earnings" class="hidden">
 
       <div class="dashboard-cards">
+
+        <div class="dashboard-card">
+          <div class="card-label">Today's Earning</div>
+          <div class="card-value">Rs. 0</div>
+        </div>
 
         <div class="dashboard-card">
           <div class="card-label">Total Earnings</div>
@@ -1457,11 +2174,6 @@ textarea{
           <div class="card-value">Rs. 3,450</div>
         </div>
 
-        <div class="dashboard-card">
-          <div class="card-label">Total Verified Plays</div>
-          <div class="card-value">2,490</div>
-        </div>
-
       </div>
 
 
@@ -1476,6 +2188,7 @@ textarea{
           <table>
 
             <thead>
+
               <tr>
                 <th>Date</th>
                 <th>Verified Plays</th>
@@ -1483,6 +2196,7 @@ textarea{
                 <th>Amount</th>
                 <th>Status</th>
               </tr>
+
             </thead>
 
             <tbody>
@@ -1490,25 +2204,31 @@ textarea{
               <tr>
                 <td>28 Sep 2026</td>
                 <td>350</td>
-                <td>Rs. 2.00</td>
+                <td>Rs. 2</td>
                 <td>Rs. 700</td>
-                <td><span class="status pending">Pending</span></td>
+                <td>
+                  <span class="status pending">Pending</span>
+                </td>
               </tr>
 
               <tr>
                 <td>27 Sep 2026</td>
                 <td>410</td>
-                <td>Rs. 2.00</td>
+                <td>Rs. 2</td>
                 <td>Rs. 820</td>
-                <td><span class="status online">Paid</span></td>
+                <td>
+                  <span class="status approved">Paid</span>
+                </td>
               </tr>
 
               <tr>
                 <td>26 Sep 2026</td>
                 <td>390</td>
-                <td>Rs. 2.00</td>
+                <td>Rs. 2</td>
                 <td>Rs. 780</td>
-                <td><span class="status online">Paid</span></td>
+                <td>
+                  <span class="status approved">Paid</span>
+                </td>
               </tr>
 
             </tbody>
@@ -1522,94 +2242,34 @@ textarea{
     </div>
 
 
-    <!-- PLAYS -->
-
-    <div id="page-plays" class="hidden">
-
-      <div class="panel">
-
-        <div class="panel-title">
-          <h3>Advertising Play History</h3>
-        </div>
-
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-              <tr>
-                <th>Ad</th>
-                <th>Screen</th>
-                <th>Date</th>
-                <th>Start</th>
-                <th>Duration</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td>Fresh Mart</td>
-                <td>SPT-SCR-001</td>
-                <td>29 Sep 2026</td>
-                <td>10:20 AM</td>
-                <td>30 sec</td>
-                <td><span class="status online">Verified</span></td>
-              </tr>
-
-              <tr>
-                <td>Pizza House</td>
-                <td>SPT-SCR-001</td>
-                <td>29 Sep 2026</td>
-                <td>10:21 AM</td>
-                <td>15 sec</td>
-                <td><span class="status online">Verified</span></td>
-              </tr>
-
-              <tr>
-                <td>Mobile World</td>
-                <td>SPT-SCR-001</td>
-                <td>29 Sep 2026</td>
-                <td>10:22 AM</td>
-                <td>30 sec</td>
-                <td><span class="status online">Verified</span></td>
-              </tr>
-
-              <tr>
-                <td>Fashion Point</td>
-                <td>SPT-SCR-001</td>
-                <td>29 Sep 2026</td>
-                <td>10:23 AM</td>
-                <td>60 sec</td>
-                <td><span class="status online">Verified</span></td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- WITHDRAWALS -->
+    <!-- ================= WITHDRAWALS ================= -->
 
     <div id="page-withdrawals" class="hidden">
 
       <div class="dashboard-cards">
 
         <div class="dashboard-card">
-          <div class="card-label">Available Balance</div>
-          <div class="card-value">Rs. 3,450</div>
+
+          <div class="card-label">
+            Available Balance
+          </div>
+
+          <div class="card-value">
+            Rs. 3,450
+          </div>
+
         </div>
 
         <div class="dashboard-card">
-          <div class="card-label">Pending Withdrawal</div>
-          <div class="card-value">Rs. 0</div>
+
+          <div class="card-label">
+            Pending Withdrawal
+          </div>
+
+          <div class="card-value">
+            Rs. 0
+          </div>
+
         </div>
 
       </div>
@@ -1624,16 +2284,27 @@ textarea{
         <div class="form-grid">
 
           <div class="form-group">
-            <label>Amount</label>
-            <input id="withdrawAmount" type="number" placeholder="Enter amount">
+
+            <label>
+              Amount <span class="required">*</span>
+            </label>
+
+            <input id="withdrawAmount"
+                   type="number"
+                   placeholder="Enter amount">
+
           </div>
 
           <div class="form-group">
-            <label>Payment Method</label>
+
+            <label>
+              Payment Method <span class="required">*</span>
+            </label>
 
             <select id="withdrawMethod">
               <option>Bank Transfer</option>
-              <option>Other</option>
+              <option>JazzCash</option>
+              <option>EasyPaisa</option>
             </select>
 
           </div>
@@ -1642,7 +2313,8 @@ textarea{
 
         <div class="form-actions">
 
-          <button class="btn btn-yellow" onclick="requestWithdrawal()">
+          <button class="btn btn-yellow"
+                  onclick="requestWithdrawal()">
             Request Withdrawal
           </button>
 
@@ -1651,7 +2323,7 @@ textarea{
       </div>
 
 
-      <div class="panel" style="margin-top:18px;">
+      <div class="panel" style="margin-top:17px;">
 
         <div class="panel-title">
           <h3>Withdrawal History</h3>
@@ -1670,16 +2342,7 @@ textarea{
               </tr>
             </thead>
 
-            <tbody id="withdrawalHistory">
-
-              <tr>
-                <td>20 Sep 2026</td>
-                <td>Rs. 5,000</td>
-                <td>Bank Transfer</td>
-                <td><span class="status online">Paid</span></td>
-              </tr>
-
-            </tbody>
+            <tbody id="withdrawalHistory"></tbody>
 
           </table>
 
@@ -1690,7 +2353,7 @@ textarea{
     </div>
 
 
-    <!-- BANK -->
+    <!-- ================= BANK ================= -->
 
     <div id="page-bank" class="hidden">
 
@@ -1701,29 +2364,29 @@ textarea{
         <div class="form-grid">
 
           <div class="form-group">
-            <label>Bank Name</label>
-            <input id="bankName" placeholder="e.g. Meezan Bank">
+            <label>Bank Name <span class="required">*</span></label>
+            <input id="bankPageName">
           </div>
 
           <div class="form-group">
-            <label>Account Title</label>
-            <input id="bankTitle" placeholder="Account holder name">
+            <label>Account Title <span class="required">*</span></label>
+            <input id="bankPageTitle">
           </div>
 
           <div class="form-group">
-            <label>IBAN</label>
-            <input id="bankIBAN" placeholder="PK00XXXX0000000000000000">
+            <label>IBAN <span class="required">*</span></label>
+            <input id="bankPageIBAN">
           </div>
 
           <div class="form-group">
-            <label>Account Number</label>
-            <input id="bankAccount">
+            <label>Account Number <span class="required">*</span></label>
+            <input id="bankPageAccount">
           </div>
 
           <div class="form-group">
-            <label>Payment Method</label>
+            <label>Payment Method <span class="required">*</span></label>
 
-            <select id="bankMethod">
+            <select id="bankPageMethod">
               <option>Bank Transfer</option>
               <option>JazzCash</option>
               <option>EasyPaisa</option>
@@ -1735,7 +2398,8 @@ textarea{
 
         <div class="form-actions">
 
-          <button class="btn btn-yellow" onclick="saveBankDetails()">
+          <button class="btn btn-yellow"
+                  onclick="saveBankPage()">
             Save Bank Details
           </button>
 
@@ -1746,45 +2410,50 @@ textarea{
     </div>
 
 
-    <!-- SUPPORT -->
+    <!-- ================= SUPPORT ================= -->
 
     <div id="page-support" class="hidden">
 
       <div class="form-section">
 
-        <h3>Submit Complaint / Support Request</h3>
+        <h3>Support / Complaint</h3>
 
         <div class="form-grid">
 
           <div class="form-group">
-            <label>Subject</label>
-            <input id="supportSubject" placeholder="What do you need help with?">
+            <label>Subject <span class="required">*</span></label>
+            <input id="supportSubject">
           </div>
 
           <div class="form-group">
-            <label>Category</label>
+            <label>Category <span class="required">*</span></label>
 
             <select id="supportCategory">
-              <option>Screen Issue</option>
-              <option>Payment Issue</option>
-              <option>Advertisement Issue</option>
+              <option>LCD Issue</option>
               <option>Internet Issue</option>
+              <option>Advertisement Issue</option>
+              <option>Payment Issue</option>
               <option>Other</option>
             </select>
 
           </div>
 
           <div class="form-group full">
-            <label>Message</label>
-            <textarea id="supportMessage"
-                      placeholder="Describe your issue..."></textarea>
+
+            <label>
+              Message <span class="required">*</span>
+            </label>
+
+            <textarea id="supportMessage"></textarea>
+
           </div>
 
         </div>
 
         <div class="form-actions">
 
-          <button class="btn btn-yellow" onclick="submitSupport()">
+          <button class="btn btn-yellow"
+                  onclick="submitSupport()">
             Submit Request
           </button>
 
@@ -1796,7 +2465,7 @@ textarea{
       <div class="panel">
 
         <div class="panel-title">
-          <h3>My Support Requests</h3>
+          <h3>My Requests</h3>
         </div>
 
         <div class="table-wrap">
@@ -1827,37 +2496,97 @@ textarea{
 </section>
 
 
-<!-- ================= LOGIN MODAL ================= -->
+<!-- =========================================================
+     NOTIFICATIONS
+========================================================= -->
+
+<div class="notification-panel" id="notificationPanel">
+
+  <div class="notification-header">
+    Notifications
+  </div>
+
+  <div class="notification-item">
+    <strong>Welcome to Spotly</strong>
+    <span>Your vendor account has been created.</span>
+  </div>
+
+  <div class="notification-item">
+    <strong>Application Status</strong>
+    <span>Your store is currently under review.</span>
+  </div>
+
+  <div class="notification-item">
+    <strong>Complete Your Profile</strong>
+    <span>Make sure all required information is complete.</span>
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     LOGIN MODAL
+========================================================= -->
 
 <div class="modal" id="loginModal">
 
-  <div class="modal-box">
+  <div class="modal-box modal-small">
 
     <div class="modal-head">
+
       <h2>Vendor Login</h2>
-      <button class="close" onclick="closeModal('loginModal')">×</button>
+
+      <button class="close"
+              onclick="closeModal('loginModal')">
+        ×
+      </button>
+
     </div>
+
 
     <div class="form-group" style="margin-bottom:15px;">
+
       <label>Email / Phone</label>
-      <input id="loginEmail" placeholder="Enter email or phone">
+
+      <input id="loginIdentity"
+             placeholder="Email or phone">
+
     </div>
+
 
     <div class="form-group" style="margin-bottom:20px;">
+
       <label>Password</label>
-      <input id="loginPassword" type="password" placeholder="Enter password">
+
+      <input id="loginPassword"
+             type="password"
+             placeholder="Password">
+
     </div>
 
-    <button class="btn btn-yellow" style="width:100%;" onclick="loginVendor()">
+
+    <button class="btn btn-yellow"
+            style="width:100%;"
+            onclick="loginVendor()">
+
       Login
+
     </button>
 
-    <div style="text-align:center;margin-top:18px;color:#777;font-size:13px;">
+
+    <div style="text-align:center;margin-top:17px;font-size:13px;color:#777;">
+
       Don't have an account?
-      <button style="border:0;background:none;font-weight:700;"
-              onclick="closeModal('loginModal');openRegister();">
+
+      <button
+        style="border:0;background:none;font-weight:700;"
+        onclick="
+          closeModal('loginModal');
+          openRegistration();
+        ">
         Register
       </button>
+
     </div>
 
   </div>
@@ -1865,126 +2594,799 @@ textarea{
 </div>
 
 
-<!-- ================= REGISTER MODAL ================= -->
+<!-- =========================================================
+     REGISTRATION MODAL
+========================================================= -->
 
-<div class="modal" id="registerModal">
+<div class="modal" id="registrationModal">
 
   <div class="modal-box">
 
     <div class="modal-head">
-      <h2>Register as Vendor</h2>
-      <button class="close" onclick="closeModal('registerModal')">×</button>
-    </div>
 
-    <div class="form-grid">
+      <div>
 
-      <div class="form-group full">
-        <label>Shop / Vendor Name *</label>
-        <input id="regShop" placeholder="Enter shop name">
-      </div>
+        <h2>Create Vendor Account</h2>
 
-      <div class="form-group">
-        <label>Owner Name *</label>
-        <input id="regOwner" placeholder="Enter owner name">
-      </div>
-
-      <div class="form-group">
-        <label>Phone *</label>
-        <input id="regPhone" placeholder="03XXXXXXXXX">
-      </div>
-
-      <div class="form-group">
-        <label>Email *</label>
-        <input id="regEmail" type="email" placeholder="vendor@email.com">
-      </div>
-
-      <div class="form-group">
-        <label>Password *</label>
-        <input id="regPassword" type="password" placeholder="Create password">
-      </div>
-
-      <div class="form-group">
-        <label>Shop Category *</label>
-
-        <select id="regCategory">
-          <option value="">Select Category</option>
-          <option>Grocery</option>
-          <option>Pharmacy</option>
-          <option>Restaurant</option>
-          <option>Clothing</option>
-          <option>Electronics</option>
-          <option>Salon</option>
-          <option>Other</option>
-        </select>
+        <p style="font-size:13px;color:#777;margin-top:5px;">
+          Complete all required information before submitting.
+        </p>
 
       </div>
 
-      <div class="form-group">
-        <label>Area *</label>
-
-        <select id="regArea">
-          <option value="">Select Area</option>
-          <option>Johar Block 1</option>
-          <option>Johar Block 2</option>
-          <option>Gulshan</option>
-          <option>North Nazimabad</option>
-          <option>Other</option>
-        </select>
-
-      </div>
-
-      <div class="form-group full">
-        <label>Written Shop Address *</label>
-        <textarea id="regAddress"
-                  placeholder="Enter complete shop address"></textarea>
-      </div>
-
-    </div>
-
-    <div class="location-box" style="margin-top:18px;">
-
-      <strong>Live Location *</strong>
-
-      <div class="location-status" style="margin-top:8px;">
-        Vendor must capture their own current location.
-      </div>
-
-      <button class="btn btn-yellow"
-              onclick="captureRegisterLocation()">
-        Use My Current Location
+      <button class="close"
+              onclick="closeModal('registrationModal')">
+        ×
       </button>
 
-      <div id="registerLocation"
-           style="font-size:12px;color:#777;margin-top:8px;">
-        Location not captured
+    </div>
+
+
+    <div class="register-progress">
+
+      <div class="progress-step active"
+           id="progress1"></div>
+
+      <div class="progress-step"
+           id="progress2"></div>
+
+      <div class="progress-step"
+           id="progress3"></div>
+
+      <div class="progress-step"
+           id="progress4"></div>
+
+      <div class="progress-step"
+           id="progress5"></div>
+
+    </div>
+
+
+    <!-- ================= STEP 1 ================= -->
+
+    <div class="register-page active"
+         id="registerPage1">
+
+      <h3 style="margin-bottom:20px;">
+        Account & Store
+      </h3>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>
+            Shop / Store Name <span class="required">*</span>
+          </label>
+
+          <input id="regShop"
+                 required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Owner Name <span class="required">*</span>
+          </label>
+
+          <input id="regOwner"
+                 required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Phone Number <span class="required">*</span>
+          </label>
+
+          <input id="regPhone"
+                 required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Email <span class="required">*</span>
+          </label>
+
+          <input id="regEmail"
+                 type="email"
+                 required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Password <span class="required">*</span>
+          </label>
+
+          <input id="regPassword"
+                 type="password"
+                 required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Confirm Password <span class="required">*</span>
+          </label>
+
+          <input id="regPasswordConfirm"
+                 type="password"
+                 required>
+
+        </div>
+
+      </div>
+
+      <div class="register-actions">
+
+        <div></div>
+
+        <button class="btn btn-yellow"
+                onclick="nextRegistration(1)">
+          Continue
+        </button>
+
       </div>
 
     </div>
 
-    <div style="margin-top:18px;">
 
-      <label style="display:flex;gap:9px;align-items:flex-start;font-size:13px;">
-        <input type="checkbox" id="regConsent">
-        <span>
-          I confirm that the information provided is correct and agree to
-          Spotly vendor terms.
-        </span>
-      </label>
+    <!-- ================= STEP 2 ================= -->
+
+    <div class="register-page"
+         id="registerPage2">
+
+      <h3 style="margin-bottom:20px;">
+        Shop Location
+      </h3>
+
+      <div class="form-grid">
+
+
+        <div class="form-group">
+
+          <label>
+            Category <span class="required">*</span>
+          </label>
+
+          <div class="add-select">
+
+            <select id="regCategory">
+              <option value="">Select Category</option>
+            </select>
+
+            <button class="btn btn-white"
+                    onclick="addRegistrationCategory()">
+              + Add New
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Area <span class="required">*</span>
+          </label>
+
+          <div class="add-select">
+
+            <select id="regArea">
+              <option value="">Select Area</option>
+            </select>
+
+            <button class="btn btn-white"
+                    onclick="addRegistrationArea()">
+              + Add New
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Phase <span class="required">*</span>
+          </label>
+
+          <div class="add-select">
+
+            <select id="regPhase">
+              <option value="">Select Phase</option>
+            </select>
+
+            <button class="btn btn-white"
+                    onclick="addRegistrationPhase()">
+              + Add New
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Precinct <span class="required">*</span>
+          </label>
+
+          <div class="add-select">
+
+            <select id="regPrecinct">
+              <option value="">Select Precinct</option>
+            </select>
+
+            <button class="btn btn-white"
+                    onclick="addRegistrationPrecinct()">
+              + Add New
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Sector <span class="required">*</span>
+          </label>
+
+          <div class="add-select">
+
+            <select id="regSector">
+              <option value="">Select Sector</option>
+            </select>
+
+            <button class="btn btn-white"
+                    onclick="addRegistrationSector()">
+              + Add New
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Block <span class="required">*</span>
+          </label>
+
+          <div class="add-select">
+
+            <select id="regBlock">
+              <option value="">Select Block</option>
+            </select>
+
+            <button class="btn btn-white"
+                    onclick="addRegistrationBlock()">
+              + Add New
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group full">
+
+          <label>
+            Complete Written Address <span class="required">*</span>
+          </label>
+
+          <textarea id="regAddress"
+                    required></textarea>
+
+        </div>
+
+      </div>
+
+
+      <div class="location-box"
+           style="margin-top:20px;">
+
+        <strong>
+          Vendor Live Location <span class="required">*</span>
+        </strong>
+
+        <div class="location-text"
+             id="registrationLocationText">
+
+          Vendor must capture their own current location.
+          Admin cannot enter this location.
+
+        </div>
+
+        <button class="btn btn-yellow"
+                onclick="captureRegistrationLocation()">
+          Use My Current Location
+        </button>
+
+        <div id="registrationCoordinates"
+             style="font-size:12px;color:#777;margin-top:9px;">
+          Location not captured
+        </div>
+
+      </div>
+
+
+      <div class="register-actions">
+
+        <button class="btn btn-white"
+                onclick="previousRegistration(2)">
+          Back
+        </button>
+
+        <button class="btn btn-yellow"
+                onclick="nextRegistration(2)">
+          Continue
+        </button>
+
+      </div>
 
     </div>
 
-    <button class="btn btn-yellow"
-            style="width:100%;margin-top:20px;"
-            onclick="registerVendor()">
-      Create Vendor Account
-    </button>
+
+    <!-- ================= STEP 3 ================= -->
+
+    <div class="register-page"
+         id="registerPage3">
+
+      <h3 style="margin-bottom:20px;">
+        Shop & LCD Information
+      </h3>
+
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>
+            Average Daily Footfall <span class="required">*</span>
+          </label>
+
+          <input id="regFootfall"
+                 type="number">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Shop Size <span class="required">*</span>
+          </label>
+
+          <input id="regShopSize"
+                 placeholder="e.g. 500 sq ft">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Ice Cream Fridge <span class="required">*</span>
+          </label>
+
+          <select id="regFridge">
+            <option value="">Select</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            LCD Status <span class="required">*</span>
+          </label>
+
+          <select id="regLCDStatus"
+                  onchange="registrationLCDChange()">
+
+            <option value="">
+              Select LCD Status
+            </option>
+
+            <option value="Already Have LCD">
+              Already Have LCD
+            </option>
+
+            <option value="Purchase From Spotly">
+              Purchase From Spotly
+            </option>
+
+            <option value="Need Installation">
+              Need Installation
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            LCD Size <span class="required">*</span>
+          </label>
+
+          <select id="regLCDSize">
+
+            <option value="">
+              Select Size
+            </option>
+
+            <option>45 inch</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Internet <span class="required">*</span>
+          </label>
+
+          <select id="regInternet">
+
+            <option value="">
+              Select
+            </option>
+
+            <option>Internet Available</option>
+            <option>No Internet</option>
+            <option>Spotly Internet Required</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Sub Meter <span class="required">*</span>
+          </label>
+
+          <select id="regSubMeter">
+
+            <option value="">
+              Select
+            </option>
+
+            <option>Yes</option>
+            <option>No</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Opening Time <span class="required">*</span>
+          </label>
+
+          <input id="regOpening"
+                 type="time"
+                 value="09:00">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Closing Time <span class="required">*</span>
+          </label>
+
+          <input id="regClosing"
+                 type="time"
+                 value="00:00">
+
+        </div>
+
+      </div>
+
+
+      <div id="registrationPurchaseBox"
+           class="location-box hidden"
+           style="margin-top:20px;">
+
+        <strong>
+          LCD Purchase / Installment
+        </strong>
+
+        <div class="form-grid"
+             style="margin-top:17px;">
+
+          <div class="form-group">
+
+            <label>
+              Purchase Method <span class="required">*</span>
+            </label>
+
+            <select id="regPurchaseMethod"
+                    onchange="registrationInstallment()">
+
+              <option>Cash</option>
+              <option>Installment</option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              LCD Price <span class="required">*</span>
+            </label>
+
+            <input id="regLCDPrice"
+                   type="number"
+                   value="60000"
+                   oninput="registrationInstallment()">
+
+          </div>
+
+
+          <div class="form-group"
+               id="regMonthsBox">
+
+            <label>
+              Installment Months
+              <span class="required">*</span>
+            </label>
+
+            <select id="regMonths"
+                    onchange="registrationInstallment()">
+
+              <option value="3">3 Months</option>
+              <option value="6">6 Months</option>
+              <option value="12">12 Months</option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Monthly Installment
+            </label>
+
+            <input id="regMonthlyInstallment"
+                   readonly>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-section"
+           style="padding:0;border:0;margin:20px 0 0;">
+
+        <h3>Load Shedding Slots</h3>
+
+        <div id="registrationLoadSlots"></div>
+
+        <button class="btn btn-white"
+                onclick="addRegistrationLoadSlot()">
+          + Add Load Shedding Slot
+        </button>
+
+      </div>
+
+
+      <div class="register-actions">
+
+        <button class="btn btn-white"
+                onclick="previousRegistration(3)">
+          Back
+        </button>
+
+        <button class="btn btn-yellow"
+                onclick="nextRegistration(3)">
+          Continue
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= STEP 4 ================= -->
+
+    <div class="register-page"
+         id="registerPage4">
+
+      <h3 style="margin-bottom:20px;">
+        Bank Details
+      </h3>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label>
+            Bank Name <span class="required">*</span>
+          </label>
+
+          <input id="regBankName">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Account Title <span class="required">*</span>
+          </label>
+
+          <input id="regBankTitle">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            IBAN <span class="required">*</span>
+          </label>
+
+          <input id="regBankIBAN"
+                 placeholder="PK00XXXX0000000000000000">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Account Number <span class="required">*</span>
+          </label>
+
+          <input id="regBankAccount">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Payment Method <span class="required">*</span>
+          </label>
+
+          <select id="regBankMethod">
+
+            <option value="">
+              Select Payment Method
+            </option>
+
+            <option>Bank Transfer</option>
+            <option>JazzCash</option>
+            <option>EasyPaisa</option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <div class="register-actions">
+
+        <button class="btn btn-white"
+                onclick="previousRegistration(4)">
+          Back
+        </button>
+
+        <button class="btn btn-yellow"
+                onclick="nextRegistration(4)">
+          Continue
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= STEP 5 ================= -->
+
+    <div class="register-page"
+         id="registerPage5">
+
+      <h3 style="margin-bottom:20px;">
+        Final Confirmation
+      </h3>
+
+
+      <div class="review-box">
+
+        <strong>
+          Please confirm your information
+        </strong>
+
+        <p>
+          All required information must be correct before
+          creating your Spotly vendor account.
+        </p>
+
+      </div>
+
+
+      <div style="margin-top:20px;">
+
+        <label style="display:flex;gap:9px;align-items:flex-start;font-size:13px;">
+
+          <input type="checkbox"
+                 id="regConsent">
+
+          <span>
+            I confirm that the information provided by me is correct,
+            my live location has been captured from my device,
+            and I agree to Spotly vendor terms.
+          </span>
+
+        </label>
+
+      </div>
+
+
+      <div class="register-actions">
+
+        <button class="btn btn-white"
+                onclick="previousRegistration(5)">
+          Back
+        </button>
+
+        <button class="btn btn-yellow"
+                onclick="createVendorAccount()">
+          Create Vendor Account
+        </button>
+
+      </div>
+
+    </div>
 
   </div>
 
 </div>
 
 
-<!-- ================= TOAST ================= -->
+<!-- =========================================================
+     TOAST
+========================================================= -->
 
 <div class="toast" id="toast"></div>
 
@@ -1992,113 +3394,341 @@ textarea{
 <script>
 
 /* =========================================================
-   SPOTLY VENDOR PORTAL
-   Prototype storage: localStorage
+   SPOTLY DATA
 ========================================================= */
 
-const STORAGE_KEY = "spotly_vendor_data_v1";
+const STORAGE_KEY="spotly_vendor_final_v2";
 
-let vendorData = JSON.parse(
-  localStorage.getItem(STORAGE_KEY) || "null"
+let data=JSON.parse(
+  localStorage.getItem(STORAGE_KEY)||"null"
 );
 
-let registerLocationData = null;
+if(!data){
 
-
-/* ================= DEFAULT DATA ================= */
-
-function defaultVendor(){
-
-  return {
+  data={
     registered:false,
+    approved:false,
+    online:false,
 
-    shopName:"",
-    owner:"",
-    phone:"",
-    email:"",
-    password:"",
-    category:"",
-    area:"",
-    address:"",
+    categories:[
+      "Grocery",
+      "Pharmacy",
+      "Restaurant",
+      "Clothing",
+      "Electronics",
+      "Salon"
+    ],
 
-    location:{
-      latitude:"",
-      longitude:"",
-      capturedAt:""
-    },
+    areas:[
+      "Johar",
+      "Gulshan",
+      "North Nazimabad"
+    ],
 
-    footfall:"",
-    shopSize:"",
-    lcdStatus:"Pending",
-    installment:"No",
-    installmentAmount:"",
-    subMeter:"Yes",
-    internet:"Yes",
-    openTime:"09:00",
-    closeTime:"00:00",
-    fridge:"No",
-    orderBooker:"",
+    phases:[
+      "Phase 1",
+      "Phase 2",
+      "Phase 3",
+      "Phase 4"
+    ],
+
+    precincts:[
+      "Precinct 1",
+      "Precinct 2",
+      "Precinct 3",
+      "Precinct 4"
+    ],
+
+    sectors:[
+      "Sector A",
+      "Sector B",
+      "Sector C",
+      "Sector D"
+    ],
+
+    blocks:[
+      "Block A",
+      "Block B",
+      "Block C",
+      "Block D"
+    ],
+
+    vendor:{},
+
+    location:null,
 
     loadShedding:[],
 
-    bank:{
-      bankName:"",
-      accountTitle:"",
-      iban:"",
-      accountNumber:"",
-      method:"Bank Transfer"
-    },
-
-    support:[],
+    bank:{},
 
     withdrawals:[],
 
-    onboardingStatus:"Pending"
+    support:[],
+
+    notifications:[]
   };
+
+  saveData();
 
 }
 
-
-/* ================= STORAGE ================= */
 
 function saveData(){
 
   localStorage.setItem(
     STORAGE_KEY,
-    JSON.stringify(vendorData)
+    JSON.stringify(data)
   );
 
 }
 
 
-function showToast(message){
+function toast(message){
 
-  const toast=document.getElementById("toast");
+  const t=document.getElementById("toast");
 
-  toast.textContent=message;
-  toast.classList.add("show");
+  t.textContent=message;
+  t.classList.add("show");
 
   setTimeout(()=>{
-    toast.classList.remove("show");
-  },2500);
+    t.classList.remove("show");
+  },2600);
 
 }
 
 
-/* ================= MODALS ================= */
+/* =========================================================
+   SELECT OPTIONS
+========================================================= */
 
-function openLogin(){
+function fillSelect(id,items,placeholder){
 
-  document.getElementById("loginModal")
+  const select=document.getElementById(id);
+
+  if(!select)return;
+
+  select.innerHTML=
+    `<option value="">${placeholder}</option>`;
+
+  items.forEach(item=>{
+
+    const option=document.createElement("option");
+
+    option.value=item;
+    option.textContent=item;
+
+    select.appendChild(option);
+
+  });
+
+}
+
+
+function loadAllSelects(){
+
+  fillSelect(
+    "regCategory",
+    data.categories,
+    "Select Category"
+  );
+
+  fillSelect(
+    "regArea",
+    data.areas,
+    "Select Area"
+  );
+
+  fillSelect(
+    "regPhase",
+    data.phases,
+    "Select Phase"
+  );
+
+  fillSelect(
+    "regPrecinct",
+    data.precincts,
+    "Select Precinct"
+  );
+
+  fillSelect(
+    "regSector",
+    data.sectors,
+    "Select Sector"
+  );
+
+  fillSelect(
+    "regBlock",
+    data.blocks,
+    "Select Block"
+  );
+
+
+  fillSelect(
+    "storeCategory",
+    data.categories,
+    "Select Category"
+  );
+
+  fillSelect(
+    "storeArea",
+    data.areas,
+    "Select Area"
+  );
+
+  fillSelect(
+    "storePhase",
+    data.phases,
+    "Select Phase"
+  );
+
+  fillSelect(
+    "storePrecinct",
+    data.precincts,
+    "Select Precinct"
+  );
+
+  fillSelect(
+    "storeSector",
+    data.sectors,
+    "Select Sector"
+  );
+
+  fillSelect(
+    "storeBlock",
+    data.blocks,
+    "Select Block"
+  );
+
+}
+
+
+/* =========================================================
+   ADD NEW MASTER OPTIONS
+========================================================= */
+
+function addItem(arrayName,label,selectId){
+
+  const value=prompt(
+    "Enter new "+label+":"
+  );
+
+  if(!value || !value.trim())return;
+
+  const clean=value.trim();
+
+  if(!data[arrayName].includes(clean)){
+
+    data[arrayName].push(clean);
+
+    saveData();
+    loadAllSelects();
+
+  }
+
+  document.getElementById(selectId).value=clean;
+
+  toast(label+" added");
+
+}
+
+
+/* Registration */
+
+function addRegistrationCategory(){
+  addItem("categories","category","regCategory");
+}
+
+function addRegistrationArea(){
+  addItem("areas","area","regArea");
+}
+
+function addRegistrationPhase(){
+  addItem("phases","phase","regPhase");
+}
+
+function addRegistrationPrecinct(){
+  addItem("precinct","precinct","regPrecinct");
+}
+
+function addRegistrationSector(){
+  addItem("sectors","sector","regSector");
+}
+
+function addRegistrationBlock(){
+  addItem("blocks","block","regBlock");
+}
+
+
+/* Portal */
+
+function addCategory(){
+  addItem("categories","category","storeCategory");
+}
+
+function addArea(){
+  addItem("areas","area","storeArea");
+}
+
+function addPhase(){
+  addItem("phases","phase","storePhase");
+}
+
+function addPrecinct(){
+  addItem("precincts","precinct","storePrecinct");
+}
+
+function addSector(){
+  addItem("sectors","sector","storeSector");
+}
+
+function addBlock(){
+  addItem("blocks","block","storeBlock");
+}
+
+
+/* =========================================================
+   REGISTRATION
+========================================================= */
+
+let registrationStep=1;
+
+function openRegistration(){
+
+  registrationStep=1;
+
+  showRegistrationStep(1);
+
+  loadAllSelects();
+
+  document.getElementById("registrationModal")
     .classList.add("active");
 
 }
 
 
-function openRegister(){
+function showRegistrationStep(step){
 
-  document.getElementById("registerModal")
-    .classList.add("active");
+  registrationStep=step;
+
+  document.querySelectorAll(".register-page")
+    .forEach(page=>{
+      page.classList.remove("active");
+    });
+
+  document.getElementById(
+    "registerPage"+step
+  ).classList.add("active");
+
+
+  for(let i=1;i<=5;i++){
+
+    document.getElementById("progress"+i)
+      .classList.toggle(
+        "active",
+        i<=step
+      );
+
+  }
 
 }
 
@@ -2111,47 +3741,259 @@ function closeModal(id){
 }
 
 
-/* ================= REGISTER LOCATION ================= */
+function nextRegistration(step){
 
-function captureRegisterLocation(){
+  if(!validateRegistrationStep(step)){
+    return;
+  }
 
-  const output=document.getElementById("registerLocation");
+  showRegistrationStep(step+1);
+
+}
+
+
+function previousRegistration(step){
+
+  showRegistrationStep(step-1);
+
+}
+
+
+/* =========================================================
+   VALIDATE REGISTRATION
+========================================================= */
+
+function requiredValue(id){
+
+  const element=document.getElementById(id);
+
+  return element && element.value.trim();
+
+}
+
+
+function validateRegistrationStep(step){
+
+  if(step===1){
+
+    const values=[
+      "regShop",
+      "regOwner",
+      "regPhone",
+      "regEmail",
+      "regPassword",
+      "regPasswordConfirm"
+    ];
+
+    for(const id of values){
+
+      if(!requiredValue(id)){
+
+        toast("Please complete all required fields");
+
+        document.getElementById(id).focus();
+
+        return false;
+
+      }
+
+    }
+
+
+    if(
+      document.getElementById("regPassword").value !==
+      document.getElementById("regPasswordConfirm").value
+    ){
+
+      toast("Passwords do not match");
+
+      return false;
+
+    }
+
+  }
+
+
+  if(step===2){
+
+    const values=[
+      "regCategory",
+      "regArea",
+      "regPhase",
+      "regPrecinct",
+      "regSector",
+      "regBlock",
+      "regAddress"
+    ];
+
+    for(const id of values){
+
+      if(!requiredValue(id)){
+
+        toast("Please complete all location fields");
+
+        document.getElementById(id).focus();
+
+        return false;
+
+      }
+
+    }
+
+
+    if(!data.location){
+
+      toast("Please capture your live location");
+
+      return false;
+
+    }
+
+  }
+
+
+  if(step===3){
+
+    const values=[
+      "regFootfall",
+      "regShopSize",
+      "regFridge",
+      "regLCDStatus",
+      "regLCDSize",
+      "regInternet",
+      "regSubMeter",
+      "regOpening",
+      "regClosing"
+    ];
+
+    for(const id of values){
+
+      if(!requiredValue(id)){
+
+        toast("Please complete all shop and LCD fields");
+
+        document.getElementById(id).focus();
+
+        return false;
+
+      }
+
+    }
+
+
+    if(
+      document.getElementById("regLCDStatus").value===
+      "Purchase From Spotly"
+    ){
+
+      if(!requiredValue("regLCDPrice")){
+
+        toast("Enter LCD price");
+
+        return false;
+
+      }
+
+    }
+
+  }
+
+
+  if(step===4){
+
+    const values=[
+      "regBankName",
+      "regBankTitle",
+      "regBankIBAN",
+      "regBankAccount",
+      "regBankMethod"
+    ];
+
+    for(const id of values){
+
+      if(!requiredValue(id)){
+
+        toast("Please complete all bank details");
+
+        document.getElementById(id).focus();
+
+        return false;
+
+      }
+
+    }
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =========================================================
+   REGISTRATION GPS
+========================================================= */
+
+function captureRegistrationLocation(){
 
   if(!navigator.geolocation){
 
-    output.textContent="Geolocation is not supported.";
+    toast("Geolocation is not supported");
+
     return;
 
   }
 
-  output.textContent="Capturing location...";
+
+  document.getElementById(
+    "registrationCoordinates"
+  ).textContent="Capturing location...";
+
 
   navigator.geolocation.getCurrentPosition(
 
     position=>{
 
-      registerLocationData={
+      data.location={
+
         latitude:position.coords.latitude,
+
         longitude:position.coords.longitude,
+
+        accuracy:position.coords.accuracy,
+
         capturedAt:new Date().toISOString()
+
       };
 
-      output.textContent=
-        "Location captured: "+
-        registerLocationData.latitude.toFixed(6)+
-        ", "+
-        registerLocationData.longitude.toFixed(6);
+      saveData();
 
-      showToast("Live location captured");
+
+      document.getElementById(
+        "registrationCoordinates"
+      ).textContent=
+
+        "Captured: "+
+        data.location.latitude.toFixed(6)+
+        ", "+
+        data.location.longitude.toFixed(6);
+
+
+      toast("Live location captured");
 
     },
 
-    error=>{
+    ()=>{
 
-      output.textContent=
-        "Location permission required.";
+      toast(
+        "Location permission is required"
+      );
 
-      showToast("Please allow location access");
+      document.getElementById(
+        "registrationCoordinates"
+      ).textContent=
+        "Location permission denied";
 
     },
 
@@ -2166,122 +4008,346 @@ function captureRegisterLocation(){
 }
 
 
-/* ================= REGISTER ================= */
+/* =========================================================
+   LCD INSTALLMENT
+========================================================= */
 
-function registerVendor(){
+function registrationLCDChange(){
 
-  const shop=document.getElementById("regShop").value.trim();
-  const owner=document.getElementById("regOwner").value.trim();
-  const phone=document.getElementById("regPhone").value.trim();
-  const email=document.getElementById("regEmail").value.trim();
-  const password=document.getElementById("regPassword").value;
-  const category=document.getElementById("regCategory").value;
-  const area=document.getElementById("regArea").value;
-  const address=document.getElementById("regAddress").value.trim();
-  const consent=document.getElementById("regConsent").checked;
+  const status=
+    document.getElementById("regLCDStatus").value;
 
-  if(
-    !shop ||
-    !owner ||
-    !phone ||
-    !email ||
-    !password ||
-    !category ||
-    !area ||
-    !address
-  ){
+  document.getElementById(
+    "registrationPurchaseBox"
+  ).classList.toggle(
+    "hidden",
+    status!=="Purchase From Spotly"
+  );
 
-    showToast("Please complete all required fields");
+  registrationInstallment();
+
+}
+
+
+function registrationInstallment(){
+
+  const method=
+    document.getElementById("regPurchaseMethod").value;
+
+  const price=
+    Number(
+      document.getElementById("regLCDPrice").value
+    )||0;
+
+  const months=
+    Number(
+      document.getElementById("regMonths").value
+    )||1;
+
+
+  const monthsBox=
+    document.getElementById("regMonthsBox");
+
+
+  if(method==="Installment"){
+
+    monthsBox.classList.remove("hidden");
+
+    document.getElementById(
+      "regMonthlyInstallment"
+    ).value=
+      "Rs. "+
+      Math.ceil(price/months).toLocaleString();
+
+  }else{
+
+    monthsBox.classList.add("hidden");
+
+    document.getElementById(
+      "regMonthlyInstallment"
+    ).value=
+      "Rs. 0";
+
+  }
+
+}
+
+
+/* =========================================================
+   REGISTRATION LOAD SHEDDING
+========================================================= */
+
+let registrationLoadSlots=[];
+
+
+function addRegistrationLoadSlot(){
+
+  registrationLoadSlots.push({
+    start:"",
+    end:""
+  });
+
+  renderRegistrationLoadSlots();
+
+}
+
+
+function removeRegistrationLoadSlot(index){
+
+  registrationLoadSlots.splice(index,1);
+
+  renderRegistrationLoadSlots();
+
+}
+
+
+function renderRegistrationLoadSlots(){
+
+  const container=
+    document.getElementById(
+      "registrationLoadSlots"
+    );
+
+  container.innerHTML="";
+
+
+  registrationLoadSlots.forEach((slot,index)=>{
+
+    const row=document.createElement("div");
+
+    row.className="load-row";
+
+    row.innerHTML=`
+
+      <input
+        type="time"
+        value="${slot.start}"
+        onchange="
+          registrationLoadSlots[${index}].start=this.value
+        "
+      >
+
+      <input
+        type="time"
+        value="${slot.end}"
+        onchange="
+          registrationLoadSlots[${index}].end=this.value
+        "
+      >
+
+      <button
+        class="btn btn-danger"
+        onclick="removeRegistrationLoadSlot(${index})">
+        Remove
+      </button>
+
+    `;
+
+    container.appendChild(row);
+
+  });
+
+}
+
+
+/* =========================================================
+   CREATE ACCOUNT
+========================================================= */
+
+function createVendorAccount(){
+
+  if(!document.getElementById("regConsent").checked){
+
+    toast("Please accept the confirmation");
+
     return;
 
   }
 
-  if(!registerLocationData){
 
-    showToast("Please capture your live location");
-    return;
+  const vendor={
 
-  }
+    shopName:document.getElementById("regShop").value.trim(),
 
-  if(!consent){
+    owner:document.getElementById("regOwner").value.trim(),
 
-    showToast("Please accept the terms");
-    return;
+    phone:document.getElementById("regPhone").value.trim(),
 
-  }
+    email:document.getElementById("regEmail").value.trim(),
 
-  vendorData=defaultVendor();
+    password:document.getElementById("regPassword").value,
 
-  vendorData.registered=true;
+    category:document.getElementById("regCategory").value,
 
-  vendorData.shopName=shop;
-  vendorData.owner=owner;
-  vendorData.phone=phone;
-  vendorData.email=email;
-  vendorData.password=password;
-  vendorData.category=category;
-  vendorData.area=area;
-  vendorData.address=address;
+    area:document.getElementById("regArea").value,
 
-  vendorData.location=registerLocationData;
+    phase:document.getElementById("regPhase").value,
+
+    precinct:document.getElementById("regPrecinct").value,
+
+    sector:document.getElementById("regSector").value,
+
+    block:document.getElementById("regBlock").value,
+
+    address:document.getElementById("regAddress").value.trim(),
+
+    footfall:document.getElementById("regFootfall").value,
+
+    shopSize:document.getElementById("regShopSize").value,
+
+    fridge:document.getElementById("regFridge").value,
+
+    lcdStatus:document.getElementById("regLCDStatus").value,
+
+    lcdSize:document.getElementById("regLCDSize").value,
+
+    internet:document.getElementById("regInternet").value,
+
+    subMeter:document.getElementById("regSubMeter").value,
+
+    opening:document.getElementById("regOpening").value,
+
+    closing:document.getElementById("regClosing").value,
+
+    purchaseMethod:
+      document.getElementById("regPurchaseMethod").value,
+
+    lcdPrice:
+      document.getElementById("regLCDPrice").value,
+
+    installmentMonths:
+      document.getElementById("regMonths").value,
+
+    monthlyInstallment:
+      document.getElementById("regMonthlyInstallment").value
+
+  };
+
+
+  data.vendor=vendor;
+
+  data.bank={
+
+    bankName:document.getElementById("regBankName").value.trim(),
+
+    accountTitle:document.getElementById("regBankTitle").value.trim(),
+
+    iban:document.getElementById("regBankIBAN").value.trim(),
+
+    accountNumber:document.getElementById("regBankAccount").value.trim(),
+
+    method:document.getElementById("regBankMethod").value
+
+  };
+
+
+  data.loadShedding=
+    registrationLoadSlots;
+
+
+  data.registered=true;
+
+  data.approved=false;
+
+  data.online=false;
+
+
+  data.notifications=[
+
+    {
+      title:"Welcome to Spotly",
+      text:"Your vendor account has been created."
+    },
+
+    {
+      title:"Store Under Review",
+      text:"Your store is currently under review."
+    }
+
+  ];
+
 
   saveData();
 
-  closeModal("registerModal");
+  closeModal("registrationModal");
 
-  showToast("Vendor account created successfully");
+  toast("Vendor account created successfully");
+
 
   setTimeout(()=>{
-    openPortal();
+
+    openVendorPortal();
+
   },500);
 
 }
 
 
-/* ================= LOGIN ================= */
+/* =========================================================
+   LOGIN
+========================================================= */
 
-function loginVendor(){
+function openLogin(){
 
-  const email=document.getElementById("loginEmail")
-    .value.trim();
-
-  const password=document.getElementById("loginPassword")
-    .value;
-
-  if(!vendorData || !vendorData.registered){
-
-    showToast("No vendor account found. Please register first.");
-    return;
-
-  }
-
-  if(
-    email !== vendorData.email &&
-    email !== vendorData.phone
-  ){
-
-    showToast("Email or phone is incorrect");
-    return;
-
-  }
-
-  if(password !== vendorData.password){
-
-    showToast("Password is incorrect");
-    return;
-
-  }
-
-  closeModal("loginModal");
-
-  openPortal();
+  document.getElementById("loginModal")
+    .classList.add("active");
 
 }
 
 
-/* ================= PORTAL ================= */
+function loginVendor(){
 
-function openPortal(){
+  if(!data.registered){
+
+    toast("Please register as a vendor first");
+
+    return;
+
+  }
+
+
+  const identity=
+    document.getElementById("loginIdentity")
+      .value.trim();
+
+  const password=
+    document.getElementById("loginPassword")
+      .value;
+
+
+  if(
+    identity!==data.vendor.email &&
+    identity!==data.vendor.phone
+  ){
+
+    toast("Email or phone is incorrect");
+
+    return;
+
+  }
+
+
+  if(password!==data.vendor.password){
+
+    toast("Password is incorrect");
+
+    return;
+
+  }
+
+
+  closeModal("loginModal");
+
+  openVendorPortal();
+
+}
+
+
+/* =========================================================
+   OPEN PORTAL
+========================================================= */
+
+function openVendorPortal(){
 
   document.getElementById("landingPage")
     .style.display="none";
@@ -2289,13 +4355,14 @@ function openPortal(){
   document.getElementById("vendorPortal")
     .classList.add("active");
 
-  document.getElementById("landingNav")
+  document.getElementById("publicNav")
     .classList.add("hidden");
 
   document.getElementById("portalNav")
     .classList.remove("hidden");
 
-  loadVendorData();
+
+  loadPortalData();
 
 }
 
@@ -2308,73 +4375,96 @@ function logout(){
   document.getElementById("landingPage")
     .style.display="block";
 
+  document.getElementById("publicNav")
+    .classList.remove("hidden");
+
   document.getElementById("portalNav")
     .classList.add("hidden");
 
-  document.getElementById("landingNav")
-    .classList.remove("hidden");
-
-  showToast("Logged out");
+  toast("Logged out");
 
 }
 
 
-/* ================= PORTAL NAVIGATION ================= */
+/* =========================================================
+   PORTAL NAVIGATION
+========================================================= */
 
-function showPortalPage(page,button){
+function showPage(page,button){
 
   const pages=[
     "dashboard",
     "profile",
-    "screen",
-    "earnings",
+    "ads",
     "plays",
+    "energy",
+    "earnings",
     "withdrawals",
     "bank",
     "support"
   ];
 
+
   pages.forEach(p=>{
 
-    const element=document.getElementById("page-"+p);
-
-    if(element){
-      element.classList.add("hidden");
-    }
+    document.getElementById(
+      "page-"+p
+    ).classList.add("hidden");
 
   });
 
-  document.getElementById("page-"+page)
-    .classList.remove("hidden");
+
+  document.getElementById(
+    "page-"+page
+  ).classList.remove("hidden");
+
 
   const titles={
+
     dashboard:"Dashboard",
-    profile:"My Profile",
-    screen:"Screen / LCD",
+
+    profile:"My Store",
+
+    ads:"Today's Ads",
+
+    plays:"Ad History",
+
+    energy:"Electricity",
+
     earnings:"Earnings",
-    plays:"Play History",
+
     withdrawals:"Withdrawals",
+
     bank:"Bank Details",
-    support:"Support / Complaints"
+
+    support:"Support"
+
   };
 
-  document.getElementById("portalTitle")
-    .textContent=titles[page];
+
+  document.getElementById(
+    "portalTitle"
+  ).textContent=titles[page];
+
 
   document.querySelectorAll(".menu button")
-    .forEach(btn=>btn.classList.remove("active"));
+    .forEach(btn=>{
+      btn.classList.remove("active");
+    });
+
 
   if(button){
+
     button.classList.add("active");
+
   }
+
 
   document.getElementById("sidebar")
     .classList.remove("open");
 
 }
 
-
-/* ================= MOBILE SIDEBAR ================= */
 
 function toggleSidebar(){
 
@@ -2384,238 +4474,330 @@ function toggleSidebar(){
 }
 
 
-/* ================= LOAD VENDOR ================= */
+/* =========================================================
+   LOAD PORTAL
+========================================================= */
 
-function loadVendorData(){
+function loadPortalData(){
 
-  if(!vendorData) return;
+  loadAllSelects();
 
-  document.getElementById("miniName")
-    .textContent=vendorData.owner || "Vendor";
+  fillStoreForm();
 
-  document.getElementById("avatar")
-    .textContent=(vendorData.owner || "V")
-      .charAt(0)
-      .toUpperCase();
-
-  /* Profile */
-
-  document.getElementById("profileShopName").value=
-    vendorData.shopName || "";
-
-  document.getElementById("profileOwner").value=
-    vendorData.owner || "";
-
-  document.getElementById("profilePhone").value=
-    vendorData.phone || "";
-
-  document.getElementById("profileEmail").value=
-    vendorData.email || "";
-
-  document.getElementById("profileCategory").value=
-    vendorData.category || "";
-
-  document.getElementById("profileArea").value=
-    vendorData.area || "";
-
-  document.getElementById("profileAddress").value=
-    vendorData.address || "";
-
-  document.getElementById("profileFootfall").value=
-    vendorData.footfall || "";
-
-  document.getElementById("profileSize").value=
-    vendorData.shopSize || "";
-
-  document.getElementById("profileLCD").value=
-    vendorData.lcdStatus || "Pending";
-
-  document.getElementById("profileInstallment").value=
-    vendorData.installment || "No";
-
-  document.getElementById("profileInstallmentAmount").value=
-    vendorData.installmentAmount || "";
-
-  document.getElementById("profileSubMeter").value=
-    vendorData.subMeter || "Yes";
-
-  document.getElementById("profileInternet").value=
-    vendorData.internet || "Yes";
-
-  document.getElementById("profileOpen").value=
-    vendorData.openTime || "09:00";
-
-  document.getElementById("profileClose").value=
-    vendorData.closeTime || "00:00";
-
-  document.getElementById("profileFridge").value=
-    vendorData.fridge || "No";
-
-  document.getElementById("profileBooker").value=
-    vendorData.orderBooker || "";
-
-  /* Bank */
-
-  document.getElementById("bankName").value=
-    vendorData.bank.bankName || "";
-
-  document.getElementById("bankTitle").value=
-    vendorData.bank.accountTitle || "";
-
-  document.getElementById("bankIBAN").value=
-    vendorData.bank.iban || "";
-
-  document.getElementById("bankAccount").value=
-    vendorData.bank.accountNumber || "";
-
-  document.getElementById("bankMethod").value=
-    vendorData.bank.method || "Bank Transfer";
-
-  /* Location */
-
-  if(vendorData.location.latitude){
-
-    document.getElementById("locationStatus")
-      .textContent="Live location captured.";
-
-    document.getElementById("locationCoordinates")
-      .textContent=
-      vendorData.location.latitude.toFixed(6)+
-      ", "+
-      vendorData.location.longitude.toFixed(6);
-
-  }
+  fillBankForm();
 
   renderLoadSlots();
 
-  renderSupport();
+  renderDashboard();
+
+  renderAds();
+
+  renderPlayHistory();
+
+  renderEnergy();
 
   renderWithdrawals();
 
-  calculateProfileCompletion();
-
-  renderDashboard();
-
-  toggleInstallment();
+  renderSupport();
 
 }
 
 
-/* ================= SAVE PROFILE ================= */
+/* =========================================================
+   FILL STORE
+========================================================= */
 
-function saveProfile(){
+function fillStoreForm(){
 
-  vendorData.shopName=
-    document.getElementById("profileShopName").value.trim();
+  const v=data.vendor;
 
-  vendorData.owner=
-    document.getElementById("profileOwner").value.trim();
+  if(!v)return;
 
-  vendorData.phone=
-    document.getElementById("profilePhone").value.trim();
 
-  vendorData.email=
-    document.getElementById("profileEmail").value.trim();
+  const fields={
 
-  vendorData.category=
-    document.getElementById("profileCategory").value;
+    storeName:v.shopName,
 
-  vendorData.area=
-    document.getElementById("profileArea").value;
+    storeOwner:v.owner,
 
-  vendorData.address=
-    document.getElementById("profileAddress").value.trim();
+    storePhone:v.phone,
 
-  vendorData.footfall=
-    document.getElementById("profileFootfall").value;
+    storeEmail:v.email,
 
-  vendorData.shopSize=
-    document.getElementById("profileSize").value;
+    storeCategory:v.category,
 
-  vendorData.lcdStatus=
-    document.getElementById("profileLCD").value;
+    storeArea:v.area,
 
-  vendorData.installment=
-    document.getElementById("profileInstallment").value;
+    storePhase:v.phase,
 
-  vendorData.installmentAmount=
-    document.getElementById("profileInstallmentAmount").value;
+    storePrecinct:v.precinct,
 
-  vendorData.subMeter=
-    document.getElementById("profileSubMeter").value;
+    storeSector:v.sector,
 
-  vendorData.internet=
-    document.getElementById("profileInternet").value;
+    storeBlock:v.block,
 
-  vendorData.openTime=
-    document.getElementById("profileOpen").value;
+    storeAddress:v.address,
 
-  vendorData.closeTime=
-    document.getElementById("profileClose").value;
+    storeFootfall:v.footfall,
 
-  vendorData.fridge=
-    document.getElementById("profileFridge").value;
+    storeSize:v.shopSize,
 
-  vendorData.orderBooker=
-    document.getElementById("profileBooker").value;
+    storeFridge:v.fridge,
+
+    lcdStatus:v.lcdStatus,
+
+    lcdSize:v.lcdSize,
+
+    internetStatus:v.internet,
+
+    subMeter:v.subMeter,
+
+    openingTime:v.opening,
+
+    closingTime:v.closing
+
+  };
+
+
+  Object.entries(fields).forEach(([id,value])=>{
+
+    const el=document.getElementById(id);
+
+    if(el && value!==undefined){
+
+      el.value=value;
+
+    }
+
+  });
+
+
+  changeLCDStatus();
+
+
+  if(data.location){
+
+    document.getElementById(
+      "locationStatus"
+    ).textContent="Live location captured.";
+
+    document.getElementById(
+      "coordinates"
+    ).textContent=
+
+      data.location.latitude.toFixed(6)+
+      ", "+
+      data.location.longitude.toFixed(6);
+
+  }
+
+}
+
+
+/* =========================================================
+   SAVE STORE
+========================================================= */
+
+function saveStoreProfile(){
+
+  const required=[
+
+    "storeName",
+    "storeOwner",
+    "storePhone",
+    "storeEmail",
+    "storeCategory",
+    "storeArea",
+    "storePhase",
+    "storePrecinct",
+    "storeSector",
+    "storeBlock",
+    "storeAddress",
+    "storeFootfall",
+    "storeSize",
+    "storeFridge",
+    "lcdStatus",
+    "lcdSize",
+    "internetStatus",
+    "subMeter",
+    "openingTime",
+    "closingTime"
+
+  ];
+
+
+  for(const id of required){
+
+    if(!document.getElementById(id).value.trim()){
+
+      toast("Please complete all required fields");
+
+      document.getElementById(id).focus();
+
+      return;
+
+    }
+
+  }
+
+
+  if(!data.location){
+
+    toast("Live location is required");
+
+    return;
+
+  }
+
+
+  data.vendor.shopName=
+    document.getElementById("storeName").value.trim();
+
+  data.vendor.owner=
+    document.getElementById("storeOwner").value.trim();
+
+  data.vendor.phone=
+    document.getElementById("storePhone").value.trim();
+
+  data.vendor.email=
+    document.getElementById("storeEmail").value.trim();
+
+  data.vendor.category=
+    document.getElementById("storeCategory").value;
+
+  data.vendor.area=
+    document.getElementById("storeArea").value;
+
+  data.vendor.phase=
+    document.getElementById("storePhase").value;
+
+  data.vendor.precinct=
+    document.getElementById("storePrecinct").value;
+
+  data.vendor.sector=
+    document.getElementById("storeSector").value;
+
+  data.vendor.block=
+    document.getElementById("storeBlock").value;
+
+  data.vendor.address=
+    document.getElementById("storeAddress").value.trim();
+
+  data.vendor.footfall=
+    document.getElementById("storeFootfall").value;
+
+  data.vendor.shopSize=
+    document.getElementById("storeSize").value;
+
+  data.vendor.fridge=
+    document.getElementById("storeFridge").value;
+
+  data.vendor.lcdStatus=
+    document.getElementById("lcdStatus").value;
+
+  data.vendor.lcdSize=
+    document.getElementById("lcdSize").value;
+
+  data.vendor.internet=
+    document.getElementById("internetStatus").value;
+
+  data.vendor.subMeter=
+    document.getElementById("subMeter").value;
+
+  data.vendor.opening=
+    document.getElementById("openingTime").value;
+
+  data.vendor.closing=
+    document.getElementById("closingTime").value;
+
+
+  data.vendor.purchaseMethod=
+    document.getElementById("purchaseMethod").value;
+
+  data.vendor.lcdPrice=
+    document.getElementById("lcdPrice").value;
+
+  data.vendor.installmentMonths=
+    document.getElementById("installmentMonths").value;
+
+
+  data.loadShedding=
+    readPortalLoadSlots();
+
 
   saveData();
 
-  calculateProfileCompletion();
-
   renderDashboard();
 
-  showToast("Profile saved successfully");
+  toast("Store information saved");
 
 }
 
 
-/* ================= GPS ================= */
+/* =========================================================
+   LOCATION
+========================================================= */
 
 function captureLocation(){
 
   if(!navigator.geolocation){
 
-    showToast("Geolocation is not supported");
+    toast("Geolocation is not supported");
+
     return;
 
   }
 
-  document.getElementById("locationStatus")
-    .textContent="Capturing current location...";
+
+  document.getElementById(
+    "locationStatus"
+  ).textContent="Capturing location...";
+
 
   navigator.geolocation.getCurrentPosition(
 
     position=>{
 
-      vendorData.location={
+      data.location={
+
         latitude:position.coords.latitude,
+
         longitude:position.coords.longitude,
+
+        accuracy:position.coords.accuracy,
+
         capturedAt:new Date().toISOString()
+
       };
+
 
       saveData();
 
-      document.getElementById("locationStatus")
-        .textContent="Live location captured.";
 
-      document.getElementById("locationCoordinates")
-        .textContent=
-        vendorData.location.latitude.toFixed(6)+
+      document.getElementById(
+        "locationStatus"
+      ).textContent="Live location captured.";
+
+
+      document.getElementById(
+        "coordinates"
+      ).textContent=
+
+        data.location.latitude.toFixed(6)+
         ", "+
-        vendorData.location.longitude.toFixed(6);
+        data.location.longitude.toFixed(6);
 
-      calculateProfileCompletion();
 
-      showToast("Location updated");
+      toast("Live location updated");
 
     },
 
     ()=>{
-      document.getElementById("locationStatus")
-        .textContent="Location permission required.";
 
-      showToast("Please allow location access");
+      toast(
+        "Please allow location permission"
+      );
+
     },
 
     {
@@ -2629,24 +4811,76 @@ function captureLocation(){
 }
 
 
-/* ================= INSTALLMENT ================= */
+/* =========================================================
+   PORTAL LCD
+========================================================= */
 
-function toggleInstallment(){
+function changeLCDStatus(){
 
-  const yes=
-    document.getElementById("profileInstallment").value==="Yes";
+  const status=
+    document.getElementById("lcdStatus").value;
 
-  document.getElementById("installmentBox")
-    .classList.toggle("hidden",!yes);
+
+  document.getElementById(
+    "installmentArea"
+  ).classList.toggle(
+    "hidden",
+    status!=="Purchase From Spotly"
+  );
+
+
+  calculateInstallment();
 
 }
 
 
-/* ================= LOAD SHEDDING ================= */
+function calculateInstallment(){
+
+  const method=
+    document.getElementById(
+      "purchaseMethod"
+    ).value;
+
+  const price=
+    Number(
+      document.getElementById("lcdPrice").value
+    )||0;
+
+  const months=
+    Number(
+      document.getElementById(
+        "installmentMonths"
+      ).value
+    )||1;
+
+
+  if(method==="Installment"){
+
+    document.getElementById(
+      "monthlyInstallment"
+    ).value=
+      "Rs. "+
+      Math.ceil(price/months).toLocaleString();
+
+  }else{
+
+    document.getElementById(
+      "monthlyInstallment"
+    ).value=
+      "Rs. 0";
+
+  }
+
+}
+
+
+/* =========================================================
+   PORTAL LOAD SHEDDING
+========================================================= */
 
 function addLoadSlot(){
 
-  vendorData.loadShedding.push({
+  data.loadShedding.push({
     start:"",
     end:""
   });
@@ -2660,7 +4894,7 @@ function addLoadSlot(){
 
 function removeLoadSlot(index){
 
-  vendorData.loadShedding.splice(index,1);
+  data.loadShedding.splice(index,1);
 
   saveData();
 
@@ -2669,23 +4903,17 @@ function removeLoadSlot(index){
 }
 
 
-function updateLoadSlot(index,type,value){
-
-  vendorData.loadShedding[index][type]=value;
-
-  saveData();
-
-}
-
-
 function renderLoadSlots(){
 
   const container=
-    document.getElementById("loadSheddingList");
+    document.getElementById("loadSlots");
+
+  if(!container)return;
 
   container.innerHTML="";
 
-  vendorData.loadShedding.forEach((slot,index)=>{
+
+  data.loadShedding.forEach((slot,index)=>{
 
     const row=document.createElement("div");
 
@@ -2695,20 +4923,25 @@ function renderLoadSlots(){
 
       <input
         type="time"
-        value="${slot.start || ""}"
-        onchange="updateLoadSlot(${index},'start',this.value)"
+        value="${slot.start||""}"
+        onchange="
+          data.loadShedding[${index}].start=this.value;
+          saveData();
+        "
       >
 
       <input
         type="time"
-        value="${slot.end || ""}"
-        onchange="updateLoadSlot(${index},'end',this.value)"
+        value="${slot.end||""}"
+        onchange="
+          data.loadShedding[${index}].end=this.value;
+          saveData();
+        "
       >
 
       <button
         class="btn btn-danger"
-        onclick="removeLoadSlot(${index})"
-      >
+        onclick="removeLoadSlot(${index})">
         Remove
       </button>
 
@@ -2721,49 +4954,625 @@ function renderLoadSlots(){
 }
 
 
-/* ================= BANK ================= */
+function readPortalLoadSlots(){
 
-function saveBankDetails(){
+  const rows=
+    document.querySelectorAll(
+      "#loadSlots .load-row"
+    );
 
-  vendorData.bank={
-    bankName:document.getElementById("bankName").value.trim(),
-    accountTitle:document.getElementById("bankTitle").value.trim(),
-    iban:document.getElementById("bankIBAN").value.trim(),
-    accountNumber:document.getElementById("bankAccount").value.trim(),
-    method:document.getElementById("bankMethod").value
-  };
+  const result=[];
 
-  saveData();
+  rows.forEach(row=>{
 
-  calculateProfileCompletion();
+    const inputs=row.querySelectorAll("input");
 
-  showToast("Bank details saved");
+    if(inputs[0].value || inputs[1].value){
+
+      result.push({
+
+        start:inputs[0].value,
+
+        end:inputs[1].value
+
+      });
+
+    }
+
+  });
+
+  return result;
 
 }
 
 
-/* ================= WITHDRAWAL ================= */
+/* =========================================================
+   BANK
+========================================================= */
+
+function fillBankForm(){
+
+  const b=data.bank||{};
+
+
+  document.getElementById(
+    "bankPageName"
+  ).value=b.bankName||"";
+
+  document.getElementById(
+    "bankPageTitle"
+  ).value=b.accountTitle||"";
+
+  document.getElementById(
+    "bankPageIBAN"
+  ).value=b.iban||"";
+
+  document.getElementById(
+    "bankPageAccount"
+  ).value=b.accountNumber||"";
+
+  document.getElementById(
+    "bankPageMethod"
+  ).value=b.method||"Bank Transfer";
+
+}
+
+
+function saveBankPage(){
+
+  const ids=[
+
+    "bankPageName",
+    "bankPageTitle",
+    "bankPageIBAN",
+    "bankPageAccount",
+    "bankPageMethod"
+
+  ];
+
+
+  for(const id of ids){
+
+    if(!document.getElementById(id).value.trim()){
+
+      toast("Please complete bank details");
+
+      return;
+
+    }
+
+  }
+
+
+  data.bank={
+
+    bankName:
+      document.getElementById("bankPageName").value.trim(),
+
+    accountTitle:
+      document.getElementById("bankPageTitle").value.trim(),
+
+    iban:
+      document.getElementById("bankPageIBAN").value.trim(),
+
+    accountNumber:
+      document.getElementById("bankPageAccount").value.trim(),
+
+    method:
+      document.getElementById("bankPageMethod").value
+
+  };
+
+
+  saveData();
+
+  toast("Bank details saved");
+
+}
+
+
+/* =========================================================
+   STORE ONLINE/OFFLINE
+========================================================= */
+
+function toggleStoreStatus(){
+
+  if(!data.approved){
+
+    toast(
+      "Store must be approved before going online"
+    );
+
+    return;
+
+  }
+
+
+  data.online=!data.online;
+
+  saveData();
+
+  renderDashboard();
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function renderDashboard(){
+
+  const approved=data.approved;
+
+
+  document.getElementById(
+    "reviewTitle"
+  ).textContent=
+
+    approved
+    ? "Your store is approved"
+    : "Your store is under review";
+
+
+  document.getElementById(
+    "reviewText"
+  ).textContent=
+
+    approved
+
+    ? "Your store is active. Today's advertisement schedule, LCD time and earnings are available below."
+
+    : "Your information has been submitted successfully. Once Spotly approves your store, advertising schedules and earnings will appear here.";
+
+
+  document.getElementById(
+    "todayAds"
+  ).textContent=
+
+    approved ? "6 Ads" : "—";
+
+
+  document.getElementById(
+    "todayEarning"
+  ).textContent=
+
+    approved ? "Rs. 120" : "—";
+
+
+  document.getElementById(
+    "todayLCDTime"
+  ).textContent=
+
+    approved ? "7h 35m" : "—";
+
+
+  document.getElementById(
+    "onlineSwitch"
+  ).classList.toggle(
+    "on",
+    data.online
+  );
+
+
+  document.getElementById(
+    "onlineText"
+  ).textContent=
+    data.online ? "Online" : "Offline";
+
+
+  document.getElementById(
+    "dashOpen"
+  ).textContent=
+    formatTime(data.vendor.opening);
+
+
+  document.getElementById(
+    "dashClose"
+  ).textContent=
+    formatTime(data.vendor.closing);
+
+
+  renderDashboardAds();
+
+}
+
+
+/* =========================================================
+   DEMO ADS
+========================================================= */
+
+const ads=[
+
+  {
+    date:"29 Sep 2026",
+    name:"Fresh Mart",
+    start:"10:00",
+    end:"10:30",
+    duration:"30 sec"
+  },
+
+  {
+    date:"29 Sep 2026",
+    name:"Pizza House",
+    start:"11:20",
+    end:"11:35",
+    duration:"15 sec"
+  },
+
+  {
+    date:"29 Sep 2026",
+    name:"Mobile World",
+    start:"12:10",
+    end:"12:40",
+    duration:"30 sec"
+  },
+
+  {
+    date:"29 Sep 2026",
+    name:"Fashion Point",
+    start:"14:00",
+    end:"14:30",
+    duration:"30 sec"
+  },
+
+  {
+    date:"29 Sep 2026",
+    name:"Fresh Mart",
+    start:"16:20",
+    end:"16:50",
+    duration:"30 sec"
+  },
+
+  {
+    date:"29 Sep 2026",
+    name:"Pizza House",
+    start:"18:30",
+    end:"18:45",
+    duration:"15 sec"
+  }
+
+];
+
+
+function renderDashboardAds(){
+
+  const container=
+    document.getElementById(
+      "dashboardAds"
+    );
+
+
+  if(!data.approved){
+
+    container.innerHTML=`
+
+      <div style="
+        padding:25px;
+        text-align:center;
+        color:#777;
+        background:#fafafa;
+        border-radius:8px;
+      ">
+        Advertisement schedule will appear
+        after store approval.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML=
+    ads.slice(0,4).map(ad=>`
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:13px 0;
+        border-bottom:1px solid #eee;
+      ">
+
+        <div>
+          <strong>${ad.name}</strong>
+
+          <div style="
+            font-size:12px;
+            color:#777;
+            margin-top:4px;
+          ">
+            ${ad.duration}
+          </div>
+        </div>
+
+        <div style="text-align:right">
+
+          <strong>
+            ${formatTime(ad.start)}
+          </strong>
+
+          <div style="
+            font-size:12px;
+            color:#777;
+          ">
+            to ${formatTime(ad.end)}
+          </div>
+
+        </div>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   TODAY ADS PAGE
+========================================================= */
+
+function renderAds(){
+
+  const message=
+    document.getElementById(
+      "adsApprovalMessage"
+    );
+
+
+  document.getElementById(
+    "adsDate"
+  ).textContent=
+    "29 Sep 2026";
+
+
+  if(!data.approved){
+
+    message.innerHTML=`
+
+      <strong>Advertisement schedule is not active yet</strong>
+
+      <p>
+        Today's advertisements will be shown here
+        after your store has been approved.
+      </p>
+
+    `;
+
+    document.getElementById(
+      "todayAdsTable"
+    ).innerHTML=`
+
+      <tr>
+        <td colspan="5"
+            style="text-align:center;color:#777;">
+          No advertisements available.
+        </td>
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  message.innerHTML=`
+
+    <strong>Today's Schedule</strong>
+
+    <p>
+      Your LCD should remain available during
+      the scheduled advertising periods.
+    </p>
+
+  `;
+
+
+  document.getElementById(
+    "todayAdsTable"
+  ).innerHTML=
+
+    ads.map(ad=>`
+
+      <tr>
+
+        <td>
+          <strong>${ad.name}</strong>
+        </td>
+
+        <td>${formatTime(ad.start)}</td>
+
+        <td>${formatTime(ad.end)}</td>
+
+        <td>${ad.duration}</td>
+
+        <td>
+          <span class="status approved">
+            Scheduled
+          </span>
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   PLAY HISTORY
+========================================================= */
+
+function renderPlayHistory(){
+
+  const history=[
+
+    {
+      date:"29 Sep 2026",
+      name:"Fresh Mart",
+      start:"10:00 AM",
+      duration:"30 sec",
+      status:"Completed",
+      verified:"Yes"
+    },
+
+    {
+      date:"29 Sep 2026",
+      name:"Pizza House",
+      start:"11:20 AM",
+      duration:"15 sec",
+      status:"Completed",
+      verified:"Yes"
+    },
+
+    {
+      date:"28 Sep 2026",
+      name:"Mobile World",
+      start:"02:20 PM",
+      duration:"30 sec",
+      status:"Completed",
+      verified:"Yes"
+    },
+
+    {
+      date:"27 Sep 2026",
+      name:"Fresh Mart",
+      start:"04:30 PM",
+      duration:"30 sec",
+      status:"Completed",
+      verified:"Yes"
+    }
+
+  ];
+
+
+  document.getElementById(
+    "playHistory"
+  ).innerHTML=
+
+    history.map(item=>`
+
+      <tr>
+
+        <td>${item.date}</td>
+
+        <td>${item.name}</td>
+
+        <td>${item.start}</td>
+
+        <td>${item.duration}</td>
+
+        <td>
+          <span class="status approved">
+            ${item.status}
+          </span>
+        </td>
+
+        <td>
+          <span class="status approved">
+            ${item.verified}
+          </span>
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   ELECTRICITY METER
+========================================================= */
+
+/*
+  45 inch LCD estimated power:
+  80 watts = 0.08 kW
+
+  Units = kW × hours
+  Bill = Units × Rs.80
+*/
+
+function renderEnergy(){
+
+  const lcdHours=
+    data.approved ? 7.5833 : 0;
+
+  const powerKW=0.08;
+
+  const units=
+    powerKW*lcdHours;
+
+  const bill=
+    units*80;
+
+
+  document.getElementById(
+    "meterUnits"
+  ).textContent=
+    units.toFixed(2);
+
+
+  document.getElementById(
+    "energyHours"
+  ).textContent=
+    formatHours(lcdHours);
+
+
+  document.getElementById(
+    "energyUnitText"
+  ).textContent=
+    units.toFixed(2);
+
+
+  document.getElementById(
+    "energyBill"
+  ).textContent=
+    "Rs. "+
+    Math.round(bill).toLocaleString();
+
+
+  document.getElementById(
+    "electricMeter"
+  ).style
+    .setProperty(
+      "--meter-progress",
+      Math.min(
+        units/10*360,
+        360
+      )+"deg"
+    );
+
+}
+
+
+/* =========================================================
+   WITHDRAWALS
+========================================================= */
 
 function requestWithdrawal(){
 
   const amount=
-    Number(document.getElementById("withdrawAmount").value);
+    Number(
+      document.getElementById(
+        "withdrawAmount"
+      ).value
+    );
+
 
   if(!amount || amount<=0){
 
-    showToast("Enter a valid amount");
+    toast("Enter a valid withdrawal amount");
+
     return;
 
   }
 
-  if(amount>3450){
 
-    showToast("Amount exceeds available balance");
-    return;
-
-  }
-
-  vendorData.withdrawals.unshift({
+  data.withdrawals.unshift({
 
     date:new Date().toLocaleDateString(
       "en-GB",
@@ -2776,19 +5585,28 @@ function requestWithdrawal(){
 
     amount:amount,
 
-    method:document.getElementById("withdrawMethod").value,
+    method:
+      document.getElementById(
+        "withdrawMethod"
+      ).value,
 
     status:"Pending"
 
   });
 
+
   saveData();
 
-  document.getElementById("withdrawAmount").value="";
+  document.getElementById(
+    "withdrawAmount"
+  ).value="";
+
 
   renderWithdrawals();
 
-  showToast("Withdrawal request submitted");
+  toast(
+    "Withdrawal request submitted"
+  );
 
 }
 
@@ -2796,21 +5614,27 @@ function requestWithdrawal(){
 function renderWithdrawals(){
 
   const tbody=
-    document.getElementById("withdrawalHistory");
+    document.getElementById(
+      "withdrawalHistory"
+    );
 
-  if(!tbody) return;
 
-  let html="";
+  if(!tbody)return;
 
-  vendorData.withdrawals.forEach(item=>{
 
-    html+=`
+  tbody.innerHTML=
+
+    data.withdrawals.length
+
+    ? data.withdrawals.map(item=>`
 
       <tr>
 
         <td>${item.date}</td>
 
-        <td>Rs. ${Number(item.amount).toLocaleString()}</td>
+        <td>
+          Rs. ${Number(item.amount).toLocaleString()}
+        </td>
 
         <td>${item.method}</td>
 
@@ -2822,49 +5646,61 @@ function renderWithdrawals(){
 
       </tr>
 
+    `).join("")
+
+    : `
+
+      <tr>
+
+        <td colspan="4"
+            style="text-align:center;color:#777;">
+          No withdrawal requests yet.
+        </td>
+
+      </tr>
+
     `;
-
-  });
-
-  tbody.innerHTML=html || `
-
-    <tr>
-      <td colspan="4" style="text-align:center;color:#777;">
-        No withdrawal requests yet.
-      </td>
-    </tr>
-
-  `;
 
 }
 
 
-/* ================= SUPPORT ================= */
+/* =========================================================
+   SUPPORT
+========================================================= */
 
 function submitSupport(){
 
   const subject=
-    document.getElementById("supportSubject")
-      .value.trim();
+    document.getElementById(
+      "supportSubject"
+    ).value.trim();
 
   const category=
-    document.getElementById("supportCategory").value;
+    document.getElementById(
+      "supportCategory"
+    ).value;
 
   const message=
-    document.getElementById("supportMessage")
-      .value.trim();
+    document.getElementById(
+      "supportMessage"
+    ).value.trim();
+
 
   if(!subject || !message){
 
-    showToast("Please enter subject and message");
+    toast("Please complete the support form");
+
     return;
 
   }
 
-  vendorData.support.unshift({
+
+  data.support.unshift({
 
     subject,
+
     category,
+
     message,
 
     date:new Date().toLocaleDateString(
@@ -2880,14 +5716,22 @@ function submitSupport(){
 
   });
 
+
   saveData();
 
-  document.getElementById("supportSubject").value="";
-  document.getElementById("supportMessage").value="";
+
+  document.getElementById(
+    "supportSubject"
+  ).value="";
+
+  document.getElementById(
+    "supportMessage"
+  ).value="";
+
 
   renderSupport();
 
-  showToast("Support request submitted");
+  toast("Support request submitted");
 
 }
 
@@ -2895,21 +5739,25 @@ function submitSupport(){
 function renderSupport(){
 
   const tbody=
-    document.getElementById("supportHistory");
+    document.getElementById(
+      "supportHistory"
+    );
 
-  if(!tbody) return;
 
-  let html="";
+  if(!tbody)return;
 
-  vendorData.support.forEach(item=>{
 
-    html+=`
+  tbody.innerHTML=
+
+    data.support.length
+
+    ? data.support.map(item=>`
 
       <tr>
 
-        <td>${escapeHtml(item.subject)}</td>
+        <td>${escapeHTML(item.subject)}</td>
 
-        <td>${escapeHtml(item.category)}</td>
+        <td>${escapeHTML(item.category)}</td>
 
         <td>${item.date}</td>
 
@@ -2921,124 +5769,72 @@ function renderSupport(){
 
       </tr>
 
+    `).join("")
+
+    : `
+
+      <tr>
+
+        <td colspan="4"
+            style="text-align:center;color:#777;">
+          No support requests yet.
+        </td>
+
+      </tr>
+
     `;
 
-  });
+}
 
-  tbody.innerHTML=html || `
 
-    <tr>
-      <td colspan="4" style="text-align:center;color:#777;">
-        No support requests yet.
-      </td>
-    </tr>
+/* =========================================================
+   NOTIFICATIONS
+========================================================= */
 
-  `;
+function toggleNotifications(){
+
+  document.getElementById(
+    "notificationPanel"
+  ).classList.toggle("active");
 
 }
 
 
-/* ================= PROFILE COMPLETION ================= */
+/* =========================================================
+   FORMAT HELPERS
+========================================================= */
 
-function calculateProfileCompletion(){
+function formatTime(time){
 
-  if(!vendorData) return;
+  if(!time)return"—";
 
-  const checks=[
+  const [hour,minute]=time.split(":");
 
-    vendorData.shopName,
-    vendorData.owner,
-    vendorData.phone,
-    vendorData.email,
-    vendorData.category,
-    vendorData.area,
-    vendorData.address,
-    vendorData.location.latitude,
-    vendorData.footfall,
-    vendorData.shopSize,
-    vendorData.lcdStatus,
-    vendorData.internet,
-    vendorData.openTime,
-    vendorData.closeTime,
-    vendorData.bank.bankName,
-    vendorData.bank.accountTitle,
-    vendorData.bank.iban
+  let h=Number(hour);
 
-  ];
+  const suffix=h>=12?"PM":"AM";
 
-  const completed=
-    checks.filter(Boolean).length;
+  h=h%12||12;
 
-  const percent=
-    Math.round((completed/checks.length)*100);
-
-  document.getElementById("profilePercent")
-    .textContent=percent+"%";
-
-  document.getElementById("profileProgress")
-    .style.width=percent+"%";
+  return h+":"+minute+" "+suffix;
 
 }
 
 
-/* ================= DASHBOARD ================= */
+function formatHours(hours){
 
-function renderDashboard(){
+  const h=Math.floor(hours);
 
-  const totalEarnings=12450;
+  const m=Math.round(
+    (hours-h)*60
+  );
 
-  const plays=2490;
-
-  const balance=3450;
-
-  document.getElementById("dashEarnings")
-    .textContent=
-    "Rs. "+totalEarnings.toLocaleString();
-
-  document.getElementById("dashPlays")
-    .textContent=plays.toLocaleString();
-
-  document.getElementById("dashBalance")
-    .textContent=
-    "Rs. "+balance.toLocaleString();
-
-  document.getElementById("onboardingStatus")
-    .textContent=
-    "Application "+vendorData.onboardingStatus;
-
-  const recent=document.getElementById("recentPlays");
-
-  recent.innerHTML=`
-
-    <tr>
-      <td>Fresh Mart</td>
-      <td>29 Sep 2026</td>
-      <td>30 sec</td>
-      <td><span class="status online">Verified</span></td>
-    </tr>
-
-    <tr>
-      <td>Pizza House</td>
-      <td>29 Sep 2026</td>
-      <td>15 sec</td>
-      <td><span class="status online">Verified</span></td>
-    </tr>
-
-    <tr>
-      <td>Mobile World</td>
-      <td>29 Sep 2026</td>
-      <td>30 sec</td>
-      <td><span class="status online">Verified</span></td>
-    </tr>
-
-  `;
+  return h+" hrs "+m+" min";
 
 }
 
 
-/* ================= ESCAPE ================= */
-
-function escapeHtml(value){
+function escapeHTML(value){
 
   return String(value)
     .replace(/&/g,"&amp;")
@@ -3050,11 +5846,20 @@ function escapeHtml(value){
 }
 
 
-/* ================= INIT ================= */
+/* =========================================================
+   INITIALIZATION
+========================================================= */
 
-if(!vendorData){
+loadAllSelects();
 
-  vendorData=defaultVendor();
+registrationInstallment();
+
+if(data.registered){
+
+  /*
+    Account exists but user must login.
+    Portal does not automatically open.
+  */
 
 }
 
