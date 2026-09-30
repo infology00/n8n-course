@@ -4163,11 +4163,18 @@ async function createVendorAccount(){
   }
 
 }
-
+let currentUser = null;
 /* =========================================================
    LOGIN
 ========================================================= */
 
+function openLogin(){
+
+  document
+    .getElementById("loginModal")
+    .classList.add("active");
+
+}
 async function loginVendor(){
 
   const identity =
