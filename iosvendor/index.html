@@ -6,6 +6,19 @@
 <title>Spotly Vendor Portal</title>
   
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+const SUPABASE_URL =
+  "https://ausocdplliuftdqxbvwa.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+</script>
 
 <style>
 :root{
