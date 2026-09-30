@@ -1,2509 +1,3794 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AWSZ DOOH Admin Portal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Spotly Admin</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
 <style>
 :root{
---bg:#f4f7fb;--white:#fff;--blue:#246bce;--blue2:#123b70;--ink:#20272e;
---muted:#68798b;--line:#d9e4ee;--soft:#eaf3fc;--green:#20855a;--greenbg:#eaf7f0;
---amber:#b97918;--amberbg:#fff5df;--red:#c33d3d;--redbg:#fff0f0;
---shadow:0 12px 35px rgba(27,63,98,.08);--r:18px
-}
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
-.muted{color:var(--muted)}
-.small{font-size:13px}
-.app{display:flex;min-height:100vh}
-.sidebar{width:255px;background:#fff;border-right:1px solid var(--line);position:fixed;inset:0 auto 0 0;padding:22px 15px;display:flex;flex-direction:column;z-index:30}
-.brand{font-size:27px;font-weight:900;color:var(--blue2)}
-.brand span{font-weight:500;color:var(--muted)}
-.side-brand{padding:4px 10px 22px;border-bottom:1px solid var(--line)}
-.nav{padding-top:16px;display:grid;gap:4px;overflow:auto}
-.nav button{border:0;background:transparent;text-align:left;padding:11px 13px;border-radius:12px;color:#526579;font-weight:700}
-.nav button:hover,.nav button.active{background:var(--soft);color:var(--blue2)}
-.side-bottom{margin-top:auto}
-.main{margin-left:255px;min-width:0;width:calc(100% - 255px)}
-.topbar{height:70px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:20}
-.top-left{display:flex;align-items:center;gap:12px}
-.crumb{font-weight:850}
-.top-actions{display:flex;align-items:center;gap:8px}
-.content{padding:28px;max-width:1550px;margin:auto}
-.head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start;margin-bottom:22px}
-.head h1{font-size:27px;margin:0 0 6px}
-.head p{margin:0;color:var(--muted)}
-.grid{display:grid;gap:16px}
-.stats{grid-template-columns:repeat(4,minmax(0,1fr))}
-.two{grid-template-columns:repeat(2,minmax(0,1fr))}
-.three{grid-template-columns:repeat(3,minmax(0,1fr))}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:20px}
-.stat-label{color:var(--muted);font-size:13px;font-weight:700}
-.stat-value{font-size:29px;font-weight:900;margin-top:7px;color:var(--blue2)}
-.btn{border:0;border-radius:12px;padding:11px 15px;font-weight:750}
-.btn-primary{background:var(--blue);color:#fff}
-.btn-soft{background:var(--soft);color:var(--blue2)}
-.btn-danger{background:var(--redbg);color:var(--red)}
-.btn-green{background:var(--greenbg);color:var(--green)}
-.btn-small{padding:8px 11px;font-size:13px}
-.field{margin:13px 0}
-.field label{display:block;font-size:13px;font-weight:750;margin-bottom:7px}
-.field input,.field textarea,.field select{
-width:100%;border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px 13px;outline:0;color:var(--ink)
-}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:#8ab7e8}
-textarea{min-height:100px;resize:vertical}
-.row{display:flex;gap:10px;align-items:center}
-.between{justify-content:space-between}
-.wrap{flex-wrap:wrap}
-.table-wrap{overflow:auto}
-.table{width:100%;border-collapse:collapse}
-.table th,.table td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:14px}
-.table th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
-.table tr:last-child td{border-bottom:0}
-.badge{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:800}
-.badge.blue{background:#e9f2ff;color:var(--blue)}
-.badge.green{background:var(--greenbg);color:var(--green)}
-.badge.amber{background:var(--amberbg);color:var(--amber)}
-.badge.red{background:var(--redbg);color:var(--red)}
-.item{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff;margin-bottom:10px}
-.item:last-child{margin-bottom:0}
-.empty{padding:30px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px}
-.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
-.tab{border:1px solid var(--line);background:#fff;color:#53677a;border-radius:10px;padding:10px 13px;font-weight:750}
-.tab.active{background:var(--blue);border-color:var(--blue);color:#fff}
-.notice{padding:13px 15px;border-radius:13px;background:var(--soft);color:var(--blue2);font-size:13px;line-height:1.55}
-.success{padding:13px 15px;border-radius:13px;background:var(--greenbg);color:var(--green);font-size:13px}
-.warning{padding:13px 15px;border-radius:13px;background:var(--amberbg);color:var(--amber);font-size:13px}
-.location-box{border:1px solid var(--line);border-radius:15px;padding:15px;background:#f9fbfd}
-.location-status{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700}
-.dot{width:9px;height:9px;border-radius:50%;background:#aaa;display:inline-block}
-.dot.green{background:#20855a}
-.dot.red{background:#c33d3d}
-.dot.amber{background:#b97918}
-.modal{position:fixed;inset:0;background:rgba(18,59,112,.25);display:grid;place-items:center;padding:20px;z-index:100}
-.modal-card{background:#fff;border-radius:22px;width:min(760px,100%);max-height:92vh;overflow:auto;padding:24px;box-shadow:0 30px 80px rgba(0,0,0,.2)}
-.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.close{border:0;background:#f1f5f9;border-radius:10px;padding:8px 11px}
-.load-slot{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;margin-bottom:10px}
-.employee-card{border:1px solid var(--line);padding:14px;border-radius:14px}
-.form-section{border-top:1px solid var(--line);padding-top:18px;margin-top:20px}
-.form-section h3{margin:0 0 5px}
-.form-section p{margin:0 0 12px;color:var(--muted);font-size:13px}
-.camera-wrap{background:#111;border-radius:16px;overflow:hidden}
-.camera-wrap video{display:block;width:100%;max-height:360px;object-fit:cover}
-.capture-preview{width:100%;max-height:250px;object-fit:contain;border-radius:12px;background:#f1f5f9}
-.share-box{display:flex;gap:8px}
-.share-box input{flex:1}
-@media(max-width:1050px){
-.sidebar{transform:translateX(-100%);transition:.2s}
-.sidebar.open{transform:none}
-.main{margin-left:0;width:100%}
-.mobile-menu{display:block!important}
-.stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:700px){
-.content{padding:18px}
-.topbar{padding:0 15px}
-.stats,.two,.three{grid-template-columns:1fr}
-.load-slot{grid-template-columns:1fr}
-.head{flex-direction:column}
-.share-box{flex-direction:column}
-}
-.mobile-menu{display:none;border:0;background:transparent;font-size:22px}
-.toast{position:fixed;right:22px;bottom:22px;z-index:150;background:#123b70;color:#fff;padding:13px 16px;border-radius:13px;box-shadow:var(--shadow);max-width:380px}
-.auth{min-height:100vh;display:grid;place-items:center;padding:24px;background:linear-gradient(135deg,#f7fbff,#e9f3fc)}
-.auth-card{width:min(450px,100%);background:#fff;border:1px solid var(--line);border-radius:26px;padding:34px;box-shadow:var(--shadow)}
-</style>
-</head>
-
-<body>
-
-<div id="auth" class="auth">
-<div class="auth-card">
-<div class="brand">AWSZ <span>DOOH Admin</span></div>
-<h1>Admin Portal</h1>
-<p class="muted">Digital Out-of-Home Advertising Network</p>
-<form id="loginForm">
-<div class="field">
-<label>Email</label>
-<input id="loginEmail" type="email" placeholder="admin@example.com" required>
-</div>
-<div class="field">
-<label>Password</label>
-<input id="loginPassword" type="password" placeholder="••••••••" required>
-</div>
-<button class="btn btn-primary" style="width:100%">Sign in</button>
-<div id="loginError" class="small" style="color:var(--red);margin-top:10px"></div>
-</form>
-</div>
-</div>
-
-<div id="app" class="app hidden">
-
-<aside id="sidebar" class="sidebar">
-<div class="side-brand">
-<div class="brand">AWSZ</div>
-<div class="small muted">DOOH Admin Portal</div>
-</div>
-
-<nav class="nav">
-<button data-page="dashboard" onclick="go('dashboard')">⌂ &nbsp; Dashboard</button>
-<button data-page="areas" onclick="go('areas')">⌖ &nbsp; Areas & Locations</button>
-<button data-page="shops" onclick="go('shops')">▣ &nbsp; Shops / Vendors</button>
-<button data-page="clients" onclick="go('clients')">◯ &nbsp; Clients</button>
-<button data-page="packages" onclick="go('packages')">▤ &nbsp; Packages</button>
-<button data-page="ads" onclick="go('ads')">▶ &nbsp; Ads & Verification</button>
-<button data-page="upcoming" onclick="go('upcoming')">◷ &nbsp; Upcoming Ads</button>
-<button data-page="monitoring" onclick="go('monitoring')">● &nbsp; Screen Monitoring</button>
-<button data-page="withdrawals" onclick="go('withdrawals')">$ &nbsp; Withdrawals</button>
-<button data-page="complaints" onclick="go('complaints')">! &nbsp; Complaints</button>
-<button data-page="employees" onclick="go('employees')">♙ &nbsp; Employees</button>
-<button data-page="forms" onclick="go('forms')">☷ &nbsp; Form Builder</button>
-<button data-page="settings" onclick="go('settings')">⚙ &nbsp; Settings</button>
-</nav>
-
-<div class="side-bottom">
-<button class="btn btn-soft" style="width:100%" onclick="logout()">Sign out</button>
-</div>
-</aside>
-
-<main class="main">
-
-<header class="topbar">
-<div class="top-left">
-<button class="mobile-menu" onclick="toggleSidebar()">☰</button>
-<div id="crumb" class="crumb">Dashboard</div>
-</div>
-<div class="top-actions">
-<span class="badge blue">AWSZ TEAM</span>
-</div>
-</header>
-
-<div id="content" class="content"></div>
-
-</main>
-</div>
-
-<div id="modal" class="modal hidden">
-<div class="modal-card" id="modalBody"></div>
-</div>
-
-<div id="toast" class="toast hidden"></div>
-
-<script>
-"use strict";
-
-/* =========================================================
-   STORAGE
-========================================================= */
-
-const STORE="awsz_dooh_v5";
-
-const defaults={
-areas:[
-{id:"a1",name:"DHA",type:"Area",parent:""},
-{id:"a2",name:"Block 1",type:"Block",parent:"a1"},
-{id:"a3",name:"Block 2",type:"Block",parent:"a1"},
-{id:"a4",name:"Sector A",type:"Sector",parent:"a1"}
-],
-categories:["Grocery","Medical","Restaurant","Electronics","Fashion","General Store"],
-employees:[
-{id:"e1",name:"Ali Raza",phone:"03001234567",role:"Order Booker",commission:5},
-{id:"e2",name:"Usman Khan",phone:"03009876543",role:"Field Officer",commission:3}
-],
-shops:[
-{
-id:"s1",
-shopName:"Al Madina Store",
-owner:"Ahmed",
-phone:"03001234567",
-category:"Grocery",
-area:"a2",
-address:"DHA Block 1, Karachi",
-footfall:180,
-size:"900 sq ft",
-lcd:"Installed",
-lcdStatus:"Online",
-installment:"Yes",
-lcdCost:60000,
-downPayment:20000,
-installmentMonths:4,
-subMeter:"Yes",
-internet:"Own Fiber",
-companyInternet:"No",
-opening:"09:00",
-closing:"00:00",
-loadSlots:[{start:"13:00",end:"14:00"},{start:"18:00",end:"19:00"}],
-fridge:"Yes",
-orderBooker:"e1",
-liveLat:24.8138,
-liveLng:67.0735,
-locationAccuracy:15,
-locationAt:new Date().toISOString(),
-lastOnline:new Date().toISOString()
-},
-{
-id:"s2",
-shopName:"City Medical",
-owner:"Bilal",
-phone:"03001112233",
-category:"Medical",
-area:"a3",
-address:"DHA Block 2, Karachi",
-footfall:220,
-size:"700 sq ft",
-lcd:"Installed",
-lcdStatus:"Offline",
-installment:"No",
-lcdCost:60000,
-downPayment:60000,
-installmentMonths:0,
-subMeter:"No",
-internet:"Mobile",
-companyInternet:"No",
-opening:"09:00",
-closing:"23:00",
-loadSlots:[{start:"15:00",end:"16:00"}],
-fridge:"No",
-orderBooker:"e2",
-liveLat:24.8142,
-liveLng:67.075,
-locationAccuracy:20,
-locationAt:new Date(Date.now()-3600000).toISOString(),
-lastOnline:new Date(Date.now()-3600000).toISOString()
-}
-],
-clients:[
-{id:"c1",company:"Fresh Foods",representative:"Hassan",phone:"03005556677",address:"Karachi",category:"Grocery",package:"pkg1",areas:["a2"],duration:30,start:"2026-10-01T09:00",end:"2026-10-30T23:00"}
-],
-packages:[
-{id:"pkg1",name:"Starter 30 Sec",media:"Video",duration:30,price:25000,plays:20,coverage:"One Block",published:true},
-{id:"pkg2",name:"Premium 15 Sec",media:"Video",duration:15,price:40000,plays:40,coverage:"Multiple Blocks",published:true},
-{id:"pkg3",name:"Poster Display",media:"Poster",duration:15,price:18000,plays:20,coverage:"One Block",minWidth:1080,minHeight:1920,published:true}
-],
-ads:[
-{id:"ad1",client:"c1",company:"Fresh Foods",package:"pkg1",mediaType:"Video",file:"fresh-foods.mp4",duration:30,status:"Pending",areas:["a2"],start:"2026-10-01T09:00",end:"2026-10-30T23:00",created:new Date().toISOString()}
-],
-upcoming:[],
-withdrawals:[
-{id:"w1",vendor:"Al Madina Store",shopId:"s1",amount:8500,status:"Pending",bank:"HBL",account:"****1234",requested:new Date().toISOString(),history:[]}
-],
-complaints:[],
-formFields:{
-shop:[
-{key:"shopName",label:"Shop Name",required:true,enabled:true},
-{key:"owner",label:"Owner / Representative Name",required:true,enabled:true},
-{key:"phone",label:"Phone / Registered Number",required:true,enabled:true},
-{key:"category",label:"Shop Category",required:true,enabled:true},
-{key:"footfall",label:"Average Footfall",required:false,enabled:true},
-{key:"size",label:"Shop Size",required:false,enabled:true},
-{key:"lcd",label:"LCD Installed / Pending",required:true,enabled:true},
-{key:"lcdStatus",label:"LCD Status",required:true,enabled:true},
-{key:"installment",label:"LCD Installment",required:true,enabled:true},
-{key:"subMeter",label:"Sub-Meter",required:false,enabled:true},
-{key:"internet",label:"Internet Availability",required:false,enabled:true},
-{key:"companyInternet",label:"Company Will Provide Internet",required:false,enabled:true},
-{key:"opening",label:"Shop Opening Time",required:true,enabled:true},
-{key:"closing",label:"Shop Closing Time",required:true,enabled:true},
-{key:"loadSlots",label:"Load-Shedding Schedule",required:false,enabled:true},
-{key:"fridge",label:"Ice Cream Fridge",required:false,enabled:true},
-{key:"orderBooker",label:"Order Booker",required:false,enabled:true},
-{key:"address",label:"Written Address",required:true,enabled:true},
-{key:"liveLocation",label:"Live Location",required:true,enabled:true}
-]
-}
-};
-
-function loadDB(){
-try{
-const x=JSON.parse(localStorage.getItem(STORE));
-return x||structuredClone(defaults);
-}catch(e){return structuredClone(defaults)}
+  --yellow:#f5c400;
+  --yellow2:#ffd92f;
+  --light-yellow:#fff7c7;
+  --soft-yellow:#fffbe8;
+  --white:#fff;
+  --grey:#f1f2f4;
+  --border:#e4e4e4;
+  --text:#202124;
+  --muted:#777;
+  --green:#299653;
+  --red:#d94b4b;
 }
 
-let db=loadDB();
-
-function saveDB(){
-localStorage.setItem(STORE,JSON.stringify(db));
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-function uid(prefix="id"){
-return prefix+"_"+Date.now()+"_"+Math.random().toString(36).slice(2,8);
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:var(--grey);
+  color:var(--text);
 }
 
-/* =========================================================
-   BASIC UI
-========================================================= */
-
-const $=id=>document.getElementById(id);
-
-function esc(v){
-return String(v??"").replace(/[&<>"']/g,m=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-}[m]));
+button,
+input,
+select,
+textarea{
+  font:inherit;
 }
 
-function toast(title,msg=""){
-$("toast").innerHTML="<strong>"+esc(title)+"</strong>"+(msg?'<div style="margin-top:4px">'+esc(msg)+"</div>":"");
-$("toast").classList.remove("hidden");
-clearTimeout(window.__toast);
-window.__toast=setTimeout(()=>$("toast").classList.add("hidden"),3500);
+button{
+  cursor:pointer;
 }
 
-function badge(status){
-let s=String(status||"").toLowerCase();
-let c=s.includes("active")||s.includes("online")||s.includes("approved")||s.includes("paid")||s.includes("published")?"green":
-s.includes("pending")||s.includes("late")||s.includes("correction")?"amber":
-s.includes("offline")||s.includes("declined")||s.includes("rejected")?"red":"blue";
-return '<span class="badge '+c+'">'+esc(status||"—")+"</span>";
+.hidden{
+  display:none!important;
 }
-
-function go(page){
-window.currentPage=page;
-$("sidebar").classList.remove("open");
-render();
-}
-
-function toggleSidebar(){
-$("sidebar").classList.toggle("open");
-}
-
-function openModal(html){
-$("modalBody").innerHTML=html;
-$("modal").classList.remove("hidden");
-}
-
-function closeModal(){
-stopCamera();
-$("modal").classList.add("hidden");
-}
-
-$("modal").addEventListener("click",e=>{
-if(e.target.id==="modal")closeModal();
-});
 
 /* =========================================================
    LOGIN
 ========================================================= */
 
-$("loginForm").addEventListener("submit",e=>{
-e.preventDefault();
-$("auth").classList.add("hidden");
-$("app").classList.remove("hidden");
-localStorage.setItem("awsz_admin_logged","1");
-go("dashboard");
-});
-
-function logout(){
-localStorage.removeItem("awsz_admin_logged");
-$("app").classList.add("hidden");
-$("auth").classList.remove("hidden");
+.login-page{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+  background:var(--grey);
 }
 
-if(localStorage.getItem("awsz_admin_logged")){
-$("auth").classList.add("hidden");
-$("app").classList.remove("hidden");
+.login-box{
+  width:100%;
+  max-width:430px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:35px;
+  box-shadow:0 15px 40px rgba(0,0,0,.07);
+}
+
+.login-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:25px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.login-brand-mark{
+  width:38px;
+  height:38px;
+  background:var(--yellow);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+}
+
+.login-subtitle{
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:28px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  margin-bottom:17px;
+}
+
+.form-group label{
+  font-size:13px;
+  font-weight:700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  border:1px solid #ddd;
+  background:#fff;
+  border-radius:8px;
+  padding:12px;
+  outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:var(--yellow);
+  box-shadow:0 0 0 3px rgba(245,196,0,.12);
+}
+
+.login-btn{
+  width:100%;
+  border:0;
+  border-radius:8px;
+  padding:13px;
+  background:var(--yellow);
+  color:#111;
+  font-weight:800;
+  margin-top:5px;
+}
+
+.login-error{
+  background:#fff0f0;
+  color:var(--red);
+  border:1px solid #f0caca;
+  padding:11px;
+  border-radius:8px;
+  font-size:13px;
+  margin-bottom:15px;
+}
+
+/* =========================================================
+   ADMIN APP
+========================================================= */
+
+.admin-app{
+  display:none;
+  min-height:100vh;
+}
+
+.admin-app.active{
+  display:flex;
+}
+
+.sidebar{
+  width:235px;
+  background:#fff;
+  border-right:1px solid var(--border);
+  padding:22px 15px;
+  flex-shrink:0;
+  min-height:100vh;
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  z-index:200;
+}
+
+.sidebar-brand{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:22px;
+  font-weight:800;
+  padding:0 12px 28px;
+}
+
+.sidebar-mark{
+  width:34px;
+  height:34px;
+  background:var(--yellow);
+  border-radius:9px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+}
+
+.sidebar-label{
+  font-size:11px;
+  color:#999;
+  font-weight:800;
+  padding:0 12px;
+  margin:17px 0 7px;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+}
+
+.menu{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.menu button{
+  width:100%;
+  border:0;
+  background:transparent;
+  text-align:left;
+  padding:12px 14px;
+  border-radius:8px;
+  color:#555;
+  font-weight:600;
+}
+
+.menu button:hover,
+.menu button.active{
+  background:var(--light-yellow);
+  color:#222;
+}
+
+.main{
+  margin-left:235px;
+  flex:1;
+  min-width:0;
+}
+
+.topbar{
+  height:70px;
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 28px;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.topbar-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.mobile-menu{
+  display:none;
+  border:0;
+  background:var(--light-yellow);
+  padding:9px 12px;
+  border-radius:7px;
+}
+
+.topbar-title{
+  font-size:20px;
+  font-weight:800;
+}
+
+.topbar-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.notification-wrap{
+  position:relative;
+}
+
+.notification-btn{
+  position:relative;
+  width:40px;
+  height:40px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.notification-btn:hover{
+  background:var(--light-yellow);
+}
+
+.notification-btn svg{
+  width:20px;
+  height:20px;
+}
+
+.notification-badge{
+  position:absolute;
+  top:-5px;
+  right:-5px;
+  min-width:18px;
+  height:18px;
+  padding:0 5px;
+  border-radius:20px;
+  background:var(--yellow);
+  color:#111;
+  font-size:10px;
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid #fff;
+}
+
+.notification-panel{
+  position:absolute;
+  right:0;
+  top:50px;
+  width:350px;
+  max-height:430px;
+  overflow:auto;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  box-shadow:0 15px 40px rgba(0,0,0,.12);
+  z-index:999;
+}
+
+.notification-head{
+  padding:16px;
+  border-bottom:1px solid #eee;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.notification-head strong{
+  font-size:15px;
+}
+
+.notification-item{
+  padding:14px 16px;
+  border-bottom:1px solid #eee;
+}
+
+.notification-item:last-child{
+  border-bottom:0;
+}
+
+.notification-item.unread{
+  background:var(--soft-yellow);
+}
+
+.notification-item-title{
+  font-weight:800;
+  font-size:13px;
+}
+
+.notification-item-text{
+  color:#777;
+  font-size:12px;
+  line-height:1.5;
+  margin-top:4px;
+}
+
+.notification-time{
+  color:#aaa;
+  font-size:11px;
+  margin-top:6px;
+}
+
+.admin-profile{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:6px 10px;
+}
+
+.admin-avatar{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:var(--yellow);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:13px;
+}
+
+.admin-profile-text{
+  font-size:12px;
+  font-weight:700;
+}
+
+.logout-btn{
+  border:1px solid var(--border);
+  background:#fff;
+  padding:10px 14px;
+  border-radius:8px;
+  font-weight:700;
+}
+
+.logout-btn:hover{
+  background:#fafafa;
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+  padding:28px;
+}
+
+.page-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:15px;
+  margin-bottom:22px;
+}
+
+.page-head h1{
+  font-size:28px;
+  margin-bottom:5px;
+}
+
+.page-head p{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.btn{
+  border:0;
+  border-radius:8px;
+  padding:10px 15px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+}
+
+.btn-yellow{
+  background:var(--yellow);
+  color:#111;
+}
+
+.btn-white{
+  background:#fff;
+  border:1px solid var(--border);
+  color:#222;
+}
+
+.btn-danger{
+  background:#fff0f0;
+  color:var(--red);
+}
+
+.btn-green{
+  background:#eaf7ee;
+  color:var(--green);
+}
+
+.btn-small{
+  padding:7px 10px;
+  font-size:12px;
 }
 
 /* =========================================================
    DASHBOARD
 ========================================================= */
 
-function shopStatus(shop){
-if(shop.lcdStatus==="Offline")return"Offline";
-
-const now=new Date();
-const parts=String(shop.opening||"09:00").split(":");
-const open=new Date();
-open.setHours(Number(parts[0]),Number(parts[1]),0,0);
-
-const last=shop.lastOnline?new Date(shop.lastOnline):null;
-
-if(!last)return"Offline";
-
-const diff=(last-open)/60000;
-
-if(diff>15)return"Late";
-return"Active";
+.dashboard-cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:18px;
 }
+
+.dashboard-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:20px;
+}
+
+.card-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.card-icon{
+  width:36px;
+  height:36px;
+  border-radius:9px;
+  background:var(--light-yellow);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card-icon svg{
+  width:19px;
+  height:19px;
+}
+
+.card-label{
+  color:#777;
+  font-size:13px;
+}
+
+.card-value{
+  font-size:27px;
+  font-weight:800;
+}
+
+.card-small{
+  color:#777;
+  font-size:11px;
+  margin-top:5px;
+}
+
+.content-grid{
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:17px;
+}
+
+.panel{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:22px;
+}
+
+.panel-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:17px;
+}
+
+.panel-title h3{
+  font-size:17px;
+}
+
+.muted{
+  color:#777;
+}
+
+.small{
+  font-size:12px;
+}
+
+.vendor-summary{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.summary-box{
+  padding:15px;
+  background:#fafafa;
+  border:1px solid #eee;
+  border-radius:9px;
+}
+
+.summary-box strong{
+  display:block;
+  font-size:21px;
+}
+
+.summary-box span{
+  color:#777;
+  font-size:12px;
+}
+
+.time-box{
+  background:var(--soft-yellow);
+  border:1px solid #ebda78;
+  border-radius:10px;
+  padding:18px;
+}
+
+.time-main{
+  font-size:25px;
+  font-weight:800;
+  margin:7px 0;
+}
+
+.notification-list{
+  max-height:330px;
+  overflow:auto;
+}
+
+/* =========================================================
+   VENDORS
+========================================================= */
+
+.vendor-stats{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:13px;
+  margin-bottom:18px;
+}
+
+.vendor-stat{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:16px;
+}
+
+.vendor-stat-number{
+  font-size:24px;
+  font-weight:800;
+}
+
+.vendor-stat-label{
+  color:#777;
+  font-size:12px;
+  margin-top:4px;
+}
+
+.vendor-toolbar{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:15px;
+  margin-bottom:15px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+
+.search-box{
+  flex:1;
+  min-width:230px;
+}
+
+.search-box input,
+.filter-select{
+  width:100%;
+  border:1px solid #ddd;
+  background:#fff;
+  border-radius:8px;
+  padding:10px 12px;
+  outline:none;
+}
+
+.search-box input:focus,
+.filter-select:focus{
+  border-color:var(--yellow);
+}
+
+.filter-group{
+  width:160px;
+}
+
+.vendor-table{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:11px;
+  overflow:hidden;
+}
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,
+td{
+  padding:13px 11px;
+  text-align:left;
+  border-bottom:1px solid #eee;
+  font-size:12px;
+  white-space:nowrap;
+}
+
+th{
+  color:#777;
+  font-weight:700;
+  background:#fafafa;
+}
+
+tr:last-child td{
+  border-bottom:0;
+}
+
+.vendor-name{
+  font-weight:800;
+}
+
+.vendor-email{
+  color:#888;
+  font-size:11px;
+  margin-top:3px;
+}
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  border-radius:6px;
+  padding:5px 9px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.status.online,
+.status.approved{
+  background:#eaf7ee;
+  color:var(--green);
+}
+
+.status.offline{
+  background:#fdeeee;
+  color:var(--red);
+}
+
+.status.pending{
+  background:var(--light-yellow);
+  color:#755e00;
+}
+
+.status.rejected{
+  background:#f4f4f4;
+  color:#666;
+}
+
+.action-buttons{
+  display:flex;
+  gap:5px;
+}
+
+/* =========================================================
+   VENDOR DETAIL
+========================================================= */
+
+.vendor-detail{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:17px;
+}
+
+.detail-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:22px;
+}
+
+.detail-card.full{
+  grid-column:1/-1;
+}
+
+.detail-card h3{
+  font-size:17px;
+  margin-bottom:17px;
+}
+
+.detail-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.detail-item{
+  padding:12px;
+  background:#fafafa;
+  border:1px solid #eee;
+  border-radius:8px;
+}
+
+.detail-item label{
+  display:block;
+  color:#888;
+  font-size:11px;
+  margin-bottom:4px;
+}
+
+.detail-item strong{
+  font-size:13px;
+}
+
+.detail-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+#vendorMap{
+  height:370px;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:1000;
+}
+
+.modal.active{
+  display:flex;
+}
+
+.modal-box{
+  background:#fff;
+  width:100%;
+  max-width:760px;
+  max-height:94vh;
+  overflow:auto;
+  border-radius:13px;
+  padding:27px;
+}
+
+.modal-small{
+  max-width:460px;
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+.modal-head h2{
+  font-size:21px;
+}
+
+.close{
+  border:0;
+  background:#f1f1f1;
+  width:32px;
+  height:32px;
+  border-radius:7px;
+  font-size:20px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+.form-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:20px;
+}
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+  text-align:center;
+  padding:40px 20px;
+  color:#888;
+}
+
+.empty strong{
+  display:block;
+  color:#444;
+  margin-bottom:5px;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#222;
+  color:#fff;
+  padding:13px 17px;
+  border-radius:8px;
+  display:none;
+  z-index:2000;
+  font-size:13px;
+}
+
+.toast.show{
+  display:block;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:1100px){
+
+  .dashboard-cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .vendor-stats{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+}
+
+@media(max-width:800px){
+
+  .sidebar{
+    left:-250px;
+    transition:.25s;
+  }
+
+  .sidebar.open{
+    left:0;
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .mobile-menu{
+    display:block;
+  }
+
+  .content{
+    padding:20px 15px;
+  }
+
+  .content-grid{
+    grid-template-columns:1fr;
+  }
+
+  .vendor-detail{
+    grid-template-columns:1fr;
+  }
+
+  .detail-card.full{
+    grid-column:auto;
+  }
+
+  .admin-profile{
+    display:none;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .topbar{
+    padding:0 15px;
+  }
+
+  .topbar-title{
+    font-size:17px;
+  }
+
+  .dashboard-cards{
+    grid-template-columns:1fr;
+  }
+
+  .vendor-stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .form-grid,
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .notification-panel{
+    position:fixed;
+    top:65px;
+    right:10px;
+    left:10px;
+    width:auto;
+  }
+
+  .page-head{
+    flex-direction:column;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     ADMIN LOGIN
+========================================================= -->
+
+<div class="login-page" id="loginPage">
+
+  <div class="login-box">
+
+    <div class="login-brand">
+      <div class="login-brand-mark">S</div>
+      Spotly Admin
+    </div>
+
+    <div class="login-subtitle">
+      Admin access only. Registration is disabled.
+    </div>
+
+    <div id="loginError" class="login-error hidden"></div>
+
+    <div class="form-group">
+      <label>Admin ID / Email</label>
+      <input
+        id="adminEmail"
+        type="email"
+        autocomplete="username"
+        placeholder="admin@spotly.com"
+      >
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input
+        id="adminPassword"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Enter admin password"
+      >
+    </div>
+
+    <button
+      class="login-btn"
+      onclick="adminLogin()"
+    >
+      Login to Admin
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     ADMIN APP
+========================================================= -->
+
+<div class="admin-app" id="adminApp">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-brand">
+      <div class="sidebar-mark">S</div>
+      Spotly
+    </div>
+
+    <div class="sidebar-label">
+      Main
+    </div>
+
+    <div class="menu">
+
+      <button
+        id="menuDashboard"
+        class="active"
+        onclick="showPage('dashboard')"
+      >
+        Dashboard
+      </button>
+
+    </div>
+
+    <div class="sidebar-label">
+      Management
+    </div>
+
+    <div class="menu">
+
+      <button
+        id="menuVendors"
+        onclick="showPage('vendors')"
+      >
+        Vendors
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="topbar-left">
+
+        <button
+          class="mobile-menu"
+          onclick="toggleSidebar()"
+        >
+          ☰
+        </button>
+
+        <div
+          class="topbar-title"
+          id="topbarTitle"
+        >
+          Dashboard
+        </div>
+
+      </div>
+
+      <div class="topbar-right">
+
+        <div class="notification-wrap">
+
+          <button
+            class="notification-btn"
+            onclick="toggleNotifications()"
+            aria-label="Notifications"
+          >
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+              <path d="M10 21h4"/>
+            </svg>
+
+            <span
+              id="notificationBadge"
+              class="notification-badge hidden"
+            >
+              0
+            </span>
+
+          </button>
+
+          <div
+            class="notification-panel hidden"
+            id="notificationPanel"
+          >
+
+            <div class="notification-head">
+              <strong>Notifications</strong>
+
+              <button
+                class="btn btn-white btn-small"
+                onclick="markNotificationsRead()"
+              >
+                Mark read
+              </button>
+            </div>
+
+            <div id="notificationList"></div>
+
+          </div>
+
+        </div>
+
+
+        <div class="admin-profile">
+
+          <div class="admin-avatar">
+            A
+          </div>
+
+          <div class="admin-profile-text">
+            Admin
+          </div>
+
+        </div>
+
+        <button
+          class="logout-btn"
+          onclick="adminLogout()"
+        >
+          Logout
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <section class="content">
+
+      <!-- =====================================================
+           DASHBOARD PAGE
+      ===================================================== -->
+
+      <div id="pageDashboard">
+
+        <div class="page-head">
+
+          <div>
+            <h1>Dashboard</h1>
+
+            <p>
+              Today's Spotly network overview.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="dashboard-cards">
+
+          <div class="dashboard-card">
+
+            <div class="card-top">
+
+              <div class="card-label">
+                Today's Ads
+              </div>
+
+              <div class="card-icon">
+                ADS
+              </div>
+
+            </div>
+
+            <div
+              class="card-value"
+              id="todayAds"
+            >
+              0
+            </div>
+
+            <div class="card-small">
+              Ads scheduled / running today
+            </div>
+
+          </div>
+
+
+          <div class="dashboard-card">
+
+            <div class="card-top">
+
+              <div class="card-label">
+                Offline Shops
+              </div>
+
+              <div class="card-icon">
+                OFF
+              </div>
+
+            </div>
+
+            <div
+              class="card-value"
+              id="offlineShops"
+            >
+              0
+            </div>
+
+            <div class="card-small">
+              Vendor screens currently offline
+            </div>
+
+          </div>
+
+
+          <div class="dashboard-card">
+
+            <div class="card-top">
+
+              <div class="card-label">
+                Today's Revenue
+              </div>
+
+              <div class="card-icon">
+                Rs
+              </div>
+
+            </div>
+
+            <div
+              class="card-value"
+              id="todayRevenue"
+            >
+              Rs 0
+            </div>
+
+            <div class="card-small">
+              Today's recorded revenue
+            </div>
+
+          </div>
+
+
+          <div class="dashboard-card">
+
+            <div class="card-top">
+
+              <div class="card-label">
+                Today's Ads Time
+              </div>
+
+              <div class="card-icon">
+                ⏱
+              </div>
+
+            </div>
+
+            <div
+              class="card-value"
+              id="todayAdsTime"
+            >
+              0 hrs
+            </div>
+
+            <div class="card-small">
+              Scheduled advertising window
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="content-grid">
+
+          <div class="panel">
+
+            <div class="panel-title">
+
+              <h3>
+                Vendor Overview
+              </h3>
+
+              <button
+                class="btn btn-yellow btn-small"
+                onclick="showPage('vendors')"
+              >
+                View Vendors
+              </button>
+
+            </div>
+
+            <div class="vendor-summary">
+
+              <div class="summary-box">
+                <strong id="totalVendors">0</strong>
+                <span>Total Vendors</span>
+              </div>
+
+              <div class="summary-box">
+                <strong id="newVendors">0</strong>
+                <span>New / Pending Vendors</span>
+              </div>
+
+              <div class="summary-box">
+                <strong id="approvedVendors">0</strong>
+                <span>Approved Vendors</span>
+              </div>
+
+              <div class="summary-box">
+                <strong id="onlineVendors">0</strong>
+                <span>Online Screens</span>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="panel">
+
+            <div class="panel-title">
+              <h3>
+                Today's Ad Time
+              </h3>
+            </div>
+
+            <div class="time-box">
+
+              <div class="small muted">
+                Advertising window
+              </div>
+
+              <div
+                class="time-main"
+                id="dashboardAdWindow"
+              >
+                Not available
+              </div>
+
+              <div class="small muted">
+                Based on today's scheduled ads.
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="panel" style="margin-top:17px;">
+
+          <div class="panel-title">
+
+            <h3>
+              Real-time Notifications
+            </h3>
+
+            <button
+              class="btn btn-white btn-small"
+              onclick="toggleNotifications()"
+            >
+              View All
+            </button>
+
+          </div>
+
+          <div
+            class="notification-list"
+            id="dashboardNotifications"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================================================
+           VENDORS PAGE
+      ===================================================== -->
+
+      <div
+        id="pageVendors"
+        class="hidden"
+      >
+
+        <div class="page-head">
+
+          <div>
+            <h1>Vendors</h1>
+
+            <p>
+              Manage vendor profiles, ads, earnings, withdrawals,
+              complaints and live screen status.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="vendor-stats">
+
+          <div class="vendor-stat">
+            <div
+              class="vendor-stat-number"
+              id="vTotal"
+            >
+              0
+            </div>
+            <div class="vendor-stat-label">
+              Total Vendors
+            </div>
+          </div>
+
+          <div class="vendor-stat">
+            <div
+              class="vendor-stat-number"
+              id="vPending"
+            >
+              0
+            </div>
+            <div class="vendor-stat-label">
+              New / Pending
+            </div>
+          </div>
+
+          <div class="vendor-stat">
+            <div
+              class="vendor-stat-number"
+              id="vApproved"
+            >
+              0
+            </div>
+            <div class="vendor-stat-label">
+              Approved
+            </div>
+          </div>
+
+          <div class="vendor-stat">
+            <div
+              class="vendor-stat-number"
+              id="vOnline"
+            >
+              0
+            </div>
+            <div class="vendor-stat-label">
+              Screens Online
+            </div>
+          </div>
+
+          <div class="vendor-stat">
+            <div
+              class="vendor-stat-number"
+              id="vOffline"
+            >
+              0
+            </div>
+            <div class="vendor-stat-label">
+              Screens Offline
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="vendor-toolbar">
+
+          <div class="search-box">
+
+            <input
+              id="vendorSearch"
+              placeholder="Search vendor, owner, phone or email..."
+              oninput="renderVendors()"
+            >
+
+          </div>
+
+          <div class="filter-group">
+
+            <select
+              id="vendorStatusFilter"
+              class="filter-select"
+              onchange="renderVendors()"
+            >
+
+              <option value="all">
+                All Status
+              </option>
+
+              <option value="pending">
+                Pending
+              </option>
+
+              <option value="approved">
+                Approved
+              </option>
+
+            </select>
+
+          </div>
+
+          <div class="filter-group">
+
+            <select
+              id="vendorOnlineFilter"
+              class="filter-select"
+              onchange="renderVendors()"
+            >
+
+              <option value="all">
+                All Screens
+              </option>
+
+              <option value="online">
+                Online
+              </option>
+
+              <option value="offline">
+                Offline
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="vendor-table">
+
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+
+                <tr>
+
+                  <th>Vendor</th>
+                  <th>Area</th>
+                  <th>Status</th>
+                  <th>Screen</th>
+                  <th>Today's Ads</th>
+                  <th>Today's Earnings</th>
+                  <th>Actions</th>
+
+                </tr>
+
+              </thead>
+
+              <tbody id="vendorTableBody"></tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================================================
+           VENDOR DETAIL PAGE
+      ===================================================== -->
+
+      <div
+        id="pageVendorDetail"
+        class="hidden"
+      >
+
+        <div class="page-head">
+
+          <div>
+
+            <button
+              class="btn btn-white btn-small"
+              onclick="showPage('vendors')"
+              style="margin-bottom:12px;"
+            >
+              ← Back to Vendors
+            </button>
+
+            <h1 id="detailVendorName">
+              Vendor
+            </h1>
+
+            <p id="detailVendorStatus">
+              Vendor profile
+            </p>
+
+          </div>
+
+          <div
+            class="detail-actions"
+            style="margin-top:0;"
+          >
+
+            <button
+              class="btn btn-yellow"
+              onclick="editCurrentVendor()"
+            >
+              Edit Vendor
+            </button>
+
+            <button
+              class="btn btn-white"
+              onclick="openVendorNotification()"
+            >
+              Personal Notification
+            </button>
+
+            <button
+              class="btn btn-danger"
+              onclick="deleteCurrentVendor()"
+            >
+              Delete Vendor
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="vendor-detail">
+
+          <div class="detail-card">
+
+            <h3>
+              Vendor Profile
+            </h3>
+
+            <div
+              class="detail-grid"
+              id="vendorProfileDetails"
+            ></div>
+
+          </div>
+
+
+          <div class="detail-card">
+
+            <h3>
+              Screen Status
+            </h3>
+
+            <div
+              id="vendorScreenDetails"
+            ></div>
+
+          </div>
+
+
+          <div class="detail-card">
+
+            <h3>
+              Vendor Financials
+            </h3>
+
+            <div
+              class="detail-grid"
+              id="vendorFinancialDetails"
+            ></div>
+
+          </div>
+
+
+          <div class="detail-card">
+
+            <h3>
+              Vendor Activity
+            </h3>
+
+            <div
+              class="detail-grid"
+              id="vendorActivityDetails"
+            ></div>
+
+          </div>
+
+
+          <div class="detail-card full">
+
+            <div class="panel-title">
+
+              <h3>
+                Live Vendor Location
+              </h3>
+
+              <span
+                class="small muted"
+                id="locationText"
+              >
+                Loading location...
+              </span>
+
+            </div>
+
+            <div id="vendorMap"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<!-- =========================================================
+     EDIT VENDOR MODAL
+========================================================= -->
+
+<div
+  class="modal"
+  id="editVendorModal"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h2>
+        Edit Vendor
+      </h2>
+
+      <button
+        class="close"
+        onclick="closeModal('editVendorModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>Vendor Name</label>
+        <input id="editVendorName">
+      </div>
+
+      <div class="form-group">
+        <label>Owner Name</label>
+        <input id="editOwnerName">
+      </div>
+
+      <div class="form-group">
+        <label>Phone</label>
+        <input id="editPhone">
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input id="editEmail" type="email">
+      </div>
+
+      <div class="form-group">
+        <label>Category</label>
+        <input id="editCategory">
+      </div>
+
+      <div class="form-group">
+        <label>Area</label>
+        <input id="editArea">
+      </div>
+
+      <div class="form-group">
+        <label>Phase</label>
+        <input id="editPhase">
+      </div>
+
+      <div class="form-group">
+        <label>Precinct</label>
+        <input id="editPrecinct">
+      </div>
+
+      <div class="form-group">
+        <label>Sector</label>
+        <input id="editSector">
+      </div>
+
+      <div class="form-group">
+        <label>Block</label>
+        <input id="editBlock">
+      </div>
+
+      <div class="form-group full">
+        <label>Address</label>
+        <textarea id="editAddress"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Vendor Status</label>
+
+        <select id="editStatus">
+
+          <option value="pending">
+            Pending
+          </option>
+
+          <option value="approved">
+            Approved
+          </option>
+
+          <option value="rejected">
+            Rejected
+          </option>
+
+        </select>
+
+      </div>
+
+      <div class="form-group">
+        <label>Screen Status</label>
+
+        <select id="editOnlineStatus">
+
+          <option value="true">
+            Online
+          </option>
+
+          <option value="false">
+            Offline
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+    <div class="form-actions">
+
+      <button
+        class="btn btn-white"
+        onclick="closeModal('editVendorModal')"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-yellow"
+        onclick="saveVendorEdit()"
+      >
+        Save Changes
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     PERSONAL NOTIFICATION MODAL
+========================================================= -->
+
+<div
+  class="modal"
+  id="notificationModal"
+>
+
+  <div class="modal-box modal-small">
+
+    <div class="modal-head">
+
+      <h2>
+        Send Vendor Notification
+      </h2>
+
+      <button
+        class="close"
+        onclick="closeModal('notificationModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+        Title
+      </label>
+
+      <input
+        id="personalNotificationTitle"
+        placeholder="Notification title"
+      >
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+        Message
+      </label>
+
+      <textarea
+        id="personalNotificationMessage"
+        placeholder="Write notification..."
+      ></textarea>
+
+    </div>
+
+    <div class="form-actions">
+
+      <button
+        class="btn btn-white"
+        onclick="closeModal('notificationModal')"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn btn-yellow"
+        onclick="sendVendorNotification()"
+      >
+        Send Notification
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+  "https://ausocdplliuftdqxbvwa.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let adminUser = null;
+let vendors = [];
+let currentVendor = null;
+let vendorMap = null;
+let realtimeChannel = null;
+
+let notifications = [];
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function $(id){
+  return document.getElementById(id);
+}
+
+
+function esc(value){
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+function toast(message){
+
+  const box = $("toast");
+
+  box.textContent = message;
+
+  box.classList.add("show");
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer =
+    setTimeout(()=>{
+      box.classList.remove("show");
+    },3000);
+
+}
+
+
+function openModal(id){
+  $(id).classList.add("active");
+}
+
+
+function closeModal(id){
+  $(id).classList.remove("active");
+}
+
+
+function statusBadge(status){
+
+  const s =
+    String(status || "pending").toLowerCase();
+
+  if(s === "approved"){
+    return `<span class="status approved">Approved</span>`;
+  }
+
+  if(s === "rejected"){
+    return `<span class="status rejected">Rejected</span>`;
+  }
+
+  return `<span class="status pending">Pending</span>`;
+}
+
+
+function screenBadge(online){
+
+  if(online === true){
+    return `<span class="status online">● Online</span>`;
+  }
+
+  return `<span class="status offline">● Offline</span>`;
+}
+
+
+function formatMoney(value){
+
+  return "Rs " +
+    Number(value || 0).toLocaleString("en-PK");
+
+}
+
+
+function formatDate(value){
+
+  if(!value) return "-";
+
+  return new Date(value).toLocaleString(
+    "en-PK",
+    {
+      dateStyle:"medium",
+      timeStyle:"short"
+    }
+  );
+
+}
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+async function adminLogin(){
+
+  const email =
+    $("adminEmail").value.trim();
+
+  const password =
+    $("adminPassword").value;
+
+  const errorBox =
+    $("loginError");
+
+  errorBox.classList.add("hidden");
+
+  if(!email || !password){
+
+    errorBox.textContent =
+      "Please enter admin ID and password.";
+
+    errorBox.classList.remove("hidden");
+
+    return;
+  }
+
+  try{
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth.signInWithPassword({
+        email,
+        password
+      });
+
+    if(error){
+
+      errorBox.textContent =
+        error.message ||
+        "Invalid admin login.";
+
+      errorBox.classList.remove("hidden");
+
+      return;
+    }
+
+    if(!data.user){
+
+      errorBox.textContent =
+        "Admin login failed.";
+
+      errorBox.classList.remove("hidden");
+
+      return;
+    }
+
+    /*
+      IMPORTANT:
+      The authenticated Supabase user must also
+      exist in public.admin_users.
+    */
+
+    const {
+      data: adminRecord,
+      error: adminError
+    } =
+      await supabaseClient
+        .from("admin_users")
+        .select("id,email,full_name,active")
+        .eq("user_id",data.user.id)
+        .maybeSingle();
+
+    if(adminError){
+
+      await supabaseClient.auth.signOut();
+
+      errorBox.textContent =
+        "Admin access configuration is missing.";
+
+      errorBox.classList.remove("hidden");
+
+      console.error(adminError);
+
+      return;
+    }
+
+    if(!adminRecord || adminRecord.active !== true){
+
+      await supabaseClient.auth.signOut();
+
+      errorBox.textContent =
+        "This account is not authorized as admin.";
+
+      errorBox.classList.remove("hidden");
+
+      return;
+    }
+
+    adminUser = {
+      ...data.user,
+      ...adminRecord
+    };
+
+    $("loginPage").style.display="none";
+
+    $("adminApp").classList.add("active");
+
+    await loadAdminData();
+
+    subscribeRealtime();
+
+  }catch(error){
+
+    console.error(error);
+
+    errorBox.textContent =
+      "Unable to login.";
+
+    errorBox.classList.remove("hidden");
+
+  }
+
+}
+
+
+async function checkExistingSession(){
+
+  const {
+    data
+  } =
+    await supabaseClient.auth.getSession();
+
+  if(!data.session){
+    return;
+  }
+
+  const user =
+    data.session.user;
+
+  const {
+    data: adminRecord
+  } =
+    await supabaseClient
+      .from("admin_users")
+      .select("id,email,full_name,active")
+      .eq("user_id",user.id)
+      .maybeSingle();
+
+  if(!adminRecord || adminRecord.active !== true){
+
+    await supabaseClient.auth.signOut();
+
+    return;
+  }
+
+  adminUser = {
+    ...user,
+    ...adminRecord
+  };
+
+  $("loginPage").style.display="none";
+
+  $("adminApp").classList.add("active");
+
+  await loadAdminData();
+
+  subscribeRealtime();
+
+}
+
+
+async function adminLogout(){
+
+  if(realtimeChannel){
+
+    await supabaseClient
+      .removeChannel(realtimeChannel);
+
+    realtimeChannel=null;
+  }
+
+  await supabaseClient.auth.signOut();
+
+  adminUser=null;
+
+  $("adminApp").classList.remove("active");
+
+  $("loginPage").style.display="flex";
+
+  $("adminEmail").value="";
+
+  $("adminPassword").value="";
+
+}
+
+
+$("adminPassword")
+  .addEventListener(
+    "keydown",
+    event=>{
+      if(event.key==="Enter"){
+        adminLogin();
+      }
+    }
+  );
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function showPage(page){
+
+  $("pageDashboard").classList.add("hidden");
+
+  $("pageVendors").classList.add("hidden");
+
+  $("pageVendorDetail").classList.add("hidden");
+
+  $("menuDashboard").classList.remove("active");
+
+  $("menuVendors").classList.remove("active");
+
+  if(page==="dashboard"){
+
+    $("pageDashboard").classList.remove("hidden");
+
+    $("menuDashboard").classList.add("active");
+
+    $("topbarTitle").textContent="Dashboard";
+
+    renderDashboard();
+
+  }
+
+  if(page==="vendors"){
+
+    $("pageVendors").classList.remove("hidden");
+
+    $("menuVendors").classList.add("active");
+
+    $("topbarTitle").textContent="Vendors";
+
+    renderVendors();
+
+  }
+
+  if(page==="vendor-detail"){
+
+    $("pageVendorDetail").classList.remove("hidden");
+
+    $("topbarTitle").textContent="Vendor Profile";
+
+    renderVendorDetail();
+
+  }
+
+  $("sidebar").classList.remove("open");
+
+}
+
+
+function toggleSidebar(){
+
+  $("sidebar").classList.toggle("open");
+
+}
+
+
+/* =========================================================
+   LOAD ADMIN DATA
+========================================================= */
+
+async function loadAdminData(){
+
+  await loadVendors();
+
+  await loadNotifications();
+
+  renderDashboard();
+
+  updateNotificationUI();
+
+}
+
+
+async function loadVendors(){
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("vendors")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+  if(error){
+
+    console.error(error);
+
+    toast("Unable to load vendors.");
+
+    vendors=[];
+
+    return;
+  }
+
+  vendors =
+    Array.isArray(data)
+      ? data
+      : [];
+
+}
+
+
+async function loadNotifications(){
+
+  /*
+    If admin_notifications table exists,
+    notifications will be loaded from it.
+
+    If it does not exist yet, the dashboard
+    simply starts with an empty notification list.
+  */
+
+  try{
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("admin_notifications")
+        .select("*")
+        .order("created_at",{ascending:false})
+        .limit(50);
+
+    if(error){
+
+      console.warn(
+        "admin_notifications table not available yet."
+      );
+
+      notifications=[];
+
+      renderNotifications();
+
+      return;
+    }
+
+    notifications =
+      data || [];
+
+    renderNotifications();
+
+  }catch(error){
+
+    console.error(error);
+
+    notifications=[];
+
+  }
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
 
 function renderDashboard(){
 
-const statuses=db.shops.map(shopStatus);
-const online=statuses.filter(x=>x==="Active").length;
-const offline=statuses.filter(x=>x==="Offline").length;
-const late=statuses.filter(x=>x==="Late").length;
+  const total =
+    vendors.length;
 
-const today=new Date().toISOString().slice(0,10);
+  const pending =
+    vendors.filter(
+      v =>
+        String(v.status || "pending")
+          .toLowerCase()==="pending"
+    ).length;
 
-const todayWithdrawals=db.withdrawals.filter(w=>String(w.requested||"").slice(0,10)===today);
-const todayIncome=Number(localStorage.getItem("awsz_today_income")||0);
-const newVendors=db.shops.filter(s=>String(s.id).includes("_")||String(s.created||"").slice(0,10)===today).length;
+  const approved =
+    vendors.filter(
+      v =>
+        String(v.status || "")
+          .toLowerCase()==="approved"
+    ).length;
 
-$("crumb").textContent="Dashboard";
+  const online =
+    vendors.filter(
+      v =>
+        v.online_status === true
+    ).length;
 
-$("content").innerHTML=`
-<div class="head">
-<div>
-<h1>Dashboard</h1>
-<p>DOOH network overview and today's operations.</p>
-</div>
-</div>
+  const offline =
+    total-online;
 
-<div class="grid stats">
-<div class="card"><div class="stat-label">Total Shops</div><div class="stat-value">${db.shops.length}</div></div>
-<div class="card"><div class="stat-label">Online / Active</div><div class="stat-value">${online}</div>${badge("Active")}</div>
-<div class="card"><div class="stat-label">Offline</div><div class="stat-value">${offline}</div>${badge("Offline")}</div>
-<div class="card"><div class="stat-label">Late</div><div class="stat-value">${late}</div>${badge("Late")}</div>
-<div class="card"><div class="stat-label">Today's Withdrawals</div><div class="stat-value">${todayWithdrawals.length}</div></div>
-<div class="card"><div class="stat-label">Today's Income</div><div class="stat-value">Rs ${todayIncome.toLocaleString()}</div></div>
-<div class="card"><div class="stat-label">New Vendors</div><div class="stat-value">${newVendors}</div></div>
-<div class="card"><div class="stat-label">Pending Approvals</div><div class="stat-value">${db.ads.filter(a=>a.status==="Pending").length}</div></div>
-</div>
 
-<div class="grid two" style="margin-top:18px">
+  $("totalVendors").textContent =
+    total;
 
-<div class="card">
-<div class="row between">
-<h3 style="margin:0">Screen Status</h3>
-<button class="btn btn-soft btn-small" onclick="go('monitoring')">View All</button>
-</div>
-<div style="margin-top:14px">
-${db.shops.map(s=>`
-<div class="item">
-<div class="row between">
-<strong>${esc(s.shopName)}</strong>
-${badge(shopStatus(s))}
-</div>
-<div class="small muted" style="margin-top:5px">${esc(s.address)}</div>
-</div>`).join("")}
-</div>
-</div>
+  $("newVendors").textContent =
+    pending;
 
-<div class="card">
-<h3 style="margin-top:0">Quick Actions</h3>
-<div class="grid">
-<button class="btn btn-primary" onclick="go('shops');setTimeout(()=>openShopForm(),100)">+ Add Shop / Vendor</button>
-<button class="btn btn-soft" onclick="go('areas')">Manage Areas</button>
-<button class="btn btn-soft" onclick="go('packages')">Create Package</button>
-<button class="btn btn-soft" onclick="go('ads')">Review Ads</button>
-<button class="btn btn-soft" onclick="go('withdrawals')">Verify Withdrawals</button>
-</div>
-</div>
+  $("approvedVendors").textContent =
+    approved;
 
-</div>
-`;
+  $("onlineVendors").textContent =
+    online;
+
+  $("offlineShops").textContent =
+    offline;
+
+  $("offlineShops").textContent =
+    offline;
+
+
+  /*
+    Vendor table currently contains the available
+    vendor-level data. Ad/revenue values will come
+    from the future ads/earnings tables.
+  */
+
+  $("todayAds").textContent =
+    "0";
+
+  $("todayRevenue").textContent =
+    formatMoney(0);
+
+  $("todayAdsTime").textContent =
+    "0 hrs";
+
+  $("dashboardAdWindow").textContent =
+    "Not available";
+
+
+  $("vTotal").textContent =
+    total;
+
+  $("vPending").textContent =
+    pending;
+
+  $("vApproved").textContent =
+    approved;
+
+  $("vOnline").textContent =
+    online;
+
+  $("vOffline").textContent =
+    offline;
+
+  renderDashboardNotifications();
+
 }
+
+
+function renderDashboardNotifications(){
+
+  const box =
+    $("dashboardNotifications");
+
+  if(!notifications.length){
+
+    box.innerHTML=`
+      <div class="empty">
+        <strong>No notifications</strong>
+        Real-time admin notifications will appear here.
+      </div>
+    `;
+
+    return;
+  }
+
+  box.innerHTML =
+    notifications
+      .slice(0,8)
+      .map(notificationHTML)
+      .join("");
+
+}
+
 
 /* =========================================================
-   AREAS
+   VENDORS
 ========================================================= */
 
-function areaName(id){
-return db.areas.find(a=>a.id===id)?.name||"—";
+function renderVendors(){
+
+  const search =
+    $("vendorSearch")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const status =
+    $("vendorStatusFilter")
+      .value;
+
+  const onlineFilter =
+    $("vendorOnlineFilter")
+      .value;
+
+
+  let list =
+    vendors.filter(v=>{
+
+      const text = [
+
+        v.vendor_name,
+        v.owner_name,
+        v.phone,
+        v.email,
+        v.area,
+        v.address
+
+      ]
+      .join(" ")
+      .toLowerCase();
+
+      if(
+        search &&
+        !text.includes(search)
+      ){
+        return false;
+      }
+
+      if(
+        status !== "all" &&
+        String(v.status || "pending")
+          .toLowerCase() !== status
+      ){
+        return false;
+      }
+
+      if(
+        onlineFilter === "online" &&
+        v.online_status !== true
+      ){
+        return false;
+      }
+
+      if(
+        onlineFilter === "offline" &&
+        v.online_status === true
+      ){
+        return false;
+      }
+
+      return true;
+
+    });
+
+
+  const body =
+    $("vendorTableBody");
+
+
+  if(!list.length){
+
+    body.innerHTML=`
+      <tr>
+        <td colspan="7">
+          <div class="empty">
+            <strong>No vendors found</strong>
+            Try another search or filter.
+          </div>
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  body.innerHTML =
+    list.map(v=>{
+
+      const id =
+        esc(v.id);
+
+      return `
+        <tr>
+
+          <td>
+
+            <div class="vendor-name">
+              ${esc(v.vendor_name || "Unnamed Vendor")}
+            </div>
+
+            <div class="vendor-email">
+              ${esc(v.email || v.phone || "-")}
+            </div>
+
+          </td>
+
+          <td>
+            ${esc(v.area || "-")}
+          </td>
+
+          <td>
+            ${statusBadge(v.status)}
+          </td>
+
+          <td>
+            ${screenBadge(v.online_status)}
+          </td>
+
+          <td>
+            0
+          </td>
+
+          <td>
+            Rs 0
+          </td>
+
+          <td>
+
+            <div class="action-buttons">
+
+              <button
+                class="btn btn-white btn-small"
+                onclick="openVendor('${id}')"
+              >
+                View
+              </button>
+
+              <button
+                class="btn btn-yellow btn-small"
+                onclick="editVendor('${id}')"
+              >
+                Edit
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+      `;
+
+    }).join("");
+
 }
 
-function renderAreas(){
-
-$("crumb").textContent="Areas & Locations";
-
-$("content").innerHTML=`
-<div class="head">
-<div>
-<h1>Areas & Locations</h1>
-<p>Create Area, Block, Sector, Phase, Precinct and custom geographic levels.</p>
-</div>
-<button class="btn btn-primary" onclick="openAreaForm()">+ Add New</button>
-</div>
-
-<div class="card">
-<div class="table-wrap">
-<table class="table">
-<thead><tr>
-<th>Name</th><th>Type</th><th>Parent</th><th>Actions</th>
-</tr></thead>
-<tbody>
-${db.areas.map(a=>`
-<tr>
-<td><strong>${esc(a.name)}</strong></td>
-<td>${badge(a.type)}</td>
-<td>${esc(areaName(a.parent))}</td>
-<td>
-<button class="btn btn-soft btn-small" onclick="openAreaForm('${a.id}')">Edit</button>
-<button class="btn btn-danger btn-small" onclick="deleteArea('${a.id}')">Delete</button>
-</td>
-</tr>`).join("")}
-</tbody>
-</table>
-</div>
-</div>
-`;
-}
-
-function openAreaForm(id=""){
-const a=db.areas.find(x=>x.id===id)||{};
-openModal(`
-<div class="modal-head">
-<h3>${id?"Edit":"Add"} Location</h3>
-<button class="close" onclick="closeModal()">✕</button>
-</div>
-
-<div class="field">
-<label>Location Name</label>
-<input id="areaName" value="${esc(a.name)}" placeholder="e.g. DHA Block 3">
-</div>
-
-<div class="field">
-<label>Area Type</label>
-<select id="areaType">
-<option ${a.type==="Area"?"selected":""}>Area</option>
-<option ${a.type==="Sub Area"?"selected":""}>Sub Area</option>
-<option ${a.type==="Block"?"selected":""}>Block</option>
-<option ${a.type==="Sector"?"selected":""}>Sector</option>
-<option ${a.type==="Phase"?"selected":""}>Phase</option>
-<option ${a.type==="Precinct"?"selected":""}>Precinct</option>
-<option ${a.type==="Zone"?"selected":""}>Zone</option>
-<option ${a.type==="Custom"?"selected":""}>Custom</option>
-</select>
-</div>
-
-<div class="field">
-<label>Parent Location</label>
-<select id="areaParent">
-<option value="">No Parent</option>
-${db.areas.filter(x=>x.id!==id).map(x=>`
-<option value="${x.id}" ${a.parent===x.id?"selected":""}>${esc(x.name)} (${esc(x.type)})</option>`).join("")}
-</select>
-</div>
-
-<div class="row" style="justify-content:flex-end">
-<button class="btn btn-soft" onclick="closeModal()">Cancel</button>
-<button class="btn btn-primary" onclick="saveArea('${id}')">Save Location</button>
-</div>
-`);
-}
-
-function saveArea(id){
-const name=$("areaName").value.trim();
-if(!name)return alert("Location name required.");
-const obj={
-id:id||uid("area"),
-name,
-type:$("areaType").value,
-parent:$("areaParent").value
-};
-if(id)db.areas=db.areas.map(x=>x.id===id?obj:x);
-else db.areas.push(obj);
-saveDB();
-closeModal();
-render();
-toast("Saved","Location saved successfully.");
-}
-
-function deleteArea(id){
-if(db.areas.some(x=>x.parent===id))return alert("Remove child locations first.");
-if(db.shops.some(x=>x.area===id))return alert("This location is being used by a shop.");
-if(!confirm("Delete this location?"))return;
-db.areas=db.areas.filter(x=>x.id!==id);
-saveDB();
-render();
-}
 
 /* =========================================================
-   CATEGORY
+   OPEN VENDOR
 ========================================================= */
 
-function addCategory(){
-const name=prompt("New category name:");
-if(!name?.trim())return;
-if(db.categories.some(x=>x.toLowerCase()===name.trim().toLowerCase()))return alert("Category already exists.");
-db.categories.push(name.trim());
-saveDB();
-render();
-toast("Category Added",name.trim());
+function openVendor(id){
+
+  currentVendor =
+    vendors.find(
+      v => String(v.id) === String(id)
+    );
+
+  if(!currentVendor){
+
+    toast("Vendor not found.");
+
+    return;
+  }
+
+  showPage("vendor-detail");
+
 }
+
 
 /* =========================================================
-   EMPLOYEES
+   VENDOR DETAIL
 ========================================================= */
 
-function renderEmployees(){
+function renderVendorDetail(){
 
-$("crumb").textContent="Employees";
+  if(!currentVendor){
 
-$("content").innerHTML=`
-<div class="head">
-<div>
-<h1>Employees / Order Bookers</h1>
-<p>New Order Bookers added from Shop Onboarding are saved here automatically.</p>
-</div>
-<button class="btn btn-primary" onclick="openEmployeeForm()">+ Add New Employee</button>
-</div>
+    showPage("vendors");
 
-<div class="grid three">
-${db.employees.map(e=>`
-<div class="employee-card">
-<div class="row between">
-<strong>${esc(e.name)}</strong>
-${badge(e.role)}
-</div>
-<div class="small muted" style="margin-top:8px">${esc(e.phone||"")}</div>
-<div style="margin-top:10px">Commission: <strong>${Number(e.commission||0)}%</strong></div>
-<div class="row" style="margin-top:12px">
-<button class="btn btn-soft btn-small" onclick="openEmployeeForm('${e.id}')">Edit</button>
-<button class="btn btn-danger btn-small" onclick="deleteEmployee('${e.id}')">Delete</button>
-</div>
-</div>
-`).join("")}
-</div>
-`;
+    return;
+  }
+
+
+  const v =
+    currentVendor;
+
+
+  $("detailVendorName").textContent =
+    v.vendor_name || "Vendor";
+
+
+  $("detailVendorStatus").innerHTML =
+    `${statusBadge(v.status)}
+     ${screenBadge(v.online_status)}`;
+
+
+  $("vendorProfileDetails").innerHTML = `
+
+    <div class="detail-item">
+      <label>Vendor Name</label>
+      <strong>${esc(v.vendor_name || "-")}</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Owner Name</label>
+      <strong>${esc(v.owner_name || "-")}</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Phone</label>
+      <strong>${esc(v.phone || "-")}</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Email</label>
+      <strong>${esc(v.email || "-")}</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Category</label>
+      <strong>${esc(v.category || "-")}</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Area</label>
+      <strong>${esc(v.area || "-")}</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Phase</label>
+      <strong>${esc(v.phase || "-")}</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Precinct</label>
+      <strong>${esc(v.precinct || "-")}</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Sector</label>
+      <strong>${esc(v.sector || "-")}</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Block</label>
+      <strong>${esc(v.block || "-")}</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Address</label>
+      <strong>${esc(v.address || "-")}</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Created</label>
+      <strong>${esc(formatDate(v.created_at))}</strong>
+    </div>
+
+  `;
+
+
+  $("vendorScreenDetails").innerHTML = `
+
+    <div class="detail-grid">
+
+      <div class="detail-item">
+        <label>Screen Status</label>
+        <strong>
+          ${v.online_status ? "Online" : "Offline"}
+        </strong>
+      </div>
+
+      <div class="detail-item">
+        <label>LCD Status</label>
+        <strong>
+          ${esc(v.lcd_status || "-")}
+        </strong>
+      </div>
+
+      <div class="detail-item">
+        <label>LCD Total Price</label>
+        <strong>
+          ${formatMoney(v.lcd_total_price)}
+        </strong>
+      </div>
+
+      <div class="detail-item">
+        <label>Monthly Installment</label>
+        <strong>
+          ${formatMoney(v.lcd_monthly_installment)}
+        </strong>
+      </div>
+
+    </div>
+
+  `;
+
+
+  $("vendorFinancialDetails").innerHTML = `
+
+    <div class="detail-item">
+      <label>Today's Earnings</label>
+      <strong>Rs 0</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Total Earnings</label>
+      <strong>Rs 0</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Withdrawals</label>
+      <strong>Rs 0</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Available Balance</label>
+      <strong>Rs 0</strong>
+    </div>
+
+  `;
+
+
+  $("vendorActivityDetails").innerHTML = `
+
+    <div class="detail-item">
+      <label>Today's Ads</label>
+      <strong>0</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Today's Ad Time</label>
+      <strong>0 hrs</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Complaints</label>
+      <strong>0</strong>
+    </div>
+
+    <div class="detail-item">
+      <label>Withdrawals</label>
+      <strong>0</strong>
+    </div>
+
+  `;
+
+
+  renderVendorMap();
+
 }
 
-function openEmployeeForm(id=""){
-const e=db.employees.find(x=>x.id===id)||{};
-openModal(`
-<div class="modal-head">
-<h3>${id?"Edit":"Add"} Employee</h3>
-<button class="close" onclick="closeModal()">✕</button>
-</div>
-<div class="field"><label>Employee Name</label><input id="empName" value="${esc(e.name)}"></div>
-<div class="field"><label>Phone</label><input id="empPhone" value="${esc(e.phone)}"></div>
-<div class="field"><label>Role</label>
-<select id="empRole">
-<option ${e.role==="Order Booker"?"selected":""}>Order Booker</option>
-<option ${e.role==="Field Officer"?"selected":""}>Field Officer</option>
-<option ${e.role==="Sales"?"selected":""}>Sales</option>
-<option ${e.role==="Other"?"selected":""}>Other</option>
-</select>
-</div>
-<div class="field"><label>Commission %</label><input id="empCommission" type="number" min="0" step=".1" value="${Number(e.commission||0)}"></div>
-<div class="row" style="justify-content:flex-end">
-<button class="btn btn-soft" onclick="closeModal()">Cancel</button>
-<button class="btn btn-primary" onclick="saveEmployee('${id}')">Save</button>
-</div>
-`);
-}
-
-function saveEmployee(id){
-const name=$("empName").value.trim();
-if(!name)return alert("Employee name required.");
-const obj={
-id:id||uid("emp"),
-name,
-phone:$("empPhone").value.trim(),
-role:$("empRole").value,
-commission:Number($("empCommission").value||0)
-};
-if(id)db.employees=db.employees.map(x=>x.id===id?obj:x);
-else db.employees.push(obj);
-saveDB();
-closeModal();
-render();
-toast("Employee Saved","Employee is now available in Order Booker dropdown.");
-}
-
-function deleteEmployee(id){
-if(db.shops.some(s=>s.orderBooker===id))return alert("This employee is assigned to a shop. Reassign the shop first.");
-if(!confirm("Delete employee?"))return;
-db.employees=db.employees.filter(x=>x.id!==id);
-saveDB();
-render();
-}
 
 /* =========================================================
-   LIVE LOCATION
+   VENDOR MAP
 ========================================================= */
 
-let locationWatch=null;
-let currentLocation=null;
+function renderVendorMap(){
 
-function requestLiveLocation(){
+  const latitude =
+    Number(currentVendor.latitude);
 
-if(!navigator.geolocation){
-$("locationStatus").innerHTML='<span class="dot red"></span> Geolocation is not supported on this device.';
-return;
+  const longitude =
+    Number(currentVendor.longitude);
+
+
+  if(
+    !Number.isFinite(latitude) ||
+    !Number.isFinite(longitude)
+  ){
+
+    $("locationText").textContent =
+      "Vendor location not available.";
+
+    $("vendorMap").innerHTML=`
+      <div class="empty">
+        <strong>Location unavailable</strong>
+        This vendor has not provided a valid live location.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  $("locationText").textContent =
+    "Live shop location";
+
+
+  if(vendorMap){
+
+    vendorMap.remove();
+
+    vendorMap=null;
+
+  }
+
+
+  $("vendorMap").innerHTML="";
+
+
+  vendorMap =
+    L.map("vendorMap")
+      .setView(
+        [latitude,longitude],
+        16
+      );
+
+
+  L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      maxZoom:19,
+      attribution:"© OpenStreetMap"
+    }
+  ).addTo(vendorMap);
+
+
+  const marker =
+    L.marker(
+      [latitude,longitude]
+    ).addTo(vendorMap);
+
+
+  marker.bindPopup(`
+    <strong>
+      ${esc(currentVendor.vendor_name || "Vendor")}
+    </strong>
+    <br>
+    ${esc(currentVendor.address || currentVendor.area || "")}
+    <br>
+    ${currentVendor.online_status ? "Online" : "Offline"}
+  `).openPopup();
+
 }
 
-$("locationStatus").innerHTML='<span class="dot amber"></span> Requesting live location permission...';
-
-navigator.geolocation.getCurrentPosition(
-pos=>{
-currentLocation={
-lat:Number(pos.coords.latitude.toFixed(7)),
-lng:Number(pos.coords.longitude.toFixed(7)),
-accuracy:Math.round(pos.coords.accuracy),
-at:new Date().toISOString()
-};
-
-$("locationStatus").innerHTML=
-'<span class="dot green"></span> Live location captured — Accuracy ±'+currentLocation.accuracy+'m';
-
-$("liveLat").value=currentLocation.lat;
-$("liveLng").value=currentLocation.lng;
-$("liveAccuracy").value=currentLocation.accuracy;
-$("liveLocationAt").value=currentLocation.at;
-
-startLocationWatch();
-},
-err=>{
-$("locationStatus").innerHTML=
-'<span class="dot red"></span> Location permission was not granted. Vendor must allow location access.';
-},
-{enableHighAccuracy:true,timeout:15000,maximumAge:0}
-);
-}
-
-function startLocationWatch(){
-
-if(locationWatch)navigator.geolocation.clearWatch(locationWatch);
-
-locationWatch=navigator.geolocation.watchPosition(
-pos=>{
-currentLocation={
-lat:Number(pos.coords.latitude.toFixed(7)),
-lng:Number(pos.coords.longitude.toFixed(7)),
-accuracy:Math.round(pos.coords.accuracy),
-at:new Date().toISOString()
-};
-
-if($("liveLat")){
-$("liveLat").value=currentLocation.lat;
-$("liveLng").value=currentLocation.lng;
-$("liveAccuracy").value=currentLocation.accuracy;
-$("liveLocationAt").value=currentLocation.at;
-$("locationStatus").innerHTML=
-'<span class="dot green"></span> Live location updating — Accuracy ±'+currentLocation.accuracy+'m';
-}
-},
-()=>{},
-{enableHighAccuracy:true,maximumAge:5000,timeout:20000}
-);
-}
 
 /* =========================================================
-   MULTIPLE LOAD SHEDDING
+   EDIT VENDOR
 ========================================================= */
 
-function loadSlotsHTML(slots=[]){
+function editVendor(id){
 
-if(!slots.length)slots=[{start:"",end:""}];
+  currentVendor =
+    vendors.find(
+      v => String(v.id) === String(id)
+    );
 
-return `
-<div id="loadSlots">
-${slots.map((s,i)=>`
-<div class="load-slot" data-slot="${i}">
-<div class="field" style="margin:0">
-<label>Start</label>
-<input class="ls-start" type="time" value="${esc(s.start||"")}">
-</div>
-<div class="field" style="margin:0">
-<label>End</label>
-<input class="ls-end" type="time" value="${esc(s.end||"")}">
-</div>
-<button class="btn btn-danger btn-small" type="button" onclick="removeLoadSlot(this)">Remove</button>
-</div>
-`).join("")}
-</div>
-<button class="btn btn-soft btn-small" type="button" onclick="addLoadSlot()">+ Add Load-Shedding Slot</button>
-`;
+  if(!currentVendor){
+
+    toast("Vendor not found.");
+
+    return;
+  }
+
+
+  $("editVendorName").value =
+    currentVendor.vendor_name || "";
+
+  $("editOwnerName").value =
+    currentVendor.owner_name || "";
+
+  $("editPhone").value =
+    currentVendor.phone || "";
+
+  $("editEmail").value =
+    currentVendor.email || "";
+
+  $("editCategory").value =
+    currentVendor.category || "";
+
+  $("editArea").value =
+    currentVendor.area || "";
+
+  $("editPhase").value =
+    currentVendor.phase || "";
+
+  $("editPrecinct").value =
+    currentVendor.precinct || "";
+
+  $("editSector").value =
+    currentVendor.sector || "";
+
+  $("editBlock").value =
+    currentVendor.block || "";
+
+  $("editAddress").value =
+    currentVendor.address || "";
+
+  $("editStatus").value =
+    currentVendor.status || "pending";
+
+  $("editOnlineStatus").value =
+    currentVendor.online_status
+      ? "true"
+      : "false";
+
+
+  openModal("editVendorModal");
+
 }
 
-function addLoadSlot(){
-const box=$("loadSlots");
-const div=document.createElement("div");
-div.className="load-slot";
-div.innerHTML=`
-<div class="field" style="margin:0">
-<label>Start</label><input class="ls-start" type="time">
-</div>
-<div class="field" style="margin:0">
-<label>End</label><input class="ls-end" type="time">
-</div>
-<button class="btn btn-danger btn-small" type="button" onclick="removeLoadSlot(this)">Remove</button>
-`;
-box.appendChild(div);
+
+function editCurrentVendor(){
+
+  if(!currentVendor) return;
+
+  editVendor(currentVendor.id);
+
 }
 
-function removeLoadSlot(btn){
-const rows=[...document.querySelectorAll("#loadSlots .load-slot")];
-if(rows.length<=1){
-btn.closest(".load-slot").querySelector(".ls-start").value="";
-btn.closest(".load-slot").querySelector(".ls-end").value="";
-return;
-}
-btn.closest(".load-slot").remove();
+
+async function saveVendorEdit(){
+
+  if(!currentVendor){
+
+    toast("Vendor not selected.");
+
+    return;
+  }
+
+
+  const updates = {
+
+    vendor_name:
+      $("editVendorName").value.trim(),
+
+    owner_name:
+      $("editOwnerName").value.trim(),
+
+    phone:
+      $("editPhone").value.trim(),
+
+    email:
+      $("editEmail").value.trim(),
+
+    category:
+      $("editCategory").value.trim(),
+
+    area:
+      $("editArea").value.trim(),
+
+    phase:
+      $("editPhase").value.trim(),
+
+    precinct:
+      $("editPrecinct").value.trim(),
+
+    sector:
+      $("editSector").value.trim(),
+
+    block:
+      $("editBlock").value.trim(),
+
+    address:
+      $("editAddress").value.trim(),
+
+    status:
+      $("editStatus").value,
+
+    online_status:
+      $("editOnlineStatus").value === "true",
+
+    updated_at:
+      new Date().toISOString()
+
+  };
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("vendors")
+      .update(updates)
+      .eq("id",currentVendor.id);
+
+
+  if(error){
+
+    console.error(error);
+
+    toast(
+      "Vendor update failed."
+    );
+
+    return;
+  }
+
+
+  Object.assign(
+    currentVendor,
+    updates
+  );
+
+
+  closeModal("editVendorModal");
+
+  await loadVendors();
+
+  renderDashboard();
+
+  renderVendorDetail();
+
+  toast(
+    "Vendor updated successfully."
+  );
+
 }
 
-function collectLoadSlots(){
-return [...document.querySelectorAll("#loadSlots .load-slot")]
-.map(row=>({
-start:row.querySelector(".ls-start")?.value||"",
-end:row.querySelector(".ls-end")?.value||""
-}))
-.filter(x=>x.start&&x.end);
-}
 
 /* =========================================================
-   SHOP FORM
+   DELETE VENDOR
 ========================================================= */
 
-function renderShops(){
+async function deleteCurrentVendor(){
 
-$("crumb").textContent="Shops / Vendors";
+  if(!currentVendor){
 
-$("content").innerHTML=`
-<div class="head">
-<div>
-<h1>Shops / Vendors</h1>
-<p>Onboard shops with written address and vendor-captured live GPS location.</p>
-</div>
-<div class="row wrap">
-<button class="btn btn-soft" onclick="openVendorLink()">🔗 Vendor Form Link</button>
-<button class="btn btn-primary" onclick="openShopForm()">+ Add Shop / Vendor</button>
-</div>
-</div>
+    return;
+  }
 
-<div class="notice" style="margin-bottom:18px">
-<strong>Important:</strong> Live location is vendor-controlled. Admin cannot enter or replace the vendor's live GPS location. When the vendor opens the shared form, the browser/device asks the vendor for location permission and captures the GPS coordinates.
-</div>
 
-<div class="card">
-<div class="table-wrap">
-<table class="table">
-<thead><tr>
-<th>Shop</th><th>Owner</th><th>Area</th><th>Category</th><th>LCD</th><th>Screen</th><th>Location</th><th>Order Booker</th><th>Actions</th>
-</tr></thead>
-<tbody>
-${db.shops.map(s=>`
-<tr>
-<td><strong>${esc(s.shopName)}</strong><div class="small muted">${esc(s.phone)}</div></td>
-<td>${esc(s.owner)}</td>
-<td>${esc(areaName(s.area))}</td>
-<td>${esc(s.category)}</td>
-<td>${esc(s.lcd)}</td>
-<td>${badge(shopStatus(s))}</td>
-<td>${s.liveLat?'<span class="badge green">GPS Captured</span>':'<span class="badge red">Missing</span>'}</td>
-<td>${esc(db.employees.find(e=>e.id===s.orderBooker)?.name||"—")}</td>
-<td>
-<button class="btn btn-soft btn-small" onclick="openShopForm('${s.id}')">Edit</button>
-<button class="btn btn-danger btn-small" onclick="deleteShop('${s.id}')">Delete</button>
-</td>
-</tr>
-`).join("")}
-</tbody>
-</table>
-</div>
-</div>
-`;
+  const confirmed =
+    confirm(
+      `Delete vendor "${currentVendor.vendor_name || "this vendor"}"?`
+    );
+
+
+  if(!confirmed){
+
+    return;
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("vendors")
+      .delete()
+      .eq("id",currentVendor.id);
+
+
+  if(error){
+
+    console.error(error);
+
+    toast(
+      "Vendor delete failed. Check admin permissions."
+    );
+
+    return;
+  }
+
+
+  toast(
+    "Vendor deleted."
+  );
+
+
+  currentVendor=null;
+
+  await loadVendors();
+
+  renderDashboard();
+
+  showPage("vendors");
+
 }
 
-function shopFormFields(s={}){
-
-const custom=db.formFields?.shop||[];
-
-return custom.filter(f=>f.enabled).map(f=>{
-const req=f.required?"required":"";
-switch(f.key){
-
-case"shopName":
-return `<div class="field"><label>${esc(f.label)}${f.required?" *":""}</label><input id="shopName" ${req} value="${esc(s.shopName)}"></div>`;
-
-case"owner":
-return `<div class="field"><label>${esc(f.label)}${f.required?" *":""}</label><input id="owner" ${req} value="${esc(s.owner)}"></div>`;
-
-case"phone":
-return `<div class="field"><label>${esc(f.label)}${f.required?" *":""}</label><input id="phone" ${req} value="${esc(s.phone)}"></div>`;
-
-case"category":
-return `
-<div class="field">
-<label>${esc(f.label)}${f.required?" *":""}</label>
-<div class="row">
-<select id="category" ${req} style="flex:1">
-<option value="">Select Category</option>
-${db.categories.map(c=>`<option ${s.category===c?"selected":""}>${esc(c)}</option>`).join("")}
-</select>
-<button type="button" class="btn btn-soft" onclick="addCategoryFromForm()">+ Add New</button>
-</div>
-</div>`;
-
-case"footfall":
-return `<div class="field"><label>${esc(f.label)}</label><input id="footfall" type="number" min="0" value="${Number(s.footfall||0)}"></div>`;
-
-case"size":
-return `<div class="field"><label>${esc(f.label)}</label><input id="size" value="${esc(s.size)}" placeholder="e.g. 900 sq ft"></div>`;
-
-case"lcd":
-return `<div class="field"><label>${esc(f.label)}${f.required?" *":""}</label><select id="lcd" ${req}><option>Installed</option><option>Pending</option></select></div>`;
-
-case"lcdStatus":
-return `<div class="field"><label>${esc(f.label)}${f.required?" *":""}</label><select id="lcdStatus" ${req}><option>Online</option><option>Offline</option></select></div>`;
-
-case"installment":
-return `<div class="field"><label>${esc(f.label)}${f.required?" *":""}</label><select id="installment" onchange="toggleInstallment()"><option>Yes</option><option>No</option></select></div>`;
-
-case"subMeter":
-return `<div class="field"><label>${esc(f.label)}</label><select id="subMeter"><option>Yes</option><option>No</option></select></div>`;
-
-case"internet":
-return `<div class="field"><label>${esc(f.label)}</label><select id="internet"><option>Own Fiber</option><option>DSL</option><option>Mobile</option><option>Company Provided</option><option>None</option></select></div>`;
-
-case"companyInternet":
-return `<div class="field"><label>${esc(f.label)}</label><select id="companyInternet"><option>No</option><option>Yes</option></select></div>`;
-
-case"opening":
-return `<div class="field"><label>${esc(f.label)}${f.required?" *":""}</label><input id="opening" type="time" ${req} value="${esc(s.opening||"09:00")}"></div>`;
-
-case"closing":
-return `<div class="field"><label>${esc(f.label)}${f.required?" *":""}</label><input id="closing" type="time" ${req} value="${esc(s.closing||"00:00")}"></div>`;
-
-case"loadSlots":
-return `<div class="field"><label>${esc(f.label)}</label>${loadSlotsHTML(s.loadSlots||[])}</div>`;
-
-case"fridge":
-return `<div class="field"><label>${esc(f.label)}</label><select id="fridge"><option>Yes</option><option>No</option></select></div>`;
-
-case"orderBooker":
-return `
-<div class="field">
-<label>${esc(f.label)}</label>
-<div class="row">
-<select id="orderBooker" style="flex:1">
-<option value="">Select Order Booker</option>
-${db.employees.filter(e=>e.role==="Order Booker"||e.role==="Sales"||e.role==="Field Officer").map(e=>`<option value="${e.id}" ${s.orderBooker===e.id?"selected":""}>${esc(e.name)}</option>`).join("")}
-</select>
-<button type="button" class="btn btn-soft" onclick="addOrderBookerFromForm()">+ Add New</button>
-</div>
-</div>`;
-
-case"address":
-return `<div class="field"><label>${esc(f.label)}${f.required?" *":""}</label><textarea id="address" ${req} placeholder="Complete written address">${esc(s.address)}</textarea></div>`;
-
-case"liveLocation":
-return `
-<div class="location-box">
-<strong>Vendor Live Location</strong>
-<p class="small muted">This location must be captured by the vendor's own device. Admin cannot manually enter it.</p>
-<div class="location-status" id="locationStatus">
-<span class="dot ${s.liveLat?"green":"red"}"></span>
-${s.liveLat?"Previously captured GPS location":"Location not captured"}
-</div>
-
-<div class="row wrap" style="margin-top:12px">
-<button type="button" class="btn btn-primary" onclick="requestLiveLocation()">📍 Capture / Update Live Location</button>
-${s.liveLat?`<a class="btn btn-soft" target="_blank" href="https://www.google.com/maps?q=${encodeURIComponent(s.liveLat+","+s.liveLng)}">Open Map</a>`:""}
-</div>
-
-<input id="liveLat" type="hidden" value="${esc(s.liveLat||"")}">
-<input id="liveLng" type="hidden" value="${esc(s.liveLng||"")}">
-<input id="liveAccuracy" type="hidden" value="${esc(s.locationAccuracy||"")}">
-<input id="liveLocationAt" type="hidden" value="${esc(s.locationAt||"")}">
-</div>`;
-}
-
-return"";
-}
-
-function addCategoryFromForm(){
-const name=prompt("New category:");
-if(!name?.trim())return;
-if(db.categories.includes(name.trim()))return alert("Category already exists.");
-db.categories.push(name.trim());
-saveDB();
-
-const select=$("category");
-if(select){
-const o=document.createElement("option");
-o.textContent=name.trim();
-o.selected=true;
-select.appendChild(o);
-}
-toast("Category Added",name.trim());
-}
-
-function addOrderBookerFromForm(){
-openEmployeeForm();
-}
-
-function toggleInstallment(){
-const el=$("installmentDetails");
-if(el)el.classList.toggle("hidden",$("installment").value!=="Yes");
-}
-
-function openShopForm(id=""){
-
-currentLocation=null;
-
-const s=db.shops.find(x=>x.id===id)||{
-lcd:"Installed",
-lcdStatus:"Offline",
-installment:"No",
-subMeter:"No",
-internet:"Own Fiber",
-companyInternet:"No",
-fridge:"No",
-opening:"09:00",
-closing:"00:00",
-loadSlots:[{start:"",end:""}]
-};
-
-openModal(`
-<div class="modal-head">
-<div>
-<h3>${id?"Edit":"Shop / Vendor Onboarding"}</h3>
-<div class="small muted">All onboarding information is saved immediately in this browser prototype.</div>
-</div>
-<button class="close" onclick="closeModal()">✕</button>
-</div>
-
-<form id="shopForm" onsubmit="saveShop(event,'${id}')">
-
-<div class="form-section" style="border-top:0;padding-top:0;margin-top:0">
-<h3>Basic Shop Information</h3>
-<p>Vendor/shop details.</p>
-<div class="grid two">
-${shopFormFields(s).filter(x=>!x.includes("location-box")&&!x.includes('id="address"')).join("")}
-</div>
-</div>
-
-<div class="form-section">
-<h3>Written Address</h3>
-<p>The written address is required separately from GPS location.</p>
-${shopFormFields(s).find(x=>x.includes('id="address"'))||""}
-</div>
-
-<div class="form-section">
-<h3>Area Location</h3>
-<p>Select the geographic location. If the required area does not exist, create it now.</p>
-<div class="field">
-<label>Area / Block / Sector / Phase / Precinct *</label>
-<div class="row">
-<select id="shopArea" required style="flex:1">
-<option value="">Select Location</option>
-${db.areas.map(a=>`<option value="${a.id}" ${s.area===a.id?"selected":""}>${esc(a.name)} — ${esc(a.type)}</option>`).join("")}
-</select>
-<button type="button" class="btn btn-soft" onclick="addAreaFromShopForm()">+ Add New</button>
-</div>
-</div>
-</div>
-
-<div class="form-section">
-<h3>Vendor Live Location</h3>
-<p>Only the vendor/device can provide this GPS location.</p>
-${shopFormFields(s).find(x=>x.includes("location-box"))||""}
-</div>
-
-<div class="form-section">
-<h3>LCD / Electricity / Internet</h3>
-<p>Installation and shop infrastructure.</p>
-
-<div id="installmentDetails" class="${s.installment==="Yes"?"":"hidden"}">
-<div class="grid three">
-<div class="field">
-<label>LCD Total Cost</label>
-<input id="lcdCost" type="number" value="${Number(s.lcdCost||60000)}" oninput="calculateInstallment()">
-</div>
-<div class="field">
-<label>Down Payment</label>
-<input id="downPayment" type="number" value="${Number(s.downPayment||0)}" oninput="calculateInstallment()">
-</div>
-<div class="field">
-<label>Months</label>
-<input id="installmentMonths" type="number" min="1" value="${Number(s.installmentMonths||1)}" oninput="calculateInstallment()">
-</div>
-</div>
-<div class="success">
-Monthly Installment: <strong id="monthlyInstallment">Rs 0</strong>
-</div>
-</div>
-</div>
-
-<div class="row" style="justify-content:flex-end;margin-top:22px">
-<button type="button" class="btn btn-soft" onclick="closeModal()">Cancel</button>
-<button class="btn btn-primary">Save Shop / Vendor</button>
-</div>
-
-</form>
-`);
-
-if($("lcd"))$("lcd").value=s.lcd||"Installed";
-if($("lcdStatus"))$("lcdStatus").value=s.lcdStatus||"Offline";
-if($("installment"))$("installment").value=s.installment||"No";
-if($("subMeter"))$("subMeter").value=s.subMeter||"No";
-if($("internet"))$("internet").value=s.internet||"Own Fiber";
-if($("companyInternet"))$("companyInternet").value=s.companyInternet||"No";
-if($("fridge"))$("fridge").value=s.fridge||"No";
-
-calculateInstallment();
-}
-
-function addAreaFromShopForm(){
-openAreaForm();
-
-const oldClose=closeModal;
-window.__areaFromShop=true;
-}
-
-function calculateInstallment(){
-const total=Number($("lcdCost")?.value||0);
-const down=Number($("downPayment")?.value||0);
-const months=Math.max(1,Number($("installmentMonths")?.value||1));
-const monthly=Math.max(0,(total-down)/months);
-if($("monthlyInstallment"))$("monthlyInstallment").textContent="Rs "+monthly.toLocaleString();
-}
-
-function saveShop(e,id){
-
-e.preventDefault();
-
-const lat=$("liveLat")?.value;
-const lng=$("liveLng")?.value;
-
-if(!lat||!lng){
-alert("Vendor live location is required. Click 'Capture / Update Live Location' and allow location access.");
-return;
-}
-
-const area=$("shopArea")?.value;
-if(!area)return alert("Area/location is required.");
-
-const slots=collectLoadSlots();
-
-const obj={
-id:id||uid("shop"),
-created:id?(db.shops.find(x=>x.id===id)?.created||new Date().toISOString()):new Date().toISOString(),
-shopName:$("shopName")?.value.trim()||"",
-owner:$("owner")?.value.trim()||"",
-phone:$("phone")?.value.trim()||"",
-category:$("category")?.value||"",
-area,
-address:$("address")?.value.trim()||"",
-footfall:Number($("footfall")?.value||0),
-size:$("size")?.value.trim()||"",
-lcd:$("lcd")?.value||"",
-lcdStatus:$("lcdStatus")?.value||"Offline",
-installment:$("installment")?.value||"No",
-lcdCost:Number($("lcdCost")?.value||0),
-downPayment:Number($("downPayment")?.value||0),
-installmentMonths:Number($("installmentMonths")?.value||0),
-subMeter:$("subMeter")?.value||"No",
-internet:$("internet")?.value||"",
-companyInternet:$("companyInternet")?.value||"No",
-opening:$("opening")?.value||"09:00",
-closing:$("closing")?.value||"00:00",
-loadSlots:slots,
-fridge:$("fridge")?.value||"No",
-orderBooker:$("orderBooker")?.value||"",
-liveLat:Number(lat),
-liveLng:Number(lng),
-locationAccuracy:Number($("liveAccuracy")?.value||0),
-locationAt:$("liveLocationAt")?.value||new Date().toISOString(),
-lastOnline:new Date().toISOString()
-};
-
-if(id){
-db.shops=db.shops.map(x=>x.id===id?obj:x);
-}else{
-db.shops.push(obj);
-}
-
-saveDB();
-closeModal();
-render();
-toast(id?"Vendor Updated":"Vendor Added","Shop onboarding saved.");
-}
-
-function deleteShop(id){
-if(!confirm("Delete this shop/vendor?"))return;
-db.shops=db.shops.filter(s=>s.id!==id);
-saveDB();
-render();
-}
 
 /* =========================================================
-   VENDOR SHARE LINK
+   PERSONAL VENDOR NOTIFICATION
 ========================================================= */
 
-function vendorFormURL(){
+function openVendorNotification(){
 
-const base=window.location.origin+window.location.pathname;
-return base+"?vendorForm=1";
+  if(!currentVendor){
+
+    toast("Vendor not selected.");
+
+    return;
+  }
+
+  $("personalNotificationTitle").value="";
+
+  $("personalNotificationMessage").value="";
+
+  openModal("notificationModal");
+
 }
 
-function openVendorLink(){
 
-openModal(`
-<div class="modal-head">
-<h3>Vendor Onboarding Link</h3>
-<button class="close" onclick="closeModal()">✕</button>
-</div>
+async function sendVendorNotification(){
 
-<div class="notice">
-Send this same website link to the shopkeeper/vendor. The vendor opens it on their mobile and provides their own live GPS location.
-</div>
+  if(!currentVendor){
 
-<div class="field">
-<label>Live Vendor Form Link</label>
-<div class="share-box">
-<input id="vendorShareLink" readonly value="${esc(vendorFormURL())}">
-<button class="btn btn-primary" onclick="copyVendorLink()">Copy</button>
-</div>
-</div>
+    return;
+  }
 
-<div class="small muted">
-No separate fake domain is created. If your website is
-<strong>https://automationwithsajjadzaidi.com/ios/</strong>,
-the form will open from that same URL using the vendor-form mode.
-</div>
 
-<div class="row" style="justify-content:flex-end;margin-top:18px">
-<button class="btn btn-soft" onclick="closeModal()">Close</button>
-</div>
-`);
+  const title =
+    $("personalNotificationTitle")
+      .value
+      .trim();
+
+  const message =
+    $("personalNotificationMessage")
+      .value
+      .trim();
+
+
+  if(!title || !message){
+
+    toast(
+      "Please enter notification title and message."
+    );
+
+    return;
+  }
+
+
+  /*
+    Vendor notification table.
+
+    This lets admin send a notification directly
+    to one vendor's authenticated user.
+  */
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("vendor_notifications")
+      .insert({
+
+        vendor_id:
+          currentVendor.id,
+
+        user_id:
+          currentVendor.user_id,
+
+        title,
+        message,
+
+        read:false,
+
+        created_at:
+          new Date().toISOString()
+
+      });
+
+
+  if(error){
+
+    console.error(error);
+
+    toast(
+      "Notification could not be sent."
+    );
+
+    return;
+  }
+
+
+  closeModal("notificationModal");
+
+  toast(
+    "Notification sent to vendor."
+  );
+
 }
 
-async function copyVendorLink(){
-const link=$("vendorShareLink").value;
-try{
-await navigator.clipboard.writeText(link);
-toast("Copied","Vendor form link copied.");
-}catch(e){
-$("vendorShareLink").select();
-document.execCommand("copy");
-toast("Copied","Vendor form link copied.");
-}
-}
 
 /* =========================================================
-   PUBLIC VENDOR FORM
+   NOTIFICATIONS
 ========================================================= */
 
-function isVendorMode(){
-return new URLSearchParams(location.search).get("vendorForm")==="1";
+function notificationHTML(n){
+
+  const unread =
+    n.read === false ||
+    n.read === null ||
+    typeof n.read === "undefined";
+
+
+  return `
+    <div class="notification-item ${unread ? "unread" : ""}">
+
+      <div class="notification-item-title">
+        ${esc(
+          n.title ||
+          n.notification_type ||
+          "Notification"
+        )}
+      </div>
+
+      <div class="notification-item-text">
+        ${esc(
+          n.message ||
+          n.text ||
+          n.description ||
+          ""
+        )}
+      </div>
+
+      <div class="notification-time">
+        ${esc(formatDate(n.created_at))}
+      </div>
+
+    </div>
+  `;
+
 }
 
-function renderVendorForm(){
 
-document.body.innerHTML=`
-<div style="min-height:100vh;background:#f4f7fb;padding:20px">
-<div style="max-width:850px;margin:auto">
+function renderNotifications(){
 
-<div class="card" style="margin-bottom:16px">
-<div class="brand">AWSZ <span>Vendor Onboarding</span></div>
-<h1 style="margin-bottom:6px">Shop Registration</h1>
-<p class="muted">Please complete your shop information. Your live location must be captured from your own device.</p>
-</div>
+  const box =
+    $("notificationList");
 
-<form id="publicVendorForm" class="card">
+  if(!notifications.length){
 
-<div class="form-section" style="border-top:0;padding-top:0;margin-top:0">
-<h3>Shop Information</h3>
-<div class="grid two">
-${shopFormFields({loadSlots:[{start:"",end:""}]}).filter(x=>!x.includes("location-box")&&!x.includes('id="address"')).join("")}
-</div>
-</div>
+    box.innerHTML=`
+      <div class="empty">
+        <strong>No notifications</strong>
+        New admin notifications will appear here.
+      </div>
+    `;
 
-<div class="form-section">
-<h3>Written Address</h3>
-${shopFormFields({loadSlots:[{start:"",end:""}]}).find(x=>x.includes('id="address"'))||""}
-</div>
+    return;
+  }
 
-<div class="form-section">
-<h3>Area / Location</h3>
-<div class="field">
-<label>Area / Block / Sector / Phase / Precinct *</label>
-<select id="shopArea" required>
-<option value="">Select your location</option>
-${db.areas.map(a=>`<option value="${a.id}">${esc(a.name)} — ${esc(a.type)}</option>`).join("")}
-</select>
-</div>
-</div>
 
-<div class="form-section">
-<h3>Your Live Location</h3>
-<p class="muted">Tap the button below and allow location permission. This is your device's GPS location.</p>
-${shopFormFields({}).find(x=>x.includes("location-box"))||""}
-</div>
+  box.innerHTML =
+    notifications
+      .map(notificationHTML)
+      .join("");
 
-<div class="form-section">
-<h3>LCD / Infrastructure</h3>
-<div id="installmentDetails" class="hidden">
-<div class="grid three">
-<div class="field"><label>LCD Total Cost</label><input id="lcdCost" type="number" value="60000" oninput="calculateInstallment()"></div>
-<div class="field"><label>Down Payment</label><input id="downPayment" type="number" value="0" oninput="calculateInstallment()"></div>
-<div class="field"><label>Months</label><input id="installmentMonths" type="number" min="1" value="1" oninput="calculateInstallment()"></div>
-</div>
-<div class="success">Monthly Installment: <strong id="monthlyInstallment">Rs 0</strong></div>
-</div>
-</div>
-
-<div class="notice" style="margin-top:20px">
-Your submission is saved to the current device immediately. For true cross-device real-time synchronization with the admin portal, connect this form to your production realtime database/API endpoint.
-</div>
-
-<button class="btn btn-primary" style="width:100%;margin-top:18px" type="submit">
-Submit Shop Registration
-</button>
-
-<div id="vendorSubmitStatus" style="margin-top:12px"></div>
-
-</form>
-</div>
-</div>
-`;
-
-if($("lcd"))$("lcd").value="Installed";
-if($("lcdStatus"))$("lcdStatus").value="Offline";
-if($("installment"))$("installment").value="No";
-if($("subMeter"))$("subMeter").value="No";
-if($("internet"))$("internet").value="Own Fiber";
-if($("companyInternet"))$("companyInternet").value="No";
-if($("fridge"))$("fridge").value="No";
-
-$("publicVendorForm").addEventListener("submit",submitVendorForm);
 }
 
-function submitVendorForm(e){
 
-e.preventDefault();
+function updateNotificationUI(){
 
-const lat=$("liveLat")?.value;
-const lng=$("liveLng")?.value;
+  renderNotifications();
 
-if(!lat||!lng){
-$("vendorSubmitStatus").innerHTML='<div class="warning">Please capture your live location before submitting.</div>';
-return;
+  const unread =
+    notifications.filter(
+      n =>
+        n.read === false ||
+        n.read === null ||
+        typeof n.read === "undefined"
+    ).length;
+
+
+  const badge =
+    $("notificationBadge");
+
+
+  if(unread <= 0){
+
+    badge.classList.add("hidden");
+
+  }else{
+
+    badge.classList.remove("hidden");
+
+    badge.textContent =
+      unread > 9
+        ? "9+"
+        : unread;
+
+  }
+
 }
 
-const obj={
-id:uid("shop"),
-created:new Date().toISOString(),
-shopName:$("shopName")?.value.trim()||"",
-owner:$("owner")?.value.trim()||"",
-phone:$("phone")?.value.trim()||"",
-category:$("category")?.value||"",
-area:$("shopArea")?.value||"",
-address:$("address")?.value.trim()||"",
-footfall:Number($("footfall")?.value||0),
-size:$("size")?.value.trim()||"",
-lcd:$("lcd")?.value||"",
-lcdStatus:$("lcdStatus")?.value||"",
-installment:$("installment")?.value||"No",
-lcdCost:Number($("lcdCost")?.value||0),
-downPayment:Number($("downPayment")?.value||0),
-installmentMonths:Number($("installmentMonths")?.value||0),
-subMeter:$("subMeter")?.value||"",
-internet:$("internet")?.value||"",
-companyInternet:$("companyInternet")?.value||"",
-opening:$("opening")?.value||"",
-closing:$("closing")?.value||"",
-loadSlots:collectLoadSlots(),
-fridge:$("fridge")?.value||"",
-orderBooker:$("orderBooker")?.value||"",
-liveLat:Number(lat),
-liveLng:Number(lng),
-locationAccuracy:Number($("liveAccuracy")?.value||0),
-locationAt:$("liveLocationAt")?.value||new Date().toISOString(),
-lastOnline:new Date().toISOString(),
-source:"vendor-shared-form",
-status:"Pending Review"
-};
 
-db.shops.push(obj);
-saveDB();
+function renderDashboardNotifications(){
 
-$("vendorSubmitStatus").innerHTML=`
-<div class="success">
-<strong>Registration submitted successfully.</strong><br>
-Your shop information and live location have been captured.
-</div>
-`;
+  const box =
+    $("dashboardNotifications");
 
-e.target.reset();
+  if(!notifications.length){
 
-toast("Submitted","Vendor registration saved.");
+    box.innerHTML=`
+      <div class="empty">
+        <strong>No notifications</strong>
+        Real-time notifications will appear here.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  box.innerHTML =
+    notifications
+      .slice(0,8)
+      .map(notificationHTML)
+      .join("");
+
 }
+
+
+function toggleNotifications(){
+
+  const panel =
+    $("notificationPanel");
+
+  panel.classList.toggle("hidden");
+
+}
+
+
+async function markNotificationsRead(){
+
+  const unreadIds =
+    notifications
+      .filter(
+        n =>
+          n.read === false ||
+          n.read === null ||
+          typeof n.read === "undefined"
+      )
+      .map(n=>n.id)
+      .filter(Boolean);
+
+
+  if(unreadIds.length){
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("admin_notifications")
+        .update({
+          read:true
+        })
+        .in("id",unreadIds);
+
+
+    if(error){
+
+      console.error(error);
+
+      return;
+    }
+
+  }
+
+
+  notifications =
+    notifications.map(
+      n=>({
+        ...n,
+        read:true
+      })
+    );
+
+
+  updateNotificationUI();
+
+  renderDashboardNotifications();
+
+}
+
 
 /* =========================================================
-   CLIENTS
+   REALTIME
 ========================================================= */
 
-function renderClients(){
+function subscribeRealtime(){
 
-$("crumb").textContent="Clients";
+  if(realtimeChannel){
 
-$("content").innerHTML=`
-<div class="head">
-<div><h1>Clients</h1><p>Advertising customers and campaigns.</p></div>
-<button class="btn btn-primary" onclick="openClientForm()">+ Add Client</button>
-</div>
+    supabaseClient
+      .removeChannel(realtimeChannel);
 
-<div class="card">
-<div class="table-wrap">
-<table class="table">
-<thead><tr><th>Company</th><th>Representative</th><th>Category</th><th>Package</th><th>Areas</th><th>Actions</th></tr></thead>
-<tbody>
-${db.clients.map(c=>`
-<tr>
-<td><strong>${esc(c.company)}</strong><div class="small muted">${esc(c.phone)}</div></td>
-<td>${esc(c.representative)}</td>
-<td>${esc(c.category)}</td>
-<td>${esc(db.packages.find(p=>p.id===c.package)?.name||c.package)}</td>
-<td>${c.areas.map(areaName).join(", ")}</td>
-<td><button class="btn btn-soft btn-small" onclick="openClientForm('${c.id}')">Edit</button></td>
-</tr>`).join("")}
-</tbody>
-</table>
-</div>
-</div>
-`;
+  }
+
+
+  realtimeChannel =
+    supabaseClient
+      .channel("spotly-admin-realtime")
+
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"vendors"
+        },
+        async payload=>{
+
+          console.log(
+            "Vendor realtime event:",
+            payload
+          );
+
+
+          await loadVendors();
+
+          renderDashboard();
+
+          if(
+            currentVendor &&
+            payload.new &&
+            String(payload.new.id) ===
+            String(currentVendor.id)
+          ){
+
+            currentVendor =
+              payload.new;
+
+            renderVendorDetail();
+
+          }
+
+        }
+      )
+
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"admin_notifications"
+        },
+        async payload=>{
+
+          console.log(
+            "Notification realtime event:",
+            payload
+          );
+
+
+          await loadNotifications();
+
+          updateNotificationUI();
+
+          renderDashboardNotifications();
+
+        }
+      )
+
+
+      .subscribe();
+
 }
 
-function openClientForm(id=""){
-const c=db.clients.find(x=>x.id===id)||{};
-openModal(`
-<div class="modal-head"><h3>${id?"Edit":"Add"} Client</h3><button class="close" onclick="closeModal()">✕</button></div>
-<div class="grid two">
-<div class="field"><label>Company Name</label><input id="clCompany" value="${esc(c.company)}"></div>
-<div class="field"><label>Representative</label><input id="clRep" value="${esc(c.representative)}"></div>
-<div class="field"><label>Phone</label><input id="clPhone" value="${esc(c.phone)}"></div>
-<div class="field"><label>Client Category</label><input id="clCategory" value="${esc(c.category)}" placeholder="Grocery, Medical..."></div>
-<div class="field" style="grid-column:1/-1"><label>Address</label><textarea id="clAddress">${esc(c.address)}</textarea></div>
-<div class="field"><label>Package</label><select id="clPackage">${db.packages.map(p=>`<option value="${p.id}" ${c.package===p.id?"selected":""}>${esc(p.name)} — Rs ${Number(p.price).toLocaleString()}</option>`).join("")}</select></div>
-</div>
-<div class="field"><label>Target Areas</label>
-<select id="clAreas" multiple size="6">${db.areas.map(a=>`<option value="${a.id}" ${c.areas?.includes(a.id)?"selected":""}>${esc(a.name)} — ${esc(a.type)}</option>`).join("")}</select>
-</div>
-<div class="grid two">
-<div class="field"><label>Start</label><input id="clStart" type="datetime-local" value="${esc(c.start)}"></div>
-<div class="field"><label>End</label><input id="clEnd" type="datetime-local" value="${esc(c.end)}"></div>
-</div>
-<div class="row" style="justify-content:flex-end"><button class="btn btn-soft" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveClient('${id}')">Save</button></div>
-`);
-}
-
-function saveClient(id){
-const obj={
-id:id||uid("client"),
-company:$("clCompany").value.trim(),
-representative:$("clRep").value.trim(),
-phone:$("clPhone").value.trim(),
-category:$("clCategory").value.trim(),
-address:$("clAddress").value.trim(),
-package:$("clPackage").value,
-areas:[...$("clAreas").selectedOptions].map(o=>o.value),
-start:$("clStart").value,
-end:$("clEnd").value
-};
-if(!obj.company)return alert("Company name required.");
-if(id)db.clients=db.clients.map(x=>x.id===id?obj:x);
-else db.clients.push(obj);
-saveDB();
-closeModal();
-render();
-}
 
 /* =========================================================
-   PACKAGES
+   CLOSE NOTIFICATION WHEN CLICKING OUTSIDE
 ========================================================= */
 
-function renderPackages(){
+document.addEventListener(
+  "click",
+  event=>{
 
-$("crumb").textContent="Packages";
+    const wrap =
+      document.querySelector(
+        ".notification-wrap"
+      );
 
-$("content").innerHTML=`
-<div class="head">
-<div><h1>Packages</h1><p>Create packages and publish them for clients.</p></div>
-<button class="btn btn-primary" onclick="openPackageForm()">+ Create Package</button>
-</div>
+    const panel =
+      $("notificationPanel");
 
-<div class="grid three">
-${db.packages.map(p=>`
-<div class="card">
-<div class="row between">
-<h3 style="margin:0">${esc(p.name)}</h3>
-${p.published?badge("Published"):badge("Draft")}
-</div>
-<div class="small muted" style="margin-top:9px">${esc(p.media)} · ${Number(p.duration)} sec</div>
-<h2 style="margin:14px 0">Rs ${Number(p.price).toLocaleString()}</h2>
-<div class="small">Frequency: ${Number(p.plays)} plays/day</div>
-<div class="small">Coverage: ${esc(p.coverage)}</div>
-<div class="row" style="margin-top:15px">
-<button class="btn btn-soft btn-small" onclick="openPackageForm('${p.id}')">Edit</button>
-<button class="btn btn-danger btn-small" onclick="deletePackage('${p.id}')">Delete</button>
-</div>
-</div>
-`).join("")}
-</div>
-`;
-}
+    if(
+      wrap &&
+      !wrap.contains(event.target)
+    ){
 
-function openPackageForm(id=""){
-const p=db.packages.find(x=>x.id===id)||{};
-openModal(`
-<div class="modal-head"><h3>${id?"Edit":"Create"} Package</h3><button class="close" onclick="closeModal()">✕</button></div>
-<div class="grid two">
-<div class="field"><label>Package Name</label><input id="pkName" value="${esc(p.name)}"></div>
-<div class="field"><label>Media Type</label><select id="pkMedia"><option>Video</option><option>Poster</option></select></div>
-<div class="field"><label>Duration (seconds)</label><select id="pkDuration"><option>15</option><option>30</option><option>60</option></select></div>
-<div class="field"><label>Price</label><input id="pkPrice" type="number" value="${Number(p.price||0)}"></div>
-<div class="field"><label>Plays / Day</label><input id="pkPlays" type="number" value="${Number(p.plays||20)}"></div>
-<div class="field"><label>Coverage</label><input id="pkCoverage" value="${esc(p.coverage||"One Block")}"></div>
-<div class="field"><label>Minimum Poster Width</label><input id="pkWidth" type="number" value="${Number(p.minWidth||1080)}"></div>
-<div class="field"><label>Minimum Poster Height</label><input id="pkHeight" type="number" value="${Number(p.minHeight||1920)}"></div>
-</div>
-<label class="row" style="margin:12px 0"><input id="pkPublished" type="checkbox" ${p.published!==false?"checked":""}> Publish package on website</label>
-<div class="row" style="justify-content:flex-end"><button class="btn btn-soft" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="savePackage('${id}')">Save Package</button></div>
-`);
-if($("pkMedia"))$("pkMedia").value=p.media||"Video";
-if($("pkDuration"))$("pkDuration").value=String(p.duration||15);
-}
+      panel.classList.add("hidden");
 
-function savePackage(id){
-const obj={
-id:id||uid("pkg"),
-name:$("pkName").value.trim(),
-media:$("pkMedia").value,
-duration:Number($("pkDuration").value),
-price:Number($("pkPrice").value||0),
-plays:Number($("pkPlays").value||0),
-coverage:$("pkCoverage").value.trim(),
-minWidth:Number($("pkWidth").value||0),
-minHeight:Number($("pkHeight").value||0),
-published:$("pkPublished").checked
-};
-if(!obj.name)return alert("Package name required.");
-if(id)db.packages=db.packages.map(x=>x.id===id?obj:x);
-else db.packages.push(obj);
-saveDB();
-closeModal();
-render();
-}
+    }
 
-function deletePackage(id){
-if(db.clients.some(c=>c.package===id))return alert("This package is being used by a client.");
-if(!confirm("Delete package?"))return;
-db.packages=db.packages.filter(x=>x.id!==id);
-saveDB();
-render();
-}
-
-/* =========================================================
-   ADS
-========================================================= */
-
-function renderAds(){
-
-$("crumb").textContent="Ads & Verification";
-
-$("content").innerHTML=`
-<div class="head">
-<div><h1>Ads & Verification</h1><p>Validate media before it reaches the admin approval queue.</p></div>
-<button class="btn btn-primary" onclick="openAdForm()">+ Upload Ad</button>
-</div>
-
-<div class="card">
-<div class="table-wrap">
-<table class="table">
-<thead><tr><th>Company</th><th>Media</th><th>Package</th><th>Validation</th><th>Status</th><th>Target</th><th>Actions</th></tr></thead>
-<tbody>
-${db.ads.map(a=>{
-const pkg=db.packages.find(p=>p.id===a.package);
-const valid=a.validation==="Valid";
-return `
-<tr>
-<td><strong>${esc(a.company)}</strong></td>
-<td>${esc(a.file)}<div class="small muted">${esc(a.mediaType)} ${a.duration?`· ${a.duration}s`:""}</div></td>
-<td>${esc(pkg?.name||"—")}</td>
-<td>${valid?badge("Valid"):badge(a.validation||"Pending")}</td>
-<td>${badge(a.status)}</td>
-<td>${a.areas.map(areaName).join(", ")}</td>
-<td>
-${a.status==="Pending"&&valid?`
-<button class="btn btn-green btn-small" onclick="approveAd('${a.id}')">Approve</button>
-<button class="btn btn-soft btn-small" onclick="correctionAd('${a.id}')">Correction</button>
-<button class="btn btn-danger btn-small" onclick="declineAd('${a.id}')">Decline</button>
-`:""}
-</td>
-</tr>`;
-}).join("")}
-</tbody>
-</table>
-</div>
-</div>
-`;
-}
-
-function openAdForm(){
-
-openModal(`
-<div class="modal-head"><h3>Upload / Validate Ad</h3><button class="close" onclick="closeModal()">✕</button></div>
-
-<div class="field"><label>Client</label>
-<select id="adClient" onchange="loadClientPackage()">
-<option value="">Select Client</option>
-${db.clients.map(c=>`<option value="${c.id}">${esc(c.company)}</option>`).join("")}
-</select>
-</div>
-
-<div class="field"><label>Package</label>
-<select id="adPackage" onchange="updateAdRules()">
-<option value="">Select Package</option>
-${db.packages.map(p=>`<option value="${p.id}">${esc(p.name)} — ${p.duration}s</option>`).join("")}
-</select>
-</div>
-
-<div class="field"><label>Media Type</label>
-<select id="adMedia"><option>Video</option><option>Poster</option></select>
-</div>
-
-<div class="field">
-<label>Media File</label>
-<input id="adFile" type="file" accept="video/*,image/*">
-</div>
-
-<div id="adValidation" class="notice">Select package and file to validate.</div>
-
-<div class="field"><label>Target Areas</label>
-<select id="adAreas" multiple size="6">
-${db.areas.map(a=>`<option value="${a.id}">${esc(a.name)} — ${esc(a.type)}</option>`).join("")}
-</select>
-</div>
-
-<div class="grid two">
-<div class="field"><label>Start</label><input id="adStart" type="datetime-local"></div>
-<div class="field"><label>End</label><input id="adEnd" type="datetime-local"></div>
-</div>
-
-<div class="row" style="justify-content:flex-end">
-<button class="btn btn-soft" onclick="closeModal()">Cancel</button>
-<button class="btn btn-primary" onclick="validateAndSaveAd()">Validate & Submit</button>
-</div>
-`);
-
-$("adFile").addEventListener("change",validateAdFile);
-}
-
-function loadClientPackage(){
-const c=db.clients.find(x=>x.id===$("adClient").value);
-if(c&&$("adPackage"))$("adPackage").value=c.package||"";
-updateAdRules();
-}
-
-function updateAdRules(){
-const p=db.packages.find(x=>x.id===$("adPackage")?.value);
-if(p&&$("adValidation")){
-$("adValidation").innerHTML=
-p.media==="Video"
-?`Package requires exactly <strong>${p.duration} seconds</strong> video.`
-:`Poster package requires at least <strong>${p.minWidth} × ${p.minHeight}px</strong>.`;
-}
-}
-
-function validateAdFile(){
-
-const file=$("adFile").files[0];
-const pkg=db.packages.find(p=>p.id===$("adPackage").value);
-
-if(!file||!pkg)return;
-
-if(pkg.media==="Video"){
-
-const video=document.createElement("video");
-video.preload="metadata";
-
-video.onloadedmetadata=()=>{
-const duration=Math.round(video.duration);
-
-if(duration!==Number(pkg.duration)){
-$("adValidation").innerHTML=
-`<div class="warning"><strong>Invalid video.</strong> Package requires ${pkg.duration}s but uploaded video is ${duration}s.</div>`;
-$("adFile").dataset.valid="0";
-}else{
-$("adValidation").innerHTML=
-`<div class="success"><strong>Valid video.</strong> Duration matches ${pkg.duration}s package.</div>`;
-$("adFile").dataset.valid="1";
-$("adFile").dataset.duration=duration;
-}
-URL.revokeObjectURL(video.src);
-};
-
-video.src=URL.createObjectURL(file);
-
-}else{
-
-const img=new Image();
-
-img.onload=()=>{
-const valid=img.naturalWidth>=Number(pkg.minWidth||0)&&img.naturalHeight>=Number(pkg.minHeight||0);
-
-if(!valid){
-$("adValidation").innerHTML=
-`<div class="warning"><strong>Invalid poster.</strong> Uploaded ${img.naturalWidth}×${img.naturalHeight}px. Required minimum ${pkg.minWidth}×${pkg.minHeight}px.</div>`;
-$("adFile").dataset.valid="0";
-}else{
-$("adValidation").innerHTML=
-`<div class="success"><strong>Valid poster.</strong> ${img.naturalWidth}×${img.naturalHeight}px.</div>`;
-$("adFile").dataset.valid="1";
-}
-};
-
-img.src=URL.createObjectURL(file);
-}
-}
-
-function validateAndSaveAd(){
-
-const file=$("adFile").files[0];
-if(!file)return alert("Upload media first.");
-if($("adFile").dataset.valid!=="1")return alert("Media does not pass package validation.");
-
-const c=db.clients.find(x=>x.id===$("adClient").value);
-const pkg=db.packages.find(x=>x.id===$("adPackage").value);
-
-if(!c||!pkg)return alert("Select client and package.");
-
-const ad={
-id:uid("ad"),
-client:c.id,
-company:c.company,
-package:pkg.id,
-mediaType:pkg.media,
-file:file.name,
-duration:Number($("adFile").dataset.duration||pkg.duration),
-validation:"Valid",
-status:"Pending",
-areas:[...$("adAreas").selectedOptions].map(o=>o.value),
-start:$("adStart").value,
-end:$("adEnd").value,
-created:new Date().toISOString()
-};
-
-db.ads.push(ad);
-saveDB();
-closeModal();
-render();
-toast("Ad Submitted","Media passed validation and entered approval queue.");
-}
-
-function approveAd(id){
-const a=db.ads.find(x=>x.id===id);
-if(!a)return;
-a.status="Approved";
-saveDB();
-render();
-toast("Approved","Ad approved for scheduling.");
-}
-
-function correctionAd(id){
-const reason=prompt("Enter correction request:");
-if(!reason?.trim())return;
-const a=db.ads.find(x=>x.id===id);
-a.status="Correction";
-a.correctionReason=reason.trim();
-saveDB();
-render();
-toast("Correction Sent","Client portal correction request recorded.");
-}
-
-function declineAd(id){
-const reason=prompt("Enter decline reason:");
-if(!reason?.trim())return;
-const a=db.ads.find(x=>x.id===id);
-a.status="Declined";
-a.declineReason=reason.trim();
-saveDB();
-render();
-}
-
-/* =========================================================
-   UPCOMING ADS
-========================================================= */
-
-function renderUpcoming(){
-
-$("crumb").textContent="Upcoming Ads";
-
-$("content").innerHTML=`
-<div class="head">
-<div><h1>Upcoming Ads</h1><p>View approved campaigns by target location.</p></div>
-</div>
-
-<div class="card" style="margin-bottom:18px">
-<div class="field" style="margin:0">
-<label>Filter by Location</label>
-<select id="upcomingArea" onchange="filterUpcoming()">
-<option value="">All Locations</option>
-${db.areas.map(a=>`<option value="${a.id}">${esc(a.name)}</option>`).join("")}
-</select>
-</div>
-</div>
-
-<div id="upcomingList"></div>
-`;
-
-filterUpcoming();
-}
-
-function filterUpcoming(){
-
-const area=$("upcomingArea")?.value||"";
-
-const ads=db.ads.filter(a=>
-a.status==="Approved" &&
-(!area||a.areas.includes(area))
+  }
 );
 
-$("upcomingList").innerHTML=ads.length?
-ads.map(a=>`
-<div class="card" style="margin-bottom:12px">
-<div class="row between">
-<div>
-<h3 style="margin:0">${esc(a.company)}</h3>
-<div class="small muted">${esc(a.file)} · ${a.duration}s</div>
-</div>
-${badge("Approved")}
-</div>
-<div class="row wrap" style="margin-top:12px">
-<strong>Locations:</strong> ${a.areas.map(areaName).join(", ")}
-</div>
-<div class="small muted" style="margin-top:8px">
-${esc(a.start||"")} → ${esc(a.end||"")}
-</div>
-</div>
-`).join("")
-:'<div class="empty">No upcoming approved ads for this location.</div>';
-}
 
 /* =========================================================
-   SCREEN MONITORING
+   KEYBOARD ESC
 ========================================================= */
 
-function renderMonitoring(){
+document.addEventListener(
+  "keydown",
+  event=>{
 
-$("crumb").textContent="Screen Monitoring";
+    if(event.key !== "Escape"){
+      return;
+    }
 
-const counts={
-active:db.shops.filter(s=>shopStatus(s)==="Active").length,
-late:db.shops.filter(s=>shopStatus(s)==="Late").length,
-offline:db.shops.filter(s=>shopStatus(s)==="Offline").length
-};
+    document
+      .querySelectorAll(".modal.active")
+      .forEach(modal=>{
+        modal.classList.remove("active");
+      });
 
-$("content").innerHTML=`
-<div class="head">
-<div><h1>Screen Monitoring</h1><p>Online, offline and late LCD status based on shop opening schedule.</p></div>
-<button class="btn btn-soft" onclick="render()">Refresh</button>
-</div>
+    $("notificationPanel")
+      .classList.add("hidden");
 
-<div class="grid stats">
-<div class="card"><div class="stat-label">Active</div><div class="stat-value">${counts.active}</div></div>
-<div class="card"><div class="stat-label">Late</div><div class="stat-value">${counts.late}</div></div>
-<div class="card"><div class="stat-label">Offline</div><div class="stat-value">${counts.offline}</div></div>
-<div class="card"><div class="stat-label">Total</div><div class="stat-value">${db.shops.length}</div></div>
-</div>
-
-<div class="card" style="margin-top:18px">
-<div class="table-wrap">
-<table class="table">
-<thead><tr><th>Shop</th><th>Opening</th><th>LCD On</th><th>Status</th><th>Location</th><th>Action</th></tr></thead>
-<tbody>
-${db.shops.map(s=>`
-<tr>
-<td><strong>${esc(s.shopName)}</strong><div class="small muted">${esc(s.address)}</div></td>
-<td>${esc(s.opening)}</td>
-<td>${s.lastOnline?new Date(s.lastOnline).toLocaleTimeString():"—"}</td>
-<td>${badge(shopStatus(s))}</td>
-<td>${s.liveLat?`<a target="_blank" href="https://www.google.com/maps?q=${encodeURIComponent(s.liveLat+","+s.liveLng)}">View GPS</a>`:"Missing"}</td>
-<td><button class="btn btn-soft btn-small" onclick="screenDetails('${s.id}')">Details</button></td>
-</tr>
-`).join("")}
-</tbody>
-</table>
-</div>
-</div>
-`;
-}
-
-function screenDetails(id){
-
-const s=db.shops.find(x=>x.id===id);
-if(!s)return;
-
-openModal(`
-<div class="modal-head"><h3>${esc(s.shopName)}</h3><button class="close" onclick="closeModal()">✕</button></div>
-
-<div class="grid two">
-<div class="card" style="box-shadow:none">
-<strong>Current Status</strong>
-<div style="margin-top:10px">${badge(shopStatus(s))}</div>
-</div>
-<div class="card" style="box-shadow:none">
-<strong>LCD</strong>
-<div style="margin-top:10px">${badge(s.lcdStatus)}</div>
-</div>
-</div>
-
-<div class="kv" style="display:grid;grid-template-columns:160px 1fr;gap:8px;margin-top:15px">
-<div>Opening</div><div>${esc(s.opening)}</div>
-<div>Closing</div><div>${esc(s.closing)}</div>
-<div>Last Online</div><div>${s.lastOnline?new Date(s.lastOnline).toLocaleString():"—"}</div>
-<div>GPS</div><div>${s.liveLat+", "+s.liveLng}</div>
-<div>Accuracy</div><div>±${s.locationAccuracy||"—"}m</div>
-<div>Internet</div><div>${esc(s.internet)}</div>
-</div>
-
-<div class="row" style="justify-content:flex-end;margin-top:18px">
-<button class="btn btn-soft" onclick="simulateOffline('${id}')">Toggle Offline</button>
-<button class="btn btn-green" onclick="simulateOnline('${id}')">Set Online Now</button>
-</div>
-`);
-}
-
-function simulateOffline(id){
-const s=db.shops.find(x=>x.id===id);
-if(!s)return;
-s.lcdStatus="Offline";
-s.lastOnline=new Date(Date.now()-3600000).toISOString();
-saveDB();
-closeModal();
-render();
-}
-
-function simulateOnline(id){
-const s=db.shops.find(x=>x.id===id);
-if(!s)return;
-s.lcdStatus="Online";
-s.lastOnline=new Date().toISOString();
-saveDB();
-closeModal();
-render();
-}
-
-/* =========================================================
-   WITHDRAWALS
-========================================================= */
-
-let paymentCamera=null;
-let capturedVendorPhoto="";
-let paymentScreenshot="";
-
-function renderWithdrawals(){
-
-$("crumb").textContent="Withdrawals";
-
-$("content").innerHTML=`
-<div class="head">
-<div><h1>Vendor Withdrawals</h1><p>Payment remains Pending until payment verification evidence is completed.</p></div>
-</div>
-
-<div class="card">
-<div class="table-wrap">
-<table class="table">
-<thead><tr><th>Vendor</th><th>Amount</th><th>Bank</th><th>Account</th><th>Status</th><th>Requested</th><th>Action</th></tr></thead>
-<tbody>
-${db.withdrawals.map(w=>`
-<tr>
-<td><strong>${esc(w.vendor)}</strong></td>
-<td>Rs ${Number(w.amount).toLocaleString()}</td>
-<td>${esc(w.bank)}</td>
-<td>${esc(w.account)}</td>
-<td>${badge(w.status)}</td>
-<td>${new Date(w.requested).toLocaleString()}</td>
-<td>
-${w.status==="Pending"?`<button class="btn btn-primary btn-small" onclick="openPaymentVerification('${w.id}')">Verify Payment</button>`:`<button class="btn btn-soft btn-small" onclick="viewPaymentHistory('${w.id}')">History</button>`}
-</td>
-</tr>
-`).join("")}
-</tbody>
-</table>
-</div>
-</div>
-`;
-}
-
-async function openPaymentVerification(id){
-
-capturedVendorPhoto="";
-paymentScreenshot="";
-
-const w=db.withdrawals.find(x=>x.id===id);
-
-openModal(`
-<div class="modal-head">
-<div>
-<h3>Payment Verification</h3>
-<div class="small muted">${esc(w.vendor)} · Rs ${Number(w.amount).toLocaleString()}</div>
-</div>
-<button class="close" onclick="closeModal()">✕</button>
-</div>
-
-<div class="notice">
-Payment can only move from <strong>Pending → Paid</strong> after the payment staff member is selected, vendor webcam photo is captured, and payment screenshot is attached.
-</div>
-
-<div class="field">
-<label>Paid By / Staff Member</label>
-<select id="paidBy">
-<option value="">Select staff member</option>
-${db.employees.map(e=>`<option value="${e.id}">${esc(e.name)} — ${esc(e.role)}</option>`).join("")}
-</select>
-</div>
-
-<div class="form-section">
-<h3>1. Vendor Webcam Photo</h3>
-<p>Open webcam and capture the vendor photo.</p>
-
-<div class="camera-wrap">
-<video id="paymentVideo" autoplay playsinline></video>
-</div>
-
-<div class="row wrap" style="margin-top:10px">
-<button class="btn btn-primary" onclick="startPaymentCamera()">Open Webcam</button>
-<button class="btn btn-soft" onclick="captureVendorPhoto()">Capture Photo</button>
-</div>
-
-<canvas id="paymentCanvas" class="hidden"></canvas>
-<img id="vendorPhotoPreview" class="capture-preview hidden" style="margin-top:12px">
-</div>
-
-<div class="form-section">
-<h3>2. Payment Screenshot</h3>
-<p>Attach bank/payment proof screenshot.</p>
-<input id="paymentScreenshotFile" type="file" accept="image/*" onchange="loadPaymentScreenshot(event)">
-<img id="paymentScreenshotPreview" class="capture-preview hidden" style="margin-top:12px">
-</div>
-
-<div class="form-section">
-<h3>3. Payment Reference</h3>
-<input id="paymentReference" placeholder="Transaction ID / payment reference">
-</div>
-
-<div class="row" style="justify-content:flex-end;margin-top:20px">
-<button class="btn btn-soft" onclick="closeModal()">Cancel</button>
-<button id="markPaidBtn" class="btn btn-green" disabled onclick="completePaymentVerification('${id}')">Mark as Paid</button>
-</div>
-`);
-
-startPaymentCamera();
-}
-
-async function startPaymentCamera(){
-
-try{
-
-if(!navigator.mediaDevices?.getUserMedia){
-alert("Camera is not available in this browser.");
-return;
-}
-
-paymentCamera=await navigator.mediaDevices.getUserMedia({
-video:{facingMode:"user"},
-audio:false
-});
-
-const video=$("paymentVideo");
-if(video)video.srcObject=paymentCamera;
-
-}catch(e){
-alert("Camera permission was not granted. Please allow camera access.");
-}
-}
-
-function captureVendorPhoto(){
-
-const video=$("paymentVideo");
-const canvas=$("paymentCanvas");
-
-if(!video||!video.videoWidth){
-alert("Open the webcam first.");
-return;
-}
-
-canvas.width=video.videoWidth;
-canvas.height=video.videoHeight;
-
-canvas.getContext("2d").drawImage(video,0,0,canvas.width,canvas.height);
-
-capturedVendorPhoto=canvas.toDataURL("image/jpeg",.82);
-
-$("vendorPhotoPreview").src=capturedVendorPhoto;
-$("vendorPhotoPreview").classList.remove("hidden");
-
-updatePaymentButton();
-}
-
-function loadPaymentScreenshot(e){
-
-const file=e.target.files[0];
-if(!file)return;
-
-const reader=new FileReader();
-
-reader.onload=()=>{
-paymentScreenshot=reader.result;
-$("paymentScreenshotPreview").src=paymentScreenshot;
-$("paymentScreenshotPreview").classList.remove("hidden");
-updatePaymentButton();
-};
-
-reader.readAsDataURL(file);
-}
-
-function updatePaymentButton(){
-
-const ok=Boolean(
-$("paidBy")?.value &&
-capturedVendorPhoto &&
-paymentScreenshot
+  }
 );
 
-if($("markPaidBtn"))$("markPaidBtn").disabled=!ok;
-}
-
-function completePaymentVerification(id){
-
-updatePaymentButton();
-
-if(!$("paidBy").value||!capturedVendorPhoto||!paymentScreenshot){
-alert("All verification steps are required.");
-return;
-}
-
-const w=db.withdrawals.find(x=>x.id===id);
-const emp=db.employees.find(x=>x.id===$("paidBy").value);
-
-w.status="Paid";
-w.paidBy=emp.name;
-w.paidAt=new Date().toISOString();
-w.paymentReference=$("paymentReference").value.trim();
-w.vendorPhoto=capturedVendorPhoto;
-w.paymentScreenshot=paymentScreenshot;
-
-w.history=w.history||[];
-w.history.push({
-status:"Paid",
-paidBy:emp.name,
-paidAt:w.paidAt,
-paymentReference:w.paymentReference
-});
-
-saveDB();
-
-closeModal();
-render();
-toast("Payment Verified","Withdrawal is now marked Paid.");
-}
-
-function stopCamera(){
-
-if(paymentCamera){
-paymentCamera.getTracks().forEach(t=>t.stop());
-paymentCamera=null;
-}
-}
-
-function viewPaymentHistory(id){
-
-const w=db.withdrawals.find(x=>x.id===id);
-
-openModal(`
-<div class="modal-head"><h3>Payment History</h3><button class="close" onclick="closeModal()">✕</button></div>
-
-<div class="kv" style="display:grid;grid-template-columns:160px 1fr;gap:8px">
-<div>Vendor</div><div>${esc(w.vendor)}</div>
-<div>Amount</div><div>Rs ${Number(w.amount).toLocaleString()}</div>
-<div>Status</div><div>${badge(w.status)}</div>
-<div>Paid By</div><div>${esc(w.paidBy||"—")}</div>
-<div>Paid At</div><div>${w.paidAt?new Date(w.paidAt).toLocaleString():"—"}</div>
-<div>Reference</div><div>${esc(w.paymentReference||"—")}</div>
-</div>
-
-${w.vendorPhoto?`
-<div class="form-section">
-<h3>Vendor Photo</h3>
-<img class="capture-preview" src="${w.vendorPhoto}">
-</div>`:""}
-
-${w.paymentScreenshot?`
-<div class="form-section">
-<h3>Payment Screenshot</h3>
-<img class="capture-preview" src="${w.paymentScreenshot}">
-</div>`:""}
-
-<div class="form-section">
-<h3>Audit History</h3>
-${(w.history||[]).map(h=>`
-<div class="item">
-<strong>${esc(h.status)}</strong>
-<div class="small muted">${esc(h.paidBy||"")} · ${h.paidAt?new Date(h.paidAt).toLocaleString():""}</div>
-<div>${esc(h.paymentReference||"")}</div>
-</div>
-`).join("")||'<div class="empty">No history.</div>'}
-</div>
-`);
-}
-
-/* =========================================================
-   COMPLAINTS
-========================================================= */
-
-function renderComplaints(){
-
-$("crumb").textContent="Complaints";
-
-$("content").innerHTML=`
-<div class="head">
-<div><h1>Complaints</h1><p>Vendor, client and operational complaints.</p></div>
-<button class="btn btn-primary" onclick="addComplaint()">+ Add Complaint</button>
-</div>
-
-<div class="card">
-${db.complaints.length?db.complaints.map(c=>`
-<div class="item">
-<div class="row between">
-<strong>${esc(c.subject)}</strong>
-${badge(c.status)}
-</div>
-<div class="small muted" style="margin-top:6px">${esc(c.from)} · ${new Date(c.created).toLocaleString()}</div>
-<p>${esc(c.message)}</p>
-</div>
-`).join(""):'<div class="empty">No complaints.</div>'}
-</div>
-`;
-}
-
-function addComplaint(){
-openModal(`
-<div class="modal-head"><h3>Add Complaint</h3><button class="close" onclick="closeModal()">✕</button></div>
-<div class="field"><label>From</label><input id="coFrom"></div>
-<div class="field"><label>Subject</label><input id="coSubject"></div>
-<div class="field"><label>Complaint</label><textarea id="coMessage"></textarea></div>
-<div class="field"><label>Status</label><select id="coStatus"><option>Pending</option><option>In Review</option><option>Resolved</option></select></div>
-<div class="row" style="justify-content:flex-end"><button class="btn btn-primary" onclick="saveComplaint()">Save</button></div>
-`);
-}
-
-function saveComplaint(){
-db.complaints.push({
-id:uid("complaint"),
-from:$("coFrom").value.trim(),
-subject:$("coSubject").value.trim(),
-message:$("coMessage").value.trim(),
-status:$("coStatus").value,
-created:new Date().toISOString()
-});
-saveDB();
-closeModal();
-render();
-}
-
-/* =========================================================
-   FORM BUILDER
-========================================================= */
-
-function renderForms(){
-
-$("crumb").textContent="Form Builder";
-
-$("content").innerHTML=`
-<div class="head">
-<div><h1>Form Builder</h1><p>Customize Shop / Vendor onboarding fields without changing the rest of the portal.</p></div>
-<button class="btn btn-primary" onclick="addCustomField()">+ Add Custom Field</button>
-</div>
-
-<div class="card">
-<h3 style="margin-top:0">Shop / Vendor Form Fields</h3>
-<div class="small muted" style="margin-bottom:15px">
-Enabled fields appear in both admin onboarding and the vendor shared form.
-</div>
-
-${db.formFields.shop.map((f,i)=>`
-<div class="item">
-<div class="row between wrap">
-<div>
-<strong>${esc(f.label)}</strong>
-<div class="small muted">${esc(f.key)}</div>
-</div>
-<div class="row">
-<label class="row small"><input type="checkbox" ${f.enabled?"checked":""} onchange="toggleFormField(${i},this.checked)"> Enabled</label>
-<label class="row small"><input type="checkbox" ${f.required?"checked":""} onchange="toggleRequiredField(${i},this.checked)"> Required</label>
-<button class="btn btn-soft btn-small" onclick="renameFormField(${i})">Rename</button>
-${!["shopName","owner","phone","category","address","liveLocation"].includes(f.key)?`<button class="btn btn-danger btn-small" onclick="deleteFormField(${i})">Delete</button>`:""}
-</div>
-</div>
-</div>
-`).join("")}
-</div>
-`;
-}
-
-function toggleFormField(i,v){
-db.formFields.shop[i].enabled=v;
-saveDB();
-render();
-}
-
-function toggleRequiredField(i,v){
-db.formFields.shop[i].required=v;
-saveDB();
-render();
-}
-
-function renameFormField(i){
-const n=prompt("New field label:",db.formFields.shop[i].label);
-if(!n?.trim())return;
-db.formFields.shop[i].label=n.trim();
-saveDB();
-render();
-}
-
-function addCustomField(){
-const label=prompt("Custom field name:");
-if(!label?.trim())return;
-
-db.formFields.shop.push({
-key:"custom_"+uid("field"),
-label:label.trim(),
-required:false,
-enabled:true
-});
-
-saveDB();
-render();
-toast("Custom Field Added","The field is now visible in the onboarding form.");
-}
-
-function deleteFormField(i){
-if(!confirm("Delete this custom field?"))return;
-db.formFields.shop.splice(i,1);
-saveDB();
-render();
-}
-
-/* =========================================================
-   SETTINGS
-========================================================= */
-
-function renderSettings(){
-
-$("crumb").textContent="Settings";
-
-$("content").innerHTML=`
-<div class="head">
-<div><h1>Settings</h1><p>Basic portal configuration.</p></div>
-</div>
-
-<div class="grid two">
-
-<div class="card">
-<h3 style="margin-top:0">Categories</h3>
-<div class="row wrap">
-${db.categories.map(c=>`<span class="badge blue">${esc(c)}</span>`).join("")}
-</div>
-<button class="btn btn-primary" style="margin-top:15px" onclick="addCategory()">+ Add New Category</button>
-</div>
-
-<div class="card">
-<h3 style="margin-top:0">Vendor Form</h3>
-<p class="muted">Share the same website URL with the vendor.</p>
-<div class="share-box">
-<input readonly value="${esc(vendorFormURL())}">
-<button class="btn btn-primary" onclick="openVendorLink()">Copy</button>
-</div>
-</div>
-
-</div>
-
-<div class="card" style="margin-top:18px">
-<h3 style="margin-top:0">Data</h3>
-<p class="muted">This single-file version stores data in browser localStorage.</p>
-<button class="btn btn-danger" onclick="resetDemoData()">Reset Demo Data</button>
-</div>
-`;
-}
-
-function resetDemoData(){
-if(!confirm("Reset all local demo data?"))return;
-db=structuredClone(defaults);
-saveDB();
-render();
-}
-
-/* =========================================================
-   ROUTER
-========================================================= */
-
-function render(){
-
-if(isVendorMode()){
-renderVendorForm();
-return;
-}
-
-const pages={
-dashboard:renderDashboard,
-areas:renderAreas,
-shops:renderShops,
-clients:renderClients,
-packages:renderPackages,
-ads:renderAds,
-upcoming:renderUpcoming,
-monitoring:renderMonitoring,
-withdrawals:renderWithdrawals,
-complaints:renderComplaints,
-employees:renderEmployees,
-forms:renderForms,
-settings:renderSettings
-};
-
-const names={
-dashboard:"Dashboard",
-areas:"Areas & Locations",
-shops:"Shops / Vendors",
-clients:"Clients",
-packages:"Packages",
-ads:"Ads & Verification",
-upcoming:"Upcoming Ads",
-monitoring:"Screen Monitoring",
-withdrawals:"Withdrawals",
-complaints:"Complaints",
-employees:"Employees",
-forms:"Form Builder",
-settings:"Settings"
-};
-
-if(!window.currentPage)window.currentPage="dashboard";
-
-$("crumb").textContent=names[window.currentPage]||"Dashboard";
-
-document.querySelectorAll(".nav button").forEach(b=>{
-b.classList.toggle("active",b.dataset.page===window.currentPage);
-});
-
-(pages[window.currentPage]||renderDashboard)();
-}
 
 /* =========================================================
    START
 ========================================================= */
 
-if(isVendorMode()){
-renderVendorForm();
-}else{
-render();
-}
-
-/* Keep local admin screen updated while staying on the page */
-setInterval(()=>{
-if(!isVendorMode()&&window.currentPage==="monitoring"){
-renderMonitoring();
-}
-},30000);
+checkExistingSession();
 
 </script>
+
 </body>
 </html>
