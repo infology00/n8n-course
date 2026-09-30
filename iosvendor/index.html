@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spotly Vendor Portal</title>
-  
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
 const SUPABASE_URL =
   "https://ausocdplliuftdqxbvwa.supabase.co";
 
@@ -842,7 +842,6 @@ th{
 }
 
 @media(max-width:1000px){
-
   .dashboard-cards{
     grid-template-columns:repeat(2,1fr);
   }
@@ -857,7 +856,6 @@ th{
 }
 
 @media(max-width:800px){
-
   .hero{
     grid-template-columns:1fr;
   }
@@ -891,7 +889,6 @@ th{
 }
 
 @media(max-width:600px){
-
   .navbar{
     padding:0 15px;
   }
@@ -956,19 +953,13 @@ th{
 
 <body>
 
-<!-- =========================================================
-     NAVBAR
-========================================================= -->
-
 <nav class="navbar">
-
   <div class="brand">
     <div class="brand-mark">S</div>
     Spotly
   </div>
 
   <div class="nav-actions" id="publicNav">
-
     <button class="btn btn-white" onclick="openLogin()">
       Login as Vendor
     </button>
@@ -976,13 +967,10 @@ th{
     <button class="btn btn-yellow" onclick="openRegistration()">
       Register as Vendor
     </button>
-
   </div>
 
   <div class="nav-actions hidden" id="portalNav">
-
-    <button class="notification"
-            onclick="toggleNotifications()">
+    <button class="notification" onclick="toggleNotifications()">
       ♢
       <span class="notification-dot"></span>
     </button>
@@ -990,1531 +978,898 @@ th{
     <button class="btn btn-white" onclick="logout()">
       Logout
     </button>
-
   </div>
-
 </nav>
-
-
-<!-- =========================================================
-     LANDING PAGE
-========================================================= -->
 
 <main class="landing" id="landingPage">
 
-  <section class="hero">
+<section class="hero">
+  <div>
+    <h1>
+      Turn Your Shop Into A
+      <span>Smart Advertising Space.</span>
+    </h1>
 
-    <div>
+    <p>
+      Join Spotly and earn from verified advertising plays
+      while giving local businesses a digital advertising space
+      inside your shop.
+    </p>
 
-      <h1>
-        Turn Your Shop Into A
-        <span>Smart Advertising Space.</span>
-      </h1>
+    <div class="hero-actions">
+      <button class="btn btn-yellow" onclick="openRegistration()">
+        Register as Vendor
+      </button>
 
-      <p>
-        Join Spotly and earn from verified advertising plays
-        while giving local businesses a digital advertising space
-        inside your shop.
-      </p>
+      <button class="btn btn-white" onclick="openLogin()">
+        Login as Vendor
+      </button>
+    </div>
+  </div>
 
-      <div class="hero-actions">
+  <div class="hero-image"></div>
+</section>
 
-        <button class="btn btn-yellow"
-                onclick="openRegistration()">
-          Register as Vendor
-        </button>
+<section class="stats">
+  <div class="stat">
+    <div class="stat-number">15 hrs</div>
+    <div class="stat-label">Daily advertising window</div>
+  </div>
 
-        <button class="btn btn-white"
-                onclick="openLogin()">
-          Login as Vendor
-        </button>
+  <div class="stat">
+    <div class="stat-number">600+</div>
+    <div class="stat-label">Potential ad plays per day</div>
+  </div>
 
-      </div>
+  <div class="stat">
+    <div class="stat-number">24/7</div>
+    <div class="stat-label">Vendor portal access</div>
+  </div>
+</section>
 
+<section class="section">
+  <div class="section-title">
+    <h2>How Spotly Works</h2>
+    <p>Simple advertising for local shops.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>Register</h3>
+      <p>Submit your store and LCD information.</p>
     </div>
 
-    <div class="hero-image"></div>
-
-  </section>
-
-
-  <section class="stats">
-
-    <div class="stat">
-      <div class="stat-number">15 hrs</div>
-      <div class="stat-label">Daily advertising window</div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>Get Approved</h3>
+      <p>Spotly reviews your store information.</p>
     </div>
 
-    <div class="stat">
-      <div class="stat-number">600+</div>
-      <div class="stat-label">Potential ad plays per day</div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>Earn</h3>
+      <p>Display verified advertisements and earn.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title">
+    <h2>Vendor Benefits</h2>
+    <p>Everything you need in one place.</p>
+  </div>
+
+  <div class="benefits">
+    <div class="benefit">
+      <div class="benefit-icon">₨</div>
+      <h3>Extra Income</h3>
+      <p>Earn from verified advertisement plays.</p>
     </div>
 
-    <div class="stat">
-      <div class="stat-number">24/7</div>
-      <div class="stat-label">Vendor portal access</div>
+    <div class="benefit">
+      <div class="benefit-icon">LCD</div>
+      <h3>Digital Display</h3>
+      <p>Use your shop space for modern advertising.</p>
     </div>
 
-  </section>
-
-
-  <section class="section">
-
-    <div class="section-title">
-      <h2>How Spotly Works</h2>
-      <p>Simple process for every shop owner.</p>
+    <div class="benefit">
+      <div class="benefit-icon">✓</div>
+      <h3>Verified Plays</h3>
+      <p>Only completed advertisement plays count.</p>
     </div>
 
-    <div class="steps">
-
-      <div class="step">
-        <div class="step-number">01</div>
-        <h3>Register Your Shop</h3>
-        <p>
-          Complete your shop, location, LCD, internet,
-          timings and bank information.
-        </p>
-      </div>
-
-      <div class="step">
-        <div class="step-number">02</div>
-        <h3>Get Approved</h3>
-        <p>
-          Spotly reviews your information before your shop
-          starts receiving advertising schedules.
-        </p>
-      </div>
-
-      <div class="step">
-        <div class="step-number">03</div>
-        <h3>Start Earning</h3>
-        <p>
-          Verified advertisements played on your LCD contribute
-          towards your vendor earnings.
-        </p>
-      </div>
-
+    <div class="benefit">
+      <div class="benefit-icon">24</div>
+      <h3>Portal Access</h3>
+      <p>Monitor ads, electricity and earnings.</p>
     </div>
+  </div>
+</section>
 
-  </section>
+<div class="cta">
+  <div>
+    <h2>Ready to join Spotly?</h2>
+    <p>Register your shop and start your vendor journey.</p>
+  </div>
 
+  <button class="btn btn-white" onclick="openRegistration()">
+    Register Now
+  </button>
+</div>
 
-  <section class="section">
-
-    <div class="section-title">
-      <h2>Vendor Benefits</h2>
-      <p>Everything important stays inside your portal.</p>
-    </div>
-
-    <div class="benefits">
-
-      <div class="benefit">
-        <div class="benefit-icon">₹</div>
-        <h3>Earn From Plays</h3>
-        <p>
-          Track verified advertisement plays and earnings.
-        </p>
-      </div>
-
-      <div class="benefit">
-        <div class="benefit-icon">▣</div>
-        <h3>LCD Monitoring</h3>
-        <p>
-          See your LCD status and operating information.
-        </p>
-      </div>
-
-      <div class="benefit">
-        <div class="benefit-icon">⚡</div>
-        <h3>Electricity Meter</h3>
-        <p>
-          Monitor estimated LCD electricity usage and cost.
-        </p>
-      </div>
-
-      <div class="benefit">
-        <div class="benefit-icon">✓</div>
-        <h3>Easy Payments</h3>
-        <p>
-          Maintain bank details and request withdrawals.
-        </p>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <section class="cta">
-
-    <div>
-      <h2>Become a Spotly Vendor</h2>
-      <p>Register your shop and complete your onboarding.</p>
-    </div>
-
-    <button class="btn btn-dark"
-            onclick="openRegistration()">
-      Register Now
-    </button>
-
-  </section>
-
-
-  <footer>
-    © 2026 Spotly. Vendor Portal.
-  </footer>
+<footer>
+  Spotly Vendor Network
+</footer>
 
 </main>
 
+<div class="portal" id="vendorPortal">
 
-<!-- =========================================================
-     VENDOR PORTAL
-========================================================= -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Vendor Portal</div>
 
-<section class="portal" id="vendorPortal">
+  <div class="menu">
+    <button class="active" onclick="showPage('dashboard',this)">Dashboard</button>
+    <button onclick="showPage('profile',this)">My Store</button>
+    <button onclick="showPage('ads',this)">Today's Ads</button>
+    <button onclick="showPage('plays',this)">Ad History</button>
+    <button onclick="showPage('energy',this)">Electricity</button>
+    <button onclick="showPage('earnings',this)">Earnings</button>
+    <button onclick="showPage('withdrawals',this)">Withdrawals</button>
+    <button onclick="showPage('bank',this)">Bank Details</button>
+    <button onclick="showPage('support',this)">Support</button>
+  </div>
+</aside>
 
-  <aside class="sidebar" id="sidebar">
+<div class="portal-content">
 
-    <div class="sidebar-title">
-      Vendor Portal
-    </div>
+<div class="portal-header">
+  <div>
+    <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
+    <h1 id="portalTitle">Dashboard</h1>
+  </div>
 
-    <div class="menu">
+  <div class="profile-mini">
+    <div class="avatar" id="portalAvatar">V</div>
+    <strong id="portalVendorName">Vendor</strong>
+  </div>
+</div>
 
-      <button class="active"
-              onclick="showPage('dashboard',this)">
-        Dashboard
+<!-- DASHBOARD -->
+<section id="page-dashboard">
+
+<div class="review-box" style="margin-bottom:18px;">
+  <strong id="reviewTitle">Your store is under review</strong>
+  <p id="reviewText">
+    Your information has been submitted successfully.
+  </p>
+</div>
+
+<div class="dashboard-cards">
+
+  <div class="dashboard-card">
+    <div class="card-label">Ads Running Today</div>
+    <div class="card-value" id="todayAds">—</div>
+    <div class="card-small">Scheduled advertisements</div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="card-label">Today's Earning</div>
+    <div class="card-value" id="todayEarning">—</div>
+    <div class="card-small">Verified plays</div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="card-label">LCD On Today</div>
+    <div class="card-value" id="todayLCDTime">—</div>
+    <div class="card-small">Estimated screen time</div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="card-label">Store Status</div>
+
+    <div class="online-control" style="margin-top:12px;">
+      <button
+        id="onlineSwitch"
+        class="switch"
+        onclick="toggleStoreStatus()">
       </button>
 
-      <button onclick="showPage('profile',this)">
-        My Store
-      </button>
+      <strong id="onlineText">Offline</strong>
+    </div>
+  </div>
 
-      <button onclick="showPage('ads',this)">
-        Today's Ads
-      </button>
+</div>
 
-      <button onclick="showPage('plays',this)">
-        Ad History
-      </button>
+<div class="content-grid">
 
-      <button onclick="showPage('energy',this)">
-        Electricity
-      </button>
+<div class="panel">
+  <div class="panel-title">
+    <h3>Today's Advertisement Schedule</h3>
+  </div>
 
-      <button onclick="showPage('earnings',this)">
-        Earnings
-      </button>
+  <div id="dashboardAds"></div>
+</div>
 
-      <button onclick="showPage('withdrawals',this)">
-        Withdrawals
-      </button>
+<div class="panel">
 
-      <button onclick="showPage('bank',this)">
-        Bank Details
-      </button>
+  <div class="panel-title">
+    <h3>Shop Timings</h3>
+  </div>
 
-      <button onclick="showPage('support',this)">
-        Support
-      </button>
-
+  <div class="energy-info">
+    <div class="energy-row">
+      <span>Opening</span>
+      <strong id="dashOpen">—</strong>
     </div>
 
-  </aside>
-
-
-  <div class="portal-content">
-
-    <div class="portal-header">
-
-      <div style="display:flex;align-items:center;gap:12px;">
-
-        <button class="mobile-menu"
-                onclick="toggleSidebar()">
-          ☰
-        </button>
-
-        <h1 id="portalTitle">Dashboard</h1>
-
-      </div>
-
-
-      <div style="display:flex;align-items:center;gap:10px;">
-
-        <button class="notification"
-                onclick="toggleNotifications()">
-          ♢
-          <span class="notification-dot"></span>
-        </button>
-
-        <div class="profile-mini">
-
-          <div class="avatar" id="avatar">V</div>
-
-          <div>
-            <strong id="miniName">Vendor</strong>
-            <div style="font-size:12px;color:#777;">
-              Vendor Account
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
+    <div class="energy-row">
+      <span>Closing</span>
+      <strong id="dashClose">—</strong>
     </div>
 
+    <div class="energy-row">
+      <span>LCD Status</span>
+      <strong id="dashLCDStatus">—</strong>
+    </div>
+  </div>
 
-    <!-- ================= DASHBOARD ================= -->
+</div>
 
-    <div id="page-dashboard">
+</div>
+</section>
 
-      <div id="reviewBanner" class="review-box"
-           style="margin-bottom:18px;">
+<!-- PROFILE -->
+<section id="page-profile" class="hidden">
 
-        <strong id="reviewTitle">
-          Your store is under review
-        </strong>
+<form onsubmit="event.preventDefault();saveStoreProfile();">
 
-        <p id="reviewText">
-          Your information has been submitted successfully.
-          Once Spotly approves your store, advertising schedules
-          and earnings will appear here.
-        </p>
+<div class="form-section">
+  <h3>Store Information</h3>
 
-      </div>
+  <div class="form-grid">
 
-
-      <div class="dashboard-cards">
-
-        <div class="dashboard-card">
-
-          <div class="card-label">
-            Today's Ads
-          </div>
-
-          <div class="card-value" id="todayAds">
-            —
-          </div>
-
-          <div class="card-small">
-            After approval
-          </div>
-
-        </div>
-
-
-        <div class="dashboard-card">
-
-          <div class="card-label">
-            Today's Earning
-          </div>
-
-          <div class="card-value" id="todayEarning">
-            —
-          </div>
-
-          <div class="card-small">
-            Verified plays
-          </div>
-
-        </div>
-
-
-        <div class="dashboard-card">
-
-          <div class="card-label">
-            LCD On Today
-          </div>
-
-          <div class="card-value" id="todayLCDTime">
-            —
-          </div>
-
-          <div class="card-small">
-            Total operating time
-          </div>
-
-        </div>
-
-
-        <div class="dashboard-card">
-
-          <div class="card-label">
-            Store Status
-          </div>
-
-          <div style="margin-top:14px;"
-               class="online-control">
-
-            <button id="onlineSwitch"
-                    class="switch"
-                    onclick="toggleStoreStatus()">
-            </button>
-
-            <strong id="onlineText">
-              Offline
-            </strong>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="content-grid">
-
-        <div class="panel">
-
-          <div class="panel-title">
-
-            <h3>Today's Advertisement Schedule</h3>
-
-            <button class="btn btn-white"
-                    onclick="showPage('ads')">
-              View Schedule
-            </button>
-
-          </div>
-
-          <div id="dashboardAds"></div>
-
-        </div>
-
-
-        <div class="panel">
-
-          <div class="panel-title">
-            <h3>Store Timings</h3>
-          </div>
-
-          <div class="energy-info">
-
-            <div class="energy-row">
-              <span>Opening</span>
-              <strong id="dashOpen">—</strong>
-            </div>
-
-            <div class="energy-row">
-              <span>Closing</span>
-              <strong id="dashClose">—</strong>
-            </div>
-
-            <div class="energy-row">
-              <span>LCD Size</span>
-              <strong>45 inch</strong>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
+    <div class="form-group">
+      <label>Store Name <span class="required">*</span></label>
+      <input id="storeName" required>
     </div>
 
-
-    <!-- ================= MY STORE ================= -->
-
-    <div id="page-profile" class="hidden">
-
-      <div class="form-section">
-
-        <h3>Store Information</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>
-              Shop / Store Name <span class="required">*</span>
-            </label>
-            <input id="storeName" required>
-          </div>
-
-          <div class="form-group">
-            <label>
-              Owner Name <span class="required">*</span>
-            </label>
-            <input id="storeOwner" required>
-          </div>
-
-          <div class="form-group">
-            <label>
-              Phone Number <span class="required">*</span>
-            </label>
-            <input id="storePhone" required>
-          </div>
-
-          <div class="form-group">
-            <label>
-              Email <span class="required">*</span>
-            </label>
-            <input id="storeEmail" type="email" required>
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Category <span class="required">*</span>
-            </label>
-
-            <div class="add-select">
-
-              <select id="storeCategory">
-                <option value="">Select Category</option>
-              </select>
-
-              <button class="btn btn-white"
-                      onclick="addCategory()">
-                + Add New
-              </button>
-
-            </div>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Area <span class="required">*</span>
-            </label>
-
-            <div class="add-select">
-
-              <select id="storeArea">
-                <option value="">Select Area</option>
-              </select>
-
-              <button class="btn btn-white"
-                      onclick="addArea()">
-                + Add New
-              </button>
-
-            </div>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Phase <span class="required">*</span>
-            </label>
-
-            <div class="add-select">
-
-              <select id="storePhase">
-                <option value="">Select Phase</option>
-                <option>Phase 1</option>
-                <option>Phase 2</option>
-                <option>Phase 3</option>
-                <option>Phase 4</option>
-                <option>Other</option>
-              </select>
-
-              <button class="btn btn-white"
-                      onclick="addPhase()">
-                + Add New
-              </button>
-
-            </div>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Precinct <span class="required">*</span>
-            </label>
-
-            <div class="add-select">
-
-              <select id="storePrecinct">
-                <option value="">Select Precinct</option>
-                <option>Precinct 1</option>
-                <option>Precinct 2</option>
-                <option>Precinct 3</option>
-                <option>Precinct 4</option>
-                <option>Other</option>
-              </select>
-
-              <button class="btn btn-white"
-                      onclick="addPrecinct()">
-                + Add New
-              </button>
-
-            </div>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Sector <span class="required">*</span>
-            </label>
-
-            <div class="add-select">
-
-              <select id="storeSector">
-                <option value="">Select Sector</option>
-                <option>Sector A</option>
-                <option>Sector B</option>
-                <option>Sector C</option>
-                <option>Sector D</option>
-                <option>Other</option>
-              </select>
-
-              <button class="btn btn-white"
-                      onclick="addSector()">
-                + Add New
-              </button>
-
-            </div>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Block <span class="required">*</span>
-            </label>
-
-            <div class="add-select">
-
-              <select id="storeBlock">
-                <option value="">Select Block</option>
-                <option>Block A</option>
-                <option>Block B</option>
-                <option>Block C</option>
-                <option>Block D</option>
-                <option>Other</option>
-              </select>
-
-              <button class="btn btn-white"
-                      onclick="addBlock()">
-                + Add New
-              </button>
-
-            </div>
-
-          </div>
-
-
-          <div class="form-group full">
-
-            <label>
-              Complete Written Address <span class="required">*</span>
-            </label>
-
-            <textarea id="storeAddress"
-                      required></textarea>
-
-          </div>
-
-        </div>
-
+    <div class="form-group">
+      <label>Owner Name <span class="required">*</span></label>
+      <input id="storeOwner" required>
+    </div>
+
+    <div class="form-group">
+      <label>Phone <span class="required">*</span></label>
+      <input id="storePhone" required>
+    </div>
+
+    <div class="form-group">
+      <label>Email <span class="required">*</span></label>
+      <input id="storeEmail" type="email" required>
+    </div>
+
+    <div class="form-group">
+      <label>Category <span class="required">*</span></label>
+      <div class="add-select">
+        <select id="storeCategory" required></select>
+        <button type="button" class="btn btn-white" onclick="addCategory()">Add New</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Area <span class="required">*</span></label>
+      <div class="add-select">
+        <select id="storeArea" required></select>
+        <button type="button" class="btn btn-white" onclick="addArea()">Add New</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Phase</label>
+      <div class="add-select">
+        <select id="storePhase" onchange="handleHierarchyChoice('storePhase')"></select>
+        <button type="button" class="btn btn-white" onclick="addPhase()">Add New</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Precinct</label>
+      <div class="add-select">
+        <select id="storePrecinct" onchange="handleHierarchyChoice('storePrecinct')"></select>
+        <button type="button" class="btn btn-white" onclick="addPrecinct()">Add New</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Sector</label>
+      <div class="add-select">
+        <select id="storeSector" onchange="handleHierarchyChoice('storeSector')"></select>
+        <button type="button" class="btn btn-white" onclick="addSector()">Add New</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Block</label>
+      <div class="add-select">
+        <select id="storeBlock" onchange="handleHierarchyChoice('storeBlock')"></select>
+        <button type="button" class="btn btn-white" onclick="addBlock()">Add New</button>
+      </div>
+    </div>
+
+    <div class="form-group full">
+      <label>Full Address <span class="required">*</span></label>
+      <textarea id="storeAddress" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Footfall <span class="required">*</span></label>
+      <input id="storeFootfall" type="number" min="0" required>
+    </div>
+
+    <div class="form-group">
+      <label>Shop Size <span class="required">*</span></label>
+      <select id="storeSize" required>
+        <option value="">Select</option>
+        <option value="Small">Small</option>
+        <option value="Medium">Medium</option>
+        <option value="Large">Large</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Ice Cream Fridge <span class="required">*</span></label>
+      <select id="storeFridge" required>
+        <option value="">Select</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+  </div>
+</div>
+
+<div class="form-section">
+  <h3>LCD & Internet</h3>
+
+  <div class="form-grid">
+
+    <div class="form-group">
+      <label>LCD Status <span class="required">*</span></label>
+      <select id="lcdStatus" onchange="changeLCDStatus()" required>
+        <option value="">Select</option>
+        <option value="Already Have LCD">Already Have LCD</option>
+        <option value="Purchase From Spotly">Purchase From Spotly</option>
+        <option value="Need Installation">Need Installation</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>LCD Size <span class="required">*</span></label>
+      <select id="lcdSize" required>
+        <option value="">Select</option>
+        <option value="45 inch">45 inch</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Internet <span class="required">*</span></label>
+      <select id="internetStatus" required>
+        <option value="">Select</option>
+        <option value="Internet Available">Internet Available</option>
+        <option value="No Internet">No Internet</option>
+        <option value="Spotly Internet Required">Spotly Internet Required</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Sub Meter <span class="required">*</span></label>
+      <select id="subMeter" required>
+        <option value="">Select</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Opening Time <span class="required">*</span></label>
+      <input id="openingTime" type="time" required>
+    </div>
+
+    <div class="form-group">
+      <label>Closing Time <span class="required">*</span></label>
+      <input id="closingTime" type="time" required>
+    </div>
+
+  </div>
+
+  <div id="installmentArea" class="location-box hidden" style="margin-top:20px;">
+
+    <strong>LCD Purchase / Installment</strong>
+
+    <div class="form-grid" style="margin-top:17px;">
+
+      <div class="form-group">
+        <label>Purchase Method</label>
+        <select id="purchaseMethod" onchange="calculateInstallment()">
+          <option value="">Select</option>
+          <option value="Cash">Cash</option>
+          <option value="Installment">Installment</option>
+        </select>
       </div>
 
-
-      <div class="form-section">
-
-        <h3>Vendor Live Location</h3>
-
-        <div class="location-box">
-
-          <strong>Current Shop Location</strong>
-
-          <div class="location-text" id="locationStatus">
-            Location has not been captured.
-          </div>
-
-          <button class="btn btn-yellow"
-                  onclick="captureLocation()">
-            Use My Current Location
-          </button>
-
-          <div id="coordinates"
-               style="font-size:12px;color:#777;margin-top:10px;">
-            —
-          </div>
-
-        </div>
-
+      <div class="form-group">
+        <label>LCD Price</label>
+        <input id="lcdPrice" type="number" min="0" value="60000" oninput="calculateInstallment()">
       </div>
 
-
-      <div class="form-section">
-
-        <h3>Shop Details</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>
-              Average Daily Footfall <span class="required">*</span>
-            </label>
-            <input id="storeFootfall" type="number">
-          </div>
-
-          <div class="form-group">
-            <label>
-              Shop Size <span class="required">*</span>
-            </label>
-            <input id="storeSize"
-                   placeholder="e.g. 500 sq ft">
-          </div>
-
-          <div class="form-group">
-            <label>
-              Ice Cream Fridge <span class="required">*</span>
-            </label>
-            <select id="storeFridge">
-              <option value="">Select</option>
-              <option>Yes</option>
-              <option>No</option>
-            </select>
-          </div>
-
-        </div>
-
+      <div class="form-group">
+        <label>Installment Months</label>
+        <select id="installmentMonths" onchange="calculateInstallment()">
+          <option value="3">3 Months</option>
+          <option value="6">6 Months</option>
+          <option value="12">12 Months</option>
+        </select>
       </div>
 
-
-      <div class="form-section">
-
-        <h3>LCD Installation</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-
-            <label>
-              LCD Status <span class="required">*</span>
-            </label>
-
-            <select id="lcdStatus"
-                    onchange="changeLCDStatus()">
-
-              <option value="">
-                Select LCD Status
-              </option>
-
-              <option value="Already Have LCD">
-                Already Have LCD
-              </option>
-
-              <option value="Purchase From Spotly">
-                Purchase From Spotly
-              </option>
-
-              <option value="Need Installation">
-                Need Installation
-              </option>
-
-            </select>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              LCD Size <span class="required">*</span>
-            </label>
-
-            <select id="lcdSize">
-              <option value="">Select Size</option>
-              <option>45 inch</option>
-            </select>
-
-          </div>
-
-        </div>
-
-
-        <div id="installmentArea"
-             class="hidden"
-             style="margin-top:20px;">
-
-          <div class="form-grid">
-
-            <div class="form-group">
-              <label>
-                Purchase Method
-              </label>
-
-              <select id="purchaseMethod"
-                      onchange="calculateInstallment()">
-
-                <option>Cash</option>
-                <option>Installment</option>
-
-              </select>
-
-            </div>
-
-            <div class="form-group">
-              <label>
-                LCD Price
-              </label>
-
-              <input id="lcdPrice"
-                     type="number"
-                     value="60000"
-                     oninput="calculateInstallment()">
-
-            </div>
-
-            <div class="form-group"
-                 id="installmentMonthsGroup">
-
-              <label>
-                Installment Months
-              </label>
-
-              <select id="installmentMonths"
-                      onchange="calculateInstallment()">
-                <option value="3">3 Months</option>
-                <option value="6">6 Months</option>
-                <option value="12">12 Months</option>
-              </select>
-
-            </div>
-
-            <div class="form-group">
-
-              <label>
-                Monthly Amount
-              </label>
-
-              <input id="monthlyInstallment"
-                     readonly
-                     placeholder="Rs. 0">
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="form-section">
-
-        <h3>Internet & Electricity</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-
-            <label>
-              Internet Availability <span class="required">*</span>
-            </label>
-
-            <select id="internetStatus">
-              <option value="">Select</option>
-              <option>Internet Available</option>
-              <option>No Internet</option>
-              <option>Spotly Internet Required</option>
-            </select>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Sub Meter <span class="required">*</span>
-            </label>
-
-            <select id="subMeter">
-              <option value="">Select</option>
-              <option>Yes</option>
-              <option>No</option>
-            </select>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="form-section">
-
-        <h3>Shop Opening & Closing</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-
-            <label>
-              Opening Time <span class="required">*</span>
-            </label>
-
-            <input id="openingTime"
-                   type="time"
-                   value="09:00">
-
-          </div>
-
-          <div class="form-group">
-
-            <label>
-              Closing Time <span class="required">*</span>
-            </label>
-
-            <input id="closingTime"
-                   type="time"
-                   value="00:00">
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="form-section">
-
-        <h3>Load Shedding Slots</h3>
-
-        <p style="color:#777;font-size:13px;margin-bottom:15px;">
-          Add all expected load-shedding periods.
-        </p>
-
-        <div id="loadSlots"></div>
-
-        <button class="btn btn-white"
-                onclick="addLoadSlot()">
-          + Add Load Shedding Slot
-        </button>
-
-      </div>
-
-
-      <div class="form-section">
-
-        <h3>Bank Details</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-
-            <label>
-              Bank Name <span class="required">*</span>
-            </label>
-
-            <input id="bankName">
-
-          </div>
-
-          <div class="form-group">
-
-            <label>
-              Account Title <span class="required">*</span>
-            </label>
-
-            <input id="bankTitle">
-
-          </div>
-
-          <div class="form-group">
-
-            <label>
-              IBAN <span class="required">*</span>
-            </label>
-
-            <input id="bankIBAN"
-                   placeholder="PK00XXXX0000000000000000">
-
-          </div>
-
-          <div class="form-group">
-
-            <label>
-              Account Number <span class="required">*</span>
-            </label>
-
-            <input id="bankAccount">
-
-          </div>
-
-          <div class="form-group">
-
-            <label>
-              Payment Method <span class="required">*</span>
-            </label>
-
-            <select id="bankMethod">
-
-              <option value="">
-                Select Payment Method
-              </option>
-
-              <option>Bank Transfer</option>
-              <option>JazzCash</option>
-              <option>EasyPaisa</option>
-
-            </select>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="form-actions">
-
-        <button class="btn btn-yellow"
-                onclick="saveStoreProfile()">
-          Save Store Information
-        </button>
-
+      <div class="form-group">
+        <label>Monthly Installment</label>
+        <input id="monthlyInstallment" readonly>
       </div>
 
     </div>
+  </div>
 
+  <div style="margin-top:20px;">
+    <h3>Load Shedding Slots</h3>
+    <div id="loadSlots"></div>
 
-    <!-- ================= TODAY'S ADS ================= -->
+    <button
+      class="btn btn-white"
+      type="button"
+      onclick="addLoadSlot()">
+      + Add Load Shedding Slot
+    </button>
+  </div>
 
-    <div id="page-ads" class="hidden">
+  <div class="form-actions">
+    <button class="btn btn-yellow" type="submit">
+      Save Store Information
+    </button>
+  </div>
 
-      <div id="adsApprovalMessage"
-           class="review-box"
-           style="margin-bottom:18px;">
-      </div>
+</div>
 
-      <div class="panel">
+<div class="form-section">
+  <h3>Store Location</h3>
 
-        <div class="panel-title">
-          <h3>Today's Advertisement Schedule</h3>
-          <span id="adsDate"></span>
-        </div>
+  <div class="location-box">
 
-        <div class="table-wrap">
+    <strong>Live Location</strong>
 
-          <table>
-
-            <thead>
-              <tr>
-                <th>Advertisement</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Duration</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
-            <tbody id="todayAdsTable"></tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
+    <div class="location-text" id="locationStatus">
+      Location not captured.
     </div>
 
-
-    <!-- ================= PLAY HISTORY ================= -->
-
-    <div id="page-plays" class="hidden">
-
-      <div class="panel">
-
-        <div class="panel-title">
-          <h3>Complete Advertisement History</h3>
-        </div>
-
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-
-              <tr>
-                <th>Date</th>
-                <th>Advertisement</th>
-                <th>Start</th>
-                <th>Duration</th>
-                <th>Status</th>
-                <th>Verified</th>
-              </tr>
-
-            </thead>
-
-            <tbody id="playHistory"></tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
+    <div class="location-text" id="coordinates">
+      —
     </div>
 
+    <button
+      type="button"
+      class="btn btn-yellow"
+      onclick="captureLocation()">
+      Capture Live Location
+    </button>
 
-    <!-- ================= ENERGY ================= -->
+  </div>
+</div>
 
-    <div id="page-energy" class="hidden">
+</form>
+</section>
 
-      <div class="panel">
+<!-- ADS -->
+<section id="page-ads" class="hidden">
 
-        <div class="panel-title">
+<div class="panel">
+  <div class="panel-title">
+    <h3>Today's Advertisements</h3>
+    <strong id="adsDate">—</strong>
+  </div>
 
-          <h3>45-inch LCD Electricity Meter</h3>
+  <div id="adsApprovalMessage" class="review-box" style="margin-bottom:18px;"></div>
 
-          <span>
-            Rate: <strong>Rs. 80 / Unit</strong>
-          </span>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Advertiser</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Duration</th>
+          <th>Status</th>
+        </tr>
+      </thead>
 
-        </div>
+      <tbody id="todayAdsTable"></tbody>
+    </table>
+  </div>
+</div>
 
+</section>
 
-        <div class="energy-box">
+<!-- PLAY HISTORY -->
+<section id="page-plays" class="hidden">
 
-          <div>
+<div class="panel">
+  <div class="panel-title">
+    <h3>Advertisement Play History</h3>
+  </div>
 
-            <div class="meter"
-                 id="electricMeter"
-                 style="--meter-progress:0deg;">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Advertiser</th>
+          <th>Played At</th>
+          <th>Duration</th>
+          <th>Status</th>
+          <th>Verified</th>
+        </tr>
+      </thead>
 
-              <div class="meter-inner">
+      <tbody id="playHistory"></tbody>
+    </table>
+  </div>
+</div>
 
-                <div class="meter-number"
-                     id="meterUnits">
-                  0.00
-                </div>
+</section>
 
-                <div class="meter-label">
-                  Units Today
-                </div>
+<!-- ENERGY -->
+<section id="page-energy" class="hidden">
 
-              </div>
+<div class="panel">
 
-            </div>
+  <div class="panel-title">
+    <h3>Digital Electricity Meter</h3>
+    <span class="status approved">45-inch LCD</span>
+  </div>
 
-          </div>
+  <div class="energy-box">
 
+    <div>
+      <div
+        class="meter"
+        id="electricMeter"
+        style="--meter-progress:0deg">
 
-          <div class="energy-info">
-
-            <div class="energy-row">
-              <span>LCD</span>
-              <strong>45 inch</strong>
-            </div>
-
-            <div class="energy-row">
-              <span>Estimated Power</span>
-              <strong>80 W</strong>
-            </div>
-
-            <div class="energy-row">
-              <span>LCD On Time</span>
-              <strong id="energyHours">0 hrs</strong>
-            </div>
-
-            <div class="energy-row">
-              <span>Estimated Units</span>
-              <strong id="energyUnitText">0.00</strong>
-            </div>
-
-            <div class="energy-row"
-                 style="background:var(--light-yellow);">
-
-              <span>Estimated Electricity Bill</span>
-
-              <strong id="energyBill">
-                Rs. 0
-              </strong>
-
-            </div>
-
-          </div>
-
+        <div class="meter-inner">
+          <div class="meter-number" id="meterUnits">0.00</div>
+          <div class="meter-label">Units</div>
         </div>
 
       </div>
-
-
-      <div class="panel" style="margin-top:17px;">
-
-        <div class="panel-title">
-          <h3>Electricity Calculation</h3>
-        </div>
-
-        <p style="color:#777;font-size:13px;line-height:1.7;">
-          Estimated bill = LCD power consumption × LCD operating
-          hours × Rs. 80 per unit. The actual electricity bill may
-          differ from this estimate.
-        </p>
-
-      </div>
-
     </div>
 
+    <div class="energy-info">
 
-    <!-- ================= EARNINGS ================= -->
-
-    <div id="page-earnings" class="hidden">
-
-      <div class="dashboard-cards">
-
-        <div class="dashboard-card">
-          <div class="card-label">Today's Earning</div>
-          <div class="card-value">Rs. 0</div>
-        </div>
-
-        <div class="dashboard-card">
-          <div class="card-label">Total Earnings</div>
-          <div class="card-value">Rs. 12,450</div>
-        </div>
-
-        <div class="dashboard-card">
-          <div class="card-label">Paid</div>
-          <div class="card-value">Rs. 9,000</div>
-        </div>
-
-        <div class="dashboard-card">
-          <div class="card-label">Pending</div>
-          <div class="card-value">Rs. 3,450</div>
-        </div>
-
+      <div class="energy-row">
+        <span>LCD Running Time</span>
+        <strong id="energyHours">0 hrs 0 min</strong>
       </div>
 
-
-      <div class="panel">
-
-        <div class="panel-title">
-          <h3>Earning History</h3>
-        </div>
-
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-
-              <tr>
-                <th>Date</th>
-                <th>Verified Plays</th>
-                <th>Rate</th>
-                <th>Amount</th>
-                <th>Status</th>
-              </tr>
-
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td>28 Sep 2026</td>
-                <td>350</td>
-                <td>Rs. 2</td>
-                <td>Rs. 700</td>
-                <td>
-                  <span class="status pending">Pending</span>
-                </td>
-              </tr>
-
-              <tr>
-                <td>27 Sep 2026</td>
-                <td>410</td>
-                <td>Rs. 2</td>
-                <td>Rs. 820</td>
-                <td>
-                  <span class="status approved">Paid</span>
-                </td>
-              </tr>
-
-              <tr>
-                <td>26 Sep 2026</td>
-                <td>390</td>
-                <td>Rs. 2</td>
-                <td>Rs. 780</td>
-                <td>
-                  <span class="status approved">Paid</span>
-                </td>
-              </tr>
-
-            </tbody>
-
-          </table>
-
-        </div>
-
+      <div class="energy-row">
+        <span>Units Consumed</span>
+        <strong id="energyUnitText">0.00</strong>
       </div>
 
-    </div>
-
-
-    <!-- ================= WITHDRAWALS ================= -->
-
-    <div id="page-withdrawals" class="hidden">
-
-      <div class="dashboard-cards">
-
-        <div class="dashboard-card">
-
-          <div class="card-label">
-            Available Balance
-          </div>
-
-          <div class="card-value">
-            Rs. 3,450
-          </div>
-
-        </div>
-
-        <div class="dashboard-card">
-
-          <div class="card-label">
-            Pending Withdrawal
-          </div>
-
-          <div class="card-value">
-            Rs. 0
-          </div>
-
-        </div>
-
+      <div class="energy-row">
+        <span>Rate</span>
+        <strong>Rs. 80 / Unit</strong>
       </div>
 
-
-      <div class="panel">
-
-        <div class="panel-title">
-          <h3>Request Withdrawal</h3>
-        </div>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-
-            <label>
-              Amount <span class="required">*</span>
-            </label>
-
-            <input id="withdrawAmount"
-                   type="number"
-                   placeholder="Enter amount">
-
-          </div>
-
-          <div class="form-group">
-
-            <label>
-              Payment Method <span class="required">*</span>
-            </label>
-
-            <select id="withdrawMethod">
-              <option>Bank Transfer</option>
-              <option>JazzCash</option>
-              <option>EasyPaisa</option>
-            </select>
-
-          </div>
-
-        </div>
-
-        <div class="form-actions">
-
-          <button class="btn btn-yellow"
-                  onclick="requestWithdrawal()">
-            Request Withdrawal
-          </button>
-
-        </div>
-
+      <div class="energy-row">
+        <span>Estimated Bill</span>
+        <strong id="energyBill">Rs. 0</strong>
       </div>
 
-
-      <div class="panel" style="margin-top:17px;">
-
-        <div class="panel-title">
-          <h3>Withdrawal History</h3>
-        </div>
-
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Method</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
-            <tbody id="withdrawalHistory"></tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- ================= BANK ================= -->
-
-    <div id="page-bank" class="hidden">
-
-      <div class="form-section">
-
-        <h3>Bank / Payment Details</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>Bank Name <span class="required">*</span></label>
-            <input id="bankPageName">
-          </div>
-
-          <div class="form-group">
-            <label>Account Title <span class="required">*</span></label>
-            <input id="bankPageTitle">
-          </div>
-
-          <div class="form-group">
-            <label>IBAN <span class="required">*</span></label>
-            <input id="bankPageIBAN">
-          </div>
-
-          <div class="form-group">
-            <label>Account Number <span class="required">*</span></label>
-            <input id="bankPageAccount">
-          </div>
-
-          <div class="form-group">
-            <label>Payment Method <span class="required">*</span></label>
-
-            <select id="bankPageMethod">
-              <option>Bank Transfer</option>
-              <option>JazzCash</option>
-              <option>EasyPaisa</option>
-            </select>
-
-          </div>
-
-        </div>
-
-        <div class="form-actions">
-
-          <button class="btn btn-yellow"
-                  onclick="saveBankPage()">
-            Save Bank Details
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- ================= SUPPORT ================= -->
-
-    <div id="page-support" class="hidden">
-
-      <div class="form-section">
-
-        <h3>Support / Complaint</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>Subject <span class="required">*</span></label>
-            <input id="supportSubject">
-          </div>
-
-          <div class="form-group">
-            <label>Category <span class="required">*</span></label>
-
-            <select id="supportCategory">
-              <option>LCD Issue</option>
-              <option>Internet Issue</option>
-              <option>Advertisement Issue</option>
-              <option>Payment Issue</option>
-              <option>Other</option>
-            </select>
-
-          </div>
-
-          <div class="form-group full">
-
-            <label>
-              Message <span class="required">*</span>
-            </label>
-
-            <textarea id="supportMessage"></textarea>
-
-          </div>
-
-        </div>
-
-        <div class="form-actions">
-
-          <button class="btn btn-yellow"
-                  onclick="submitSupport()">
-            Submit Request
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <div class="panel">
-
-        <div class="panel-title">
-          <h3>My Requests</h3>
-        </div>
-
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-              <tr>
-                <th>Subject</th>
-                <th>Category</th>
-                <th>Date</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
-            <tbody id="supportHistory"></tbody>
-
-          </table>
-
-        </div>
-
+      <div style="font-size:12px;color:#777;">
+        Estimated using 80W power consumption.
+        Actual consumption depends on the LCD model.
       </div>
 
     </div>
 
   </div>
 
+</div>
+
 </section>
 
+<!-- EARNINGS -->
+<section id="page-earnings" class="hidden">
 
-<!-- =========================================================
-     NOTIFICATIONS
-========================================================= -->
+<div class="dashboard-cards">
 
+  <div class="dashboard-card">
+    <div class="card-label">Today's Earning</div>
+    <div class="card-value">Rs. 0</div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="card-label">Total Earnings</div>
+    <div class="card-value">Rs. 12,450</div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="card-label">Paid</div>
+    <div class="card-value">Rs. 9,000</div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="card-label">Pending</div>
+    <div class="card-value">Rs. 3,450</div>
+  </div>
+
+</div>
+
+<div class="panel">
+
+  <div class="panel-title">
+    <h3>Earning History</h3>
+  </div>
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Verified Plays</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>28 Sep 2026</td>
+          <td>20</td>
+          <td>Rs. 1,200</td>
+          <td><span class="status approved">Verified</span></td>
+        </tr>
+
+        <tr>
+          <td>27 Sep 2026</td>
+          <td>18</td>
+          <td>Rs. 1,080</td>
+          <td><span class="status approved">Verified</span></td>
+        </tr>
+
+        <tr>
+          <td>26 Sep 2026</td>
+          <td>22</td>
+          <td>Rs. 1,320</td>
+          <td><span class="status approved">Verified</span></td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+</section>
+
+<!-- WITHDRAWALS -->
+<section id="page-withdrawals" class="hidden">
+
+<div class="dashboard-cards">
+
+  <div class="dashboard-card">
+    <div class="card-label">Available Balance</div>
+    <div class="card-value">Rs. 0</div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="card-label">Pending Withdrawal</div>
+    <div class="card-value">Rs. 0</div>
+  </div>
+
+</div>
+
+<div class="form-section">
+
+  <h3>Request Withdrawal</h3>
+
+  <div class="form-grid">
+
+    <div class="form-group">
+      <label>Amount</label>
+      <input
+        id="withdrawAmount"
+        type="number"
+        min="1"
+        placeholder="Enter amount">
+    </div>
+
+    <div class="form-group">
+      <label>Payment Method</label>
+      <select id="withdrawMethod">
+        <option value="Bank Transfer">Bank Transfer</option>
+        <option value="JazzCash">JazzCash</option>
+        <option value="EasyPaisa">EasyPaisa</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="form-actions">
+    <button class="btn btn-yellow" onclick="requestWithdrawal()">
+      Request Withdrawal
+    </button>
+  </div>
+
+</div>
+
+<div class="panel">
+
+  <div class="panel-title">
+    <h3>Withdrawal History</h3>
+  </div>
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Method</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody id="withdrawalHistory"></tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+</section>
+
+<!-- BANK -->
+<section id="page-bank" class="hidden">
+
+<div class="form-section">
+
+  <h3>Bank Details</h3>
+
+  <div class="form-grid">
+
+    <div class="form-group">
+      <label>Bank Name</label>
+      <input id="bankPageName">
+    </div>
+
+    <div class="form-group">
+      <label>Account Title</label>
+      <input id="bankPageTitle">
+    </div>
+
+    <div class="form-group">
+      <label>IBAN</label>
+      <input id="bankPageIBAN">
+    </div>
+
+    <div class="form-group">
+      <label>Account Number</label>
+      <input id="bankPageAccount">
+    </div>
+
+    <div class="form-group">
+      <label>Payment Method</label>
+      <select id="bankPageMethod">
+        <option value="Bank Transfer">Bank Transfer</option>
+        <option value="JazzCash">JazzCash</option>
+        <option value="EasyPaisa">EasyPaisa</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="form-actions">
+    <button class="btn btn-yellow" onclick="saveBankPage()">
+      Save Bank Details
+    </button>
+  </div>
+
+</div>
+
+</section>
+
+<!-- SUPPORT -->
+<section id="page-support" class="hidden">
+
+<div class="form-section">
+
+  <h3>Contact Support</h3>
+
+  <div class="form-grid">
+
+    <div class="form-group">
+      <label>Subject</label>
+      <input id="supportSubject">
+    </div>
+
+    <div class="form-group">
+      <label>Category</label>
+      <select id="supportCategory">
+        <option value="LCD">LCD</option>
+        <option value="Advertisement">Advertisement</option>
+        <option value="Payment">Payment</option>
+        <option value="Technical">Technical</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="form-group full">
+      <label>Message</label>
+      <textarea id="supportMessage"></textarea>
+    </div>
+
+  </div>
+
+  <div class="form-actions">
+    <button class="btn btn-yellow" onclick="submitSupport()">
+      Submit Support Request
+    </button>
+  </div>
+
+</div>
+
+<div class="panel">
+
+  <div class="panel-title">
+    <h3>Support History</h3>
+  </div>
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Category</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody id="supportHistory"></tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+</section>
+
+</div>
+</div>
+
+<!-- NOTIFICATION PANEL -->
 <div class="notification-panel" id="notificationPanel">
 
   <div class="notification-header">
@@ -2523,974 +1878,514 @@ th{
 
   <div class="notification-item">
     <strong>Welcome to Spotly</strong>
-    <span>Your vendor account has been created.</span>
+    <span>Your vendor portal is ready.</span>
   </div>
 
   <div class="notification-item">
     <strong>Application Status</strong>
-    <span>Your store is currently under review.</span>
+    <span>Your store application is under review.</span>
   </div>
 
   <div class="notification-item">
     <strong>Complete Your Profile</strong>
-    <span>Make sure all required information is complete.</span>
+    <span>Keep your store information updated.</span>
   </div>
 
 </div>
 
-
-<!-- =========================================================
-     LOGIN MODAL
-========================================================= -->
-
+<!-- LOGIN MODAL -->
 <div class="modal" id="loginModal">
 
-  <div class="modal-box modal-small">
+<div class="modal-box modal-small">
 
-    <div class="modal-head">
+  <div class="modal-head">
+    <h2>Vendor Login</h2>
+    <button class="close" onclick="closeModal('loginModal')">×</button>
+  </div>
 
-      <h2>Vendor Login</h2>
+  <div class="form-group">
+    <label>Email or Phone</label>
+    <input id="loginIdentity">
+  </div>
 
-      <button class="close"
-              onclick="closeModal('loginModal')">
-        ×
-      </button>
+  <div class="form-group" style="margin-top:15px;">
+    <label>Password</label>
+    <input id="loginPassword" type="password">
+  </div>
 
-    </div>
-
-
-    <div class="form-group" style="margin-bottom:15px;">
-
-      <label>Email / Phone</label>
-
-      <input id="loginIdentity"
-             placeholder="Email or phone">
-
-    </div>
-
-
-    <div class="form-group" style="margin-bottom:20px;">
-
-      <label>Password</label>
-
-      <input id="loginPassword"
-             type="password"
-             placeholder="Password">
-
-    </div>
-
-
-    <button class="btn btn-yellow"
-            style="width:100%;"
-            onclick="loginVendor()">
-
+  <div class="form-actions">
+    <button class="btn btn-yellow" onclick="loginVendor()">
       Login
-
     </button>
+  </div>
 
-
-    <div style="text-align:center;margin-top:17px;font-size:13px;color:#777;">
-
-      Don't have an account?
-
-      <button
-        style="border:0;background:none;font-weight:700;"
-        onclick="
-          closeModal('loginModal');
-          openRegistration();
-        ">
-        Register
-      </button>
-
-    </div>
-
+  <div style="margin-top:15px;text-align:center;font-size:13px;color:#777;">
+    New vendor?
+    <button
+      class="btn btn-white"
+      style="padding:7px 12px;"
+      onclick="closeModal('loginModal');openRegistration();">
+      Register
+    </button>
   </div>
 
 </div>
 
-<!-- =========================================================
-     REGISTRATION MODAL
-========================================================= -->
+</div>
 
+<!-- REGISTRATION MODAL -->
 <div class="modal" id="registrationModal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <div class="modal-head">
+<div class="modal-head">
+  <div>
+    <h2>Create Vendor Account</h2>
+    <p style="color:#777;margin-top:5px;">
+      Complete all information to register your store.
+    </p>
+  </div>
 
-      <div>
-        <h2>Create Vendor Account</h2>
+  <button class="close" onclick="closeModal('registrationModal')">
+    ×
+  </button>
+</div>
 
-        <p style="font-size:13px;color:#777;margin-top:5px;">
-          Complete all required information before submitting.
-        </p>
-      </div>
+<div class="register-progress">
+  <div class="progress-step active" id="progress1"></div>
+  <div class="progress-step" id="progress2"></div>
+  <div class="progress-step" id="progress3"></div>
+  <div class="progress-step" id="progress4"></div>
+  <div class="progress-step" id="progress5"></div>
+</div>
 
-      <button class="close"
-              onclick="closeModal('registrationModal')">
-        ×
+<!-- STEP 1 -->
+<div class="register-page active" id="registerPage1">
+
+<h3 style="margin-bottom:20px;">Account & Store</h3>
+
+<div class="form-grid">
+
+  <div class="form-group">
+    <label>Shop Name <span class="required">*</span></label>
+    <input id="regShop" required>
+  </div>
+
+  <div class="form-group">
+    <label>Owner Name <span class="required">*</span></label>
+    <input id="regOwner" required>
+  </div>
+
+  <div class="form-group">
+    <label>Phone <span class="required">*</span></label>
+    <input id="regPhone" required>
+  </div>
+
+  <div class="form-group">
+    <label>Email <span class="required">*</span></label>
+    <input id="regEmail" type="email" required>
+  </div>
+
+  <div class="form-group">
+    <label>Password <span class="required">*</span></label>
+    <input id="regPassword" type="password" required>
+  </div>
+
+  <div class="form-group">
+    <label>Confirm Password <span class="required">*</span></label>
+    <input id="regPasswordConfirm" type="password" required>
+  </div>
+
+</div>
+
+<div class="register-actions">
+
+  <button class="btn btn-white"
+          type="button"
+          onclick="closeModal('registrationModal')">
+    Cancel
+  </button>
+
+  <button class="btn btn-yellow"
+          type="button"
+          onclick="nextRegistration(1)">
+    Continue
+  </button>
+
+</div>
+
+</div>
+
+<!-- STEP 2 -->
+<div class="register-page" id="registerPage2">
+
+<h3 style="margin-bottom:20px;">Shop Location</h3>
+
+<div class="form-grid">
+
+  <div class="form-group">
+    <label>Category <span class="required">*</span></label>
+
+    <div class="add-select">
+
+      <select id="regCategory" required></select>
+
+      <button
+        type="button"
+        class="btn btn-white"
+        onclick="addRegistrationCategory()">
+        Add New
       </button>
 
     </div>
+  </div>
 
+  <div class="form-group">
+    <label>Area <span class="required">*</span></label>
 
-    <div class="register-progress">
+    <div class="add-select">
 
-      <div class="progress-step active" id="progress1"></div>
-      <div class="progress-step" id="progress2"></div>
-      <div class="progress-step" id="progress3"></div>
-      <div class="progress-step" id="progress4"></div>
-      <div class="progress-step" id="progress5"></div>
+      <select id="regArea" required></select>
+
+      <button
+        type="button"
+        class="btn btn-white"
+        onclick="addRegistrationArea()">
+        Add New
+      </button>
+
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Phase</label>
+
+    <div class="add-select">
+
+      <select
+        id="regPhase"
+        onchange="handleHierarchyChoice('regPhase')">
+      </select>
+
+      <button
+        type="button"
+        class="btn btn-white"
+        onclick="addRegistrationPhase()">
+        Add New
+      </button>
+
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Precinct</label>
+
+    <div class="add-select">
+
+      <select
+        id="regPrecinct"
+        onchange="handleHierarchyChoice('regPrecinct')">
+      </select>
+
+      <button
+        type="button"
+        class="btn btn-white"
+        onclick="addRegistrationPrecinct()">
+        Add New
+      </button>
+
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Sector</label>
+
+    <div class="add-select">
+
+      <select
+        id="regSector"
+        onchange="handleHierarchyChoice('regSector')">
+      </select>
+
+      <button
+        type="button"
+        class="btn btn-white"
+        onclick="addRegistrationSector()">
+        Add New
+      </button>
+
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Block</label>
+
+    <div class="add-select">
+
+      <select
+        id="regBlock"
+        onchange="handleHierarchyChoice('regBlock')">
+      </select>
+
+      <button
+        type="button"
+        class="btn btn-white"
+        onclick="addRegistrationBlock()">
+        Add New
+      </button>
+
+    </div>
+  </div>
+
+  <div class="form-group full">
+    <label>Full Address <span class="required">*</span></label>
+    <textarea id="regAddress" required></textarea>
+  </div>
+
+</div>
+
+<div class="location-box" style="margin-top:20px;">
+
+  <strong>Live Location</strong>
+
+  <div class="location-text" id="registrationCoordinates">
+    Location not captured.
+  </div>
+
+  <button
+    type="button"
+    class="btn btn-yellow"
+    onclick="captureRegistrationLocation()">
+    Capture Live Location
+  </button>
+
+</div>
+
+<div class="register-actions">
+
+  <button
+    class="btn btn-white"
+    type="button"
+    onclick="previousRegistration(2)">
+    Back
+  </button>
+
+  <button
+    class="btn btn-yellow"
+    type="button"
+    onclick="nextRegistration(2)">
+    Continue
+  </button>
+
+</div>
+
+</div>
+
+<!-- STEP 3 -->
+<div class="register-page" id="registerPage3">
+
+<h3 style="margin-bottom:20px;">
+  Shop & LCD
+</h3>
+
+<div class="form-grid">
+
+  <div class="form-group">
+    <label>Footfall <span class="required">*</span></label>
+    <input id="regFootfall" type="number" min="0" required>
+  </div>
+
+  <div class="form-group">
+    <label>Shop Size <span class="required">*</span></label>
+    <select id="regShopSize" required>
+      <option value="">Select</option>
+      <option value="Small">Small</option>
+      <option value="Medium">Medium</option>
+      <option value="Large">Large</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Ice Cream Fridge <span class="required">*</span></label>
+    <select id="regFridge" required>
+      <option value="">Select</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>LCD Status <span class="required">*</span></label>
+
+    <select
+      id="regLCDStatus"
+      onchange="registrationLCDChange()"
+      required>
+
+      <option value="">Select LCD Status</option>
+
+      <option value="Already Have LCD">
+        Already Have LCD
+      </option>
+
+      <option value="Purchase From Spotly">
+        Purchase From Spotly
+      </option>
+
+      <option value="Need Installation">
+        Need Installation
+      </option>
+
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>LCD Size <span class="required">*</span></label>
+
+    <select id="regLCDSize" required>
+      <option value="">Select Size</option>
+      <option value="45 inch">45 inch</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Internet <span class="required">*</span></label>
+
+    <select id="regInternet" required>
+      <option value="">Select</option>
+      <option value="Internet Available">
+        Internet Available
+      </option>
+      <option value="No Internet">
+        No Internet
+      </option>
+      <option value="Spotly Internet Required">
+        Spotly Internet Required
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Sub Meter <span class="required">*</span></label>
+
+    <select id="regSubMeter" required>
+      <option value="">Select</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Opening Time <span class="required">*</span></label>
+
+    <input
+      id="regOpening"
+      type="time"
+      value="09:00"
+      required>
+  </div>
+
+  <div class="form-group">
+    <label>Closing Time <span class="required">*</span></label>
+
+    <input
+      id="regClosing"
+      type="time"
+      value="00:00"
+      required>
+  </div>
+
+</div>
+
+<div
+  id="registrationPurchaseBox"
+  class="location-box hidden"
+  style="margin-top:20px;">
+
+  <strong>LCD Purchase / Installment</strong>
+
+  <div
+    class="form-grid"
+    style="margin-top:17px;">
+
+    <div class="form-group">
+      <label>
+        Purchase Method <span class="required">*</span>
+      </label>
+
+      <select
+        id="regPurchaseMethod"
+        onchange="registrationInstallment()"
+        required>
+
+        <option value="">Select</option>
+
+        <option value="Cash">
+          Cash
+        </option>
+
+        <option value="Installment">
+          Installment
+        </option>
+
+      </select>
+    </div>
+
+    <div class="form-group">
+
+      <label>
+        LCD Price <span class="required">*</span>
+      </label>
+
+      <input
+        id="regLCDPrice"
+        type="number"
+        min="0"
+        value="60000"
+        oninput="registrationInstallment()"
+        required>
 
     </div>
 
+    <div
+      class="form-group"
+      id="regMonthsBox">
 
-    <!-- ================= STEP 1 ================= -->
+      <label>
+        Installment Months
+        <span class="required">*</span>
+      </label>
 
-    <div class="register-page active" id="registerPage1">
+      <select
+        id="regMonths"
+        onchange="registrationInstallment()"
+        required>
 
-      <h3 style="margin-bottom:20px;">
-        Account & Store
-      </h3>
+        <option value="3">
+          3 Months
+        </option>
 
-      <div class="form-grid">
+        <option value="6">
+          6 Months
+        </option>
 
-        <div class="form-group">
-          <label>
-            Shop / Store Name <span class="required">*</span>
-          </label>
+        <option value="12">
+          12 Months
+        </option>
 
-          <input id="regShop"
-                 required>
-        </div>
-
-
-        <div class="form-group">
-          <label>
-            Owner Name <span class="required">*</span>
-          </label>
-
-          <input id="regOwner"
-                 required>
-        </div>
-
-
-        <div class="form-group">
-          <label>
-            Phone Number <span class="required">*</span>
-          </label>
-
-          <input id="regPhone"
-                 type="tel"
-                 required>
-        </div>
-
-
-        <div class="form-group">
-          <label>
-            Email <span class="required">*</span>
-          </label>
-
-          <input id="regEmail"
-                 type="email"
-                 required>
-        </div>
-
-
-        <div class="form-group">
-          <label>
-            Password <span class="required">*</span>
-          </label>
-
-          <input id="regPassword"
-                 type="password"
-                 minlength="6"
-                 required>
-        </div>
-
-
-        <div class="form-group">
-          <label>
-            Confirm Password <span class="required">*</span>
-          </label>
-
-          <input id="regPasswordConfirm"
-                 type="password"
-                 minlength="6"
-                 required>
-        </div>
-
-      </div>
-
-
-      <div class="register-actions">
-
-        <div></div>
-
-        <button class="btn btn-yellow"
-                type="button"
-                onclick="nextRegistration(1)">
-          Continue
-        </button>
-
-      </div>
+      </select>
 
     </div>
 
-
-    <!-- ================= STEP 2 ================= -->
-
-    <div class="register-page" id="registerPage2">
-
-      <h3 style="margin-bottom:20px;">
-        Shop Location
-      </h3>
-
-      <div class="form-grid">
-
-
-        <!-- CATEGORY -->
-
-        <div class="form-group">
-
-          <label>
-            Category <span class="required">*</span>
-          </label>
-
-          <div class="add-select">
-
-            <select id="regCategory" required>
-              <option value="">Select Category</option>
-            </select>
-
-            <button class="btn btn-white"
-                    type="button"
-                    onclick="addRegistrationCategory()">
-              + Add New
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <!-- AREA -->
-
-        <div class="form-group">
-
-          <label>
-            Area <span class="required">*</span>
-          </label>
-
-          <div class="add-select">
-
-            <select id="regArea" required>
-              <option value="">Select Area</option>
-            </select>
-
-            <button class="btn btn-white"
-                    type="button"
-                    onclick="addRegistrationArea()">
-              + Add New
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <!-- PHASE -->
-
-        <div class="form-group">
-
-          <label>
-            Phase <span class="required">*</span>
-          </label>
-
-          <div class="add-select">
-
-            <select id="regPhase" required>
-              <option value="">Select Phase</option>
-            </select>
-
-            <button class="btn btn-white"
-                    type="button"
-                    onclick="addRegistrationPhase()">
-              + Add New
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <!-- PRECINCT -->
-
-        <div class="form-group">
-
-          <label>
-            Precinct <span class="required">*</span>
-          </label>
-
-          <div class="add-select">
-
-            <select id="regPrecinct" required>
-              <option value="">Select Precinct</option>
-            </select>
-
-            <button class="btn btn-white"
-                    type="button"
-                    onclick="addRegistrationPrecinct()">
-              + Add New
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <!-- SECTOR -->
-
-        <div class="form-group">
-
-          <label>
-            Sector <span class="required">*</span>
-          </label>
-
-          <div class="add-select">
-
-            <select id="regSector" required>
-              <option value="">Select Sector</option>
-            </select>
-
-            <button class="btn btn-white"
-                    type="button"
-                    onclick="addRegistrationSector()">
-              + Add New
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <!-- BLOCK -->
-
-        <div class="form-group">
-
-          <label>
-            Block <span class="required">*</span>
-          </label>
-
-          <div class="add-select">
-
-            <select id="regBlock" required>
-              <option value="">Select Block</option>
-            </select>
-
-            <button class="btn btn-white"
-                    type="button"
-                    onclick="addRegistrationBlock()">
-              + Add New
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <!-- ADDRESS -->
-
-        <div class="form-group full">
-
-          <label>
-            Complete Written Address <span class="required">*</span>
-          </label>
-
-          <textarea id="regAddress"
-                    required></textarea>
-
-        </div>
-
-      </div>
-
-
-      <!-- LIVE LOCATION -->
-
-      <div class="location-box"
-           style="margin-top:20px;">
-
-        <strong>
-          Vendor Live Location <span class="required">*</span>
-        </strong>
-
-        <div class="location-text"
-             id="registrationLocationText">
-
-          Vendor must capture their own current location.
-          Admin cannot enter this location.
-
-        </div>
-
-        <button class="btn btn-yellow"
-                type="button"
-                onclick="captureRegistrationLocation()">
-          Use My Current Location
-        </button>
-
-        <div id="registrationCoordinates"
-             style="font-size:12px;color:#777;margin-top:9px;">
-          Location not captured
-        </div>
-
-      </div>
-
-
-      <div class="register-actions">
-
-        <button class="btn btn-white"
-                type="button"
-                onclick="previousRegistration(2)">
-          Back
-        </button>
-
-        <button class="btn btn-yellow"
-                type="button"
-                onclick="nextRegistration(2)">
-          Continue
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- ================= STEP 3 ================= -->
-
-    <div class="register-page" id="registerPage3">
-
-      <h3 style="margin-bottom:20px;">
-        Shop & LCD Information
-      </h3>
-
-
-      <div class="form-grid">
-
-
-        <!-- FOOTFALL -->
-
-        <div class="form-group">
-
-          <label>
-            Average Daily Footfall <span class="required">*</span>
-          </label>
-
-          <input id="regFootfall"
-                 type="number"
-                 min="0"
-                 required>
-
-        </div>
-
-
-        <!-- SHOP SIZE -->
-
-        <div class="form-group">
-
-          <label>
-            Shop Size <span class="required">*</span>
-          </label>
-
-          <input id="regShopSize"
-                 placeholder="e.g. 500 sq ft"
-                 required>
-
-        </div>
-
-
-        <!-- FRIDGE -->
-
-        <div class="form-group">
-
-          <label>
-            Ice Cream Fridge <span class="required">*</span>
-          </label>
-
-          <select id="regFridge" required>
-
-            <option value="">
-              Select
-            </option>
-
-            <option value="Yes">
-              Yes
-            </option>
-
-            <option value="No">
-              No
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <!-- LCD STATUS -->
-
-        <div class="form-group">
-
-          <label>
-            LCD Status <span class="required">*</span>
-          </label>
-
-          <select id="regLCDStatus"
-                  onchange="registrationLCDChange()"
-                  required>
-
-            <option value="">
-              Select LCD Status
-            </option>
-
-            <option value="Already Have LCD">
-              Already Have LCD
-            </option>
-
-            <option value="Purchase From Spotly">
-              Purchase From Spotly
-            </option>
-
-            <option value="Need Installation">
-              Need Installation
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <!-- LCD SIZE -->
-
-        <div class="form-group">
-
-          <label>
-            LCD Size <span class="required">*</span>
-          </label>
-
-          <select id="regLCDSize" required>
-
-            <option value="">
-              Select Size
-            </option>
-
-            <option value="45 inch">
-              45 inch
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <!-- INTERNET -->
-
-        <div class="form-group">
-
-          <label>
-            Internet <span class="required">*</span>
-          </label>
-
-          <select id="regInternet" required>
-
-            <option value="">
-              Select
-            </option>
-
-            <option value="Internet Available">
-              Internet Available
-            </option>
-
-            <option value="No Internet">
-              No Internet
-            </option>
-
-            <option value="Spotly Internet Required">
-              Spotly Internet Required
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <!-- SUB METER -->
-
-        <div class="form-group">
-
-          <label>
-            Sub Meter <span class="required">*</span>
-          </label>
-
-          <select id="regSubMeter" required>
-
-            <option value="">
-              Select
-            </option>
-
-            <option value="Yes">
-              Yes
-            </option>
-
-            <option value="No">
-              No
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <!-- OPENING -->
-
-        <div class="form-group">
-
-          <label>
-            Opening Time <span class="required">*</span>
-          </label>
-
-          <input id="regOpening"
-                 type="time"
-                 value="09:00"
-                 required>
-
-        </div>
-
-
-        <!-- CLOSING -->
-
-        <div class="form-group">
-
-          <label>
-            Closing Time <span class="required">*</span>
-          </label>
-
-          <input id="regClosing"
-                 type="time"
-                 value="00:00"
-                 required>
-
-        </div>
-
-      </div>
-
-
-      <!-- LCD PURCHASE -->
-
-      <div id="registrationPurchaseBox"
-           class="location-box hidden"
-           style="margin-top:20px;">
-
-        <strong>
-          LCD Purchase / Installment
-        </strong>
-
-        <div class="form-grid"
-             style="margin-top:17px;">
-
-
-          <div class="form-group">
-
-            <label>
-              Purchase Method <span class="required">*</span>
-            </label>
-
-            <select id="regPurchaseMethod"
-                    onchange="registrationInstallment()"
-                    required>
-
-              <option value="">
-                Select
-              </option>
-
-              <option value="Cash">
-                Cash
-              </option>
-
-              <option value="Installment">
-                Installment
-              </option>
-
-            </select>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              LCD Price <span class="required">*</span>
-            </label>
-
-            <input id="regLCDPrice"
-                   type="number"
-                   min="0"
-                   value="60000"
-                   oninput="registrationInstallment()"
-                   required>
-
-          </div>
-
-
-          <div class="form-group"
-               id="regMonthsBox">
-
-            <label>
-              Installment Months
-              <span class="required">*</span>
-            </label>
-
-            <select id="regMonths"
-                    onchange="registrationInstallment()"
-                    required>
-
-              <option value="3">
-                3 Months
-              </option>
-
-              <option value="6">
-                6 Months
-              </option>
-
-              <option value="12">
-                12 Months
-              </option>
-
-            </select>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Monthly Installment
-            </label>
-
-            <input id="regMonthlyInstallment"
-                   readonly>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- LOAD SHEDDING -->
-
-      <div class="form-section"
-           style="padding:0;border:0;margin:20px 0 0;">
-
-        <h3>
-          Load Shedding Slots
-        </h3>
-
-        <div id="registrationLoadSlots"></div>
-
-        <button class="btn btn-white"
-                type="button"
-                onclick="addRegistrationLoadSlot()">
-          + Add Load Shedding Slot
-        </button>
-
-      </div>
-
-
-      <div class="register-actions">
-
-        <button class="btn btn-white"
-                type="button"
-                onclick="previousRegistration(3)">
-          Back
-        </button>
-
-        <button class="btn btn-yellow"
-                type="button"
-                onclick="nextRegistration(3)">
-          Continue
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- ================= STEP 4 ================= -->
-
-    <div class="register-page" id="registerPage4">
-
-      <h3 style="margin-bottom:20px;">
-        Bank Details
-      </h3>
-
-      <div class="form-grid">
-
-
-        <div class="form-group">
-
-          <label>
-            Bank Name <span class="required">*</span>
-          </label>
-
-          <input id="regBankName"
-                 required>
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label>
-            Account Title <span class="required">*</span>
-          </label>
-
-          <input id="regBankTitle"
-                 required>
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label>
-            IBAN <span class="required">*</span>
-          </label>
-
-          <input id="regBankIBAN"
-                 placeholder="PK00XXXX0000000000000000"
-                 required>
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label>
-            Account Number <span class="required">*</span>
-          </label>
-
-          <input id="regBankAccount"
-                 required>
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label>
-            Payment Method <span class="required">*</span>
-          </label>
-
-          <select id="regBankMethod" required>
-
-            <option value="">
-              Select Payment Method
-            </option>
-
-            <option value="Bank Transfer">
-              Bank Transfer
-            </option>
-
-            <option value="JazzCash">
-              JazzCash
-            </option>
-
-            <option value="EasyPaisa">
-              EasyPaisa
-            </option>
-
-          </select>
-
-        </div>
-
-      </div>
-
-
-      <div class="register-actions">
-
-        <button class="btn btn-white"
-                type="button"
-                onclick="previousRegistration(4)">
-          Back
-        </button>
-
-        <button class="btn btn-yellow"
-                type="button"
-                onclick="nextRegistration(4)">
-          Continue
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- ================= STEP 5 ================= -->
-
-    <div class="register-page" id="registerPage5">
-
-      <h3 style="margin-bottom:20px;">
-        Final Confirmation
-      </h3>
-
-
-      <div class="review-box">
-
-        <strong>
-          Please confirm your information
-        </strong>
-
-        <p>
-          All required information must be correct before
-          creating your Spotly vendor account.
-        </p>
-
-      </div>
-
-
-      <div style="margin-top:20px;">
-
-        <label style="display:flex;gap:9px;align-items:flex-start;font-size:13px;">
-
-          <input type="checkbox"
-                 id="regConsent"
-                 required>
-
-          <span>
-            I confirm that the information provided by me is correct,
-            my live location has been captured from my device,
-            and I agree to Spotly vendor terms.
-          </span>
-
-        </label>
-
-      </div>
-
-
-      <div class="register-actions">
-
-        <button class="btn btn-white"
-                type="button"
-                onclick="previousRegistration(5)">
-          Back
-        </button>
-
-        <button class="btn btn-yellow"
-                type="button"
-                onclick="createVendorAccount()">
-          Create Vendor Account
-        </button>
-
-      </div>
+    <div class="form-group">
+
+      <label>
+        Monthly Installment
+      </label>
+
+      <input
+        id="regMonthlyInstallment"
+        readonly>
 
     </div>
 
@@ -3498,12 +2393,200 @@ th{
 
 </div>
 
-<!-- =========================================================
-     TOAST
-========================================================= -->
+<div
+  class="form-section"
+  style="padding:0;border:0;margin:20px 0 0;">
+
+  <h3>
+    Load Shedding Slots
+  </h3>
+
+  <div id="registrationLoadSlots"></div>
+
+  <button
+    class="btn btn-white"
+    type="button"
+    onclick="addRegistrationLoadSlot()">
+    + Add Load Shedding Slot
+  </button>
+
+</div>
+
+<div class="register-actions">
+
+  <button
+    class="btn btn-white"
+    type="button"
+    onclick="previousRegistration(3)">
+    Back
+  </button>
+
+  <button
+    class="btn btn-yellow"
+    type="button"
+    onclick="nextRegistration(3)">
+    Continue
+  </button>
+
+</div>
+
+</div>
+
+<!-- STEP 4 -->
+<div class="register-page" id="registerPage4">
+
+<h3 style="margin-bottom:20px;">
+  Bank Details
+</h3>
+
+<div class="form-grid">
+
+  <div class="form-group">
+    <label>
+      Bank Name <span class="required">*</span>
+    </label>
+    <input id="regBankName" required>
+  </div>
+
+  <div class="form-group">
+    <label>
+      Account Title <span class="required">*</span>
+    </label>
+    <input id="regBankTitle" required>
+  </div>
+
+  <div class="form-group">
+    <label>
+      IBAN <span class="required">*</span>
+    </label>
+
+    <input
+      id="regBankIBAN"
+      placeholder="PK00XXXX0000000000000000"
+      required>
+
+  </div>
+
+  <div class="form-group">
+    <label>
+      Account Number <span class="required">*</span>
+    </label>
+    <input id="regBankAccount" required>
+  </div>
+
+  <div class="form-group">
+    <label>
+      Payment Method <span class="required">*</span>
+    </label>
+
+    <select id="regBankMethod" required>
+
+      <option value="">
+        Select Payment Method
+      </option>
+
+      <option value="Bank Transfer">
+        Bank Transfer
+      </option>
+
+      <option value="JazzCash">
+        JazzCash
+      </option>
+
+      <option value="EasyPaisa">
+        EasyPaisa
+      </option>
+
+    </select>
+
+  </div>
+
+</div>
+
+<div class="register-actions">
+
+  <button
+    class="btn btn-white"
+    type="button"
+    onclick="previousRegistration(4)">
+    Back
+  </button>
+
+  <button
+    class="btn btn-yellow"
+    type="button"
+    onclick="nextRegistration(4)">
+    Continue
+  </button>
+
+</div>
+
+</div>
+
+<!-- STEP 5 -->
+<div class="register-page" id="registerPage5">
+
+<h3 style="margin-bottom:20px;">
+  Final Confirmation
+</h3>
+
+<div class="review-box">
+
+  <strong>
+    Please confirm your information
+  </strong>
+
+  <p>
+    All required information must be correct before
+    creating your Spotly vendor account.
+  </p>
+
+</div>
+
+<div style="margin-top:20px;">
+
+<label
+  style="display:flex;gap:9px;align-items:flex-start;font-size:13px;">
+
+  <input
+    type="checkbox"
+    id="regConsent"
+    required>
+
+  <span>
+    I confirm that the information provided by me is correct,
+    my live location has been captured from my device,
+    and I agree to Spotly vendor terms.
+  </span>
+
+</label>
+
+</div>
+
+<div class="register-actions">
+
+  <button
+    class="btn btn-white"
+    type="button"
+    onclick="previousRegistration(5)">
+    Back
+  </button>
+
+  <button
+    class="btn btn-yellow"
+    type="button"
+    onclick="createVendorAccount()">
+    Create Vendor Account
+  </button>
+
+</div>
+
+</div>
+
+</div>
+</div>
 
 <div class="toast" id="toast"></div>
-
 
 <script>
 
@@ -3580,28 +2663,25 @@ if(!data){
     support:[],
 
     notifications:[]
+
   };
 
   saveData();
-
 }
 
-
 function saveData(){
-
   localStorage.setItem(
     STORAGE_KEY,
     JSON.stringify(data)
   );
-
 }
-
 
 function toast(message){
 
   const t=document.getElementById("toast");
 
   t.textContent=message;
+
   t.classList.add("show");
 
   setTimeout(()=>{
@@ -3609,7 +2689,6 @@ function toast(message){
   },2600);
 
 }
-
 
 /* =========================================================
    SELECT OPTIONS
@@ -3636,7 +2715,6 @@ function fillSelect(id,items,placeholder){
   });
 
 }
-
 
 function loadAllSelects(){
 
@@ -3676,7 +2754,6 @@ function loadAllSelects(){
     "Select Block"
   );
 
-
   fillSelect(
     "storeCategory",
     data.categories,
@@ -3715,7 +2792,6 @@ function loadAllSelects(){
 
 }
 
-
 /* =========================================================
    ADD NEW MASTER OPTIONS
 ========================================================= */
@@ -3735,6 +2811,7 @@ function addItem(arrayName,label,selectId){
     data[arrayName].push(clean);
 
     saveData();
+
     loadAllSelects();
 
   }
@@ -3745,66 +2822,160 @@ function addItem(arrayName,label,selectId){
 
 }
 
-
-/* Registration */
-
 function addRegistrationCategory(){
-  addItem("categories","category","regCategory");
+  addItem(
+    "categories",
+    "category",
+    "regCategory"
+  );
 }
 
 function addRegistrationArea(){
-  addItem("areas","area","regArea");
+  addItem(
+    "areas",
+    "area",
+    "regArea"
+  );
 }
 
 function addRegistrationPhase(){
-  addItem("phases","phase","regPhase");
+  addItem(
+    "phases",
+    "phase",
+    "regPhase"
+  );
 }
 
 function addRegistrationPrecinct(){
-  addItem("precinct","precinct","regPrecinct");
+  addItem(
+    "precincts",
+    "precinct",
+    "regPrecinct"
+  );
 }
 
 function addRegistrationSector(){
-  addItem("sectors","sector","regSector");
+  addItem(
+    "sectors",
+    "sector",
+    "regSector"
+  );
 }
 
 function addRegistrationBlock(){
-  addItem("blocks","block","regBlock");
+  addItem(
+    "blocks",
+    "block",
+    "regBlock"
+  );
 }
 
-
-/* Portal */
-
 function addCategory(){
-  addItem("categories","category","storeCategory");
+  addItem(
+    "categories",
+    "category",
+    "storeCategory"
+  );
 }
 
 function addArea(){
-  addItem("areas","area","storeArea");
+  addItem(
+    "areas",
+    "area",
+    "storeArea"
+  );
 }
 
 function addPhase(){
-  addItem("phases","phase","storePhase");
+  addItem(
+    "phases",
+    "phase",
+    "storePhase"
+  );
 }
 
 function addPrecinct(){
-  addItem("precincts","precinct","storePrecinct");
+  addItem(
+    "precincts",
+    "precinct",
+    "storePrecinct"
+  );
 }
 
 function addSector(){
-  addItem("sectors","sector","storeSector");
+  addItem(
+    "sectors",
+    "sector",
+    "storeSector"
+  );
 }
 
 function addBlock(){
-  addItem("blocks","block","storeBlock");
+  addItem(
+    "blocks",
+    "block",
+    "storeBlock"
+  );
 }
 
+/* =========================================================
+   ONLY ONE HIERARCHY LEVEL
+========================================================= */
+
+function handleHierarchyChoice(sourceId){
+
+  const registrationIds=[
+    "regPhase",
+    "regPrecinct",
+    "regSector",
+    "regBlock"
+  ];
+
+  const storeIds=[
+    "storePhase",
+    "storePrecinct",
+    "storeSector",
+    "storeBlock"
+  ];
+
+  let ids=[];
+
+  if(sourceId.startsWith("reg")){
+    ids=registrationIds;
+  }else{
+    ids=storeIds;
+  }
+
+  const source=document.getElementById(sourceId);
+
+  if(!source || !source.value){
+    return;
+  }
+
+  ids.forEach(id=>{
+
+    if(id!==sourceId){
+
+      const element=
+        document.getElementById(id);
+
+      if(element){
+        element.value="";
+      }
+
+    }
+
+  });
+
+}
 
 /* =========================================================
    REGISTRATION
 ========================================================= */
 
 let registrationStep=1;
+
+let registrationLoadSlots=[];
 
 function openRegistration(){
 
@@ -3814,29 +2985,36 @@ function openRegistration(){
 
   loadAllSelects();
 
-  document.getElementById("registrationModal")
+  registrationLoadSlots=[];
+
+  renderRegistrationLoadSlots();
+
+  document
+    .getElementById("registrationModal")
     .classList.add("active");
 
 }
-
 
 function showRegistrationStep(step){
 
   registrationStep=step;
 
-  document.querySelectorAll(".register-page")
+  document
+    .querySelectorAll(".register-page")
     .forEach(page=>{
       page.classList.remove("active");
     });
 
-  document.getElementById(
-    "registerPage"+step
-  ).classList.add("active");
-
+  document
+    .getElementById(
+      "registerPage"+step
+    )
+    .classList.add("active");
 
   for(let i=1;i<=5;i++){
 
-    document.getElementById("progress"+i)
+    document
+      .getElementById("progress"+i)
       .classList.toggle(
         "active",
         i<=step
@@ -3846,14 +3024,16 @@ function showRegistrationStep(step){
 
 }
 
-
 function closeModal(id){
 
-  document.getElementById(id)
-    .classList.remove("active");
+  const modal=
+    document.getElementById(id);
+
+  if(modal){
+    modal.classList.remove("active");
+  }
 
 }
-
 
 function nextRegistration(step){
 
@@ -3865,26 +3045,28 @@ function nextRegistration(step){
 
 }
 
-
 function previousRegistration(step){
 
   showRegistrationStep(step-1);
 
 }
 
-
 /* =========================================================
-   VALIDATE REGISTRATION
+   VALIDATION
 ========================================================= */
 
 function requiredValue(id){
 
-  const element=document.getElementById(id);
+  const element=
+    document.getElementById(id);
 
-  return element && element.value.trim();
+  if(!element)return"";
+
+  return String(
+    element.value||""
+  ).trim();
 
 }
-
 
 function validateRegistrationStep(step){
 
@@ -3903,16 +3085,19 @@ function validateRegistrationStep(step){
 
       if(!requiredValue(id)){
 
-        toast("Please complete all required fields");
+        toast(
+          "Please complete all required fields"
+        );
 
-        document.getElementById(id).focus();
+        document
+          .getElementById(id)
+          .focus();
 
         return false;
 
       }
 
     }
-
 
     if(
       document.getElementById("regPassword").value !==
@@ -3927,16 +3112,11 @@ function validateRegistrationStep(step){
 
   }
 
-
   if(step===2){
 
     const values=[
       "regCategory",
       "regArea",
-      "regPhase",
-      "regPrecinct",
-      "regSector",
-      "regBlock",
       "regAddress"
     ];
 
@@ -3944,9 +3124,13 @@ function validateRegistrationStep(step){
 
       if(!requiredValue(id)){
 
-        toast("Please complete all location fields");
+        toast(
+          "Please complete all required location fields"
+        );
 
-        document.getElementById(id).focus();
+        document
+          .getElementById(id)
+          .focus();
 
         return false;
 
@@ -3954,17 +3138,39 @@ function validateRegistrationStep(step){
 
     }
 
+    const hierarchyIds=[
+      "regPhase",
+      "regPrecinct",
+      "regSector",
+      "regBlock"
+    ];
+
+    const selectedHierarchy=
+      hierarchyIds.filter(
+        id=>requiredValue(id)
+      );
+
+    if(selectedHierarchy.length!==1){
+
+      toast(
+        "Please select only one: Phase, Precinct, Sector or Block"
+      );
+
+      return false;
+
+    }
 
     if(!data.location){
 
-      toast("Please capture your live location");
+      toast(
+        "Please capture your live location"
+      );
 
       return false;
 
     }
 
   }
-
 
   if(step===3){
 
@@ -3984,9 +3190,13 @@ function validateRegistrationStep(step){
 
       if(!requiredValue(id)){
 
-        toast("Please complete all shop and LCD fields");
+        toast(
+          "Please complete all shop and LCD fields"
+        );
 
-        document.getElementById(id).focus();
+        document
+          .getElementById(id)
+          .focus();
 
         return false;
 
@@ -3994,11 +3204,18 @@ function validateRegistrationStep(step){
 
     }
 
-
     if(
       document.getElementById("regLCDStatus").value===
       "Purchase From Spotly"
     ){
+
+      if(!requiredValue("regPurchaseMethod")){
+
+        toast("Select purchase method");
+
+        return false;
+
+      }
 
       if(!requiredValue("regLCDPrice")){
 
@@ -4011,7 +3228,6 @@ function validateRegistrationStep(step){
     }
 
   }
-
 
   if(step===4){
 
@@ -4027,9 +3243,13 @@ function validateRegistrationStep(step){
 
       if(!requiredValue(id)){
 
-        toast("Please complete all bank details");
+        toast(
+          "Please complete all bank details"
+        );
 
-        document.getElementById(id).focus();
+        document
+          .getElementById(id)
+          .focus();
 
         return false;
 
@@ -4039,31 +3259,32 @@ function validateRegistrationStep(step){
 
   }
 
-
   return true;
 
 }
 
-
 /* =========================================================
-   REGISTRATION GPS
+   GPS
 ========================================================= */
 
 function captureRegistrationLocation(){
 
   if(!navigator.geolocation){
 
-    toast("Geolocation is not supported");
+    toast(
+      "Geolocation is not supported"
+    );
 
     return;
 
   }
 
-
-  document.getElementById(
-    "registrationCoordinates"
-  ).textContent="Capturing location...";
-
+  document
+    .getElementById(
+      "registrationCoordinates"
+    )
+    .textContent=
+      "Capturing location...";
 
   navigator.geolocation.getCurrentPosition(
 
@@ -4071,30 +3292,35 @@ function captureRegistrationLocation(){
 
       data.location={
 
-        latitude:position.coords.latitude,
+        latitude:
+          position.coords.latitude,
 
-        longitude:position.coords.longitude,
+        longitude:
+          position.coords.longitude,
 
-        accuracy:position.coords.accuracy,
+        accuracy:
+          position.coords.accuracy,
 
-        capturedAt:new Date().toISOString()
+        capturedAt:
+          new Date().toISOString()
 
       };
 
       saveData();
 
+      document
+        .getElementById(
+          "registrationCoordinates"
+        )
+        .textContent=
+          "Captured: "+
+          data.location.latitude.toFixed(6)+
+          ", "+
+          data.location.longitude.toFixed(6);
 
-      document.getElementById(
-        "registrationCoordinates"
-      ).textContent=
-
-        "Captured: "+
-        data.location.latitude.toFixed(6)+
-        ", "+
-        data.location.longitude.toFixed(6);
-
-
-      toast("Live location captured");
+      toast(
+        "Live location captured"
+      );
 
     },
 
@@ -4104,10 +3330,12 @@ function captureRegistrationLocation(){
         "Location permission is required"
       );
 
-      document.getElementById(
-        "registrationCoordinates"
-      ).textContent=
-        "Location permission denied";
+      document
+        .getElementById(
+          "registrationCoordinates"
+        )
+        .textContent=
+          "Location permission denied";
 
     },
 
@@ -4121,7 +3349,6 @@ function captureRegistrationLocation(){
 
 }
 
-
 /* =========================================================
    LCD INSTALLMENT
 ========================================================= */
@@ -4129,70 +3356,85 @@ function captureRegistrationLocation(){
 function registrationLCDChange(){
 
   const status=
-    document.getElementById("regLCDStatus").value;
+    document.getElementById(
+      "regLCDStatus"
+    ).value;
 
-  document.getElementById(
-    "registrationPurchaseBox"
-  ).classList.toggle(
-    "hidden",
-    status!=="Purchase From Spotly"
-  );
+  document
+    .getElementById(
+      "registrationPurchaseBox"
+    )
+    .classList.toggle(
+      "hidden",
+      status!=="Purchase From Spotly"
+    );
 
   registrationInstallment();
 
 }
 
-
 function registrationInstallment(){
 
   const method=
-    document.getElementById("regPurchaseMethod").value;
+    document.getElementById(
+      "regPurchaseMethod"
+    ).value;
 
   const price=
     Number(
-      document.getElementById("regLCDPrice").value
+      document.getElementById(
+        "regLCDPrice"
+      ).value
     )||0;
 
   const months=
     Number(
-      document.getElementById("regMonths").value
+      document.getElementById(
+        "regMonths"
+      ).value
     )||1;
 
-
   const monthsBox=
-    document.getElementById("regMonthsBox");
-
+    document.getElementById(
+      "regMonthsBox"
+    );
 
   if(method==="Installment"){
 
-    monthsBox.classList.remove("hidden");
+    monthsBox.classList.remove(
+      "hidden"
+    );
 
-    document.getElementById(
-      "regMonthlyInstallment"
-    ).value=
-      "Rs. "+
-      Math.ceil(price/months).toLocaleString();
+    document
+      .getElementById(
+        "regMonthlyInstallment"
+      )
+      .value=
+        "Rs. "+
+        Math.ceil(
+          price/months
+        ).toLocaleString();
 
   }else{
 
-    monthsBox.classList.add("hidden");
+    monthsBox.classList.add(
+      "hidden"
+    );
 
-    document.getElementById(
-      "regMonthlyInstallment"
-    ).value=
-      "Rs. 0";
+    document
+      .getElementById(
+        "regMonthlyInstallment"
+      )
+      .value=
+        "Rs. 0";
 
   }
 
 }
 
-
 /* =========================================================
    REGISTRATION LOAD SHEDDING
 ========================================================= */
-
-let registrationLoadSlots=[];
-
 
 function addRegistrationLoadSlot(){
 
@@ -4205,15 +3447,16 @@ function addRegistrationLoadSlot(){
 
 }
 
-
 function removeRegistrationLoadSlot(index){
 
-  registrationLoadSlots.splice(index,1);
+  registrationLoadSlots.splice(
+    index,
+    1
+  );
 
   renderRegistrationLoadSlots();
 
 }
-
 
 function renderRegistrationLoadSlots(){
 
@@ -4222,240 +3465,829 @@ function renderRegistrationLoadSlots(){
       "registrationLoadSlots"
     );
 
+  if(!container)return;
+
   container.innerHTML="";
 
+  registrationLoadSlots.forEach(
+    (slot,index)=>{
 
-  registrationLoadSlots.forEach((slot,index)=>{
+      const row=
+        document.createElement("div");
 
-    const row=document.createElement("div");
+      row.className="load-row";
 
-    row.className="load-row";
+      row.innerHTML=`
 
-    row.innerHTML=`
+        <input
+          type="time"
+          value="${slot.start}"
+          onchange="
+            registrationLoadSlots[${index}].start=this.value
+          ">
 
-      <input
-        type="time"
-        value="${slot.start}"
-        onchange="
-          registrationLoadSlots[${index}].start=this.value
-        "
-      >
+        <input
+          type="time"
+          value="${slot.end}"
+          onchange="
+            registrationLoadSlots[${index}].end=this.value
+          ">
 
-      <input
-        type="time"
-        value="${slot.end}"
-        onchange="
-          registrationLoadSlots[${index}].end=this.value
-        "
-      >
+        <button
+          class="btn btn-danger"
+          type="button"
+          onclick="
+            removeRegistrationLoadSlot(${index})
+          ">
+          Remove
+        </button>
 
-      <button
-        class="btn btn-danger"
-        onclick="removeRegistrationLoadSlot(${index})">
-        Remove
-      </button>
+      `;
 
-    `;
+      container.appendChild(row);
 
-    container.appendChild(row);
-
-  });
+    }
+  );
 
 }
 
+/* =========================================================
+   SUPABASE AUTH + VENDOR
+========================================================= */
+
+let currentUser=null;
+let currentVendor=null;
+
+async function getCurrentUser(){
+
+  const {
+    data:sessionData
+  }=await supabaseClient.auth.getSession();
+
+  currentUser=
+    sessionData &&
+    sessionData.session
+      ? sessionData.session.user
+      : null;
+
+  return currentUser;
+
+}
+
+async function loadVendorFromSupabase(){
+
+  const user=
+    await getCurrentUser();
+
+  if(!user){
+    return null;
+  }
+
+  const {
+    data:vendor,
+    error
+  }=
+    await supabaseClient
+      .from("vendors")
+      .select("*")
+      .eq("user_id",user.id)
+      .maybeSingle();
+
+  if(error){
+
+    console.error(
+      "Vendor load error:",
+      error
+    );
+
+    toast(
+      "Unable to load vendor data"
+    );
+
+    return null;
+
+  }
+
+  if(!vendor){
+    return null;
+  }
+
+  currentVendor=vendor;
+
+  data.registered=true;
+
+  data.vendor={
+    shopName:vendor.vendor_name||"",
+    owner:vendor.owner_name||"",
+    phone:vendor.phone||"",
+    email:vendor.email||"",
+    category:vendor.category||"",
+    area:vendor.area||"",
+    phase:vendor.phase||"",
+    precinct:vendor.precinct||"",
+    sector:vendor.sector||"",
+    block:vendor.block||"",
+    address:vendor.address||"",
+    footfall:vendor.footfall||0,
+    shopSize:vendor.shop_size||"",
+    fridge:
+      vendor.ice_cream_fridge===true
+        ?"Yes"
+        :"No",
+    lcdStatus:vendor.lcd_status||"",
+    lcdSize:"45 inch",
+    internet:vendor.internet_status||"",
+    subMeter:"",
+    opening:
+      vendor.opening_time
+        ?String(vendor.opening_time).slice(0,5)
+        :"",
+    closing:
+      vendor.closing_time
+        ?String(vendor.closing_time).slice(0,5)
+        :"",
+    purchaseMethod:"",
+    lcdPrice:
+      vendor.lcd_total_price||60000,
+    installmentMonths:
+      vendor.lcd_installment_months||0,
+    monthlyInstallment:
+      vendor.lcd_monthly_installment||0
+  };
+
+  data.bank={
+    bankName:vendor.bank_name||"",
+    accountTitle:vendor.account_title||"",
+    iban:vendor.iban||"",
+    accountNumber:vendor.account_number||"",
+    method:vendor.payment_method||""
+  };
+
+  data.approved=
+    String(vendor.status||"pending")
+      .toLowerCase()==="approved";
+
+  data.online=
+    vendor.online_status===true;
+
+  if(
+    vendor.latitude!==null &&
+    vendor.longitude!==null
+  ){
+
+    data.location={
+      latitude:Number(vendor.latitude),
+      longitude:Number(vendor.longitude),
+      accuracy:0,
+      capturedAt:
+        vendor.updated_at||
+        new Date().toISOString()
+    };
+
+  }
+
+  saveData();
+
+  return vendor;
+
+}
 
 /* =========================================================
    CREATE ACCOUNT
 ========================================================= */
 
-function createVendorAccount(){
+async function createVendorAccount(){
 
   if(!document.getElementById("regConsent").checked){
 
-    toast("Please accept the confirmation");
+    toast(
+      "Please accept the confirmation"
+    );
 
     return;
 
   }
 
+  if(!validateRegistrationStep(2)){
 
-  const vendor={
+    showRegistrationStep(2);
 
-    shopName:document.getElementById("regShop").value.trim(),
+    return;
 
-    owner:document.getElementById("regOwner").value.trim(),
+  }
 
-    phone:document.getElementById("regPhone").value.trim(),
+  if(!validateRegistrationStep(3)){
 
-    email:document.getElementById("regEmail").value.trim(),
+    showRegistrationStep(3);
 
-    password:document.getElementById("regPassword").value,
+    return;
 
-    category:document.getElementById("regCategory").value,
+  }
 
-    area:document.getElementById("regArea").value,
+  if(!validateRegistrationStep(4)){
 
-    phase:document.getElementById("regPhase").value,
+    showRegistrationStep(4);
 
-    precinct:document.getElementById("regPrecinct").value,
+    return;
 
-    sector:document.getElementById("regSector").value,
+  }
 
-    block:document.getElementById("regBlock").value,
+  const email=
+    document
+      .getElementById("regEmail")
+      .value
+      .trim();
 
-    address:document.getElementById("regAddress").value.trim(),
+  const password=
+    document
+      .getElementById("regPassword")
+      .value;
 
-    footfall:document.getElementById("regFootfall").value,
+  const confirmPassword=
+    document
+      .getElementById("regPasswordConfirm")
+      .value;
 
-    shopSize:document.getElementById("regShopSize").value,
+  if(password!==confirmPassword){
 
-    fridge:document.getElementById("regFridge").value,
+    toast(
+      "Passwords do not match"
+    );
 
-    lcdStatus:document.getElementById("regLCDStatus").value,
+    showRegistrationStep(1);
 
-    lcdSize:document.getElementById("regLCDSize").value,
+    return;
 
-    internet:document.getElementById("regInternet").value,
+  }
 
-    subMeter:document.getElementById("regSubMeter").value,
+  const hierarchy={
+    phase:
+      document.getElementById(
+        "regPhase"
+      ).value||null,
 
-    opening:document.getElementById("regOpening").value,
+    precinct:
+      document.getElementById(
+        "regPrecinct"
+      ).value||null,
 
-    closing:document.getElementById("regClosing").value,
+    sector:
+      document.getElementById(
+        "regSector"
+      ).value||null,
 
-    purchaseMethod:
-      document.getElementById("regPurchaseMethod").value,
-
-    lcdPrice:
-      document.getElementById("regLCDPrice").value,
-
-    installmentMonths:
-      document.getElementById("regMonths").value,
-
-    monthlyInstallment:
-      document.getElementById("regMonthlyInstallment").value
-
+    block:
+      document.getElementById(
+        "regBlock"
+      ).value||null
   };
 
+  try{
 
-  data.vendor=vendor;
+    toast(
+      "Creating your Spotly account..."
+    );
 
-  data.bank={
+    const {
+      data:authData,
+      error:authError
+    }=
+      await supabaseClient.auth.signUp({
 
-    bankName:document.getElementById("regBankName").value.trim(),
+        email:email,
 
-    accountTitle:document.getElementById("regBankTitle").value.trim(),
+        password:password,
 
-    iban:document.getElementById("regBankIBAN").value.trim(),
+        options:{
+          data:{
+            vendor_name:
+              document.getElementById(
+                "regShop"
+              ).value.trim(),
 
-    accountNumber:document.getElementById("regBankAccount").value.trim(),
+            owner_name:
+              document.getElementById(
+                "regOwner"
+              ).value.trim(),
 
-    method:document.getElementById("regBankMethod").value
+            phone:
+              document.getElementById(
+                "regPhone"
+              ).value.trim()
+          }
+        }
 
-  };
+      });
 
+    if(authError){
 
-  data.loadShedding=
-    registrationLoadSlots;
+      console.error(
+        "Signup error:",
+        authError
+      );
 
+      toast(
+        authError.message||
+        "Unable to create account"
+      );
 
-  data.registered=true;
+      return;
 
-  data.approved=false;
-
-  data.online=false;
-
-
-  data.notifications=[
-
-    {
-      title:"Welcome to Spotly",
-      text:"Your vendor account has been created."
-    },
-
-    {
-      title:"Store Under Review",
-      text:"Your store is currently under review."
     }
 
-  ];
+    if(
+      !authData||
+      !authData.user
+    ){
 
+      toast(
+        "Account creation failed"
+      );
 
-  saveData();
+      return;
 
-  closeModal("registrationModal");
+    }
 
-  toast("Vendor account created successfully");
+    if(!authData.session){
 
+      toast(
+        "Please verify your email first, then login."
+      );
 
-  setTimeout(()=>{
+      closeModal(
+        "registrationModal"
+      );
 
-    openVendorPortal();
+      return;
 
-  },500);
+    }
+
+    currentUser=
+      authData.session.user;
+
+    const vendorPayload={
+
+      user_id:
+        currentUser.id,
+
+      vendor_name:
+        document.getElementById(
+          "regShop"
+        ).value.trim(),
+
+      owner_name:
+        document.getElementById(
+          "regOwner"
+        ).value.trim(),
+
+      phone:
+        document.getElementById(
+          "regPhone"
+        ).value.trim(),
+
+      email:
+        email,
+
+      category:
+        document.getElementById(
+          "regCategory"
+        ).value,
+
+      area:
+        document.getElementById(
+          "regArea"
+        ).value,
+
+      phase:
+        hierarchy.phase,
+
+      precinct:
+        hierarchy.precinct,
+
+      sector:
+        hierarchy.sector,
+
+      block:
+        hierarchy.block,
+
+      address:
+        document.getElementById(
+          "regAddress"
+        ).value.trim(),
+
+      latitude:
+        data.location
+          ?data.location.latitude
+          :null,
+
+      longitude:
+        data.location
+          ?data.location.longitude
+          :null,
+
+      footfall:
+        Number(
+          document.getElementById(
+            "regFootfall"
+          ).value
+        )||0,
+
+      shop_size:
+        document.getElementById(
+          "regShopSize"
+        ).value,
+
+      lcd_status:
+        document.getElementById(
+          "regLCDStatus"
+        ).value,
+
+      lcd_total_price:
+        Number(
+          document.getElementById(
+            "regLCDPrice"
+          ).value
+        )||60000,
+
+      lcd_down_payment:
+        document.getElementById(
+          "regPurchaseMethod"
+        ).value==="Cash"
+          ?Number(
+            document.getElementById(
+              "regLCDPrice"
+            ).value
+          )||0
+          :0,
+
+      lcd_monthly_installment:
+        Number(
+          String(
+            document.getElementById(
+              "regMonthlyInstallment"
+            ).value
+          ).replace(
+            /[^0-9.]/g,
+            ""
+          )
+        )||0,
+
+      lcd_installment_months:
+        Number(
+          document.getElementById(
+            "regMonths"
+          ).value
+        )||0,
+
+      internet_status:
+        document.getElementById(
+          "regInternet"
+        ).value,
+
+      internet_provider:null,
+
+      internet_company_required:
+        document.getElementById(
+          "regInternet"
+        ).value===
+        "Spotly Internet Required",
+
+      opening_time:
+        document.getElementById(
+          "regOpening"
+        ).value,
+
+      closing_time:
+        document.getElementById(
+          "regClosing"
+        ).value,
+
+      ice_cream_fridge:
+        document.getElementById(
+          "regFridge"
+        ).value==="Yes",
+
+      bank_name:
+        document.getElementById(
+          "regBankName"
+        ).value.trim(),
+
+      account_title:
+        document.getElementById(
+          "regBankTitle"
+        ).value.trim(),
+
+      account_number:
+        document.getElementById(
+          "regBankAccount"
+        ).value.trim(),
+
+      iban:
+        document.getElementById(
+          "regBankIBAN"
+        ).value.trim(),
+
+      payment_method:
+        document.getElementById(
+          "regBankMethod"
+        ).value,
+
+      status:"pending",
+
+      online_status:false
+
+    };
+
+    const {
+      data:insertedVendor,
+      error:vendorError
+    }=
+      await supabaseClient
+        .from("vendors")
+        .insert(
+          vendorPayload
+        )
+        .select()
+        .single();
+
+    if(vendorError){
+
+      console.error(
+        "Vendor insert error:",
+        vendorError
+      );
+
+      toast(
+        vendorError.message||
+        "Vendor profile could not be saved"
+      );
+
+      return;
+
+    }
+
+    currentVendor=
+      insertedVendor;
+
+    data.registered=true;
+    data.approved=false;
+    data.online=false;
+
+    data.vendor={
+      shopName:
+        vendorPayload.vendor_name,
+
+      owner:
+        vendorPayload.owner_name,
+
+      phone:
+        vendorPayload.phone,
+
+      email:
+        vendorPayload.email,
+
+      category:
+        vendorPayload.category,
+
+      area:
+        vendorPayload.area,
+
+      phase:
+        vendorPayload.phase||"",
+
+      precinct:
+        vendorPayload.precinct||"",
+
+      sector:
+        vendorPayload.sector||"",
+
+      block:
+        vendorPayload.block||"",
+
+      address:
+        vendorPayload.address,
+
+      footfall:
+        vendorPayload.footfall,
+
+      shopSize:
+        vendorPayload.shop_size,
+
+      fridge:
+        document.getElementById(
+          "regFridge"
+        ).value,
+
+      lcdStatus:
+        vendorPayload.lcd_status,
+
+      lcdSize:
+        document.getElementById(
+          "regLCDSize"
+        ).value,
+
+      internet:
+        vendorPayload.internet_status,
+
+      subMeter:
+        document.getElementById(
+          "regSubMeter"
+        ).value,
+
+      opening:
+        vendorPayload.opening_time,
+
+      closing:
+        vendorPayload.closing_time,
+
+      purchaseMethod:
+        document.getElementById(
+          "regPurchaseMethod"
+        ).value,
+
+      lcdPrice:
+        vendorPayload.lcd_total_price,
+
+      installmentMonths:
+        vendorPayload.lcd_installment_months,
+
+      monthlyInstallment:
+        vendorPayload.lcd_monthly_installment
+    };
+
+    data.bank={
+      bankName:
+        vendorPayload.bank_name,
+
+      accountTitle:
+        vendorPayload.account_title,
+
+      iban:
+        vendorPayload.iban,
+
+      accountNumber:
+        vendorPayload.account_number,
+
+      method:
+        vendorPayload.payment_method
+    };
+
+    saveData();
+
+    closeModal(
+      "registrationModal"
+    );
+
+    toast(
+      "Vendor account created successfully"
+    );
+
+    setTimeout(
+      ()=>{
+        openVendorPortal();
+      },
+      500
+    );
+
+  }catch(error){
+
+    console.error(
+      "Registration error:",
+      error
+    );
+
+    toast(
+      "Something went wrong. Please try again."
+    );
+
+  }
 
 }
-
 
 /* =========================================================
    LOGIN
 ========================================================= */
 
-function openLogin(){
-
-  document.getElementById("loginModal")
-    .classList.add("active");
-
-}
-
-
-function loginVendor(){
-
-  if(!data.registered){
-
-    toast("Please register as a vendor first");
-
-    return;
-
-  }
-
+async function loginVendor(){
 
   const identity=
-    document.getElementById("loginIdentity")
-      .value.trim();
+    document
+      .getElementById(
+        "loginIdentity"
+      )
+      .value
+      .trim();
 
   const password=
-    document.getElementById("loginPassword")
+    document
+      .getElementById(
+        "loginPassword"
+      )
       .value;
 
+  if(!identity || !password){
 
-  if(
-    identity!==data.vendor.email &&
-    identity!==data.vendor.phone
-  ){
-
-    toast("Email or phone is incorrect");
+    toast(
+      "Please enter login details"
+    );
 
     return;
 
   }
 
+  try{
 
-  if(password!==data.vendor.password){
+    let email=identity;
 
-    toast("Password is incorrect");
+    if(
+      !identity.includes("@")
+    ){
 
-    return;
+      const {
+        data:phoneVendor,
+        error:phoneError
+      }=
+        await supabaseClient
+          .from("vendors")
+          .select("email")
+          .eq("phone",identity)
+          .maybeSingle();
+
+      if(phoneError){
+
+        console.error(
+          phoneError
+        );
+
+        toast(
+          "Unable to find vendor"
+        );
+
+        return;
+
+      }
+
+      if(!phoneVendor){
+
+        toast(
+          "Email or phone is incorrect"
+        );
+
+        return;
+
+      }
+
+      email=phoneVendor.email;
+
+    }
+
+    const {
+      data:authData,
+      error:authError
+    }=
+      await supabaseClient.auth.signInWithPassword({
+
+        email:email,
+
+        password:password
+
+      });
+
+    if(authError){
+
+      toast(
+        authError.message||
+        "Login failed"
+      );
+
+      return;
+
+    }
+
+    currentUser=
+      authData.user;
+
+    await loadVendorFromSupabase();
+
+    closeModal(
+      "loginModal"
+    );
+
+    openVendorPortal();
+
+  }catch(error){
+
+    console.error(
+      error
+    );
+
+    toast(
+      "Login failed"
+    );
 
   }
-
-
-  closeModal("loginModal");
-
-  openVendorPortal();
 
 }
-
 
 /* =========================================================
    OPEN PORTAL
@@ -4463,42 +4295,72 @@ function loginVendor(){
 
 function openVendorPortal(){
 
-  document.getElementById("landingPage")
+  document
+    .getElementById(
+      "landingPage"
+    )
     .style.display="none";
 
-  document.getElementById("vendorPortal")
+  document
+    .getElementById(
+      "vendorPortal"
+    )
     .classList.add("active");
 
-  document.getElementById("publicNav")
+  document
+    .getElementById(
+      "publicNav"
+    )
     .classList.add("hidden");
 
-  document.getElementById("portalNav")
+  document
+    .getElementById(
+      "portalNav"
+    )
     .classList.remove("hidden");
-
 
   loadPortalData();
 
 }
 
+/* =========================================================
+   LOGOUT
+========================================================= */
 
-function logout(){
+async function logout(){
 
-  document.getElementById("vendorPortal")
+  await supabaseClient.auth.signOut();
+
+  currentUser=null;
+  currentVendor=null;
+
+  document
+    .getElementById(
+      "vendorPortal"
+    )
     .classList.remove("active");
 
-  document.getElementById("landingPage")
+  document
+    .getElementById(
+      "landingPage"
+    )
     .style.display="block";
 
-  document.getElementById("publicNav")
+  document
+    .getElementById(
+      "publicNav"
+    )
     .classList.remove("hidden");
 
-  document.getElementById("portalNav")
+  document
+    .getElementById(
+      "portalNav"
+    )
     .classList.add("hidden");
 
   toast("Logged out");
 
 }
-
 
 /* =========================================================
    PORTAL NAVIGATION
@@ -4518,81 +4380,85 @@ function showPage(page,button){
     "support"
   ];
 
-
   pages.forEach(p=>{
 
-    document.getElementById(
-      "page-"+p
-    ).classList.add("hidden");
+    const element=
+      document.getElementById(
+        "page-"+p
+      );
+
+    if(element){
+      element.classList.add("hidden");
+    }
 
   });
 
-
-  document.getElementById(
-    "page-"+page
-  ).classList.remove("hidden");
-
+  document
+    .getElementById(
+      "page-"+page
+    )
+    .classList.remove("hidden");
 
   const titles={
 
     dashboard:"Dashboard",
-
     profile:"My Store",
-
     ads:"Today's Ads",
-
     plays:"Ad History",
-
     energy:"Electricity",
-
     earnings:"Earnings",
-
     withdrawals:"Withdrawals",
-
     bank:"Bank Details",
-
     support:"Support"
 
   };
 
+  document
+    .getElementById(
+      "portalTitle"
+    )
+    .textContent=
+      titles[page];
 
-  document.getElementById(
-    "portalTitle"
-  ).textContent=titles[page];
-
-
-  document.querySelectorAll(".menu button")
+  document
+    .querySelectorAll(
+      ".menu button"
+    )
     .forEach(btn=>{
       btn.classList.remove("active");
     });
 
-
   if(button){
-
     button.classList.add("active");
-
   }
 
-
-  document.getElementById("sidebar")
+  document
+    .getElementById(
+      "sidebar"
+    )
     .classList.remove("open");
 
 }
 
-
 function toggleSidebar(){
 
-  document.getElementById("sidebar")
-    .classList.toggle("open");
+  document
+    .getElementById(
+      "sidebar"
+    )
+    .classList.toggle(
+      "open"
+    );
 
 }
-
 
 /* =========================================================
    LOAD PORTAL
 ========================================================= */
 
-function loadPortalData(){
+async function loadPortalData(){
+
+  await loadVendorFromSupabase();
 
   loadAllSelects();
 
@@ -4616,7 +4482,6 @@ function loadPortalData(){
 
 }
 
-
 /* =========================================================
    FILL STORE
 ========================================================= */
@@ -4626,7 +4491,6 @@ function fillStoreForm(){
   const v=data.vendor;
 
   if(!v)return;
-
 
   const fields={
 
@@ -4672,60 +4536,78 @@ function fillStoreForm(){
 
   };
 
+  Object.entries(fields)
+    .forEach(
+      ([id,value])=>{
 
-  Object.entries(fields).forEach(([id,value])=>{
+        const el=
+          document.getElementById(id);
 
-    const el=document.getElementById(id);
+        if(
+          el &&
+          value!==undefined
+        ){
 
-    if(el && value!==undefined){
+          el.value=value;
 
-      el.value=value;
+        }
 
-    }
-
-  });
-
+      }
+    );
 
   changeLCDStatus();
 
-
   if(data.location){
 
-    document.getElementById(
-      "locationStatus"
-    ).textContent="Live location captured.";
+    document
+      .getElementById(
+        "locationStatus"
+      )
+      .textContent=
+        "Live location captured.";
 
-    document.getElementById(
-      "coordinates"
-    ).textContent=
-
-      data.location.latitude.toFixed(6)+
-      ", "+
-      data.location.longitude.toFixed(6);
+    document
+      .getElementById(
+        "coordinates"
+      )
+      .textContent=
+        data.location.latitude.toFixed(6)+
+        ", "+
+        data.location.longitude.toFixed(6);
 
   }
 
+  document
+    .getElementById(
+      "portalVendorName"
+    )
+    .textContent=
+      v.shopName||"Vendor";
+
+  document
+    .getElementById(
+      "portalAvatar"
+    )
+    .textContent=
+      (v.shopName||"V")
+        .charAt(0)
+        .toUpperCase();
+
 }
 
-
 /* =========================================================
-   SAVE STORE
+   SAVE STORE PROFILE
 ========================================================= */
 
-function saveStoreProfile(){
+async function saveStoreProfile(){
 
   const required=[
-
     "storeName",
     "storeOwner",
     "storePhone",
     "storeEmail",
     "storeCategory",
     "storeArea",
-    "storePhase",
-    "storePrecinct",
-    "storeSector",
-    "storeBlock",
     "storeAddress",
     "storeFootfall",
     "storeSize",
@@ -4736,17 +4618,23 @@ function saveStoreProfile(){
     "subMeter",
     "openingTime",
     "closingTime"
-
   ];
-
 
   for(const id of required){
 
-    if(!document.getElementById(id).value.trim()){
+    const el=
+      document.getElementById(id);
 
-      toast("Please complete all required fields");
+    if(
+      !el ||
+      !String(el.value||"").trim()
+    ){
 
-      document.getElementById(id).focus();
+      toast(
+        "Please complete all required fields"
+      );
+
+      if(el)el.focus();
 
       return;
 
@@ -4754,99 +4642,224 @@ function saveStoreProfile(){
 
   }
 
+  const hierarchyIds=[
+    "storePhase",
+    "storePrecinct",
+    "storeSector",
+    "storeBlock"
+  ];
 
-  if(!data.location){
+  const selectedHierarchy=
+    hierarchyIds.filter(
+      id=>
+        String(
+          document.getElementById(id).value||""
+        ).trim()
+    );
 
-    toast("Live location is required");
+  if(selectedHierarchy.length!==1){
+
+    toast(
+      "Please select only one: Phase, Precinct, Sector or Block"
+    );
 
     return;
 
   }
 
+  const user=
+    await getCurrentUser();
 
-  data.vendor.shopName=
-    document.getElementById("storeName").value.trim();
+  if(!user){
 
-  data.vendor.owner=
-    document.getElementById("storeOwner").value.trim();
+    toast(
+      "Please login again"
+    );
 
-  data.vendor.phone=
-    document.getElementById("storePhone").value.trim();
+    return;
 
-  data.vendor.email=
-    document.getElementById("storeEmail").value.trim();
+  }
 
-  data.vendor.category=
-    document.getElementById("storeCategory").value;
+  const payload={
 
-  data.vendor.area=
-    document.getElementById("storeArea").value;
+    vendor_name:
+      document.getElementById(
+        "storeName"
+      ).value.trim(),
 
-  data.vendor.phase=
-    document.getElementById("storePhase").value;
+    owner_name:
+      document.getElementById(
+        "storeOwner"
+      ).value.trim(),
 
-  data.vendor.precinct=
-    document.getElementById("storePrecinct").value;
+    phone:
+      document.getElementById(
+        "storePhone"
+      ).value.trim(),
 
-  data.vendor.sector=
-    document.getElementById("storeSector").value;
+    email:
+      document.getElementById(
+        "storeEmail"
+      ).value.trim(),
 
-  data.vendor.block=
-    document.getElementById("storeBlock").value;
+    category:
+      document.getElementById(
+        "storeCategory"
+      ).value,
 
-  data.vendor.address=
-    document.getElementById("storeAddress").value.trim();
+    area:
+      document.getElementById(
+        "storeArea"
+      ).value,
 
-  data.vendor.footfall=
-    document.getElementById("storeFootfall").value;
+    phase:
+      document.getElementById(
+        "storePhase"
+      ).value||null,
 
-  data.vendor.shopSize=
-    document.getElementById("storeSize").value;
+    precinct:
+      document.getElementById(
+        "storePrecinct"
+      ).value||null,
 
-  data.vendor.fridge=
-    document.getElementById("storeFridge").value;
+    sector:
+      document.getElementById(
+        "storeSector"
+      ).value||null,
 
-  data.vendor.lcdStatus=
-    document.getElementById("lcdStatus").value;
+    block:
+      document.getElementById(
+        "storeBlock"
+      ).value||null,
 
-  data.vendor.lcdSize=
-    document.getElementById("lcdSize").value;
+    address:
+      document.getElementById(
+        "storeAddress"
+      ).value.trim(),
 
-  data.vendor.internet=
-    document.getElementById("internetStatus").value;
+    latitude:
+      data.location
+        ?data.location.latitude
+        :null,
 
-  data.vendor.subMeter=
-    document.getElementById("subMeter").value;
+    longitude:
+      data.location
+        ?data.location.longitude
+        :null,
 
-  data.vendor.opening=
-    document.getElementById("openingTime").value;
+    footfall:
+      Number(
+        document.getElementById(
+          "storeFootfall"
+        ).value
+      )||0,
 
-  data.vendor.closing=
-    document.getElementById("closingTime").value;
+    shop_size:
+      document.getElementById(
+        "storeSize"
+      ).value,
 
+    lcd_status:
+      document.getElementById(
+        "lcdStatus"
+      ).value,
 
-  data.vendor.purchaseMethod=
-    document.getElementById("purchaseMethod").value;
+    lcd_total_price:
+      Number(
+        document.getElementById(
+          "lcdPrice"
+        ).value
+      )||60000,
 
-  data.vendor.lcdPrice=
-    document.getElementById("lcdPrice").value;
+    lcd_installment_months:
+      Number(
+        document.getElementById(
+          "installmentMonths"
+        ).value
+      )||0,
 
-  data.vendor.installmentMonths=
-    document.getElementById("installmentMonths").value;
+    lcd_monthly_installment:
+      Number(
+        String(
+          document.getElementById(
+            "monthlyInstallment"
+          ).value
+        ).replace(
+          /[^0-9.]/g,
+          ""
+        )
+      )||0,
 
+    internet_status:
+      document.getElementById(
+        "internetStatus"
+      ).value,
 
-  data.loadShedding=
-    readPortalLoadSlots();
+    internet_company_required:
+      document.getElementById(
+        "internetStatus"
+      ).value===
+      "Spotly Internet Required",
 
+    opening_time:
+      document.getElementById(
+        "openingTime"
+      ).value,
 
-  saveData();
+    closing_time:
+      document.getElementById(
+        "closingTime"
+      ).value,
+
+    ice_cream_fridge:
+      document.getElementById(
+        "storeFridge"
+      ).value==="Yes",
+
+    updated_at:
+      new Date().toISOString()
+
+  };
+
+  const {
+    data:updatedVendor,
+    error
+  }=
+    await supabaseClient
+      .from("vendors")
+      .update(payload)
+      .eq("user_id",user.id)
+      .select()
+      .single();
+
+  if(error){
+
+    console.error(
+      "Profile update error:",
+      error
+    );
+
+    toast(
+      error.message||
+      "Store information could not be saved"
+    );
+
+    return;
+
+  }
+
+  currentVendor=
+    updatedVendor;
+
+  await loadVendorFromSupabase();
 
   renderDashboard();
 
-  toast("Store information saved");
+  toast(
+    "Store information saved"
+  );
 
 }
-
 
 /* =========================================================
    LOCATION
@@ -4856,17 +4869,20 @@ function captureLocation(){
 
   if(!navigator.geolocation){
 
-    toast("Geolocation is not supported");
+    toast(
+      "Geolocation is not supported"
+    );
 
     return;
 
   }
 
-
-  document.getElementById(
-    "locationStatus"
-  ).textContent="Capturing location...";
-
+  document
+    .getElementById(
+      "locationStatus"
+    )
+    .textContent=
+      "Capturing location...";
 
   navigator.geolocation.getCurrentPosition(
 
@@ -4874,44 +4890,48 @@ function captureLocation(){
 
       data.location={
 
-        latitude:position.coords.latitude,
+        latitude:
+          position.coords.latitude,
 
-        longitude:position.coords.longitude,
+        longitude:
+          position.coords.longitude,
 
-        accuracy:position.coords.accuracy,
+        accuracy:
+          position.coords.accuracy,
 
-        capturedAt:new Date().toISOString()
+        capturedAt:
+          new Date().toISOString()
 
       };
 
-
       saveData();
 
+      document
+        .getElementById(
+          "locationStatus"
+        )
+        .textContent=
+          "Live location captured.";
 
-      document.getElementById(
-        "locationStatus"
-      ).textContent="Live location captured.";
+      document
+        .getElementById(
+          "coordinates"
+        )
+        .textContent=
+          data.location.latitude.toFixed(6)+
+          ", "+
+          data.location.longitude.toFixed(6);
 
-
-      document.getElementById(
-        "coordinates"
-      ).textContent=
-
-        data.location.latitude.toFixed(6)+
-        ", "+
-        data.location.longitude.toFixed(6);
-
-
-      toast("Live location updated");
+      toast(
+        "Live location updated"
+      );
 
     },
 
     ()=>{
-
       toast(
         "Please allow location permission"
       );
-
     },
 
     {
@@ -4924,7 +4944,6 @@ function captureLocation(){
 
 }
 
-
 /* =========================================================
    PORTAL LCD
 ========================================================= */
@@ -4932,21 +4951,22 @@ function captureLocation(){
 function changeLCDStatus(){
 
   const status=
-    document.getElementById("lcdStatus").value;
+    document.getElementById(
+      "lcdStatus"
+    ).value;
 
-
-  document.getElementById(
-    "installmentArea"
-  ).classList.toggle(
-    "hidden",
-    status!=="Purchase From Spotly"
-  );
-
+  document
+    .getElementById(
+      "installmentArea"
+    )
+    .classList.toggle(
+      "hidden",
+      status!=="Purchase From Spotly"
+    );
 
   calculateInstallment();
 
 }
-
 
 function calculateInstallment(){
 
@@ -4957,7 +4977,9 @@ function calculateInstallment(){
 
   const price=
     Number(
-      document.getElementById("lcdPrice").value
+      document.getElementById(
+        "lcdPrice"
+      ).value
     )||0;
 
   const months=
@@ -4967,29 +4989,33 @@ function calculateInstallment(){
       ).value
     )||1;
 
-
   if(method==="Installment"){
 
-    document.getElementById(
-      "monthlyInstallment"
-    ).value=
-      "Rs. "+
-      Math.ceil(price/months).toLocaleString();
+    document
+      .getElementById(
+        "monthlyInstallment"
+      )
+      .value=
+        "Rs. "+
+        Math.ceil(
+          price/months
+        ).toLocaleString();
 
   }else{
 
-    document.getElementById(
-      "monthlyInstallment"
-    ).value=
-      "Rs. 0";
+    document
+      .getElementById(
+        "monthlyInstallment"
+      )
+      .value=
+        "Rs. 0";
 
   }
 
 }
 
-
 /* =========================================================
-   PORTAL LOAD SHEDDING
+   LOAD SHEDDING
 ========================================================= */
 
 function addLoadSlot(){
@@ -5005,10 +5031,12 @@ function addLoadSlot(){
 
 }
 
-
 function removeLoadSlot(index){
 
-  data.loadShedding.splice(index,1);
+  data.loadShedding.splice(
+    index,
+    1
+  );
 
   saveData();
 
@@ -5016,57 +5044,60 @@ function removeLoadSlot(index){
 
 }
 
-
 function renderLoadSlots(){
 
   const container=
-    document.getElementById("loadSlots");
+    document.getElementById(
+      "loadSlots"
+    );
 
   if(!container)return;
 
   container.innerHTML="";
 
+  data.loadShedding.forEach(
+    (slot,index)=>{
 
-  data.loadShedding.forEach((slot,index)=>{
+      const row=
+        document.createElement(
+          "div"
+        );
 
-    const row=document.createElement("div");
+      row.className="load-row";
 
-    row.className="load-row";
+      row.innerHTML=`
 
-    row.innerHTML=`
+        <input
+          type="time"
+          value="${slot.start||""}"
+          onchange="
+            data.loadShedding[${index}].start=this.value;
+            saveData();
+          ">
 
-      <input
-        type="time"
-        value="${slot.start||""}"
-        onchange="
-          data.loadShedding[${index}].start=this.value;
-          saveData();
-        "
-      >
+        <input
+          type="time"
+          value="${slot.end||""}"
+          onchange="
+            data.loadShedding[${index}].end=this.value;
+            saveData();
+          ">
 
-      <input
-        type="time"
-        value="${slot.end||""}"
-        onchange="
-          data.loadShedding[${index}].end=this.value;
-          saveData();
-        "
-      >
+        <button
+          class="btn btn-danger"
+          type="button"
+          onclick="removeLoadSlot(${index})">
+          Remove
+        </button>
 
-      <button
-        class="btn btn-danger"
-        onclick="removeLoadSlot(${index})">
-        Remove
-      </button>
+      `;
 
-    `;
+      container.appendChild(row);
 
-    container.appendChild(row);
-
-  });
+    }
+  );
 
 }
-
 
 function readPortalLoadSlots(){
 
@@ -5079,16 +5110,19 @@ function readPortalLoadSlots(){
 
   rows.forEach(row=>{
 
-    const inputs=row.querySelectorAll("input");
+    const inputs=
+      row.querySelectorAll(
+        "input"
+      );
 
-    if(inputs[0].value || inputs[1].value){
+    if(
+      inputs[0].value ||
+      inputs[1].value
+    ){
 
       result.push({
-
         start:inputs[0].value,
-
         end:inputs[1].value
-
       });
 
     }
@@ -5099,57 +5133,76 @@ function readPortalLoadSlots(){
 
 }
 
-
 /* =========================================================
    BANK
 ========================================================= */
 
 function fillBankForm(){
 
-  const b=data.bank||{};
+  const b=
+    data.bank||{};
 
+  document
+    .getElementById(
+      "bankPageName"
+    )
+    .value=
+      b.bankName||"";
 
-  document.getElementById(
-    "bankPageName"
-  ).value=b.bankName||"";
+  document
+    .getElementById(
+      "bankPageTitle"
+    )
+    .value=
+      b.accountTitle||"";
 
-  document.getElementById(
-    "bankPageTitle"
-  ).value=b.accountTitle||"";
+  document
+    .getElementById(
+      "bankPageIBAN"
+    )
+    .value=
+      b.iban||"";
 
-  document.getElementById(
-    "bankPageIBAN"
-  ).value=b.iban||"";
+  document
+    .getElementById(
+      "bankPageAccount"
+    )
+    .value=
+      b.accountNumber||"";
 
-  document.getElementById(
-    "bankPageAccount"
-  ).value=b.accountNumber||"";
-
-  document.getElementById(
-    "bankPageMethod"
-  ).value=b.method||"Bank Transfer";
+  document
+    .getElementById(
+      "bankPageMethod"
+    )
+    .value=
+      b.method||
+      "Bank Transfer";
 
 }
 
-
-function saveBankPage(){
+async function saveBankPage(){
 
   const ids=[
-
     "bankPageName",
     "bankPageTitle",
     "bankPageIBAN",
     "bankPageAccount",
     "bankPageMethod"
-
   ];
-
 
   for(const id of ids){
 
-    if(!document.getElementById(id).value.trim()){
+    const el=
+      document.getElementById(id);
 
-      toast("Please complete bank details");
+    if(
+      !el ||
+      !String(el.value||"").trim()
+    ){
+
+      toast(
+        "Please complete bank details"
+      );
 
       return;
 
@@ -5157,39 +5210,118 @@ function saveBankPage(){
 
   }
 
+  const user=
+    await getCurrentUser();
 
-  data.bank={
+  if(!user){
 
-    bankName:
-      document.getElementById("bankPageName").value.trim(),
+    toast(
+      "Please login again"
+    );
 
-    accountTitle:
-      document.getElementById("bankPageTitle").value.trim(),
+    return;
+
+  }
+
+  const payload={
+
+    bank_name:
+      document
+        .getElementById(
+          "bankPageName"
+        )
+        .value
+        .trim(),
+
+    account_title:
+      document
+        .getElementById(
+          "bankPageTitle"
+        )
+        .value
+        .trim(),
 
     iban:
-      document.getElementById("bankPageIBAN").value.trim(),
+      document
+        .getElementById(
+          "bankPageIBAN"
+        )
+        .value
+        .trim(),
 
-    accountNumber:
-      document.getElementById("bankPageAccount").value.trim(),
+    account_number:
+      document
+        .getElementById(
+          "bankPageAccount"
+        )
+        .value
+        .trim(),
 
-    method:
-      document.getElementById("bankPageMethod").value
+    payment_method:
+      document
+        .getElementById(
+          "bankPageMethod"
+        )
+        .value,
+
+    updated_at:
+      new Date().toISOString()
 
   };
 
+  const {
+    error
+  }=
+    await supabaseClient
+      .from("vendors")
+      .update(payload)
+      .eq("user_id",user.id);
+
+  if(error){
+
+    console.error(
+      error
+    );
+
+    toast(
+      error.message||
+      "Bank details could not be saved"
+    );
+
+    return;
+
+  }
+
+  data.bank={
+    bankName:
+      payload.bank_name,
+
+    accountTitle:
+      payload.account_title,
+
+    iban:
+      payload.iban,
+
+    accountNumber:
+      payload.account_number,
+
+    method:
+      payload.payment_method
+  };
 
   saveData();
 
-  toast("Bank details saved");
+  toast(
+    "Bank details saved"
+  );
 
 }
 
-
 /* =========================================================
-   STORE ONLINE/OFFLINE
+   ONLINE / OFFLINE
 ========================================================= */
 
-function toggleStoreStatus(){
+async function toggleStoreStatus(){
 
   if(!data.approved){
 
@@ -5201,8 +5333,54 @@ function toggleStoreStatus(){
 
   }
 
+  const user=
+    await getCurrentUser();
 
-  data.online=!data.online;
+  if(!user){
+
+    toast(
+      "Please login again"
+    );
+
+    return;
+
+  }
+
+  const newStatus=
+    !data.online;
+
+  const {
+    error
+  }=
+    await supabaseClient
+      .from("vendors")
+      .update({
+        online_status:newStatus,
+        updated_at:
+          new Date().toISOString()
+      })
+      .eq(
+        "user_id",
+        user.id
+      );
+
+  if(error){
+
+    console.error(
+      error
+    );
+
+    toast(
+      error.message||
+      "Status could not be updated"
+    );
+
+    return;
+
+  }
+
+  data.online=
+    newStatus;
 
   saveData();
 
@@ -5210,87 +5388,107 @@ function toggleStoreStatus(){
 
 }
 
-
 /* =========================================================
    DASHBOARD
 ========================================================= */
 
 function renderDashboard(){
 
-  const approved=data.approved;
+  const approved=
+    data.approved;
 
+  document
+    .getElementById(
+      "reviewTitle"
+    )
+    .textContent=
+      approved
+        ?"Your store is approved"
+        :"Your store is under review";
 
-  document.getElementById(
-    "reviewTitle"
-  ).textContent=
+  document
+    .getElementById(
+      "reviewText"
+    )
+    .textContent=
+      approved
+        ?"Your store is active. Today's advertisement schedule, LCD time and earnings are available below."
+        :"Your information has been submitted successfully. Once Spotly approves your store, advertising schedules and earnings will appear here.";
 
-    approved
-    ? "Your store is approved"
-    : "Your store is under review";
+  document
+    .getElementById(
+      "todayAds"
+    )
+    .textContent=
+      approved
+        ?"6 Ads"
+        :"—";
 
+  document
+    .getElementById(
+      "todayEarning"
+    )
+    .textContent=
+      approved
+        ?"Rs. 120"
+        :"—";
 
-  document.getElementById(
-    "reviewText"
-  ).textContent=
+  document
+    .getElementById(
+      "todayLCDTime"
+    )
+    .textContent=
+      approved
+        ?"7h 35m"
+        :"—";
 
-    approved
+  document
+    .getElementById(
+      "onlineSwitch"
+    )
+    .classList.toggle(
+      "on",
+      data.online
+    );
 
-    ? "Your store is active. Today's advertisement schedule, LCD time and earnings are available below."
+  document
+    .getElementById(
+      "onlineText"
+    )
+    .textContent=
+      data.online
+        ?"Online"
+        :"Offline";
 
-    : "Your information has been submitted successfully. Once Spotly approves your store, advertising schedules and earnings will appear here.";
+  document
+    .getElementById(
+      "dashOpen"
+    )
+    .textContent=
+      formatTime(
+        data.vendor.opening
+      );
 
+  document
+    .getElementById(
+      "dashClose"
+    )
+    .textContent=
+      formatTime(
+        data.vendor.closing
+      );
 
-  document.getElementById(
-    "todayAds"
-  ).textContent=
-
-    approved ? "6 Ads" : "—";
-
-
-  document.getElementById(
-    "todayEarning"
-  ).textContent=
-
-    approved ? "Rs. 120" : "—";
-
-
-  document.getElementById(
-    "todayLCDTime"
-  ).textContent=
-
-    approved ? "7h 35m" : "—";
-
-
-  document.getElementById(
-    "onlineSwitch"
-  ).classList.toggle(
-    "on",
-    data.online
-  );
-
-
-  document.getElementById(
-    "onlineText"
-  ).textContent=
-    data.online ? "Online" : "Offline";
-
-
-  document.getElementById(
-    "dashOpen"
-  ).textContent=
-    formatTime(data.vendor.opening);
-
-
-  document.getElementById(
-    "dashClose"
-  ).textContent=
-    formatTime(data.vendor.closing);
-
+  document
+    .getElementById(
+      "dashLCDStatus"
+    )
+    .textContent=
+      data.vendor.lcdStatus||
+      "—";
 
   renderDashboardAds();
 
 }
-
 
 /* =========================================================
    DEMO ADS
@@ -5348,14 +5546,12 @@ const ads=[
 
 ];
 
-
 function renderDashboardAds(){
 
   const container=
     document.getElementById(
       "dashboardAds"
     );
-
 
   if(!data.approved){
 
@@ -5368,8 +5564,10 @@ function renderDashboardAds(){
         background:#fafafa;
         border-radius:8px;
       ">
+
         Advertisement schedule will appear
         after store approval.
+
       </div>
 
     `;
@@ -5378,54 +5576,61 @@ function renderDashboardAds(){
 
   }
 
-
   container.innerHTML=
-    ads.slice(0,4).map(ad=>`
-
-      <div style="
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        padding:13px 0;
-        border-bottom:1px solid #eee;
-      ">
-
-        <div>
-          <strong>${ad.name}</strong>
+    ads
+      .slice(0,4)
+      .map(
+        ad=>`
 
           <div style="
-            font-size:12px;
-            color:#777;
-            margin-top:4px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:13px 0;
+            border-bottom:1px solid #eee;
           ">
-            ${ad.duration}
+
+            <div>
+
+              <strong>
+                ${ad.name}
+              </strong>
+
+              <div style="
+                font-size:12px;
+                color:#777;
+                margin-top:4px;
+              ">
+                ${ad.duration}
+              </div>
+
+            </div>
+
+            <div style="text-align:right">
+
+              <strong>
+                ${formatTime(ad.start)}
+              </strong>
+
+              <div style="
+                font-size:12px;
+                color:#777;
+              ">
+                to ${formatTime(ad.end)}
+              </div>
+
+            </div>
+
           </div>
-        </div>
 
-        <div style="text-align:right">
-
-          <strong>
-            ${formatTime(ad.start)}
-          </strong>
-
-          <div style="
-            font-size:12px;
-            color:#777;
-          ">
-            to ${formatTime(ad.end)}
-          </div>
-
-        </div>
-
-      </div>
-
-    `).join("");
+        `
+      )
+      .join("");
 
 }
 
-
 /* =========================================================
-   TODAY ADS PAGE
+   TODAY ADS
 ========================================================= */
 
 function renderAds(){
@@ -5435,18 +5640,20 @@ function renderAds(){
       "adsApprovalMessage"
     );
 
-
-  document.getElementById(
-    "adsDate"
-  ).textContent=
-    "29 Sep 2026";
-
+  document
+    .getElementById(
+      "adsDate"
+    )
+    .textContent=
+      "29 Sep 2026";
 
   if(!data.approved){
 
     message.innerHTML=`
 
-      <strong>Advertisement schedule is not active yet</strong>
+      <strong>
+        Advertisement schedule is not active yet
+      </strong>
 
       <p>
         Today's advertisements will be shown here
@@ -5455,27 +5662,31 @@ function renderAds(){
 
     `;
 
-    document.getElementById(
-      "todayAdsTable"
-    ).innerHTML=`
+    document
+      .getElementById(
+        "todayAdsTable"
+      )
+      .innerHTML=`
 
-      <tr>
-        <td colspan="5"
+        <tr>
+          <td
+            colspan="5"
             style="text-align:center;color:#777;">
-          No advertisements available.
-        </td>
-      </tr>
+            No advertisements available.
+          </td>
+        </tr>
 
-    `;
+      `;
 
     return;
 
   }
 
-
   message.innerHTML=`
 
-    <strong>Today's Schedule</strong>
+    <strong>
+      Today's Schedule
+    </strong>
 
     <p>
       Your LCD should remain available during
@@ -5484,37 +5695,48 @@ function renderAds(){
 
   `;
 
+  document
+    .getElementById(
+      "todayAdsTable"
+    )
+    .innerHTML=
+      ads
+        .map(
+          ad=>`
 
-  document.getElementById(
-    "todayAdsTable"
-  ).innerHTML=
+            <tr>
 
-    ads.map(ad=>`
+              <td>
+                <strong>
+                  ${ad.name}
+                </strong>
+              </td>
 
-      <tr>
+              <td>
+                ${formatTime(ad.start)}
+              </td>
 
-        <td>
-          <strong>${ad.name}</strong>
-        </td>
+              <td>
+                ${formatTime(ad.end)}
+              </td>
 
-        <td>${formatTime(ad.start)}</td>
+              <td>
+                ${ad.duration}
+              </td>
 
-        <td>${formatTime(ad.end)}</td>
+              <td>
+                <span class="status approved">
+                  Scheduled
+                </span>
+              </td>
 
-        <td>${ad.duration}</td>
+            </tr>
 
-        <td>
-          <span class="status approved">
-            Scheduled
-          </span>
-        </td>
-
-      </tr>
-
-    `).join("");
+          `
+        )
+        .join("");
 
 }
-
 
 /* =========================================================
    PLAY HISTORY
@@ -5562,96 +5784,113 @@ function renderPlayHistory(){
 
   ];
 
+  document
+    .getElementById(
+      "playHistory"
+    )
+    .innerHTML=
+      history
+        .map(
+          item=>`
 
-  document.getElementById(
-    "playHistory"
-  ).innerHTML=
+            <tr>
 
-    history.map(item=>`
+              <td>
+                ${item.date}
+              </td>
 
-      <tr>
+              <td>
+                ${item.name}
+              </td>
 
-        <td>${item.date}</td>
+              <td>
+                ${item.start}
+              </td>
 
-        <td>${item.name}</td>
+              <td>
+                ${item.duration}
+              </td>
 
-        <td>${item.start}</td>
+              <td>
+                <span class="status approved">
+                  ${item.status}
+                </span>
+              </td>
 
-        <td>${item.duration}</td>
+              <td>
+                <span class="status approved">
+                  ${item.verified}
+                </span>
+              </td>
 
-        <td>
-          <span class="status approved">
-            ${item.status}
-          </span>
-        </td>
+            </tr>
 
-        <td>
-          <span class="status approved">
-            ${item.verified}
-          </span>
-        </td>
-
-      </tr>
-
-    `).join("");
+          `
+        )
+        .join("");
 
 }
 
-
 /* =========================================================
-   ELECTRICITY METER
+   ELECTRICITY
 ========================================================= */
-
-/*
-  45 inch LCD estimated power:
-  80 watts = 0.08 kW
-
-  Units = kW × hours
-  Bill = Units × Rs.80
-*/
 
 function renderEnergy(){
 
   const lcdHours=
-    data.approved ? 7.5833 : 0;
+    data.approved
+      ?7.5833
+      :0;
 
-  const powerKW=0.08;
+  const powerKW=
+    0.08;
 
   const units=
-    powerKW*lcdHours;
+    powerKW*
+    lcdHours;
 
   const bill=
-    units*80;
+    units*
+    80;
 
+  document
+    .getElementById(
+      "meterUnits"
+    )
+    .textContent=
+      units.toFixed(2);
 
-  document.getElementById(
-    "meterUnits"
-  ).textContent=
-    units.toFixed(2);
+  document
+    .getElementById(
+      "energyHours"
+    )
+    .textContent=
+      formatHours(
+        lcdHours
+      );
 
+  document
+    .getElementById(
+      "energyUnitText"
+    )
+    .textContent=
+      units.toFixed(2);
 
-  document.getElementById(
-    "energyHours"
-  ).textContent=
-    formatHours(lcdHours);
+  document
+    .getElementById(
+      "energyBill"
+    )
+    .textContent=
+      "Rs. "+
+      Math.round(
+        bill
+      ).toLocaleString();
 
-
-  document.getElementById(
-    "energyUnitText"
-  ).textContent=
-    units.toFixed(2);
-
-
-  document.getElementById(
-    "energyBill"
-  ).textContent=
-    "Rs. "+
-    Math.round(bill).toLocaleString();
-
-
-  document.getElementById(
-    "electricMeter"
-  ).style
+  document
+    .getElementById(
+      "electricMeter"
+    )
+    .style
     .setProperty(
       "--meter-progress",
       Math.min(
@@ -5662,7 +5901,6 @@ function renderEnergy(){
 
 }
 
-
 /* =========================================================
    WITHDRAWALS
 ========================================================= */
@@ -5671,59 +5909,31 @@ function requestWithdrawal(){
 
   const amount=
     Number(
-      document.getElementById(
-        "withdrawAmount"
-      ).value
+      document
+        .getElementById(
+          "withdrawAmount"
+        )
+        .value
     );
 
+  if(
+    !amount ||
+    amount<=0
+  ){
 
-  if(!amount || amount<=0){
-
-    toast("Enter a valid withdrawal amount");
+    toast(
+      "Available balance is Rs. 0"
+    );
 
     return;
 
   }
 
-
-  data.withdrawals.unshift({
-
-    date:new Date().toLocaleDateString(
-      "en-GB",
-      {
-        day:"2-digit",
-        month:"short",
-        year:"numeric"
-      }
-    ),
-
-    amount:amount,
-
-    method:
-      document.getElementById(
-        "withdrawMethod"
-      ).value,
-
-    status:"Pending"
-
-  });
-
-
-  saveData();
-
-  document.getElementById(
-    "withdrawAmount"
-  ).value="";
-
-
-  renderWithdrawals();
-
   toast(
-    "Withdrawal request submitted"
+    "Available balance is Rs. 0"
   );
 
 }
-
 
 function renderWithdrawals(){
 
@@ -5732,51 +5942,63 @@ function renderWithdrawals(){
       "withdrawalHistory"
     );
 
-
   if(!tbody)return;
 
-
   tbody.innerHTML=
-
     data.withdrawals.length
 
-    ? data.withdrawals.map(item=>`
+      ?data.withdrawals
+        .map(
+          item=>`
 
-      <tr>
+            <tr>
 
-        <td>${item.date}</td>
+              <td>
+                ${item.date}
+              </td>
 
-        <td>
-          Rs. ${Number(item.amount).toLocaleString()}
-        </td>
+              <td>
+                Rs.
+                ${Number(
+                  item.amount
+                ).toLocaleString()}
+              </td>
 
-        <td>${item.method}</td>
+              <td>
+                ${item.method}
+              </td>
 
-        <td>
-          <span class="status pending">
-            ${item.status}
-          </span>
-        </td>
+              <td>
 
-      </tr>
+                <span class="status pending">
+                  ${item.status}
+                </span>
 
-    `).join("")
+              </td>
 
-    : `
+            </tr>
 
-      <tr>
+          `
+        )
+        .join("")
 
-        <td colspan="4"
+      :`
+
+        <tr>
+
+          <td
+            colspan="4"
             style="text-align:center;color:#777;">
-          No withdrawal requests yet.
-        </td>
 
-      </tr>
+            No withdrawal requests yet.
 
-    `;
+          </td>
+
+        </tr>
+
+      `;
 
 }
-
 
 /* =========================================================
    SUPPORT
@@ -5785,29 +6007,37 @@ function renderWithdrawals(){
 function submitSupport(){
 
   const subject=
-    document.getElementById(
-      "supportSubject"
-    ).value.trim();
+    document
+      .getElementById(
+        "supportSubject"
+      )
+      .value
+      .trim();
 
   const category=
-    document.getElementById(
-      "supportCategory"
-    ).value;
+    document
+      .getElementById(
+        "supportCategory"
+      )
+      .value;
 
   const message=
-    document.getElementById(
-      "supportMessage"
-    ).value.trim();
-
+    document
+      .getElementById(
+        "supportMessage"
+      )
+      .value
+      .trim();
 
   if(!subject || !message){
 
-    toast("Please complete the support form");
+    toast(
+      "Please complete the support form"
+    );
 
     return;
 
   }
-
 
   data.support.unshift({
 
@@ -5817,38 +6047,42 @@ function submitSupport(){
 
     message,
 
-    date:new Date().toLocaleDateString(
-      "en-GB",
-      {
-        day:"2-digit",
-        month:"short",
-        year:"numeric"
-      }
-    ),
+    date:
+      new Date()
+        .toLocaleDateString(
+          "en-GB",
+          {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+          }
+        ),
 
     status:"Pending"
 
   });
 
-
   saveData();
 
+  document
+    .getElementById(
+      "supportSubject"
+    )
+    .value="";
 
-  document.getElementById(
-    "supportSubject"
-  ).value="";
-
-  document.getElementById(
-    "supportMessage"
-  ).value="";
-
+  document
+    .getElementById(
+      "supportMessage"
+    )
+    .value="";
 
   renderSupport();
 
-  toast("Support request submitted");
+  toast(
+    "Support request submitted"
+  );
 
 }
-
 
 function renderSupport(){
 
@@ -5857,49 +6091,64 @@ function renderSupport(){
       "supportHistory"
     );
 
-
   if(!tbody)return;
 
-
   tbody.innerHTML=
-
     data.support.length
 
-    ? data.support.map(item=>`
+      ?data.support
+        .map(
+          item=>`
 
-      <tr>
+            <tr>
 
-        <td>${escapeHTML(item.subject)}</td>
+              <td>
+                ${escapeHTML(
+                  item.subject
+                )}
+              </td>
 
-        <td>${escapeHTML(item.category)}</td>
+              <td>
+                ${escapeHTML(
+                  item.category
+                )}
+              </td>
 
-        <td>${item.date}</td>
+              <td>
+                ${item.date}
+              </td>
 
-        <td>
-          <span class="status pending">
-            ${item.status}
-          </span>
-        </td>
+              <td>
 
-      </tr>
+                <span class="status pending">
+                  ${item.status}
+                </span>
 
-    `).join("")
+              </td>
 
-    : `
+            </tr>
 
-      <tr>
+          `
+        )
+        .join("")
 
-        <td colspan="4"
+      :`
+
+        <tr>
+
+          <td
+            colspan="4"
             style="text-align:center;color:#777;">
-          No support requests yet.
-        </td>
 
-      </tr>
+            No support requests yet.
 
-    `;
+          </td>
+
+        </tr>
+
+      `;
 
 }
-
 
 /* =========================================================
    NOTIFICATIONS
@@ -5907,58 +6156,132 @@ function renderSupport(){
 
 function toggleNotifications(){
 
-  document.getElementById(
-    "notificationPanel"
-  ).classList.toggle("active");
+  document
+    .getElementById(
+      "notificationPanel"
+    )
+    .classList.toggle(
+      "active"
+    );
 
 }
 
-
 /* =========================================================
-   FORMAT HELPERS
+   HELPERS
 ========================================================= */
 
 function formatTime(time){
 
   if(!time)return"—";
 
-  const [hour,minute]=time.split(":");
+  const parts=
+    String(time)
+      .split(":");
 
-  let h=Number(hour);
+  const hour=
+    Number(parts[0]);
 
-  const suffix=h>=12?"PM":"AM";
+  const minute=
+    parts[1]||"00";
 
-  h=h%12||12;
+  let h=
+    hour;
 
-  return h+":"+minute+" "+suffix;
+  const suffix=
+    h>=12
+      ?"PM"
+      :"AM";
+
+  h=
+    h%12||12;
+
+  return(
+    h+
+    ":"+
+    minute+
+    " "+
+    suffix
+  );
 
 }
-
 
 function formatHours(hours){
 
-  const h=Math.floor(hours);
+  const h=
+    Math.floor(
+      hours
+    );
 
-  const m=Math.round(
-    (hours-h)*60
+  const m=
+    Math.round(
+      (hours-h)*60
+    );
+
+  return(
+    h+
+    " hrs "+
+    m+
+    " min"
   );
 
-  return h+" hrs "+m+" min";
-
 }
-
 
 function escapeHTML(value){
 
   return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
+/* =========================================================
+   AUTH SESSION
+========================================================= */
+
+supabaseClient.auth.onAuthStateChange(
+  async (event,session)=>{
+
+    if(
+      event==="SIGNED_IN" &&
+      session
+    ){
+
+      currentUser=
+        session.user;
+
+      await loadVendorFromSupabase();
+
+    }
+
+    if(
+      event==="SIGNED_OUT"
+    ){
+
+      currentUser=null;
+      currentVendor=null;
+
+    }
+
+  }
+);
 
 /* =========================================================
    INITIALIZATION
@@ -5968,14 +6291,18 @@ loadAllSelects();
 
 registrationInstallment();
 
-if(data.registered){
+(async()=>{
 
-  /*
-    Account exists but user must login.
-    Portal does not automatically open.
-  */
+  const user=
+    await getCurrentUser();
 
-}
+  if(user){
+
+    await loadVendorFromSupabase();
+
+  }
+
+})();
 
 </script>
 
