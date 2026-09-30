@@ -2608,7 +2608,6 @@ th{
 
 </div>
 
-
 <!-- =========================================================
      REGISTRATION MODAL
 ========================================================= -->
@@ -2620,13 +2619,11 @@ th{
     <div class="modal-head">
 
       <div>
-
         <h2>Create Vendor Account</h2>
 
         <p style="font-size:13px;color:#777;margin-top:5px;">
           Complete all required information before submitting.
         </p>
-
       </div>
 
       <button class="close"
@@ -2639,28 +2636,18 @@ th{
 
     <div class="register-progress">
 
-      <div class="progress-step active"
-           id="progress1"></div>
-
-      <div class="progress-step"
-           id="progress2"></div>
-
-      <div class="progress-step"
-           id="progress3"></div>
-
-      <div class="progress-step"
-           id="progress4"></div>
-
-      <div class="progress-step"
-           id="progress5"></div>
+      <div class="progress-step active" id="progress1"></div>
+      <div class="progress-step" id="progress2"></div>
+      <div class="progress-step" id="progress3"></div>
+      <div class="progress-step" id="progress4"></div>
+      <div class="progress-step" id="progress5"></div>
 
     </div>
 
 
     <!-- ================= STEP 1 ================= -->
 
-    <div class="register-page active"
-         id="registerPage1">
+    <div class="register-page active" id="registerPage1">
 
       <h3 style="margin-bottom:20px;">
         Account & Store
@@ -2669,43 +2656,37 @@ th{
       <div class="form-grid">
 
         <div class="form-group">
-
           <label>
             Shop / Store Name <span class="required">*</span>
           </label>
 
           <input id="regShop"
                  required>
-
         </div>
 
 
         <div class="form-group">
-
           <label>
             Owner Name <span class="required">*</span>
           </label>
 
           <input id="regOwner"
                  required>
-
         </div>
 
 
         <div class="form-group">
-
           <label>
             Phone Number <span class="required">*</span>
           </label>
 
           <input id="regPhone"
+                 type="tel"
                  required>
-
         </div>
 
 
         <div class="form-group">
-
           <label>
             Email <span class="required">*</span>
           </label>
@@ -2713,42 +2694,41 @@ th{
           <input id="regEmail"
                  type="email"
                  required>
-
         </div>
 
 
         <div class="form-group">
-
           <label>
             Password <span class="required">*</span>
           </label>
 
           <input id="regPassword"
                  type="password"
+                 minlength="6"
                  required>
-
         </div>
 
 
         <div class="form-group">
-
           <label>
             Confirm Password <span class="required">*</span>
           </label>
 
           <input id="regPasswordConfirm"
                  type="password"
+                 minlength="6"
                  required>
-
         </div>
 
       </div>
+
 
       <div class="register-actions">
 
         <div></div>
 
         <button class="btn btn-yellow"
+                type="button"
                 onclick="nextRegistration(1)">
           Continue
         </button>
@@ -2760,8 +2740,7 @@ th{
 
     <!-- ================= STEP 2 ================= -->
 
-    <div class="register-page"
-         id="registerPage2">
+    <div class="register-page" id="registerPage2">
 
       <h3 style="margin-bottom:20px;">
         Shop Location
@@ -2769,6 +2748,8 @@ th{
 
       <div class="form-grid">
 
+
+        <!-- CATEGORY -->
 
         <div class="form-group">
 
@@ -2778,11 +2759,12 @@ th{
 
           <div class="add-select">
 
-            <select id="regCategory">
+            <select id="regCategory" required>
               <option value="">Select Category</option>
             </select>
 
             <button class="btn btn-white"
+                    type="button"
                     onclick="addRegistrationCategory()">
               + Add New
             </button>
@@ -2792,6 +2774,8 @@ th{
         </div>
 
 
+        <!-- AREA -->
+
         <div class="form-group">
 
           <label>
@@ -2800,11 +2784,12 @@ th{
 
           <div class="add-select">
 
-            <select id="regArea">
+            <select id="regArea" required>
               <option value="">Select Area</option>
             </select>
 
             <button class="btn btn-white"
+                    type="button"
                     onclick="addRegistrationArea()">
               + Add New
             </button>
@@ -2814,6 +2799,8 @@ th{
         </div>
 
 
+        <!-- PHASE -->
+
         <div class="form-group">
 
           <label>
@@ -2822,11 +2809,12 @@ th{
 
           <div class="add-select">
 
-            <select id="regPhase">
+            <select id="regPhase" required>
               <option value="">Select Phase</option>
             </select>
 
             <button class="btn btn-white"
+                    type="button"
                     onclick="addRegistrationPhase()">
               + Add New
             </button>
@@ -2836,6 +2824,8 @@ th{
         </div>
 
 
+        <!-- PRECINCT -->
+
         <div class="form-group">
 
           <label>
@@ -2844,11 +2834,12 @@ th{
 
           <div class="add-select">
 
-            <select id="regPrecinct">
+            <select id="regPrecinct" required>
               <option value="">Select Precinct</option>
             </select>
 
             <button class="btn btn-white"
+                    type="button"
                     onclick="addRegistrationPrecinct()">
               + Add New
             </button>
@@ -2858,6 +2849,8 @@ th{
         </div>
 
 
+        <!-- SECTOR -->
+
         <div class="form-group">
 
           <label>
@@ -2866,11 +2859,12 @@ th{
 
           <div class="add-select">
 
-            <select id="regSector">
+            <select id="regSector" required>
               <option value="">Select Sector</option>
             </select>
 
             <button class="btn btn-white"
+                    type="button"
                     onclick="addRegistrationSector()">
               + Add New
             </button>
@@ -2880,6 +2874,8 @@ th{
         </div>
 
 
+        <!-- BLOCK -->
+
         <div class="form-group">
 
           <label>
@@ -2888,11 +2884,12 @@ th{
 
           <div class="add-select">
 
-            <select id="regBlock">
+            <select id="regBlock" required>
               <option value="">Select Block</option>
             </select>
 
             <button class="btn btn-white"
+                    type="button"
                     onclick="addRegistrationBlock()">
               + Add New
             </button>
@@ -2901,6 +2898,8 @@ th{
 
         </div>
 
+
+        <!-- ADDRESS -->
 
         <div class="form-group full">
 
@@ -2915,6 +2914,8 @@ th{
 
       </div>
 
+
+      <!-- LIVE LOCATION -->
 
       <div class="location-box"
            style="margin-top:20px;">
@@ -2932,6 +2933,7 @@ th{
         </div>
 
         <button class="btn btn-yellow"
+                type="button"
                 onclick="captureRegistrationLocation()">
           Use My Current Location
         </button>
@@ -2947,11 +2949,13 @@ th{
       <div class="register-actions">
 
         <button class="btn btn-white"
+                type="button"
                 onclick="previousRegistration(2)">
           Back
         </button>
 
         <button class="btn btn-yellow"
+                type="button"
                 onclick="nextRegistration(2)">
           Continue
         </button>
@@ -2963,8 +2967,7 @@ th{
 
     <!-- ================= STEP 3 ================= -->
 
-    <div class="register-page"
-         id="registerPage3">
+    <div class="register-page" id="registerPage3">
 
       <h3 style="margin-bottom:20px;">
         Shop & LCD Information
@@ -2973,6 +2976,9 @@ th{
 
       <div class="form-grid">
 
+
+        <!-- FOOTFALL -->
+
         <div class="form-group">
 
           <label>
@@ -2980,10 +2986,14 @@ th{
           </label>
 
           <input id="regFootfall"
-                 type="number">
+                 type="number"
+                 min="0"
+                 required>
 
         </div>
 
+
+        <!-- SHOP SIZE -->
 
         <div class="form-group">
 
@@ -2992,10 +3002,13 @@ th{
           </label>
 
           <input id="regShopSize"
-                 placeholder="e.g. 500 sq ft">
+                 placeholder="e.g. 500 sq ft"
+                 required>
 
         </div>
 
+
+        <!-- FRIDGE -->
 
         <div class="form-group">
 
@@ -3003,14 +3016,26 @@ th{
             Ice Cream Fridge <span class="required">*</span>
           </label>
 
-          <select id="regFridge">
-            <option value="">Select</option>
-            <option>Yes</option>
-            <option>No</option>
+          <select id="regFridge" required>
+
+            <option value="">
+              Select
+            </option>
+
+            <option value="Yes">
+              Yes
+            </option>
+
+            <option value="No">
+              No
+            </option>
+
           </select>
 
         </div>
 
+
+        <!-- LCD STATUS -->
 
         <div class="form-group">
 
@@ -3019,7 +3044,8 @@ th{
           </label>
 
           <select id="regLCDStatus"
-                  onchange="registrationLCDChange()">
+                  onchange="registrationLCDChange()"
+                  required>
 
             <option value="">
               Select LCD Status
@@ -3042,24 +3068,30 @@ th{
         </div>
 
 
+        <!-- LCD SIZE -->
+
         <div class="form-group">
 
           <label>
             LCD Size <span class="required">*</span>
           </label>
 
-          <select id="regLCDSize">
+          <select id="regLCDSize" required>
 
             <option value="">
               Select Size
             </option>
 
-            <option>45 inch</option>
+            <option value="45 inch">
+              45 inch
+            </option>
 
           </select>
 
         </div>
 
+
+        <!-- INTERNET -->
 
         <div class="form-group">
 
@@ -3067,20 +3099,30 @@ th{
             Internet <span class="required">*</span>
           </label>
 
-          <select id="regInternet">
+          <select id="regInternet" required>
 
             <option value="">
               Select
             </option>
 
-            <option>Internet Available</option>
-            <option>No Internet</option>
-            <option>Spotly Internet Required</option>
+            <option value="Internet Available">
+              Internet Available
+            </option>
+
+            <option value="No Internet">
+              No Internet
+            </option>
+
+            <option value="Spotly Internet Required">
+              Spotly Internet Required
+            </option>
 
           </select>
 
         </div>
 
+
+        <!-- SUB METER -->
 
         <div class="form-group">
 
@@ -3088,19 +3130,26 @@ th{
             Sub Meter <span class="required">*</span>
           </label>
 
-          <select id="regSubMeter">
+          <select id="regSubMeter" required>
 
             <option value="">
               Select
             </option>
 
-            <option>Yes</option>
-            <option>No</option>
+            <option value="Yes">
+              Yes
+            </option>
+
+            <option value="No">
+              No
+            </option>
 
           </select>
 
         </div>
 
+
+        <!-- OPENING -->
 
         <div class="form-group">
 
@@ -3110,10 +3159,13 @@ th{
 
           <input id="regOpening"
                  type="time"
-                 value="09:00">
+                 value="09:00"
+                 required>
 
         </div>
 
+
+        <!-- CLOSING -->
 
         <div class="form-group">
 
@@ -3123,12 +3175,15 @@ th{
 
           <input id="regClosing"
                  type="time"
-                 value="00:00">
+                 value="00:00"
+                 required>
 
         </div>
 
       </div>
 
+
+      <!-- LCD PURCHASE -->
 
       <div id="registrationPurchaseBox"
            class="location-box hidden"
@@ -3141,6 +3196,7 @@ th{
         <div class="form-grid"
              style="margin-top:17px;">
 
+
           <div class="form-group">
 
             <label>
@@ -3148,10 +3204,20 @@ th{
             </label>
 
             <select id="regPurchaseMethod"
-                    onchange="registrationInstallment()">
+                    onchange="registrationInstallment()"
+                    required>
 
-              <option>Cash</option>
-              <option>Installment</option>
+              <option value="">
+                Select
+              </option>
+
+              <option value="Cash">
+                Cash
+              </option>
+
+              <option value="Installment">
+                Installment
+              </option>
 
             </select>
 
@@ -3166,8 +3232,10 @@ th{
 
             <input id="regLCDPrice"
                    type="number"
+                   min="0"
                    value="60000"
-                   oninput="registrationInstallment()">
+                   oninput="registrationInstallment()"
+                   required>
 
           </div>
 
@@ -3181,11 +3249,20 @@ th{
             </label>
 
             <select id="regMonths"
-                    onchange="registrationInstallment()">
+                    onchange="registrationInstallment()"
+                    required>
 
-              <option value="3">3 Months</option>
-              <option value="6">6 Months</option>
-              <option value="12">12 Months</option>
+              <option value="3">
+                3 Months
+              </option>
+
+              <option value="6">
+                6 Months
+              </option>
+
+              <option value="12">
+                12 Months
+              </option>
 
             </select>
 
@@ -3208,14 +3285,19 @@ th{
       </div>
 
 
+      <!-- LOAD SHEDDING -->
+
       <div class="form-section"
            style="padding:0;border:0;margin:20px 0 0;">
 
-        <h3>Load Shedding Slots</h3>
+        <h3>
+          Load Shedding Slots
+        </h3>
 
         <div id="registrationLoadSlots"></div>
 
         <button class="btn btn-white"
+                type="button"
                 onclick="addRegistrationLoadSlot()">
           + Add Load Shedding Slot
         </button>
@@ -3226,11 +3308,13 @@ th{
       <div class="register-actions">
 
         <button class="btn btn-white"
+                type="button"
                 onclick="previousRegistration(3)">
           Back
         </button>
 
         <button class="btn btn-yellow"
+                type="button"
                 onclick="nextRegistration(3)">
           Continue
         </button>
@@ -3242,8 +3326,7 @@ th{
 
     <!-- ================= STEP 4 ================= -->
 
-    <div class="register-page"
-         id="registerPage4">
+    <div class="register-page" id="registerPage4">
 
       <h3 style="margin-bottom:20px;">
         Bank Details
@@ -3251,13 +3334,15 @@ th{
 
       <div class="form-grid">
 
+
         <div class="form-group">
 
           <label>
             Bank Name <span class="required">*</span>
           </label>
 
-          <input id="regBankName">
+          <input id="regBankName"
+                 required>
 
         </div>
 
@@ -3268,7 +3353,8 @@ th{
             Account Title <span class="required">*</span>
           </label>
 
-          <input id="regBankTitle">
+          <input id="regBankTitle"
+                 required>
 
         </div>
 
@@ -3280,7 +3366,8 @@ th{
           </label>
 
           <input id="regBankIBAN"
-                 placeholder="PK00XXXX0000000000000000">
+                 placeholder="PK00XXXX0000000000000000"
+                 required>
 
         </div>
 
@@ -3291,7 +3378,8 @@ th{
             Account Number <span class="required">*</span>
           </label>
 
-          <input id="regBankAccount">
+          <input id="regBankAccount"
+                 required>
 
         </div>
 
@@ -3302,15 +3390,23 @@ th{
             Payment Method <span class="required">*</span>
           </label>
 
-          <select id="regBankMethod">
+          <select id="regBankMethod" required>
 
             <option value="">
               Select Payment Method
             </option>
 
-            <option>Bank Transfer</option>
-            <option>JazzCash</option>
-            <option>EasyPaisa</option>
+            <option value="Bank Transfer">
+              Bank Transfer
+            </option>
+
+            <option value="JazzCash">
+              JazzCash
+            </option>
+
+            <option value="EasyPaisa">
+              EasyPaisa
+            </option>
 
           </select>
 
@@ -3322,11 +3418,13 @@ th{
       <div class="register-actions">
 
         <button class="btn btn-white"
+                type="button"
                 onclick="previousRegistration(4)">
           Back
         </button>
 
         <button class="btn btn-yellow"
+                type="button"
                 onclick="nextRegistration(4)">
           Continue
         </button>
@@ -3338,8 +3436,7 @@ th{
 
     <!-- ================= STEP 5 ================= -->
 
-    <div class="register-page"
-         id="registerPage5">
+    <div class="register-page" id="registerPage5">
 
       <h3 style="margin-bottom:20px;">
         Final Confirmation
@@ -3365,7 +3462,8 @@ th{
         <label style="display:flex;gap:9px;align-items:flex-start;font-size:13px;">
 
           <input type="checkbox"
-                 id="regConsent">
+                 id="regConsent"
+                 required>
 
           <span>
             I confirm that the information provided by me is correct,
@@ -3381,11 +3479,13 @@ th{
       <div class="register-actions">
 
         <button class="btn btn-white"
+                type="button"
                 onclick="previousRegistration(5)">
           Back
         </button>
 
         <button class="btn btn-yellow"
+                type="button"
                 onclick="createVendorAccount()">
           Create Vendor Account
         </button>
@@ -3397,7 +3497,6 @@ th{
   </div>
 
 </div>
-
 
 <!-- =========================================================
      TOAST
