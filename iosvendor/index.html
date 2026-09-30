@@ -4170,120 +4170,185 @@ async function createVendorAccount(){
 
 async function loginVendor(){
 
-  const identity=
+  const identity =
     document
-      .getElementById(
-        "loginIdentity"
-      )
+      .getElementById("loginIdentity")
       .value
       .trim();
 
-  const password=
+  const password =
     document
-      .getElementById(
-        "loginPassword"
-      )
+      .getElementById("loginPassword")
       .value;
 
   if(!identity || !password){
 
-    toast(
-      "Please enter login details"
-    );
+    toast("Please enter login details");
 
     return;
+  }
 
+  if(!identity.includes("@")){
+
+    toast("Please login using your registered email");
+
+    return;
   }
 
   try{
 
-    let email=identity;
-
-    if(
-      !identity.includes("@")
-    ){
-
-      const {
-        data:phoneVendor,
-        error:phoneError
-      }=
-        await supabaseClient
-          .from("vendors")
-          .select("email")
-          .eq("phone",identity)
-          .maybeSingle();
-
-      if(phoneError){
-
-        console.error(
-          phoneError
-        );
-
-        toast(
-          "Unable to find vendor"
-        );
-
-        return;
-
-      }
-
-      if(!phoneVendor){
-
-        toast(
-          "Email or phone is incorrect"
-        );
-
-        return;
-
-      }
-
-      email=phoneVendor.email;
-
-    }
-
     const {
-      data:authData,
-      error:authError
-    }=
+      data: authData,
+      error: authError
+    } =
       await supabaseClient.auth.signInWithPassword({
 
-        email:email,
+        email: identity,
 
-        password:password
+        password: password
 
       });
 
     if(authError){
 
+      console.error(authError);
+
       toast(
-        authError.message||
-        "Login failed"
+        authError.message ||
+        "Email or password is incorrect"
       );
 
       return;
-
     }
 
-    currentUser=
-      authData.user;
+    if(!authData || !authData.user){
 
-    await loadVendorFromSupabase();
+      toast("Login failed");
 
-    closeModal(
-      "loginModal"
-    );
+      return;
+    }
+
+    currentUser = authData.user;
+
+    const {
+      data: vendor,
+      error: vendorError
+    } =
+      await supabaseClient
+        .from("vendors")
+        .select("*")
+        .eq("user_id", currentUser.id)
+        .maybeSingle();
+
+    if(vendorError){
+
+      console.error(vendorError);
+
+      toast("Unable to load vendor profile");
+
+      return;
+    }
+
+    if(!vendor){
+
+      toast("Vendor profile not found");
+
+      return;
+    }
+
+    data.vendor = {
+
+      shopName: vendor.vendor_name || "",
+
+      owner: vendor.owner_name || "",
+
+      phone: vendor.phone || "",
+
+      email: vendor.email || currentUser.email || "",
+
+      category: vendor.category || "",
+
+      area: vendor.area || "",
+
+      phase: vendor.phase || "",
+
+      precinct: vendor.precinct || "",
+
+      sector: vendor.sector || "",
+
+      block: vendor.block || "",
+
+      address: vendor.address || "",
+
+      footfall: vendor.footfall || 0,
+
+      shopSize: vendor.shop_size || "",
+
+      lcdStatus: vendor.lcd_status || "",
+
+      lcdPrice: vendor.lcd_total_price || 0,
+
+      monthlyInstallment:
+        vendor.lcd_monthly_installment || 0,
+
+      installmentMonths:
+        vendor.lcd_installment_months || 0,
+
+      internet:
+        vendor.internet_status || "",
+
+      opening:
+        vendor.opening_time || "",
+
+      closing:
+        vendor.closing_time || "",
+
+      fridge:
+        vendor.ice_cream_fridge ? "Yes" : "No"
+
+    };
+
+    data.bank = {
+
+      bankName: vendor.bank_name || "",
+
+      accountTitle: vendor.account_title || "",
+
+      iban: vendor.iban || "",
+
+      accountNumber: vendor.account_number || "",
+
+      method: vendor.payment_method || ""
+
+    };
+
+    data.location = {
+
+      latitude: vendor.latitude,
+
+      longitude: vendor.longitude
+
+    };
+
+    data.registered = true;
+
+    data.approved =
+      vendor.status === "approved";
+
+    data.online =
+      vendor.online_status === true;
+
+    saveData();
+
+    closeModal("loginModal");
 
     openVendorPortal();
 
   }catch(error){
 
-    console.error(
-      error
-    );
+    console.error(error);
 
-    toast(
-      "Login failed"
-    );
+    toast("Login failed");
 
   }
 
