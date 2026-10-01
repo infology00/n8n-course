@@ -1,0 +1,2894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certification School — GHL Student Experience Demo</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  background:#f5f8fb;
+  color:#18324a;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+
+:root{
+  --navy:#123b63;
+  --blue:#1d5d91;
+  --blue2:#347db4;
+  --soft:#edf5fb;
+  --border:#dce6ef;
+  --green:#21865b;
+  --greenbg:#eaf7f0;
+  --orange:#b86b12;
+  --orangebg:#fff4e3;
+  --red:#c54848;
+  --redbg:#fff0f0;
+  --text:#18324a;
+  --muted:#718397;
+  --white:#fff;
+}
+
+.app{display:flex;min-height:100vh}
+
+.sidebar{
+  width:250px;
+  background:#fff;
+  border-right:1px solid var(--border);
+  position:fixed;
+  left:0;top:0;bottom:0;
+  z-index:20;
+  display:flex;
+  flex-direction:column;
+}
+
+.brand{
+  height:72px;
+  padding:17px 20px;
+  border-bottom:1px solid var(--border);
+}
+.brand-title{
+  font-size:17px;
+  font-weight:800;
+  color:var(--navy);
+}
+.brand-sub{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.nav{
+  padding:13px 11px;
+  overflow:auto;
+}
+.nav-label{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:#9aa8b6;
+  font-weight:800;
+  padding:13px 10px 7px;
+}
+.nav button{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#53687b;
+  padding:10px 11px;
+  text-align:left;
+  border-radius:8px;
+  margin:1px 0;
+  font-size:13px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.nav button:hover{background:#f2f6f9}
+.nav button.active{
+  background:#eaf3fa;
+  color:var(--navy);
+  font-weight:700;
+}
+.nav-icon{
+  width:19px;
+  text-align:center;
+  font-size:14px;
+}
+
+.sidebar-bottom{
+  margin-top:auto;
+  padding:14px;
+  border-top:1px solid var(--border);
+}
+.demo-status{
+  background:#f4f8fb;
+  border:1px solid var(--border);
+  padding:10px;
+  border-radius:9px;
+  font-size:11px;
+}
+.dot{
+  display:inline-block;
+  width:7px;height:7px;
+  background:#27a66d;
+  border-radius:50%;
+  margin-right:5px;
+}
+
+.main{
+  margin-left:250px;
+  width:calc(100% - 250px);
+}
+
+.topbar{
+  height:72px;
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 27px;
+  position:sticky;
+  top:0;
+  z-index:15;
+}
+.page-title{
+  font-size:18px;
+  font-weight:800;
+  color:var(--navy);
+}
+.page-context{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:3px;
+}
+.top-actions{display:flex;align-items:center;gap:10px}
+.search{
+  width:210px;
+  border:1px solid var(--border);
+  padding:9px 12px;
+  border-radius:7px;
+  outline:none;
+  font-size:12px;
+}
+.student-select{
+  border:1px solid var(--border);
+  background:#fff;
+  padding:9px 11px;
+  border-radius:7px;
+  color:var(--text);
+  font-size:12px;
+}
+.demo-badge{
+  background:#eaf3fa;
+  color:var(--navy);
+  border-radius:20px;
+  padding:7px 11px;
+  font-size:10px;
+  font-weight:800;
+}
+
+.content{
+  padding:27px;
+  max-width:1600px;
+  margin:auto;
+}
+
+.problem-solution{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-bottom:20px;
+}
+.ps{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:17px 19px;
+}
+.ps.problem{border-left:4px solid #d97777}
+.ps.solution{border-left:4px solid var(--blue)}
+.ps-label{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-weight:900;
+  margin-bottom:7px;
+}
+.problem .ps-label{color:var(--red)}
+.solution .ps-label{color:var(--blue)}
+.ps h3{
+  margin:0 0 5px;
+  font-size:14px;
+}
+.ps p{
+  margin:0;
+  color:#617589;
+  font-size:12px;
+  line-height:1.55;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  margin:24px 0 12px;
+}
+.section-head h2{
+  margin:0;
+  font-size:17px;
+  color:var(--navy);
+}
+.section-head p{
+  margin:4px 0 0;
+  font-size:11px;
+  color:var(--muted);
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px;
+}
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:17px;
+}
+.metric-label{
+  color:var(--muted);
+  font-size:11px;
+}
+.metric-value{
+  color:var(--navy);
+  font-size:25px;
+  font-weight:800;
+  margin-top:6px;
+}
+.metric-note{
+  font-size:10px;
+  margin-top:6px;
+  color:#718397;
+}
+
+.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:15px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+
+.panel{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:11px;
+  overflow:hidden;
+}
+.panel-head{
+  padding:14px 16px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.panel-head h3{
+  margin:0;
+  font-size:13px;
+  color:var(--navy);
+}
+.panel-body{padding:16px}
+
+.badge{
+  display:inline-block;
+  padding:4px 7px;
+  border-radius:5px;
+  font-size:9px;
+  font-weight:800;
+  margin:2px;
+}
+.badge.blue{background:#eaf3fa;color:var(--blue)}
+.badge.green{background:var(--greenbg);color:var(--green)}
+.badge.orange{background:var(--orangebg);color:var(--orange)}
+.badge.red{background:var(--redbg);color:var(--red)}
+.badge.gray{background:#f0f3f6;color:#66798b}
+
+.btn{
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--navy);
+  padding:8px 12px;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:700;
+}
+.btn:hover{background:#f5f8fb}
+.btn.primary{
+  background:var(--navy);
+  color:#fff;
+  border-color:var(--navy);
+}
+.btn.small{padding:6px 9px;font-size:10px}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+th{
+  background:#f7fafc;
+  text-align:left;
+  padding:10px 12px;
+  color:#738496;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+td{
+  padding:11px 12px;
+  border-top:1px solid #edf1f4;
+  font-size:11px;
+  color:#40566b;
+}
+td strong{color:var(--navy)}
+
+.progress{
+  height:7px;
+  background:#e9eef2;
+  border-radius:20px;
+  overflow:hidden;
+}
+.progress span{
+  display:block;
+  height:100%;
+  background:var(--blue);
+  border-radius:20px;
+}
+.progress-row{
+  margin:11px 0;
+}
+.progress-label{
+  display:flex;
+  justify-content:space-between;
+  font-size:10px;
+  color:#687d90;
+  margin-bottom:5px;
+}
+
+.timeline{position:relative}
+.timeline-item{
+  display:flex;
+  gap:11px;
+  padding:10px 0;
+  border-bottom:1px solid #edf1f4;
+}
+.timeline-dot{
+  width:8px;height:8px;
+  background:var(--blue);
+  border-radius:50%;
+  margin-top:4px;
+  flex:none;
+}
+.timeline-time{
+  font-size:9px;
+  color:#9aa8b6;
+}
+.timeline-title{
+  font-size:11px;
+  font-weight:700;
+  color:var(--navy);
+}
+.timeline-desc{
+  font-size:10px;
+  color:#748597;
+  margin-top:2px;
+}
+
+.student-card{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+.avatar{
+  width:46px;height:46px;
+  border-radius:50%;
+  background:#dcecf7;
+  color:var(--navy);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:15px;
+}
+.student-name{
+  font-weight:800;
+  font-size:14px;
+  color:var(--navy);
+}
+.student-meta{
+  color:#7a8b9b;
+  font-size:10px;
+  margin-top:3px;
+}
+
+.workflow-list{
+  display:grid;
+  gap:10px;
+}
+.workflow{
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:13px;
+  background:#fff;
+  cursor:pointer;
+}
+.workflow:hover{border-color:#b7ccdc}
+.workflow-top{
+  display:flex;
+  justify-content:space-between;
+}
+.workflow-name{
+  font-size:12px;
+  font-weight:800;
+  color:var(--navy);
+}
+.workflow-desc{
+  font-size:10px;
+  color:#738496;
+  margin-top:5px;
+}
+.workflow-stats{
+  display:flex;
+  gap:15px;
+  margin-top:9px;
+  font-size:9px;
+  color:#8393a1;
+}
+
+.workflow-canvas{
+  background:#f4f7fa;
+  padding:22px;
+  border-radius:8px;
+}
+.flow-step{
+  width:80%;
+  max-width:620px;
+  margin:0 auto;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:12px 14px;
+  position:relative;
+}
+.flow-step:not(:last-child):after{
+  content:"↓";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:-24px;
+  color:#90a2b2;
+  font-weight:bold;
+}
+.flow-type{
+  font-size:8px;
+  text-transform:uppercase;
+  font-weight:900;
+  color:var(--blue);
+  margin-bottom:5px;
+}
+.flow-title{
+  font-size:11px;
+  font-weight:800;
+  color:var(--navy);
+}
+.flow-desc{
+  font-size:10px;
+  color:#718397;
+  margin-top:3px;
+}
+.flow-arrow-space{height:27px}
+
+.email{
+  border:1px solid var(--border);
+  border-radius:9px;
+  overflow:hidden;
+  background:#fff;
+}
+.email-head{
+  padding:12px;
+  background:#f7fafc;
+  border-bottom:1px solid var(--border);
+}
+.email-row{
+  display:flex;
+  margin:4px 0;
+  font-size:10px;
+}
+.email-row span:first-child{
+  width:55px;
+  color:#8796a4;
+}
+.email-body{
+  padding:22px;
+  font-size:11px;
+  color:#53687b;
+  line-height:1.65;
+}
+.email-body h2{
+  color:var(--navy);
+  font-size:17px;
+}
+.email-cta{
+  display:inline-block;
+  padding:9px 16px;
+  background:var(--navy);
+  color:#fff;
+  border-radius:5px;
+  font-size:10px;
+  font-weight:800;
+  margin:8px 0;
+}
+
+.lesson{
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:13px;
+  margin-bottom:8px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.lesson-icon{
+  width:35px;height:35px;
+  border-radius:7px;
+  background:#edf5fb;
+  color:var(--blue);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+}
+.lesson-title{
+  font-size:11px;
+  font-weight:800;
+  color:var(--navy);
+}
+.lesson-sub{
+  font-size:9px;
+  color:#7b8c9b;
+  margin-top:3px;
+}
+
+.community{
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  margin-bottom:9px;
+}
+.community-top{
+  display:flex;
+  justify-content:space-between;
+}
+.community-name{
+  font-size:12px;
+  font-weight:800;
+  color:var(--navy);
+}
+.community-desc{
+  font-size:10px;
+  color:#748597;
+  margin-top:5px;
+}
+.community-members{
+  font-size:9px;
+  color:#8b9aa7;
+  margin-top:8px;
+}
+
+.access-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid #edf1f4;
+  font-size:10px;
+}
+.access-name{font-weight:700;color:var(--navy)}
+
+.check{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:9px 0;
+  font-size:10px;
+  color:#52697b;
+}
+.checkmark{
+  width:18px;height:18px;
+  border-radius:4px;
+  background:var(--greenbg);
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10px;
+  font-weight:bold;
+}
+.checkmark.no{
+  background:#f4f6f8;
+  color:#a2adb7;
+}
+
+.call-card{
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:16px;
+}
+.call-title{
+  font-size:14px;
+  font-weight:800;
+  color:var(--navy);
+}
+.call-info{
+  display:flex;
+  gap:17px;
+  margin:10px 0;
+  font-size:10px;
+  color:#718397;
+}
+.zoom{
+  background:#eaf3fa;
+  color:var(--blue);
+  border-radius:6px;
+  padding:8px 11px;
+  font-size:10px;
+  font-weight:800;
+  display:inline-block;
+}
+
+.sop{
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:15px;
+}
+.sop h4{
+  margin:0 0 8px;
+  color:var(--navy);
+  font-size:12px;
+}
+.sop ol{
+  padding-left:18px;
+  margin:0;
+}
+.sop li{
+  font-size:10px;
+  color:#667b8d;
+  padding:3px 0;
+}
+
+.notice{
+  padding:11px 13px;
+  background:#f1f7fb;
+  border:1px solid #dcebf5;
+  border-radius:8px;
+  font-size:10px;
+  color:#5e7487;
+  margin-bottom:14px;
+}
+.notice strong{color:var(--navy)}
+
+.req-row{
+  display:grid;
+  grid-template-columns:1.2fr 1.4fr 1fr;
+  gap:0;
+  border-top:1px solid #edf1f4;
+}
+.req-row > div{
+  padding:12px;
+  font-size:10px;
+  border-right:1px solid #edf1f4;
+}
+.req-head{
+  background:#f7fafc;
+  font-size:9px!important;
+  text-transform:uppercase;
+  color:#7d8d9b;
+  font-weight:800;
+}
+
+.drawer{
+  position:fixed;
+  right:-560px;
+  top:0;
+  bottom:0;
+  width:540px;
+  background:#fff;
+  box-shadow:-10px 0 30px rgba(22,53,80,.12);
+  z-index:50;
+  transition:.25s;
+  overflow:auto;
+}
+.drawer.open{right:0}
+.drawer-head{
+  padding:18px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+}
+.drawer-head h3{
+  margin:0;
+  color:var(--navy);
+  font-size:15px;
+}
+.close{
+  border:0;
+  background:#f3f6f8;
+  border-radius:5px;
+  width:28px;height:28px;
+}
+.drawer-body{padding:18px}
+
+.modal-bg{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(12,35,55,.32);
+  z-index:100;
+  align-items:center;
+  justify-content:center;
+}
+.modal-bg.open{display:flex}
+.modal{
+  width:500px;
+  max-width:90%;
+  background:#fff;
+  border-radius:12px;
+  padding:20px;
+  box-shadow:0 20px 60px rgba(0,0,0,.15);
+}
+.modal h3{margin:0 0 7px;color:var(--navy)}
+.modal p{font-size:11px;color:#718397}
+.form-row{margin:12px 0}
+.form-row label{
+  display:block;
+  font-size:10px;
+  font-weight:800;
+  color:#617589;
+  margin-bottom:5px;
+}
+.form-row input,.form-row select,.form-row textarea{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:9px;
+  outline:none;
+  font-size:11px;
+}
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:17px;
+}
+
+.toast{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  background:var(--navy);
+  color:#fff;
+  padding:12px 15px;
+  border-radius:7px;
+  font-size:11px;
+  box-shadow:0 8px 30px rgba(0,0,0,.15);
+  transform:translateY(100px);
+  opacity:0;
+  transition:.25s;
+  z-index:200;
+}
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.hidden{display:none!important}
+
+@media(max-width:1050px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .grid2,.grid3{grid-template-columns:1fr}
+}
+@media(max-width:750px){
+  .sidebar{width:65px}
+  .brand-title,.brand-sub,.nav-label,.nav button span:not(.nav-icon),.demo-status{display:none}
+  .brand{text-align:center;padding:22px 5px}
+  .nav button{justify-content:center}
+  .main{margin-left:65px;width:calc(100% - 65px)}
+  .topbar{padding:0 12px}
+  .search{display:none}
+  .content{padding:15px}
+  .problem-solution{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr 1fr}
+  .drawer{width:90%}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-title">Certification School</div>
+    <div class="brand-sub">GHL Student Experience Demo</div>
+  </div>
+
+  <nav class="nav">
+
+    <div class="nav-label">Overview</div>
+    <button class="active" onclick="showPage('dashboard',this)">
+      <span class="nav-icon">▦</span><span>Dashboard</span>
+    </button>
+
+    <div class="nav-label">Student Experience</div>
+    <button onclick="showPage('students',this)">
+      <span class="nav-icon">◉</span><span>Students / Student 360</span>
+    </button>
+    <button onclick="showPage('courses',this)">
+      <span class="nav-icon">▤</span><span>Courses & Library</span>
+    </button>
+    <button onclick="showPage('communities',this)">
+      <span class="nav-icon">◎</span><span>Communities</span>
+    </button>
+    <button onclick="showPage('calls',this)">
+      <span class="nav-icon">◷</span><span>Live Calls</span>
+    </button>
+
+    <div class="nav-label">Automation</div>
+    <button onclick="showPage('automations',this)">
+      <span class="nav-icon">⚙</span><span>Automations</span>
+    </button>
+    <button onclick="showPage('emails',this)">
+      <span class="nav-icon">✉</span><span>Emails & Messages</span>
+    </button>
+
+    <div class="nav-label">Management</div>
+    <button onclick="showPage('progress',this)">
+      <span class="nav-icon">◒</span><span>Progress & Certification</span>
+    </button>
+    <button onclick="showPage('tasks',this)">
+      <span class="nav-icon">✓</span><span>Tasks & Support</span>
+    </button>
+    <button onclick="showPage('fields',this)">
+      <span class="nav-icon">#</span><span>Tags & Custom Fields</span>
+    </button>
+    <button onclick="showPage('activity',this)">
+      <span class="nav-icon">↻</span><span>Activity Timeline</span>
+    </button>
+
+    <div class="nav-label">Make It Easy</div>
+    <button onclick="showPage('sops',this)">
+      <span class="nav-icon">☷</span><span>SOPs & How-To</span>
+    </button>
+    <button onclick="showPage('requirements',this)">
+      <span class="nav-icon">▥</span><span>Client Requirement Map</span>
+    </button>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div class="demo-status">
+      <span class="dot"></span>
+      <strong>Demo Environment</strong><br>
+      <span style="color:#80909e">No live student data</span>
+    </div>
+  </div>
+</aside>
+
+
+<!-- MAIN -->
+<main class="main">
+
+<header class="topbar">
+  <div>
+    <div class="page-title" id="pageTitle">School Overview</div>
+    <div class="page-context" id="pageContext">
+      How the complete student experience would work inside GHL
+    </div>
+  </div>
+
+  <div class="top-actions">
+    <input class="search" placeholder="Search student, course, workflow..." oninput="globalSearch(this.value)">
+    <select class="student-select" onchange="selectStudent(this.value)">
+      <option>Sarah Mitchell</option>
+      <option>James Carter</option>
+      <option>Emma Wilson</option>
+    </select>
+    <div class="demo-badge">GHL DEMO</div>
+  </div>
+</header>
+
+
+<div class="content">
+
+<!-- ================= DASHBOARD ================= -->
+<section id="page-dashboard" class="page">
+
+<div class="problem-solution">
+  <div class="ps problem">
+    <div class="ps-label">Client's Problem</div>
+    <h3>"I don't want to manually manage students, content, emails and access every week."</h3>
+    <p>The school needs one simple place to see who joined, what they have access to, who is progressing, who needs help and who is ready for certification.</p>
+  </div>
+  <div class="ps solution">
+    <div class="ps-label">Our GHL Solution</div>
+    <h3>One connected student-management system.</h3>
+    <p>We connect contacts, courses, communities, emails, live calls, progress, tasks and automations so routine work happens automatically while the team stays in control.</p>
+  </div>
+</div>
+
+<div class="notice">
+  <strong>Follow one student through the entire demo:</strong>
+  Sarah Mitchell is a Year 1 Certification student in Cohort 2026-A. Every page below uses her real-looking journey so you can see exactly what happens.
+</div>
+
+<div class="cards">
+  <div class="card">
+    <div class="metric-label">Active Students</div>
+    <div class="metric-value">248</div>
+    <div class="metric-note">Students currently enrolled</div>
+  </div>
+  <div class="card">
+    <div class="metric-label">Students Needing Attention</div>
+    <div class="metric-value">17</div>
+    <div class="metric-note">Detected automatically</div>
+  </div>
+  <div class="card">
+    <div class="metric-label">Average Progress</div>
+    <div class="metric-value">68%</div>
+    <div class="metric-note">Across active students</div>
+  </div>
+  <div class="card">
+    <div class="metric-label">Certification Ready</div>
+    <div class="metric-value">31</div>
+    <div class="metric-note">Awaiting review</div>
+  </div>
+</div>
+
+<div class="section-head">
+  <div>
+    <h2>Sarah's Student Journey</h2>
+    <p>This is what happens from enrollment to certification.</p>
+  </div>
+  <button class="btn primary" onclick="runJourney()">▶ Run Student Journey</button>
+</div>
+
+<div class="panel">
+  <div class="panel-body">
+    <div class="grid3">
+
+      <div>
+        <div class="student-card">
+          <div class="avatar">SM</div>
+          <div>
+            <div class="student-name">Sarah Mitchell</div>
+            <div class="student-meta">sarah@example.com · Cohort 2026-A</div>
+          </div>
+        </div>
+
+        <div style="margin-top:17px">
+          <span class="badge green">ACTIVE</span>
+          <span class="badge blue">YEAR 1</span>
+          <span class="badge blue">COHORT 2026-A</span>
+        </div>
+
+        <div class="progress-row">
+          <div class="progress-label"><span>Course Progress</span><strong>42%</strong></div>
+          <div class="progress"><span style="width:42%"></span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+              <div class="timeline-time">02 Sep · 09:00</div>
+              <div class="timeline-title">Student enrolled</div>
+              <div class="timeline-desc">Enrollment form submitted.</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+              <div class="timeline-time">02 Sep · 09:02</div>
+              <div class="timeline-title">Access granted</div>
+              <div class="timeline-desc">Course + Main Community.</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div>
+              <div class="timeline-time">02 Sep · 09:03</div>
+              <div class="timeline-title">Welcome email sent</div>
+              <div class="timeline-desc">Student received starting instructions.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <strong style="font-size:11px;color:#123b63">Current Student Status</strong>
+
+        <div class="check">
+          <div class="checkmark">✓</div>
+          Course access active
+        </div>
+        <div class="check">
+          <div class="checkmark">✓</div>
+          Main community joined
+        </div>
+        <div class="check">
+          <div class="checkmark">✓</div>
+          Weekly emails active
+        </div>
+        <div class="check">
+          <div class="checkmark no">–</div>
+          Week 3 assignment incomplete
+        </div>
+
+        <button class="btn small primary" style="margin-top:8px" onclick="showPage('students')">
+          Open Sarah's Student 360 →
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="section-head">
+  <div>
+    <h2>What GHL Handles vs What You Handle</h2>
+    <p>The goal is to reduce the client's weekly workload.</p>
+  </div>
+</div>
+
+<div class="grid2">
+
+<div class="panel">
+  <div class="panel-head"><h3>GHL handles automatically</h3><span class="badge green">AUTOMATED</span></div>
+  <div class="panel-body">
+    <div class="check"><div class="checkmark">✓</div> Grant course access</div>
+    <div class="check"><div class="checkmark">✓</div> Grant community access</div>
+    <div class="check"><div class="checkmark">✓</div> Send welcome email</div>
+    <div class="check"><div class="checkmark">✓</div> Release weekly content</div>
+    <div class="check"><div class="checkmark">✓</div> Send Zoom reminders</div>
+    <div class="check"><div class="checkmark">✓</div> Follow up missed calls</div>
+    <div class="check"><div class="checkmark">✓</div> Remind overdue assignments</div>
+    <div class="check"><div class="checkmark">✓</div> Flag inactive students</div>
+    <div class="check"><div class="checkmark">✓</div> Create admin tasks when human action is needed</div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-head"><h3>You / Your Team handles</h3><span class="badge blue">SIMPLE</span></div>
+  <div class="panel-body">
+    <div class="check"><div class="checkmark">1</div> Upload the week's teaching material</div>
+    <div class="check"><div class="checkmark">2</div> Add the Zoom link</div>
+    <div class="check"><div class="checkmark">3</div> Upload the replay</div>
+    <div class="check"><div class="checkmark">4</div> Review students who need personal help</div>
+    <div class="check"><div class="checkmark">5</div> Review certification-ready students</div>
+    <div style="margin-top:13px;padding:10px;background:#f6f9fb;border-radius:7px;font-size:10px;color:#718397">
+      <strong style="color:#123b63">Goal:</strong> You operate the school. You should not need a developer every time you upload a lesson or send a reminder.
+    </div>
+  </div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= STUDENTS ================= -->
+<section id="page-students" class="page hidden">
+
+<div class="problem-solution">
+  <div class="ps problem">
+    <div class="ps-label">Client's Problem</div>
+    <h3>"I need to know exactly what each student has access to and what is happening with them."</h3>
+    <p>Student information can become scattered between course access, emails, community membership, attendance, assignments and notes.</p>
+  </div>
+  <div class="ps solution">
+    <div class="ps-label">Our GHL Solution</div>
+    <h3>One Student 360 record.</h3>
+    <p>Each student has one contact record containing their status, program, cohort, tags, access, progress, attendance, communication history and next action.</p>
+  </div>
+</div>
+
+<div class="grid2">
+
+<div class="panel">
+  <div class="panel-head">
+    <h3>Student 360 — Sarah Mitchell</h3>
+    <button class="btn small" onclick="openModal('student')">Edit Student</button>
+  </div>
+  <div class="panel-body">
+
+    <div class="student-card">
+      <div class="avatar">SM</div>
+      <div>
+        <div class="student-name">Sarah Mitchell</div>
+        <div class="student-meta">sarah@example.com · +1 555 0192</div>
+      </div>
+    </div>
+
+    <div style="margin:17px 0">
+      <span class="badge green">ACTIVE</span>
+      <span class="badge blue">YEAR 1 CERTIFICATION</span>
+      <span class="badge blue">COHORT 2026-A</span>
+    </div>
+
+    <div class="grid3">
+      <div class="card" style="padding:11px">
+        <div class="metric-label">Progress</div>
+        <strong style="font-size:18px;color:#123b63">42%</strong>
+      </div>
+      <div class="card" style="padding:11px">
+        <div class="metric-label">Attendance</div>
+        <strong style="font-size:18px;color:#123b63">92%</strong>
+      </div>
+      <div class="card" style="padding:11px">
+        <div class="metric-label">Assignments</div>
+        <strong style="font-size:18px;color:#123b63">4 / 6</strong>
+      </div>
+    </div>
+
+    <div style="margin-top:17px">
+      <strong style="font-size:11px;color:#123b63">Custom Fields</strong>
+      <table style="margin-top:7px">
+        <tr><td>Student Status</td><td><strong>Active</strong></td></tr>
+        <tr><td>Program</td><td><strong>Year 1 Certification</strong></td></tr>
+        <tr><td>Cohort</td><td><strong>2026-A</strong></td></tr>
+        <tr><td>Course Progress</td><td><strong>42%</strong></td></tr>
+        <tr><td>Attendance %</td><td><strong>92%</strong></td></tr>
+        <tr><td>Certification Status</td><td><strong>In Progress</strong></td></tr>
+        <tr><td>Next Required Action</td><td><strong>Complete Week 3 Assignment</strong></td></tr>
+      </table>
+    </div>
+
+    <div style="margin-top:15px">
+      <strong style="font-size:11px;color:#123b63">Tags</strong><br>
+      <span class="badge blue">student:active</span>
+      <span class="badge blue">cohort:2026-a</span>
+      <span class="badge blue">program:year1</span>
+      <span class="badge blue">community:main</span>
+      <span class="badge orange">assignment:due</span>
+    </div>
+
+  </div>
+</div>
+
+<div>
+
+<div class="panel">
+  <div class="panel-head"><h3>Student Access</h3></div>
+  <div class="panel-body">
+    <div class="access-row">
+      <div><div class="access-name">Year 1 Certification</div><span class="badge green">ACTIVE</span></div>
+      <span>Course</span>
+    </div>
+    <div class="access-row">
+      <div><div class="access-name">Main School Community</div><span class="badge green">JOINED</span></div>
+      <span>Community</span>
+    </div>
+    <div class="access-row">
+      <div><div class="access-name">Cohort 2026-A</div><span class="badge green">JOINED</span></div>
+      <span>Group</span>
+    </div>
+    <div class="access-row">
+      <div><div class="access-name">Advanced Practice</div><span class="badge gray">LOCKED</span></div>
+      <span>Community</span>
+    </div>
+    <div class="access-row">
+      <div><div class="access-name">Alumni Community</div><span class="badge gray">LOCKED</span></div>
+      <span>Community</span>
+    </div>
+  </div>
+</div>
+
+<div class="panel" style="margin-top:15px">
+  <div class="panel-head">
+    <h3>Recent Student Activity</h3>
+    <button class="btn small" onclick="showPage('activity')">Full Timeline</button>
+  </div>
+  <div class="panel-body">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div><div class="timeline-time">Today · 09:14</div><div class="timeline-title">Opened Week 3 lesson</div><div class="timeline-desc">Course activity recorded.</div></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div><div class="timeline-time">Yesterday · 18:02</div><div class="timeline-title">Attended live call</div><div class="timeline-desc">Attendance marked automatically.</div></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div><div class="timeline-time">30 Sep · 09:00</div><div class="timeline-title">Week 3 released</div><div class="timeline-desc">Release workflow completed.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<div class="section-head">
+  <div><h2>Simple Student Actions</h2><p>These buttons simulate changes the admin may make.</p></div>
+</div>
+
+<div class="panel">
+  <div class="panel-body" style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn primary" onclick="studentAction('assignment')">✓ Mark Assignment Complete</button>
+    <button class="btn" onclick="studentAction('attendance')">Add Attendance</button>
+    <button class="btn" onclick="studentAction('community')">Grant Community Access</button>
+    <button class="btn" onclick="studentAction('support')">Create Support Task</button>
+  </div>
+</div>
+
+</section>
+
+
+<!-- ================= COURSES ================= -->
+<section id="page-courses" class="page hidden">
+
+<div class="problem-solution">
+  <div class="ps problem">
+    <div class="ps-label">Client's Problem</div>
+    <h3>"I want to add new teaching material every week without needing technical help."</h3>
+    <p>The existing course needs to be simplified so written lessons, PDFs, audio, videos, recordings, quizzes and assignments are easy to add repeatedly.</p>
+  </div>
+  <div class="ps solution">
+    <div class="ps-label">Our GHL Solution</div>
+    <h3>A reusable weekly course structure.</h3>
+    <p>Build the structure once. Each week follows the same simple pattern, so the team mainly replaces the content rather than rebuilding the system.</p>
+  </div>
+</div>
+
+<div class="notice">
+  <strong>Weekly process:</strong> Create Week → Add lesson → Upload resources → Add quiz/assignment → Set release date. Everything else can connect to the existing student automations.
+</div>
+
+<div class="grid2">
+
+<div class="panel">
+  <div class="panel-head">
+    <h3>Year 1 Certification — Course Library</h3>
+    <button class="btn small primary" onclick="openModal('lesson')">+ Add Week</button>
+  </div>
+  <div class="panel-body">
+
+    <div class="lesson">
+      <div class="lesson-icon">01</div>
+      <div style="flex:1">
+        <div class="lesson-title">Week 01 — Foundations</div>
+        <div class="lesson-sub">Video · PDF · Audio Practice · Quiz · Assignment</div>
+      </div>
+      <span class="badge green">COMPLETE</span>
+    </div>
+
+    <div class="lesson">
+      <div class="lesson-icon">02</div>
+      <div style="flex:1">
+        <div class="lesson-title">Week 02 — Core Practice</div>
+        <div class="lesson-sub">Video · Workbook · Quiz · Assignment</div>
+      </div>
+      <span class="badge green">COMPLETE</span>
+    </div>
+
+    <div class="lesson" style="border-color:#b8d2e4">
+      <div class="lesson-icon">03</div>
+      <div style="flex:1">
+        <div class="lesson-title">Week 03 — Applied Learning</div>
+        <div class="lesson-sub">Recording · PDF · Audio · Quiz · Assignment</div>
+      </div>
+      <span class="badge blue">CURRENT</span>
+    </div>
+
+    <div class="lesson">
+      <div class="lesson-icon">04</div>
+      <div style="flex:1">
+        <div class="lesson-title">Week 04 — Integration</div>
+        <div class="lesson-sub">Content not released yet</div>
+      </div>
+      <span class="badge gray">SCHEDULED</span>
+    </div>
+
+    <div class="lesson">
+      <div class="lesson-icon">05</div>
+      <div style="flex:1">
+        <div class="lesson-title">Week 05 — Advanced Practice</div>
+        <div class="lesson-sub">Content not released yet</div>
+      </div>
+      <span class="badge gray">SCHEDULED</span>
+    </div>
+
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-head"><h3>Week 03 — Actual Content</h3><span class="badge blue">RELEASED</span></div>
+  <div class="panel-body">
+
+    <div style="padding:12px;background:#f5f9fc;border-radius:7px;margin-bottom:12px">
+      <div style="font-size:9px;color:#7b8c9b">RELEASE</div>
+      <strong style="font-size:12px;color:#123b63">Monday, 09:00 AM</strong>
+    </div>
+
+    <div class="lesson" onclick="toast('Opening video preview...')">
+      <div class="lesson-icon">▶</div>
+      <div><div class="lesson-title">Applied Learning — Video Lesson</div><div class="lesson-sub">42 minutes · Video</div></div>
+    </div>
+
+    <div class="lesson" onclick="toast('Opening PDF preview...')">
+      <div class="lesson-icon">PDF</div>
+      <div><div class="lesson-title">Week 3 Workbook</div><div class="lesson-sub">12 pages · PDF</div></div>
+    </div>
+
+    <div class="lesson" onclick="toast('Playing audio practice...')">
+      <div class="lesson-icon">♫</div>
+      <div><div class="lesson-title">Guided Audio Practice</div><div class="lesson-sub">18 minutes · Audio</div></div>
+    </div>
+
+    <div class="lesson">
+      <div class="lesson-icon">?</div>
+      <div><div class="lesson-title">Week 3 Knowledge Check</div><div class="lesson-sub">10 questions · Quiz</div></div>
+      <span class="badge blue">10 Q</span>
+    </div>
+
+    <div class="lesson">
+      <div class="lesson-icon">✓</div>
+      <div><div class="lesson-title">Week 3 Assignment</div><div class="lesson-sub">Required · Due Friday</div></div>
+      <span class="badge orange">DUE</span>
+    </div>
+
+    <button class="btn primary" style="width:100%;margin-top:8px" onclick="toast('Week 3 content preview opened')">
+      Preview Student View
+    </button>
+  </div>
+</div>
+
+</div>
+
+<div class="section-head">
+  <div><h2>Weekly Content Process</h2><p>The client should be able to repeat this every week.</p></div>
+</div>
+
+<div class="grid3">
+  <div class="card">
+    <div class="metric-value" style="font-size:18px">01</div>
+    <strong style="font-size:12px">Add Content</strong>
+    <p style="font-size:10px;color:#718397">Upload video, PDF, audio or recording.</p>
+  </div>
+  <div class="card">
+    <div class="metric-value" style="font-size:18px">02</div>
+    <strong style="font-size:12px">Add Assessment</strong>
+    <p style="font-size:10px;color:#718397">Add quiz and assignment instructions.</p>
+  </div>
+  <div class="card">
+    <div class="metric-value" style="font-size:18px">03</div>
+    <strong style="font-size:12px">Schedule</strong>
+    <p style="font-size:10px;color:#718397">Set release date. The connected workflow handles notifications.</p>
+  </div>
+</div>
+
+</section>
+
+
+<!-- ================= COMMUNITIES ================= -->
+<section id="page-communities" class="page hidden">
+
+<div class="problem-solution">
+  <div class="ps problem">
+    <div class="ps-label">Client's Problem</div>
+    <h3>"I need one main school community plus different groups for different parts of the program."</h3>
+    <p>Students should automatically receive the spaces they are entitled to without accidentally seeing private groups.</p>
+  </div>
+  <div class="ps solution">
+    <div class="ps-label">Our GHL Solution</div>
+    <h3>Access is controlled by enrollment, cohort and student status.</h3>
+    <p>We create the communities once and connect access rules to the student's program, cohort, certification status and relevant tags.</p>
+  </div>
+</div>
+
+<div class="grid2">
+
+<div class="panel">
+  <div class="panel-head">
+    <h3>School Communities</h3>
+    <button class="btn small primary" onclick="openModal('community')">+ Add Community</button>
+  </div>
+  <div class="panel-body">
+
+    <div class="community">
+      <div class="community-top">
+        <div class="community-name">Main School Community</div>
+        <span class="badge green">ACTIVE</span>
+      </div>
+      <div class="community-desc">All enrolled students. Announcements, questions and general support.</div>
+      <div class="community-members">248 members · Access: Student Status = Active</div>
+    </div>
+
+    <div class="community">
+      <div class="community-top">
+        <div class="community-name">Cohort 2026-A</div>
+        <span class="badge green">ACTIVE</span>
+      </div>
+      <div class="community-desc">Private cohort discussions and cohort-specific updates.</div>
+      <div class="community-members">72 members · Access: cohort:2026-a</div>
+    </div>
+
+    <div class="community">
+      <div class="community-top">
+        <div class="community-name">Advanced Practice Group</div>
+        <span class="badge blue">PRIVATE</span>
+      </div>
+      <div class="community-desc">For students who reach the advanced-practice stage.</div>
+      <div class="community-members">38 members · Access: Advanced status</div>
+    </div>
+
+    <div class="community">
+      <div class="community-top">
+        <div class="community-name">Certification Support</div>
+        <span class="badge blue">PRIVATE</span>
+      </div>
+      <div class="community-desc">Support for certification requirements and final assessment.</div>
+      <div class="community-members">31 members · Access: cert:eligible</div>
+    </div>
+
+    <div class="community">
+      <div class="community-top">
+        <div class="community-name">Alumni Community</div>
+        <span class="badge gray">LOCKED</span>
+      </div>
+      <div class="community-desc">Automatically available after certification approval.</div>
+      <div class="community-members">64 members · Access: alumni:certified</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-head"><h3>Sarah's Community Access</h3></div>
+  <div class="panel-body">
+
+    <div class="student-card">
+      <div class="avatar">SM</div>
+      <div>
+        <div class="student-name">Sarah Mitchell</div>
+        <div class="student-meta">What Sarah can currently see</div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px">
+      <div class="access-row">
+        <div class="access-name">Main School Community</div>
+        <span class="badge green">JOINED</span>
+      </div>
+      <div class="access-row">
+        <div class="access-name">Cohort 2026-A</div>
+        <span class="badge green">JOINED</span>
+      </div>
+      <div class="access-row">
+        <div class="access-name">Certification Support</div>
+        <span class="badge green">JOINED</span>
+      </div>
+      <div class="access-row">
+        <div class="access-name">Advanced Practice</div>
+        <span class="badge gray">NOT YET</span>
+      </div>
+      <div class="access-row">
+        <div class="access-name">Alumni</div>
+        <span class="badge gray">NOT YET</span>
+      </div>
+    </div>
+
+    <div style="margin-top:17px;padding:12px;background:#f4f8fb;border-radius:8px;font-size:10px;color:#65798b">
+      <strong style="color:#123b63">Example automation:</strong><br><br>
+      When Sarah becomes <strong>Certified</strong> → remove student:active → add alumni:certified → grant Alumni Community → send congratulations email.
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= AUTOMATIONS ================= -->
+<section id="page-automations" class="page hidden">
+
+<div class="problem-solution">
+  <div class="ps problem">
+    <div class="ps-label">Client's Problem</div>
+    <h3>"I want automation, but I don't want a complicated backend that needs another full-time person."</h3>
+    <p>The school needs repetitive work automated without creating hundreds of confusing workflows that nobody understands later.</p>
+  </div>
+  <div class="ps solution">
+    <div class="ps-label">Our GHL Solution</div>
+    <h3>Small number of purposeful workflows.</h3>
+    <p>Each workflow has one clear job. We use simple triggers, waits, conditions, communication and human tasks only where necessary.</p>
+  </div>
+</div>
+
+<div class="notice">
+  <strong>Design principle:</strong> Every automation below answers one question: "What repetitive task should the school no longer have to do manually?"
+</div>
+
+<div class="grid2">
+
+<div class="panel">
+  <div class="panel-head"><h3>Core School Workflows</h3><span class="badge green">7 PUBLISHED</span></div>
+  <div class="panel-body workflow-list">
+
+    <div class="workflow" onclick="openWorkflow('onboarding')">
+      <div class="workflow-top"><div class="workflow-name">01 · Student Onboarding</div><span class="badge green">PUBLISHED</span></div>
+      <div class="workflow-desc">Enrollment → access → tags → welcome email → getting started.</div>
+      <div class="workflow-stats"><span>248 completed</span><span>0 errors</span><span>Runs on enrollment</span></div>
+    </div>
+
+    <div class="workflow" onclick="openWorkflow('weekly')">
+      <div class="workflow-top"><div class="workflow-name">02 · Weekly Content Release</div><span class="badge green">PUBLISHED</span></div>
+      <div class="workflow-desc">Release weekly content → notify students → check assignment.</div>
+      <div class="workflow-stats"><span>736 releases</span><span>4 pending</span><span>Runs weekly</span></div>
+    </div>
+
+    <div class="workflow" onclick="openWorkflow('call')">
+      <div class="workflow-top"><div class="workflow-name">03 · Live Call Reminder</div><span class="badge green">PUBLISHED</span></div>
+      <div class="workflow-desc">24h reminder → 1h reminder → Zoom → attendance.</div>
+      <div class="workflow-stats"><span>12 upcoming</span><span>0 errors</span><span>Weekly</span></div>
+    </div>
+
+    <div class="workflow" onclick="openWorkflow('missed')">
+      <div class="workflow-top"><div class="workflow-name">04 · Missed Call Follow-up</div><span class="badge green">PUBLISHED</span></div>
+      <div class="workflow-desc">Missed call → send replay → check if help is needed.</div>
+      <div class="workflow-stats"><span>18 this month</span><span>16 completed</span></div>
+    </div>
+
+    <div class="workflow" onclick="openWorkflow('assignment')">
+      <div class="workflow-top"><div class="workflow-name">05 · Assignment Reminder</div><span class="badge green">PUBLISHED</span></div>
+      <div class="workflow-desc">Due date → reminder → second reminder → support task.</div>
+      <div class="workflow-stats"><span>34 pending</span><span>11 resolved</span></div>
+    </div>
+
+    <div class="workflow" onclick="openWorkflow('risk')">
+      <div class="workflow-top"><div class="workflow-name">06 · At-Risk Student Check</div><span class="badge green">PUBLISHED</span></div>
+      <div class="workflow-desc">Inactivity → at-risk tag → re-engagement → staff task.</div>
+      <div class="workflow-stats"><span>17 flagged</span><span>5 re-engaged</span></div>
+    </div>
+
+    <div class="workflow" onclick="openWorkflow('certification')">
+      <div class="workflow-top"><div class="workflow-name">07 · Certification Review</div><span class="badge green">PUBLISHED</span></div>
+      <div class="workflow-desc">Requirements complete → eligible → admin review → certified.</div>
+      <div class="workflow-stats"><span>31 ready</span><span>7 awaiting review</span></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-head"><h3>Why this reduces workload</h3></div>
+  <div class="panel-body">
+
+    <div style="font-size:11px;color:#123b63;font-weight:800">Without automation</div>
+
+    <div class="check"><div class="checkmark no">1</div> Check every new enrollment</div>
+    <div class="check"><div class="checkmark no">2</div> Manually grant course access</div>
+    <div class="check"><div class="checkmark no">3</div> Add students to communities</div>
+    <div class="check"><div class="checkmark no">4</div> Send welcome email</div>
+    <div class="check"><div class="checkmark no">5</div> Remember weekly reminders</div>
+    <div class="check"><div class="checkmark no">6</div> Chase overdue assignments</div>
+    <div class="check"><div class="checkmark no">7</div> Find inactive students</div>
+
+    <hr style="border:0;border-top:1px solid #edf1f4;margin:15px 0">
+
+    <div style="font-size:11px;color:#123b63;font-weight:800">With the proposed system</div>
+
+    <div style="margin-top:10px;padding:13px;background:#eaf7f0;border-radius:8px;font-size:10px;color:#39735a;line-height:1.6">
+      <strong>Routine work happens automatically.</strong><br>
+      The team only receives a task when a real human decision or intervention is needed.
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= EMAILS ================= -->
+<section id="page-emails" class="page hidden">
+
+<div class="problem-solution">
+  <div class="ps problem">
+    <div class="ps-label">Client's Problem</div>
+    <h3>"Students need the correct emails, reminders and updates without me manually sending everything."</h3>
+    <p>Important communication should be consistent and timely, but the client also wants to be able to send something manually when needed.</p>
+  </div>
+  <div class="ps solution">
+    <div class="ps-label">Our GHL Solution</div>
+    <h3>Reusable real-world email templates connected to workflows.</h3>
+    <p>We create a small library of clear emails. Automations trigger them at the right moment, while the team can manually reuse them when necessary.</p>
+  </div>
+</div>
+
+<div class="grid2">
+
+<div class="panel">
+  <div class="panel-head"><h3>Email Template Library</h3><button class="btn small primary" onclick="toast('New email template created')">+ New Template</button></div>
+  <div class="panel-body">
+
+    <div class="workflow" onclick="showEmail('welcome')">
+      <div class="workflow-top"><div class="workflow-name">Welcome to the Certification School</div><span class="badge green">ACTIVE</span></div>
+      <div class="workflow-desc">Sent immediately after enrollment.</div>
+    </div>
+
+    <div class="workflow" onclick="showEmail('weekly')">
+      <div class="workflow-top"><div class="workflow-name">Your Week 3 Learning Materials Are Ready</div><span class="badge green">ACTIVE</span></div>
+      <div class="workflow-desc">Sent when weekly content is released.</div>
+    </div>
+
+    <div class="workflow" onclick="showEmail('call')">
+      <div class="workflow-top"><div class="workflow-name">Tomorrow's Live Certification Call</div><span class="badge green">ACTIVE</span></div>
+      <div class="workflow-desc">Sent 24 hours before the call.</div>
+    </div>
+
+    <div class="workflow" onclick="showEmail('missed')">
+      <div class="workflow-top"><div class="workflow-name">We Missed You — Here's the Replay</div><span class="badge green">ACTIVE</span></div>
+      <div class="workflow-desc">Sent when attendance is marked missed.</div>
+    </div>
+
+    <div class="workflow" onclick="showEmail('assignment')">
+      <div class="workflow-top"><div class="workflow-name">Reminder: Your Assignment Is Due</div><span class="badge orange">ACTIVE</span></div>
+      <div class="workflow-desc">Triggered before assignment deadline.</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-head"><h3>Live Email Preview</h3><span class="badge blue" id="emailTrigger">WELCOME EMAIL</span></div>
+  <div class="panel-body">
+
+    <div class="email" id="emailPreview">
+
+      <div class="email-head">
+        <div class="email-row"><span>From:</span><strong>Certification School &lt;support@school.demo&gt;</strong></div>
+        <div class="email-row"><span>To:</span><strong>Sarah Mitchell &lt;sarah@example.com&gt;</strong></div>
+        <div class="email-row"><span>Subject:</span><strong id="emailSubject">Welcome to the Certification School, Sarah</strong></div>
+      </div>
+
+      <div class="email-body" id="emailBody">
+        <h2>Welcome, Sarah!</h2>
+
+        <p>We're excited to have you inside the Certification School.</p>
+
+        <p>Your student access has now been set up. You can log in and start with <strong>Week 1 — Foundations</strong>.</p>
+
+        <p>Your account includes:</p>
+
+        <ul>
+          <li>Year 1 Certification Course</li>
+          <li>Main School Community</li>
+          <li>Cohort 2026-A Community</li>
+          <li>Weekly learning materials</li>
+          <li>Live certification calls</li>
+        </ul>
+
+        <p>Start here:</p>
+
+        <span class="email-cta">Open My Student Area</span>
+
+        <p>See you inside,<br><strong>Certification School Team</strong></p>
+      </div>
+
+    </div>
+
+    <div style="margin-top:12px;padding:11px;background:#f4f8fb;border-radius:7px;font-size:10px;color:#718397">
+      <strong style="color:#123b63">Workflow connection:</strong>
+      Student enrolled → onboarding workflow → access granted → this email sent automatically.
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CALLS ================= -->
+<section id="page-calls" class="page hidden">
+
+<div class="problem-solution">
+  <div class="ps problem">
+    <div class="ps-label">Client's Problem</div>
+    <h3>"I need weekly live calls, Zoom links, reminders, attendance and replays to be reliable."</h3>
+    <p>Students should not miss calls because they forgot the link. After the call, the right students should receive the replay.</p>
+  </div>
+  <div class="ps solution">
+    <div class="ps-label">Our GHL Solution</div>
+    <h3>One repeatable live-call process.</h3>
+    <p>Create the session once, connect the Zoom link, schedule reminders, record attendance and trigger replay follow-up based on attendance.</p>
+  </div>
+</div>
+
+<div class="grid2">
+
+<div class="call-card">
+  <div class="call-title">Week 3 Certification Coaching Call</div>
+
+  <div class="call-info">
+    <span>📅 Tue, 6 Oct 2026</span>
+    <span>⏰ 6:00 PM</span>
+    <span>👥 214 registered</span>
+  </div>
+
+  <span class="zoom">↗ Open Zoom Meeting</span>
+
+  <hr style="border:0;border-top:1px solid #edf1f4;margin:17px 0">
+
+  <strong style="font-size:11px;color:#123b63">Reminder Schedule</strong>
+
+  <div class="access-row">
+    <div>24-hour reminder</div>
+    <span class="badge green">SENT / SCHEDULED</span>
+  </div>
+
+  <div class="access-row">
+    <div>1-hour reminder</div>
+    <span class="badge blue">SCHEDULED</span>
+  </div>
+
+  <div class="access-row">
+    <div>15-minute reminder</div>
+    <span class="badge gray">OPTIONAL</span>
+  </div>
+
+  <div style="margin-top:15px">
+    <button class="btn primary" onclick="toast('Zoom link copied')">Copy Zoom Link</button>
+    <button class="btn" onclick="toast('Reminder preview opened')">Preview Reminder</button>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-head"><h3>Attendance — Week 3 Call</h3></div>
+  <div class="panel-body">
+    <table>
+      <thead><tr><th>Student</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Sarah Mitchell</strong></td><td><span class="badge green">ATTENDED</span></td><td>—</td></tr>
+        <tr><td><strong>James Carter</strong></td><td><span class="badge green">ATTENDED</span></td><td>—</td></tr>
+        <tr><td><strong>Emma Wilson</strong></td><td><span class="badge red">MISSED</span></td><td><button class="btn small" onclick="toast('Replay sent to Emma')">Send Replay</button></td></tr>
+        <tr><td><strong>Daniel Brooks</strong></td><td><span class="badge green">ATTENDED</span></td><td>—</td></tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:14px;padding:11px;background:#fff4e3;border-radius:7px;font-size:10px;color:#856124">
+      <strong>What happens to Emma automatically?</strong><br>
+      Missed attendance → replay email → wait 2 days → if no activity, create Student Support task.
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="section-head">
+  <div><h2>After the Call</h2><p>Replay management becomes part of the same student journey.</p></div>
+</div>
+
+<div class="grid3">
+  <div class="card"><strong style="font-size:12px;color:#123b63">1. Upload Replay</strong><p style="font-size:10px;color:#718397">Admin uploads recording to the correct Week.</p></div>
+  <div class="card"><strong style="font-size:12px;color:#123b63">2. Notify Students</strong><p style="font-size:10px;color:#718397">Attended students can receive a replay/update email.</p></div>
+  <div class="card"><strong style="font-size:12px;color:#123b63">3. Help Missed Students</strong><p style="font-size:10px;color:#718397">Missed students receive the replay and can be flagged for support.</p></div>
+</div>
+
+</section>
+
+
+<!-- ================= PROGRESS ================= -->
+<section id="page-progress" class="page hidden">
+
+<div class="problem-solution">
+  <div class="ps problem">
+    <div class="ps-label">Client's Problem</div>
+    <h3>"I need to know who is progressing, who is falling behind and who is ready for certification."</h3>
+    <p>Without a clear view, the team has to manually check course activity, attendance and coursework.</p>
+  </div>
+  <div class="ps solution">
+    <div class="ps-label">Our GHL Solution</div>
+    <h3>A simple progress and certification dashboard.</h3>
+    <p>Track course progress, attendance, assignments, quizzes and certification requirements, then use workflows to identify the next action.</p>
+  </div>
+</div>
+
+<div class="grid2">
+
+<div class="panel">
+  <div class="panel-head"><h3>Sarah Mitchell — Progress</h3><span class="badge orange">IN PROGRESS</span></div>
+  <div class="panel-body">
+
+    <div class="progress-row">
+      <div class="progress-label"><span>Overall Course Progress</span><strong>42%</strong></div>
+      <div class="progress"><span style="width:42%"></span></div>
+    </div>
+
+    <div class="progress-row">
+      <div class="progress-label"><span>Attendance</span><strong>92%</strong></div>
+      <div class="progress"><span style="width:92%"></span></div>
+    </div>
+
+    <div class="progress-row">
+      <div class="progress-label"><span>Assignments</span><strong>4 / 6</strong></div>
+      <div class="progress"><span style="width:67%"></span></div>
+    </div>
+
+    <div class="progress-row">
+      <div class="progress-label"><span>Quizzes</span><strong>5 / 6</strong></div>
+      <div class="progress"><span style="width:83%"></span></div>
+    </div>
+
+    <hr style="border:0;border-top:1px solid #edf1f4;margin:18px 0">
+
+    <strong style="font-size:11px;color:#123b63">Certification Checklist</strong>
+
+    <div class="check"><div class="checkmark no">–</div> All course modules complete</div>
+    <div class="check"><div class="checkmark">✓</div> Attendance requirement met</div>
+    <div class="check"><div class="checkmark no">–</div> All assignments submitted</div>
+    <div class="check"><div class="checkmark no">–</div> Final assessment complete</div>
+    <div class="check"><div class="checkmark no">–</div> Admin certification review</div>
+
+    <div style="margin-top:15px;padding:11px;background:#fff4e3;border-radius:7px;font-size:10px;color:#856124">
+      <strong>Next required action:</strong> Sarah needs to complete the Week 3 assignment.
+    </div>
+
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-head"><h3>Student Health Overview</h3></div>
+  <div class="panel-body">
+    <table>
+      <thead><tr><th>Student</th><th>Progress</th><th>Attendance</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Sarah Mitchell</strong></td><td>42%</td><td>92%</td><td><span class="badge green">ON TRACK</span></td></tr>
+        <tr><td><strong>James Carter</strong></td><td>76%</td><td>100%</td><td><span class="badge green">ON TRACK</span></td></tr>
+        <tr><td><strong>Emma Wilson</strong></td><td>28%</td><td>58%</td><td><span class="badge red">AT RISK</span></td></tr>
+        <tr><td><strong>Daniel Brooks</strong></td><td>91%</td><td>100%</td><td><span class="badge blue">CERT READY</span></td></tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:15px;padding:12px;background:#f4f8fb;border-radius:7px;font-size:10px;color:#718397">
+      <strong style="color:#123b63">Proactive rule:</strong><br>
+      If a student is inactive for 14 days OR misses required coursework → add <strong>student:at-risk</strong> → send support email → create task if necessary.
+    </div>
+  </div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= TASKS ================= -->
+<section id="page-tasks" class="page hidden">
+
+<div class="problem-solution">
+  <div class="ps problem">
+    <div class="ps-label">Client's Problem</div>
+    <h3>"When something needs a human, I don't want it to get lost inside automation."</h3>
+    <p>Automation should not replace human support. It should identify the exceptions that actually require someone to intervene.</p>
+  </div>
+  <div class="ps solution">
+    <div class="ps-label">Our GHL Solution</div>
+    <h3>Tasks are created only when human action is required.</h3>
+    <p>Each task tells the team who needs help, why the task was created, what triggered it and when it is due.</p>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-head"><h3>Student Support & Admin Tasks</h3><button class="btn small primary" onclick="openModal('task')">+ Create Task</button></div>
+  <div class="panel-body">
+    <table>
+      <thead>
+        <tr><th>Task</th><th>Student</th><th>Reason</th><th>Due</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Check Sarah's overdue assignment</strong></td>
+          <td>Sarah Mitchell</td>
+          <td>Week 3 incomplete</td>
+          <td>Tomorrow</td>
+          <td><span class="badge orange">OPEN</span></td>
+        </tr>
+        <tr>
+          <td><strong>Review Emma's missed calls</strong></td>
+          <td>Emma Wilson</td>
+          <td>2 missed sessions</td>
+          <td>Today</td>
+          <td><span class="badge red">URGENT</span></td>
+        </tr>
+        <tr>
+          <td><strong>Review Daniel for certification</strong></td>
+          <td>Daniel Brooks</td>
+          <td>Requirements complete</td>
+          <td>06 Oct</td>
+          <td><span class="badge blue">REVIEW</span></td>
+        </tr>
+        <tr>
+          <td><strong>Check login issue</strong></td>
+          <td>Olivia Stone</td>
+          <td>Student reported login problem</td>
+          <td>Today</td>
+          <td><span class="badge orange">OPEN</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section-head">
+  <div><h2>Example: Sarah's Assignment Issue</h2><p>Automation handles the routine part. A person only gets involved when needed.</p></div>
+</div>
+
+<div class="grid3">
+  <div class="card">
+    <div class="metric-label">STEP 1</div>
+    <strong style="font-size:12px;color:#123b63">Due Date Approaches</strong>
+    <p style="font-size:10px;color:#718397">GHL sends Sarah a reminder automatically.</p>
+  </div>
+  <div class="card">
+    <div class="metric-label">STEP 2</div>
+    <strong style="font-size:12px;color:#123b63">Still Incomplete</strong>
+    <p style="font-size:10px;color:#718397">GHL sends a second reminder.</p>
+  </div>
+  <div class="card">
+    <div class="metric-label">STEP 3</div>
+    <strong style="font-size:12px;color:#123b63">Needs Human Help</strong>
+    <p style="font-size:10px;color:#718397">GHL creates a task for Student Support.</p>
+  </div>
+</div>
+
+</section>
+
+
+<!-- ================= FIELDS ================= -->
+<section id="page-fields" class="page hidden">
+
+<div class="problem-solution">
+  <div class="ps problem">
+    <div class="ps-label">Client's Problem</div>
+    <h3>"I need automation to know things like a student's cohort, progress, status and certification stage."</h3>
+    <p>If the data is not organized, workflows become unreliable and difficult to maintain.</p>
+  </div>
+  <div class="ps solution">
+    <div class="ps-label">Our GHL Solution</div>
+    <h3>Keep information simple: fields for facts, tags for automation.</h3>
+    <p>Custom fields store student information. Tags identify conditions that workflows can act on.</p>
+  </div>
+</div>
+
+<div class="grid2">
+
+<div class="panel">
+  <div class="panel-head"><h3>Custom Fields</h3><button class="btn small primary" onclick="toast('Custom field created')">+ Add Field</button></div>
+  <div class="panel-body">
+    <table>
+      <thead><tr><th>Field</th><th>Sarah's Value</th><th>Used For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Enrollment Date</strong></td><td>02 Sep 2026</td><td>Onboarding</td></tr>
+        <tr><td><strong>Cohort</strong></td><td>2026-A</td><td>Community access</td></tr>
+        <tr><td><strong>Program</strong></td><td>Year 1 Certification</td><td>Course access</td></tr>
+        <tr><td><strong>Student Status</strong></td><td>Active</td><td>Access + workflows</td></tr>
+        <tr><td><strong>Course Progress</strong></td><td>42%</td><td>Progress</td></tr>
+        <tr><td><strong>Attendance %</strong></td><td>92%</td><td>Certification</td></tr>
+        <tr><td><strong>Certification Status</strong></td><td>In Progress</td><td>Certification workflow</td></tr>
+        <tr><td><strong>Next Required Action</strong></td><td>Week 3 Assignment</td><td>Student support</td></tr>
+        <tr><td><strong>Last Activity</strong></td><td>01 Oct 2026</td><td>At-risk check</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-head"><h3>Tags</h3><button class="btn small primary" onclick="toast('Tag created')">+ Add Tag</button></div>
+  <div class="panel-body">
+
+    <div style="margin-bottom:12px">
+      <span class="badge blue">student:active</span>
+      <span class="badge blue">student:enrolled</span>
+      <span class="badge blue">cohort:2026-a</span>
+      <span class="badge blue">program:year1</span>
+      <span class="badge blue">community:main</span>
+      <span class="badge orange">assignment:due</span>
+      <span class="badge red">student:at-risk</span>
+      <span class="badge blue">attendance:required</span>
+      <span class="badge blue">cert:eligible</span>
+      <span class="badge green">alumni:certified</span>
+    </div>
+
+    <div style="padding:13px;background:#f4f8fb;border-radius:8px;font-size:10px;line-height:1.6;color:#6d8192">
+      <strong style="color:#123b63">Why tags matter:</strong><br><br>
+      Sarah has <strong>assignment:due</strong> → assignment reminder workflow can act.<br><br>
+      Sarah has <strong>cohort:2026-a</strong> → she gets access to that private group.<br><br>
+      Sarah later gets <strong>cert:eligible</strong> → certification support workflow starts.
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= ACTIVITY ================= -->
+<section id="page-activity" class="page hidden">
+
+<div class="problem-solution">
+  <div class="ps problem">
+    <div class="ps-label">Client's Problem</div>
+    <h3>"When something stupid happens with the tech, I need to quickly know what went wrong."</h3>
+    <p>Login, access, email and course issues are much easier to troubleshoot when there is a clear history of what happened.</p>
+  </div>
+  <div class="ps solution">
+    <div class="ps-label">Our GHL Solution</div>
+    <h3>A clear activity trail.</h3>
+    <p>We keep student events, access changes, emails, workflow actions, tags and tasks visible so support can trace the problem quickly.</p>
+  </div>
+</div>
+
+<div class="grid2">
+
+<div class="panel">
+  <div class="panel-head"><h3>Sarah Mitchell — Activity Timeline</h3><button class="btn small" onclick="toast('Activity refreshed')">Refresh</button></div>
+  <div class="panel-body">
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-time">01 Oct · 09:14</div>
+          <div class="timeline-title">Course Progress changed: 38% → 42%</div>
+          <div class="timeline-desc">Week 3 lesson completed.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-time">01 Oct · 09:10</div>
+          <div class="timeline-title">Week 3 lesson opened</div>
+          <div class="timeline-desc">Student accessed Applied Learning video.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-time">30 Sep · 09:03</div>
+          <div class="timeline-title">Email sent: Your Week 3 Learning Materials Are Ready</div>
+          <div class="timeline-desc">Weekly Content Release workflow.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-time">30 Sep · 09:02</div>
+          <div class="timeline-title">Week 3 released</div>
+          <div class="timeline-desc">Student received course access.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-time">02 Sep · 09:03</div>
+          <div class="timeline-title">Welcome email sent</div>
+          <div class="timeline-desc">Student Onboarding workflow.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-time">02 Sep · 09:02</div>
+          <div class="timeline-title">Community access granted</div>
+          <div class="timeline-desc">Main School + Cohort 2026-A.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-time">02 Sep · 09:02</div>
+          <div class="timeline-title">Course access granted</div>
+          <div class="timeline-desc">Year 1 Certification.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-time">02 Sep · 09:01</div>
+          <div class="timeline-title">Tags added</div>
+          <div class="timeline-desc">student:active · cohort:2026-a · program:year1.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-time">02 Sep · 09:00</div>
+          <div class="timeline-title">Student enrolled</div>
+          <div class="timeline-desc">Enrollment form completed.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-head"><h3>Troubleshooting Example</h3></div>
+  <div class="panel-body">
+
+    <strong style="font-size:12px;color:#123b63">Student says:</strong>
+
+    <div style="padding:12px;background:#f7fafc;border-radius:7px;margin:9px 0 15px;font-size:10px;color:#63788b">
+      "I can't see Week 3."
+    </div>
+
+    <strong style="font-size:11px;color:#123b63">Support checks:</strong>
+
+    <div class="check"><div class="checkmark">✓</div> Is Sarah an active student?</div>
+    <div class="check"><div class="checkmark">✓</div> Does she have Year 1 course access?</div>
+    <div class="check"><div class="checkmark">✓</div> Was Week 3 released?</div>
+    <div class="check"><div class="checkmark">✓</div> Did the workflow run?</div>
+    <div class="check"><div class="checkmark">✓</div> Was the email sent?</div>
+
+    <div style="margin-top:14px;padding:12px;background:#eaf7f0;border-radius:7px;font-size:10px;color:#39735a">
+      <strong>Result:</strong> Week 3 was released and access is active. If Sarah still cannot see it, the issue is likely on the student-facing membership/course side rather than the enrollment workflow.
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SOPS ================= -->
+<section id="page-sops" class="page hidden">
+
+<div class="problem-solution">
+  <div class="ps problem">
+    <div class="ps-label">Client's Problem</div>
+    <h3>"Once this is built, I don't want to keep asking someone how to do basic recurring tasks."</h3>
+    <p>The team needs simple instructions for the things they will repeat every week.</p>
+  </div>
+  <div class="ps solution">
+    <div class="ps-label">Our GHL Solution</div>
+    <h3>Short SOPs and Loom-style walkthroughs.</h3>
+    <p>We document the recurring tasks in simple steps so the team can operate the school independently.</p>
+  </div>
+</div>
+
+<div class="grid3">
+
+<div class="sop">
+  <h4>📚 Add a New Weekly Lesson</h4>
+  <ol>
+    <li>Open the current course week.</li>
+    <li>Duplicate the previous week's structure.</li>
+    <li>Replace video/PDF/audio.</li>
+    <li>Add quiz and assignment.</li>
+    <li>Set release date.</li>
+  </ol>
+  <button class="btn small" style="margin-top:10px" onclick="toast('SOP: Add Weekly Lesson opened')">View Walkthrough</button>
+</div>
+
+<div class="sop">
+  <h4>🎥 Upload a Replay</h4>
+  <ol>
+    <li>Open the completed live session.</li>
+    <li>Upload the recording.</li>
+    <li>Save it under the correct week.</li>
+    <li>Run replay notification.</li>
+  </ol>
+  <button class="btn small" style="margin-top:10px" onclick="toast('SOP: Upload Replay opened')">View Walkthrough</button>
+</div>
+
+<div class="sop">
+  <h4>👥 Add a New Cohort</h4>
+  <ol>
+    <li>Create cohort identifier.</li>
+    <li>Create/assign community.</li>
+    <li>Set access condition.</li>
+    <li>Add cohort tag.</li>
+    <li>Test with one student.</li>
+  </ol>
+  <button class="btn small" style="margin-top:10px" onclick="toast('SOP: New Cohort opened')">View Walkthrough</button>
+</div>
+
+<div class="sop">
+  <h4>📅 Create a Live Call</h4>
+  <ol>
+    <li>Create the weekly session.</li>
+    <li>Add Zoom link.</li>
+    <li>Set call date/time.</li>
+    <li>Confirm reminder workflow.</li>
+  </ol>
+  <button class="btn small" style="margin-top:10px" onclick="toast('SOP: Create Live Call opened')">View Walkthrough</button>
+</div>
+
+<div class="sop">
+  <h4>⚠️ Review At-Risk Students</h4>
+  <ol>
+    <li>Open At-Risk view.</li>
+    <li>Review last activity.</li>
+    <li>Check coursework.</li>
+    <li>Contact student if needed.</li>
+    <li>Close task.</li>
+  </ol>
+  <button class="btn small" style="margin-top:10px" onclick="toast('SOP: At-Risk Review opened')">View Walkthrough</button>
+</div>
+
+<div class="sop">
+  <h4>🏆 Review Certification</h4>
+  <ol>
+    <li>Open certification-ready list.</li>
+    <li>Check required coursework.</li>
+    <li>Check attendance.</li>
+    <li>Review final assessment.</li>
+    <li>Approve certification.</li>
+  </ol>
+  <button class="btn small" style="margin-top:10px" onclick="toast('SOP: Certification Review opened')">View Walkthrough</button>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= REQUIREMENTS ================= -->
+<section id="page-requirements" class="page hidden">
+
+<div class="problem-solution">
+  <div class="ps problem">
+    <div class="ps-label">Client's Problem</div>
+    <h3>"I want someone who can look at what I'm trying to accomplish and recommend the cleanest solution."</h3>
+    <p>The client isn't looking for someone who simply waits for instructions. They want the requirements understood and translated into a simple system.</p>
+  </div>
+  <div class="ps solution">
+    <div class="ps-label">Our Approach</div>
+    <h3>Requirement → Simple GHL Setup → Student Experience → Less Work.</h3>
+    <p>Every part of the build should have a reason. If something does not reduce workload or improve the student experience, we avoid adding unnecessary complexity.</p>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-head">
+    <h3>Client Requirement → Proposed Solution</h3>
+    <span class="badge blue">COMPLETE MAP</span>
+  </div>
+
+  <div class="req-row">
+    <div class="req-head">What the client needs</div>
+    <div class="req-head">What we build</div>
+    <div class="req-head">Client result</div>
+  </div>
+
+  <div class="req-row">
+    <div><strong>Main course/resource library</strong><br><span style="color:#81909e">Organize the school content.</span></div>
+    <div>Reusable course structure with weeks, lessons, videos, PDFs, audio, quizzes and assignments.</div>
+    <div><span class="badge green">Easy to maintain</span></div>
+  </div>
+
+  <div class="req-row">
+    <div><strong>Add teaching material every week</strong></div>
+    <div>Simple repeatable weekly publishing process + SOP.</div>
+    <div><span class="badge green">Less tech help</span></div>
+  </div>
+
+  <div class="req-row">
+    <div><strong>Quizzes / assessments / assignments</strong></div>
+    <div>Course assessments + progress fields + reminder workflows.</div>
+    <div><span class="badge green">Visible progress</span></div>
+  </div>
+
+  <div class="req-row">
+    <div><strong>Main + 3 additional communities</strong></div>
+    <div>Main School + Cohort + Advanced Practice + Certification Support.</div>
+    <div><span class="badge green">Correct access</span></div>
+  </div>
+
+  <div class="req-row">
+    <div><strong>Correct student access</strong></div>
+    <div>Enrollment, cohort, program and certification rules.</div>
+    <div><span class="badge green">Fewer access issues</span></div>
+  </div>
+
+  <div class="req-row">
+    <div><strong>Student onboarding</strong></div>
+    <div>Enrollment workflow → tags → course → community → welcome email.</div>
+    <div><span class="badge green">Automatic setup</span></div>
+  </div>
+
+  <div class="req-row">
+    <div><strong>Emails / reminders / updates</strong></div>
+    <div>Reusable email library connected to workflows.</div>
+    <div><span class="badge green">Consistent communication</span></div>
+  </div>
+
+  <div class="req-row">
+    <div><strong>Tags / workflows without complexity</strong></div>
+    <div>Small set of purposeful tags and workflows with clear naming.</div>
+    <div><span class="badge green">Easy backend</span></div>
+  </div>
+
+  <div class="req-row">
+    <div><strong>Weekly Zoom calls</strong></div>
+    <div>Call schedule + reminders + attendance + replay process.</div>
+    <div><span class="badge green">Reliable calls</span></div>
+  </div>
+
+  <div class="req-row">
+    <div><strong>Track attendance / progress</strong></div>
+    <div>Student fields + progress dashboard + certification checklist.</div>
+    <div><span class="badge green">Clear student status</span></div>
+  </div>
+
+  <div class="req-row">
+    <div><strong>Troubleshooting</strong></div>
+    <div>Student 360 + activity timeline + support tasks.</div>
+    <div><span class="badge green">Faster diagnosis</span></div>
+  </div>
+
+  <div class="req-row">
+    <div><strong>Proactive recommendations</strong></div>
+    <div>At-risk rules + support tasks + workflow improvement review.</div>
+    <div><span class="badge green">Proactive support</span></div>
+  </div>
+
+  <div class="req-row">
+    <div><strong>SOPs / Looms</strong></div>
+    <div>Short guides for recurring school operations.</div>
+    <div><span class="badge green">Team independence</span></div>
+  </div>
+
+</div>
+
+<div class="section-head">
+  <div><h2>The Bigger Picture</h2><p>This is the experience we are proposing, not just a collection of GHL features.</p></div>
+</div>
+
+<div class="panel">
+  <div class="panel-body">
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:7px;text-align:center">
+
+      <div style="padding:13px 6px;background:#edf5fb;border-radius:7px">
+        <strong style="font-size:11px;color:#123b63">1</strong><br>
+        <span style="font-size:9px">Enroll</span>
+      </div>
+
+      <div style="padding:13px 6px;background:#edf5fb;border-radius:7px">
+        <strong style="font-size:11px;color:#123b63">2</strong><br>
+        <span style="font-size:9px">Get Access</span>
+      </div>
+
+      <div style="padding:13px 6px;background:#edf5fb;border-radius:7px">
+        <strong style="font-size:11px;color:#123b63">3</strong><br>
+        <span style="font-size:9px">Learn</span>
+      </div>
+
+      <div style="padding:13px 6px;background:#edf5fb;border-radius:7px">
+        <strong style="font-size:11px;color:#123b63">4</strong><br>
+        <span style="font-size:9px">Attend</span>
+      </div>
+
+      <div style="padding:13px 6px;background:#edf5fb;border-radius:7px">
+        <strong style="font-size:11px;color:#123b63">5</strong><br>
+        <span style="font-size:9px">Complete</span>
+      </div>
+
+      <div style="padding:13px 6px;background:#edf5fb;border-radius:7px">
+        <strong style="font-size:11px;color:#123b63">6</strong><br>
+        <span style="font-size:9px">Get Reviewed</span>
+      </div>
+
+      <div style="padding:13px 6px;background:#eaf7f0;border-radius:7px">
+        <strong style="font-size:11px;color:#21865b">7</strong><br>
+        <span style="font-size:9px">Certified</span>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:17px;font-size:11px;color:#617589">
+      <strong style="color:#123b63">The objective:</strong>
+      a beautiful student experience for the learner, and a simple operating system for the school team.
+    </div>
+
+  </div>
+</div>
+
+</section>
+
+</div>
+</main>
+</div>
+
+
+<!-- WORKFLOW DRAWER -->
+<div class="drawer" id="workflowDrawer">
+  <div class="drawer-head">
+    <div>
+      <h3 id="drawerTitle">Student Onboarding</h3>
+      <div style="font-size:10px;color:#7c8d9b;margin-top:4px" id="drawerSubtitle">Real GHL-style workflow example</div>
+    </div>
+    <button class="close" onclick="closeDrawer()">×</button>
+  </div>
+
+  <div class="drawer-body">
+
+    <div class="notice">
+      <strong>Example student:</strong> Sarah Mitchell triggered this workflow after enrolling in the Year 1 Certification program.
+    </div>
+
+    <div class="workflow-canvas" id="workflowCanvas"></div>
+
+    <div style="margin-top:17px;padding:13px;background:#f4f8fb;border-radius:8px;font-size:10px;color:#657a8d">
+      <strong style="color:#123b63">What the student experiences:</strong><br><br>
+      Sarah enrolls once. The system handles the repetitive setup in the background. She receives access, joins the right spaces and receives the correct communication without the admin manually completing every step.
+    </div>
+
+  </div>
+</div>
+
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <h3 id="modalTitle">Add Item</h3>
+    <p id="modalDescription">Demo form — changes are simulated.</p>
+
+    <div class="form-row">
+      <label>Name</label>
+      <input id="modalInput" placeholder="Enter name...">
+    </div>
+
+    <div class="form-row">
+      <label>Details</label>
+      <textarea id="modalDetails" rows="4" placeholder="Enter details..."></textarea>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="saveModal()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+const pages={
+  dashboard:["School Overview","How the complete student experience would work inside GHL"],
+  students:["Students / Student 360","One complete student record from enrollment to certification"],
+  courses:["Courses & Library","Reusable course structure and simple weekly publishing"],
+  communities:["Communities","Main school community plus controlled private groups"],
+  automations:["Automations","Small, purposeful workflows that reduce repetitive work"],
+  emails:["Emails & Messages","Real email templates connected to the student journey"],
+  calls:["Live Calls","Zoom reminders, attendance and replay workflow"],
+  progress:["Progress & Certification","Coursework, attendance and certification readiness"],
+  tasks:["Tasks & Support","Human intervention only when automation cannot solve the issue"],
+  fields:["Tags & Custom Fields","Simple student data that powers the system"],
+  activity:["Activity Timeline","Trace exactly what happened and when"],
+  sops:["SOPs & How-To","Simple recurring instructions for the school team"],
+  requirements:["Client Requirement Map","Every client requirement mapped to a practical solution"]
+};
+
+function showPage(id,button=null){
+
+  document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
+  const target=document.getElementById("page-"+id);
+  if(target) target.classList.remove("hidden");
+
+  document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+  if(button) button.classList.add("active");
+
+  document.getElementById("pageTitle").innerText=pages[id][0];
+  document.getElementById("pageContext").innerText=pages[id][1];
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function toast(message){
+  const t=document.getElementById("toast");
+  t.innerText=message;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2500);
+}
+
+function selectStudent(name){
+  toast("Viewing "+name+" — demo student context updated");
+}
+
+function globalSearch(value){
+  if(value.length>2){
+    toast("Searching demo data for: "+value);
+  }
+}
+
+function runJourney(){
+
+  const steps=[
+    "Sarah enrolled",
+    "Student Onboarding workflow started",
+    "Course access granted",
+    "Main Community access granted",
+    "Cohort 2026-A access granted",
+    "Welcome email sent",
+    "Week 3 content released",
+    "Week 3 email sent"
+  ];
+
+  let i=0;
+
+  const run=()=>{
+    if(i<steps.length){
+      toast(steps[i]);
+      i++;
+      setTimeout(run,650);
+    }else{
+      toast("✓ Sarah's automated student journey completed");
+    }
+  };
+
+  run();
+}
+
+function studentAction(type){
+
+  if(type==="assignment"){
+    toast("Sarah → assignment completed → progress updated → tag removed");
+  }
+
+  if(type==="attendance"){
+    toast("Sarah → attendance recorded → 92% → 93%");
+  }
+
+  if(type==="community"){
+    toast("Sarah → Advanced Practice community access granted");
+  }
+
+  if(type==="support"){
+    toast("Support task created for Sarah");
+  }
+}
+
+
+const workflowData={
+
+ onboarding:{
+  title:"01 · Student Onboarding",
+  steps:[
+   ["TRIGGER","Contact enrolled","Enrollment form / student status becomes Enrolled"],
+   ["ACTION","Add Tag: student:active","Marks the student as an active student"],
+   ["ACTION","Update Student Status = Active","Stores the student's current status"],
+   ["ACTION","Grant Course Access: Year 1 Certification","Student can immediately access the course"],
+   ["ACTION","Grant Community: Main School","Student joins the main school community"],
+   ["ACTION","Grant Community: Cohort 2026-A","Student joins their private cohort group"],
+   ["EMAIL","Send: Welcome to the Certification School","Student receives login and starting instructions"],
+   ["WAIT","Wait 1 Day","Give the student time to enter the platform"],
+   ["EMAIL","Send: How to Start Week 1","Helpful follow-up without manual work"],
+   ["TASK","Create Task: Check onboarding","Admin only intervenes if something needs checking"]
+  ]
+ },
+
+ weekly:{
+  title:"02 · Weekly Content Release",
+  steps:[
+   ["TRIGGER","Monday at 09:00","Weekly publishing schedule starts"],
+   ["FILTER","Program = Year 1 Certification","Only relevant students continue"],
+   ["ACTION","Release Week 3","The next learning content becomes available"],
+   ["EMAIL","Send: Your Week 3 Learning Materials Are Ready","Students receive the correct weekly message"],
+   ["ACTION","Create Community Announcement","Students are notified inside the community"],
+   ["WAIT","Wait 3 Days","Allow students time to complete the work"],
+   ["IF / ELSE","Assignment completed?","YES continues / NO receives reminder"],
+   ["EMAIL","Send Assignment Reminder","Only students who need it receive the reminder"],
+   ["WAIT","Wait 2 Days","Give another opportunity to complete"],
+   ["TASK","Create Support Task","Human follow-up only for students still incomplete"]
+  ]
+ },
+
+ call:{
+  title:"03 · Live Call Reminder",
+  steps:[
+   ["TRIGGER","Live Call scheduled","Weekly session is created"],
+   ["WAIT","Wait until 24 hours before","No manual reminder needed"],
+   ["EMAIL","Send: Tomorrow's Live Certification Call","Includes date, time and Zoom link"],
+   ["WAIT","Wait until 1 hour before","Second reminder is scheduled"],
+   ["SMS","Send SMS Reminder","Short last-minute reminder"],
+   ["CALL","Student attends Zoom","Attendance is recorded"],
+   ["ACTION","Update Attendance %","Student record stays current"],
+   ["ACTION","Upload Replay after call","Replay becomes available"],
+   ["EMAIL","Send Replay","Relevant students receive the recording"]
+  ]
+ },
+
+ missed:{
+  title:"04 · Missed Call Follow-up",
+  steps:[
+   ["TRIGGER","Attendance = Missed","Student did not attend required session"],
+   ["ACTION","Add Tag: attendance:missed","Makes the event visible"],
+   ["EMAIL","Send: We Missed You — Here's the Replay","Student immediately gets the recording"],
+   ["WAIT","Wait 2 Days","Allow student time to watch"],
+   ["IF / ELSE","Student active after replay?","YES → continue / NO → support"],
+   ["TASK","Create Student Support Task","Human intervention only when necessary"]
+  ]
+ },
+
+ assignment:{
+  title:"05 · Assignment Reminder",
+  steps:[
+   ["TRIGGER","Assignment due in 24 hours","Student has not completed required work"],
+   ["FILTER","Assignment Status ≠ Complete","Only incomplete students continue"],
+   ["EMAIL","Send: Reminder — Your Assignment Is Due","Friendly reminder with course link"],
+   ["WAIT","Wait until due date","No admin work required"],
+   ["IF / ELSE","Assignment completed?","YES → stop / NO → second reminder"],
+   ["EMAIL","Send: Your Assignment Is Still Waiting","Second reminder"],
+   ["WAIT","Wait 3 Days","Allow completion"],
+   ["TASK","Create Support Task","Escalate only if still incomplete"]
+  ]
+ },
+
+ risk:{
+  title:"06 · At-Risk Student Check",
+  steps:[
+   ["TRIGGER","Student inactive for 14 days","System detects inactivity"],
+   ["FILTER","Student Status = Active","Only active students are checked"],
+   ["ACTION","Add Tag: student:at-risk","Makes the student visible to the team"],
+   ["EMAIL","Send: We Haven't Seen You Lately","Re-engagement message"],
+   ["WAIT","Wait 3 Days","Allow student to return"],
+   ["IF / ELSE","Student activity returned?","YES → remove at-risk / NO → support"],
+   ["ACTION","Remove Tag: student:at-risk","Student is back on track"],
+   ["TASK","Create Student Support Task","Team can personally reach out"]
+  ]
+ },
+
+ certification:{
+  title:"07 · Certification Review",
+  steps:[
+   ["TRIGGER","Student meets certification conditions","Course and required work are checked"],
+   ["FILTER","Attendance requirement met","Required attendance is confirmed"],
+   ["FILTER","Assignments complete","Required coursework is complete"],
+   ["FILTER","Final assessment complete","Final requirement is confirmed"],
+   ["ACTION","Add Tag: cert:eligible","Student is ready for review"],
+   ["ACTION","Grant Certification Support","Student receives certification support area"],
+   ["TASK","Create Admin Review Task","Human review is required before approval"],
+   ["ACTION","Status = Certified","Admin approves certification"],
+   ["ACTION","Add Tag: alumni:certified","Student moves into alumni journey"],
+   ["EMAIL","Send: Congratulations — You're Certified!","Student receives final congratulations"]
+  ]
+ }
+
+};
+
+
+function openWorkflow(key){
+
+  const data=workflowData[key];
+  if(!data)return;
+
+  document.getElementById("drawerTitle").innerText=data.title;
+
+  let html="";
+
+  data.steps.forEach((s,index)=>{
+
+    const type=s[0];
+
+    let label=type;
+    let iconClass="";
+
+    if(type==="TRIGGER") label="TRIGGER";
+    if(type==="ACTION") label="ACTION";
+    if(type==="EMAIL") label="EMAIL";
+    if(type==="WAIT") label="WAIT";
+    if(type==="FILTER") label="IF / FILTER";
+    if(type==="IF / ELSE") label="IF / ELSE";
+    if(type==="TASK") label="TASK";
+    if(type==="SMS") label="SMS";
+    if(type==="CALL") label="ATTENDANCE";
+
+    html+=`
+      <div class="flow-step">
+        <div class="flow-type">${label}</div>
+        <div class="flow-title">${s[1]}</div>
+        <div class="flow-desc">${s[2]}</div>
+      </div>
+    `;
+
+    if(index<data.steps.length-1){
+      html+=`<div class="flow-arrow-space"></div>`;
+    }
+
+  });
+
+  document.getElementById("workflowCanvas").innerHTML=html;
+  document.getElementById("workflowDrawer").classList.add("open");
+}
+
+function closeDrawer(){
+  document.getElementById("workflowDrawer").classList.remove("open");
+}
+
+
+const emailData={
+
+ welcome:{
+  label:"WELCOME EMAIL",
+  subject:"Welcome to the Certification School, Sarah",
+  body:`
+   <h2>Welcome, Sarah!</h2>
+   <p>We're excited to have you inside the Certification School.</p>
+   <p>Your student access has now been set up. You can log in and start with <strong>Week 1 — Foundations</strong>.</p>
+   <p>Your account includes:</p>
+   <ul>
+    <li>Year 1 Certification Course</li>
+    <li>Main School Community</li>
+    <li>Cohort 2026-A Community</li>
+    <li>Weekly learning materials</li>
+    <li>Live certification calls</li>
+   </ul>
+   <p>Start here:</p>
+   <span class="email-cta">Open My Student Area</span>
+   <p>See you inside,<br><strong>Certification School Team</strong></p>
+  `
+ },
+
+ weekly:{
+  label:"WEEKLY CONTENT",
+  subject:"Your Week 3 Learning Materials Are Ready",
+  body:`
+   <h2>Week 3 is ready, Sarah.</h2>
+   <p>Your new learning materials are now available inside the Certification School.</p>
+   <p><strong>This week you'll complete:</strong></p>
+   <ul>
+    <li>Applied Learning video lesson</li>
+    <li>Week 3 workbook</li>
+    <li>Guided audio practice</li>
+    <li>10-question knowledge check</li>
+    <li>Week 3 assignment</li>
+   </ul>
+   <p>Please complete the lesson before Tuesday's live call.</p>
+   <span class="email-cta">Open Week 3</span>
+   <p>See you inside,<br><strong>Certification School Team</strong></p>
+  `
+ },
+
+ call:{
+  label:"LIVE CALL REMINDER",
+  subject:"Reminder: Tomorrow's Certification Call",
+  body:`
+   <h2>See you tomorrow, Sarah.</h2>
+   <p>Your Week 3 live certification call is happening tomorrow.</p>
+   <p><strong>Tuesday, 6 October 2026<br>6:00 PM</strong></p>
+   <p>We'll be working through the Week 3 material and answering student questions.</p>
+   <span class="email-cta">Join the Zoom Call</span>
+   <p>Please try to join a few minutes early.</p>
+   <p>Certification School Team</p>
+  `
+ },
+
+ missed:{
+  label:"MISSED CALL REPLAY",
+  subject:"We Missed You — Here's Your Week 3 Replay",
+  body:`
+   <h2>We missed you, Sarah.</h2>
+   <p>It looks like you weren't able to join this week's live certification call.</p>
+   <p>No problem — we've saved the full recording for you.</p>
+   <span class="email-cta">Watch the Replay</span>
+   <p>If you're having trouble keeping up with the course, simply reply to this email and our team can help.</p>
+   <p>Certification School Team</p>
+  `
+ },
+
+ assignment:{
+  label:"ASSIGNMENT REMINDER",
+  subject:"Reminder: Your Week 3 Assignment Is Due",
+  body:`
+   <h2>Your Week 3 assignment is waiting.</h2>
+   <p>Hi Sarah,</p>
+   <p>Just a quick reminder that your Week 3 assignment is due this Friday.</p>
+   <p>You've already completed the lesson, so you're nearly there.</p>
+   <span class="email-cta">Complete My Assignment</span>
+   <p>If you need help, just reply and let us know.</p>
+   <p>Certification School Team</p>
+  `
+ }
+
+};
+
+
+function showEmail(key){
+
+  const data=emailData[key];
+
+  if(!data)return;
+
+  document.getElementById("emailTrigger").innerText=data.label;
+  document.getElementById("emailSubject").innerText=data.subject;
+  document.getElementById("emailBody").innerHTML=data.body;
+
+  toast("Previewing: "+data.label);
+}
+
+
+let currentModal="";
+
+function openModal(type){
+
+  currentModal=type;
+
+  const titles={
+    student:"Edit Student",
+    lesson:"Add Weekly Content",
+    community:"Create Community",
+    task:"Create Support Task"
+  };
+
+  const desc={
+    student:"Update Sarah's student information.",
+    lesson:"Create a new reusable week for teaching material.",
+    community:"Create a new student community or group.",
+    task:"Create a human follow-up task."
+  };
+
+  document.getElementById("modalTitle").innerText=titles[type]||"Add Item";
+  document.getElementById("modalDescription").innerText=desc[type]||"Demo form — changes are simulated.";
+  document.getElementById("modalInput").value="";
+  document.getElementById("modalDetails").value="";
+  document.getElementById("modalBg").classList.add("open");
+}
+
+function closeModal(){
+  document.getElementById("modalBg").classList.remove("open");
+}
+
+function saveModal(){
+
+  const name=document.getElementById("modalInput").value||"New item";
+
+  closeModal();
+
+  const messages={
+    student:"Student updated: "+name,
+    lesson:"New weekly content created: "+name,
+    community:"Community created: "+name,
+    task:"Task created: "+name
+  };
+
+  toast(messages[currentModal]||"Saved: "+name);
+}
+
+</script>
+
+</body>
+</html>
