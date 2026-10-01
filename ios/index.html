@@ -213,6 +213,10 @@ button{
   color:#171717;
 }
 
+.nav-icon{
+  display:none;
+}
+
 .sidebar-bottom{
   position:absolute;
   left:15px;
@@ -419,7 +423,7 @@ button{
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:850px;
+  min-width:1050px;
 }
 
 th{
@@ -436,6 +440,7 @@ td{
   padding:14px 15px;
   border-top:1px solid #eeeae0;
   font-size:13px;
+  vertical-align:top;
 }
 
 .vendor-name{
@@ -741,6 +746,10 @@ td{
     font-size:18px;
   }
 
+  .nav-icon{
+    display:block;
+  }
+
   .sidebar-bottom{
     left:8px;
     right:8px;
@@ -799,25 +808,43 @@ td{
 <!-- LOGIN -->
 <div id="loginPage" class="login-page">
   <div class="login-card">
+
     <div class="logo">S</div>
+
     <h1>Spotly Admin</h1>
-    <p>Admin access to the vendor management portal.</p>
+
+    <p>
+      Admin access to the vendor management portal.
+    </p>
 
     <div class="field">
       <label>Admin ID</label>
-      <input id="loginEmail" type="email" placeholder="admin@soptly.com">
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="admin@soptly.com"
+      >
     </div>
 
     <div class="field">
       <label>Password</label>
-      <input id="loginPassword" type="password" placeholder="Enter password">
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="Enter password"
+      >
     </div>
 
-    <button class="primary-btn" style="width:100%" onclick="loginAdmin()">
+    <button
+      class="primary-btn"
+      style="width:100%"
+      onclick="loginAdmin()"
+    >
       Login
     </button>
 
     <div id="loginError" class="error-text"></div>
+
   </div>
 </div>
 
@@ -825,163 +852,347 @@ td{
 <div id="adminApp" class="app hidden">
 
   <aside class="sidebar">
+
     <div class="brand">
       <div class="brand-mark">S</div>
       <strong>Spotly</strong>
     </div>
 
     <nav class="nav">
-      <button id="navDashboard" class="active" onclick="showPage('dashboard')">
+
+      <button
+        id="navDashboard"
+        class="active"
+        onclick="showPage('dashboard')"
+      >
         <span>▣ &nbsp; Dashboard</span>
         <b class="nav-icon">▣</b>
       </button>
 
-      <button id="navVendors" onclick="showPage('vendors')">
+      <button
+        id="navVendors"
+        onclick="showPage('vendors')"
+      >
         <span>▤ &nbsp; Vendors</span>
         <b class="nav-icon">▤</b>
       </button>
 
-      <button id="navNotifications" onclick="showPage('notifications')">
+      <button
+        id="navNotifications"
+        onclick="showPage('notifications')"
+      >
         <span>♢ &nbsp; Notifications</span>
         <b class="nav-icon">♢</b>
       </button>
+
     </nav>
 
     <div class="sidebar-bottom">
-      <button class="logout-btn" onclick="logoutAdmin()">
+
+      <button
+        class="logout-btn"
+        onclick="logoutAdmin()"
+      >
         <span>Logout</span>
         <b>↪</b>
       </button>
+
     </div>
+
   </aside>
 
   <main class="main">
 
     <header class="topbar">
+
       <div class="topbar-title">
-        <h2 id="pageTitle">Dashboard</h2>
-        <span id="pageSubtitle">Spotly Vendor Network</span>
+
+        <h2 id="pageTitle">
+          Dashboard
+        </h2>
+
+        <span id="pageSubtitle">
+          Spotly Vendor Network
+        </span>
+
       </div>
 
       <div class="admin-profile">
+
         <div>
-          <strong id="adminName">Main Admin</strong>
+          <strong id="adminName">
+            Main Admin
+          </strong>
         </div>
-        <div class="admin-avatar">A</div>
+
+        <div class="admin-avatar">
+          A
+        </div>
+
       </div>
+
     </header>
 
     <section class="content">
 
       <!-- DASHBOARD -->
+
       <div id="dashboardPage">
 
         <div class="stats">
+
           <div class="stat-card">
-            <div class="label">Today's Ads</div>
-            <div class="value" id="todayAds">0</div>
-            <div class="sub">Ads scheduled today</div>
+
+            <div class="label">
+              Today's Ads
+            </div>
+
+            <div
+              class="value"
+              id="todayAds"
+            >
+              0
+            </div>
+
+            <div class="sub">
+              Ads scheduled today
+            </div>
+
           </div>
 
           <div class="stat-card">
-            <div class="label">Offline Shops</div>
-            <div class="value" id="offlineShops">0</div>
-            <div class="sub">Vendor screens offline</div>
+
+            <div class="label">
+              Offline Shops
+            </div>
+
+            <div
+              class="value"
+              id="offlineShops"
+            >
+              0
+            </div>
+
+            <div class="sub">
+              Vendor screens offline
+            </div>
+
           </div>
 
           <div class="stat-card">
-            <div class="label">Today's Revenue</div>
-            <div class="value">Rs. <span id="todayRevenue">0</span></div>
-            <div class="sub">Current available system data</div>
+
+            <div class="label">
+              Today's Revenue
+            </div>
+
+            <div class="value">
+              Rs.
+              <span id="todayRevenue">
+                0
+              </span>
+            </div>
+
+            <div class="sub">
+              Current available system data
+            </div>
+
           </div>
 
           <div class="stat-card">
-            <div class="label">Today's Ads Time</div>
-            <div class="value" id="todayAdsTime">—</div>
-            <div class="sub">Run window</div>
+
+            <div class="label">
+              Today's Ads Time
+            </div>
+
+            <div
+              class="value"
+              id="todayAdsTime"
+            >
+              —
+            </div>
+
+            <div class="sub">
+              Run window
+            </div>
+
           </div>
+
         </div>
 
         <div class="dashboard-grid">
 
           <div class="panel">
+
             <div class="panel-head">
-              <h3>Vendor Overview</h3>
-              <span id="dashboardVendorCount">0 vendors</span>
+
+              <h3>
+                Vendor Overview
+              </h3>
+
+              <span id="dashboardVendorCount">
+                0 vendors
+              </span>
+
             </div>
 
             <div class="vendor-summary">
+
               <div class="mini-card">
-                <span>Total Vendors</span>
-                <strong id="dashTotalVendors">0</strong>
+
+                <span>
+                  Total Vendors
+                </span>
+
+                <strong id="dashTotalVendors">
+                  0
+                </strong>
+
               </div>
 
               <div class="mini-card">
-                <span>Pending</span>
-                <strong id="dashPendingVendors">0</strong>
+
+                <span>
+                  Pending
+                </span>
+
+                <strong id="dashPendingVendors">
+                  0
+                </strong>
+
               </div>
 
               <div class="mini-card">
-                <span>Approved</span>
-                <strong id="dashApprovedVendors">0</strong>
+
+                <span>
+                  Approved
+                </span>
+
+                <strong id="dashApprovedVendors">
+                  0
+                </strong>
+
               </div>
 
               <div class="mini-card">
-                <span>Online</span>
-                <strong id="dashOnlineVendors">0</strong>
+
+                <span>
+                  Online
+                </span>
+
+                <strong id="dashOnlineVendors">
+                  0
+                </strong>
+
               </div>
+
             </div>
 
             <div id="recentVendors"></div>
+
           </div>
 
           <div class="panel">
+
             <div class="panel-head">
-              <h3>Real-time Notifications</h3>
-              <span id="notificationCount">0</span>
+
+              <h3>
+                Real-time Notifications
+              </h3>
+
+              <span id="notificationCount">
+                0
+              </span>
+
             </div>
 
-            <div id="dashboardNotifications" class="notification-list"></div>
+            <div
+              id="dashboardNotifications"
+              class="notification-list"
+            ></div>
+
           </div>
 
         </div>
+
       </div>
 
       <!-- VENDORS -->
-      <div id="vendorsPage" class="hidden">
+
+      <div
+        id="vendorsPage"
+        class="hidden"
+      >
 
         <div class="page-head">
+
           <div>
-            <h2>Vendors</h2>
-            <p>Manage every vendor registered in the Spotly network.</p>
+
+            <h2>
+              Vendors
+            </h2>
+
+            <p>
+              Manage every vendor registered in the Spotly network.
+            </p>
+
           </div>
+
         </div>
 
         <div class="vendor-summary">
 
           <div class="mini-card">
-            <span>Total Vendors</span>
-            <strong id="totalVendors">0</strong>
+
+            <span>
+              Total Vendors
+            </span>
+
+            <strong id="totalVendors">
+              0
+            </strong>
+
           </div>
 
           <div class="mini-card">
-            <span>Pending Vendors</span>
-            <strong id="pendingVendors">0</strong>
+
+            <span>
+              Pending Vendors
+            </span>
+
+            <strong id="pendingVendors">
+              0
+            </strong>
+
           </div>
 
           <div class="mini-card">
-            <span>Approved Vendors</span>
-            <strong id="approvedVendors">0</strong>
+
+            <span>
+              Approved Vendors
+            </span>
+
+            <strong id="approvedVendors">
+              0
+            </strong>
+
           </div>
 
           <div class="mini-card">
-            <span>Online Screens</span>
-            <strong id="onlineVendors">0</strong>
+
+            <span>
+              Online Screens
+            </span>
+
+            <strong id="onlineVendors">
+              0
+            </strong>
+
           </div>
 
         </div>
 
         <div class="toolbar">
+
           <input
             id="vendorSearch"
             class="search"
@@ -989,120 +1200,281 @@ td{
             oninput="renderVendors()"
           >
 
-          <select id="vendorStatusFilter" class="filter" onchange="renderVendors()">
-            <option value="">All Status</option>
-            <option value="pending">Pending</option>
-            <option value="approved">Approved</option>
-            <option value="rejected">Rejected</option>
-            <option value="blocked">Blocked</option>
+          <select
+            id="vendorStatusFilter"
+            class="filter"
+            onchange="renderVendors()"
+          >
+
+            <option value="">
+              All Status
+            </option>
+
+            <option value="pending">
+              Pending
+            </option>
+
+            <option value="approved">
+              Approved
+            </option>
+
+            <option value="rejected">
+              Rejected
+            </option>
+
+            <option value="blocked">
+              Blocked
+            </option>
+
           </select>
 
-          <select id="vendorOnlineFilter" class="filter" onchange="renderVendors()">
-            <option value="">All Screens</option>
-            <option value="online">Online</option>
-            <option value="offline">Offline</option>
+          <select
+            id="vendorOnlineFilter"
+            class="filter"
+            onchange="renderVendors()"
+          >
+
+            <option value="">
+              All Screens
+            </option>
+
+            <option value="online">
+              Online
+            </option>
+
+            <option value="offline">
+              Offline
+            </option>
+
           </select>
 
-          <button class="secondary-btn" onclick="loadVendors()">
+          <button
+            class="secondary-btn"
+            onclick="loadVendors()"
+          >
             Refresh
           </button>
+
         </div>
 
         <div class="table-wrap">
+
           <table>
+
             <thead>
+
               <tr>
-                <th>Vendor</th>
-                <th>Phone</th>
-                <th>Area</th>
-                <th>Hierarchy</th>
-                <th>LCD</th>
-                <th>Status</th>
-                <th>Screen</th>
-                <th>Actions</th>
+
+                <th>
+                  Vendor
+                </th>
+
+                <th>
+                  Phone
+                </th>
+
+                <th>
+                  Area
+                </th>
+
+                <th>
+                  Hierarchy
+                </th>
+
+                <th>
+                  LCD
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Screen
+                </th>
+
+                <th>
+                  Actions
+                </th>
+
               </tr>
+
             </thead>
-            <tbody id="vendorsTable"></tbody>
+
+            <tbody id="vendorsTable">
+
+              <tr>
+                <td
+                  colspan="8"
+                  style="text-align:center;padding:35px;color:#999"
+                >
+                  Loading vendors...
+                </td>
+              </tr>
+
+            </tbody>
+
           </table>
+
         </div>
 
       </div>
 
       <!-- NOTIFICATIONS -->
-      <div id="notificationsPage" class="hidden">
+
+      <div
+        id="notificationsPage"
+        class="hidden"
+      >
 
         <div class="page-head">
+
           <div>
-            <h2>Notifications</h2>
-            <p>Send personal notifications to vendors.</p>
+
+            <h2>
+              Notifications
+            </h2>
+
+            <p>
+              Send personal notifications to vendors.
+            </p>
+
           </div>
 
-          <button class="primary-btn" onclick="openNotificationModal()">
+          <button
+            class="primary-btn"
+            onclick="openNotificationModal()"
+          >
             Send Notification
           </button>
+
         </div>
 
         <div class="panel">
+
           <div class="panel-head">
-            <h3>Vendor Notifications</h3>
-            <span id="allNotificationCount">0</span>
+
+            <h3>
+              Vendor Notifications
+            </h3>
+
+            <span id="allNotificationCount">
+              0
+            </span>
+
           </div>
 
-          <div id="allNotifications" class="notification-list"></div>
+          <div
+            id="allNotifications"
+            class="notification-list"
+          ></div>
+
         </div>
 
       </div>
 
     </section>
+
   </main>
+
 </div>
 
 <!-- VENDOR DETAIL MODAL -->
-<div id="vendorDetailModal" class="modal-backdrop hidden">
+
+<div
+  id="vendorDetailModal"
+  class="modal-backdrop hidden"
+>
+
   <div class="modal">
 
     <div class="modal-head">
-      <h3 id="vendorDetailTitle">Vendor Details</h3>
-      <button class="close-btn" onclick="closeModal('vendorDetailModal')">×</button>
+
+      <h3 id="vendorDetailTitle">
+        Vendor Details
+      </h3>
+
+      <button
+        class="close-btn"
+        onclick="closeModal('vendorDetailModal')"
+      >
+        ×
+      </button>
+
     </div>
 
     <div class="modal-body">
+
       <div id="vendorDetailContent"></div>
+
     </div>
 
     <div class="modal-footer">
-      <button class="secondary-btn" onclick="closeModal('vendorDetailModal')">
+
+      <button
+        class="secondary-btn"
+        onclick="closeModal('vendorDetailModal')"
+      >
         Close
       </button>
 
-      <button id="detailRejectBtn" class="danger-btn">
+      <button
+        id="detailRejectBtn"
+        class="danger-btn"
+      >
         Reject
       </button>
 
-      <button id="detailApproveBtn" class="success-btn">
+      <button
+        id="detailApproveBtn"
+        class="success-btn"
+      >
         Approve
       </button>
 
-      <button id="detailEditBtn" class="primary-btn">
+      <button
+        id="detailEditBtn"
+        class="primary-btn"
+      >
         Edit Vendor
       </button>
+
     </div>
 
   </div>
+
 </div>
 
 <!-- EDIT VENDOR MODAL -->
-<div id="editVendorModal" class="modal-backdrop hidden">
+
+<div
+  id="editVendorModal"
+  class="modal-backdrop hidden"
+>
+
   <div class="modal">
 
     <div class="modal-head">
-      <h3>Edit Vendor</h3>
-      <button class="close-btn" onclick="closeModal('editVendorModal')">×</button>
+
+      <h3>
+        Edit Vendor
+      </h3>
+
+      <button
+        class="close-btn"
+        onclick="closeModal('editVendorModal')"
+      >
+        ×
+      </button>
+
     </div>
 
     <div class="modal-body">
 
-      <input type="hidden" id="editVendorId">
+      <input
+        type="hidden"
+        id="editVendorId"
+      >
 
       <div class="form-grid">
 
@@ -1158,12 +1530,18 @@ td{
 
         <div class="field full">
           <label>Address</label>
-          <textarea id="editAddress" rows="3"></textarea>
+          <textarea
+            id="editAddress"
+            rows="3"
+          ></textarea>
         </div>
 
         <div class="field">
           <label>Footfall</label>
-          <input id="editFootfall" type="number">
+          <input
+            id="editFootfall"
+            type="number"
+          >
         </div>
 
         <div class="field">
@@ -1178,22 +1556,34 @@ td{
 
         <div class="field">
           <label>LCD Total Price</label>
-          <input id="editLCDPrice" type="number">
+          <input
+            id="editLCDPrice"
+            type="number"
+          >
         </div>
 
         <div class="field">
           <label>LCD Down Payment</label>
-          <input id="editLCDDownPayment" type="number">
+          <input
+            id="editLCDDownPayment"
+            type="number"
+          >
         </div>
 
         <div class="field">
           <label>Monthly Installment</label>
-          <input id="editLCDMonthly" type="number">
+          <input
+            id="editLCDMonthly"
+            type="number"
+          >
         </div>
 
         <div class="field">
           <label>Installment Months</label>
-          <input id="editLCDMonths" type="number">
+          <input
+            id="editLCDMonths"
+            type="number"
+          >
         </div>
 
         <div class="field">
@@ -1208,12 +1598,18 @@ td{
 
         <div class="field">
           <label>Opening Time</label>
-          <input id="editOpeningTime" type="time">
+          <input
+            id="editOpeningTime"
+            type="time"
+          >
         </div>
 
         <div class="field">
           <label>Closing Time</label>
-          <input id="editClosingTime" type="time">
+          <input
+            id="editClosingTime"
+            type="time"
+          >
         </div>
 
         <div class="field">
@@ -1243,28 +1639,67 @@ td{
 
         <div class="field">
           <label>Status</label>
+
           <select id="editStatus">
-            <option value="pending">Pending</option>
-            <option value="approved">Approved</option>
-            <option value="rejected">Rejected</option>
-            <option value="blocked">Blocked</option>
+
+            <option value="pending">
+              Pending
+            </option>
+
+            <option value="approved">
+              Approved
+            </option>
+
+            <option value="rejected">
+              Rejected
+            </option>
+
+            <option value="blocked">
+              Blocked
+            </option>
+
           </select>
+
         </div>
 
         <div class="field">
-          <label>Screen Online</label>
+
+          <label>
+            Screen Online
+          </label>
+
           <select id="editOnlineStatus">
-            <option value="false">Offline</option>
-            <option value="true">Online</option>
+
+            <option value="false">
+              Offline
+            </option>
+
+            <option value="true">
+              Online
+            </option>
+
           </select>
+
         </div>
 
         <div class="field">
-          <label>Ice Cream Fridge</label>
+
+          <label>
+            Ice Cream Fridge
+          </label>
+
           <select id="editFridge">
-            <option value="false">No</option>
-            <option value="true">Yes</option>
+
+            <option value="false">
+              No
+            </option>
+
+            <option value="true">
+              Yes
+            </option>
+
           </select>
+
         </div>
 
       </div>
@@ -1272,62 +1707,121 @@ td{
     </div>
 
     <div class="modal-footer">
-      <button class="secondary-btn" onclick="closeModal('editVendorModal')">
+
+      <button
+        class="secondary-btn"
+        onclick="closeModal('editVendorModal')"
+      >
         Cancel
       </button>
 
-      <button class="primary-btn" onclick="saveVendor()">
+      <button
+        class="primary-btn"
+        onclick="saveVendor()"
+      >
         Save Changes
       </button>
+
     </div>
 
   </div>
+
 </div>
 
 <!-- NOTIFICATION MODAL -->
-<div id="notificationModal" class="modal-backdrop hidden">
+
+<div
+  id="notificationModal"
+  class="modal-backdrop hidden"
+>
+
   <div class="modal small">
 
     <div class="modal-head">
-      <h3>Send Vendor Notification</h3>
-      <button class="close-btn" onclick="closeModal('notificationModal')">×</button>
+
+      <h3>
+        Send Vendor Notification
+      </h3>
+
+      <button
+        class="close-btn"
+        onclick="closeModal('notificationModal')"
+      >
+        ×
+      </button>
+
     </div>
 
     <div class="modal-body">
 
       <div class="field">
-        <label>Select Vendor</label>
+
+        <label>
+          Select Vendor
+        </label>
+
         <select id="notificationVendor"></select>
+
       </div>
 
       <div class="field">
-        <label>Title</label>
-        <input id="notificationTitle" placeholder="Notification title">
+
+        <label>
+          Title
+        </label>
+
+        <input
+          id="notificationTitle"
+          placeholder="Notification title"
+        >
+
       </div>
 
       <div class="field">
-        <label>Message</label>
-        <textarea id="notificationMessage" rows="5" placeholder="Write notification..."></textarea>
+
+        <label>
+          Message
+        </label>
+
+        <textarea
+          id="notificationMessage"
+          rows="5"
+          placeholder="Write notification..."
+        ></textarea>
+
       </div>
 
     </div>
 
     <div class="modal-footer">
-      <button class="secondary-btn" onclick="closeModal('notificationModal')">
+
+      <button
+        class="secondary-btn"
+        onclick="closeModal('notificationModal')"
+      >
         Cancel
       </button>
 
-      <button class="primary-btn" onclick="sendNotification()">
+      <button
+        class="primary-btn"
+        onclick="sendNotification()"
+      >
         Send
       </button>
+
     </div>
 
   </div>
+
 </div>
 
-<div id="toast" class="toast hidden"></div>
+<div
+  id="toast"
+  class="toast hidden"
+></div>
 
 <script>
+
 /* =========================
    SUPABASE
 ========================= */
@@ -1364,7 +1858,14 @@ function $(id){
 }
 
 function esc(value){
-  if(value === null || value === undefined) return "";
+
+  if(
+    value === null ||
+    value === undefined
+  ){
+    return "";
+  }
+
   return String(value)
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
@@ -1374,71 +1875,143 @@ function esc(value){
 }
 
 function money(value){
-  const n = Number(value || 0);
+
+  const n =
+    Number(value || 0);
+
   return n.toLocaleString("en-PK");
 }
 
 function formatDate(value){
-  if(!value) return "—";
+
+  if(!value){
+    return "—";
+  }
 
   try{
-    return new Date(value).toLocaleString("en-PK",{
-      dateStyle:"medium",
-      timeStyle:"short"
-    });
+
+    return new Date(value).toLocaleString(
+      "en-PK",
+      {
+        dateStyle:"medium",
+        timeStyle:"short"
+      }
+    );
+
   }catch(e){
+
     return value;
+
   }
 }
 
 function formatTime(value){
-  if(!value) return "—";
+
+  if(!value){
+    return "—";
+  }
+
   return String(value).slice(0,5);
 }
 
 function toast(message){
-  const el = $("toast");
 
-  el.textContent = message;
+  const el =
+    $("toast");
+
+  if(!el){
+    return;
+  }
+
+  el.textContent =
+    message;
+
   el.classList.remove("hidden");
 
-  clearTimeout(window.__toastTimer);
+  clearTimeout(
+    window.__toastTimer
+  );
 
   window.__toastTimer =
-    setTimeout(()=>{
-      el.classList.add("hidden");
-    },3000);
+    setTimeout(
+      ()=>{
+        el.classList.add("hidden");
+      },
+      3000
+    );
 }
 
 function openModal(id){
-  $(id).classList.remove("hidden");
+
+  const el =
+    $(id);
+
+  if(el){
+    el.classList.remove("hidden");
+  }
 }
 
 function closeModal(id){
-  $(id).classList.add("hidden");
+
+  const el =
+    $(id);
+
+  if(el){
+    el.classList.add("hidden");
+  }
 }
 
 function statusBadge(status){
-  const s = String(status || "pending").toLowerCase();
+
+  const s =
+    String(
+      status || "pending"
+    ).toLowerCase();
+
+  const allowed = [
+    "pending",
+    "approved",
+    "rejected",
+    "blocked"
+  ];
+
+  const safeClass =
+    allowed.includes(s)
+      ? s
+      : "pending";
 
   return `
-    <span class="badge ${esc(s)}">
+    <span class="badge ${safeClass}">
       ${esc(s)}
     </span>
   `;
 }
 
 function onlineBadge(online){
+
   return online
     ? `<span class="badge online">Online</span>`
     : `<span class="badge offline">Offline</span>`;
 }
 
 function getHierarchy(v){
-  if(v.phase) return "Phase: " + v.phase;
-  if(v.precinct) return "Precinct: " + v.precinct;
-  if(v.sector) return "Sector: " + v.sector;
-  if(v.block) return "Block: " + v.block;
+
+  if(v.phase){
+    return "Phase: " + v.phase;
+  }
+
+  if(v.precinct){
+    return "Precinct: " + v.precinct;
+  }
+
+  if(v.sector){
+    return "Sector: " + v.sector;
+  }
+
+  if(v.block){
+    return "Block: " + v.block;
+  }
+
   return "—";
 }
 
@@ -1454,11 +2027,14 @@ async function loginAdmin(){
   const password =
     $("loginPassword").value;
 
-  $("loginError").textContent = "";
+  $("loginError").textContent =
+    "";
 
   if(!email || !password){
+
     $("loginError").textContent =
       "Please enter Admin ID and password.";
+
     return;
   }
 
@@ -1474,7 +2050,11 @@ async function loginAdmin(){
       });
 
     if(authError){
-      console.error(authError);
+
+      console.error(
+        "ADMIN LOGIN ERROR:",
+        authError
+      );
 
       $("loginError").textContent =
         authError.message ||
@@ -1483,14 +2063,25 @@ async function loginAdmin(){
       return;
     }
 
-    if(!authData || !authData.user){
+    if(
+      !authData ||
+      !authData.user ||
+      !authData.session
+    ){
+
       $("loginError").textContent =
-        "Login failed.";
+        "Login session was not created.";
+
       return;
     }
 
     currentUser =
       authData.user;
+
+    console.log(
+      "ADMIN LOGGED IN:",
+      currentUser.id
+    );
 
     const {
       data:admin,
@@ -1499,12 +2090,22 @@ async function loginAdmin(){
       await supabaseClient
         .from("admin_users")
         .select("*")
-        .eq("user_id",currentUser.id)
-        .eq("active",true)
+        .eq(
+          "user_id",
+          currentUser.id
+        )
+        .eq(
+          "active",
+          true
+        )
         .maybeSingle();
 
     if(adminError){
-      console.error(adminError);
+
+      console.error(
+        "ADMIN CHECK ERROR:",
+        adminError
+      );
 
       await supabaseClient.auth.signOut();
 
@@ -1515,6 +2116,7 @@ async function loginAdmin(){
     }
 
     if(!admin){
+
       await supabaseClient.auth.signOut();
 
       $("loginError").textContent =
@@ -1523,19 +2125,29 @@ async function loginAdmin(){
       return;
     }
 
-    adminProfile = admin;
+    adminProfile =
+      admin;
 
     $("adminName").textContent =
-      admin.full_name || "Main Admin";
+      admin.full_name ||
+      "Main Admin";
 
-    $("loginPage").classList.add("hidden");
-    $("adminApp").classList.remove("hidden");
+    $("loginPage")
+      .classList
+      .add("hidden");
+
+    $("adminApp")
+      .classList
+      .remove("hidden");
 
     await startAdmin();
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "LOGIN EXCEPTION:",
+      error
+    );
 
     $("loginError").textContent =
       "Login failed. Please try again.";
@@ -1548,7 +2160,12 @@ async function loginAdmin(){
 
 async function startAdmin(){
 
+  console.log(
+    "STARTING ADMIN PORTAL"
+  );
+
   await loadVendors();
+
   await loadNotifications();
 
   subscribeRealtime();
@@ -1565,22 +2182,42 @@ async function startAdmin(){
 async function logoutAdmin(){
 
   if(realtimeChannel){
+
     await supabaseClient.removeChannel(
       realtimeChannel
     );
 
-    realtimeChannel = null;
+    realtimeChannel =
+      null;
   }
 
   await supabaseClient.auth.signOut();
 
-  currentUser = null;
-  adminProfile = null;
+  currentUser =
+    null;
 
-  $("adminApp").classList.add("hidden");
-  $("loginPage").classList.remove("hidden");
+  adminProfile =
+    null;
 
-  $("loginPassword").value = "";
+  vendors =
+    [];
+
+  notifications =
+    [];
+
+  currentVendor =
+    null;
+
+  $("adminApp")
+    .classList
+    .add("hidden");
+
+  $("loginPage")
+    .classList
+    .remove("hidden");
+
+  $("loginPassword").value =
+    "";
 }
 
 /* =========================
@@ -1589,18 +2226,39 @@ async function logoutAdmin(){
 
 function showPage(page){
 
-  $("dashboardPage").classList.add("hidden");
-  $("vendorsPage").classList.add("hidden");
-  $("notificationsPage").classList.add("hidden");
+  $("dashboardPage")
+    .classList
+    .add("hidden");
 
-  $("navDashboard").classList.remove("active");
-  $("navVendors").classList.remove("active");
-  $("navNotifications").classList.remove("active");
+  $("vendorsPage")
+    .classList
+    .add("hidden");
+
+  $("notificationsPage")
+    .classList
+    .add("hidden");
+
+  $("navDashboard")
+    .classList
+    .remove("active");
+
+  $("navVendors")
+    .classList
+    .remove("active");
+
+  $("navNotifications")
+    .classList
+    .remove("active");
 
   if(page === "dashboard"){
 
-    $("dashboardPage").classList.remove("hidden");
-    $("navDashboard").classList.add("active");
+    $("dashboardPage")
+      .classList
+      .remove("hidden");
+
+    $("navDashboard")
+      .classList
+      .add("active");
 
     $("pageTitle").textContent =
       "Dashboard";
@@ -1612,8 +2270,13 @@ function showPage(page){
 
   }else if(page === "vendors"){
 
-    $("vendorsPage").classList.remove("hidden");
-    $("navVendors").classList.add("active");
+    $("vendorsPage")
+      .classList
+      .remove("hidden");
+
+    $("navVendors")
+      .classList
+      .add("active");
 
     $("pageTitle").textContent =
       "Vendors";
@@ -1625,8 +2288,13 @@ function showPage(page){
 
   }else if(page === "notifications"){
 
-    $("notificationsPage").classList.remove("hidden");
-    $("navNotifications").classList.add("active");
+    $("notificationsPage")
+      .classList
+      .remove("hidden");
+
+    $("navNotifications")
+      .classList
+      .add("active");
 
     $("pageTitle").textContent =
       "Notifications";
@@ -1644,7 +2312,85 @@ function showPage(page){
 
 async function loadVendors(){
 
+  const body =
+    $("vendorsTable");
+
+  if(body){
+
+    body.innerHTML = `
+      <tr>
+        <td
+          colspan="8"
+          style="text-align:center;padding:35px;color:#999"
+        >
+          Loading vendors...
+        </td>
+      </tr>
+    `;
+  }
+
   try{
+
+    const {
+      data:authCheck,
+      error:authError
+    } =
+      await supabaseClient.auth.getUser();
+
+    if(authError){
+
+      console.error(
+        "AUTH ERROR:",
+        authError
+      );
+
+      if(body){
+
+        body.innerHTML = `
+          <tr>
+            <td
+              colspan="8"
+              style="text-align:center;padding:35px;color:#b42318"
+            >
+              Admin session error.
+            </td>
+          </tr>
+        `;
+      }
+
+      return;
+    }
+
+    if(!authCheck || !authCheck.user){
+
+      console.error(
+        "NO AUTH USER"
+      );
+
+      if(body){
+
+        body.innerHTML = `
+          <tr>
+            <td
+              colspan="8"
+              style="text-align:center;padding:35px;color:#b42318"
+            >
+              Admin session not found.
+            </td>
+          </tr>
+        `;
+      }
+
+      return;
+    }
+
+    currentUser =
+      authCheck.user;
+
+    console.log(
+      "LOADING VENDORS FOR ADMIN:",
+      currentUser.id
+    );
 
     const {
       data,
@@ -1653,27 +2399,92 @@ async function loadVendors(){
       await supabaseClient
         .from("vendors")
         .select("*")
-        .order("created_at",{
-          ascending:false
-        });
+        .order(
+          "created_at",
+          {
+            ascending:false
+          }
+        );
 
     if(error){
-      console.error(error);
-      toast("Unable to load vendors.");
+
+      console.error(
+        "VENDORS QUERY ERROR:",
+        error
+      );
+
+      vendors =
+        [];
+
+      if(body){
+
+        body.innerHTML = `
+          <tr>
+            <td
+              colspan="8"
+              style="text-align:center;padding:35px;color:#b42318"
+            >
+              Unable to load vendors.
+              <br>
+              <small>${esc(error.message)}</small>
+            </td>
+          </tr>
+        `;
+      }
+
+      toast(
+        "Unable to load vendors: " +
+        error.message
+      );
+
       return;
     }
 
-    vendors = data || [];
+    vendors =
+      Array.isArray(data)
+        ? data
+        : [];
+
+    console.log(
+      "VENDORS LOADED:",
+      vendors
+    );
+
+    updateVendorStats();
+
+    populateNotificationVendors();
 
     renderVendors();
-    updateVendorStats();
-    populateNotificationVendors();
+
     updateDashboard();
 
   }catch(error){
 
-    console.error(error);
-    toast("Unable to load vendors.");
+    console.error(
+      "LOAD VENDORS EXCEPTION:",
+      error
+    );
+
+    vendors =
+      [];
+
+    if(body){
+
+      body.innerHTML = `
+        <tr>
+          <td
+            colspan="8"
+            style="text-align:center;padding:35px;color:#b42318"
+          >
+            Vendor loading failed.
+          </td>
+        </tr>
+      `;
+    }
+
+    toast(
+      "Unable to load vendors."
+    );
   }
 }
 
@@ -1688,45 +2499,64 @@ function updateVendorStats(){
 
   const pending =
     vendors.filter(
-      v => String(v.status).toLowerCase() === "pending"
+      v =>
+        String(v.status || "")
+          .toLowerCase() ===
+        "pending"
     ).length;
 
   const approved =
     vendors.filter(
-      v => String(v.status).toLowerCase() === "approved"
+      v =>
+        String(v.status || "")
+          .toLowerCase() ===
+        "approved"
     ).length;
 
   const online =
     vendors.filter(
-      v => v.online_status === true
+      v =>
+        v.online_status === true
     ).length;
 
-  $("totalVendors").textContent =
-    total;
+  if($("totalVendors"))
+    $("totalVendors").textContent =
+      total;
 
-  $("pendingVendors").textContent =
-    pending;
+  if($("pendingVendors"))
+    $("pendingVendors").textContent =
+      pending;
 
-  $("approvedVendors").textContent =
-    approved;
+  if($("approvedVendors"))
+    $("approvedVendors").textContent =
+      approved;
 
-  $("onlineVendors").textContent =
-    online;
+  if($("onlineVendors"))
+    $("onlineVendors").textContent =
+      online;
 
-  $("dashTotalVendors").textContent =
-    total;
+  if($("dashTotalVendors"))
+    $("dashTotalVendors").textContent =
+      total;
 
-  $("dashPendingVendors").textContent =
-    pending;
+  if($("dashPendingVendors"))
+    $("dashPendingVendors").textContent =
+      pending;
 
-  $("dashApprovedVendors").textContent =
-    approved;
+  if($("dashApprovedVendors"))
+    $("dashApprovedVendors").textContent =
+      approved;
 
-  $("dashOnlineVendors").textContent =
-    online;
+  if($("dashOnlineVendors"))
+    $("dashOnlineVendors").textContent =
+      online;
 
-  $("dashboardVendorCount").textContent =
-    `${total} vendor${total === 1 ? "" : "s"}`;
+  if($("dashboardVendorCount")){
+
+    $("dashboardVendorCount")
+      .textContent =
+      `${total} vendor${total === 1 ? "" : "s"}`;
+  }
 }
 
 /* =========================
@@ -1738,23 +2568,46 @@ function renderVendors(){
   const body =
     $("vendorsTable");
 
-  if(!body) return;
+  if(!body){
+
+    console.error(
+      "vendorsTable element not found."
+    );
+
+    return;
+  }
 
   const search =
-    ($("vendorSearch")?.value || "")
-      .trim()
-      .toLowerCase();
+    (
+      $("vendorSearch")?.value ||
+      ""
+    )
+    .trim()
+    .toLowerCase();
 
   const status =
-    $("vendorStatusFilter")?.value || "";
+    $("vendorStatusFilter")?.value ||
+    "";
 
   const onlineFilter =
-    $("vendorOnlineFilter")?.value || "";
+    $("vendorOnlineFilter")?.value ||
+    "";
+
+  const source =
+    Array.isArray(vendors)
+      ? vendors
+      : [];
+
+  console.log(
+    "RENDERING VENDORS:",
+    source.length
+  );
 
   let list =
-    vendors.filter(v => {
+    source.filter(v => {
 
       const haystack = [
+
         v.vendor_name,
         v.owner_name,
         v.phone,
@@ -1766,18 +2619,28 @@ function renderVendors(){
         v.sector,
         v.block,
         v.address
+
       ]
-      .filter(Boolean)
+      .filter(
+        value =>
+          value !== null &&
+          value !== undefined
+      )
       .join(" ")
       .toLowerCase();
 
-      if(search && !haystack.includes(search)){
+      if(
+        search &&
+        !haystack.includes(search)
+      ){
         return false;
       }
 
       if(
         status &&
-        String(v.status || "").toLowerCase() !== status
+        String(v.status || "")
+          .toLowerCase() !==
+        status
       ){
         return false;
       }
@@ -1803,8 +2666,15 @@ function renderVendors(){
 
     body.innerHTML = `
       <tr>
-        <td colspan="8" style="text-align:center;padding:35px;color:#999">
-          No vendors found.
+        <td
+          colspan="8"
+          style="text-align:center;padding:35px;color:#999"
+        >
+          ${
+            source.length
+              ? "No vendors match the selected search/filter."
+              : "No vendors found."
+          }
         </td>
       </tr>
     `;
@@ -1813,96 +2683,137 @@ function renderVendors(){
   }
 
   body.innerHTML =
-    list.map(v => {
+    list
+      .map(v => {
 
-      const id =
-        v.id;
+        const id =
+          String(v.id || "");
 
-      return `
-        <tr>
+        const safeId =
+          esc(id);
 
-          <td>
-            <div class="vendor-name">
-              ${esc(v.vendor_name || "Unnamed Vendor")}
-            </div>
+        return `
+          <tr>
 
-            <div class="vendor-email">
-              ${esc(v.email || "")}
-            </div>
-          </td>
+            <td>
 
-          <td>
-            ${esc(v.phone || "—")}
-          </td>
+              <div class="vendor-name">
+                ${esc(
+                  v.vendor_name ||
+                  "Unnamed Vendor"
+                )}
+              </div>
 
-          <td>
-            ${esc(v.area || "—")}
-          </td>
+              <div class="vendor-email">
+                ${esc(
+                  v.email ||
+                  ""
+                )}
+              </div>
 
-          <td>
-            ${esc(getHierarchy(v))}
-          </td>
+            </td>
 
-          <td>
-            ${esc(v.lcd_status || "—")}
-          </td>
+            <td>
+              ${esc(
+                v.phone ||
+                "—"
+              )}
+            </td>
 
-          <td>
-            ${statusBadge(v.status)}
-          </td>
+            <td>
+              ${esc(
+                v.area ||
+                "—"
+              )}
+            </td>
 
-          <td>
-            ${onlineBadge(v.online_status === true)}
-          </td>
+            <td>
+              ${esc(
+                getHierarchy(v)
+              )}
+            </td>
 
-          <td>
-            <div class="actions">
+            <td>
+              ${esc(
+                v.lcd_status ||
+                "—"
+              )}
+            </td>
 
-              <button
-                class="action-btn"
-                onclick="viewVendor('${esc(id)}')">
-                View
-              </button>
+            <td>
+              ${statusBadge(
+                v.status
+              )}
+            </td>
 
-              <button
-                class="action-btn"
-                onclick="editVendor('${esc(id)}')">
-                Edit
-              </button>
+            <td>
+              ${onlineBadge(
+                v.online_status === true
+              )}
+            </td>
 
-              ${
-                String(v.status).toLowerCase() !== "approved"
-                ?
-                `
+            <td>
+
+              <div class="actions">
+
                 <button
-                  class="action-btn approve"
-                  onclick="approveVendor('${esc(id)}')">
-                  Approve
+                  class="action-btn"
+                  onclick="viewVendor('${safeId}')"
+                >
+                  View
                 </button>
-                `
-                :
-                ""
-              }
 
-              <button
-                class="action-btn"
-                onclick="openNotificationForVendor('${esc(id)}')">
-                Notify
-              </button>
+                <button
+                  class="action-btn"
+                  onclick="editVendor('${safeId}')"
+                >
+                  Edit
+                </button>
 
-              <button
-                class="action-btn delete"
-                onclick="deleteVendor('${esc(id)}')">
-                Delete
-              </button>
+                ${
+                  String(v.status || "")
+                    .toLowerCase() !==
+                  "approved"
 
-            </div>
-          </td>
+                  ?
 
-        </tr>
-      `;
+                  `
+                    <button
+                      class="action-btn approve"
+                      onclick="approveVendor('${safeId}')"
+                    >
+                      Approve
+                    </button>
+                  `
 
-    }).join("");
+                  :
+
+                  ""
+                }
+
+                <button
+                  class="action-btn"
+                  onclick="openNotificationForVendor('${safeId}')"
+                >
+                  Notify
+                </button>
+
+                <button
+                  class="action-btn delete"
+                  onclick="deleteVendor('${safeId}')"
+                >
+                  Delete
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+        `;
+
+      })
+      .join("");
 }
 
 /* =========================
@@ -1913,335 +2824,774 @@ function viewVendor(id){
 
   const vendor =
     vendors.find(
-      v => String(v.id) === String(id)
+      v =>
+        String(v.id) ===
+        String(id)
     );
 
   if(!vendor){
-    toast("Vendor not found.");
+
+    toast(
+      "Vendor not found."
+    );
+
     return;
   }
 
-  currentVendor = vendor;
+  currentVendor =
+    vendor;
 
-  $("vendorDetailTitle").textContent =
+  $("vendorDetailTitle")
+    .textContent =
     vendor.vendor_name ||
     "Vendor Details";
 
-  $("vendorDetailContent").innerHTML = `
+  $("vendorDetailContent")
+    .innerHTML = `
 
-    <div class="detail-grid">
+      <div class="detail-grid">
 
-      <div class="detail-section full">
-        <h4>Vendor Status</h4>
+        <div class="detail-section full">
 
-        <div class="detail-list">
-
-          <div class="detail-item">
-            <label>Status</label>
-            <strong>
-              ${statusBadge(vendor.status)}
-            </strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Screen</label>
-            <strong>
-              ${onlineBadge(vendor.online_status === true)}
-            </strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Registered</label>
-            <strong>
-              ${esc(formatDate(vendor.created_at))}
-            </strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Last Updated</label>
-            <strong>
-              ${esc(formatDate(vendor.updated_at))}
-            </strong>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="detail-section">
-        <h4>Personal Details</h4>
-
-        <div class="detail-list">
-
-          <div class="detail-item">
-            <label>Vendor Name</label>
-            <strong>${esc(vendor.vendor_name || "—")}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Owner Name</label>
-            <strong>${esc(vendor.owner_name || "—")}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Phone</label>
-            <strong>${esc(vendor.phone || "—")}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Email</label>
-            <strong>${esc(vendor.email || "—")}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>User ID</label>
-            <strong>${esc(vendor.user_id || "—")}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Category</label>
-            <strong>${esc(vendor.category || "—")}</strong>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="detail-section">
-        <h4>Shop & Location</h4>
-
-        <div class="detail-list">
-
-          <div class="detail-item">
-            <label>Area</label>
-            <strong>${esc(vendor.area || "—")}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Shop Size</label>
-            <strong>${esc(vendor.shop_size || "—")}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Phase</label>
-            <strong>${esc(vendor.phase || "—")}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Precinct</label>
-            <strong>${esc(vendor.precinct || "—")}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Sector</label>
-            <strong>${esc(vendor.sector || "—")}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Block</label>
-            <strong>${esc(vendor.block || "—")}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Footfall</label>
-            <strong>${money(vendor.footfall)}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Address</label>
-            <strong>${esc(vendor.address || "—")}</strong>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="detail-section full">
-        <h4>Live Location</h4>
-
-        <div class="location-box">
+          <h4>
+            Vendor Status
+          </h4>
 
           <div class="detail-list">
 
             <div class="detail-item">
-              <label>Latitude</label>
-              <strong>${esc(vendor.latitude ?? "—")}</strong>
+
+              <label>
+                Status
+              </label>
+
+              <strong>
+                ${statusBadge(
+                  vendor.status
+                )}
+              </strong>
+
             </div>
 
             <div class="detail-item">
-              <label>Longitude</label>
-              <strong>${esc(vendor.longitude ?? "—")}</strong>
+
+              <label>
+                Screen
+              </label>
+
+              <strong>
+                ${onlineBadge(
+                  vendor.online_status === true
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Registered
+              </label>
+
+              <strong>
+                ${esc(
+                  formatDate(
+                    vendor.created_at
+                  )
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Last Updated
+              </label>
+
+              <strong>
+                ${esc(
+                  formatDate(
+                    vendor.updated_at
+                  )
+                )}
+              </strong>
+
             </div>
 
           </div>
 
-          ${
-            vendor.latitude !== null &&
-            vendor.latitude !== undefined &&
-            vendor.longitude !== null &&
-            vendor.longitude !== undefined
-            ?
-            `
-            <a
-              class="map-link"
-              target="_blank"
-              rel="noopener"
-              href="https://www.google.com/maps?q=${encodeURIComponent(vendor.latitude + "," + vendor.longitude)}">
-              Open Vendor Location on Map
-            </a>
-            `
-            :
-            `
-            <div style="color:#999;font-size:12px;margin-top:10px">
-              No live location has been saved for this vendor.
+        </div>
+
+        <div class="detail-section">
+
+          <h4>
+            Personal Details
+          </h4>
+
+          <div class="detail-list">
+
+            <div class="detail-item">
+
+              <label>
+                Vendor Name
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.vendor_name ||
+                  "—"
+                )}
+              </strong>
+
             </div>
-            `
-          }
 
-        </div>
-      </div>
+            <div class="detail-item">
 
-      <div class="detail-section">
-        <h4>LCD Details</h4>
+              <label>
+                Owner Name
+              </label>
 
-        <div class="detail-list">
+              <strong>
+                ${esc(
+                  vendor.owner_name ||
+                  "—"
+                )}
+              </strong>
 
-          <div class="detail-item">
-            <label>LCD Status</label>
-            <strong>${esc(vendor.lcd_status || "—")}</strong>
-          </div>
+            </div>
 
-          <div class="detail-item">
-            <label>Total Price</label>
-            <strong>Rs. ${money(vendor.lcd_total_price)}</strong>
-          </div>
+            <div class="detail-item">
 
-          <div class="detail-item">
-            <label>Down Payment</label>
-            <strong>Rs. ${money(vendor.lcd_down_payment)}</strong>
-          </div>
+              <label>
+                Phone
+              </label>
 
-          <div class="detail-item">
-            <label>Monthly Installment</label>
-            <strong>Rs. ${money(vendor.lcd_monthly_installment)}</strong>
-          </div>
+              <strong>
+                ${esc(
+                  vendor.phone ||
+                  "—"
+                )}
+              </strong>
 
-          <div class="detail-item">
-            <label>Installment Months</label>
-            <strong>${esc(vendor.lcd_installment_months || 0)}</strong>
-          </div>
+            </div>
 
-        </div>
-      </div>
+            <div class="detail-item">
 
-      <div class="detail-section">
-        <h4>Internet & Timing</h4>
+              <label>
+                Email
+              </label>
 
-        <div class="detail-list">
+              <strong>
+                ${esc(
+                  vendor.email ||
+                  "—"
+                )}
+              </strong>
 
-          <div class="detail-item">
-            <label>Internet Status</label>
-            <strong>${esc(vendor.internet_status || "—")}</strong>
-          </div>
+            </div>
 
-          <div class="detail-item">
-            <label>Internet Provider</label>
-            <strong>${esc(vendor.internet_provider || "—")}</strong>
-          </div>
+            <div class="detail-item">
 
-          <div class="detail-item">
-            <label>Required Company</label>
-            <strong>${vendor.internet_company_required ? "Yes" : "No"}</strong>
-          </div>
+              <label>
+                User ID
+              </label>
 
-          <div class="detail-item">
-            <label>Opening Time</label>
-            <strong>${esc(formatTime(vendor.opening_time))}</strong>
-          </div>
+              <strong>
+                ${esc(
+                  vendor.user_id ||
+                  "—"
+                )}
+              </strong>
 
-          <div class="detail-item">
-            <label>Closing Time</label>
-            <strong>${esc(formatTime(vendor.closing_time))}</strong>
-          </div>
+            </div>
 
-          <div class="detail-item">
-            <label>Ice Cream Fridge</label>
-            <strong>${vendor.ice_cream_fridge ? "Yes" : "No"}</strong>
-          </div>
+            <div class="detail-item">
 
-        </div>
-      </div>
+              <label>
+                Category
+              </label>
 
-      <div class="detail-section">
-        <h4>Bank & Payment</h4>
+              <strong>
+                ${esc(
+                  vendor.category ||
+                  "—"
+                )}
+              </strong>
 
-        <div class="detail-list">
+            </div>
 
-          <div class="detail-item">
-            <label>Bank</label>
-            <strong>${esc(vendor.bank_name || "—")}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Account Title</label>
-            <strong>${esc(vendor.account_title || "—")}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Account Number</label>
-            <strong>${esc(vendor.account_number || "—")}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>IBAN</label>
-            <strong>${esc(vendor.iban || "—")}</strong>
-          </div>
-
-          <div class="detail-item">
-            <label>Payment Method</label>
-            <strong>${esc(vendor.payment_method || "—")}</strong>
           </div>
 
         </div>
-      </div>
 
-      <div class="detail-section">
-        <h4>Vendor Notifications</h4>
+        <div class="detail-section">
 
-        <div id="vendorNotificationsDetail">
-          ${renderVendorNotifications(vendor.id)}
+          <h4>
+            Shop & Location
+          </h4>
+
+          <div class="detail-list">
+
+            <div class="detail-item">
+
+              <label>
+                Area
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.area ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Shop Size
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.shop_size ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Phase
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.phase ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Precinct
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.precinct ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Sector
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.sector ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Block
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.block ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Footfall
+              </label>
+
+              <strong>
+                ${money(
+                  vendor.footfall
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Address
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.address ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+
+          </div>
+
         </div>
-      </div>
 
-    </div>
-  `;
+        <div class="detail-section full">
+
+          <h4>
+            Live Location
+          </h4>
+
+          <div class="location-box">
+
+            <div class="detail-list">
+
+              <div class="detail-item">
+
+                <label>
+                  Latitude
+                </label>
+
+                <strong>
+                  ${esc(
+                    vendor.latitude ??
+                    "—"
+                  )}
+                </strong>
+
+              </div>
+
+              <div class="detail-item">
+
+                <label>
+                  Longitude
+                </label>
+
+                <strong>
+                  ${esc(
+                    vendor.longitude ??
+                    "—"
+                  )}
+                </strong>
+
+              </div>
+
+            </div>
+
+            ${
+              vendor.latitude !== null &&
+              vendor.latitude !== undefined &&
+              vendor.longitude !== null &&
+              vendor.longitude !== undefined
+
+              ?
+
+              `
+                <a
+                  class="map-link"
+                  target="_blank"
+                  rel="noopener"
+                  href="https://www.google.com/maps?q=${encodeURIComponent(
+                    vendor.latitude +
+                    "," +
+                    vendor.longitude
+                  )}"
+                >
+                  Open Vendor Location on Map
+                </a>
+              `
+
+              :
+
+              `
+                <div
+                  style="
+                    color:#999;
+                    font-size:12px;
+                    margin-top:10px
+                  "
+                >
+                  No live location has been saved for this vendor.
+                </div>
+              `
+            }
+
+          </div>
+
+        </div>
+
+        <div class="detail-section">
+
+          <h4>
+            LCD Details
+          </h4>
+
+          <div class="detail-list">
+
+            <div class="detail-item">
+
+              <label>
+                LCD Status
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.lcd_status ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Total Price
+              </label>
+
+              <strong>
+                Rs.
+                ${money(
+                  vendor.lcd_total_price
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Down Payment
+              </label>
+
+              <strong>
+                Rs.
+                ${money(
+                  vendor.lcd_down_payment
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Monthly Installment
+              </label>
+
+              <strong>
+                Rs.
+                ${money(
+                  vendor.lcd_monthly_installment
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Installment Months
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.lcd_installment_months ||
+                  0
+                )}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="detail-section">
+
+          <h4>
+            Internet & Timing
+          </h4>
+
+          <div class="detail-list">
+
+            <div class="detail-item">
+
+              <label>
+                Internet Status
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.internet_status ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Internet Provider
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.internet_provider ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Required Company
+              </label>
+
+              <strong>
+                ${
+                  vendor.internet_company_required
+                    ? "Yes"
+                    : "No"
+                }
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Opening Time
+              </label>
+
+              <strong>
+                ${esc(
+                  formatTime(
+                    vendor.opening_time
+                  )
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Closing Time
+              </label>
+
+              <strong>
+                ${esc(
+                  formatTime(
+                    vendor.closing_time
+                  )
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Ice Cream Fridge
+              </label>
+
+              <strong>
+                ${
+                  vendor.ice_cream_fridge
+                    ? "Yes"
+                    : "No"
+                }
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="detail-section">
+
+          <h4>
+            Bank & Payment
+          </h4>
+
+          <div class="detail-list">
+
+            <div class="detail-item">
+
+              <label>
+                Bank
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.bank_name ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Account Title
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.account_title ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Account Number
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.account_number ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                IBAN
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.iban ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+
+            <div class="detail-item">
+
+              <label>
+                Payment Method
+              </label>
+
+              <strong>
+                ${esc(
+                  vendor.payment_method ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="detail-section">
+
+          <h4>
+            Vendor Notifications
+          </h4>
+
+          <div id="vendorNotificationsDetail">
+
+            ${renderVendorNotifications(
+              vendor.id
+            )}
+
+          </div>
+
+        </div>
+
+      </div>
+    `;
 
   $("detailApproveBtn").onclick =
-    () => approveVendor(vendor.id);
+    () =>
+      approveVendor(
+        vendor.id
+      );
 
   $("detailRejectBtn").onclick =
-    () => rejectVendor(vendor.id);
+    () =>
+      rejectVendor(
+        vendor.id
+      );
 
   $("detailEditBtn").onclick =
     () => {
-      closeModal("vendorDetailModal");
-      editVendor(vendor.id);
+
+      closeModal(
+        "vendorDetailModal"
+      );
+
+      editVendor(
+        vendor.id
+      );
     };
 
-  openModal("vendorDetailModal");
+  openModal(
+    "vendorDetailModal"
+  );
 }
 
 /* =========================
    VENDOR NOTIFICATIONS
 ========================= */
 
-function renderVendorNotifications(vendorId){
+function renderVendorNotifications(
+  vendorId
+){
 
   const list =
     notifications.filter(
-      n => String(n.vendor_id) === String(vendorId)
+      n =>
+        String(n.vendor_id) ===
+        String(vendorId)
     );
 
   if(!list.length){
+
     return `
-      <div style="color:#999;font-size:12px">
+      <div
+        style="
+          color:#999;
+          font-size:12px
+        "
+      >
         No notifications sent yet.
       </div>
     `;
@@ -2249,26 +3599,53 @@ function renderVendorNotifications(vendorId){
 
   return `
     <div class="notification-list">
+
       ${
-        list.slice(0,8).map(n => `
-          <div class="notification-item ${n.is_read ? "" : "unread"}">
+        list
+          .slice(0,8)
+          .map(
+            n => `
 
-            <div class="notification-title">
-              ${esc(n.title)}
-            </div>
+              <div
+                class="notification-item ${
+                  n.is_read
+                    ? ""
+                    : "unread"
+                }"
+              >
 
-            <div class="notification-message">
-              ${esc(n.message)}
-            </div>
+                <div class="notification-title">
+                  ${esc(
+                    n.title
+                  )}
+                </div>
 
-            <div class="notification-meta">
-              ${esc(formatDate(n.created_at))}
-              ${n.is_read ? " · Read" : " · Unread"}
-            </div>
+                <div class="notification-message">
+                  ${esc(
+                    n.message
+                  )}
+                </div>
 
-          </div>
-        `).join("")
+                <div class="notification-meta">
+                  ${esc(
+                    formatDate(
+                      n.created_at
+                    )
+                  )}
+                  ${
+                    n.is_read
+                      ? " · Read"
+                      : " · Unread"
+                  }
+                </div>
+
+              </div>
+
+            `
+          )
+          .join("")
       }
+
     </div>
   `;
 }
@@ -2281,11 +3658,17 @@ async function approveVendor(id){
 
   const vendor =
     vendors.find(
-      v => String(v.id) === String(id)
+      v =>
+        String(v.id) ===
+        String(id)
     );
 
   if(!vendor){
-    toast("Vendor not found.");
+
+    toast(
+      "Vendor not found."
+    );
+
     return;
   }
 
@@ -2298,13 +3681,25 @@ async function approveVendor(id){
         .from("vendors")
         .update({
           status:"approved",
-          updated_at:new Date().toISOString()
+          updated_at:
+            new Date().toISOString()
         })
-        .eq("id",id);
+        .eq(
+          "id",
+          id
+        );
 
     if(error){
-      console.error(error);
-      toast(error.message || "Unable to approve vendor.");
+
+      console.error(
+        error
+      );
+
+      toast(
+        error.message ||
+        "Unable to approve vendor."
+      );
+
       return;
     }
 
@@ -2314,28 +3709,44 @@ async function approveVendor(id){
       "Your Spotly vendor account has been approved by admin."
     );
 
-    toast("Vendor approved.");
+    toast(
+      "Vendor approved."
+    );
 
     await loadVendors();
+
     await loadNotifications();
 
-    if(currentVendor &&
-       String(currentVendor.id) === String(id)){
+    if(
+      currentVendor &&
+      String(currentVendor.id) ===
+      String(id)
+    ){
 
       currentVendor =
         vendors.find(
-          v => String(v.id) === String(id)
+          v =>
+            String(v.id) ===
+            String(id)
         ) || null;
 
       if(currentVendor){
-        viewVendor(currentVendor.id);
+
+        viewVendor(
+          currentVendor.id
+        );
       }
     }
 
   }catch(error){
 
-    console.error(error);
-    toast("Unable to approve vendor.");
+    console.error(
+      error
+    );
+
+    toast(
+      "Unable to approve vendor."
+    );
   }
 }
 
@@ -2367,13 +3778,25 @@ async function rejectVendor(id){
         .from("vendors")
         .update({
           status:"rejected",
-          updated_at:new Date().toISOString()
+          updated_at:
+            new Date().toISOString()
         })
-        .eq("id",id);
+        .eq(
+          "id",
+          id
+        );
 
     if(error){
-      console.error(error);
-      toast(error.message || "Unable to reject vendor.");
+
+      console.error(
+        error
+      );
+
+      toast(
+        error.message ||
+        "Unable to reject vendor."
+      );
+
       return;
     }
 
@@ -2383,21 +3806,34 @@ async function rejectVendor(id){
       cleanReason
     );
 
-    toast("Vendor rejected.");
+    toast(
+      "Vendor rejected."
+    );
 
     await loadVendors();
+
     await loadNotifications();
 
-    if(currentVendor &&
-       String(currentVendor.id) === String(id)){
+    if(
+      currentVendor &&
+      String(currentVendor.id) ===
+      String(id)
+    ){
 
-      closeModal("vendorDetailModal");
+      closeModal(
+        "vendorDetailModal"
+      );
     }
 
   }catch(error){
 
-    console.error(error);
-    toast("Unable to reject vendor.");
+    console.error(
+      error
+    );
+
+    toast(
+      "Unable to reject vendor."
+    );
   }
 }
 
@@ -2409,17 +3845,26 @@ async function deleteVendor(id){
 
   const vendor =
     vendors.find(
-      v => String(v.id) === String(id)
+      v =>
+        String(v.id) ===
+        String(id)
     );
 
   if(!vendor){
-    toast("Vendor not found.");
+
+    toast(
+      "Vendor not found."
+    );
+
     return;
   }
 
   const confirmed =
     confirm(
-      `Delete vendor "${vendor.vendor_name || "this vendor"}"?\n\nThis deletes the vendor profile from the vendors table.`
+      `Delete vendor "${
+        vendor.vendor_name ||
+        "this vendor"
+      }"?\n\nThis deletes the vendor profile from the vendors table.`
     );
 
   if(!confirmed){
@@ -2434,23 +3879,42 @@ async function deleteVendor(id){
       await supabaseClient
         .from("vendors")
         .delete()
-        .eq("id",id);
+        .eq(
+          "id",
+          id
+        );
 
     if(error){
-      console.error(error);
-      toast(error.message || "Unable to delete vendor.");
+
+      console.error(
+        error
+      );
+
+      toast(
+        error.message ||
+        "Unable to delete vendor."
+      );
+
       return;
     }
 
-    toast("Vendor deleted.");
+    toast(
+      "Vendor deleted."
+    );
 
     await loadVendors();
+
     await loadNotifications();
 
   }catch(error){
 
-    console.error(error);
-    toast("Unable to delete vendor.");
+    console.error(
+      error
+    );
+
+    toast(
+      "Unable to delete vendor."
+    );
   }
 }
 
@@ -2462,27 +3926,55 @@ function editVendor(id){
 
   const v =
     vendors.find(
-      x => String(x.id) === String(id)
+      x =>
+        String(x.id) ===
+        String(id)
     );
 
   if(!v){
-    toast("Vendor not found.");
+
+    toast(
+      "Vendor not found."
+    );
+
     return;
   }
 
-  $("editVendorId").value = v.id || "";
+  $("editVendorId").value =
+    v.id || "";
 
-  $("editVendorName").value = v.vendor_name || "";
-  $("editOwnerName").value = v.owner_name || "";
-  $("editPhone").value = v.phone || "";
-  $("editEmail").value = v.email || "";
-  $("editCategory").value = v.category || "";
-  $("editArea").value = v.area || "";
-  $("editPhase").value = v.phase || "";
-  $("editPrecinct").value = v.precinct || "";
-  $("editSector").value = v.sector || "";
-  $("editBlock").value = v.block || "";
-  $("editAddress").value = v.address || "";
+  $("editVendorName").value =
+    v.vendor_name || "";
+
+  $("editOwnerName").value =
+    v.owner_name || "";
+
+  $("editPhone").value =
+    v.phone || "";
+
+  $("editEmail").value =
+    v.email || "";
+
+  $("editCategory").value =
+    v.category || "";
+
+  $("editArea").value =
+    v.area || "";
+
+  $("editPhase").value =
+    v.phase || "";
+
+  $("editPrecinct").value =
+    v.precinct || "";
+
+  $("editSector").value =
+    v.sector || "";
+
+  $("editBlock").value =
+    v.block || "";
+
+  $("editAddress").value =
+    v.address || "";
 
   $("editFootfall").value =
     v.footfall ?? "";
@@ -2512,10 +4004,18 @@ function editVendor(id){
     v.internet_provider || "";
 
   $("editOpeningTime").value =
-    formatTime(v.opening_time);
+    v.opening_time
+      ? String(
+          v.opening_time
+        ).slice(0,5)
+      : "";
 
   $("editClosingTime").value =
-    formatTime(v.closing_time);
+    v.closing_time
+      ? String(
+          v.closing_time
+        ).slice(0,5)
+      : "";
 
   $("editBankName").value =
     v.bank_name || "";
@@ -2536,12 +4036,18 @@ function editVendor(id){
     v.status || "pending";
 
   $("editOnlineStatus").value =
-    v.online_status ? "true" : "false";
+    v.online_status
+      ? "true"
+      : "false";
 
   $("editFridge").value =
-    v.ice_cream_fridge ? "true" : "false";
+    v.ice_cream_fridge
+      ? "true"
+      : "false";
 
-  openModal("editVendorModal");
+  openModal(
+    "editVendorModal"
+  );
 }
 
 /* =========================
@@ -2554,101 +4060,164 @@ async function saveVendor(){
     $("editVendorId").value;
 
   if(!id){
-    toast("Vendor ID missing.");
+
+    toast(
+      "Vendor ID missing."
+    );
+
     return;
   }
 
   const payload = {
 
     vendor_name:
-      $("editVendorName").value.trim(),
+      $("editVendorName")
+        .value
+        .trim(),
 
     owner_name:
-      $("editOwnerName").value.trim(),
+      $("editOwnerName")
+        .value
+        .trim(),
 
     phone:
-      $("editPhone").value.trim(),
+      $("editPhone")
+        .value
+        .trim(),
 
     email:
-      $("editEmail").value.trim(),
+      $("editEmail")
+        .value
+        .trim(),
 
     category:
-      $("editCategory").value.trim(),
+      $("editCategory")
+        .value
+        .trim(),
 
     area:
-      $("editArea").value.trim(),
+      $("editArea")
+        .value
+        .trim(),
 
     phase:
-      $("editPhase").value.trim(),
+      $("editPhase")
+        .value
+        .trim(),
 
     precinct:
-      $("editPrecinct").value.trim(),
+      $("editPrecinct")
+        .value
+        .trim(),
 
     sector:
-      $("editSector").value.trim(),
+      $("editSector")
+        .value
+        .trim(),
 
     block:
-      $("editBlock").value.trim(),
+      $("editBlock")
+        .value
+        .trim(),
 
     address:
-      $("editAddress").value.trim(),
+      $("editAddress")
+        .value
+        .trim(),
 
     footfall:
-      Number($("editFootfall").value || 0),
+      Number(
+        $("editFootfall").value ||
+        0
+      ),
 
     shop_size:
-      $("editShopSize").value.trim(),
+      $("editShopSize")
+        .value
+        .trim(),
 
     lcd_status:
-      $("editLCDStatus").value.trim(),
+      $("editLCDStatus")
+        .value
+        .trim(),
 
     lcd_total_price:
-      Number($("editLCDPrice").value || 0),
+      Number(
+        $("editLCDPrice").value ||
+        0
+      ),
 
     lcd_down_payment:
-      Number($("editLCDDownPayment").value || 0),
+      Number(
+        $("editLCDDownPayment").value ||
+        0
+      ),
 
     lcd_monthly_installment:
-      Number($("editLCDMonthly").value || 0),
+      Number(
+        $("editLCDMonthly").value ||
+        0
+      ),
 
     lcd_installment_months:
-      Number($("editLCDMonths").value || 0),
+      Number(
+        $("editLCDMonths").value ||
+        0
+      ),
 
     internet_status:
-      $("editInternetStatus").value.trim(),
+      $("editInternetStatus")
+        .value
+        .trim(),
 
     internet_provider:
-      $("editInternetProvider").value.trim(),
+      $("editInternetProvider")
+        .value
+        .trim(),
 
     opening_time:
-      $("editOpeningTime").value || null,
+      $("editOpeningTime").value ||
+      null,
 
     closing_time:
-      $("editClosingTime").value || null,
+      $("editClosingTime").value ||
+      null,
 
     bank_name:
-      $("editBankName").value.trim(),
+      $("editBankName")
+        .value
+        .trim(),
 
     account_title:
-      $("editAccountTitle").value.trim(),
+      $("editAccountTitle")
+        .value
+        .trim(),
 
     account_number:
-      $("editAccountNumber").value.trim(),
+      $("editAccountNumber")
+        .value
+        .trim(),
 
     iban:
-      $("editIBAN").value.trim(),
+      $("editIBAN")
+        .value
+        .trim(),
 
     payment_method:
-      $("editPaymentMethod").value.trim(),
+      $("editPaymentMethod")
+        .value
+        .trim(),
 
     status:
       $("editStatus").value,
 
     online_status:
-      $("editOnlineStatus").value === "true",
+      $("editOnlineStatus")
+        .value === "true",
 
     ice_cream_fridge:
-      $("editFridge").value === "true",
+      $("editFridge")
+        .value === "true",
 
     updated_at:
       new Date().toISOString()
@@ -2662,34 +4231,61 @@ async function saveVendor(){
       await supabaseClient
         .from("vendors")
         .update(payload)
-        .eq("id",id);
+        .eq(
+          "id",
+          id
+        );
 
     if(error){
-      console.error(error);
-      toast(error.message || "Unable to save vendor.");
+
+      console.error(
+        error
+      );
+
+      toast(
+        error.message ||
+        "Unable to save vendor."
+      );
+
       return;
     }
 
-    toast("Vendor updated.");
+    toast(
+      "Vendor updated."
+    );
 
-    closeModal("editVendorModal");
+    closeModal(
+      "editVendorModal"
+    );
 
     await loadVendors();
 
     const updated =
       vendors.find(
-        v => String(v.id) === String(id)
+        v =>
+          String(v.id) ===
+          String(id)
       );
 
     if(updated){
-      currentVendor = updated;
-      viewVendor(updated.id);
+
+      currentVendor =
+        updated;
+
+      viewVendor(
+        updated.id
+      );
     }
 
   }catch(error){
 
-    console.error(error);
-    toast("Unable to save vendor.");
+    console.error(
+      error
+    );
+
+    toast(
+      "Unable to save vendor."
+    );
   }
 }
 
@@ -2701,44 +4297,55 @@ async function loadNotifications(){
 
   try{
 
-    /*
-      IMPORTANT:
-      vendor_notifications currently does NOT depend
-      on a foreign-key relationship with vendors.
-      Therefore we fetch notifications directly and
-      connect vendor information in JavaScript.
-    */
-
     const {
       data,
       error
     } =
       await supabaseClient
-        .from("vendor_notifications")
+        .from(
+          "vendor_notifications"
+        )
         .select("*")
-        .order("created_at",{
-          ascending:false
-        })
+        .order(
+          "created_at",
+          {
+            ascending:false
+          }
+        )
         .limit(100);
 
     if(error){
-      console.error(error);
-      notifications = [];
+
+      console.error(
+        "NOTIFICATION ERROR:",
+        error
+      );
+
+      notifications =
+        [];
+
       renderAllNotifications();
+
       updateNotificationCount();
+
       return;
     }
 
-    notifications = data || [];
+    notifications =
+      data || [];
 
     updateNotificationCount();
+
     renderAllNotifications();
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
 
-    notifications = [];
+    notifications =
+      [];
 
     updateNotificationCount();
   }
@@ -2760,15 +4367,22 @@ async function createVendorNotification(
       error
     } =
       await supabaseClient
-        .from("vendor_notifications")
+        .from(
+          "vendor_notifications"
+        )
         .insert({
-          vendor_id:vendorId,
-          title:title,
-          message:message,
-          is_read:false
+          vendor_id:
+            vendorId,
+          title:
+            title,
+          message:
+            message,
+          is_read:
+            false
         });
 
     if(error){
+
       console.error(
         "Notification insert error:",
         error
@@ -2777,7 +4391,9 @@ async function createVendorNotification(
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      error
+    );
   }
 }
 
@@ -2790,19 +4406,34 @@ function populateNotificationVendors(){
   const select =
     $("notificationVendor");
 
-  if(!select) return;
+  if(!select){
+    return;
+  }
 
   select.innerHTML = `
     <option value="">
       Select vendor
     </option>
+
     ${
-      vendors.map(v => `
-        <option value="${esc(v.id)}">
-          ${esc(v.vendor_name || "Unnamed Vendor")}
-          ${v.email ? " — " + esc(v.email) : ""}
-        </option>
-      `).join("")
+      vendors
+        .map(
+          v => `
+            <option value="${esc(v.id)}">
+              ${esc(
+                v.vendor_name ||
+                "Unnamed Vendor"
+              )}
+              ${
+                v.email
+                  ? " — " +
+                    esc(v.email)
+                  : ""
+              }
+            </option>
+          `
+        )
+        .join("")
     }
   `;
 }
@@ -2811,49 +4442,79 @@ function openNotificationModal(){
 
   populateNotificationVendors();
 
-  $("notificationVendor").value = "";
-  $("notificationTitle").value = "";
-  $("notificationMessage").value = "";
+  $("notificationVendor")
+    .value = "";
 
-  openModal("notificationModal");
+  $("notificationTitle")
+    .value = "";
+
+  $("notificationMessage")
+    .value = "";
+
+  openModal(
+    "notificationModal"
+  );
 }
 
 function openNotificationForVendor(id){
 
   populateNotificationVendors();
 
-  $("notificationVendor").value =
+  $("notificationVendor")
+    .value =
     id;
 
-  $("notificationTitle").value = "";
-  $("notificationMessage").value = "";
+  $("notificationTitle")
+    .value = "";
 
-  openModal("notificationModal");
+  $("notificationMessage")
+    .value = "";
+
+  openModal(
+    "notificationModal"
+  );
 }
 
 async function sendNotification(){
 
   const vendorId =
-    $("notificationVendor").value;
+    $("notificationVendor")
+      .value;
 
   const title =
-    $("notificationTitle").value.trim();
+    $("notificationTitle")
+      .value
+      .trim();
 
   const message =
-    $("notificationMessage").value.trim();
+    $("notificationMessage")
+      .value
+      .trim();
 
   if(!vendorId){
-    toast("Please select a vendor.");
+
+    toast(
+      "Please select a vendor."
+    );
+
     return;
   }
 
   if(!title){
-    toast("Please enter notification title.");
+
+    toast(
+      "Please enter notification title."
+    );
+
     return;
   }
 
   if(!message){
-    toast("Please enter notification message.");
+
+    toast(
+      "Please enter notification message."
+    );
+
     return;
   }
 
@@ -2863,70 +4524,127 @@ async function sendNotification(){
       error
     } =
       await supabaseClient
-        .from("vendor_notifications")
+        .from(
+          "vendor_notifications"
+        )
         .insert({
-          vendor_id:vendorId,
-          title:title,
-          message:message,
-          is_read:false
+          vendor_id:
+            vendorId,
+          title:
+            title,
+          message:
+            message,
+          is_read:
+            false
         });
 
     if(error){
-      console.error(error);
-      toast(error.message || "Unable to send notification.");
+
+      console.error(
+        error
+      );
+
+      toast(
+        error.message ||
+        "Unable to send notification."
+      );
+
       return;
     }
 
-    toast("Notification sent.");
+    toast(
+      "Notification sent."
+    );
 
-    closeModal("notificationModal");
+    closeModal(
+      "notificationModal"
+    );
 
     await loadNotifications();
 
   }catch(error){
 
-    console.error(error);
-    toast("Unable to send notification.");
+    console.error(
+      error
+    );
+
+    toast(
+      "Unable to send notification."
+    );
   }
 }
 
 /* =========================
-   RENDER NOTIFICATIONS
+   NOTIFICATIONS RENDER
 ========================= */
 
 function getVendorById(id){
 
   return vendors.find(
-    v => String(v.id) === String(id)
+    v =>
+      String(v.id) ===
+      String(id)
   );
 }
 
 function notificationHTML(n){
 
   const vendor =
-    getVendorById(n.vendor_id);
+    getVendorById(
+      n.vendor_id
+    );
 
   return `
-    <div class="notification-item ${n.is_read ? "" : "unread"}">
+    <div
+      class="notification-item ${
+        n.is_read
+          ? ""
+          : "unread"
+      }"
+    >
 
       <div class="notification-title">
-        ${esc(n.title || "Notification")}
+        ${esc(
+          n.title ||
+          "Notification"
+        )}
       </div>
 
       <div class="notification-message">
-        ${esc(n.message || "")}
+        ${esc(
+          n.message ||
+          ""
+        )}
       </div>
 
       <div class="notification-meta">
+
         ${
           vendor
-          ?
-          `To: ${esc(vendor.vendor_name || vendor.email || "Vendor")} · `
-          :
-          "Vendor · "
+            ?
+            `To: ${
+              esc(
+                vendor.vendor_name ||
+                vendor.email ||
+                "Vendor"
+              )
+            } · `
+            :
+            "Vendor · "
         }
-        ${esc(formatDate(n.created_at))}
-        ${n.is_read ? " · Read" : " · Unread"}
+
+        ${esc(
+          formatDate(
+            n.created_at
+          )
+        )}
+
+        ${
+          n.is_read
+            ? " · Read"
+            : " · Unread"
+        }
+
       </div>
 
     </div>
@@ -2938,12 +4656,20 @@ function renderAllNotifications(){
   const container =
     $("allNotifications");
 
-  if(!container) return;
+  if(!container){
+    return;
+  }
 
   if(!notifications.length){
 
     container.innerHTML = `
-      <div style="color:#999;font-size:13px;padding:15px 0">
+      <div
+        style="
+          color:#999;
+          font-size:13px;
+          padding:15px 0
+        "
+      >
         No notifications yet.
       </div>
     `;
@@ -2953,7 +4679,9 @@ function renderAllNotifications(){
 
   container.innerHTML =
     notifications
-      .map(notificationHTML)
+      .map(
+        notificationHTML
+      )
       .join("");
 }
 
@@ -2962,15 +4690,25 @@ function renderDashboardNotifications(){
   const container =
     $("dashboardNotifications");
 
-  if(!container) return;
+  if(!container){
+    return;
+  }
 
   const list =
-    notifications.slice(0,7);
+    notifications.slice(
+      0,
+      7
+    );
 
   if(!list.length){
 
     container.innerHTML = `
-      <div style="color:#999;font-size:13px">
+      <div
+        style="
+          color:#999;
+          font-size:13px
+        "
+      >
         No notifications yet.
       </div>
     `;
@@ -2980,7 +4718,9 @@ function renderDashboardNotifications(){
 
   container.innerHTML =
     list
-      .map(notificationHTML)
+      .map(
+        notificationHTML
+      )
       .join("");
 }
 
@@ -2988,14 +4728,23 @@ function updateNotificationCount(){
 
   const count =
     notifications.filter(
-      n => !n.is_read
+      n =>
+        !n.is_read
     ).length;
 
-  $("notificationCount").textContent =
-    count;
+  if($("notificationCount")){
 
-  $("allNotificationCount").textContent =
-    notifications.length;
+    $("notificationCount")
+      .textContent =
+      count;
+  }
+
+  if($("allNotificationCount")){
+
+    $("allNotificationCount")
+      .textContent =
+      notifications.length;
+  }
 }
 
 /* =========================
@@ -3005,15 +4754,12 @@ function updateNotificationCount(){
 function updateDashboard(){
 
   updateVendorStats();
-  updateNotificationCount();
-  renderDashboardNotifications();
-  renderRecentVendors();
 
-  /*
-    Ads/revenue are intentionally shown as 0
-    until their actual database tables are connected.
-    No fake earnings or ad records are generated.
-  */
+  updateNotificationCount();
+
+  renderDashboardNotifications();
+
+  renderRecentVendors();
 
   $("todayAds").textContent =
     "0";
@@ -3026,7 +4772,8 @@ function updateDashboard(){
 
   $("offlineShops").textContent =
     vendors.filter(
-      v => v.online_status !== true
+      v =>
+        v.online_status !== true
     ).length;
 }
 
@@ -3035,15 +4782,25 @@ function renderRecentVendors(){
   const container =
     $("recentVendors");
 
-  if(!container) return;
+  if(!container){
+    return;
+  }
 
   const list =
-    vendors.slice(0,6);
+    vendors.slice(
+      0,
+      6
+    );
 
   if(!list.length){
 
     container.innerHTML = `
-      <div style="color:#999;font-size:13px">
+      <div
+        style="
+          color:#999;
+          font-size:13px
+        "
+      >
         No vendors registered yet.
       </div>
     `;
@@ -3052,37 +4809,71 @@ function renderRecentVendors(){
   }
 
   container.innerHTML = `
-    <div style="display:flex;flex-direction:column;gap:8px">
+
+    <div
+      style="
+        display:flex;
+        flex-direction:column;
+        gap:8px
+      "
+    >
 
       ${
-        list.map(v => `
-          <div
-            style="
-              display:flex;
-              justify-content:space-between;
-              align-items:center;
-              gap:10px;
-              border-top:1px solid #eeeae0;
-              padding:11px 0;
-            "
-          >
+        list
+          .map(
+            v => `
 
-            <div>
-              <div style="font-weight:800;font-size:13px">
-                ${esc(v.vendor_name || "Unnamed Vendor")}
+              <div
+                style="
+                  display:flex;
+                  justify-content:space-between;
+                  align-items:center;
+                  gap:10px;
+                  border-top:1px solid #eeeae0;
+                  padding:11px 0;
+                "
+              >
+
+                <div>
+
+                  <div
+                    style="
+                      font-weight:800;
+                      font-size:13px
+                    "
+                  >
+                    ${esc(
+                      v.vendor_name ||
+                      "Unnamed Vendor"
+                    )}
+                  </div>
+
+                  <div
+                    style="
+                      font-size:11px;
+                      color:#999;
+                      margin-top:3px
+                    "
+                  >
+                    ${esc(
+                      v.area ||
+                      "No area"
+                    )}
+                  </div>
+
+                </div>
+
+                <div>
+                  ${statusBadge(
+                    v.status
+                  )}
+                </div>
+
               </div>
 
-              <div style="font-size:11px;color:#999;margin-top:3px">
-                ${esc(v.area || "No area")}
-              </div>
-            </div>
-
-            <div>
-              ${statusBadge(v.status)}
-            </div>
-
-          </div>
-        `).join("")
+            `
+          )
+          .join("")
       }
 
     </div>
@@ -3096,14 +4887,20 @@ function renderRecentVendors(){
 function subscribeRealtime(){
 
   if(realtimeChannel){
+
     supabaseClient.removeChannel(
       realtimeChannel
     );
+
+    realtimeChannel =
+      null;
   }
 
   realtimeChannel =
     supabaseClient
-      .channel("spotly-admin-live")
+      .channel(
+        "spotly-admin-live"
+      )
 
       .on(
         "postgres_changes",
@@ -3138,37 +4935,48 @@ function subscribeRealtime(){
           );
 
           await loadNotifications();
+
           renderDashboardNotifications();
 
           if(
             $("vendorDetailModal") &&
-            !$("vendorDetailModal").classList.contains("hidden") &&
+            !$("vendorDetailModal")
+              .classList
+              .contains("hidden") &&
             currentVendor
           ){
-            viewVendor(currentVendor.id);
+
+            viewVendor(
+              currentVendor.id
+            );
           }
         }
       )
 
-      .subscribe(status => {
+      .subscribe(
+        status => {
 
-        console.log(
-          "Admin realtime status:",
-          status
-        );
+          console.log(
+            "Admin realtime status:",
+            status
+          );
 
-      });
+        }
+      );
 }
 
 /* =========================
-   ESCAPE KEY / MODALS
+   ESCAPE KEY
 ========================= */
 
 document.addEventListener(
   "keydown",
   event => {
 
-    if(event.key !== "Escape"){
+    if(
+      event.key !==
+      "Escape"
+    ){
       return;
     }
 
@@ -3176,17 +4984,25 @@ document.addEventListener(
       "vendorDetailModal",
       "editVendorModal",
       "notificationModal"
-    ].forEach(id => {
+    ]
+    .forEach(
+      id => {
 
-      const el = $(id);
+        const el =
+          $(id);
 
-      if(el &&
-         !el.classList.contains("hidden")){
+        if(
+          el &&
+          !el.classList.contains(
+            "hidden"
+          )
+        ){
 
-        closeModal(id);
+          closeModal(id);
+        }
+
       }
-
-    });
+    );
   }
 );
 
@@ -3213,25 +5029,49 @@ document.addEventListener(
         data.session.user;
 
       const {
-        data:admin
+        data:admin,
+        error:adminError
       } =
         await supabaseClient
           .from("admin_users")
           .select("*")
-          .eq("user_id",currentUser.id)
-          .eq("active",true)
+          .eq(
+            "user_id",
+            currentUser.id
+          )
+          .eq(
+            "active",
+            true
+          )
           .maybeSingle();
+
+      if(adminError){
+
+        console.error(
+          "AUTO ADMIN CHECK ERROR:",
+          adminError
+        );
+
+        return;
+      }
 
       if(admin){
 
         adminProfile =
           admin;
 
-        $("adminName").textContent =
-          admin.full_name || "Main Admin";
+        $("adminName")
+          .textContent =
+          admin.full_name ||
+          "Main Admin";
 
-        $("loginPage").classList.add("hidden");
-        $("adminApp").classList.remove("hidden");
+        $("loginPage")
+          .classList
+          .add("hidden");
+
+        $("adminApp")
+          .classList
+          .remove("hidden");
 
         await startAdmin();
       }
@@ -3246,6 +5086,7 @@ document.addEventListener(
   }
 
 })();
+
 </script>
 
 </body>
