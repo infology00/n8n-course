@@ -3,267 +3,192 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Spotly Admin Portal</title>
+<title>Spotly Admin</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+*{box-sizing:border-box}
 :root{
   --yellow:#f5c400;
-  --yellow2:#ffd92f;
-  --light-yellow:#fff7c7;
-  --soft-yellow:#fffbe8;
+  --yellow2:#ffd84d;
+  --yellow3:#fff3b5;
+  --bg:#f6f6f4;
   --white:#fff;
-  --grey:#f1f2f4;
-  --border:#e4e4e4;
-  --text:#202124;
+  --text:#202020;
   --muted:#777;
-  --green:#299653;
-  --red:#d94b4b;
-  --orange:#d88900;
+  --border:#e7e7e2;
+  --green:#17823b;
+  --green-bg:#e7f6ec;
+  --red:#c93636;
+  --red-bg:#fdeaea;
+  --orange:#b87900;
+  --orange-bg:#fff3d6;
+  --grey:#777;
+  --grey-bg:#eeeeec;
+  --shadow:0 8px 30px rgba(0,0,0,.07);
 }
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
 body{
-  font-family:Inter,Arial,sans-serif;
-  background:var(--grey);
+  margin:0;
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  background:var(--bg);
   color:var(--text);
 }
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
 
-button,
-input,
-select,
-textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.hidden{
-  display:none!important;
-}
-
-/* ================= LOGIN ================= */
-
-.login-screen{
+/* LOGIN */
+.login-page{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:var(--grey);
-  padding:20px;
+  padding:24px;
+  background:var(--bg);
 }
-
 .login-card{
   width:100%;
-  max-width:430px;
+  max-width:410px;
   background:#fff;
   border:1px solid var(--border);
-  border-radius:16px;
-  padding:35px;
-  box-shadow:0 15px 40px rgba(0,0,0,.06);
+  border-radius:22px;
+  padding:34px;
+  box-shadow:var(--shadow);
 }
-
-.login-brand{
+.logo{
+  width:54px;
+  height:54px;
+  border-radius:16px;
+  background:var(--yellow);
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:10px;
-  font-size:28px;
-  font-weight:800;
-  margin-bottom:10px;
+  font-weight:900;
+  font-size:24px;
+  margin-bottom:18px;
 }
-
-.brand-mark{
-  width:42px;
-  height:42px;
-  background:var(--yellow);
+.login-card h1{
+  margin:0 0 7px;
+  font-size:27px;
+}
+.login-card p{
+  margin:0 0 25px;
+  color:var(--muted);
+}
+.field{
+  margin-bottom:15px;
+}
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:7px;
+}
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  border:1px solid #ddd;
+  background:#fff;
   border-radius:10px;
+  padding:11px 12px;
+  outline:none;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:var(--yellow);
+  box-shadow:0 0 0 3px rgba(245,196,0,.15);
+}
+.primary-btn{
+  border:0;
+  background:var(--yellow);
+  color:#171717;
+  border-radius:10px;
+  padding:12px 18px;
+  font-weight:800;
+}
+.primary-btn:hover{background:var(--yellow2)}
+.full{width:100%}
+
+/* APP */
+.app{
+  min-height:100vh;
+  display:flex;
+}
+.sidebar{
+  width:245px;
+  background:#fff;
+  border-right:1px solid var(--border);
+  position:fixed;
+  top:0;
+  left:0;
+  bottom:0;
+  padding:20px 14px;
+  z-index:50;
+  overflow-y:auto;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:5px 8px 22px;
+}
+.brand-mark{
+  width:38px;
+  height:38px;
+  border-radius:11px;
+  background:var(--yellow);
   display:flex;
   align-items:center;
   justify-content:center;
   font-weight:900;
 }
-
-.login-subtitle{
-  text-align:center;
-  color:var(--muted);
-  margin-bottom:28px;
-  font-size:14px;
+.brand-name{
+  font-size:18px;
+  font-weight:900;
 }
-
-.login-form{
-  display:grid;
-  gap:16px;
-}
-
-.form-group{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-
-.form-group label{
-  font-size:13px;
-  font-weight:700;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea{
-  width:100%;
-  border:1px solid #ddd;
-  background:#fff;
-  border-radius:8px;
-  padding:12px;
-  outline:none;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
-  border-color:var(--yellow);
-  box-shadow:0 0 0 3px rgba(245,196,0,.12);
-}
-
-textarea{
-  min-height:100px;
-  resize:vertical;
-}
-
-.login-btn{
-  width:100%;
-  border:0;
-  border-radius:8px;
-  background:var(--yellow);
-  padding:13px;
-  font-weight:800;
-  margin-top:5px;
-}
-
-.login-btn:hover{
-  background:var(--yellow2);
-}
-
-.login-error{
-  color:var(--red);
-  background:#fff1f1;
-  border:1px solid #ffd0d0;
-  padding:10px;
-  border-radius:8px;
-  font-size:13px;
-  display:none;
-}
-
-/* ================= APP ================= */
-
-.app{
-  min-height:100vh;
-  display:flex;
-}
-
-.sidebar{
-  width:245px;
-  background:#fff;
-  border-right:1px solid var(--border);
-  padding:24px 15px;
-  flex-shrink:0;
-  position:fixed;
-  left:0;
-  top:0;
-  bottom:0;
-  overflow-y:auto;
-  z-index:200;
-}
-
-.sidebar-brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:0 10px 28px;
-  font-size:21px;
-  font-weight:800;
-}
-
-.sidebar-brand .brand-mark{
-  width:34px;
-  height:34px;
-  font-size:16px;
-}
-
-.sidebar-section{
-  margin:18px 10px 8px;
+.nav-section{
+  margin:13px 8px 7px;
   color:#aaa;
   font-size:10px;
+  font-weight:900;
   text-transform:uppercase;
   letter-spacing:.8px;
-  font-weight:800;
 }
-
-.menu{
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-}
-
-.menu button{
+.nav-btn{
   width:100%;
   border:0;
   background:transparent;
   text-align:left;
-  padding:12px 13px;
-  border-radius:8px;
-  color:#555;
+  padding:10px 11px;
+  border-radius:9px;
+  color:#444;
+  margin-bottom:3px;
   font-weight:600;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
 }
-
-.menu button:hover,
-.menu button.active{
-  background:var(--light-yellow);
-  color:#222;
-}
-
-.menu-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.menu-icon{
-  width:20px;
-  text-align:center;
-  font-size:15px;
-}
-
-.menu-count{
-  background:var(--yellow);
-  color:#222;
-  min-width:20px;
-  height:20px;
-  border-radius:20px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:10px;
+.nav-btn:hover{background:#faf6df}
+.nav-btn.active{
+  background:var(--yellow3);
+  color:#111;
   font-weight:800;
 }
+.sidebar-bottom{
+  margin-top:18px;
+  border-top:1px solid var(--border);
+  padding-top:14px;
+}
+.logout{
+  color:var(--red);
+}
 
-.app-main{
+/* MAIN */
+.main{
   margin-left:245px;
   width:calc(100% - 245px);
   min-height:100vh;
 }
-
 .topbar{
   height:70px;
   background:#fff;
@@ -271,810 +196,437 @@ textarea{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 28px;
+  padding:0 25px;
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:30;
 }
-
-.topbar-left{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.mobile-menu{
-  display:none;
-  border:0;
-  background:var(--light-yellow);
-  padding:9px 12px;
-  border-radius:7px;
-}
-
 .page-title{
-  font-size:23px;
-  font-weight:800;
+  font-size:21px;
+  font-weight:900;
 }
-
-.topbar-right{
+.top-actions{
   display:flex;
   align-items:center;
   gap:10px;
 }
-
-.admin-profile{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  background:#fff;
-  border:1px solid var(--border);
-  padding:6px 10px;
-  border-radius:8px;
-}
-
-.admin-avatar{
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  background:var(--yellow);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:800;
-}
-
-.admin-name{
-  font-size:13px;
-  font-weight:700;
-}
-
-.notification-btn{
-  position:relative;
+.icon-btn{
   width:40px;
   height:40px;
   border:1px solid var(--border);
   background:#fff;
-  border-radius:8px;
+  border-radius:10px;
   display:flex;
   align-items:center;
   justify-content:center;
+  position:relative;
 }
-
-.notification-btn svg{
-  width:19px;
-  height:19px;
+.icon-btn:hover{background:#fff9df}
+.icon-btn svg{
+  width:20px;
+  height:20px;
 }
-
 .notification-badge{
   position:absolute;
-  top:4px;
-  right:4px;
-  min-width:15px;
-  height:15px;
+  top:-4px;
+  right:-4px;
+  min-width:17px;
+  height:17px;
   padding:0 4px;
   border-radius:20px;
-  background:var(--red);
+  background:#d93025;
   color:#fff;
-  font-size:9px;
-  font-weight:800;
+  font-size:10px;
+  font-weight:900;
   display:flex;
   align-items:center;
   justify-content:center;
 }
-
-.content{
-  padding:28px;
-}
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
-}
-
-/* ================= BUTTONS ================= */
-
-.btn{
-  border:0;
-  border-radius:8px;
-  padding:10px 15px;
+.admin-label{
+  font-size:13px;
   font-weight:700;
-  transition:.2s;
+}
+.content{
+  padding:25px;
 }
 
-.btn:hover{
-  transform:translateY(-1px);
-}
-
-.btn-yellow{
-  background:var(--yellow);
-  color:#111;
-}
-
-.btn-white{
-  background:#fff;
-  border:1px solid var(--border);
-  color:#222;
-}
-
-.btn-danger{
-  background:#fff0f0;
-  color:var(--red);
-}
-
-.btn-green{
-  background:#eaf7ee;
-  color:var(--green);
-}
-
-.btn-dark{
-  background:#222;
-  color:#fff;
-}
-
-.btn-small{
-  padding:7px 10px;
-  font-size:12px;
-}
-
-.btn:disabled{
-  opacity:.55;
-  cursor:not-allowed;
-  transform:none;
-}
-
-/* ================= DASHBOARD ================= */
-
-.dashboard-cards{
+/* DASHBOARD */
+.stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:15px;
-  margin-bottom:18px;
+  margin-bottom:23px;
 }
-
-.dashboard-card{
+.stat{
   background:#fff;
   border:1px solid var(--border);
-  border-radius:11px;
-  padding:20px;
+  border-radius:15px;
+  padding:19px;
 }
-
-.card-label{
-  color:#777;
-  font-size:13px;
+.stat-label{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
 }
-
-.card-value{
+.stat-value{
   font-size:27px;
-  font-weight:800;
-  margin-top:9px;
+  font-weight:900;
+  margin-top:8px;
 }
-
-.card-small{
-  color:#777;
-  font-size:12px;
-  margin-top:5px;
-}
-
-.content-grid{
-  display:grid;
-  grid-template-columns:1.5fr 1fr;
-  gap:17px;
-}
-
-.panel{
+.section-card{
   background:#fff;
   border:1px solid var(--border);
-  border-radius:11px;
-  padding:22px;
-  margin-bottom:17px;
+  border-radius:15px;
+  padding:18px;
+  margin-bottom:18px;
 }
-
-.panel-title{
+.section-head{
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px;
-}
-
-.panel-title h3{
-  font-size:18px;
-}
-
-.empty{
-  text-align:center;
-  color:#888;
-  padding:35px 15px;
-}
-
-.quick-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
   gap:12px;
-}
-
-.quick-card{
-  border:1px solid var(--border);
-  background:#fff;
-  border-radius:9px;
-  padding:17px;
-  cursor:pointer;
-}
-
-.quick-card:hover{
-  border-color:#e4cc48;
-  background:var(--soft-yellow);
-}
-
-.quick-card strong{
-  display:block;
-  margin-bottom:5px;
-}
-
-.quick-card span{
-  font-size:12px;
-  color:#777;
-}
-
-/* ================= STATS ================= */
-
-.vendor-stats{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:12px;
-  margin-bottom:18px;
-}
-
-.mini-stat{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:17px;
-}
-
-.mini-stat-label{
-  color:#777;
-  font-size:12px;
-}
-
-.mini-stat-value{
-  font-size:23px;
-  font-weight:800;
-  margin-top:7px;
-}
-
-/* ================= TOOLBAR ================= */
-
-.toolbar{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:15px;
   margin-bottom:15px;
-  display:flex;
-  gap:10px;
-  align-items:center;
-  flex-wrap:wrap;
+}
+.section-head h2{
+  font-size:16px;
+  margin:0;
+}
+.small-muted{
+  color:var(--muted);
+  font-size:12px;
 }
 
+/* TOOLBAR */
+.toolbar{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+}
 .search{
   flex:1;
-  min-width:230px;
-}
-
-.search input,
-.toolbar select{
-  width:100%;
-  border:1px solid #ddd;
+  min-width:220px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:10px 12px;
   background:#fff;
-  border-radius:8px;
-  padding:11px;
   outline:none;
 }
-
-.search input:focus,
-.toolbar select:focus{
-  border-color:var(--yellow);
+.filter{
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:10px;
+  padding:10px 12px;
 }
 
-/* ================= TABLE ================= */
-
+/* TABLE */
 .table-wrap{
   overflow-x:auto;
 }
-
 table{
   width:100%;
   border-collapse:collapse;
+  min-width:800px;
 }
-
-th,
-td{
-  padding:13px 9px;
+th{
   text-align:left;
-  border-bottom:1px solid #eee;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  color:#888;
+  padding:12px 10px;
+  border-bottom:1px solid var(--border);
+}
+td{
+  padding:13px 10px;
+  border-bottom:1px solid #f0f0ed;
   font-size:13px;
   vertical-align:middle;
 }
-
-th{
-  color:#777;
-  font-weight:700;
-  white-space:nowrap;
-}
-
-tbody tr:hover{
-  background:#fffdf0;
-}
-
-.vendor-name-cell{
-  min-width:180px;
-}
-
-.vendor-name-cell strong{
-  display:block;
-  margin-bottom:3px;
-}
-
-.vendor-name-cell span{
-  color:#888;
-  font-size:11px;
-}
-
-.action-buttons{
-  display:flex;
-  gap:5px;
-  flex-wrap:wrap;
-}
-
-.action-btn{
-  border:1px solid var(--border);
-  background:#fff;
-  padding:6px 8px;
-  border-radius:6px;
-  font-size:11px;
-  font-weight:700;
-}
-
-.action-btn:hover{
-  background:var(--light-yellow);
-}
-
-.action-btn.approve{
-  background:#eaf7ee;
-  color:var(--green);
-  border-color:#ccebd6;
-}
-
-.action-btn.reject,
-.action-btn.delete{
-  background:#fff0f0;
-  color:var(--red);
-  border-color:#ffd2d2;
-}
-
-/* ================= STATUS ================= */
-
-.status{
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  border-radius:6px;
-  padding:5px 9px;
-  font-size:11px;
-  font-weight:700;
-  white-space:nowrap;
-}
-
-.status.approved{
-  background:#eaf7ee;
-  color:var(--green);
-}
-
-.status.pending{
-  background:var(--light-yellow);
-  color:#755e00;
-}
-
-.status.rejected{
-  background:#fff0f0;
-  color:var(--red);
-}
-
-.status.online{
-  background:#eaf7ee;
-  color:var(--green);
-}
-
-.status.offline{
-  background:#fdeeee;
-  color:var(--red);
-}
-
-/* ================= NOTIFICATIONS ================= */
-
-.notification-list{
-  display:grid;
-  gap:10px;
-}
-
-.notification-card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:16px;
-}
-
-.notification-card.unread{
-  border-left:4px solid var(--yellow);
-}
-
-.notification-card-head{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:6px;
-}
-
-.notification-card-title{
+tr:last-child td{border-bottom:0}
+.vendor-name{
   font-weight:800;
 }
-
-.notification-card-meta{
-  color:#888;
-  font-size:11px;
-}
-
-.notification-card p{
-  color:#555;
-  font-size:13px;
-  line-height:1.5;
-}
-
-/* ================= DETAIL ================= */
-
-.detail-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-.detail-item{
-  background:#fafafa;
-  border:1px solid #eee;
-  border-radius:8px;
-  padding:12px;
-}
-
-.detail-item.full{
-  grid-column:1/-1;
-}
-
-.detail-label{
+.vendor-sub{
   font-size:11px;
   color:#888;
-  margin-bottom:5px;
+  margin-top:3px;
 }
-
-.detail-value{
-  font-size:13px;
-  font-weight:700;
-  word-break:break-word;
+.badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:900;
 }
-
-.location-map{
-  width:100%;
-  height:300px;
-  border:0;
-  border-radius:10px;
-  margin-top:12px;
-}
-
-.map-actions{
+.badge.approved{background:var(--green-bg);color:var(--green)}
+.badge.pending{background:var(--orange-bg);color:var(--orange)}
+.badge.rejected{background:var(--red-bg);color:var(--red)}
+.badge.online{background:var(--green-bg);color:var(--green)}
+.badge.offline{background:var(--grey-bg);color:#555}
+.actions{
   display:flex;
-  gap:8px;
-  margin-top:10px;
-  flex-wrap:wrap;
+  align-items:center;
+  gap:6px;
+}
+.action-btn{
+  height:32px;
+  min-width:32px;
+  padding:0 8px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:800;
+}
+.action-btn:hover{background:#fff8d9}
+.action-btn.approve{
+  background:var(--yellow);
+  border-color:var(--yellow);
+}
+.action-btn.reject{
+  color:var(--red);
+}
+.action-btn.edit{
+  width:32px;
+  padding:0;
+}
+.action-btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
 }
 
-/* ================= MODAL ================= */
-
-.modal{
+/* MODAL */
+.modal-backdrop{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.45);
-  display:none;
+  background:rgba(0,0,0,.35);
+  z-index:100;
+  display:flex;
   align-items:center;
   justify-content:center;
   padding:20px;
-  z-index:500;
 }
-
-.modal.active{
-  display:flex;
-}
-
-.modal-box{
-  background:#fff;
+.modal{
   width:100%;
-  max-width:950px;
-  max-height:94vh;
-  overflow:auto;
-  border-radius:13px;
-  padding:28px;
+  max-width:760px;
+  max-height:90vh;
+  overflow-y:auto;
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 20px 60px rgba(0,0,0,.18);
 }
-
-.modal-small{
-  max-width:500px;
-}
-
+.modal.small{max-width:470px}
 .modal-head{
+  position:sticky;
+  top:0;
+  background:#fff;
+  z-index:2;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:22px;
+  padding:18px 20px;
+  border-bottom:1px solid var(--border);
 }
-
-.modal-head h2{
-  font-size:20px;
+.modal-head h3{
+  margin:0;
+  font-size:18px;
 }
-
-.close{
-  border:0;
-  background:#f1f1f1;
-  width:32px;
-  height:32px;
-  border-radius:7px;
-  font-size:20px;
+.close-btn{
+  width:34px;
+  height:34px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:9px;
+  font-size:19px;
 }
-
-.modal-actions{
+.modal-body{padding:20px}
+.modal-foot{
   display:flex;
   justify-content:flex-end;
   gap:8px;
-  margin-top:22px;
-  flex-wrap:wrap;
-}
-
-/* ================= FORM ================= */
-
-.form-section{
+  padding:15px 20px;
+  border-top:1px solid var(--border);
   background:#fff;
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:20px;
-  margin-bottom:15px;
+  position:sticky;
+  bottom:0;
 }
-
-.form-section h3{
-  font-size:16px;
-  margin-bottom:17px;
-}
-
-.form-grid{
+.grid2{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
 }
-
-.form-group.full{
-  grid-column:1/-1;
+.info-section{
+  margin-bottom:20px;
 }
-
-.checkbox-row{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding-top:10px;
+.info-title{
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+  color:#999;
+  margin-bottom:10px;
+  letter-spacing:.6px;
 }
-
-.checkbox-row input{
-  width:17px;
-  height:17px;
-  accent-color:var(--yellow);
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
 }
-
-/* ================= LOCATION ================= */
-
-.location-empty{
-  background:var(--soft-yellow);
-  border:1px solid #ead56d;
-  padding:15px;
+.info-item{
+  background:#fafaf8;
+  border:1px solid #eeeeea;
   border-radius:9px;
-  color:#6d5e10;
-  font-size:13px;
+  padding:10px;
+}
+.info-label{
+  color:#999;
+  font-size:10px;
+  margin-bottom:4px;
+}
+.info-value{
+  font-size:12px;
+  font-weight:700;
+  word-break:break-word;
+}
+.map-box{
+  width:100%;
+  height:260px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  background:#eee;
+}
+.map-box iframe{
+  width:100%;
+  height:100%;
+  border:0;
 }
 
-/* ================= LIVE PANEL ================= */
-
-.live-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:12px 0;
-  border-bottom:1px solid #eee;
-}
-
-.live-row:last-child{
-  border-bottom:0;
-}
-
-.live-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.live-dot{
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:var(--green);
-}
-
-.live-dot.offline{
-  background:var(--red);
-}
-
-/* ================= PLACEHOLDER OLD FEATURES ================= */
-
-.feature-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:17px;
-  gap:10px;
-}
-
-.feature-header h2{
-  font-size:22px;
-}
-
-.feature-description{
-  color:#777;
-  font-size:13px;
-  margin-top:4px;
-}
-
-.feature-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.feature-card{
+/* NOTIFICATIONS */
+.notification-panel{
+  position:fixed;
+  top:62px;
+  right:20px;
+  width:390px;
+  max-height:520px;
+  overflow-y:auto;
   background:#fff;
   border:1px solid var(--border);
-  border-radius:11px;
-  padding:20px;
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  z-index:90;
 }
-
-.feature-card h3{
-  font-size:16px;
-  margin-bottom:7px;
+.notification-head{
+  padding:15px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
-
-.feature-card p{
-  color:#777;
+.notification-head strong{font-size:14px}
+.notification-item{
+  padding:13px 15px;
+  border-bottom:1px solid #f0f0ed;
+  cursor:pointer;
+}
+.notification-item:hover{background:#fffaf0}
+.notification-item.unread{background:#fffbea}
+.notification-item-title{
+  font-weight:900;
   font-size:13px;
-  line-height:1.5;
+}
+.notification-item-message{
+  font-size:12px;
+  color:#666;
+  margin-top:4px;
+  line-height:1.45;
+}
+.notification-item-meta{
+  font-size:10px;
+  color:#999;
+  margin-top:7px;
+}
+.empty{
+  text-align:center;
+  color:#999;
+  padding:35px 15px;
+  font-size:13px;
 }
 
-/* ================= TOAST ================= */
-
-.toast{
+/* TOAST */
+.toast-wrap{
   position:fixed;
   right:20px;
   bottom:20px;
+  z-index:300;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.toast{
+  max-width:360px;
   background:#222;
   color:#fff;
-  padding:13px 17px;
-  border-radius:8px;
+  padding:12px 15px;
+  border-radius:10px;
+  font-size:12px;
+  box-shadow:var(--shadow);
+}
+
+/* GENERIC */
+.placeholder{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:40px;
+  text-align:center;
+}
+.placeholder h2{
+  margin:0 0 7px;
+  font-size:20px;
+}
+.placeholder p{
+  color:#888;
+  margin:0;
+}
+
+/* MOBILE */
+.mobile-menu{
   display:none;
-  z-index:1000;
-  font-size:13px;
-  max-width:360px;
+  width:40px;
+  height:40px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:9px;
 }
-
-.toast.show{
-  display:block;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:1100px){
-
-  .dashboard-cards{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .vendor-stats{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .content-grid{
-    grid-template-columns:1fr;
-  }
-
-  .feature-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media(max-width:800px){
-
+@media(max-width:950px){
   .sidebar{
-    left:-260px;
-    transition:.25s;
+    transform:translateX(-100%);
+    transition:.2s;
   }
-
-  .sidebar.open{
-    left:0;
-  }
-
-  .app-main{
+  .sidebar.open{transform:translateX(0)}
+  .main{
     margin-left:0;
     width:100%;
   }
-
-  .mobile-menu{
-    display:block;
-  }
-
-  .content{
-    padding:20px 15px;
-  }
-
-  .admin-profile{
-    display:none;
-  }
-
-  .detail-grid,
-  .form-grid{
-    grid-template-columns:1fr;
-  }
-
-  .form-group.full,
-  .detail-item.full{
-    grid-column:auto;
-  }
-
-  .feature-grid{
-    grid-template-columns:1fr;
-  }
+  .mobile-menu{display:flex;align-items:center;justify-content:center}
+  .stats{grid-template-columns:repeat(2,1fr)}
 }
-
 @media(max-width:600px){
-
-  .dashboard-cards,
-  .vendor-stats{
-    grid-template-columns:1fr;
-  }
-
-  .topbar{
-    padding:0 15px;
-  }
-
-  .page-title{
-    font-size:18px;
-  }
-
-  .content{
-    padding:15px;
-  }
-
-  .login-card{
-    padding:25px;
-  }
-
-  .modal{
-    padding:10px;
-  }
-
-  .modal-box{
-    padding:20px;
+  .content{padding:15px}
+  .topbar{padding:0 15px}
+  .admin-label{display:none}
+  .stats{grid-template-columns:1fr 1fr;gap:9px}
+  .stat{padding:13px}
+  .stat-value{font-size:21px}
+  .grid2,.info-grid{grid-template-columns:1fr}
+  .notification-panel{
+    left:10px;
+    right:10px;
+    width:auto;
   }
 }
 </style>
@@ -1082,1294 +634,396 @@ tbody tr:hover{
 
 <body>
 
-<!-- ================= LOGIN ================= -->
-
-<div class="login-screen" id="loginScreen">
-
+<!-- LOGIN -->
+<div id="loginPage" class="login-page">
   <div class="login-card">
+    <div class="logo">S</div>
+    <h1>Spotly Admin</h1>
+    <p>Sign in to manage vendors and network activity.</p>
 
-    <div class="login-brand">
-      <div class="brand-mark">S</div>
-      Spotly
+    <div class="field">
+      <label>Admin ID</label>
+      <input id="adminEmail" type="email" value="admin@soptly.com" autocomplete="username">
     </div>
 
-    <div class="login-subtitle">
-      Admin Portal
+    <div class="field">
+      <label>Password</label>
+      <input id="adminPassword" type="password" autocomplete="current-password">
     </div>
 
-    <div class="login-error" id="loginError"></div>
-
-    <form class="login-form" id="loginForm">
-
-      <div class="form-group">
-        <label>Admin ID / Email</label>
-        <input
-          id="adminEmail"
-          type="email"
-          autocomplete="username"
-          placeholder="admin@soptly.com"
-          required
-        >
-      </div>
-
-      <div class="form-group">
-        <label>Password</label>
-        <input
-          id="adminPassword"
-          type="password"
-          autocomplete="current-password"
-          placeholder="Enter password"
-          required
-        >
-      </div>
-
-      <button class="login-btn" type="submit">
-        Login
-      </button>
-
-    </form>
-
+    <button id="loginBtn" class="primary-btn full" onclick="adminLogin()">
+      Login
+    </button>
   </div>
-
 </div>
 
+<!-- APP -->
+<div id="adminApp" class="app hidden">
 
-<!-- ================= ADMIN APP ================= -->
-
-<div class="app hidden" id="adminApp">
-
-  <!-- SIDEBAR -->
-
-  <aside class="sidebar" id="sidebar">
-
-    <div class="sidebar-brand">
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">
       <div class="brand-mark">S</div>
-      Spotly Admin
+      <div class="brand-name">Spotly Admin</div>
     </div>
 
-    <div class="sidebar-section">Main</div>
+    <div class="nav-section">Main</div>
 
-    <div class="menu">
+    <button class="nav-btn active" data-page="dashboard" onclick="goPage('dashboard')">
+      Dashboard
+    </button>
 
-      <button data-page="dashboard" class="active">
-        <span class="menu-left">
-          <span class="menu-icon">⌂</span>
-          Dashboard
-        </span>
-      </button>
+    <button class="nav-btn" data-page="vendors" onclick="goPage('vendors')">
+      Vendors
+    </button>
 
-      <button data-page="vendors">
-        <span class="menu-left">
-          <span class="menu-icon">▣</span>
-          Connected Vendors
-        </span>
-        <span class="menu-count" id="vendorMenuCount">0</span>
-      </button>
+    <button class="nav-btn" data-page="notifications" onclick="goPage('notifications')">
+      Notifications
+    </button>
 
-      <button data-page="notifications">
-        <span class="menu-left">
-          <span class="menu-icon">●</span>
-          Notifications
-        </span>
-        <span class="menu-count hidden" id="notificationMenuCount">0</span>
-      </button>
+    <div class="nav-section">Advertising</div>
 
+    <button class="nav-btn" data-page="packages" onclick="goPage('packages')">
+      Packages
+    </button>
+
+    <button class="nav-btn" data-page="ads" onclick="goPage('ads')">
+      Ads
+    </button>
+
+    <button class="nav-btn" data-page="upcoming" onclick="goPage('upcoming')">
+      Upcoming Ads
+    </button>
+
+    <button class="nav-btn" data-page="monitoring" onclick="goPage('monitoring')">
+      Screen Monitoring
+    </button>
+
+    <div class="nav-section">Management</div>
+
+    <button class="nav-btn" data-page="withdrawals" onclick="goPage('withdrawals')">
+      Withdrawals
+    </button>
+
+    <button class="nav-btn" data-page="complaints" onclick="goPage('complaints')">
+      Complaints
+    </button>
+
+    <button class="nav-btn" data-page="formbuilder" onclick="goPage('formbuilder')">
+      Form Builder
+    </button>
+
+    <button class="nav-btn" data-page="settings" onclick="goPage('settings')">
+      Settings
+    </button>
+
+    <div class="sidebar-bottom">
+      <button class="nav-btn logout" onclick="adminLogout()">Logout</button>
     </div>
-
-    <div class="sidebar-section">Advertising</div>
-
-    <div class="menu">
-
-      <button data-page="packages">
-        <span class="menu-left">
-          <span class="menu-icon">▤</span>
-          Packages
-        </span>
-      </button>
-
-      <button data-page="ads">
-        <span class="menu-left">
-          <span class="menu-icon">▣</span>
-          Ads
-        </span>
-      </button>
-
-      <button data-page="upcoming">
-        <span class="menu-left">
-          <span class="menu-icon">◷</span>
-          Upcoming Ads
-        </span>
-      </button>
-
-      <button data-page="monitoring">
-        <span class="menu-left">
-          <span class="menu-icon">◉</span>
-          Screen Monitoring
-        </span>
-      </button>
-
-    </div>
-
-    <div class="sidebar-section">Finance & Support</div>
-
-    <div class="menu">
-
-      <button data-page="withdrawals">
-        <span class="menu-left">
-          <span class="menu-icon">₨</span>
-          Withdrawals
-        </span>
-      </button>
-
-      <button data-page="complaints">
-        <span class="menu-left">
-          <span class="menu-icon">!</span>
-          Complaints
-        </span>
-      </button>
-
-    </div>
-
-    <div class="sidebar-section">System</div>
-
-    <div class="menu">
-
-      <button data-page="formbuilder">
-        <span class="menu-left">
-          <span class="menu-icon">□</span>
-          Form Builder
-        </span>
-      </button>
-
-      <button data-page="settings">
-        <span class="menu-left">
-          <span class="menu-icon">⚙</span>
-          Settings
-        </span>
-      </button>
-
-      <button id="sidebarLogout">
-        <span class="menu-left">
-          <span class="menu-icon">↪</span>
-          Logout
-        </span>
-      </button>
-
-    </div>
-
   </aside>
 
-
-  <!-- MAIN -->
-
-  <main class="app-main">
+  <main class="main">
 
     <header class="topbar">
-
-      <div class="topbar-left">
-
-        <button
-          class="mobile-menu"
-          id="mobileMenu"
-          type="button"
-        >
+      <div class="top-actions">
+        <button class="mobile-menu" onclick="toggleSidebar()" aria-label="Menu">
           ☰
         </button>
-
-        <div class="page-title" id="pageTitle">
-          Dashboard
-        </div>
-
+        <div id="pageTitle" class="page-title">Dashboard</div>
       </div>
 
-      <div class="topbar-right">
+      <div class="top-actions">
+        <div class="admin-label">Main Admin</div>
 
-        <button
-          class="notification-btn"
-          id="topNotificationBtn"
-          type="button"
-          title="Notifications"
-        >
-
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <button class="icon-btn" onclick="toggleNotificationPanel()" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
             <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
             <path d="M10 21h4"/>
           </svg>
-
-          <span
-            class="notification-badge hidden"
-            id="notificationBadge"
-          >
-            0
-          </span>
-
+          <span id="topNotificationBadge" class="notification-badge hidden">0</span>
         </button>
-
-        <div class="admin-profile">
-
-          <div class="admin-avatar" id="adminAvatar">
-            A
-          </div>
-
-          <div class="admin-name" id="adminName">
-            Admin
-          </div>
-
-        </div>
-
       </div>
-
     </header>
 
+    <div id="notificationPanel" class="notification-panel hidden"></div>
 
-    <section class="content">
+    <section id="content" class="content"></section>
 
+  </main>
+</div>
 
-      <!-- ================= DASHBOARD ================= -->
+<!-- VENDOR DETAIL -->
+<div id="vendorDetailModal" class="modal-backdrop hidden">
+  <div class="modal">
 
-      <div class="page active" id="page-dashboard">
+    <div class="modal-head">
+      <h3 id="vendorDetailTitle">Vendor</h3>
+      <button class="close-btn" onclick="closeModal('vendorDetailModal')">×</button>
+    </div>
 
-        <div class="dashboard-cards">
+    <div id="vendorDetailBody" class="modal-body"></div>
 
-          <div class="dashboard-card">
-            <div class="card-label">Today's Ads</div>
-            <div class="card-value" id="todayAds">0</div>
-            <div class="card-small">Connected advertising activity</div>
-          </div>
+    <div id="vendorDetailFoot" class="modal-foot"></div>
 
-          <div class="dashboard-card">
-            <div class="card-label">Offline Shops</div>
-            <div class="card-value" id="offlineShops">0</div>
-            <div class="card-small">Vendor screens currently offline</div>
-          </div>
+  </div>
+</div>
 
-          <div class="dashboard-card">
-            <div class="card-label">Today's Revenue</div>
-            <div class="card-value" id="todayRevenue">Rs. 0</div>
-            <div class="card-small">Actual ads revenue will appear here</div>
-          </div>
+<!-- EDIT VENDOR -->
+<div id="editVendorModal" class="modal-backdrop hidden">
+  <div class="modal">
 
-          <div class="dashboard-card">
-            <div class="card-label">Today's Ads Time</div>
-            <div class="card-value" id="todayAdsTime">—</div>
-            <div class="card-small">Scheduled advertising window</div>
-          </div>
+    <div class="modal-head">
+      <h3>Edit Vendor</h3>
+      <button class="close-btn" onclick="closeModal('editVendorModal')">×</button>
+    </div>
 
+    <div class="modal-body">
+
+      <input id="editVendorId" type="hidden">
+
+      <div class="info-title">Personal</div>
+
+      <div class="grid2">
+        <div class="field">
+          <label>Vendor Name</label>
+          <input id="edit_vendor_name">
         </div>
 
-
-        <div class="vendor-stats">
-
-          <div class="mini-stat">
-            <div class="mini-stat-label">Total Vendors</div>
-            <div class="mini-stat-value" id="dashTotalVendors">0</div>
-          </div>
-
-          <div class="mini-stat">
-            <div class="mini-stat-label">Approved</div>
-            <div class="mini-stat-value" id="dashApprovedVendors">0</div>
-          </div>
-
-          <div class="mini-stat">
-            <div class="mini-stat-label">Pending</div>
-            <div class="mini-stat-value" id="dashPendingVendors">0</div>
-          </div>
-
-          <div class="mini-stat">
-            <div class="mini-stat-label">Online Screens</div>
-            <div class="mini-stat-value" id="dashOnlineVendors">0</div>
-          </div>
-
-          <div class="mini-stat">
-            <div class="mini-stat-label">Offline Screens</div>
-            <div class="mini-stat-value" id="dashOfflineVendors">0</div>
-          </div>
-
+        <div class="field">
+          <label>Owner Name</label>
+          <input id="edit_owner_name">
         </div>
 
-
-        <div class="content-grid">
-
-          <div class="panel">
-
-            <div class="panel-title">
-              <h3>Connected Vendors</h3>
-
-              <button
-                class="btn btn-white btn-small"
-                onclick="showPage('vendors')"
-              >
-                View All
-              </button>
-            </div>
-
-            <div class="table-wrap">
-
-              <table>
-
-                <thead>
-                  <tr>
-                    <th>Vendor</th>
-                    <th>Area</th>
-                    <th>Status</th>
-                    <th>Screen</th>
-                  </tr>
-                </thead>
-
-                <tbody id="recentVendorsTable"></tbody>
-
-              </table>
-
-            </div>
-
-          </div>
-
-
-          <div class="panel">
-
-            <div class="panel-title">
-              <h3>Real-time Notifications</h3>
-
-              <button
-                class="btn btn-white btn-small"
-                onclick="showPage('notifications')"
-              >
-                Open
-              </button>
-            </div>
-
-            <div id="recentNotifications"></div>
-
-          </div>
-
+        <div class="field">
+          <label>Phone</label>
+          <input id="edit_phone">
         </div>
 
-
-        <div class="panel">
-
-          <div class="panel-title">
-            <h3>Quick Access</h3>
-          </div>
-
-          <div class="quick-grid">
-
-            <div class="quick-card" onclick="showPage('vendors')">
-              <strong>Connected Vendors</strong>
-              <span>Review vendor profiles, approvals, screens and locations.</span>
-            </div>
-
-            <div class="quick-card" onclick="showPage('notifications')">
-              <strong>Vendor Notifications</strong>
-              <span>Send personal notifications directly to connected vendors.</span>
-            </div>
-
-            <div class="quick-card" onclick="showPage('monitoring')">
-              <strong>Screen Monitoring</strong>
-              <span>Monitor connected vendor screen online/offline status.</span>
-            </div>
-
-            <div class="quick-card" onclick="showPage('withdrawals')">
-              <strong>Withdrawals</strong>
-              <span>Manage vendor withdrawal requests when finance data is connected.</span>
-            </div>
-
-          </div>
-
+        <div class="field">
+          <label>Email</label>
+          <input id="edit_email">
         </div>
-
       </div>
 
+      <div class="info-title">Business & Location</div>
 
-      <!-- ================= VENDORS ================= -->
-
-      <div class="page" id="page-vendors">
-
-        <div class="feature-header">
-
-          <div>
-            <h2>Connected Vendors</h2>
-            <div class="feature-description">
-              Manage vendors connected with Spotly.
-            </div>
-          </div>
-
-          <button
-            class="btn btn-yellow"
-            onclick="loadVendors()"
-          >
-            Refresh
-          </button>
-
+      <div class="grid2">
+        <div class="field">
+          <label>Category</label>
+          <input id="edit_category">
         </div>
 
-
-        <div class="vendor-stats">
-
-          <div class="mini-stat">
-            <div class="mini-stat-label">Total Vendors</div>
-            <div class="mini-stat-value" id="totalVendors">0</div>
-          </div>
-
-          <div class="mini-stat">
-            <div class="mini-stat-label">Approved</div>
-            <div class="mini-stat-value" id="approvedVendors">0</div>
-          </div>
-
-          <div class="mini-stat">
-            <div class="mini-stat-label">Pending</div>
-            <div class="mini-stat-value" id="pendingVendors">0</div>
-          </div>
-
-          <div class="mini-stat">
-            <div class="mini-stat-label">Online</div>
-            <div class="mini-stat-value" id="onlineVendors">0</div>
-          </div>
-
-          <div class="mini-stat">
-            <div class="mini-stat-label">Offline</div>
-            <div class="mini-stat-value" id="offlineVendors">0</div>
-          </div>
-
+        <div class="field">
+          <label>Area</label>
+          <input id="edit_area">
         </div>
 
+        <div class="field">
+          <label>Phase</label>
+          <input id="edit_phase">
+        </div>
 
-        <div class="toolbar">
+        <div class="field">
+          <label>Precinct</label>
+          <input id="edit_precinct">
+        </div>
 
-          <div class="search">
-            <input
-              id="vendorSearch"
-              type="search"
-              placeholder="Search vendor, owner, phone, email, area..."
-            >
-          </div>
+        <div class="field">
+          <label>Sector</label>
+          <input id="edit_sector">
+        </div>
 
-          <select id="vendorStatusFilter">
-            <option value="">All Status</option>
-            <option value="pending">Pending</option>
-            <option value="approved">Approved</option>
-            <option value="rejected">Rejected</option>
-          </select>
+        <div class="field">
+          <label>Block</label>
+          <input id="edit_block">
+        </div>
+      </div>
 
-          <select id="vendorOnlineFilter">
-            <option value="">All Screens</option>
+      <div class="field">
+        <label>Address</label>
+        <textarea id="edit_address" rows="3"></textarea>
+      </div>
+
+      <div class="grid2">
+        <div class="field">
+          <label>Footfall</label>
+          <input id="edit_footfall" type="number">
+        </div>
+
+        <div class="field">
+          <label>Shop Size</label>
+          <input id="edit_shop_size">
+        </div>
+      </div>
+
+      <div class="info-title">LCD</div>
+
+      <div class="grid2">
+        <div class="field">
+          <label>LCD Status</label>
+          <select id="edit_lcd_status">
+            <option value="">Select</option>
             <option value="online">Online</option>
             <option value="offline">Offline</option>
           </select>
-
         </div>
 
-
-        <div class="panel">
-
-          <div class="table-wrap">
-
-            <table>
-
-              <thead>
-
-                <tr>
-                  <th>Vendor</th>
-                  <th>Phone</th>
-                  <th>Area</th>
-                  <th>Hierarchy</th>
-                  <th>LCD</th>
-                  <th>Status</th>
-                  <th>Screen</th>
-                  <th>Actions</th>
-                </tr>
-
-              </thead>
-
-              <tbody id="vendorsTable"></tbody>
-
-            </table>
-
-          </div>
-
+        <div class="field">
+          <label>Total LCD Price</label>
+          <input id="edit_lcd_total_price" type="number">
         </div>
 
+        <div class="field">
+          <label>Down Payment</label>
+          <input id="edit_lcd_down_payment" type="number">
+        </div>
+
+        <div class="field">
+          <label>Monthly Installment</label>
+          <input id="edit_lcd_monthly_installment" type="number">
+        </div>
+
+        <div class="field">
+          <label>Installment Months</label>
+          <input id="edit_lcd_installment_months" type="number">
+        </div>
+
+        <div class="field">
+          <label>Online Status</label>
+          <select id="edit_online_status">
+            <option value="false">Offline</option>
+            <option value="true">Online</option>
+          </select>
+        </div>
       </div>
 
+      <div class="info-title">Internet</div>
 
-      <!-- ================= NOTIFICATIONS ================= -->
-
-      <div class="page" id="page-notifications">
-
-        <div class="feature-header">
-
-          <div>
-            <h2>Vendor Notifications</h2>
-            <div class="feature-description">
-              Send personal notifications to connected vendors.
-            </div>
-          </div>
-
-          <button
-            class="btn btn-yellow"
-            onclick="openNotificationModal()"
-          >
-            Send Notification
-          </button>
-
+      <div class="grid2">
+        <div class="field">
+          <label>Internet Status</label>
+          <input id="edit_internet_status">
         </div>
 
-
-        <div class="panel">
-
-          <div class="notification-list" id="notificationList"></div>
-
+        <div class="field">
+          <label>Internet Provider</label>
+          <input id="edit_internet_provider">
         </div>
 
+        <div class="field">
+          <label>Internet Company Required</label>
+          <select id="edit_internet_company_required">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </div>
       </div>
 
+      <div class="info-title">Opening Hours</div>
 
-      <!-- ================= PACKAGES ================= -->
-
-      <div class="page" id="page-packages">
-
-        <div class="feature-header">
-
-          <div>
-            <h2>Packages</h2>
-            <div class="feature-description">
-              Advertising packages management.
-            </div>
-
-          </div>
-
+      <div class="grid2">
+        <div class="field">
+          <label>Opening Time</label>
+          <input id="edit_opening_time" type="time">
         </div>
 
-        <div class="feature-grid">
-
-          <div class="feature-card">
-            <h3>Advertising Packages</h3>
-            <p>
-              Package management section preserved from the previous admin structure.
-              Connect the package database table here when package schema is available.
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <h3>Package Pricing</h3>
-            <p>
-              Pricing and duration can be managed here without changing the existing admin UI.
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <h3>Package Availability</h3>
-            <p>
-              Package activation and availability controls are reserved for the package data source.
-            </p>
-          </div>
-
+        <div class="field">
+          <label>Closing Time</label>
+          <input id="edit_closing_time" type="time">
         </div>
-
       </div>
 
-
-      <!-- ================= ADS ================= -->
-
-      <div class="page" id="page-ads">
-
-        <div class="feature-header">
-
-          <div>
-            <h2>Ads</h2>
-            <div class="feature-description">
-              Advertising campaign management.
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="panel">
-
-          <div class="empty">
-            <strong>Ads database is not connected yet.</strong>
-            <br><br>
-            Vendor connections are live through Supabase. Actual ads,
-            clients, campaigns and play records should be connected only
-            after their database tables are available.
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ================= UPCOMING ADS ================= -->
-
-      <div class="page" id="page-upcoming">
-
-        <div class="feature-header">
-
-          <div>
-            <h2>Upcoming Ads</h2>
-            <div class="feature-description">
-              Scheduled advertising campaigns.
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="panel">
-
-          <div class="empty">
-            Upcoming ads will appear here after the actual ads schedule
-            table is connected.
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ================= MONITORING ================= -->
-
-      <div class="page" id="page-monitoring">
-
-        <div class="feature-header">
-
-          <div>
-            <h2>Screen Monitoring</h2>
-            <div class="feature-description">
-              Monitor the connected vendor LCD screens.
-            </div>
-
-          </div>
-
-          <button
-            class="btn btn-yellow"
-            onclick="renderMonitoring()"
-          >
-            Refresh
-          </button>
-
-        </div>
-
-
-        <div class="panel">
-
-          <div id="monitoringList"></div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ================= WITHDRAWALS ================= -->
-
-      <div class="page" id="page-withdrawals">
-
-        <div class="feature-header">
-
-          <div>
-            <h2>Vendor Withdrawals</h2>
-            <div class="feature-description">
-              Vendor withdrawal management.
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="panel">
-
-          <div class="empty">
-            Withdrawal requests will appear here once the actual
-            vendor withdrawals table is connected.
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ================= COMPLAINTS ================= -->
-
-      <div class="page" id="page-complaints">
-
-        <div class="feature-header">
-
-          <div>
-            <h2>Vendor Complaints</h2>
-            <div class="feature-description">
-              Vendor complaint and support management.
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="panel">
-
-          <div class="empty">
-            Vendor complaints will appear here once the actual
-            complaints table is connected.
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ================= FORM BUILDER ================= -->
-
-      <div class="page" id="page-formbuilder">
-
-        <div class="feature-header">
-
-          <div>
-            <h2>Form Builder</h2>
-            <div class="feature-description">
-              Vendor registration and form configuration.
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="feature-grid">
-
-          <div class="feature-card">
-            <h3>Vendor Registration</h3>
-            <p>
-              Vendor registration currently uses the existing vendor
-              registration flow and Supabase vendors table.
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <h3>Required Fields</h3>
-            <p>
-              Vendor profile fields can be expanded later without
-              changing the approval workflow.
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <h3>Custom Fields</h3>
-            <p>
-              Custom form fields can be connected after the form-builder
-              database structure is finalized.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ================= SETTINGS ================= -->
-
-      <div class="page" id="page-settings">
-
-        <div class="feature-header">
-
-          <div>
-            <h2>Settings</h2>
-            <div class="feature-description">
-              Admin portal settings.
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="panel">
-
-          <div class="form-grid">
-
-            <div class="form-group">
-              <label>Admin Email</label>
-              <input
-                id="settingsAdminEmail"
-                readonly
-              >
-            </div>
-
-            <div class="form-group">
-              <label>Admin Name</label>
-              <input
-                id="settingsAdminName"
-                readonly
-              >
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-</div>
-
-
-<!-- ================= VENDOR DETAIL MODAL ================= -->
-
-<div class="modal" id="vendorDetailModal">
-
-  <div class="modal-box">
-
-    <div class="modal-head">
-
-      <h2 id="vendorDetailTitle">
-        Vendor Details
-      </h2>
-
-      <button
-        class="close"
-        onclick="closeModal('vendorDetailModal')"
-      >
-        ×
-      </button>
-
-    </div>
-
-    <div id="vendorDetailContent"></div>
-
-  </div>
-
-</div>
-
-
-<!-- ================= EDIT VENDOR MODAL ================= -->
-
-<div class="modal" id="editVendorModal">
-
-  <div class="modal-box">
-
-    <div class="modal-head">
-
-      <h2>Edit Vendor</h2>
-
-      <button
-        class="close"
-        onclick="closeModal('editVendorModal')"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <form id="editVendorForm">
-
-      <input
-        type="hidden"
-        id="editVendorId"
-      >
-
-
-      <div class="form-section">
-
-        <h3>Vendor Information</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>Vendor Name</label>
-            <input id="editVendorName">
-          </div>
-
-          <div class="form-group">
-            <label>Owner Name</label>
-            <input id="editOwnerName">
-          </div>
-
-          <div class="form-group">
-            <label>Phone</label>
-            <input id="editPhone">
-          </div>
-
-          <div class="form-group">
-            <label>Email</label>
-            <input id="editEmail" type="email">
-          </div>
-
-          <div class="form-group">
-            <label>Category</label>
-            <input id="editCategory">
-          </div>
-
-          <div class="form-group">
-            <label>Area</label>
-            <input id="editArea">
-          </div>
-
-          <div class="form-group full">
-            <label>Address</label>
-            <textarea id="editAddress"></textarea>
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="form-section">
-
-        <h3>Hierarchy</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>Phase</label>
-            <input id="editPhase">
-          </div>
-
-          <div class="form-group">
-            <label>Precinct</label>
-            <input id="editPrecinct">
-          </div>
-
-          <div class="form-group">
-            <label>Sector</label>
-            <input id="editSector">
-          </div>
-
-          <div class="form-group">
-            <label>Block</label>
-            <input id="editBlock">
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="form-section">
-
-        <h3>Shop & LCD</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>Footfall</label>
-            <input id="editFootfall" type="number">
-          </div>
-
-          <div class="form-group">
-            <label>Shop Size</label>
-            <input id="editShopSize">
-          </div>
-
-          <div class="form-group">
-            <label>LCD Status</label>
-            <input id="editLcdStatus">
-          </div>
-
-          <div class="form-group">
-            <label>LCD Total Price</label>
-            <input id="editLcdPrice" type="number">
-          </div>
-
-          <div class="form-group">
-            <label>LCD Down Payment</label>
-            <input id="editLcdDownPayment" type="number">
-          </div>
-
-          <div class="form-group">
-            <label>Monthly Installment</label>
-            <input id="editMonthlyInstallment" type="number">
-          </div>
-
-          <div class="form-group">
-            <label>Installment Months</label>
-            <input id="editInstallmentMonths" type="number">
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="form-section">
-
-        <h3>Internet & Timings</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>Internet Status</label>
-            <input id="editInternetStatus">
-          </div>
-
-          <div class="form-group">
-            <label>Internet Provider</label>
-            <input id="editInternetProvider">
-          </div>
-
-          <div class="form-group">
-            <label>Opening Time</label>
-            <input id="editOpeningTime" type="time">
-          </div>
-
-          <div class="form-group">
-            <label>Closing Time</label>
-            <input id="editClosingTime" type="time">
-          </div>
-
-          <div class="checkbox-row">
-            <input
-              id="editInternetCompanyRequired"
-              type="checkbox"
-            >
-            <label for="editInternetCompanyRequired">
-              Internet Company Required
-            </label>
-          </div>
-
-          <div class="checkbox-row">
-            <input
-              id="editFridge"
-              type="checkbox"
-            >
-            <label for="editFridge">
-              Ice Cream Fridge
-            </label>
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="form-section">
-
-        <h3>Bank & Payment</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>Bank Name</label>
-            <input id="editBankName">
-          </div>
-
-          <div class="form-group">
-            <label>Account Title</label>
-            <input id="editAccountTitle">
-          </div>
-
-          <div class="form-group">
-            <label>Account Number</label>
-            <input id="editAccountNumber">
-          </div>
-
-          <div class="form-group">
-            <label>IBAN</label>
-            <input id="editIban">
-          </div>
-
-          <div class="form-group">
-            <label>Payment Method</label>
-            <input id="editPaymentMethod">
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="form-section">
-
-        <h3>Status & Location</h3>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>Status</label>
-
-            <select id="editStatus">
-
-              <option value="pending">
-                Pending
-              </option>
-
-              <option value="approved">
-                Approved
-              </option>
-
-              <option value="rejected">
-                Rejected
-              </option>
-
-            </select>
-
-          </div>
-
-          <div class="form-group">
-            <label>Screen Online Status</label>
-
-            <select id="editOnlineStatus">
-
-              <option value="false">
-                Offline
-              </option>
-
-              <option value="true">
-                Online
-              </option>
-
-            </select>
-
-          </div>
-
-          <div class="form-group">
-            <label>Latitude</label>
-            <input id="editLatitude" type="number" step="any">
-          </div>
-
-          <div class="form-group">
-            <label>Longitude</label>
-            <input id="editLongitude" type="number" step="any">
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="modal-actions">
-
-        <button
-          class="btn btn-white"
-          type="button"
-          onclick="closeModal('editVendorModal')"
-        >
-          Cancel
-        </button>
-
-        <button
-          class="btn btn-yellow"
-          type="submit"
-        >
-          Save Changes
-        </button>
-
-      </div>
-
-    </form>
-
-  </div>
-
-</div>
-
-
-<!-- ================= NOTIFICATION MODAL ================= -->
-
-<div class="modal" id="notificationModal">
-
-  <div class="modal-box modal-small">
-
-    <div class="modal-head">
-
-      <h2>Send Vendor Notification</h2>
-
-      <button
-        class="close"
-        onclick="closeModal('notificationModal')"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <form id="notificationForm">
-
-      <div class="form-group">
-
-        <label>Vendor</label>
-
-        <select
-          id="notificationVendor"
-          required
-        >
-
-          <option value="">
-            Select Vendor
-          </option>
-
+      <div class="field">
+        <label>Ice Cream Fridge</label>
+        <select id="edit_ice_cream_fridge">
+          <option value="false">No</option>
+          <option value="true">Yes</option>
         </select>
-
       </div>
 
+      <div class="info-title">Bank</div>
 
-      <br>
+      <div class="grid2">
+        <div class="field">
+          <label>Bank Name</label>
+          <input id="edit_bank_name">
+        </div>
 
+        <div class="field">
+          <label>Account Title</label>
+          <input id="edit_account_title">
+        </div>
 
-      <div class="form-group">
+        <div class="field">
+          <label>Account Number</label>
+          <input id="edit_account_number">
+        </div>
 
-        <label>Title</label>
+        <div class="field">
+          <label>IBAN</label>
+          <input id="edit_iban">
+        </div>
 
-        <input
-          id="notificationTitle"
-          maxlength="120"
-          placeholder="Notification title"
-          required
-        >
-
+        <div class="field">
+          <label>Payment Method</label>
+          <input id="edit_payment_method">
+        </div>
       </div>
 
+      <div class="info-title">Coordinates</div>
 
-      <br>
+      <div class="grid2">
+        <div class="field">
+          <label>Latitude</label>
+          <input id="edit_latitude" type="number" step="any">
+        </div>
 
-
-      <div class="form-group">
-
-        <label>Message</label>
-
-        <textarea
-          id="notificationMessage"
-          maxlength="1000"
-          placeholder="Write notification..."
-          required
-        ></textarea>
-
+        <div class="field">
+          <label>Longitude</label>
+          <input id="edit_longitude" type="number" step="any">
+        </div>
       </div>
 
-
-      <div class="modal-actions">
-
-        <button
-          class="btn btn-white"
-          type="button"
-          onclick="closeModal('notificationModal')"
-        >
-          Cancel
-        </button>
-
-        <button
-          class="btn btn-yellow"
-          type="submit"
-        >
-          Send Notification
-        </button>
-
+      <div class="field">
+        <label>Status</label>
+        <select id="edit_status">
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
+        </select>
       </div>
 
-    </form>
+    </div>
+
+    <div class="modal-foot">
+      <button class="action-btn" onclick="closeModal('editVendorModal')">Cancel</button>
+      <button class="primary-btn" onclick="saveVendor()">Save Changes</button>
+    </div>
 
   </div>
-
 </div>
 
+<!-- CONFIRM -->
+<div id="confirmModal" class="modal-backdrop hidden">
+  <div class="modal small">
 
-<!-- ================= TOAST ================= -->
+    <div class="modal-head">
+      <h3 id="confirmTitle">Confirm</h3>
+      <button class="close-btn" onclick="closeModal('confirmModal')">×</button>
+    </div>
 
-<div class="toast" id="toast"></div>
+    <div id="confirmMessage" class="modal-body"></div>
 
+    <div class="modal-foot">
+      <button class="action-btn" onclick="closeModal('confirmModal')">Cancel</button>
+      <button id="confirmYes" class="primary-btn">Confirm</button>
+    </div>
+
+  </div>
+</div>
+
+<div id="toastWrap" class="toast-wrap"></div>
 
 <script>
-
 /* =========================================================
    SUPABASE
 ========================================================= */
@@ -2386,38 +1040,25 @@ const supabaseClient =
     SUPABASE_KEY
   );
 
-
 /* =========================================================
    STATE
 ========================================================= */
 
-let currentUser = null;
-let adminProfile = null;
-
+let currentAdmin = null;
 let vendors = [];
-let notifications = [];
+let adminNotifications = [];
+let currentPage = "dashboard";
+let realtimeChannels = [];
+let offlineNotificationState = new Set();
 
-let currentVendor = null;
-
-let realtimeChannel = null;
-let notificationChannel = null;
-
+const $ = id => document.getElementById(id);
 
 /* =========================================================
    HELPERS
 ========================================================= */
 
-function $(id){
-  return document.getElementById(id);
-}
-
-
 function esc(value){
-
-  if(value === null || value === undefined){
-    return "";
-  }
-
+  if(value === null || value === undefined) return "";
   return String(value)
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
@@ -2426,209 +1067,61 @@ function esc(value){
     .replace(/'/g,"&#039;");
 }
 
-
-function money(value){
-
-  const number =
-    Number(value || 0);
-
-  return "Rs. " +
-    number.toLocaleString("en-PK");
-}
-
-
-function formatDate(value){
-
-  if(!value){
-    return "—";
-  }
-
-  const date = new Date(value);
-
-  if(Number.isNaN(date.getTime())){
-    return "—";
-  }
-
-  return date.toLocaleDateString(
-    "en-PK",
-    {
-      year:"numeric",
-      month:"short",
-      day:"numeric"
-    }
-  );
-}
-
-
-function formatDateTime(value){
-
-  if(!value){
-    return "—";
-  }
-
-  const date = new Date(value);
-
-  if(Number.isNaN(date.getTime())){
-    return "—";
-  }
-
-  return date.toLocaleString(
-    "en-PK",
-    {
-      year:"numeric",
-      month:"short",
-      day:"numeric",
-      hour:"2-digit",
-      minute:"2-digit"
-    }
-  );
-}
-
-
-function formatTime(value){
-
-  if(!value){
-    return "—";
-  }
-
-  return String(value).slice(0,5);
-}
-
-
 function toast(message){
-
-  const el = $("toast");
-
+  const wrap = $("toastWrap");
+  const el = document.createElement("div");
+  el.className = "toast";
   el.textContent = message;
-  el.classList.add("show");
+  wrap.appendChild(el);
 
-  clearTimeout(window.__toastTimer);
-
-  window.__toastTimer =
-    setTimeout(()=>{
-      el.classList.remove("show");
-    },3500);
+  setTimeout(()=>{
+    el.remove();
+  },3500);
 }
-
 
 function openModal(id){
-
-  $(id)?.classList.add("active");
+  $(id).classList.remove("hidden");
 }
-
 
 function closeModal(id){
-
-  $(id)?.classList.remove("active");
+  $(id).classList.add("hidden");
 }
 
+function formatDate(value){
+  if(!value) return "—";
 
-function statusBadge(status){
+  const d = new Date(value);
 
-  const value =
-    String(status || "pending").toLowerCase();
+  if(isNaN(d.getTime())) return value;
 
-  let cls = "pending";
-
-  if(value === "approved"){
-    cls = "approved";
-  }
-
-  if(value === "rejected"){
-    cls = "rejected";
-  }
-
-  return `
-    <span class="status ${cls}">
-      ${esc(value)}
-    </span>
-  `;
+  return d.toLocaleString("en-GB",{
+    day:"numeric",
+    month:"short",
+    year:"numeric",
+    hour:"numeric",
+    minute:"2-digit"
+  });
 }
 
+function todayKey(){
+  const d = new Date();
 
-function onlineBadge(online){
-
-  return online === true
-
-    ? `
-      <span class="status online">
-        ● Online
-      </span>
-    `
-
-    : `
-      <span class="status offline">
-        ● Offline
-      </span>
-    `;
+  return [
+    d.getFullYear(),
+    String(d.getMonth()+1).padStart(2,"0"),
+    String(d.getDate()).padStart(2,"0")
+  ].join("-");
 }
 
-
-function getHierarchy(vendor){
-
-  if(vendor.phase){
-    return "Phase: " + vendor.phase;
-  }
-
-  if(vendor.precinct){
-    return "Precinct: " + vendor.precinct;
-  }
-
-  if(vendor.sector){
-    return "Sector: " + vendor.sector;
-  }
-
-  if(vendor.block){
-    return "Block: " + vendor.block;
-  }
-
-  return "—";
+function isAdminUser(){
+  return !!currentAdmin;
 }
-
-
-function getVendorById(id){
-
-  return vendors.find(
-    vendor =>
-      String(vendor.id) === String(id)
-  );
-}
-
-
-function getInitials(name){
-
-  const value =
-    String(name || "Admin").trim();
-
-  if(!value){
-    return "A";
-  }
-
-  return value
-    .split(/\s+/)
-    .slice(0,2)
-    .map(x => x[0])
-    .join("")
-    .toUpperCase();
-}
-
 
 /* =========================================================
-   LOGIN
+   AUTH
 ========================================================= */
 
-$("loginForm").addEventListener(
-  "submit",
-  async function(event){
-
-    event.preventDefault();
-
-    await loginAdmin();
-  }
-);
-
-
-async function loginAdmin(){
+async function adminLogin(){
 
   const email =
     $("adminEmail").value.trim();
@@ -2636,22 +1129,13 @@ async function loginAdmin(){
   const password =
     $("adminPassword").value;
 
-  const errorBox =
-    $("loginError");
-
-  errorBox.style.display = "none";
-  errorBox.textContent = "";
-
   if(!email || !password){
-
-    errorBox.textContent =
-      "Please enter admin ID and password.";
-
-    errorBox.style.display = "block";
-
+    toast("Enter Admin ID and password.");
     return;
   }
 
+  $("loginBtn").disabled = true;
+  $("loginBtn").textContent = "Logging in...";
 
   try{
 
@@ -2664,35 +1148,16 @@ async function loginAdmin(){
         password
       });
 
-
     if(error){
-
       console.error(error);
-
-      errorBox.textContent =
-        error.message ||
-        "Invalid admin login.";
-
-      errorBox.style.display = "block";
-
+      toast(error.message || "Login failed.");
       return;
     }
 
-
-    if(!data?.user){
-
-      errorBox.textContent =
-        "Admin login failed.";
-
-      errorBox.style.display = "block";
-
+    if(!data || !data.user){
+      toast("Admin login failed.");
       return;
     }
-
-
-    currentUser =
-      data.user;
-
 
     const {
       data: admin,
@@ -2701,1983 +1166,888 @@ async function loginAdmin(){
       await supabaseClient
         .from("admin_users")
         .select("*")
-        .eq("user_id",currentUser.id)
+        .eq("user_id",data.user.id)
         .eq("active",true)
         .maybeSingle();
 
-
     if(adminError){
-
       console.error(adminError);
-
       await supabaseClient.auth.signOut();
-
-      errorBox.textContent =
-        adminError.message ||
-        "Unable to verify admin account.";
-
-      errorBox.style.display = "block";
-
+      toast("Unable to verify admin account.");
       return;
     }
-
 
     if(!admin){
-
       await supabaseClient.auth.signOut();
-
-      errorBox.textContent =
-        "This account is not an active admin.";
-
-      errorBox.style.display = "block";
-
+      toast("This account is not an active admin.");
       return;
     }
 
-
-    adminProfile =
-      admin;
-
+    currentAdmin = {
+      ...admin,
+      authUser:data.user
+    };
 
     showAdminApp();
 
-    await startAdmin();
+    await loadAll();
+
+    subscribeRealtime();
 
   }catch(error){
 
     console.error(error);
+    toast("Login failed.");
 
-    errorBox.textContent =
-      error.message ||
-      "Login failed.";
+  }finally{
 
-    errorBox.style.display = "block";
+    $("loginBtn").disabled = false;
+    $("loginBtn").textContent = "Login";
+
   }
 }
 
+async function adminLogout(){
 
-/* =========================================================
-   SHOW ADMIN
-========================================================= */
+  realtimeChannels.forEach(channel=>{
+    try{
+      supabaseClient.removeChannel(channel);
+    }catch(e){}
+  });
 
-function showAdminApp(){
-
-  $("loginScreen")
-    .classList.add("hidden");
-
-  $("adminApp")
-    .classList.remove("hidden");
-
-  const name =
-    adminProfile?.full_name ||
-    currentUser?.email ||
-    "Admin";
-
-  $("adminName").textContent =
-    name;
-
-  $("adminAvatar").textContent =
-    getInitials(name);
-
-  $("settingsAdminEmail").value =
-    currentUser?.email || "";
-
-  $("settingsAdminName").value =
-    adminProfile?.full_name || "";
-
-}
-
-
-async function logoutAdmin(){
-
-  try{
-
-    if(realtimeChannel){
-      await supabaseClient
-        .removeChannel(realtimeChannel);
-    }
-
-    if(notificationChannel){
-      await supabaseClient
-        .removeChannel(notificationChannel);
-    }
-
-  }catch(error){
-
-    console.error(error);
-
-  }
-
+  realtimeChannels = [];
 
   await supabaseClient.auth.signOut();
 
-  currentUser = null;
-  adminProfile = null;
+  currentAdmin = null;
+  vendors = [];
+  adminNotifications = [];
 
-  $("adminApp")
-    .classList.add("hidden");
-
-  $("loginScreen")
-    .classList.remove("hidden");
+  $("adminApp").classList.add("hidden");
+  $("loginPage").classList.remove("hidden");
 
   $("adminPassword").value = "";
-
 }
 
-
-$("sidebarLogout")
-  .addEventListener(
-    "click",
-    logoutAdmin
-  );
-
-
-/* =========================================================
-   PAGE ROUTER
-========================================================= */
-
-const pageTitles = {
-
-  dashboard:"Dashboard",
-  vendors:"Connected Vendors",
-  notifications:"Notifications",
-  packages:"Packages",
-  ads:"Ads",
-  upcoming:"Upcoming Ads",
-  monitoring:"Screen Monitoring",
-  withdrawals:"Withdrawals",
-  complaints:"Complaints",
-  formbuilder:"Form Builder",
-  settings:"Settings"
-
-};
-
-
-document
-  .querySelectorAll(".menu button[data-page]")
-  .forEach(button => {
-
-    button.addEventListener(
-      "click",
-      ()=>{
-
-        showPage(
-          button.dataset.page
-        );
-
-      }
-    );
-
-  });
-
-
-function showPage(page){
-
-  document
-    .querySelectorAll(".page")
-    .forEach(el =>
-      el.classList.remove("active")
-    );
-
-
-  const target =
-    $("page-" + page);
-
-  if(target){
-    target.classList.add("active");
-  }
-
-
-  document
-    .querySelectorAll(".menu button[data-page]")
-    .forEach(button => {
-
-      button.classList.toggle(
-        "active",
-        button.dataset.page === page
-      );
-
-    });
-
-
-  $("pageTitle").textContent =
-    pageTitles[page] ||
-    "Admin Portal";
-
-
-  $("sidebar")
-    .classList.remove("open");
-
-
-  if(page === "monitoring"){
-    renderMonitoring();
-  }
-
-}
-
-
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
-$("mobileMenu")
-  .addEventListener(
-    "click",
-    ()=>{
-      $("sidebar")
-        .classList.toggle("open");
-    }
-  );
-
-
-/* =========================================================
-   START
-========================================================= */
-
-async function startAdmin(){
-
-  await loadVendors();
-
-  await loadNotifications();
-
-  subscribeRealtime();
-
-  updateDashboard();
-
-  showPage("dashboard");
-
-}
-
-
-/* =========================================================
-   LOAD VENDORS
-========================================================= */
-
-async function loadVendors(){
-
-  const table =
-    $("vendorsTable");
-
-  if(table){
-
-    table.innerHTML = `
-      <tr>
-        <td colspan="8" style="text-align:center;padding:35px;color:#777;">
-          Loading vendors...
-        </td>
-      </tr>
-    `;
-
-  }
-
+async function restoreSession(){
 
   try{
 
     const {
-      data,
-      error
+      data:{session}
     } =
-      await supabaseClient
-        .from("vendors")
-        .select("*")
-        .order(
-          "created_at",
-          {ascending:false}
-        );
+      await supabaseClient.auth.getSession();
 
-
-    if(error){
-
-      console.error(
-        "loadVendors error:",
-        error
-      );
-
-      vendors = [];
-
-      if(table){
-
-        table.innerHTML = `
-          <tr>
-            <td colspan="8" style="text-align:center;padding:35px;color:#d94b4b;">
-              Unable to load vendors.<br>
-              ${esc(error.message)}
-            </td>
-          </tr>
-        `;
-
-      }
-
-      toast(
-        error.message ||
-        "Unable to load vendors."
-      );
-
+    if(!session || !session.user){
       return;
     }
 
+    const {
+      data:admin
+    } =
+      await supabaseClient
+        .from("admin_users")
+        .select("*")
+        .eq("user_id",session.user.id)
+        .eq("active",true)
+        .maybeSingle();
 
-    vendors =
-      Array.isArray(data)
-        ? data
-        : [];
+    if(!admin){
+      await supabaseClient.auth.signOut();
+      return;
+    }
 
+    currentAdmin = {
+      ...admin,
+      authUser:session.user
+    };
 
-    renderVendors();
+    showAdminApp();
 
-    updateVendorStats();
+    await loadAll();
 
-    populateNotificationVendors();
+    subscribeRealtime();
 
-    updateDashboard();
+  }catch(error){
+    console.error(error);
+  }
+}
 
-    renderMonitoring();
+function showAdminApp(){
+  $("loginPage").classList.add("hidden");
+  $("adminApp").classList.remove("hidden");
+}
+
+/* =========================================================
+   LOAD
+========================================================= */
+
+async function loadAll(){
+
+  await Promise.all([
+    loadVendors(),
+    loadAdminNotifications()
+  ]);
+
+  renderCurrentPage();
+  updateNotificationBadge();
+}
+
+/* =========================================================
+   VENDORS
+========================================================= */
+
+async function loadVendors(){
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("vendors")
+      .select("*")
+      .order("created_at",{ascending:false});
+
+  if(error){
+    console.error("loadVendors:",error);
+    toast(error.message || "Unable to load vendors.");
+    vendors = [];
+    return;
+  }
+
+  vendors = data || [];
+}
+
+function getVendorById(id){
+
+  return vendors.find(
+    v => String(v.id) === String(id)
+  ) || null;
+}
+
+/* =========================================================
+   ADMIN NOTIFICATIONS
+========================================================= */
+
+async function loadAdminNotifications(){
+
+  /*
+    Admin notifications are stored separately.
+    Required table:
+
+    admin_notifications
+      id uuid
+      title text
+      message text
+      type text
+      vendor_id uuid nullable
+      is_read boolean
+      created_at timestamptz
+  */
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("admin_notifications")
+      .select("*")
+      .order("created_at",{ascending:false})
+      .limit(100);
+
+  if(error){
+
+    console.warn(
+      "admin_notifications unavailable:",
+      error.message
+    );
+
+    adminNotifications = [];
+    return;
+  }
+
+  adminNotifications = data || [];
+}
+
+async function createAdminNotification({
+  title,
+  message,
+  type = "system",
+  vendorId = null
+}){
+
+  try{
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("admin_notifications")
+        .insert({
+          title,
+          message,
+          type,
+          vendor_id:vendorId,
+          is_read:false
+        });
+
+    if(error){
+      console.error(
+        "createAdminNotification:",
+        error
+      );
+      return false;
+    }
+
+    return true;
 
   }catch(error){
 
     console.error(error);
+    return false;
 
-    toast(
-      error.message ||
-      "Unable to load vendors."
+  }
+}
+
+async function markNotificationRead(id){
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("admin_notifications")
+      .update({
+        is_read:true
+      })
+      .eq("id",id);
+
+  if(error){
+    console.error(error);
+    return;
+  }
+
+  const n =
+    adminNotifications.find(
+      x => String(x.id) === String(id)
     );
 
+  if(n){
+    n.is_read = true;
   }
 
+  updateNotificationBadge();
+
+  renderNotifications();
 }
 
+function updateNotificationBadge(){
 
-/* =========================================================
-   VENDOR STATS
-========================================================= */
-
-function updateVendorStats(){
-
-  const total =
-    vendors.length;
-
-  const approved =
-    vendors.filter(
-      v =>
-        String(v.status || "")
-          .toLowerCase() === "approved"
+  const unread =
+    adminNotifications.filter(
+      n => !n.is_read
     ).length;
 
-  const pending =
-    vendors.filter(
-      v =>
-        String(v.status || "pending")
-          .toLowerCase() === "pending"
-    ).length;
+  const badge =
+    $("topNotificationBadge");
 
-  const online =
-    vendors.filter(
-      v => v.online_status === true
-    ).length;
-
-  const offline =
-    total - online;
-
-
-  $("totalVendors").textContent =
-    total;
-
-  $("approvedVendors").textContent =
-    approved;
-
-  $("pendingVendors").textContent =
-    pending;
-
-  $("onlineVendors").textContent =
-    online;
-
-  $("offlineVendors").textContent =
-    offline;
-
-
-  $("vendorMenuCount").textContent =
-    total;
-
-
-  $("dashTotalVendors").textContent =
-    total;
-
-  $("dashApprovedVendors").textContent =
-    approved;
-
-  $("dashPendingVendors").textContent =
-    pending;
-
-  $("dashOnlineVendors").textContent =
-    online;
-
-  $("dashOfflineVendors").textContent =
-    offline;
-
+  if(unread > 0){
+    badge.textContent =
+      unread > 99 ? "99+" : unread;
+    badge.classList.remove("hidden");
+  }else{
+    badge.classList.add("hidden");
+  }
 }
 
-
 /* =========================================================
-   VENDOR FILTERS
-========================================================= */
-
-$("vendorSearch")
-  .addEventListener(
-    "input",
-    renderVendors
-  );
-
-
-$("vendorStatusFilter")
-  .addEventListener(
-    "change",
-    renderVendors
-  );
-
-
-$("vendorOnlineFilter")
-  .addEventListener(
-    "change",
-    renderVendors
-  );
-
-
-/* =========================================================
-   RENDER VENDORS
-========================================================= */
-
-function renderVendors(){
-
-  const body =
-    $("vendorsTable");
-
-  if(!body){
-    return;
-  }
-
-
-  const search =
-    ($("vendorSearch")?.value || "")
-      .trim()
-      .toLowerCase();
-
-
-  const statusFilter =
-    $("vendorStatusFilter")?.value || "";
-
-
-  const onlineFilter =
-    $("vendorOnlineFilter")?.value || "";
-
-
-  const filtered =
-    vendors.filter(vendor => {
-
-      const searchable = [
-
-        vendor.vendor_name,
-        vendor.owner_name,
-        vendor.phone,
-        vendor.email,
-        vendor.category,
-        vendor.area,
-        vendor.phase,
-        vendor.precinct,
-        vendor.sector,
-        vendor.block,
-        vendor.address,
-        vendor.lcd_status
-
-      ]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase();
-
-
-      if(
-        search &&
-        !searchable.includes(search)
-      ){
-        return false;
-      }
-
-
-      if(
-        statusFilter &&
-        String(vendor.status || "pending")
-          .toLowerCase() !== statusFilter
-      ){
-        return false;
-      }
-
-
-      if(
-        onlineFilter === "online" &&
-        vendor.online_status !== true
-      ){
-        return false;
-      }
-
-
-      if(
-        onlineFilter === "offline" &&
-        vendor.online_status === true
-      ){
-        return false;
-      }
-
-
-      return true;
-
-    });
-
-
-  if(!filtered.length){
-
-    body.innerHTML = `
-      <tr>
-        <td colspan="8" style="text-align:center;padding:40px;color:#777;">
-          No connected vendors found.
-        </td>
-      </tr>
-    `;
-
-    return;
-  }
-
-
-  body.innerHTML =
-    filtered.map(vendor => {
-
-      const id =
-        String(vendor.id || "");
-
-
-      const lcd =
-        vendor.lcd_status ||
-        "—";
-
-
-      return `
-
-        <tr>
-
-          <td class="vendor-name-cell">
-
-            <strong>
-              ${esc(
-                vendor.vendor_name ||
-                "Unnamed Vendor"
-              )}
-            </strong>
-
-            <span>
-              ${esc(
-                vendor.owner_name ||
-                "Owner not available"
-              )}
-            </span>
-
-          </td>
-
-
-          <td>
-            ${esc(vendor.phone || "—")}
-          </td>
-
-
-          <td>
-
-            <strong>
-              ${esc(vendor.area || "—")}
-            </strong>
-
-            ${
-              vendor.category
-              ? `<div style="font-size:11px;color:#888;margin-top:3px;">
-                   ${esc(vendor.category)}
-                 </div>`
-              : ""
-            }
-
-          </td>
-
-
-          <td>
-            ${esc(getHierarchy(vendor))}
-          </td>
-
-
-          <td>
-            ${esc(lcd)}
-          </td>
-
-
-          <td>
-            ${statusBadge(vendor.status)}
-          </td>
-
-
-          <td>
-            ${onlineBadge(vendor.online_status)}
-          </td>
-
-
-          <td>
-
-            <div class="action-buttons">
-
-              ${
-                id
-                ? `
-                  <button
-                    class="action-btn"
-                    data-action="view"
-                    data-id="${esc(id)}"
-                  >
-                    View
-                  </button>
-
-                  <button
-                    class="action-btn"
-                    data-action="edit"
-                    data-id="${esc(id)}"
-                  >
-                    Edit
-                  </button>
-                `
-                : `
-                  <button
-                    class="action-btn"
-                    disabled
-                  >
-                    No ID
-                  </button>
-                `
-              }
-
-
-              ${
-                String(vendor.status || "pending")
-                  .toLowerCase() !== "approved" && id
-                ? `
-                  <button
-                    class="action-btn approve"
-                    data-action="approve"
-                    data-id="${esc(id)}"
-                  >
-                    Approve
-                  </button>
-                `
-                : ""
-              }
-
-
-              ${
-                String(vendor.status || "")
-                  .toLowerCase() !== "rejected" && id
-                ? `
-                  <button
-                    class="action-btn reject"
-                    data-action="reject"
-                    data-id="${esc(id)}"
-                  >
-                    Reject
-                  </button>
-                `
-                : ""
-              }
-
-
-              ${
-                id
-                ? `
-                  <button
-                    class="action-btn delete"
-                    data-action="delete"
-                    data-id="${esc(id)}"
-                  >
-                    Delete
-                  </button>
-                `
-                : ""
-              }
-
-            </div>
-
-          </td>
-
-        </tr>
-
-      `;
-
-    }).join("");
-
-}
-
-
-/* =========================================================
-   VENDOR ACTION DELEGATION
-========================================================= */
-
-$("vendorsTable")
-  .addEventListener(
-    "click",
-    async function(event){
-
-      const button =
-        event.target.closest(
-          "[data-action][data-id]"
-        );
-
-
-      if(!button){
-        return;
-      }
-
-
-      const id =
-        button.dataset.id;
-
-      const action =
-        button.dataset.action;
-
-
-      if(action === "view"){
-        viewVendor(id);
-        return;
-      }
-
-
-      if(action === "edit"){
-        editVendor(id);
-        return;
-      }
-
-
-      if(action === "approve"){
-        await approveVendor(id);
-        return;
-      }
-
-
-      if(action === "reject"){
-        await rejectVendor(id);
-        return;
-      }
-
-
-      if(action === "delete"){
-        await deleteVendor(id);
-        return;
-      }
-
-    }
-  );
-
-
-/* =========================================================
-   VIEW VENDOR
-========================================================= */
-
-function viewVendor(id){
-
-  const vendor =
-    getVendorById(id);
-
-
-  if(!vendor){
-
-    toast(
-      "Vendor not found."
-    );
-
-    return;
-  }
-
-
-  currentVendor =
-    vendor;
-
-
-  $("vendorDetailTitle").textContent =
-    vendor.vendor_name ||
-    "Vendor Details";
-
-
-  let mapHTML = "";
-
-
-  if(
-    vendor.latitude !== null &&
-    vendor.latitude !== undefined &&
-    vendor.longitude !== null &&
-    vendor.longitude !== undefined &&
-    vendor.latitude !== "" &&
-    vendor.longitude !== ""
-  ){
-
-    const lat =
-      Number(vendor.latitude);
-
-    const lng =
-      Number(vendor.longitude);
-
-
-    if(
-      Number.isFinite(lat) &&
-      Number.isFinite(lng)
-    ){
-
-      const mapUrl =
-        `https://www.google.com/maps?q=${encodeURIComponent(
-          lat + "," + lng
-        )}&output=embed`;
-
-
-      const externalUrl =
-        `https://www.google.com/maps?q=${encodeURIComponent(
-          lat + "," + lng
-        )}`;
-
-
-      mapHTML = `
-
-        <div class="form-section" style="margin-top:15px;">
-
-          <h3>Saved Vendor Location</h3>
-
-          <iframe
-            class="location-map"
-            src="${mapUrl}"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
-
-          <div class="map-actions">
-
-            <a
-              class="btn btn-yellow"
-              href="${externalUrl}"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="text-decoration:none;"
-            >
-              Open in Google Maps
-            </a>
-
-          </div>
-
-        </div>
-
-      `;
-
-    }
-
-  }
-
-
-  if(!mapHTML){
-
-    mapHTML = `
-
-      <div class="form-section" style="margin-top:15px;">
-
-        <h3>Saved Vendor Location</h3>
-
-        <div class="location-empty">
-          No valid saved latitude/longitude is available for this vendor.
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  $("vendorDetailContent").innerHTML = `
-
-    <div class="form-section">
-
-      <h3>Vendor Profile</h3>
-
-      <div class="detail-grid">
-
-        ${detailItem(
-          "Vendor Name",
-          vendor.vendor_name
-        )}
-
-        ${detailItem(
-          "Owner Name",
-          vendor.owner_name
-        )}
-
-        ${detailItem(
-          "Phone",
-          vendor.phone
-        )}
-
-        ${detailItem(
-          "Email",
-          vendor.email
-        )}
-
-        ${detailItem(
-          "Category",
-          vendor.category
-        )}
-
-        ${detailItem(
-          "Area",
-          vendor.area
-        )}
-
-        ${detailItem(
-          "Hierarchy",
-          getHierarchy(vendor)
-        )}
-
-        ${detailItem(
-          "Address",
-          vendor.address,
-          true
-        )}
-
-      </div>
-
-    </div>
-
-
-    <div class="form-section">
-
-      <h3>LCD & Shop</h3>
-
-      <div class="detail-grid">
-
-        ${detailItem(
-          "Footfall",
-          vendor.footfall
-        )}
-
-        ${detailItem(
-          "Shop Size",
-          vendor.shop_size
-        )}
-
-        ${detailItem(
-          "LCD Status",
-          vendor.lcd_status
-        )}
-
-        ${detailItem(
-          "LCD Total Price",
-          money(vendor.lcd_total_price)
-        )}
-
-        ${detailItem(
-          "LCD Down Payment",
-          money(vendor.lcd_down_payment)
-        )}
-
-        ${detailItem(
-          "Monthly Installment",
-          money(vendor.lcd_monthly_installment)
-        )}
-
-        ${detailItem(
-          "Installment Months",
-          vendor.lcd_installment_months
-        )}
-
-        ${detailItem(
-          "Ice Cream Fridge",
-          vendor.ice_cream_fridge ? "Yes" : "No"
-        )}
-
-      </div>
-
-    </div>
-
-
-    <div class="form-section">
-
-      <h3>Internet & Timings</h3>
-
-      <div class="detail-grid">
-
-        ${detailItem(
-          "Internet Status",
-          vendor.internet_status
-        )}
-
-        ${detailItem(
-          "Internet Provider",
-          vendor.internet_provider
-        )}
-
-        ${detailItem(
-          "Internet Company Required",
-          vendor.internet_company_required
-            ? "Yes"
-            : "No"
-        )}
-
-        ${detailItem(
-          "Opening Time",
-          formatTime(vendor.opening_time)
-        )}
-
-        ${detailItem(
-          "Closing Time",
-          formatTime(vendor.closing_time)
-        )}
-
-      </div>
-
-    </div>
-
-
-    <div class="form-section">
-
-      <h3>Bank & Payment</h3>
-
-      <div class="detail-grid">
-
-        ${detailItem(
-          "Bank Name",
-          vendor.bank_name
-        )}
-
-        ${detailItem(
-          "Account Title",
-          vendor.account_title
-        )}
-
-        ${detailItem(
-          "Account Number",
-          vendor.account_number
-        )}
-
-        ${detailItem(
-          "IBAN",
-          vendor.iban
-        )}
-
-        ${detailItem(
-          "Payment Method",
-          vendor.payment_method
-        )}
-
-      </div>
-
-    </div>
-
-
-    <div class="form-section">
-
-      <h3>Account Status</h3>
-
-      <div class="detail-grid">
-
-        ${detailItem(
-          "Approval",
-          String(vendor.status || "pending")
-        )}
-
-        ${detailItem(
-          "Screen",
-          vendor.online_status
-            ? "Online"
-            : "Offline"
-        )}
-
-        ${detailItem(
-          "Created",
-          formatDateTime(vendor.created_at)
-        )}
-
-        ${detailItem(
-          "Updated",
-          formatDateTime(vendor.updated_at)
-        )}
-
-        ${detailItem(
-          "Vendor ID",
-          vendor.id
-        )}
-
-        ${detailItem(
-          "Auth User ID",
-          vendor.user_id
-        )}
-
-      </div>
-
-    </div>
-
-
-    ${mapHTML}
-
-
-    <div class="modal-actions">
-
-      ${
-        String(vendor.status || "pending")
-          .toLowerCase() !== "approved"
-        ? `
-          <button
-            class="btn btn-green"
-            onclick="approveVendor('${String(vendor.id || "")}')"
-          >
-            Approve Vendor
-          </button>
-        `
-        : ""
-      }
-
-
-      ${
-        String(vendor.status || "")
-          .toLowerCase() !== "rejected"
-        ? `
-          <button
-            class="btn btn-danger"
-            onclick="rejectVendor('${String(vendor.id || "")}')"
-          >
-            Reject Vendor
-          </button>
-        `
-        : ""
-      }
-
-
-      <button
-        class="btn btn-white"
-        onclick="editVendor('${String(vendor.id || "")}')"
-      >
-        Edit
-      </button>
-
-
-      <button
-        class="btn btn-white"
-        onclick="closeModal('vendorDetailModal')"
-      >
-        Close
-      </button>
-
-    </div>
-
-  `;
-
-
-  openModal("vendorDetailModal");
-
-}
-
-
-function detailItem(
-  label,
-  value,
-  full=false
-){
-
-  return `
-
-    <div class="detail-item ${full ? "full" : ""}">
-
-      <div class="detail-label">
-        ${esc(label)}
-      </div>
-
-      <div class="detail-value">
-        ${esc(
-          value === null ||
-          value === undefined ||
-          value === ""
-            ? "—"
-            : value
-        )}
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-
-/* =========================================================
-   APPROVE VENDOR
+   APPROVAL
 ========================================================= */
 
 async function approveVendor(id){
 
-  const vendor =
-    getVendorById(id);
-
+  const vendor = getVendorById(id);
 
   if(!vendor){
-
-    toast(
-      "Vendor not found."
-    );
-
+    toast("Vendor not found.");
     return;
   }
 
+  if(!vendor.id){
+    toast("This vendor has no valid database ID.");
+    return;
+  }
+
+  if(String(vendor.status).toLowerCase() === "approved"){
+    toast("Vendor is already approved.");
+    return;
+  }
 
   const vendorName =
     vendor.vendor_name ||
     vendor.owner_name ||
     "this vendor";
 
+  showConfirm(
+    "Approve Vendor",
+    `Approve ${vendorName}?`,
+    async ()=>{
 
-  const confirmed =
-    confirm(
-      `Approve ${vendorName}?`
-    );
+      try{
 
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .from("vendors")
+            .update({
+              status:"approved",
+              updated_at:new Date().toISOString()
+            })
+            .eq("id",id)
+            .select("*")
+            .maybeSingle();
 
-  if(!confirmed){
-    return;
-  }
+        if(error){
 
+          console.error(
+            "APPROVAL ERROR:",
+            error
+          );
 
-  try{
+          toast(
+            error.message ||
+            "Vendor approval failed."
+          );
 
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("vendors")
-        .update({
-          status:"approved",
-          updated_at:new Date().toISOString()
-        })
-        .eq("id",id)
-        .select("*")
-        .maybeSingle();
+          return;
+        }
 
+        if(!data){
 
-    if(error){
+          toast(
+            "Vendor was not updated. Check admin RLS."
+          );
 
-      console.error(
-        "approveVendor error:",
-        error
-      );
+          return;
+        }
 
-      toast(
-        error.message ||
-        "Vendor approval failed."
-      );
+        const index =
+          vendors.findIndex(
+            v => String(v.id) === String(id)
+          );
 
-      return;
-    }
+        if(index !== -1){
+          vendors[index] = data;
+        }
 
+        /*
+          Vendor notification:
+          ONLY vendor receives this.
+        */
 
-    if(!data){
+        await createVendorApprovalNotification(data);
 
-      toast(
-        "Vendor was not updated. Check admin RLS policy."
-      );
+        /*
+          Admin notification:
+          ONLY admin receives this.
+        */
 
-      return;
-    }
+        await createAdminNotification({
+          title:"Vendor Approved",
+          message:`${vendorName} has been approved.`,
+          type:"vendor_approved",
+          vendorId:data.id
+        });
 
+        closeModal("confirmModal");
+        closeModal("vendorDetailModal");
 
-    const index =
-      vendors.findIndex(
-        v =>
-          String(v.id) === String(id)
-      );
+        renderCurrentPage();
 
+        await loadAdminNotifications();
 
-    if(index !== -1){
+        updateNotificationBadge();
 
-      vendors[index] =
-        data;
+        toast("Vendor approved successfully.");
 
-    }
+      }catch(error){
 
-
-    /* Send approval notification */
-
-    if(data.id){
-
-      const {
-        error:notificationError
-      } =
-        await supabaseClient
-          .from("vendor_notifications")
-          .insert({
-            vendor_id:data.id,
-            title:"Vendor Account Approved",
-            message:"Your Spotly vendor account has been approved by the admin.",
-            is_read:false
-          });
-
-
-      if(notificationError){
-
-        console.error(
-          "Approval notification error:",
-          notificationError
+        console.error(error);
+        toast(
+          error.message ||
+          "Vendor approval failed."
         );
 
       }
 
     }
-
-
-    renderVendors();
-
-    updateVendorStats();
-
-    updateDashboard();
-
-    populateNotificationVendors();
-
-    renderMonitoring();
-
-
-    closeModal(
-      "vendorDetailModal"
-    );
-
-
-    toast(
-      "Vendor approved successfully."
-    );
-
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      error.message ||
-      "Vendor approval failed."
-    );
-
-  }
-
+  );
 }
 
+async function createVendorApprovalNotification(vendor){
+
+  if(!vendor || !vendor.id){
+    return;
+  }
+
+  /*
+    Prevent duplicate approval notifications.
+
+    We check existing unread/read approval notification
+    for this vendor before inserting another one.
+  */
+
+  const {
+    data:existing,
+    error:existingError
+  } =
+    await supabaseClient
+      .from("vendor_notifications")
+      .select("id,title,created_at")
+      .eq("vendor_id",vendor.id)
+      .eq("title","Vendor Account Approved")
+      .limit(1);
+
+  if(existingError){
+
+    console.error(
+      "Vendor notification check:",
+      existingError
+    );
+
+    return;
+  }
+
+  if(existing && existing.length){
+    return;
+  }
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("vendor_notifications")
+      .insert({
+        vendor_id:vendor.id,
+        title:"Vendor Account Approved",
+        message:"Your Spotly vendor account has been approved by admin.",
+        is_read:false
+      });
+
+  if(error){
+    console.error(
+      "Vendor approval notification:",
+      error
+    );
+  }
+}
 
 /* =========================================================
-   REJECT VENDOR
+   REJECT
 ========================================================= */
 
 async function rejectVendor(id){
 
-  const vendor =
-    getVendorById(id);
-
+  const vendor = getVendorById(id);
 
   if(!vendor){
-
-    toast(
-      "Vendor not found."
-    );
-
+    toast("Vendor not found.");
     return;
   }
 
-
-  const reason =
-    prompt(
-      "Enter rejection message for vendor:"
-    );
-
-
-  if(reason === null){
+  if(String(vendor.status).toLowerCase() === "rejected"){
+    toast("Vendor is already rejected.");
     return;
   }
 
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("vendors")
-        .update({
-          status:"rejected",
-          updated_at:new Date().toISOString()
-        })
-        .eq("id",id)
-        .select("*")
-        .maybeSingle();
-
-
-    if(error){
-
-      console.error(error);
-
-      toast(
-        error.message ||
-        "Vendor rejection failed."
-      );
-
-      return;
-    }
-
-
-    if(!data){
-
-      toast(
-        "Vendor was not updated."
-      );
-
-      return;
-    }
-
-
-    const index =
-      vendors.findIndex(
-        v =>
-          String(v.id) === String(id)
-      );
-
-
-    if(index !== -1){
-
-      vendors[index] =
-        data;
-
-    }
-
-
-    if(data.id){
-
-      const {
-        error:notificationError
-      } =
-        await supabaseClient
-          .from("vendor_notifications")
-          .insert({
-            vendor_id:data.id,
-            title:"Vendor Account Update",
-            message:
-              reason.trim()
-                ? "Your vendor application was rejected. Reason: " + reason.trim()
-                : "Your vendor application was rejected by the admin.",
-            is_read:false
-          });
-
-
-      if(notificationError){
-
-        console.error(
-          notificationError
-        );
-
-      }
-
-    }
-
-
-    renderVendors();
-
-    updateVendorStats();
-
-    updateDashboard();
-
-    closeModal(
-      "vendorDetailModal"
-    );
-
-
-    toast(
-      "Vendor rejected."
-    );
-
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      error.message ||
-      "Vendor rejection failed."
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   DELETE VENDOR
-========================================================= */
-
-async function deleteVendor(id){
-
-  const vendor =
-    getVendorById(id);
-
-
-  if(!vendor){
-
-    toast(
-      "Vendor not found."
-    );
-
-    return;
-  }
-
-
-  const name =
+  const vendorName =
     vendor.vendor_name ||
     vendor.owner_name ||
     "this vendor";
 
+  showConfirm(
+    "Reject Vendor",
+    `Reject ${vendorName}?`,
+    async ()=>{
 
-  const confirmed =
-    confirm(
-      `Delete ${name} from the vendor list?\n\nThis deletes the vendor profile record only. The Supabase Auth user is not deleted from the browser.`
-    );
+      try{
 
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .from("vendors")
+            .update({
+              status:"rejected",
+              updated_at:new Date().toISOString()
+            })
+            .eq("id",id)
+            .select("*")
+            .maybeSingle();
 
-  if(!confirmed){
+        if(error){
+          console.error(error);
+          toast(error.message || "Vendor rejection failed.");
+          return;
+        }
+
+        if(!data){
+          toast("Vendor was not updated.");
+          return;
+        }
+
+        const index =
+          vendors.findIndex(
+            v => String(v.id) === String(id)
+          );
+
+        if(index !== -1){
+          vendors[index] = data;
+        }
+
+        await createVendorStatusNotification(
+          data,
+          "Vendor Account Rejected",
+          "Your Spotly vendor account has been rejected by admin."
+        );
+
+        await createAdminNotification({
+          title:"Vendor Rejected",
+          message:`${vendorName} has been rejected.`,
+          type:"vendor_rejected",
+          vendorId:data.id
+        });
+
+        closeModal("confirmModal");
+        closeModal("vendorDetailModal");
+
+        renderCurrentPage();
+
+        await loadAdminNotifications();
+
+        updateNotificationBadge();
+
+        toast("Vendor rejected.");
+
+      }catch(error){
+
+        console.error(error);
+        toast(error.message || "Vendor rejection failed.");
+
+      }
+
+    }
+  );
+}
+
+async function createVendorStatusNotification(
+  vendor,
+  title,
+  message
+){
+
+  if(!vendor || !vendor.id) return;
+
+  const {
+    data
+  } =
+    await supabaseClient
+      .from("vendor_notifications")
+      .select("id")
+      .eq("vendor_id",vendor.id)
+      .eq("title",title)
+      .limit(1);
+
+  if(data && data.length){
     return;
   }
 
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("vendor_notifications")
+      .insert({
+        vendor_id:vendor.id,
+        title,
+        message,
+        is_read:false
+      });
 
-  try{
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("vendors")
-        .delete()
-        .eq("id",id);
-
-
-    if(error){
-
-      console.error(error);
-
-      toast(
-        error.message ||
-        "Vendor deletion failed."
-      );
-
-      return;
-    }
-
-
-    vendors =
-      vendors.filter(
-        v =>
-          String(v.id) !== String(id)
-      );
-
-
-    renderVendors();
-
-    updateVendorStats();
-
-    updateDashboard();
-
-    populateNotificationVendors();
-
-    renderMonitoring();
-
-
-    closeModal(
-      "vendorDetailModal"
-    );
-
-    closeModal(
-      "editVendorModal"
-    );
-
-
-    toast(
-      "Vendor deleted successfully."
-    );
-
-
-  }catch(error){
-
+  if(error){
     console.error(error);
-
-    toast(
-      error.message ||
-      "Vendor deletion failed."
-    );
-
   }
-
 }
 
+/* =========================================================
+   DELETE
+========================================================= */
+
+async function deleteVendor(id){
+
+  const vendor = getVendorById(id);
+
+  if(!vendor){
+    toast("Vendor not found.");
+    return;
+  }
+
+  const vendorName =
+    vendor.vendor_name ||
+    vendor.owner_name ||
+    "this vendor";
+
+  showConfirm(
+    "Delete Vendor",
+    `Delete ${vendorName} vendor profile? This cannot be undone.`,
+    async ()=>{
+
+      try{
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .from("vendors")
+            .delete()
+            .eq("id",id);
+
+        if(error){
+
+          console.error(error);
+
+          toast(
+            error.message ||
+            "Vendor deletion failed."
+          );
+
+          return;
+        }
+
+        vendors =
+          vendors.filter(
+            v => String(v.id) !== String(id)
+          );
+
+        closeModal("confirmModal");
+        closeModal("vendorDetailModal");
+
+        renderCurrentPage();
+
+        toast("Vendor deleted.");
+
+      }catch(error){
+
+        console.error(error);
+        toast("Vendor deletion failed.");
+
+      }
+
+    }
+  );
+}
 
 /* =========================================================
-   EDIT VENDOR
+   EDIT
 ========================================================= */
 
 function editVendor(id){
 
-  const vendor =
-    getVendorById(id);
+  const v = getVendorById(id);
 
-
-  if(!vendor){
-
-    toast(
-      "Vendor not found."
-    );
-
+  if(!v){
+    toast("Vendor not found.");
     return;
   }
 
+  $("editVendorId").value = v.id || "";
 
-  currentVendor =
-    vendor;
+  $("edit_vendor_name").value = v.vendor_name || "";
+  $("edit_owner_name").value = v.owner_name || "";
+  $("edit_phone").value = v.phone || "";
+  $("edit_email").value = v.email || "";
 
+  $("edit_category").value = v.category || "";
+  $("edit_area").value = v.area || "";
+  $("edit_phase").value = v.phase || "";
+  $("edit_precinct").value = v.precinct || "";
+  $("edit_sector").value = v.sector || "";
+  $("edit_block").value = v.block || "";
+  $("edit_address").value = v.address || "";
 
-  $("editVendorId").value =
-    vendor.id || "";
+  $("edit_footfall").value = v.footfall ?? 0;
+  $("edit_shop_size").value = v.shop_size || "";
 
+  $("edit_lcd_status").value =
+    String(v.lcd_status || "").toLowerCase();
 
-  $("editVendorName").value =
-    vendor.vendor_name || "";
+  $("edit_lcd_total_price").value =
+    v.lcd_total_price ?? 0;
 
-  $("editOwnerName").value =
-    vendor.owner_name || "";
+  $("edit_lcd_down_payment").value =
+    v.lcd_down_payment ?? 0;
 
-  $("editPhone").value =
-    vendor.phone || "";
+  $("edit_lcd_monthly_installment").value =
+    v.lcd_monthly_installment ?? 0;
 
-  $("editEmail").value =
-    vendor.email || "";
+  $("edit_lcd_installment_months").value =
+    v.lcd_installment_months ?? 0;
 
-  $("editCategory").value =
-    vendor.category || "";
+  $("edit_online_status").value =
+    v.online_status ? "true" : "false";
 
-  $("editArea").value =
-    vendor.area || "";
+  $("edit_internet_status").value =
+    v.internet_status || "";
 
-  $("editAddress").value =
-    vendor.address || "";
+  $("edit_internet_provider").value =
+    v.internet_provider || "";
 
+  $("edit_internet_company_required").value =
+    v.internet_company_required ? "true" : "false";
 
-  $("editPhase").value =
-    vendor.phase || "";
+  $("edit_opening_time").value =
+    normalizeTime(v.opening_time);
 
-  $("editPrecinct").value =
-    vendor.precinct || "";
+  $("edit_closing_time").value =
+    normalizeTime(v.closing_time);
 
-  $("editSector").value =
-    vendor.sector || "";
+  $("edit_ice_cream_fridge").value =
+    v.ice_cream_fridge ? "true" : "false";
 
-  $("editBlock").value =
-    vendor.block || "";
+  $("edit_bank_name").value =
+    v.bank_name || "";
 
+  $("edit_account_title").value =
+    v.account_title || "";
 
-  $("editFootfall").value =
-    vendor.footfall ?? "";
+  $("edit_account_number").value =
+    v.account_number || "";
 
-  $("editShopSize").value =
-    vendor.shop_size || "";
+  $("edit_iban").value =
+    v.iban || "";
 
-  $("editLcdStatus").value =
-    vendor.lcd_status || "";
+  $("edit_payment_method").value =
+    v.payment_method || "";
 
-  $("editLcdPrice").value =
-    vendor.lcd_total_price ?? "";
+  $("edit_latitude").value =
+    v.latitude ?? "";
 
-  $("editLcdDownPayment").value =
-    vendor.lcd_down_payment ?? "";
+  $("edit_longitude").value =
+    v.longitude ?? "";
 
-  $("editMonthlyInstallment").value =
-    vendor.lcd_monthly_installment ?? "";
+  $("edit_status").value =
+    String(v.status || "pending").toLowerCase();
 
-  $("editInstallmentMonths").value =
-    vendor.lcd_installment_months ?? "";
-
-
-  $("editInternetStatus").value =
-    vendor.internet_status || "";
-
-  $("editInternetProvider").value =
-    vendor.internet_provider || "";
-
-  $("editInternetCompanyRequired").checked =
-    vendor.internet_company_required === true;
-
-  $("editOpeningTime").value =
-    formatTimeInput(vendor.opening_time);
-
-  $("editClosingTime").value =
-    formatTimeInput(vendor.closing_time);
-
-  $("editFridge").checked =
-    vendor.ice_cream_fridge === true;
-
-
-  $("editBankName").value =
-    vendor.bank_name || "";
-
-  $("editAccountTitle").value =
-    vendor.account_title || "";
-
-  $("editAccountNumber").value =
-    vendor.account_number || "";
-
-  $("editIban").value =
-    vendor.iban || "";
-
-  $("editPaymentMethod").value =
-    vendor.payment_method || "";
-
-
-  $("editStatus").value =
-    vendor.status || "pending";
-
-  $("editOnlineStatus").value =
-    vendor.online_status === true
-      ? "true"
-      : "false";
-
-
-  $("editLatitude").value =
-    vendor.latitude ?? "";
-
-  $("editLongitude").value =
-    vendor.longitude ?? "";
-
-
-  closeModal(
-    "vendorDetailModal"
-  );
-
-  openModal(
-    "editVendorModal"
-  );
-
+  openModal("editVendorModal");
 }
 
+function normalizeTime(value){
 
-function formatTimeInput(value){
+  if(!value) return "";
 
-  if(!value){
-    return "";
-  }
-
-  return String(value)
-    .slice(0,5);
-
+  return String(value).slice(0,5);
 }
-
-
-/* =========================================================
-   SAVE VENDOR
-========================================================= */
-
-$("editVendorForm")
-  .addEventListener(
-    "submit",
-    async function(event){
-
-      event.preventDefault();
-
-      await saveVendor();
-
-    }
-  );
-
 
 async function saveVendor(){
 
   const id =
     $("editVendorId").value;
 
-
   if(!id){
-
-    toast(
-      "Vendor ID is missing."
-    );
-
+    toast("Vendor ID missing.");
     return;
   }
-
-
-  const latValue =
-    $("editLatitude").value.trim();
-
-  const lngValue =
-    $("editLongitude").value.trim();
-
-
-  let latitude =
-    latValue === ""
-      ? null
-      : Number(latValue);
-
-
-  let longitude =
-    lngValue === ""
-      ? null
-      : Number(lngValue);
-
-
-  if(
-    latitude !== null &&
-    !Number.isFinite(latitude)
-  ){
-
-    toast(
-      "Latitude is invalid."
-    );
-
-    return;
-  }
-
-
-  if(
-    longitude !== null &&
-    !Number.isFinite(longitude)
-  ){
-
-    toast(
-      "Longitude is invalid."
-    );
-
-    return;
-  }
-
 
   const payload = {
 
-    vendor_name:
-      $("editVendorName").value.trim(),
+    vendor_name:$("edit_vendor_name").value.trim(),
+    owner_name:$("edit_owner_name").value.trim(),
+    phone:$("edit_phone").value.trim(),
+    email:$("edit_email").value.trim(),
 
-    owner_name:
-      $("editOwnerName").value.trim(),
-
-    phone:
-      $("editPhone").value.trim(),
-
-    email:
-      $("editEmail").value.trim(),
-
-    category:
-      $("editCategory").value.trim(),
-
-    area:
-      $("editArea").value.trim(),
-
-    address:
-      $("editAddress").value.trim(),
-
-
-    phase:
-      $("editPhase").value.trim(),
-
-    precinct:
-      $("editPrecinct").value.trim(),
-
-    sector:
-      $("editSector").value.trim(),
-
-    block:
-      $("editBlock").value.trim(),
-
+    category:$("edit_category").value.trim(),
+    area:$("edit_area").value.trim(),
+    phase:$("edit_phase").value.trim(),
+    precinct:$("edit_precinct").value.trim(),
+    sector:$("edit_sector").value.trim(),
+    block:$("edit_block").value.trim(),
+    address:$("edit_address").value.trim(),
 
     footfall:
-      numberOrZero(
-        $("editFootfall").value
-      ),
+      Number($("edit_footfall").value || 0),
 
     shop_size:
-      $("editShopSize").value.trim(),
+      $("edit_shop_size").value.trim(),
 
     lcd_status:
-      $("editLcdStatus").value.trim(),
+      $("edit_lcd_status").value,
 
     lcd_total_price:
-      numberOrZero(
-        $("editLcdPrice").value
-      ),
+      Number($("edit_lcd_total_price").value || 0),
 
     lcd_down_payment:
-      numberOrZero(
-        $("editLcdDownPayment").value
-      ),
+      Number($("edit_lcd_down_payment").value || 0),
 
     lcd_monthly_installment:
-      numberOrZero(
-        $("editMonthlyInstallment").value
-      ),
+      Number($("edit_lcd_monthly_installment").value || 0),
 
     lcd_installment_months:
-      integerOrZero(
-        $("editInstallmentMonths").value
-      ),
-
-
-    internet_status:
-      $("editInternetStatus").value.trim(),
-
-    internet_provider:
-      $("editInternetProvider").value.trim(),
-
-    internet_company_required:
-      $("editInternetCompanyRequired").checked,
-
-
-    opening_time:
-      $("editOpeningTime").value || null,
-
-    closing_time:
-      $("editClosingTime").value || null,
-
-    ice_cream_fridge:
-      $("editFridge").checked,
-
-
-    bank_name:
-      $("editBankName").value.trim(),
-
-    account_title:
-      $("editAccountTitle").value.trim(),
-
-    account_number:
-      $("editAccountNumber").value.trim(),
-
-    iban:
-      $("editIban").value.trim(),
-
-    payment_method:
-      $("editPaymentMethod").value.trim(),
-
-
-    status:
-      $("editStatus").value,
+      Number($("edit_lcd_installment_months").value || 0),
 
     online_status:
-      $("editOnlineStatus").value === "true",
+      $("edit_online_status").value === "true",
 
+    internet_status:
+      $("edit_internet_status").value.trim(),
 
-    latitude,
-    longitude,
+    internet_provider:
+      $("edit_internet_provider").value.trim(),
 
+    internet_company_required:
+      $("edit_internet_company_required").value === "true",
+
+    opening_time:
+      $("edit_opening_time").value || null,
+
+    closing_time:
+      $("edit_closing_time").value || null,
+
+    ice_cream_fridge:
+      $("edit_ice_cream_fridge").value === "true",
+
+    bank_name:
+      $("edit_bank_name").value.trim(),
+
+    account_title:
+      $("edit_account_title").value.trim(),
+
+    account_number:
+      $("edit_account_number").value.trim(),
+
+    iban:
+      $("edit_iban").value.trim(),
+
+    payment_method:
+      $("edit_payment_method").value.trim(),
+
+    latitude:
+      $("edit_latitude").value === ""
+        ? null
+        : Number($("edit_latitude").value),
+
+    longitude:
+      $("edit_longitude").value === ""
+        ? null
+        : Number($("edit_longitude").value),
+
+    status:
+      $("edit_status").value,
 
     updated_at:
       new Date().toISOString()
-
   };
-
 
   try{
 
@@ -4692,759 +2062,1522 @@ async function saveVendor(){
         .select("*")
         .maybeSingle();
 
-
-    if(error){
-
-      console.error(
-        "saveVendor error:",
-        error
-      );
-
-      toast(
-        error.message ||
-        "Vendor update failed."
-      );
-
-      return;
-    }
-
-
-    if(!data){
-
-      toast(
-        "Vendor was not updated. Check admin RLS policy."
-      );
-
-      return;
-    }
-
-
-    const index =
-      vendors.findIndex(
-        v =>
-          String(v.id) === String(id)
-      );
-
-
-    if(index !== -1){
-
-      vendors[index] =
-        data;
-
-    }
-
-
-    renderVendors();
-
-    updateVendorStats();
-
-    updateDashboard();
-
-    populateNotificationVendors();
-
-    renderMonitoring();
-
-
-    closeModal(
-      "editVendorModal"
-    );
-
-
-    toast(
-      "Vendor updated successfully."
-    );
-
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      error.message ||
-      "Vendor update failed."
-    );
-
-  }
-
-}
-
-
-function numberOrZero(value){
-
-  if(value === "" || value === null){
-    return 0;
-  }
-
-  const number =
-    Number(value);
-
-  return Number.isFinite(number)
-    ? number
-    : 0;
-}
-
-
-function integerOrZero(value){
-
-  if(value === "" || value === null){
-    return 0;
-  }
-
-  const number =
-    parseInt(value,10);
-
-  return Number.isFinite(number)
-    ? number
-    : 0;
-}
-
-
-/* =========================================================
-   LOAD NOTIFICATIONS
-========================================================= */
-
-async function loadNotifications(){
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("vendor_notifications")
-        .select("*")
-        .order(
-          "created_at",
-          {ascending:false}
-        )
-        .limit(100);
-
-
-    if(error){
-
-      console.error(
-        "loadNotifications error:",
-        error
-      );
-
-      notifications = [];
-
-      renderNotifications();
-
-      updateNotificationCount();
-
-      return;
-    }
-
-
-    notifications =
-      Array.isArray(data)
-        ? data
-        : [];
-
-
-    renderNotifications();
-
-    updateNotificationCount();
-
-  }catch(error){
-
-    console.error(error);
-
-  }
-
-}
-
-
-/* =========================================================
-   POPULATE NOTIFICATION VENDORS
-========================================================= */
-
-function populateNotificationVendors(){
-
-  const select =
-    $("notificationVendor");
-
-
-  if(!select){
-    return;
-  }
-
-
-  const currentValue =
-    select.value;
-
-
-  select.innerHTML = `
-
-    <option value="">
-      Select Vendor
-    </option>
-
-  `;
-
-
-  vendors
-    .filter(
-      vendor =>
-        vendor.id
-    )
-    .forEach(vendor => {
-
-      const option =
-        document.createElement("option");
-
-      option.value =
-        vendor.id;
-
-      option.textContent =
-        `${vendor.vendor_name || "Unnamed Vendor"} — ${vendor.phone || vendor.email || "No contact"}`;
-
-      select.appendChild(option);
-
-    });
-
-
-  if(
-    currentValue &&
-    vendors.some(
-      v =>
-        String(v.id) ===
-        String(currentValue)
-    )
-  ){
-
-    select.value =
-      currentValue;
-
-  }
-
-}
-
-
-/* =========================================================
-   OPEN NOTIFICATION MODAL
-========================================================= */
-
-function openNotificationModal(){
-
-  populateNotificationVendors();
-
-  $("notificationTitle").value = "";
-
-  $("notificationMessage").value = "";
-
-  $("notificationVendor").value = "";
-
-  openModal(
-    "notificationModal"
-  );
-
-}
-
-
-/* =========================================================
-   CREATE VENDOR NOTIFICATION
-========================================================= */
-
-$("notificationForm")
-  .addEventListener(
-    "submit",
-    async function(event){
-
-      event.preventDefault();
-
-      await createVendorNotification();
-
-    }
-  );
-
-
-async function createVendorNotification(){
-
-  const vendorId =
-    $("notificationVendor").value;
-
-  const title =
-    $("notificationTitle")
-      .value
-      .trim();
-
-  const message =
-    $("notificationMessage")
-      .value
-      .trim();
-
-
-  if(!vendorId){
-
-    toast(
-      "Please select a vendor."
-    );
-
-    return;
-  }
-
-
-  if(!title){
-
-    toast(
-      "Please enter notification title."
-    );
-
-    return;
-  }
-
-
-  if(!message){
-
-    toast(
-      "Please enter notification message."
-    );
-
-    return;
-  }
-
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("vendor_notifications")
-        .insert({
-          vendor_id:vendorId,
-          title,
-          message,
-          is_read:false
-        })
-        .select("*")
-        .single();
-
-
     if(error){
 
       console.error(error);
-
-      toast(
-        error.message ||
-        "Notification could not be sent."
-      );
-
+      toast(error.message || "Vendor update failed.");
       return;
     }
 
+    if(!data){
 
-    notifications.unshift(data);
+      toast("Vendor was not updated.");
+      return;
+    }
 
+    const oldVendor =
+      getVendorById(id);
 
-    renderNotifications();
+    const oldStatus =
+      String(oldVendor?.status || "").toLowerCase();
 
-    updateNotificationCount();
+    const newStatus =
+      String(data.status || "").toLowerCase();
 
+    const index =
+      vendors.findIndex(
+        v => String(v.id) === String(id)
+      );
 
-    closeModal(
-      "notificationModal"
-    );
+    if(index !== -1){
+      vendors[index] = data;
+    }
 
+    /*
+      If edit changes pending -> approved,
+      also create proper notifications.
+    */
 
-    toast(
-      "Notification sent successfully."
-    );
+    if(
+      oldStatus !== "approved" &&
+      newStatus === "approved"
+    ){
 
+      await createVendorApprovalNotification(data);
+
+      await createAdminNotification({
+        title:"Vendor Approved",
+        message:`${data.vendor_name || data.owner_name || "Vendor"} has been approved.`,
+        type:"vendor_approved",
+        vendorId:data.id
+      });
+    }
+
+    closeModal("editVendorModal");
+
+    renderCurrentPage();
+
+    await loadAdminNotifications();
+
+    updateNotificationBadge();
+
+    toast("Vendor updated successfully.");
 
   }catch(error){
 
     console.error(error);
-
-    toast(
-      error.message ||
-      "Notification could not be sent."
-    );
+    toast(error.message || "Vendor update failed.");
 
   }
-
 }
 
-
 /* =========================================================
-   RENDER NOTIFICATIONS
+   VENDOR VIEW
 ========================================================= */
 
-function notificationHTML(notification){
+function viewVendor(id){
 
-  const vendor =
-    getVendorById(
-      notification.vendor_id
-    );
+  const v = getVendorById(id);
 
+  if(!v){
+    toast("Vendor not found.");
+    return;
+  }
 
-  const vendorName =
-    vendor?.vendor_name ||
-    vendor?.owner_name ||
+  const name =
+    v.vendor_name ||
+    v.owner_name ||
     "Vendor";
 
+  $("vendorDetailTitle").textContent = name;
 
-  return `
+  const lat = v.latitude;
+  const lng = v.longitude;
 
-    <div class="notification-card ${
-      notification.is_read
-        ? ""
-        : "unread"
-    }">
+  let mapHtml = `
+    <div class="map-box">
+      <div class="empty">Location not available</div>
+    </div>
+  `;
 
-      <div class="notification-card-head">
+  if(lat !== null && lat !== undefined &&
+     lng !== null && lng !== undefined &&
+     lat !== "" && lng !== ""){
 
-        <div class="notification-card-title">
-          ${esc(notification.title)}
-        </div>
+    const src =
+      `https://www.google.com/maps?q=${encodeURIComponent(lat+","+lng)}&output=embed`;
 
-        <div class="notification-card-meta">
-          ${formatDateTime(notification.created_at)}
-        </div>
+    mapHtml = `
+      <div class="map-box">
+        <iframe
+          src="${src}"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    `;
+  }
+
+  const status =
+    String(v.status || "pending").toLowerCase();
+
+  const statusBadge =
+    status === "approved"
+      ? `<span class="badge approved">Approved</span>`
+      : status === "rejected"
+        ? `<span class="badge rejected">Rejected</span>`
+        : `<span class="badge pending">Pending</span>`;
+
+  const online =
+    v.online_status === true;
+
+  $("vendorDetailBody").innerHTML = `
+
+    <div class="info-section">
+      <div class="info-title">Status</div>
+      <div>${statusBadge}</div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-title">Personal</div>
+
+      <div class="info-grid">
+
+        ${info("Vendor Name",v.vendor_name)}
+        ${info("Owner Name",v.owner_name)}
+        ${info("Phone",v.phone)}
+        ${info("Email",v.email)}
 
       </div>
+    </div>
 
-      <div
-        style="font-size:12px;color:#777;margin-bottom:7px;"
-      >
-        To: ${esc(vendorName)}
+    <div class="info-section">
+      <div class="info-title">Business & Location</div>
+
+      <div class="info-grid">
+
+        ${info("Category",v.category)}
+        ${info("Area",v.area)}
+        ${info("Phase",v.phase)}
+        ${info("Precinct",v.precinct)}
+        ${info("Sector",v.sector)}
+        ${info("Block",v.block)}
+        ${info("Footfall",v.footfall)}
+        ${info("Shop Size",v.shop_size)}
+        ${info("Address",v.address)}
+
       </div>
+    </div>
 
-      <p>
-        ${esc(notification.message)}
-      </p>
+    <div class="info-section">
+      <div class="info-title">LCD</div>
 
+      <div class="info-grid">
+
+        ${info("LCD Status",v.lcd_status)}
+        ${info("Online Status",online ? "Online" : "Offline")}
+        ${info("Total Price",money(v.lcd_total_price))}
+        ${info("Down Payment",money(v.lcd_down_payment))}
+        ${info("Monthly Installment",money(v.lcd_monthly_installment))}
+        ${info("Installment Months",v.lcd_installment_months)}
+
+      </div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-title">Internet</div>
+
+      <div class="info-grid">
+
+        ${info("Internet Status",v.internet_status)}
+        ${info("Provider",v.internet_provider)}
+        ${info("Company Required",v.internet_company_required ? "Yes" : "No")}
+
+      </div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-title">Opening Hours</div>
+
+      <div class="info-grid">
+
+        ${info("Opening",normalizeTime(v.opening_time))}
+        ${info("Closing",normalizeTime(v.closing_time))}
+
+      </div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-title">Bank</div>
+
+      <div class="info-grid">
+
+        ${info("Bank",v.bank_name)}
+        ${info("Account Title",v.account_title)}
+        ${info("Account Number",v.account_number)}
+        ${info("IBAN",v.iban)}
+        ${info("Payment Method",v.payment_method)}
+
+      </div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-title">Live Location</div>
+      ${mapHtml}
     </div>
 
   `;
 
-}
+  let actions = `
+    <button class="action-btn" onclick="editVendor('${esc(v.id)}')">
+      ✏️
+    </button>
+  `;
 
+  if(status === "pending"){
 
-function renderNotifications(){
+    actions += `
+      <button
+        class="action-btn approve"
+        onclick="approveVendor('${esc(v.id)}')">
+        Approve
+      </button>
 
-  const list =
-    $("notificationList");
-
-
-  if(!list){
-    return;
-  }
-
-
-  if(!notifications.length){
-
-    list.innerHTML = `
-      <div class="empty">
-        No vendor notifications yet.
-      </div>
+      <button
+        class="action-btn reject"
+        onclick="rejectVendor('${esc(v.id)}')">
+        Reject
+      </button>
     `;
 
-  }else{
+  }else if(status === "rejected"){
 
-    list.innerHTML =
-      notifications
-        .map(notificationHTML)
-        .join("");
-
+    actions += `
+      <button
+        class="action-btn approve"
+        onclick="approveVendor('${esc(v.id)}')">
+        Approve
+      </button>
+    `;
   }
 
+  actions += `
+    <button
+      class="action-btn"
+      onclick="deleteVendor('${esc(v.id)}')">
+      Delete
+    </button>
+  `;
 
-  const recent =
-    $("recentNotifications");
+  $("vendorDetailFoot").innerHTML = actions;
 
-
-  if(recent){
-
-    if(!notifications.length){
-
-      recent.innerHTML = `
-        <div class="empty">
-          No notifications yet.
-        </div>
-      `;
-
-    }else{
-
-      recent.innerHTML =
-        notifications
-          .slice(0,5)
-          .map(notificationHTML)
-          .join("");
-
-    }
-
-  }
-
+  openModal("vendorDetailModal");
 }
 
+function info(label,value){
 
-function updateNotificationCount(){
-
-  const unread =
-    notifications.filter(
-      n =>
-        n.is_read !== true
-    ).length;
-
-
-  const badge =
-    $("notificationBadge");
-
-
-  const menuCount =
-    $("notificationMenuCount");
-
-
-  if(unread > 0){
-
-    badge.textContent =
-      unread > 99
-        ? "99+"
-        : unread;
-
-    badge.classList.remove(
-      "hidden"
-    );
-
-
-    menuCount.textContent =
-      unread > 99
-        ? "99+"
-        : unread;
-
-    menuCount.classList.remove(
-      "hidden"
-    );
-
-  }else{
-
-    badge.classList.add(
-      "hidden"
-    );
-
-    menuCount.classList.add(
-      "hidden"
-    );
-
-  }
-
+  return `
+    <div class="info-item">
+      <div class="info-label">${esc(label)}</div>
+      <div class="info-value">${esc(
+        value === null ||
+        value === undefined ||
+        value === ""
+          ? "—"
+          : value
+      )}</div>
+    </div>
+  `;
 }
 
+function money(value){
 
-$("topNotificationBtn")
-  .addEventListener(
-    "click",
-    ()=>{
-      showPage("notifications");
+  const n = Number(value || 0);
+
+  return "Rs. " +
+    n.toLocaleString("en-PK");
+}
+
+/* =========================================================
+   CONFIRM
+========================================================= */
+
+function showConfirm(title,message,callback){
+
+  $("confirmTitle").textContent = title;
+  $("confirmMessage").textContent = message;
+
+  const yes = $("confirmYes");
+
+  yes.onclick = async ()=>{
+
+    yes.disabled = true;
+
+    try{
+      await callback();
+    }finally{
+      yes.disabled = false;
     }
+  };
+
+  openModal("confirmModal");
+}
+
+/* =========================================================
+   TIME / OFFLINE LOGIC
+========================================================= */
+
+function getMinutes(time){
+
+  if(!time) return null;
+
+  const str = String(time).slice(0,5);
+
+  const parts = str.split(":");
+
+  if(parts.length !== 2) return null;
+
+  const h = Number(parts[0]);
+  const m = Number(parts[1]);
+
+  if(
+    Number.isNaN(h) ||
+    Number.isNaN(m)
+  ){
+    return null;
+  }
+
+  return h * 60 + m;
+}
+
+function currentMinutes(){
+
+  const now = new Date();
+
+  return now.getHours() * 60 +
+         now.getMinutes();
+}
+
+function isWithinOpeningHours(vendor){
+
+  const opening =
+    getMinutes(vendor.opening_time);
+
+  const closing =
+    getMinutes(vendor.closing_time);
+
+  if(opening === null || closing === null){
+    return false;
+  }
+
+  const now =
+    currentMinutes();
+
+  /*
+    Normal schedule:
+    10:00 -> 22:00
+  */
+
+  if(opening < closing){
+
+    return (
+      now >= opening &&
+      now < closing
+    );
+  }
+
+  /*
+    Overnight schedule:
+    22:00 -> 02:00
+  */
+
+  if(opening > closing){
+
+    return (
+      now >= opening ||
+      now < closing
+    );
+  }
+
+  /*
+    Same opening/closing means no
+    valid operating window.
+  */
+
+  return false;
+}
+
+function isEligibleOfflineVendor(vendor){
+
+  if(!vendor) return false;
+
+  /*
+    RULE 1:
+    Only approved vendors.
+  */
+
+  if(
+    String(vendor.status || "").toLowerCase()
+      !== "approved"
+  ){
+    return false;
+  }
+
+  /*
+    RULE 2:
+    Shop must currently be open.
+  */
+
+  if(!isWithinOpeningHours(vendor)){
+    return false;
+  }
+
+  /*
+    RULE 3:
+    LCD must actually be offline.
+  */
+
+  const lcd =
+    String(vendor.lcd_status || "").toLowerCase();
+
+  const online =
+    vendor.online_status === true;
+
+  if(
+    lcd === "offline" ||
+    lcd === "off" ||
+    online === false
+  ){
+    return true;
+  }
+
+  return false;
+}
+
+function getOfflineVendors(){
+
+  return vendors.filter(
+    isEligibleOfflineVendor
   );
+}
 
+/* =========================================================
+   OFFLINE NOTIFICATIONS
+========================================================= */
+
+async function checkOfflineNotifications(){
+
+  const offline =
+    getOfflineVendors();
+
+  const currentIds =
+    new Set(
+      offline
+        .filter(v=>v.id)
+        .map(v=>String(v.id))
+    );
+
+  /*
+    Remove vendors that are no longer offline
+    from local notification state.
+  */
+
+  for(const id of Array.from(
+    offlineNotificationState
+  )){
+
+    if(!currentIds.has(id)){
+      offlineNotificationState.delete(id);
+    }
+  }
+
+  /*
+    Only create notification when a vendor
+    enters eligible offline state.
+  */
+
+  for(const vendor of offline){
+
+    if(!vendor.id) continue;
+
+    const id =
+      String(vendor.id);
+
+    if(
+      offlineNotificationState.has(id)
+    ){
+      continue;
+    }
+
+    /*
+      Check today's existing notification
+      so refreshes do not create duplicates.
+    */
+
+    const start =
+      new Date();
+
+    start.setHours(0,0,0,0);
+
+    const {
+      data:existing,
+      error
+    } =
+      await supabaseClient
+        .from("admin_notifications")
+        .select("id")
+        .eq("vendor_id",vendor.id)
+        .eq("type","lcd_offline")
+        .gte("created_at",start.toISOString())
+        .limit(1);
+
+    if(error){
+      console.error(error);
+      continue;
+    }
+
+    if(!existing || !existing.length){
+
+      await createAdminNotification({
+        title:"LCD Offline",
+        message:`${vendor.vendor_name || vendor.owner_name || "Vendor"}'s LCD is offline during shop operating hours.`,
+        type:"lcd_offline",
+        vendorId:vendor.id
+      });
+
+    }
+
+    offlineNotificationState.add(id);
+  }
+
+  await loadAdminNotifications();
+  updateNotificationBadge();
+}
 
 /* =========================================================
    DASHBOARD
 ========================================================= */
 
-function updateDashboard(){
-
-  const total =
-    vendors.length;
-
-
-  const online =
-    vendors.filter(
-      v =>
-        v.online_status === true
-    ).length;
-
+function renderDashboard(){
 
   const offline =
-    total - online;
+    getOfflineVendors();
 
+  const approved =
+    vendors.filter(
+      v => String(v.status).toLowerCase() === "approved"
+    );
 
-  $("offlineShops").textContent =
-    offline;
+  const pending =
+    vendors.filter(
+      v => String(v.status).toLowerCase() === "pending"
+    );
 
+  $("content").innerHTML = `
 
-  $("todayAds").textContent =
-    "0";
+    <div class="stats">
 
+      <div class="stat">
+        <div class="stat-label">Today's Ads</div>
+        <div class="stat-value">0</div>
+      </div>
 
-  $("todayRevenue").textContent =
-    "Rs. 0";
+      <div class="stat">
+        <div class="stat-label">Offline Screens</div>
+        <div class="stat-value">${offline.length}</div>
+      </div>
 
+      <div class="stat">
+        <div class="stat-label">Today's Revenue</div>
+        <div class="stat-value">Rs. 0</div>
+      </div>
 
-  $("todayAdsTime").textContent =
-    "—";
+      <div class="stat">
+        <div class="stat-label">Today's Ads Time</div>
+        <div class="stat-value" style="font-size:18px">
+          — → —
+        </div>
+      </div>
 
+    </div>
 
-  renderRecentVendors();
+    <div class="section-card">
 
+      <div class="section-head">
+        <h2>Vendor Overview</h2>
+        <span class="small-muted">
+          ${vendors.length} total vendors
+        </span>
+      </div>
+
+      <div class="stats" style="margin:0">
+
+        <div class="stat">
+          <div class="stat-label">Total Vendors</div>
+          <div class="stat-value">${vendors.length}</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-label">Pending</div>
+          <div class="stat-value">${pending.length}</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-label">Approved</div>
+          <div class="stat-value">${approved.length}</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-label">Offline Now</div>
+          <div class="stat-value">${offline.length}</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="section-card">
+
+      <div class="section-head">
+        <h2>Offline Screens</h2>
+        <button
+          class="action-btn"
+          onclick="goPage('monitoring')">
+          View All
+        </button>
+      </div>
+
+      ${
+        offline.length
+          ? renderOfflineMiniTable(offline)
+          : `<div class="empty">
+               No approved vendor LCD is offline during operating hours.
+             </div>`
+      }
+
+    </div>
+
+  `;
 }
 
+function renderOfflineMiniTable(list){
 
-function renderRecentVendors(){
+  return `
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Vendor</th>
+            <th>Area</th>
+            <th>Hours</th>
+            <th>LCD</th>
+          </tr>
+        </thead>
 
-  const body =
-    $("recentVendorsTable");
+        <tbody>
 
+          ${list.map(v=>`
 
-  if(!body){
-    return;
-  }
+            <tr>
 
+              <td>
+                <div class="vendor-name">
+                  ${esc(v.vendor_name || "—")}
+                </div>
+                <div class="vendor-sub">
+                  ${esc(v.owner_name || "")}
+                </div>
+              </td>
 
-  const recent =
-    vendors.slice(0,8);
+              <td>${esc(v.area || "—")}</td>
 
+              <td>
+                ${esc(normalizeTime(v.opening_time))}
+                -
+                ${esc(normalizeTime(v.closing_time))}
+              </td>
 
-  if(!recent.length){
+              <td>
+                <span class="badge offline">
+                  Offline
+                </span>
+              </td>
 
-    body.innerHTML = `
-      <tr>
-        <td colspan="4" style="text-align:center;padding:30px;color:#777;">
-          No vendors connected yet.
-        </td>
-      </tr>
-    `;
+            </tr>
 
-    return;
-  }
+          `).join("")}
 
-
-  body.innerHTML =
-    recent.map(vendor => `
-
-      <tr>
-
-        <td class="vendor-name-cell">
-
-          <strong>
-            ${esc(
-              vendor.vendor_name ||
-              "Unnamed Vendor"
-            )}
-          </strong>
-
-          <span>
-            ${esc(
-              vendor.owner_name ||
-              "—"
-            )}
-          </span>
-
-        </td>
-
-        <td>
-          ${esc(vendor.area || "—")}
-        </td>
-
-        <td>
-          ${statusBadge(vendor.status)}
-        </td>
-
-        <td>
-          ${onlineBadge(vendor.online_status)}
-        </td>
-
-      </tr>
-
-    `).join("");
-
+        </tbody>
+      </table>
+    </div>
+  `;
 }
-
 
 /* =========================================================
-   SCREEN MONITORING
+   VENDORS PAGE
+========================================================= */
+
+let vendorSearch = "";
+let vendorFilter = "all";
+
+function renderVendors(){
+
+  const filtered =
+    vendors.filter(v=>{
+
+      const q =
+        vendorSearch.toLowerCase();
+
+      const text = [
+        v.vendor_name,
+        v.owner_name,
+        v.phone,
+        v.email,
+        v.area,
+        v.category,
+        v.phase,
+        v.precinct,
+        v.sector,
+        v.block
+      ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+
+      const searchMatch =
+        !q || text.includes(q);
+
+      const status =
+        String(v.status || "pending")
+          .toLowerCase();
+
+      const filterMatch =
+        vendorFilter === "all" ||
+        status === vendorFilter;
+
+      return searchMatch && filterMatch;
+    });
+
+  $("content").innerHTML = `
+
+    <div class="section-card">
+
+      <div class="toolbar">
+
+        <input
+          id="vendorSearch"
+          class="search"
+          placeholder="Search vendors..."
+          value="${esc(vendorSearch)}"
+        >
+
+        <select id="vendorFilter" class="filter">
+
+          <option value="all"
+            ${vendorFilter==="all"?"selected":""}>
+            All
+          </option>
+
+          <option value="pending"
+            ${vendorFilter==="pending"?"selected":""}>
+            Pending
+          </option>
+
+          <option value="approved"
+            ${vendorFilter==="approved"?"selected":""}>
+            Approved
+          </option>
+
+          <option value="rejected"
+            ${vendorFilter==="rejected"?"selected":""}>
+            Rejected
+          </option>
+
+        </select>
+
+      </div>
+
+      <div class="table-wrap">
+
+        <table id="vendorsTable">
+
+          <thead>
+            <tr>
+              <th>Vendor</th>
+              <th>Area</th>
+              <th>Category</th>
+              <th>LCD</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            ${
+              filtered.length
+                ? filtered.map(renderVendorRow).join("")
+                : `
+                  <tr>
+                    <td colspan="6">
+                      <div class="empty">
+                        No vendors found.
+                      </div>
+                    </td>
+                  </tr>
+                `
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  `;
+
+  const search =
+    $("vendorSearch");
+
+  const filter =
+    $("vendorFilter");
+
+  search.addEventListener("input",e=>{
+    vendorSearch = e.target.value;
+    renderVendors();
+    $("vendorSearch").focus();
+
+    const el = $("vendorSearch");
+    el.setSelectionRange(
+      el.value.length,
+      el.value.length
+    );
+  });
+
+  filter.addEventListener("change",e=>{
+    vendorFilter = e.target.value;
+    renderVendors();
+  });
+
+  $("vendorsTable").addEventListener(
+    "click",
+    async event=>{
+
+      const button =
+        event.target.closest(
+          "[data-action][data-id]"
+        );
+
+      if(!button) return;
+
+      const id =
+        button.dataset.id;
+
+      const action =
+        button.dataset.action;
+
+      if(action === "view"){
+        viewVendor(id);
+        return;
+      }
+
+      if(action === "edit"){
+        editVendor(id);
+        return;
+      }
+
+      if(action === "approve"){
+        await approveVendor(id);
+        return;
+      }
+
+      if(action === "reject"){
+        await rejectVendor(id);
+        return;
+      }
+
+      if(action === "delete"){
+        await deleteVendor(id);
+        return;
+      }
+
+    }
+  );
+}
+
+function renderVendorRow(v){
+
+  const status =
+    String(v.status || "pending")
+      .toLowerCase();
+
+  const statusBadge =
+    status === "approved"
+      ? `<span class="badge approved">Approved</span>`
+      : status === "rejected"
+        ? `<span class="badge rejected">Rejected</span>`
+        : `<span class="badge pending">Pending</span>`;
+
+  const lcd =
+    String(v.lcd_status || "").toLowerCase();
+
+  const lcdOnline =
+    v.online_status === true ||
+    lcd === "online";
+
+  const onlineBadge =
+    lcdOnline
+      ? `<span class="badge online">Online</span>`
+      : `<span class="badge offline">Offline</span>`;
+
+  let actions = `
+
+    <button
+      class="action-btn"
+      data-action="view"
+      data-id="${esc(v.id)}"
+      title="View">
+      👁
+    </button>
+
+    <button
+      class="action-btn edit"
+      data-action="edit"
+      data-id="${esc(v.id)}"
+      title="Edit">
+      ✏
+    </button>
+
+  `;
+
+  if(status === "pending"){
+
+    actions += `
+
+      <button
+        class="action-btn approve"
+        data-action="approve"
+        data-id="${esc(v.id)}">
+        Approve
+      </button>
+
+      <button
+        class="action-btn reject"
+        data-action="reject"
+        data-id="${esc(v.id)}">
+        Reject
+      </button>
+
+    `;
+
+  }else if(status === "rejected"){
+
+    actions += `
+
+      <button
+        class="action-btn approve"
+        data-action="approve"
+        data-id="${esc(v.id)}">
+        Approve
+      </button>
+
+    `;
+  }
+
+  return `
+
+    <tr>
+
+      <td>
+        <div class="vendor-name">
+          ${esc(v.vendor_name || "—")}
+        </div>
+
+        <div class="vendor-sub">
+          ${esc(v.owner_name || "")}
+        </div>
+      </td>
+
+      <td>
+        ${esc(v.area || "—")}
+      </td>
+
+      <td>
+        ${esc(v.category || "—")}
+      </td>
+
+      <td>
+        ${onlineBadge}
+      </td>
+
+      <td>
+        ${statusBadge}
+      </td>
+
+      <td>
+        <div class="actions">
+          ${actions}
+        </div>
+      </td>
+
+    </tr>
+  `;
+}
+
+/* =========================================================
+   MONITORING
 ========================================================= */
 
 function renderMonitoring(){
 
-  const container =
-    $("monitoringList");
+  const offline =
+    getOfflineVendors();
 
+  $("content").innerHTML = `
 
-  if(!container){
-    return;
-  }
+    <div class="section-card">
 
+      <div class="section-head">
+        <div>
+          <h2>Offline Screens</h2>
+          <div class="small-muted">
+            Only approved vendors whose shops are currently open
+            and whose LCD is offline are shown.
+          </div>
+        </div>
 
-  if(!vendors.length){
+        <span class="badge ${
+          offline.length
+            ? "offline"
+            : "approved"
+        }">
+          ${offline.length} Offline
+        </span>
+
+      </div>
+
+      ${
+        offline.length
+          ? `
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Vendor</th>
+                    <th>Area</th>
+                    <th>Opening</th>
+                    <th>Closing</th>
+                    <th>LCD</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  ${offline.map(v=>`
+
+                    <tr>
+
+                      <td>
+                        <div class="vendor-name">
+                          ${esc(v.vendor_name || "—")}
+                        </div>
+                        <div class="vendor-sub">
+                          ${esc(v.owner_name || "")}
+                        </div>
+                      </td>
+
+                      <td>
+                        ${esc(v.area || "—")}
+                      </td>
+
+                      <td>
+                        ${esc(normalizeTime(v.opening_time))}
+                      </td>
+
+                      <td>
+                        ${esc(normalizeTime(v.closing_time))}
+                      </td>
+
+                      <td>
+                        <span class="badge offline">
+                          Offline
+                        </span>
+                      </td>
+
+                      <td>
+                        <span class="badge approved">
+                          Approved
+                        </span>
+                      </td>
+
+                      <td>
+                        <button
+                          class="action-btn"
+                          onclick="viewVendor('${esc(v.id)}')">
+                          👁
+                        </button>
+                      </td>
+
+                    </tr>
+
+                  `).join("")}
+
+                </tbody>
+              </table>
+            </div>
+          `
+          : `
+            <div class="empty">
+              No offline LCD screens right now.
+            </div>
+          `
+      }
+
+    </div>
+  `;
+}
+
+/* =========================================================
+   NOTIFICATIONS PAGE
+========================================================= */
+
+function renderNotifications(){
+
+  $("content").innerHTML = `
+
+    <div class="section-card">
+
+      <div class="section-head">
+        <div>
+          <h2>Admin Notifications</h2>
+          <div class="small-muted">
+            Vendor activity, approvals, complaints,
+            withdrawals and eligible offline screens.
+          </div>
+        </div>
+
+        <button
+          class="action-btn"
+          onclick="loadAll().then(()=>renderNotifications())">
+          Refresh
+        </button>
+      </div>
+
+      <div id="notificationsList"></div>
+
+    </div>
+
+  `;
+
+  renderNotificationListInto(
+    $("notificationsList")
+  );
+}
+
+function renderNotificationListInto(container){
+
+  if(!container) return;
+
+  if(!adminNotifications.length){
 
     container.innerHTML = `
       <div class="empty">
-        No connected vendors found.
+        No notifications.
       </div>
     `;
 
     return;
   }
 
-
-  const sorted =
-    [...vendors]
-      .sort(
-        (a,b) =>
-          Number(b.online_status === true) -
-          Number(a.online_status === true)
-      );
-
-
   container.innerHTML =
-    sorted.map(vendor => `
+    adminNotifications.map(n=>`
 
-      <div class="live-row">
+      <div
+        class="notification-item ${
+          n.is_read ? "" : "unread"
+        }"
+        data-notification-id="${esc(n.id)}">
 
-        <div class="live-left">
-
-          <span
-            class="live-dot ${
-              vendor.online_status === true
-                ? ""
-                : "offline"
-            }"
-          ></span>
-
-          <div>
-
-            <strong>
-              ${esc(
-                vendor.vendor_name ||
-                "Unnamed Vendor"
-              )}
-            </strong>
-
-            <div
-              style="font-size:11px;color:#888;margin-top:3px;"
-            >
-              ${esc(vendor.area || "—")}
-              ·
-              ${esc(vendor.lcd_status || "LCD")}
-            </div>
-
-          </div>
-
+        <div class="notification-item-title">
+          ${esc(n.title)}
         </div>
 
+        <div class="notification-item-message">
+          ${esc(n.message)}
+        </div>
 
-        <div>
-
-          ${onlineBadge(
-            vendor.online_status
-          )}
-
+        <div class="notification-item-meta">
+          ${esc(formatDate(n.created_at))}
         </div>
 
       </div>
 
     `).join("");
 
+  container
+    .querySelectorAll(
+      "[data-notification-id]"
+    )
+    .forEach(el=>{
+
+      el.addEventListener(
+        "click",
+        async ()=>{
+
+          const id =
+            el.dataset.notificationId;
+
+          await markNotificationRead(id);
+
+        }
+      );
+
+    });
 }
 
+function renderNotificationPanel(){
+
+  const panel =
+    $("notificationPanel");
+
+  if(!adminNotifications.length){
+
+    panel.innerHTML = `
+      <div class="notification-head">
+        <strong>Notifications</strong>
+      </div>
+      <div class="empty">
+        No notifications.
+      </div>
+    `;
+
+    return;
+  }
+
+  const list =
+    adminNotifications.slice(0,20);
+
+  panel.innerHTML = `
+
+    <div class="notification-head">
+      <strong>Notifications</strong>
+      <button
+        class="action-btn"
+        onclick="goPage('notifications');hideNotificationPanel()">
+        View All
+      </button>
+    </div>
+
+    ${
+      list.map(n=>`
+
+        <div
+          class="notification-item ${
+            n.is_read ? "" : "unread"
+          }"
+          data-panel-notification="${esc(n.id)}">
+
+          <div class="notification-item-title">
+            ${esc(n.title)}
+          </div>
+
+          <div class="notification-item-message">
+            ${esc(n.message)}
+          </div>
+
+          <div class="notification-item-meta">
+            ${esc(formatDate(n.created_at))}
+          </div>
+
+        </div>
+
+      `).join("")
+    }
+
+  `;
+
+  panel
+    .querySelectorAll(
+      "[data-panel-notification]"
+    )
+    .forEach(el=>{
+
+      el.addEventListener(
+        "click",
+        async ()=>{
+
+          await markNotificationRead(
+            el.dataset.panelNotification
+          );
+
+        }
+      );
+
+    });
+}
+
+function toggleNotificationPanel(){
+
+  const panel =
+    $("notificationPanel");
+
+  panel.classList.toggle("hidden");
+
+  if(!panel.classList.contains("hidden")){
+    renderNotificationPanel();
+  }
+}
+
+function hideNotificationPanel(){
+  $("notificationPanel")
+    .classList.add("hidden");
+}
+
+document.addEventListener("click",event=>{
+
+  const panel =
+    $("notificationPanel");
+
+  const button =
+    event.target.closest(".icon-btn");
+
+  if(
+    !panel.classList.contains("hidden") &&
+    !panel.contains(event.target) &&
+    !button
+  ){
+    panel.classList.add("hidden");
+  }
+
+});
+
+/* =========================================================
+   GENERIC OLD SECTIONS
+========================================================= */
+
+function renderPackages(){
+
+  $("content").innerHTML = `
+    <div class="placeholder">
+      <h2>Packages</h2>
+      <p>Package management area.</p>
+    </div>
+  `;
+}
+
+function renderAds(){
+
+  $("content").innerHTML = `
+    <div class="placeholder">
+      <h2>Ads</h2>
+      <p>Advertising management area.</p>
+    </div>
+  `;
+}
+
+function renderUpcoming(){
+
+  $("content").innerHTML = `
+    <div class="placeholder">
+      <h2>Upcoming Ads</h2>
+      <p>Upcoming advertising schedules.</p>
+    </div>
+  `;
+}
+
+function renderWithdrawals(){
+
+  $("content").innerHTML = `
+    <div class="placeholder">
+      <h2>Withdrawals</h2>
+      <p>Vendor withdrawal management area.</p>
+    </div>
+  `;
+}
+
+function renderComplaints(){
+
+  $("content").innerHTML = `
+    <div class="placeholder">
+      <h2>Complaints</h2>
+      <p>Vendor complaint management area.</p>
+    </div>
+  `;
+}
+
+function renderFormBuilder(){
+
+  $("content").innerHTML = `
+    <div class="placeholder">
+      <h2>Form Builder</h2>
+      <p>Vendor registration form builder.</p>
+    </div>
+  `;
+}
+
+function renderSettings(){
+
+  $("content").innerHTML = `
+    <div class="placeholder">
+      <h2>Settings</h2>
+      <p>Admin settings.</p>
+    </div>
+  `;
+}
+
+/* =========================================================
+   ROUTER
+========================================================= */
+
+const pageNames = {
+  dashboard:"Dashboard",
+  vendors:"Vendors",
+  notifications:"Notifications",
+  packages:"Packages",
+  ads:"Ads",
+  upcoming:"Upcoming Ads",
+  monitoring:"Screen Monitoring",
+  withdrawals:"Withdrawals",
+  complaints:"Complaints",
+  formbuilder:"Form Builder",
+  settings:"Settings"
+};
+
+function goPage(page){
+
+  currentPage = page;
+
+  hideNotificationPanel();
+
+  $("pageTitle").textContent =
+    pageNames[page] || "Dashboard";
+
+  document
+    .querySelectorAll(".nav-btn[data-page]")
+    .forEach(btn=>{
+      btn.classList.toggle(
+        "active",
+        btn.dataset.page === page
+      );
+    });
+
+  renderCurrentPage();
+
+  $("sidebar").classList.remove("open");
+}
+
+function renderCurrentPage(){
+
+  switch(currentPage){
+
+    case "vendors":
+      renderVendors();
+      break;
+
+    case "notifications":
+      renderNotifications();
+      break;
+
+    case "monitoring":
+      renderMonitoring();
+      break;
+
+    case "packages":
+      renderPackages();
+      break;
+
+    case "ads":
+      renderAds();
+      break;
+
+    case "upcoming":
+      renderUpcoming();
+      break;
+
+    case "withdrawals":
+      renderWithdrawals();
+      break;
+
+    case "complaints":
+      renderComplaints();
+      break;
+
+    case "formbuilder":
+      renderFormBuilder();
+      break;
+
+    case "settings":
+      renderSettings();
+      break;
+
+    default:
+      renderDashboard();
+  }
+}
 
 /* =========================================================
    REALTIME
@@ -5452,248 +3585,204 @@ function renderMonitoring(){
 
 function subscribeRealtime(){
 
-  try{
+  realtimeChannels.forEach(channel=>{
+    try{
+      supabaseClient.removeChannel(channel);
+    }catch(e){}
+  });
 
-    if(realtimeChannel){
+  realtimeChannels = [];
 
-      supabaseClient
-        .removeChannel(
-          realtimeChannel
-        );
+  const vendorChannel =
+    supabaseClient
+      .channel("admin-vendors-realtime")
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"vendors"
+        },
+        async payload=>{
 
-    }
+          console.log(
+            "Vendor realtime:",
+            payload
+          );
 
+          await loadVendors();
 
-    if(notificationChannel){
+          /*
+            New vendor notification.
+          */
 
-      supabaseClient
-        .removeChannel(
-          notificationChannel
-        );
+          if(payload.eventType === "INSERT"){
 
-    }
+            const v =
+              payload.new;
 
+            await createAdminNotification({
+              title:"New Vendor Approval Request",
+              message:`${v.vendor_name || v.owner_name || "A vendor"} has submitted a registration for approval.`,
+              type:"vendor_pending",
+              vendorId:v.id
+            });
 
-    realtimeChannel =
-      supabaseClient
-        .channel(
-          "admin-vendors-realtime"
-        )
-        .on(
-          "postgres_changes",
-          {
-            event:"*",
-            schema:"public",
-            table:"vendors"
-          },
-          async function(){
-
-            await loadVendors();
-
+            await loadAdminNotifications();
           }
-        )
-        .subscribe();
 
+          renderCurrentPage();
+          updateNotificationBadge();
 
-    notificationChannel =
-      supabaseClient
-        .channel(
-          "admin-notifications-realtime"
-        )
-        .on(
-          "postgres_changes",
-          {
-            event:"*",
-            schema:"public",
-            table:"vendor_notifications"
-          },
-          async function(){
+        }
+      )
+      .subscribe();
 
-            await loadNotifications();
+  realtimeChannels.push(vendorChannel);
 
+  const notificationChannel =
+    supabaseClient
+      .channel("admin-notifications-realtime")
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"admin_notifications"
+        },
+        async payload=>{
+
+          console.log(
+            "Admin notification realtime:",
+            payload
+          );
+
+          await loadAdminNotifications();
+
+          updateNotificationBadge();
+
+          if(currentPage === "notifications"){
+            renderNotifications();
           }
-        )
-        .subscribe();
 
+          renderNotificationPanel();
 
-  }catch(error){
+        }
+      )
+      .subscribe();
 
-    console.error(
-      "Realtime error:",
-      error
-    );
+  realtimeChannels.push(
+    notificationChannel
+  );
 
-  }
+  const vendorNotificationChannel =
+    supabaseClient
+      .channel("vendor-notifications-admin-listener")
+      .on(
+        "postgres_changes",
+        {
+          event:"INSERT",
+          schema:"public",
+          table:"vendor_notifications"
+        },
+        payload=>{
 
-}
+          /*
+            Intentionally do NOTHING.
 
+            Vendor notifications are for vendors.
+            They must never be displayed as admin
+            notifications.
+          */
 
-/* =========================================================
-   MODAL CLICK OUTSIDE
-========================================================= */
-
-document
-  .querySelectorAll(".modal")
-  .forEach(modal => {
-
-    modal.addEventListener(
-      "click",
-      function(event){
-
-        if(event.target === modal){
-
-          modal.classList.remove(
-            "active"
+          console.log(
+            "Vendor notification ignored by admin:",
+            payload.new
           );
 
         }
+      )
+      .subscribe();
 
-      }
-    );
-
-  });
-
-
-/* =========================================================
-   ESCAPE
-========================================================= */
-
-document.addEventListener(
-  "keydown",
-  function(event){
-
-    if(event.key !== "Escape"){
-      return;
-    }
-
-
-    document
-      .querySelectorAll(".modal.active")
-      .forEach(modal => {
-
-        modal.classList.remove(
-          "active"
-        );
-
-      });
-
-  }
-);
-
-
-/* =========================================================
-   SESSION RESTORE
-========================================================= */
-
-async function restoreSession(){
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth.getSession();
-
-
-    if(error){
-
-      console.error(error);
-
-      return;
-    }
-
-
-    const session =
-      data?.session;
-
-
-    if(!session?.user){
-      return;
-    }
-
-
-    currentUser =
-      session.user;
-
-
-    const {
-      data:admin,
-      error:adminError
-    } =
-      await supabaseClient
-        .from("admin_users")
-        .select("*")
-        .eq(
-          "user_id",
-          currentUser.id
-        )
-        .eq(
-          "active",
-          true
-        )
-        .maybeSingle();
-
-
-    if(adminError){
-
-      console.error(
-        adminError
-      );
-
-      return;
-    }
-
-
-    if(!admin){
-      return;
-    }
-
-
-    adminProfile =
-      admin;
-
-
-    showAdminApp();
-
-    await startAdmin();
-
-
-  }catch(error){
-
-    console.error(error);
-
-  }
-
+  realtimeChannels.push(
+    vendorNotificationChannel
+  );
 }
 
-
-restoreSession();
-
-
 /* =========================================================
-   AUTH STATE
+   PERIODIC MONITOR
 ========================================================= */
 
-supabaseClient.auth.onAuthStateChange(
-  async function(event,session){
+setInterval(async ()=>{
 
-    if(event === "SIGNED_OUT"){
+  if(!currentAdmin) return;
 
-      currentUser = null;
-      adminProfile = null;
+  await loadVendors();
 
-      $("adminApp")
-        .classList.add("hidden");
+  await checkOfflineNotifications();
 
-      $("loginScreen")
-        .classList.remove("hidden");
+  if(
+    currentPage === "monitoring" ||
+    currentPage === "dashboard"
+  ){
+    renderCurrentPage();
+  }
+
+},30000);
+
+/*
+  Check immediately after login/page load.
+*/
+
+setInterval(async ()=>{
+
+  if(!currentAdmin) return;
+
+  await checkOfflineNotifications();
+
+},60000);
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+function toggleSidebar(){
+  $("sidebar")
+    .classList.toggle("open");
+}
+
+/* =========================================================
+   MODAL OUTSIDE CLICK
+========================================================= */
+
+[
+  "vendorDetailModal",
+  "editVendorModal",
+  "confirmModal"
+].forEach(id=>{
+
+  $(id).addEventListener(
+    "click",
+    event=>{
+
+      if(event.target === $(id)){
+        closeModal(id);
+      }
 
     }
+  );
 
-  }
-);
+});
 
+/* =========================================================
+   START
+========================================================= */
+
+(async function(){
+
+  await restoreSession();
+
+})();
 </script>
 
 </body>
