@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glams Secret — SEO Migration Protection | AWSZ</title>
+
+<style>
+:root{
+  --navy:#102b57;
+  --blue:#1769ff;
+  --cyan:#25c7e8;
+  --violet:#7c5cff;
+  --pink:#ff5ca8;
+  --mint:#22b573;
+  --gold:#ffb52e;
+  --red:#ef5b67;
+  --ink:#14243d;
+  --muted:#687991;
+  --line:#dce7f5;
+  --bg:#f4f8ff;
+  --card:#ffffff;
+  --shadow:0 24px 70px rgba(22,65,125,.12);
+  --shadow2:0 12px 30px rgba(22,65,125,.10);
+  --radius:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);
+  background:#fff;
+  line-height:1.55;
+}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+.container{width:min(1220px,92%);margin:auto}
+
+/* NAV */
+header{
+  position:sticky;top:0;z-index:1000;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(220,231,245,.8);
+}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between}
+.logo{
+  font-size:27px;font-weight:950;letter-spacing:-1.8px;color:var(--navy)
+}
+.logo i{font-style:normal;color:var(--blue)}
+.navlinks{display:flex;gap:27px;color:#60718a;font-size:13px;font-weight:700}
+.navlinks a:hover{color:var(--blue)}
+.navcta{
+  background:var(--navy);color:white;padding:12px 18px;border-radius:12px;
+  font-weight:850;font-size:13px;box-shadow:0 9px 20px rgba(16,43,87,.18)
+}
+
+/* HERO */
+.hero{
+  position:relative;overflow:hidden;
+  padding:86px 0 55px;
+  background:
+    radial-gradient(circle at 88% 12%,rgba(37,199,232,.20),transparent 24%),
+    radial-gradient(circle at 8% 25%,rgba(124,92,255,.12),transparent 25%),
+    linear-gradient(180deg,#f5f9ff 0,#fff 100%);
+}
+.hero:before{
+  content:"";position:absolute;width:440px;height:440px;border-radius:50%;
+  border:1px solid rgba(23,105,255,.08);right:-170px;top:-160px;
+}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:55px;align-items:center}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#e9f2ff;border:1px solid #d4e5ff;color:#1760d9;
+  border-radius:999px;padding:7px 12px;font-size:11px;font-weight:900;
+  text-transform:uppercase;letter-spacing:.8px
+}
+.badge .pulse{width:7px;height:7px;border-radius:50%;background:#21bd78;box-shadow:0 0 0 5px #dff7eb}
+.hero h1{
+  margin:20px 0 18px;font-size:clamp(48px,6vw,78px);line-height:.98;
+  letter-spacing:-4.5px;max-width:730px
+}
+.hero h1 span{
+  background:linear-gradient(90deg,var(--blue),var(--violet),var(--pink));
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.hero-copy{font-size:18px;color:var(--muted);max-width:690px}
+.hero-actions{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.primary{
+  background:linear-gradient(135deg,var(--blue),#3a82ff);
+  color:#fff;padding:14px 20px;border-radius:13px;font-weight:900;
+  box-shadow:0 14px 28px rgba(23,105,255,.22)
+}
+.secondary{
+  background:#fff;border:1px solid var(--line);padding:14px 20px;border-radius:13px;
+  font-weight:850;color:var(--navy)
+}
+.hero-mini{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:27px
+}
+.mini{
+  background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px;
+  box-shadow:var(--shadow2)
+}
+.mini b{display:block;font-size:20px}.mini span{font-size:11px;color:var(--muted)}
+
+/* HERO VISUAL */
+.hero-visual{
+  position:relative;background:#fff;border:1px solid var(--line);border-radius:28px;
+  padding:12px;box-shadow:var(--shadow);transform:rotate(.4deg)
+}
+.dashboard{
+  border-radius:20px;overflow:hidden;background:#f5f8fd;border:1px solid #e2ebf6
+}
+.dash-top{
+  display:flex;align-items:center;gap:8px;padding:13px 15px;background:#fff;
+  border-bottom:1px solid #e2ebf6
+}
+.dot{width:8px;height:8px;border-radius:50%;background:#cbd5e2}
+.fake-url{
+  margin-left:5px;flex:1;background:#f5f8fc;border:1px solid #e2e8f1;
+  border-radius:8px;padding:6px 9px;font:10px monospace;color:#65758b
+}
+.dash-body{padding:16px}
+.dash-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}
+.dash-title strong{font-size:14px}.live-pill{font-size:9px;font-weight:900;color:#16845b;background:#e6f8ef;padding:5px 8px;border-radius:999px}
+.score{
+  background:linear-gradient(135deg,#102b57,#1769ff);border-radius:17px;padding:19px;color:#fff;
+  display:flex;justify-content:space-between;align-items:end
+}
+.score b{font-size:37px;line-height:1}.score small{color:#cfe1ff;font-size:10px}
+.spark{height:72px;display:flex;align-items:end;gap:5px}
+.bar{flex:1;border-radius:5px 5px 2px 2px;background:rgba(255,255,255,.55)}
+.bar:nth-child(1){height:25%}.bar:nth-child(2){height:38%}.bar:nth-child(3){height:30%}
+.bar:nth-child(4){height:55%}.bar:nth-child(5){height:48%}.bar:nth-child(6){height:73%}
+.bar:nth-child(7){height:62%}.bar:nth-child(8){height:86%}.bar:nth-child(9){height:76%}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.check{
+  background:#fff;border:1px solid #e2eaf5;border-radius:12px;padding:12px;
+  display:flex;gap:8px;align-items:center;font-size:10px;font-weight:800
+}
+.check em{font-style:normal;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:#edf4ff;color:var(--blue)}
+
+/* SECTION */
+section{padding:92px 0}
+.section-head{max-width:770px;margin-bottom:42px}
+.kicker{color:var(--blue);font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:1.3px}
+.section-head h2{font-size:43px;line-height:1.06;letter-spacing:-2.5px;margin:10px 0 13px}
+.section-head p{color:var(--muted);font-size:16px}
+
+/* LIVE SITES */
+.sites{background:linear-gradient(180deg,#fff,#f4f8ff)}
+.site-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.site-window{
+  background:#fff;border:1px solid var(--line);border-radius:25px;overflow:hidden;
+  box-shadow:var(--shadow)
+}
+.site-window.new{border-color:#c8d8ff;box-shadow:0 25px 75px rgba(23,105,255,.16)}
+.window-head{padding:17px 18px;background:#fbfdff;border-bottom:1px solid var(--line)}
+.window-meta{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.window-name{display:flex;gap:10px;align-items:center}
+.site-icon{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;color:white;font-weight:950}
+.site-icon.old{background:linear-gradient(135deg,#51657f,#2f4663)}
+.site-icon.new{background:linear-gradient(135deg,var(--blue),var(--violet))}
+.window-name strong{font-size:14px}.window-name span{display:block;color:#8290a4;font-size:10px}
+.window-status{font-size:9px;font-weight:950;padding:6px 8px;border-radius:999px}
+.window-status.live{background:#e7f9f0;color:#13855a}.window-status.stage{background:#edf2ff;color:#315ad8}
+.site-url{margin-top:12px;font:10px monospace;color:#63748b;background:#f3f7fc;border:1px solid #e0e8f2;border-radius:9px;padding:8px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.site-frame{
+  height:410px;background:#edf3f9;position:relative;overflow:hidden
+}
+.site-frame iframe{width:100%;height:100%;border:0;background:#fff}
+.frame-cover{
+  position:absolute;bottom:0;left:0;right:0;padding:14px;
+  background:linear-gradient(180deg,transparent,rgba(9,25,48,.88));
+  color:#fff;display:flex;justify-content:space-between;align-items:end;gap:10px
+}
+.frame-cover span{font-size:10px;color:#d8e7ff}.frame-open{
+  background:#fff;color:var(--navy);padding:8px 11px;border-radius:9px;font-size:10px;font-weight:900
+}
+.site-note{padding:14px 17px;color:#6c7b90;font-size:11px;border-top:1px solid var(--line)}
+
+/* FLOW */
+.flow-section{background:var(--bg)}
+.flow{display:grid;grid-template-columns:1fr 45px 1fr 45px 1fr;gap:10px;align-items:center}
+.flow-card{
+  min-height:245px;padding:27px;border-radius:24px;border:1px solid var(--line);background:#fff;
+  box-shadow:var(--shadow2);position:relative;overflow:hidden
+}
+.flow-card:after{content:"";position:absolute;width:110px;height:110px;border-radius:50%;right:-45px;top:-45px;background:#edf4ff}
+.flow-num{font-size:11px;font-weight:950;color:var(--blue);position:relative;z-index:1}
+.flow-card h3{font-size:21px;margin:12px 0 7px;position:relative;z-index:1}
+.flow-card p{font-size:13px;color:var(--muted);position:relative;z-index:1}
+.flow-icon{font-size:31px;position:relative;z-index:1}
+.flow-arrow{font-size:25px;color:#8ca0b9;text-align:center}
+
+/* AUDIT LAB */
+.lab{
+  background:#0e2242;color:#fff;position:relative;overflow:hidden
+}
+.lab:before{
+  content:"";position:absolute;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(23,105,255,.30),transparent 65%);right:-220px;top:-250px
+}
+.lab .section-head p{color:#aebfda}.lab .kicker{color:#67d8ff}
+.lab-shell{
+  position:relative;z-index:1;background:#fff;color:var(--ink);border-radius:27px;overflow:hidden;
+  box-shadow:0 30px 90px rgba(0,0,0,.22)
+}
+.lab-top{
+  padding:15px 17px;border-bottom:1px solid var(--line);background:#f7faff;
+  display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap
+}
+.tabs{display:flex;gap:7px}
+.tab{
+  border:1px solid var(--line);background:#fff;color:#65758b;padding:9px 12px;border-radius:10px;
+  font-size:11px;font-weight:900;cursor:pointer
+}
+.tab.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.lab-body{display:grid;grid-template-columns:255px 1fr;min-height:560px}
+.audit-menu{background:#fbfdff;border-right:1px solid var(--line);padding:15px}
+.audit-item{
+  padding:12px 13px;border-radius:11px;margin-bottom:4px;font-size:11px;font-weight:850;
+  color:#65758b;cursor:pointer
+}
+.audit-item.active{background:#eaf2ff;color:var(--blue)}
+.audit-item:hover{background:#f0f5fb}
+.audit-content{padding:30px}
+.audit-head{display:flex;justify-content:space-between;gap:15px;align-items:start}
+.audit-head h3{margin:0;font-size:25px;letter-spacing:-1px}
+.risk{font-size:9px;font-weight:950;padding:6px 8px;border-radius:999px;background:#fff2df;color:#a76300}
+.browser{margin-top:20px;border:1px solid #dbe5f0;border-radius:18px;overflow:hidden}
+.browser-top{height:43px;background:#f4f7fb;border-bottom:1px solid #dfe7f0;display:flex;align-items:center;gap:6px;padding:0 12px}
+.browser-address{flex:1;margin-left:5px;background:#fff;border:1px solid #dce5ef;border-radius:8px;padding:6px 9px;font:10px monospace;color:#64748a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.browser-body{padding:24px;background:#fff}
+.stage-chip{font-size:9px;font-weight:950;color:var(--blue);letter-spacing:.9px}
+.compare{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:17px}
+.compare-card{border:1px solid var(--line);border-radius:14px;padding:15px}
+.compare-card b{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px}
+.compare-card p{font-size:11px;color:var(--muted);margin:0}
+.before b{color:#60728a}.during b{color:#a66600}.after b{color:var(--mint)}
+.implementation{
+  margin-top:15px;padding:15px;border-radius:13px;background:#f3f8ff;border:1px solid #dbeaff;
+  font-size:11px;color:#60728a
+}
+.implementation strong{display:block;color:var(--navy);margin-bottom:3px}
+
+/* SPICY VISUAL */
+.spicy{background:#f7f9fd}
+.spicy-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
+.feature-card{
+  background:#fff;border:1px solid var(--line);border-radius:25px;padding:28px;box-shadow:var(--shadow2)
+}
+.feature-card.dark{
+  background:linear-gradient(145deg,#102b57,#1d55aa);color:#fff;border:0;
+  position:relative;overflow:hidden
+}
+.feature-card.dark:after{
+  content:"SEO";position:absolute;right:-15px;bottom:-45px;font-size:130px;font-weight:950;
+  color:rgba(255,255,255,.06);line-height:1
+}
+.feature-card h3{margin:10px 0 7px;font-size:22px}
+.feature-card p{font-size:13px;color:var(--muted)}
+.feature-card.dark p{color:#c4d6f2}
+.pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.pill{font-size:10px;font-weight:850;padding:7px 9px;border-radius:999px;background:#edf4ff;color:#2860bd}
+.dark .pill{background:rgba(255,255,255,.11);color:#e4efff}
+.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}
+.metric{background:#f6f9fd;border:1px solid #e2eaf4;border-radius:13px;padding:14px}
+.metric b{font-size:22px;display:block}.metric span{font-size:10px;color:var(--muted)}
+
+/* TIMELINE */
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.day{
+  border:1px solid var(--line);background:#fff;border-radius:22px;padding:24px;box-shadow:var(--shadow2);
+  position:relative;overflow:hidden
+}
+.day:before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.day-label{font-size:10px;font-weight:950;color:var(--blue);text-transform:uppercase;letter-spacing:1px}
+.day h3{margin:7px 0;font-size:21px}
+.day ul{padding-left:17px;margin-bottom:0;color:var(--muted);font-size:12px}
+.day li{margin:6px 0}
+
+/* DELIVERABLES */
+.deliver{background:var(--bg)}
+.delivery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.delivery{
+  background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow2)
+}
+.delivery .icon{
+  width:36px;height:36px;border-radius:10px;display:grid;place-items:center;
+  background:#eaf3ff;color:var(--blue);font-weight:950
+}
+.delivery strong{display:block;margin-top:13px;font-size:13px}.delivery span{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+
+/* PRICE */
+.invest{padding-top:70px}
+.price-wrap{
+  background:
+    radial-gradient(circle at 90% 20%,rgba(37,199,232,.23),transparent 24%),
+    linear-gradient(135deg,#102b57,#165fd4 72%,#237bdc);
+  border-radius:31px;padding:50px;color:#fff;box-shadow:0 30px 80px rgba(18,78,170,.28);
+  display:grid;grid-template-columns:1fr 390px;gap:50px;align-items:center;overflow:hidden;position:relative
+}
+.price-wrap:after{
+  content:"$1,200";position:absolute;right:-35px;top:-48px;font-size:130px;font-weight:950;
+  color:rgba(255,255,255,.05);letter-spacing:-8px
+}
+.price-kicker{font-size:10px;font-weight:950;letter-spacing:1.2px;color:#a9d9ff;text-transform:uppercase}
+.price-wrap h2{font-size:48px;line-height:1.02;letter-spacing:-2.8px;margin:10px 0 15px}
+.price-wrap p{color:#d0e2ff;max-width:650px;font-size:14px}
+.price-card{
+  position:relative;z-index:2;background:#fff;color:var(--ink);border-radius:24px;padding:27px;
+  box-shadow:0 20px 45px rgba(0,0,0,.16)
+}
+.price-card small{color:#75859b;font-size:10px;font-weight:800}
+.price{font-size:58px;font-weight:950;letter-spacing:-3px;margin:2px 0}
+.price-sub{color:#718097;font-size:11px}
+.payment{border-top:1px solid var(--line);margin-top:18px;padding-top:15px;display:grid;gap:10px}
+.payment-row{display:flex;justify-content:space-between;font-size:12px}.payment-row b{color:var(--blue)}
+.quote-btn{display:block;text-align:center;background:var(--navy);color:#fff;padding:12px;border-radius:11px;font-size:12px;font-weight:900;margin-top:18px}
+
+/* CTA */
+.cta{text-align:center;padding:105px 0}
+.cta h2{font-size:50px;line-height:1.03;letter-spacing:-3px;margin:12px auto;max-width:800px}
+.cta p{max-width:610px;margin:0 auto 25px;color:var(--muted);font-size:15px}
+footer{border-top:1px solid var(--line);padding:25px 0;color:#7a899d;font-size:11px}
+
+/* responsive */
+@media(max-width:920px){
+  .navlinks{display:none}
+  .hero-grid,.spicy-grid,.price-wrap{grid-template-columns:1fr}
+  .site-grid{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .flow-arrow{transform:rotate(90deg)}
+  .lab-body{grid-template-columns:1fr}
+  .audit-menu{border-right:0;border-bottom:1px solid var(--line);display:flex;overflow:auto}
+  .audit-item{white-space:nowrap}
+  .timeline{grid-template-columns:1fr}
+  .delivery-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:620px){
+  .hero{padding-top:58px}.hero h1{font-size:48px;letter-spacing:-3px}
+  .hero-mini{grid-template-columns:1fr}
+  .section-head h2{font-size:35px}
+  .compare{grid-template-columns:1fr}
+  .delivery-grid{grid-template-columns:1fr}
+  .price-wrap{padding:30px}.price-wrap h2{font-size:38px}
+  .cta h2{font-size:38px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="logo" href="#">AWS<i>Z</i></a>
+    <nav class="navlinks">
+      <a href="#sites">Live Websites</a>
+      <a href="#workflow">Strategy</a>
+      <a href="#audit">Audit Lab</a>
+      <a href="#deliverables">Deliverables</a>
+      <a href="#investment">Investment</a>
+    </nav>
+    <a class="navcta" href="#investment">Review Proposal</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="badge"><span class="pulse"></span> SEO Migration Protection · Magento</div>
+
+      <h1>
+        New theme.<br>
+        <span>Same SEO strength.</span>
+      </h1>
+
+      <p class="hero-copy">
+        A focused pre-migration and post-migration SEO protection plan for
+        Glams Secret — built to identify what matters before the redesign,
+        protect it during the transition, and verify it after launch.
+      </p>
+
+      <div class="hero-actions">
+        <a class="primary" href="#sites">Explore Both Websites ↓</a>
+        <a class="secondary" href="#investment">View $1,200 Scope</a>
+      </div>
+
+      <div class="hero-mini">
+        <div class="mini"><b>6</b><span>Days</span></div>
+        <div class="mini"><b>2</b><span>SEO Audits</span></div>
+        <div class="mini"><b>$1.2K</b><span>Fixed Investment</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="dashboard">
+        <div class="dash-top">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <div class="fake-url">awsz / glams-secret / migration-control-room</div>
+        </div>
+        <div class="dash-body">
+          <div class="dash-title">
+            <strong>Migration Protection Dashboard</strong>
+            <span class="live-pill">● PROJECT READY</span>
+          </div>
+
+          <div class="score">
+            <div>
+              <small>CONTROLLED PROCESS</small>
+              <div style="font-size:18px;font-weight:900;margin-top:4px">Baseline → Protect → Verify</div>
+            </div>
+            <div class="spark">
+              <i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i>
+              <i class="bar"></i><i class="bar"></i><i class="bar"></i><i class="bar"></i>
+            </div>
+          </div>
+
+          <div class="checks">
+            <div class="check"><em>↗</em> URL Mapping</div>
+            <div class="check"><em>✓</em> Canonicals</div>
+            <div class="check"><em>◇</em> Schema</div>
+            <div class="check"><em>◎</em> Image SEO</div>
+            <div class="check"><em>⌁</em> Indexability</div>
+            <div class="check"><em>⚡</em> Performance</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE WEBSITES -->
+<section class="sites" id="sites">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">01 · The two environments</div>
+      <h2>See the current store and the new theme side by side.</h2>
+      <p>
+        The audit starts from the live Glams Secret storefront and compares it
+        with the new staging environment. The frames below load the actual
+        websites in-browser where the hosting/security policy permits framing.
+      </p>
+    </div>
+
+    <div class="site-grid">
+
+      <article class="site-window">
+        <div class="window-head">
+          <div class="window-meta">
+            <div class="window-name">
+              <div class="site-icon old">01</div>
+              <div>
+                <strong>Current Production</strong>
+                <span>Existing Glams Secret storefront</span>
+              </div>
+            </div>
+            <span class="window-status live">LIVE</span>
+          </div>
+          <div class="site-url">https://glamssecret.com/en/</div>
+        </div>
+
+        <div class="site-frame">
+          <iframe
+            src="https://glamssecret.com/en/"
+            title="Glams Secret current live website"
+            loading="lazy">
+          </iframe>
+
+          <div class="frame-cover">
+            <span>Current live environment</span>
+            <a class="frame-open" href="https://glamssecret.com/en/" target="_blank">Open ↗</a>
+          </div>
+        </div>
+
+        <div class="site-note">
+          Baseline target: URLs · metadata · canonicals · schema · images · indexability · performance
+        </div>
+      </article>
+
+
+      <article class="site-window new">
+        <div class="window-head">
+          <div class="window-meta">
+            <div class="window-name">
+              <div class="site-icon new">02</div>
+              <div>
+                <strong>New Theme / Staging</strong>
+                <span>Migration environment supplied for review</span>
+              </div>
+            </div>
+            <span class="window-status stage">STAGING</span>
+          </div>
+          <div class="site-url">https://481ff2a1a5.nxcli.io/</div>
+        </div>
+
+        <div class="site-frame">
+          <iframe
+            src="https://481ff2a1a5.nxcli.io/"
+            title="Glams Secret new staging website"
+            loading="lazy">
+          </iframe>
+
+          <div class="frame-cover">
+            <span>New theme environment</span>
+            <a class="frame-open" href="https://481ff2a1a5.nxcli.io/" target="_blank">Open ↗</a>
+          </div>
+        </div>
+
+        <div class="site-note">
+          Comparison target: preserve SEO signals while the visual/frontend experience changes.
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- WORKFLOW -->
+<section class="flow-section" id="workflow">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">02 · The migration logic</div>
+      <h2>Not “audit once”. Measure, protect, then prove.</h2>
+      <p>
+        The value is in the comparison. The same SEO signals are checked
+        before and after the theme change so regressions can be identified
+        instead of guessed.
+      </p>
+    </div>
+
+    <div class="flow">
+      <div class="flow-card">
+        <div class="flow-icon">🔎</div>
+        <div class="flow-num">STEP 01 · BASELINE</div>
+        <h3>Pre-Audit</h3>
+        <p>
+          Crawl the current store and record the important SEO signals,
+          representative URLs and technical configuration.
+        </p>
+      </div>
+
+      <div class="flow-arrow">→</div>
+
+      <div class="flow-card">
+        <div class="flow-icon">🛡️</div>
+        <div class="flow-num">STEP 02 · PROTECT</div>
+        <h3>Migration Review</h3>
+        <p>
+          Compare the staging theme, identify possible changes and prepare
+          the URL/SEO protection actions required before launch.
+        </p>
+      </div>
+
+      <div class="flow-arrow">→</div>
+
+      <div class="flow-card">
+        <div class="flow-icon">✅</div>
+        <div class="flow-num">STEP 03 · VERIFY</div>
+        <h3>Post-Audit</h3>
+        <p>
+          Re-crawl production after deployment and compare it with the
+          original baseline.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIT LAB -->
+<section class="lab" id="audit">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">03 · Interactive audit lab</div>
+      <h2>Click an SEO signal. See what actually happens.</h2>
+      <p>
+        This is the working model for the audit report: what exists now,
+        what can change during migration, how it is implemented, and what
+        gets verified afterward.
+      </p>
+    </div>
+
+    <div class="lab-shell">
+      <div class="lab-top">
+        <div class="tabs">
+          <button class="tab active" onclick="setStage('pre',this)">PRE-AUDIT</button>
+          <button class="tab" onclick="setStage('migration',this)">MIGRATION</button>
+          <button class="tab" onclick="setStage('post',this)">POST-AUDIT</button>
+        </div>
+        <div style="font-size:10px;color:#73839a;font-weight:800">
+          GLAMS SECRET · SEO PROTECTION WORKFLOW
+        </div>
+      </div>
+
+      <div class="lab-body">
+        <aside class="audit-menu">
+          <div class="audit-item active" onclick="selectAudit('url',this)">↗ URL & Redirects</div>
+          <div class="audit-item" onclick="selectAudit('meta',this)">T Meta Titles & Descriptions</div>
+          <div class="audit-item" onclick="selectAudit('canonical',this)">◎ Canonical URLs</div>
+          <div class="audit-item" onclick="selectAudit('schema',this)">◇ Structured Data</div>
+          <div class="audit-item" onclick="selectAudit('images',this)">▧ Images & ALT Text</div>
+          <div class="audit-item" onclick="selectAudit('index',this)">◉ Indexability</div>
+          <div class="audit-item" onclick="selectAudit('speed',this)">⚡ Performance</div>
+          <div class="audit-item" onclick="selectAudit('geo',this)">✦ GEO / AI Discovery</div>
+        </aside>
+
+        <main class="audit-content" id="auditContent"></main>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPICY VALUE -->
+<section class="spicy">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">04 · What makes the audit useful</div>
+      <h2>Every finding turns into an action.</h2>
+      <p>
+        The final report is structured for both the business owner and the
+        Magento/development team — issue, evidence, action and validation.
+      </p>
+    </div>
+
+    <div class="spicy-grid">
+      <div class="feature-card dark">
+        <div style="font-size:30px">🧭</div>
+        <h3>SEO Migration Control Map</h3>
+        <p>
+          A practical map of the elements that must survive the theme change.
+          Instead of a long generic checklist, each item is connected to a
+          real implementation step.
+        </p>
+        <div class="pills">
+          <span class="pill">URL Mapping</span>
+          <span class="pill">301 Redirects</span>
+          <span class="pill">Canonical</span>
+          <span class="pill">Schema</span>
+          <span class="pill">ALT</span>
+          <span class="pill">Robots</span>
+          <span class="pill">Sitemap</span>
+          <span class="pill">Performance</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div style="font-size:30px">📊</div>
+        <h3>Baseline vs After</h3>
+        <p>
+          The same representative pages and signals are compared after
+          deployment. This makes the post-audit measurable rather than
+          subjective.
+        </p>
+
+        <div class="metric-grid">
+          <div class="metric"><b>2×</b><span>Audit checkpoints</span></div>
+          <div class="metric"><b>6</b><span>Working days</span></div>
+          <div class="metric"><b>8</b><span>Core audit areas</span></div>
+          <div class="metric"><b>1</b><span>Final action report</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">05 · Delivery plan</div>
+      <h2>Six days. Three controlled phases.</h2>
+      <p>Each phase has a clear output, so the project keeps moving toward launch readiness.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="day">
+        <div class="day-label">Days 1–2 · Baseline</div>
+        <h3>Pre-Audit</h3>
+        <ul>
+          <li>Current-site crawl</li>
+          <li>URL inventory & representative page set</li>
+          <li>Title / description review</li>
+          <li>Canonical & schema review</li>
+          <li>Image / ALT review</li>
+          <li>Robots / sitemap / indexability</li>
+          <li>Performance baseline</li>
+        </ul>
+      </div>
+
+      <div class="day">
+        <div class="day-label">Days 3–4 · Protection</div>
+        <h3>Migration Review</h3>
+        <ul>
+          <li>Current vs staging comparison</li>
+          <li>Changed URL identification</li>
+          <li>Redirect mapping</li>
+          <li>Template SEO comparison</li>
+          <li>Canonical / schema checks</li>
+          <li>Image and frontend SEO review</li>
+          <li>Launch-risk checklist</li>
+        </ul>
+      </div>
+
+      <div class="day">
+        <div class="day-label">Days 5–6 · Proof</div>
+        <h3>Post-Audit</h3>
+        <ul>
+          <li>Production re-crawl</li>
+          <li>Baseline comparison</li>
+          <li>Regression detection</li>
+          <li>Redirect verification</li>
+          <li>Indexability verification</li>
+          <li>Final priority report</li>
+          <li>Launch recommendations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section class="deliver" id="deliverables">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">06 · Final deliverables</div>
+      <h2>What the $1,200 actually buys.</h2>
+      <p>
+        A compact, implementation-focused migration package rather than a
+        generic SEO report.
+      </p>
+    </div>
+
+    <div class="delivery-grid">
+      <div class="delivery"><div class="icon">01</div><strong>Pre-Migration SEO Baseline</strong><span>Documented snapshot of the current storefront's important SEO signals.</span></div>
+      <div class="delivery"><div class="icon">02</div><strong>URL & Redirect Map</strong><span>Old/new URL mapping and redirect requirements for affected pages.</span></div>
+      <div class="delivery"><div class="icon">03</div><strong>Theme SEO Comparison</strong><span>Current versus staging review across critical frontend SEO elements.</span></div>
+      <div class="delivery"><div class="icon">04</div><strong>Post-Migration Audit</strong><span>Re-test the same signals after the new theme reaches production.</span></div>
+      <div class="delivery"><div class="icon">05</div><strong>Priority Issue Register</strong><span>Findings organized into actionable items for implementation.</span></div>
+      <div class="delivery"><div class="icon">06</div><strong>SEO Launch Checklist</strong><span>Final production checks for the Magento theme launch.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTMENT -->
+<section class="invest" id="investment">
+  <div class="container">
+    <div class="price-wrap">
+      <div>
+        <div class="price-kicker">Project investment · fixed scope</div>
+        <h2>Protect the migration before it goes live.</h2>
+        <p>
+          Six working days covering the current Glams Secret website, the
+          new staging theme, migration protection and post-launch validation.
+        </p>
+        <p style="margin-top:20px;font-size:12px;color:#a9c9ef">
+          Pre-Audit · Migration Review · Post-Audit · Final Report
+        </p>
+      </div>
+
+      <div class="price-card">
+        <small>TOTAL PROJECT INVESTMENT</small>
+        <div class="price">$1,200</div>
+        <div class="price-sub">Fixed price · 6-day delivery window</div>
+
+        <div class="payment">
+          <div class="payment-row"><span>Project Start · 50%</span><b>$600</b></div>
+          <div class="payment-row"><span>Final Report · 50%</span><b>$600</b></div>
+        </div>
+
+        <a class="quote-btn" href="#contact">Proceed With SEO Migration Audit →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="container">
+    <div class="badge">Ready when the theme is ready</div>
+    <h2>Let's make the migration measurable — not risky.</h2>
+    <p>
+      First establish what Google currently sees. Then protect the important
+      signals. Then prove what changed after launch.
+    </p>
+    <a class="primary" href="mailto:infology00@gmail.com?subject=Glams%20Secret%20SEO%20Migration%20Audit">
+      Start the 6-Day Audit →
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="container" style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
+    <span>AWSZ · Automation with Sajjad Zaidi</span>
+    <span>Glams Secret · Magento SEO Migration Protection</span>
+  </div>
+</footer>
+
+<script>
+const audits = {
+  url:{
+    title:"URL Structure & Redirects",risk:"HIGH RISK",
+    description:"Protect the relationship between existing URLs and their new destinations.",
+    pre:{address:"glamssecret.com/en/[representative-product-or-category-url]",title:"Baseline capture",content:"Inventory representative production URLs and record their current status, canonical and destination behaviour."},
+    migration:{address:"OLD URL  →  NEW THEME / NEW URL",title:"What can change?",content:"If a URL key or route changes, the old address can become a broken page unless a correct permanent redirect is provided."},
+    post:{address:"OLD URL  →  HTTP 301  →  NEW PRODUCTION URL",title:"Validation",content:"Test the affected URLs after launch: status code, final destination and redirect chain."},
+    implementation:"Create an old → new URL map for genuine URL changes, apply the appropriate permanent redirects, then crawl the mapped URLs after launch.",
+    benefit:"Protects existing discoverability and reduces avoidable 404 and redirect-chain issues."
+  },
+  meta:{
+    title:"Meta Titles & Descriptions",risk:"HIGH",
+    description:"Check whether the new frontend preserves the intended page-level metadata.",
+    pre:{address:"Production page → <head>",title:"Existing metadata",content:"Capture titles and descriptions from representative home, category, product and CMS pages."},
+    migration:{address:"New theme → <head> metadata",title:"Template comparison",content:"Verify the new theme still renders the intended metadata instead of replacing or dropping it."},
+    post:{address:"Production → rendered HTML",title:"Final validation",content:"Re-crawl the same page sample and compare the metadata against the baseline."},
+    implementation:"Record representative metadata before migration, inspect the new theme output, then repeat the same checks after deployment.",
+    benefit:"Keeps important page relevance signals consistent through the redesign."
+  },
+  canonical:{
+    title:"Canonical URLs",risk:"HIGH",
+    description:"Confirm the preferred URL remains explicit and correct after the theme change.",
+    pre:{address:"Production page → rel=canonical",title:"Baseline canonical",content:"Record canonical output on representative product, category and CMS pages."},
+    migration:{address:"New template → rel=canonical",title:"Theme preservation",content:"Check that the new template does not remove, duplicate or incorrectly alter canonical output."},
+    post:{address:"Production → canonical",title:"Final verification",content:"Confirm canonical URLs point to the intended production URLs."},
+    implementation:"Compare rendered canonical tags before and after migration and investigate unexpected changes.",
+    benefit:"Reduces duplicate-URL ambiguity and helps preserve the intended indexable URL."
+  },
+  schema:{
+    title:"Structured Data",risk:"HIGH",
+    description:"Review machine-readable ecommerce information exposed by the storefront templates.",
+    pre:{address:"Product page → JSON-LD / structured data",title:"Existing signals",content:"Capture representative product structured data and the fields currently exposed."},
+    migration:{address:"New product template → schema",title:"Template preservation",content:"Check that product information and relevant structured data remain available in the new frontend."},
+    post:{address:"Production → schema validation",title:"Final verification",content:"Re-test representative product pages after deployment and document changes."},
+    implementation:"Compare representative product structured data before and after migration and validate changed fields.",
+    benefit:"Helps preserve clean machine-readable product information."
+  },
+  images:{
+    title:"Images & ALT Text",risk:"MEDIUM",
+    description:"Review image markup, descriptive ALT attributes and frontend loading behaviour.",
+    pre:{address:"Product/category → image markup",title:"Image baseline",content:"Review important product and category images and record representative ALT output."},
+    migration:{address:"New theme → image component",title:"Frontend comparison",content:"Check whether ALT attributes, dimensions and loading behaviour survive the new templates."},
+    post:{address:"Production → image crawl",title:"Final validation",content:"Re-test representative image elements after the new theme is live."},
+    implementation:"Review representative templates and crawl image elements before and after migration.",
+    benefit:"Supports accessibility, image understanding and cleaner technical implementation."
+  },
+  index:{
+    title:"Indexability",risk:"CRITICAL",
+    description:"Make sure staging restrictions do not accidentally become production restrictions.",
+    pre:{address:"Production → robots / sitemap / robots meta",title:"Baseline",content:"Record important crawl and indexability controls on the current store."},
+    migration:{address:"Staging → robots / noindex controls",title:"Launch protection",content:"Verify staging restrictions are intentional and that production will not inherit them incorrectly."},
+    post:{address:"Production → crawlability",title:"Final check",content:"Verify important production pages remain crawlable and accessible."},
+    implementation:"Review robots.txt, sitemap, robots meta, canonical signals and representative HTTP responses before and after launch.",
+    benefit:"Reduces the risk of accidentally blocking search engines after deployment."
+  },
+  speed:{
+    title:"Performance",risk:"MEDIUM",
+    description:"A new theme can change scripts, images, CSS and frontend rendering behaviour.",
+    pre:{address:"Current theme → performance baseline",title:"Baseline",content:"Capture consistent performance measurements on representative page types."},
+    migration:{address:"New theme → assets / scripts",title:"Performance impact",content:"Identify heavier assets, scripts or layout changes introduced by the new frontend."},
+    post:{address:"Production → performance re-test",title:"Comparison",content:"Run the same page sample again and compare the results."},
+    implementation:"Use the same representative page types before and after migration so the comparison remains meaningful.",
+    benefit:"Helps identify performance regressions introduced by the redesign."
+  },
+  geo:{
+    title:"GEO / AI Discovery",risk:"EMERGING",
+    description:"Review whether important product and business information remains clear and machine-readable.",
+    pre:{address:"Current page → semantic content",title:"Existing information",content:"Review headings, product information, structured data and crawl accessibility."},
+    migration:{address:"New theme → semantic HTML",title:"Frontend structure",content:"Check that important content remains accessible and clearly structured in the rendered page."},
+    post:{address:"Production → machine-readable content",title:"Final validation",content:"Confirm important information remains discoverable and structured after launch."},
+    implementation:"Review semantic structure, structured information, important content visibility and crawl accessibility before and after migration.",
+    benefit:"Creates a cleaner foundation for search engines and other automated information systems."
+  }
+};
+
+let currentAudit="url";
+let currentStage="pre";
+
+function selectAudit(key,el){
+  currentAudit=key;
+  document.querySelectorAll(".audit-item").forEach(x=>x.classList.remove("active"));
+  el.classList.add("active");
+  renderAudit();
+}
+function setStage(stage,el){
+  currentStage=stage;
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  el.classList.add("active");
+  renderAudit();
+}
+function renderAudit(){
+  const a=audits[currentAudit], s=a[currentStage];
+  const label=currentStage==="pre"?"PRE-AUDIT":currentStage==="migration"?"MIGRATION":"POST-AUDIT";
+  document.getElementById("auditContent").innerHTML=`
+    <div class="audit-head">
+      <div>
+        <h3>${a.title}</h3>
+        <div style="color:#687991;font-size:12px;margin-top:5px">${a.description}</div>
+      </div>
+      <span class="risk">${a.risk}</span>
+    </div>
+
+    <div class="browser">
+      <div class="browser-top">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <div class="browser-address">${s.address}</div>
+      </div>
+      <div class="browser-body">
+        <div class="stage-chip">${label}</div>
+        <h4 style="margin:7px 0 4px;font-size:18px">${s.title}</h4>
+        <div style="font-size:12px;color:#687991">${s.content}</div>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="compare-card before">
+        <b>Before</b>
+        <p>Capture the real signal from the current production environment.</p>
+      </div>
+      <div class="compare-card during">
+        <b>During migration</b>
+        <p>Compare the same signal against the new theme and identify risk.</p>
+      </div>
+      <div class="compare-card after">
+        <b>After</b>
+        <p>Re-test production and document whether the signal was preserved.</p>
+      </div>
+    </div>
+
+    <div class="implementation">
+      <strong>How it is implemented</strong>
+      ${a.implementation}
+    </div>
+    <div class="implementation" style="background:#f1fbf7;border-color:#d8f0e5">
+      <strong style="color:#16845a">Business benefit</strong>
+      ${a.benefit}
+    </div>
+  `;
+}
+renderAudit();
+</script>
+
+</body>
+</html>
