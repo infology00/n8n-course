@@ -1,0 +1,4882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sadaat BusinessOS — Integrated Business Management Demo</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#10243e;
+  --navy2:#17365d;
+  --blue:#2878f0;
+  --blue2:#4f9cff;
+  --cyan:#15b8c9;
+  --green:#19a974;
+  --green-bg:#eaf9f3;
+  --orange:#ef9b32;
+  --orange-bg:#fff5e7;
+  --red:#e34d59;
+  --red-bg:#fff0f1;
+  --purple:#7357d9;
+  --purple-bg:#f1edff;
+  --ink:#182433;
+  --muted:#718096;
+  --border:#e6ebf1;
+  --bg:#f5f7fa;
+  --white:#fff;
+  --shadow:0 12px 35px rgba(16,36,62,.07);
+  --shadow2:0 5px 18px rgba(16,36,62,.08);
+  --radius:16px;
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Inter,Arial,sans-serif;
+  font-size:14px;
+}
+
+button,input,select,textarea{
+  font:inherit;
+}
+
+button{cursor:pointer}
+
+.app{
+  display:flex;
+  min-height:100vh;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+  width:265px;
+  background:#fff;
+  border-right:1px solid var(--border);
+  position:fixed;
+  inset:0 auto 0 0;
+  z-index:100;
+  display:flex;
+  flex-direction:column;
+}
+
+.brand{
+  padding:23px 20px 18px;
+  border-bottom:1px solid var(--border);
+}
+
+.brand-row{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.logo{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  background:linear-gradient(135deg,#102d50,#2878f0);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-weight:800;
+  font-size:17px;
+  box-shadow:0 8px 20px rgba(40,120,240,.25);
+}
+
+.brand h2{
+  margin:0;
+  font-family:Manrope;
+  font-size:16px;
+  font-weight:800;
+}
+
+.brand small{
+  color:var(--muted);
+  font-size:10px;
+  font-weight:600;
+}
+
+.business-switch{
+  margin:15px;
+  background:#f4f7fb;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:10px;
+}
+
+.business-switch label{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.7px;
+  margin-bottom:6px;
+}
+
+.business-switch select{
+  width:100%;
+  border:0;
+  background:transparent;
+  outline:0;
+  font-weight:700;
+  color:var(--navy);
+}
+
+.nav{
+  padding:0 10px;
+  overflow:auto;
+  flex:1;
+}
+
+.nav-title{
+  padding:15px 12px 7px;
+  color:#9aa5b3;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.nav-item{
+  width:100%;
+  border:0;
+  background:transparent;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  color:#617083;
+  padding:10px 12px;
+  border-radius:10px;
+  text-align:left;
+  margin-bottom:2px;
+  transition:.18s;
+}
+
+.nav-item:hover{
+  background:#f2f6fb;
+  color:var(--navy);
+}
+
+.nav-item.active{
+  background:#eaf2ff;
+  color:#1768dc;
+  font-weight:700;
+}
+
+.nav-icon{
+  width:20px;
+  text-align:center;
+  font-size:16px;
+}
+
+.sidebar-bottom{
+  padding:13px 15px;
+  border-top:1px solid var(--border);
+}
+
+.demo-badge{
+  padding:11px;
+  border-radius:11px;
+  background:#fff8e8;
+  border:1px solid #f4dfaa;
+  color:#9a6a13;
+  font-size:11px;
+  line-height:1.5;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+  margin-left:265px;
+  width:calc(100% - 265px);
+}
+
+.topbar{
+  height:72px;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:80;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 28px;
+}
+
+.breadcrumb{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.breadcrumb strong{
+  color:var(--ink);
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.live{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 10px;
+  border:1px solid #d9eee5;
+  background:#f0fbf6;
+  color:#16865d;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.live-dot{
+  width:7px;
+  height:7px;
+  background:#21b779;
+  border-radius:50%;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  50%{opacity:.35;transform:scale(.75)}
+}
+
+.avatar{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#17365d,#2878f0);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:800;
+}
+
+.content{
+  padding:28px;
+  max-width:1700px;
+  margin:auto;
+}
+
+.page{display:none}
+.page.active{display:block}
+
+/* ================= TYPOGRAPHY ================= */
+
+.eyebrow{
+  color:var(--blue);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-weight:800;
+  margin-bottom:7px;
+}
+
+.page-title{
+  font-family:Manrope;
+  font-size:30px;
+  line-height:1.15;
+  margin:0 0 8px;
+  color:var(--navy);
+  font-weight:800;
+}
+
+.page-subtitle{
+  margin:0;
+  color:var(--muted);
+  line-height:1.6;
+}
+
+.section-title{
+  font-family:Manrope;
+  font-size:19px;
+  font-weight:800;
+  color:var(--navy);
+  margin:0;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:28px 0 13px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow2);
+}
+
+.card-pad{padding:20px}
+
+/* ================= BUTTONS ================= */
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:10px 14px;
+  font-weight:700;
+  font-size:12px;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  transition:.15s;
+}
+
+.btn:hover{transform:translateY(-1px)}
+
+.btn-primary{
+  background:var(--blue);
+  color:#fff;
+  box-shadow:0 6px 15px rgba(40,120,240,.2);
+}
+
+.btn-dark{
+  background:var(--navy);
+  color:#fff;
+}
+
+.btn-light{
+  background:#f3f6fa;
+  color:#445466;
+  border:1px solid var(--border);
+}
+
+.btn-green{
+  background:var(--green);
+  color:white;
+}
+
+.btn-danger{
+  background:#fff0f1;
+  color:#c83744;
+}
+
+.btn-purple{
+  background:var(--purple);
+  color:#fff;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 80% 15%,rgba(79,156,255,.22),transparent 30%),
+    linear-gradient(135deg,#10243e,#173d67 60%,#1b5c88);
+  color:#fff;
+  border-radius:22px;
+  padding:34px;
+  min-height:300px;
+  box-shadow:0 20px 45px rgba(16,36,62,.18);
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  width:320px;
+  height:320px;
+  right:-100px;
+  bottom:-160px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:50%;
+}
+
+.hero-content{
+  max-width:650px;
+  position:relative;
+  z-index:2;
+}
+
+.hero .eyebrow{color:#91c4ff}
+
+.hero h1{
+  font-family:Manrope;
+  font-size:34px;
+  line-height:1.12;
+  margin:0 0 13px;
+  font-weight:800;
+}
+
+.hero p{
+  color:#d8e6f5;
+  line-height:1.7;
+  margin:0 0 21px;
+  max-width:630px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.hero .btn-light{
+  background:rgba(255,255,255,.11);
+  color:white;
+  border:1px solid rgba(255,255,255,.18);
+}
+
+.hero-visual{
+  position:absolute;
+  right:32px;
+  top:34px;
+  width:390px;
+  z-index:2;
+}
+
+.mini-screen{
+  background:#fff;
+  border-radius:15px;
+  padding:13px;
+  box-shadow:0 22px 50px rgba(0,0,0,.22);
+  color:var(--ink);
+}
+
+.screen-top{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:11px;
+}
+
+.screen-title{
+  font-size:10px;
+  font-weight:800;
+}
+
+.screen-bars{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+}
+
+.screen-stat{
+  background:#f6f8fb;
+  padding:9px;
+  border-radius:9px;
+}
+
+.screen-stat small{
+  font-size:8px;
+  color:var(--muted);
+}
+
+.screen-stat strong{
+  display:block;
+  font-size:14px;
+  margin-top:3px;
+}
+
+.fake-chart{
+  height:85px;
+  margin-top:9px;
+  border-radius:10px;
+  background:linear-gradient(180deg,#eef6ff,#fff);
+  position:relative;
+  overflow:hidden;
+}
+
+.fake-chart svg{
+  width:100%;
+  height:100%;
+}
+
+/* ================= KPI ================= */
+
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:13px;
+  margin-top:16px;
+}
+
+.kpi{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:17px;
+  box-shadow:var(--shadow2);
+}
+
+.kpi-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.kpi-icon{
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:17px;
+}
+
+.kpi-value{
+  font-family:Manrope;
+  font-size:25px;
+  font-weight:800;
+  margin-top:12px;
+  color:var(--navy);
+}
+
+.kpi-label{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.kpi-change{
+  font-size:10px;
+  font-weight:700;
+  color:var(--green);
+}
+
+/* ================= GRID ================= */
+
+.grid-2{
+  display:grid;
+  grid-template-columns:1.35fr 1fr;
+  gap:16px;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.grid-4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px;
+}
+
+/* ================= TABLE ================= */
+
+.table-wrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th{
+  text-align:left;
+  padding:11px 14px;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  color:#8b97a7;
+  font-weight:800;
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+
+td{
+  padding:13px 14px;
+  border-bottom:1px solid #edf0f4;
+  font-size:12px;
+  white-space:nowrap;
+}
+
+tr:last-child td{border-bottom:0}
+
+td strong{font-weight:700}
+
+.muted{color:var(--muted)}
+
+.amount{
+  font-weight:800;
+  color:var(--navy);
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:5px 8px;
+  border-radius:20px;
+  font-size:9px;
+  font-weight:800;
+}
+
+.badge-green{background:var(--green-bg);color:#14815a}
+.badge-orange{background:var(--orange-bg);color:#b57419}
+.badge-red{background:var(--red-bg);color:#c53b47}
+.badge-blue{background:#eaf2ff;color:#1768dc}
+.badge-purple{background:var(--purple-bg);color:#654cc1}
+.badge-gray{background:#f1f3f6;color:#697688}
+
+/* ================= EVENTS ================= */
+
+.event{
+  display:flex;
+  gap:11px;
+  padding:12px 0;
+  border-bottom:1px solid #edf0f4;
+}
+
+.event:last-child{border-bottom:0}
+
+.event-icon{
+  width:32px;
+  height:32px;
+  border-radius:9px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+
+.event-title{
+  font-weight:700;
+  font-size:12px;
+}
+
+.event-meta{
+  font-size:10px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+/* ================= REQUIREMENTS ================= */
+
+.requirement-card{
+  padding:18px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:14px;
+  box-shadow:var(--shadow2);
+}
+
+.req-code{
+  color:var(--blue);
+  font-size:10px;
+  font-weight:800;
+}
+
+.req-title{
+  font-family:Manrope;
+  font-size:15px;
+  font-weight:800;
+  margin:5px 0 9px;
+}
+
+.problem{
+  background:#fff6f6;
+  border-left:3px solid var(--red);
+  padding:9px;
+  margin-bottom:7px;
+  border-radius:0 7px 7px 0;
+}
+
+.solution{
+  background:#f2fbf7;
+  border-left:3px solid var(--green);
+  padding:9px;
+  margin-bottom:7px;
+  border-radius:0 7px 7px 0;
+}
+
+.demo{
+  background:#f1f6ff;
+  border-left:3px solid var(--blue);
+  padding:9px;
+  border-radius:0 7px 7px 0;
+}
+
+.small-label{
+  display:block;
+  font-size:9px;
+  text-transform:uppercase;
+  font-weight:800;
+  letter-spacing:.6px;
+  margin-bottom:3px;
+}
+
+/* ================= POS ================= */
+
+.pos-layout{
+  display:grid;
+  grid-template-columns:1.45fr .75fr;
+  gap:16px;
+}
+
+.pos-products{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:11px;
+}
+
+.product{
+  border:1px solid var(--border);
+  border-radius:13px;
+  overflow:hidden;
+  background:#fff;
+  transition:.15s;
+}
+
+.product:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow2);
+}
+
+.product-img{
+  height:105px;
+  background:#eef3f8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.product-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.product-body{
+  padding:11px;
+}
+
+.product-brand{
+  color:var(--blue);
+  font-size:9px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.product-name{
+  font-size:12px;
+  font-weight:800;
+  margin:4px 0;
+}
+
+.product-meta{
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:9px;
+}
+
+.product-price{
+  font-size:15px;
+  font-weight:800;
+  color:var(--navy);
+  margin-top:8px;
+}
+
+.cart{
+  position:sticky;
+  top:90px;
+}
+
+.cart-items{
+  max-height:320px;
+  overflow:auto;
+}
+
+.cart-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:11px 0;
+  border-bottom:1px solid #edf0f4;
+}
+
+.cart-item-name{
+  font-weight:700;
+  font-size:11px;
+}
+
+.qty{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.qty button{
+  width:23px;
+  height:23px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:6px;
+}
+
+.cart-total{
+  margin-top:15px;
+  padding-top:13px;
+  border-top:1px dashed #ccd3dd;
+}
+
+.total-row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+  font-size:12px;
+}
+
+.total-row.grand{
+  font-size:17px;
+  font-weight:800;
+  color:var(--navy);
+  margin-top:12px;
+}
+
+/* ================= PRODUCTS / IMAGES ================= */
+
+.inventory-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px;
+}
+
+.stock-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+}
+
+.stock-img{
+  height:130px;
+  background:#f0f3f7;
+}
+
+.stock-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.stock-body{padding:13px}
+
+.stock-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:11px;
+}
+
+/* ================= WORKFLOW ================= */
+
+.workflow{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+  margin-top:12px;
+}
+
+.workflow-step{
+  position:relative;
+  padding:17px;
+  background:#fff;
+  border:1px solid var(--border);
+  min-height:125px;
+}
+
+.workflow-step:first-child{border-radius:13px 0 0 13px}
+.workflow-step:last-child{border-radius:0 13px 13px 0}
+
+.workflow-step:not(:last-child):after{
+  content:"→";
+  position:absolute;
+  right:-13px;
+  top:50%;
+  transform:translateY(-50%);
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  background:var(--blue);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:3;
+  font-weight:800;
+}
+
+.step-number{
+  width:28px;
+  height:28px;
+  background:#eaf2ff;
+  color:var(--blue);
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:11px;
+}
+
+.workflow-step h4{
+  margin:11px 0 5px;
+  font-size:13px;
+}
+
+.workflow-step p{
+  margin:0;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.5;
+}
+
+/* ================= ARCHITECTURE ================= */
+
+.architecture{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  align-items:center;
+}
+
+.arch-box{
+  padding:18px 12px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:13px;
+  text-align:center;
+  box-shadow:var(--shadow2);
+}
+
+.arch-icon{
+  font-size:24px;
+  margin-bottom:8px;
+}
+
+.arch-box strong{
+  display:block;
+  font-size:12px;
+}
+
+.arch-box span{
+  display:block;
+  font-size:9px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.arch-arrow{
+  color:var(--blue);
+  font-size:20px;
+  text-align:center;
+}
+
+/* ================= MODAL ================= */
+
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(12,27,44,.48);
+  backdrop-filter:blur(5px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:300;
+  padding:20px;
+}
+
+.modal-bg.open{display:flex}
+
+.modal{
+  width:100%;
+  max-width:620px;
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 30px 80px rgba(0,0,0,.25);
+  overflow:hidden;
+}
+
+.modal-head{
+  padding:18px 20px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.modal-head h3{
+  margin:0;
+  font-family:Manrope;
+  font-size:17px;
+}
+
+.close{
+  border:0;
+  background:#f2f4f7;
+  width:30px;
+  height:30px;
+  border-radius:8px;
+}
+
+.modal-body{padding:20px}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+}
+
+.field.full{grid-column:1/-1}
+
+.field label{
+  display:block;
+  font-size:10px;
+  font-weight:800;
+  color:#68778a;
+  margin-bottom:6px;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  padding:10px 11px;
+  border:1px solid #dfe5ec;
+  border-radius:9px;
+  outline:none;
+  color:var(--ink);
+  background:#fff;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:#73aaf6;
+  box-shadow:0 0 0 3px #eaf2ff;
+}
+
+.modal-foot{
+  padding:15px 20px;
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+}
+
+/* ================= INVOICE ================= */
+
+.invoice{
+  max-width:780px;
+  margin:auto;
+  background:white;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  border-radius:15px;
+  padding:30px;
+}
+
+.invoice-head{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  padding-bottom:20px;
+}
+
+.invoice-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.invoice-brand .logo{
+  width:38px;
+  height:38px;
+}
+
+.invoice-title{
+  text-align:right;
+}
+
+.invoice-title h2{
+  margin:0;
+  font-family:Manrope;
+}
+
+.invoice-meta{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin:22px 0;
+}
+
+.invoice-meta div{
+  background:#f7f9fb;
+  padding:12px;
+  border-radius:9px;
+}
+
+.invoice-meta small{
+  color:var(--muted);
+  font-size:9px;
+}
+
+.invoice-meta strong{
+  display:block;
+  margin-top:3px;
+}
+
+/* ================= MOBILE ================= */
+
+.mobile-menu{
+  display:none;
+  border:0;
+  background:#f1f4f8;
+  width:35px;
+  height:35px;
+  border-radius:9px;
+}
+
+@media(max-width:1200px){
+  .kpis{grid-template-columns:repeat(3,1fr)}
+  .hero-visual{display:none}
+  .grid-2{grid-template-columns:1fr}
+  .inventory-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+@media(max-width:900px){
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.25s;
+  }
+  .sidebar.open{transform:translateX(0)}
+  .main{
+    margin-left:0;
+    width:100%;
+  }
+  .mobile-menu{display:block}
+  .topbar{
+    padding:0 15px;
+  }
+  .content{padding:16px}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:1fr}
+  .pos-layout{grid-template-columns:1fr}
+  .cart{position:static}
+  .inventory-grid{grid-template-columns:repeat(2,1fr)}
+  .workflow{grid-template-columns:1fr 1fr}
+  .workflow-step:first-child{border-radius:13px 0 0 0}
+  .workflow-step:last-child{border-radius:0 0 13px 0}
+  .workflow-step:not(:last-child):after{display:none}
+  .architecture{grid-template-columns:1fr}
+  .arch-arrow{transform:rotate(90deg)}
+}
+
+@media(max-width:600px){
+  .page-title{font-size:24px}
+  .hero{padding:23px}
+  .hero h1{font-size:26px}
+  .kpis{grid-template-columns:1fr 1fr}
+  .pos-products{grid-template-columns:1fr 1fr}
+  .inventory-grid{grid-template-columns:1fr 1fr}
+  .form-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .workflow{grid-template-columns:1fr}
+  .top-actions .live{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar" id="sidebar">
+
+  <div class="brand">
+    <div class="brand-row">
+      <div class="logo">SO</div>
+      <div>
+        <h2>BusinessOS</h2>
+        <small>Integrated Business Management</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="business-switch">
+    <label>Business View</label>
+    <select id="businessFilter" onchange="changeBusiness()">
+      <option value="all">All Businesses</option>
+      <option value="sadaat">Sadaat Electronics</option>
+      <option value="ak">AK Traders</option>
+    </select>
+  </div>
+
+  <nav class="nav">
+
+    <div class="nav-title">Overview</div>
+
+    <button class="nav-item active" onclick="openPage('dashboard',this)">
+      <span class="nav-icon">⌂</span> Dashboard
+    </button>
+
+    <button class="nav-item" onclick="openPage('requirements',this)">
+      <span class="nav-icon">✓</span> Requirements
+    </button>
+
+    <button class="nav-item" onclick="openPage('activity',this)">
+      <span class="nav-icon">◉</span> Live Activity
+    </button>
+
+    <div class="nav-title">Sales & Commerce</div>
+
+    <button class="nav-item" onclick="openPage('pos',this)">
+      <span class="nav-icon">▣</span> Electronics POS
+    </button>
+
+    <button class="nav-item" onclick="openPage('sales',this)">
+      <span class="nav-icon">↗</span> Sales
+    </button>
+
+    <button class="nav-item" onclick="openPage('purchases',this)">
+      <span class="nav-icon">↓</span> Purchases
+    </button>
+
+    <button class="nav-item" onclick="openPage('invoices',this)">
+      <span class="nav-icon">▤</span> Invoices & Quotations
+    </button>
+
+    <div class="nav-title">Inventory & People</div>
+
+    <button class="nav-item" onclick="openPage('inventory',this)">
+      <span class="nav-icon">▦</span> Inventory
+    </button>
+
+    <button class="nav-item" onclick="openPage('customers',this)">
+      <span class="nav-icon">♙</span> Customers & Dealers
+    </button>
+
+    <button class="nav-item" onclick="openPage('repairs',this)">
+      <span class="nav-icon">⚒</span> Repairs & Job Cards
+    </button>
+
+    <button class="nav-item" onclick="openPage('technicians',this)">
+      <span class="nav-icon">⚙</span> Technicians
+    </button>
+
+    <div class="nav-title">Finance</div>
+
+    <button class="nav-item" onclick="openPage('payments',this)">
+      <span class="nav-icon">₨</span> Payments & Cash
+    </button>
+
+    <button class="nav-item" onclick="openPage('expenses',this)">
+      <span class="nav-icon">−</span> Expenses
+    </button>
+
+    <button class="nav-item" onclick="openPage('reports',this)">
+      <span class="nav-icon">▥</span> Reports & P&L
+    </button>
+
+    <div class="nav-title">System</div>
+
+    <button class="nav-item" onclick="openPage('architecture',this)">
+      <span class="nav-icon">◇</span> Architecture
+    </button>
+
+    <button class="nav-item" onclick="openPage('users',this)">
+      <span class="nav-icon">♙</span> Users & Permissions
+    </button>
+
+    <button class="nav-item" onclick="openPage('references',this)">
+      <span class="nav-icon">#</span> Reference System
+    </button>
+
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div class="demo-badge">
+      <strong>INTERACTIVE DEMO</strong><br>
+      This prototype demonstrates the proposed workflows. Production deployment will use a secure cloud database, authentication, backups and role-based access.
+    </div>
+  </div>
+
+</aside>
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+<header class="topbar">
+
+  <div style="display:flex;align-items:center;gap:10px">
+    <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
+
+    <div class="breadcrumb">
+      BusinessOS <span>/</span> <strong id="breadcrumb">Dashboard</strong>
+    </div>
+  </div>
+
+  <div class="top-actions">
+    <div class="live">
+      <span class="live-dot"></span>
+      Demo Data Live
+    </div>
+    <div class="avatar">SZ</div>
+  </div>
+
+</header>
+
+<div class="content">
+
+<!-- =========================================================
+ DASHBOARD
+========================================================= -->
+
+<section class="page active" id="page-dashboard">
+
+  <div class="hero">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">Integrated Business Management Platform</div>
+
+      <h1>One system for Sadaat Electronics & AK Traders.</h1>
+
+      <p>
+        A unified management platform connecting retail POS, wholesale sales,
+        inventory, purchasing, service operations, technicians, payments,
+        outstanding, expenses and business reporting.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="openPageById('pos')">
+          Open Electronics POS →
+        </button>
+
+        <button class="btn btn-light" onclick="openPageById('requirements')">
+          View Requirement Coverage
+        </button>
+      </div>
+
+    </div>
+
+    <div class="hero-visual">
+
+      <div class="mini-screen">
+
+        <div class="screen-top">
+          <div class="screen-title">BUSINESS PERFORMANCE</div>
+          <span class="badge badge-green">LIVE</span>
+        </div>
+
+        <div class="screen-bars">
+
+          <div class="screen-stat">
+            <small>Sales</small>
+            <strong>₨ 2.84M</strong>
+          </div>
+
+          <div class="screen-stat">
+            <small>Receivable</small>
+            <strong>₨ 742K</strong>
+          </div>
+
+          <div class="screen-stat">
+            <small>Stock</small>
+            <strong>₨ 4.18M</strong>
+          </div>
+
+        </div>
+
+        <div class="fake-chart">
+
+          <svg viewBox="0 0 390 100" preserveAspectRatio="none">
+
+            <path
+              d="M0 76 C40 72,55 52,85 63 S125 80,155 48 S200 58,230 35 S270 51,300 29 S340 42,390 12"
+              fill="none"
+              stroke="#2878f0"
+              stroke-width="3"/>
+
+            <path
+              d="M0 76 C40 72,55 52,85 63 S125 80,155 48 S200 58,230 35 S270 51,300 29 S340 42,390 12 L390 100 L0 100Z"
+              fill="rgba(40,120,240,.08)"/>
+
+          </svg>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="kpis">
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="kpi-icon" style="background:#eaf2ff;color:#2878f0">₨</div>
+        <span class="kpi-change">↑ 12.4%</span>
+      </div>
+      <div class="kpi-value">₨ 2.84M</div>
+      <div class="kpi-label">Monthly Sales</div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="kpi-icon" style="background:#eaf9f3;color:#19a974">✓</div>
+        <span class="kpi-change">78%</span>
+      </div>
+      <div class="kpi-value">₨ 2.10M</div>
+      <div class="kpi-label">Collected Payments</div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="kpi-icon" style="background:#fff5e7;color:#ef9b32">!</div>
+        <span class="badge badge-orange">Attention</span>
+      </div>
+      <div class="kpi-value">₨ 742K</div>
+      <div class="kpi-label">Customer / Dealer Outstanding</div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="kpi-icon" style="background:#f1edff;color:#7357d9">▦</div>
+        <span class="badge badge-blue">Live</span>
+      </div>
+      <div class="kpi-value">486</div>
+      <div class="kpi-label">Inventory Items</div>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-top">
+        <div class="kpi-icon" style="background:#fff0f1;color:#e34d59">⚒</div>
+        <span class="badge badge-red">7 Open</span>
+      </div>
+      <div class="kpi-value">23</div>
+      <div class="kpi-label">Service Jobs This Month</div>
+    </div>
+
+  </div>
+
+
+  <div class="section-head">
+    <h2 class="section-title">Two Businesses. One Control Center.</h2>
+    <button class="btn btn-light" onclick="openPageById('reports')">View Reports →</button>
+  </div>
+
+  <div class="grid-2">
+
+    <div class="card card-pad">
+
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div class="eyebrow">Retail + Service</div>
+          <h3 style="margin:0;font-family:Manrope">Sadaat Electronics</h3>
+          <p class="muted" style="margin:5px 0 0;font-size:11px">
+            Home appliances retail, repairs & technician operations
+          </p>
+        </div>
+        <span class="badge badge-blue">RETAIL</span>
+      </div>
+
+      <div class="grid-3" style="margin-top:18px">
+
+        <div>
+          <div class="muted" style="font-size:10px">Sales</div>
+          <strong style="font-size:17px">₨ 1.62M</strong>
+        </div>
+
+        <div>
+          <div class="muted" style="font-size:10px">Repairs</div>
+          <strong style="font-size:17px">23</strong>
+        </div>
+
+        <div>
+          <div class="muted" style="font-size:10px">Outstanding</div>
+          <strong style="font-size:17px">₨ 286K</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card card-pad">
+
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div class="eyebrow" style="color:#7357d9">Wholesale</div>
+          <h3 style="margin:0;font-family:Manrope">AK Traders</h3>
+          <p class="muted" style="margin:5px 0 0;font-size:11px">
+            Kitchen appliances wholesale & dealer management
+          </p>
+        </div>
+        <span class="badge badge-purple">WHOLESALE</span>
+      </div>
+
+      <div class="grid-3" style="margin-top:18px">
+
+        <div>
+          <div class="muted" style="font-size:10px">Sales</div>
+          <strong style="font-size:17px">₨ 1.22M</strong>
+        </div>
+
+        <div>
+          <div class="muted" style="font-size:10px">Dealers</div>
+          <strong style="font-size:17px">86</strong>
+        </div>
+
+        <div>
+          <div class="muted" style="font-size:10px">Outstanding</div>
+          <strong style="font-size:17px">₨ 456K</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="section-head">
+    <h2 class="section-title">How the system connects the business</h2>
+  </div>
+
+  <div class="workflow">
+
+    <div class="workflow-step">
+      <div class="step-number">01</div>
+      <h4>Sale / Purchase</h4>
+      <p>Retail POS and wholesale transactions automatically create financial and inventory records.</p>
+    </div>
+
+    <div class="workflow-step">
+      <div class="step-number">02</div>
+      <h4>Inventory</h4>
+      <p>Stock increases through purchases and decreases through sales or parts used in repairs.</p>
+    </div>
+
+    <div class="workflow-step">
+      <div class="step-number">03</div>
+      <h4>Payments</h4>
+      <p>Paid, partial and outstanding amounts remain linked to each customer or dealer.</p>
+    </div>
+
+    <div class="workflow-step">
+      <div class="step-number">04</div>
+      <h4>Reports</h4>
+      <p>Management gets business-wise sales, expenses, profit and outstanding visibility.</p>
+    </div>
+
+  </div>
+
+
+  <div class="section-head">
+    <h2 class="section-title">Live Transactions</h2>
+    <button class="btn btn-primary" onclick="openModal('saleModal')">+ New Sale</button>
+  </div>
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Reference</th>
+          <th>Business</th>
+          <th>Type</th>
+          <th>Customer / Dealer</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody id="liveTransactions"></tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+ REQUIREMENTS
+========================================================= -->
+
+<section class="page" id="page-requirements">
+
+  <div class="eyebrow">Requirement Coverage</div>
+
+  <h1 class="page-title">Every requirement mapped to a solution.</h1>
+
+  <p class="page-subtitle">
+    The following reference maps the requested business requirements to the
+    proposed module and the corresponding demonstration screen.
+  </p>
+
+
+  <div class="section-head">
+    <h2 class="section-title">Problem → Solution → Demonstration</h2>
+  </div>
+
+  <div class="grid-2">
+
+    <div class="requirement-card">
+
+      <div class="req-code">REQ-01 · SALES</div>
+      <div class="req-title">Retail & Wholesale Sales</div>
+
+      <div class="problem">
+        <span class="small-label" style="color:#c53b47">Problem</span>
+        Sales for two businesses can become difficult to track when records are maintained separately.
+      </div>
+
+      <div class="solution">
+        <span class="small-label" style="color:#14815a">Solution</span>
+        Business-aware POS and sales management with customer/dealer, payment and inventory linkage.
+      </div>
+
+      <div class="demo">
+        <span class="small-label" style="color:#1768dc">Demonstration</span>
+        Electronics POS + Sales screen + Live Transactions.
+      </div>
+
+    </div>
+
+
+    <div class="requirement-card">
+
+      <div class="req-code">REQ-02 · SERVICE</div>
+      <div class="req-title">Customer Complaints & Service</div>
+
+      <div class="problem">
+        <span class="small-label" style="color:#c53b47">Problem</span>
+        Complaints can be lost without a central service history.
+      </div>
+
+      <div class="solution">
+        <span class="small-label" style="color:#14815a">Solution</span>
+        Complaint → Job Card → Technician → Visit → Parts → Charges → Payment workflow.
+      </div>
+
+      <div class="demo">
+        <span class="small-label" style="color:#1768dc">Demonstration</span>
+        Repairs & Job Cards module.
+      </div>
+
+    </div>
+
+
+    <div class="requirement-card">
+
+      <div class="req-code">REQ-03 · TECHNICIANS</div>
+      <div class="req-title">Technician Management</div>
+
+      <div class="problem">
+        <span class="small-label" style="color:#c53b47">Problem</span>
+        Management needs visibility into technician workload and profitability.
+      </div>
+
+      <div class="solution">
+        <span class="small-label" style="color:#14815a">Solution</span>
+        Technician profiles, assigned jobs, visits, income, costs and profitability.
+      </div>
+
+      <div class="demo">
+        <span class="small-label" style="color:#1768dc">Demonstration</span>
+        Technician dashboard and profitability report.
+      </div>
+
+    </div>
+
+
+    <div class="requirement-card">
+
+      <div class="req-code">REQ-04 · INVENTORY</div>
+      <div class="req-title">Stock & Inventory</div>
+
+      <div class="problem">
+        <span class="small-label" style="color:#c53b47">Problem</span>
+        Stock movement across purchases, sales and repairs needs one source of truth.
+      </div>
+
+      <div class="solution">
+        <span class="small-label" style="color:#14815a">Solution</span>
+        Product catalogue, stock quantities, low-stock alerts and movement history.
+      </div>
+
+      <div class="demo">
+        <span class="small-label" style="color:#1768dc">Demonstration</span>
+        Inventory cards + stock movement.
+      </div>
+
+    </div>
+
+
+    <div class="requirement-card">
+
+      <div class="req-code">REQ-05 · FINANCE</div>
+      <div class="req-title">Payments, Cash & Outstanding</div>
+
+      <div class="problem">
+        <span class="small-label" style="color:#c53b47">Problem</span>
+        Paid, partial and outstanding transactions need clear tracking.
+      </div>
+
+      <div class="solution">
+        <span class="small-label" style="color:#14815a">Solution</span>
+        Payment ledger linked with invoices, customers, dealers and business accounts.
+      </div>
+
+      <div class="demo">
+        <span class="small-label" style="color:#1768dc">Demonstration</span>
+        Payments, outstanding and cash dashboard.
+      </div>
+
+    </div>
+
+
+    <div class="requirement-card">
+
+      <div class="req-code">REQ-06 · REPORTING</div>
+      <div class="req-title">Monthly Sales, Expenses & Profit</div>
+
+      <div class="problem">
+        <span class="small-label" style="color:#c53b47">Problem</span>
+        Management needs a clear monthly picture instead of manually combining spreadsheets.
+      </div>
+
+      <div class="solution">
+        <span class="small-label" style="color:#14815a">Solution</span>
+        Automated management reports with business-wise filtering.
+      </div>
+
+      <div class="demo">
+        <span class="small-label" style="color:#1768dc">Demonstration</span>
+        Reports & P&L module.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="section-head">
+    <h2 class="section-title">Integrated Requirement Checklist</h2>
+  </div>
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Reference</th>
+          <th>Requirement</th>
+          <th>Business</th>
+          <th>Proposed Module</th>
+          <th>Demo</th>
+          <th>Production</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td><strong>R-01</strong></td>
+          <td>POS / Retail Sales</td>
+          <td>Sadaat Electronics</td>
+          <td>Electronics POS</td>
+          <td><span class="badge badge-green">Covered</span></td>
+          <td><span class="badge badge-blue">Implement</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>R-02</strong></td>
+          <td>Wholesale Sales</td>
+          <td>AK Traders</td>
+          <td>Wholesale Sales</td>
+          <td><span class="badge badge-green">Covered</span></td>
+          <td><span class="badge badge-blue">Implement</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>R-03</strong></td>
+          <td>Customer Complaints</td>
+          <td>Sadaat Electronics</td>
+          <td>Service Desk</td>
+          <td><span class="badge badge-green">Covered</span></td>
+          <td><span class="badge badge-blue">Implement</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>R-04</strong></td>
+          <td>Technician Management</td>
+          <td>Sadaat Electronics</td>
+          <td>Technicians</td>
+          <td><span class="badge badge-green">Covered</span></td>
+          <td><span class="badge badge-blue">Implement</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>R-05</strong></td>
+          <td>Job Cards / Visits</td>
+          <td>Sadaat Electronics</td>
+          <td>Service Jobs</td>
+          <td><span class="badge badge-green">Covered</span></td>
+          <td><span class="badge badge-blue">Implement</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>R-06</strong></td>
+          <td>Parts / Materials Used</td>
+          <td>Sadaat Electronics</td>
+          <td>Inventory + Job Card</td>
+          <td><span class="badge badge-green">Covered</span></td>
+          <td><span class="badge badge-blue">Implement</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>R-07</strong></td>
+          <td>Sales / Purchases</td>
+          <td>Both</td>
+          <td>Commerce</td>
+          <td><span class="badge badge-green">Covered</span></td>
+          <td><span class="badge badge-blue">Implement</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>R-08</strong></td>
+          <td>Customer / Dealer Outstanding</td>
+          <td>Both</td>
+          <td>Accounts</td>
+          <td><span class="badge badge-green">Covered</span></td>
+          <td><span class="badge badge-blue">Implement</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>R-09</strong></td>
+          <td>Expenses / Cash</td>
+          <td>Both</td>
+          <td>Finance</td>
+          <td><span class="badge badge-green">Covered</span></td>
+          <td><span class="badge badge-blue">Implement</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>R-10</strong></td>
+          <td>Monthly P&L</td>
+          <td>Both</td>
+          <td>Reports</td>
+          <td><span class="badge badge-green">Covered</span></td>
+          <td><span class="badge badge-blue">Implement</span></td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+ POS
+========================================================= -->
+
+<section class="page" id="page-pos">
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:15px;flex-wrap:wrap">
+
+    <div>
+      <div class="eyebrow">Sales Terminal</div>
+      <h1 class="page-title">Electronics POS</h1>
+      <p class="page-subtitle">
+        Retail-ready POS for appliances, electronics and accessories.
+      </p>
+    </div>
+
+    <div style="display:flex;gap:8px">
+      <select class="btn btn-light" id="posBusiness">
+        <option>Sadaat Electronics</option>
+        <option>AK Traders</option>
+      </select>
+
+      <button class="btn btn-primary" onclick="completeSale()">
+        Complete Sale
+      </button>
+    </div>
+
+  </div>
+
+
+  <div style="margin-top:18px">
+
+    <div class="pos-layout">
+
+      <div>
+
+        <div class="card card-pad">
+
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:center">
+
+            <div>
+              <strong style="font-family:Manrope;font-size:16px">Products</strong>
+              <div class="muted" style="font-size:10px;margin-top:3px">
+                Search and add products to cart
+              </div>
+            </div>
+
+            <input
+              id="productSearch"
+              oninput="renderProducts()"
+              placeholder="Search appliance, SKU, brand..."
+              style="width:250px;max-width:50%;padding:9px 11px;border:1px solid var(--border);border-radius:9px"
+            >
+
+          </div>
+
+          <div class="pos-products" id="posProducts" style="margin-top:15px"></div>
+
+        </div>
+
+      </div>
+
+
+      <div>
+
+        <div class="card card-pad cart">
+
+          <div style="display:flex;justify-content:space-between;align-items:center">
+
+            <div>
+              <strong style="font-family:Manrope;font-size:16px">Current Cart</strong>
+              <div class="muted" style="font-size:10px;margin-top:3px">
+                Invoice will be generated after checkout
+              </div>
+            </div>
+
+            <span class="badge badge-blue" id="cartCount">0 Items</span>
+
+          </div>
+
+
+          <div class="cart-items" id="cartItems" style="margin-top:10px"></div>
+
+
+          <div class="cart-total">
+
+            <div class="total-row">
+              <span>Subtotal</span>
+              <strong id="cartSubtotal">₨ 0</strong>
+            </div>
+
+            <div class="total-row">
+              <span>Discount</span>
+              <strong>₨ 0</strong>
+            </div>
+
+            <div class="total-row">
+              <span>Tax</span>
+              <strong>Included</strong>
+            </div>
+
+            <div class="total-row grand">
+              <span>Total</span>
+              <span id="cartTotal">₨ 0</span>
+            </div>
+
+          </div>
+
+
+          <button class="btn btn-green" style="width:100%;justify-content:center;margin-top:10px" onclick="completeSale()">
+            ✓ Checkout & Create Invoice
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+ SALES
+========================================================= -->
+
+<section class="page" id="page-sales">
+
+  <div class="eyebrow">Commerce</div>
+  <h1 class="page-title">Sales Management</h1>
+  <p class="page-subtitle">
+    Retail and wholesale sales with customer, payment and outstanding visibility.
+  </p>
+
+  <div class="kpis">
+
+    <div class="kpi">
+      <div class="kpi-label">Today's Sales</div>
+      <div class="kpi-value">₨ 184K</div>
+      <span class="badge badge-green">24 Transactions</span>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-label">Paid</div>
+      <div class="kpi-value">₨ 132K</div>
+      <span class="badge badge-green">71.7%</span>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-label">Outstanding</div>
+      <div class="kpi-value">₨ 52K</div>
+      <span class="badge badge-orange">Follow-up</span>
+    </div>
+
+  </div>
+
+  <div class="section-head">
+    <h2 class="section-title">Sales Ledger</h2>
+    <button class="btn btn-primary" onclick="openModal('saleModal')">+ New Sale</button>
+  </div>
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Invoice</th>
+          <th>Date</th>
+          <th>Business</th>
+          <th>Customer / Dealer</th>
+          <th>Items</th>
+          <th>Total</th>
+          <th>Paid</th>
+          <th>Outstanding</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody id="salesTable"></tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+ PURCHASES
+========================================================= -->
+
+<section class="page" id="page-purchases">
+
+  <div class="eyebrow">Procurement</div>
+  <h1 class="page-title">Purchases</h1>
+  <p class="page-subtitle">
+    Supplier purchases automatically feed inventory and purchase reporting.
+  </p>
+
+  <div class="grid-3" style="margin-top:18px">
+
+    <div class="card card-pad">
+      <div class="muted" style="font-size:10px">This Month</div>
+      <div class="kpi-value">₨ 1.48M</div>
+      <span class="badge badge-blue">42 Purchase Orders</span>
+    </div>
+
+    <div class="card card-pad">
+      <div class="muted" style="font-size:10px">Received</div>
+      <div class="kpi-value">₨ 1.21M</div>
+      <span class="badge badge-green">82%</span>
+    </div>
+
+    <div class="card card-pad">
+      <div class="muted" style="font-size:10px">Supplier Payable</div>
+      <div class="kpi-value">₨ 270K</div>
+      <span class="badge badge-orange">Pending</span>
+    </div>
+
+  </div>
+
+  <div class="section-head">
+    <h2 class="section-title">Purchase Orders</h2>
+    <button class="btn btn-primary" onclick="openModal('purchaseModal')">+ New Purchase</button>
+  </div>
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>PO</th>
+          <th>Supplier</th>
+          <th>Business</th>
+          <th>Items</th>
+          <th>Amount</th>
+          <th>Received</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td><strong>PO-2048</strong></td>
+          <td>PEL Distribution</td>
+          <td>Sadaat Electronics</td>
+          <td>18</td>
+          <td class="amount">₨ 386,000</td>
+          <td>100%</td>
+          <td><span class="badge badge-green">Received</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>PO-2047</strong></td>
+          <td>Haier Pakistan</td>
+          <td>Sadaat Electronics</td>
+          <td>11</td>
+          <td class="amount">₨ 244,500</td>
+          <td>70%</td>
+          <td><span class="badge badge-orange">Partial</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>PO-2046</strong></td>
+          <td>Kitchen World Supply</td>
+          <td>AK Traders</td>
+          <td>35</td>
+          <td class="amount">₨ 518,000</td>
+          <td>100%</td>
+          <td><span class="badge badge-green">Received</span></td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+ INVENTORY
+========================================================= -->
+
+<section class="page" id="page-inventory">
+
+  <div class="eyebrow">Stock Control</div>
+  <h1 class="page-title">Inventory & Stock</h1>
+  <p class="page-subtitle">
+    Product-level stock visibility with low-stock alerts and business separation.
+  </p>
+
+
+  <div class="grid-4" style="margin-top:18px">
+
+    <div class="card card-pad">
+      <div class="muted">Total Products</div>
+      <div class="kpi-value">486</div>
+      <span class="badge badge-blue">Across Businesses</span>
+    </div>
+
+    <div class="card card-pad">
+      <div class="muted">Stock Value</div>
+      <div class="kpi-value">₨ 4.18M</div>
+      <span class="badge badge-green">Current</span>
+    </div>
+
+    <div class="card card-pad">
+      <div class="muted">Low Stock</div>
+      <div class="kpi-value">17</div>
+      <span class="badge badge-orange">Reorder</span>
+    </div>
+
+    <div class="card card-pad">
+      <div class="muted">Out of Stock</div>
+      <div class="kpi-value">4</div>
+      <span class="badge badge-red">Attention</span>
+    </div>
+
+  </div>
+
+
+  <div class="section-head">
+    <h2 class="section-title">Electronics Catalogue</h2>
+    <button class="btn btn-primary" onclick="openModal('stockModal')">+ Add Stock</button>
+  </div>
+
+  <div class="inventory-grid" id="inventoryGrid"></div>
+
+</section>
+
+
+<!-- =========================================================
+ CUSTOMERS
+========================================================= -->
+
+<section class="page" id="page-customers">
+
+  <div class="eyebrow">CRM</div>
+  <h1 class="page-title">Customers & Dealers</h1>
+  <p class="page-subtitle">
+    Central customer and dealer profiles with transaction and outstanding history.
+  </p>
+
+  <div class="section-head">
+    <h2 class="section-title">Relationship Directory</h2>
+    <button class="btn btn-primary" onclick="openModal('customerModal')">+ Add Contact</button>
+  </div>
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Business</th>
+          <th>Phone</th>
+          <th>Total Sales</th>
+          <th>Outstanding</th>
+          <th>Last Activity</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td><strong>Muhammad Asad</strong></td>
+          <td><span class="badge badge-blue">Customer</span></td>
+          <td>Sadaat Electronics</td>
+          <td>0301-5551021</td>
+          <td>₨ 284,500</td>
+          <td class="amount">₨ 0</td>
+          <td>Today · 4:42 PM</td>
+          <td><span class="badge badge-green">Clear</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>Al-Madina Electronics</strong></td>
+          <td><span class="badge badge-purple">Dealer</span></td>
+          <td>AK Traders</td>
+          <td>0321-8812011</td>
+          <td>₨ 1,240,000</td>
+          <td class="amount">₨ 125,000</td>
+          <td>Today · 3:15 PM</td>
+          <td><span class="badge badge-orange">Outstanding</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>Kashif Ahmed</strong></td>
+          <td><span class="badge badge-blue">Customer</span></td>
+          <td>Sadaat Electronics</td>
+          <td>0333-2219870</td>
+          <td>₨ 92,000</td>
+          <td class="amount">₨ 8,500</td>
+          <td>Today · 2:08 PM</td>
+          <td><span class="badge badge-orange">Outstanding</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>Home Kitchen Store</strong></td>
+          <td><span class="badge badge-purple">Dealer</span></td>
+          <td>AK Traders</td>
+          <td>0300-7742010</td>
+          <td>₨ 786,000</td>
+          <td class="amount">₨ 64,000</td>
+          <td>Yesterday</td>
+          <td><span class="badge badge-orange">Outstanding</span></td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+ REPAIRS
+========================================================= -->
+
+<section class="page" id="page-repairs">
+
+  <div class="eyebrow">Service Management</div>
+  <h1 class="page-title">Repairs & Job Cards</h1>
+  <p class="page-subtitle">
+    From complaint registration to technician visit, parts usage, service charges and payment.
+  </p>
+
+
+  <div class="grid-4" style="margin-top:18px">
+
+    <div class="card card-pad">
+      <div class="muted">Open Complaints</div>
+      <div class="kpi-value">7</div>
+      <span class="badge badge-red">Requires Action</span>
+    </div>
+
+    <div class="card card-pad">
+      <div class="muted">Assigned Jobs</div>
+      <div class="kpi-value">11</div>
+      <span class="badge badge-blue">In Progress</span>
+    </div>
+
+    <div class="card card-pad">
+      <div class="muted">Completed</div>
+      <div class="kpi-value">16</div>
+      <span class="badge badge-green">This Month</span>
+    </div>
+
+    <div class="card card-pad">
+      <div class="muted">Service Revenue</div>
+      <div class="kpi-value">₨ 186K</div>
+      <span class="badge badge-green">↑ 9.2%</span>
+    </div>
+
+  </div>
+
+
+  <div class="section-head">
+    <h2 class="section-title">Job Cards</h2>
+    <button class="btn btn-primary" onclick="openModal('repairModal')">+ New Complaint</button>
+  </div>
+
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Job Card</th>
+          <th>Customer</th>
+          <th>Appliance</th>
+          <th>Issue</th>
+          <th>Technician</th>
+          <th>Parts</th>
+          <th>Charges</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td><strong>REP-208</strong></td>
+          <td>Kashif Ahmed</td>
+          <td>Haier Refrigerator</td>
+          <td>Cooling issue</td>
+          <td>Ahmed Raza</td>
+          <td>Thermostat</td>
+          <td>₨ 8,500</td>
+          <td><span class="badge badge-orange">Visit Scheduled</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>REP-207</strong></td>
+          <td>Farhan Malik</td>
+          <td>Dawlance AC</td>
+          <td>Not cooling</td>
+          <td>Bilal Khan</td>
+          <td>Capacitor</td>
+          <td>₨ 6,800</td>
+          <td><span class="badge badge-blue">In Progress</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>REP-206</strong></td>
+          <td>Saima Residence</td>
+          <td>PEL Washing Machine</td>
+          <td>Drain issue</td>
+          <td>Ahmed Raza</td>
+          <td>Drain Pump</td>
+          <td>₨ 5,400</td>
+          <td><span class="badge badge-green">Completed</span></td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <div class="section-head">
+    <h2 class="section-title">Service Workflow</h2>
+  </div>
+
+  <div class="workflow">
+
+    <div class="workflow-step">
+      <div class="step-number">1</div>
+      <h4>Complaint</h4>
+      <p>Customer complaint is registered with appliance and issue details.</p>
+    </div>
+
+    <div class="workflow-step">
+      <div class="step-number">2</div>
+      <h4>Job Card</h4>
+      <p>Unique job reference is created and assigned to a technician.</p>
+    </div>
+
+    <div class="workflow-step">
+      <div class="step-number">3</div>
+      <h4>Visit + Parts</h4>
+      <p>Technician records visit, work performed and parts/material used.</p>
+    </div>
+
+    <div class="workflow-step">
+      <div class="step-number">4</div>
+      <h4>Charge + Payment</h4>
+      <p>Service charges, payment and technician profitability are recorded.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+ TECHNICIANS
+========================================================= -->
+
+<section class="page" id="page-technicians">
+
+  <div class="eyebrow">Field Operations</div>
+  <h1 class="page-title">Technicians & Profitability</h1>
+  <p class="page-subtitle">
+    Workload, completed jobs, service income, expenses and profitability by technician.
+  </p>
+
+
+  <div class="grid-3" style="margin-top:18px">
+
+    <div class="card card-pad">
+
+      <div style="display:flex;gap:12px;align-items:center">
+
+        <div class="avatar">AR</div>
+
+        <div>
+          <strong>Ahmed Raza</strong>
+          <div class="muted" style="font-size:10px">Senior Technician</div>
+        </div>
+
+      </div>
+
+      <div class="grid-3" style="margin-top:18px">
+
+        <div>
+          <div class="muted" style="font-size:9px">Jobs</div>
+          <strong>18</strong>
+        </div>
+
+        <div>
+          <div class="muted" style="font-size:9px">Revenue</div>
+          <strong>₨ 92K</strong>
+        </div>
+
+        <div>
+          <div class="muted" style="font-size:9px">Profit</div>
+          <strong style="color:var(--green)">₨ 61K</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card card-pad">
+
+      <div style="display:flex;gap:12px;align-items:center">
+
+        <div class="avatar" style="background:linear-gradient(135deg,#7357d9,#a98cff)">BK</div>
+
+        <div>
+          <strong>Bilal Khan</strong>
+          <div class="muted" style="font-size:10px">Technician</div>
+        </div>
+
+      </div>
+
+      <div class="grid-3" style="margin-top:18px">
+
+        <div>
+          <div class="muted" style="font-size:9px">Jobs</div>
+          <strong>14</strong>
+        </div>
+
+        <div>
+          <div class="muted" style="font-size:9px">Revenue</div>
+          <strong>₨ 74K</strong>
+        </div>
+
+        <div>
+          <div class="muted" style="font-size:9px">Profit</div>
+          <strong style="color:var(--green)">₨ 48K</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card card-pad">
+
+      <div style="display:flex;gap:12px;align-items:center">
+
+        <div class="avatar" style="background:linear-gradient(135deg,#ef9b32,#f5c56f)">HS</div>
+
+        <div>
+          <strong>Hassan Shah</strong>
+          <div class="muted" style="font-size:10px">Junior Technician</div>
+        </div>
+
+      </div>
+
+      <div class="grid-3" style="margin-top:18px">
+
+        <div>
+          <div class="muted" style="font-size:9px">Jobs</div>
+          <strong>9</strong>
+        </div>
+
+        <div>
+          <div class="muted" style="font-size:9px">Revenue</div>
+          <strong>₨ 42K</strong>
+        </div>
+
+        <div>
+          <div class="muted" style="font-size:9px">Profit</div>
+          <strong style="color:var(--green)">₨ 27K</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="section-head">
+    <h2 class="section-title">Technician Performance</h2>
+  </div>
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Technician</th>
+          <th>Assigned</th>
+          <th>Completed</th>
+          <th>Service Revenue</th>
+          <th>Parts Cost</th>
+          <th>Technician Cost</th>
+          <th>Profit</th>
+          <th>Completion</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td><strong>Ahmed Raza</strong></td>
+          <td>21</td>
+          <td>18</td>
+          <td>₨ 92,000</td>
+          <td>₨ 17,500</td>
+          <td>₨ 13,000</td>
+          <td class="amount">₨ 61,500</td>
+          <td><span class="badge badge-green">86%</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>Bilal Khan</strong></td>
+          <td>17</td>
+          <td>14</td>
+          <td>₨ 74,000</td>
+          <td>₨ 13,500</td>
+          <td>₨ 12,000</td>
+          <td class="amount">₨ 48,500</td>
+          <td><span class="badge badge-green">82%</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>Hassan Shah</strong></td>
+          <td>12</td>
+          <td>9</td>
+          <td>₨ 42,000</td>
+          <td>₨ 8,000</td>
+          <td>₨ 7,000</td>
+          <td class="amount">₨ 27,000</td>
+          <td><span class="badge badge-orange">75%</span></td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+ PAYMENTS
+========================================================= -->
+
+<section class="page" id="page-payments">
+
+  <div class="eyebrow">Finance</div>
+  <h1 class="page-title">Payments, Cash & Outstanding</h1>
+  <p class="page-subtitle">
+    Track incoming payments, partial payments, customer balances and cash activity.
+  </p>
+
+
+  <div class="grid-4" style="margin-top:18px">
+
+    <div class="card card-pad">
+      <div class="muted">Cash Today</div>
+      <div class="kpi-value">₨ 286K</div>
+      <span class="badge badge-green">Incoming</span>
+    </div>
+
+    <div class="card card-pad">
+      <div class="muted">Bank</div>
+      <div class="kpi-value">₨ 418K</div>
+      <span class="badge badge-blue">Incoming</span>
+    </div>
+
+    <div class="card card-pad">
+      <div class="muted">Receivable</div>
+      <div class="kpi-value">₨ 742K</div>
+      <span class="badge badge-orange">Outstanding</span>
+    </div>
+
+    <div class="card card-pad">
+      <div class="muted">Payable</div>
+      <div class="kpi-value">₨ 270K</div>
+      <span class="badge badge-red">Supplier</span>
+    </div>
+
+  </div>
+
+
+  <div class="section-head">
+    <h2 class="section-title">Payment Ledger</h2>
+    <button class="btn btn-green" onclick="openModal('paymentModal')">+ Receive Payment</button>
+  </div>
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Reference</th>
+          <th>Customer / Dealer</th>
+          <th>Business</th>
+          <th>Invoice</th>
+          <th>Method</th>
+          <th>Amount</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td><strong>PAY-9821</strong></td>
+          <td>Muhammad Asad</td>
+          <td>Sadaat Electronics</td>
+          <td>INV-1042</td>
+          <td>Cash</td>
+          <td class="amount">₨ 48,500</td>
+          <td>4:42 PM</td>
+        </tr>
+
+        <tr>
+          <td><strong>PAY-9820</strong></td>
+          <td>Al-Madina Electronics</td>
+          <td>AK Traders</td>
+          <td>WS-3088</td>
+          <td>Bank</td>
+          <td class="amount">₨ 75,000</td>
+          <td>3:15 PM</td>
+        </tr>
+
+        <tr>
+          <td><strong>PAY-9819</strong></td>
+          <td>Kashif Ahmed</td>
+          <td>Sadaat Electronics</td>
+          <td>REP-208</td>
+          <td>Cash</td>
+          <td class="amount">₨ 8,500</td>
+          <td>2:08 PM</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+ EXPENSES
+========================================================= -->
+
+<section class="page" id="page-expenses">
+
+  <div class="eyebrow">Finance</div>
+  <h1 class="page-title">Expenses & Cash Outflow</h1>
+  <p class="page-subtitle">
+    Record operating expenses and understand where business cash is being spent.
+  </p>
+
+  <div class="grid-4" style="margin-top:18px">
+
+    <div class="card card-pad">
+      <div class="muted">Monthly Expenses</div>
+      <div class="kpi-value">₨ 386K</div>
+    </div>
+
+    <div class="card card-pad">
+      <div class="muted">Utilities</div>
+      <div class="kpi-value">₨ 48K</div>
+    </div>
+
+    <div class="card card-pad">
+      <div class="muted">Technician Cost</div>
+      <div class="kpi-value">₨ 92K</div>
+    </div>
+
+    <div class="card card-pad">
+      <div class="muted">Other</div>
+      <div class="kpi-value">₨ 246K</div>
+    </div>
+
+  </div>
+
+  <div class="section-head">
+    <h2 class="section-title">Expense Ledger</h2>
+    <button class="btn btn-primary" onclick="openModal('expenseModal')">+ Add Expense</button>
+  </div>
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Reference</th>
+          <th>Business</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Method</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>02 Oct 2026</td>
+          <td>EXP-501</td>
+          <td>Sadaat Electronics</td>
+          <td>Utilities</td>
+          <td>Electricity</td>
+          <td>Bank</td>
+          <td class="amount">₨ 31,500</td>
+        </tr>
+
+        <tr>
+          <td>02 Oct 2026</td>
+          <td>EXP-500</td>
+          <td>AK Traders</td>
+          <td>Transport</td>
+          <td>Dealer delivery</td>
+          <td>Cash</td>
+          <td class="amount">₨ 12,800</td>
+        </tr>
+
+        <tr>
+          <td>01 Oct 2026</td>
+          <td>EXP-499</td>
+          <td>Sadaat Electronics</td>
+          <td>Technician</td>
+          <td>Field allowance</td>
+          <td>Cash</td>
+          <td class="amount">₨ 7,500</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+ REPORTS
+========================================================= -->
+
+<section class="page" id="page-reports">
+
+  <div class="eyebrow">Management Intelligence</div>
+  <h1 class="page-title">Reports & Profitability</h1>
+  <p class="page-subtitle">
+    Business-wise reporting for sales, expenses, profit, outstanding and technician performance.
+  </p>
+
+
+  <div class="grid-2" style="margin-top:18px">
+
+    <div class="card card-pad">
+
+      <div style="display:flex;justify-content:space-between">
+        <div>
+          <strong style="font-family:Manrope">Monthly P&L</strong>
+          <div class="muted" style="font-size:10px;margin-top:4px">October 2026 · All Businesses</div>
+        </div>
+        <span class="badge badge-green">Profitable</span>
+      </div>
+
+      <div style="margin-top:22px">
+
+        <div class="total-row">
+          <span>Revenue</span>
+          <strong>₨ 2,840,000</strong>
+        </div>
+
+        <div class="total-row">
+          <span>Cost of Goods Sold</span>
+          <strong>₨ 1,746,000</strong>
+        </div>
+
+        <div class="total-row">
+          <span>Operating Expenses</span>
+          <strong>₨ 386,000</strong>
+        </div>
+
+        <div style="border-top:1px solid var(--border);margin:15px 0"></div>
+
+        <div class="total-row grand">
+          <span>Estimated Gross Profit</span>
+          <span style="color:var(--green)">₨ 708,000</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card card-pad">
+
+      <strong style="font-family:Manrope">Business Comparison</strong>
+
+      <div style="margin-top:20px">
+
+        <div style="margin-bottom:16px">
+
+          <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:5px">
+            <span>Sadaat Electronics</span>
+            <strong>₨ 1.62M</strong>
+          </div>
+
+          <div style="height:8px;background:#edf1f6;border-radius:10px">
+            <div style="width:72%;height:100%;background:#2878f0;border-radius:10px"></div>
+          </div>
+
+        </div>
+
+        <div>
+
+          <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:5px">
+            <span>AK Traders</span>
+            <strong>₨ 1.22M</strong>
+          </div>
+
+          <div style="height:8px;background:#edf1f6;border-radius:10px">
+            <div style="width:54%;height:100%;background:#7357d9;border-radius:10px"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="section-head">
+    <h2 class="section-title">Management Reports</h2>
+  </div>
+
+  <div class="grid-3">
+
+    <div class="card card-pad">
+      <div style="font-size:24px">📊</div>
+      <h3 style="font-family:Manrope;margin:10px 0 5px">Sales Report</h3>
+      <p class="muted" style="font-size:11px;line-height:1.6">
+        Daily, monthly, business-wise and customer/dealer sales analysis.
+      </p>
+      <button class="btn btn-light" onclick="alert('Demo: Sales report generated')">Generate Report</button>
+    </div>
+
+    <div class="card card-pad">
+      <div style="font-size:24px">💰</div>
+      <h3 style="font-family:Manrope;margin:10px 0 5px">Outstanding Report</h3>
+      <p class="muted" style="font-size:11px;line-height:1.6">
+        Customer and dealer receivables with payment history.
+      </p>
+      <button class="btn btn-light" onclick="alert('Demo: Outstanding report generated')">Generate Report</button>
+    </div>
+
+    <div class="card card-pad">
+      <div style="font-size:24px">⚙️</div>
+      <h3 style="font-family:Manrope;margin:10px 0 5px">Technician Profitability</h3>
+      <p class="muted" style="font-size:11px;line-height:1.6">
+        Revenue, parts cost, technician cost and estimated profitability.
+      </p>
+      <button class="btn btn-light" onclick="alert('Demo: Technician report generated')">Generate Report</button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+ ACTIVITY
+========================================================= -->
+
+<section class="page" id="page-activity">
+
+  <div class="eyebrow">Real-Time Operations</div>
+  <h1 class="page-title">Live Activity & Events</h1>
+  <p class="page-subtitle">
+    A central activity timeline showing important business events as they happen.
+  </p>
+
+
+  <div class="grid-2" style="margin-top:18px">
+
+    <div class="card card-pad">
+
+      <div style="display:flex;justify-content:space-between;align-items:center">
+
+        <div>
+          <strong style="font-family:Manrope">Activity Stream</strong>
+          <div class="muted" style="font-size:10px;margin-top:3px">Latest system events</div>
+        </div>
+
+        <span class="badge badge-green">
+          <span class="live-dot" style="display:inline-block;margin-right:5px"></span>
+          LIVE
+        </span>
+
+      </div>
+
+      <div id="events" style="margin-top:10px"></div>
+
+    </div>
+
+
+    <div class="card card-pad">
+
+      <strong style="font-family:Manrope">Today's Operations</strong>
+
+      <div style="margin-top:18px">
+
+        <div class="total-row">
+          <span>Sales Created</span>
+          <strong>24</strong>
+        </div>
+
+        <div class="total-row">
+          <span>Payments Received</span>
+          <strong>18</strong>
+        </div>
+
+        <div class="total-row">
+          <span>Job Cards Created</span>
+          <strong>7</strong>
+        </div>
+
+        <div class="total-row">
+          <span>Technician Visits</span>
+          <strong>11</strong>
+        </div>
+
+        <div class="total-row">
+          <span>Low Stock Alerts</span>
+          <strong style="color:var(--orange)">5</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+ INVOICES
+========================================================= -->
+
+<section class="page" id="page-invoices">
+
+  <div class="eyebrow">Documents</div>
+  <h1 class="page-title">Invoices & Quotations</h1>
+  <p class="page-subtitle">
+    Central document management for sales invoices, quotations and service billing.
+  </p>
+
+
+  <div class="section-head">
+    <h2 class="section-title">Recent Documents</h2>
+    <button class="btn btn-primary" onclick="showInvoice()">Preview Invoice</button>
+  </div>
+
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Reference</th>
+          <th>Type</th>
+          <th>Business</th>
+          <th>Customer / Dealer</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td><strong>INV-1042</strong></td>
+          <td>Sales Invoice</td>
+          <td>Sadaat Electronics</td>
+          <td>Muhammad Asad</td>
+          <td>₨ 48,500</td>
+          <td>02 Oct 2026</td>
+          <td><span class="badge badge-green">Paid</span></td>
+          <td><button class="btn btn-light" onclick="showInvoice()">View</button></td>
+        </tr>
+
+        <tr>
+          <td><strong>WS-3088</strong></td>
+          <td>Wholesale Invoice</td>
+          <td>AK Traders</td>
+          <td>Al-Madina Electronics</td>
+          <td>₨ 125,000</td>
+          <td>02 Oct 2026</td>
+          <td><span class="badge badge-orange">Partial</span></td>
+          <td><button class="btn btn-light" onclick="showInvoice()">View</button></td>
+        </tr>
+
+        <tr>
+          <td><strong>Q-1028</strong></td>
+          <td>Quotation</td>
+          <td>Sadaat Electronics</td>
+          <td>Saima Residence</td>
+          <td>₨ 38,500</td>
+          <td>01 Oct 2026</td>
+          <td><span class="badge badge-blue">Sent</span></td>
+          <td><button class="btn btn-light" onclick="showInvoice()">View</button></td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <div id="invoicePreview" style="display:none;margin-top:20px">
+
+    <div class="invoice">
+
+      <div class="invoice-head">
+
+        <div class="invoice-brand">
+          <div class="logo">SO</div>
+          <div>
+            <strong style="font-family:Manrope;font-size:17px">Sadaat Electronics</strong>
+            <div class="muted" style="font-size:10px">Business Management Demo</div>
+          </div>
+        </div>
+
+        <div class="invoice-title">
+          <h2>INVOICE</h2>
+          <div class="muted">INV-1042</div>
+        </div>
+
+      </div>
+
+
+      <div class="invoice-meta">
+
+        <div>
+          <small>Bill To</small>
+          <strong>Muhammad Asad</strong>
+          <span class="muted">0301-5551021</span>
+        </div>
+
+        <div>
+          <small>Invoice Date</small>
+          <strong>02 October 2026</strong>
+          <span class="muted">Payment: Paid</span>
+        </div>
+
+      </div>
+
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Haier 14 Cu.Ft Refrigerator</td>
+            <td>1</td>
+            <td>₨ 48,500</td>
+            <td>₨ 48,500</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+
+      <div style="display:flex;justify-content:flex-end;margin-top:20px">
+
+        <div style="width:230px">
+
+          <div class="total-row">
+            <span>Subtotal</span>
+            <strong>₨ 48,500</strong>
+          </div>
+
+          <div class="total-row grand">
+            <span>Total</span>
+            <span>₨ 48,500</span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <button class="btn btn-dark" onclick="window.print()" style="margin-top:15px">
+        🖨 Print Invoice
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+ ARCHITECTURE
+========================================================= -->
+
+<section class="page" id="page-architecture">
+
+  <div class="eyebrow">Production Blueprint</div>
+  <h1 class="page-title">Proposed Production Architecture</h1>
+  <p class="page-subtitle">
+    The current screen is an interactive demonstration. The production version can be implemented as a secure cloud-based multi-user system.
+  </p>
+
+
+  <div class="section-head">
+    <h2 class="section-title">How the production platform connects</h2>
+  </div>
+
+  <div class="architecture">
+
+    <div class="arch-box">
+      <div class="arch-icon">💻</div>
+      <strong>Web / Mobile UI</strong>
+      <span>Responsive browser application</span>
+    </div>
+
+    <div class="arch-arrow">→</div>
+
+    <div class="arch-box">
+      <div class="arch-icon">🔐</div>
+      <strong>Authentication</strong>
+      <span>Users, roles & permissions</span>
+    </div>
+
+    <div class="arch-arrow">→</div>
+
+    <div class="arch-box">
+      <div class="arch-icon">🗄️</div>
+      <strong>Cloud Database</strong>
+      <span>Centralized business records</span>
+    </div>
+
+    <div class="arch-arrow">→</div>
+
+    <div class="arch-box">
+      <div class="arch-icon">📊</div>
+      <strong>Reports Engine</strong>
+      <span>Business intelligence & P&L</span>
+    </div>
+
+  </div>
+
+
+  <div class="grid-3" style="margin-top:18px">
+
+    <div class="card card-pad">
+      <div style="font-size:23px">☁️</div>
+      <h3 style="font-family:Manrope;margin:9px 0 5px">Cloud Access</h3>
+      <p class="muted" style="font-size:11px;line-height:1.6">
+        Authorized users can access the system through a browser without relying on one local computer.
+      </p>
+      <span class="badge badge-blue">Production Scope</span>
+    </div>
+
+    <div class="card card-pad">
+      <div style="font-size:23px">🔒</div>
+      <h3 style="font-family:Manrope;margin:9px 0 5px">Security & Permissions</h3>
+      <p class="muted" style="font-size:11px;line-height:1.6">
+        Role-based access can control who can sell, purchase, view reports, manage technicians or access finance.
+      </p>
+      <span class="badge badge-blue">Production Scope</span>
+    </div>
+
+    <div class="card card-pad">
+      <div style="font-size:23px">💾</div>
+      <h3 style="font-family:Manrope;margin:9px 0 5px">Backup & Recovery</h3>
+      <p class="muted" style="font-size:11px;line-height:1.6">
+        Automated database backups and recovery procedures can protect important business records.
+      </p>
+      <span class="badge badge-blue">Production Scope</span>
+    </div>
+
+  </div>
+
+
+  <div class="section-head">
+    <h2 class="section-title">Suggested Technology Direction</h2>
+  </div>
+
+  <div class="card card-pad">
+
+    <div class="grid-4">
+
+      <div>
+        <div class="eyebrow">Frontend</div>
+        <strong>React / Next.js</strong>
+        <p class="muted" style="font-size:10px">Responsive business interface</p>
+      </div>
+
+      <div>
+        <div class="eyebrow">Database</div>
+        <strong>PostgreSQL</strong>
+        <p class="muted" style="font-size:10px">Structured business data</p>
+      </div>
+
+      <div>
+        <div class="eyebrow">Backend</div>
+        <strong>Secure API Layer</strong>
+        <p class="muted" style="font-size:10px">Business logic & integrations</p>
+      </div>
+
+      <div>
+        <div class="eyebrow">Hosting</div>
+        <strong>Cloud Infrastructure</strong>
+        <p class="muted" style="font-size:10px">Secure web access & backups</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+ USERS
+========================================================= -->
+
+<section class="page" id="page-users">
+
+  <div class="eyebrow">Access Control</div>
+  <h1 class="page-title">Users & Permissions</h1>
+  <p class="page-subtitle">
+    Different staff members can receive access according to their responsibilities.
+  </p>
+
+
+  <div class="section-head">
+    <h2 class="section-title">User Directory</h2>
+    <button class="btn btn-primary">+ Add User</button>
+  </div>
+
+  <div class="card table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Role</th>
+          <th>Business</th>
+          <th>Sales</th>
+          <th>Purchases</th>
+          <th>Finance</th>
+          <th>Reports</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td><strong>Admin</strong></td>
+          <td>Administrator</td>
+          <td>All</td>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+          <td>✓</td>
+          <td><span class="badge badge-green">Active</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>Sales Manager</strong></td>
+          <td>Sales</td>
+          <td>Both</td>
+          <td>✓</td>
+          <td>View</td>
+          <td>View</td>
+          <td>✓</td>
+          <td><span class="badge badge-green">Active</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>Service Manager</strong></td>
+          <td>Service</td>
+          <td>Sadaat</td>
+          <td>View</td>
+          <td>View</td>
+          <td>View</td>
+          <td>View</td>
+          <td><span class="badge badge-green">Active</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>Accountant</strong></td>
+          <td>Finance</td>
+          <td>Both</td>
+          <td>View</td>
+          <td>View</td>
+          <td>✓</td>
+          <td>✓</td>
+          <td><span class="badge badge-green">Active</span></td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+ REFERENCES
+========================================================= -->
+
+<section class="page" id="page-references">
+
+  <div class="eyebrow">Traceability</div>
+  <h1 class="page-title">Requirement Reference System</h1>
+  <p class="page-subtitle">
+    Each requested requirement is connected to a module, workflow and demonstration screen.
+  </p>
+
+
+  <div class="card table-wrap" style="margin-top:18px">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Reference</th>
+          <th>Client Requirement</th>
+          <th>Module</th>
+          <th>Workflow</th>
+          <th>Demo Screen</th>
+          <th>Coverage</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td><strong>REQ-001</strong></td>
+          <td>Retail Sales</td>
+          <td>POS</td>
+          <td>Product → Cart → Payment → Invoice</td>
+          <td>Electronics POS</td>
+          <td><span class="badge badge-green">Demonstrated</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>REQ-002</strong></td>
+          <td>Wholesale Sales</td>
+          <td>Wholesale</td>
+          <td>Dealer → Order → Invoice → Outstanding</td>
+          <td>Sales</td>
+          <td><span class="badge badge-green">Demonstrated</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>REQ-003</strong></td>
+          <td>Customer Complaints</td>
+          <td>Service</td>
+          <td>Complaint → Job Card</td>
+          <td>Repairs</td>
+          <td><span class="badge badge-green">Demonstrated</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>REQ-004</strong></td>
+          <td>Technician Visits</td>
+          <td>Technicians</td>
+          <td>Assign → Visit → Complete</td>
+          <td>Technicians</td>
+          <td><span class="badge badge-green">Demonstrated</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>REQ-005</strong></td>
+          <td>Parts / Materials</td>
+          <td>Inventory</td>
+          <td>Stock → Used in Job → Deduct</td>
+          <td>Inventory</td>
+          <td><span class="badge badge-green">Demonstrated</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>REQ-006</strong></td>
+          <td>Service Charges</td>
+          <td>Payments</td>
+          <td>Job → Charge → Payment</td>
+          <td>Payments</td>
+          <td><span class="badge badge-green">Demonstrated</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>REQ-007</strong></td>
+          <td>Expenses / Cash</td>
+          <td>Finance</td>
+          <td>Expense → Cash/Bank → Report</td>
+          <td>Expenses</td>
+          <td><span class="badge badge-green">Demonstrated</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>REQ-008</strong></td>
+          <td>Monthly P&L</td>
+          <td>Reports</td>
+          <td>Revenue → Costs → Expenses → Profit</td>
+          <td>Reports</td>
+          <td><span class="badge badge-green">Demonstrated</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>REQ-009</strong></td>
+          <td>Business-wise Reports</td>
+          <td>Reporting</td>
+          <td>All / Sadaat / AK</td>
+          <td>Dashboard</td>
+          <td><span class="badge badge-green">Demonstrated</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>REQ-010</strong></td>
+          <td>Cloud / Web Access</td>
+          <td>Architecture</td>
+          <td>User → Secure Login → Cloud</td>
+          <td>Architecture</td>
+          <td><span class="badge badge-blue">Production</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>REQ-011</strong></td>
+          <td>Backup / Security</td>
+          <td>Infrastructure</td>
+          <td>Database → Backup → Recovery</td>
+          <td>Architecture</td>
+          <td><span class="badge badge-blue">Production</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>REQ-012</strong></td>
+          <td>Login / Permissions</td>
+          <td>RBAC</td>
+          <td>User → Role → Permissions</td>
+          <td>Users</td>
+          <td><span class="badge badge-blue">Production</span></td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <div class="section-head">
+    <h2 class="section-title">What this means for the project</h2>
+  </div>
+
+  <div class="grid-3">
+
+    <div class="card card-pad">
+      <div style="font-size:26px">01</div>
+      <h3 style="font-family:Manrope">Understand</h3>
+      <p class="muted" style="font-size:11px;line-height:1.6">
+        The business requirements are first converted into clearly defined workflows.
+      </p>
+    </div>
+
+    <div class="card card-pad">
+      <div style="font-size:26px">02</div>
+      <h3 style="font-family:Manrope">Demonstrate</h3>
+      <p class="muted" style="font-size:11px;line-height:1.6">
+        The important workflows are represented in an interactive software prototype.
+      </p>
+    </div>
+
+    <div class="card card-pad">
+      <div style="font-size:26px">03</div>
+      <h3 style="font-family:Manrope">Implement</h3>
+      <p class="muted" style="font-size:11px;line-height:1.6">
+        Final production scope can then be confirmed and implemented on the agreed technology stack.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+</main>
+</div>
+
+
+<!-- =========================================================
+ MODALS
+========================================================= -->
+
+<div class="modal-bg" id="saleModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+      <h3>Create New Sale</h3>
+      <button class="close" onclick="closeModal('saleModal')">×</button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Business</label>
+          <select id="saleBusiness">
+            <option>Sadaat Electronics</option>
+            <option>AK Traders</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Customer / Dealer</label>
+          <input id="saleCustomer" value="New Customer">
+        </div>
+
+        <div class="field">
+          <label>Product</label>
+          <select>
+            <option>Haier Refrigerator</option>
+            <option>Dawlance AC</option>
+            <option>PEL Washing Machine</option>
+            <option>Westpoint Air Fryer</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Amount</label>
+          <input id="saleAmount" type="number" value="48500">
+        </div>
+
+        <div class="field">
+          <label>Payment Status</label>
+          <select>
+            <option>Paid</option>
+            <option>Partial</option>
+            <option>Credit</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Payment Method</label>
+          <select>
+            <option>Cash</option>
+            <option>Bank Transfer</option>
+            <option>Card</option>
+          </select>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal-foot">
+      <button class="btn btn-light" onclick="closeModal('saleModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="createSale()">Create Sale</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="modal-bg" id="purchaseModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+      <h3>Create Purchase</h3>
+      <button class="close" onclick="closeModal('purchaseModal')">×</button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Business</label>
+          <select>
+            <option>Sadaat Electronics</option>
+            <option>AK Traders</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Supplier</label>
+          <input value="New Supplier">
+        </div>
+
+        <div class="field">
+          <label>Product</label>
+          <input value="New Appliance">
+        </div>
+
+        <div class="field">
+          <label>Quantity</label>
+          <input type="number" value="10">
+        </div>
+
+        <div class="field">
+          <label>Total Amount</label>
+          <input type="number" value="150000">
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal-foot">
+      <button class="btn btn-light" onclick="closeModal('purchaseModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="simpleSuccess('Purchase order created successfully')">Create Purchase</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="modal-bg" id="repairModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+      <h3>Create Service Complaint</h3>
+      <button class="close" onclick="closeModal('repairModal')">×</button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Customer</label>
+          <input value="New Customer">
+        </div>
+
+        <div class="field">
+          <label>Appliance</label>
+          <input value="Refrigerator">
+        </div>
+
+        <div class="field full">
+          <label>Complaint / Issue</label>
+          <textarea rows="3">Customer reported appliance issue.</textarea>
+        </div>
+
+        <div class="field">
+          <label>Technician</label>
+          <select>
+            <option>Ahmed Raza</option>
+            <option>Bilal Khan</option>
+            <option>Hassan Shah</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Estimated Charges</label>
+          <input type="number" value="5000">
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal-foot">
+      <button class="btn btn-light" onclick="closeModal('repairModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="simpleSuccess('Job card REP-209 created successfully')">Create Job Card</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="modal-bg" id="paymentModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+      <h3>Receive Payment</h3>
+      <button class="close" onclick="closeModal('paymentModal')">×</button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Customer / Dealer</label>
+          <input value="Muhammad Asad">
+        </div>
+
+        <div class="field">
+          <label>Invoice</label>
+          <input value="INV-1042">
+        </div>
+
+        <div class="field">
+          <label>Amount</label>
+          <input type="number" value="25000">
+        </div>
+
+        <div class="field">
+          <label>Method</label>
+          <select>
+            <option>Cash</option>
+            <option>Bank</option>
+            <option>Card</option>
+          </select>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal-foot">
+      <button class="btn btn-light" onclick="closeModal('paymentModal')">Cancel</button>
+      <button class="btn btn-green" onclick="simpleSuccess('Payment PAY-9822 received successfully')">Receive Payment</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="modal-bg" id="expenseModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+      <h3>Add Expense</h3>
+      <button class="close" onclick="closeModal('expenseModal')">×</button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Business</label>
+          <select>
+            <option>Sadaat Electronics</option>
+            <option>AK Traders</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Category</label>
+          <select>
+            <option>Utilities</option>
+            <option>Transport</option>
+            <option>Technician</option>
+            <option>Rent</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label>Description</label>
+          <input value="Business expense">
+        </div>
+
+        <div class="field">
+          <label>Amount</label>
+          <input type="number" value="5000">
+        </div>
+
+        <div class="field">
+          <label>Payment Method</label>
+          <select>
+            <option>Cash</option>
+            <option>Bank</option>
+          </select>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal-foot">
+      <button class="btn btn-light" onclick="closeModal('expenseModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="simpleSuccess('Expense recorded successfully')">Save Expense</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="modal-bg" id="customerModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+      <h3>Add Customer / Dealer</h3>
+      <button class="close" onclick="closeModal('customerModal')">×</button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Name</label>
+          <input value="">
+        </div>
+
+        <div class="field">
+          <label>Type</label>
+          <select>
+            <option>Customer</option>
+            <option>Dealer</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Phone</label>
+          <input value="">
+        </div>
+
+        <div class="field">
+          <label>Business</label>
+          <select>
+            <option>Sadaat Electronics</option>
+            <option>AK Traders</option>
+          </select>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal-foot">
+      <button class="btn btn-light" onclick="closeModal('customerModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="simpleSuccess('Contact added successfully')">Save Contact</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="modal-bg" id="stockModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+      <h3>Add Inventory Stock</h3>
+      <button class="close" onclick="closeModal('stockModal')">×</button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Product Name</label>
+          <input value="">
+        </div>
+
+        <div class="field">
+          <label>SKU</label>
+          <input value="SKU-NEW">
+        </div>
+
+        <div class="field">
+          <label>Quantity</label>
+          <input type="number" value="10">
+        </div>
+
+        <div class="field">
+          <label>Purchase Price</label>
+          <input type="number" value="10000">
+        </div>
+
+        <div class="field">
+          <label>Sale Price</label>
+          <input type="number" value="12000">
+        </div>
+
+        <div class="field">
+          <label>Business</label>
+          <select>
+            <option>Sadaat Electronics</option>
+            <option>AK Traders</option>
+          </select>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal-foot">
+      <button class="btn btn-light" onclick="closeModal('stockModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="simpleSuccess('Inventory item added successfully')">Add Stock</button>
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+ DATA
+========================================================= */
+
+const products = [
+
+  {
+    id:1,
+    name:"Haier Refrigerator",
+    brand:"Haier",
+    sku:"HR-14F",
+    price:48500,
+    stock:18,
+    image:"https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    id:2,
+    name:"Dawlance Split AC",
+    brand:"Dawlance",
+    sku:"DW-1.5T",
+    price:112000,
+    stock:9,
+    image:"https://images.unsplash.com/photo-1631545806609-4b7d8e7f5b74?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    id:3,
+    name:"PEL Washing Machine",
+    brand:"PEL",
+    sku:"PEL-WM",
+    price:58500,
+    stock:12,
+    image:"https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    id:4,
+    name:"Westpoint Air Fryer",
+    brand:"Westpoint",
+    sku:"WF-928",
+    price:18500,
+    stock:24,
+    image:"https://images.unsplash.com/photo-1647453406689-5e3c7f9d5a1a?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    id:5,
+    name:"Haier Microwave Oven",
+    brand:"Haier",
+    sku:"MW-20L",
+    price:26500,
+    stock:8,
+    image:"https://images.unsplash.com/photo-1585659722983-3a675dabf23d?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    id:6,
+    name:"Kenwood Blender",
+    brand:"Kenwood",
+    sku:"KW-BL",
+    price:12900,
+    stock:31,
+    image:"https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    id:7,
+    name:"Dawlance Water Dispenser",
+    brand:"Dawlance",
+    sku:"DW-WD",
+    price:22500,
+    stock:14,
+    image:"https://images.unsplash.com/photo-1601039641847-7857b994d704?auto=format&fit=crop&w=700&q=80"
+  },
+
+  {
+    id:8,
+    name:"PEL Deep Freezer",
+    brand:"PEL",
+    sku:"PEL-DF",
+    price:67500,
+    stock:5,
+    image:"https://images.unsplash.com/photo-1592432678016-e910b452f9a2?auto=format&fit=crop&w=700&q=80"
+  }
+
+];
+
+let cart = [];
+
+let events = [
+
+  {
+    icon:"₨",
+    bg:"#eaf2ff",
+    color:"#2878f0",
+    title:"Sale INV-1042 created",
+    meta:"Sadaat Electronics · Muhammad Asad · ₨ 48,500 · 4 min ago"
+  },
+
+  {
+    icon:"✓",
+    bg:"#eaf9f3",
+    color:"#19a974",
+    title:"Payment PAY-9821 received",
+    meta:"Cash payment · ₨ 48,500 · 8 min ago"
+  },
+
+  {
+    icon:"⚒",
+    bg:"#fff5e7",
+    color:"#ef9b32",
+    title:"Job REP-208 assigned",
+    meta:"Ahmed Raza · Haier Refrigerator · 16 min ago"
+  },
+
+  {
+    icon:"▦",
+    bg:"#fff0f1",
+    color:"#e34d59",
+    title:"Low stock alert",
+    meta:"PEL Deep Freezer · 5 units remaining · 22 min ago"
+  },
+
+  {
+    icon:"₨",
+    bg:"#f1edff",
+    color:"#7357d9",
+    title:"Wholesale order updated",
+    meta:"AK Traders · Al-Madina Electronics · 35 min ago"
+  }
+
+];
+
+
+/* =========================================================
+ NAVIGATION
+========================================================= */
+
+function openPage(id,btn){
+
+  document.querySelectorAll(".page").forEach(p=>{
+    p.classList.remove("active");
+  });
+
+  const page=document.getElementById("page-"+id);
+
+  if(page){
+    page.classList.add("active");
+  }
+
+  document.querySelectorAll(".nav-item").forEach(n=>{
+    n.classList.remove("active");
+  });
+
+  if(btn){
+    btn.classList.add("active");
+  }
+
+  const titles={
+    dashboard:"Dashboard",
+    requirements:"Requirements",
+    activity:"Live Activity",
+    pos:"Electronics POS",
+    sales:"Sales",
+    purchases:"Purchases",
+    invoices:"Invoices & Quotations",
+    inventory:"Inventory",
+    customers:"Customers & Dealers",
+    repairs:"Repairs & Job Cards",
+    technicians:"Technicians",
+    payments:"Payments & Cash",
+    expenses:"Expenses",
+    reports:"Reports & P&L",
+    architecture:"Architecture",
+    users:"Users & Permissions",
+    references:"Reference System"
+  };
+
+  document.getElementById("breadcrumb").textContent=titles[id]||id;
+
+  if(window.innerWidth<900){
+    document.getElementById("sidebar").classList.remove("open");
+  }
+
+  renderPageData();
+
+}
+
+
+function openPageById(id){
+
+  const btn=[...document.querySelectorAll(".nav-item")]
+    .find(x=>x.getAttribute("onclick")?.includes("'"+id+"'"));
+
+  openPage(id,btn);
+
+}
+
+
+/* =========================================================
+ SIDEBAR
+========================================================= */
+
+function toggleSidebar(){
+
+  document.getElementById("sidebar").classList.toggle("open");
+
+}
+
+
+/* =========================================================
+ BUSINESS FILTER
+========================================================= */
+
+function changeBusiness(){
+
+  const value=document.getElementById("businessFilter").value;
+
+  const labels={
+    all:"All Businesses",
+    sadaat:"Sadaat Electronics",
+    ak:"AK Traders"
+  };
+
+  addEvent(
+    "◉",
+    "#eaf2ff",
+    "#2878f0",
+    "Business filter changed",
+    labels[value]
+  );
+
+}
+
+
+/* =========================================================
+ PRODUCTS
+========================================================= */
+
+function renderProducts(){
+
+  const container=document.getElementById("posProducts");
+
+  if(!container)return;
+
+  const query=(document.getElementById("productSearch")?.value||"").toLowerCase();
+
+  const filtered=products.filter(p=>
+    p.name.toLowerCase().includes(query) ||
+    p.brand.toLowerCase().includes(query) ||
+    p.sku.toLowerCase().includes(query)
+  );
+
+  container.innerHTML=filtered.map(p=>`
+
+    <div class="product">
+
+      <div class="product-img">
+        <img
+          src="${p.image}"
+          alt="${p.name}"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<div style=font-size:35px>📦</div>'"
+        >
+      </div>
+
+      <div class="product-body">
+
+        <div class="product-brand">${p.brand}</div>
+
+        <div class="product-name">${p.name}</div>
+
+        <div class="product-meta">
+          <span>${p.sku}</span>
+          <span>${p.stock} in stock</span>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between">
+
+          <div class="product-price">
+            ₨ ${p.price.toLocaleString()}
+          </div>
+
+          <button
+            class="btn btn-primary"
+            style="padding:6px 8px"
+            onclick="addToCart(${p.id})"
+          >
+            + Add
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+function addToCart(id){
+
+  const product=products.find(p=>p.id===id);
+
+  if(!product)return;
+
+  const existing=cart.find(x=>x.id===id);
+
+  if(existing){
+    existing.qty++;
+  }else{
+    cart.push({
+      ...product,
+      qty:1
+    });
+  }
+
+  renderCart();
+
+}
+
+
+function changeQty(id,change){
+
+  const item=cart.find(x=>x.id===id);
+
+  if(!item)return;
+
+  item.qty+=change;
+
+  if(item.qty<=0){
+    cart=cart.filter(x=>x.id!==id);
+  }
+
+  renderCart();
+
+}
+
+
+function renderCart(){
+
+  const container=document.getElementById("cartItems");
+
+  if(!container)return;
+
+  let total=0;
+  let count=0;
+
+  container.innerHTML=cart.length?
+
+    cart.map(item=>{
+
+      const line=item.price*item.qty;
+
+      total+=line;
+      count+=item.qty;
+
+      return `
+
+        <div class="cart-item">
+
+          <div>
+            <div class="cart-item-name">${item.name}</div>
+            <div class="muted" style="font-size:9px">
+              ₨ ${item.price.toLocaleString()} × ${item.qty}
+            </div>
+          </div>
+
+          <div class="qty">
+            <button onclick="changeQty(${item.id},-1)">−</button>
+            <strong>${item.qty}</strong>
+            <button onclick="changeQty(${item.id},1)">+</button>
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("")
+
+    :
+
+    `<div style="text-align:center;padding:40px 10px;color:#9aa5b3">
+      <div style="font-size:30px">🛒</div>
+      <div style="font-size:11px;margin-top:8px">Cart is empty</div>
+    </div>`;
+
+  document.getElementById("cartSubtotal").textContent="₨ "+total.toLocaleString();
+  document.getElementById("cartTotal").textContent="₨ "+total.toLocaleString();
+  document.getElementById("cartCount").textContent=count+" Item"+(count===1?"":"s");
+
+}
+
+
+/* =========================================================
+ COMPLETE SALE
+========================================================= */
+
+function completeSale(){
+
+  if(cart.length===0){
+
+    openModal("saleModal");
+
+    return;
+
+  }
+
+  let total=cart.reduce((sum,item)=>sum+(item.price*item.qty),0);
+
+  const ref="INV-"+Math.floor(1000+Math.random()*8999);
+
+  addEvent(
+    "₨",
+    "#eaf2ff",
+    "#2878f0",
+    "New POS sale completed",
+    `${ref} · Sadaat Electronics · ₨ ${total.toLocaleString()}`
+  );
+
+  alert(
+    "Sale completed successfully.\n\n"+
+    "Invoice: "+ref+"\n"+
+    "Amount: ₨ "+total.toLocaleString()
+  );
+
+  cart=[];
+
+  renderCart();
+
+}
+
+
+/* =========================================================
+ LIVE TRANSACTIONS
+========================================================= */
+
+function renderTransactions(){
+
+  const tbody=document.getElementById("liveTransactions");
+
+  if(!tbody)return;
+
+  tbody.innerHTML=`
+
+    <tr>
+      <td>4:42 PM</td>
+      <td><strong>INV-1042</strong></td>
+      <td>Sadaat Electronics</td>
+      <td><span class="badge badge-blue">POS Sale</span></td>
+      <td>Muhammad Asad</td>
+      <td class="amount">₨ 48,500</td>
+      <td><span class="badge badge-green">Paid</span></td>
+    </tr>
+
+    <tr>
+      <td>3:15 PM</td>
+      <td><strong>WS-3088</strong></td>
+      <td>AK Traders</td>
+      <td><span class="badge badge-purple">Wholesale</span></td>
+      <td>Al-Madina Electronics</td>
+      <td class="amount">₨ 125,000</td>
+      <td><span class="badge badge-orange">Partial</span></td>
+    </tr>
+
+    <tr>
+      <td>2:08 PM</td>
+      <td><strong>REP-208</strong></td>
+      <td>Sadaat Electronics</td>
+      <td><span class="badge badge-orange">Service</span></td>
+      <td>Kashif Ahmed</td>
+      <td class="amount">₨ 8,500</td>
+      <td><span class="badge badge-green">Paid</span></td>
+    </tr>
+
+    <tr>
+      <td>1:36 PM</td>
+      <td><strong>PAY-9818</strong></td>
+      <td>AK Traders</td>
+      <td><span class="badge badge-green">Payment</span></td>
+      <td>Home Kitchen Store</td>
+      <td class="amount">₨ 64,000</td>
+      <td><span class="badge badge-green">Received</span></td>
+    </tr>
+
+    <tr>
+      <td>12:20 PM</td>
+      <td><strong>PO-2048</strong></td>
+      <td>Sadaat Electronics</td>
+      <td><span class="badge badge-gray">Purchase</span></td>
+      <td>PEL Distribution</td>
+      <td class="amount">₨ 386,000</td>
+      <td><span class="badge badge-blue">Received</span></td>
+    </tr>
+
+  `;
+
+}
+
+
+/* =========================================================
+ SALES TABLE
+========================================================= */
+
+function renderSales(){
+
+  const tbody=document.getElementById("salesTable");
+
+  if(!tbody)return;
+
+  tbody.innerHTML=`
+
+    <tr>
+      <td><strong>INV-1042</strong></td>
+      <td>02 Oct 2026</td>
+      <td>Sadaat Electronics</td>
+      <td>Muhammad Asad</td>
+      <td>1</td>
+      <td class="amount">₨ 48,500</td>
+      <td>₨ 48,500</td>
+      <td>₨ 0</td>
+      <td><span class="badge badge-green">Paid</span></td>
+    </tr>
+
+    <tr>
+      <td><strong>WS-3088</strong></td>
+      <td>02 Oct 2026</td>
+      <td>AK Traders</td>
+      <td>Al-Madina Electronics</td>
+      <td>8</td>
+      <td class="amount">₨ 125,000</td>
+      <td>₨ 75,000</td>
+      <td>₨ 50,000</td>
+      <td><span class="badge badge-orange">Partial</span></td>
+    </tr>
+
+    <tr>
+      <td><strong>INV-1041</strong></td>
+      <td>02 Oct 2026</td>
+      <td>Sadaat Electronics</td>
+      <td>Saima Residence</td>
+      <td>2</td>
+      <td class="amount">₨ 82,500</td>
+      <td>₨ 82,500</td>
+      <td>₨ 0</td>
+      <td><span class="badge badge-green">Paid</span></td>
+    </tr>
+
+  `;
+
+}
+
+
+/* =========================================================
+ INVENTORY
+========================================================= */
+
+function renderInventory(){
+
+  const grid=document.getElementById("inventoryGrid");
+
+  if(!grid)return;
+
+  grid.innerHTML=products.map(p=>`
+
+    <div class="stock-card">
+
+      <div class="stock-img">
+        <img
+          src="${p.image}"
+          alt="${p.name}"
+          onerror="this.style.display='none';this.parentElement.innerHTML='<div style=height:100%;display:flex;align-items:center;justify-content:center;font-size:40px>📦</div>'"
+        >
+      </div>
+
+      <div class="stock-body">
+
+        <div class="product-brand">${p.brand}</div>
+
+        <div class="product-name">${p.name}</div>
+
+        <div class="muted" style="font-size:9px">
+          SKU: ${p.sku}
+        </div>
+
+        <div class="stock-footer">
+
+          <div>
+            <div class="muted" style="font-size:9px">Stock</div>
+            <strong>${p.stock} units</strong>
+          </div>
+
+          ${
+            p.stock<=5
+            ? `<span class="badge badge-red">Low Stock</span>`
+            : p.stock<=10
+            ? `<span class="badge badge-orange">Watch</span>`
+            : `<span class="badge badge-green">Healthy</span>`
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+/* =========================================================
+ EVENTS
+========================================================= */
+
+function renderEvents(){
+
+  const container=document.getElementById("events");
+
+  if(!container)return;
+
+  container.innerHTML=events.map(e=>`
+
+    <div class="event">
+
+      <div
+        class="event-icon"
+        style="background:${e.bg};color:${e.color}"
+      >
+        ${e.icon}
+      </div>
+
+      <div>
+
+        <div class="event-title">${e.title}</div>
+
+        <div class="event-meta">${e.meta}</div>
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+function addEvent(icon,bg,color,title,meta){
+
+  events.unshift({
+    icon,
+    bg,
+    color,
+    title,
+    meta:"Just now · "+meta
+  });
+
+  events=events.slice(0,8);
+
+  renderEvents();
+
+}
+
+
+/* =========================================================
+ MODALS
+========================================================= */
+
+function openModal(id){
+
+  document.getElementById(id).classList.add("open");
+
+}
+
+
+function closeModal(id){
+
+  document.getElementById(id).classList.remove("open");
+
+}
+
+
+function simpleSuccess(message){
+
+  document.querySelectorAll(".modal-bg").forEach(x=>x.classList.remove("open"));
+
+  addEvent(
+    "✓",
+    "#eaf9f3",
+    "#19a974",
+    "New record created",
+    message
+  );
+
+  alert(message);
+
+}
+
+
+/* =========================================================
+ CREATE SALE FROM FORM
+========================================================= */
+
+function createSale(){
+
+  const customer=document.getElementById("saleCustomer").value||"Customer";
+
+  const amount=Number(document.getElementById("saleAmount").value)||0;
+
+  const ref="INV-"+Math.floor(1000+Math.random()*8999);
+
+  closeModal("saleModal");
+
+  addEvent(
+    "₨",
+    "#eaf2ff",
+    "#2878f0",
+    "New sales invoice created",
+    `${ref} · ${customer} · ₨ ${amount.toLocaleString()}`
+  );
+
+  alert(
+    "Sales invoice created successfully.\n\n"+
+    "Reference: "+ref+"\n"+
+    "Customer: "+customer+"\n"+
+    "Amount: ₨ "+amount.toLocaleString()
+  );
+
+}
+
+
+/* =========================================================
+ INVOICE
+========================================================= */
+
+function showInvoice(){
+
+  const el=document.getElementById("invoicePreview");
+
+  el.style.display="block";
+
+  el.scrollIntoView({
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+ RENDER
+========================================================= */
+
+function renderPageData(){
+
+  renderProducts();
+  renderCart();
+  renderTransactions();
+  renderSales();
+  renderInventory();
+  renderEvents();
+
+}
+
+
+/* =========================================================
+ INITIALIZE
+========================================================= */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+  renderPageData();
+
+});
+
+
+/* =========================================================
+ CLOSE MODAL ON BACKDROP
+========================================================= */
+
+document.querySelectorAll(".modal-bg").forEach(bg=>{
+
+  bg.addEventListener("click",e=>{
+
+    if(e.target===bg){
+      bg.classList.remove("open");
+    }
+
+  });
+
+});
+
+
+/* =========================================================
+ DEMO LIVE CLOCK
+========================================================= */
+
+setInterval(()=>{
+
+  const live=document.querySelector(".live");
+
+  if(live){
+    live.innerHTML=
+      '<span class="live-dot"></span> Demo Data Live · '+
+
+      new Date().toLocaleTimeString([],{
+        hour:"2-digit",
+        minute:"2-digit"
+      });
+  }
+
+},1000);
+
+</script>
+
+</body>
+</html>
