@@ -1,0 +1,3867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spotly Admin Portal</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root{
+  --yellow:#f5c400;
+  --yellow-light:#fff4c7;
+  --bg:#f5f5f3;
+  --white:#fff;
+  --text:#292929;
+  --muted:#777;
+  --line:#e5e3dc;
+  --green:#16834b;
+  --green-bg:#e9f7ef;
+  --red:#c83b32;
+  --red-bg:#fff0ef;
+  --shadow:0 8px 30px rgba(0,0,0,.06);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+button,input,select,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* LOGIN */
+
+.login-screen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.login-card{
+  width:400px;
+  max-width:100%;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:32px;
+  box-shadow:var(--shadow);
+}
+
+.logo{
+  font-size:27px;
+  font-weight:800;
+}
+
+.logo span{
+  color:#b28c00;
+}
+
+.login-sub{
+  color:var(--muted);
+  font-size:13px;
+  margin:7px 0 25px;
+}
+
+label{
+  display:block;
+  font-size:12px;
+  font-weight:700;
+  margin:14px 0 7px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:11px 12px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  outline:none;
+  background:#fff;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#d3ac00;
+}
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:10px 14px;
+  font-weight:700;
+}
+
+.btn-yellow{
+  background:var(--yellow);
+  color:#292929;
+}
+
+.btn-light{
+  background:#fff;
+  border:1px solid var(--line);
+}
+
+.btn-green{
+  background:var(--green-bg);
+  color:var(--green);
+  border:1px solid #c9ead8;
+}
+
+.btn-red{
+  background:var(--red-bg);
+  color:var(--red);
+  border:1px solid #f1d0cc;
+}
+
+.login-btn{
+  width:100%;
+  margin-top:18px;
+}
+
+.error{
+  margin-top:14px;
+  padding:11px;
+  background:var(--red-bg);
+  color:var(--red);
+  border-radius:9px;
+  font-size:13px;
+}
+
+/* APP */
+
+.app{
+  min-height:100vh;
+}
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:240px;
+  background:#fff;
+  border-right:1px solid var(--line);
+  padding:22px 14px;
+  z-index:20;
+}
+
+.side-logo{
+  font-size:22px;
+  font-weight:800;
+  padding:0 10px 25px;
+}
+
+.side-logo span{
+  color:#b28c00;
+}
+
+.nav{
+  display:grid;
+  gap:5px;
+}
+
+.nav button{
+  border:0;
+  background:transparent;
+  text-align:left;
+  padding:12px;
+  border-radius:10px;
+  color:#555;
+  font-weight:700;
+}
+
+.nav button:hover,
+.nav button.active{
+  background:var(--yellow-light);
+  color:#705800;
+}
+
+.main{
+  margin-left:240px;
+  min-height:100vh;
+}
+
+.topbar{
+  height:70px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 27px;
+  position:sticky;
+  top:0;
+  z-index:15;
+}
+
+.top-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.mobile-menu{
+  display:none;
+  border:0;
+  background:#fff;
+  font-size:21px;
+}
+
+.page-title{
+  font-size:21px;
+  font-weight:800;
+}
+
+.admin-email{
+  font-size:12px;
+  background:var(--yellow-light);
+  padding:8px 11px;
+  border-radius:9px;
+}
+
+.content{
+  padding:25px 27px;
+}
+
+/* DASHBOARD */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.stat{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+
+.stat-label{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.stat-value{
+  font-size:28px;
+  font-weight:800;
+  margin-top:8px;
+}
+
+.section{
+  margin-top:18px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:15px;
+  overflow:hidden;
+}
+
+.section-head{
+  padding:16px 18px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.section-title{
+  font-weight:800;
+}
+
+.filters{
+  display:flex;
+  gap:8px;
+}
+
+.filters input,
+.filters select{
+  width:auto;
+  min-width:150px;
+}
+
+/* TABLE */
+
+.table-wrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:850px;
+}
+
+th,
+td{
+  padding:13px 15px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  font-size:13px;
+}
+
+th{
+  color:var(--muted);
+  font-size:10px;
+  text-transform:uppercase;
+}
+
+.actions{
+  display:flex;
+  gap:6px;
+  align-items:center;
+}
+
+.icon-btn{
+  width:34px;
+  height:34px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:9px;
+}
+
+.icon-btn:hover{
+  background:var(--yellow-light);
+}
+
+.badge{
+  display:inline-flex;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.badge-approved,
+.badge-online{
+  background:var(--green-bg);
+  color:var(--green);
+}
+
+.badge-pending,
+.badge-offline{
+  background:#fff3cf;
+  color:#806300;
+}
+
+.badge-rejected{
+  background:var(--red-bg);
+  color:var(--red);
+}
+
+/* NOTIFICATIONS */
+
+.notification{
+  padding:15px 18px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.notification.unread{
+  background:#fffdf1;
+}
+
+.notification-title{
+  font-size:13px;
+  font-weight:800;
+}
+
+.notification-message{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.notification-time{
+  color:#999;
+  font-size:11px;
+  white-space:nowrap;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.28);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:100;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:720px;
+  max-width:100%;
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:17px;
+}
+
+.modal-head{
+  padding:17px 20px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.modal-title{
+  font-weight:800;
+}
+
+.modal-close{
+  border:0;
+  background:transparent;
+  font-size:22px;
+}
+
+.modal-body{
+  padding:20px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+.detail-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.detail{
+  background:#f8f8f6;
+  padding:12px;
+  border-radius:10px;
+}
+
+.detail small{
+  display:block;
+  color:#999;
+  font-size:10px;
+  margin-bottom:4px;
+}
+
+.detail b{
+  font-size:13px;
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:18px;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#292929;
+  color:#fff;
+  padding:12px 16px;
+  border-radius:10px;
+  opacity:0;
+  transform:translateY(8px);
+  pointer-events:none;
+  transition:.2s;
+  z-index:200;
+}
+
+.toast.show{
+  opacity:1;
+  transform:none;
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+  .sidebar{
+    width:215px;
+  }
+
+  .main{
+    margin-left:215px;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+
+  .sidebar{
+    display:none;
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .mobile-menu{
+    display:block;
+  }
+
+  .topbar{
+    padding:0 15px;
+  }
+
+  .admin-email{
+    display:none;
+  }
+
+  .content{
+    padding:17px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .filters{
+    width:100%;
+    flex-direction:column;
+  }
+
+  .filters input,
+  .filters select{
+    width:100%;
+  }
+
+  .section-head{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .form-grid,
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<div id="loginScreen" class="login-screen">
+
+  <div class="login-card">
+
+    <div class="logo">
+      Spotly <span>Admin</span>
+    </div>
+
+    <div class="login-sub">
+      Vendor network control center
+    </div>
+
+    <div id="loginError" class="error hidden"></div>
+
+    <label>Email</label>
+
+    <input
+      id="loginEmail"
+      type="email"
+      placeholder="admin@spotly.com"
+      autocomplete="username"
+    >
+
+    <label>Password</label>
+
+    <input
+      id="loginPassword"
+      type="password"
+      placeholder="Password"
+      autocomplete="current-password"
+    >
+
+    <button
+      class="btn btn-yellow login-btn"
+      onclick="loginAdmin()"
+    >
+      Sign in
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ADMIN APP -->
+
+<div id="adminApp" class="app hidden">
+
+  <aside class="sidebar">
+
+    <div class="side-logo">
+      Spotly <span>Admin</span>
+    </div>
+
+    <nav class="nav">
+
+      <button
+        class="active"
+        data-page="dashboard"
+        onclick="showPage('dashboard',this)"
+      >
+        Dashboard
+      </button>
+
+      <button
+        data-page="vendors"
+        onclick="showPage('vendors',this)"
+      >
+        Vendors
+      </button>
+
+      <button
+        data-page="screens"
+        onclick="showPage('screens',this)"
+      >
+        Screen Monitoring
+      </button>
+
+      <button
+        data-page="notifications"
+        onclick="showPage('notifications',this)"
+      >
+        Notifications
+        <span id="notificationBadge"></span>
+      </button>
+
+      <button
+        data-page="withdrawals"
+        onclick="showPage('withdrawals',this)"
+      >
+        Withdrawals
+      </button>
+
+      <button
+        data-page="complaints"
+        onclick="showPage('complaints',this)"
+      >
+        Complaints
+      </button>
+
+    </nav>
+
+  </aside>
+
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="top-left">
+
+        <button
+          class="mobile-menu"
+          onclick="toggleSidebar()"
+        >
+          ☰
+        </button>
+
+        <div
+          id="pageTitle"
+          class="page-title"
+        >
+          Dashboard
+        </div>
+
+      </div>
+
+      <div
+        style="display:flex;align-items:center;gap:10px"
+      >
+
+        <span
+          id="adminEmail"
+          class="admin-email"
+        ></span>
+
+        <button
+          class="btn btn-light"
+          onclick="logoutAdmin()"
+        >
+          Logout
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <div
+      id="pageContent"
+      class="content"
+    ></div>
+
+  </main>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div
+  id="modal"
+  class="modal"
+  onclick="if(event.target===this)closeModal()"
+>
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <div
+        id="modalTitle"
+        class="modal-title"
+      ></div>
+
+      <button
+        class="modal-close"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div
+      id="modalBody"
+      class="modal-body"
+    ></div>
+
+  </div>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+  "https://ausocdplliuftdqxbvwa.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_MOXjixlgTPDBvrD3nZP81Q_9n30a-et";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY,
+    {
+      auth:{
+        persistSession:true,
+        autoRefreshToken:true,
+        detectSessionInUrl:true,
+        storageKey:"spotly-admin-auth"
+      }
+    }
+  );
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let currentUser = null;
+
+let vendors = [];
+
+let adminNotifications = [];
+
+let currentPage = "dashboard";
+
+let realtimeChannel = null;
+
+let offlineAlertCache = new Set();
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function esc(value){
+
+  return String(value ?? "")
+    .replace(/[&<>"']/g,function(char){
+
+      return {
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+      }[char];
+
+    });
+
+}
+
+
+function toast(message){
+
+  const element =
+    document.getElementById("toast");
+
+  element.textContent = message;
+
+  element.classList.add("show");
+
+  setTimeout(function(){
+
+    element.classList.remove("show");
+
+  },2800);
+
+}
+
+
+function showLoginError(message){
+
+  const element =
+    document.getElementById("loginError");
+
+  element.textContent = message;
+
+  element.classList.remove("hidden");
+
+}
+
+
+function clearLoginError(){
+
+  document
+    .getElementById("loginError")
+    .classList.add("hidden");
+
+}
+
+
+function closeModal(){
+
+  document
+    .getElementById("modal")
+    .classList.remove("show");
+
+}
+
+
+function openModal(title,body){
+
+  document
+    .getElementById("modalTitle")
+    .textContent = title;
+
+  document
+    .getElementById("modalBody")
+    .innerHTML = body;
+
+  document
+    .getElementById("modal")
+    .classList.add("show");
+
+}
+
+
+function formatTime(value){
+
+  if(!value) return "—";
+
+  return String(value).slice(0,5);
+
+}
+
+
+function formatDate(value){
+
+  if(!value) return "—";
+
+  return new Date(value).toLocaleString();
+
+}
+
+
+/* =========================================================
+   WORKING HOURS
+========================================================= */
+
+function isWithinWorkingHours(vendor){
+
+  if(
+    !vendor ||
+    !vendor.opening_time ||
+    !vendor.closing_time
+  ){
+    return false;
+  }
+
+  const now = new Date();
+
+  const currentMinutes =
+    now.getHours() * 60 +
+    now.getMinutes();
+
+  const opening =
+    String(vendor.opening_time)
+      .split(":")
+      .map(Number);
+
+  const closing =
+    String(vendor.closing_time)
+      .split(":")
+      .map(Number);
+
+  const openingMinutes =
+    opening[0] * 60 + opening[1];
+
+  const closingMinutes =
+    closing[0] * 60 + closing[1];
+
+  if(openingMinutes <= closingMinutes){
+
+    return (
+      currentMinutes >= openingMinutes &&
+      currentMinutes <= closingMinutes
+    );
+
+  }
+
+  return (
+    currentMinutes >= openingMinutes ||
+    currentMinutes <= closingMinutes
+  );
+
+}
+
+
+function isOfflineDuringWorkingHours(vendor){
+
+  return (
+    vendor &&
+    vendor.status === "approved" &&
+    vendor.online_status !== true &&
+    isWithinWorkingHours(vendor)
+  );
+
+}
+
+
+/* =========================================================
+   ADMIN LOGIN
+========================================================= */
+
+async function loginAdmin(){
+
+  clearLoginError();
+
+  const email =
+    document
+      .getElementById("loginEmail")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const password =
+    document
+      .getElementById("loginPassword")
+      .value;
+
+  if(!email || !password){
+
+    showLoginError(
+      "Please enter email and password."
+    );
+
+    return;
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient.auth.signInWithPassword({
+
+      email:email,
+
+      password:password
+
+    });
+
+
+  if(error){
+
+    console.error(
+      "LOGIN ERROR:",
+      error
+    );
+
+    showLoginError(
+      error.message ||
+      "Invalid login credentials."
+    );
+
+    return;
+  }
+
+
+  if(!data || !data.user){
+
+    showLoginError(
+      "Login failed. No user session returned."
+    );
+
+    return;
+  }
+
+
+  /*
+    IMPORTANT:
+    Immediately verify that the session exists.
+  */
+
+  const {
+    data:sessionData
+  } =
+    await supabaseClient.auth.getSession();
+
+
+  if(
+    !sessionData ||
+    !sessionData.session ||
+    !sessionData.session.user
+  ){
+
+    showLoginError(
+      "Login succeeded but Supabase session was not created."
+    );
+
+    return;
+  }
+
+
+  currentUser =
+    sessionData.session.user;
+
+
+  /*
+    Verify admin_users.
+  */
+
+  const {
+    data:admin,
+    error:adminError
+  } =
+    await supabaseClient
+      .from("admin_users")
+      .select(
+        "id,user_id,email,full_name,active"
+      )
+      .eq(
+        "user_id",
+        currentUser.id
+      )
+      .eq(
+        "active",
+        true
+      )
+      .maybeSingle();
+
+
+  if(adminError){
+
+    console.error(
+      "ADMIN CHECK ERROR:",
+      adminError
+    );
+
+    await supabaseClient.auth.signOut();
+
+    showLoginError(
+      adminError.message ||
+      "Unable to verify admin access."
+    );
+
+    return;
+  }
+
+
+  if(!admin){
+
+    await supabaseClient.auth.signOut();
+
+    showLoginError(
+      "This account does not have admin access."
+    );
+
+    return;
+  }
+
+
+  /*
+    SUCCESS
+  */
+
+  document
+    .getElementById("loginScreen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("adminApp")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("adminEmail")
+    .textContent =
+      admin.email ||
+      currentUser.email ||
+      "Admin";
+
+
+  await startAdminPortal();
+
+}
+
+
+/* =========================================================
+   SESSION RESTORE
+========================================================= */
+
+async function restoreAdminSession(){
+
+  try{
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth.getSession();
+
+
+    if(error){
+
+      console.error(
+        "SESSION ERROR:",
+        error
+      );
+
+      return;
+    }
+
+
+    const session =
+      data?.session;
+
+
+    if(!session?.user){
+
+      return;
+    }
+
+
+    const user =
+      session.user;
+
+
+    const {
+      data:admin,
+      error:adminError
+    } =
+      await supabaseClient
+        .from("admin_users")
+        .select(
+          "id,user_id,email,full_name,active"
+        )
+        .eq(
+          "user_id",
+          user.id
+        )
+        .eq(
+          "active",
+          true
+        )
+        .maybeSingle();
+
+
+    if(
+      adminError ||
+      !admin
+    ){
+
+      await supabaseClient.auth.signOut();
+
+      return;
+    }
+
+
+    currentUser = user;
+
+
+    document
+      .getElementById("loginScreen")
+      .classList.add("hidden");
+
+    document
+      .getElementById("adminApp")
+      .classList.remove("hidden");
+
+    document
+      .getElementById("adminEmail")
+      .textContent =
+        admin.email ||
+        user.email ||
+        "Admin";
+
+
+    await startAdminPortal();
+
+  }catch(error){
+
+    console.error(
+      "RESTORE ERROR:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   START PORTAL
+========================================================= */
+
+async function startAdminPortal(){
+
+  await Promise.all([
+    loadVendors(),
+    loadAdminNotifications()
+  ]);
+
+  subscribeRealtime();
+
+  renderPage();
+
+  await createOfflineNotifications();
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logoutAdmin(){
+
+  if(realtimeChannel){
+
+    await supabaseClient
+      .removeChannel(
+        realtimeChannel
+      );
+
+    realtimeChannel = null;
+
+  }
+
+  await supabaseClient.auth.signOut();
+
+  currentUser = null;
+
+  location.reload();
+
+}
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+supabaseClient.auth.onAuthStateChange(
+  function(event){
+
+    if(event === "SIGNED_OUT"){
+
+      currentUser = null;
+
+      document
+        .getElementById("adminApp")
+        .classList.add("hidden");
+
+      document
+        .getElementById("loginScreen")
+        .classList.remove("hidden");
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   LOAD VENDORS
+========================================================= */
+
+async function loadVendors(){
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("vendors")
+      .select("*")
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
+
+
+  if(error){
+
+    console.error(
+      "VENDOR LOAD ERROR:",
+      error
+    );
+
+    toast(
+      error.message ||
+      "Unable to load vendors."
+    );
+
+    return;
+  }
+
+
+  vendors = data || [];
+
+}
+
+
+/* =========================================================
+   LOAD ADMIN NOTIFICATIONS
+========================================================= */
+
+async function loadAdminNotifications(){
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("admin_notifications")
+      .select("*")
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      )
+      .limit(100);
+
+
+  if(error){
+
+    console.error(
+      "NOTIFICATION LOAD ERROR:",
+      error
+    );
+
+    adminNotifications = [];
+
+    updateNotificationBadge();
+
+    return;
+  }
+
+
+  adminNotifications =
+    data || [];
+
+  updateNotificationBadge();
+
+}
+
+
+/* =========================================================
+   NOTIFICATION BADGE
+========================================================= */
+
+function updateNotificationBadge(){
+
+  const unread =
+    adminNotifications
+      .filter(
+        notification =>
+          !notification.is_read
+      )
+      .length;
+
+  const badge =
+    document.getElementById(
+      "notificationBadge"
+    );
+
+  if(unread){
+
+    badge.textContent =
+      ` (${unread})`;
+
+  }else{
+
+    badge.textContent = "";
+
+  }
+
+}
+
+
+/* =========================================================
+   REALTIME
+========================================================= */
+
+function subscribeRealtime(){
+
+  if(realtimeChannel){
+
+    supabaseClient
+      .removeChannel(
+        realtimeChannel
+      );
+
+  }
+
+
+  realtimeChannel =
+    supabaseClient
+      .channel("spotly-admin-live")
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"vendors"
+        },
+        async function(){
+
+          await loadVendors();
+
+          renderPage();
+
+          await createOfflineNotifications();
+
+        }
+      )
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"admin_notifications"
+        },
+        async function(){
+
+          await loadAdminNotifications();
+
+          if(
+            currentPage ===
+            "notifications"
+          ){
+
+            renderPage();
+
+          }
+
+        }
+      )
+
+      .subscribe();
+
+}
+
+
+/* =========================================================
+   OFFLINE NOTIFICATIONS
+========================================================= */
+
+async function createOfflineNotifications(){
+
+  const approvedOffline =
+    vendors.filter(
+      isOfflineDuringWorkingHours
+    );
+
+
+  for(
+    const vendor of approvedOffline
+  ){
+
+    if(!vendor.id){
+
+      continue;
+
+    }
+
+
+    const vendorKey =
+      String(vendor.id);
+
+
+    /*
+      Prevent duplicate alerts
+      in current browser session.
+    */
+
+    if(
+      offlineAlertCache.has(
+        vendorKey
+      )
+    ){
+
+      continue;
+
+    }
+
+
+    /*
+      Check recent database notification.
+      One alert per vendor in 6 hours.
+    */
+
+    const sixHoursAgo =
+      new Date(
+        Date.now() -
+        6 * 60 * 60 * 1000
+      ).toISOString();
+
+
+    const {
+      data:existing
+    } =
+      await supabaseClient
+        .from("admin_notifications")
+        .select("id")
+        .eq(
+          "vendor_id",
+          vendor.id
+        )
+        .eq(
+          "type",
+          "vendor_offline"
+        )
+        .gte(
+          "created_at",
+          sixHoursAgo
+        )
+        .limit(1);
+
+
+    if(
+      existing &&
+      existing.length
+    ){
+
+      offlineAlertCache.add(
+        vendorKey
+      );
+
+      continue;
+
+    }
+
+
+    const vendorName =
+      vendor.vendor_name ||
+      vendor.owner_name ||
+      "Vendor";
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("admin_notifications")
+        .insert({
+
+          title:
+            "Vendor Offline During Working Hours",
+
+          message:
+            `${vendorName} is offline during working hours. Please contact the vendor.`,
+
+          type:
+            "vendor_offline",
+
+          vendor_id:
+            vendor.id,
+
+          is_read:
+            false
+
+        });
+
+
+    if(!error){
+
+      offlineAlertCache.add(
+        vendorKey
+      );
+
+    }else{
+
+      console.error(
+        "OFFLINE NOTIFICATION ERROR:",
+        error
+      );
+
+    }
+
+  }
+
+
+  await loadAdminNotifications();
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function showPage(
+  page,
+  button
+){
+
+  currentPage = page;
+
+
+  document
+    .querySelectorAll(
+      ".nav button"
+    )
+    .forEach(
+      item =>
+        item.classList.remove(
+          "active"
+        )
+    );
+
+
+  if(button){
+
+    button.classList.add(
+      "active"
+    );
+
+  }else{
+
+    document
+      .querySelector(
+        `.nav button[data-page="${page}"]`
+      )
+      ?.classList.add(
+        "active"
+      );
+
+  }
+
+
+  renderPage();
+
+}
+
+
+/* =========================================================
+   RENDER PAGE
+========================================================= */
+
+function renderPage(){
+
+  const titles = {
+
+    dashboard:
+      "Dashboard",
+
+    vendors:
+      "Vendors",
+
+    screens:
+      "Screen Monitoring",
+
+    notifications:
+      "Notifications",
+
+    withdrawals:
+      "Withdrawals",
+
+    complaints:
+      "Complaints"
+
+  };
+
+
+  document
+    .getElementById("pageTitle")
+    .textContent =
+      titles[currentPage] ||
+      "Dashboard";
+
+
+  if(
+    currentPage ===
+    "dashboard"
+  ){
+
+    document
+      .getElementById("pageContent")
+      .innerHTML =
+        dashboardPage();
+
+    return;
+
+  }
+
+
+  if(
+    currentPage ===
+    "vendors"
+  ){
+
+    document
+      .getElementById("pageContent")
+      .innerHTML =
+        vendorsPage();
+
+    return;
+
+  }
+
+
+  if(
+    currentPage ===
+    "screens"
+  ){
+
+    document
+      .getElementById("pageContent")
+      .innerHTML =
+        screensPage();
+
+    return;
+
+  }
+
+
+  if(
+    currentPage ===
+    "notifications"
+  ){
+
+    document
+      .getElementById("pageContent")
+      .innerHTML =
+        notificationsPage();
+
+    return;
+
+  }
+
+
+  if(
+    currentPage ===
+    "withdrawals"
+  ){
+
+    renderDynamicPage(
+      "vendor_withdrawals",
+      "Vendor Withdrawals"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    currentPage ===
+    "complaints"
+  ){
+
+    renderDynamicPage(
+      "vendor_complaints",
+      "Vendor Complaints"
+    );
+
+    return;
+
+  }
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function dashboardPage(){
+
+  const total =
+    vendors.length;
+
+  const pending =
+    vendors.filter(
+      v => v.status === "pending"
+    ).length;
+
+  const approved =
+    vendors.filter(
+      v => v.status === "approved"
+    ).length;
+
+  const offline =
+    vendors.filter(
+      isOfflineDuringWorkingHours
+    ).length;
+
+
+  return `
+
+    <div class="stats">
+
+      <div class="stat">
+        <div class="stat-label">
+          Total Vendors
+        </div>
+        <div class="stat-value">
+          ${total}
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">
+          Pending Vendors
+        </div>
+        <div class="stat-value">
+          ${pending}
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">
+          Approved Vendors
+        </div>
+        <div class="stat-value">
+          ${approved}
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">
+          Offline Screens
+        </div>
+        <div class="stat-value">
+          ${offline}
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="section">
+
+      <div class="section-head">
+
+        <div class="section-title">
+          Attention Required
+        </div>
+
+        <button
+          class="btn btn-light"
+          onclick="showPage('notifications')"
+        >
+          View Notifications
+        </button>
+
+      </div>
+
+      ${
+        adminNotifications
+          .slice(0,6)
+          .map(notificationHTML)
+          .join("")
+        ||
+        `<div class="notification">
+          No notifications yet.
+        </div>`
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   VENDORS PAGE
+========================================================= */
+
+function vendorsPage(){
+
+  return `
+
+    <div class="section">
+
+      <div class="section-head">
+
+        <div class="section-title">
+          Vendor Profiles
+        </div>
+
+        <div class="filters">
+
+          <input
+            id="vendorSearch"
+            placeholder="Search vendor..."
+            oninput="filterVendors()"
+          >
+
+          <select
+            id="vendorStatus"
+            onchange="filterVendors()"
+          >
+
+            <option value="">
+              All Statuses
+            </option>
+
+            <option value="pending">
+              Pending
+            </option>
+
+            <option value="approved">
+              Approved
+            </option>
+
+            <option value="rejected">
+              Rejected
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+      <div
+        id="vendorTable"
+        class="table-wrap"
+      >
+
+        ${vendorTableHTML(vendors)}
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   VENDOR TABLE
+========================================================= */
+
+function vendorTableHTML(list){
+
+  if(!list.length){
+
+    return `
+      <div class="notification">
+        No vendors found.
+      </div>
+    `;
+
+  }
+
+
+  return `
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Vendor</th>
+
+          <th>Owner</th>
+
+          <th>Area</th>
+
+          <th>Status</th>
+
+          <th>Screen</th>
+
+          <th>Actions</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        ${
+          list.map(
+            vendor => `
+
+              <tr>
+
+                <td>
+
+                  <b>
+                    ${esc(
+                      vendor.vendor_name ||
+                      "—"
+                    )}
+                  </b>
+
+                  <div
+                    style="
+                      color:#999;
+                      font-size:11px;
+                      margin-top:3px
+                    "
+                  >
+                    ${esc(
+                      vendor.email ||
+                      ""
+                    )}
+                  </div>
+
+                </td>
+
+                <td>
+                  ${esc(
+                    vendor.owner_name ||
+                    "—"
+                  )}
+                </td>
+
+                <td>
+                  ${esc(
+                    vendor.area ||
+                    "—"
+                  )}
+                </td>
+
+                <td>
+
+                  ${
+                    vendor.status ===
+                    "approved"
+
+                    ? `
+                      <span class="badge badge-approved">
+                        Approved
+                      </span>
+                    `
+
+                    : vendor.status ===
+                      "rejected"
+
+                    ? `
+                      <span class="badge badge-rejected">
+                        Rejected
+                      </span>
+                    `
+
+                    : `
+                      <span class="badge badge-pending">
+                        Pending
+                      </span>
+                    `
+                  }
+
+                </td>
+
+                <td>
+
+                  ${
+                    vendor.status ===
+                    "approved"
+
+                    ? vendor.online_status ===
+                      true
+
+                      ? `
+                        <span class="badge badge-online">
+                          Online
+                        </span>
+                      `
+
+                      : `
+                        <span class="badge badge-offline">
+                          Offline
+                        </span>
+                      `
+
+                    : "—"
+                  }
+
+                </td>
+
+                <td>
+
+                  <div class="actions">
+
+                    <button
+                      class="icon-btn"
+                      title="View"
+                      onclick="viewVendor('${vendor.id}')"
+                    >
+                      ⌕
+                    </button>
+
+                    <button
+                      class="icon-btn"
+                      title="Edit"
+                      onclick="editVendor('${vendor.id}')"
+                    >
+                      ✎
+                    </button>
+
+                    ${
+                      vendor.status ===
+                      "pending"
+
+                      ? `
+
+                        <button
+                          class="btn btn-green"
+                          onclick="approveVendor('${vendor.id}')"
+                        >
+                          Approve
+                        </button>
+
+                        <button
+                          class="btn btn-red"
+                          onclick="rejectVendor('${vendor.id}')"
+                        >
+                          Reject
+                        </button>
+
+                      `
+
+                      : ""
+
+                    }
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            `
+          ).join("")
+        }
+
+      </tbody>
+
+    </table>
+
+  `;
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function filterVendors(){
+
+  const search =
+    (
+      document
+        .getElementById("vendorSearch")
+        ?.value ||
+      ""
+    )
+    .toLowerCase();
+
+
+  const status =
+    document
+      .getElementById("vendorStatus")
+      ?.value ||
+    "";
+
+
+  const filtered =
+    vendors.filter(
+      vendor => {
+
+        const text = [
+
+          vendor.vendor_name,
+          vendor.owner_name,
+          vendor.email,
+          vendor.phone,
+          vendor.area
+
+        ]
+        .join(" ")
+        .toLowerCase();
+
+
+        return (
+          (!status ||
+            vendor.status === status) &&
+          (!search ||
+            text.includes(search))
+        );
+
+      }
+    );
+
+
+  document
+    .getElementById("vendorTable")
+    .innerHTML =
+      vendorTableHTML(
+        filtered
+      );
+
+}
+
+
+/* =========================================================
+   GET VENDOR
+========================================================= */
+
+function getVendor(id){
+
+  return vendors.find(
+    vendor =>
+      String(vendor.id) ===
+      String(id)
+  );
+
+}
+
+
+/* =========================================================
+   VIEW VENDOR
+========================================================= */
+
+function viewVendor(id){
+
+  const vendor =
+    getVendor(id);
+
+
+  if(!vendor){
+
+    toast(
+      "Vendor not found."
+    );
+
+    return;
+
+  }
+
+
+  const fields = [
+
+    ["Vendor Name",vendor.vendor_name],
+
+    ["Owner Name",vendor.owner_name],
+
+    ["Phone",vendor.phone],
+
+    ["Email",vendor.email],
+
+    ["Category",vendor.category],
+
+    ["Area",vendor.area],
+
+    ["Phase",vendor.phase],
+
+    ["Precinct",vendor.precinct],
+
+    ["Sector",vendor.sector],
+
+    ["Block",vendor.block],
+
+    ["Address",vendor.address],
+
+    ["Footfall",vendor.footfall],
+
+    ["Shop Size",vendor.shop_size],
+
+    ["LCD Status",vendor.lcd_status],
+
+    ["Internet",vendor.internet_status],
+
+    ["Opening Time",
+      formatTime(
+        vendor.opening_time
+      )
+    ],
+
+    ["Closing Time",
+      formatTime(
+        vendor.closing_time
+      )
+    ],
+
+    ["Status",vendor.status],
+
+    [
+      "Screen",
+      vendor.status === "approved"
+        ? (
+            vendor.online_status
+              ? "Online"
+              : "Offline"
+          )
+        : "Not monitored"
+    ]
+
+  ];
+
+
+  openModal(
+
+    vendor.vendor_name ||
+    "Vendor Profile",
+
+    `
+
+      <div class="detail-grid">
+
+        ${
+          fields.map(
+            field => `
+
+              <div class="detail">
+
+                <small>
+                  ${esc(field[0])}
+                </small>
+
+                <b>
+                  ${esc(
+                    field[1] ??
+                    "—"
+                  )}
+                </b>
+
+              </div>
+
+            `
+          ).join("")
+        }
+
+      </div>
+
+
+      <div class="modal-actions">
+
+        ${
+          vendor.status ===
+          "pending"
+
+          ? `
+
+            <button
+              class="btn btn-red"
+              onclick="rejectVendor('${vendor.id}')"
+            >
+              Reject
+            </button>
+
+            <button
+              class="btn btn-yellow"
+              onclick="approveVendor('${vendor.id}')"
+            >
+              Approve
+            </button>
+
+          `
+
+          : ""
+
+        }
+
+        <button
+          class="btn btn-light"
+          onclick="closeModal()"
+        >
+          Close
+        </button>
+
+      </div>
+
+    `
+
+  );
+
+}
+
+
+/* =========================================================
+   EDIT VENDOR
+========================================================= */
+
+function editVendor(id){
+
+  const vendor =
+    getVendor(id);
+
+
+  if(!vendor){
+
+    toast(
+      "Vendor not found."
+    );
+
+    return;
+
+  }
+
+
+  openModal(
+
+    "Edit Vendor",
+
+    `
+
+      <div class="form-grid">
+
+        ${editField(
+          "vendor_name",
+          "Vendor Name",
+          vendor.vendor_name
+        )}
+
+        ${editField(
+          "owner_name",
+          "Owner Name",
+          vendor.owner_name
+        )}
+
+        ${editField(
+          "phone",
+          "Phone",
+          vendor.phone
+        )}
+
+        ${editField(
+          "email",
+          "Email",
+          vendor.email
+        )}
+
+        ${editField(
+          "category",
+          "Category",
+          vendor.category
+        )}
+
+        ${editField(
+          "area",
+          "Area",
+          vendor.area
+        )}
+
+        ${editField(
+          "phase",
+          "Phase",
+          vendor.phase
+        )}
+
+        ${editField(
+          "precinct",
+          "Precinct",
+          vendor.precinct
+        )}
+
+        ${editField(
+          "sector",
+          "Sector",
+          vendor.sector
+        )}
+
+        ${editField(
+          "block",
+          "Block",
+          vendor.block
+        )}
+
+        ${editField(
+          "footfall",
+          "Footfall",
+          vendor.footfall,
+          "number"
+        )}
+
+        ${editField(
+          "shop_size",
+          "Shop Size",
+          vendor.shop_size
+        )}
+
+        ${editField(
+          "opening_time",
+          "Opening Time",
+          formatTime(
+            vendor.opening_time
+          ),
+          "time"
+        )}
+
+        ${editField(
+          "closing_time",
+          "Closing Time",
+          formatTime(
+            vendor.closing_time
+          ),
+          "time"
+        )}
+
+        ${editField(
+          "lcd_status",
+          "LCD Status",
+          vendor.lcd_status
+        )}
+
+        ${editField(
+          "internet_status",
+          "Internet Status",
+          vendor.internet_status
+        )}
+
+        ${editField(
+          "address",
+          "Address",
+          vendor.address,
+          "text",
+          true
+        )}
+
+      </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          class="btn btn-light"
+          onclick="closeModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="btn btn-yellow"
+          onclick="saveVendor('${vendor.id}')"
+        >
+          Save
+        </button>
+
+      </div>
+
+    `
+
+  );
+
+}
+
+
+function editField(
+  name,
+  label,
+  value,
+  type="text",
+  full=false
+){
+
+  return `
+
+    <div
+      class="${full ? "full" : ""}"
+    >
+
+      <label>
+        ${esc(label)}
+      </label>
+
+      <input
+        id="edit_${name}"
+        type="${type}"
+        value="${esc(value)}"
+      >
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   SAVE VENDOR
+========================================================= */
+
+async function saveVendor(id){
+
+  const fields = [
+
+    "vendor_name",
+    "owner_name",
+    "phone",
+    "email",
+    "category",
+    "area",
+    "phase",
+    "precinct",
+    "sector",
+    "block",
+    "footfall",
+    "shop_size",
+    "opening_time",
+    "closing_time",
+    "lcd_status",
+    "internet_status",
+    "address"
+
+  ];
+
+
+  const patch = {};
+
+
+  fields.forEach(
+    field => {
+
+      let value =
+        document
+          .getElementById(
+            "edit_" + field
+          )
+          ?.value ??
+        "";
+
+
+      if(field === "footfall"){
+
+        value =
+          Number(value) || 0;
+
+      }
+
+
+      patch[field] =
+        value;
+
+    }
+  );
+
+
+  patch.updated_at =
+    new Date().toISOString();
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("vendors")
+      .update(patch)
+      .eq("id",id)
+      .select("*")
+      .maybeSingle();
+
+
+  if(error){
+
+    toast(
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  if(!data){
+
+    toast(
+      "Vendor was not updated."
+    );
+
+    return;
+
+  }
+
+
+  const index =
+    vendors.findIndex(
+      vendor =>
+        String(vendor.id) ===
+        String(id)
+    );
+
+
+  if(index !== -1){
+
+    vendors[index] =
+      data;
+
+  }
+
+
+  closeModal();
+
+  renderPage();
+
+  toast(
+    "Vendor updated."
+  );
+
+}
+
+
+/* =========================================================
+   APPROVE VENDOR
+========================================================= */
+
+async function approveVendor(id){
+
+  const vendor =
+    getVendor(id);
+
+
+  if(!vendor){
+
+    toast(
+      "Vendor not found."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    vendor.status ===
+    "approved"
+  ){
+
+    toast(
+      "Vendor is already approved."
+    );
+
+    return;
+
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("vendors")
+      .update({
+
+        status:
+          "approved",
+
+        online_status:
+          false,
+
+        updated_at:
+          new Date().toISOString()
+
+      })
+      .eq(
+        "id",
+        id
+      )
+      .select("*")
+      .maybeSingle();
+
+
+  if(error){
+
+    console.error(
+      "APPROVE ERROR:",
+      error
+    );
+
+    toast(
+      error.message ||
+      "Approval failed."
+    );
+
+    return;
+
+  }
+
+
+  if(!data){
+
+    toast(
+      "Vendor was not updated. Check vendor ID and RLS."
+    );
+
+    return;
+
+  }
+
+
+  const index =
+    vendors.findIndex(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
+
+
+  if(index !== -1){
+
+    vendors[index] =
+      data;
+
+  }
+
+
+  await createVendorApprovalNotification(
+    data
+  );
+
+
+  await createAdminNotification({
+
+    title:
+      "Vendor Approved",
+
+    message:
+      `${data.vendor_name || data.owner_name || "Vendor"} has been approved.`,
+
+    type:
+      "vendor_approved",
+
+    vendorId:
+      data.id
+
+  });
+
+
+  closeModal();
+
+  renderPage();
+
+  await loadAdminNotifications();
+
+  toast(
+    "Vendor approved successfully."
+  );
+
+}
+
+
+/* =========================================================
+   REJECT VENDOR
+========================================================= */
+
+async function rejectVendor(id){
+
+  const vendor =
+    getVendor(id);
+
+
+  if(!vendor){
+
+    toast(
+      "Vendor not found."
+    );
+
+    return;
+
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("vendors")
+      .update({
+
+        status:
+          "rejected",
+
+        online_status:
+          false,
+
+        updated_at:
+          new Date().toISOString()
+
+      })
+      .eq(
+        "id",
+        id
+      )
+      .select("*")
+      .maybeSingle();
+
+
+  if(error){
+
+    toast(
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  if(!data){
+
+    toast(
+      "Vendor was not updated."
+    );
+
+    return;
+
+  }
+
+
+  const index =
+    vendors.findIndex(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
+
+
+  if(index !== -1){
+
+    vendors[index] =
+      data;
+
+  }
+
+
+  await createVendorNotification(
+
+    data,
+
+    "Vendor Application Update",
+
+    "Your Spotly vendor application has been rejected. Please contact support."
+
+  );
+
+
+  await createAdminNotification({
+
+    title:
+      "Vendor Rejected",
+
+    message:
+      `${data.vendor_name || data.owner_name || "Vendor"} has been rejected.`,
+
+    type:
+      "vendor_rejected",
+
+    vendorId:
+      data.id
+
+  });
+
+
+  closeModal();
+
+  renderPage();
+
+  await loadAdminNotifications();
+
+  toast(
+    "Vendor rejected."
+  );
+
+}
+
+
+/* =========================================================
+   VENDOR APPROVAL NOTIFICATION
+========================================================= */
+
+async function createVendorApprovalNotification(
+  vendor
+){
+
+  if(!vendor?.id){
+
+    return;
+
+  }
+
+
+  const {
+    data:existing
+  } =
+    await supabaseClient
+      .from("vendor_notifications")
+      .select("id")
+      .eq(
+        "vendor_id",
+        vendor.id
+      )
+      .eq(
+        "title",
+        "Vendor Account Approved"
+      )
+      .limit(1);
+
+
+  if(
+    existing &&
+    existing.length
+  ){
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("vendor_notifications")
+      .insert({
+
+        vendor_id:
+          vendor.id,
+
+        title:
+          "Vendor Account Approved",
+
+        message:
+          "Your Spotly vendor account has been approved by admin.",
+
+        is_read:
+          false
+
+      });
+
+
+  if(error){
+
+    console.error(
+      "VENDOR APPROVAL NOTIFICATION ERROR:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   GENERIC VENDOR NOTIFICATION
+========================================================= */
+
+async function createVendorNotification(
+  vendor,
+  title,
+  message
+){
+
+  if(!vendor?.id){
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("vendor_notifications")
+      .insert({
+
+        vendor_id:
+          vendor.id,
+
+        title:
+          title,
+
+        message:
+          message,
+
+        is_read:
+          false
+
+      });
+
+
+  if(error){
+
+    console.error(
+      "VENDOR NOTIFICATION ERROR:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   ADMIN NOTIFICATION
+========================================================= */
+
+async function createAdminNotification({
+  title,
+  message,
+  type,
+  vendorId=null
+}){
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("admin_notifications")
+      .insert({
+
+        title:
+          title,
+
+        message:
+          message,
+
+        type:
+          type,
+
+        vendor_id:
+          vendorId,
+
+        is_read:
+          false
+
+      });
+
+
+  if(error){
+
+    console.error(
+      "ADMIN NOTIFICATION ERROR:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   NOTIFICATION HTML
+========================================================= */
+
+function notificationHTML(
+  notification
+){
+
+  return `
+
+    <div
+      class="
+        notification
+        ${notification.is_read ? "" : "unread"}
+      "
+    >
+
+      <div>
+
+        <div class="notification-title">
+
+          ${esc(
+            notification.title
+          )}
+
+        </div>
+
+        <div class="notification-message">
+
+          ${esc(
+            notification.message
+          )}
+
+        </div>
+
+      </div>
+
+      <div class="notification-time">
+
+        ${formatDate(
+          notification.created_at
+        )}
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   NOTIFICATIONS PAGE
+========================================================= */
+
+function notificationsPage(){
+
+  return `
+
+    <div class="section">
+
+      <div class="section-head">
+
+        <div class="section-title">
+          Admin Notifications
+        </div>
+
+        <button
+          class="btn btn-light"
+          onclick="markNotificationsRead()"
+        >
+          Mark All Read
+        </button>
+
+      </div>
+
+      ${
+        adminNotifications
+          .map(notificationHTML)
+          .join("")
+        ||
+        `
+          <div class="notification">
+            No notifications yet.
+          </div>
+        `
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================================
+   MARK READ
+========================================================= */
+
+async function markNotificationsRead(){
+
+  const ids =
+    adminNotifications
+      .filter(
+        notification =>
+          !notification.is_read
+      )
+      .map(
+        notification =>
+          notification.id
+      );
+
+
+  if(!ids.length){
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("admin_notifications")
+      .update({
+        is_read:true
+      })
+      .in(
+        "id",
+        ids
+      );
+
+
+  if(error){
+
+    toast(
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  await loadAdminNotifications();
+
+  renderPage();
+
+}
+
+
+/* =========================================================
+   SCREEN MONITORING
+========================================================= */
+
+function screensPage(){
+
+  const approved =
+    vendors.filter(
+      vendor =>
+        vendor.status ===
+        "approved"
+    );
+
+
+  return `
+
+    <div class="section">
+
+      <div class="section-head">
+
+        <div>
+
+          <div class="section-title">
+            Approved Screens
+          </div>
+
+          <div
+            style="
+              color:#999;
+              font-size:11px;
+              margin-top:4px
+            "
+          >
+            Offline alerts are active only during vendor working hours.
+          </div>
+
+        </div>
+
+        <button
+          class="btn btn-light"
+          onclick="refreshScreens()"
+        >
+          Refresh
+        </button>
+
+      </div>
+
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>Vendor</th>
+
+              <th>Working Hours</th>
+
+              <th>Screen</th>
+
+              <th>Location</th>
+
+              <th>Alert</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            ${
+              approved
+                .map(
+                  vendor => `
+
+                    <tr>
+
+                      <td>
+                        <b>
+                          ${esc(
+                            vendor.vendor_name ||
+                            vendor.owner_name ||
+                            "—"
+                          )}
+                        </b>
+                      </td>
+
+                      <td>
+
+                        ${formatTime(
+                          vendor.opening_time
+                        )}
+
+                        –
+
+                        ${formatTime(
+                          vendor.closing_time
+                        )}
+
+                      </td>
+
+                      <td>
+
+                        ${
+                          vendor.online_status ===
+                          true
+
+                          ? `
+                            <span class="badge badge-online">
+                              Online
+                            </span>
+                          `
+
+                          : `
+                            <span class="badge badge-offline">
+                              Offline
+                            </span>
+                          `
+                        }
+
+                      </td>
+
+                      <td>
+
+                        ${
+                          vendor.latitude &&
+                          vendor.longitude
+
+                          ? `
+                            ${esc(
+                              vendor.latitude
+                            )},
+                            ${esc(
+                              vendor.longitude
+                            )}
+                          `
+
+                          : "Not available"
+                        }
+
+                      </td>
+
+                      <td>
+
+                        ${
+                          isOfflineDuringWorkingHours(
+                            vendor
+                          )
+
+                          ? `
+                            <span class="badge badge-offline">
+                              Contact Vendor
+                            </span>
+                          `
+
+                          : "—"
+                        }
+
+                      </td>
+
+                    </tr>
+
+                  `
+                )
+                .join("")
+              ||
+
+              `
+                <tr>
+                  <td colspan="5">
+                    No approved vendors.
+                  </td>
+                </tr>
+              `
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+async function refreshScreens(){
+
+  await loadVendors();
+
+  await createOfflineNotifications();
+
+  renderPage();
+
+}
+
+
+/* =========================================================
+   DYNAMIC TABLE PAGES
+========================================================= */
+
+async function renderDynamicPage(
+  table,
+  title
+){
+
+  document
+    .getElementById("pageContent")
+    .innerHTML = `
+
+      <div class="section">
+
+        <div class="section-head">
+
+          <div class="section-title">
+            ${esc(title)}
+          </div>
+
+        </div>
+
+        <div class="notification">
+          Loading...
+        </div>
+
+      </div>
+
+    `;
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from(table)
+      .select("*")
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      )
+      .limit(100);
+
+
+  if(error){
+
+    document
+      .getElementById("pageContent")
+      .innerHTML = `
+
+        <div class="section">
+
+          <div class="section-head">
+
+            <div class="section-title">
+              ${esc(title)}
+            </div>
+
+          </div>
+
+          <div class="notification">
+
+            No ${esc(
+              table
+            )} table/data available yet.
+
+          </div>
+
+        </div>
+
+      `;
+
+    return;
+
+  }
+
+
+  const rows =
+    data || [];
+
+
+  if(!rows.length){
+
+    document
+      .getElementById("pageContent")
+      .innerHTML = `
+
+        <div class="section">
+
+          <div class="section-head">
+
+            <div class="section-title">
+              ${esc(title)}
+            </div>
+
+          </div>
+
+          <div class="notification">
+            No records yet.
+          </div>
+
+        </div>
+
+      `;
+
+    return;
+
+  }
+
+
+  const columns =
+    Object.keys(
+      rows[0]
+    )
+    .filter(
+      column =>
+        column !== "id"
+    )
+    .slice(
+      0,
+      8
+    );
+
+
+  document
+    .getElementById("pageContent")
+    .innerHTML = `
+
+      <div class="section">
+
+        <div class="section-head">
+
+          <div class="section-title">
+            ${esc(title)}
+          </div>
+
+        </div>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                ${
+                  columns
+                    .map(
+                      column =>
+                        `<th>
+                          ${esc(
+                            column
+                              .replaceAll(
+                                "_",
+                                " "
+                              )
+                          )}
+                        </th>`
+                    )
+                    .join("")
+                }
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              ${
+                rows
+                  .map(
+                    row => `
+
+                      <tr>
+
+                        ${
+                          columns
+                            .map(
+                              column => `
+
+                                <td>
+
+                                  ${esc(
+                                    row[column] === null
+                                      ? "—"
+                                      : typeof row[column] === "object"
+                                      ? JSON.stringify(
+                                          row[column]
+                                        )
+                                      : row[column]
+                                  )}
+
+                                </td>
+
+                              `
+                            )
+                            .join("")
+                        }
+
+                      </tr>
+
+                    `
+                  )
+                  .join("")
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+function toggleSidebar(){
+
+  const sidebar =
+    document.querySelector(
+      ".sidebar"
+    );
+
+
+  if(
+    sidebar.style.display ===
+    "block"
+  ){
+
+    sidebar.style.display =
+      "none";
+
+  }else{
+
+    sidebar.style.display =
+      "block";
+
+  }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+window.addEventListener(
+  "load",
+  function(){
+
+    restoreAdminSession();
+
+  }
+);
+
+</script>
+
+</body>
+</html>
