@@ -14,25 +14,10 @@
   padding:0;
 }
 
-:root{
-  --yellow:#f6c800;
-  --yellow-dark:#d9ad00;
-  --yellow-soft:#fff8d8;
-  --white:#ffffff;
-  --grey:#f5f5f3;
-  --grey2:#e9e9e5;
-  --text:#222222;
-  --muted:#777777;
-  --green:#198754;
-  --red:#dc3545;
-  --orange:#ef8b00;
-  --shadow:0 8px 25px rgba(0,0,0,.07);
-}
-
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--grey);
-  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  background:#f7f7f5;
+  color:#222;
 }
 
 button,
@@ -52,30 +37,30 @@ button{
 
 /* LOGIN */
 
-#loginScreen{
+.login-page{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:var(--grey);
   padding:20px;
+  background:#f7f7f5;
 }
 
 .login-card{
   width:100%;
   max-width:420px;
   background:#fff;
-  border-radius:18px;
+  border:1px solid #e8e8e8;
+  border-radius:20px;
   padding:35px;
-  box-shadow:var(--shadow);
-  border:1px solid var(--grey2);
+  box-shadow:0 12px 35px rgba(0,0,0,.06);
 }
 
 .logo{
-  width:55px;
-  height:55px;
-  border-radius:14px;
-  background:var(--yellow);
+  width:58px;
+  height:58px;
+  background:#ffd21c;
+  border-radius:16px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -85,77 +70,82 @@ button{
 }
 
 .login-card h1{
-  font-size:26px;
+  font-size:28px;
   margin-bottom:7px;
 }
 
 .login-card p{
-  color:var(--muted);
+  color:#777;
   margin-bottom:25px;
 }
 
-.form-group{
-  margin-bottom:17px;
+.field{
+  margin-bottom:16px;
 }
 
-.form-group label{
+.field label{
   display:block;
   font-size:13px;
   font-weight:700;
   margin-bottom:7px;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea{
+.field input,
+.field select,
+.field textarea{
   width:100%;
-  border:1px solid #d9d9d4;
+  border:1px solid #ddd;
+  background:#fff;
   border-radius:10px;
   padding:12px 13px;
   outline:none;
-  background:#fff;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
-  border-color:var(--yellow-dark);
-  box-shadow:0 0 0 3px rgba(246,200,0,.15);
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:#e2b900;
 }
 
 .primary-btn{
+  width:100%;
   border:0;
-  background:var(--yellow);
+  background:#ffd21c;
   color:#171717;
-  font-weight:800;
-  padding:12px 18px;
+  padding:13px;
   border-radius:10px;
+  font-weight:800;
 }
 
 .primary-btn:hover{
-  background:var(--yellow-dark);
+  background:#f2c500;
 }
 
-.full{
-  width:100%;
+.login-error{
+  color:#c62828;
+  font-size:13px;
+  margin-top:12px;
+  min-height:18px;
 }
 
 /* APP */
 
-#adminApp{
+.app{
   min-height:100vh;
   display:flex;
 }
 
+/* SIDEBAR */
+
 .sidebar{
   width:245px;
   background:#fff;
-  border-right:1px solid var(--grey2);
+  border-right:1px solid #e8e8e8;
+  padding:22px 14px;
   position:fixed;
   top:0;
   bottom:0;
   left:0;
-  padding:22px 15px;
   z-index:20;
 }
 
@@ -169,8 +159,8 @@ button{
 .brand-icon{
   width:42px;
   height:42px;
-  border-radius:11px;
-  background:var(--yellow);
+  background:#ffd21c;
+  border-radius:12px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -178,14 +168,14 @@ button{
   font-size:20px;
 }
 
-.brand-text strong{
-  display:block;
-  font-size:18px;
+.brand-name{
+  font-size:20px;
+  font-weight:900;
 }
 
-.brand-text span{
+.brand-sub{
   font-size:11px;
-  color:var(--muted);
+  color:#888;
 }
 
 .nav{
@@ -194,8 +184,7 @@ button{
   gap:5px;
 }
 
-.nav button{
-  width:100%;
+.nav-btn{
   border:0;
   background:transparent;
   padding:12px 13px;
@@ -205,46 +194,28 @@ button{
   font-weight:700;
 }
 
-.nav button:hover,
-.nav button.active{
-  background:var(--yellow-soft);
-  color:#171717;
+.nav-btn:hover{
+  background:#fff7cc;
+  color:#222;
 }
 
-.nav-icon{
-  display:inline-block;
-  width:26px;
+.nav-btn.active{
+  background:#ffd21c;
+  color:#171717;
 }
 
 .sidebar-bottom{
   position:absolute;
-  left:15px;
-  right:15px;
+  left:14px;
+  right:14px;
   bottom:20px;
-}
-
-.admin-mini{
-  background:var(--grey);
-  border-radius:12px;
-  padding:12px;
-  margin-bottom:10px;
-}
-
-.admin-mini strong{
-  display:block;
-  font-size:13px;
-}
-
-.admin-mini span{
-  color:var(--muted);
-  font-size:11px;
 }
 
 .logout-btn{
   width:100%;
   border:1px solid #ddd;
   background:#fff;
-  padding:10px;
+  padding:11px;
   border-radius:10px;
   font-weight:700;
 }
@@ -254,13 +225,12 @@ button{
 .main{
   margin-left:245px;
   width:calc(100% - 245px);
-  min-height:100vh;
 }
 
 .topbar{
-  height:70px;
+  height:72px;
   background:#fff;
-  border-bottom:1px solid var(--grey2);
+  border-bottom:1px solid #e8e8e8;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -270,155 +240,116 @@ button{
   z-index:10;
 }
 
-.page-title h2{
-  font-size:20px;
+.page-title{
+  font-size:22px;
+  font-weight:850;
 }
 
-.page-title span{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.top-actions{
+.admin-user{
   display:flex;
   align-items:center;
   gap:10px;
 }
 
-.notification-btn{
-  position:relative;
-  border:1px solid #ddd;
-  background:#fff;
-  width:40px;
-  height:40px;
-  border-radius:10px;
-  font-size:18px;
-}
-
-.badge{
-  position:absolute;
-  top:-5px;
-  right:-5px;
-  min-width:18px;
-  height:18px;
+.admin-avatar{
+  width:36px;
+  height:36px;
+  background:#ffd21c;
   border-radius:50%;
-  background:var(--red);
-  color:#fff;
-  font-size:10px;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:2px;
+  font-weight:900;
 }
 
 .content{
-  padding:25px;
-}
-
-.page{
-  display:none;
-}
-
-.page.active{
-  display:block;
+  padding:28px;
 }
 
 /* CARDS */
 
-.stats-grid{
+.stats{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:16px;
-  margin-bottom:22px;
+  margin-bottom:25px;
 }
 
 .stat-card{
   background:#fff;
-  border:1px solid var(--grey2);
-  border-radius:14px;
-  padding:19px;
-  box-shadow:0 3px 12px rgba(0,0,0,.03);
+  border:1px solid #e7e7e7;
+  border-radius:15px;
+  padding:20px;
 }
 
 .stat-label{
-  color:var(--muted);
-  font-size:12px;
-  font-weight:700;
+  color:#777;
+  font-size:13px;
+  margin-bottom:10px;
 }
 
 .stat-value{
-  font-size:29px;
+  font-size:27px;
   font-weight:900;
-  margin-top:8px;
 }
 
-.stat-card.yellow{
-  border-top:4px solid var(--yellow);
+.stat-note{
+  margin-top:7px;
+  font-size:12px;
+  color:#999;
 }
 
-.stat-card.orange{
-  border-top:4px solid var(--orange);
-}
+/* SECTIONS */
 
-.stat-card.green{
-  border-top:4px solid var(--green);
-}
-
-.stat-card.red{
-  border-top:4px solid var(--red);
-}
-
-.section-card{
+.section{
   background:#fff;
-  border:1px solid var(--grey2);
-  border-radius:14px;
+  border:1px solid #e7e7e7;
+  border-radius:15px;
   margin-bottom:20px;
   overflow:hidden;
 }
 
-.section-header{
-  padding:17px 19px;
+.section-head{
+  padding:18px 20px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  border-bottom:1px solid var(--grey2);
+  align-items:center;
+  border-bottom:1px solid #eee;
 }
 
-.section-header h3{
-  font-size:16px;
+.section-title{
+  font-size:17px;
+  font-weight:850;
 }
 
-.section-header span{
-  color:var(--muted);
-  font-size:12px;
+.section-body{
+  padding:20px;
 }
 
 /* TABLE */
 
 .table-wrap{
-  overflow:auto;
+  overflow-x:auto;
 }
 
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:850px;
 }
 
 th{
-  background:#fafaf8;
-  color:#666;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.3px;
   text-align:left;
-  padding:13px 15px;
-  border-bottom:1px solid var(--grey2);
+  font-size:12px;
+  color:#777;
+  font-weight:800;
+  padding:12px;
+  border-bottom:1px solid #eee;
+  white-space:nowrap;
 }
 
 td{
-  padding:14px 15px;
-  border-bottom:1px solid #eee;
+  padding:13px 12px;
+  border-bottom:1px solid #f0f0f0;
   font-size:13px;
   vertical-align:middle;
 }
@@ -427,49 +358,42 @@ tr:last-child td{
   border-bottom:0;
 }
 
-.vendor-name{
-  font-weight:800;
-}
-
-.vendor-sub{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:3px;
-}
+/* STATUS */
 
 .status{
   display:inline-flex;
   padding:5px 9px;
-  border-radius:20px;
-  font-size:10px;
+  border-radius:999px;
+  font-size:11px;
   font-weight:800;
-  text-transform:uppercase;
 }
 
 .status.approved{
-  background:#e7f6ee;
-  color:var(--green);
+  background:#e8f6df;
+  color:#397221;
 }
 
 .status.pending{
-  background:#fff3d6;
-  color:#a96900;
+  background:#fff3bf;
+  color:#7b6200;
 }
 
 .status.rejected{
-  background:#fde9eb;
-  color:var(--red);
+  background:#ffe6e6;
+  color:#a62626;
 }
 
 .status.online{
-  background:#e7f6ee;
-  color:var(--green);
+  background:#e8f6df;
+  color:#397221;
 }
 
 .status.offline{
-  background:#fde9eb;
-  color:var(--red);
+  background:#ffe7e7;
+  color:#a12626;
 }
+
+/* ACTIONS */
 
 .actions{
   display:flex;
@@ -481,8 +405,8 @@ tr:last-child td{
   width:34px;
   height:34px;
   border:1px solid #ddd;
-  border-radius:8px;
   background:#fff;
+  border-radius:8px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -490,167 +414,52 @@ tr:last-child td{
 }
 
 .icon-btn:hover{
-  background:var(--yellow-soft);
-  border-color:var(--yellow);
+  background:#fff7cc;
 }
 
-.approve-btn,
-.reject-btn{
-  border:0;
-  padding:8px 10px;
-  border-radius:8px;
-  font-size:11px;
-  font-weight:800;
+.icon-btn.approve{
+  border-color:#d8eacb;
+  background:#f4faef;
 }
 
-.approve-btn{
-  background:var(--yellow);
+.icon-btn.reject{
+  border-color:#f1d0d0;
+  background:#fff6f6;
 }
 
-.reject-btn{
-  background:#fde9eb;
-  color:var(--red);
+.icon-btn.delete{
+  color:#b22;
 }
 
-/* TOOLBAR */
+/* FILTER */
 
 .toolbar{
   display:flex;
   gap:10px;
-  margin-bottom:15px;
   flex-wrap:wrap;
 }
 
 .search{
-  flex:1;
-  min-width:220px;
-  padding:11px 13px;
+  min-width:230px;
   border:1px solid #ddd;
-  border-radius:10px;
+  border-radius:9px;
+  padding:10px 12px;
   outline:none;
 }
 
 .filter{
-  padding:11px 13px;
   border:1px solid #ddd;
-  border-radius:10px;
-  background:#fff;
-}
-
-/* MONITOR */
-
-.monitor-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-}
-
-.monitor-card{
-  background:#fff;
-  border:1px solid var(--grey2);
-  border-radius:14px;
-  padding:18px;
-}
-
-.monitor-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:15px;
-}
-
-.monitor-shop{
-  font-size:16px;
-  font-weight:800;
-}
-
-.warning{
-  background:#fff3d6;
-  color:#a96900;
-  border-radius:8px;
-  padding:10px;
-  font-size:12px;
-  margin:12px 0;
-}
-
-.monitor-info{
-  display:grid;
-  gap:8px;
-  font-size:12px;
-  color:#555;
-}
-
-.contact-btn{
-  width:100%;
-  margin-top:14px;
-  border:1px solid #ddd;
-  background:#fff;
-  padding:10px;
   border-radius:9px;
-  font-weight:800;
-}
-
-/* NOTIFICATIONS */
-
-.notification-list{
-  display:grid;
-  gap:10px;
-}
-
-.notification-item{
+  padding:10px 12px;
   background:#fff;
-  border:1px solid var(--grey2);
-  border-radius:12px;
-  padding:15px;
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-}
-
-.notification-item.unread{
-  border-left:4px solid var(--yellow);
-  background:#fffdf1;
-}
-
-.notification-title{
-  font-weight:800;
-  font-size:14px;
-}
-
-.notification-message{
-  color:#555;
-  font-size:12px;
-  margin-top:5px;
-}
-
-.notification-time{
-  color:#999;
-  font-size:10px;
-  white-space:nowrap;
-}
-
-.read-btn{
-  margin-top:8px;
-  border:0;
-  background:var(--yellow-soft);
-  padding:6px 9px;
-  border-radius:7px;
-  font-size:10px;
-  font-weight:800;
 }
 
 /* EMPTY */
 
 .empty{
+  padding:40px 20px;
   text-align:center;
-  padding:45px 20px;
   color:#888;
-}
-
-.empty strong{
-  display:block;
-  color:#444;
-  margin-bottom:6px;
 }
 
 /* MODAL */
@@ -658,55 +467,43 @@ tr:last-child td{
 .modal-backdrop{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.42);
-  z-index:100;
-  display:none;
+  background:rgba(0,0,0,.38);
+  display:flex;
   align-items:center;
   justify-content:center;
   padding:20px;
-}
-
-.modal-backdrop.show{
-  display:flex;
+  z-index:100;
 }
 
 .modal{
   width:100%;
-  max-width:850px;
-  max-height:92vh;
+  max-width:700px;
+  max-height:90vh;
   overflow:auto;
   background:#fff;
-  border-radius:16px;
+  border-radius:18px;
   box-shadow:0 20px 60px rgba(0,0,0,.2);
 }
 
-.modal.small{
-  max-width:480px;
-}
-
-.modal-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.modal-head{
   padding:18px 20px;
-  border-bottom:1px solid var(--grey2);
-  position:sticky;
-  top:0;
-  background:#fff;
-  z-index:2;
+  border-bottom:1px solid #eee;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
-.modal-header h3{
-  font-size:17px;
+.modal-title{
+  font-size:18px;
+  font-weight:850;
 }
 
 .close-btn{
-  border:0;
-  background:#f2f2ef;
   width:34px;
   height:34px;
+  border:0;
+  background:#f3f3f3;
   border-radius:8px;
-  font-size:18px;
 }
 
 .modal-body{
@@ -714,161 +511,130 @@ tr:last-child td{
 }
 
 .modal-footer{
+  padding:15px 20px;
+  border-top:1px solid #eee;
   display:flex;
   justify-content:flex-end;
   gap:9px;
-  padding:15px 20px;
-  border-top:1px solid var(--grey2);
 }
 
-.secondary-btn{
+.btn{
   border:1px solid #ddd;
   background:#fff;
   padding:10px 15px;
   border-radius:9px;
-  font-weight:700;
+  font-weight:750;
 }
 
-.danger-btn{
-  border:0;
-  background:#fde9eb;
-  color:var(--red);
-  padding:10px 15px;
-  border-radius:9px;
-  font-weight:800;
+.btn.yellow{
+  background:#ffd21c;
+  border-color:#ffd21c;
 }
 
-.form-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
+.btn.red{
+  color:#a22;
 }
 
-.form-grid .full-width{
-  grid-column:1/-1;
-}
+/* DETAIL */
 
 .detail-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:10px;
+  gap:13px;
 }
 
-.detail{
-  background:#fafaf8;
-  border-radius:9px;
-  padding:11px;
+.detail-item{
+  background:#f8f8f6;
+  border-radius:10px;
+  padding:12px;
 }
 
-.detail small{
-  color:#999;
-  display:block;
-  font-size:10px;
+.detail-label{
+  font-size:11px;
+  color:#888;
   margin-bottom:4px;
 }
 
-.detail strong{
-  font-size:12px;
-}
-
-.map-wrap{
-  margin-top:15px;
-  border-radius:12px;
-  overflow:hidden;
-  border:1px solid var(--grey2);
-}
-
-.map-wrap iframe{
-  width:100%;
-  height:280px;
-  border:0;
+.detail-value{
+  font-weight:750;
+  word-break:break-word;
 }
 
 /* TOAST */
 
-#toast{
+.toast{
   position:fixed;
-  right:20px;
-  bottom:20px;
+  right:22px;
+  bottom:22px;
   background:#222;
   color:#fff;
-  padding:12px 17px;
-  border-radius:9px;
-  font-size:12px;
-  z-index:999;
+  padding:13px 17px;
+  border-radius:10px;
+  z-index:200;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+  font-size:13px;
+}
+
+/* MOBILE */
+
+.mobile-menu{
   display:none;
-  max-width:350px;
+  border:1px solid #ddd;
+  background:#fff;
+  width:38px;
+  height:38px;
+  border-radius:9px;
 }
 
-#toast.show{
-  display:block;
-}
+@media(max-width:900px){
 
-/* RESPONSIVE */
-
-@media(max-width:1000px){
-  .stats-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .monitor-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media(max-width:750px){
   .sidebar{
-    width:70px;
-    padding:15px 8px;
+    transform:translateX(-100%);
+    transition:.2s;
   }
 
-  .brand-text,
-  .nav-text,
-  .admin-mini,
-  .logout-text{
-    display:none;
-  }
-
-  .brand{
-    justify-content:center;
-    padding-bottom:20px;
-  }
-
-  .nav button{
-    text-align:center;
-    padding:12px 5px;
-  }
-
-  .nav-icon{
-    width:auto;
-  }
-
-  .sidebar-bottom{
-    left:8px;
-    right:8px;
+  .sidebar.open{
+    transform:translateX(0);
   }
 
   .main{
-    margin-left:70px;
-    width:calc(100% - 70px);
+    margin-left:0;
+    width:100%;
+  }
+
+  .mobile-menu{
+    display:block;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:600px){
+
+  .content{
+    padding:15px;
   }
 
   .topbar{
     padding:0 15px;
   }
 
-  .content{
-    padding:15px;
-  }
-
-  .stats-grid,
-  .monitor-grid{
+  .stats{
     grid-template-columns:1fr;
   }
 
-  .form-grid,
   .detail-grid{
     grid-template-columns:1fr;
+  }
+
+  .toolbar{
+    width:100%;
+  }
+
+  .search{
+    width:100%;
   }
 
   .login-card{
@@ -880,131 +646,137 @@ tr:last-child td{
 
 <body>
 
-<!-- LOGIN -->
+<!-- =========================
+     LOGIN
+========================= -->
 
-<section id="loginScreen">
+<div id="loginPage" class="login-page">
+
   <div class="login-card">
 
     <div class="logo">S</div>
 
     <h1>Spotly Admin</h1>
-    <p>Sign in to manage vendors, screens and operations.</p>
 
-    <form id="loginForm">
+    <p>Sign in to manage your vendor network.</p>
 
-      <div class="form-group">
-        <label for="adminEmail">Admin Email</label>
+    <form onsubmit="event.preventDefault(); loginAdmin();">
+
+      <div class="field">
+        <label>Admin Email</label>
         <input
-          type="email"
           id="adminEmail"
-          autocomplete="email"
+          type="email"
+          autocomplete="username"
           placeholder="admin@spotly.com"
           required
         >
       </div>
 
-      <div class="form-group">
-        <label for="adminPassword">Password</label>
+      <div class="field">
+        <label>Password</label>
         <input
-          type="password"
           id="adminPassword"
+          type="password"
           autocomplete="current-password"
           placeholder="Enter password"
           required
         >
       </div>
 
-      <button type="submit" class="primary-btn full">
+      <button class="primary-btn" id="loginButton">
         Login
       </button>
+
+      <div id="loginError" class="login-error"></div>
 
     </form>
 
   </div>
-</section>
+
+</div>
 
 
-<!-- ADMIN APP -->
+<!-- =========================
+     ADMIN APP
+========================= -->
 
-<section id="adminApp" class="hidden">
+<div id="adminApp" class="app hidden">
 
-  <aside class="sidebar">
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar" id="sidebar">
 
     <div class="brand">
+
       <div class="brand-icon">S</div>
-      <div class="brand-text">
-        <strong>Spotly</strong>
-        <span>Admin Portal</span>
+
+      <div>
+        <div class="brand-name">Spotly</div>
+        <div class="brand-sub">Admin Portal</div>
       </div>
+
     </div>
 
     <nav class="nav">
 
       <button
-        type="button"
-        class="active"
+        class="nav-btn active"
         data-page="dashboard"
+        onclick="showPage('dashboard')"
       >
-        <span class="nav-icon">⌂</span>
-        <span class="nav-text">Dashboard</span>
+        Dashboard
       </button>
 
       <button
-        type="button"
+        class="nav-btn"
         data-page="vendors"
+        onclick="showPage('vendors')"
       >
-        <span class="nav-icon">▣</span>
-        <span class="nav-text">Vendors</span>
+        Vendors
       </button>
 
       <button
-        type="button"
+        class="nav-btn"
         data-page="monitoring"
+        onclick="showPage('monitoring')"
       >
-        <span class="nav-icon">◉</span>
-        <span class="nav-text">Screen Monitoring</span>
+        Offline Screens
       </button>
 
       <button
-        type="button"
+        class="nav-btn"
         data-page="notifications"
+        onclick="showPage('notifications')"
       >
-        <span class="nav-icon">●</span>
-        <span class="nav-text">Notifications</span>
+        Notifications
       </button>
 
       <button
-        type="button"
-        data-page="withdrawals"
-      >
-        <span class="nav-icon">₨</span>
-        <span class="nav-text">Withdrawals</span>
-      </button>
-
-      <button
-        type="button"
+        class="nav-btn"
         data-page="complaints"
+        onclick="showPage('complaints')"
       >
-        <span class="nav-icon">!</span>
-        <span class="nav-text">Complaints</span>
+        Complaints
+      </button>
+
+      <button
+        class="nav-btn"
+        data-page="withdrawals"
+        onclick="showPage('withdrawals')"
+      >
+        Withdrawals
       </button>
 
     </nav>
 
     <div class="sidebar-bottom">
 
-      <div class="admin-mini">
-        <strong id="sidebarAdminName">Admin</strong>
-        <span id="sidebarAdminEmail"></span>
-      </div>
-
       <button
-        type="button"
         class="logout-btn"
-        onclick="logout()"
+        onclick="logoutAdmin()"
       >
-        <span>↪</span>
-        <span class="logout-text">Logout</span>
+        Logout
       </button>
 
     </div>
@@ -1012,29 +784,36 @@ tr:last-child td{
   </aside>
 
 
+  <!-- MAIN -->
+
   <main class="main">
 
     <header class="topbar">
 
-      <div class="page-title">
-        <h2 id="pageTitle">Dashboard</h2>
-        <span id="pageSubtitle">Spotly operations overview</span>
-      </div>
-
-      <div class="top-actions">
+      <div style="display:flex;align-items:center;gap:12px">
 
         <button
-          type="button"
-          class="notification-btn"
-          onclick="openPage('notifications')"
-          aria-label="Notifications"
+          class="mobile-menu"
+          onclick="toggleSidebar()"
         >
-          ♧
-          <span
-            id="notificationBadge"
-            class="badge hidden"
-          >0</span>
+          ☰
         </button>
+
+        <div id="pageTitle" class="page-title">
+          Dashboard
+        </div>
+
+      </div>
+
+      <div class="admin-user">
+
+        <div id="adminName">
+          Admin
+        </div>
+
+        <div class="admin-avatar">
+          A
+        </div>
 
       </div>
 
@@ -1045,70 +824,106 @@ tr:last-child td{
 
       <!-- DASHBOARD -->
 
-      <section id="page-dashboard" class="page active">
+      <section id="page-dashboard" class="page">
 
-        <div class="stats-grid">
+        <div class="stats">
 
-          <div class="stat-card yellow">
-            <div class="stat-label">TOTAL VENDORS</div>
-            <div class="stat-value" id="statTotalVendors">0</div>
+          <div class="stat-card">
+            <div class="stat-label">Today's Ads</div>
+            <div class="stat-value" id="statAds">0</div>
+            <div class="stat-note">Verified ads today</div>
           </div>
 
-          <div class="stat-card orange">
-            <div class="stat-label">PENDING VENDORS</div>
-            <div class="stat-value" id="statPendingVendors">0</div>
+          <div class="stat-card">
+            <div class="stat-label">Offline Shops</div>
+            <div class="stat-value" id="statOffline">0</div>
+            <div class="stat-note">Approved shops offline</div>
           </div>
 
-          <div class="stat-card red">
-            <div class="stat-label">OFFLINE SCREENS</div>
-            <div class="stat-value" id="statOfflineScreens">0</div>
+          <div class="stat-card">
+            <div class="stat-label">Today's Revenue</div>
+            <div class="stat-value" id="statRevenue">Rs 0</div>
+            <div class="stat-note">Based on available records</div>
           </div>
 
-          <div class="stat-card green">
-            <div class="stat-label">TODAY'S NOTIFICATIONS</div>
-            <div class="stat-value" id="statTodayNotifications">0</div>
-          </div>
-
-        </div>
-
-
-        <div class="section-card">
-
-          <div class="section-header">
-            <h3>Pending Vendor Requests</h3>
-            <span id="pendingCountText">0 pending</span>
-          </div>
-
-          <div class="table-wrap">
-            <table>
-
-              <thead>
-                <tr>
-                  <th>Vendor</th>
-                  <th>Owner</th>
-                  <th>Area</th>
-                  <th>Phone</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-
-              <tbody id="dashboardPendingTable"></tbody>
-
-            </table>
+          <div class="stat-card">
+            <div class="stat-label">Vendors</div>
+            <div class="stat-value" id="statVendors">0</div>
+            <div class="stat-note">Total vendor accounts</div>
           </div>
 
         </div>
 
 
-        <div class="section-card">
+        <div class="section">
 
-          <div class="section-header">
-            <h3>Offline Screens</h3>
-            <span>Approved vendors during working hours</span>
+          <div class="section-head">
+
+            <div class="section-title">
+              Vendor Overview
+            </div>
+
+            <button
+              class="btn yellow"
+              onclick="showPage('vendors')"
+            >
+              View Vendors
+            </button>
+
           </div>
 
-          <div id="dashboardOfflineList"></div>
+          <div class="section-body">
+
+            <div class="stats" style="margin:0">
+
+              <div class="stat-card">
+                <div class="stat-label">Pending</div>
+                <div class="stat-value" id="statPending">0</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-label">Approved</div>
+                <div class="stat-value" id="statApproved">0</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-label">Online Screens</div>
+                <div class="stat-value" id="statOnline">0</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-label">Offline During Hours</div>
+                <div class="stat-value" id="statWorkingOffline">0</div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="section">
+
+          <div class="section-head">
+
+            <div class="section-title">
+              Recent Notifications
+            </div>
+
+            <button
+              class="btn"
+              onclick="showPage('notifications')"
+            >
+              View All
+            </button>
+
+          </div>
+
+          <div
+            id="dashboardNotifications"
+            class="section-body"
+          ></div>
 
         </div>
 
@@ -1117,50 +932,58 @@ tr:last-child td{
 
       <!-- VENDORS -->
 
-      <section id="page-vendors" class="page">
+      <section
+        id="page-vendors"
+        class="page hidden"
+      >
 
-        <div class="toolbar">
+        <div class="section">
 
-          <input
-            id="vendorSearch"
-            class="search"
-            type="search"
-            placeholder="Search vendor, owner, phone or area..."
-          >
+          <div class="section-head">
 
-          <select
-            id="vendorStatusFilter"
-            class="filter"
-          >
-            <option value="all">All Status</option>
-            <option value="pending">Pending</option>
-            <option value="approved">Approved</option>
-            <option value="rejected">Rejected</option>
-          </select>
+            <div class="section-title">
+              Vendors
+            </div>
 
-        </div>
+            <div class="toolbar">
 
+              <input
+                id="vendorSearch"
+                class="search"
+                placeholder="Search vendor..."
+                oninput="renderVendors()"
+              >
 
-        <div class="section-card">
+              <select
+                id="vendorStatusFilter"
+                class="filter"
+                onchange="renderVendors()"
+              >
+                <option value="">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </select>
 
-          <div class="section-header">
-            <h3>Vendor Profiles</h3>
-            <span id="vendorCountText">0 vendors</span>
+            </div>
+
           </div>
 
-          <div class="table-wrap">
+          <div class="section-body table-wrap">
 
             <table>
 
               <thead>
+
                 <tr>
                   <th>Vendor</th>
-                  <th>Contact</th>
-                  <th>Location</th>
+                  <th>Owner</th>
+                  <th>Area</th>
                   <th>Status</th>
                   <th>Screen</th>
                   <th>Actions</th>
                 </tr>
+
               </thead>
 
               <tbody id="vendorsTable"></tbody>
@@ -1176,16 +999,50 @@ tr:last-child td{
 
       <!-- MONITORING -->
 
-      <section id="page-monitoring" class="page">
+      <section
+        id="page-monitoring"
+        class="page hidden"
+      >
 
-        <div class="section-card">
+        <div class="section">
 
-          <div class="section-header">
-            <h3>Offline Screens</h3>
-            <span id="monitoringTime"></span>
+          <div class="section-head">
+
+            <div class="section-title">
+              Offline Screens
+            </div>
+
+            <button
+              class="btn"
+              onclick="loadAll()"
+            >
+              Refresh
+            </button>
+
           </div>
 
-          <div id="monitoringList" class="monitor-grid" style="padding:18px;"></div>
+          <div class="section-body table-wrap">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>Vendor</th>
+                  <th>Area</th>
+                  <th>Opening</th>
+                  <th>Closing</th>
+                  <th>Screen</th>
+                  <th>Action</th>
+                </tr>
+
+              </thead>
+
+              <tbody id="offlineTable"></tbody>
+
+            </table>
+
+          </div>
 
         </div>
 
@@ -1194,49 +1051,25 @@ tr:last-child td{
 
       <!-- NOTIFICATIONS -->
 
-      <section id="page-notifications" class="page">
+      <section
+        id="page-notifications"
+        class="page hidden"
+      >
 
-        <div class="section-card">
+        <div class="section">
 
-          <div class="section-header">
+          <div class="section-head">
 
-            <h3>Notifications</h3>
-
-            <button
-              type="button"
-              class="secondary-btn"
-              onclick="markAllNotificationsRead()"
-            >
-              Mark all read
-            </button>
+            <div class="section-title">
+              Notifications
+            </div>
 
           </div>
 
           <div
             id="notificationsList"
-            style="padding:15px;"
+            class="section-body"
           ></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- WITHDRAWALS -->
-
-      <section id="page-withdrawals" class="page">
-
-        <div class="section-card">
-
-          <div class="section-header">
-            <h3>Vendor Withdrawals</h3>
-            <span>Connected when withdrawal table is available</span>
-          </div>
-
-          <div class="empty">
-            <strong>No withdrawal records loaded</strong>
-            Withdrawal data will appear here when the withdrawal table is connected.
-          </div>
 
         </div>
 
@@ -1245,18 +1078,49 @@ tr:last-child td{
 
       <!-- COMPLAINTS -->
 
-      <section id="page-complaints" class="page">
+      <section
+        id="page-complaints"
+        class="page hidden"
+      >
 
-        <div class="section-card">
+        <div class="section">
 
-          <div class="section-header">
-            <h3>Vendor Complaints</h3>
-            <span>Connected when complaint table is available</span>
+          <div class="section-head">
+
+            <div class="section-title">
+              Vendor Complaints
+            </div>
+
           </div>
 
           <div class="empty">
-            <strong>No complaint records loaded</strong>
-            Complaint data will appear here when the complaint table is connected.
+            No complaints table is connected yet.
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- WITHDRAWALS -->
+
+      <section
+        id="page-withdrawals"
+        class="page hidden"
+      >
+
+        <div class="section">
+
+          <div class="section-head">
+
+            <div class="section-title">
+              Vendor Withdrawals
+            </div>
+
+          </div>
+
+          <div class="empty">
+            No withdrawals table is connected yet.
           </div>
 
         </div>
@@ -1267,28 +1131,29 @@ tr:last-child td{
 
   </main>
 
-</section>
+</div>
 
 
-<!-- VIEW MODAL -->
+<!-- =========================
+     VENDOR VIEW MODAL
+========================= -->
 
 <div
-  id="viewModal"
-  class="modal-backdrop"
-  onclick="backdropClose(event,'viewModal')"
+  id="vendorModal"
+  class="modal-backdrop hidden"
 >
 
   <div class="modal">
 
-    <div class="modal-header">
+    <div class="modal-head">
 
-      <h3>Vendor Details</h3>
+      <div class="modal-title">
+        Vendor Profile
+      </div>
 
       <button
-        type="button"
         class="close-btn"
-        onclick="closeModal('viewModal')"
-        aria-label="Close"
+        onclick="closeModal('vendorModal')"
       >
         ×
       </button>
@@ -1296,263 +1161,17 @@ tr:last-child td{
     </div>
 
     <div
-      id="viewModalBody"
-      class="modal-body"
-    ></div>
-
-  </div>
-
-</div>
-
-
-<!-- EDIT MODAL -->
-
-<div
-  id="editModal"
-  class="modal-backdrop"
-  onclick="backdropClose(event,'editModal')"
->
-
-  <div class="modal">
-
-    <div class="modal-header">
-
-      <h3>Edit Vendor</h3>
-
-      <button
-        type="button"
-        class="close-btn"
-        onclick="closeModal('editModal')"
-        aria-label="Close"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <form id="editVendorForm">
-
-      <div class="modal-body">
-
-        <input
-          type="hidden"
-          id="editId"
-        >
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label for="editVendorName">Vendor Name</label>
-            <input id="editVendorName">
-          </div>
-
-          <div class="form-group">
-            <label for="editOwnerName">Owner Name</label>
-            <input id="editOwnerName">
-          </div>
-
-          <div class="form-group">
-            <label for="editPhone">Phone</label>
-            <input id="editPhone">
-          </div>
-
-          <div class="form-group">
-            <label for="editEmail">Email</label>
-            <input id="editEmail" type="email">
-          </div>
-
-          <div class="form-group">
-            <label for="editCategory">Category</label>
-            <input id="editCategory">
-          </div>
-
-          <div class="form-group">
-            <label for="editArea">Area</label>
-            <input id="editArea">
-          </div>
-
-          <div class="form-group">
-            <label for="editPhase">Phase</label>
-            <input id="editPhase">
-          </div>
-
-          <div class="form-group">
-            <label for="editPrecinct">Precinct</label>
-            <input id="editPrecinct">
-          </div>
-
-          <div class="form-group">
-            <label for="editSector">Sector</label>
-            <input id="editSector">
-          </div>
-
-          <div class="form-group">
-            <label for="editBlock">Block</label>
-            <input id="editBlock">
-          </div>
-
-          <div class="form-group full-width">
-            <label for="editAddress">Address</label>
-            <textarea id="editAddress" rows="2"></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="editFootfall">Footfall</label>
-            <input id="editFootfall" type="number">
-          </div>
-
-          <div class="form-group">
-            <label for="editShopSize">Shop Size</label>
-            <input id="editShopSize">
-          </div>
-
-          <div class="form-group">
-            <label for="editOpening">Opening Time</label>
-            <input id="editOpening" type="time">
-          </div>
-
-          <div class="form-group">
-            <label for="editClosing">Closing Time</label>
-            <input id="editClosing" type="time">
-          </div>
-
-          <div class="form-group">
-            <label for="editLcdStatus">LCD Status</label>
-            <select id="editLcdStatus">
-              <option value="">Select</option>
-              <option value="online">Online</option>
-              <option value="offline">Offline</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="editOnlineStatus">Vendor Screen</label>
-            <select id="editOnlineStatus">
-              <option value="true">Online</option>
-              <option value="false">Offline</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="editInternetStatus">Internet Status</label>
-            <input id="editInternetStatus">
-          </div>
-
-          <div class="form-group">
-            <label for="editInternetProvider">Internet Provider</label>
-            <input id="editInternetProvider">
-          </div>
-
-          <div class="form-group">
-            <label for="editBankName">Bank Name</label>
-            <input id="editBankName">
-          </div>
-
-          <div class="form-group">
-            <label for="editAccountTitle">Account Title</label>
-            <input id="editAccountTitle">
-          </div>
-
-          <div class="form-group">
-            <label for="editAccountNumber">Account Number</label>
-            <input id="editAccountNumber">
-          </div>
-
-          <div class="form-group">
-            <label for="editIban">IBAN</label>
-            <input id="editIban">
-          </div>
-
-          <div class="form-group">
-            <label for="editPaymentMethod">Payment Method</label>
-            <input id="editPaymentMethod">
-          </div>
-
-          <div class="form-group">
-            <label for="editStatus">Status</label>
-            <select id="editStatus">
-              <option value="pending">Pending</option>
-              <option value="approved">Approved</option>
-              <option value="rejected">Rejected</option>
-            </select>
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="modal-footer">
-
-        <button
-          type="button"
-          class="secondary-btn"
-          onclick="closeModal('editModal')"
-        >
-          Cancel
-        </button>
-
-        <button
-          type="submit"
-          class="primary-btn"
-        >
-          Save Changes
-        </button>
-
-      </div>
-
-    </form>
-
-  </div>
-
-</div>
-
-
-<!-- CONFIRM MODAL -->
-
-<div
-  id="confirmModal"
-  class="modal-backdrop"
->
-
-  <div class="modal small">
-
-    <div class="modal-header">
-
-      <h3 id="confirmTitle">Confirm</h3>
-
-      <button
-        type="button"
-        class="close-btn"
-        onclick="closeModal('confirmModal')"
-        aria-label="Close"
-      >
-        ×
-      </button>
-
-    </div>
-
-    <div
-      id="confirmBody"
+      id="vendorModalBody"
       class="modal-body"
     ></div>
 
     <div class="modal-footer">
 
       <button
-        type="button"
-        class="secondary-btn"
-        onclick="closeModal('confirmModal')"
+        class="btn"
+        onclick="closeModal('vendorModal')"
       >
-        Cancel
-      </button>
-
-      <button
-        type="button"
-        id="confirmAction"
-        class="primary-btn"
-      >
-        Confirm
+        Close
       </button>
 
     </div>
@@ -1562,88 +1181,244 @@ tr:last-child td{
 </div>
 
 
-<!-- NOTIFICATION MODAL -->
+<!-- =========================
+     EDIT MODAL
+========================= -->
 
 <div
-  id="notificationModal"
-  class="modal-backdrop"
+  id="editModal"
+  class="modal-backdrop hidden"
 >
 
-  <div class="modal small">
+  <div class="modal">
 
-    <div class="modal-header">
+    <div class="modal-head">
 
-      <h3>Notify Vendor</h3>
+      <div class="modal-title">
+        Edit Vendor
+      </div>
 
       <button
-        type="button"
         class="close-btn"
-        onclick="closeModal('notificationModal')"
-        aria-label="Close"
+        onclick="closeModal('editModal')"
       >
         ×
       </button>
 
     </div>
 
-    <form id="notificationForm">
+    <div class="modal-body">
 
-      <div class="modal-body">
+      <input type="hidden" id="editVendorId">
 
-        <input
-          type="hidden"
-          id="notificationVendorId"
-        >
+      <div class="detail-grid">
 
-        <div class="form-group">
-          <label for="notificationTitle">Title</label>
-          <input
-            id="notificationTitle"
-            required
-          >
+        <div class="field">
+          <label>Vendor Name</label>
+          <input id="editVendorName">
         </div>
 
-        <div class="form-group">
-          <label for="notificationMessage">Message</label>
-          <textarea
-            id="notificationMessage"
-            rows="5"
-            required
-          ></textarea>
+        <div class="field">
+          <label>Owner Name</label>
+          <input id="editOwnerName">
+        </div>
+
+        <div class="field">
+          <label>Phone</label>
+          <input id="editPhone">
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input id="editEmail" type="email">
+        </div>
+
+        <div class="field">
+          <label>Category</label>
+          <input id="editCategory">
+        </div>
+
+        <div class="field">
+          <label>Area</label>
+          <input id="editArea">
+        </div>
+
+        <div class="field">
+          <label>Phase</label>
+          <input id="editPhase">
+        </div>
+
+        <div class="field">
+          <label>Precinct</label>
+          <input id="editPrecinct">
+        </div>
+
+        <div class="field">
+          <label>Sector</label>
+          <input id="editSector">
+        </div>
+
+        <div class="field">
+          <label>Block</label>
+          <input id="editBlock">
+        </div>
+
+        <div class="field">
+          <label>Address</label>
+          <input id="editAddress">
+        </div>
+
+        <div class="field">
+          <label>Footfall</label>
+          <input id="editFootfall" type="number">
+        </div>
+
+        <div class="field">
+          <label>Shop Size</label>
+          <input id="editShopSize">
+        </div>
+
+        <div class="field">
+          <label>LCD Status</label>
+          <input id="editLcdStatus">
+        </div>
+
+        <div class="field">
+          <label>Opening Time</label>
+          <input id="editOpening" type="time">
+        </div>
+
+        <div class="field">
+          <label>Closing Time</label>
+          <input id="editClosing" type="time">
+        </div>
+
+        <div class="field">
+          <label>Internet Status</label>
+          <input id="editInternet">
+        </div>
+
+        <div class="field">
+          <label>Fridge</label>
+          <select id="editFridge">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
         </div>
 
       </div>
 
-      <div class="modal-footer">
+    </div>
 
-        <button
-          type="button"
-          class="secondary-btn"
-          onclick="closeModal('notificationModal')"
-        >
-          Cancel
-        </button>
+    <div class="modal-footer">
 
-        <button
-          type="submit"
-          class="primary-btn"
-        >
-          Send Notification
-        </button>
+      <button
+        class="btn"
+        onclick="closeModal('editModal')"
+      >
+        Cancel
+      </button>
 
-      </div>
+      <button
+        class="btn yellow"
+        onclick="saveVendorEdit()"
+      >
+        Save Changes
+      </button>
 
-    </form>
+    </div>
 
   </div>
 
 </div>
 
 
-<div id="toast"></div>
+<!-- =========================
+     NOTIFICATION MODAL
+========================= -->
+
+<div
+  id="notificationModal"
+  class="modal-backdrop hidden"
+>
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <div class="modal-title">
+        Notify Vendor
+      </div>
+
+      <button
+        class="close-btn"
+        onclick="closeModal('notificationModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <input
+        type="hidden"
+        id="notificationVendorId"
+      >
+
+      <div class="field">
+
+        <label>Title</label>
+
+        <input
+          id="notificationTitle"
+          placeholder="Notification title"
+        >
+
+      </div>
+
+      <div class="field">
+
+        <label>Message</label>
+
+        <textarea
+          id="notificationMessage"
+          rows="5"
+          placeholder="Write your message..."
+        ></textarea>
+
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button
+        class="btn"
+        onclick="closeModal('notificationModal')"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="btn yellow"
+        onclick="sendVendorNotification()"
+      >
+        Send
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div id="toast" class="toast hidden"></div>
 
 
 <script>
+
 /* =========================================================
    SUPABASE
 ========================================================= */
@@ -1663,6 +1438,7 @@ const supabaseClient =
         persistSession:true,
         autoRefreshToken:true,
         detectSessionInUrl:true,
+        storage:window.localStorage,
         storageKey:"spotly-admin-auth"
       }
     }
@@ -1673,321 +1449,339 @@ const supabaseClient =
    STATE
 ========================================================= */
 
+let currentUser = null;
 let currentAdmin = null;
 let vendors = [];
-let notifications = [];
-let currentPage = "dashboard";
-let monitorTimer = null;
-let notificationChannel = null;
-let vendorChannel = null;
+let adminNotifications = [];
 
 
 /* =========================================================
-   DOM HELPERS
+   HELPERS
 ========================================================= */
 
-function $(id){
-  return document.getElementById(id);
-}
-
-function escapeHtml(value){
-  if(value === null || value === undefined){
-    return "";
-  }
-
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
-function formatDate(value){
-  if(!value){
-    return "-";
-  }
-
-  try{
-    return new Date(value).toLocaleString();
-  }catch{
-    return value;
-  }
-}
-
 function toast(message){
-  const el = $("toast");
+
+  const el =
+    document.getElementById("toast");
 
   el.textContent = message;
-  el.classList.add("show");
+
+  el.classList.remove("hidden");
 
   clearTimeout(window.__toastTimer);
 
   window.__toastTimer =
     setTimeout(()=>{
-      el.classList.remove("show");
+      el.classList.add("hidden");
     },3000);
 }
 
 
-/* =========================================================
-   MODALS
-========================================================= */
+function closeModal(id){
+
+  const el =
+    document.getElementById(id);
+
+  if(el){
+    el.classList.add("hidden");
+  }
+}
+
 
 function openModal(id){
-  $(id).classList.add("show");
-}
 
-function closeModal(id){
-  $(id).classList.remove("show");
-}
+  const el =
+    document.getElementById(id);
 
-function backdropClose(event,id){
-  if(event.target.id === id){
-    closeModal(id);
+  if(el){
+    el.classList.remove("hidden");
   }
+}
+
+
+function esc(value){
+
+  if(value === null || value === undefined){
+    return "";
+  }
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+function formatTime(value){
+
+  if(!value) return "-";
+
+  return String(value).slice(0,5);
+}
+
+
+function isWorkingHours(vendor){
+
+  if(
+    vendor.status !== "approved" ||
+    !vendor.opening_time ||
+    !vendor.closing_time
+  ){
+    return false;
+  }
+
+  const now = new Date();
+
+  const current =
+    now.getHours()*60 +
+    now.getMinutes();
+
+  const openingParts =
+    String(vendor.opening_time)
+      .slice(0,5)
+      .split(":")
+      .map(Number);
+
+  const closingParts =
+    String(vendor.closing_time)
+      .slice(0,5)
+      .split(":")
+      .map(Number);
+
+  const opening =
+    openingParts[0]*60 +
+    openingParts[1];
+
+  const closing =
+    closingParts[0]*60 +
+    closingParts[1];
+
+  if(opening <= closing){
+    return current >= opening &&
+           current <= closing;
+  }
+
+  return current >= opening ||
+         current <= closing;
+}
+
+
+function isVendorOffline(vendor){
+
+  return (
+    vendor.status === "approved" &&
+    isWorkingHours(vendor) &&
+    vendor.online_status !== true
+  );
 }
 
 
 /* =========================================================
-   PAGE NAVIGATION
+   LOGIN
 ========================================================= */
 
-const pageTitles = {
-  dashboard:[
-    "Dashboard",
-    "Spotly operations overview"
-  ],
-  vendors:[
-    "Vendors",
-    "Manage vendor profiles and approval"
-  ],
-  monitoring:[
-    "Screen Monitoring",
-    "Approved vendor screens during working hours"
-  ],
-  notifications:[
-    "Notifications",
-    "Admin activity and vendor notifications"
-  ],
-  withdrawals:[
-    "Withdrawals",
-    "Vendor withdrawal requests"
-  ],
-  complaints:[
-    "Complaints",
-    "Vendor complaints and issues"
-  ]
-};
-
-function openPage(page){
-
-  currentPage = page;
-
-  document
-    .querySelectorAll(".page")
-    .forEach(el=>{
-      el.classList.remove("active");
-    });
-
-  const target = $("page-"+page);
-
-  if(target){
-    target.classList.add("active");
-  }
-
-  document
-    .querySelectorAll(".nav button")
-    .forEach(btn=>{
-      btn.classList.toggle(
-        "active",
-        btn.dataset.page === page
-      );
-    });
-
-  if(pageTitles[page]){
-    $("pageTitle").textContent = pageTitles[page][0];
-    $("pageSubtitle").textContent = pageTitles[page][1];
-  }
-
-  if(page === "vendors"){
-    renderVendors();
-  }
-
-  if(page === "monitoring"){
-    renderMonitoring();
-  }
-
-  if(page === "notifications"){
-    renderNotifications();
-  }
-}
-
-
-/* =========================================================
-   AUTH
-========================================================= */
-
-async function adminLogin(){
+async function loginAdmin(){
 
   const email =
-    $("adminEmail").value.trim();
+    document
+      .getElementById("adminEmail")
+      .value
+      .trim();
 
   const password =
-    $("adminPassword").value;
+    document
+      .getElementById("adminPassword")
+      .value;
+
+  const errorBox =
+    document.getElementById("loginError");
+
+  const button =
+    document.getElementById("loginButton");
+
+  errorBox.textContent = "";
 
   if(!email || !password){
-    toast("Email and password required");
+
+    errorBox.textContent =
+      "Please enter email and password.";
+
     return;
   }
 
+  button.disabled = true;
+  button.textContent = "Logging in...";
+
   try{
 
-    console.log("LOGIN START:",email);
+    const {data,error} =
+      await supabaseClient.auth
+        .signInWithPassword({
+          email,
+          password
+        });
 
-    const {
+    console.log("LOGIN RESULT:",{
       data,
       error
-    } =
-      await supabaseClient.auth.signInWithPassword({
-        email,
-        password
-      });
-
-    console.log("LOGIN DATA:",data);
-    console.log("LOGIN ERROR:",error);
+    });
 
     if(error){
-      toast(error.message || "Login failed");
+
+      errorBox.textContent =
+        error.message ||
+        "Invalid login credentials.";
+
       return;
     }
 
-    if(!data || !data.user){
-      toast("No authenticated user returned");
+    if(!data || !data.user || !data.session){
+
+      errorBox.textContent =
+        "Login succeeded but no session was created.";
+
       return;
     }
 
-    currentAdmin = data.user;
-
-    const adminResult =
-      await getAdminRecord(data.user.id);
+    currentUser =
+      data.user;
 
     console.log(
-      "ADMIN RECORD:",
-      adminResult
+      "AUTH USER:",
+      currentUser
     );
 
-    if(adminResult.error){
+    console.log(
+      "SESSION EXISTS:",
+      !!data.session
+    );
 
-      console.error(
-        "ADMIN CHECK ERROR:",
-        adminResult.error
-      );
+
+    /* CHECK ADMIN RECORD */
+
+    const {
+      data:admin,
+      error:adminError
+    } =
+      await supabaseClient
+        .from("admin_users")
+        .select("*")
+        .eq("user_id",currentUser.id)
+        .eq("active",true)
+        .maybeSingle();
+
+    console.log(
+      "ADMIN ROW:",
+      admin
+    );
+
+    console.log(
+      "ADMIN ERROR:",
+      adminError
+    );
+
+
+    if(adminError){
+
+      console.error(adminError);
+
+      errorBox.textContent =
+        "Admin access could not be verified.";
 
       await supabaseClient.auth.signOut();
-
-      toast(
-        "Admin check failed: " +
-        adminResult.error.message
-      );
 
       return;
     }
 
-    if(!adminResult.data){
+
+    if(!admin){
+
+      errorBox.textContent =
+        "This account does not have admin access.";
 
       await supabaseClient.auth.signOut();
-
-      currentAdmin = null;
-
-      toast(
-        "This account does not have admin access."
-      );
 
       return;
     }
 
-    currentAdmin = {
-      ...data.user,
-      adminRecord:adminResult.data
-    };
 
-    await enterAdminPortal();
+    currentAdmin =
+      admin;
+
+    localStorage.setItem(
+      "spotly_admin_logged",
+      "true"
+    );
+
+    openAdminApp();
 
   }catch(error){
 
-    console.error(
-      "LOGIN EXCEPTION:",
-      error
-    );
+    console.error(error);
 
-    toast(
-      error.message ||
-      "Unable to login"
-    );
+    errorBox.textContent =
+      "Login failed. Please try again.";
+
+  }finally{
+
+    button.disabled = false;
+    button.textContent = "Login";
+
   }
 }
 
 
-async function getAdminRecord(userId){
+/* =========================================================
+   EXISTING SESSION
+========================================================= */
 
-  return await supabaseClient
-    .from("admin_users")
-    .select(
-      "id,user_id,email,full_name,active"
-    )
-    .eq("user_id",userId)
-    .eq("active",true)
-    .maybeSingle();
-}
-
-
-async function checkExistingAdminSession(){
+async function checkExistingSession(){
 
   try{
 
     const {
-      data,
+      data:{
+        session
+      },
       error
     } =
-      await supabaseClient.auth.getSession();
+      await supabaseClient.auth
+        .getSession();
 
     console.log(
-      "EXISTING SESSION:",
-      data?.session
+      "SESSION RESULT:",
+      {
+        session,
+        error
+      }
     );
 
-    console.log(
-      "SESSION ERROR:",
-      error
-    );
-
-    if(error || !data || !data.session){
+    if(error || !session){
 
       showLogin();
-
       return;
     }
 
-    const user =
-      data.session.user;
+    currentUser =
+      session.user;
 
-    const adminResult =
-      await getAdminRecord(user.id);
 
-    console.log(
-      "SESSION ADMIN:",
-      adminResult.data
-    );
-
-    console.log(
-      "SESSION ADMIN ERROR:",
-      adminResult.error
-    );
+    const {
+      data:admin,
+      error:adminError
+    } =
+      await supabaseClient
+        .from("admin_users")
+        .select("*")
+        .eq("user_id",currentUser.id)
+        .eq("active",true)
+        .maybeSingle();
 
     if(
-      adminResult.error ||
-      !adminResult.data
+      adminError ||
+      !admin
     ){
 
       await supabaseClient.auth.signOut();
@@ -1997,59 +1791,78 @@ async function checkExistingAdminSession(){
       return;
     }
 
-    currentAdmin = {
-      ...user,
-      adminRecord:adminResult.data
-    };
+    currentAdmin =
+      admin;
 
-    await enterAdminPortal();
+    openAdminApp();
 
   }catch(error){
 
-    console.error(
-      "SESSION CHECK ERROR:",
-      error
-    );
+    console.error(error);
 
     showLogin();
+
   }
 }
 
 
-async function enterAdminPortal(){
+/* =========================================================
+   AUTH STATE
+========================================================= */
 
-  $("loginScreen").style.display = "none";
-  $("adminApp").classList.remove("hidden");
+supabaseClient.auth.onAuthStateChange(
+  (event,session)=>{
 
-  const admin =
-    currentAdmin.adminRecord ||
-    {};
+    console.log(
+      "AUTH STATE:",
+      event,
+      !!session
+    );
 
-  $("sidebarAdminName").textContent =
-    admin.full_name ||
-    "Main Admin";
+  }
+);
 
-  $("sidebarAdminEmail").textContent =
-    admin.email ||
-    currentAdmin.email ||
-    "";
 
-  await loadAll();
+/* =========================================================
+   OPEN APP
+========================================================= */
 
-  setupRealtime();
+function openAdminApp(){
 
-  startMonitoringTimer();
+  document
+    .getElementById("loginPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("adminApp")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("adminName")
+    .textContent =
+      currentAdmin?.full_name ||
+      "Admin";
+
+  loadAll();
 }
 
 
 function showLogin(){
 
-  $("loginScreen").style.display = "flex";
-  $("adminApp").classList.add("hidden");
+  document
+    .getElementById("adminApp")
+    .classList.add("hidden");
+
+  document
+    .getElementById("loginPage")
+    .classList.remove("hidden");
+
+  currentUser = null;
+  currentAdmin = null;
 }
 
 
-async function logout(){
+async function logoutAdmin(){
 
   try{
 
@@ -2057,53 +1870,89 @@ async function logout(){
 
   }catch(error){
 
-    console.error(
-      "LOGOUT ERROR:",
-      error
-    );
+    console.error(error);
 
   }
 
-  currentAdmin = null;
-  vendors = [];
-  notifications = [];
-
-  if(notificationChannel){
-    await supabaseClient
-      .removeChannel(notificationChannel);
-    notificationChannel = null;
-  }
-
-  if(vendorChannel){
-    await supabaseClient
-      .removeChannel(vendorChannel);
-    vendorChannel = null;
-  }
+  localStorage.removeItem(
+    "spotly_admin_logged"
+  );
 
   showLogin();
+
+  toast("Logged out");
 }
 
 
 /* =========================================================
-   AUTH EVENT
+   NAVIGATION
 ========================================================= */
 
-supabaseClient.auth.onAuthStateChange(
-  (event,session)=>{
+function showPage(page){
 
-    console.log(
-      "AUTH EVENT:",
-      event,
-      session
+  document
+    .querySelectorAll(".page")
+    .forEach(el=>{
+      el.classList.add("hidden");
+    });
+
+  const target =
+    document.getElementById(
+      "page-"+page
     );
 
-    if(event === "SIGNED_OUT"){
-      currentAdmin = null;
-      showLogin();
-    }
-
+  if(target){
+    target.classList.remove("hidden");
   }
-);
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(btn=>{
+      btn.classList.toggle(
+        "active",
+        btn.dataset.page === page
+      );
+    });
+
+  const titles = {
+    dashboard:"Dashboard",
+    vendors:"Vendors",
+    monitoring:"Offline Screens",
+    notifications:"Notifications",
+    complaints:"Complaints",
+    withdrawals:"Withdrawals"
+  };
+
+  document
+    .getElementById("pageTitle")
+    .textContent =
+      titles[page] || "Dashboard";
+
+  document
+    .getElementById("sidebar")
+    .classList.remove("open");
+
+  if(page === "vendors"){
+    renderVendors();
+  }
+
+  if(page === "monitoring"){
+    renderOffline();
+  }
+
+  if(page === "notifications"){
+    renderNotifications();
+  }
+}
+
+
+function toggleSidebar(){
+
+  document
+    .getElementById("sidebar")
+    .classList.toggle("open");
+
+}
 
 
 /* =========================================================
@@ -2112,16 +1961,19 @@ supabaseClient.auth.onAuthStateChange(
 
 async function loadAll(){
 
-  await loadVendors();
-  await loadNotifications();
+  await Promise.all([
+    loadVendors(),
+    loadAdminNotifications()
+  ]);
 
-  await syncVendorRequestNotifications();
-  await syncOfflineNotifications();
+  updateDashboard();
 
-  renderDashboard();
   renderVendors();
-  renderMonitoring();
+
+  renderOffline();
+
   renderNotifications();
+
 }
 
 
@@ -2140,414 +1992,92 @@ async function loadVendors(){
       .select("*")
       .order(
         "created_at",
-        {
-          ascending:false
-        }
+        {ascending:false}
       );
 
   if(error){
 
     console.error(
-      "VENDOR LOAD ERROR:",
+      "VENDORS ERROR:",
       error
     );
 
-    toast(
-      "Unable to load vendors: " +
-      error.message
-    );
+    toast("Unable to load vendors");
 
     return;
   }
 
   vendors =
-    Array.isArray(data)
-      ? data
-      : [];
+    data || [];
 
 }
 
-
-function vendorStatus(vendor){
-
-  return (
-    vendor.status ||
-    "pending"
-  ).toLowerCase();
-}
-
-
-function vendorIsApproved(vendor){
-
-  return vendorStatus(vendor) === "approved";
-}
-
-
-function isVendorOpenNow(vendor){
-
-  if(!vendor.opening_time ||
-     !vendor.closing_time){
-
-    return false;
-  }
-
-  const now =
-    new Date();
-
-  const currentMinutes =
-    now.getHours()*60 +
-    now.getMinutes();
-
-  const opening =
-    timeToMinutes(
-      vendor.opening_time
-    );
-
-  const closing =
-    timeToMinutes(
-      vendor.closing_time
-    );
-
-  if(
-    opening === null ||
-    closing === null
-  ){
-    return false;
-  }
-
-  if(opening === closing){
-    return true;
-  }
-
-  if(opening < closing){
-
-    return (
-      currentMinutes >= opening &&
-      currentMinutes < closing
-    );
-
-  }
-
-  return (
-    currentMinutes >= opening ||
-    currentMinutes < closing
-  );
-}
-
-
-function timeToMinutes(value){
-
-  if(!value){
-    return null;
-  }
-
-  const parts =
-    String(value)
-      .split(":");
-
-  if(parts.length < 2){
-    return null;
-  }
-
-  const h =
-    Number(parts[0]);
-
-  const m =
-    Number(parts[1]);
-
-  if(
-    Number.isNaN(h) ||
-    Number.isNaN(m)
-  ){
-    return null;
-  }
-
-  return h*60+m;
-}
-
-
-function isScreenOnline(vendor){
-
-  return vendor.online_status === true;
-}
-
-
-function isOfflineScreen(vendor){
-
-  if(!vendorIsApproved(vendor)){
-    return false;
-  }
-
-  if(!isVendorOpenNow(vendor)){
-    return false;
-  }
-
-  return !isScreenOnline(vendor);
-}
-
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
-function renderDashboard(){
-
-  const total =
-    vendors.length;
-
-  const pending =
-    vendors.filter(
-      v => vendorStatus(v) === "pending"
-    ).length;
-
-  const offline =
-    vendors.filter(
-      isOfflineScreen
-    ).length;
-
-  $("statTotalVendors").textContent =
-    total;
-
-  $("statPendingVendors").textContent =
-    pending;
-
-  $("statOfflineScreens").textContent =
-    offline;
-
-  const today =
-    new Date();
-
-  const start =
-    new Date(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate()
-    );
-
-  const todayNotifications =
-    notifications.filter(n=>{
-      if(!n.created_at){
-        return false;
-      }
-
-      return new Date(n.created_at) >= start;
-    }).length;
-
-  $("statTodayNotifications").textContent =
-    todayNotifications;
-
-  $("pendingCountText").textContent =
-    pending + " pending";
-
-  renderDashboardPending();
-  renderDashboardOffline();
-}
-
-
-function renderDashboardPending(){
-
-  const body =
-    $("dashboardPendingTable");
-
-  const pending =
-    vendors.filter(
-      v => vendorStatus(v) === "pending"
-    );
-
-  if(!pending.length){
-
-    body.innerHTML = `
-      <tr>
-        <td colspan="6">
-          <div class="empty">
-            <strong>No pending vendors</strong>
-            All vendor requests have been processed.
-          </div>
-        </td>
-      </tr>
-    `;
-
-    return;
-  }
-
-  body.innerHTML =
-    pending.slice(0,10).map(v=>{
-
-      return `
-        <tr>
-
-          <td>
-            <div class="vendor-name">
-              ${escapeHtml(v.vendor_name || "-")}
-            </div>
-            <div class="vendor-sub">
-              ${escapeHtml(v.category || "")}
-            </div>
-          </td>
-
-          <td>
-            ${escapeHtml(v.owner_name || "-")}
-          </td>
-
-          <td>
-            ${escapeHtml(v.area || "-")}
-          </td>
-
-          <td>
-            ${escapeHtml(v.phone || "-")}
-          </td>
-
-          <td>
-            <span class="status pending">
-              Pending
-            </span>
-          </td>
-
-          <td>
-            <div class="actions">
-
-              <button
-                type="button"
-                class="icon-btn"
-                title="View"
-                onclick="viewVendor('${v.id}')"
-              >
-                ◉
-              </button>
-
-              <button
-                type="button"
-                class="icon-btn"
-                title="Edit"
-                onclick="editVendor('${v.id}')"
-              >
-                ✎
-              </button>
-
-              <button
-                type="button"
-                class="approve-btn"
-                onclick="approveVendor('${v.id}')"
-              >
-                Approve
-              </button>
-
-              <button
-                type="button"
-                class="reject-btn"
-                onclick="rejectVendor('${v.id}')"
-              >
-                Reject
-              </button>
-
-            </div>
-          </td>
-
-        </tr>
-      `;
-
-    }).join("");
-}
-
-
-function renderDashboardOffline(){
-
-  const container =
-    $("dashboardOfflineList");
-
-  const offline =
-    vendors.filter(
-      isOfflineScreen
-    );
-
-  if(!offline.length){
-
-    container.innerHTML = `
-      <div class="empty">
-        <strong>No offline screens</strong>
-        All approved screens are online or outside working hours.
-      </div>
-    `;
-
-    return;
-  }
-
-  container.innerHTML =
-    offline.map(
-      offlineCard
-    ).join("");
-}
-
-
-/* =========================================================
-   VENDORS PAGE
-========================================================= */
 
 function renderVendors(){
 
+  const tbody =
+    document.getElementById(
+      "vendorsTable"
+    );
+
+  if(!tbody) return;
+
   const search =
-    ($("vendorSearch")?.value || "")
+    (
+      document
+        .getElementById("vendorSearch")
+        ?.value ||
+      ""
+    )
       .trim()
       .toLowerCase();
 
-  const filter =
-    $("vendorStatusFilter")?.value ||
-    "all";
+  const statusFilter =
+    document
+      .getElementById("vendorStatusFilter")
+      ?.value ||
+    "";
 
   let list =
-    [...vendors];
+    vendors.filter(v=>{
 
-  if(filter !== "all"){
-
-    list =
-      list.filter(
-        v => vendorStatus(v) === filter
-      );
-
-  }
-
-  if(search){
-
-    list =
-      list.filter(v=>{
-
-        const haystack =
-          [
-            v.vendor_name,
-            v.owner_name,
-            v.phone,
-            v.email,
-            v.area,
-            v.phase,
-            v.precinct,
-            v.sector,
-            v.block
-          ]
+      const text =
+        [
+          v.vendor_name,
+          v.owner_name,
+          v.email,
+          v.phone,
+          v.area,
+          v.phase,
+          v.precinct,
+          v.sector,
+          v.block
+        ]
           .filter(Boolean)
           .join(" ")
           .toLowerCase();
 
-        return haystack.includes(search);
+      const searchMatch =
+        !search ||
+        text.includes(search);
 
-      });
+      const statusMatch =
+        !statusFilter ||
+        v.status === statusFilter;
 
-  }
+      return searchMatch &&
+             statusMatch;
 
-  $("vendorCountText").textContent =
-    list.length +
-    (list.length === 1 ? " vendor" : " vendors");
+    });
 
-  const body =
-    $("vendorsTable");
 
   if(!list.length){
 
-    body.innerHTML = `
+    tbody.innerHTML = `
       <tr>
         <td colspan="6">
           <div class="empty">
-            <strong>No vendors found</strong>
-            Try another search or filter.
+            No vendors found.
           </div>
         </td>
       </tr>
@@ -2556,156 +2086,117 @@ function renderVendors(){
     return;
   }
 
-  body.innerHTML =
+
+  tbody.innerHTML =
     list.map(v=>{
 
       const status =
-        vendorStatus(v);
+        v.status || "pending";
 
       const online =
-        isScreenOnline(v);
+        v.online_status === true;
+
+      let actions = `
+        <button
+          class="icon-btn"
+          title="View"
+          onclick="viewVendor('${v.id}')"
+        >
+          👁
+        </button>
+
+        <button
+          class="icon-btn"
+          title="Edit"
+          onclick="editVendor('${v.id}')"
+        >
+          ✎
+        </button>
+      `;
+
+
+      if(status === "pending"){
+
+        actions += `
+          <button
+            class="icon-btn approve"
+            title="Approve"
+            onclick="approveVendor('${v.id}')"
+          >
+            ✓
+          </button>
+
+          <button
+            class="icon-btn reject"
+            title="Reject"
+            onclick="rejectVendor('${v.id}')"
+          >
+            ×
+          </button>
+        `;
+
+      }
+
+
+      actions += `
+        <button
+          class="icon-btn"
+          title="Notify Vendor"
+          onclick="openNotification('${v.id}')"
+        >
+          🔔
+        </button>
+
+        <button
+          class="icon-btn delete"
+          title="Delete"
+          onclick="deleteVendor('${v.id}')"
+        >
+          🗑
+        </button>
+      `;
+
 
       return `
         <tr>
 
           <td>
-
-            <div class="vendor-name">
-              ${escapeHtml(v.vendor_name || "-")}
-            </div>
-
-            <div class="vendor-sub">
-              ${escapeHtml(v.owner_name || "-")}
-            </div>
-
+            <strong>
+              ${esc(v.vendor_name || "-")}
+            </strong>
           </td>
 
           <td>
-
-            <div>${escapeHtml(v.phone || "-")}</div>
-
-            <div class="vendor-sub">
-              ${escapeHtml(v.email || "")}
-            </div>
-
+            ${esc(v.owner_name || "-")}
           </td>
 
           <td>
-
-            <div>
-              ${escapeHtml(v.area || "-")}
-            </div>
-
-            <div class="vendor-sub">
-              ${escapeHtml(
-                hierarchyText(v)
-              )}
-            </div>
-
+            ${esc(v.area || "-")}
           </td>
 
           <td>
-
-            <span class="status ${status}">
-              ${escapeHtml(status)}
+            <span class="status ${esc(status)}">
+              ${esc(status)}
             </span>
-
           </td>
 
           <td>
-
-            ${
-              status === "approved"
-              ? `
-                <span class="status ${
-                  online ? "online" : "offline"
-                }">
-                  ${online ? "Online" : "Offline"}
-                </span>
-              `
-              : `
-                <span style="color:#aaa;font-size:11px;">
-                  —
-                </span>
-              `
-            }
-
+            <span class="status ${online ? "online":"offline"}">
+              ${online ? "Online":"Offline"}
+            </span>
           </td>
 
           <td>
-
             <div class="actions">
-
-              <button
-                type="button"
-                class="icon-btn"
-                title="View"
-                onclick="viewVendor('${v.id}')"
-              >
-                ◉
-              </button>
-
-              <button
-                type="button"
-                class="icon-btn"
-                title="Edit"
-                onclick="editVendor('${v.id}')"
-              >
-                ✎
-              </button>
-
-              ${
-                status === "pending"
-                ? `
-                  <button
-                    type="button"
-                    class="approve-btn"
-                    onclick="approveVendor('${v.id}')"
-                  >
-                    Approve
-                  </button>
-
-                  <button
-                    type="button"
-                    class="reject-btn"
-                    onclick="rejectVendor('${v.id}')"
-                  >
-                    Reject
-                  </button>
-                `
-                : ""
-              }
-
+              ${actions}
             </div>
-
           </td>
 
         </tr>
       `;
 
     }).join("");
-}
 
-
-function hierarchyText(v){
-
-  if(v.phase){
-    return "Phase: " + v.phase;
-  }
-
-  if(v.precinct){
-    return "Precinct: " + v.precinct;
-  }
-
-  if(v.sector){
-    return "Sector: " + v.sector;
-  }
-
-  if(v.block){
-    return "Block: " + v.block;
-  }
-
-  return "";
 }
 
 
@@ -2716,510 +2207,206 @@ function hierarchyText(v){
 function viewVendor(id){
 
   const vendor =
-    vendors.find(
-      v => String(v.id) === String(id)
-    );
+    vendors.find(v=>v.id === id);
 
-  if(!vendor){
+  if(!vendor) return;
 
-    toast("Vendor not found");
-    return;
-  }
+  const location =
+    vendor.latitude &&
+    vendor.longitude
+      ? `${vendor.latitude}, ${vendor.longitude}`
+      : "-";
 
-  const status =
-    vendorStatus(vendor);
 
-  const online =
-    isScreenOnline(vendor);
+  document
+    .getElementById("vendorModalBody")
+    .innerHTML = `
 
-  let mapHtml = "";
+      <div class="detail-grid">
 
-  if(
-    vendor.latitude !== null &&
-    vendor.latitude !== undefined &&
-    vendor.longitude !== null &&
-    vendor.longitude !== undefined &&
-    vendor.latitude !== "" &&
-    vendor.longitude !== ""
-  ){
-
-    const lat =
-      Number(vendor.latitude);
-
-    const lng =
-      Number(vendor.longitude);
-
-    if(
-      Number.isFinite(lat) &&
-      Number.isFinite(lng)
-    ){
-
-      const mapUrl =
-        "https://www.google.com/maps?q=" +
-        encodeURIComponent(
-          lat + "," + lng
-        ) +
-        "&output=embed";
-
-      mapHtml = `
-        <div class="map-wrap">
-          <iframe
-            src="${mapUrl}"
-            loading="lazy"
-            title="Vendor location"
-          ></iframe>
+        <div class="detail-item">
+          <div class="detail-label">Vendor Name</div>
+          <div class="detail-value">
+            ${esc(vendor.vendor_name || "-")}
+          </div>
         </div>
-      `;
 
-    }
+        <div class="detail-item">
+          <div class="detail-label">Owner</div>
+          <div class="detail-value">
+            ${esc(vendor.owner_name || "-")}
+          </div>
+        </div>
 
-  }
+        <div class="detail-item">
+          <div class="detail-label">Phone</div>
+          <div class="detail-value">
+            ${esc(vendor.phone || "-")}
+          </div>
+        </div>
 
-  $("viewModalBody").innerHTML = `
+        <div class="detail-item">
+          <div class="detail-label">Email</div>
+          <div class="detail-value">
+            ${esc(vendor.email || "-")}
+          </div>
+        </div>
 
-    <div style="margin-bottom:15px;">
+        <div class="detail-item">
+          <div class="detail-label">Category</div>
+          <div class="detail-value">
+            ${esc(vendor.category || "-")}
+          </div>
+        </div>
 
-      <div style="font-size:20px;font-weight:900;">
-        ${escapeHtml(vendor.vendor_name || "-")}
+        <div class="detail-item">
+          <div class="detail-label">Area</div>
+          <div class="detail-value">
+            ${esc(vendor.area || "-")}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Phase</div>
+          <div class="detail-value">
+            ${esc(vendor.phase || "-")}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Precinct</div>
+          <div class="detail-value">
+            ${esc(vendor.precinct || "-")}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Sector</div>
+          <div class="detail-value">
+            ${esc(vendor.sector || "-")}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Block</div>
+          <div class="detail-value">
+            ${esc(vendor.block || "-")}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Address</div>
+          <div class="detail-value">
+            ${esc(vendor.address || "-")}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Footfall</div>
+          <div class="detail-value">
+            ${esc(vendor.footfall || 0)}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Shop Size</div>
+          <div class="detail-value">
+            ${esc(vendor.shop_size || "-")}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">LCD Status</div>
+          <div class="detail-value">
+            ${esc(vendor.lcd_status || "-")}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">LCD Total Price</div>
+          <div class="detail-value">
+            Rs ${esc(vendor.lcd_total_price || 0)}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Monthly Installment</div>
+          <div class="detail-value">
+            Rs ${esc(vendor.lcd_monthly_installment || 0)}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Internet</div>
+          <div class="detail-value">
+            ${esc(vendor.internet_status || "-")}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Internet Provider</div>
+          <div class="detail-value">
+            ${esc(vendor.internet_provider || "-")}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Opening</div>
+          <div class="detail-value">
+            ${formatTime(vendor.opening_time)}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Closing</div>
+          <div class="detail-value">
+            ${formatTime(vendor.closing_time)}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Screen</div>
+          <div class="detail-value">
+            ${vendor.online_status ? "Online":"Offline"}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Status</div>
+          <div class="detail-value">
+            ${esc(vendor.status || "pending")}
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <div class="detail-label">Live Location</div>
+          <div class="detail-value">
+            ${esc(location)}
+          </div>
+        </div>
+
       </div>
 
-      <div style="color:#888;font-size:12px;margin-top:4px;">
-        ${escapeHtml(vendor.owner_name || "-")}
-      </div>
-
-    </div>
-
-
-    <div class="detail-grid">
-
-      ${detailItem(
-        "Status",
-        status.toUpperCase()
-      )}
-
-      ${detailItem(
-        "Phone",
-        vendor.phone
-      )}
-
-      ${detailItem(
-        "Email",
-        vendor.email
-      )}
-
-      ${detailItem(
-        "Category",
-        vendor.category
-      )}
-
-      ${detailItem(
-        "Area",
-        vendor.area
-      )}
-
-      ${detailItem(
-        "Hierarchy",
-        hierarchyText(v)
-      )}
-
-      ${detailItem(
-        "Address",
-        vendor.address
-      )}
-
-      ${detailItem(
-        "Footfall",
-        vendor.footfall
-      )}
-
-      ${detailItem(
-        "Shop Size",
-        vendor.shop_size
-      )}
-
-      ${detailItem(
-        "Opening",
-        vendor.opening_time
-      )}
-
-      ${detailItem(
-        "Closing",
-        vendor.closing_time
-      )}
-
-      ${detailItem(
-        "LCD Status",
-        vendor.lcd_status
-      )}
-
-      ${detailItem(
-        "Screen",
-        vendorIsApproved(vendor)
-          ? (online ? "Online" : "Offline")
-          : "Not Active"
-      )}
-
-      ${detailItem(
-        "LCD Price",
-        vendor.lcd_total_price
-          ? "₨ " + vendor.lcd_total_price
-          : "-"
-      )}
-
-      ${detailItem(
-        "Monthly Installment",
-        vendor.lcd_monthly_installment
-          ? "₨ " + vendor.lcd_monthly_installment
-          : "-"
-      )}
-
-      ${detailItem(
-        "Installment Months",
-        vendor.lcd_installment_months
-      )}
-
-      ${detailItem(
-        "Internet",
-        vendor.internet_status
-      )}
-
-      ${detailItem(
-        "Internet Provider",
-        vendor.internet_provider
-      )}
-
-      ${detailItem(
-        "Bank",
-        vendor.bank_name
-      )}
-
-      ${detailItem(
-        "Account Title",
-        vendor.account_title
-      )}
-
-      ${detailItem(
-        "Account Number",
-        vendor.account_number
-      )}
-
-      ${detailItem(
-        "IBAN",
-        vendor.iban
-      )}
-
-      ${detailItem(
-        "Payment Method",
-        vendor.payment_method
-      )}
-
-      ${detailItem(
-        "Created",
-        formatDate(vendor.created_at)
-      )}
-
-    </div>
-
-    ${
-      mapHtml
-        ? `
-          <div style="margin-top:20px;">
-            <h4 style="font-size:14px;margin-bottom:9px;">
-              Live Location
-            </h4>
-            ${mapHtml}
-          </div>
-        `
-        : `
-          <div class="empty">
-            <strong>Location not available</strong>
-            This vendor has not provided latitude and longitude.
-          </div>
-        `
-    }
-
-  `;
-
-  openModal("viewModal");
-}
-
-
-function detailItem(label,value){
-
-  return `
-    <div class="detail">
-
-      <small>
-        ${escapeHtml(label)}
-      </small>
-
-      <strong>
-        ${escapeHtml(
-          value === null ||
-          value === undefined ||
-          value === ""
-            ? "-"
-            : value
-        )}
-      </strong>
-
-    </div>
-  `;
-}
-
-
-/* =========================================================
-   EDIT VENDOR
-========================================================= */
-
-function editVendor(id){
-
-  const v =
-    vendors.find(
-      vendor =>
-        String(vendor.id) === String(id)
-    );
-
-  if(!v){
-
-    toast("Vendor not found");
-    return;
-  }
-
-  $("editId").value =
-    v.id || "";
-
-  $("editVendorName").value =
-    v.vendor_name || "";
-
-  $("editOwnerName").value =
-    v.owner_name || "";
-
-  $("editPhone").value =
-    v.phone || "";
-
-  $("editEmail").value =
-    v.email || "";
-
-  $("editCategory").value =
-    v.category || "";
-
-  $("editArea").value =
-    v.area || "";
-
-  $("editPhase").value =
-    v.phase || "";
-
-  $("editPrecinct").value =
-    v.precinct || "";
-
-  $("editSector").value =
-    v.sector || "";
-
-  $("editBlock").value =
-    v.block || "";
-
-  $("editAddress").value =
-    v.address || "";
-
-  $("editFootfall").value =
-    v.footfall ?? "";
-
-  $("editShopSize").value =
-    v.shop_size || "";
-
-  $("editOpening").value =
-    normalizeTime(v.opening_time);
-
-  $("editClosing").value =
-    normalizeTime(v.closing_time);
-
-  $("editLcdStatus").value =
-    v.lcd_status || "";
-
-  $("editOnlineStatus").value =
-    v.online_status === true
-      ? "true"
-      : "false";
-
-  $("editInternetStatus").value =
-    v.internet_status || "";
-
-  $("editInternetProvider").value =
-    v.internet_provider || "";
-
-  $("editBankName").value =
-    v.bank_name || "";
-
-  $("editAccountTitle").value =
-    v.account_title || "";
-
-  $("editAccountNumber").value =
-    v.account_number || "";
-
-  $("editIban").value =
-    v.iban || "";
-
-  $("editPaymentMethod").value =
-    v.payment_method || "";
-
-  $("editStatus").value =
-    vendorStatus(v);
-
-  openModal("editModal");
-}
-
-
-function normalizeTime(value){
-
-  if(!value){
-    return "";
-  }
-
-  return String(value)
-    .slice(0,5);
-}
-
-
-async function saveVendorChanges(event){
-
-  event.preventDefault();
-
-  const id =
-    $("editId").value;
-
-  if(!id){
-
-    toast("Vendor ID missing");
-    return;
-  }
-
-  const payload = {
-
-    vendor_name:
-      $("editVendorName").value.trim(),
-
-    owner_name:
-      $("editOwnerName").value.trim(),
-
-    phone:
-      $("editPhone").value.trim(),
-
-    email:
-      $("editEmail").value.trim(),
-
-    category:
-      $("editCategory").value.trim(),
-
-    area:
-      $("editArea").value.trim(),
-
-    phase:
-      $("editPhase").value.trim() || null,
-
-    precinct:
-      $("editPrecinct").value.trim() || null,
-
-    sector:
-      $("editSector").value.trim() || null,
-
-    block:
-      $("editBlock").value.trim() || null,
-
-    address:
-      $("editAddress").value.trim(),
-
-    footfall:
-      $("editFootfall").value === ""
-        ? 0
-        : Number($("editFootfall").value),
-
-    shop_size:
-      $("editShopSize").value.trim(),
-
-    opening_time:
-      $("editOpening").value || null,
-
-    closing_time:
-      $("editClosing").value || null,
-
-    lcd_status:
-      $("editLcdStatus").value || null,
-
-    online_status:
-      $("editOnlineStatus").value === "true",
-
-    internet_status:
-      $("editInternetStatus").value.trim(),
-
-    internet_provider:
-      $("editInternetProvider").value.trim(),
-
-    bank_name:
-      $("editBankName").value.trim(),
-
-    account_title:
-      $("editAccountTitle").value.trim(),
-
-    account_number:
-      $("editAccountNumber").value.trim(),
-
-    iban:
-      $("editIban").value.trim(),
-
-    payment_method:
-      $("editPaymentMethod").value.trim(),
-
-    status:
-      $("editStatus").value
-
-  };
-
-  try{
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("vendors")
-        .update(payload)
-        .eq("id",id);
-
-    if(error){
-
-      console.error(
-        "UPDATE ERROR:",
-        error
-      );
-
-      toast(
-        "Update failed: " +
-        error.message
-      );
-
-      return;
-    }
-
-    closeModal("editModal");
-
-    toast("Vendor updated");
-
-    await loadVendors();
-
-    renderDashboard();
-    renderVendors();
-    renderMonitoring();
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      error.message ||
-      "Unable to update vendor"
-    );
-
-  }
+      ${
+        vendor.latitude &&
+        vendor.longitude
+          ? `
+            <div style="margin-top:15px">
+              <a
+                href="https://www.google.com/maps?q=${encodeURIComponent(vendor.latitude + "," + vendor.longitude)}"
+                target="_blank"
+                style="color:#222;font-weight:800"
+              >
+                Open Vendor Location
+              </a>
+            </div>
+          `
+          : ""
+      }
+
+    `;
+
+  openModal("vendorModal");
 }
 
 
@@ -3230,44 +2417,62 @@ async function saveVendorChanges(event){
 async function approveVendor(id){
 
   const vendor =
-    vendors.find(
-      v => String(v.id) === String(id)
+    vendors.find(v=>v.id === id);
+
+  if(!vendor) return;
+
+  const confirmed =
+    confirm(
+      `Approve ${vendor.vendor_name || "this vendor"}?`
     );
 
-  if(!vendor){
-    toast("Vendor not found");
+  if(!confirmed) return;
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("vendors")
+      .update({
+        status:"approved",
+        online_status:false,
+        updated_at:new Date().toISOString()
+      })
+      .eq("id",id);
+
+
+  if(error){
+
+    console.error(error);
+
+    toast(
+      "Unable to approve vendor"
+    );
+
     return;
   }
 
-  $("confirmTitle").textContent =
-    "Approve Vendor";
 
-  $("confirmBody").innerHTML = `
-    <p style="font-size:13px;line-height:1.6;">
-      Approve
-      <strong>
-        ${escapeHtml(vendor.vendor_name || "this vendor")}
-      </strong>
-      and activate the vendor account?
-    </p>
-  `;
+  await createAdminNotification(
+    "Vendor approved",
+    `${vendor.vendor_name || "Vendor"} has been approved.`,
+    "vendor_approved",
+    id
+  );
 
-  $("confirmAction").textContent =
-    "Approve";
 
-  $("confirmAction").onclick =
-    async ()=>{
+  await createVendorNotification(
+    id,
+    "Vendor approved",
+    "Your Spotly vendor account has been approved."
+  );
 
-      closeModal("confirmModal");
 
-      await updateVendorStatus(
-        vendor,
-        "approved"
-      );
+  toast("Vendor approved");
 
-    };
+  await loadAll();
 
-  openModal("confirmModal");
 }
 
 
@@ -3278,150 +2483,454 @@ async function approveVendor(id){
 async function rejectVendor(id){
 
   const vendor =
-    vendors.find(
-      v => String(v.id) === String(id)
+    vendors.find(v=>v.id === id);
+
+  if(!vendor) return;
+
+  const confirmed =
+    confirm(
+      `Reject ${vendor.vendor_name || "this vendor"}?`
     );
 
-  if(!vendor){
-    toast("Vendor not found");
-    return;
-  }
-
-  $("confirmTitle").textContent =
-    "Reject Vendor";
-
-  $("confirmBody").innerHTML = `
-    <p style="font-size:13px;line-height:1.6;">
-      Reject
-      <strong>
-        ${escapeHtml(vendor.vendor_name || "this vendor")}
-      </strong>
-     ?
-    </p>
-  `;
-
-  $("confirmAction").textContent =
-    "Reject";
-
-  $("confirmAction").onclick =
-    async ()=>{
-
-      closeModal("confirmModal");
-
-      await updateVendorStatus(
-        vendor,
-        "rejected"
-      );
-
-    };
-
-  openModal("confirmModal");
-}
+  if(!confirmed) return;
 
 
-/* =========================================================
-   STATUS UPDATE
-========================================================= */
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("vendors")
+      .update({
+        status:"rejected",
+        online_status:false,
+        updated_at:new Date().toISOString()
+      })
+      .eq("id",id);
 
-async function updateVendorStatus(
-  vendor,
-  newStatus
-){
 
-  try{
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("vendors")
-        .update({
-          status:newStatus,
-          updated_at:new Date().toISOString()
-        })
-        .eq("id",vendor.id);
-
-    if(error){
-
-      console.error(
-        "STATUS UPDATE ERROR:",
-        error
-      );
-
-      toast(
-        "Status update failed: " +
-        error.message
-      );
-
-      return;
-    }
-
-    const vendorName =
-      vendor.vendor_name ||
-      "Vendor";
-
-    if(newStatus === "approved"){
-
-      await createVendorNotification(
-        vendor.id,
-        "Vendor Approved",
-        "Your Spotly vendor account has been approved. Your screen will remain offline until you turn it online."
-      );
-
-      await createAdminNotification(
-        "Vendor Approved",
-        vendorName +
-        " has been approved.",
-        "vendor_approved",
-        vendor.id
-      );
-
-      toast("Vendor approved");
-
-    }else if(newStatus === "rejected"){
-
-      await createVendorNotification(
-        vendor.id,
-        "Vendor Application Update",
-        "Your Spotly vendor application has been rejected. Please contact Spotly support for more information."
-      );
-
-      await createAdminNotification(
-        "Vendor Rejected",
-        vendorName +
-        " has been rejected.",
-        "vendor_rejected",
-        vendor.id
-      );
-
-      toast("Vendor rejected");
-
-    }
-
-    await loadVendors();
-    await loadNotifications();
-
-    renderDashboard();
-    renderVendors();
-    renderMonitoring();
-    renderNotifications();
-
-  }catch(error){
+  if(error){
 
     console.error(error);
 
     toast(
-      error.message ||
-      "Unable to update vendor"
+      "Unable to reject vendor"
     );
 
+    return;
   }
+
+
+  await createAdminNotification(
+    "Vendor rejected",
+    `${vendor.vendor_name || "Vendor"} has been rejected.`,
+    "vendor_rejected",
+    id
+  );
+
+
+  await createVendorNotification(
+    id,
+    "Vendor application update",
+    "Your Spotly vendor application has been rejected."
+  );
+
+
+  toast("Vendor rejected");
+
+  await loadAll();
+
 }
 
 
 /* =========================================================
-   VENDOR NOTIFICATIONS
+   EDIT VENDOR
 ========================================================= */
+
+function editVendor(id){
+
+  const v =
+    vendors.find(x=>x.id === id);
+
+  if(!v) return;
+
+  document
+    .getElementById("editVendorId")
+    .value = v.id;
+
+  document
+    .getElementById("editVendorName")
+    .value = v.vendor_name || "";
+
+  document
+    .getElementById("editOwnerName")
+    .value = v.owner_name || "";
+
+  document
+    .getElementById("editPhone")
+    .value = v.phone || "";
+
+  document
+    .getElementById("editEmail")
+    .value = v.email || "";
+
+  document
+    .getElementById("editCategory")
+    .value = v.category || "";
+
+  document
+    .getElementById("editArea")
+    .value = v.area || "";
+
+  document
+    .getElementById("editPhase")
+    .value = v.phase || "";
+
+  document
+    .getElementById("editPrecinct")
+    .value = v.precinct || "";
+
+  document
+    .getElementById("editSector")
+    .value = v.sector || "";
+
+  document
+    .getElementById("editBlock")
+    .value = v.block || "";
+
+  document
+    .getElementById("editAddress")
+    .value = v.address || "";
+
+  document
+    .getElementById("editFootfall")
+    .value = v.footfall || 0;
+
+  document
+    .getElementById("editShopSize")
+    .value = v.shop_size || "";
+
+  document
+    .getElementById("editLcdStatus")
+    .value = v.lcd_status || "";
+
+  document
+    .getElementById("editOpening")
+    .value = formatTime(v.opening_time);
+
+  document
+    .getElementById("editClosing")
+    .value = formatTime(v.closing_time);
+
+  document
+    .getElementById("editInternet")
+    .value = v.internet_status || "";
+
+  document
+    .getElementById("editFridge")
+    .value =
+      v.ice_cream_fridge
+        ? "true"
+        : "false";
+
+  openModal("editModal");
+}
+
+
+async function saveVendorEdit(){
+
+  const id =
+    document
+      .getElementById("editVendorId")
+      .value;
+
+  if(!id) return;
+
+
+  const updateData = {
+
+    vendor_name:
+      document
+        .getElementById("editVendorName")
+        .value
+        .trim(),
+
+    owner_name:
+      document
+        .getElementById("editOwnerName")
+        .value
+        .trim(),
+
+    phone:
+      document
+        .getElementById("editPhone")
+        .value
+        .trim(),
+
+    email:
+      document
+        .getElementById("editEmail")
+        .value
+        .trim(),
+
+    category:
+      document
+        .getElementById("editCategory")
+        .value
+        .trim(),
+
+    area:
+      document
+        .getElementById("editArea")
+        .value
+        .trim(),
+
+    phase:
+      document
+        .getElementById("editPhase")
+        .value
+        .trim(),
+
+    precinct:
+      document
+        .getElementById("editPrecinct")
+        .value
+        .trim(),
+
+    sector:
+      document
+        .getElementById("editSector")
+        .value
+        .trim(),
+
+    block:
+      document
+        .getElementById("editBlock")
+        .value
+        .trim(),
+
+    address:
+      document
+        .getElementById("editAddress")
+        .value
+        .trim(),
+
+    footfall:
+      Number(
+        document
+          .getElementById("editFootfall")
+          .value || 0
+      ),
+
+    shop_size:
+      document
+        .getElementById("editShopSize")
+        .value
+        .trim(),
+
+    lcd_status:
+      document
+        .getElementById("editLcdStatus")
+        .value
+        .trim(),
+
+    opening_time:
+      document
+        .getElementById("editOpening")
+        .value || null,
+
+    closing_time:
+      document
+        .getElementById("editClosing")
+        .value || null,
+
+    internet_status:
+      document
+        .getElementById("editInternet")
+        .value
+        .trim(),
+
+    ice_cream_fridge:
+      document
+        .getElementById("editFridge")
+        .value === "true",
+
+    updated_at:
+      new Date().toISOString()
+
+  };
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("vendors")
+      .update(updateData)
+      .eq("id",id);
+
+
+  if(error){
+
+    console.error(error);
+
+    toast(
+      "Unable to update vendor"
+    );
+
+    return;
+  }
+
+
+  closeModal("editModal");
+
+  toast("Vendor updated");
+
+  await loadAll();
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+async function deleteVendor(id){
+
+  const vendor =
+    vendors.find(v=>v.id === id);
+
+  if(!vendor) return;
+
+
+  const confirmed =
+    confirm(
+      `Delete ${vendor.vendor_name || "this vendor"} permanently?`
+    );
+
+  if(!confirmed) return;
+
+
+  const {
+    error
+  } =
+    await supabaseClient
+      .from("vendors")
+      .delete()
+      .eq("id",id);
+
+
+  if(error){
+
+    console.error(error);
+
+    toast(
+      "Unable to delete vendor"
+    );
+
+    return;
+  }
+
+
+  toast("Vendor deleted");
+
+  await loadAll();
+
+}
+
+
+/* =========================================================
+   VENDOR NOTIFICATION
+========================================================= */
+
+function openNotification(id){
+
+  document
+    .getElementById("notificationVendorId")
+    .value = id;
+
+  document
+    .getElementById("notificationTitle")
+    .value = "";
+
+  document
+    .getElementById("notificationMessage")
+    .value = "";
+
+  openModal(
+    "notificationModal"
+  );
+
+}
+
+
+async function sendVendorNotification(){
+
+  const vendorId =
+    document
+      .getElementById(
+        "notificationVendorId"
+      )
+      .value;
+
+  const title =
+    document
+      .getElementById(
+        "notificationTitle"
+      )
+      .value
+      .trim();
+
+  const message =
+    document
+      .getElementById(
+        "notificationMessage"
+      )
+      .value
+      .trim();
+
+
+  if(!vendorId ||
+     !title ||
+     !message){
+
+    toast(
+      "Please complete notification"
+    );
+
+    return;
+  }
+
+
+  const {
+    error
+  } =
+    await createVendorNotification(
+      vendorId,
+      title,
+      message
+    );
+
+
+  if(error){
+
+    toast(
+      "Unable to send notification"
+    );
+
+    return;
+  }
+
+
+  closeModal(
+    "notificationModal"
+  );
+
+  toast(
+    "Notification sent"
+  );
+
+}
+
 
 async function createVendorNotification(
   vendorId,
@@ -3429,30 +2938,25 @@ async function createVendorNotification(
   message
 ){
 
-  if(!vendorId){
-    return;
-  }
-
-  const {
-    error
-  } =
+  const result =
     await supabaseClient
       .from("vendor_notifications")
       .insert({
         vendor_id:vendorId,
-        title:title,
-        message:message,
-        is_read:false
+        title,
+        message
       });
 
-  if(error){
+  if(result.error){
 
     console.error(
       "VENDOR NOTIFICATION ERROR:",
-      error
+      result.error
     );
 
   }
+
+  return result;
 }
 
 
@@ -3463,7 +2967,7 @@ async function createVendorNotification(
 async function createAdminNotification(
   title,
   message,
-  type,
+  type="system",
   vendorId=null
 ){
 
@@ -3475,9 +2979,8 @@ async function createAdminNotification(
       .insert({
         title,
         message,
-        type:type || "system",
-        vendor_id:vendorId,
-        is_read:false
+        type,
+        vendor_id:vendorId
       });
 
   if(error){
@@ -3487,14 +2990,12 @@ async function createAdminNotification(
       error
     );
 
-    return false;
   }
 
-  return true;
 }
 
 
-async function loadNotifications(){
+async function loadAdminNotifications(){
 
   const {
     data,
@@ -3505,679 +3006,372 @@ async function loadNotifications(){
       .select("*")
       .order(
         "created_at",
-        {
-          ascending:false
-        }
+        {ascending:false}
       )
-      .limit(200);
+      .limit(100);
+
 
   if(error){
 
     console.error(
-      "NOTIFICATION LOAD ERROR:",
+      "NOTIFICATIONS ERROR:",
       error
     );
 
-    notifications = [];
-
-    updateNotificationBadge();
+    adminNotifications = [];
 
     return;
   }
 
-  notifications =
-    Array.isArray(data)
-      ? data
-      : [];
 
-  updateNotificationBadge();
-}
+  adminNotifications =
+    data || [];
 
-
-function updateNotificationBadge(){
-
-  const unread =
-    notifications.filter(
-      n => n.is_read !== true
-    ).length;
-
-  const badge =
-    $("notificationBadge");
-
-  if(unread > 0){
-
-    badge.textContent =
-      unread > 99
-        ? "99+"
-        : unread;
-
-    badge.classList.remove(
-      "hidden"
-    );
-
-  }else{
-
-    badge.classList.add(
-      "hidden"
-    );
-
-  }
 }
 
 
 function renderNotifications(){
 
   const container =
-    $("notificationsList");
+    document.getElementById(
+      "notificationsList"
+    );
 
-  if(!notifications.length){
+  if(!container) return;
+
+
+  if(!adminNotifications.length){
 
     container.innerHTML = `
       <div class="empty">
-        <strong>No notifications</strong>
-        New vendor requests and operational alerts will appear here.
+        No notifications.
       </div>
     `;
 
     return;
   }
 
+
   container.innerHTML =
-    notifications.map(n=>{
+    adminNotifications
+      .map(n=>{
 
-      const vendor =
-        vendors.find(
-          v =>
-            String(v.id) ===
-            String(n.vendor_id)
-        );
+        const vendor =
+          vendors.find(
+            v=>v.id === n.vendor_id
+          );
 
-      return `
-        <div class="notification-list">
 
-          <div class="notification-item ${
-            n.is_read ? "" : "unread"
-          }">
+        return `
+          <div
+            style="
+              padding:14px 0;
+              border-bottom:1px solid #eee
+            "
+          >
 
-            <div>
+            <div
+              style="
+                display:flex;
+                justify-content:space-between;
+                gap:10px
+              "
+            >
 
-              <div class="notification-title">
-                ${escapeHtml(n.title)}
-              </div>
+              <strong>
+                ${esc(n.title)}
+              </strong>
 
-              <div class="notification-message">
-                ${escapeHtml(n.message)}
-              </div>
+              <span
+                style="
+                  font-size:11px;
+                  color:#999
+                "
+              >
+                ${formatDate(n.created_at)}
+              </span>
 
-              ${
-                vendor
+            </div>
+
+            <div
+              style="
+                color:#666;
+                margin-top:5px;
+                font-size:13px
+              "
+            >
+              ${esc(n.message)}
+            </div>
+
+            ${
+              vendor
                 ? `
                   <div
                     style="
-                      margin-top:8px;
-                      color:#888;
-                      font-size:10px;
+                      margin-top:7px;
+                      font-size:11px;
+                      font-weight:700
                     "
                   >
                     Vendor:
-                    ${escapeHtml(
-                      vendor.vendor_name || "-"
-                    )}
+                    ${esc(vendor.vendor_name || "-")}
                   </div>
                 `
                 : ""
-              }
-
-              ${
-                !n.is_read
-                ? `
-                  <button
-                    type="button"
-                    class="read-btn"
-                    onclick="markNotificationRead('${n.id}')"
-                  >
-                    Mark as read
-                  </button>
-                `
-                : ""
-              }
-
-            </div>
-
-            <div class="notification-time">
-              ${formatDate(n.created_at)}
-            </div>
+            }
 
           </div>
+        `;
 
-        </div>
-      `;
+      })
+      .join("");
 
-    }).join("");
 }
 
 
-async function markNotificationRead(id){
+function formatDate(value){
 
-  const {
-    error
-  } =
-    await supabaseClient
-      .from("admin_notifications")
-      .update({
-        is_read:true
-      })
-      .eq("id",id);
+  if(!value) return "";
 
-  if(error){
+  try{
 
-    toast(
-      "Unable to mark notification read"
-    );
+    return new Date(value)
+      .toLocaleString();
 
-    return;
+  }catch{
+
+    return "";
+
   }
 
-  const n =
-    notifications.find(
-      x => String(x.id) === String(id)
-    );
-
-  if(n){
-    n.is_read = true;
-  }
-
-  updateNotificationBadge();
-  renderNotifications();
-}
-
-
-async function markAllNotificationsRead(){
-
-  const unreadIds =
-    notifications
-      .filter(
-        n => n.is_read !== true
-      )
-      .map(
-        n => n.id
-      );
-
-  if(!unreadIds.length){
-
-    toast("No unread notifications");
-
-    return;
-  }
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .from("admin_notifications")
-      .update({
-        is_read:true
-      })
-      .in("id",unreadIds);
-
-  if(error){
-
-    toast(
-      "Unable to update notifications"
-    );
-
-    return;
-  }
-
-  notifications.forEach(
-    n => n.is_read = true
-  );
-
-  updateNotificationBadge();
-  renderNotifications();
-
-  toast("All notifications marked read");
 }
 
 
 /* =========================================================
-   VENDOR REQUEST NOTIFICATION SYNC
+   OFFLINE
 ========================================================= */
 
-async function syncVendorRequestNotifications(){
+function renderOffline(){
+
+  const tbody =
+    document.getElementById(
+      "offlineTable"
+    );
+
+  if(!tbody) return;
+
+
+  const offline =
+    vendors.filter(
+      isVendorOffline
+    );
+
+
+  if(!offline.length){
+
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6">
+          <div class="empty">
+            No approved screens are offline during working hours.
+          </div>
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  tbody.innerHTML =
+    offline
+      .map(v=>{
+
+        return `
+          <tr>
+
+            <td>
+              <strong>
+                ${esc(v.vendor_name || "-")}
+              </strong>
+            </td>
+
+            <td>
+              ${esc(v.area || "-")}
+            </td>
+
+            <td>
+              ${formatTime(v.opening_time)}
+            </td>
+
+            <td>
+              ${formatTime(v.closing_time)}
+            </td>
+
+            <td>
+              <span class="status offline">
+                Offline
+              </span>
+            </td>
+
+            <td>
+
+              <div class="actions">
+
+                <button
+                  class="icon-btn"
+                  title="View"
+                  onclick="viewVendor('${v.id}')"
+                >
+                  👁
+                </button>
+
+                <button
+                  class="icon-btn"
+                  title="Notify Vendor"
+                  onclick="openNotification('${v.id}')"
+                >
+                  🔔
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+        `;
+
+      })
+      .join("");
+
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function updateDashboard(){
+
+  const total =
+    vendors.length;
 
   const pending =
     vendors.filter(
-      v => vendorStatus(v) === "pending"
-    );
+      v=>v.status === "pending"
+    ).length;
 
-  if(!pending.length){
-    return;
-  }
+  const approved =
+    vendors.filter(
+      v=>v.status === "approved"
+    ).length;
 
-  for(const vendor of pending){
-
-    const alreadyNotified =
-      notifications.some(n=>{
-
-        return (
-          n.type === "new_vendor" &&
-          String(n.vendor_id) ===
-          String(vendor.id)
-        );
-
-      });
-
-    if(alreadyNotified){
-      continue;
-    }
-
-    const result =
-      await createAdminNotification(
-        "New Vendor Request",
-        (
-          vendor.vendor_name ||
-          "A vendor"
-        ) +
-        " has submitted a vendor request for approval.",
-        "new_vendor",
-        vendor.id
-      );
-
-    if(result){
-
-      notifications.unshift({
-        id:
-          "local-" +
-          vendor.id,
-        title:"New Vendor Request",
-        message:
-          (
-            vendor.vendor_name ||
-            "A vendor"
-          ) +
-          " has submitted a vendor request for approval.",
-        type:"new_vendor",
-        vendor_id:vendor.id,
-        is_read:false,
-        created_at:new Date().toISOString()
-      });
-
-    }
-
-  }
-
-  updateNotificationBadge();
-}
-
-
-/* =========================================================
-   OFFLINE NOTIFICATION SYNC
-========================================================= */
-
-async function syncOfflineNotifications(){
+  const online =
+    vendors.filter(
+      v=>
+        v.status === "approved" &&
+        v.online_status === true
+    ).length;
 
   const offline =
     vendors.filter(
-      isOfflineScreen
+      isVendorOffline
+    ).length;
+
+
+  document
+    .getElementById("statVendors")
+    .textContent = total;
+
+  document
+    .getElementById("statPending")
+    .textContent = pending;
+
+  document
+    .getElementById("statApproved")
+    .textContent = approved;
+
+  document
+    .getElementById("statOnline")
+    .textContent = online;
+
+  document
+    .getElementById("statOffline")
+    .textContent = offline;
+
+  document
+    .getElementById("statWorkingOffline")
+    .textContent = offline;
+
+
+  /*
+    Ads / Revenue tables are not currently available,
+    so don't invent numbers.
+  */
+
+  document
+    .getElementById("statAds")
+    .textContent = "0";
+
+  document
+    .getElementById("statRevenue")
+    .textContent = "Rs 0";
+
+
+  const recent =
+    adminNotifications
+      .slice(0,5);
+
+
+  const box =
+    document.getElementById(
+      "dashboardNotifications"
     );
 
-  if(!offline.length){
-    return;
-  }
 
-  const now =
-    Date.now();
+  if(!recent.length){
 
-  for(const vendor of offline){
-
-    const recent =
-      notifications.some(n=>{
-
-        if(
-          n.type !== "vendor_offline"
-        ){
-          return false;
-        }
-
-        if(
-          String(n.vendor_id) !==
-          String(vendor.id)
-        ){
-          return false;
-        }
-
-        if(!n.created_at){
-          return false;
-        }
-
-        const created =
-          new Date(
-            n.created_at
-          ).getTime();
-
-        return (
-          now - created <
-          30 * 60 * 1000
-        );
-
-      });
-
-    if(recent){
-      continue;
-    }
-
-    const name =
-      vendor.vendor_name ||
-      "Vendor";
-
-    const result =
-      await createAdminNotification(
-        "Vendor Offline",
-        name +
-        " screen is offline during working hours. Contact vendor to avoid revenue loss.",
-        "vendor_offline",
-        vendor.id
-      );
-
-    if(result){
-
-      notifications.unshift({
-        id:
-          "local-offline-" +
-          vendor.id +
-          "-" +
-          now,
-        title:"Vendor Offline",
-        message:
-          name +
-          " screen is offline during working hours. Contact vendor to avoid revenue loss.",
-        type:"vendor_offline",
-        vendor_id:vendor.id,
-        is_read:false,
-        created_at:new Date().toISOString()
-      });
-
-    }
-
-  }
-
-  updateNotificationBadge();
-}
-
-
-/* =========================================================
-   MONITORING
-========================================================= */
-
-function renderMonitoring(){
-
-  $("monitoringTime").textContent =
-    new Date().toLocaleTimeString();
-
-  const container =
-    $("monitoringList");
-
-  const offline =
-    vendors.filter(
-      isOfflineScreen
-    );
-
-  if(!offline.length){
-
-    container.innerHTML = `
-      <div class="empty" style="grid-column:1/-1;">
-        <strong>No offline screens</strong>
-        There are no approved vendor screens offline during working hours.
+    box.innerHTML = `
+      <div class="empty">
+        No notifications.
       </div>
     `;
 
     return;
   }
 
-  container.innerHTML =
-    offline.map(
-      offlineCard
-    ).join("");
-}
 
+  box.innerHTML =
+    recent
+      .map(n=>`
 
-function offlineCard(vendor){
+        <div
+          style="
+            padding:12px 0;
+            border-bottom:1px solid #eee
+          "
+        >
 
-  const phone =
-    vendor.phone || "";
-
-  return `
-    <div class="monitor-card">
-
-      <div class="monitor-top">
-
-        <div>
-          <div class="monitor-shop">
-            ${escapeHtml(
-              vendor.vendor_name || "-"
-            )}
-          </div>
+          <strong>
+            ${esc(n.title)}
+          </strong>
 
           <div
             style="
-              color:#888;
-              font-size:11px;
-              margin-top:3px;
+              color:#666;
+              font-size:13px;
+              margin-top:4px
             "
           >
-            ${escapeHtml(
-              vendor.owner_name || "-"
-            )}
+            ${esc(n.message)}
           </div>
+
         </div>
 
-        <span class="status offline">
-          Offline
-        </span>
+      `)
+      .join("");
 
-      </div>
-
-      <div class="warning">
-        Screen is offline during working hours.
-        Revenue may be affected.
-      </div>
-
-      <div class="monitor-info">
-
-        <div>
-          <strong>Area:</strong>
-          ${escapeHtml(
-            vendor.area || "-"
-          )}
-        </div>
-
-        <div>
-          <strong>Location:</strong>
-          ${escapeHtml(
-            hierarchyText(vendor) || "-"
-          )}
-        </div>
-
-        <div>
-          <strong>Working Hours:</strong>
-          ${escapeHtml(
-            normalizeTime(
-              vendor.opening_time
-            ) || "-"
-          )}
-          -
-          ${escapeHtml(
-            normalizeTime(
-              vendor.closing_time
-            ) || "-"
-          )}
-        </div>
-
-        <div>
-          <strong>Phone:</strong>
-          ${escapeHtml(
-            phone || "-"
-          )}
-        </div>
-
-      </div>
-
-      ${
-        phone
-        ? `
-          <button
-            type="button"
-            class="contact-btn"
-            onclick="contactVendor('${escapeHtml(phone)}')"
-          >
-            Contact Vendor
-          </button>
-        `
-        : ""
-      }
-
-    </div>
-  `;
-}
-
-
-function contactVendor(phone){
-
-  const clean =
-    String(phone)
-      .replace(/\s+/g,"");
-
-  window.location.href =
-    "tel:" + clean;
-}
-
-
-function startMonitoringTimer(){
-
-  clearInterval(
-    monitorTimer
-  );
-
-  monitorTimer =
-    setInterval(
-      async ()=>{
-
-        renderDashboard();
-        renderMonitoring();
-
-        await syncOfflineNotifications();
-
-      },
-      60000
-    );
-}
-
-
-/* =========================================================
-   SEND PERSONAL VENDOR NOTIFICATION
-========================================================= */
-
-function openVendorNotification(id){
-
-  const vendor =
-    vendors.find(
-      v => String(v.id) === String(id)
-    );
-
-  if(!vendor){
-
-    toast("Vendor not found");
-    return;
-  }
-
-  $("notificationVendorId").value =
-    vendor.id;
-
-  $("notificationTitle").value =
-    "";
-
-  $("notificationMessage").value =
-    "";
-
-  openModal(
-    "notificationModal"
-  );
-}
-
-
-async function sendVendorNotification(event){
-
-  event.preventDefault();
-
-  const vendorId =
-    $("notificationVendorId").value;
-
-  const title =
-    $("notificationTitle").value.trim();
-
-  const message =
-    $("notificationMessage").value.trim();
-
-  if(!vendorId || !title || !message){
-
-    toast(
-      "Please complete all fields"
-    );
-
-    return;
-  }
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .from("vendor_notifications")
-      .insert({
-        vendor_id:vendorId,
-        title,
-        message,
-        is_read:false
-      });
-
-  if(error){
-
-    console.error(error);
-
-    toast(
-      "Unable to send notification: " +
-      error.message
-    );
-
-    return;
-  }
-
-  const vendor =
-    vendors.find(
-      v => String(v.id) === String(vendorId)
-    );
-
-  await createAdminNotification(
-    "Vendor Notification Sent",
-    "A notification was sent to " +
-    (
-      vendor?.vendor_name ||
-      "vendor"
-    ) +
-    ".",
-    "vendor_notification",
-    vendorId
-  );
-
-  closeModal(
-    "notificationModal"
-  );
-
-  await loadNotifications();
-
-  renderNotifications();
-
-  toast("Notification sent");
 }
 
 
@@ -4187,170 +3381,132 @@ async function sendVendorNotification(event){
 
 function setupRealtime(){
 
-  if(notificationChannel){
-    supabaseClient
-      .removeChannel(
-        notificationChannel
-      );
-  }
+  supabaseClient
+    .channel("spotly-admin-vendors")
+    .on(
+      "postgres_changes",
+      {
+        event:"*",
+        schema:"public",
+        table:"vendors"
+      },
+      async payload=>{
 
-  if(vendorChannel){
-    supabaseClient
-      .removeChannel(
-        vendorChannel
-      );
-  }
+        console.log(
+          "VENDOR REALTIME:",
+          payload
+        );
+
+        await loadAll();
+
+      }
+    )
+    .subscribe();
 
 
-  notificationChannel =
-    supabaseClient
-      .channel(
-        "spotly-admin-notifications"
-      )
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"admin_notifications"
-        },
-        async payload=>{
+  supabaseClient
+    .channel("spotly-admin-notifications")
+    .on(
+      "postgres_changes",
+      {
+        event:"INSERT",
+        schema:"public",
+        table:"admin_notifications"
+      },
+      async payload=>{
 
-          console.log(
-            "ADMIN NOTIFICATION EVENT:",
-            payload
+        console.log(
+          "ADMIN NOTIFICATION:",
+          payload
+        );
+
+        await loadAdminNotifications();
+
+        updateDashboard();
+
+        if(
+          payload.new &&
+          payload.new.title
+        ){
+
+          toast(
+            payload.new.title
           );
 
-          await loadNotifications();
-
-          renderNotifications();
-          renderDashboard();
-
         }
-      )
-      .subscribe();
 
-
-  vendorChannel =
-    supabaseClient
-      .channel(
-        "spotly-admin-vendors"
-      )
-      .on(
-        "postgres_changes",
-        {
-          event:"*",
-          schema:"public",
-          table:"vendors"
-        },
-        async payload=>{
-
-          console.log(
-            "VENDOR EVENT:",
-            payload
-          );
-
-          await loadVendors();
-
-          await syncVendorRequestNotifications();
-          await syncOfflineNotifications();
-
-          renderDashboard();
-          renderVendors();
-          renderMonitoring();
-
-        }
-      )
-      .subscribe();
+      }
+    )
+    .subscribe();
 
 }
 
 
 /* =========================================================
-   EVENT LISTENERS
+   AUTO OFFLINE NOTIFICATION
 ========================================================= */
 
-$("loginForm").addEventListener(
-  "submit",
-  event=>{
-    event.preventDefault();
-    adminLogin();
-  }
-);
+let offlineNotificationCache = {};
+
+async function checkOfflineNotifications(){
+
+  if(!vendors.length) return;
 
 
-$("editVendorForm").addEventListener(
-  "submit",
-  saveVendorChanges
-);
+  for(const vendor of vendors){
 
-
-$("notificationForm").addEventListener(
-  "submit",
-  sendVendorNotification
-);
-
-
-$("vendorSearch").addEventListener(
-  "input",
-  renderVendors
-);
-
-
-$("vendorStatusFilter").addEventListener(
-  "change",
-  renderVendors
-);
-
-
-document
-  .querySelectorAll(".nav button")
-  .forEach(button=>{
-
-    button.addEventListener(
-      "click",
-      ()=>{
-        openPage(
-          button.dataset.page
-        );
-      }
-    );
-
-  });
-
-
-/* =========================================================
-   KEYBOARD
-========================================================= */
-
-document.addEventListener(
-  "keydown",
-  event=>{
-
-    if(event.key !== "Escape"){
-      return;
+    if(!isVendorOffline(vendor)){
+      continue;
     }
 
-    [
-      "viewModal",
-      "editModal",
-      "confirmModal",
-      "notificationModal"
-    ].forEach(id=>{
 
-      const el = $(id);
+    const key =
+      vendor.id +
+      "_" +
+      new Date().toISOString()
+        .slice(0,13);
 
-      if(
-        el &&
-        el.classList.contains("show")
-      ){
-        closeModal(id);
-      }
 
-    });
+    if(
+      offlineNotificationCache[key]
+    ){
+      continue;
+    }
+
+
+    offlineNotificationCache[key] =
+      true;
+
+
+    const exists =
+      adminNotifications.some(n=>
+        n.vendor_id === vendor.id &&
+        n.type === "vendor_offline" &&
+        new Date(n.created_at)
+          .toISOString()
+          .slice(0,13)
+          ===
+        new Date()
+          .toISOString()
+          .slice(0,13)
+      );
+
+
+    if(exists){
+      continue;
+    }
+
+
+    await createAdminNotification(
+      "Vendor offline",
+      `${vendor.vendor_name || "Vendor"} is offline during working hours. Contact vendor.`,
+      "vendor_offline",
+      vendor.id
+    );
 
   }
-);
+
+}
 
 
 /* =========================================================
@@ -4359,8 +3515,22 @@ document.addEventListener(
 
 document.addEventListener(
   "DOMContentLoaded",
-  ()=>{
-    checkExistingAdminSession();
+  async ()=>{
+
+    await checkExistingSession();
+
+    setupRealtime();
+
+    setInterval(
+      async ()=>{
+        await loadVendors();
+        renderOffline();
+        updateDashboard();
+        await checkOfflineNotifications();
+      },
+      60000
+    );
+
   }
 );
 
