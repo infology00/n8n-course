@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWSZ | AI Live Avatar & Creator Automation Proposal</title>
+<style>
+:root{
+  --bg:#f7f8fc;
+  --white:#fff;
+  --ink:#15182b;
+  --muted:#777d91;
+  --line:#e8e9f1;
+  --purple:#7557e8;
+  --purple2:#9c7cff;
+  --navy:#10152c;
+  --blue:#4b7bec;
+  --pink:#f06b9b;
+  --soft:#f0edff;
+  --radius:19px;
+  --shadow:0 12px 35px rgba(28,28,60,.055);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);line-height:1.6;font-size:14px}
+a{text-decoration:none;color:inherit}
+button{font:inherit;cursor:pointer}
+.wrap{width:min(1160px,91%);margin:auto}
+.nav{height:76px;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-size:27px;font-weight:950;letter-spacing:-2px;color:#16172a}
+.logo span{color:var(--purple)}
+.nav-links{display:flex;gap:24px;color:#6d7186;font-size:12px;font-weight:650}
+.nav-links a:hover{color:var(--purple)}
+.nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:11px 16px;font-size:12px;font-weight:800;background:#fff;transition:.2s}
+.nav-cta{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn-primary{background:var(--purple);color:#fff;border-color:var(--purple)}
+.btn-primary:hover{background:#6043d1;transform:translateY(-1px)}
+.btn:hover{transform:translateY(-1px)}
+.hero{padding:35px 0 22px}
+.hero-card{position:relative;overflow:hidden;min-height:440px;border-radius:27px;background:linear-gradient(115deg,#10152c 0%,#1a1c42 54%,#332566 100%);color:white;display:grid;grid-template-columns:1.04fr .96fr;align-items:center;box-shadow:0 24px 60px #20204720}
+.hero-card:before{content:"";position:absolute;width:480px;height:480px;border-radius:50%;right:9%;top:-40%;background:radial-gradient(circle,#9c7cff48,transparent 68%);pointer-events:none}
+.hero-copy{padding:48px 0 48px 47px;position:relative;z-index:2}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:10px;text-transform:uppercase;letter-spacing:1.7px;font-weight:850;color:var(--purple)}
+.hero .eyebrow{color:#c5b5ff;background:#ffffff10;border:1px solid #ffffff1e;padding:8px 11px;border-radius:30px}
+.live-dot{height:7px;width:7px;border-radius:50%;background:#ff6b83;box-shadow:0 0 0 5px #ff6b831b}
+h1{font-size:clamp(35px,4.1vw,55px);line-height:1.07;letter-spacing:-2.7px;margin:20px 0 16px;max-width:540px}
+.gradient-text{background:linear-gradient(95deg,#c9b9ff,#a7c7ff,#ffacc9);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-copy p{color:#c1c4d8;font-size:13px;max-width:450px;line-height:1.85;margin-bottom:23px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.hero .btn{padding:12px 16px}
+.hero .btn-secondary{background:#ffffff10;color:white;border-color:#ffffff30}
+.hero-visual{position:relative;min-height:390px;align-self:stretch;display:flex;align-items:center;justify-content:center;padding:25px 25px 25px 0}
+.studio{position:relative;width:100%;max-width:460px;height:350px;border:1px solid #ffffff1b;border-radius:23px;overflow:hidden;background:linear-gradient(150deg,#26244c,#171c37 60%,#312451);box-shadow:0 20px 45px #0003}
+.studio-grid{position:absolute;inset:0;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:28px 28px}
+.studio-light{position:absolute;top:15px;right:18%;width:150px;height:150px;border-radius:50%;background:#8b74ff44;filter:blur(35px)}
+.window-label{position:absolute;top:14px;left:15px;display:flex;gap:7px;align-items:center;color:#e8e4ff;font-size:9px;font-weight:750;letter-spacing:.5px}
+.live-pill{background:#ef526d;color:#fff;padding:5px 8px;border-radius:5px;font-size:9px;font-weight:900}
+.viewer{position:absolute;top:13px;right:14px;color:#e2e4f6;background:#ffffff12;border:1px solid #ffffff15;padding:5px 8px;border-radius:6px;font-size:9px}
+.avatar-scene{position:absolute;left:22%;bottom:0;width:54%;height:83%;display:flex;justify-content:center;align-items:flex-end}
+.avatar-hair{position:absolute;top:34px;width:139px;height:157px;background:linear-gradient(90deg,#252037,#574052,#211d33);border-radius:70px 70px 38px 38px}
+.avatar-face{position:absolute;top:53px;width:105px;height:129px;border-radius:48% 48% 45% 45%;background:linear-gradient(110deg,#e5b49d,#f6d0b5 60%,#dca78f);z-index:2}
+.avatar-ear{position:absolute;top:105px;width:16px;height:26px;border-radius:50%;background:#e6b39a;z-index:1}
+.avatar-ear.left{left:calc(50% - 59px)}.avatar-ear.right{right:calc(50% - 59px)}
+.avatar-hairline{position:absolute;top:48px;width:110px;height:45px;border-radius:60% 50% 20% 20%;background:#2d2639;z-index:3}
+.avatar-hairline:after{content:"";position:absolute;left:49px;top:0;width:39px;height:57px;background:#2d2639;border-radius:0 60% 70% 0;transform:rotate(-9deg)}
+.eye{position:absolute;top:107px;width:6px;height:4px;border-radius:50%;background:#45323a;z-index:4}
+.eye.left{left:calc(50% - 23px)}.eye.right{right:calc(50% - 23px)}
+.nose{position:absolute;top:111px;width:7px;height:14px;border-right:1px solid #c18f7e;z-index:4}
+.smile{position:absolute;top:135px;width:19px;height:8px;border-bottom:2px solid #a64f5d;border-radius:0 0 50% 50%;z-index:4}
+.neck{position:absolute;bottom:83px;width:37px;height:45px;background:#e2ad95;z-index:1}
+.body-avatar{position:absolute;bottom:-8px;width:194px;height:135px;border-radius:80px 80px 0 0;background:linear-gradient(100deg,#a3a5e7,#e4d5ff 60%,#aaa5e4);z-index:2}
+.jacket{position:absolute;bottom:-4px;width:214px;height:90px;background:linear-gradient(90deg,#5a5b8e,#aaa0dc,#4b4f80);clip-path:polygon(25% 0,42% 18%,50% 33%,58% 18%,75% 0,100% 100%,0 100%)}
+.avatar-scene:after{content:"";position:absolute;bottom:0;width:230px;height:13px;border-radius:50%;background:#080b1a88;filter:blur(8px)}
+.chat-float{position:absolute;z-index:5;right:12px;top:75px;width:151px;background:#ffffffee;color:#22243a;padding:10px;border-radius:11px;box-shadow:0 10px 25px #0002;font-size:9px;animation:float 5s ease-in-out infinite}
+.chat-float strong{display:block;font-size:9px;margin-bottom:4px}
+.chat-float span{color:#72758a;line-height:1.5}
+.product-float{position:absolute;z-index:5;bottom:18px;left:13px;width:150px;background:#fff;color:#22243a;border-radius:10px;padding:9px;display:flex;gap:9px;align-items:center;font-size:9px;box-shadow:0 10px 25px #0002}
+.product-art{width:37px;height:42px;border-radius:7px;background:linear-gradient(145deg,#e8d5cc,#ad8f82);display:grid;place-items:center;font-size:18px}
+.product-float strong{display:block;font-size:10px}
+.product-float span{color:var(--purple);font-weight:850}
+.studio-footer{position:absolute;bottom:12px;right:12px;color:#d2d2eb;font-size:8px;z-index:5}
+@keyframes float{50%{transform:translateY(-6px)}}
+.trust{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 4px 29px;border-bottom:1px solid var(--line)}
+.trust-label{font-size:10px;color:var(--muted);font-weight:750;max-width:145px}
+.platforms{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.platform{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:10px 13px;border-radius:11px;font-size:11px;font-weight:800;box-shadow:0 3px 10px #20204704}
+.p-icon{width:27px;height:27px;border-radius:8px;display:grid;place-items:center;font-weight:950;font-size:12px;color:white}
+.instagram{background:linear-gradient(135deg,#7654d8,#ed4d82,#f6a34c)}
+.facebook{background:#2878e8}.youtube{background:#f04444}.tiktok{background:#171923}.twitch{background:#7552db}.linkedin{background:#1678b9}
+.section{padding:73px 0}
+.section-white{background:#fff}
+.section-head{text-align:center;max-width:700px;margin:0 auto 34px}
+.section-head h2{font-size:clamp(27px,3vw,37px);letter-spacing:-1.5px;line-height:1.2;margin:12px 0}
+.section-head p{font-size:13px;color:var(--muted);max-width:600px;margin:0 auto;line-height:1.8}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:23px;box-shadow:var(--shadow);min-width:0}
+.card-icon{height:43px;width:43px;border-radius:13px;display:grid;place-items:center;background:var(--soft);color:var(--purple);font-size:20px;margin-bottom:17px}
+.card h3{font-size:16px;letter-spacing:-.3px;margin:0 0 9px}
+.card p{font-size:12px;color:var(--muted);line-height:1.8;margin:0}
+.card ul{list-style:none;margin:15px 0 0;padding:0}
+.card li{font-size:11px;color:#51576a;padding:7px 0;border-top:1px solid #f0f0f6}
+.card li:before{content:"✓";color:var(--purple);font-weight:900;margin-right:8px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.split-copy h2{font-size:clamp(27px,3vw,37px);line-height:1.2;letter-spacing:-1.4px;margin:12px 0}
+.split-copy p{font-size:13px;color:var(--muted);line-height:1.85}
+.checks{display:grid;gap:11px;margin:20px 0}
+.check{display:flex;gap:10px;font-size:12px;color:#464b5e}
+.check b{color:var(--purple)}
+.mini-window{background:#11162d;border-radius:20px;padding:19px;color:white;box-shadow:0 25px 55px #171a3520;overflow:hidden}
+.mini-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ffffff19;padding-bottom:14px;font-size:11px}
+.mini-head span{color:#b6a6ff}
+.stream-preview{height:170px;border-radius:12px;margin:14px 0;background:radial-gradient(circle at 52% 30%,#7161bb,#29264f 43%,#191e39 74%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.stream-person{width:105px;height:140px;position:relative;display:flex;align-items:flex-end;justify-content:center}
+.stream-person:before{content:"";position:absolute;top:10px;width:57px;height:67px;border-radius:50% 50% 40% 40%;background:#f1c5ab;box-shadow:0 -10px 0 4px #30243b}
+.stream-person:after{content:"";position:absolute;bottom:0;width:105px;height:73px;border-radius:50% 50% 0 0;background:#c3b3fa}
+.live-comment{position:absolute;left:12px;bottom:11px;max-width:200px;background:#ffffffed;color:#252640;border-radius:8px;padding:8px 10px;font-size:9px}
+.stream-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stream-metric{padding:10px;border:1px solid #ffffff18;border-radius:9px;background:#ffffff08}
+.stream-metric small{display:block;color:#a7aac2;font-size:9px}
+.stream-metric b{display:block;margin-top:3px;font-size:12px}
+.flow-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-top:25px}
+.flow-step{padding:18px 14px;background:#fff;border:1px solid var(--line);border-radius:13px;position:relative}
+.flow-step:not(:last-child):after{content:"→";position:absolute;right:-12px;top:32px;color:#a0a2b4;font-weight:900;z-index:2}
+.flow-step .step-no{font-size:10px;color:var(--purple);font-weight:900}
+.flow-step strong{display:block;font-size:12px;margin:8px 0 5px}
+.flow-step p{font-size:10px;color:var(--muted);margin:0;line-height:1.7}
+.commerce-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.commerce-card{display:grid;grid-template-columns:105px 1fr;gap:18px;align-items:center;padding:22px;background:#fff;border:1px solid var(--line);border-radius:17px}
+.commerce-icon{height:100px;border-radius:14px;display:grid;place-items:center;font-size:33px;background:linear-gradient(145deg,#eeeaff,#f9e7f0)}
+.commerce-card h3{margin:0 0 6px;font-size:15px}
+.commerce-card p{margin:0;color:var(--muted);font-size:11px;line-height:1.8}
+.label{display:inline-block;background:#f0edff;color:#6548d5;border-radius:6px;padding:4px 7px;font-size:9px;font-weight:850;margin-bottom:8px}
+.request-card{display:grid;grid-template-columns:1fr .9fr;gap:25px;background:linear-gradient(120deg,#141a35,#28234e);border-radius:22px;padding:29px;color:white;align-items:center}
+.request-card h2{font-size:27px;letter-spacing:-1px;line-height:1.2;margin:11px 0}
+.request-card p{font-size:12px;color:#c0c3d7;line-height:1.85}
+.comment-demo{background:#fff;color:#24263b;border-radius:13px;padding:15px}
+.comment-user{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:850}
+.comment-user i{height:27px;width:27px;border-radius:50%;background:#e8ddff;display:grid;place-items:center;font-style:normal;color:#6548d5}
+.comment-text{font-size:12px;margin:13px 0;line-height:1.6}
+.comment-text b{color:#6548d5}
+.comment-note{font-size:9px;color:#85899c;border-top:1px solid #eeeef5;padding-top:10px}
+.portal-shell{display:grid;grid-template-columns:185px 1fr;min-height:410px;border:1px solid var(--line);border-radius:19px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+.portal-side{background:#14182e;color:#c4c7d9;padding:20px 12px}
+.portal-brand{font-size:17px;font-weight:950;color:white;padding:0 10px 20px}
+.portal-brand span{color:#ad99ff}
+.portal-link{padding:10px;border-radius:8px;font-size:10px;margin:4px 0}
+.portal-link.active{background:#7560d6;color:white}
+.portal-main{padding:22px;min-width:0}
+.portal-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+.portal-top h3{margin:0;font-size:17px}
+.portal-top span{font-size:10px;color:var(--muted)}
+.portal-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:16px}
+.portal-stat{border:1px solid var(--line);border-radius:10px;padding:12px}
+.portal-stat small{display:block;color:var(--muted);font-size:9px}
+.portal-stat strong{font-size:17px;display:block;margin-top:5px}
+.portal-workflows{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.workflow-box{border:1px solid var(--line);border-radius:11px;padding:13px}
+.workflow-box strong{font-size:11px;display:block;margin-bottom:5px}
+.workflow-box p{font-size:10px;color:var(--muted);margin:0}
+.workflow-box button{border:0;background:#f0edff;color:#6349c8;padding:7px 9px;border-radius:6px;font-size:9px;font-weight:850;margin-top:10px}
+.chip-row{display:flex;gap:6px;flex-wrap:wrap;margin:9px 0}
+.chip{border:1px solid var(--line);border-radius:6px;padding:5px 7px;font-size:9px;color:#777b90}
+.chip.on{background:#f0edff;border-color:#c7baff;color:#6044ce}
+.portal-help{font-size:10px;color:var(--muted);margin-top:14px}
+.target-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.target{background:#fff;border:1px solid var(--line);border-radius:15px;padding:19px}
+.target .symbol{font-size:21px;color:var(--purple)}
+.target h3{font-size:13px;margin:10px 0 5px}
+.target p{font-size:10px;color:var(--muted);margin:0;line-height:1.8}
+.proposal{background:linear-gradient(120deg,#12172f,#24204a);color:white;border-radius:24px;padding:35px;display:grid;grid-template-columns:1fr .8fr;gap:30px;align-items:center;box-shadow:0 22px 50px #151a3320}
+.proposal .eyebrow{color:#b9aaff}
+.proposal h2{font-size:34px;letter-spacing:-1.5px;line-height:1.15;margin:12px 0}
+.proposal p{font-size:12px;color:#c3c5d9;line-height:1.9}
+.proposal-list{display:grid;gap:10px;margin-top:18px}
+.proposal-list div{font-size:11px;color:#e1e1ef}
+.proposal-list div:before{content:"✓";color:#bba9ff;font-weight:900;margin-right:9px}
+.price-card{border:1px solid #ffffff24;background:#ffffff09;border-radius:17px;padding:23px}
+.price-label{font-size:10px;color:#c2b4ff;font-weight:850;text-transform:uppercase;letter-spacing:1px}
+.price{font-size:50px;font-weight:950;letter-spacing:-2px;margin:7px 0 0}
+.price small{font-size:15px;letter-spacing:0;color:#c6c8db}
+.price-card hr{border:0;border-top:1px solid #ffffff20;margin:18px 0}
+.price-row{display:flex;justify-content:space-between;gap:10px;font-size:11px;margin:10px 0;color:#d4d5e3}
+.price-row strong{color:white}
+.proposal .btn{width:100%;margin-top:12px}
+.fineprint{font-size:10px!important;color:#999eb9!important;margin-top:15px}
+.faqs{max-width:800px;margin:auto}
+details{background:#fff;border:1px solid var(--line);border-radius:11px;padding:16px 18px;margin:9px 0}
+summary{cursor:pointer;font-size:12px;font-weight:800;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary:after{content:"+";font-size:17px;color:var(--purple)}
+details[open] summary:after{content:"−"}
+details p{font-size:11px;color:var(--muted);line-height:1.8;margin:12px 0 0}
+.footer{padding:26px 0;background:#fff;border-top:1px solid var(--line)}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.footer p{font-size:10px;color:var(--muted);margin:0}
+@media(max-width:900px){
+ .nav-links{display:none}
+ .hero-card{grid-template-columns:1fr}
+ .hero-copy{padding:38px 35px 10px}
+ .hero-visual{padding:20px 30px 30px;min-height:350px}
+ .studio{height:320px}
+ .split{grid-template-columns:1fr;gap:25px}
+ .grid-3{grid-template-columns:1fr 1fr}
+ .flow-steps{grid-template-columns:1fr 1fr}
+ .flow-step:after{display:none}
+ .proposal{grid-template-columns:1fr}
+ .trust{align-items:flex-start;flex-direction:column}
+ .platforms{justify-content:flex-start}
+}
+@media(max-width:600px){
+ .wrap{width:92%}
+ .nav{height:65px}
+ .nav-cta{font-size:10px;padding:9px}
+ .hero-card{border-radius:19px}
+ .hero-copy{padding:29px 22px 6px}
+ h1{font-size:37px;letter-spacing:-1.8px}
+ .hero-visual{padding:20px 13px 23px;min-height:305px}
+ .studio{height:285px}
+ .avatar-scene{transform:scale(.84);transform-origin:bottom center}
+ .chat-float{right:6px;width:125px;font-size:8px}
+ .product-float{left:7px;bottom:10px;width:130px}
+ .trust{padding:20px 0}
+ .platforms{gap:7px}
+ .platform{padding:7px 9px;font-size:10px}
+ .p-icon{width:24px;height:24px}
+ .section{padding:53px 0}
+ .grid-3,.commerce-grid,.target-grid{grid-template-columns:1fr}
+ .card{padding:20px}
+ .flow-steps{grid-template-columns:1fr 1fr}
+ .request-card{grid-template-columns:1fr;padding:20px}
+ .portal-shell{grid-template-columns:1fr}
+ .portal-side{display:none}
+ .portal-main{padding:14px}
+ .portal-stats{grid-template-columns:1fr 1fr 1fr}
+ .portal-stat{padding:9px}
+ .portal-stat strong{font-size:14px}
+ .portal-workflows{grid-template-columns:1fr}
+ .proposal{padding:23px}
+ .proposal h2{font-size:29px}
+ .price{font-size:44px}
+ .footer-inner{align-items:flex-start;flex-direction:column}
+}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="#top">AWS<span>Z</span></a>
+    <nav class="nav-links">
+      <a href="#how">How It Works</a>
+      <a href="#commerce">Live Commerce</a>
+      <a href="#portal">Management Portal</a>
+      <a href="#targets">Growth Opportunities</a>
+    </nav>
+    <a class="nav-cta" href="#proposal">View Proposal ↗</a>
+  </div>
+</header>
+
+<main id="top">
+<div class="wrap hero">
+  <div class="hero-card">
+    <div class="hero-copy">
+      <div class="eyebrow"><i class="live-dot"></i> AI Creator Automation System</div>
+      <h1>One AI Avatar.<br><span class="gradient-text">Every Channel.</span><br>One Control Room.</h1>
+      <p>A connected content and live-streaming system designed to bring AI presenters, multi-platform broadcasts, product promotions, audience engagement, and creator monetization into one managed workflow.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#how">Explore the System <span>↗</span></a>
+        <a class="btn btn-secondary" href="#proposal">View Project Proposal</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="studio">
+        <div class="studio-grid"></div><div class="studio-light"></div>
+        <div class="window-label"><i class="live-dot"></i> VIRTUAL PRESENTER STUDIO <span class="live-pill">LIVE</span></div>
+        <div class="viewer">◉ 1,248 viewers</div>
+        <div class="avatar-scene">
+          <div class="avatar-hair"></div><div class="avatar-ear left"></div><div class="avatar-ear right"></div>
+          <div class="avatar-face"></div><div class="avatar-hairline"></div>
+          <div class="eye left"></div><div class="eye right"></div><div class="nose"></div><div class="smile"></div>
+          <div class="neck"></div><div class="body-avatar"></div><div class="jacket"></div>
+        </div>
+        <div class="chat-float"><strong>Viewer · @maria</strong><span>Where can I get this? Please share the product link!</span></div>
+        <div class="product-float"><div class="product-art">✦</div><div><strong>Featured product</strong><span>View product ↗</span></div></div>
+        <div class="studio-footer">AI PRESENTER · AUTOMATED WORKFLOW</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trust">
+    <div class="trust-label">DESIGNED FOR MULTI-PLATFORM DISTRIBUTION</div>
+    <div class="platforms">
+      <div class="platform"><span class="p-icon instagram">◎</span> Instagram</div>
+      <div class="platform"><span class="p-icon facebook">f</span> Facebook</div>
+      <div class="platform"><span class="p-icon youtube">▶</span> YouTube</div>
+      <div class="platform"><span class="p-icon tiktok">♪</span> TikTok</div>
+      <div class="platform"><span class="p-icon twitch">▰</span> Twitch</div>
+    </div>
+  </div>
+</div>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">01 / The technology</div>
+      <h2>How the AI Live Avatar Works</h2>
+      <p>We use a suitable AI avatar and video-generation platform to create a presenter, prepare the content, and build a repeatable production workflow around your brand.</p>
+    </div>
+    <div class="grid-3">
+      <article class="card">
+        <div class="card-icon">◉</div>
+        <h3>AI Avatar Creation</h3>
+        <p>Build a virtual presenter that represents the brand, speaks the required script, and delivers consistent on-camera content.</p>
+        <ul><li>Evaluate HeyGen and other suitable avatar tools</li><li>Configure presenter, voice, script, and visual style</li><li>Prepare reusable content templates</li></ul>
+      </article>
+      <article class="card">
+        <div class="card-icon">♫</div>
+        <h3>Voice & Content Engine</h3>
+        <p>Provide the topic, campaign, product details, or promotional brief. The workflow turns the input into structured presenter content.</p>
+        <ul><li>Script preparation and content variations</li><li>Voice, language, and delivery configuration</li><li>Generate video assets for review</li></ul>
+      </article>
+      <article class="card">
+        <div class="card-icon">⌘</div>
+        <h3>Automation & Distribution</h3>
+        <p>Use n8n to coordinate the production steps, manage requests, pass approved assets onward, and track job status.</p>
+        <ul><li>Automated workflow orchestration</li><li>Content and campaign management</li><li>Delivery status and asset organization</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-white">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-copy">
+        <div class="eyebrow">02 / Multi-platform broadcasting</div>
+        <h2>How do we go live on multiple platforms at once?</h2>
+        <p>OBS Studio can act as the broadcast production layer. The avatar or video output is brought into the streaming scene, then the configured broadcast workflow distributes the stream to supported destinations.</p>
+        <div class="checks">
+          <div class="check"><b>✓</b><span><strong>OBS Studio:</strong> scenes, overlays, audio, and video output.</span></div>
+          <div class="check"><b>✓</b><span><strong>Multi-destination streaming:</strong> configure platform outputs or a suitable multistream service.</span></div>
+          <div class="check"><b>✓</b><span><strong>n8n orchestration:</strong> manage scripts, campaign details, job status, and operational notifications.</span></div>
+          <div class="check"><b>✓</b><span><strong>Platform checks:</strong> verify live-stream eligibility, stream keys, account permissions, and destination-specific requirements.</span></div>
+        </div>
+        <p>For a local OBS setup, the streaming computer must remain powered on and connected during the broadcast. A cloud-based or hosted broadcasting arrangement may change that requirement.</p>
+      </div>
+      <div class="mini-window">
+        <div class="mini-head"><strong>Broadcast control preview</strong><span>● STREAM SETUP</span></div>
+        <div class="stream-preview">
+          <div class="stream-person"></div>
+          <div class="live-pill" style="position:absolute;top:12px;left:12px">LIVE PREVIEW</div>
+          <div class="live-comment"><strong>@viewer</strong><br>Can you tell us more about this product?</div>
+        </div>
+        <div class="stream-metrics">
+          <div class="stream-metric"><small>Production</small><b>OBS Studio</b></div>
+          <div class="stream-metric"><small>Workflow</small><b>n8n</b></div>
+          <div class="stream-metric"><small>Destinations</small><b>Multi-channel</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step"><span class="step-no">STEP 01</span><strong>Prepare the avatar</strong><p>Choose the presenter, voice, script, and content format.</p></div>
+      <div class="flow-step"><span class="step-no">STEP 02</span><strong>Build the scene</strong><p>Set up the avatar output, branding, overlays, and audio in OBS.</p></div>
+      <div class="flow-step"><span class="step-no">STEP 03</span><strong>Configure channels</strong><p>Select eligible platforms and configure their approved streaming paths.</p></div>
+      <div class="flow-step"><span class="step-no">STEP 04</span><strong>Monitor the broadcast</strong><p>Check stream status and route audience engagement into the workflow.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="commerce">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">03 / Content formats</div>
+      <h2>One presenter. Multiple ways to publish.</h2>
+      <p>Choose the output that matches the campaign. Not every task needs a live stream; the same content operation can support recorded videos, product promotions, and creative assets.</p>
+    </div>
+    <div class="commerce-grid">
+      <article class="commerce-card"><div class="commerce-icon">🛍️</div><div><span class="label">LIVE COMMERCE</span><h3>Live product selling</h3><p>Showcase products, explain benefits, share approved product links, answer common questions, and direct viewers to purchase channels.</p></div></article>
+      <article class="commerce-card"><div class="commerce-icon">🎬</div><div><span class="label">RECORDED VIDEO</span><h3>Generate & publish videos</h3><p>Generate a presenter video from a topic or script, review the result, then upload or schedule it through supported publishing integrations.</p></div></article>
+      <article class="commerce-card"><div class="commerce-icon">📣</div><div><span class="label">CAMPAIGNS</span><h3>Promotions & announcements</h3><p>Run campaign-specific presenter scripts for launches, offers, brand announcements, event reminders, and seasonal promotions.</p></div></article>
+      <article class="commerce-card"><div class="commerce-icon">🖼️</div><div><span class="label">CREATIVE ASSETS</span><h3>Images & promotional creatives</h3><p>Submit an image brief or campaign details and generate creative assets using a connected image-generation service, with review before publishing.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-white">
+  <div class="wrap">
+    <div class="request-card">
+      <div>
+        <div class="eyebrow" style="color:#c4b5ff">04 / Audience interaction</div>
+        <h2>“Comment below to get…”<br>Turn requests into content jobs.</h2>
+        <p>Viewers can request a guide, product details, an image, or a video. The system can classify the request and route it into a suitable content workflow when the necessary inputs and permissions are available.</p>
+        <div class="checks">
+          <div class="check" style="color:#eee"><b>✓</b><span>Identify a request for a PDF, image, video, or product link.</span></div>
+          <div class="check" style="color:#eee"><b>✓</b><span>Check whether a reference file, product image, brief, or account access is required.</span></div>
+          <div class="check" style="color:#eee"><b>✓</b><span>Prepare the asset, create a review task, and deliver it through a permitted channel.</span></div>
+        </div>
+      </div>
+      <div class="comment-demo">
+        <div class="comment-user"><i>JD</i> Jordan Davis <span style="margin-left:auto;color:#9a9caf;font-weight:500">Sample comment</span></div>
+        <div class="comment-text">“Can you make a <b>PDF guide</b> for this product and send me the link?”</div>
+        <div class="comment-note">Possible workflow: detect request → check required inputs → create asset task → review → deliver via an approved channel.</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:11px"><span class="chip on">PDF request</span><span class="chip">Product link</span><span class="chip">Image request</span><span class="chip">Video request</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="portal">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">05 / Centralized operations</div>
+      <h2>Everything managed from one web portal</h2>
+      <p>A central control panel keeps campaign inputs, channel selection, production requests, and publishing jobs organized. The interface below illustrates the proposed experience.</p>
+    </div>
+    <div class="portal-shell">
+      <aside class="portal-side">
+        <div class="portal-brand">AWS<span>Z</span> <span style="font-size:9px;font-weight:500;color:#9ca1bb">CREATOR OS</span></div>
+        <div class="portal-link active">▦ Overview</div>
+        <div class="portal-link">◉ Live Streams</div>
+        <div class="portal-link">▶ Video Studio</div>
+        <div class="portal-link">▧ Image Studio</div>
+        <div class="portal-link">🛍 Products & Offers</div>
+        <div class="portal-link">◎ Social Channels</div>
+        <div class="portal-link">⌘ Automations</div>
+        <div class="portal-link">⚙ Settings</div>
+      </aside>
+      <div class="portal-main">
+        <div class="portal-top"><div><h3>Creator Control Center</h3><span>Campaign workspace · Preview</span></div><span class="label">DEMO DASHBOARD</span></div>
+        <div class="portal-stats">
+          <div class="portal-stat"><small>Connected channels</small><strong>05</strong></div>
+          <div class="portal-stat"><small>Content jobs</small><strong>12</strong></div>
+          <div class="portal-stat"><small>Pending review</small><strong>03</strong></div>
+        </div>
+        <div class="portal-workflows">
+          <div class="workflow-box"><strong>🔴 Start a live session</strong><p>Enter today's topic, script, featured product, and preferred streaming channels.</p><div class="chip-row"><span class="chip on">YouTube</span><span class="chip on">Facebook</span><span class="chip">Instagram</span><span class="chip">TikTok</span></div><button type="button" data-toast="Live session setup selected in the portal preview.">Configure live session ↗</button></div>
+          <div class="workflow-box"><strong>▶ Create a video</strong><p>Choose the avatar, enter a script, generate the video, review it, then publish where supported.</p><div class="chip-row"><span class="chip on">Avatar</span><span class="chip">Script</span><span class="chip">Publish</span></div><button type="button" data-toast="Video creation selected in the portal preview.">Create a video ↗</button></div>
+          <div class="workflow-box"><strong>▧ Generate an image</strong><p>Provide a creative brief, product reference, format, and required image dimensions.</p><div class="chip-row"><span class="chip on">Brief</span><span class="chip">Reference image</span></div><button type="button" data-toast="Image creation selected in the portal preview.">Create an image ↗</button></div>
+          <div class="workflow-box"><strong>🛍 Launch a product campaign</strong><p>Add the product link, offer, approved copy, and target channels for the promotion.</p><div class="chip-row"><span class="chip on">Product URL</span><span class="chip">Offer</span><span class="chip">Channels</span></div><button type="button" data-toast="Product campaign selected in the portal preview.">Set up campaign ↗</button></div>
+        </div>
+        <div class="portal-help">Illustrative portal UI · Buttons show interaction previews only. Production actions require connected services, authentication, and configured workflows.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-white" id="targets">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">06 / Growth opportunities</div>
+      <h2>What can this system help you target?</h2>
+      <p>The platform is designed to support different creator and business models. Actual revenue depends on audience, eligibility, content performance, commercial agreements, and platform policies.</p>
+    </div>
+    <div class="target-grid">
+      <article class="target"><div class="symbol">🛍</div><h3>Live Commerce</h3><p>Product demonstrations, product links, campaign offers, and purchase-oriented audience engagement.</p></article>
+      <article class="target"><div class="symbol">✦</div><h3>Brand Deals & Sponsorships</h3><p>Sponsored segments, product placements, brand campaigns, and a professional enquiry workflow.</p></article>
+      <article class="target"><div class="symbol">♧</div><h3>Subscriptions & Memberships</h3><p>Promote paid communities, memberships, exclusive content, or recurring subscription offers.</p></article>
+      <article class="target"><div class="symbol">▤</div><h3>PDFs & Digital Products</h3><p>Promote guides, templates, ebooks, downloadable resources, and digital product offers.</p></article>
+      <article class="target"><div class="symbol">▶</div><h3>Platform Monetization</h3><p>Prepare content operations for eligible platform monetization features, subject to account and policy requirements.</p></article>
+      <article class="target"><div class="symbol">◎</div><h3>Lead Generation</h3><p>Capture relevant enquiries, qualify requests, route prospective buyers, and manage follow-up tasks.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="proposal">
+  <div class="wrap">
+    <div class="proposal">
+      <div>
+        <div class="eyebrow">07 / Project proposal · AWSZ</div>
+        <h2>From concept to a working automation foundation.</h2>
+        <p>Build the initial AI avatar and creator-automation workflow, connect the agreed services, and deliver a centralized portal experience for managing live sessions and content production.</p>
+        <div class="proposal-list">
+          <div>AI avatar and content-generation workflow setup</div>
+          <div>OBS and agreed multi-platform streaming configuration</div>
+          <div>n8n workflow orchestration for campaign and content tasks</div>
+          <div>Centralized portal UI for live, video, image, and product workflows</div>
+          <div>Initial request-routing logic and workflow status visibility</div>
+          <div>Testing, walkthrough, and handover documentation</div>
+        </div>
+      </div>
+      <div class="price-card">
+        <div class="price-label">Proposed project investment</div>
+        <div class="price">$1,370 <small>USD</small></div>
+        <hr>
+        <div class="price-row"><span>Estimated delivery</span><strong>8–10 days</strong></div>
+        <div class="price-row"><span>Project type</span><strong>Initial implementation</strong></div>
+        <div class="price-row"><span>Delivery</span><strong>Configured workflows + handover</strong></div>
+        <a href="mailto:infology00@gmail.com?subject=AI%20Live%20Avatar%20Project%20-%20AWSZ" class="btn btn-primary">Discuss the Proposal ↗</a>
+        <p class="fineprint">Third-party subscriptions, usage credits, paid platform plans, and other external service charges are separate unless explicitly agreed. Exact integrations and live publishing capabilities will be confirmed during setup.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-white">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">08 / Project clarity</div>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faqs">
+      <details><summary>Will the same AI avatar go live on every platform at once?</summary><p>The intended setup uses OBS and a supported multistream distribution path. Each target platform must support the selected broadcast method, and account eligibility, stream-key access, and any platform restrictions must be checked before implementation.</p></details>
+      <details><summary>Does the computer need to stay on?</summary><p>For a local OBS-based broadcast, yes: the computer must remain powered on, connected, and running the stream. A hosted or cloud broadcast architecture can reduce local-computer dependence but may require additional services.</p></details>
+      <details><summary>Can viewers request a PDF, image, or video in comments?</summary><p>The workflow can classify supported requests and create content tasks. Automatically generating and delivering each asset depends on the connected generation service, required reference materials, review rules, and the available delivery channel.</p></details>
+      <details><summary>Can we publish videos and images from the portal?</summary><p>The portal can organize creation and publishing actions. Direct publishing requires an approved integration for each destination; some platforms or media types may require manual review or upload.</p></details>
+      <details><summary>Does the proposal include all software subscriptions?</summary><p>The proposed project fee covers the agreed implementation scope. HeyGen or equivalent avatar services, AI usage, hosting, and any paid multistream or platform plans are separate unless specifically included in the final agreement.</p></details>
+      <details><summary>Is all platform monetization guaranteed?</summary><p>No. The system can support content and campaign operations, but monetization access and earnings are controlled by the relevant platform, account eligibility, audience performance, and commercial agreements.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <a class="logo" href="#top">AWS<span>Z</span></a>
+    <p>AI Live Avatar · Multi-platform Streaming · Creator Automation</p>
+    <p>Build less manually. Run smarter.</p>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll("[data-toast]").forEach(button=>{
+  button.addEventListener("click",()=>{
+    let note=document.getElementById("portal-toast");
+    if(!note){
+      note=document.createElement("div");
+      note.id="portal-toast";
+      note.style.cssText="position:fixed;bottom:22px;right:22px;z-index:50;background:#171a32;color:white;padding:13px 17px;border-radius:10px;font-size:12px;box-shadow:0 10px 30px #0002;max-width:320px";
+      document.body.appendChild(note);
+    }
+    note.textContent=button.dataset.toast;
+    note.style.display="block";
+    clearTimeout(window.portalToastTimer);
+    window.portalToastTimer=setTimeout(()=>note.style.display="none",2600);
+  });
+});
+</script>
+</body>
+</html>
