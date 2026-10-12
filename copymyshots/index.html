@@ -1,0 +1,434 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Screenshot to Text | OCR Tool</title>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 30px 15px;
+    font-family: Arial, sans-serif;
+    background: #f3f6fc;
+    color: #172033;
+}
+
+.container {
+    max-width: 850px;
+    margin: auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #667085;
+    line-height: 1.6;
+}
+
+.card {
+    background: #fff;
+    padding: 22px;
+    border-radius: 18px;
+    border: 1px solid #e1e7f0;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+}
+
+.upload {
+    display: block;
+    border: 2px dashed #9bb5e9;
+    background: #f8faff;
+    border-radius: 14px;
+    padding: 35px 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.upload:hover {
+    background: #edf4ff;
+    border-color: #2563eb;
+}
+
+.upload h3 {
+    margin: 0 0 10px;
+}
+
+.upload p {
+    color: #667085;
+    font-size: 14px;
+    margin: 0;
+}
+
+#imageInput {
+    display: none;
+}
+
+#preview {
+    display: none;
+    max-width: 100%;
+    max-height: 350px;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.primary {
+    background: #2563eb;
+    color: white;
+}
+
+.secondary {
+    background: #e9eef7;
+    color: #172033;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.status {
+    font-size: 13px;
+    color: #667085;
+    margin-top: 15px;
+    line-height: 1.5;
+}
+
+.progress {
+    height: 6px;
+    background: #e8edf5;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+#progressBar {
+    height: 100%;
+    width: 0%;
+    background: #2563eb;
+    transition: width 0.2s;
+}
+
+.resultHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.resultHeader h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 300px;
+    padding: 15px;
+    border: 1px solid #d6deeb;
+    border-radius: 12px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: #2563eb;
+}
+
+.note {
+    font-size: 12px;
+    color: #667085;
+    line-height: 1.6;
+    margin-top: 15px;
+}
+
+@media (max-width: 500px) {
+    header h1 {
+        font-size: 26px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .buttons button {
+        flex: 1;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+    <h1>Screenshot to Text</h1>
+    <p>Upload your screenshot, extract all readable text, and copy it with one click.</p>
+</header>
+
+<section class="card">
+
+    <label class="upload" id="dropZone" for="imageInput">
+        <h3>📸 Upload Screenshot</h3>
+        <p>Click here or drag and drop an image</p>
+        <p>PNG, JPG, JPEG or WEBP</p>
+    </label>
+
+    <input type="file" id="imageInput" accept="image/*">
+
+    <img id="preview" alt="Screenshot preview">
+
+    <div class="buttons">
+        <button class="primary" id="extractBtn" disabled>
+            Extract Text
+        </button>
+
+        <button class="secondary" id="clearBtn">
+            Clear
+        </button>
+    </div>
+
+    <div class="status" id="status">
+        Select a screenshot to get started.
+    </div>
+
+    <div class="progress">
+        <div id="progressBar"></div>
+    </div>
+
+</section>
+
+<section class="card">
+
+    <div class="resultHeader">
+        <h2>Extracted Text</h2>
+
+        <div class="buttons" style="margin-top:0">
+            <button class="primary" id="copyBtn">
+                Copy All Text
+            </button>
+
+            <button class="secondary" id="downloadBtn">
+                Download TXT
+            </button>
+        </div>
+    </div>
+
+    <textarea id="output" placeholder="Your extracted text will appear here..."></textarea>
+
+    <div class="note">
+        Tip: Clear, high-resolution screenshots produce better results.
+        OCR may not read blurry text or handwriting perfectly.
+        Internet is required to load the OCR engine.
+    </div>
+
+</section>
+
+</div>
+
+<script>
+const imageInput = document.getElementById("imageInput");
+const preview = document.getElementById("preview");
+const extractBtn = document.getElementById("extractBtn");
+const output = document.getElementById("output");
+const status = document.getElementById("status");
+const progressBar = document.getElementById("progressBar");
+const dropZone = document.getElementById("dropZone");
+
+let selectedFile = null;
+let isProcessing = false;
+
+function setStatus(message) {
+    status.textContent = message;
+}
+
+function selectImage(file) {
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+        setStatus("Please select a valid image file.");
+        return;
+    }
+
+    selectedFile = file;
+
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = "block";
+
+    extractBtn.disabled = false;
+    progressBar.style.width = "0%";
+
+    setStatus("Screenshot selected. Click Extract Text.");
+}
+
+imageInput.addEventListener("change", function(event) {
+    selectImage(event.target.files[0]);
+});
+
+["dragenter", "dragover"].forEach(function(eventName) {
+    dropZone.addEventListener(eventName, function(event) {
+        event.preventDefault();
+        dropZone.style.borderColor = "#2563eb";
+    });
+});
+
+["dragleave", "drop"].forEach(function(eventName) {
+    dropZone.addEventListener(eventName, function(event) {
+        event.preventDefault();
+        dropZone.style.borderColor = "#9bb5e9";
+    });
+});
+
+dropZone.addEventListener("drop", function(event) {
+    selectImage(event.dataTransfer.files[0]);
+});
+
+extractBtn.addEventListener("click", async function() {
+    if (!selectedFile || isProcessing) return;
+
+    if (!window.Tesseract) {
+        setStatus("OCR engine unavailable. Check your internet and reload.");
+        return;
+    }
+
+    isProcessing = true;
+    extractBtn.disabled = true;
+
+    setStatus("Starting OCR... Please wait.");
+    progressBar.style.width = "2%";
+
+    try {
+        const result = await Tesseract.recognize(
+            selectedFile,
+            "eng+urd",
+            {
+                logger: function(message) {
+                    if (message.status) {
+                        setStatus(
+                            message.status === "recognizing text"
+                                ? "Reading text from screenshot..."
+                                : message.status + "..."
+                        );
+                    }
+
+                    if (typeof message.progress === "number") {
+                        progressBar.style.width =
+                            Math.round(message.progress * 100) + "%";
+                    }
+                }
+            }
+        );
+
+        output.value = (result.data.text || "").trim();
+        progressBar.style.width = "100%";
+
+        if (output.value) {
+            setStatus("Text extracted successfully. You can now copy it.");
+        } else {
+            setStatus("No text detected. Try a clearer screenshot.");
+        }
+
+    } catch (error) {
+        console.error(error);
+        setStatus("Extraction failed. Reload the page and try again.");
+    } finally {
+        isProcessing = false;
+        extractBtn.disabled = !selectedFile;
+    }
+});
+
+document.getElementById("copyBtn").addEventListener("click", async function() {
+    if (!output.value.trim()) {
+        setStatus("There is no text to copy yet.");
+        return;
+    }
+
+    try {
+        await navigator.clipboard.writeText(output.value);
+        setStatus("All text copied to clipboard!");
+    } catch (error) {
+        output.focus();
+        output.select();
+
+        try {
+            document.execCommand("copy");
+            setStatus("Text copied to clipboard!");
+        } catch (copyError) {
+            setStatus("Text selected. Press Ctrl+C to copy.");
+        }
+    }
+});
+
+document.getElementById("downloadBtn").addEventListener("click", function() {
+    if (!output.value.trim()) {
+        setStatus("Extract some text before downloading.");
+        return;
+    }
+
+    const blob = new Blob(
+        [output.value],
+        { type: "text/plain;charset=utf-8" }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = "extracted-text.txt";
+    link.click();
+
+    URL.revokeObjectURL(url);
+});
+
+document.getElementById("clearBtn").addEventListener("click", function() {
+    selectedFile = null;
+    imageInput.value = "";
+    preview.removeAttribute("src");
+    preview.style.display = "none";
+    output.value = "";
+    progressBar.style.width = "0%";
+    extractBtn.disabled = true;
+
+    setStatus("Select a screenshot to get started.");
+});
+</script>
+
+</body>
+</html>
+```
