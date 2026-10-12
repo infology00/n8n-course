@@ -4,25 +4,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Screenshot to Text | OCR Tool</title>
+<title>Screenshot Text Extractor</title>
 
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 
 <style>
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
-    padding: 30px 15px;
+    padding: 30px 16px;
     font-family: Arial, sans-serif;
     background: #f3f6fc;
     color: #172033;
 }
 
 .container {
-    max-width: 850px;
+    max-width: 900px;
     margin: auto;
 }
 
@@ -32,66 +30,79 @@ header {
 }
 
 header h1 {
-    font-size: 32px;
+    font-size: 34px;
     margin-bottom: 10px;
 }
 
 header p {
     color: #667085;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 .card {
-    background: #fff;
-    padding: 22px;
-    border-radius: 18px;
+    background: white;
     border: 1px solid #e1e7f0;
+    border-radius: 18px;
+    padding: 22px;
     margin-bottom: 20px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+    box-shadow: 0 8px 25px rgba(0,0,0,.04);
 }
 
-.upload {
-    display: block;
+.paste-area {
     border: 2px dashed #9bb5e9;
     background: #f8faff;
-    border-radius: 14px;
-    padding: 35px 15px;
+    border-radius: 15px;
+    padding: 32px 16px;
     text-align: center;
     cursor: pointer;
+    transition: .2s;
+    outline: none;
 }
 
-.upload:hover {
-    background: #edf4ff;
+.paste-area:hover,
+.paste-area:focus {
     border-color: #2563eb;
+    background: #eff5ff;
 }
 
-.upload h3 {
+.paste-area h3 {
     margin: 0 0 10px;
+    font-size: 20px;
 }
 
-.upload p {
+.paste-area p {
+    margin: 6px 0;
     color: #667085;
     font-size: 14px;
-    margin: 0;
+    line-height: 1.6;
 }
 
-#imageInput {
-    display: none;
+.shortcut {
+    display: inline-block;
+    background: #e5edff;
+    color: #1d4ed8;
+    border-radius: 7px;
+    padding: 7px 12px;
+    font-weight: bold;
+    margin-top: 8px;
 }
+
+#imageInput { display: none; }
 
 #preview {
     display: none;
     max-width: 100%;
-    max-height: 350px;
+    max-height: 360px;
+    object-fit: contain;
     margin: 20px auto;
     border-radius: 10px;
 }
 
 .buttons {
     display: flex;
-    flex-wrap: wrap;
     gap: 10px;
-    margin-top: 18px;
+    flex-wrap: wrap;
+    margin-top: 17px;
 }
 
 button {
@@ -101,6 +112,11 @@ button {
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
+}
+
+button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
 }
 
 .primary {
@@ -113,16 +129,12 @@ button {
     color: #172033;
 }
 
-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
 .status {
     font-size: 13px;
+    line-height: 1.6;
     color: #667085;
     margin-top: 15px;
-    line-height: 1.5;
+    overflow-wrap: anywhere;
 }
 
 .progress {
@@ -135,35 +147,36 @@ button:disabled {
 
 #progressBar {
     height: 100%;
-    width: 0%;
+    width: 0;
     background: #2563eb;
-    transition: width 0.2s;
+    transition: width .2s;
 }
 
-.resultHeader {
+.result-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 15px;
 }
 
-.resultHeader h2 {
+.result-header h2 {
     margin: 0;
     font-size: 20px;
 }
 
 textarea {
+    display: block;
     width: 100%;
-    min-height: 300px;
+    min-height: 320px;
     padding: 15px;
     border: 1px solid #d6deeb;
     border-radius: 12px;
     resize: vertical;
     font-family: Arial, sans-serif;
     font-size: 15px;
-    line-height: 1.7;
+    line-height: 1.8;
     outline: none;
 }
 
@@ -172,43 +185,45 @@ textarea:focus {
 }
 
 .note {
-    font-size: 12px;
     color: #667085;
-    line-height: 1.6;
-    margin-top: 15px;
+    font-size: 12px;
+    line-height: 1.7;
+    margin-top: 14px;
 }
 
-@media (max-width: 500px) {
-    header h1 {
-        font-size: 26px;
-    }
-
-    .card {
-        padding: 15px;
-    }
-
-    .buttons button {
-        flex: 1;
-    }
+@media(max-width: 550px) {
+    body { padding: 18px 10px; }
+    header h1 { font-size: 27px; }
+    .card { padding: 15px; }
+    .paste-area { padding: 25px 12px; }
+    .buttons button { flex: 1; }
 }
 </style>
 </head>
 
 <body>
+
 <div class="container">
 
 <header>
-    <h1>Screenshot to Text</h1>
-    <p>Upload your screenshot, extract all readable text, and copy it with one click.</p>
+    <h1>Screenshot Text Extractor</h1>
+    <p>Paste a screenshot, extract the text, and copy everything in one click.</p>
 </header>
 
 <section class="card">
 
-    <label class="upload" id="dropZone" for="imageInput">
-        <h3>📸 Upload Screenshot</h3>
-        <p>Click here or drag and drop an image</p>
-        <p>PNG, JPG, JPEG or WEBP</p>
-    </label>
+    <div
+        class="paste-area"
+        id="pasteArea"
+        tabindex="0"
+        role="button"
+        aria-label="Paste screenshot here using Control V"
+    >
+        <h3>📋 Paste Screenshot Here</h3>
+        <p>Screenshot copy karo aur yahan click karke</p>
+        <div class="shortcut">Ctrl + V</div>
+        <p>Ya neeche diye gaye options se image select karo.</p>
+    </div>
 
     <input type="file" id="imageInput" accept="image/*">
 
@@ -219,13 +234,17 @@ textarea:focus {
             Extract Text
         </button>
 
+        <button class="secondary" id="uploadBtn">
+            Upload Screenshot
+        </button>
+
         <button class="secondary" id="clearBtn">
             Clear
         </button>
     </div>
 
-    <div class="status" id="status">
-        Select a screenshot to get started.
+    <div class="status" id="status" aria-live="polite">
+        Ready. Screenshot copy karo aur Ctrl + V dabao.
     </div>
 
     <div class="progress">
@@ -236,7 +255,7 @@ textarea:focus {
 
 <section class="card">
 
-    <div class="resultHeader">
+    <div class="result-header">
         <h2>Extracted Text</h2>
 
         <div class="buttons" style="margin-top:0">
@@ -250,12 +269,16 @@ textarea:focus {
         </div>
     </div>
 
-    <textarea id="output" placeholder="Your extracted text will appear here..."></textarea>
+    <textarea
+        id="output"
+        placeholder="Extracted text yahan appear hoga..."
+        spellcheck="false"
+    ></textarea>
 
     <div class="note">
-        Tip: Clear, high-resolution screenshots produce better results.
-        OCR may not read blurry text or handwriting perfectly.
-        Internet is required to load the OCR engine.
+        Tip: Clear screenshots produce better results. You can edit
+        the extracted text before copying. English and Urdu OCR are
+        enabled. Internet is required to load the OCR engine.
     </div>
 
 </section>
@@ -264,73 +287,136 @@ textarea:focus {
 
 <script>
 const imageInput = document.getElementById("imageInput");
+const pasteArea = document.getElementById("pasteArea");
 const preview = document.getElementById("preview");
 const extractBtn = document.getElementById("extractBtn");
 const output = document.getElementById("output");
 const status = document.getElementById("status");
 const progressBar = document.getElementById("progressBar");
-const dropZone = document.getElementById("dropZone");
 
 let selectedFile = null;
 let isProcessing = false;
+let previewURL = null;
 
 function setStatus(message) {
     status.textContent = message;
 }
 
-function selectImage(file) {
+function selectImage(file, source = "Screenshot") {
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-        setStatus("Please select a valid image file.");
+        setStatus("Please select or paste a valid image.");
         return;
     }
 
     selectedFile = file;
 
-    preview.src = URL.createObjectURL(file);
+    if (previewURL) {
+        URL.revokeObjectURL(previewURL);
+    }
+
+    previewURL = URL.createObjectURL(file);
+    preview.src = previewURL;
     preview.style.display = "block";
 
     extractBtn.disabled = false;
     progressBar.style.width = "0%";
 
-    setStatus("Screenshot selected. Click Extract Text.");
+    setStatus(source + " ready! Click Extract Text.");
 }
 
-imageInput.addEventListener("change", function(event) {
-    selectImage(event.target.files[0]);
+// Upload button
+document.getElementById("uploadBtn").addEventListener("click", () => {
+    imageInput.click();
 });
 
-["dragenter", "dragover"].forEach(function(eventName) {
-    dropZone.addEventListener(eventName, function(event) {
+imageInput.addEventListener("change", event => {
+    const file = event.target.files[0];
+
+    if (file) {
+        selectImage(file, "Uploaded screenshot");
+    }
+
+    // Allows selecting the same image again later.
+    imageInput.value = "";
+});
+
+// Ctrl + V screenshot paste
+document.addEventListener("paste", event => {
+    const items = event.clipboardData?.items;
+
+    if (!items) return;
+
+    for (const item of items) {
+        if (item.type && item.type.startsWith("image/")) {
+            const file = item.getAsFile();
+
+            if (file) {
+                event.preventDefault();
+                selectImage(file, "Pasted screenshot");
+                return;
+            }
+        }
+    }
+
+    // If clipboard contains text, don't block normal text pasting.
+    if (!items.length) {
+        setStatus("Clipboard mein image nahi mili. Screenshot copy karke Ctrl + V karein.");
+    }
+});
+
+// Clicking the paste area makes it ready for Ctrl + V.
+pasteArea.addEventListener("click", () => {
+    pasteArea.focus();
+    setStatus("Ready to paste. Ab Ctrl + V dabao.");
+});
+
+pasteArea.addEventListener("keydown", event => {
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "v") {
+        setStatus("Clipboard se screenshot paste karne ki koshish ho rahi hai...");
+    }
+});
+
+// Drag and drop support
+["dragenter", "dragover"].forEach(name => {
+    pasteArea.addEventListener(name, event => {
         event.preventDefault();
-        dropZone.style.borderColor = "#2563eb";
+        pasteArea.style.borderColor = "#2563eb";
     });
 });
 
-["dragleave", "drop"].forEach(function(eventName) {
-    dropZone.addEventListener(eventName, function(event) {
+["dragleave", "drop"].forEach(name => {
+    pasteArea.addEventListener(name, event => {
         event.preventDefault();
-        dropZone.style.borderColor = "#9bb5e9";
+        pasteArea.style.borderColor = "#9bb5e9";
     });
 });
 
-dropZone.addEventListener("drop", function(event) {
-    selectImage(event.dataTransfer.files[0]);
+pasteArea.addEventListener("drop", event => {
+    const file = [...event.dataTransfer.files].find(
+        item => item.type.startsWith("image/")
+    );
+
+    if (file) {
+        selectImage(file, "Dropped screenshot");
+    } else {
+        setStatus("Please drop an image file.");
+    }
 });
 
-extractBtn.addEventListener("click", async function() {
+// Extract text from image
+extractBtn.addEventListener("click", async () => {
     if (!selectedFile || isProcessing) return;
 
     if (!window.Tesseract) {
-        setStatus("OCR engine unavailable. Check your internet and reload.");
+        setStatus("OCR engine load nahi hua. Internet check karke page reload karein.");
         return;
     }
 
     isProcessing = true;
     extractBtn.disabled = true;
-
-    setStatus("Starting OCR... Please wait.");
+    setStatus("OCR start ho raha hai. Please wait...");
     progressBar.style.width = "2%";
 
     try {
@@ -338,13 +424,13 @@ extractBtn.addEventListener("click", async function() {
             selectedFile,
             "eng+urd",
             {
-                logger: function(message) {
+                logger: message => {
                     if (message.status) {
-                        setStatus(
-                            message.status === "recognizing text"
-                                ? "Reading text from screenshot..."
-                                : message.status + "..."
-                        );
+                        if (message.status === "recognizing text") {
+                            setStatus("Screenshot ka text read ho raha hai...");
+                        } else {
+                            setStatus(message.status + "...");
+                        }
                     }
 
                     if (typeof message.progress === "number") {
@@ -359,50 +445,57 @@ extractBtn.addEventListener("click", async function() {
         progressBar.style.width = "100%";
 
         if (output.value) {
-            setStatus("Text extracted successfully. You can now copy it.");
+            setStatus("Success! Text extract ho gaya. Ab Copy All Text dabao.");
         } else {
-            setStatus("No text detected. Try a clearer screenshot.");
+            setStatus("Text detect nahi hua. Clear screenshot try karein.");
         }
 
     } catch (error) {
         console.error(error);
-        setStatus("Extraction failed. Reload the page and try again.");
+        setStatus("Extraction failed. Internet check karke reload karein.");
     } finally {
         isProcessing = false;
         extractBtn.disabled = !selectedFile;
     }
 });
 
-document.getElementById("copyBtn").addEventListener("click", async function() {
+// Copy all extracted text
+document.getElementById("copyBtn").addEventListener("click", async () => {
     if (!output.value.trim()) {
-        setStatus("There is no text to copy yet.");
+        setStatus("Copy karne ke liye pehle text extract karein.");
         return;
     }
 
     try {
         await navigator.clipboard.writeText(output.value);
-        setStatus("All text copied to clipboard!");
+        setStatus("All text copied successfully!");
     } catch (error) {
         output.focus();
         output.select();
 
         try {
-            document.execCommand("copy");
-            setStatus("Text copied to clipboard!");
-        } catch (copyError) {
-            setStatus("Text selected. Press Ctrl+C to copy.");
+            const success = document.execCommand("copy");
+
+            setStatus(
+                success
+                    ? "Text copied successfully!"
+                    : "Text selected. Ctrl + C dabao."
+            );
+        } catch {
+            setStatus("Text selected. Ctrl + C dabao.");
         }
     }
 });
 
-document.getElementById("downloadBtn").addEventListener("click", function() {
+// Download text file
+document.getElementById("downloadBtn").addEventListener("click", () => {
     if (!output.value.trim()) {
-        setStatus("Extract some text before downloading.");
+        setStatus("Download se pehle text extract karein.");
         return;
     }
 
     const blob = new Blob(
-        [output.value],
+        ["\uFEFF", output.value],
         { type: "text/plain;charset=utf-8" }
     );
 
@@ -413,19 +506,32 @@ document.getElementById("downloadBtn").addEventListener("click", function() {
     link.download = "extracted-text.txt";
     link.click();
 
-    URL.revokeObjectURL(url);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
 
-document.getElementById("clearBtn").addEventListener("click", function() {
+// Clear current screenshot and result
+document.getElementById("clearBtn").addEventListener("click", () => {
+    if (isProcessing) {
+        setStatus("Extraction complete hone ka wait karein, phir clear karein.");
+        return;
+    }
+
     selectedFile = null;
     imageInput.value = "";
+
     preview.removeAttribute("src");
     preview.style.display = "none";
+
     output.value = "";
     progressBar.style.width = "0%";
     extractBtn.disabled = true;
 
-    setStatus("Select a screenshot to get started.");
+    if (previewURL) {
+        URL.revokeObjectURL(previewURL);
+        previewURL = null;
+    }
+
+    setStatus("Cleared! Ab naya screenshot paste ya upload karein.");
 });
 </script>
 
