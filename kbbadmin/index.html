@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karachi Bachat Bazar — Admin Portal</title>
+<style>
+:root{--red:#d71920;--red2:#b50f17;--pale:#fff1f1;--bg:#f6f7f9;--white:#fff;--ink:#24262b;--muted:#777e89;--line:#e9ebef;--green:#16834a;--orange:#b96a00;--blue:#3264c8;--shadow:0 5px 24px #1c243008}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px Inter,"Segoe UI",Arial,sans-serif;color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:100vh}.sidebar{background:#fff;border-right:1px solid var(--line);padding:20px 13px;position:sticky;top:0;height:100vh;overflow:auto}.brand{padding:5px 10px 23px;font-size:17px;font-weight:900;color:var(--red);line-height:1.35}.brand span{display:block;color:#222;font-size:11px;letter-spacing:1.5px;margin-top:5px}.side-label{font-size:10px;color:#9a9da5;font-weight:800;letter-spacing:1.2px;padding:13px 11px 7px}.nav{width:100%;display:flex;align-items:center;gap:11px;border:0;background:transparent;text-align:left;padding:12px 11px;border-radius:9px;color:#606672;margin:2px 0;font-weight:650;font-size:12px}.nav .ico{width:20px;text-align:center;font-size:16px}.nav.active{background:var(--pale);color:var(--red);font-weight:800}.nav:hover{background:#f7f7f8}.side-bottom{border-top:1px solid var(--line);margin-top:20px;padding-top:15px}.main{min-width:0}.topbar{height:72px;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:0 28px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}.crumb{font-size:11px;color:var(--muted)}.topbar h1{font-size:19px;margin:4px 0 0}.topright{display:flex;align-items:center;gap:10px}.admin-avatar{width:35px;height:35px;background:var(--pale);color:var(--red);border-radius:50%;display:grid;place-items:center;font-weight:900}.main-inner{padding:25px 28px 50px;max-width:1600px;margin:auto}.page{display:none}.page.active{display:block}.pageintro{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}.pageintro h2{font-size:21px;margin:0 0 6px}.pageintro p{color:var(--muted);font-size:12px;margin:0;line-height:1.5}.btn{border:1px solid #dedfe4;background:white;border-radius:8px;padding:10px 13px;font-weight:750;font-size:12px;color:#34363b}.btn:hover{border-color:#c5c7ce}.btn-red{background:var(--red);color:white;border-color:var(--red)}.btn-red:hover{background:var(--red2)}.btn-green{background:var(--green);color:white;border-color:var(--green)}.btn-soft{background:var(--pale);color:var(--red);border-color:#ffdddd}.btn-sm{padding:7px 9px;font-size:11px}.row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.between{display:flex;align-items:center;justify-content:space-between;gap:12px}.muted{color:var(--muted)}.small{font-size:11px}.grid{display:grid;gap:15px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}.stat,.panel{background:white;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}.stat{padding:18px}.stat-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.stat-label{font-size:11px;color:var(--muted);font-weight:650}.stat-icon{height:34px;width:34px;border-radius:9px;background:#fff0f0;display:grid;place-items:center;font-size:16px}.stat-value{font-size:25px;font-weight:850;letter-spacing:-.7px;margin:15px 0 5px;overflow-wrap:anywhere}.stat-foot{font-size:10px;color:var(--muted);line-height:1.5}.green{color:var(--green)!important}.red{color:var(--red)!important}.orange{color:var(--orange)!important}.blue{color:var(--blue)!important}.dashboard-grid{grid-template-columns:1.5fr 1fr;margin-bottom:17px}.panel{padding:19px;min-width:0}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:17px}.panel-head h3{font-size:14px;margin:0}.panel-head p{font-size:11px;color:var(--muted);margin:5px 0 0}.metric-list{display:grid;gap:0}.metric{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid #f0f1f3;font-size:12px}.metric:last-child{border-bottom:0}.metric strong{font-size:13px}.progress{height:7px;background:#f0f1f3;border-radius:8px;overflow:hidden;margin-top:9px}.progress div{height:100%;background:var(--red);border-radius:8px}.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px}.fieldsearch{flex:1;min-width:180px}.filters input,.filters select,.control{padding:10px 11px;border:1px solid #dddfe4;border-radius:8px;background:#fff;min-width:0}.filters input{width:100%}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:10px;background:white}table{border-collapse:collapse;width:100%;font-size:12px;white-space:nowrap}th{text-align:left;background:#fafafa;color:#777e89;font-size:10px;text-transform:uppercase;letter-spacing:.5px;padding:13px 14px;font-weight:800}td{padding:13px 14px;border-top:1px solid #f0f1f3;vertical-align:middle}tbody tr:hover{background:#fffafa}.tag{display:inline-flex;align-items:center;padding:5px 8px;border-radius:5px;font-size:10px;font-weight:800;background:#f0f1f3;color:#5e626b}.tag.greenbg{background:#e8f7ee;color:#14743f}.tag.redbg{background:#ffebeb;color:#bc1c23}.tag.orangebg{background:#fff2df;color:#9a600c}.tag.bluebg{background:#eaf0ff;color:#2853ac}.productcell{display:flex;align-items:center;gap:9px}.productthumb{width:40px;height:40px;background:#f1f2f4;border-radius:7px;display:grid;place-items:center;overflow:hidden;font-size:22px;flex-shrink:0}.productthumb img{width:100%;height:100%;object-fit:contain}.empty{padding:35px;text-align:center;color:var(--muted)}.empty b{display:block;color:#333;margin-bottom:7px}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.formgrid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.field{display:block;min-width:0}.field>span{display:block;font-size:11px;font-weight:750;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;border:1px solid #dfe1e6;border-radius:8px;padding:11px;background:#fff;outline-color:var(--red);min-width:0}.field textarea{resize:vertical;min-height:85px}.field small{display:block;color:var(--muted);font-size:10px;line-height:1.5;margin-top:5px}.formsection{padding:19px;border:1px solid var(--line);border-radius:12px;background:#fff;margin-bottom:15px}.formsection h3{font-size:14px;margin:0 0 15px}.full{grid-column:1/-1}.checkrow{display:flex;align-items:center;gap:8px;font-size:12px}.checkrow input{accent-color:var(--red)}.hint{font-size:11px;color:var(--muted);line-height:1.65;margin:9px 0}.uploadbox{padding:20px;border:1px dashed #d3d6de;border-radius:10px;background:#fbfbfc}.uploadbox input{max-width:100%}.preview-img{width:95px;height:95px;border-radius:10px;background:#f2f2f2;display:grid;place-items:center;overflow:hidden;font-size:35px}.preview-img img{width:100%;height:100%;object-fit:contain}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:15px}.tab{border:1px solid #e0e1e5;background:#fff;border-radius:8px;padding:9px 12px;font-size:11px;font-weight:750}.tab.active{background:var(--pale);border-color:#ffd4d4;color:var(--red)}.banner-preview{border-radius:12px;background:linear-gradient(110deg,#b30d17,#e32b33);padding:24px;color:white;min-height:140px;display:flex;align-items:center;justify-content:space-between;gap:15px;margin:15px 0}.banner-preview h3{font-size:23px;margin:0 0 8px}.banner-preview p{margin:0;font-size:12px;color:#ffe5e5}.banner-preview .banner-icon{font-size:52px}.account-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.notice{border:1px solid #f4d8aa;background:#fff8e9;border-radius:9px;padding:13px;font-size:11px;line-height:1.6;color:#75551f;margin-bottom:15px}.notice.rednotice{border-color:#ffd4d4;background:#fff4f4;color:#852329}.modalback{position:fixed;inset:0;background:#0006;z-index:50;display:none;align-items:center;justify-content:center;padding:15px}.modalback.open{display:flex}.modal{width:min(900px,100%);max-height:94vh;overflow:auto;background:white;border-radius:14px;box-shadow:0 20px 70px #0002}.modalhead{padding:18px 21px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;background:#fff;z-index:2}.modalhead h2{font-size:17px;margin:0}.modalbody{padding:20px}.modalfoot{padding:15px 20px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px;position:sticky;bottom:0;background:white}.close{width:32px;height:32px;border:0;background:#f0f1f3;border-radius:8px;font-size:20px}.toast{position:fixed;right:25px;bottom:25px;z-index:100;background:#24262b;color:white;border-radius:9px;padding:13px 17px;font-size:12px;box-shadow:0 8px 28px #0002;opacity:0;transform:translateY(10px);transition:.2s;pointer-events:none;max-width:calc(100% - 30px)}.toast.show{opacity:1;transform:translateY(0)}.order-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-bottom:15px}.mini-stat{border:1px solid var(--line);border-radius:9px;padding:12px}.mini-stat small{display:block;color:var(--muted);font-size:10px}.mini-stat strong{display:block;font-size:16px;margin-top:7px}.order-items{width:100%;margin:15px 0}.order-items th,.order-items td{padding:11px 8px}.vendor-send{min-width:118px}.setting-note{background:#f7f8fa;padding:12px;border-radius:8px;font-size:11px;color:#686e79;line-height:1.6;margin-top:10px}
+@media(max-width:1100px){.layout{grid-template-columns:210px minmax(0,1fr)}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.main-inner{padding:20px}.topbar{padding:0 20px}.dashboard-grid{grid-template-columns:1fr}.account-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.layout{grid-template-columns:1fr}.sidebar{height:auto;position:relative;padding:11px;overflow:visible;border-right:0;border-bottom:1px solid var(--line)}.brand{padding:5px 8px 12px}.side-label,.side-bottom{display:none}.navlist{display:flex;overflow:auto;gap:4px}.nav{width:auto;flex-shrink:0;padding:10px;font-size:11px}.nav .ico{display:none}.topbar{height:62px;padding:0 13px}.topbar h1{font-size:16px}.main-inner{padding:15px 12px 35px}.stats{gap:9px}.stat{padding:13px}.stat-value{font-size:21px}.stat-icon{width:29px;height:29px}.pageintro{align-items:flex-start;flex-direction:column}.formgrid,.formgrid.three{grid-template-columns:1fr}.account-grid{grid-template-columns:1fr}.order-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.banner-preview h3{font-size:18px}.banner-preview .banner-icon{font-size:36px}.topright .muted{display:none}.modalbody{padding:13px}.modalhead{padding:14px}.modalfoot{padding:12px}.toast{right:12px;bottom:12px}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+ <div class="brand">KARACHI BACHAT BAZAR<span>ADMIN CONTROL CENTER</span></div>
+ <div class="side-label">MAIN MENU</div>
+ <div class="navlist">
+  <button class="nav active" data-page="dashboard"><span class="ico">▦</span> Dashboard</button>
+  <button class="nav" data-page="orders"><span class="ico">▤</span> Orders</button>
+  <button class="nav" data-page="products"><span class="ico">▧</span> Products</button>
+  <button class="nav" data-page="categories"><span class="ico">▦</span> Categories</button>
+  <button class="nav" data-page="vendors"><span class="ico">♙</span> Vendors</button>
+  <button class="nav" data-page="accounts"><span class="ico">◈</span> Accounts & Finance</button>
+  <button class="nav" data-page="rewards"><span class="ico">♧</span> Rewards</button>
+  <button class="nav" data-page="customers"><span class="ico">♧</span> Customers</button>
+ </div>
+ <div class="side-label">STORE MANAGEMENT</div>
+ <div class="navlist">
+  <button class="nav" data-page="banners"><span class="ico">▣</span> Website Banners</button>
+  <button class="nav" data-page="discounts"><span class="ico">％</span> Discounts</button>
+  <button class="nav" data-page="delivery"><span class="ico">▦</span> Delivery Settings</button>
+  <button class="nav" data-page="settings"><span class="ico">⚙</span> Store Settings</button>
+  <button class="nav" data-page="import"><span class="ico">⇧</span> CSV Import / Export</button>
+ </div>
+ <div class="side-bottom"><button class="nav" id="resetDemo">↻ Reset demo data</button><p class="hint" style="padding:0 10px">Admin demo · Changes saved in this browser.</p></div>
+</aside>
+<div class="main">
+ <header class="topbar"><div><div class="crumb">Karachi Bachat Bazar / Admin</div><h1 id="pageTitle">Dashboard</h1></div><div class="topright"><span class="muted small" id="today"></span><div class="admin-avatar">A</div></div></header>
+ <div class="main-inner">
+  <section class="page active" id="page-dashboard">
+   <div class="pageintro"><div><h2>Store overview</h2><p>Sales, vendor liabilities, customer receivables and product operations at a glance.</p></div><button class="btn btn-red" onclick="openOrderForm()">＋ Create Order</button></div>
+   <div class="grid stats">
+    <div class="stat"><div class="stat-top"><span class="stat-label">Today's Orders</span><span class="stat-icon">🧾</span></div><div class="stat-value" id="sToday">0</div><div class="stat-foot">Orders created today</div></div>
+    <div class="stat"><div class="stat-top"><span class="stat-label">Today's Sales</span><span class="stat-icon">💰</span></div><div class="stat-value" id="sSales">Rs. 0</div><div class="stat-foot">Gross order value</div></div>
+    <div class="stat"><div class="stat-top"><span class="stat-label">Estimated 5% Profit</span><span class="stat-icon">📈</span></div><div class="stat-value green" id="sProfit">Rs. 0</div><div class="stat-foot">Based on order value; not net profit</div></div>
+    <div class="stat"><div class="stat-top"><span class="stat-label">Vendor Payables</span><span class="stat-icon">🏭</span></div><div class="stat-value red" id="sPayables">Rs. 0</div><div class="stat-foot">95% estimated cost portion, unpaid</div></div>
+    <div class="stat"><div class="stat-top"><span class="stat-label">Customer Receivables</span><span class="stat-icon">📥</span></div><div class="stat-value" id="sReceivable">Rs. 0</div><div class="stat-foot">Amount not yet received</div></div>
+    <div class="stat"><div class="stat-top"><span class="stat-label">Total Items Ordered</span><span class="stat-icon">📦</span></div><div class="stat-value" id="sQuantity">0</div><div class="stat-foot">Combined product quantity</div></div>
+    <div class="stat"><div class="stat-top"><span class="stat-label">Products in Catalogue</span><span class="stat-icon">🛒</span></div><div class="stat-value" id="sProducts">0</div><div class="stat-foot">Listed grocery products</div></div>
+    <div class="stat"><div class="stat-top"><span class="stat-label">Rewards Outstanding</span><span class="stat-icon">🎁</span></div><div class="stat-value" id="sRewards">Rs. 0</div><div class="stat-foot">Demo customer rewards balance</div></div>
+   </div>
+   <div class="grid dashboard-grid">
+    <div class="panel"><div class="panel-head"><div><h3>Recent Orders</h3><p>Open any order to view its items and vendor action.</p></div><button class="btn btn-sm" onclick="navigate('orders')">View all →</button></div><div id="recentOrders"></div></div>
+    <div class="panel"><div class="panel-head"><div><h3>Accounts Snapshot</h3><p>Illustrative 5% margin calculation</p></div></div><div class="metric-list">
+     <div class="metric"><span>Order value</span><strong id="aGross">Rs. 0</strong></div><div class="metric"><span>Estimated profit (5%)</span><strong class="green" id="aProfit">Rs. 0</strong></div><div class="metric"><span>Estimated cost / payables (95%)</span><strong id="aCost">Rs. 0</strong></div><div class="metric"><span>Vendor payments recorded</span><strong id="aPaid">Rs. 0</strong></div><div class="metric"><span>Customer payments received</span><strong id="aReceived">Rs. 0</strong></div>
+    </div><div class="setting-note">This is a simplified planning model, not accounting advice. Actual supplier invoices, delivery, packing, discounts, taxes, returns and expenses affect real profit.</div></div>
+   </div>
+   <div class="panel"><div class="panel-head"><div><h3>Operational quick actions</h3><p>Common tasks for your daily workflow.</p></div></div><div class="row"><button class="btn btn-red" onclick="openProductForm()">＋ Add Product</button><button class="btn" onclick="navigate('import')">⇧ Import CSV</button><button class="btn" onclick="navigate('vendors')">＋ Add Vendor</button><button class="btn" onclick="navigate('delivery')">⚙ Delivery Slots</button><button class="btn" onclick="navigate('banners')">▣ Edit Banner</button></div></div>
+  </section>
+
+  <section class="page" id="page-orders">
+   <div class="pageintro"><div><h2>Order management</h2><p>Open an order to review the customer, line items, assigned vendor and payment breakdown.</p></div><button class="btn btn-red" onclick="openOrderForm()">＋ Create Order</button></div>
+   <div class="grid stats" style="grid-template-columns:repeat(3,minmax(0,1fr))"><div class="stat"><div class="stat-label">All Orders</div><div class="stat-value" id="oCount">0</div></div><div class="stat"><div class="stat-label">Awaiting Vendor</div><div class="stat-value" id="oPending">0</div></div><div class="stat"><div class="stat-label">Delivered</div><div class="stat-value" id="oDelivered">0</div></div></div>
+   <div class="filters"><div class="fieldsearch"><input id="orderSearch" placeholder="Search order ID, customer or phone..."></div><select id="orderStatusFilter"><option value="">All statuses</option><option>New</option><option>Vendor Notified</option><option>Processing</option><option>Delivered</option><option>Cancelled</option></select><select id="orderDateFilter"><option value="all">All dates</option><option value="today">Today</option></select></div>
+   <div class="tablewrap"><table><thead><tr><th>Order</th><th>Customer</th><th>Date</th><th>Items / Qty</th><th>Order Total</th><th>Vendor</th><th>Status</th><th>Action</th></tr></thead><tbody id="ordersTable"></tbody></table></div>
+  </section>
+
+  <section class="page" id="page-products">
+   <div class="pageintro"><div><h2>Product catalogue</h2><p>Add grocery items, product photos, brand, weight, category and prices.</p></div><div class="row"><button class="btn" onclick="navigate('import')">⇧ CSV Import</button><button class="btn btn-red" onclick="openProductForm()">＋ Add Product</button></div></div>
+   <div class="filters"><div class="fieldsearch"><input id="productSearch" placeholder="Search product, brand, SKU..."></div><select id="productCatFilter"><option value="">All categories</option></select><select id="productStockFilter"><option value="">All stock states</option><option value="In stock">In stock</option><option value="Out of stock">Out of stock</option></select><button class="btn" onclick="exportProducts()">Export CSV</button></div>
+   <div class="tablewrap"><table><thead><tr><th>Product</th><th>SKU</th><th>Category / Subcategory</th><th>Vendor</th><th>Weight / Unit</th><th>Cost</th><th>Selling Price</th><th>Market Price</th><th>Stock</th><th>Actions</th></tr></thead><tbody id="productsTable"></tbody></table></div>
+  </section>
+
+  <section class="page" id="page-categories">
+   <div class="pageintro"><div><h2>Categories & subcategories</h2><p>Manage the hierarchy used by product forms and CSV imports.</p></div><button class="btn btn-red" onclick="openCategoryForm()">＋ Add Category</button></div>
+   <div class="grid dashboard-grid"><div class="panel"><div class="panel-head"><h3>Category list</h3><span class="tag" id="catCount">0</span></div><div class="tablewrap"><table><thead><tr><th>Category</th><th>Subcategories</th><th>Products</th><th>Actions</th></tr></thead><tbody id="categoriesTable"></tbody></table></div></div><div class="panel"><div class="panel-head"><h3>Quick add category</h3></div><form id="quickCategoryForm"><label class="field"><span>Category name *</span><input name="name" required placeholder="e.g. Household Cleaning"></label><label class="field" style="margin-top:13px"><span>Subcategories (comma-separated)</span><input name="subs" placeholder="Laundry, Dishwashing, Floor Care"></label><label class="field" style="margin-top:13px"><span>Icon / Emoji</span><input name="icon" value="🛒"></label><button class="btn btn-red" style="margin-top:15px">Save Category</button></form></div></div>
+  </section>
+
+  <section class="page" id="page-vendors">
+   <div class="pageintro"><div><h2>Vendor directory</h2><p>Manage suppliers, their product categories, contact details and outstanding payables.</p></div><button class="btn btn-red" onclick="openVendorForm()">＋ Add Vendor</button></div>
+   <div class="grid stats" style="grid-template-columns:repeat(3,minmax(0,1fr))"><div class="stat"><div class="stat-label">Registered Vendors</div><div class="stat-value" id="vCount">0</div></div><div class="stat"><div class="stat-label">Unpaid Payables</div><div class="stat-value red" id="vPayables">Rs. 0</div></div><div class="stat"><div class="stat-label">Vendor Messages Sent</div><div class="stat-value" id="vSent">0</div></div></div>
+   <div class="filters"><div class="fieldsearch"><input id="vendorSearch" placeholder="Search vendor or contact..."></div></div>
+   <div class="tablewrap"><table><thead><tr><th>Vendor</th><th>Contact</th><th>Categories</th><th>Orders</th><th>Payables</th><th>Status</th><th>Actions</th></tr></thead><tbody id="vendorsTable"></tbody></table></div>
+  </section>
+
+  <section class="page" id="page-accounts">
+   <div class="pageintro"><div><h2>Accounts & finance</h2><p>Track estimated margin, customer money due and vendor liabilities.</p></div><button class="btn" onclick="exportAccounts()">Export finance CSV</button></div>
+   <div class="notice">The demo uses a configurable 5% profit share of order value and allocates the remaining 95% to estimated product cost/payables. Change the rate in Store Settings. It does not calculate real net profit unless actual expenses and supplier costs are recorded.</div>
+   <div class="grid stats account-grid"><div class="stat"><div class="stat-label">Total Order Value</div><div class="stat-value" id="fGross">Rs. 0</div></div><div class="stat"><div class="stat-label">Estimated Profit</div><div class="stat-value green" id="fProfit">Rs. 0</div></div><div class="stat"><div class="stat-label">Estimated Supplier Cost</div><div class="stat-value" id="fCost">Rs. 0</div></div><div class="stat"><div class="stat-label">Customer Receivables</div><div class="stat-value" id="fReceivables">Rs. 0</div></div><div class="stat"><div class="stat-label">Vendor Payables</div><div class="stat-value red" id="fPayables">Rs. 0</div></div><div class="stat"><div class="stat-label">Vendor Payments Made</div><div class="stat-value" id="fPaid">Rs. 0</div></div></div>
+   <div class="grid dashboard-grid"><div class="panel"><div class="panel-head"><h3>Customer receivables</h3><span class="tag orangebg">Money to collect</span></div><div class="tablewrap"><table><thead><tr><th>Order</th><th>Customer</th><th>Amount Due</th><th>Action</th></tr></thead><tbody id="receivablesTable"></tbody></table></div></div><div class="panel"><div class="panel-head"><h3>Vendor payables</h3><span class="tag redbg">Money to pay</span></div><div class="tablewrap"><table><thead><tr><th>Vendor</th><th>Outstanding</th><th>Action</th></tr></thead><tbody id="payablesTable"></tbody></table></div></div></div>
+  </section>
+
+  <section class="page" id="page-rewards">
+   <div class="pageintro"><div><h2>Rewards management</h2><p>Set the reward for product suggestions and review demo reward entries.</p></div></div>
+   <div class="grid stats" style="grid-template-columns:repeat(3,minmax(0,1fr))"><div class="stat"><div class="stat-label">Reward Per Suggestion</div><div class="stat-value" id="rAmount">Rs. 5</div></div><div class="stat"><div class="stat-label">Suggestions Logged</div><div class="stat-value" id="rCount">0</div></div><div class="stat"><div class="stat-label">Reward Liability</div><div class="stat-value" id="rLiability">Rs. 0</div></div></div>
+   <div class="grid dashboard-grid"><div class="formsection"><h3>Reward settings</h3><form id="rewardForm"><label class="field"><span>Reward per accepted suggestion (PKR)</span><input type="number" name="amount" min="0" step="1" required></label><label class="field" style="margin-top:13px"><span>Maximum reward per customer (PKR)</span><input type="number" name="cap" min="0" step="1" required></label><label class="checkrow" style="margin-top:14px"><input type="checkbox" name="enabled"> Enable product suggestion rewards</label><button class="btn btn-red" style="margin-top:16px">Save Reward Settings</button></form></div><div class="panel"><div class="panel-head"><h3>Customer reward ledger</h3></div><div id="rewardLedger"></div></div></div>
+  </section>
+
+  <section class="page" id="page-customers">
+   <div class="pageintro"><div><h2>Customer directory</h2><p>Customer records created from demo orders.</p></div></div>
+   <div class="filters"><div class="fieldsearch"><input id="customerSearch" placeholder="Search customer name, area or phone..."></div></div>
+   <div class="tablewrap"><table><thead><tr><th>Customer</th><th>Phone</th><th>Area</th><th>Orders</th><th>Lifetime Order Value</th><th>Outstanding</th></tr></thead><tbody id="customersTable"></tbody></table></div>
+  </section>
+
+  <section class="page" id="page-banners">
+   <div class="pageintro"><div><h2>Website banners</h2><p>Update hero text, promotional banners, button labels and theme colors.</p></div></div>
+   <div class="panel"><div class="panel-head"><h3>Live-style banner preview</h3><span class="tag">Preview</span></div><div class="banner-preview" id="bannerPreview"><div><h3>Save on your everyday grocery.</h3><p>Everyday essentials at your convenience.</p></div><div class="banner-icon">🛒</div></div>
+   <form id="bannerForm"><div class="formgrid"><label class="field"><span>Main heading</span><input name="title" required></label><label class="field"><span>Subtitle</span><input name="subtitle"></label><label class="field"><span>Button text</span><input name="button"></label><label class="field"><span>Banner emoji</span><input name="emoji"></label><label class="field"><span>Background start color</span><input name="color1" type="color" style="height:43px;padding:4px"></label><label class="field"><span>Background end color</span><input name="color2" type="color" style="height:43px;padding:4px"></label><label class="field full"><span>Promotional strip text</span><input name="strip"></label></div><div class="row" style="margin-top:17px"><button class="btn btn-red">Save Banner Settings</button><button type="button" class="btn" id="bannerDefault">Restore default preview</button></div></form></div>
+   <div class="notice" style="margin-top:15px">This updates the admin's saved banner configuration and preview. To update the customer-facing website, the public website must read these settings from a shared database/API.</div>
+  </section>
+
+  <section class="page" id="page-discounts">
+   <div class="pageintro"><div><h2>Discount management</h2><p>Create discount codes and percentage/fixed discounts for eligible baskets.</p></div><button class="btn btn-red" onclick="openDiscountForm()">＋ Add Discount</button></div>
+   <div class="tablewrap"><table><thead><tr><th>Code</th><th>Type</th><th>Value</th><th>Minimum Cart</th><th>Start Date</th><th>End Date</th><th>Status</th><th>Actions</th></tr></thead><tbody id="discountsTable"></tbody></table></div>
+  </section>
+
+  <section class="page" id="page-delivery">
+   <div class="pageintro"><div><h2>Delivery & cart settings</h2><p>Set the delivery interval, order cutoff, fee and minimum/maximum basket value.</p></div></div>
+   <div class="formsection"><h3>Delivery schedule</h3><form id="deliveryForm"><div class="formgrid three"><label class="field"><span>Delivery interval (days)</span><input type="number" name="interval" min="1" max="31" required></label><label class="field"><span>Minimum notice before delivery (hours)</span><input type="number" name="cutoff" min="0" max="168" required></label><label class="field"><span>First slot lead time (days)</span><input type="number" name="lead" min="1" max="31" required></label><label class="field"><span>Delivery start time</span><input type="time" name="start" required></label><label class="field"><span>Delivery end time</span><input type="time" name="end" required></label><label class="field"><span>Delivery fee (PKR)</span><input type="number" name="fee" min="0" required></label><label class="field"><span>Minimum cart value (PKR)</span><input type="number" name="minCart" min="0" required></label><label class="field"><span>Maximum cart value (PKR)</span><input type="number" name="maxCart" min="0" required></label><label class="field"><span>Delivery area</span><input name="area" required></label></div><div class="setting-note">The default is every 2 days, 24-hour cutoff, Rs. 300 delivery, and Rs. 3,000 minimum cart. This setting page saves the configuration; the storefront needs to be connected to these settings to enforce them.</div><button class="btn btn-red" style="margin-top:16px">Save Delivery Settings</button></form></div>
+   <div class="panel"><div class="panel-head"><h3>Upcoming delivery slots</h3><button class="btn btn-sm" id="refreshSlots">Refresh preview</button></div><p class="hint">Slot preview based on the current schedule and cutoff settings.</p><div id="slotPreview"></div></div>
+  </section>
+
+  <section class="page" id="page-settings">
+   <div class="pageintro"><div><h2>Store settings</h2><p>Configure the business name, margin model and general operating preferences.</p></div></div>
+   <div class="formsection"><h3>General configuration</h3><form id="settingsForm"><div class="formgrid"><label class="field"><span>Store name</span><input name="storeName" required></label><label class="field"><span>Admin contact phone</span><input name="phone"></label><label class="field"><span>Default profit percentage</span><input name="profitRate" type="number" min="0" max="100" step=".1" required><small>Used for estimated dashboard profit and cost allocation.</small></label><label class="field"><span>Currency</span><select name="currency"><option value="PKR">PKR — Pakistani Rupee</option></select></label><label class="field"><span>Order ID prefix</span><input name="orderPrefix" required></label><label class="field"><span>Default vendor assignment</span><select name="defaultVendor" id="defaultVendorSelect"></select></label></div><button class="btn btn-red" style="margin-top:16px">Save Store Settings</button></form></div>
+   <div class="notice rednotice">Security note: this demo has no login, server-side permissions or secure multi-user storage. Do not use it to store real customer financial or personal data until authentication and a backend are implemented.</div>
+  </section>
+
+  <section class="page" id="page-import">
+   <div class="pageintro"><div><h2>CSV import & export</h2><p>Import product lists, map existing categories or create categories from your file.</p></div></div>
+   <div class="notice">Recommended columns: name, sku, category, subcategory, brand, unit, weight, cost, price, marketPrice, stock, vendor, image. Header names are case-insensitive. CSV images should be public image URLs; local file paths will not work on customers' devices.</div>
+   <div class="formsection"><h3>1. Upload product CSV</h3><div class="uploadbox"><input type="file" id="csvFile" accept=".csv,text/csv"><p class="hint">Select a .csv file exported from Excel or Google Sheets.</p><button class="btn" id="downloadTemplate">Download CSV template</button></div></div>
+   <div class="formsection" id="csvPreviewPanel" style="display:none"><h3>2. Review and map categories</h3><div class="formgrid"><label class="field"><span>Category handling</span><select id="csvCategoryMode"><option value="existing">Match existing categories; skip unknown categories</option><option value="create">Create new categories if needed</option><option value="allnew">Import all categories as new only when missing</option></select></label><label class="field"><span>Default category if CSV category is blank</span><select id="csvDefaultCategory"></select></label></div><p class="hint" id="csvInfo"></p><div class="tablewrap"><table><thead id="csvHead"></thead><tbody id="csvBody"></tbody></table></div><div class="row" style="margin-top:15px"><button class="btn btn-red" id="importCsv">Import Products</button><button class="btn" id="cancelCsv">Cancel</button></div></div>
+   <div class="formsection"><h3>Export existing products</h3><p class="hint">Download current products as a CSV file for editing and re-importing.</p><button class="btn btn-red" onclick="exportProducts()">Export Product CSV</button><button class="btn" style="margin-left:7px" onclick="exportOrders()">Export Orders CSV</button></div>
+  </section>
+ </div>
+</div>
+</div>
+
+<div class="modalback" id="modalBack"><div class="modal"><div class="modalhead"><h2 id="modalTitle">Details</h2><button class="close" onclick="closeModal()">×</button></div><div class="modalbody" id="modalBody"></div><div class="modalfoot" id="modalFoot"></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const fmt=n=>"Rs. "+Math.round(Number(n)||0).toLocaleString("en-PK");
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const todayKey=()=>new Date().toISOString().slice(0,10);
+const dateFmt=d=>new Date(d+"T12:00:00").toLocaleDateString("en-PK",{day:"numeric",month:"short",year:"numeric"});
+const uid=prefix=>prefix+"-"+Date.now().toString().slice(-7);
+const safeNum=x=>Math.max(0,Number(x)||0);
+const DEFAULT_CATEGORIES=[
+{name:"Atta & Flour",icon:"🌾",subs:["Wheat Flour","Maida","Besan","Suji"]},
+{name:"Rice & Chawal",icon:"🍚",subs:["Basmati","Sella","IRRI","Brown Rice"]},
+{name:"Daal & Pulses",icon:"🫘",subs:["Masoor","Moong","Chana","Mash","Beans"]},
+{name:"Cooking Oil & Ghee",icon:"🫗",subs:["Cooking Oil","Banaspati","Desi Ghee"]},
+{name:"Masalay",icon:"🌶️",subs:["National","Shan","Whole Spices","Powder Spices"]},
+{name:"Sugar & Salt",icon:"🧂",subs:["Sugar","Iodized Salt","Pink Salt"]},
+{name:"Tea & Coffee",icon:"☕",subs:["Tea","Green Tea","Coffee"]},
+{name:"Milk & Dairy",icon:"🥛",subs:["Milk","Powdered Milk","Butter","Cheese"]},
+{name:"Biscuits & Snacks",icon:"🍪",subs:["Biscuits","Chips","Nimco","Nuts"]},
+{name:"Drinks",icon:"🥤",subs:["Juice","Soft Drinks","Water","Syrups"]},
+{name:"Breakfast",icon:"🥣",subs:["Cereal","Oats","Honey","Jam"]},
+{name:"Noodles & Pasta",icon:"🍝",subs:["Noodles","Macaroni","Spaghetti"]},
+{name:"Canned Food & Sauces",icon:"🥫",subs:["Ketchup","Mayonnaise","Canned Beans"]},
+{name:"Bakery",icon:"🍞",subs:["Bread","Buns","Rusk"]},
+{name:"Personal Care",icon:"🧴",subs:["Body Care","Deodorant","Hand Wash"]},
+{name:"Soap & Body Wash",icon:"🧼",subs:["Bath Soap","Body Wash"]},
+{name:"Hair Care",icon:"🧴",subs:["Shampoo","Conditioner","Hair Oil"]},
+{name:"Oral Care",icon:"🪥",subs:["Toothpaste","Toothbrush","Mouthwash"]},
+{name:"Laundry",icon:"🫧",subs:["Washing Powder","Liquid Detergent","Fabric Care"]},
+{name:"Cleaning",icon:"🧽",subs:["Dishwashing","Floor Cleaner","Toilet Cleaner"]},
+{name:"Tissue & Paper",icon:"🧻",subs:["Facial Tissue","Toilet Roll","Kitchen Roll"]},
+{name:"Baby Care",icon:"🍼",subs:["Diapers","Wipes","Baby Shampoo"]},
+{name:"Kitchen",icon:"🍽️",subs:["Foil","Garbage Bags","Matches"]},
+{name:"Fresh Produce",icon:"🥬",subs:["Vegetables","Fruit","Herbs"]},
+{name:"Frozen Food",icon:"🧊",subs:["Frozen Vegetables","Frozen Snacks"]},
+{name:"Eggs",icon:"🥚",subs:["Farm Eggs","Desi Eggs"]},
+{name:"Pet Care",icon:"🐾",subs:["Pet Food","Pet Supplies"]},
+{name:"Other Essentials",icon:"🛍️",subs:["Household","Miscellaneous"]}
+];
+const sampleProducts=[
+{name:"Falak Basmati Rice",sku:"RICE-001",category:"Rice & Chawal",subcategory:"Basmati",brand:"Falak",unit:"1 kg",weight:"1 kg",cost:420,price:450,marketPrice:500,stock:30,emoji:"🍚"},
+{name:"Guard Basmati Rice",sku:"RICE-002",category:"Rice & Chawal",subcategory:"Basmati",brand:"Guard",unit:"1 kg",weight:"1 kg",cost:400,price:430,marketPrice:480,stock:25,emoji:"🍚"},
+{name:"National Biryani Masala",sku:"SPC-001",category:"Masalay",subcategory:"National",brand:"National",unit:"packet",weight:"packet",cost:90,price:100,marketPrice:120,stock:40,emoji:"🌶️"},
+{name:"Milkpak UHT Milk",sku:"DAI-001",category:"Milk & Dairy",subcategory:"Milk",brand:"Milkpak",unit:"1 litre",weight:"1 litre",cost:340,price:360,marketPrice:390,stock:24,emoji:"🥛"},
+{name:"Surf Excel Powder",sku:"CLN-001",category:"Laundry",subcategory:"Washing Powder",brand:"Surf Excel",unit:"500 g",weight:"500 g",cost:330,price:350,marketPrice:400,stock:18,emoji:"🫧"},
+{name:"Colgate Toothpaste",sku:"ORA-001",category:"Oral Care",subcategory:"Toothpaste",brand:"Colgate",unit:"tube",weight:"100 g",cost:165,price:180,marketPrice:210,stock:20,emoji:"🪥"}
+];
+function initialState(){
+ const now=new Date(),date=todayKey(),prior=new Date(now.getTime()-86400000).toISOString().slice(0,10);
+ const vendors=[
+ {id:"V-001",name:"Joria Bazar Wholesale",contact:"03001234567",email:"supplier@example.com",address:"Joria Bazar, Karachi",categories:["Rice & Chawal","Daal & Pulses","Atta & Flour","Masalay"],status:"Active",notes:"Demo vendor"},
+ {id:"V-002",name:"Household Goods Supplier",contact:"03007654321",email:"cleaning@example.com",address:"Karachi, Pakistan",categories:["Laundry","Cleaning","Personal Care"],status:"Active",notes:"Demo vendor"},
+ {id:"V-003",name:"General Grocery Supplier",contact:"03111234567",email:"grocery@example.com",address:"Karachi, Pakistan",categories:["Milk & Dairy","Biscuits & Snacks","Drinks"],status:"Active",notes:"Demo vendor"}
+ ];
+ const products=sampleProducts.map((p,i)=>({...p,id:"P-"+String(i+1).padStart(4,"0"),vendorId:i===4?"V-002":i===3||i===5?"V-003":"V-001",image:"",active:true}));
+ const orders=[
+ {id:"KBB-1001",customer:"Ali Ahmed",phone:"03001112222",area:"Gulshan-e-Iqbal",address:"Block 7, Karachi",date,deliveryDate:date,items:[{productId:"P-0001",name:"Falak Basmati Rice",qty:5,price:450,vendorId:"V-001"},{productId:"P-0003",name:"National Biryani Masala",qty:3,price:100,vendorId:"V-001"}],status:"New",paymentMethod:"Cash on Delivery",paid:0,vendorSent:{},notes:"Demo order"},
+ {id:"KBB-1002",customer:"Sara Khan",phone:"03002223333",area:"North Nazimabad",address:"Block H, Karachi",date:prior,deliveryDate:date,items:[{productId:"P-0004",name:"Milkpak UHT Milk",qty:6,price:360,vendorId:"V-003"},{productId:"P-0005",name:"Surf Excel Powder",qty:2,price:350,vendorId:"V-002"}],status:"Processing",paymentMethod:"Cash on Delivery",paid:0,vendorSent:{"V-003":true},notes:"Demo order"},
+ {id:"KBB-1003",customer:"Usman Malik",phone:"03003334444",area:"PECHS",address:"Karachi",date:prior,deliveryDate:date,items:[{productId:"P-0002",name:"Guard Basmati Rice",qty:4,price:430,vendorId:"V-001"}],status:"Delivered",paymentMethod:"Cash on Delivery",paid:1720,vendorSent:{"V-001":true},notes:"Demo order"}
+ ];
+ return {categories:DEFAULT_CATEGORIES,products,vendors,orders,customers:[],settings:{storeName:"Karachi Bachat Bazar",phone:"",profitRate:5,orderPrefix:"KBB",defaultVendor:"V-001"},delivery:{interval:2,cutoff:24,lead:2,start:"10:00",end:"18:00",fee:300,minCart:3000,maxCart:100000,area:"Karachi (excluding Bahria Town)"},rewards:{amount:5,cap:100,enabled:true,entries:[]},banner:{title:"Save on your everyday grocery.",subtitle:"Everyday essentials at your convenience.",button:"Shop Groceries",emoji:"🛒",color1:"#b30d17",color2:"#e32b33",strip:"Everyday Rashan, Smarter Shopping"},discounts:[],vendorPayments:[],customerPayments:[],suggestions:[]};
+}
+let state;
+try{state=JSON.parse(localStorage.getItem("kbb_admin_state")||"null")}catch(e){state=null}
+if(!state||!state.products||!state.orders)state=initialState();
+function persist(){localStorage.setItem("kbb_admin_state",JSON.stringify(state))}
+function toast(msg){const el=$("toast");el.textContent=msg;el.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove("show"),2700)}
+function vendorById(id){return state.vendors.find(v=>v.id===id)}
+function categoryByName(name){return state.categories.find(c=>c.name.toLowerCase()===String(name||"").toLowerCase())}
+function orderTotal(o){return o.items.reduce((s,i)=>s+safeNum(i.qty)*safeNum(i.price),0)}
+function orderQty(o){return o.items.reduce((s,i)=>s+safeNum(i.qty),0)}
+function activeOrders(){return state.orders.filter(o=>o.status!=="Cancelled")}
+function profitOf(o){return orderTotal(o)*safeNum(state.settings.profitRate)/100}
+function costOf(o){return orderTotal(o)-profitOf(o)}
+function dueFromCustomer(o){return Math.max(0,orderTotal(o)-safeNum(o.paid))}
+function payableForVendor(vendorId){return activeOrders().reduce((s,o)=>s+o.items.filter(i=>i.vendorId===vendorId).reduce((a,i)=>a+safeNum(i.qty)*safeNum(i.price)*.95,0),0)-state.vendorPayments.filter(p=>p.vendorId===vendorId).reduce((s,p)=>s+safeNum(p.amount),0)}
+function vendorOrderCount(id){return state.orders.filter(o=>o.items.some(i=>i.vendorId===id)).length}
+function navigate(name){document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.querySelectorAll(".nav[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===name));$("page-"+name).classList.add("active");$("pageTitle").textContent=({dashboard:"Dashboard",orders:"Order Management",products:"Products",categories:"Categories",vendors:"Vendors",accounts:"Accounts & Finance",rewards:"Rewards",customers:"Customers",banners:"Website Banners",discounts:"Discounts",delivery:"Delivery Settings",settings:"Store Settings",import:"CSV Import / Export"})[name]||name;renderAll();window.scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll(".nav[data-page]").forEach(b=>b.onclick=()=>navigate(b.dataset.page));
+$("today").textContent=new Date().toLocaleDateString("en-PK",{day:"numeric",month:"short",year:"numeric"});
+
+function badge(text){const cl=({"New":"redbg","Vendor Notified":"bluebg","Processing":"orangebg","Delivered":"greenbg","Cancelled":"","Active":"greenbg","Inactive":"","In stock":"greenbg","Out of stock":"redbg"})[text]||"";return `<span class="tag ${cl}">${esc(text)}</span>`}
+function renderDashboard(){
+ const today=state.orders.filter(o=>o.date===todayKey()&&o.status!=="Cancelled");
+ const sales=today.reduce((s,o)=>s+orderTotal(o),0);
+ const total=activeOrders().reduce((s,o)=>s+orderTotal(o),0);
+ const profit=activeOrders().reduce((s,o)=>s+profitOf(o),0);
+ const payables=Math.max(0,activeOrders().reduce((s,o)=>s+costOf(o),0)-state.vendorPayments.reduce((s,p)=>s+safeNum(p.amount),0));
+ const receivables=activeOrders().reduce((s,o)=>s+dueFromCustomer(o),0);
+ const qty=activeOrders().reduce((s,o)=>s+orderQty(o),0);
+ $("sToday").textContent=today.length;$("sSales").textContent=fmt(sales);$("sProfit").textContent=fmt(today.reduce((s,o)=>s+profitOf(o),0));$("sPayables").textContent=fmt(payables);$("sReceivable").textContent=fmt(receivables);$("sQuantity").textContent=qty.toLocaleString();$("sProducts").textContent=state.products.length;
+ $("sRewards").textContent=fmt(state.rewards.entries.filter(x=>!x.redeemed).reduce((s,x)=>s+safeNum(x.amount),0));
+ $("aGross").textContent=fmt(total);$("aProfit").textContent=fmt(profit);$("aCost").textContent=fmt(Math.max(0,total-profit));$("aPaid").textContent=fmt(state.vendorPayments.reduce((s,p)=>s+safeNum(p.amount),0));$("aReceived").textContent=fmt(state.customerPayments.reduce((s,p)=>s+safeNum(p.amount),0));
+ const recent=[...state.orders].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);
+ $("recentOrders").innerHTML=recent.length?`<div class="tablewrap"><table><thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th><th></th></tr></thead><tbody>${recent.map(o=>`<tr><td><b>${esc(o.id)}</b><div class="small muted">${dateFmt(o.date)}</div></td><td>${esc(o.customer)}</td><td><b>${fmt(orderTotal(o))}</b></td><td>${badge(o.status)}</td><td><button class="btn btn-sm" onclick="openOrder('${o.id}')">Open</button></td></tr>`).join("")}</tbody></table></div>`:'<div class="empty">No orders yet.</div>';
+}
+function renderOrders(){
+ const q=($("orderSearch")?.value||"").toLowerCase(),st=$("orderStatusFilter")?.value||"",dt=$("orderDateFilter")?.value||"all";
+ let arr=[...state.orders].filter(o=>(!q||[o.id,o.customer,o.phone,o.area].join(" ").toLowerCase().includes(q))&&(!st||o.status===st)&&(dt!=="today"||o.date===todayKey())).sort((a,b)=>b.date.localeCompare(a.date));
+ $("oCount").textContent=state.orders.length;$("oPending").textContent=state.orders.filter(o=>!["Vendor Notified","Delivered","Cancelled"].includes(o.status)).length;$("oDelivered").textContent=state.orders.filter(o=>o.status==="Delivered").length;
+ $("ordersTable").innerHTML=arr.length?arr.map(o=>{const vendors=[...new Set(o.items.map(i=>i.vendorId).filter(Boolean))].map(id=>vendorById(id)?.name||"Unassigned").join(", ");return `<tr><td><b>${esc(o.id)}</b><div class="small muted">${esc(o.paymentMethod||"")}</div></td><td>${esc(o.customer)}<div class="small muted">${esc(o.area)}</div></td><td>${dateFmt(o.date)}<div class="small muted">Delivery: ${o.deliveryDate?dateFmt(o.deliveryDate):"Not set"}</div></td><td>${o.items.length} lines / ${orderQty(o)} units</td><td><b>${fmt(orderTotal(o))}</b></td><td style="max-width:180px;white-space:normal">${esc(vendors||"Unassigned")}</td><td>${badge(o.status)}</td><td><button class="btn btn-sm" onclick="openOrder('${o.id}')">Open order</button></td></tr>`}).join(""):'<tr><td colspan="8"><div class="empty"><b>No matching orders</b>Try another search or create a demo order.</div></td></tr>';
+}
+function renderProducts(){
+ const q=($("productSearch")?.value||"").toLowerCase(),cat=$("productCatFilter")?.value||"",stk=$("productStockFilter")?.value||"";
+ $("productCatFilter").innerHTML='<option value="">All categories</option>'+state.categories.map(c=>`<option>${esc(c.name)}</option>`).join("");if(cat)$("productCatFilter").value=cat;
+ const arr=state.products.filter(p=>(!q||[p.name,p.sku,p.brand,p.category,p.subcategory].join(" ").toLowerCase().includes(q))&&(!cat||p.category===cat)&&(!stk||(stk==="In stock"?safeNum(p.stock)>0:safeNum(p.stock)===0)));
+ $("productsTable").innerHTML=arr.length?arr.map(p=>`<tr><td><div class="productcell"><div class="productthumb">${p.image?`<img src="${esc(p.image)}" onerror="this.style.display='none';this.parentElement.textContent='${esc(p.emoji||"🛒")}'">`:esc(p.emoji||"🛒")}</div><div><b>${esc(p.name)}</b><div class="small muted">${esc(p.brand||"Unbranded")}</div></div></div></td><td>${esc(p.sku||"—")}</td><td>${esc(p.category)}<div class="small muted">${esc(p.subcategory||"—")}</div></td><td>${esc(vendorById(p.vendorId)?.name||"Unassigned")}</td><td>${esc(p.weight||p.unit||"—")}</td><td>${fmt(p.cost)}</td><td><b>${fmt(p.price)}</b></td><td>${fmt(p.marketPrice)}</td><td>${safeNum(p.stock)} ${badge(safeNum(p.stock)?"In stock":"Out of stock")}</td><td><div class="row"><button class="btn btn-sm" onclick="openProductForm('${p.id}')">Edit</button><button class="btn btn-sm" onclick="deleteProduct('${p.id}')">Delete</button></div></td></tr>`).join(""):'<tr><td colspan="10"><div class="empty"><b>No products found</b>Add a product or import a CSV.</div></td></tr>';
+}
+function renderCategories(){
+ $("catCount").textContent=state.categories.length;
+ $("categoriesTable").innerHTML=state.categories.map(c=>`<tr><td><b>${esc(c.icon||"🛒")} ${esc(c.name)}</b></td><td>${esc((c.subs||[]).join(", ")||"—")}</td><td>${state.products.filter(p=>p.category===c.name).length}</td><td><div class="row"><button class="btn btn-sm" onclick="editCategory('${esc(c.name)}')">Edit</button><button class="btn btn-sm" onclick="deleteCategory('${esc(c.name)}')">Delete</button></div></td></tr>`).join("");
+}
+function renderVendors(){
+ const q=($("vendorSearch")?.value||"").toLowerCase();
+ const arr=state.vendors.filter(v=>[v.name,v.contact,v.email].join(" ").toLowerCase().includes(q));
+ $("vCount").textContent=state.vendors.length;$("vPayables").textContent=fmt(state.vendors.reduce((s,v)=>s+Math.max(0,payableForVendor(v.id)),0));$("vSent").textContent=state.orders.reduce((s,o)=>s+Object.keys(o.vendorSent||{}).filter(k=>o.vendorSent[k]).length,0);
+ $("vendorsTable").innerHTML=arr.length?arr.map(v=>`<tr><td><b>${esc(v.name)}</b><div class="small muted">${esc(v.address||"")}</div></td><td>${esc(v.contact||"—")}<div class="small muted">${esc(v.email||"")}</div></td><td style="white-space:normal;max-width:180px">${esc((v.categories||[]).join(", ")||"All categories")}</td><td>${vendorOrderCount(v.id)}</td><td><b>${fmt(Math.max(0,payableForVendor(v.id)))}</b></td><td>${badge(v.status||"Active")}</td><td><div class="row"><button class="btn btn-sm" onclick="openVendorForm('${v.id}')">Edit</button><button class="btn btn-sm" onclick="recordVendorPayment('${v.id}')">Pay vendor</button></div></td></tr>`).join(""):'<tr><td colspan="7"><div class="empty">No vendors found.</div></td></tr>';
+}
+function renderAccounts(){
+ const total=activeOrders().reduce((s,o)=>s+orderTotal(o),0),profit=total*safeNum(state.settings.profitRate)/100,cost=total-profit;
+ $("fGross").textContent=fmt(total);$("fProfit").textContent=fmt(profit);$("fCost").textContent=fmt(cost);
+ $("fReceivables").textContent=fmt(activeOrders().reduce((s,o)=>s+dueFromCustomer(o),0));
+ $("fPayables").textContent=fmt(Math.max(0,cost-state.vendorPayments.reduce((s,p)=>s+safeNum(p.amount),0)));
+ $("fPaid").textContent=fmt(state.vendorPayments.reduce((s,p)=>s+safeNum(p.amount),0));
+ const due=activeOrders().filter(o=>dueFromCustomer(o)>0);
+ $("receivablesTable").innerHTML=due.length?due.map(o=>`<tr><td>${esc(o.id)}</td><td>${esc(o.customer)}</td><td><b>${fmt(dueFromCustomer(o))}</b></td><td><button class="btn btn-sm" onclick="recordCustomerPayment('${o.id}')">Record payment</button></td></tr>`).join(""):'<tr><td colspan="4">No outstanding customer balances.</td></tr>';
+ $("payablesTable").innerHTML=state.vendors.map(v=>`<tr><td>${esc(v.name)}</td><td><b>${fmt(Math.max(0,payableForVendor(v.id)))}</b></td><td><button class="btn btn-sm" onclick="recordVendorPayment('${v.id}')">Record payment</button></td></tr>`).join("");
+}
+function renderRewards(){
+ $("rAmount").textContent=fmt(state.rewards.amount);$("rCount").textContent=state.suggestions.length;
+ $("rLiability").textContent=fmt(state.rewards.entries.filter(x=>!x.redeemed).reduce((s,x)=>s+safeNum(x.amount),0));
+ const f=$("rewardForm");f.amount.value=state.rewards.amount;f.cap.value=state.rewards.cap;f.enabled.checked=!!state.rewards.enabled;
+ $("rewardLedger").innerHTML=state.suggestions.length?state.suggestions.map(x=>`<div class="metric"><div><b>${esc(x.name)}</b><div class="small muted">${esc(x.date||"")}</div></div><strong>${fmt(x.reward||state.rewards.amount)}</strong></div>`).join(""):'<div class="empty">No product suggestions recorded in admin.</div>';
+}
+function renderCustomers(){
+ const q=($("customerSearch")?.value||"").toLowerCase(),map={};
+ state.orders.forEach(o=>{const key=o.phone||o.customer;if(!map[key])map[key]={name:o.customer,phone:o.phone,area:o.area,orders:0,total:0,due:0};map[key].orders++;map[key].total+=orderTotal(o);map[key].due+=dueFromCustomer(o)});
+ const arr=Object.values(map).filter(c=>[c.name,c.phone,c.area].join(" ").toLowerCase().includes(q));
+ $("customersTable").innerHTML=arr.length?arr.map(c=>`<tr><td><b>${esc(c.name)}</b></td><td>${esc(c.phone||"—")}</td><td>${esc(c.area||"—")}</td><td>${c.orders}</td><td>${fmt(c.total)}</td><td>${fmt(c.due)}</td></tr>`).join(""):'<tr><td colspan="6"><div class="empty">No customer records.</div></td></tr>';
+}
+function renderBanner(){
+ const b=state.banner;$("bannerPreview").style.background=`linear-gradient(110deg,${b.color1},${b.color2})`;$("bannerPreview").innerHTML=`<div><h3>${esc(b.title)}</h3><p>${esc(b.subtitle)}</p><div style="margin-top:12px;font-size:11px;font-weight:bold">${esc(b.button)}</div></div><div class="banner-icon">${esc(b.emoji)}</div>`;
+ const f=$("bannerForm");Object.keys(b).forEach(k=>{if(f.elements[k])f.elements[k].value=b[k]});
+}
+function renderDiscounts(){
+ $("discountsTable").innerHTML=state.discounts.length?state.discounts.map(d=>`<tr><td><b>${esc(d.code)}</b></td><td>${esc(d.type)}</td><td>${d.type==="Percent"?esc(d.value)+"%":fmt(d.value)}</td><td>${fmt(d.minCart)}</td><td>${esc(d.start||"—")}</td><td>${esc(d.end||"—")}</td><td>${badge(d.active?"Active":"Inactive")}</td><td><div class="row"><button class="btn btn-sm" onclick="toggleDiscount('${d.id}')">${d.active?"Disable":"Enable"}</button><button class="btn btn-sm" onclick="deleteDiscount('${d.id}')">Delete</button></div></td></tr>`).join(""):'<tr><td colspan="8"><div class="empty">No discount codes. Create your first discount.</div></td></tr>';
+}
+function renderDelivery(){
+ const d=state.delivery,now=new Date(),slots=[];let date=new Date(now.getFullYear(),now.getMonth(),now.getDate()+safeNum(d.lead),0,0,0,0);
+ for(let i=0;i<8;i++){const dt=new Date(date);dt.setHours(...d.start.split(":").map(Number),0,0);if(dt.getTime()-now.getTime()>=safeNum(d.cutoff)*3600000)slots.push(dt);date.setDate(date.getDate()+Math.max(1,safeNum(d.interval)))}
+ $("slotPreview").innerHTML=slots.length?slots.map((s,i)=>`<div class="metric"><div><b>${i===0?"★ NEXT AVAILABLE · ":""}${s.toLocaleDateString("en-PK",{weekday:"short",day:"numeric",month:"short",year:"numeric"})}</b><div class="small muted">${esc(d.start)} – ${esc(d.end)} · Cutoff ${safeNum(d.cutoff)} hours before</div></div>${i===0?'<span class="tag redbg">Highlighted</span>':'<span class="tag">Upcoming</span>'}</div>`).join(""):'<p class="hint">No slots match the current cutoff. Adjust the schedule.</p>';
+ const f=$("deliveryForm");Object.keys(d).forEach(k=>{if(f.elements[k])f.elements[k].value=d[k]});
+}
+function renderSettings(){
+ const f=$("settingsForm");Object.keys(state.settings).forEach(k=>{if(f.elements[k]&&k!=="defaultVendor")f.elements[k].value=state.settings[k]});
+ $("defaultVendorSelect").innerHTML='<option value="">No default vendor</option>'+state.vendors.map(v=>`<option value="${v.id}">${esc(v.name)}</option>`).join("");$("defaultVendorSelect").value=state.settings.defaultVendor||"";
+}
+function renderAll(){
+ renderDashboard();renderOrders();renderProducts();renderCategories();renderVendors();renderAccounts();renderRewards();renderCustomers();renderBanner();renderDiscounts();renderDelivery();renderSettings();
+}
+function openModal(title,body,foot){$("modalTitle").textContent=title;$("modalBody").innerHTML=body;$("modalFoot").innerHTML=foot||"";$("modalBack").classList.add("open")}
+function closeModal(){$("modalBack").classList.remove("open")}
+$("modalBack").onclick=e=>{if(e.target===$("modalBack"))closeModal()};
+function optionsCategories(selected=""){return '<option value="">Select category</option>'+state.categories.map(c=>`<option value="${esc(c.name)}" ${c.name===selected?"selected":""}>${esc(c.name)}</option>`).join("")}
+function optionsVendors(selected=""){return '<option value="">Unassigned / choose later</option>'+state.vendors.map(v=>`<option value="${v.id}" ${v.id===selected?"selected":""}>${esc(v.name)}</option>`).join("")}
+function openProductForm(id=""){
+ const p=state.products.find(x=>x.id===id)||{name:"",sku:"",category:"",subcategory:"",brand:"",unit:"piece",weight:"",cost:0,price:0,marketPrice:0,stock:0,vendorId:state.settings.defaultVendor||"",image:"",emoji:"🛒",active:true};
+ const body=`<form id="productForm"><div class="formgrid three"><label class="field"><span>Product name *</span><input name="name" required value="${esc(p.name)}"></label><label class="field"><span>SKU / Product ID</span><input name="sku" value="${esc(p.sku)}" placeholder="Auto-generated if blank"></label><label class="field"><span>Brand</span><input name="brand" value="${esc(p.brand)}" placeholder="e.g. National, Falak"></label><label class="field"><span>Category *</span><select name="category" required>${optionsCategories(p.category)}</select><small>Select or create categories from Category Management.</small></label><label class="field"><span>Subcategory</span><input name="subcategory" value="${esc(p.subcategory)}" placeholder="e.g. Basmati"></label><label class="field"><span>Weight / pack size</span><input name="weight" value="${esc(p.weight)}" placeholder="1 kg, 500 g, 1 litre"></label><label class="field"><span>Unit label</span><input name="unit" value="${esc(p.unit)}" placeholder="pack, kg, piece"></label><label class="field"><span>Purchase cost (PKR) *</span><input type="number" name="cost" min="0" step=".01" required value="${p.cost}"></label><label class="field"><span>Selling price (PKR) *</span><input type="number" name="price" min="0" step=".01" required value="${p.price}"></label><label class="field"><span>Market / comparison price</span><input type="number" name="marketPrice" min="0" step=".01" value="${p.marketPrice}"></label><label class="field"><span>Stock quantity</span><input type="number" name="stock" min="0" step="1" value="${p.stock}"></label><label class="field"><span>Assign vendor</span><select name="vendorId">${optionsVendors(p.vendorId)}</select></label><label class="field full"><span>Product image URL</span><input name="image" type="url" value="${esc(p.image)}" placeholder="https://example.com/product.jpg"><small>Use a publicly accessible image URL for the demo. Local files are not shared with customers.</small></label><label class="field"><span>Fallback emoji</span><input name="emoji" value="${esc(p.emoji||"🛒")}"></label><label class="checkrow"><input name="active" type="checkbox" ${p.active!==false?"checked":""}> Product active / listed</label></div></form>`;
+ openModal(id?"Edit product":"Add product",body,`<button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-red" onclick="saveProduct('${id}')">Save Product</button>`);
+}
+function saveProduct(id){
+ const f=$("productForm");if(!f.reportValidity())return;const d=Object.fromEntries(new FormData(f).entries());if(!categoryByName(d.category)){toast("Select a valid category.");return}
+ const old=state.products.find(p=>p.id===id);const product={...(old||{}),...d,id:id||uid("P"),cost:safeNum(d.cost),price:safeNum(d.price),marketPrice:safeNum(d.marketPrice),stock:safeNum(d.stock),active:f.elements.active.checked};
+ if(!product.sku)product.sku=uid("SKU");
+ if(old)Object.assign(old,product);else state.products.unshift(product);
+ persist();closeModal();renderAll();toast(old?"Product updated.":"Product added successfully.");
+}
+function deleteProduct(id){const p=state.products.find(p=>p.id===id);if(!p)return;if(!confirm("Delete "+p.name+"? Existing orders will remain unchanged."))return;state.products=state.products.filter(p=>p.id!==id);persist();renderAll();toast("Product deleted.");}
+function openCategoryForm(name=""){
+ const c=categoryByName(name)||{name:"",icon:"🛒",subs:[]};
+ openModal(name?"Edit category":"Add category",`<form id="categoryForm"><label class="field"><span>Category name *</span><input name="name" required value="${esc(c.name)}"></label><label class="field" style="margin-top:13px"><span>Subcategories</span><textarea name="subs" placeholder="Separate each subcategory with a comma">${esc((c.subs||[]).join(", "))}</textarea></label><label class="field" style="margin-top:13px"><span>Icon / emoji</span><input name="icon" value="${esc(c.icon||"🛒")}"></label></form>`,`<button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-red" onclick="saveCategory('${esc(name)}')">Save Category</button>`);
+}
+function editCategory(n){openCategoryForm(n)}
+function saveCategory(oldName){
+ const f=$("categoryForm");if(!f.reportValidity())return;const d=Object.fromEntries(new FormData(f).entries()),name=d.name.trim();if(state.categories.some(c=>c.name.toLowerCase()===name.toLowerCase()&&c.name!==oldName)){toast("Category already exists.");return}
+ const data={name,icon:d.icon||"🛒",subs:d.subs.split(",").map(s=>s.trim()).filter(Boolean)};
+ if(oldName){const c=categoryByName(oldName);if(c)Object.assign(c,data);state.products.forEach(p=>{if(p.category===oldName)p.category=name})}else state.categories.push(data);
+ persist();closeModal();renderAll();toast("Category saved.");
+}
+function deleteCategory(name){if(state.products.some(p=>p.category===name)){toast("Move or delete products in this category first.");return}if(!confirm("Delete category "+name+"?"))return;state.categories=state.categories.filter(c=>c.name!==name);persist();renderAll();toast("Category deleted.");}
+$("quickCategoryForm").onsubmit=e=>{e.preventDefault();const f=e.target,d=Object.fromEntries(new FormData(f).entries());if(categoryByName(d.name)){toast("Category already exists.");return}state.categories.push({name:d.name.trim(),icon:d.icon||"🛒",subs:d.subs.split(",").map(s=>s.trim()).filter(Boolean)});persist();f.reset();renderAll();toast("Category created.");};
+function openVendorForm(id=""){
+ const v=state.vendors.find(x=>x.id===id)||{name:"",contact:"",email:"",address:"",categories:[],status:"Active",notes:""};
+ const body=`<form id="vendorForm"><div class="formgrid"><label class="field"><span>Vendor / supplier name *</span><input name="name" required value="${esc(v.name)}"></label><label class="field"><span>Contact number</span><input name="contact" value="${esc(v.contact)}"></label><label class="field"><span>Email</span><input type="email" name="email" value="${esc(v.email)}"></label><label class="field"><span>Status</span><select name="status"><option ${v.status==="Active"?"selected":""}>Active</option><option ${v.status==="Inactive"?"selected":""}>Inactive</option></select></label><label class="field full"><span>Address</span><input name="address" value="${esc(v.address)}"></label><label class="field full"><span>Supplied categories (select multiple)</span><select name="categories" multiple size="6">${state.categories.map(c=>`<option value="${esc(c.name)}" ${(v.categories||[]).includes(c.name)?"selected":""}>${esc(c.name)}</option>`).join("")}</select><small>Hold Ctrl (Windows) or Command (Mac) to select multiple categories.</small></label><label class="field full"><span>Notes</span><textarea name="notes">${esc(v.notes)}</textarea></label></div></form>`;
+ openModal(id?"Edit vendor":"Add vendor",body,`<button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-red" onclick="saveVendor('${id}')">Save Vendor</button>`);
+}
+function saveVendor(id){
+ const f=$("vendorForm");if(!f.reportValidity())return;const fd=new FormData(f),d=Object.fromEntries(fd.entries());d.categories=[...f.elements.categories.selectedOptions].map(o=>o.value);
+ const old=state.vendors.find(v=>v.id===id),v={...(old||{}),...d,id:id||uid("V")};if(old)Object.assign(old,v);else state.vendors.push(v);
+ persist();closeModal();renderAll();toast("Vendor saved.");
+}
+function recordVendorPayment(id){
+ const v=vendorById(id);if(!v)return;
+ openModal("Record vendor payment",`<p class="hint">Vendor: <b>${esc(v.name)}</b></p><p class="hint">Current estimated payable: <b>${fmt(Math.max(0,payableForVendor(id)))}</b></p><form id="vendorPayForm"><label class="field"><span>Payment amount (PKR) *</span><input name="amount" type="number" min=".01" step=".01" required></label><label class="field" style="margin-top:13px"><span>Payment reference / notes</span><input name="ref" placeholder="Bank transfer, cash, invoice reference"></label></form>`,`<button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-red" onclick="saveVendorPayment('${id}')">Record Payment</button>`);
+}
+function saveVendorPayment(id){const f=$("vendorPayForm");if(!f.reportValidity())return;const d=Object.fromEntries(new FormData(f).entries());state.vendorPayments.push({id:uid("VP"),vendorId:id,amount:safeNum(d.amount),ref:d.ref,date:todayKey()});persist();closeModal();renderAll();toast("Vendor payment recorded.");}
+function recordCustomerPayment(orderId){
+ const o=state.orders.find(x=>x.id===orderId);if(!o)return;
+ openModal("Record customer payment",`<p class="hint">Order: <b>${esc(o.id)}</b> · ${esc(o.customer)}</p><p class="hint">Outstanding: <b>${fmt(dueFromCustomer(o))}</b></p><form id="customerPayForm"><label class="field"><span>Amount received (PKR) *</span><input name="amount" type="number" min=".01" max="${dueFromCustomer(o)}" step=".01" required></label><label class="field" style="margin-top:13px"><span>Payment reference</span><input name="ref" placeholder="Cash / transfer reference"></label></form>`,`<button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-red" onclick="saveCustomerPayment('${orderId}')">Record Receipt</button>`);
+}
+function saveCustomerPayment(id){const f=$("customerPayForm");if(!f.reportValidity())return;const d=Object.fromEntries(new FormData(f).entries()),o=state.orders.find(x=>x.id===id);if(!o)return;const amount=safeNum(d.amount);if(amount>dueFromCustomer(o)){toast("Amount exceeds the outstanding balance.");return}o.paid=safeNum(o.paid)+amount;state.customerPayments.push({id:uid("CP"),orderId:id,amount,ref:d.ref,date:todayKey()});persist();closeModal();renderAll();toast("Customer receipt recorded.");}
+
+function orderModalItems(o){
+ return `<div class="tablewrap"><table class="order-items"><thead><tr><th>Product</th><th>Qty</th><th>Price</th><th>Line total</th><th>Vendor</th></tr></thead><tbody>${o.items.map((i,n)=>`<tr><td><b>${esc(i.name)}</b></td><td>${i.qty}</td><td>${fmt(i.price)}</td><td>${fmt(i.qty*i.price)}</td><td>${esc(vendorById(i.vendorId)?.name||"Unassigned")}</td></tr>`).join("")}</tbody></table></div>`;
+}
+function openOrder(id){
+ const o=state.orders.find(x=>x.id===id);if(!o)return;
+ const vIds=[...new Set(o.items.map(i=>i.vendorId).filter(Boolean))];
+ const total=orderTotal(o),profit=profitOf(o),payable=costOf(o);
+ const body=`<div class="order-summary"><div class="mini-stat"><small>Order total</small><strong>${fmt(total)}</strong></div><div class="mini-stat"><small>Estimated 5% profit</small><strong class="green">${fmt(profit)}</strong></div><div class="mini-stat"><small>Estimated 95% cost</small><strong>${fmt(payable)}</strong></div><div class="mini-stat"><small>Customer due</small><strong>${fmt(dueFromCustomer(o))}</strong></div></div>
+ <div class="formgrid"><div><p class="hint">Order ID</p><b>${esc(o.id)}</b></div><div><p class="hint">Status</p><select id="editOrderStatus" class="control">${["New","Vendor Notified","Processing","Delivered","Cancelled"].map(s=>`<option ${o.status===s?"selected":""}>${s}</option>`).join("")}</select></div><div><p class="hint">Customer</p><b>${esc(o.customer)}</b><div class="small muted">${esc(o.phone)}</div></div><div><p class="hint">Order date / delivery</p><b>${dateFmt(o.date)}</b><div class="small muted">${o.deliveryDate?dateFmt(o.deliveryDate):"Not set"}</div></div><div><p class="hint">Delivery area</p><b>${esc(o.area||"—")}</b></div><div><p class="hint">Payment method</p><b>${esc(o.paymentMethod||"—")}</b></div><div class="full"><p class="hint">Full address</p><b>${esc(o.address||"—")}</b></div></div>
+ <h3 style="font-size:13px;margin:22px 0 10px">Ordered products</h3>${orderModalItems(o)}
+ <div class="formsection"><div class="between"><h3 style="margin:0">Vendor dispatch</h3><span class="tag">${vIds.length} vendor(s)</span></div><p class="hint">Each vendor gets a separate order message containing only their assigned items. In this demo, clicking the button marks the message as sent and shows a toast; no real message is transmitted.</p>${vIds.length?vIds.map(vid=>{const v=vendorById(vid),items=o.items.filter(i=>i.vendorId===vid),sent=!!o.vendorSent?.[vid];return `<div class="metric"><div><b>${esc(v?.name||"Vendor")}</b><div class="small muted">${items.map(i=>esc(i.name)+" × "+i.qty).join(", ")}</div><div class="small muted">${esc(v?.contact||"No contact number")}</div></div><button class="btn btn-sm vendor-send ${sent?"":"btn-red"}" ${sent?"disabled":""} onclick="sendVendorOrder('${o.id}','${vid}')">${sent?"✓ Message Sent":"Send to Vendor →"}</button></div>`}).join(""):'<p class="hint">No vendors assigned to this order. Edit the order items to assign vendors.</p>'}</div>
+ <div class="formsection"><h3>Order notes</h3><textarea id="orderNotes" class="control" style="width:100%;min-height:65px">${esc(o.notes||"")}</textarea><div class="row" style="margin-top:10px"><button class="btn" onclick="saveOrderNotes('${o.id}')">Save Notes</button><button class="btn" onclick="recordCustomerPayment('${o.id}')">Record Customer Payment</button></div></div>`;
+ openModal("Order details — "+o.id,body,`<button class="btn" onclick="closeModal()">Close</button><button class="btn btn-red" onclick="saveOrderStatus('${o.id}')">Save Status</button>`);
+}
+function sendVendorOrder(orderId,vendorId){
+ const o=state.orders.find(x=>x.id===orderId),v=vendorById(vendorId);if(!o||!v)return;
+ if(!o.vendorSent)o.vendorSent={};if(o.vendorSent[vendorId]){toast("This vendor message was already marked sent.");return}
+ // Demo-only: this does NOT transmit a real WhatsApp/SMS/email message.
+ o.vendorSent[vendorId]=true;if(o.status==="New")o.status="Vendor Notified";
+ persist();openOrder(orderId);renderAll();toast("Demo vendor message marked as sent for "+v.name+".");
+}
+function saveOrderStatus(id){const o=state.orders.find(x=>x.id===id);if(!o)return;o.status=$("editOrderStatus").value;persist();closeModal();renderAll();toast("Order status updated.");}
+function saveOrderNotes(id){const o=state.orders.find(x=>x.id===id);if(!o)return;o.notes=$("orderNotes").value;persist();toast("Order notes saved.");}
+function openOrderForm(){
+ const body=`<form id="newOrderForm"><div class="formgrid"><label class="field"><span>Customer name *</span><input name="customer" required></label><label class="field"><span>Phone *</span><input name="phone" required></label><label class="field"><span>Area *</span><input name="area" required></label><label class="field"><span>Delivery date</span><input name="deliveryDate" type="date" value="${todayKey()}"></label><label class="field full"><span>Address</span><textarea name="address"></textarea></label><label class="field full"><span>Add product</span><select id="newOrderProduct">${state.products.map(p=>`<option value="${p.id}">${esc(p.name)} · ${fmt(p.price)}</option>`).join("")}</select></label><label class="field"><span>Quantity</span><input id="newOrderQty" type="number" min="1" value="1"></label><label class="field"><span>Payment method</span><select name="paymentMethod"><option>Cash on Delivery</option><option>Bank Transfer</option><option>Paid</option></select></label></div><button type="button" class="btn" style="margin-top:12px" onclick="addNewOrderLine()">＋ Add selected product</button><div id="newOrderLines" class="setting-note">No products added yet.</div><label class="field" style="margin-top:13px"><span>Notes</span><textarea name="notes"></textarea></label></form>`;
+ openModal("Create order",body,`<button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-red" onclick="saveNewOrder()">Create Order</button>`);
+ window.newOrderLines=[];
+}
+function addNewOrderLine(){
+ const id=$("newOrderProduct").value,p=state.products.find(x=>x.id===id),qty=Math.max(1,safeNum($("newOrderQty").value));if(!p)return;
+ const existing=window.newOrderLines.find(x=>x.productId===id);if(existing)existing.qty+=qty;else window.newOrderLines.push({productId:p.id,name:p.name,qty,price:p.price,vendorId:p.vendorId||state.settings.defaultVendor||""});
+ $("newOrderLines").innerHTML=window.newOrderLines.map(i=>`${esc(i.name)} × ${i.qty} = ${fmt(i.qty*i.price)} <button type="button" class="btn btn-sm" onclick="removeNewOrderLine('${i.productId}')">Remove</button>`).join("<br>");
+}
+function removeNewOrderLine(id){window.newOrderLines=window.newOrderLines.filter(i=>i.productId!==id);$("newOrderLines").innerHTML=window.newOrderLines.map(i=>`${esc(i.name)} × ${i.qty} = ${fmt(i.qty*i.price)}`).join("<br>")||"No products added yet."}
+function saveNewOrder(){
+ const f=$("newOrderForm");if(!f.reportValidity())return;if(!window.newOrderLines?.length){toast("Add at least one product.");return}
+ const d=Object.fromEntries(new FormData(f).entries());
+ const o={id:uid(state.settings.orderPrefix||"KBB"),customer:d.customer,phone:d.phone,area:d.area,address:d.address,date:todayKey(),deliveryDate:d.deliveryDate,items:window.newOrderLines,status:"New",paymentMethod:d.paymentMethod,paid:d.paymentMethod==="Paid"?window.newOrderLines.reduce((s,i)=>s+i.qty*i.price,0):0,vendorSent:{},notes:d.notes||""};
+ state.orders.unshift(o);persist();closeModal();renderAll();toast("Order created successfully.");
+}
+
+function openDiscountForm(){
+ openModal("Create discount",`<form id="discountForm"><div class="formgrid"><label class="field"><span>Discount code *</span><input name="code" required placeholder="e.g. BACHAT10"></label><label class="field"><span>Discount type</span><select name="type"><option>Percent</option><option>Fixed PKR</option></select></label><label class="field"><span>Discount value *</span><input name="value" type="number" min=".01" required></label><label class="field"><span>Minimum cart value</span><input name="minCart" type="number" min="0" value="0"></label><label class="field"><span>Start date</span><input name="start" type="date" value="${todayKey()}"></label><label class="field"><span>End date</span><input name="end" type="date"></label><label class="checkrow"><input name="active" type="checkbox" checked> Discount active</label></div></form>`,`<button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-red" onclick="saveDiscount()">Save Discount</button>`);
+}
+function saveDiscount(){const f=$("discountForm");if(!f.reportValidity())return;const d=Object.fromEntries(new FormData(f).entries());if(state.discounts.some(x=>x.code.toLowerCase()===d.code.trim().toLowerCase())){toast("Discount code already exists.");return}state.discounts.push({id:uid("D"),...d,code:d.code.trim().toUpperCase(),value:safeNum(d.value),minCart:safeNum(d.minCart),active:f.elements.active.checked});persist();closeModal();renderAll();toast("Discount saved.");}
+function toggleDiscount(id){const d=state.discounts.find(x=>x.id===id);if(d)d.active=!d.active;persist();renderAll();toast("Discount status updated.");}
+function deleteDiscount(id){if(!confirm("Delete this discount code?"))return;state.discounts=state.discounts.filter(x=>x.id!==id);persist();renderAll();toast("Discount deleted.");}
+$("rewardForm").onsubmit=e=>{e.preventDefault();const f=e.target;state.rewards.amount=safeNum(f.amount.value);state.rewards.cap=safeNum(f.cap.value);state.rewards.enabled=f.enabled.checked;persist();renderAll();toast("Reward settings saved.");};
+$("bannerForm").onsubmit=e=>{e.preventDefault();const f=e.target;state.banner=Object.fromEntries(new FormData(f).entries());persist();renderBanner();toast("Banner configuration saved.");};
+$("bannerDefault").onclick=()=>{state.banner=initialState().banner;persist();renderBanner();toast("Default banner preview restored.");};
+$("deliveryForm").onsubmit=e=>{e.preventDefault();const f=e.target,d=Object.fromEntries(new FormData(f).entries());d.interval=Math.max(1,safeNum(d.interval));d.cutoff=safeNum(d.cutoff);d.lead=Math.max(1,safeNum(d.lead));d.fee=safeNum(d.fee);d.minCart=safeNum(d.minCart);d.maxCart=safeNum(d.maxCart);if(d.maxCart&&d.maxCart<d.minCart){toast("Maximum cart must be greater than minimum cart.");return}state.delivery=d;persist();renderDelivery();toast("Delivery settings saved.");};
+$("refreshSlots").onclick=()=>{renderDelivery();toast("Upcoming slots refreshed.");};
+$("settingsForm").onsubmit=e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.target).entries());d.profitRate=Math.min(100,safeNum(d.profitRate));state.settings={...state.settings,...d};persist();renderAll();toast("Store settings saved.");};
+
+let csvRows=[],csvHeaders=[];
+function parseCSV(text){
+ const rows=[];let row=[],field="",quoted=false;
+ for(let i=0;i<text.length;i++){const ch=text[i],next=text[i+1];
+  if(ch==='"'&&quoted&&next==='"'){field+='"';i++}
+  else if(ch==='"'){quoted=!quoted}
+  else if(ch===","&&!quoted){row.push(field);field=""}
+  else if((ch==="\n"||ch==="\r")&&!quoted){if(ch==="\r"&&next==="\n")i++;row.push(field);if(row.some(x=>x.trim()!==""))rows.push(row);row=[];field=""}
+  else field+=ch;
+ }
+ row.push(field);if(row.some(x=>x.trim()!==""))rows.push(row);
+ if(!rows.length)return {headers:[],rows:[]};
+ const headers=rows.shift().map(h=>h.trim().replace(/^\uFEFF/,""));
+ return {headers,rows:rows.map(r=>Object.fromEntries(headers.map((h,i)=>[h.toLowerCase().replace(/[\s_-]/g,""),(r[i]||"").trim()])))};
+}
+$("csvFile").onchange=async e=>{
+ const file=e.target.files[0];if(!file)return;
+ try{const parsed=parseCSV(await file.text());if(!parsed.headers.length)throw Error("Empty CSV");csvHeaders=parsed.headers;csvRows=parsed.rows;
+ $("csvPreviewPanel").style.display="block";$("csvInfo").textContent=`${csvRows.length} rows detected. Previewing the first 8 rows. Header columns: ${csvHeaders.join(", ")}`;
+ $("csvHead").innerHTML="<tr>"+csvHeaders.map(h=>`<th>${esc(h)}</th>`).join("")+"</tr>";
+ $("csvBody").innerHTML=csvRows.slice(0,8).map(r=>"<tr>"+csvHeaders.map(h=>`<td>${esc(r[h.toLowerCase().replace(/[\s_-]/g,"")]||"")}</td>`).join("")+"</tr>").join("");
+ $("csvDefaultCategory").innerHTML=optionsCategories(state.categories[0]?.name||"");toast("CSV loaded. Review the preview before importing.");
+ }catch(err){toast("Could not read CSV. Check the file format.");}
+};
+$("cancelCsv").onclick=()=>{$("csvPreviewPanel").style.display="none";$("csvFile").value="";csvRows=[];};
+$("importCsv").onclick=()=>{
+ if(!csvRows.length){toast("Upload a CSV first.");return}
+ const mode=$("csvCategoryMode").value,defaultCat=$("csvDefaultCategory").value;
+ const get=(r,...keys)=>{for(const k of keys){const key=k.toLowerCase().replace(/[\s_-]/g,"");if(r[key]!==undefined&&r[key]!=="")return r[key]}return ""};
+ let added=0,skipped=0,created=0;
+ csvRows.forEach((r,idx)=>{
+  const name=get(r,"name","product","productName","title");if(!name){skipped++;return}
+  let category=get(r,"category","cat")||defaultCat;
+  if(!category){skipped++;return}
+  let cat=categoryByName(category);
+  if(!cat&&mode==="create"){cat={name:category,icon:"🛒",subs:[]};state.categories.push(cat);created++}
+  if(!cat){skipped++;return}
+  const sub=get(r,"subcategory","subCategory","subcat");
+  if(sub&&!cat.subs.includes(sub))cat.subs.push(sub);
+  const sku=get(r,"sku","productId","code")||uid("SKU");
+  const existing=state.products.find(p=>p.sku&&p.sku.toLowerCase()===sku.toLowerCase());
+  const p={id:existing?.id||uid("P"),name,sku,category:cat.name,subcategory:sub,brand:get(r,"brand"),unit:get(r,"unit","packUnit"),weight:get(r,"weight","size","packSize"),cost:safeNum(get(r,"cost","purchasePrice","buyPrice")),price:safeNum(get(r,"price","sellingPrice")),marketPrice:safeNum(get(r,"marketPrice","comparePrice","mrp")),stock:safeNum(get(r,"stock","quantity","qty")),vendorId:state.vendors.find(v=>v.name.toLowerCase()===get(r,"vendor","vendorName").toLowerCase())?.id||"",image:get(r,"image","imageUrl","photo"),emoji:"🛒",active:true};
+  if(existing)Object.assign(existing,p);else state.products.push(p);added++;
+ });
+ persist();renderAll();$("csvInfo").textContent=`Import complete: ${added} products added/updated, ${skipped} rows skipped, ${created} new categories created.`;toast("CSV import finished.");
+};
+function downloadFile(name,content,type="text/csv"){
+ const blob=new Blob(["\uFEFF"+content],{type}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function csvEscape(v){const s=String(v??"");return /[",\r\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}
+function exportProducts(){
+ const fields=["name","sku","category","subcategory","brand","unit","weight","cost","price","marketPrice","stock","vendor","image"];
+ const lines=[fields.join(",")];
+ state.products.forEach(p=>lines.push([p.name,p.sku,p.category,p.subcategory,p.brand,p.unit,p.weight,p.cost,p.price,p.marketPrice,p.stock,vendorById(p.vendorId)?.name||"",p.image].map(csvEscape).join(",")));
+ downloadFile("karachi-bachat-bazar-products.csv",lines.join("\r\n"));toast("Product CSV exported.");
+}
+function exportOrders(){
+ const fields=["id","customer","phone","area","date","deliveryDate","status","paymentMethod","total","quantity","items"];
+ const lines=[fields.join(",")];state.orders.forEach(o=>lines.push([o.id,o.customer,o.phone,o.area,o.date,o.deliveryDate,o.status,o.paymentMethod,orderTotal(o),orderQty(o),o.items.map(i=>i.name+" x "+i.qty).join("; ")].map(csvEscape).join(",")));
+ downloadFile("karachi-bachat-bazar-orders.csv",lines.join("\r\n"));toast("Orders CSV exported.");
+}
+function exportAccounts(){
+ const lines=["Order,Date,Customer,Order Total,Profit Rate,Estimated Profit,Estimated Cost,Customer Paid,Customer Due,Status"];
+ state.orders.forEach(o=>lines.push([o.id,o.date,o.customer,orderTotal(o),state.settings.profitRate,profitOf(o),costOf(o),o.paid,dueFromCustomer(o),o.status].map(csvEscape).join(",")));
+ downloadFile("karachi-bachat-bazar-accounts.csv",lines.join("\r\n"));toast("Finance CSV exported.");
+}
+$("downloadTemplate").onclick=()=>downloadFile("grocery-products-template.csv","name,sku,category,subcategory,brand,unit,weight,cost,price,marketPrice,stock,vendor,image\r\nFalak Basmati Rice,RICE-100,Rice & Chawal,Basmati,Falak,pack,1 kg,420,450,500,20,Joria Bazar Wholesale,https://example.com/rice.jpg\r\nNational Biryani Masala,SPC-100,Masalay,National,National,packet,packet,90,100,120,30,Joria Bazar Wholesale,","text/csv");
+$("resetDemo").onclick=()=>{if(!confirm("Reset all local demo data? This will erase changes made in this browser."))return;state=initialState();persist();renderAll();navigate("dashboard");toast("Demo data reset.");};
+["orderSearch","orderStatusFilter","orderDateFilter"].forEach(id=>$(id).addEventListener("input",renderOrders));
+["productSearch","productCatFilter","productStockFilter"].forEach(id=>$(id).addEventListener("input",renderProducts));
+$("vendorSearch").addEventListener("input",renderVendors);$("customerSearch").addEventListener("input",renderCustomers);
+renderAll();
+</script>
+</body>
+</html>
