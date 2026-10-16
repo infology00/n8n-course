@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AWSZ | Unified Immigration Lawyers — Live Automation Simulator</title>
+<style>
+:root{--blue:#1769e0;--blue2:#104cae;--yellow:#ffd43b;--red:#e54848;--ink:#17233b;--muted:#65748b;--line:#e1e8f2;--bg:#f4f7fb;--white:#fff;--green:#16845b;--softblue:#edf4ff;--softyellow:#fff8d9;--softred:#fff0f0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:var(--blue);text-decoration:none}.wrap{width:min(1180px,calc(100% - 32px));margin:auto}.top{position:sticky;top:0;z-index:10;background:#ffffffed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}.logo{display:flex;align-items:center;gap:10px;font-weight:950;font-size:21px;letter-spacing:-.05em}.mark{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--blue);color:#fff}.logo small{display:block;font-size:9px;letter-spacing:.13em;color:var(--muted);line-height:1.1}.navlinks{display:flex;gap:18px;font-size:12px;font-weight:800}.navlinks a{color:#4d5b72}.btn{border:0;border-radius:11px;padding:11px 15px;background:var(--blue);color:#fff;font-weight:850;font-size:13px;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn:hover{background:var(--blue2)}.btn.yellow{background:var(--yellow);color:#252b38}.btn.red{background:var(--red)}.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn.small{padding:8px 11px;font-size:12px}.hero{padding:62px 0 40px;background:radial-gradient(circle at 85% 15%,#e0ecff 0,transparent 30%),linear-gradient(#fff,#f4f8ff);border-bottom:1px solid var(--line)}.heroGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:34px;align-items:center}.eyebrow{display:inline-flex;gap:8px;align-items:center;background:var(--softyellow);border:1px solid #f1e4a9;border-radius:999px;padding:6px 11px;font-size:10px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--red)}h1{font-size:clamp(35px,5vw,58px);line-height:1.05;letter-spacing:-.06em;margin:18px 0}h1 em{font-style:normal;color:var(--blue)}.hero p{color:var(--muted);max-width:680px;font-size:16px}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.heroTags{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px;color:#52617a;font-size:11px;font-weight:800}.heroTags span:before{content:"✓";color:var(--green);font-weight:950;margin-right:6px}.preview{background:#fff;border:1px solid var(--line);border-radius:22px;padding:19px;box-shadow:0 18px 45px #1b37600e}.previewTop{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:12px}.pill{border-radius:999px;padding:4px 8px;background:#e4f8ee;color:var(--green);font-size:10px;font-weight:900}.miniPipeline{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.pipe{border:1px solid var(--line);border-top:3px solid var(--blue);padding:10px 8px;border-radius:10px;font-size:10px}.pipe:nth-child(2){border-top-color:var(--yellow)}.pipe:nth-child(3){border-top-color:var(--red)}.pipe b{display:block;font-size:11px}.pipe strong{font-size:20px;display:block;margin:8px 0 0}.feed{margin-top:12px;display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:11px;padding:10px;font-size:11px}.feed .ico{width:30px;height:30px;display:grid;place-items:center;background:var(--softblue);border-radius:9px}.feed small{display:block;color:var(--muted)}section{padding:64px 0}.sectionHead{max-width:790px;margin-bottom:28px}.kicker{color:var(--blue);font-size:10px;font-weight:950;letter-spacing:.15em;text-transform:uppercase}.sectionHead h2{font-size:clamp(27px,3.5vw,40px);line-height:1.15;letter-spacing:-.045em;margin:8px 0 12px}.sectionHead p{color:var(--muted);margin:0}.overviewGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat,.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:19px}.stat b{display:block;font-size:24px;letter-spacing:-.04em}.stat span{color:var(--muted);font-size:11px}.stat i{display:block;width:30px;height:4px;background:var(--blue);border-radius:5px;margin-bottom:13px}.stat:nth-child(2) i{background:var(--yellow)}.stat:nth-child(3) i{background:var(--red)}.phase{border:1px solid var(--line);border-radius:21px;background:#fff;overflow:hidden;margin-top:24px}.phaseHead{display:flex;gap:15px;align-items:flex-start;padding:24px;background:linear-gradient(100deg,#eaf2ff,#fff);border-bottom:1px solid var(--line)}.phaseNo{flex:0 0 44px;height:44px;border-radius:13px;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:950}.phaseHead h3{margin:0;font-size:21px}.phaseHead p{margin:4px 0 0;color:var(--muted);font-size:13px}.phaseBody{padding:24px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.item{border:1px solid var(--line);border-radius:14px;padding:16px}.item h3,.item h4{font-size:14px;margin:0 0 6px}.item p{font-size:12px;color:var(--muted);margin:0}.item .ic{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:var(--softblue);margin-bottom:10px}.item.yellow .ic{background:var(--softyellow)}.item.red .ic{background:var(--softred)}.tag{display:inline-block;background:var(--softblue);color:var(--blue2);border-radius:6px;padding:4px 7px;font-size:10px;font-weight:850;margin:4px 3px 0 0}.notice{background:var(--softyellow);border:1px solid #f2e5a5;color:#65531a;border-radius:12px;padding:13px 15px;font-size:12px;margin-top:16px}.lawyers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.lawyer{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px}.lawyer .label{font-size:10px;font-weight:950;color:var(--blue);letter-spacing:.1em}.lawyer h3{margin:8px 0 4px;font-size:16px}.lawyer p{font-size:12px;color:var(--muted);margin:0}.simSection{background:#eef4fc}.simLayout{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px;align-items:start}.simPanel,.console{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 12px 30px #17345a08}.simPanel h3,.console h3{margin:0 0 4px;font-size:17px}.muted{color:var(--muted);font-size:12px}.field{margin:13px 0}.field label{display:block;font-size:11px;font-weight:900;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:1px solid #d8e2ef;border-radius:10px;padding:10px 11px;background:#fff;color:var(--ink);outline:none;font-size:13px}.field textarea{min-height:68px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #1769e019}.radioChoices{display:flex;gap:8px;flex-wrap:wrap}.choice{display:flex;align-items:center;gap:6px;border:1px solid var(--line);padding:8px 10px;border-radius:9px;font-size:12px}.choice input{width:auto}.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.consoleHead{display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:13px}.log{display:grid;gap:9px;margin-top:14px;max-height:520px;overflow:auto}.logEntry{display:grid;grid-template-columns:30px 1fr;gap:10px;border:1px solid var(--line);border-radius:11px;padding:11px}.logIcon{width:29px;height:29px;border-radius:9px;display:grid;place-items:center;background:var(--softblue);font-size:13px}.logEntry.good .logIcon{background:#e3f8ed}.logEntry.warn .logIcon{background:var(--softyellow)}.logEntry h4{font-size:12px;margin:0 0 3px}.logEntry p{font-size:11px;color:var(--muted);margin:0}.logEntry .stamp{font-size:9px;color:#8491a5;margin-top:5px;font-weight:850;text-transform:uppercase;letter-spacing:.07em}.empty{padding:38px 15px;text-align:center;color:var(--muted);font-size:12px}.runStatus{margin-top:12px;border-radius:10px;padding:10px 12px;background:#edf8f2;color:#166743;font-size:12px;display:none}.workflowList{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.workflow{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px;display:flex;gap:12px}.num{width:33px;height:33px;flex:0 0 33px;border-radius:10px;background:var(--blue);color:white;display:grid;place-items:center;font-size:12px;font-weight:950}.workflow:nth-child(3n+2) .num{background:#f4c927;color:#2b2b2b}.workflow:nth-child(3n) .num{background:var(--red)}.workflow h3{font-size:13px;margin:0 0 5px}.workflow p{font-size:11px;color:var(--muted);margin:0}.workflow .trigger{display:inline-block;font-size:9px;font-weight:900;color:var(--blue);background:var(--softblue);padding:4px 6px;border-radius:5px;margin-top:8px}.tableWrap{overflow:auto;border:1px solid var(--line);border-radius:14px}table{border-collapse:collapse;width:100%;min-width:600px;background:#fff}th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);font-size:12px;vertical-align:top}th{background:#f2f6fc;text-transform:uppercase;font-size:10px;letter-spacing:.1em;color:var(--muted)}td:first-child{font-weight:850}tr:last-child td{border-bottom:0}.footer{background:#fff;border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-size:11px}.footerInner{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.hidden{display:none!important}
+@media(max-width:850px){.navlinks{display:none}.heroGrid,.simLayout{grid-template-columns:1fr}.overviewGrid{grid-template-columns:repeat(2,1fr)}.lawyers{grid-template-columns:1fr}.workflowList{grid-template-columns:1fr}}
+@media(max-width:580px){.wrap{width:calc(100% - 24px)}.hero{padding:42px 0 32px}section{padding:45px 0}.grid2{grid-template-columns:1fr}.phaseHead,.phaseBody{padding:17px}.overviewGrid{gap:8px}.stat{padding:14px}.stat b{font-size:20px}.miniPipeline{gap:4px}.pipe{padding:8px 5px}.pipe b{font-size:9px}.btn{font-size:12px}.simPanel,.console{padding:14px}}
+@media print{.top{position:static}.simSection .btn,.actions{display:none}.phase,.item,.workflow{break-inside:avoid}body{background:#fff}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap nav">
+    <a class="logo" href="#top"><span class="mark">A</span><span>AWSZ<small>AI AUTOMATION & SYSTEMS</small></span></a>
+    <nav class="navlinks"><a href="#overview">Overview</a><a href="#phase1">Phase 01</a><a href="#simulator">Live Simulator</a><a href="#workflows">All Automations</a></nav>
+    <a class="btn small" href="#simulator">Try Live Example ↗</a>
+  </div>
+</header>
+<main id="top">
+<section class="hero">
+ <div class="wrap heroGrid">
+  <div>
+   <div class="eyebrow"><i></i> Implementation Brief + Interactive Demo</div>
+   <h1>Unified Immigration Lawyers <em>Automation System</em></h1>
+   <p>A practical plan for organizing leads, routing consultations to the right lawyer, automating client communication, and managing the journey from first inquiry to hired client in GoHighLevel.</p>
+   <div class="actions"><a class="btn" href="#simulator">Run an Example Workflow ↓</a><a class="btn ghost" href="#workflows">Explore Automations</a></div>
+   <div class="heroTags"><span>GHL CRM & pipeline</span><span>Lawyer-specific routing</span><span>Booking & follow-up</span></div>
+  </div>
+  <div class="preview">
+   <div class="previewTop"><strong>CRM workflow preview</strong><span class="pill">SIMULATION</span></div>
+   <div class="miniPipeline"><div class="pipe"><b>New Leads</b><strong>01</strong></div><div class="pipe"><b>Hired</b><strong>02</strong></div><div class="pipe"><b>Not Hired</b><strong>03</strong></div></div>
+   <div class="feed"><div class="ico">📝</div><div><b>Website form submitted</b><small>Capture source, matter type and lawyer</small></div></div>
+   <div class="feed"><div class="ico">⚖️</div><div><b>Route to selected lawyer</b><small>Assigned workflow and calendar</small></div></div>
+   <div class="feed"><div class="ico">✉️</div><div><b>Automated follow-up</b><small>Confirmation, reminders or staff alert</small></div></div>
+  </div>
+ </div>
+</section>
+
+<section id="overview" style="padding-top:30px;padding-bottom:32px">
+ <div class="wrap">
+  <div class="overviewGrid">
+   <div class="stat"><i></i><b>3 stages</b><span>New Leads · Hired · Not Hired</span></div>
+   <div class="stat"><i></i><b>2 phases</b><span>System foundation and automations</span></div>
+   <div class="stat"><i></i><b>12 workflows</b><span>Core automation set from the brief</span></div>
+   <div class="stat"><i></i><b>3 alerts</b><span>Designated recipients for Other Matter</span></div>
+  </div>
+ </div>
+</section>
+
+<section id="phase1">
+ <div class="wrap">
+  <div class="sectionHead"><div class="kicker">Project overview · Phase 01</div><h2>Build the CRM foundation first</h2><p>Set up the forms, fields, pipeline, source tags, lawyer routing and required connections. Every automation will rely on these details, so the foundation must be consistent.</p></div>
+  <div class="phase">
+   <div class="phaseHead"><div class="phaseNo">01</div><div><h3>Forms, Pipeline & Routing</h3><p>One clear place for every lead and its next action.</p></div></div>
+   <div class="phaseBody"><div class="grid2">
+    <article class="item"><div class="ic">▦</div><h3>GHL pipeline</h3><p>Create and configure New Leads, Hired, and Not Hired. Assign owners, update opportunity stages, and keep each lead's status visible.</p><span class="tag">New Leads</span><span class="tag">Hired</span><span class="tag">Not Hired</span></article>
+    <article class="item yellow"><div class="ic">🧾</div><h3>Consultation form in GHL</h3><p>Build the form around the firm's flow: contact details → jurisdiction → matter type → preferred lawyer → appointment/payment journey. Confirm the supplied AI Studio forms and final required fields.</p></article>
+    <article class="item"><div class="ic">🏷️</div><h3>Source tags on every page</h3><p>Each form/page adds a specific tag so staff can see where the lead came from.</p><span class="tag">Source - Contact Us</span><span class="tag">Source - Consultation</span><span class="tag">Source - Landing Page</span></article>
+    <article class="item red"><div class="ic">⚖️</div><h3>Conditional lawyer routing</h3><p>Selection of a listed lawyer starts that lawyer's own route. The assigned lawyer, calendar, notifications and relevant follow-up must stay aligned.</p></article>
+    <article class="item yellow"><div class="ic">📅</div><h3>Booking & payment</h3><p>Configure the 30-minute consultation, availability, CAD $250 payment path, booking confirmation and reminders. Confirm whether GHL replaces or connects with the current scheduler.</p></article>
+    <article class="item"><div class="ic">🔁</div><h3>Clio data migration</h3><p>Move the agreed Clio Grow data into GHL after field mapping, duplicate review and sample validation. Clio Manage sync is a separate integration requirement.</p></article>
+   </div><div class="notice"><b>Example:</b> A visitor submits the Consultation form, selects “Canadian Immigration,” chooses “Work Permit,” and selects Natalie. GHL records the form source, saves the selections, assigns the lead to Natalie's route and starts the matching booking/follow-up process.</div></div>
+  </div>
+ </div>
+</section>
+
+<section style="background:#fff;padding-top:54px;padding-bottom:54px" id="lawyers">
+ <div class="wrap">
+  <div class="sectionHead"><div class="kicker">Conditional workflows</div><h2>Each lawyer has a separate automation route</h2><p>The routing should follow the actual lawyer chosen by the visitor, not a single generic sequence.</p></div>
+  <div class="lawyers">
+   <article class="lawyer"><span class="label">LAWYER WORKFLOW 01</span><h3>Natalie Domazet</h3><p>When selected: assign Natalie, use her confirmed calendar, send the lawyer-specific confirmation and reminders, notify the right staff, and trigger her no-show follow-up if needed.</p><span class="tag">Trigger: Lawyer = Natalie</span></article>
+   <article class="lawyer"><span class="label">LAWYER WORKFLOW 02</span><h3>Rylee Raeburn-Gibson</h3><p>When selected: assign Rylee, use her confirmed calendar, send the lawyer-specific confirmation and reminders, notify the right staff, and trigger her no-show follow-up if needed.</p><span class="tag">Trigger: Lawyer = Rylee</span></article>
+   <article class="lawyer" style="border-color:#f0dfa0;background:#fffdf5"><span class="label" style="color:#8b6800">PRIORITY WORKFLOW 03</span><h3>Other Matter</h3><p>Immediately email three designated staff members with the lead's contact details, jurisdiction, matter description, source tag and submission details. Create a follow-up task if agreed.</p><span class="tag" style="background:var(--softyellow);color:#735600">Trigger: Matter = Other</span></article>
+  </div>
+ </div>
+</section>
+
+<section class="simSection" id="simulator">
+ <div class="wrap">
+  <div class="sectionHead"><div class="kicker">Interactive example · runs in this page</div><h2>Live workflow simulator</h2><p>Try different lead details and run the demo. The activity panel will show the actions the proposed GHL automation should take. This is a front-end simulation with sample data, not a live connection to the firm's GHL account.</p></div>
+  <div class="simLayout">
+   <form class="simPanel" id="leadForm">
+    <h3>Simulate a new inquiry</h3><div class="muted">Change the details, then click “Run automation”.</div>
+    <div class="field"><label for="fullName">Lead name</label><input id="fullName" value="Alex Morgan" required></div>
+    <div class="field"><label for="email">Email</label><input id="email" type="email" value="alex@example.com" required></div>
+    <div class="field"><label for="phone">Phone</label><input id="phone" value="+1 416 555 0100"></div>
+    <div class="field"><label for="source">Submitted from</label><select id="source"><option value="Contact Us">Contact Us page</option><option value="Consultation">Consultation page</option><option value="Landing Page">Landing page</option></select></div>
+    <div class="field"><label for="jurisdiction">Immigration jurisdiction</label><select id="jurisdiction"><option>Canadian Immigration</option><option>U.S. Immigration</option><option>Not sure</option></select></div>
+    <div class="field"><label for="matter">Matter type</label><select id="matter"><option>Work Permit</option><option>Study Permit</option><option>Travel / Visitor Visa</option><option>Citizenship</option><option>Inadmissibility</option><option value="Other Matter">Other Matter</option></select></div>
+    <div class="field" id="lawyerField"><label for="lawyer">Preferred lawyer</label><select id="lawyer"><option>Natalie Domazet</option><option>Rylee Raeburn-Gibson</option><option>Not selected yet</option></select></div>
+    <div class="field"><label for="notes">Brief matter description</label><textarea id="notes">I need advice about my immigration application.</textarea></div>
+    <div class="btnrow"><button class="btn" type="submit">▶ Run automation</button><button class="btn ghost" type="button" id="reset">Reset demo</button></div>
+    <div class="runStatus" id="status"></div>
+   </form>
+   <div class="console">
+    <div class="consoleHead"><div><h3>Automation activity log</h3><div class="muted">Actions generated by the simulation</div></div><span class="pill" id="runPill">WAITING</span></div>
+    <div class="log" id="log"><div class="empty">No workflow has run yet.<br>Enter a lead and click <b>Run automation</b> to see the steps.</div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="phase2">
+ <div class="wrap">
+  <div class="sectionHead"><div class="kicker">Project overview · Phase 02</div><h2>Automations that handle the follow-up</h2><p>Once the CRM foundation is confirmed, these workflows can run from form submission, appointment status, payment status, contact activity or pipeline stage changes.</p></div>
+  <div class="workflowList" id="workflows">
+   <article class="workflow"><span class="num">01</span><div><h3>Form Submission & Source Tagging</h3><p>Create/update contact, tag the form/page source, store jurisdiction, matter and lawyer, create/update opportunity, route the lead.</p><span class="trigger">Trigger: GHL form submitted</span></div></article>
+   <article class="workflow"><span class="num">02</span><div><h3>Consultation Booked</h3><p>Immediate confirmation; reminders 24 hours, 2 hours and 30 minutes before; preparation email with documents to prepare and topics for the lawyer.</p><span class="trigger">Trigger: Appointment booked</span></div></article>
+   <article class="workflow"><span class="num">03</span><div><h3>No-Show Recovery</h3><p>SMS within 15 minutes with rebooking link, then Day 1 and Day 3 follow-ups. Stop if the lead rebooks or opts out.</p><span class="trigger">Trigger: Appointment marked no-show</span></div></article>
+   <article class="workflow"><span class="num">04</span><div><h3>Missed Call Text-Back</h3><p>Send a text within about one minute inviting the caller to reply or book a consultation.</p><span class="trigger">Trigger: Missed call</span></div></article>
+   <article class="workflow"><span class="num">05</span><div><h3>Hired Client & Agreement</h3><p>When a lead becomes Hired, send the relevant retainer/agreement using the firm's chosen path: with payment link or without it.</p><span class="trigger">Trigger: Pipeline stage = Hired</span></div></article>
+   <article class="workflow"><span class="num">06</span><div><h3>Abandoned Booking Recovery</h3><p>If booking payment is not completed: SMS after 30 minutes, email after 4 hours and final SMS the next day. Stop once completed.</p><span class="trigger">Trigger: Booking started, payment incomplete</span></div></article>
+   <article class="workflow"><span class="num">07</span><div><h3>Old Lead Reactivation</h3><p>Approved SMS to eligible older leads first; email non-responders. Respect consent, opt-outs and the firm's approved legal messaging.</p><span class="trigger">Trigger: Approved one-off campaign</span></div></article>
+   <article class="workflow"><span class="num">08</span><div><h3>Channel Escalation</h3><p>After three ignored emails, switch to SMS; if still cold, use a supported permitted ringless voicemail provider, then a final plain-text email.</p><span class="trigger">Trigger: No response threshold reached</span></div></article>
+   <article class="workflow"><span class="num">09</span><div><h3>Delayed Application / Mandamus Nurture</h3><p>Share firm-approved information about processing delays and mandamus options with relevant leads; no promises about outcomes.</p><span class="trigger">Trigger: Eligible delayed-application lead</span></div></article>
+   <article class="workflow"><span class="num">10</span><div><h3>Document Collection Drip</h3><p>Reminders on Day 3, Day 7 and Day 14 for outstanding documents; staff task on Day 21.</p><span class="trigger">Trigger: Hired client with missing documents</span></div></article>
+   <article class="workflow"><span class="num">11</span><div><h3>Lead SLA Alert</h3><p>During configured business hours, alert the team at 45 minutes without human touch and alert a manager at one hour.</p><span class="trigger">Trigger: New lead not actioned</span></div></article>
+   <article class="workflow"><span class="num">12</span><div><h3>Stale Pipeline Stage Sweeper</h3><p>Nightly review of opportunities stuck longer than the agreed number of days; create a staff task and route to the correct nurture flow.</p><span class="trigger">Trigger: Nightly scheduled check</span></div></article>
+  </div>
+ </div>
+</section>
+
+<section style="background:#fff" id="example">
+ <div class="wrap">
+  <div class="sectionHead"><div class="kicker">Realistic workflow examples</div><h2>What the automations do in practice</h2><p>Examples of the expected behavior after the corresponding workflow is connected and configured in GHL.</p></div>
+  <div class="tableWrap"><table><thead><tr><th>Scenario</th><th>Automation logic</th><th>Expected result</th></tr></thead><tbody>
+   <tr><td>Lead selects Natalie</td><td>Form submitted → lawyer field = Natalie → assign Natalie route/calendar → send approved confirmation.</td><td>Lead and appointment are connected to the correct lawyer journey.</td></tr>
+   <tr><td>Lead selects Other Matter</td><td>Matter = Other → apply source tag → send immediate notification to all 3 designated staff.</td><td>Three recipients receive the same lead summary and staff can respond quickly.</td></tr>
+   <tr><td>Consultation booked</td><td>Appointment created → confirmation now → reminders 24h, 2h, 30m → preparation email.</td><td>Client knows when to attend and what to prepare.</td></tr>
+   <tr><td>Client does not attend</td><td>Appointment marked no-show → rebooking SMS within 15m → Day 1 and Day 3 follow-ups.</td><td>Missed consultation has a structured rebooking path.</td></tr>
+   <tr><td>Client is hired</td><td>Stage changes to Hired → select correct retainer template → send with or without payment link per firm rule.</td><td>Onboarding begins and the pipeline reflects client status.</td></tr>
+   <tr><td>Documents still missing</td><td>Retained client has outstanding checklist → reminders Day 3/7/14 → task Day 21.</td><td>Staff can follow up on incomplete client files.</td></tr>
+  </tbody></table></div>
+ </div>
+</section>
+
+<section id="handover">
+ <div class="wrap">
+  <div class="sectionHead"><div class="kicker">Required before live launch</div><h2>Only the key items to confirm</h2><p>These are dependencies for accurate implementation, not extra features.</p></div>
+  <div class="grid2">
+   <article class="item yellow"><div class="ic">✉️</div><h3>Three “Other Matter” recipients</h3><p>Provide the three email addresses and confirm whether each alert should also create a task or assign an owner.</p></article>
+   <article class="item"><div class="ic">⚖️</div><h3>Lawyer calendars & rules</h3><p>Confirm the final lawyer list, each calendar, available appointment types and internal notification recipients.</p></article>
+   <article class="item red"><div class="ic">🔗</div><h3>Clio access & sync scope</h3><p>Confirm the data to migrate from Clio Grow and which fields or records should sync with Clio Manage.</p></article>
+   <article class="item"><div class="ic">💳</div><h3>Booking, payment & messaging providers</h3><p>Confirm the scheduler, payment processor, sending email, SMS number/provider and any voicemail service required.</p></article>
+  </div>
+  <div class="notice"><b>Scope clarity:</b> The simulator is interactive and demonstrates sample logic locally in the browser. It does not send real SMS/emails, create real GHL contacts, charge payments, or connect to Clio. Those actions require access, credentials, supported integrations and testing inside the client's systems. Use firm-approved messages and comply with applicable consent, privacy and legal-professional requirements.</div>
+ </div>
+</section>
+</main>
+<footer class="footer"><div class="wrap footerInner"><a class="logo" href="#top"><span class="mark">A</span><span>AWSZ<small>AI AUTOMATION & SYSTEMS</small></span></a><span>Unified Immigration Lawyers · CRM & Workflow Automation Plan</span><a href="https://uilawyers.com" target="_blank" rel="noopener">uilawyers.com ↗</a></div></footer>
+
+<script>
+(function(){
+ const $=id=>document.getElementById(id);
+ const form=$('leadForm'), log=$('log'), status=$('status'), pill=$('runPill');
+ const otherValue='Other Matter';
+ $('matter').addEventListener('change',()=>{
+   const other=$('matter').value===otherValue;
+   $('lawyerField').classList.toggle('hidden',other);
+ });
+ function entry(title,desc,icon='✓',kind='good',stamp='SIMULATED ACTION'){
+   const div=document.createElement('div');div.className='logEntry '+kind;
+   const ico=document.createElement('div');ico.className='logIcon';ico.textContent=icon;
+   const body=document.createElement('div');const h=document.createElement('h4');h.textContent=title;
+   const p=document.createElement('p');p.textContent=desc;const s=document.createElement('div');s.className='stamp';s.textContent=stamp;
+   body.append(h,p,s);div.append(ico,body);log.append(div);
+ }
+ function run(e){
+   e.preventDefault();
+   const name=$('fullName').value.trim()||'Sample lead', email=$('email').value.trim(), phone=$('phone').value.trim();
+   const source=$('source').value, jurisdiction=$('jurisdiction').value, matter=$('matter').value, lawyer=$('lawyer').value, notes=$('notes').value.trim();
+   log.innerHTML='';pill.textContent='RUN COMPLETE';status.style.display='block';
+   status.textContent='Simulation completed for '+name+'. These are example actions only; no external messages were sent.';
+   entry('New lead received',name+' · '+email+(phone?' · '+phone:''),'📝','good','TRIGGER: FORM SUBMITTED');
+   entry('Source tag applied','Source - '+source,'🏷️','good','ACTION: ADD TAG');
+   entry('CRM fields saved','Jurisdiction: '+jurisdiction+' · Matter: '+matter+(notes?' · Notes: '+notes:''),'▦','good','ACTION: UPDATE CONTACT');
+   entry('Pipeline opportunity created/updated','Stage: New Leads. Duplicate checking and exact field mapping depend on the live GHL setup.','↗','good','ACTION: UPSERT OPPORTUNITY');
+   if(matter===otherValue){
+     entry('Other Matter route selected','The lawyer-specific route is bypassed because the matter requires the designated triage team.','⚠️','warn','CONDITION: MATTER = OTHER');
+     entry('Three staff email alerts queued in the proposed design','Recipient 1, Recipient 2 and Recipient 3 will receive the lead summary once their actual email addresses are configured. No email is sent by this simulator.','✉️','warn','ACTION: NOTIFY 3 RECIPIENTS');
+     entry('Priority follow-up task','Create/assign a triage task according to the firm's confirmed ownership rules.','☑','good','ACTION: CREATE TASK');
+   }else if(lawyer==='Not selected yet'){
+     entry('Lawyer selection missing','Do not book into an individual lawyer calendar yet. Route to the agreed team for review or ask the visitor to select a lawyer.','!','warn','CONDITION: NO LAWYER SELECTED');
+   }else{
+     entry('Lawyer-specific route selected',lawyer+' is the selected lawyer. In the live setup, assign the correct owner and that lawyer’s confirmed calendar.','⚖️','good','CONDITION: LAWYER = '+lawyer.toUpperCase());
+     entry('Booking confirmation path prepared','After a real appointment is booked, send the approved confirmation and schedule reminders at 24 hours, 2 hours and 30 minutes before.','📅','good','NEXT WORKFLOW: CONSULTATION BOOKED');
+     entry('Preparation email path prepared','Send the firm-approved checklist and consultation preparation email after booking.','✉️','good','ACTION: SEND PREPARATION EMAIL');
+   }
+   entry('Consent and stop conditions checked in design','Respect contact preferences; suppress duplicate runs and stop follow-ups after opt-out, completed booking or other configured exit event.','🛡️','good','SAFETY CHECK');
+   log.scrollTop=0;
+ }
+ form.addEventListener('submit',run);
+ $('reset').addEventListener('click',()=>{
+   form.reset();$('matter').value='Work Permit';$('lawyerField').classList.remove('hidden');log.innerHTML='<div class="empty">No workflow has run yet.<br>Enter a lead and click <b>Run automation</b> to see the steps.</div>';
+   status.style.display='none';pill.textContent='WAITING';
+ });
+})();
+</script>
+</body>
+</html>
