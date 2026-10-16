@@ -1,0 +1,611 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rashan Mart | Karachi Grocery Store</title>
+<style>
+:root{--red:#d71920;--dark:#a80f16;--light:#fff2f2;--ink:#222;--muted:#777;--green:#138348;--line:#eee}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fff}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.topbar{background:#a80f16;color:white;text-align:center;padding:9px;font-size:12px;font-weight:700}
+header{background:white;position:sticky;top:0;z-index:20;box-shadow:0 2px 12px #0000000c}
+.head{max-width:1250px;margin:auto;display:flex;align-items:center;gap:20px;padding:15px 20px}
+.logo{font-size:24px;font-weight:900;color:var(--red);white-space:nowrap}
+.logo span{color:#252525}
+.search{flex:1;display:flex;border:2px solid var(--red);border-radius:12px;overflow:hidden;min-width:100px}
+.search input{border:0;outline:0;padding:13px;width:100%;min-width:0}
+.search button{background:var(--red);color:white;border:0;padding:0 20px;font-weight:bold}
+.head-actions{display:flex;gap:12px;align-items:center}
+.head-btn{background:#fff5f5;border:0;border-radius:12px;padding:11px 13px;font-weight:bold;white-space:nowrap}
+.cart-btn{background:var(--red);color:white}
+#cartCount{background:white;color:var(--red);border-radius:50%;padding:2px 6px;margin-left:4px}
+nav{border-top:1px solid var(--line);overflow-x:auto}
+.navinner{max-width:1250px;margin:auto;padding:11px 20px;display:flex;gap:25px;white-space:nowrap;font-size:13px;font-weight:bold}
+.navinner a:hover{color:var(--red)}
+main{max-width:1250px;margin:auto;padding:22px 20px 60px}
+.hero{display:grid;grid-template-columns:1.5fr .7fr;gap:16px}
+.hero-main{min-height:315px;background:linear-gradient(110deg,#a80f16,#ed3038);color:white;border-radius:22px;padding:38px;display:flex;align-items:center;position:relative;overflow:hidden}
+.hero-main:after{content:"🛒";font-size:130px;position:absolute;right:5%;bottom:20px;opacity:.24}
+.hero-copy{max-width:510px;position:relative;z-index:1}
+.eyebrow{display:inline-block;background:#ffffff28;padding:8px 12px;border-radius:30px;font-size:12px;font-weight:bold}
+.hero h1{font-size:clamp(30px,4vw,49px);line-height:1.1;margin:17px 0 12px}
+.hero p{line-height:1.6;color:#ffe5e5;max-width:430px}
+.primary{background:#fff;color:var(--red);border:0;border-radius:10px;padding:13px 20px;font-weight:800;margin-top:8px}
+.hero-side{display:flex;flex-direction:column;gap:16px}
+.promo{flex:1;border-radius:20px;padding:24px;background:#fff0dc;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.promo:nth-child(2){background:#e8f6e9}
+.promo small{font-weight:bold;color:#8e3c19}
+.promo h3{font-size:23px;margin:10px 0}
+.promo .emoji{font-size:47px;position:absolute;right:16px;bottom:12px}
+.section{margin-top:38px}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:19px}
+.section-head h2{font-size:23px;margin:0}
+.section-head p{font-size:13px;color:var(--muted);margin:6px 0 0}
+.text-btn{border:0;background:none;color:var(--red);font-weight:bold}
+.cat-scroll{display:flex;gap:18px;overflow-x:auto;padding:5px 2px 13px;scrollbar-width:thin}
+.cat{flex:0 0 105px;text-align:center;border:0;background:white;padding:0}
+.cat-circle{width:78px;height:78px;margin:0 auto 10px;border-radius:50%;background:#fff1f1;display:flex;align-items:center;justify-content:center;font-size:36px;border:2px solid transparent;transition:.2s}
+.cat:hover .cat-circle,.cat.active .cat-circle{border-color:var(--red);background:#ffe3e3;transform:translateY(-2px)}
+.cat-name{font-size:12px;font-weight:700;line-height:1.35}
+.offer-strip{background:#fff3f3;border:1px solid #ffe1e1;border-radius:14px;padding:17px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:28px}
+.offer-strip strong{color:var(--red)}
+.offer-strip span{font-size:13px}
+.carousel-wrap{position:relative}
+.products{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+.product{border:1px solid var(--line);border-radius:15px;padding:11px;position:relative;min-width:0;transition:.2s;background:white}
+.product:hover{box-shadow:0 8px 25px #0000000c;transform:translateY(-2px)}
+.pimg{height:135px;border-radius:10px;background:#fafafa;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.pimg img{width:100%;height:100%;object-fit:contain}
+.pemoji{font-size:65px}
+.tag{position:absolute;top:8px;left:8px;background:#ffe5e5;color:var(--red);font-size:10px;font-weight:bold;padding:5px 7px;border-radius:5px}
+.ptitle{font-size:13px;font-weight:bold;line-height:1.4;margin:11px 0 6px;min-height:36px}
+.pmeta{font-size:11px;color:var(--muted);margin-bottom:8px}
+.prices{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.price{font-weight:900;color:var(--red);font-size:16px}
+.oldprice{font-size:11px;color:#999;text-decoration:line-through}
+.pbottom{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:5px}
+.addbtn{background:var(--red);color:white;border:0;border-radius:8px;width:35px;height:34px;font-size:23px;font-weight:bold}
+.addbtn:hover{background:var(--dark)}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:27px;height:27px;border:1px solid #ddd;background:white;border-radius:7px;font-weight:bold}
+.carousel-controls{display:flex;gap:7px}
+.arrow{width:35px;height:35px;border:1px solid #ddd;border-radius:50%;background:white;font-size:19px}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.toolbar input{flex:1;min-width:190px;padding:12px;border:1px solid #ddd;border-radius:10px;outline-color:var(--red)}
+.toolbar select{padding:12px;border:1px solid #ddd;border-radius:10px;background:white;max-width:100%}
+.resultline{color:var(--muted);font-size:13px;margin-bottom:13px}
+#allProducts{grid-template-columns:repeat(6,minmax(0,1fr))}
+.empty{grid-column:1/-1;text-align:center;border:1px dashed #f1b8b8;background:#fffafa;padding:35px 20px;border-radius:17px}
+.empty .big{font-size:48px}
+.empty h3{margin:10px 0;color:#292929}
+.empty p{color:#666;font-size:14px;line-height:1.6}
+.suggest{display:flex;max-width:460px;margin:16px auto 0;gap:8px}
+.suggest input{flex:1;min-width:0;border:1px solid #ddd;border-radius:9px;padding:12px}
+.rewardbtn{border:0;border-radius:9px;background:var(--green);color:white;padding:10px 14px;font-weight:bold;white-space:nowrap}
+.reward-note{font-size:12px!important;color:var(--green)!important}
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:38px}
+.benefit{border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;gap:12px;align-items:center}
+.benefit .ico{font-size:27px}
+.benefit strong{font-size:13px}
+.benefit p{font-size:11px;color:var(--muted);margin:5px 0 0}
+footer{background:#211d1d;color:white;padding:38px 20px}
+.foot-inner{max-width:1250px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
+footer p,footer a{font-size:13px;color:#c9c9c9;line-height:1.8}
+footer h3{font-size:15px}
+.cart-overlay{position:fixed;inset:0;background:#0007;z-index:40;display:none}
+.cart-overlay.open{display:block}
+.drawer{position:absolute;right:0;top:0;height:100%;height:100dvh;width:min(450px,100%);background:white;display:flex;flex-direction:column}
+.drawer-head{padding:20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.drawer-head h2{margin:0;font-size:20px}
+.close{border:0;background:#f5f5f5;border-radius:8px;width:35px;height:35px;font-size:20px}
+.cart-items{flex:1;overflow:auto;padding:15px}
+.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.cart-emoji{width:65px;height:65px;border-radius:10px;background:#faf3f3;display:flex;align-items:center;justify-content:center;font-size:33px;flex-shrink:0}
+.cart-info{flex:1;min-width:0}
+.cart-info strong{font-size:13px}
+.cart-info p{font-size:12px;color:var(--muted);margin:7px 0}
+.cart-foot{padding:18px;border-top:1px solid var(--line)}
+.summaryrow{display:flex;justify-content:space-between;margin:9px 0;font-size:14px}
+.summaryrow.saving{color:var(--green)}
+.checkout{width:100%;padding:15px;background:var(--red);color:white;border:0;border-radius:10px;font-weight:bold;margin-top:12px}
+.smallnote{font-size:11px;color:var(--muted);line-height:1.5}
+.modal{position:fixed;inset:0;z-index:60;background:#0008;display:none;align-items:center;justify-content:center;padding:15px}
+.modal.open{display:flex}
+.modal-box{background:white;width:min(480px,100%);padding:25px;border-radius:18px;max-height:90vh;overflow:auto}
+.modal-box h2{margin-top:0}
+.field{display:block;margin:14px 0}
+.field span{display:block;font-size:12px;font-weight:bold;margin-bottom:7px}
+.field input,.field textarea,.field select{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px;outline-color:var(--red)}
+.field textarea{min-height:70px;resize:vertical}
+.formrow{display:flex;gap:10px}
+.formrow>*{flex:1;min-width:0}
+.submit{width:100%;padding:14px;background:var(--red);color:white;border:0;border-radius:10px;font-weight:bold}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);background:#222;color:white;padding:13px 18px;border-radius:10px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:100;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.reward-pill{color:var(--green)}
+@media(max-width:1050px){.products,#allProducts{grid-template-columns:repeat(4,minmax(0,1fr))}.head{gap:10px}.logo{font-size:20px}.hero-main{padding:28px}.benefits{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.topbar{font-size:11px}.head{padding:12px;flex-wrap:wrap}.logo{font-size:21px}.search{order:3;flex-basis:100%}.head-actions{margin-left:auto;gap:5px}.head-btn{padding:9px;font-size:12px}main{padding:15px 12px 40px}.hero{grid-template-columns:1fr}.hero-main{min-height:280px;padding:25px}.hero-main:after{font-size:95px;right:0}.hero-side{display:grid;grid-template-columns:1fr 1fr}.promo{padding:16px;min-height:145px}.promo h3{font-size:18px}.promo .emoji{font-size:30px}.section{margin-top:30px}.section-head h2{font-size:20px}.cat{flex-basis:82px}.cat-circle{width:65px;height:65px;font-size:29px}.products,#allProducts{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.pimg{height:130px}.ptitle{font-size:12px}.price{font-size:15px}.offer-strip{align-items:flex-start;flex-direction:column}.benefits{gap:8px}.benefit{padding:12px;gap:8px}.benefit .ico{font-size:23px}.benefit strong{font-size:11px}.benefit p{font-size:10px}.foot-inner{grid-template-columns:1fr;gap:10px}.suggest{flex-wrap:wrap}.suggest input{flex-basis:100%}.rewardbtn{width:100%}}
+</style>
+</head>
+<body>
+<div class="topbar">🛒 Karachi's Daily Grocery Store · Smart Shopping, Better Savings</div>
+<header>
+  <div class="head">
+    <a href="#" class="logo">RASHAN<span>MART.</span></a>
+    <form class="search" id="searchForm">
+      <input id="topSearch" placeholder="Search atta, rice, Surf Excel, shampoo..." autocomplete="off">
+      <button type="submit">Search</button>
+    </form>
+    <div class="head-actions">
+      <button class="head-btn" id="rewardOpen">🎁 <span id="rewardHeader">Rs. 0</span></button>
+      <button class="head-btn cart-btn" id="openCart">🛒 Cart <span id="cartCount">0</span></button>
+    </div>
+  </div>
+  <nav><div class="navinner">
+    <a href="#home">Home</a><a href="#categories">All Categories</a>
+    <a href="#featured">Featured Products</a><a href="#shop">Shop Groceries</a>
+    <a href="#benefits">Why Rashan Mart?</a>
+  </div></nav>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="hero-main"><div class="hero-copy">
+    <span class="eyebrow">YOUR HOME, YOUR RASHAN</span>
+    <h1>Everyday Grocery.<br>Smarter Prices.</h1>
+    <p>From aata and chawal to household essentials — explore everyday groceries for your family, all in one place.</p>
+    <button class="primary" onclick="document.querySelector('#shop').scrollIntoView({behavior:'smooth'})">SHOP GROCERIES &nbsp; →</button>
+  </div></div>
+  <div class="hero-side">
+    <div class="promo"><small>SMART SHOPPING</small><h3>Stock up on<br>daily essentials</h3><div class="emoji">🛍️</div></div>
+    <div class="promo"><small>YOUR VOICE MATTERS</small><h3>Suggest a product<br>earn Rs. 5*</h3><div class="emoji">🎁</div></div>
+  </div>
+</section>
+
+<section class="section" id="categories">
+  <div class="section-head"><div><h2>Shop by Category</h2><p>Everything your home needs, in one place.</p></div><button class="text-btn" onclick="showAll()">View all →</button></div>
+  <div class="cat-scroll" id="categoryList"></div>
+</section>
+
+<div class="offer-strip"><div><strong>💰 Your shopping, your savings</strong><br><span>Compare listed prices and see your estimated savings in the cart.</span></div><button class="text-btn" onclick="document.querySelector('#shop').scrollIntoView({behavior:'smooth'})">Start shopping →</button></div>
+
+<section class="section" id="featured">
+  <div class="section-head"><div><h2>Popular Picks</h2><p>Explore popular household essentials.</p></div>
+    <div class="carousel-controls"><button class="arrow" id="prevSlide" aria-label="Previous products">‹</button><button class="arrow" id="nextSlide" aria-label="Next products">›</button></div>
+  </div>
+  <div class="carousel-wrap"><div class="products" id="featuredProducts"></div></div>
+</section>
+
+<section class="section" id="shop">
+  <div class="section-head"><div><h2 id="shopTitle">All Grocery Products</h2><p>Search, browse and add your everyday essentials.</p></div></div>
+  <div class="toolbar">
+    <input id="shopSearch" placeholder="Search products, brands or categories...">
+    <select id="categoryFilter"><option value="All">All categories</option></select>
+    <select id="sortFilter"><option value="default">Sort: Recommended</option><option value="low">Price: Low to high</option><option value="high">Price: High to low</option><option value="name">Name: A to Z</option></select>
+  </div>
+  <div class="resultline" id="resultCount"></div>
+  <div class="products" id="allProducts"></div>
+</section>
+
+<section class="benefits" id="benefits">
+  <div class="benefit"><div class="ico">🛒</div><div><strong>Wide Grocery Range</strong><p>Everyday essentials in one store.</p></div></div>
+  <div class="benefit"><div class="ico">💸</div><div><strong>Know Your Savings</strong><p>View estimated savings before checkout.</p></div></div>
+  <div class="benefit"><div class="ico">🎁</div><div><strong>Suggest Products</strong><p>Earn a demo Rs. 5 reward per suggestion.</p></div></div>
+  <div class="benefit"><div class="ico">📦</div><div><strong>Karachi Delivery</strong><p>Delivery options shown at checkout.</p></div></div>
+</section>
+</main>
+
+<footer><div class="foot-inner">
+  <div><div class="logo" style="color:white">RASHAN<span style="color:#ff6268">MART.</span></div><p>Your everyday grocery destination. Browse household staples, food, personal care and cleaning products in one convenient place.</p><p>Prices, product availability and delivery details must be confirmed before a real order is accepted.</p></div>
+  <div><h3>Quick Links</h3><p><a href="#home">Home</a><br><a href="#categories">Categories</a><br><a href="#shop">All Products</a></p></div>
+  <div><h3>Customer Support</h3><p>Karachi, Pakistan<br>Delivery charges are confirmed at checkout.<br>© <span id="year"></span> Rashan Mart</p></div>
+</div></footer>
+
+<div class="cart-overlay" id="cartOverlay">
+ <div class="drawer">
+  <div class="drawer-head"><h2>🛒 Your Shopping Cart</h2><button class="close" id="closeCart">×</button></div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+   <div class="summaryrow"><span>Subtotal</span><strong id="cartSubtotal">Rs. 0</strong></div>
+   <div class="summaryrow saving"><span>Estimated savings*</span><strong id="cartSavings">Rs. 0</strong></div>
+   <div class="summaryrow"><span>Delivery fee (estimate)</span><strong id="deliveryFee">Rs. 300</strong></div>
+   <div class="summaryrow"><strong>Total</strong><strong id="cartTotal">Rs. 300</strong></div>
+   <p class="smallnote">*Savings are based on illustrative comparison prices and are not verified market prices. Delivery fee is a demo estimate.</p>
+   <button class="checkout" id="checkoutBtn">PROCEED TO CHECKOUT →</button>
+  </div>
+ </div>
+</div>
+
+<div class="modal" id="checkoutModal"><div class="modal-box">
+ <div class="section-head"><h2>Delivery Details</h2><button class="close" data-close="checkoutModal">×</button></div>
+ <form id="checkoutForm">
+  <label class="field"><span>Full name *</span><input name="name" required placeholder="Your full name"></label>
+  <label class="field"><span>Mobile number *</span><input name="phone" required type="tel" placeholder="03XX XXXXXXX"></label>
+  <label class="field"><span>Karachi delivery area *</span><input name="area" required placeholder="e.g. Gulshan-e-Iqbal"></label>
+  <label class="field"><span>Full address *</span><textarea name="address" required placeholder="House, street, block and nearby landmark"></textarea></label>
+  <label class="field"><span>Payment method</span><select name="payment"><option>Cash on Delivery</option><option>Bank Transfer (confirm manually)</option></select></label>
+  <button class="submit" type="submit">CREATE ORDER SUMMARY</button>
+  <p class="smallnote">This demo creates an order summary in your browser. It does not send orders to a shop or save them to a server.</p>
+ </form>
+</div></div>
+
+<div class="modal" id="rewardModal"><div class="modal-box">
+ <div class="section-head"><h2>🎁 Your Product Rewards</h2><button class="close" data-close="rewardModal">×</button></div>
+ <p>Suggest a grocery item that you couldn't find. Your demo reward balance increases by Rs. 5 when you add a new suggestion.</p>
+ <h2 class="reward-pill" id="rewardBalance">Rs. 0</h2>
+ <div id="suggestionsList"></div>
+ <p class="smallnote">Demo only: suggestions and reward balance are stored in this browser. No cash or real payment is issued.</p>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const CATEGORIES = [
+ {name:"Atta & Flour",icon:"🌾"},{name:"Rice & Chawal",icon:"🍚"},{name:"Daal & Pulses",icon:"🫘"},
+ {name:"Cooking Oil",icon:"🫗"},{name:"Ghee",icon:"🧈"},{name:"Masalay",icon:"🌶️"},
+ {name:"Sugar & Salt",icon:"🧂"},{name:"Tea & Coffee",icon:"☕"},{name:"Milk & Dairy",icon:"🥛"},
+ {name:"Biscuits",icon:"🍪"},{name:"Snacks",icon:"🍿"},{name:"Drinks",icon:"🧃"},
+ {name:"Breakfast",icon:"🥣"},{name:"Noodles & Pasta",icon:"🍝"},{name:"Canned Food",icon:"🥫"},
+ {name:"Bakery",icon:"🍞"},{name:"Personal Care",icon:"🧴"},{name:"Soap & Body Wash",icon:"🧼"},
+ {name:"Hair Care",icon:"🧴"},{name:"Oral Care",icon:"🪥"},{name:"Laundry",icon:"🫧"},
+ {name:"Cleaning",icon:"🧹"},{name:"Tissue & Paper",icon:"🧻"},{name:"Baby Care",icon:"🍼"},
+ {name:"Kitchen",icon:"🍽️"},{name:"Fresh Produce",icon:"🥬"},{name:"Frozen Food",icon:"🧊"},
+ {name:"Eggs",icon:"🥚"},{name:"Pet Care",icon:"🐾"},{name:"Other Essentials",icon:"🛍️"}
+];
+const P = [];
+function add(category,name,brand,price,compare,unit,emoji,image=""){
+ P.push({id:P.length+1,category,name,brand,price,compare,unit,emoji,image});
+}
+// Demo prices only: replace these with verified supplier and retail prices before launch.
+[
+["Atta & Flour","Chakki Atta","Local",170,190,"1 kg","🌾"],
+["Atta & Flour","Fine Atta","Local",165,185,"1 kg","🌾"],
+["Atta & Flour","Maida Flour","Local",150,175,"1 kg","🌾"],
+["Atta & Flour","Besan","Local",220,250,"1 kg","🌾"],
+["Atta & Flour","Suji / Semolina","Local",180,210,"1 kg","🌾"],
+["Rice & Chawal","Falak Basmati Rice","Falak",450,520,"1 kg","🍚"],
+["Rice & Chawal","Guard Basmati Rice","Guard",430,500,"1 kg","🍚"],
+["Rice & Chawal","Super Kernel Basmati","Local",390,450,"1 kg","🍚"],
+["Rice & Chawal","IRRI Rice","Local",180,210,"1 kg","🍚"],
+["Rice & Chawal","Brown Rice","Local",350,400,"1 kg","🍚"],
+["Rice & Chawal","Sella Basmati Rice","Local",300,350,"1 kg","🍚"],
+["Rice & Chawal","Steam Rice","Local",260,300,"1 kg","🍚"],
+["Daal & Pulses","Masoor Daal","Local",260,300,"1 kg","🫘"],
+["Daal & Pulses","Moong Daal","Local",300,340,"1 kg","🫘"],
+["Daal & Pulses","Chana Daal","Local",230,270,"1 kg","🫘"],
+["Daal & Pulses","Mash Daal","Local",360,410,"1 kg","🫘"],
+["Daal & Pulses","White Chickpeas","Local",280,320,"1 kg","🫘"],
+["Daal & Pulses","Black Chickpeas","Local",240,280,"1 kg","🫘"],
+["Daal & Pulses","Red Kidney Beans","Local",380,430,"1 kg","🫘"],
+["Daal & Pulses","White Beans","Local",320,370,"1 kg","🫘"],
+["Cooking Oil","Dalda Cooking Oil","Dalda",620,680,"1 litre","🫗"],
+["Cooking Oil","Canola Oil","Local",650,710,"1 litre","🫗"],
+["Cooking Oil","Sunflower Oil","Local",670,730,"1 litre","🫗"],
+["Cooking Oil","Corn Oil","Local",700,760,"1 litre","🫗"],
+["Ghee","Dalda Banaspati","Dalda",600,660,"1 kg","🧈"],
+["Ghee","Tullo Banaspati","Tullo",590,650,"1 kg","🧈"],
+["Ghee","Cooking Ghee","Local",570,630,"1 kg","🧈"],
+["Masalay","National Biryani Masala","National",100,120,"packet","🌶️"],
+["Masalay","Shan Biryani Masala","Shan",110,130,"packet","🌶️"],
+["Masalay","National Karahi Masala","National",100,120,"packet","🌶️"],
+["Masalay","Shan Korma Masala","Shan",110,130,"packet","🌶️"],
+["Masalay","Red Chilli Powder","Local",180,220,"200 g","🌶️"],
+["Masalay","Haldi Powder","Local",120,150,"200 g","🌶️"],
+["Masalay","Dhania Powder","Local",140,170,"200 g","🌶️"],
+["Masalay","Zeera Whole","Local",250,290,"200 g","🌶️"],
+["Masalay","Black Pepper","Local",300,350,"100 g","🌶️"],
+["Masalay","Garam Masala","Local",180,220,"100 g","🌶️"],
+["Masalay","Whole Red Chilli","Local",160,190,"200 g","🌶️"],
+["Masalay","White Salt","Local",50,60,"800 g","🧂"],
+["Sugar & Salt","White Sugar","Local",175,195,"1 kg","🧂"],
+["Sugar & Salt","Brown Sugar","Local",250,290,"500 g","🧂"],
+["Sugar & Salt","Iodized Salt","Local",60,70,"800 g","🧂"],
+["Tea & Coffee","Tapal Danedar Tea","Tapal",550,600,"190 g","☕"],
+["Tea & Coffee","Lipton Yellow Label","Lipton",600,660,"190 g","☕"],
+["Tea & Coffee","Vital Tea","Vital",450,500,"190 g","☕"],
+["Tea & Coffee","Instant Coffee","Local",450,520,"jar","☕"],
+["Milk & Dairy","Milkpak UHT Milk","Milkpak",360,390,"1 litre","🥛"],
+["Milk & Dairy","Olper's Milk","Olper's",360,390,"1 litre","🥛"],
+["Milk & Dairy","Everyday Milk Powder","Everyday",650,710,"350 g","🥛"],
+["Milk & Dairy","Dairy Cream","Local",160,180,"pack","🥛"],
+["Milk & Dairy","Butter","Local",300,340,"200 g","🧈"],
+["Milk & Dairy","Cheddar Cheese","Local",500,560,"200 g","🧀"],
+["Biscuits","LU Prince Biscuits","LU",50,60,"pack","🍪"],
+["Biscuits","Peek Freans Sooper","Peek Freans",50,60,"pack","🍪"],
+["Biscuits","LU Candi","LU",40,50,"pack","🍪"],
+["Biscuits","Gala Biscuits","LU",40,50,"pack","🍪"],
+["Biscuits","Saltish Crackers","Local",50,60,"pack","🍪"],
+["Biscuits","Chocolate Biscuits","Local",70,85,"pack","🍪"],
+["Snacks","Potato Chips","Local",50,60,"pack","🍟"],
+["Snacks","Nimco Mix","Local",100,120,"200 g","🥨"],
+["Snacks","Popcorn","Local",100,120,"pack","🍿"],
+["Snacks","Peanuts","Local",180,210,"250 g","🥜"],
+["Snacks","Instant Cup Snacks","Local",90,110,"cup","🍜"],
+["Drinks","Cola Drink","Local",120,140,"1.5 litre","🥤"],
+["Drinks","Orange Drink","Local",120,140,"1.5 litre","🧃"],
+["Drinks","Mango Juice","Local",100,120,"1 litre","🧃"],
+["Drinks","Mineral Water","Local",100,120,"1.5 litre","💧"],
+["Drinks","Rooh Afza","Hamdard",350,390,"800 ml","🧃"],
+["Breakfast","Corn Flakes","Local",400,450,"pack","🥣"],
+["Breakfast","Oats","Local",300,350,"500 g","🥣"],
+["Breakfast","Honey","Local",450,520,"bottle","🍯"],
+["Breakfast","Jam","Local",200,240,"jar","🍓"],
+["Noodles & Pasta","Instant Noodles","Local",60,70,"pack","🍜"],
+["Noodles & Pasta","Macaroni","Local",180,210,"400 g","🍝"],
+["Noodles & Pasta","Spaghetti","Local",200,230,"400 g","🍝"],
+["Noodles & Pasta","Vermicelli / Sawaiyan","Local",100,120,"pack","🍝"],
+["Canned Food","Tomato Ketchup","Local",220,260,"bottle","🥫"],
+["Canned Food","Mayonnaise","Local",250,290,"bottle","🥫"],
+["Canned Food","Chilli Garlic Sauce","Local",200,240,"bottle","🥫"],
+["Canned Food","Canned Beans","Local",250,300,"can","🥫"],
+["Bakery","Bread","Local",150,170,"loaf","🍞"],
+["Bakery","Burger Buns","Local",120,140,"pack","🍔"],
+["Bakery","Rusk","Local",160,190,"pack","🍞"],
+["Personal Care","Lifebuoy Soap","Lifebuoy",120,140,"bar","🧼"],
+["Personal Care","Lux Soap","Lux",130,150,"bar","🧼"],
+["Personal Care","Dettol Soap","Dettol",150,175,"bar","🧼"],
+["Personal Care","Hand Wash","Local",220,260,"bottle","🧴"],
+["Soap & Body Wash","Dove Beauty Bar","Dove",180,210,"bar","🧼"],
+["Soap & Body Wash","Body Wash","Local",350,400,"bottle","🧴"],
+["Hair Care","Sunsilk Shampoo","Sunsilk",350,400,"bottle","🧴"],
+["Hair Care","Head & Shoulders","H&S",450,510,"bottle","🧴"],
+["Hair Care","Pantene Shampoo","Pantene",400,460,"bottle","🧴"],
+["Hair Care","Hair Conditioner","Local",400,450,"bottle","🧴"],
+["Hair Care","Hair Oil","Local",220,260,"bottle","🧴"],
+["Oral Care","Colgate Toothpaste","Colgate",180,210,"tube","🪥"],
+["Oral Care","Sensodyne Toothpaste","Sensodyne",450,510,"tube","🪥"],
+["Oral Care","Toothbrush","Local",100,120,"piece","🪥"],
+["Oral Care","Mouthwash","Local",350,400,"bottle","🪥"],
+["Laundry","Surf Excel Powder","Surf Excel",350,400,"500 g","🫧"],
+["Laundry","Ariel Washing Powder","Ariel",400,450,"500 g","🫧"],
+["Laundry","Bonus Washing Powder","Bonus",250,290,"500 g","🫧"],
+["Laundry","Laundry Soap","Local",100,120,"bar","🧼"],
+["Laundry","Fabric Softener","Local",350,400,"bottle","🫧"],
+["Cleaning","Vim Dishwash Bar","Vim",100,120,"bar","🧽"],
+["Cleaning","Dishwashing Liquid","Local",220,260,"bottle","🧽"],
+["Cleaning","Toilet Cleaner","Local",250,290,"bottle","🧴"],
+["Cleaning","Floor Cleaner","Local",250,300,"bottle","🧹"],
+["Cleaning","Glass Cleaner","Local",280,320,"bottle","🪟"],
+["Cleaning","Bleach","Local",180,220,"bottle","🧴"],
+["Tissue & Paper","Facial Tissues","Local",180,220,"box","🧻"],
+["Tissue & Paper","Toilet Tissue Roll","Local",100,120,"roll","🧻"],
+["Tissue & Paper","Kitchen Paper Roll","Local",220,260,"roll","🧻"],
+["Tissue & Paper","Paper Napkins","Local",100,120,"pack","🧻"],
+["Baby Care","Baby Diapers","Local",600,700,"pack","🍼"],
+["Baby Care","Baby Wipes","Local",250,300,"pack","🧻"],
+["Baby Care","Baby Shampoo","Local",350,400,"bottle","🍼"],
+["Kitchen","Aluminium Foil","Local",200,240,"roll","🍽️"],
+["Kitchen","Cling Film","Local",180,220,"roll","🍽️"],
+["Kitchen","Garbage Bags","Local",150,180,"pack","🗑️"],
+["Kitchen","Matches","Local",30,40,"box","🔥"],
+["Kitchen","Candles","Local",80,100,"pack","🕯️"],
+["Fresh Produce","Potatoes","Local",100,130,"1 kg","🥔"],
+["Fresh Produce","Onions","Local",100,130,"1 kg","🧅"],
+["Fresh Produce","Tomatoes","Local",120,150,"1 kg","🍅"],
+["Fresh Produce","Garlic","Local",300,350,"250 g","🧄"],
+["Fresh Produce","Ginger","Local",250,300,"250 g","🫚"],
+["Fresh Produce","Lemons","Local",100,130,"250 g","🍋"],
+["Fresh Produce","Bananas","Local",150,180,"dozen","🍌"],
+["Fresh Produce","Apples","Local",300,380,"1 kg","🍎"],
+["Frozen Food","Frozen Peas","Local",250,300,"pack","🧊"],
+["Frozen Food","Frozen Paratha","Local",400,460,"pack","🫓"],
+["Frozen Food","Chicken Nuggets","Local",650,750,"pack","🍗"],
+["Eggs","Farm Eggs","Local",360,420,"dozen","🥚"],
+["Pet Care","Cat Food","Local",450,520,"pack","🐾"],
+["Other Essentials","White Vinegar","Local",100,120,"bottle","🧴"],
+["Other Essentials","Lemon Juice","Local",100,120,"bottle","🍋"],
+["Other Essentials","Disposable Cups","Local",150,180,"pack","🥤"],
+["Other Essentials","Food Storage Bags","Local",120,150,"pack","🛍️"]
+].forEach(x=>add(...x));
+
+const fmt=n=>"Rs. "+Math.round(n).toLocaleString("en-PK");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let cart={};
+let activeCategory="All";
+let carouselStart=0;
+let toastTimer;
+let rewardBalance=Number(localStorage.getItem("rm_reward_balance")||0);
+let suggestions=JSON.parse(localStorage.getItem("rm_suggestions")||"[]");
+let rewardNames=new Set(suggestions.map(s=>s.name.toLowerCase()));
+const $=id=>document.getElementById(id);
+$("year").textContent=new Date().getFullYear();
+
+function toast(msg){
+ const t=$("toast");t.textContent=msg;t.classList.add("show");
+ clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2600);
+}
+function saveRewards(){
+ localStorage.setItem("rm_reward_balance",String(rewardBalance));
+ localStorage.setItem("rm_suggestions",JSON.stringify(suggestions));
+ updateRewardUI();
+}
+function updateRewardUI(){
+ $("rewardHeader").textContent=fmt(rewardBalance);
+ $("rewardBalance").textContent=fmt(rewardBalance);
+ $("suggestionsList").innerHTML=suggestions.length
+ ?"<h3>Your suggestions</h3>"+suggestions.map(s=>`<p>➕ ${esc(s.name)} <span class="reward-pill">+Rs. 5</span></p>`).join("")
+ :"<p>No product suggestions yet.</p>";
+}
+function renderCategories(){
+ $("categoryList").innerHTML=CATEGORIES.map(c=>`
+ <button class="cat ${activeCategory===c.name?"active":""}" data-cat="${esc(c.name)}">
+ <div class="cat-circle">${c.icon}</div><div class="cat-name">${esc(c.name)}</div></button>`).join("");
+ $("categoryFilter").innerHTML='<option value="All">All categories</option>'+CATEGORIES.map(c=>`<option value="${esc(c.name)}">${esc(c.name)}</option>`).join("");
+ $("categoryList").querySelectorAll(".cat").forEach(b=>b.addEventListener("click",()=>{
+  activeCategory=b.dataset.cat;
+  $("categoryFilter").value=activeCategory;
+  renderCategories();renderAllProducts();
+  $("shopTitle").textContent=activeCategory==="All"?"All Grocery Products":activeCategory;
+  $("shop").scrollIntoView({behavior:"smooth"});
+ }));
+}
+function productCard(p){
+ const q=cart[p.id]||0;
+ const saving=Math.max(0,p.compare-p.price);
+ return `<article class="product">
+  <div class="pimg">${p.image?`<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">`:""}<span class="pemoji" style="${p.image?"display:none":""}">${p.emoji}</span>
+  ${saving>0?`<span class="tag">SAVE ${Math.round(saving/p.compare*100)}%</span>`:""}</div>
+  <div class="ptitle">${esc(p.name)}</div>
+  <div class="pmeta">${esc(p.brand)} · ${esc(p.unit)}</div>
+  <div class="prices"><span class="price">${fmt(p.price)}</span><span class="oldprice">${fmt(p.compare)}</span></div>
+  <div class="pbottom"><span class="pmeta">${q?`${q} in cart`:"Ready to add"}</span>
+  ${q?`<div class="qty"><button data-minus="${p.id}">−</button><b>${q}</b><button data-plus="${p.id}">+</button></div>`:`<button class="addbtn" data-plus="${p.id}" aria-label="Add ${esc(p.name)}">+</button>`}
+  </div></article>`;
+}
+function attachProductButtons(root){
+ root.querySelectorAll("[data-plus]").forEach(b=>b.addEventListener("click",()=>addToCart(Number(b.dataset.plus),1)));
+ root.querySelectorAll("[data-minus]").forEach(b=>b.addEventListener("click",()=>addToCart(Number(b.dataset.minus),-1)));
+}
+function renderFeatured(){
+ const visible=[];
+ for(let i=0;i<Math.min(6,P.length);i++)visible.push(P[(carouselStart+i)%P.length]);
+ $("featuredProducts").innerHTML=visible.map(productCard).join("");
+ attachProductButtons($("featuredProducts"));
+}
+function currentQuery(){return $("shopSearch").value.trim().toLowerCase()}
+function renderAllProducts(){
+ const q=currentQuery();
+ let items=P.filter(p=>(activeCategory==="All"||p.category===activeCategory)&&
+ [p.name,p.brand,p.category,p.unit].join(" ").toLowerCase().includes(q));
+ const sort=$("sortFilter").value;
+ if(sort==="low")items.sort((a,b)=>a.price-b.price);
+ if(sort==="high")items.sort((a,b)=>b.price-a.price);
+ if(sort==="name")items.sort((a,b)=>a.name.localeCompare(b.name));
+ $("resultCount").textContent=`Showing ${items.length} product${items.length===1?"":"s"}`;
+ $("shopTitle").textContent=activeCategory==="All"?"All Grocery Products":activeCategory;
+ if(items.length){
+  $("allProducts").innerHTML=items.map(productCard).join("");
+ }else{
+  $("allProducts").innerHTML=`<div class="empty">
+   <div class="big">🛍️</div><h3>Add this product & get a reward of Rs. 5!</h3>
+   <p>We couldn't find “${esc($("shopSearch").value.trim())}” in our catalogue. Suggest it below and earn a Rs. 5 demo reward.</p>
+   <div class="suggest"><input id="suggestInput" value="${esc($("shopSearch").value.trim())}" placeholder="Enter product name"><button class="rewardbtn" id="suggestButton">＋ Add & earn Rs. 5</button></div>
+   <p class="reward-note">Your demo reward balance: ${fmt(rewardBalance)}</p>
+  </div>`;
+  $("suggestButton").addEventListener("click",submitSuggestion);
+  $("suggestInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();submitSuggestion()}});
+ }
+ attachProductButtons($("allProducts"));
+}
+function showAll(){
+ activeCategory="All";$("categoryFilter").value="All";$("shopSearch").value="";$("topSearch").value="";
+ renderCategories();renderAllProducts();$("shop").scrollIntoView({behavior:"smooth"});
+}
+function addToCart(id,delta){
+ const p=P.find(x=>x.id===id);if(!p)return;
+ cart[id]=Math.max(0,(cart[id]||0)+delta);
+ if(!cart[id])delete cart[id];
+ updateCart();renderFeatured();renderAllProducts();
+ if(delta>0)toast(p.name+" added to cart");
+}
+function updateCart(){
+ const ids=Object.keys(cart);
+ const count=ids.reduce((s,id)=>s+cart[id],0);
+ $("cartCount").textContent=count;
+ const subtotal=ids.reduce((s,id)=>{const p=P.find(x=>x.id===Number(id));return s+p.price*cart[id]},0);
+ const savings=ids.reduce((s,id)=>{const p=P.find(x=>x.id===Number(id));return s+Math.max(0,p.compare-p.price)*cart[id]},0);
+ const delivery=count?300:0;
+ $("cartSubtotal").textContent=fmt(subtotal);
+ $("cartSavings").textContent=fmt(savings);
+ $("deliveryFee").textContent=fmt(delivery);
+ $("cartTotal").textContent=fmt(subtotal+delivery);
+ $("cartItems").innerHTML=ids.length?ids.map(id=>{
+  const p=P.find(x=>x.id===Number(id));
+  return `<div class="cart-item"><div class="cart-emoji">${p.emoji}</div><div class="cart-info"><strong>${esc(p.name)}</strong><p>${fmt(p.price)} × ${cart[id]} = <b>${fmt(p.price*cart[id])}</b></p><div class="qty"><button data-minus="${id}">−</button><b>${cart[id]}</b><button data-plus="${id}">+</button></div></div></div>`;
+ }).join(""):'<div class="empty"><div class="big">🛒</div><h3>Your cart is empty</h3><p>Add your favourite grocery products to get started.</p></div>';
+ attachProductButtons($("cartItems"));
+}
+function openCart(){updateCart();$("cartOverlay").classList.add("open")}
+function closeCart(){$("cartOverlay").classList.remove("open")}
+function submitSuggestion(){
+ const input=$("suggestInput");
+ if(!input)return;
+ const name=input.value.trim();
+ if(name.length<2){toast("Please enter a product name.");return}
+ const key=name.toLowerCase();
+ if(P.some(p=>p.name.toLowerCase()===key)||rewardNames.has(key)){
+  toast("This product or suggestion has already been added.");return;
+ }
+ suggestions.unshift({name,created:new Date().toISOString()});
+ rewardNames.add(key);
+ rewardBalance+=5;
+ saveRewards();
+ toast("Product suggested! Rs. 5 demo reward added.");
+ renderAllProducts();
+}
+function runSearch(value){
+ $("topSearch").value=value;
+ $("shopSearch").value=value;
+ activeCategory="All";$("categoryFilter").value="All";
+ renderCategories();renderAllProducts();
+ $("shop").scrollIntoView({behavior:"smooth"});
+}
+$("searchForm").addEventListener("submit",e=>{e.preventDefault();runSearch($("topSearch").value)});
+$("topSearch").addEventListener("input",()=>{$("shopSearch").value=$("topSearch").value;activeCategory="All";$("categoryFilter").value="All";renderAllProducts()});
+$("shopSearch").addEventListener("input",()=>{
+ $("topSearch").value=$("shopSearch").value;
+ activeCategory="All";$("categoryFilter").value="All";
+ renderCategories();renderAllProducts();
+});
+$("categoryFilter").addEventListener("change",()=>{
+ activeCategory=$("categoryFilter").value;renderCategories();renderAllProducts();
+});
+$("sortFilter").addEventListener("change",renderAllProducts);
+$("prevSlide").addEventListener("click",()=>{carouselStart=(carouselStart-1+P.length)%P.length;renderFeatured()});
+$("nextSlide").addEventListener("click",()=>{carouselStart=(carouselStart+1)%P.length;renderFeatured()});
+$("openCart").addEventListener("click",openCart);
+$("closeCart").addEventListener("click",closeCart);
+$("cartOverlay").addEventListener("click",e=>{if(e.target===$("cartOverlay"))closeCart()});
+$("checkoutBtn").addEventListener("click",()=>{
+ if(!Object.keys(cart).length){toast("Your cart is empty.");return}
+ closeCart();$("checkoutModal").classList.add("open");
+});
+$("rewardOpen").addEventListener("click",()=>{$("rewardModal").classList.add("open");updateRewardUI()});
+document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>$(b.dataset.close).classList.remove("open")));
+document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("open")}));
+$("checkoutForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const f=new FormData(e.target);
+ const ids=Object.keys(cart);
+ const subtotal=ids.reduce((s,id)=>s+P.find(p=>p.id===Number(id)).price*cart[id],0);
+ const savings=ids.reduce((s,id)=>{const p=P.find(p=>p.id===Number(id));return s+Math.max(0,p.compare-p.price)*cart[id]},0);
+ const lines=ids.map(id=>{const p=P.find(p=>p.id===Number(id));return `${p.name} (${cart[id]} x ${fmt(p.price)}) = ${fmt(p.price*cart[id])}`});
+ const order=`RASHAN MART - DEMO ORDER SUMMARY
+Name: ${f.get("name")}
+Phone: ${f.get("phone")}
+Area: ${f.get("area")}
+Address: ${f.get("address")}
+Payment: ${f.get("payment")}
+
+ITEMS:
+${lines.join("\n")}
+
+Subtotal: ${fmt(subtotal)}
+Estimated savings: ${fmt(savings)}
+Estimated delivery: ${fmt(300)}
+TOTAL: ${fmt(subtotal+300)}
+
+NOTE: This is a browser-generated demo summary, not a confirmed order. Prices and availability must be verified.`;
+ const w=window.open("","_blank");
+ if(w){
+  w.document.write("<!doctype html><html><head><meta charset='utf-8'><title>Order Summary</title><style>body{font-family:Arial;max-width:700px;margin:35px auto;padding:20px;line-height:1.6}pre{white-space:pre-wrap;font-family:Arial}button{padding:12px 20px;background:#d71920;color:white;border:0;border-radius:8px;cursor:pointer}@media print{button{display:none}}</style></head><body><h2>RASHAN MART</h2><pre>"+esc(order)+"</pre><button onclick='window.print()'>Print / Save PDF</button></body></html>");
+  w.document.close();
+ }else{
+  const blob=new Blob([order],{type:"text/plain"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="rashan-mart-order.txt";a.click();URL.revokeObjectURL(a.href);
+ }
+ $("checkoutModal").classList.remove("open");
+ toast("Demo order summary generated.");
+});
+renderCategories();
+renderFeatured();
+renderAllProducts();
+updateCart();
+updateRewardUI();
+</script>
+</body>
+</html>
