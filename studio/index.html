@@ -30,6 +30,21 @@ html,body{height:100%;overflow:hidden}body{background:#0d1117;color:#edf3fa}head
 @media(max-width:1100px){.layout{grid-template-columns:220px minmax(360px,1fr) 240px;gap:7px}.shell{padding:7px}.panel{padding:10px}.sidebar #scale .swara-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#rightInspector .take-actions{gap:3px}}
 @media(max-width:800px){html,body{height:auto;overflow:auto}.shell{height:auto}.layout{height:auto;display:flex;flex-direction:column}.sidebar{height:auto;max-height:38vh}.content{display:contents}#record{order:1;min-height:560px}#timeline{order:2;height:300px}#rightInspector{order:3;height:auto;overflow:visible}#record .wave{height:150px!important;flex:none}.sidebar #accomp,.sidebar #scale{max-height:none}.piano-keyboard{height:100px}}
 
+
+/* Final repair: visible piano geometry and dependable recording controls */
+#record{overflow:hidden!important}
+#record .wave{height:clamp(95px,15vh,150px)!important;min-height:95px!important;flex:none!important}
+.piano-panel{display:block!important;min-height:135px;flex:none!important;overflow:hidden}
+.piano-keyboard{height:clamp(86px,12vh,118px)!important;display:block!important;position:relative!important;overflow:hidden!important;min-height:86px;background:#dce4ed;border-radius:0 0 6px 6px}
+.piano-white-row{position:absolute;inset:0;display:flex;width:100%;height:100%}
+.piano-keyboard .piano-key{height:100%;min-width:0;flex:1 1 0;border-radius:0 0 5px 5px;position:relative;padding:0 0 6px;font-size:10px;z-index:1}
+.piano-keyboard .piano-key.black{position:absolute;top:0;height:64%;width:20px;min-width:20px;flex:none;border:0;padding:0;z-index:3;overflow:visible;background:transparent;box-shadow:none}
+.piano-keyboard .piano-key.black span{left:0;top:0;width:100%;height:100%;padding-bottom:5px}
+.piano-keyboard .piano-key.active{background:linear-gradient(#42e58c,#15a85b)!important}
+#recordBtn.active{background:#a51e38!important;border-color:#ff7185!important;box-shadow:0 0 0 5px #ff526522,0 0 18px #ff526566!important}
+#stopVocal{min-width:100px;font-weight:750}
+@media(max-width:800px){#record{overflow:visible!important}.piano-keyboard{height:100px!important}#record .wave{height:125px!important}}
+
 </style></head>
 <body>
 <header><div class="brand"><div class="logo">MS</div><div>MATAM STUDIO<small>VOCAL • SUR • ACCOMPANIMENT</small></div></div><div class="header-right"><span class="live" id="engineStatus">● AUDIO ENGINE READY</span><button class="stop" id="stopAll">■ STOP ALL</button><button class="gold" id="downloadMix">↓ Export vocal</button></div></header>
@@ -61,7 +76,7 @@ html,body{height:100%;overflow:hidden}body{background:#0d1117;color:#edf3fa}head
 </main></div></div>
 <script>
 (()=>{'use strict';
-const $=id=>document.getElementById(id);let dbPromise=null;function openDB(){if(dbPromise)return dbPromise;dbPromise=new Promise((resolve,reject)=>{if(!('indexedDB' in window)){reject(new Error('IndexedDB unavailable'));return}let req=indexedDB.open('MatamStudioDB',1);req.onupgradeneeded=()=>{let d=req.result;if(!d.objectStoreNames.contains('items'))d.createObjectStore('items',{keyPath:'key'})};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)});return dbPromise}async function dbPut(item){let d=await openDB();return new Promise((resolve,reject)=>{let tx=d.transaction('items','readwrite');tx.objectStore('items').put(item);tx.oncomplete=()=>resolve(true);tx.onerror=()=>reject(tx.error)})}async function dbAll(){let d=await openDB();return new Promise((resolve,reject)=>{let tx=d.transaction('items','readonly'),r=tx.objectStore('items').getAll();r.onsuccess=()=>resolve(r.result||[]);r.onerror=()=>reject(r.error)})}async function dbDelete(key){let d=await openDB();return new Promise((resolve,reject)=>{let tx=d.transaction('items','readwrite');tx.objectStore('items').delete(key);tx.oncomplete=()=>resolve(true);tx.onerror=()=>reject(tx.error)})}let ctx=null,micCtx=null,stream=null,recorder=null,chunks=[],recording=false,recStart=0,timer=null,analyser=null,micGain=null,raf=null,takes=[],currentTake=null,activeVocal=null;
+const $=id=>document.getElementById(id);let dbPromise=null;function openDB(){if(dbPromise)return dbPromise;dbPromise=new Promise((resolve,reject)=>{if(!('indexedDB' in window)){reject(new Error('IndexedDB unavailable'));return}let req=indexedDB.open('MatamStudioDB',1);req.onupgradeneeded=()=>{let d=req.result;if(!d.objectStoreNames.contains('items'))d.createObjectStore('items',{keyPath:'key'})};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)});return dbPromise}async function dbPut(item){let d=await openDB();return new Promise((resolve,reject)=>{let tx=d.transaction('items','readwrite');tx.objectStore('items').put(item);tx.oncomplete=()=>resolve(true);tx.onerror=()=>reject(tx.error)})}async function dbAll(){let d=await openDB();return new Promise((resolve,reject)=>{let tx=d.transaction('items','readonly'),r=tx.objectStore('items').getAll();r.onsuccess=()=>resolve(r.result||[]);r.onerror=()=>reject(r.error)})}async function dbDelete(key){let d=await openDB();return new Promise((resolve,reject)=>{let tx=d.transaction('items','readwrite');tx.objectStore('items').delete(key);tx.oncomplete=()=>resolve(true);tx.onerror=()=>reject(tx.error)})}let ctx=null,micCtx=null,stream=null,recorder=null,chunks=[],recording=false,recordingStarting=false,recordingFinalizing=false,recStart=0,timer=null,analyser=null,micGain=null,raf=null,takes=[],currentTake=null,activeVocal=null;
 let beatUrl=null,beatPlaying=false,tanPlaying=false,tanTimer=null,sargamTimer=null,chordTimer=null,loopTimers=[],sargamVoices=[],selectedNotes=new Set([0,2,4,5,7,9,11]),chordIndex=0;
 const names=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];const labels=['Sa','komal Re','Re','komal Ga','Ga','Ma','tivra Ma','Pa','komal Dha','Dha','komal Ni','Ni'];const scales={major:[0,2,4,5,7,9,11],minor:[0,2,3,5,7,8,10],bhairav:[0,1,4,5,7,8,11],pentatonic:[0,2,4,7,9],chromatic:[0,1,2,3,4,5,6,7,8,9,10,11]};
 function audio(){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==='suspended')ctx.resume().catch(()=>{});return ctx}async function audioReady(){const c=audio();if(c.state==='suspended')await c.resume();return c}function status(s){$('engineStatus').textContent='● '+s.toUpperCase()}function rootPc(){return names.indexOf($('root').value)}function rootMidi(){return 12*(Number($('octave').value)+1)+rootPc()}function freqSemi(semi){return 440*Math.pow(2,(rootMidi()+semi-69)/12)}function fmt(s){s=Math.max(0,Math.floor(s||0));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
@@ -110,48 +125,48 @@ function releaseMic(){
 }
 function drawWave(a){let cv=$('wave'),g=cv.getContext('2d');g.clearRect(0,0,cv.width,cv.height);g.strokeStyle='#e8bf75';g.lineWidth=2;g.beginPath();if(a){let d=new Uint8Array(a.fftSize);a.getByteTimeDomainData(d);for(let i=0;i<d.length;i++){let x=i/(d.length-1)*cv.width,y=d[i]/255*cv.height;if(!i)g.moveTo(x,y);else g.lineTo(x,y)}}else{for(let x=0;x<cv.width;x++){let y=cv.height/2+Math.sin(x*.05)*Math.sin(x*.013)*25;if(!x)g.moveTo(x,y);else g.lineTo(x,y)}}g.stroke()}
 async function startRecording(){
- if(recording)return;
+ if(recording||recordingStarting||recordingFinalizing)return;
+ recordingStarting=true;
+ $('recordBtn').disabled=true;$('recStatus').textContent='Requesting microphone…';$('recHint').textContent='Allow microphone access in your browser.';
  try{
   await ensureMic();
-  // Resume the instrument context from this user gesture; never pause or restart backing players.
+  if(!recordingStarting){releaseMic();return;}
   await audioReady();
+  if(!recordingStarting){releaseMic();return;}
+  if(!window.MediaRecorder)throw new Error('MediaRecorder is not supported. Please use Chrome or Edge.');
   chunks=[];
-  const opts={};if(window.MediaRecorder?.isTypeSupported?.('audio/webm;codecs=opus'))opts.mimeType='audio/webm;codecs=opus';
-  const activeRecorder=new MediaRecorder(stream,opts);recorder=activeRecorder;
+  const preferred=['audio/webm;codecs=opus','audio/webm','audio/mp4'];
+  const mimeType=preferred.find(t=>MediaRecorder.isTypeSupported?.(t));
+  const activeRecorder=new MediaRecorder(stream,mimeType?{mimeType}:undefined);recorder=activeRecorder;
   activeRecorder.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};
-  activeRecorder.onerror=e=>{console.error('Recorder error',e);$('recHint').textContent='Recording error. Please try again.'};
+  activeRecorder.onerror=e=>{console.error('Recorder error',e);$('recHint').textContent='Recording error: '+(e.error?.message||'please try again')};
   activeRecorder.onstop=async()=>{
    try{
     const mime=activeRecorder.mimeType||chunks[0]?.type||'audio/webm';
     const blob=new Blob(chunks,{type:mime});
-    // Stop the physical mic immediately after the final recorder chunk arrives; saving to IndexedDB can continue independently.
     releaseMic();
-    if(!blob.size)throw new Error('Empty recording');
+    if(!blob.size)throw new Error('No audio data was captured. Check browser microphone permission and try again.');
     const url=URL.createObjectURL(blob),t={id:Date.now(),name:'Verse '+(takes.length+1),blob,url,duration:(Date.now()-recStart)/1000,tuned:false,final:false};
     takes.unshift(t);currentTake=t;renderTakes();$('duration').textContent=fmt(t.duration);
-    try{await dbPut({key:'take:'+t.id,id:t.id,name:t.name,blob:t.blob,duration:t.duration,tuned:t.tuned,final:t.final});$('recHint').textContent='Recording saved. Click Play to listen.'}
-    catch(err){console.warn('Take persistence failed',err);$('recHint').textContent='Recording ready for this session; browser storage could not save it.'}
+    try{await dbPut({key:'take:'+t.id,id:t.id,name:t.name,blob:t.blob,duration:t.duration,tuned:t.tuned,final:t.final});$('recHint').textContent='Recording saved. Press Play to listen.'}
+    catch(err){console.warn('Take persistence failed',err);$('recHint').textContent='Take recorded for this session, but browser storage could not save it.'}
     status('Vocal saved');
-   }catch(err){console.error(err);$('recHint').textContent='Recording could not be saved. Please record again.'}
-   finally{
-    // Release microphone permission only after MediaRecorder has emitted its final data.
-    if(recorder===activeRecorder)recorder=null;
-    releaseMic();
-    $('recordBtn').classList.remove('active');$('recStatus').textContent='Ready';
-   }
+   }catch(err){console.error(err);$('recHint').textContent=err.message||'Recording could not be saved. Please record again.'}
+   finally{if(recorder===activeRecorder)recorder=null;releaseMic();recording=false;recordingStarting=false;recordingFinalizing=false;$('recordBtn').disabled=false;$('recordBtn').classList.remove('active');$('recordBtn').textContent='●';$('recStatus').textContent='Ready';clearInterval(timer);timer=null;}
   };
-  activeRecorder.start(250);recording=true;recStart=Date.now();
-  $('recordBtn').classList.add('active');$('recStatus').textContent='Recording…';$('recHint').textContent='Recording microphone. Beat, tanpura and harmonium continue independently.';
+  activeRecorder.start(250);recording=true;recordingStarting=false;recStart=Date.now();
+  $('recordBtn').disabled=false;$('recordBtn').classList.add('active');$('recordBtn').textContent='Ⅱ';$('recStatus').textContent='Recording…';$('recHint').textContent='Recording microphone. Beat, tanpura and harmonium keep playing.';
   clearInterval(timer);timer=setInterval(()=>$('timer').textContent=fmt((Date.now()-recStart)/1000),200);status('Recording vocals');
- }catch(e){console.error(e);releaseMic();recording=false;$('recordBtn').classList.remove('active');$('recStatus').textContent='Ready';alert(e.message||'Could not start microphone recording.');$('recHint').textContent=e.message||'Microphone could not start.'}
+ }catch(e){console.error(e);recordingStarting=false;recording=false;releaseMic();$('recordBtn').disabled=false;$('recordBtn').classList.remove('active');$('recordBtn').textContent='●';$('recStatus').textContent='Ready';$('recHint').textContent=e.message||'Microphone could not start.';status('Microphone unavailable');}
 }
 function stopRecording(){
+ if(recordingStarting&&!recording){recordingStarting=false;releaseMic();$('recordBtn').disabled=false;$('recordBtn').classList.remove('active');$('recordBtn').textContent='●';$('recStatus').textContent='Ready';$('recHint').textContent='Microphone request cancelled.';return;}
+ if(recordingFinalizing)return;
  if(!recording){if(stream&&!recorder)releaseMic();return;}
- recording=false;clearInterval(timer);timer=null;
- $('recordBtn').classList.remove('active');$('recStatus').textContent='Saving…';$('timer').textContent=fmt((Date.now()-recStart)/1000);
+ recording=false;recordingFinalizing=true;clearInterval(timer);timer=null;$('recordBtn').classList.remove('active');$('recordBtn').textContent='●';$('recStatus').textContent='Saving…';$('timer').textContent=fmt((Date.now()-recStart)/1000);
  const activeRecorder=recorder;
- if(activeRecorder&&activeRecorder.state!=='inactive'){try{activeRecorder.stop()}catch(e){console.error(e);releaseMic()}}
- else releaseMic();
+ if(activeRecorder&&activeRecorder.state!=='inactive'){try{activeRecorder.requestData();activeRecorder.stop()}catch(e){console.error(e);releaseMic();recordingStarting=false;$('recHint').textContent='Could not stop recorder cleanly: '+e.message}}
+ else{releaseMic();recordingStarting=false;recordingFinalizing=false;$('recordBtn').disabled=false;$('recStatus').textContent='Ready'}
 }
 $('inputGain').oninput=()=>{$('gainOut').textContent=$('inputGain').value+'%';if(micGain)micGain.gain.value=+$('inputGain').value/100};$('vocalVol').oninput=()=>$('vocalOut').textContent=$('vocalVol').value+'%';
 ['bass','mid','treble'].forEach(id=>$(id).oninput=()=>{if(activeVocalNodes.length){let node=activeVocalNodes.find(n=>n.type==='lowshelf'&&id==='bass')||activeVocalNodes.find(n=>n.type==='peaking'&&id==='mid')||activeVocalNodes.find(n=>n.type==='highshelf'&&id==='treble');if(node)node.gain.value=+$(id).value}});$('echo').oninput=()=>{if(activeVocalEchoNode)activeVocalEchoNode.gain.value=+$('echo').value/100*.45};$('vocalVol').addEventListener('input',()=>{if(activeVocalGainNode)activeVocalGainNode.gain.value=Math.min(1.5,+$('vocalVol').value/100)});
@@ -218,10 +233,25 @@ const pianoActive=new Map();
 function pianoFreq(midi){return 440*Math.pow(2,(midi-69)/12)}
 function pianoStart(midi){const c=audio();const preset=$('harmoniumTone')?.value||'classic',air=(+$('harmAir')?.value||55)/100,master=c.createGain(),filter=c.createBiquadFilter();filter.type='lowpass';filter.frequency.value=preset==='warm'?1800:preset==='bright'?5200:3200;master.gain.setValueAtTime(.0001,c.currentTime);master.gain.linearRampToValueAtTime(Math.max(.001,(+$('harmVol').value/100)*.22*(.8+air*.45)),c.currentTime+.035);master.connect(filter);filter.connect(c.destination);const oscs=[];(preset==='warm'?[1,2,3,4]:preset==='bright'?[1,2,3,4,5,6]:[1,2,3,4,5]).forEach((h,i)=>{const o=c.createOscillator(),g=c.createGain();o.type='sawtooth';o.frequency.value=pianoFreq(midi)*h;g.gain.value=(1/(h**1.15))*(i===0?1:.45);o.connect(g);g.connect(master);o.start();oscs.push(o)});pianoActive.set(midi,{master,oscs});return pianoActive.get(midi)}
 function pianoStop(midi){const v=pianoActive.get(midi);if(!v)return;const c=audio();try{v.master.gain.cancelScheduledValues(c.currentTime);v.master.gain.setTargetAtTime(.0001,c.currentTime,.035);v.oscs.forEach(o=>{try{o.stop(c.currentTime+.18)}catch(e){}})}catch(e){}pianoActive.delete(midi)}
-function drawPiano(){const host=$('pianoKeyboard');if(!host)return;[...pianoActive.keys()].forEach(n=>pianoStop(n));const octaves=+$('pianoOctaves').value||2,rootMidiValue=rootMidi(),startMidi=rootMidiValue;host.innerHTML='';const total=octaves*12+1;for(let i=0;i<total;i++){const midi=startMidi+i,pc=midi%12,isBlack=[1,3,6,8,10].includes(pc),b=document.createElement('button');b.type='button';b.className='piano-key'+(isBlack?' black':'');b.dataset.midi=midi;const label=names[pc]+Math.floor(midi/12-1);if(isBlack)b.innerHTML='<span>'+names[pc]+'</span>';else b.textContent=names[pc];b.title=label;b.setAttribute('aria-label',label);b.onpointerdown=e=>{e.preventDefault();if(pianoActive.has(midi)){pianoStop(midi);b.classList.remove('active')}else{pianoStart(midi);b.classList.add('active')}};host.appendChild(b)} }
+function drawPiano(){
+ const host=$('pianoKeyboard');if(!host)return;
+ [...pianoActive.keys()].forEach(n=>pianoStop(n));
+ const octaves=+$('pianoOctaves').value||2,startMidi=rootMidi(),endMidi=startMidi+octaves*12;
+ host.innerHTML='';const whites=[],blacks=[];let whiteIndex=0;
+ for(let midi=startMidi;midi<=endMidi;midi++){
+  const pc=((midi%12)+12)%12,isBlack=[1,3,6,8,10].includes(pc),label=names[pc]+Math.floor(midi/12-1);
+  const b=document.createElement('button');b.type='button';b.className='piano-key'+(isBlack?' black':'');b.dataset.midi=midi;b.title=label;b.setAttribute('aria-label',label);
+  if(isBlack){b.innerHTML='<span>'+names[pc]+'</span>';b.style.left='0';blacks.push(b)}
+  else{b.textContent=names[pc];b.dataset.whiteIndex=whiteIndex++;whites.push(b)}
+  b.onpointerdown=e=>{e.preventDefault();if(pianoActive.has(midi)){pianoStop(midi);b.classList.remove('active')}else{pianoStart(midi);b.classList.add('active')}};
+ }
+ const row=document.createElement('div');row.className='piano-white-row';row.style.setProperty('--white-count',whites.length);whites.forEach(b=>row.appendChild(b));host.appendChild(row);
+ // Place black keys against the white-key row, using the number of white keys before each black key.
+ let passed=0;for(let midi=startMidi;midi<=endMidi;midi++){const pc=((midi%12)+12)%12;if(![1,3,6,8,10].includes(pc)){passed++;continue}const b=blacks.find(x=>+x.dataset.midi===midi);if(b){b.style.left=`calc(${passed / whites.length * 100}% - 10px)`;host.appendChild(b)}}
+}
 $('pianoOctaves').onchange=drawPiano;$('root').addEventListener('change',drawPiano);$('octave').addEventListener('change',drawPiano);$('harmStop').addEventListener('click',()=>{pianoActive.forEach((v,n)=>pianoStop(n));document.querySelectorAll('.piano-key.active').forEach(k=>k.classList.remove('active'))});
 // Keep the instrument audio engine running independently while the mic recorder is active.
-$('recordBtn').addEventListener('click',()=>{if(recording)stopRecording();else startRecording()});$('stopVocal').addEventListener('click',stopRecording);
+$('recordBtn').onclick=()=>{if(recording||recordingStarting)stopRecording();else startRecording()};$('stopVocal').onclick=stopRecording;
 const oldStopAll=stopAll;$('stopAll').addEventListener('click',()=>{pianoActive.forEach((v,n)=>pianoStop(n));document.querySelectorAll('.piano-key.active').forEach(k=>k.classList.remove('active'))});
 drawPiano();
 // Restore saved beat, takes and timeline tracks.
