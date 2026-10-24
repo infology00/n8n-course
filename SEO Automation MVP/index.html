@@ -1,0 +1,795 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrightForce AI | SEO Operations Portal</title>
+<style>
+:root{
+  --bg:#f4f6fb;
+  --surface:#ffffff;
+  --navy:#111a2e;
+  --navy2:#1b2742;
+  --blue:#4f6df5;
+  --blue-light:#eef1ff;
+  --purple:#805ad5;
+  --green:#139b70;
+  --green-light:#e6f8f0;
+  --orange:#db8a24;
+  --orange-light:#fff4e4;
+  --red:#d95454;
+  --text:#202941;
+  --muted:#8490a7;
+  --border:#e8ecf4;
+  --shadow:0 8px 28px rgba(24,39,75,.055);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app{display:flex;min-height:100vh}
+.sidebar{width:252px;background:var(--navy);color:#fff;padding:25px 16px;display:flex;flex-direction:column;flex-shrink:0}
+.brand{display:flex;align-items:center;gap:11px;padding:0 10px 28px;border-bottom:1px solid rgba(255,255,255,.09)}
+.brand-logo{width:39px;height:39px;border-radius:12px;background:linear-gradient(135deg,#6481ff,#9164e8);display:grid;place-items:center;font-size:21px;font-weight:800}
+.brand h2{font-size:15px;letter-spacing:.2px;margin:0}
+.brand p{font-size:10px;color:#9aa8c7;margin:4px 0 0}
+.workspace{margin:20px 7px;padding:12px;background:rgba(255,255,255,.06);border-radius:12px}
+.workspace small{display:block;color:#8e9bb7;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.workspace strong{font-size:12px}
+.nav-label{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:#7e8ba8;padding:15px 11px 8px}
+.nav-item{width:100%;display:flex;align-items:center;gap:12px;padding:11px 12px;border:0;background:transparent;color:#aeb8ce;border-radius:9px;text-align:left;font-size:12px;margin:2px 0;transition:.2s}
+.nav-item:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav-item.active{background:linear-gradient(90deg,#4f6df5,#685de8);color:white;box-shadow:0 6px 18px #3648ad44}
+.nav-icon{width:18px;text-align:center;font-size:15px}
+.nav-count{margin-left:auto;border-radius:6px;background:#384866;padding:3px 7px;font-size:10px}
+.sidebar-bottom{margin-top:auto;padding:16px 8px 0;border-top:1px solid rgba(255,255,255,.09)}
+.demo-note{font-size:10px;line-height:1.6;color:#9aa8c7}
+.profile{display:flex;align-items:center;gap:10px;margin-top:17px}
+.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#dce5ff;color:#3549a2;font-size:11px;font-weight:800;flex-shrink:0}
+.profile strong{font-size:11px;display:block}
+.profile small{color:#8e9bb7;font-size:10px}
+.main{flex:1;min-width:0}
+.topbar{height:75px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 30px;gap:20px}
+.breadcrumb{font-size:12px;color:var(--muted)}
+.breadcrumb strong{color:var(--text)}
+.top-actions{display:flex;align-items:center;gap:12px}
+.demo-pill{font-size:10px;color:#7255c6;background:#f0eaff;padding:7px 10px;border-radius:20px;font-weight:700}
+.icon-button{width:35px;height:35px;border:1px solid var(--border);background:#fff;border-radius:10px;color:#65708a}
+.content{padding:27px 30px 50px;max-width:1600px;margin:auto}
+.page{display:none;animation:fade .18s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:.5;transform:translateY(3px)}to{opacity:1;transform:none}}
+.page-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:23px}
+.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:var(--blue);font-weight:800;margin-bottom:9px}
+h1{font-size:26px;letter-spacing:-.7px;margin:0 0 8px}
+.subtitle{font-size:12px;color:var(--muted);line-height:1.7;margin:0;max-width:720px}
+.button{border:0;border-radius:9px;padding:10px 14px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:.2s}
+.button:hover{transform:translateY(-1px);filter:brightness(.98)}
+.primary{background:var(--blue);color:#fff;box-shadow:0 4px 12px #4f6df52b}
+.secondary{background:#fff;border:1px solid var(--border);color:#4f5b75}
+.success{background:var(--green-light);color:var(--green)}
+.warning{background:var(--orange-light);color:#a96b17}
+.danger{background:#fff0f0;color:var(--red)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:15px;padding:20px;box-shadow:var(--shadow);min-width:0}
+.card-title{font-size:13px;font-weight:800;margin:0}
+.card-subtitle{font-size:10px;color:var(--muted);margin-top:6px;line-height:1.6}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:19px}
+.grid{display:grid;gap:16px}
+.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:17px}
+.stat-card{padding:19px}
+.stat-top{display:flex;justify-content:space-between;align-items:center}
+.stat-label{font-size:11px;color:var(--muted)}
+.stat-icon{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--blue-light);color:var(--blue);font-size:16px}
+.stat-value{font-size:27px;letter-spacing:-.8px;font-weight:800;margin:16px 0 7px}
+.stat-foot{font-size:10px;color:var(--muted)}
+.positive{color:var(--green);font-weight:700}
+.two-col{grid-template-columns:minmax(0,1.35fr) minmax(280px,.85fr);margin-bottom:17px}
+.three-col{grid-template-columns:repeat(3,minmax(0,1fr))}
+.progress{height:6px;background:#edf0f7;border-radius:8px;overflow:hidden;margin-top:9px}
+.progress span{height:100%;display:block;background:linear-gradient(90deg,var(--blue),#9773ef);border-radius:8px}
+.progress-row{margin:17px 0}
+.progress-label{display:flex;justify-content:space-between;font-size:11px;gap:10px}
+.progress-label span:last-child{color:var(--muted)}
+.status{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;padding:6px 8px;border-radius:7px;white-space:nowrap}
+.status:before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}
+.status.approved{background:var(--green-light);color:var(--green)}
+.status.review{background:var(--orange-light);color:#bd791a}
+.status.progressing{background:var(--blue-light);color:var(--blue)}
+.status.draft{background:#f0f1f5;color:#78839a}
+.status.rejected{background:#fff0f0;color:var(--red)}
+.table-wrap{width:100%;overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:670px}
+th{text-align:left;background:#fafbfe;color:#929bb0;font-size:9px;text-transform:uppercase;letter-spacing:.7px;padding:12px 13px;font-weight:800;white-space:nowrap}
+td{padding:14px 13px;border-top:1px solid #eef1f6;font-size:11px;vertical-align:middle}
+td small{display:block;color:var(--muted);margin-top:5px;font-size:10px;line-height:1.5}
+.keyword{font-weight:700;color:#27334e}
+.person{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.person .avatar{width:28px;height:28px;font-size:9px}
+.person span{font-size:10px}
+.activity-list{display:flex;flex-direction:column}
+.activity{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid #eef1f6}
+.activity:last-child{border-bottom:0}
+.activity-dot{width:30px;height:30px;border-radius:9px;background:#edf1ff;color:var(--blue);display:grid;place-items:center;flex-shrink:0}
+.activity strong{font-size:11px;display:block;margin-bottom:5px}
+.activity p{font-size:10px;line-height:1.6;color:var(--muted);margin:0}
+.activity time{font-size:9px;color:#9aa3b5;display:block;margin-top:5px}
+.notice{border:1px solid #dfe6ff;background:#f6f8ff;border-radius:11px;padding:13px 15px;font-size:11px;line-height:1.7;color:#566385;margin-bottom:18px}
+.notice strong{color:#3e53b2}
+.tag{display:inline-block;padding:5px 8px;border-radius:6px;background:#f1f3fa;color:#67728b;font-size:9px;font-weight:700}
+.search-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.search{border:1px solid var(--border);border-radius:9px;padding:10px 12px;background:#fff;font-size:11px;min-width:180px;outline:none;color:var(--text)}
+.search:focus,textarea:focus,input:focus,select:focus{border-color:#a7b4ff;outline:2px solid #e6eaff}
+.search.grow{flex:1}
+select.search{cursor:pointer}
+.task-title{font-weight:800;font-size:11px}
+.task-description{font-size:10px;color:var(--muted);margin-top:5px;line-height:1.5}
+.before-after{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.preview-box{border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.preview-label{padding:11px 13px;background:#f8f9fc;display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:800}
+.preview-body{padding:16px}
+.browser-bar{display:flex;gap:5px;margin-bottom:15px}
+.browser-dot{width:7px;height:7px;border-radius:50%;background:#d8ddea}
+.mock-site{border:1px solid #edf0f5;border-radius:7px;overflow:hidden}
+.mock-header{display:flex;align-items:center;justify-content:space-between;padding:12px 11px;border-bottom:1px solid #edf0f5;font-size:9px;font-weight:800}
+.mock-logo{display:flex;align-items:center;gap:6px}
+.mock-mark{width:18px;height:18px;background:#253b66;border-radius:5px;color:white;display:grid;place-items:center;font-size:10px}
+.mock-links{color:#8993a8;font-size:8px}
+.mock-hero{padding:24px 13px;background:#f5f7fc}
+.mock-hero h3{font-size:19px;line-height:1.2;margin:0 0 9px;letter-spacing:-.5px}
+.mock-hero p{font-size:9px;line-height:1.7;color:#69758e;margin:0 0 12px}
+.mock-cta{display:inline-block;background:#375dbb;color:white;padding:8px 10px;border-radius:5px;font-size:8px}
+.mock-image{height:70px;margin-top:15px;border-radius:5px;background:linear-gradient(135deg,#c9d6eb,#e8edf5);display:grid;place-items:center;color:#617496;font-size:9px}
+.mock-section{padding:13px}
+.mock-section h4{font-size:11px;margin:0 0 8px}
+.mock-section p{font-size:8px;line-height:1.6;color:#7b879b;margin:0}
+.mock-meta{font-size:9px;padding:9px;background:#f7f8fc;color:#69758e;border-radius:6px;margin-top:10px;line-height:1.7;overflow-wrap:anywhere}
+.diff{background:#e7f8ef;border-radius:4px;padding:1px 3px;color:#13845f}
+.seo-field{padding:12px 0;border-bottom:1px solid #edf0f5}
+.seo-field:last-child{border:0}
+.seo-field label{display:block;font-size:9px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.6px;margin-bottom:7px}
+.seo-field p{font-size:11px;line-height:1.6;margin:0;overflow-wrap:anywhere}
+.seo-field textarea{width:100%;border:1px solid var(--border);border-radius:8px;padding:9px;font-size:11px;resize:vertical;min-height:55px;color:var(--text)}
+.seo-field input{width:100%;border:1px solid var(--border);border-radius:8px;padding:9px;font-size:11px;color:var(--text)}
+.field-count{font-size:9px;color:var(--muted);text-align:right;margin-top:5px}
+.approval-step{display:flex;gap:12px;position:relative;padding-bottom:19px}
+.approval-step:not(:last-child):after{content:"";position:absolute;left:14px;top:30px;bottom:0;width:1px;background:#e1e6f2}
+.step-icon{width:29px;height:29px;border-radius:50%;background:var(--blue-light);color:var(--blue);display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0;z-index:1}
+.approval-step strong{font-size:11px;display:block;margin:2px 0 5px}
+.approval-step p{font-size:10px;color:var(--muted);margin:0;line-height:1.6}
+.chip-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.chip{padding:7px 9px;border-radius:7px;background:#f1f3fa;font-size:10px;color:#66728b}
+.chip.active{background:#e8edff;color:#4c60d4}
+.blog-card h3{font-size:14px;line-height:1.45;margin:13px 0 8px}
+.blog-card p{font-size:11px;line-height:1.7;color:var(--muted)}
+.blog-meta{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+.blog-card .button{margin-top:8px}
+.integration{display:flex;align-items:center;gap:13px;padding:15px 0;border-bottom:1px solid #eef1f6}
+.integration:last-child{border:0}
+.integration-logo{width:42px;height:42px;border:1px solid var(--border);border-radius:12px;display:grid;place-items:center;font-size:15px;font-weight:900;background:#fff;color:#4f6df5}
+.integration strong{font-size:11px;display:block}
+.integration p{font-size:10px;color:var(--muted);margin:5px 0 0}
+.integration .status{margin-left:auto}
+.report-bars{display:flex;align-items:flex-end;gap:12px;height:150px;padding-top:15px}
+.report-bar{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end}
+.report-bar span{width:100%;max-width:36px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#7487ff,#5d68e7);min-height:8px}
+.report-bar small{font-size:9px;color:var(--muted)}
+.report-bar b{font-size:9px}
+.empty-state{padding:28px;text-align:center;color:var(--muted);font-size:11px}
+.modal-backdrop{position:fixed;inset:0;background:#10182e88;display:none;align-items:center;justify-content:center;padding:20px;z-index:100}
+.modal-backdrop.show{display:flex}
+.modal{width:min(720px,100%);max-height:88vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:0 25px 80px #0c163a55}
+.modal-head{padding:21px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:15px}
+.modal-head h2{font-size:17px;margin:0}
+.modal-head p{font-size:10px;color:var(--muted);margin:7px 0 0}
+.modal-body{padding:23px 24px}
+.modal-foot{padding:16px 24px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:9px;flex-wrap:wrap}
+.modal-close{background:none;border:0;font-size:23px;color:var(--muted)}
+.form-label{display:block;font-size:10px;font-weight:800;margin:13px 0 7px}
+.form-control{width:100%;padding:11px;border:1px solid var(--border);border-radius:8px;font-size:11px;color:var(--text)}
+textarea.form-control{min-height:80px;resize:vertical}
+.toast{position:fixed;bottom:24px;right:24px;background:#17233c;color:white;border-radius:11px;padding:14px 18px;font-size:11px;box-shadow:var(--shadow);z-index:200;display:none;max-width:360px;line-height:1.6}
+.toast.show{display:block;animation:fade .2s}
+.footer-note{text-align:center;font-size:10px;color:#9aa3b5;margin-top:22px;line-height:1.7}
+.mobile-menu{display:none}
+@media(max-width:1100px){
+ .sidebar{width:215px}.content{padding:23px 20px}.topbar{padding:0 20px}
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .two-col{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+ .sidebar{display:none;position:fixed;z-index:80;inset:0 auto 0 0;width:260px;overflow:auto}
+ .sidebar.open{display:flex}
+ .mobile-menu{display:inline-flex}
+ .content{padding:19px 13px 35px}.topbar{height:63px;padding:0 13px}
+ .topbar .breadcrumb{font-size:10px}.demo-pill{display:none}
+ .page-heading{flex-direction:column}.page-heading .button{align-self:flex-start}
+ .stats{gap:10px}.stat-card{padding:14px}.stat-value{font-size:23px}
+ .before-after{grid-template-columns:1fr}
+ .three-col{grid-template-columns:1fr}
+ h1{font-size:23px}.card{padding:15px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-logo">B</div>
+      <div><h2>BrightForce AI</h2><p>SEO OPERATIONS PLATFORM</p></div>
+    </div>
+    <div class="workspace">
+      <small>Active workspace</small>
+      <strong>Bright Force Electrical ↗</strong>
+    </div>
+    <div class="nav-label">Overview</div>
+    <button class="nav-item active" data-page="dashboard"><span class="nav-icon">▦</span>Dashboard</button>
+    <button class="nav-item" data-page="seo-tasks"><span class="nav-icon">✓</span>SEO Tasks <span class="nav-count" id="taskCount">4</span></button>
+    <button class="nav-item" data-page="keywords"><span class="nav-icon">⌕</span>Keyword Research</button>
+    <button class="nav-item" data-page="page-optimizer"><span class="nav-icon">⌘</span>Page Optimizer</button>
+    <div class="nav-label">Content & People</div>
+    <button class="nav-item" data-page="blog-studio"><span class="nav-icon">▤</span>Blog Studio</button>
+    <button class="nav-item" data-page="team"><span class="nav-icon">♙</span>Team & Approvals</button>
+    <button class="nav-item" data-page="activity"><span class="nav-icon">◷</span>Activity Log</button>
+    <div class="nav-label">Performance</div>
+    <button class="nav-item" data-page="reports"><span class="nav-icon">▥</span>Reports & Insights</button>
+    <button class="nav-item" data-page="integrations"><span class="nav-icon">⎔</span>Integrations</button>
+    <button class="nav-item" data-page="settings"><span class="nav-icon">⚙</span>Workflow Settings</button>
+    <div class="sidebar-bottom">
+      <div class="demo-note">Interactive product walkthrough<br>Illustrative data · No live connections</div>
+      <div class="profile">
+        <div class="avatar" style="background:#e6dfff;color:#7050b5">AD</div>
+        <div><strong>Alex Morgan</strong><small>SEO Operations Manager</small></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="icon-button mobile-menu" id="menuBtn" aria-label="Open navigation">☰</button>
+        <div class="breadcrumb">BrightForce AI <span style="padding:0 7px">/</span> <strong id="crumb">Dashboard</strong></div>
+      </div>
+      <div class="top-actions">
+        <span class="demo-pill">● DEMO ENVIRONMENT</span>
+        <button class="icon-button" title="Notifications" onclick="toast('Demo notifications: 2 tasks awaiting review.')">♧</button>
+        <div class="avatar" style="width:32px;height:32px">AD</div>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <section class="page active" id="page-dashboard">
+        <div class="page-heading">
+          <div><div class="eyebrow">SEO command centre</div><h1>Good morning, Alex 👋</h1><p class="subtitle">Your team's SEO work, AI recommendations and approval workflow — in one place. Review suggested improvements before anything is published.</p></div>
+          <button class="button primary" onclick="go('seo-tasks')">＋ Review SEO tasks</button>
+        </div>
+        <div class="notice"><strong>Demo workspace:</strong> The activity, performance figures and recommendations below are illustrative examples, not live analytics from brightforceelectrical.com.au. No website changes are published from this prototype.</div>
+        <div class="grid stats">
+          <div class="card stat-card"><div class="stat-top"><span class="stat-label">SEO opportunities</span><span class="stat-icon">⌕</span></div><div class="stat-value" id="statOpportunities">24</div><div class="stat-foot">Illustrative recommendations identified</div></div>
+          <div class="card stat-card"><div class="stat-top"><span class="stat-label">Awaiting approval</span><span class="stat-icon" style="background:#fff4e4;color:#d48a27">◷</span></div><div class="stat-value" id="statPending">4</div><div class="stat-foot">Need human review before application</div></div>
+          <div class="card stat-card"><div class="stat-top"><span class="stat-label">Approved this month</span><span class="stat-icon" style="background:#e6f8f0;color:#139b70">✓</span></div><div class="stat-value" id="statApproved">18</div><div class="stat-foot">Sample workflow activity</div></div>
+          <div class="card stat-card"><div class="stat-top"><span class="stat-label">Pages under review</span><span class="stat-icon" style="background:#f1eaff;color:#805ad5">▤</span></div><div class="stat-value">7</div><div class="stat-foot">Sample content optimisation queue</div></div>
+        </div>
+        <div class="grid two-col">
+          <div class="card">
+            <div class="card-head"><div><h3 class="card-title">SEO workflow overview</h3><p class="card-subtitle">Example progress across the work queue</p></div><span class="tag">Illustrative</span></div>
+            <div class="progress-row"><div class="progress-label"><span>Recommendations generated</span><span>24</span></div><div class="progress"><span style="width:100%"></span></div></div>
+            <div class="progress-row"><div class="progress-label"><span>Assigned to team</span><span>20 / 24</span></div><div class="progress"><span style="width:83%"></span></div></div>
+            <div class="progress-row"><div class="progress-label"><span>Reviewed by staff</span><span>15 / 24</span></div><div class="progress"><span style="width:62%"></span></div></div>
+            <div class="progress-row"><div class="progress-label"><span>Manager approved</span><span>18 sample items</span></div><div class="progress"><span style="width:75%"></span></div></div>
+            <p class="card-subtitle">A production version would calculate these figures from actual task records and integration data.</p>
+          </div>
+          <div class="card">
+            <div class="card-head"><div><h3 class="card-title">Approval pipeline</h3><p class="card-subtitle">Human control at every important step</p></div></div>
+            <div class="approval-step"><div class="step-icon">1</div><div><strong>AI identifies an opportunity</strong><p>Suggest a page improvement and explain its rationale.</p></div></div>
+            <div class="approval-step"><div class="step-icon">2</div><div><strong>Employee reviews and edits</strong><p>Check accuracy, service area, intent and wording.</p></div></div>
+            <div class="approval-step"><div class="step-icon">3</div><div><strong>Manager approves or returns</strong><p>Capture reviewer, decision, reason and timestamp.</p></div></div>
+            <div class="approval-step"><div class="step-icon">4</div><div><strong>Apply, verify and record</strong><p>In a connected MVP, safely publish and confirm the change.</p></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><div><h3 class="card-title">Priority work queue</h3><p class="card-subtitle">Example tasks for an electrical services business</p></div><button class="button secondary" onclick="go('seo-tasks')">View all tasks →</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Task</th><th>Assigned to</th><th>Priority</th><th>Status</th><th>Action</th></tr></thead><tbody id="dashboardTasks"></tbody></table></div>
+        </div>
+      </section>
+
+      <!-- SEO TASKS -->
+      <section class="page" id="page-seo-tasks">
+        <div class="page-heading"><div><div class="eyebrow">Execution & governance</div><h1>SEO Tasks</h1><p class="subtitle">Track every recommendation from assignment through staff review, manager approval, revisions and final verification.</p></div><button class="button primary" onclick="openNewTask()">＋ Create demo task</button></div>
+        <div class="notice"><strong>Why this matters:</strong> AI proposes work; employees validate it; managers control approval. Each action is logged in this interactive prototype.</div>
+        <div class="card">
+          <div class="search-row"><input class="search grow" id="taskSearch" placeholder="Search task, keyword, page or employee..." oninput="renderTasks()"><select class="search" id="taskFilter" onchange="renderTasks()"><option value="">All statuses</option><option>Needs review</option><option>In progress</option><option>Approved</option><option>Changes requested</option></select></div>
+          <div class="table-wrap"><table><thead><tr><th>Task / recommendation</th><th>Employee</th><th>Priority</th><th>Review time</th><th>Status</th><th>Workflow</th></tr></thead><tbody id="taskTable"></tbody></table></div>
+        </div>
+      </section>
+
+      <!-- KEYWORDS -->
+      <section class="page" id="page-keywords">
+        <div class="page-heading"><div><div class="eyebrow">Search intent & opportunities</div><h1>Keyword Research</h1><p class="subtitle">Organise service-related search themes, intended landing pages, supporting evidence and next actions. Add verified search metrics after connecting a data source.</p></div><button class="button primary" onclick="openKeywordModal()">＋ Add keyword</button></div>
+        <div class="notice"><strong>Data integrity:</strong> Search volume and difficulty are intentionally not fabricated. These sample keywords are hypotheses for research, not verified rankings or measured demand.</div>
+        <div class="grid stats">
+          <div class="card stat-card"><div class="stat-label">Sample keyword themes</div><div class="stat-value" id="keywordCount">8</div><div class="stat-foot">Illustrative research backlog</div></div>
+          <div class="card stat-card"><div class="stat-label">Local service intent</div><div class="stat-value">High</div><div class="stat-foot">Hypothesis to validate against data</div></div>
+          <div class="card stat-card"><div class="stat-label">Mapping coverage</div><div class="stat-value">75%</div><div class="stat-foot">Illustrative page-mapping estimate</div></div>
+          <div class="card stat-card"><div class="stat-label">Verified search metrics</div><div class="stat-value">—</div><div class="stat-foot">Not connected in this demo</div></div>
+        </div>
+        <div class="card">
+          <div class="search-row"><input class="search grow" id="keywordSearch" placeholder="Search keywords, page mapping, evidence..." oninput="renderKeywords()"><select class="search" id="intentFilter" onchange="renderKeywords()"><option value="">All intents</option><option>Transactional</option><option>Local</option><option>Informational</option></select></div>
+          <div class="table-wrap"><table><thead><tr><th>Keyword / intent</th><th>Suggested page</th><th>Evidence to verify</th><th>Recommendation</th><th>Assigned to</th><th>Status</th><th>Action</th></tr></thead><tbody id="keywordTable"></tbody></table></div>
+        </div>
+      </section>
+
+      <!-- PAGE OPTIMIZER -->
+      <section class="page" id="page-page-optimizer">
+        <div class="page-heading"><div><div class="eyebrow">On-page SEO workbench</div><h1>Page Optimizer</h1><p class="subtitle">Compare an illustrative existing page with an AI-assisted proposal. Edit the proposed metadata, inspect page structure and route the change for human review.</p></div><button class="button primary" onclick="saveSEOProposal()">Save demo edits</button></div>
+        <div class="notice"><strong>Sample page only:</strong> The original title, H1, image filename and layout shown here are placeholders, not a verified crawl of the live website. Replace them with actual page content before implementing recommendations.</div>
+        <div class="card" style="margin-bottom:17px">
+          <div class="card-head"><div><h3 class="card-title">Selected page</h3><p class="card-subtitle">Proposed optimisation for an emergency electrical service page</p></div><span class="status review">Human review required</span></div>
+          <label class="form-label">Target URL (sample destination)</label>
+          <input class="form-control" id="targetUrl" value="https://brightforceelectrical.com.au/emergency-electrician/" />
+          <p class="card-subtitle">Confirm that this URL exists and matches the intended service before publishing.</p>
+        </div>
+        <div class="grid two-col">
+          <div class="card">
+            <div class="card-head"><div><h3 class="card-title">Before & after page preview</h3><p class="card-subtitle">Illustrative desktop layout — not a live website screenshot</p></div></div>
+            <div class="before-after">
+              <div class="preview-box">
+                <div class="preview-label"><span>BEFORE · SAMPLE</span><span class="status draft">Placeholder</span></div>
+                <div class="preview-body"><div class="browser-bar"><i class="browser-dot"></i><i class="browser-dot"></i><i class="browser-dot"></i></div>
+                  <div class="mock-site">
+                    <div class="mock-header"><div class="mock-logo"><span class="mock-mark">B</span> BRIGHT FORCE</div><span class="mock-links">Home · Services · Contact</span></div>
+                    <div class="mock-hero"><h3>Welcome to our website</h3><p>Example placeholder hero copy. Confirm the current website content before making any change.</p><span class="mock-cta">Contact Us</span><div class="mock-image">Image: IMG_1234.jpg</div></div>
+                    <div class="mock-section"><h4>Our Services</h4><p>Service descriptions · internal links · FAQs · footer</p></div>
+                  </div>
+                  <div class="mock-meta"><b>Title:</b> Home | Bright Force Electrical<br><b>H1:</b> Welcome to our website<br><b>Image:</b> IMG_1234.jpg</div>
+                </div>
+              </div>
+              <div class="preview-box">
+                <div class="preview-label"><span>AFTER · PROPOSED</span><span class="status approved">AI suggestion</span></div>
+                <div class="preview-body"><div class="browser-bar"><i class="browser-dot"></i><i class="browser-dot"></i><i class="browser-dot"></i></div>
+                  <div class="mock-site">
+                    <div class="mock-header"><div class="mock-logo"><span class="mock-mark">B</span> BRIGHT FORCE</div><span class="mock-links">Home · Services · Contact</span></div>
+                    <div class="mock-hero"><h3 id="previewH1">Emergency Electrical Services</h3><p id="previewHero">Need an electrician? Review the service details and contact options for your area. Confirm all claims with the business.</p><span class="mock-cta">Request Assistance</span><div class="mock-image" id="previewImage">Proposed service image</div></div>
+                    <div class="mock-section"><h4>Emergency Electrical Help</h4><p>Clear service explanation · relevant service links · FAQs · contact details</p></div>
+                  </div>
+                  <div class="mock-meta"><b>Title:</b> <span id="previewTitle">Emergency Electrician | Bright Force Electrical</span><br><b>H1:</b> <span id="metaH1">Emergency Electrical Services</span><br><b>Image:</b> <span id="metaImage">emergency-electrical-services.webp</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><div><h3 class="card-title">Editable SEO recommendations</h3><p class="card-subtitle">Review each field before sending it for approval</p></div></div>
+            <div class="seo-field"><label>Title tag · proposed</label><input id="seoTitle" maxlength="70" value="Emergency Electrician | Bright Force Electrical" oninput="syncSEO()"><div class="field-count" id="titleCount">47 characters · validate final length and SERP display</div></div>
+            <div class="seo-field"><label>Meta description · proposed</label><textarea id="seoDescription" maxlength="200" oninput="syncSEO()">Need an electrician? Explore Bright Force Electrical's emergency services, service coverage and contact options. Confirm availability before publishing.</textarea><div class="field-count" id="descCount">Character count shown below</div></div>
+            <div class="seo-field"><label>H1 · proposed</label><input id="seoH1" maxlength="120" value="Emergency Electrical Services" oninput="syncSEO()"></div>
+            <div class="seo-field"><label>Image filename · proposed</label><input id="seoImage" value="emergency-electrical-services.webp" oninput="syncSEO()"></div>
+            <div class="seo-field"><label>Image alt text · proposed</label><textarea id="seoAlt">Describe the actual electrical service or scene shown in the image, without keyword stuffing.</textarea></div>
+            <div class="seo-field"><label>Internal linking recommendation</label><p>Link to the relevant electrical service, contact page and genuinely related service pages using descriptive anchor text.</p></div>
+            <div class="seo-field"><label>Why AI suggests this</label><p>Align the page title and main heading with the intended service topic, make the page's purpose clearer, and create useful pathways to related information. Validate against the actual page and search data.</p></div>
+            <div class="chip-row"><span class="chip active">Title tag</span><span class="chip active">H1 hierarchy</span><span class="chip">Internal links</span><span class="chip">Image alt text</span><span class="chip">Meta description</span></div>
+            <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:20px"><button class="button primary" onclick="sendSEOForReview()">Submit for approval</button><button class="button secondary" onclick="resetSEO()">Reset sample</button></div>
+          </div>
+        </div>
+        <div class="grid two-col">
+          <div class="card"><div class="card-head"><div><h3 class="card-title">Page anatomy checklist</h3><p class="card-subtitle">Items a real crawl and reviewer should verify</p></div></div>
+            <div id="anatomyList">
+              <div class="progress-row"><div class="progress-label"><span>Logo and header consistency</span><span>Verify</span></div><div class="progress"><span style="width:80%"></span></div></div>
+              <div class="progress-row"><div class="progress-label"><span>Single clear primary H1</span><span>Verify</span></div><div class="progress"><span style="width:90%"></span></div></div>
+              <div class="progress-row"><div class="progress-label"><span>Service content and trust signals</span><span>Verify</span></div><div class="progress"><span style="width:65%"></span></div></div>
+              <div class="progress-row"><div class="progress-label"><span>FAQs and accurate answers</span><span>Verify</span></div><div class="progress"><span style="width:50%"></span></div></div>
+              <div class="progress-row"><div class="progress-label"><span>Footer, contact and internal links</span><span>Verify</span></div><div class="progress"><span style="width:75%"></span></div></div>
+            </div>
+          </div>
+          <div class="card"><div class="card-head"><div><h3 class="card-title">Reviewer notes</h3><p class="card-subtitle">Corrections should explain what changed and why</p></div></div>
+            <label class="form-label">Employee correction / reviewer note</label>
+            <textarea class="form-control" id="seoReviewerNote" placeholder="Example: Verify the actual service coverage and after-hours availability. Do not promise emergency response times unless confirmed."></textarea>
+            <label class="form-label">Review outcome</label>
+            <select class="form-control" id="seoReviewOutcome"><option>Needs review</option><option>Approved</option><option>Changes requested</option></select>
+            <button class="button secondary" style="margin-top:13px" onclick="saveReviewNote()">Save review note</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOG STUDIO -->
+      <section class="page" id="page-blog-studio">
+        <div class="page-heading"><div><div class="eyebrow">AI-assisted content workflow</div><h1>Blog Studio</h1><p class="subtitle">Prepare helpful electrical-service content with human editing, fact checks, review notes and explicit approval before publication.</p></div><button class="button primary" onclick="openBlogModal()">＋ New draft</button></div>
+        <div class="notice"><strong>Content safety:</strong> These are sample ideas and drafts. Technical advice, safety instructions, claims, local service coverage and emergency availability require qualified review.</div>
+        <div class="grid three-col" id="blogGrid"></div>
+      </section>
+
+      <!-- TEAM -->
+      <section class="page" id="page-team">
+        <div class="page-heading"><div><div class="eyebrow">Human-in-the-loop controls</div><h1>Team & Approvals</h1><p class="subtitle">See who owns each task, when it was submitted, how long review took, what changed and who made the final decision.</p></div><button class="button secondary" onclick="go('activity')">Open audit log →</button></div>
+        <div class="grid stats">
+          <div class="card stat-card"><div class="stat-label">Assigned employees</div><div class="stat-value">3</div><div class="stat-foot">Sample roles, not actual staff records</div></div>
+          <div class="card stat-card"><div class="stat-label">Waiting on reviewer</div><div class="stat-value" id="teamPending">4</div><div class="stat-foot">Illustrative work queue</div></div>
+          <div class="card stat-card"><div class="stat-label">Review SLA target</div><div class="stat-value">1 day</div><div class="stat-foot">Configurable workflow example</div></div>
+          <div class="card stat-card"><div class="stat-label">Audit coverage</div><div class="stat-value">100%</div><div class="stat-foot">Actions in this local demo are logged</div></div>
+        </div>
+        <div class="card" style="margin-bottom:17px"><div class="card-head"><div><h3 class="card-title">Example team responsibilities</h3><p class="card-subtitle">Use real named accounts and permissions in the production MVP</p></div></div>
+          <div class="grid three-col">
+            <div style="display:flex;gap:12px;align-items:center"><div class="avatar">JM</div><div><strong style="font-size:12px">Jamie Miller</strong><p class="card-subtitle">SEO Specialist · Keyword research and page edits</p></div></div>
+            <div style="display:flex;gap:12px;align-items:center"><div class="avatar" style="background:#f8e8d5;color:#a76920">SK</div><div><strong style="font-size:12px">Sarah Khan</strong><p class="card-subtitle">Content Editor · Drafts and factual checks</p></div></div>
+            <div style="display:flex;gap:12px;align-items:center"><div class="avatar" style="background:#e7ddff;color:#7651b8">AD</div><div><strong style="font-size:12px">Alex Morgan</strong><p class="card-subtitle">SEO Manager · Final approval and governance</p></div></div>
+          </div>
+        </div>
+        <div class="card"><div class="card-head"><div><h3 class="card-title">Approval register</h3><p class="card-subtitle">Sample task timeline, reviewer decisions and revision notes</p></div></div><div class="table-wrap"><table><thead><tr><th>Task</th><th>Owner / submitted</th><th>Reviewer</th><th>Review duration</th><th>Corrections / notes</th><th>Final status</th><th>Action</th></tr></thead><tbody id="approvalTable"></tbody></table></div></div>
+      </section>
+
+      <!-- ACTIVITY -->
+      <section class="page" id="page-activity">
+        <div class="page-heading"><div><div class="eyebrow">Accountability & history</div><h1>Activity Log</h1><p class="subtitle">An audit-style history of sample task creation, employee edits, reviewer notes, approval decisions and status changes.</p></div><button class="button secondary" onclick="exportActivity()">⇩ Export CSV</button></div>
+        <div class="notice"><strong>Production requirement:</strong> Use a server-side, timestamped, access-controlled audit log. Browser-only demo history is not tamper-resistant and may disappear when the page is reloaded.</div>
+        <div class="card"><div class="card-head"><div><h3 class="card-title">Recent workflow events</h3><p class="card-subtitle">New actions from this browser session appear here</p></div><span class="tag" id="eventCount">0 events</span></div><div class="activity-list" id="activityList"></div></div>
+      </section>
+
+      <!-- REPORTS -->
+      <section class="page" id="page-reports">
+        <div class="page-heading"><div><div class="eyebrow">Measurement & decision support</div><h1>Reports & Insights</h1><p class="subtitle">Track the difference between work completed and outcomes achieved. Connect real analytics before interpreting SEO performance.</p></div><button class="button secondary" onclick="toast('Demo report prepared. Connect analytics to populate real performance data.')">Export demo report ↓</button></div>
+        <div class="notice"><strong>Important:</strong> Charts and figures on this page are illustrative. Organic clicks, impressions, CTR, ranking and leads must come from connected Google Search Console, GA4 or another verified data source.</div>
+        <div class="grid stats">
+          <div class="card stat-card"><div class="stat-label">Organic clicks</div><div class="stat-value">—</div><div class="stat-foot">Connect Search Console</div></div>
+          <div class="card stat-card"><div class="stat-label">Search impressions</div><div class="stat-value">—</div><div class="stat-foot">Connect Search Console</div></div>
+          <div class="card stat-card"><div class="stat-label">Qualified leads</div><div class="stat-value">—</div><div class="stat-foot">Connect analytics / CRM</div></div>
+          <div class="card stat-card"><div class="stat-label">Published changes</div><div class="stat-value">0</div><div class="stat-foot">This prototype does not publish</div></div>
+        </div>
+        <div class="grid two-col">
+          <div class="card"><div class="card-head"><div><h3 class="card-title">Illustrative task completion</h3><p class="card-subtitle">Sample workflow activity, not search performance</p></div></div>
+            <div class="report-bars"><div class="report-bar"><b>24</b><span style="height:100%"></span><small>Found</small></div><div class="report-bar"><b>20</b><span style="height:83%"></span><small>Assigned</small></div><div class="report-bar"><b>15</b><span style="height:62%"></span><small>Reviewed</small></div><div class="report-bar"><b>18</b><span style="height:75%"></span><small>Approved*</small></div></div><p class="card-subtitle">*Illustrative sample totals may represent separate items or workflow stages; connect real task records for consistent reporting.</p>
+          </div>
+          <div class="card"><div class="card-head"><div><h3 class="card-title">How impact should be measured</h3><p class="card-subtitle">Separate delivery metrics from business outcomes</p></div></div>
+            <div class="activity-list">
+              <div class="activity"><div class="activity-dot">✓</div><div><strong>Operational metrics</strong><p>Tasks completed, review turnaround, revision rate, approved changes and verified deployments.</p></div></div>
+              <div class="activity"><div class="activity-dot">⌕</div><div><strong>SEO metrics</strong><p>Organic clicks, impressions, CTR and query/page trends from Search Console.</p></div></div>
+              <div class="activity"><div class="activity-dot">↗</div><div><strong>Business outcomes</strong><p>Qualified enquiries, phone calls and leads with a clear measurement definition.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INTEGRATIONS -->
+      <section class="page" id="page-integrations">
+        <div class="page-heading"><div><div class="eyebrow">Data sources & automation</div><h1>Integrations</h1><p class="subtitle">The proposed MVP can connect SEO data, analytics, the CMS and workflow automation — with credentials and permissions configured securely.</p></div><span class="demo-pill">CONNECTIONS NOT ACTIVE</span></div>
+        <div class="notice"><strong>Live vs proposed:</strong> These are integration targets, not connected accounts. This standalone HTML cannot authenticate to services, fetch live metrics or publish content.</div>
+        <div class="grid two-col">
+          <div class="card"><div class="card-head"><div><h3 class="card-title">Data & analytics</h3><p class="card-subtitle">Bring verified search and website performance into one workspace</p></div></div>
+            <div class="integration"><div class="integration-logo" style="color:#4285f4">G</div><div><strong>Google Search Console</strong><p>Queries, clicks, impressions, CTR and page performance</p></div><span class="status draft">Not connected</span></div>
+            <div class="integration"><div class="integration-logo" style="color:#e8a23b">◔</div><div><strong>Google Analytics 4</strong><p>Landing pages, sessions and configured conversion events</p></div><span class="status draft">Not connected</span></div>
+            <div class="integration"><div class="integration-logo" style="color:#3478c9">W</div><div><strong>WordPress / CMS</strong><p>Read content, prepare revisions and publish approved changes</p></div><span class="status draft">Not connected</span></div>
+          </div>
+          <div class="card"><div class="card-head"><div><h3 class="card-title">Automation & AI</h3><p class="card-subtitle">Coordinate repeatable workflows and model-assisted suggestions</p></div></div>
+            <div class="integration"><div class="integration-logo" style="color:#e66b3d">n8n</div><div><strong>n8n automation</strong><p>Scheduled crawls, task routing, alerts and workflow orchestration</p></div><span class="status draft">Not connected</span></div>
+            <div class="integration"><div class="integration-logo" style="color:#139b70">AI</div><div><strong>AI recommendation engine</strong><p>Draft metadata, content briefs, explanations and revision suggestions</p></div><span class="status draft">Not connected</span></div>
+            <div class="integration"><div class="integration-logo" style="color:#805ad5">↗</div><div><strong>Rank / keyword data provider</strong><p>Search volume, difficulty and ranking data when licensed and available</p></div><span class="status draft">Not connected</span></div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:17px"><h3 class="card-title">Recommended production connection sequence</h3>
+          <div class="approval-step" style="margin-top:18px"><div class="step-icon">1</div><div><strong>Connect read-only SEO data first</strong><p>Authorise Search Console and analytics; validate account, site property and reporting windows.</p></div></div>
+          <div class="approval-step"><div class="step-icon">2</div><div><strong>Import and crawl the website</strong><p>Establish canonical URLs, existing titles, headings, indexability and content inventory.</p></div></div>
+          <div class="approval-step"><div class="step-icon">3</div><div><strong>Configure human review permissions</strong><p>Assign employees and reviewers, record decisions and define who can publish.</p></div></div>
+          <div class="approval-step"><div class="step-icon">4</div><div><strong>Enable controlled publishing</strong><p>Back up original values, publish approved changes, verify the result and retain rollback history.</p></div></div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="page" id="page-settings">
+        <div class="page-heading"><div><div class="eyebrow">Governance & configuration</div><h1>Workflow Settings</h1><p class="subtitle">Define the guardrails for recommendations, staff reviews, publishing permissions and reporting.</p></div><button class="button primary" onclick="saveSettings()">Save demo settings</button></div>
+        <div class="grid two-col">
+          <div class="card"><div class="card-head"><div><h3 class="card-title">Approval policy</h3><p class="card-subtitle">Example policy settings for the future connected MVP</p></div></div>
+            <label class="form-label">Who can approve content?</label><select class="form-control" id="settingApprover"><option>SEO Manager only</option><option>Manager or Site Administrator</option><option>Named authorised reviewers</option></select>
+            <label class="form-label">Publishing mode</label><select class="form-control" id="settingPublish"><option>Manual publish after approval</option><option>Stage for final verification</option><option>Draft-only; never auto-publish</option></select>
+            <label class="form-label">Review target</label><select class="form-control" id="settingSLA"><option>1 business day</option><option>2 business days</option><option>3 business days</option></select>
+            <label class="form-label">Require reviewer note for changes requested?</label><select class="form-control" id="settingNote"><option>Yes — required</option><option>No — optional</option></select>
+          </div>
+          <div class="card"><div class="card-head"><div><h3 class="card-title">AI quality guardrails</h3><p class="card-subtitle">Recommended safety and accuracy checks</p></div></div>
+            <div class="progress-row"><div class="progress-label"><span>Verify service claims before publish</span><span class="positive">Required</span></div></div>
+            <div class="progress-row"><div class="progress-label"><span>Do not fabricate SEO metrics</span><span class="positive">Required</span></div></div>
+            <div class="progress-row"><div class="progress-label"><span>Keep original values for rollback</span><span class="positive">Required</span></div></div>
+            <div class="progress-row"><div class="progress-label"><span>Log employee and reviewer decisions</span><span class="positive">Required</span></div></div>
+            <div class="progress-row"><div class="progress-label"><span>Check page content before changes</span><span class="positive">Required</span></div></div>
+            <div class="notice" style="margin-top:20px;margin-bottom:0">Settings currently update only this browser demo. A real product needs backend storage, role-based access controls and authenticated audit events.</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-note">BrightForce AI · SEO operations walkthrough · Sample business and workflow data only<br>Not connected to Bright Force Electrical's website, CMS, analytics or employee accounts.</div>
+    </div>
+  </main>
+</div>
+
+<!-- Reusable modal -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-head"><div><h2 id="modalTitle">Review task</h2><p id="modalSubtitle">Inspect the recommendation and record a decision.</p></div><button class="modal-close" onclick="closeModal()" aria-label="Close">×</button></div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot" id="modalFoot"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const tasks = [
+ {id:1,title:"Optimise emergency service page metadata",keyword:"emergency electrician",page:"Emergency service page",employee:"Jamie Miller",initials:"JM",priority:"High",status:"Needs review",submitted:"Today, 9:15 AM",reviewer:"Alex Morgan",duration:"Awaiting review",correction:"Verify service coverage and emergency availability before approval.",reason:"Align title and heading with the intended service topic."},
+ {id:2,title:"Review switchboard upgrade content",keyword:"switchboard upgrade electrician",page:"Switchboard service page",employee:"Jamie Miller",initials:"JM",priority:"High",status:"In progress",submitted:"Today, 10:05 AM",reviewer:"Alex Morgan",duration:"Not submitted",correction:"Confirm scope and terminology with the qualified team.",reason:"Improve clarity for visitors researching switchboard services."},
+ {id:3,title:"Draft residential electrical safety article",keyword:"electrical safety checklist",page:"Blog draft",employee:"Sarah Khan",initials:"SK",priority:"Medium",status:"Needs review",submitted:"Today, 11:20 AM",reviewer:"Alex Morgan",duration:"Awaiting review",correction:"Qualified review required for all safety advice.",reason:"Create useful educational content and link to relevant services."},
+ {id:4,title:"Improve internal links on service pages",keyword:"local electrician",page:"Service page group",employee:"Jamie Miller",initials:"JM",priority:"Medium",status:"Changes requested",submitted:"Yesterday, 3:40 PM",reviewer:"Alex Morgan",duration:"2h 15m (sample)",correction:"Use descriptive anchor text and remove unrelated links.",reason:"Improve navigation and clarify relationships between relevant pages."},
+ {id:5,title:"Update service image descriptions",keyword:"electrical services",page:"Image metadata",employee:"Jamie Miller",initials:"JM",priority:"Low",status:"Approved",submitted:"Yesterday, 10:10 AM",reviewer:"Alex Morgan",duration:"42m (sample)",correction:"Alt text revised to describe the image accurately.",reason:"Improve accessibility and contextual image information."},
+ {id:6,title:"Review blog title and search intent",keyword:"electrician maintenance tips",page:"Blog Studio",employee:"Sarah Khan",initials:"SK",priority:"Low",status:"Approved",submitted:"Yesterday, 9:00 AM",reviewer:"Alex Morgan",duration:"1h 05m (sample)",correction:"Removed an unsupported service claim.",reason:"Make the title more useful and accurate."}
+];
+let keywords = [
+ {keyword:"emergency electrician",intent:"Transactional",page:"Emergency service page",evidence:"Validate with Search Console and service inventory",recommendation:"Review dedicated service page and metadata",employee:"Jamie Miller",status:"Needs review"},
+ {keyword:"switchboard upgrade electrician",intent:"Transactional",page:"Switchboard service page",evidence:"Check queries, existing page coverage and customer language",recommendation:"Review service copy and relevant internal links",employee:"Jamie Miller",status:"In progress"},
+ {keyword:"electrical safety checklist",intent:"Informational",page:"Safety article",evidence:"Validate topic relevance and qualified safety sources",recommendation:"Create a fact-checked educational article",employee:"Sarah Khan",status:"Needs review"},
+ {keyword:"residential electrician",intent:"Local",page:"Residential services page",evidence:"Confirm service offering and location targeting",recommendation:"Clarify residential service coverage",employee:"Jamie Miller",status:"Approved"},
+ {keyword:"commercial electrician",intent:"Local",page:"Commercial services page",evidence:"Verify commercial capability and actual customer demand",recommendation:"Map to a dedicated page only if appropriate",employee:"Jamie Miller",status:"Needs review"},
+ {keyword:"electrical fault finding",intent:"Transactional",page:"Fault-finding service page",evidence:"Check existing content and verified search queries",recommendation:"Improve service explanation and contact path",employee:"Jamie Miller",status:"In progress"},
+ {keyword:"electrician maintenance tips",intent:"Informational",page:"Maintenance blog",evidence:"Review topic accuracy and search data",recommendation:"Publish helpful content after expert review",employee:"Sarah Khan",status:"Approved"},
+ {keyword:"electrician near me",intent:"Local",page:"Location / contact page",evidence:"Review Search Console, local profile and service area",recommendation:"Ensure contact and location information is accurate",employee:"Jamie Miller",status:"Needs review"}
+];
+let blogs = [
+ {id:1,title:"Electrical Safety Checklist for Homeowners",category:"Educational guide",keyword:"electrical safety checklist",status:"Needs review",author:"Sarah Khan",excerpt:"A proposed homeowner guide explaining when to seek qualified electrical help, how to recognise potential warning signs, and why electrical work should be handled by a licensed professional.",body:"INTRODUCTION\nThis is an illustrative draft for review. Electrical safety content must be checked by a qualified professional and aligned with applicable local requirements.\n\nWHEN TO SEEK PROFESSIONAL HELP\nExplain warning signs in cautious, non-diagnostic language. Do not instruct readers to open electrical equipment or perform hazardous work themselves.\n\nPREVENTIVE MAINTENANCE\nProvide general, safe reminders and clarify when a licensed electrician should inspect equipment.\n\nNEXT STEPS\nExplain the business's verified services and how customers can contact the team. Confirm all service claims before publication."},
+ {id:2,title:"What to Know Before a Switchboard Upgrade",category:"Service explainer",keyword:"switchboard upgrade electrician",status:"Draft",author:"Jamie Miller",excerpt:"A proposed explainer on the purpose of switchboards, when professional assessment may be needed, and what a customer can ask before booking electrical work.",body:"INTRODUCTION\nExplain what a switchboard does in plain language and avoid implying that every property needs the same upgrade.\n\nWHEN TO SEEK AN ASSESSMENT\nDescribe general reasons to consult a qualified electrician. Do not diagnose a property without inspection.\n\nQUESTIONS TO ASK\nSuggest asking about scope, compliance, timing and written estimates.\n\nNEXT STEPS\nConfirm the actual services offered by Bright Force Electrical before linking to the relevant service page."},
+ {id:3,title:"Understanding Common Electrical Faults",category:"Customer education",keyword:"electrical fault finding",status:"In progress",author:"Sarah Khan",excerpt:"A proposed article helping customers understand why recurring electrical issues need qualified assessment, with careful safety language and a clear route to professional help.",body:"INTRODUCTION\nExplain that electrical symptoms can have multiple causes and require professional assessment.\n\nSAFETY FIRST\nAvoid DIY repair steps. Tell readers not to touch exposed wiring or damaged electrical components and to seek qualified help.\n\nWHAT TO TELL YOUR ELECTRICIAN\nEncourage readers to describe symptoms and when they occur without investigating dangerous equipment.\n\nNEXT STEPS\nVerify the business's fault-finding service details and contact information."}
+];
+let activity = [
+ {event:"AI recommendation created",detail:"Emergency service page metadata suggestion prepared for review.",actor:"AI workflow (sample)",time:"Today · 9:05 AM",type:"ai"},
+ {event:"Task assigned to Jamie Miller",detail:"Emergency service page task added to the review queue.",actor:"Alex Morgan",time:"Today · 9:15 AM",type:"assign"},
+ {event:"Employee submitted content draft",detail:"Sample task: residential electrical safety article.",actor:"Sarah Khan",time:"Today · 11:20 AM",type:"edit"},
+ {event:"Reviewer requested revisions",detail:"Sample note: use descriptive anchor text and remove unrelated links.",actor:"Alex Morgan",time:"Yesterday · 3:40 PM",type:"review"}
+];
+let approvedCount=18;
+let nextTaskId=7;
+let currentModalAction=null;
+
+const $ = id => document.getElementById(id);
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function statusClass(s){
+ if(s==="Approved")return "approved";
+ if(s==="Needs review")return "review";
+ if(s==="In progress")return "progressing";
+ if(s==="Changes requested")return "rejected";
+ return "draft";
+}
+function statusTag(s){return `<span class="status ${statusClass(s)}">${esc(s)}</span>`}
+function toast(msg){
+ const el=$("toast");el.textContent=msg;el.classList.add("show");
+ clearTimeout(window.__toastTimer);window.__toastTimer=setTimeout(()=>el.classList.remove("show"),3300);
+}
+function go(page){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ const target=$("page-"+page);if(!target)return;
+ target.classList.add("active");
+ document.querySelectorAll(".nav-item").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+ const active=document.querySelector(`.nav-item[data-page="${page}"]`);
+ $("crumb").textContent=active?active.textContent.trim():"Dashboard";
+ $("sidebar").classList.remove("open");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll(".nav-item").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+$("menuBtn").addEventListener("click",()=>$("sidebar").classList.toggle("open"));
+
+function logEvent(event,detail,actor="Alex Morgan",type="review"){
+ const now=new Date();
+ activity.unshift({event,detail,actor,time:now.toLocaleDateString()+" · "+now.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}),type});
+ renderActivity();
+}
+function renderDashboard(){
+ const queue=tasks.filter(t=>t.status!=="Approved").slice(0,4);
+ $("dashboardTasks").innerHTML=queue.map(t=>`<tr>
+ <td><div class="task-title">${esc(t.title)}</div><small>${esc(t.page)} · ${esc(t.keyword)}</small></td>
+ <td><div class="person"><div class="avatar">${esc(t.initials)}</div><span>${esc(t.employee)}</span></div></td>
+ <td><span class="tag">${esc(t.priority)}</span></td><td>${statusTag(t.status)}</td>
+ <td><button class="button secondary" onclick="openTask(${t.id})">Review</button></td></tr>`).join("")||`<tr><td colspan="5" class="empty-state">No outstanding tasks.</td></tr>`;
+ const pending=tasks.filter(t=>t.status==="Needs review"||t.status==="Changes requested").length;
+ $("statPending").textContent=pending;
+ $("teamPending").textContent=pending;
+ $("taskCount").textContent=pending;
+ $("statApproved").textContent=approvedCount;
+}
+function renderTasks(){
+ const q=($("taskSearch")?.value||"").toLowerCase();
+ const filter=$("taskFilter")?.value||"";
+ const filtered=tasks.filter(t=>(!filter||t.status===filter)&&[t.title,t.keyword,t.page,t.employee,t.status].join(" ").toLowerCase().includes(q));
+ $("taskTable").innerHTML=filtered.map(t=>`<tr>
+ <td><div class="task-title">${esc(t.title)}</div><small>${esc(t.keyword)} · ${esc(t.page)}</small><small>${esc(t.reason)}</small></td>
+ <td><div class="person"><div class="avatar">${esc(t.initials)}</div><span>${esc(t.employee)}<small>Submitted: ${esc(t.submitted)}</small></span></div></td>
+ <td><span class="tag">${esc(t.priority)}</span></td><td>${esc(t.duration)}</td><td>${statusTag(t.status)}</td>
+ <td><button class="button secondary" onclick="openTask(${t.id})">Open task</button></td></tr>`).join("")||`<tr><td colspan="6" class="empty-state">No matching tasks found.</td></tr>`;
+ renderDashboard();
+}
+function renderKeywords(){
+ const q=($("keywordSearch")?.value||"").toLowerCase();
+ const intent=$("intentFilter")?.value||"";
+ const filtered=keywords.filter(k=>(!intent||k.intent===intent)&&[k.keyword,k.page,k.evidence,k.recommendation,k.employee,k.status].join(" ").toLowerCase().includes(q));
+ $("keywordTable").innerHTML=filtered.map((k,i)=>`<tr>
+ <td><div class="keyword">${esc(k.keyword)}</div><small>${esc(k.intent)} intent · hypothesis</small></td>
+ <td>${esc(k.page)}</td><td>${esc(k.evidence)}</td><td>${esc(k.recommendation)}</td><td>${esc(k.employee)}</td><td>${statusTag(k.status)}</td>
+ <td><button class="button secondary" onclick="keywordAction(${keywords.indexOf(k)})">Review</button></td></tr>`).join("")||`<tr><td colspan="7" class="empty-state">No matching keyword themes.</td></tr>`;
+ $("keywordCount").textContent=keywords.length;
+}
+function keywordAction(i){
+ const k=keywords[i];
+ openModal("Review keyword","Update the sample recommendation and record a workflow decision.",`
+ <div class="notice"><strong>Keyword hypothesis:</strong> ${esc(k.keyword)}. This is not verified search-volume or ranking data.</div>
+ <label class="form-label">Suggested landing page</label><input class="form-control" id="kwPage" value="${esc(k.page)}">
+ <label class="form-label">Evidence / data to verify</label><textarea class="form-control" id="kwEvidence">${esc(k.evidence)}</textarea>
+ <label class="form-label">Recommendation</label><textarea class="form-control" id="kwRecommendation">${esc(k.recommendation)}</textarea>
+ <label class="form-label">Assigned employee</label><select class="form-control" id="kwEmployee"><option ${k.employee==="Jamie Miller"?"selected":""}>Jamie Miller</option><option ${k.employee==="Sarah Khan"?"selected":""}>Sarah Khan</option></select>
+ <label class="form-label">Status</label><select class="form-control" id="kwStatus">${["Needs review","In progress","Approved","Changes requested"].map(s=>`<option ${s===k.status?"selected":""}>${s}</option>`).join("")}</select>`,
+ `<button class="button secondary" onclick="closeModal()">Cancel</button><button class="button primary" onclick="saveKeyword(${i})">Save decision</button>`);
+}
+function saveKeyword(i){
+ const k=keywords[i];k.page=$("kwPage").value;k.evidence=$("kwEvidence").value;k.recommendation=$("kwRecommendation").value;k.employee=$("kwEmployee").value;k.status=$("kwStatus").value;
+ logEvent("Keyword recommendation updated",`${k.keyword}: ${k.status}`,k.employee,"edit");
+ closeModal();renderKeywords();toast("Keyword recommendation saved in this demo.");
+}
+function openTask(id){
+ const t=tasks.find(x=>x.id===id);if(!t)return;
+ openModal("Review SEO task",t.title,`
+ <div class="grid two-col" style="gap:12px">
+ <div><label class="form-label">Assigned employee</label><div class="form-control" style="background:#fafbfe">${esc(t.employee)}</div></div>
+ <div><label class="form-label">Priority</label><div class="form-control" style="background:#fafbfe">${esc(t.priority)}</div></div>
+ </div>
+ <label class="form-label">Target page / content</label><div class="form-control" style="background:#fafbfe">${esc(t.page)}</div>
+ <label class="form-label">AI recommendation rationale</label><div class="notice" style="margin-top:0">${esc(t.reason)}</div>
+ <label class="form-label">Employee corrections / reviewer notes</label><textarea class="form-control" id="taskCorrection">${esc(t.correction)}</textarea>
+ <label class="form-label">Reviewer decision</label><select class="form-control" id="taskDecision">${["Needs review","In progress","Approved","Changes requested"].map(s=>`<option ${s===t.status?"selected":""}>${s}</option>`).join("")}</select>
+ <label class="form-label">Reviewer name</label><input class="form-control" id="taskReviewer" value="${esc(t.reviewer)}">
+ <p class="card-subtitle">Submitted: ${esc(t.submitted)} · Review duration: ${esc(t.duration)}. Times are illustrative unless generated by this current browser session.</p>`,
+ `<button class="button secondary" onclick="closeModal()">Cancel</button><button class="button primary" onclick="saveTask(${t.id})">Save review decision</button>`);
+}
+function saveTask(id){
+ const t=tasks.find(x=>x.id===id);if(!t)return;
+ const old=t.status;
+ t.correction=$("taskCorrection").value;t.status=$("taskDecision").value;t.reviewer=$("taskReviewer").value||"Reviewer";
+ if(t.status==="Approved"&&old!=="Approved"){approvedCount++;t.duration="Saved in current session";}
+ if(t.status!=="Approved"&&old==="Approved")approvedCount=Math.max(0,approvedCount-1);
+ t.duration=t.status==="Needs review"?"Awaiting review":t.status==="Approved"?"Recorded in demo session":"Updated in demo session";
+ logEvent("Task review updated",`${t.title}: ${old} → ${t.status}. Note: ${t.correction}`,t.reviewer,"review");
+ closeModal();renderTasks();renderApprovals();toast("Review decision saved. No live website changes were made.");
+}
+function renderApprovals(){
+ $("approvalTable").innerHTML=tasks.map(t=>`<tr>
+ <td><div class="task-title">${esc(t.title)}</div><small>${esc(t.page)}</small></td>
+ <td>${esc(t.employee)}<small>${esc(t.submitted)}</small></td>
+ <td>${esc(t.reviewer)}</td><td>${esc(t.duration)}</td><td>${esc(t.correction)}</td><td>${statusTag(t.status)}</td>
+ <td><button class="button secondary" onclick="openTask(${t.id})">Review</button></td></tr>`).join("");
+}
+function renderActivity(){
+ $("eventCount").textContent=activity.length+" events";
+ $("activityList").innerHTML=activity.map(a=>`<div class="activity"><div class="activity-dot">${a.type==="ai"?"✧":a.type==="assign"?"↗":a.type==="edit"?"✎":"✓"}</div><div style="flex:1"><strong>${esc(a.event)}</strong><p>${esc(a.detail)}</p><time>${esc(a.actor)} · ${esc(a.time)}</time></div></div>`).join("");
+}
+function renderBlogs(){
+ $("blogGrid").innerHTML=blogs.map(b=>`<div class="card blog-card">
+ <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span class="tag">${esc(b.category)}</span>${statusTag(b.status)}</div>
+ <h3>${esc(b.title)}</h3><p>${esc(b.excerpt)}</p>
+ <div class="blog-meta"><span class="chip">${esc(b.keyword)}</span><span class="chip">By ${esc(b.author)}</span></div>
+ <button class="button secondary" onclick="openBlog(${b.id})">Read & review draft →</button>
+ </div>`).join("");
+}
+function openBlog(id){
+ const b=blogs.find(x=>x.id===id);if(!b)return;
+ openModal("Blog draft review",b.title,`
+ <label class="form-label">Draft content</label><textarea class="form-control" id="blogBody" style="min-height:230px">${esc(b.body)}</textarea>
+ <label class="form-label">Reviewer notes / requested corrections</label><textarea class="form-control" id="blogNote" placeholder="Add fact-checking notes, required corrections or approval conditions."></textarea>
+ <label class="form-label">Review decision</label><select class="form-control" id="blogDecision">${["Draft","Needs review","In progress","Approved","Changes requested"].map(s=>`<option ${s===b.status?"selected":""}>${s}</option>`).join("")}</select>
+ <div class="notice" style="margin-top:15px"><strong>Before publication:</strong> verify all technical claims, confirm the service is offered, check internal links, review title and metadata, and obtain qualified approval where required.</div>`,
+ `<button class="button secondary" onclick="closeModal()">Cancel</button><button class="button primary" onclick="saveBlog(${b.id})">Save review</button>`);
+}
+function saveBlog(id){
+ const b=blogs.find(x=>x.id===id);if(!b)return;
+ b.body=$("blogBody").value;b.status=$("blogDecision").value;
+ const note=$("blogNote").value||"Draft reviewed; no additional note provided.";
+ logEvent("Blog draft reviewed",`${b.title}. Decision: ${b.status}. Note: ${note}`,b.author,"edit");
+ closeModal();renderBlogs();toast("Blog draft updated in demo. It has not been published.");
+}
+function openBlogModal(){
+ openModal("Create blog draft","Add a new illustrative draft to the local content queue.",`
+ <label class="form-label">Blog title</label><input class="form-control" id="newBlogTitle" placeholder="e.g. Questions to ask before an electrical upgrade">
+ <label class="form-label">Target keyword hypothesis</label><input class="form-control" id="newBlogKeyword" placeholder="Enter a topic to validate">
+ <label class="form-label">Short brief</label><textarea class="form-control" id="newBlogBody" placeholder="Describe the audience, purpose, key points and required fact checks."></textarea>
+ <label class="form-label">Assigned employee</label><select class="form-control" id="newBlogAuthor"><option>Sarah Khan</option><option>Jamie Miller</option></select>`,
+ `<button class="button secondary" onclick="closeModal()">Cancel</button><button class="button primary" onclick="createBlog()">Create draft</button>`);
+}
+function createBlog(){
+ const title=$("newBlogTitle").value.trim(),keyword=$("newBlogKeyword").value.trim(),body=$("newBlogBody").value.trim(),author=$("newBlogAuthor").value;
+ if(!title){toast("Please enter a draft title.");return}
+ blogs.unshift({id:Date.now(),title,keyword:keyword||"Not yet assigned",category:"New draft",status:"Draft",author,excerpt:body||"New draft awaiting content and factual review.",body:body||"Draft outline to be completed and fact-checked."});
+ logEvent("Blog draft created",title,author,"edit");closeModal();renderBlogs();toast("New draft created in this browser demo.");
+}
+function openNewTask(){
+ openModal("Create SEO task","Create an illustrative task for the local demo queue.",`
+ <label class="form-label">Task title</label><input class="form-control" id="newTaskTitle" placeholder="What should be reviewed?">
+ <label class="form-label">Target keyword hypothesis</label><input class="form-control" id="newTaskKeyword" placeholder="Related search theme">
+ <label class="form-label">Target page</label><input class="form-control" id="newTaskPage" placeholder="Page or content item">
+ <label class="form-label">Assigned employee</label><select class="form-control" id="newTaskEmployee"><option>Jamie Miller</option><option>Sarah Khan</option></select>
+ <label class="form-label">Priority</label><select class="form-control" id="newTaskPriority"><option>High</option><option>Medium</option><option>Low</option></select>
+ <label class="form-label">Recommendation rationale</label><textarea class="form-control" id="newTaskReason" placeholder="Why should this task be considered?"></textarea>`,
+ `<button class="button secondary" onclick="closeModal()">Cancel</button><button class="button primary" onclick="createTask()">Create task</button>`);
+}
+function createTask(){
+ const title=$("newTaskTitle").value.trim();if(!title){toast("Please enter a task title.");return}
+ const employee=$("newTaskEmployee").value;
+ const t={id:nextTaskId++,title,keyword:$("newTaskKeyword").value||"Not specified",page:$("newTaskPage").value||"Page to confirm",employee,initials:employee==="Sarah Khan"?"SK":"JM",priority:$("newTaskPriority").value,status:"Needs review",submitted:new Date().toLocaleString(),reviewer:"Alex Morgan",duration:"Awaiting review",correction:$("newTaskReason").value||"Awaiting employee and reviewer notes.",reason:$("newTaskReason").value||"New task; rationale needs validation."};
+ tasks.unshift(t);logEvent("SEO task created",title,"Alex Morgan","assign");closeModal();renderTasks();renderApprovals();toast("Task added to the local demo queue.");
+}
+function openKeywordModal(){
+ openModal("Add keyword hypothesis","Add a research theme and document how it should be validated.",`
+ <label class="form-label">Keyword</label><input class="form-control" id="newKeyword" placeholder="Enter keyword theme">
+ <label class="form-label">Intent</label><select class="form-control" id="newIntent"><option>Transactional</option><option>Local</option><option>Informational</option></select>
+ <label class="form-label">Suggested page</label><input class="form-control" id="newKeywordPage" placeholder="Relevant landing page">
+ <label class="form-label">Evidence to verify</label><textarea class="form-control" id="newKeywordEvidence" placeholder="Search Console query, source, existing page, customer language..."></textarea>
+ <label class="form-label">Recommendation</label><textarea class="form-control" id="newKeywordRec" placeholder="Next action for a reviewer"></textarea>`,
+ `<button class="button secondary" onclick="closeModal()">Cancel</button><button class="button primary" onclick="createKeyword()">Add keyword</button>`);
+}
+function createKeyword(){
+ const keyword=$("newKeyword").value.trim();if(!keyword){toast("Please enter a keyword.");return}
+ keywords.unshift({keyword,intent:$("newIntent").value,page:$("newKeywordPage").value||"To be mapped",evidence:$("newKeywordEvidence").value||"Evidence not yet collected",recommendation:$("newKeywordRec").value||"Research and review before action",employee:"Jamie Miller",status:"Needs review"});
+ logEvent("Keyword hypothesis added",keyword,"Alex Morgan","edit");closeModal();renderKeywords();toast("Keyword added. Search metrics remain unverified.");
+}
+function openModal(title,subtitle,body,foot){
+ $("modalTitle").textContent=title;$("modalSubtitle").textContent=subtitle;$("modalBody").innerHTML=body;$("modalFoot").innerHTML=foot;
+ $("modalBackdrop").classList.add("show");
+}
+function closeModal(){$("modalBackdrop").classList.remove("show")}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+function syncSEO(){
+ const title=$("seoTitle").value,h1=$("seoH1").value,img=$("seoImage").value,desc=$("seoDescription").value;
+ $("previewTitle").textContent=title||"Untitled proposed page";
+ $("previewH1").textContent=h1||"Proposed heading";
+ $("metaH1").textContent=h1||"Not provided";
+ $("metaImage").textContent=img||"Not provided";
+ $("previewImage").textContent="Proposed image: "+(img||"not provided");
+ $("titleCount").textContent=title.length+" characters · validate final length and SERP display";
+ $("descCount").textContent=desc.length+" characters · verify accuracy and display";
+}
+function saveSEOProposal(){
+ syncSEO();
+ logEvent("SEO proposal edited","Title, meta description, H1 and image fields saved in the local page preview.","Alex Morgan","edit");
+ toast("SEO proposal saved in this demo session.");
+}
+function sendSEOForReview(){
+ const title=$("seoTitle").value.trim(),h1=$("seoH1").value.trim();
+ if(!title||!h1){toast("Please complete the title and H1 before submission.");return}
+ const t={id:nextTaskId++,title:"Review proposed SEO metadata: emergency service page",keyword:"emergency electrician",page:$("targetUrl").value||"Target page to confirm",employee:"Jamie Miller",initials:"JM",priority:"High",status:"Needs review",submitted:new Date().toLocaleString(),reviewer:"Alex Morgan",duration:"Awaiting review",correction:"Review title, description, H1, image filename and alt text. Verify live page content before approval.",reason:"Proposed title: "+title+"; proposed H1: "+h1};
+ tasks.unshift(t);logEvent("SEO proposal submitted for review","Emergency page SEO fields submitted. No changes have been published.","Alex Morgan","review");
+ renderTasks();renderApprovals();toast("Submitted to the demo review queue. Nothing was published.");go("seo-tasks");
+}
+function resetSEO(){
+ $("seoTitle").value="Emergency Electrician | Bright Force Electrical";
+ $("seoDescription").value="Need an electrician? Explore Bright Force Electrical's emergency services, service coverage and contact options. Confirm availability before publishing.";
+ $("seoH1").value="Emergency Electrical Services";
+ $("seoImage").value="emergency-electrical-services.webp";
+ $("seoAlt").value="Describe the actual electrical service or scene shown in the image, without keyword stuffing.";
+ syncSEO();toast("Sample SEO fields reset.");
+}
+function saveReviewNote(){
+ const note=$("seoReviewerNote").value.trim(),decision=$("seoReviewOutcome").value;
+ if(!note){toast("Add a reviewer note before saving.");return}
+ logEvent("Page optimiser review note saved",`Decision: ${decision}. Note: ${note}`,"Alex Morgan","review");
+ toast("Reviewer note recorded in the demo audit log.");
+}
+function saveSettings(){
+ logEvent("Workflow settings updated",`Approver: ${$("settingApprover").value}; publishing: ${$("settingPublish").value}; review target: ${$("settingSLA").value}; reviewer note: ${$("settingNote").value}.`,"Alex Morgan","review");
+ toast("Demo settings saved for this session only.");
+}
+function exportActivity(){
+ const rows=[["Event","Details","Actor","Time"],...activity.map(a=>[a.event,a.detail,a.actor,a.time])];
+ const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")).join("\r\n");
+ const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download="brightforce-demo-activity.csv";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+ toast("Activity CSV exported from this browser session.");
+}
+renderDashboard();
+renderTasks();
+renderKeywords();
+renderApprovals();
+renderBlogs();
+renderActivity();
+syncSEO();
+</script>
+</body>
+</html>
