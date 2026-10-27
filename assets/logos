@@ -1,0 +1,55 @@
+from pathlib import Path
+
+# All logo assets will be created here
+folder = Path("assets/logos")
+folder.mkdir(parents=True, exist_ok=True)
+
+logos = {
+    "gohighlevel": ("GHL", "#F5A623"),
+    "hubspot": ("hub", "#FF7A59"),
+    "zoho": ("Z", "#E34B4B"),
+    "lylio": ("L", "#7367F0"),
+    "salesforce": ("SF", "#20A7E8"),
+    "pipedrive": ("P", "#20A464"),
+    "monday": ("M", "#F04F88"),
+    "clickup": ("CU", "#8B5CF6"),
+    "freshsales": ("F", "#FF8A45"),
+    "kommo": ("K", "#7C5CE7"),
+    "close": ("C", "#35B9A6"),
+    "insightly": ("I", "#F97316"),
+    "n8n": ("n8n", "#EA4B71"),
+    "make": ("M", "#9B4DFF"),
+    "zapier": ("Z", "#FF4F00"),
+    "pabbly": ("P", "#20A464"),
+    "activepieces": ("AP", "#8B5CF6"),
+    "workato": ("W", "#17B8A6"),
+    "power-automate": ("PA", "#1684D8"),
+    "albato": ("A", "#FF6B35"),
+    "ifttt": ("IF", "#EEEEEE"),
+    "integrately": ("IN", "#FFB31A"),
+    "relay": ("R", "#5B7CFA"),
+    "lindy": ("L", "#DDDDDD"),
+}
+
+for filename, (label, color) in logos.items():
+    font_size = 14 if len(label) > 2 else 19
+
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg"
+    width="64" height="64" viewBox="0 0 64 64">
+      <rect x="2" y="2" width="60" height="60" rx="15"
+        fill="#191c19" stroke="#343a32" stroke-width="2"/>
+      <circle cx="32" cy="32" r="21"
+        fill="{color}" opacity="0.16"/>
+      <text x="32" y="39"
+        text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="{font_size}"
+        font-weight="800"
+        fill="{color}">{label}</text>
+    </svg>'''
+
+    (folder / f"{filename}.svg").write_text(
+        svg, encoding="utf-8"
+    )
+
+print(f"Created {len(logos)} SVG assets in {folder}")
