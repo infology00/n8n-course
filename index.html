@@ -1,294 +1,412 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Automation with Sajjad Zaidi | AWSZ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWSZ | Automation & Business Systems</title>
 
 <style>
 :root {
-  --black: #050505;
-  --grey: #e9e9e5;
+  --black: #080908;
+  --panel: #f0f0eb;
   --lime: #d5ff45;
-  --ink: #171717;
-  --panel: #111311;
+  --text: #11120f;
+  --muted: #777970;
+  --border: rgba(0,0,0,.10);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  min-height: 100vh;
   background: var(--black);
+  color: white;
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
 }
 
 .site-header {
   width: 70%;
-  margin: 28px auto 0;
-  padding: 15px 24px;
-  background: var(--grey);
-  border: 1px solid #fff;
+  max-width: 1440px;
+  margin: 26px auto 0;
+  background: var(--panel);
+  color: var(--text);
   border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  padding: 12px 20px;
   position: relative;
   z-index: 100;
 }
 
-/* AWSZ: BLACK TEXT ONLY */
-.brand {
-  color: #000;
-  background: transparent;
-  text-decoration: none;
-  font-size: 38px;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: -2px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.nav-menu {
+.header-inner {
+  min-height: 58px;
   display: flex;
   align-items: center;
-  gap: 23px;
+  justify-content: space-between;
+  gap: 22px;
 }
 
-.nav-item { position: static; }
+.brand {
+  flex-shrink: 0;
+  text-decoration: none;
+  color: #080908;
+  font-size: 35px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -2px;
+}
 
-.nav-link {
-  display: inline-flex;
+.nav {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 0;
+  gap: 25px;
+}
+
+.nav-item {
+  position: static;
+}
+
+.nav-button,
+.nav-link {
   border: 0;
   background: transparent;
-  color: var(--ink);
-  font: 700 13px Arial, sans-serif;
+  color: #20211c;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
   text-decoration: none;
-  white-space: nowrap;
   cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 0;
 }
 
-.nav-link:hover,
-.nav-link[aria-expanded="true"] {
-  color: #759900;
-}
-
-.arrow {
+.chevron {
   width: 7px;
   height: 7px;
   border-right: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
-  transform: rotate(45deg);
-  margin-top: -4px;
+  transform: rotate(45deg) translateY(-2px);
   transition: transform .2s;
 }
 
-.nav-link[aria-expanded="true"] .arrow {
-  transform: rotate(225deg);
-  margin-top: 4px;
+.nav-item.open .chevron {
+  transform: rotate(225deg) translate(-1px,-1px);
 }
 
-/* WIDE LANDSCAPE DROPDOWNS */
-.dropdown {
-  position: absolute;
-  top: calc(100% + 12px);
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(780px, 90vw);
-  padding: 22px;
-  background: var(--panel);
-  border: 1px solid #303730;
-  border-radius: 16px;
-  box-shadow: 0 20px 55px #000a;
-  display: none;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 7px 10px;
-  z-index: 200;
-}
-
-.dropdown.open {
-  display: grid;
-  animation: appear .18s ease-out;
-}
-
-.dropdown-label {
-  grid-column: 1 / -1;
-  color: var(--lime);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 0 8px 12px;
-  border-bottom: 1px solid #303730;
-  margin-bottom: 4px;
-}
-
-/* LOCAL LOGO ASSETS */
-.tool-link {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  min-width: 0;
-  padding: 10px 8px;
-  border-radius: 8px;
-  color: #ededed;
-  font-size: 12px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background .2s, color .2s;
-}
-
-.tool-link:hover {
-  color: var(--lime);
-  background: #ffffff0b;
-}
-
-.tool-logo {
-  display: block;
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
+.talk-button {
   flex-shrink: 0;
-}
-
-.view-all {
-  grid-column: 1 / -1;
-  border-top: 1px solid #303730;
-  margin-top: 8px;
-  padding: 15px 8px 2px;
-  color: var(--lime);
-  font-size: 12px;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-/* CTA */
-.cta {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 12px;
-  padding: 14px 19px;
+  padding: 15px 18px;
+  border-radius: 11px;
   background: var(--lime);
-  color: #101010;
-  border-radius: 10px;
-  border: 0;
-  font-size: 12px;
+  color: #10110c;
+  font-size: 13px;
   font-weight: 800;
   text-decoration: none;
-  white-space: nowrap;
-  transition: transform .2s, background .2s, box-shadow .2s;
+  transition: transform .2s, background .2s;
 }
 
-.cta:hover {
-  background: #e2ff79;
-  color: #101010;
+.talk-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 22px #d5ff4530;
+  background: #c5f32e;
 }
 
-.cta-arrow {
-  font-size: 18px;
-  transition: transform .2s;
+.talk-arrow {
+  font-size: 19px;
+  line-height: 12px;
 }
 
-.cta:hover .cta-arrow { transform: translateX(4px); }
+.dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  width: 100%;
+  padding: 24px;
+  border-radius: 17px;
+  background: #f0f0eb;
+  border: 1px solid rgba(255,255,255,.3);
+  box-shadow: 0 20px 55px rgba(0,0,0,.35);
+  color: var(--text);
+}
+
+.nav-item.open .dropdown {
+  display: block;
+  animation: dropdownIn .18s ease-out;
+}
+
+@keyframes dropdownIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 19px;
+}
+
+.dropdown-heading h3 {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.dropdown-heading span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.dropdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.dropdown-link {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px;
+  text-decoration: none;
+  color: #171812;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.48);
+  border-radius: 11px;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+
+.dropdown-link:hover {
+  background: white;
+  border-color: #c4e85a;
+  transform: translateY(-2px);
+}
+
+.logo-box {
+  width: 39px;
+  height: 39px;
+  min-width: 39px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.07);
+}
+
+.logo-box svg {
+  width: 27px;
+  height: 27px;
+  display: block;
+}
+
+.item-text {
+  min-width: 0;
+}
+
+.item-text strong {
+  display: block;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.item-text small {
+  display: block;
+  color: #777970;
+  font-size: 10px;
+  margin-top: 3px;
+  line-height: 1.3;
+}
 
 .menu-toggle {
   display: none;
-  background: transparent;
   border: 0;
+  background: transparent;
   color: #111;
   font-size: 27px;
   cursor: pointer;
+  padding: 5px;
 }
 
-.mobile-cta { display: none; }
-
-@keyframes appear {
-  from { opacity: 0; translate: 0 -5px; }
-  to { opacity: 1; translate: 0 0; }
+.empty-stage {
+  width: 70%;
+  max-width: 1440px;
+  margin: 30px auto;
+  min-height: 300px;
 }
 
-/* RESPONSIVE */
-@media (max-width: 1450px) {
-  .site-header { width: 90%; gap: 16px; }
-  .nav-menu { gap: 16px; }
-  .brand { font-size: 36px; }
-}
-
-@media (max-width: 1000px) {
+/* MOBILE AND TABLET */
+@media (max-width: 1150px) {
   .site-header {
-    width: 92%;
-    margin-top: 18px;
-    padding: 14px 17px;
-    flex-wrap: wrap;
-    gap: 12px;
+    width: 90%;
+    padding: 12px 16px;
   }
 
-  .brand { font-size: 34px; }
+  .nav {
+    gap: 16px;
+  }
+
+  .nav-button,
+  .nav-link {
+    font-size: 12px;
+  }
+
+  .talk-button {
+    padding: 13px;
+  }
+
+  .dropdown-grid {
+    grid-template-columns: repeat(3, minmax(0,1fr));
+  }
+}
+
+@media (max-width: 850px) {
+  .site-header {
+    width: 94%;
+    margin-top: 14px;
+    padding: 10px 14px;
+  }
+
+  .header-inner {
+    min-height: 48px;
+  }
+
+  .brand {
+    font-size: 31px;
+  }
 
   .menu-toggle {
     display: block;
     margin-left: auto;
   }
 
-  .nav-menu {
+  .nav {
     display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
     width: 100%;
-    flex-direction: column;
+    padding: 17px;
+    background: var(--panel);
+    border-radius: 15px;
+    box-shadow: 0 20px 45px rgba(0,0,0,.3);
     align-items: stretch;
-    gap: 2px;
-    padding-top: 8px;
+    flex-direction: column;
+    gap: 4px;
   }
 
-  .nav-menu.mobile-open { display: flex; }
-  .nav-item { width: 100%; position: relative; }
+  .nav.mobile-open {
+    display: flex;
+  }
 
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-button,
   .nav-link {
     width: 100%;
     justify-content: space-between;
-    padding: 14px 5px;
+    padding: 13px 4px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .talk-button {
+    padding: 12px 14px;
+    font-size: 12px;
   }
 
   .dropdown {
     position: static;
-    left: auto;
-    top: auto;
-    transform: none;
     width: 100%;
-    margin: 3px 0 12px;
-    padding: 14px;
+    margin: 5px 0 12px;
+    padding: 13px;
     box-shadow: none;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-radius: 12px;
   }
 
-  .header-cta { display: none; }
+  .dropdown-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 7px;
+  }
 
-  .nav-menu.mobile-open .mobile-cta {
-    display: inline-flex;
-    align-self: flex-start;
-    margin: 12px 0 5px;
+  .dropdown-link {
+    padding: 9px;
+    gap: 8px;
+  }
+
+  .logo-box {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+  }
+
+  .logo-box svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .item-text strong {
+    font-size: 11px;
+  }
+
+  .item-text small {
+    display: none;
+  }
+
+  .dropdown-heading h3 {
+    font-size: 14px;
+  }
+
+  .dropdown-heading span {
+    font-size: 9px;
+  }
+
+  .empty-stage {
+    width: 94%;
   }
 }
 
-@media (max-width: 400px) {
-  .site-header { width: 94%; padding: 12px; }
-  .brand { font-size: 30px; }
-  .dropdown { padding: 10px; gap: 3px; }
-  .tool-link { font-size: 11px; gap: 6px; padding: 8px 4px; }
-  .tool-logo { width: 23px; height: 23px; }
-}
+@media (max-width: 430px) {
+  .site-header {
+    width: 96%;
+    padding: 9px 11px;
+  }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
+  .brand {
+    font-size: 28px;
+  }
+
+  .talk-button {
+    gap: 6px;
+    padding: 11px 10px;
+  }
+
+  .dropdown {
+    padding: 10px;
+  }
+
+  .dropdown-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  .dropdown-link {
+    padding: 8px 6px;
+  }
+
+  .item-text strong {
+    font-size: 10px;
   }
 }
 </style>
@@ -297,222 +415,258 @@ body {
 <body>
 
 <header class="site-header">
+  <div class="header-inner">
 
-  <a class="brand" href="/" aria-label="AWSZ Home">AWSZ</a>
+    <a href="#" class="brand" aria-label="AWSZ home">AWSZ</a>
 
-  <button class="menu-toggle"
-          aria-label="Toggle navigation"
-          aria-expanded="false">☰</button>
+    <button class="menu-toggle" id="menuToggle"
+      aria-label="Toggle navigation" aria-expanded="false">☰</button>
 
-  <nav class="nav-menu" aria-label="Main navigation">
+    <nav class="nav" id="mainNav">
 
-    <!-- CRM MENU -->
-    <div class="nav-item">
-      <button class="nav-link dropdown-toggle"
-              aria-expanded="false"
-              aria-controls="crm-dropdown">
-        CRMs <span class="arrow"></span>
-      </button>
+      <!-- CRMS -->
+      <div class="nav-item" data-menu="crms">
+        <button class="nav-button" aria-expanded="false">
+          CRMs <span class="chevron"></span>
+        </button>
 
-      <div class="dropdown" id="crm-dropdown">
-        <div class="dropdown-label">CRM Platforms</div>
+        <div class="dropdown">
+          <div class="dropdown-heading">
+            <h3>CRM Platforms</h3>
+            <span>Customer relationships & sales systems</span>
+          </div>
 
-        <a class="tool-link" href="https://www.gohighlevel.com/">
-          <img class="tool-logo" src="assets/logos/gohighlevel.svg" alt="">
-          <span>GoHighLevel</span>
-        </a>
-        <a class="tool-link" href="https://www.hubspot.com/">
-          <img class="tool-logo" src="assets/logos/hubspot.svg" alt="">
-          <span>HubSpot</span>
-        </a>
-        <a class="tool-link" href="https://www.zoho.com/crm/">
-          <img class="tool-logo" src="assets/logos/zoho.svg" alt="">
-          <span>Zoho CRM</span>
-        </a>
-        <a class="tool-link" href="https://www.lyl.io/">
-          <img class="tool-logo" src="assets/logos/lylio.svg" alt="">
-          <span>Lylio</span>
-        </a>
-        <a class="tool-link" href="https://www.salesforce.com/">
-          <img class="tool-logo" src="assets/logos/salesforce.svg" alt="">
-          <span>Salesforce</span>
-        </a>
-        <a class="tool-link" href="https://www.pipedrive.com/">
-          <img class="tool-logo" src="assets/logos/pipedrive.svg" alt="">
-          <span>Pipedrive</span>
-        </a>
-        <a class="tool-link" href="https://monday.com/">
-          <img class="tool-logo" src="assets/logos/monday.svg" alt="">
-          <span>Monday.com</span>
-        </a>
-        <a class="tool-link" href="https://clickup.com/">
-          <img class="tool-logo" src="assets/logos/clickup.svg" alt="">
-          <span>ClickUp</span>
-        </a>
-        <a class="tool-link" href="https://www.freshworks.com/crm/">
-          <img class="tool-logo" src="assets/logos/freshsales.svg" alt="">
-          <span>Freshsales</span>
-        </a>
-        <a class="tool-link" href="https://www.kommo.com/">
-          <img class="tool-logo" src="assets/logos/kommo.svg" alt="">
-          <span>Kommo</span>
-        </a>
-        <a class="tool-link" href="https://www.close.com/">
-          <img class="tool-logo" src="assets/logos/close.svg" alt="">
-          <span>Close CRM</span>
-        </a>
-        <a class="tool-link" href="https://www.insightly.com/">
-          <img class="tool-logo" src="assets/logos/insightly.svg" alt="">
-          <span>Insightly</span>
-        </a>
+          <div class="dropdown-grid">
 
-        <a class="view-all" href="#crms">Explore CRM Solutions →</a>
+            <a class="dropdown-link" href="https://www.gohighlevel.com/" target="_blank" rel="noopener">
+              <span class="logo-box">
+                <svg viewBox="0 0 40 40" aria-hidden="true">
+                  <path d="M5 10h19v6H5zM5 19h25v6H5zM5 28h17v5H5z" fill="#F5A623"/>
+                  <path d="M27 8l8 12-8 12h-6l8-12-8-12z" fill="#222"/>
+                </svg>
+              </span>
+              <span class="item-text"><strong>GoHighLevel</strong><small>CRM & marketing</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://www.hubspot.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><g fill="none" stroke="#FF7A59" stroke-width="4" stroke-linecap="round"><circle cx="15" cy="23" r="7"/><path d="M20 18L30 9M25 9h5v5M22 23l9 6M15 16V7M28 29h4"/></g><circle cx="30" cy="8" r="4" fill="#FF7A59"/></svg></span>
+              <span class="item-text"><strong>HubSpot</strong><small>CRM & inbound sales</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://www.zoho.com/crm/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="4" y="7" width="32" height="26" rx="5" fill="#E34B4B"/><text x="20" y="25" font-size="14" text-anchor="middle" font-weight="900" fill="#fff">Zoho</text></svg></span>
+              <span class="item-text"><strong>Zoho CRM</strong><small>Sales management</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://www.salesforce.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M11 28a7 7 0 0 1-1-14 10 10 0 0 1 18-2 8 8 0 0 1 3 15z" fill="#20A7E8"/><text x="20" y="24" font-size="8" text-anchor="middle" font-weight="900" fill="#fff">sales</text></svg></span>
+              <span class="item-text"><strong>Salesforce</strong><small>Enterprise CRM</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://www.pipedrive.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M7 9h26v22H7z" rx="4" fill="#20A464"/><path d="M13 15h14M13 20h10M13 25h7" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg></span>
+              <span class="item-text"><strong>Pipedrive</strong><small>Sales pipeline CRM</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://monday.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="10" cy="22" r="5" fill="#F04F88"/><circle cx="21" cy="22" r="5" fill="#FFCB00"/><circle cx="32" cy="22" r="5" fill="#00CA72"/></svg></span>
+              <span class="item-text"><strong>Monday.com</strong><small>Work management</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://clickup.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 25l8-8 6 5 6-10 8 13" fill="none" stroke="#8B5CF6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 31h26" stroke="#E84D8A" stroke-width="4" stroke-linecap="round"/></svg></span>
+              <span class="item-text"><strong>ClickUp</strong><small>Tasks & workflows</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://www.freshworks.com/freshsales-crm/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 28L20 7l12 21z" fill="#FF8A45"/><circle cx="20" cy="24" r="5" fill="#fff"/></svg></span>
+              <span class="item-text"><strong>Freshsales</strong><small>Sales CRM</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://www.kommo.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 8h7v10l10-10h8L21 20l12 12h-9L15 22v10H8z" fill="#7C5CE7"/></svg></span>
+              <span class="item-text"><strong>Kommo</strong><small>Messaging CRM</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://close.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="14" fill="none" stroke="#35B9A6" stroke-width="6"/><path d="M25 14a8 8 0 1 0 0 12" fill="none" stroke="#222" stroke-width="4" stroke-linecap="round"/></svg></span>
+              <span class="item-text"><strong>Close CRM</strong><small>Calling & sales</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://www.insightly.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 5l16 15-16 15L4 20z" fill="#F97316"/><circle cx="20" cy="20" r="5" fill="#fff"/></svg></span>
+              <span class="item-text"><strong>Insightly</strong><small>CRM & projects</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://www.lylio.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M11 7h7v19h14v7H11z" fill="#7367F0"/></svg></span>
+              <span class="item-text"><strong>Lylio</strong><small>CRM platform</small></span>
+            </a>
+
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- AUTOMATION MENU -->
-    <div class="nav-item">
-      <button class="nav-link dropdown-toggle"
-              aria-expanded="false"
-              aria-controls="automation-dropdown">
-        Automation <span class="arrow"></span>
-      </button>
+      <!-- AUTOMATION -->
+      <div class="nav-item" data-menu="automation">
+        <button class="nav-button" aria-expanded="false">
+          Automation <span class="chevron"></span>
+        </button>
 
-      <div class="dropdown" id="automation-dropdown">
-        <div class="dropdown-label">Automation Tools</div>
+        <div class="dropdown">
+          <div class="dropdown-heading">
+            <h3>Automation Platforms</h3>
+            <span>Connect apps, APIs and AI workflows</span>
+          </div>
 
-        <a class="tool-link" href="https://n8n.io/">
-          <img class="tool-logo" src="assets/logos/n8n.svg" alt="">
-          <span>n8n</span>
-        </a>
-        <a class="tool-link" href="https://www.make.com/">
-          <img class="tool-logo" src="assets/logos/make.svg" alt="">
-          <span>Make</span>
-        </a>
-        <a class="tool-link" href="https://zapier.com/">
-          <img class="tool-logo" src="assets/logos/zapier.svg" alt="">
-          <span>Zapier</span>
-        </a>
-        <a class="tool-link" href="https://pabbly.com/">
-          <img class="tool-logo" src="assets/logos/pabbly.svg" alt="">
-          <span>Pabbly Connect</span>
-        </a>
-        <a class="tool-link" href="https://www.activepieces.com/">
-          <img class="tool-logo" src="assets/logos/activepieces.svg" alt="">
-          <span>Activepieces</span>
-        </a>
-        <a class="tool-link" href="https://www.workato.com/">
-          <img class="tool-logo" src="assets/logos/workato.svg" alt="">
-          <span>Workato</span>
-        </a>
-        <a class="tool-link" href="https://www.microsoft.com/power-platform/">
-          <img class="tool-logo" src="assets/logos/power-automate.svg" alt="">
-          <span>Power Automate</span>
-        </a>
-        <a class="tool-link" href="https://albato.com/">
-          <img class="tool-logo" src="assets/logos/albato.svg" alt="">
-          <span>Albato</span>
-        </a>
-        <a class="tool-link" href="https://ifttt.com/">
-          <img class="tool-logo" src="assets/logos/ifttt.svg" alt="">
-          <span>IFTTT</span>
-        </a>
-        <a class="tool-link" href="https://www.integrately.com/">
-          <img class="tool-logo" src="assets/logos/integrately.svg" alt="">
-          <span>Integrately</span>
-        </a>
-        <a class="tool-link" href="https://relay.app/">
-          <img class="tool-logo" src="assets/logos/relay.svg" alt="">
-          <span>Relay.app</span>
-        </a>
-        <a class="tool-link" href="https://www.lindy.ai/">
-          <img class="tool-logo" src="assets/logos/lindy.svg" alt="">
-          <span>Lindy AI</span>
-        </a>
+          <div class="dropdown-grid">
 
-        <a class="view-all" href="#automation">Explore Automation →</a>
+            <a class="dropdown-link" href="https://n8n.io/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><g fill="none" stroke="#EA4B71" stroke-width="4"><path d="M10 20h20M10 20l7-9M10 20l7 9M30 20l-7-9M30 20l-7 9"/></g><g fill="#EA4B71"><circle cx="10" cy="20" r="5"/><circle cx="30" cy="20" r="5"/><circle cx="20" cy="7" r="4"/><circle cx="20" cy="33" r="4"/></g></svg></span>
+              <span class="item-text"><strong>n8n</strong><small>Workflow automation</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://www.make.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 10h9v20H5zM16 10h9v20h-9zM27 10h8v20h-8z" fill="#9B4DFF"/></svg></span>
+              <span class="item-text"><strong>Make</strong><small>Visual automation</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://zapier.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><g fill="#FF4F00"><rect x="17" y="5" width="6" height="30" rx="2"/><rect x="5" y="17" width="30" height="6" rx="2"/><rect x="8" y="8" width="6" height="6" transform="rotate(-45 11 11)"/><rect x="26" y="26" width="6" height="6" transform="rotate(-45 29 29)"/></g></svg></span>
+              <span class="item-text"><strong>Zapier</strong><small>App integrations</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://www.pabbly.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9 7h22v7H16v5h12v7H16v7H9z" fill="#20A464"/></svg></span>
+              <span class="item-text"><strong>Pabbly Connect</strong><small>App workflows</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://www.activepieces.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 9h24v7H8zM8 24h24v7H8z" fill="#8B5CF6"/><circle cx="20" cy="20" r="4" fill="#fff"/></svg></span>
+              <span class="item-text"><strong>Activepieces</strong><small>Open-source automation</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://www.workato.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 9l12 22L32 9" fill="none" stroke="#17B8A6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="item-text"><strong>Workato</strong><small>Enterprise automation</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://www.microsoft.com/power-platform/products/power-automate" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 10l14 10-14 10z" fill="#1684D8"/><path d="M19 10l15 10-15 10z" fill="#6BC8F4"/></svg></span>
+              <span class="item-text"><strong>Power Automate</strong><small>Microsoft workflows</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://albato.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 5L36 33H4z" fill="#FF6B35"/><path d="M20 17l5 9H15z" fill="#fff"/></svg></span>
+              <span class="item-text"><strong>Albato</strong><small>No-code integrations</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://ifttt.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 7h24v7H15v5h13v7H15v7H8z" fill="#333"/></svg></span>
+              <span class="item-text"><strong>IFTTT</strong><small>Connected services</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://integrately.com/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#FFB31A"/><path d="M13 20h14M20 13v14" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></span>
+              <span class="item-text"><strong>Integrately</strong><small>One-click automation</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://relay.app/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 8h24v24H8z" rx="6" fill="#5B7CFA"/><path d="M14 13l12 7-12 7z" fill="#fff"/></svg></span>
+              <span class="item-text"><strong>Relay.app</strong><small>AI-powered workflows</small></span>
+            </a>
+
+            <a class="dropdown-link" href="https://www.lindy.ai/" target="_blank" rel="noopener">
+              <span class="logo-box"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M10 6h7v21h14v7H10z" fill="#333"/><circle cx="28" cy="11" r="4" fill="#DDDDDD" stroke="#333" stroke-width="2"/></svg></span>
+              <span class="item-text"><strong>Lindy AI</strong><small>AI agents & assistants</small></span>
+            </a>
+
+          </div>
+        </div>
       </div>
-    </div>
 
-    <a class="nav-link" href="#corporate-training">Corporate Training</a>
-    <a class="nav-link" href="#online-sessions">Online Sessions</a>
+      <a class="nav-link" href="#corporate-training">Corporate Training</a>
+      <a class="nav-link" href="#online-sessions">Online Sessions</a>
 
-    <a class="cta mobile-cta" href="mailto:infology00@gmail.com">
-      Let's Talk <span class="cta-arrow">↗</span>
+    </nav>
+
+    <a class="talk-button" href="mailto:infology00@gmail.com">
+      Let's Talk <span class="talk-arrow">↗</span>
     </a>
 
-  </nav>
-
-  <a class="cta header-cta" href="mailto:infology00@gmail.com">
-    Let's Talk <span class="cta-arrow">↗</span>
-  </a>
-
+  </div>
 </header>
 
+<!-- Hero section baad mein add kar sakte hain -->
+<main class="empty-stage" id="home"></main>
+
 <script>
-const menuToggle = document.querySelector('.menu-toggle');
-const navMenu = document.querySelector('.nav-menu');
-const dropdownButtons = document.querySelectorAll('.dropdown-toggle');
+(() => {
+  const menuToggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('mainNav');
+  const items = document.querySelectorAll('.nav-item[data-menu]');
 
-function closeDropdowns() {
-  document.querySelectorAll('.dropdown').forEach(dropdown => {
-    dropdown.classList.remove('open');
-  });
-
-  dropdownButtons.forEach(button => {
-    button.setAttribute('aria-expanded', 'false');
-  });
-}
-
-menuToggle.addEventListener('click', () => {
-  const isOpen = navMenu.classList.toggle('mobile-open');
-
-  menuToggle.setAttribute('aria-expanded', String(isOpen));
-  menuToggle.textContent = isOpen ? '×' : '☰';
-
-  if (!isOpen) closeDropdowns();
-});
-
-dropdownButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const dropdown = document.getElementById(
-      button.getAttribute('aria-controls')
-    );
-
-    const shouldOpen = !dropdown.classList.contains('open');
-
-    closeDropdowns();
-
-    if (shouldOpen) {
-      dropdown.classList.add('open');
-      button.setAttribute('aria-expanded', 'true');
-    }
-  });
-});
-
-document.addEventListener('click', event => {
-  if (!event.target.closest('.nav-item')) closeDropdowns();
-});
-
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape') {
-    closeDropdowns();
-    navMenu.classList.remove('mobile-open');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    menuToggle.textContent = '☰';
+  function closeDropdowns(except = null) {
+    items.forEach(item => {
+      if (item !== except) {
+        item.classList.remove('open');
+        const button = item.querySelector('.nav-button');
+        if (button) button.setAttribute('aria-expanded', 'false');
+      }
+    });
   }
-});
 
-document.querySelectorAll('.nav-menu a').forEach(link => {
-  link.addEventListener('click', () => {
-    if (link.getAttribute('href').startsWith('#')) {
-      navMenu.classList.remove('mobile-open');
+  items.forEach(item => {
+    const button = item.querySelector('.nav-button');
+
+    button.addEventListener('click', event => {
+      event.stopPropagation();
+
+      const willOpen = !item.classList.contains('open');
+      closeDropdowns(item);
+
+      item.classList.toggle('open', willOpen);
+      button.setAttribute('aria-expanded', String(willOpen));
+    });
+  });
+
+  menuToggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('mobile-open');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.textContent = isOpen ? '✕' : '☰';
+
+    if (!isOpen) closeDropdowns();
+  });
+
+  document.addEventListener('click', event => {
+    if (!event.target.closest('.site-header')) {
+      closeDropdowns();
+      nav.classList.remove('mobile-open');
       menuToggle.setAttribute('aria-expanded', 'false');
       menuToggle.textContent = '☰';
     }
   });
-});
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('mobile-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.textContent = '☰';
+      closeDropdowns();
+    });
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeDropdowns();
+      nav.classList.remove('mobile-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.textContent = '☰';
+    }
+  });
+})();
 </script>
 
 </body>
 </html>
+```
