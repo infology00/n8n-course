@@ -1,116 +1,454 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5c842">
-<meta name="description" content="Sajjad Zaidi — AI automation, business systems, corporate training, brand collaborations and practical online education.">
-<title>Sajjad Zaidi | AI, Automation & Growth Systems</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Manrope:wght@400;500;550;600;650;700;750&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automation with Sajjad Zaidi</title>
+
 <style>
-:root{--yellow:#f5c842;--yellow-soft:#fff4c7;--ink:#202328;--muted:#676b72;--paper:#f8f8f5;--white:#fff;--line:#e6e6df;--blue:#dce8ed;--green:#dfe9df;--radius:25px;--shadow:0 22px 60px #20232810}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:92px}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 'DM Sans',sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button{font:inherit}.wrap{width:min(1220px,calc(100% - 48px));margin:auto}.topline{height:5px;background:var(--yellow)}header{position:sticky;top:0;z-index:20;background:#f8f8f5ed;backdrop-filter:blur(18px);border-bottom:1px solid #20232810}.nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:11px}.brand-mark{width:43px;height:43px;display:grid;place-items:center;background:var(--yellow);border-radius:15px;font:750 1rem Manrope;letter-spacing:-.08em}.brand-name{font:650 1rem Manrope;display:block;line-height:1.2}.brand-sub{font-size:.73rem;color:var(--muted);display:block;margin-top:4px}.nav-links{display:flex;align-items:center;gap:24px;font-size:.86rem;color:#4d5157}.nav-links a:hover{color:#967000}.nav-cta{background:var(--ink);color:white;border-radius:999px;padding:11px 17px;font-size:.85rem;font-weight:650}.menu-toggle{display:none;border:1px solid var(--line);background:white;border-radius:12px;padding:9px 12px}.banner-hero{padding:22px 0 0}.banner-frame{width:100%;border-radius:22px;overflow:hidden;background:#ecece6;box-shadow:var(--shadow);line-height:0}.banner-frame img{display:block;width:100%;height:auto;object-fit:contain}.banner-note{font-size:.72rem;color:#8b8d90;text-align:right;margin-top:8px}.section{padding:100px 0}.section.alt{background:#f0f1ec}.section.dark{background:var(--ink);color:white}.section-head{display:flex;justify-content:space-between;align-items:end;gap:36px;margin-bottom:36px}.kicker{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:700;color:#8c700d;display:flex;align-items:center;gap:10px}.kicker:before{content:'';height:2px;width:25px;background:var(--yellow)}h1,h2,h3,h4{font-family:Manrope,sans-serif;letter-spacing:-.045em;line-height:1.12;margin:0;font-weight:550}h2{font-size:clamp(2.1rem,4.3vw,3.5rem);margin-top:13px}.section-intro{color:var(--muted);max-width:480px;line-height:1.8;margin:0}.section.dark .section-intro{color:#b8bcc2}.four-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}.service-card{position:relative;display:flex;flex-direction:column;min-height:390px;border-radius:24px;overflow:hidden;background:white;border:1px solid #e8e8e2;transition:transform .3s,box-shadow .3s}.service-card:hover{transform:translateY(-7px);box-shadow:var(--shadow)}.service-image{height:220px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#e8e8e2}.service-image img{width:100%;height:100%;object-fit:cover;display:block}.image-placeholder{width:100%;height:100%;display:grid;place-items:center;position:relative;overflow:hidden;background:linear-gradient(145deg,#f9e8a0,#f6f3e9 58%,#dce6e8)}.image-placeholder:before,.image-placeholder:after{content:'';position:absolute;border:1px solid #24272b24;border-radius:50%;width:240px;height:240px}.image-placeholder:after{width:160px;height:160px}.placeholder-word{position:relative;z-index:1;font:650 1.1rem Manrope;letter-spacing:.06em;text-transform:uppercase}.service-card:nth-child(2) .image-placeholder{background:linear-gradient(145deg,#d9e6eb,#f8f8f4 60%,#f5d86d)}.service-card:nth-child(3) .image-placeholder{background:linear-gradient(145deg,#e8e8e1,#fff5d3 60%,#d7e1d8)}.service-card:nth-child(4) .image-placeholder{background:linear-gradient(145deg,#e0e9df,#f8f8f4 60%,#e8d7c8)}.service-copy{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}.service-number{font-size:.72rem;color:#8b8e93;letter-spacing:.13em;font-weight:700}.service-copy h3{font-size:1.24rem;margin:10px 0}.service-copy p{font-size:.88rem;color:var(--muted);margin:0 0 20px;line-height:1.75}.arrow-link{margin-top:auto;display:flex;align-items:center;justify-content:space-between;font-size:.85rem;font-weight:700;border-top:1px solid var(--line);padding-top:14px}.arrow-circle{width:30px;height:30px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;font-size:1.05rem;transition:transform .2s}.service-card:hover .arrow-circle{transform:rotate(-35deg)}.tools-intro{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:42px}.tools-intro h2{max-width:590px}.tools-wall{display:grid;gap:10px;overflow:hidden}.tool-row{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}.tool-tile{display:flex;align-items:center;gap:10px;background:#2c3036;border:1px solid #454950;color:#fff;border-radius:13px;padding:12px 16px;min-height:53px;font:600 .92rem Manrope;box-shadow:0 8px 22px #0001;animation:brickDrop .7s both;animation-delay:var(--delay,0s);transform-origin:top center}.tool-tile:nth-child(3n+1){font-size:1.08rem;padding:14px 20px}.tool-tile:nth-child(4n){background:#353a41}.tool-tile:nth-child(5n){background:#f5c842;color:#202328;border-color:#f5c842}.tool-tile .tool-dot{width:9px;height:9px;border-radius:3px;background:var(--yellow);flex-shrink:0}.tool-tile:nth-child(5n) .tool-dot{background:#202328}.tool-row:nth-child(2){margin-left:32px}.tool-row:nth-child(4){margin-right:35px}.tool-caption{text-align:center;color:#aeb3b9;font-size:.77rem;margin-top:28px}@keyframes brickDrop{0%{opacity:0;transform:translateY(-90px) rotate(-4deg)}70%{opacity:1;transform:translateY(7px) rotate(1deg)}100%{opacity:1;transform:translateY(0) rotate(0)}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}.systems-strip{padding:0 0 90px}.systems-panel{border-radius:30px;background:var(--yellow);padding:42px 46px;display:grid;grid-template-columns:.9fr 1.1fr;gap:45px;align-items:center;overflow:hidden;position:relative}.systems-panel:after{content:'↗';position:absolute;right:20px;top:-70px;font:400 18rem/1 Manrope;color:#2023280c}.systems-panel h2{font-size:clamp(2rem,3.5vw,3rem);max-width:470px}.systems-panel p{color:#4f4935;line-height:1.8;margin:18px 0 0}.system-points{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:12px}.system-point{background:#fffdf2c7;border:1px solid #20232810;border-radius:17px;padding:18px}.system-point b{display:block;font:650 1rem Manrope}.system-point span{display:block;color:#66604b;font-size:.82rem;line-height:1.6;margin-top:7px}.training-banner{border-radius:28px;min-height:290px;overflow:hidden;background:linear-gradient(105deg,#25292e 0%,#25292e 53%,#4c4a3d 100%);color:white;display:grid;grid-template-columns:1.1fr .9fr;align-items:stretch;margin-bottom:34px}.training-banner-copy{padding:43px 46px;display:flex;flex-direction:column;justify-content:center}.training-banner .kicker{color:var(--yellow)}.training-banner h2{font-size:clamp(2rem,3.5vw,3.15rem);max-width:600px}.training-banner p{color:#c7cbd0;max-width:560px;line-height:1.8}.training-banner-art{position:relative;min-height:260px;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 65% 35%,#f5c84242,transparent 45%)}.training-banner-art img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.training-symbol{font:600 clamp(5rem,10vw,9rem)/1 Manrope;color:var(--yellow);opacity:.9;transform:rotate(-8deg);text-shadow:12px 12px 0 #fff1}.training-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.training-card{background:white;border:1px solid var(--line);border-radius:19px;padding:22px;min-height:215px;position:relative;overflow:hidden}.training-card .num{font:600 2rem Manrope;color:#d4b13b;letter-spacing:-.08em}.training-card h3{font-size:1.05rem;margin:13px 0 9px}.training-card p{font-size:.84rem;line-height:1.75;color:var(--muted);margin:0}.training-card small{display:block;color:#8d741f;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:13px}.resource-bar{margin-top:22px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px 25px;display:flex;align-items:center;justify-content:space-between;gap:20px}.resource-bar h3{font-size:1.15rem}.resource-bar p{margin:6px 0 0;color:var(--muted);font-size:.85rem}.button{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid transparent;border-radius:999px;padding:12px 18px;background:var(--ink);color:white;font-size:.85rem;font-weight:700;white-space:nowrap;transition:transform .2s,background .2s}.button:hover{transform:translateY(-2px);background:#41464d}.button.yellow{background:var(--yellow);color:var(--ink)}.button.outline{background:transparent;border-color:#cfd0ca;color:var(--ink)}.button.disabled{opacity:.48;cursor:not-allowed}.collab-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:44px;align-items:center}.collab-visual{min-height:450px;border-radius:28px;position:relative;overflow:hidden;background:linear-gradient(145deg,#f5c842 0%,#f7e9a7 38%,#e4e9e3 100%);padding:28px;display:flex;align-items:end}.collab-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.collab-stamp{position:relative;z-index:1;background:#fffef0ed;border:1px solid #fff;border-radius:20px;padding:20px 22px;max-width:280px;box-shadow:var(--shadow)}.collab-stamp b{font:650 1.4rem Manrope;display:block}.collab-stamp span{font-size:.85rem;color:var(--muted)}.collab-copy h2{margin:13px 0 17px}.collab-copy>p{color:var(--muted);line-height:1.85}.collab-points{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0}.collab-point{border-top:1px solid var(--line);padding-top:12px}.collab-point b{display:block;font:650 .95rem Manrope}.collab-point span{display:block;color:var(--muted);font-size:.82rem;margin-top:5px}.section.dark .kicker{color:var(--yellow)}.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.tool-card{border-radius:22px;overflow:hidden;background:#2b2f35;border:1px solid #42464c;cursor:pointer;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;min-height:315px}.tool-card:hover{transform:translateY(-5px);box-shadow:0 20px 45px #0003}.tool-thumb{height:178px;position:relative;display:grid;place-items:center;background:linear-gradient(145deg,#41474f,#282c31);overflow:hidden}.tool-thumb img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}.tool-thumb:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#2023287a,transparent 75%)}.tool-logo{position:relative;z-index:1;width:65px;height:65px;border-radius:19px;display:grid;place-items:center;background:var(--yellow);color:#202328;font:750 1.1rem Manrope;box-shadow:0 8px 30px #0003}.play{position:absolute;z-index:2;right:16px;bottom:14px;width:38px;height:38px;border:1px solid #ffffff77;background:#ffffff25;backdrop-filter:blur(8px);border-radius:50%;display:grid;place-items:center;color:white}.tool-card-copy{padding:20px 21px 22px;flex:1}.tool-card-copy .tool-category{font-size:.68rem;color:var(--yellow);text-transform:uppercase;letter-spacing:.13em;font-weight:700}.tool-card-copy h3{font-size:1.22rem;margin:8px 0}.tool-card-copy p{font-size:.85rem;color:#c2c6cb;line-height:1.75;margin:0}.gallery-note{font-size:.78rem;color:#aeb3b9;margin-top:20px}.students-panel{border-radius:30px;background:#e6ece6;display:grid;grid-template-columns:.9fr 1.1fr;overflow:hidden}.students-copy{padding:43px}.students-copy h2{font-size:clamp(2rem,3.7vw,3.2rem)}.students-copy>p{color:var(--muted);line-height:1.85}.student-benefits{display:grid;gap:12px;margin:23px 0}.student-benefit{display:flex;gap:12px;align-items:start;font-size:.9rem}.tick{width:24px;height:24px;background:var(--yellow);border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-weight:700}.students-resources{background:#25292e;color:white;padding:37px;display:flex;flex-direction:column;justify-content:center;gap:13px}.students-resources h3{font-size:1.45rem;margin-bottom:6px}.resource-card{display:flex;align-items:center;gap:15px;padding:16px;background:#ffffff0b;border:1px solid #ffffff1b;border-radius:15px}.resource-icon{width:42px;height:42px;background:var(--yellow);color:var(--ink);border-radius:13px;display:grid;place-items:center;font-size:1.1rem;flex-shrink:0}.resource-card div:nth-child(2){flex:1}.resource-card b{display:block;font:600 .94rem Manrope}.resource-card span{display:block;font-size:.78rem;color:#b9bec4;margin-top:3px}.resource-card a{font-size:.8rem;color:var(--yellow);font-weight:700}.diy-strip{margin-top:25px;border:1px solid #e4d07a;background:#fff5c9;border-radius:22px;padding:23px 26px;display:flex;align-items:center;justify-content:space-between;gap:22px}.diy-title{display:flex;align-items:center;gap:16px}.diy-icon{width:52px;height:52px;border-radius:16px;background:var(--yellow);display:grid;place-items:center;font-size:1.4rem}.diy-title h3{font-size:1.15rem}.diy-title p{font-size:.83rem;color:#625a3d;margin:5px 0 0}.footer{background:#1e2125;color:white;padding:58px 0 22px}.footer-top{display:grid;grid-template-columns:1.4fr .8fr .8fr 1fr;gap:35px;padding-bottom:42px}.footer-brand p{color:#b7bbc1;font-size:.88rem;max-width:290px;line-height:1.8}.footer-heading{font:650 .88rem Manrope;margin:6px 0 16px}.footer-links{display:grid;gap:10px;color:#c3c7cc;font-size:.84rem}.footer-links a:hover{color:var(--yellow)}.footer-diy{display:inline-flex;margin-top:10px;padding:8px 12px;border-radius:10px;background:var(--yellow);color:var(--ink);font-weight:750;font-size:.8rem}.socials{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.socials a{width:36px;height:36px;border:1px solid #44484e;border-radius:11px;display:grid;place-items:center;color:#f3f3ef;font-size:.75rem;font-weight:700}.socials a:hover{background:var(--yellow);border-color:var(--yellow);color:var(--ink)}.footer-bottom{border-top:1px solid #3b3f45;padding-top:19px;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;color:#aeb3b9;font-size:.77rem}.footer-legal{display:flex;gap:16px}.wa-float{position:fixed;z-index:15;right:20px;bottom:20px;background:#1f9d63;color:white;border-radius:999px;padding:12px 17px;font-size:.84rem;font-weight:700;box-shadow:0 9px 30px #0002}.cookie{display:none;position:fixed;z-index:50;bottom:18px;left:18px;right:18px;max-width:750px;margin:auto;background:white;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 20px 70px #0003}.cookie p{font-size:.83rem;color:var(--muted);margin:6px 0 14px}.cookie-actions{display:flex;gap:8px;flex-wrap:wrap}.cookie-actions button{border:1px solid var(--line);background:white;border-radius:999px;padding:9px 13px;font-size:.78rem;font-weight:700;cursor:pointer}.cookie-actions .accept{background:var(--ink);color:white}.video-modal{display:none;position:fixed;z-index:60;inset:0;background:#111d;align-items:center;justify-content:center;padding:22px}.video-modal.open{display:flex}.modal-card{width:min(900px,100%);background:#202328;border-radius:20px;overflow:hidden;color:white;box-shadow:0 25px 100px #0006}.modal-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid #ffffff20}.modal-head h3{font-size:1rem}.modal-close{background:#ffffff16;color:white;border:1px solid #ffffff30;border-radius:10px;padding:7px 11px;cursor:pointer}.video-frame{width:100%;aspect-ratio:16/9;border:0;display:block;background:#101114}.modal-help{padding:18px;color:#c2c6cb;font-size:.84rem}.modal-help a{color:var(--yellow);text-decoration:underline}.empty-resource{opacity:.58;pointer-events:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-@media(max-width:1000px){.nav-links{gap:14px;font-size:.8rem}.four-grid{grid-template-columns:repeat(2,1fr)}.training-grid{grid-template-columns:repeat(2,1fr)}.gallery-grid{grid-template-columns:repeat(2,1fr)}.footer-top{grid-template-columns:1.2fr 1fr 1fr}.footer-top>div:last-child{grid-column:2/4}.service-card{min-height:360px}}
-@media(max-width:720px){.wrap{width:min(100% - 30px,560px)}.nav{height:68px}.brand-mark{width:39px;height:39px}.menu-toggle{display:block}.nav-cta{display:none}.nav-links{display:none;position:absolute;top:68px;left:0;right:0;padding:16px 20px 22px;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 20px 30px #0000000b;flex-direction:column;align-items:stretch;gap:0}.nav-links.open{display:flex}.nav-links a{padding:12px 4px;border-bottom:1px solid var(--line);font-size:.92rem}.banner-hero{padding:12px 0 0}.banner-frame{border-radius:12px}.banner-note{font-size:.65rem}.section{padding:68px 0}.section-head,.tools-intro{display:block}.section-intro{margin-top:17px}.four-grid{grid-template-columns:1fr;gap:13px}.service-card{min-height:0;display:grid;grid-template-columns:42% 58%;border-radius:19px}.service-image{height:100%;min-height:235px}.service-copy{padding:17px 16px 18px}.service-copy h3{font-size:1.05rem}.service-copy p{font-size:.8rem;margin-bottom:15px}.service-number{font-size:.65rem}.arrow-link{font-size:.78rem;padding-top:11px}.arrow-circle{width:26px;height:26px;flex-shrink:0}.tools-intro h2{margin-bottom:14px}.tool-row,.tool-row:nth-child(2),.tool-row:nth-child(4){margin:0;gap:7px}.tool-tile{min-height:43px;padding:9px 11px;font-size:.76rem;border-radius:10px}.tool-tile:nth-child(3n+1){font-size:.86rem;padding:10px 12px}.tool-tile .tool-dot{width:7px;height:7px}.systems-strip{padding-bottom:65px}.systems-panel{padding:27px 23px;grid-template-columns:1fr;gap:25px;border-radius:23px}.system-points{gap:9px}.system-point{padding:14px}.system-point b{font-size:.88rem}.system-point span{font-size:.75rem}.training-banner{grid-template-columns:1fr;margin-bottom:22px}.training-banner-copy{padding:29px 24px}.training-banner-art{min-height:130px;max-height:160px}.training-symbol{font-size:6rem}.training-grid{grid-template-columns:1fr 1fr;gap:10px}.training-card{padding:16px;min-height:230px;border-radius:16px}.training-card .num{font-size:1.6rem}.training-card h3{font-size:.95rem}.training-card p{font-size:.77rem}.training-card small{font-size:.62rem}.resource-bar{align-items:flex-start;flex-direction:column;padding:19px}.collab-grid{grid-template-columns:1fr;gap:26px}.collab-visual{min-height:300px;border-radius:22px}.collab-copy h2{margin-bottom:13px}.collab-points{gap:10px}.gallery-grid{grid-template-columns:1fr;gap:13px}.tool-card{min-height:0;display:grid;grid-template-columns:40% 60%;border-radius:18px}.tool-thumb{height:100%;min-height:205px}.tool-logo{width:52px;height:52px;border-radius:15px;font-size:.9rem}.tool-card-copy{padding:18px 15px}.tool-card-copy h3{font-size:1.06rem}.tool-card-copy p{font-size:.78rem}.students-panel{grid-template-columns:1fr;border-radius:23px}.students-copy{padding:29px 24px}.students-resources{padding:25px 20px}.resource-card{padding:13px}.diy-strip{align-items:flex-start;flex-direction:column;padding:19px}.diy-title{align-items:flex-start}.footer-top{grid-template-columns:1fr 1fr;gap:28px 20px}.footer-top>div:first-child{grid-column:1/-1}.footer-top>div:last-child{grid-column:auto}.footer-bottom{align-items:flex-start;flex-direction:column}.wa-float{right:12px;bottom:12px;padding:10px 13px;font-size:.78rem}.cookie{left:10px;right:10px;bottom:10px;padding:16px}.cookie-actions button{font-size:.73rem}.tool-caption{text-align:left}.section-head{margin-bottom:27px}}
-@media(max-width:380px){.service-card{grid-template-columns:1fr}.service-image{min-height:170px;height:170px}.training-grid{grid-template-columns:1fr}.training-card{min-height:0}.collab-points{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr}.footer-top>div:first-child,.footer-top>div:last-child{grid-column:auto}}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/* V3 visual refinement: editorial, warm, layered — not a generic template. */
-:root{--yellow:#f3c943;--ink:#20242a;--muted:#6c7077;--paper:#fbfaf7;--line:#e8e4dc;--shadow:0 24px 70px rgba(28,31,36,.09)}
-body{background:var(--paper)}.wrap{width:min(1280px,calc(100% - 64px))}header{background:rgba(251,250,247,.92);border-bottom-color:#20242a12}.nav{height:82px}.brand-mark{border-radius:13px;box-shadow:5px 5px 0 #20242a12}.nav-links{gap:19px;font-size:.82rem}.nav-links a{position:relative;padding:8px 0}.nav-links a:after{content:'';position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--yellow);transition:right .22s}.nav-links a:hover:after{right:0}.nav-cta{border-radius:12px;padding:12px 17px}.banner-hero{padding:18px 0 0}.banner-frame{border-radius:18px;background:transparent;box-shadow:0 24px 60px #20242a12}.banner-frame img{width:100%;height:auto;object-fit:contain}.banner-note{background:#fff2c2;padding:9px 13px;border-radius:9px;color:#51472a;text-align:left;line-height:1.5}.section{padding:112px 0}.section.alt{background:#f0f0eb}.section-head{margin-bottom:42px}.kicker{font-size:.68rem;letter-spacing:.19em}.kicker:before{width:30px}h2{font-size:clamp(2.4rem,4.6vw,4rem);letter-spacing:-.055em;line-height:1.04}.section-intro{font-size:.95rem}.four-grid{gap:18px}.service-card{min-height:410px;border-radius:22px;border-color:#e9e5dc;box-shadow:0 7px 25px #25292e06}.service-card:hover{transform:translateY(-8px);box-shadow:0 24px 55px #25292e13}.service-image{height:235px;position:relative}.service-image:after{content:'↗';position:absolute;right:13px;top:13px;width:36px;height:36px;display:grid;place-items:center;background:#fffdf0;border-radius:50%;font-size:1.1rem;color:#20242a;box-shadow:0 5px 18px #0001}.image-placeholder{background:radial-gradient(circle at 70% 28%,#fff 0 5%,transparent 6%),linear-gradient(140deg,#f4d76f 0%,#fbf8e9 48%,#d8e5e7 100%)}.image-placeholder:before{width:290px;height:290px;border:1px solid #20242a18;transform:translate(38px,25px)}.image-placeholder:after{width:205px;height:205px;border:1px solid #20242a1b;transform:translate(38px,25px)}.placeholder-word{padding:14px 18px;background:#ffffffc9;border:1px solid #fff;border-radius:12px;box-shadow:0 10px 30px #20242a0b;letter-spacing:.02em}.service-copy{padding:23px 23px 25px}.service-copy h3{font-size:1.27rem}.service-copy p{font-size:.9rem}.arrow-link{border-top-color:#ece9e2}.section.dark{background:#20242a}.section.dark .kicker{color:var(--yellow)}.tools-intro{margin-bottom:46px}.stack-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:32px;align-items:stretch}.stack-feature{min-height:600px;border:1px solid #ffffff15;border-radius:28px;position:relative;overflow:hidden;display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,#f3c94320,transparent 35%),linear-gradient(150deg,#292e35,#1b1e23)}.stack-feature:before,.stack-feature:after{content:'';position:absolute;width:420px;height:420px;border-radius:50%;border:1px solid #ffffff10}.stack-feature:after{width:300px;height:300px;border-color:#f3c94335}.stack-orbit{position:absolute;border:1px dashed #f3c94340;border-radius:50%;width:500px;height:230px;transform:rotate(-28deg)}.orbit-two{width:500px;height:270px;transform:rotate(42deg);border-color:#ffffff24}.stack-core{position:relative;z-index:2;width:180px;height:180px;border-radius:48px;background:linear-gradient(145deg,#ffe88c,#f3c943);color:#20242a;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 0 0 14px #f3c94315,0 25px 70px #0005;transform:rotate(-5deg)}.stack-core-mark{font:750 1.1rem Manrope;letter-spacing:-.08em}.stack-core b{font:700 1.3rem/1.1 Manrope;margin-top:9px}.stack-core small{font-size:.65rem;margin-top:8px;opacity:.75}.orbit-tag{position:absolute;z-index:3;padding:9px 13px;border:1px solid #ffffff2b;background:#30363e;color:#fff;border-radius:10px;font:650 .68rem Manrope;letter-spacing:.1em;box-shadow:0 12px 30px #0003}.tag-a{top:17%;left:18%;transform:rotate(-8deg)}.tag-b{top:25%;right:12%;background:var(--yellow);color:#20242a;transform:rotate(7deg)}.tag-c{bottom:24%;left:9%;transform:rotate(5deg)}.tag-d{bottom:16%;right:13%;transform:rotate(-7deg)}.stack-categories{display:grid;gap:12px}.stack-category{border:1px solid #ffffff15;border-radius:19px;background:linear-gradient(110deg,#ffffff08,#ffffff03);padding:19px 21px;transition:transform .2s,border-color .2s,background .2s}.stack-category:hover{transform:translateX(5px);border-color:#f3c94366;background:#ffffff0c}.stack-category-head{display:flex;align-items:flex-start;gap:15px}.stack-index{display:grid;place-items:center;min-width:39px;height:39px;border-radius:12px;background:#f3c943;color:#20242a;font:750 .76rem Manrope}.stack-category h3{font-size:1.02rem;letter-spacing:-.02em}.stack-category p{font-size:.78rem;color:#aeb4bc;margin:5px 0 0}.tool-pills{display:flex;flex-wrap:wrap;gap:7px;margin:15px 0 0 54px}.tool-pills span{border:1px solid #ffffff1b;background:#ffffff0a;color:#e7e9ec;border-radius:8px;padding:6px 10px;font-size:.73rem}.tool-pills span:first-child{border-color:#f3c9436b;color:#ffe27a}.tool-caption{color:#aeb4bc;line-height:1.7;margin-top:28px}.systems-panel{border-radius:28px;box-shadow:0 22px 60px #bfa02d16}.training-banner{border-radius:28px;box-shadow:0 20px 50px #20242a12}.training-card{border-radius:20px;transition:transform .22s,box-shadow .22s}.training-card:hover{transform:translateY(-4px);box-shadow:0 16px 35px #20242a0c}.resource-bar{border-radius:20px;box-shadow:0 10px 30px #20242a05}.button{border-radius:12px;padding:13px 18px}.button.yellow{box-shadow:0 7px 0 #cda52f}.button.yellow:hover{transform:translateY(-2px);box-shadow:0 9px 0 #cda52f}.collab-visual{border-radius:27px;box-shadow:0 20px 50px #20242a12}.collab-stamp{backdrop-filter:blur(12px)}.tool-card{border-radius:21px;background:#282d33;border-color:#41464d}.tool-card:hover{transform:translateY(-7px)}.tool-thumb{background:radial-gradient(circle at 70% 20%,#f3c94340,transparent 35%),linear-gradient(145deg,#41474f,#24282e)}.tool-logo{border-radius:18px;box-shadow:8px 8px 0 #ffffff18}.students-panel{border-radius:28px;box-shadow:0 22px 55px #20242a0b}.diy-strip{border-radius:20px}.footer{background:#191c20}.footer-diy{box-shadow:0 5px 0 #b99524}.wa-float{border-radius:13px;box-shadow:0 10px 35px #0002}.cookie{border-radius:20px;box-shadow:0 20px 80px #0004}
-/* Keep the entire supplied banner visible on phones; never crop its text. */
-@media(max-width:720px){.wrap{width:calc(100% - 28px)}.nav{height:68px}.nav-links{top:68px;max-height:calc(100vh - 68px);overflow:auto}.banner-hero{padding:9px 0 0}.banner-frame{border-radius:9px;box-shadow:0 10px 28px #20242a12}.banner-frame img{width:100%;height:auto;max-height:none;object-fit:contain}.section{padding:72px 0}.section-head{margin-bottom:28px}.stack-layout{grid-template-columns:1fr;gap:16px}.stack-feature{min-height:310px;border-radius:21px}.stack-feature:before{width:280px;height:280px}.stack-feature:after{width:200px;height:200px}.stack-orbit{width:300px;height:150px}.orbit-two{width:300px;height:180px}.stack-core{width:130px;height:130px;border-radius:34px}.stack-core b{font-size:1.05rem}.tag-a{top:13%;left:10%}.tag-b{top:18%;right:8%}.tag-c{bottom:16%;left:6%}.tag-d{bottom:12%;right:7%}.stack-category{padding:16px}.tool-pills{margin-left:0}.four-grid{grid-template-columns:1fr}.service-card{grid-template-columns:40% 60%;min-height:0}.service-image{min-height:225px;height:100%}.service-image:after{width:29px;height:29px;right:8px;top:8px}.service-copy{padding:17px 15px}.service-copy h3{font-size:1.03rem}.service-copy p{font-size:.79rem}.training-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.resource-bar{padding:18px}.footer-top{grid-template-columns:1fr 1fr}.nav-cta{display:none}}
-@media(max-width:390px){.service-card{grid-template-columns:1fr}.service-image{height:170px;min-height:170px}.stack-feature{min-height:270px}.training-grid{grid-template-columns:1fr}.stack-category h3{font-size:.95rem}.stack-category p{font-size:.73rem}}
+body {
+  background: #050505;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111;
+  min-height: 100vh;
+}
 
-/* Final polish: richer imagery, smooth interactions, accessible focus states. */
-.service-image>img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-.service-card:hover .service-image>img{transform:scale(1.055)}
-.training-banner-art>img{filter:saturate(.78);opacity:.78}
-.collab-visual>img{filter:saturate(.82);transition:transform .6s ease}
-.collab-visual:hover>img{transform:scale(1.035)}
-.tool-thumb>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.68;transition:transform .5s ease}
-.tool-card:hover .tool-thumb>img{transform:scale(1.06)}
-:focus-visible{outline:3px solid #b68b00;outline-offset:4px}
-.nav-links a,.footer-links a,.footer-legal a{transition:color .2s ease}
-.link-unconfigured{cursor:pointer}
-@media(max-width:720px){.service-image>img{min-height:225px}.training-banner-art>img{height:100%;object-fit:cover}.collab-visual>img{object-fit:cover}}
+/* HEADER */
 
-/* ===== PREMIUM VISUAL REFRESH — homepage layout polish ===== */
-:root{--yellow:#f4c94f;--yellow-soft:#fff4cf;--ink:#18212e;--muted:#647083;--paper:#fbfaf7;--white:#fff;--line:#e4e8ee;--blue:#dceaff;--green:#e2eee6;--radius:26px;--shadow:0 18px 50px rgba(24,33,46,.09)}
-body{background:var(--paper);color:var(--ink);font-size:16px;line-height:1.7;overflow-x:hidden}
-::selection{background:#d9e6ff;color:#18212e}
-.wrap{width:min(1280px,calc(100% - 64px))}
-.topline{height:4px;background:linear-gradient(90deg,#2864e8 0%,#6f9cff 32%,#f4c94f 72%,#f4c94f 100%)}
-header{background:rgba(251,250,247,.9);border-bottom:1px solid rgba(24,33,46,.08);box-shadow:0 5px 25px rgba(24,33,46,.025)}
-.nav{height:82px}.brand-mark{background:#2864e8;color:#fff;border-radius:14px;box-shadow:0 8px 20px #2864e82b}.brand-name{letter-spacing:-.035em}.brand-sub{letter-spacing:.01em}.nav-links{gap:clamp(12px,1.65vw,25px);font-size:.84rem;font-weight:600}.nav-links a{position:relative;transition:color .2s}.nav-links a:not(.nav-cta):after{content:"";position:absolute;left:0;right:100%;bottom:-8px;height:2px;background:#2864e8;transition:right .2s}.nav-links a:not(.nav-cta):hover:after{right:0}.nav-links a:hover{color:#2864e8}.nav-cta{background:#2864e8;color:#fff;padding:12px 19px;box-shadow:0 8px 18px #2864e822;transition:transform .2s,box-shadow .2s}.nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 24px #2864e833;color:white}
-.banner-hero{padding:30px 0 0}.banner-frame{border-radius:26px;box-shadow:0 25px 70px rgba(24,33,46,.11);outline:1px solid rgba(24,33,46,.06);outline-offset:-1px}.banner-note{font-size:.7rem;letter-spacing:.03em;color:#8b94a3;margin-top:10px}
-.section{padding:clamp(76px,8vw,118px) 0;position:relative}.section.alt{background:linear-gradient(180deg,#f0f5fb 0%,#f7f8f8 100%)}.section.dark{background:#18212e;color:#fff}.section-head{margin-bottom:44px;align-items:end}.kicker{color:#2864e8;letter-spacing:.19em;font-size:.69rem;font-weight:800}.kicker:before{height:3px;width:28px;border-radius:5px;background:#f4c94f}.section.dark .kicker{color:#f4c94f}h1,h2,h3,h4{letter-spacing:-.055em;font-weight:650}h2{font-size:clamp(2.25rem,4.1vw,3.7rem);line-height:1.07;letter-spacing:-.065em;margin-top:16px;max-width:780px}.section-intro{font-size:.98rem;max-width:430px;color:#667184;line-height:1.85}.section.dark .section-intro{color:#c2cad7}
-.four-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}.service-card{min-height:420px;border-radius:25px;border:1px solid #e4e8ee;box-shadow:0 8px 28px rgba(24,33,46,.035);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}.service-card:hover{transform:translateY(-9px);box-shadow:0 25px 55px rgba(24,33,46,.13);border-color:#cbd9f2}.service-image{height:225px;background:#e9eef5;position:relative}.service-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(24,33,46,.16));pointer-events:none}.service-image img{transition:transform .65s cubic-bezier(.2,.8,.2,1)}.service-card:hover .service-image img{transform:scale(1.055)}.service-copy{padding:24px 23px 25px}.service-number{color:#2864e8;letter-spacing:.15em;font-size:.68rem}.service-copy h3{font-size:1.27rem;letter-spacing:-.045em;margin:12px 0}.service-copy p{font-size:.9rem;line-height:1.8;color:#687386}.arrow-link{border-color:#edf0f4;padding-top:17px;font-size:.86rem}.arrow-circle{background:#e7efff;color:#2864e8;width:34px;height:34px;font-size:1.15rem}.service-card:hover .arrow-circle{background:#2864e8;color:#fff;transform:rotate(-35deg)}
-.tools-intro{margin-bottom:44px}.tools-intro h2{max-width:680px}.tools-wall{gap:12px}.tool-row{gap:12px}.tool-tile{border-radius:15px;background:#fff;border:1px solid #dfe5ef;color:#243044;padding:13px 18px;min-height:55px;box-shadow:0 8px 20px rgba(24,33,46,.045);font-size:.9rem;animation-duration:.85s}.tool-tile:nth-child(3n+1){font-size:1rem;padding:15px 21px}.tool-tile:nth-child(4n){background:#eef4ff;color:#214eac;border-color:#d9e5fb}.tool-tile:nth-child(5n){background:#f4c94f;color:#18212e;border-color:#f4c94f}.tool-tile .tool-dot{background:#2864e8}.tool-tile:nth-child(5n) .tool-dot{background:#18212e}.tool-row:nth-child(2){margin-left:0}.tool-row:nth-child(4){margin-right:0}.tool-caption{color:#b6c0cf;letter-spacing:.04em}
-.systems-strip{padding:0 0 100px}.systems-panel{border-radius:32px;background:linear-gradient(120deg,#f4cb50 0%,#f8dc86 100%);padding:clamp(30px,4vw,55px);gap:50px;box-shadow:0 20px 55px rgba(191,147,18,.12)}.systems-panel h2{font-size:clamp(2.1rem,3.5vw,3.2rem)}.systems-panel p{font-size:.96rem;max-width:460px}.system-points{gap:14px}.system-point{border-radius:19px;background:rgba(255,255,255,.75);padding:22px;border-color:rgba(24,33,46,.06);transition:transform .25s,background .25s}.system-point:hover{transform:translateY(-4px);background:#fff}.system-point b{font-size:1.03rem}.system-point span{line-height:1.7}
-.training-banner{border-radius:30px;background:linear-gradient(115deg,#1a2638 0%,#263c5b 60%,#3f526b 100%);box-shadow:0 20px 50px rgba(24,33,46,.12);margin-bottom:38px}.training-banner-copy{padding:clamp(30px,4vw,55px)}.training-banner h2{font-size:clamp(2.1rem,3.6vw,3.4rem);letter-spacing:-.06em}.training-banner p{font-size:.95rem;line-height:1.85}.training-banner-art{background:radial-gradient(circle at 65% 35%,#f4c94f52,transparent 46%)}.training-banner-art img{opacity:.83;mix-blend-mode:screen}.training-symbol{color:#f4c94f;text-shadow:10px 12px 0 #ffffff16}.training-grid{gap:17px}.training-card{border-radius:22px;padding:25px;min-height:235px;box-shadow:0 8px 25px rgba(24,33,46,.035);transition:transform .3s,box-shadow .3s,border-color .3s}.training-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(24,33,46,.08);border-color:#cddaf2}.training-card .num{color:#2864e8;font-size:2.15rem}.training-card h3{font-size:1.1rem;line-height:1.3}.training-card p{font-size:.88rem}.training-card small{color:#2864e8;letter-spacing:.1em}
-.resource-bar{margin-top:26px;border-radius:22px;padding:25px 28px;border-color:#e1e6ed;box-shadow:0 7px 25px rgba(24,33,46,.03)}.resource-bar h3{font-size:1.22rem}.button{padding:13px 20px;background:#2864e8;border-radius:999px;box-shadow:0 8px 20px rgba(40,100,232,.15);transition:transform .22s,background .22s,box-shadow .22s}.button:hover{background:#1d4fc3;box-shadow:0 12px 24px rgba(40,100,232,.23)}.button.yellow{background:#f4c94f;color:#18212e;box-shadow:0 8px 20px rgba(191,147,18,.16)}.button.yellow:hover{background:#ffda6d}.button.outline{box-shadow:none;border-color:#d1d9e5}.button.disabled{box-shadow:none}
-.collab-grid{gap:clamp(30px,5vw,72px)}.collab-visual{min-height:510px;border-radius:30px;box-shadow:0 20px 50px rgba(24,33,46,.1);background:linear-gradient(145deg,#f4c94f,#f9e9ae 45%,#dce8f5)}.collab-visual img{transition:transform .7s}.collab-visual:hover img{transform:scale(1.04)}.collab-stamp{border-radius:22px;padding:22px 24px;box-shadow:0 16px 38px rgba(24,33,46,.14);backdrop-filter:blur(8px)}.collab-stamp b{font-size:1.45rem;letter-spacing:-.05em}.collab-copy h2{margin:16px 0 20px;font-size:clamp(2.3rem,4vw,3.65rem)}.collab-copy>p{font-size:.98rem;line-height:1.9;color:#647083}.collab-points{gap:18px 20px;margin:29px 0}.collab-point{border-color:#dce2eb;padding-top:15px}.collab-point b{font-size:.98rem}.collab-point span{line-height:1.7}
-.gallery-grid{gap:20px}.tool-card{border-radius:23px;overflow:hidden;background:#202c3d;border:1px solid #35445a;transition:transform .3s,box-shadow .3s,border-color .3s}.tool-card:hover{transform:translateY(-7px);box-shadow:0 20px 45px #0003;border-color:#6684b4}.tool-thumb{height:245px;background:#26364b}.tool-thumb img{transition:transform .65s}.tool-card:hover .tool-thumb img{transform:scale(1.05)}.tool-thumb:after{background:linear-gradient(180deg,transparent 25%,rgba(13,22,35,.78))}.tool-logo{border-radius:14px;background:#f4c94f;color:#18212e;box-shadow:0 8px 20px #0002}.play{width:50px;height:50px;border-radius:50%;background:#fff;color:#2864e8;box-shadow:0 10px 25px #0003}.tool-card-copy{padding:24px}.tool-category{color:#f4c94f;font-size:.69rem;letter-spacing:.13em}.tool-card-copy h3{font-size:1.32rem;margin:11px 0}.tool-card-copy p{font-size:.9rem;line-height:1.8;color:#c1cbd9}
-.students-panel{border-radius:30px;overflow:hidden;box-shadow:0 20px 55px rgba(24,33,46,.08)}.students-copy{padding:clamp(30px,4vw,55px)}.students-copy h2{font-size:clamp(2.1rem,3.8vw,3.25rem)}.students-copy>p{line-height:1.9;color:#667184}.student-benefit{line-height:1.65}.tick{background:#e7efff;color:#2864e8}.students-resources{padding:clamp(28px,4vw,48px);background:#1c2b40}.students-resources h3{font-size:1.5rem}.resource-card{border-radius:16px;background:#ffffff0c;border:1px solid #ffffff18;padding:15px}.resource-card a{color:#f4c94f}.resource-icon{border-radius:11px;background:#f4c94f;color:#18212e}.diy-strip{border:1px solid #e0e6ee;border-radius:22px;background:#fff;padding:23px 26px;margin-top:25px;box-shadow:0 8px 25px rgba(24,33,46,.035)}.diy-icon{background:#e7efff;color:#2864e8;border-radius:14px}
-.footer{background:#111c2b;padding:75px 0 24px}.footer-top{gap:50px;padding-bottom:50px}.footer-brand p{color:#c0c8d4;line-height:1.85;max-width:300px}.footer-heading{color:#f4c94f;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;font-weight:800;margin-bottom:18px}.footer-links{gap:12px}.footer-links a{color:#c6ced9;transition:color .2s,transform .2s}.footer-links a:hover{color:#fff;transform:translateX(3px)}.footer-diy{background:#263b58;color:#f4c94f;border-radius:13px;padding:12px 15px}.socials a{border:1px solid #3a4a60;background:#1b2a3d;transition:background .2s,transform .2s}.socials a:hover{background:#2864e8;transform:translateY(-3px)}.footer-bottom{border-color:#334156;color:#aeb9c8;font-size:.78rem}.footer-legal a{color:#bfc8d5}.footer-legal a:hover{color:#f4c94f}
-/* image, keyboard and touch polish */
-img{max-width:100%}a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:3px solid #7ea5ff;outline-offset:4px}.button:active,.nav-cta:active{transform:translateY(0) scale(.98)}
-@media(max-width:1100px){.wrap{width:min(100% - 44px,1000px)}.nav-links{gap:13px;font-size:.79rem}.four-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.service-card{min-height:390px}.training-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.section{padding:82px 0}}
-@media(max-width:760px){.wrap{width:calc(100% - 34px)}.nav{height:72px}.menu-toggle{display:block;background:#fff;color:var(--ink);font-weight:700}.nav-links{display:none;position:absolute;left:17px;right:17px;top:calc(100% + 8px);padding:15px;background:#fff;border:1px solid #e3e8ef;border-radius:20px;box-shadow:0 22px 45px rgba(24,33,46,.14);align-items:stretch;gap:3px;font-size:.95rem}.nav-links.open{display:flex;flex-direction:column}.nav-links a{padding:12px 13px;border-radius:11px}.nav-links a:hover{background:#eef4ff}.nav-links a:not(.nav-cta):after{display:none}.nav-cta{text-align:center;margin-top:5px}.banner-hero{padding-top:16px}.banner-frame{border-radius:16px}.section{padding:68px 0}.section-head,.tools-intro{display:block;margin-bottom:30px}.section-intro{margin-top:18px}.four-grid{grid-template-columns:1fr;gap:16px}.service-card{min-height:0}.service-image{height:235px}.service-copy{padding:22px}.systems-strip{padding-bottom:68px}.systems-panel{grid-template-columns:1fr;padding:29px 23px;gap:25px;border-radius:24px}.system-points{gap:10px}.system-point{padding:16px}.training-banner{grid-template-columns:1fr;border-radius:24px}.training-banner-copy{padding:30px 24px}.training-banner-art{min-height:190px;max-height:220px}.training-grid{grid-template-columns:1fr;gap:13px}.training-card{min-height:0;padding:22px}.resource-bar{align-items:flex-start;flex-direction:column;padding:22px}.collab-grid{grid-template-columns:1fr;gap:30px}.collab-visual{min-height:350px}.collab-copy h2{font-size:2.45rem}.collab-points{gap:16px}.gallery-grid{grid-template-columns:1fr;gap:16px}.tool-thumb{height:220px}.students-panel{grid-template-columns:1fr}.students-copy{padding:30px 24px}.students-resources{padding:28px 22px}.diy-strip{align-items:flex-start;flex-direction:column;padding:21px}.footer{padding-top:58px}.footer-top{grid-template-columns:1fr 1fr;gap:32px 20px}.footer-brand{grid-column:1/-1}.footer-bottom{flex-wrap:wrap;gap:12px}.footer-bottom>span:last-child{display:none}}
-@media(max-width:420px){.brand-sub{font-size:.66rem}.brand-mark{width:39px;height:39px}.system-points{grid-template-columns:1fr}.collab-visual{min-height:300px}.collab-stamp{padding:16px;max-width:245px}.footer-top{grid-template-columns:1fr}.footer-brand{grid-column:auto}.section h2{font-size:2.15rem}}
+.site-header {
+  width: 70%;
+  margin: 28px auto 0;
+  padding: 15px 24px;
+  background: #e9e9e5;
+  border: 1px solid #ffffff;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  position: relative;
+  z-index: 100;
+}
 
+/* LOGO */
+
+.brand {
+  text-decoration: none;
+  color: #111;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.7px;
+  white-space: nowrap;
+}
+
+.brand span {
+  display: block;
+  color: #777;
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+
+/* NAVIGATION */
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #171717;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 12px 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.nav-link:hover,
+.nav-link[aria-expanded="true"] {
+  color: #739900;
+}
+
+.arrow {
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  margin-top: -4px;
+  transition: transform .2s ease;
+}
+
+.nav-link[aria-expanded="true"] .arrow {
+  transform: rotate(225deg);
+  margin-top: 4px;
+}
+
+/* DROPDOWNS */
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: -20px;
+  width: 330px;
+  padding: 19px;
+  background: #111311;
+  border: 1px solid #303430;
+  border-radius: 15px;
+  box-shadow: 0 18px 45px #0008;
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  z-index: 200;
+}
+
+.dropdown.open {
+  display: grid;
+  animation: appear .18s ease-out;
+}
+
+.dropdown-label {
+  grid-column: 1 / -1;
+  color: #a3a99e;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  padding: 0 8px 10px;
+}
+
+.dropdown a {
+  display: block;
+  color: #ededed;
+  text-decoration: none;
+  font-size: 12px;
+  padding: 11px 8px;
+  border-radius: 7px;
+  transition: background .2s, color .2s;
+}
+
+.dropdown a:hover {
+  color: #d5ff45;
+  background: #ffffff0b;
+}
+
+.dropdown .view-all {
+  grid-column: 1 / -1;
+  border-top: 1px solid #303430;
+  margin-top: 8px;
+  padding-top: 15px;
+  color: #d5ff45;
+}
+
+/* CTA */
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 19px;
+  background: #d5ff45;
+  color: #101010;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+  border-radius: 9px;
+  transition: transform .2s, background .2s,
+              box-shadow .2s;
+}
+
+.cta:hover {
+  background: #e2ff79;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 22px #d5ff4530;
+}
+
+.cta span {
+  font-size: 17px;
+  transition: transform .2s;
+}
+
+.cta:hover span {
+  transform: translateX(4px);
+}
+
+/* MOBILE MENU BUTTON */
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  font-size: 27px;
+  color: #111;
+  cursor: pointer;
+}
+
+/* ANIMATION */
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1450px) {
+  .site-header {
+    width: 90%;
+    gap: 15px;
+  }
+
+  .nav-menu {
+    gap: 16px;
+  }
+
+  .brand {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .site-header {
+    width: 92%;
+    padding: 13px 17px;
+    flex-wrap: wrap;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  .nav-menu {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding-top: 10px;
+  }
+
+  .nav-menu.mobile-open {
+    display: flex;
+  }
+
+  .nav-link {
+    width: 100%;
+    justify-content: space-between;
+    padding: 13px 5px;
+  }
+
+  .dropdown {
+    position: static;
+    width: 100%;
+    margin: 3px 0 12px;
+    box-shadow: none;
+  }
+
+  .header-cta {
+    display: none;
+  }
+
+  .nav-menu.mobile-open .mobile-cta {
+    display: inline-flex;
+    align-self: flex-start;
+    margin-top: 12px;
+  }
+}
+
+@media (min-width: 1001px) {
+  .mobile-cta {
+    display: none !important;
+  }
+}
 </style>
 </head>
+
 <body>
-<div class="topline"></div>
-<header><div class="wrap nav"><a class="brand" href="index.html" aria-label="Sajjad Zaidi home"><span class="brand-mark">SZ</span><span><span class="brand-name">Sajjad Zaidi</span><span class="brand-sub">AI · Automation · Education</span></span></a><button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">Menu ☰</button><nav class="nav-links" id="navLinks" aria-label="Main navigation"><a data-content-key="nav_projects" href="projects.html">Projects</a><a data-content-key="nav_brands" href="brand-collaborations.html">Brand Collaborations</a><a data-content-key="nav_corporate" href="corporate-training.html">Corporate Training</a><a data-content-key="nav_tools" href="tools.html">Tools & Tutorials</a><a data-content-key="nav_courses" href="courses.html">Online Learning</a><a data-content-key="nav_diy" href="diy-tutorials.html">DIY Tutorials</a><a data-content-key="nav_contact" href="contact.html">Contact</a></nav><a class="nav-cta" href="https://wa.me/923346694427" target="_blank" rel="noopener">Let's talk ↗</a></div></header>
-<main id="top">
-<!-- HERO: intentionally banner-only; no added headline, copy, or buttons. Banner should contain all hero messaging. -->
-<section class="banner-hero" aria-label="Brand banner"><div class="wrap"><div class="banner-frame"><img id="heroBanner" src="https://drive.google.com/thumbnail?id=17IQ_5DY8xPvGDi1fNH73yS7VjWfbl8Xj&sz=w2400" alt="Sajjad Zaidi brand banner" fetchpriority="high"></div><div class="banner-note" id="bannerNote" hidden>Banner load nahi hua. Google Drive sharing ko “Anyone with the link” karein ya banner file ko repository ke <code>assets</code> folder mein upload karein.</div></div></section>
-<section class="section" id="services"><div class="wrap"><div class="section-head"><div><div class="kicker">Ways to work together</div><h2>Four ways I help you<br>move forward.</h2></div><p class="section-intro">Choose the path that fits your goal. Each card can be connected to its own page, campaign or enquiry journey from your future CRM.</p></div><div class="four-grid" id="serviceCards">
-<a class="service-card content-card" data-content-key="service_projects" href="projects.html" aria-label="Projects and automation"><div class="service-image"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=85" alt="Projects — Sajjad Zaidi services" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="image-placeholder" style="display:none"><span class="placeholder-word">Projects</span></div></div><div class="service-copy"><span class="service-number">01 / BUILD</span><h3>Projects & Automation</h3><p>Practical systems, connected tools and AI-powered workflows built around real business needs.</p><span class="arrow-link">Explore projects <span class="arrow-circle">↗</span></span></div></a>
-<a class="service-card content-card" data-content-key="service_brands" href="brand-collaborations.html" aria-label="Brand collaborations"><div class="service-image"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=85" alt="Collaborate — Sajjad Zaidi services" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="image-placeholder" style="display:none"><span class="placeholder-word">Collaborate</span></div></div><div class="service-copy"><span class="service-number">02 / CREATE</span><h3>Brand Collaborations</h3><p>Useful, clear and engaging content that demonstrates how tools solve real problems.</p><span class="arrow-link">Partner with me <span class="arrow-circle">↗</span></span></div></a>
-<a class="service-card content-card" data-content-key="service_corporate" href="corporate-training.html" aria-label="Corporate training"><div class="service-image"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1000&q=85" alt="Team growth — Sajjad Zaidi services" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="image-placeholder" style="display:none"><span class="placeholder-word">Team growth</span></div></div><div class="service-copy"><span class="service-number">03 / ENABLE</span><h3>Corporate Training</h3><p>Help teams understand, adopt and improve their automation and AI processes after delivery.</p><span class="arrow-link">Explore training <span class="arrow-circle">↗</span></span></div></a>
-<a class="service-card content-card" data-content-key="service_teaching" href="courses.html" aria-label="Online teaching"><div class="service-image"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=85" alt="Learn — Sajjad Zaidi services" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="image-placeholder" style="display:none"><span class="placeholder-word">Learn</span></div></div><div class="service-copy"><span class="service-number">04 / TEACH</span><h3>Online Teaching</h3><p>Step-by-step lessons, practical walkthroughs and learning resources for students and independent professionals.</p><span class="arrow-link">Start learning <span class="arrow-circle">↗</span></span></div></a>
-</div></div></section>
-<section class="section dark" id="tools"><div class="wrap"><div class="tools-intro"><div><div class="kicker">My automation ecosystem</div><h2>Tools don’t work alone.<br>Systems do.</h2></div><p class="section-intro">I bring the right platforms together across lead generation, conversations, automation, voice and content — with each tool doing a clear job.</p></div><div class="stack-layout"><div class="stack-feature"><div class="stack-orbit orbit-one"></div><div class="stack-orbit orbit-two"></div><div class="stack-core"><span class="stack-core-mark">SZ</span><b>Connected<br>systems</b><small>People · Process · AI</small></div><span class="orbit-tag tag-a">AI</span><span class="orbit-tag tag-b">CRM</span><span class="orbit-tag tag-c">WORKFLOWS</span><span class="orbit-tag tag-d">CONTENT</span></div><div class="stack-categories"><article class="stack-category"><div class="stack-category-head"><span class="stack-index">01</span><div><h3>Chatbots & AI assistants</h3><p>Support, qualification and knowledge access</p></div></div><div class="tool-pills"><span>Chatbase</span><span>Grok</span><span>GHL AI</span></div></article><article class="stack-category"><div class="stack-category-head"><span class="stack-index">02</span><div><h3>Voice & conversations</h3><p>Voice agents, call handling and audio</p></div></div><div class="tool-pills"><span>ElevenLabs</span><span>Fish Audio</span><span>Voice agents</span></div></article><article class="stack-category"><div class="stack-category-head"><span class="stack-index">03</span><div><h3>Lead generation & CRM</h3><p>Find leads, track conversations, move deals</p></div></div><div class="tool-pills"><span>Apollo</span><span>Apify</span><span>GoHighLevel</span><span>Zoho</span></div></article><article class="stack-category"><div class="stack-category-head"><span class="stack-index">04</span><div><h3>Automation & integrations</h3><p>Connect apps and remove repetitive work</p></div></div><div class="tool-pills"><span>n8n</span><span>Make</span><span>Zapier</span><span>Flow</span></div></article><article class="stack-category"><div class="stack-category-head"><span class="stack-index">05</span><div><h3>Content & digital delivery</h3><p>Publish, capture and deliver digital experiences</p></div></div><div class="tool-pills"><span>Creatisia</span><span>WordPress</span><span>Jotform</span><span>Shopify</span><span>Video automation</span></div></article></div></div><p class="tool-caption">The goal isn’t a long list of tools. It’s a reliable system that helps a business respond, deliver and improve.</p></div></section>
-<section class="systems-strip"><div class="wrap"><div class="systems-panel"><div><div class="kicker">Beyond connecting apps</div><h2>Automation should improve the way business works.</h2><p>I focus on what happens before and after the workflow: response quality, follow-up, visibility, team adoption and measurable improvement.</p></div><div class="system-points"><div class="system-point"><b>Lead to close</b><span>Reduce missed enquiries and make follow-ups consistent.</span></div><div class="system-point"><b>Track conversations</b><span>Review response quality, objections and next steps.</span></div><div class="system-point"><b>Improve the process</b><span>Find bottlenecks and use real activity to improve workflows.</span></div><div class="system-point"><b>Support the team</b><span>Help people use the system confidently after handover.</span></div></div></div></div></section>
-<section class="section alt" id="corporate"><div class="wrap"><div class="training-banner"><div class="training-banner-copy"><div class="kicker">Corporate enablement</div><h2>Delivery is the beginning. Adoption is what creates value.</h2><p>After a CRM or automation system is delivered, I help teams understand what to track, how to review it and how to improve the process over time.</p></div><div class="training-banner-art" id="trainingBannerArt"><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=85" alt="Team collaborating in a training session" loading="lazy"><div class="training-symbol">↗</div></div></div><div class="section-head"><div><div class="kicker">What the training covers</div><h2>Eight practical areas.<br>Built around real work.</h2></div><p class="section-intro">Examples below describe the learning areas. A corporate guide PDF can be added from the content manager when it is ready.</p></div><div class="training-grid" id="corporateTopics">
-<article class="training-card"><span class="num">01</span><h3>CRM Handover & Adoption</h3><p>Map ownership, pipeline stages and daily use. Example: a sales team learns when to update a deal and who owns the next action.</p><small>People + process</small></article>
-<article class="training-card"><span class="num">02</span><h3>Lead Response Tracking</h3><p>Measure speed-to-lead and missed enquiries. Example: flag leads not contacted within the team's agreed response window.</p><small>Lead management</small></article>
-<article class="training-card"><span class="num">03</span><h3>Conversation Quality</h3><p>Review calls and messages for clarity, discovery and follow-up. Example: identify unanswered buyer questions and recurring objections.</p><small>Conversation review</small></article>
-<article class="training-card"><span class="num">04</span><h3>Follow-up Automation</h3><p>Design useful reminders and sequences with clear stop rules. Example: stop promotional follow-ups as soon as a meeting is booked.</p><small>Workflow design</small></article>
-<article class="training-card"><span class="num">05</span><h3>Pipeline Visibility</h3><p>Track stage movement, stalled deals and next steps. Example: review deals with no activity for seven days.</p><small>Sales operations</small></article>
-<article class="training-card"><span class="num">06</span><h3>Conversion Improvement</h3><p>Find friction between enquiry and close. Example: compare lead sources and stages where qualified prospects drop off.</p><small>Closing performance</small></article>
-<article class="training-card"><span class="num">07</span><h3>Automation Monitoring</h3><p>Check failures, exceptions and data quality. Example: alert an owner when a lead sync fails instead of silently losing it.</p><small>Reliability</small></article>
-<article class="training-card"><span class="num">08</span><h3>Continuous Improvement</h3><p>Use weekly reviews to improve scripts, routing and workflows. Example: update a process after a repeated customer complaint.</p><small>Ongoing optimisation</small></article>
-</div><div class="resource-bar"><div><h3>Corporate CRM & Automation Field Guide</h3><p>A practical field guide for teams covering CRM adoption, automation tracking and conversion improvement.</p></div><a class="button yellow content-resource" data-content-key="corporate_pdf" href="#" aria-disabled="true">Get the field guide ↗</a></div></div></section>
-<section class="section" id="collaborations"><div class="wrap"><div class="collab-grid"><div class="collab-visual" id="collabBanner"><img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85" alt="Creative brand collaboration meeting" loading="lazy"><div class="collab-stamp"><b>30 days of useful content</b><span>Planned around the product, audience and campaign goal.</span></div></div><div class="collab-copy"><div class="kicker">Paid brand collaborations</div><h2>Not just a mention.<br>A month of useful content.</h2><p>I work with relevant brands to turn product features into clear, practical content that helps the audience understand what a tool does, where it fits and how to use it.</p><div class="collab-points"><div class="collab-point"><b>30-day content plan</b><span>Structured topics, formats and publishing rhythm.</span></div><div class="collab-point"><b>Real use cases</b><span>Demonstrations based on practical workflows.</span></div><div class="collab-point"><b>Feature-led stories</b><span>Explain features through a problem and outcome.</span></div><div class="collab-point"><b>Clear deliverables</b><span>Agree content formats, timeline and approvals.</span></div></div><a class="button" data-content-key="brand_collab_cta" href="https://wa.me/923346694427" target="_blank" rel="noopener">Discuss a collaboration ↗</a></div></div></div></section>
-<section class="section dark" id="tool-gallery"><div class="wrap"><div class="section-head"><div><div class="kicker">Tool walkthroughs</div><h2>Explore tools, one feature<br>at a time.</h2></div><p class="section-intro">Explore practical breakdowns of the platforms behind connected business systems.</p></div><div class="gallery-grid" id="toolGallery">
-<article class="tool-card" data-video="" tabindex="0" role="button" aria-label="GoHighLevel walkthrough"><div class="tool-thumb"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=85" alt="GoHighLevel walkthrough preview" loading="lazy"><div class="tool-logo">GHL</div><span class="play">▶</span></div><div class="tool-card-copy"><span class="tool-category">CRM · Funnels · Automation</span><h3>GoHighLevel (GHL)</h3><p>Explore CRM pipelines, forms, calendars, workflows, conversations and campaign tracking.</p></div></article>
-<article class="tool-card" data-video="" tabindex="0" role="button" aria-label="n8n walkthrough"><div class="tool-thumb"><img src="https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?auto=format&fit=crop&w=1000&q=85" alt="n8n walkthrough preview" loading="lazy"><div class="tool-logo">n8n</div><span class="play">▶</span></div><div class="tool-card-copy"><span class="tool-category">Workflow automation</span><h3>n8n</h3><p>Connect apps, transform data, add logic and build workflows that are easier to monitor.</p></div></article>
-<article class="tool-card" data-video="" tabindex="0" role="button" aria-label="AI voice walkthrough"><div class="tool-thumb"><img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=1000&q=85" alt="AI voice walkthrough preview" loading="lazy"><div class="tool-logo">AI</div><span class="play">▶</span></div><div class="tool-card-copy"><span class="tool-category">Voice · Agents</span><h3>AI Voice Agents</h3><p>Understand call flows, handoffs, voice quality and practical customer-service use cases.</p></div></article>
-</div><p class="gallery-note">Select a walkthrough when its video is published. Tool thumbnails and videos are managed through your content system.</p></div></section>
-<section class="section" id="learning"><div class="wrap"><div class="students-panel"><div class="students-copy"><div class="kicker">Learn by building</div><h2>Practical learning for students and self-employed professionals.</h2><p>Online classes focus on understanding the logic, building useful projects and learning how to troubleshoot — not just copying steps.</p><div class="student-benefits"><div class="student-benefit"><span class="tick">✓</span><span>Step-by-step lessons with practical examples.</span></div><div class="student-benefit"><span class="tick">✓</span><span>Guides and reference PDFs to support practice.</span></div><div class="student-benefit"><span class="tick">✓</span><span>Learn workflows, integrations and automation thinking.</span></div><div class="student-benefit"><span class="tick">✓</span><span>Resources that can be updated as courses evolve.</span></div></div><a class="button" data-content-key="courses_page" href="courses.html">Explore online classes ↗</a></div><div class="students-resources"><h3>Free student resources</h3><p style="color:#bfc4ca;margin:0 0 7px;font-size:.85rem">Free learning resources for practice, revision and building your own projects.</p><div class="resource-card"><div class="resource-icon">PDF</div><div><b>Student Guide</b><span>Foundational learning guide</span></div><a class="content-resource" data-content-key="student_guide_pdf" href="#" aria-disabled="true">Get guide ↗</a></div><div class="resource-card"><div class="resource-icon">↗</div><div><b>Course Workbook</b><span>Practice checklist and notes</span></div><a class="content-resource" data-content-key="course_workbook_pdf" href="#" aria-disabled="true">Get PDF ↗</a></div><div class="resource-card"><div class="resource-icon">▶</div><div><b>Course Library</b><span>Classes and tutorial access</span></div><a data-content-key="course_library" href="courses.html">View courses ↗</a></div></div></div><div class="diy-strip"><div class="diy-title"><div class="diy-icon">✳</div><div><h3>DIY Tutorials — learn it, build it, improve it.</h3><p>Short practical walkthroughs for people who prefer learning by doing.</p></div></div><a class="button" data-content-key="diy_tutorials" href="diy-tutorials.html">Explore DIY tutorials ↗</a></div></div></section>
-</main>
-<footer class="footer" id="footer"><div class="wrap"><div class="footer-top"><div class="footer-brand"><a class="brand" href="index.html"><span class="brand-mark">SZ</span><span><span class="brand-name" style="color:white">Sajjad Zaidi</span><span class="brand-sub" style="color:#b7bbc1">AI · Automation · Education</span></span></a><p>Practical AI, automation and learning experiences designed to help people and teams work better.</p><a class="footer-diy" data-content-key="diy_tutorials" href="diy-tutorials.html">✳ Explore DIY Tutorials</a></div><div><div class="footer-heading">Explore</div><div class="footer-links"><a href="services.html">Services</a><a href="tools.html">Automation stack</a><a href="corporate-training.html">Corporate training</a><a href="tools.html#walkthroughs">Tool walkthroughs</a><a href="courses.html">Online learning</a></div></div><div><div class="footer-heading">Work with me</div><div class="footer-links"><a href="projects.html">Client projects</a><a href="brand-collaborations.html">Paid brand collaborations</a><a href="corporate-training.html">Corporate training</a><a href="courses.html">Courses & resources</a><a href="booking.html">Book a meeting ↗</a></div></div><div><div class="footer-heading">Follow & connect</div><div class="footer-links"><a href="mailto:infology00@gmail.com">Email</a><a href="https://wa.me/923346694427" target="_blank" rel="noopener">WhatsApp</a></div><div class="socials"><a data-social="tiktok" href="#" aria-label="TikTok">TT</a><a data-social="x" href="#" aria-label="X">X</a><a data-social="linkedin" href="#" aria-label="LinkedIn">in</a><a data-social="youtube" href="#" aria-label="YouTube">▶</a><a data-social="facebook" href="#" aria-label="Facebook">f</a><a data-social="instagram" href="#" aria-label="Instagram">◎</a></div></div></div><div class="footer-bottom"><span>© <span id="year"></span> Sajjad Zaidi. All rights reserved.</span><div class="footer-legal"><a data-content-key="privacy_page" href="privacy.html">Privacy</a><a href="#" id="cookieSettings">Cookie settings</a><a data-content-key="terms_page" href="terms.html">Terms</a></div><span>Built with purpose. Improved over time.</span></div></div></footer>
-<a class="wa-float" href="https://wa.me/923346694427" target="_blank" rel="noopener">WhatsApp ↗</a>
-<div class="cookie" id="cookieBanner" role="dialog" aria-label="Cookie preferences"><strong>Your privacy matters</strong><p>Optional analytics load only after you agree. Essential site functionality works without analytics.</p><div class="cookie-actions"><button class="accept" id="acceptCookies">Accept analytics</button><button id="essentialCookies">Essential only</button><button id="closeCookies">Decide later</button></div></div>
-<div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Tool video"><div class="modal-card"><div class="modal-head"><h3 id="modalTitle">Tool walkthrough</h3><button class="modal-close" id="modalClose">Close ✕</button></div><iframe class="video-frame" id="videoFrame" title="Tool walkthrough video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="modal-help" id="modalHelp">If the video does not play, <a id="externalVideo" href="#" target="_blank" rel="noopener">open it in a new tab</a>.</div></div></div>
+
+<header class="site-header">
+
+  <!-- LOGO -->
+  <a class="brand" href="/">
+    AWSZ
+    <span>AUTOMATION SYSTEMS</span>
+  </a>
+
+  <!-- MOBILE BUTTON -->
+  <button class="menu-toggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false">
+    ☰
+  </button>
+
+  <!-- NAVIGATION -->
+  <nav class="nav-menu">
+
+    <!-- CRMS -->
+    <div class="nav-item">
+      <button class="nav-link dropdown-toggle"
+              aria-expanded="false"
+              aria-controls="crm-dropdown">
+        CRMs <span class="arrow"></span>
+      </button>
+
+      <div class="dropdown" id="crm-dropdown">
+        <div class="dropdown-label">CRM Platforms</div>
+        <a href="https://www.gohighlevel.com/">GoHighLevel</a>
+        <a href="https://www.hubspot.com/">HubSpot</a>
+        <a href="https://www.zoho.com/crm/">Zoho CRM</a>
+        <a href="https://www.lyl.io/">Lylio</a>
+        <a href="https://www.salesforce.com/">Salesforce</a>
+        <a href="https://www.pipedrive.com/">Pipedrive</a>
+        <a href="https://monday.com/">Monday.com</a>
+        <a href="https://clickup.com/">ClickUp</a>
+        <a href="https://www.freshworks.com/crm/">Freshsales</a>
+        <a href="https://www.kommo.com/">Kommo</a>
+        <a href="https://www.close.com/">Close CRM</a>
+        <a href="https://www.insightly.com/">Insightly</a>
+        <a class="view-all" href="#crms">
+          Explore CRM Solutions →
+        </a>
+      </div>
+    </div>
+
+    <!-- AUTOMATION -->
+    <div class="nav-item">
+      <button class="nav-link dropdown-toggle"
+              aria-expanded="false"
+              aria-controls="automation-dropdown">
+        Automation <span class="arrow"></span>
+      </button>
+
+      <div class="dropdown" id="automation-dropdown">
+        <div class="dropdown-label">Automation Tools</div>
+        <a href="https://n8n.io/">n8n</a>
+        <a href="https://www.make.com/">Make</a>
+        <a href="https://zapier.com/">Zapier</a>
+        <a href="https://pabbly.com/">Pabbly Connect</a>
+        <a href="https://www.activepieces.com/">Activepieces</a>
+        <a href="https://www.workato.com/">Workato</a>
+        <a href="https://www.microsoft.com/power-platform/">Power Automate</a>
+        <a href="https://albato.com/">Albato</a>
+        <a href="https://ifttt.com/">IFTTT</a>
+        <a href="https://www.integrately.com/">Integrately</a>
+        <a href="https://relay.app/">Relay.app</a>
+        <a href="https://www.lindy.ai/">Lindy AI</a>
+        <a class="view-all" href="#automation">
+          Explore Automation →
+        </a>
+      </div>
+    </div>
+
+    <!-- DIRECT LINKS -->
+    <a class="nav-link" href="#corporate-training">
+      Corporate Training
+    </a>
+
+    <a class="nav-link" href="#online-sessions">
+      Online Sessions
+    </a>
+
+    <!-- MOBILE CTA -->
+    <a class="cta mobile-cta" href="mailto:infology00@gmail.com">
+      Let's Talk <span>↗</span>
+    </a>
+
+  </nav>
+
+  <!-- DESKTOP CTA -->
+  <a class="cta header-cta"
+     href="mailto:infology00@gmail.com">
+    Let's Talk <span>↗</span>
+  </a>
+
+</header>
+
 <script>
-// Public website configuration only. Never place a Supabase secret/service-role key here.
-const AWSZ_CONFIG={supabaseUrl:'https://frytztocmsmytiliksde.supabase.co',supabasePublishableKey:'sb_publishable_bddE6swvLl137kftiZacmA_YZGj4p-v',clarityProjectId:'',contentTable:'website_content',socialLinks:{tiktok:'',x:'',linkedin:'',youtube:'',facebook:'',instagram:''}};
-const defaults={service_projects:{title:'Projects & Automation',description:'Practical systems, connected tools and AI-powered workflows built around real business needs.',image_url:'',target_url:'projects.html'},service_brands:{title:'Brand Collaborations',description:'Useful, clear and engaging content that demonstrates how tools solve real problems.',image_url:'',target_url:'brand-collaborations.html'},service_corporate:{title:'Corporate Training',description:'Help teams understand, adopt and improve their automation and AI processes after delivery.',image_url:'',target_url:'corporate-training.html'},service_teaching:{title:'Online Teaching',description:'Step-by-step lessons, practical walkthroughs and learning resources.',image_url:'',target_url:'courses.html'},corporate_pdf:{title:'Corporate CRM & Automation Field Guide',file_url:''},student_guide_pdf:{title:'Student Guide',file_url:''},course_workbook_pdf:{title:'Course Workbook',file_url:''},course_library:{target_url:'courses.html'},courses_page:{target_url:'courses.html'},diy_tutorials:{target_url:'diy-tutorials.html'},brand_collab_cta:{target_url:'brand-collaborations.html'},privacy_page:{target_url:'privacy.html'},terms_page:{target_url:'terms.html'},nav_projects:{target_url:'projects.html'},nav_brands:{target_url:'brand-collaborations.html'},nav_corporate:{target_url:'corporate-training.html'},nav_tools:{target_url:'tools.html'},nav_courses:{target_url:'courses.html'},nav_diy:{target_url:'diy-tutorials.html'},nav_contact:{target_url:'contact.html'},corporate_banner:{image_url:''},collaboration_banner:{image_url:''},tool_ghl:{title:'GoHighLevel (GHL)',description:'Explore CRM pipelines, forms, calendars, workflows, conversations and campaign tracking.',thumbnail_url:'',video_url:''},tool_n8n:{title:'n8n',description:'Connect apps, transform data, add logic and build workflows that are easier to monitor.',thumbnail_url:'',video_url:''},tool_voice:{title:'AI Voice Agents',description:'Understand call flows, handoffs, voice quality and practical customer-service use cases.',thumbnail_url:'',video_url:''}};
-let content={...defaults};
-const navToggle=document.getElementById('menuToggle'),nav=document.getElementById('navLinks');navToggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');navToggle.setAttribute('aria-expanded',String(open))});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');navToggle.setAttribute('aria-expanded','false')}));document.getElementById('year').textContent=new Date().getFullYear();
-function safeUrl(url){try{const u=new URL(url,location.href);return ['https:','http:'].includes(u.protocol)?u.href:''}catch{return ''}}
-function setHref(el,url){const clean=safeUrl(url);if(clean){el.href=clean;el.classList.remove('empty-resource');el.removeAttribute('aria-disabled');el.removeAttribute('title')}else if(el.classList.contains('content-resource')){el.href='resource-access.html?key='+encodeURIComponent(el.dataset.contentKey);el.classList.remove('empty-resource');el.removeAttribute('aria-disabled')}else{el.classList.add('link-unconfigured');el.setAttribute('aria-label',(el.textContent||'Link')+' destination not configured');if(!el.dataset.noPreventDefault){el.addEventListener('click',e=>{e.preventDefault();}, {once:false})}}}
-function applyContent(){document.querySelectorAll('[data-content-key]').forEach(el=>{const item=content[el.dataset.contentKey]||{};const url=item.target_url||item.file_url||'';if(el.classList.contains('content-card')){setHref(el,url);const img=el.querySelector('.service-image');if(item.image_url){const clean=safeUrl(item.image_url);if(clean)img.innerHTML=`<img src="${clean}" alt="${(item.title||'Service image').replace(/[<>"']/g,'')}" loading="lazy">`}const h=el.querySelector('h3');if(h&&item.title)h.textContent=item.title;const p=el.querySelector('p');if(p&&item.description)p.textContent=item.description;}else if(el.classList.contains('content-resource')){el.href='resource-access.html?key='+encodeURIComponent(el.dataset.contentKey);el.classList.remove('empty-resource');el.removeAttribute('aria-disabled');if(el.dataset.contentKey==='corporate_pdf')el.textContent='Get the field guide ↗';else if(el.dataset.contentKey==='student_guide_pdf')el.textContent='Get student guide ↗';else el.textContent='Get workbook ↗'}else{setHref(el,url)}});
-const tb=content.corporate_banner?.image_url;if(tb&&safeUrl(tb)){document.getElementById('trainingBannerArt').innerHTML=`<img src="${safeUrl(tb)}" alt="Corporate training banner" loading="lazy">`};const cb=content.collaboration_banner?.image_url;if(cb&&safeUrl(cb)){const box=document.getElementById('collabBanner');box.style.backgroundImage=`url("${safeUrl(cb)}")`;box.style.backgroundSize='cover';box.style.backgroundPosition='center'}
-const toolKeys=['tool_ghl','tool_n8n','tool_voice'];document.querySelectorAll('#toolGallery .tool-card').forEach((card,i)=>{const item=content[toolKeys[i]]||{};card.dataset.video=item.video_url||'';const title=card.querySelector('h3'),desc=card.querySelector('p'),thumb=card.querySelector('.tool-thumb'),logo=card.querySelector('.tool-logo');if(item.title)title.textContent=item.title;if(item.description)desc.textContent=item.description;if(item.thumbnail_url&&safeUrl(item.thumbnail_url)){thumb.style.backgroundImage=`url("${safeUrl(item.thumbnail_url)}")`;thumb.style.backgroundSize='cover';thumb.style.backgroundPosition='center';logo.style.display='none'}});
-}
-async function loadContent(){if(!AWSZ_CONFIG.supabaseUrl||!AWSZ_CONFIG.supabasePublishableKey)return;try{const {createClient}=await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');const sb=createClient(AWSZ_CONFIG.supabaseUrl,AWSZ_CONFIG.supabasePublishableKey);const {data,error}=await sb.from(AWSZ_CONFIG.contentTable).select('content_key,content_value').eq('is_published',true);if(error)throw error;(data||[]).forEach(row=>{if(row.content_key&&row.content_value&&typeof row.content_value==='object')content[row.content_key]={...(content[row.content_key]||{}),...row.content_value}});applyContent()}catch(e){console.warn('CMS content not loaded; using built-in layout.',e)}}
-function openVideo(card){const raw=card.dataset.video;if(!raw){return}const url=safeUrl(raw);if(!url)return;const embed=url.includes('youtube.com/watch')?url.replace('youtube.com/watch?v=','youtube.com/embed/').split('&')[0]:url.includes('youtu.be/')?'https://www.youtube.com/embed/'+url.split('youtu.be/')[1].split(/[?&]/)[0]:url.includes('vimeo.com/')?'https://player.vimeo.com/video/'+url.split('vimeo.com/')[1].split(/[?&]/)[0]:url;document.getElementById('modalTitle').textContent=card.querySelector('h3').textContent;document.getElementById('videoFrame').src=embed;document.getElementById('externalVideo').href=url;document.getElementById('videoModal').classList.add('open');document.body.style.overflow='hidden'}function closeVideo(){document.getElementById('videoModal').classList.remove('open');document.getElementById('videoFrame').src='';document.body.style.overflow=''}document.querySelectorAll('#toolGallery .tool-card').forEach(card=>{card.addEventListener('click',()=>openVideo(card));card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openVideo(card)}})});document.getElementById('modalClose').addEventListener('click',closeVideo);document.getElementById('videoModal').addEventListener('click',e=>{if(e.target.id==='videoModal')closeVideo()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVideo()});
-const cookie=document.getElementById('cookieBanner'),cookieKey='awsz_cookie_choice_v2';function loadClarity(){const id=AWSZ_CONFIG.clarityProjectId;if(!id||!/^[a-zA-Z0-9]+$/.test(id)||window.__awszClarityLoaded)return;window.__awszClarityLoaded=true;(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,'clarity','script',id)}try{const choice=localStorage.getItem(cookieKey);if(!choice)cookie.style.display='block';if(choice==='analytics')loadClarity()}catch{cookie.style.display='block'}function saveCookie(choice){try{localStorage.setItem(cookieKey,choice)}catch{}cookie.style.display='none';if(choice==='analytics')loadClarity()}document.getElementById('acceptCookies').addEventListener('click',()=>saveCookie('analytics'));document.getElementById('essentialCookies').addEventListener('click',()=>saveCookie('essential'));document.getElementById('closeCookies').addEventListener('click',()=>cookie.style.display='none');document.getElementById('cookieSettings').addEventListener('click',e=>{e.preventDefault();cookie.style.display='block'});
-document.querySelectorAll('[data-social]').forEach(a=>{const u=AWSZ_CONFIG.socialLinks[a.dataset.social];if(u&&safeUrl(u)){a.href=safeUrl(u);a.target='_blank';a.rel='noopener'}else{a.addEventListener('click',e=>{e.preventDefault();const note=document.getElementById('socialNotice')||document.createElement('div');note.id='socialNotice';note.textContent='This social profile link will be added soon.';note.style.cssText='position:fixed;bottom:78px;right:20px;z-index:70;background:#20242a;color:#fff;padding:12px 16px;border-radius:12px;box-shadow:0 10px 30px #0002;font-size:14px';if(!note.isConnected)document.body.appendChild(note);clearTimeout(window.__socialNoticeTimer);window.__socialNoticeTimer=setTimeout(()=>note.remove(),2600)})}});
-const hero=document.getElementById('heroBanner');hero.addEventListener('error',()=>{if(!hero.dataset.fallbackTried){hero.dataset.fallbackTried='1';hero.src='https://drive.google.com/uc?export=view&id=17IQ_5DY8xPvGDi1fNH73yS7VjWfbl8Xj';return}document.getElementById('bannerNote').hidden=false;hero.alt='Banner image could not be loaded. Make the Google Drive image public or upload it into the repository.'});loadContent();
+const menuToggle = document.querySelector('.menu-toggle');
+const navMenu = document.querySelector('.nav-menu');
+const dropdownButtons = document.querySelectorAll('.dropdown-toggle');
+
+menuToggle.addEventListener('click', () => {
+  const isOpen = navMenu.classList.toggle('mobile-open');
+  menuToggle.setAttribute('aria-expanded', isOpen);
+  menuToggle.textContent = isOpen ? '×' : '☰';
+});
+
+dropdownButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const dropdown = document.getElementById(
+      button.getAttribute('aria-controls')
+    );
+
+    const willOpen = !dropdown.classList.contains('open');
+
+    document.querySelectorAll('.dropdown').forEach(menu => {
+      menu.classList.remove('open');
+    });
+
+    dropdownButtons.forEach(item => {
+      item.setAttribute('aria-expanded', 'false');
+    });
+
+    if (willOpen) {
+      dropdown.classList.add('open');
+      button.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+document.addEventListener('click', event => {
+  if (!event.target.closest('.nav-item')) {
+    document.querySelectorAll('.dropdown').forEach(menu => {
+      menu.classList.remove('open');
+    });
+
+    dropdownButtons.forEach(button => {
+      button.setAttribute('aria-expanded', 'false');
+    });
+  }
+});
+
+document.querySelectorAll('.nav-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (link.getAttribute('href').startsWith('#')) {
+      navMenu.classList.remove('mobile-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.textContent = '☰';
+    }
+  });
+});
 </script>
-</body></html>
+
+</body>
+</html>
