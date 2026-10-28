@@ -667,5 +667,215 @@ body {
 })();
 </script>
 
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <span class="hero-label">GOHIGHLEVEL • CRM AUTOMATION</span>
+
+    <h1>
+      Got a CRM But It’s Not
+      <span>Making Any Difference?</span>
+    </h1>
+
+    <p>
+      Your CRM should do more than store contacts. Turn missed leads,
+      manual follow-ups, and disconnected processes into an automated
+      system that helps your business move forward.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="https://wa.me/923346694427" class="btn-primary">
+        Fix My CRM <span>↗</span>
+      </a>
+
+      <a href="https://www.linkedin.com/in/automation-with-sajjad-zaidi/"
+         target="_blank" rel="noopener" class="btn-secondary">
+        Let’s Talk <span>↗</span>
+      </a>
+    </div>
+
+    <div class="hero-services">
+      CRM Automation <span>•</span>
+      Lead Follow-ups <span>•</span>
+      AI Workflows
+    </div>
+  </div>
+</section>
+
+<style>
+.hero {
+  min-height: 650px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 90px 9%;
+  background: #080908;
+  color: #F5F5F0;
+  font-family: Arial, sans-serif;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: url("https://drive.google.com/uc?export=view&id=17f7jiyMnm1H07vljkECgbf8qr380goFu");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.02);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    rgba(8,9,8,.96) 0%,
+    rgba(8,9,8,.88) 43%,
+    rgba(8,9,8,.48) 100%
+  );
+}
+
+.hero-content {
+  max-width: 760px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-label {
+  display: inline-block;
+  padding: 10px 14px;
+  border: 1px solid rgba(213,255,69,.35);
+  border-radius: 50px;
+  background: rgba(213,255,69,.08);
+  color: #D5FF45;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 27px;
+}
+
+.hero h1 {
+  font-size: clamp(43px, 6.2vw, 78px);
+  line-height: 1.04;
+  letter-spacing: -3.5px;
+  font-weight: 850;
+  margin: 0;
+}
+
+.hero h1 span {
+  display: block;
+  color: #D5FF45;
+  margin-top: 10px;
+}
+
+.hero-content > p {
+  max-width: 620px;
+  color: #C3C5BB;
+  font-size: 16px;
+  line-height: 1.9;
+  margin-top: 25px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.hero-buttons a {
+  min-height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 22px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: .25s ease;
+}
+
+.btn-primary {
+  background: #D5FF45;
+  color: #11120F;
+  border: 1px solid #D5FF45;
+}
+
+.btn-primary:hover {
+  background: #E7FF91;
+  transform: translateY(-3px);
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.3);
+  color: #F5F5F0;
+}
+
+.btn-secondary:hover {
+  border-color: #D5FF45;
+  color: #D5FF45;
+  transform: translateY(-3px);
+}
+
+.hero-services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+  color: #B5B7AD;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+
+.hero-services span {
+  color: #D5FF45;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 620px;
+    padding: 75px 7%;
+  }
+
+  .hero-overlay {
+    background: rgba(8,9,8,.78);
+  }
+
+  .hero h1 {
+    font-size: clamp(40px, 10vw, 57px);
+    letter-spacing: -2px;
+  }
+
+  .hero-content > p {
+    font-size: 14px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .hero-buttons a {
+    width: 100%;
+  }
+
+  .hero-services {
+    line-height: 1.8;
+    gap: 8px;
+  }
+}
+</style>
+  
+  
 </body>
 </html>
