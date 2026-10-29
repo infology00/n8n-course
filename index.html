@@ -1,564 +1,1028 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AWSZ | AI Automation</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-:root {
-  --bg: #080908;
-  --lime: #D5FF45;
-  --cream: #F0F0EB;
-  --white: #F5F5F0;
-  --muted: #C0C1B8;
-}
+  <title>Sajjad Zaidi | AI Automation Engineer & Trainer</title>
+  <meta name="description" content="Meet Sajjad Zaidi — AI Automation Engineer, developer and corporate AI trainer. Let's make your business systems simpler.">
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+  <style>
+    :root {
+      --page: #F7F7F0;
+      --nav: #E8EDE1;
+      --charcoal: #202923;
+      --muted: #667067;
+      --lime: #B9F52B;
+      --border: rgba(32, 41, 35, 0.13);
+      --white: #FFFFFF;
+    }
 
-body {
-  background: var(--bg);
-  color: var(--white);
-  font-family: Arial, Helvetica, sans-serif;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-a { text-decoration: none; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* HEADER */
+    body {
+      background: var(--page);
+      color: var(--charcoal);
+      font-family: Inter, Arial, sans-serif;
+      line-height: 1.6;
+    }
 
-.site-header {
-  width: 70%;
-  max-width: 1200px;
-  min-height: 76px;
-  margin: 22px auto 0;
-  padding: 12px 16px 12px 25px;
-  background: var(--cream);
-  color: #171812;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  position: relative;
-  z-index: 20;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-.brand {
-  font-size: 29px;
-  font-weight: 900;
-  letter-spacing: -2px;
-  color: #171812;
-}
+    button {
+      font: inherit;
+    }
 
-.brand span { color: #79A900; }
+    /* NAVIGATION */
 
-.main-nav {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-}
+    .navbar-wrap {
+      width: 82%;
+      max-width: 1440px;
+      margin: 22px auto 0;
+      position: relative;
+      z-index: 100;
+    }
 
-.nav-item { position: relative; }
+    .navbar {
+      min-height: 76px;
+      padding: 12px 20px 12px 25px;
+      border: 1px solid rgba(32, 41, 35, 0.07);
+      border-radius: 23px;
+      background: var(--nav);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 22px;
+    }
 
-.nav-link {
-  color: #25261F;
-  font-size: 12px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 12px 0;
-  white-space: nowrap;
-}
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      font-size: 29px;
+      font-weight: 900;
+      letter-spacing: -1.8px;
+    }
 
-.chevron {
-  width: 7px;
-  height: 7px;
-  border-right: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: rotate(45deg);
-  margin-top: -4px;
-}
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      background: var(--lime);
+      border-radius: 12px;
+      font-size: 13px;
+      letter-spacing: -1px;
+      font-weight: 900;
+    }
 
-.dropdown {
-  position: absolute;
-  top: 100%;
-  left: -18px;
-  width: 390px;
-  padding: 18px;
-  border-radius: 13px;
-  background: var(--cream);
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 5px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(8px);
-  transition: .2s ease;
-  box-shadow: 0 15px 40px #0004;
-}
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 23px;
+    }
 
-.nav-item:hover .dropdown,
-.nav-item:focus-within .dropdown,
-.nav-item.open .dropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
+    .nav-item {
+      position: relative;
+    }
 
-.dropdown-heading {
-  grid-column: 1/-1;
-  font-size: 10px;
-  color: #73766A;
-  font-weight: 800;
-  letter-spacing: 1px;
-  padding: 5px 8px 10px;
-  text-transform: uppercase;
-}
+    .nav-link {
+      border: 0;
+      background: transparent;
+      color: var(--charcoal);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 650;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 10px 0;
+    }
 
-.dropdown a {
-  padding: 12px 9px;
-  border-radius: 8px;
-  color: #22231D;
-  font-size: 12px;
-  font-weight: 700;
-}
+    .nav-link:hover {
+      opacity: 0.65;
+    }
 
-.dropdown a:hover { background: #E1E6D5; }
+    .chevron {
+      font-size: 11px;
+      transition: transform 0.2s ease;
+    }
 
-.talk-button {
-  background: var(--lime);
-  color: #151610;
-  padding: 15px 18px;
-  border-radius: 9px;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 12px;
-  font-weight: 800;
-  white-space: nowrap;
-  transition: .2s ease;
-}
+    .nav-item.open .chevron {
+      transform: rotate(180deg);
+    }
 
-.talk-button:hover {
-  background: #E7FF91;
-  transform: translateY(-2px);
-}
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 13px);
+      left: -18px;
+      width: 270px;
+      padding: 10px;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(32, 41, 35, 0.10);
+      display: none;
+    }
 
-.menu-toggle {
-  display: none;
-  border: 0;
-  border-radius: 8px;
-  background: #E2E4DA;
-  width: 42px;
-  height: 42px;
-  font-size: 23px;
-  cursor: pointer;
-}
+    .nav-item.open .dropdown {
+      display: block;
+    }
 
-/* HERO WITH BACKGROUND IMAGE */
+    .dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px;
+      border-radius: 11px;
+      font-size: 13px;
+      font-weight: 650;
+    }
 
-.hero {
-  width: 94%;
-  max-width: 1500px;
-  min-height: 650px;
-  margin: 22px auto 0;
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 85px 8%;
-  isolation: isolate;
-  background: #080908;
-}
+    .dropdown a:hover {
+      background: #F2F5EC;
+    }
 
-.hero-background {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  background-image: url("https://drive.google.com/uc?export=view&id=17f7jiyMnm1H07vljkECgbf8qr380goFu");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
+    .tool-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border-radius: 10px;
+      background: #F1F4EC;
+      font-size: 12px;
+      font-weight: 900;
+    }
 
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(
-    90deg,
-    rgba(8,9,8,.96) 0%,
-    rgba(8,9,8,.85) 40%,
-    rgba(8,9,8,.48) 72%,
-    rgba(8,9,8,.30) 100%
-  );
-}
+    .tool-icon img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+    }
 
-.hero-content {
-  max-width: 760px;
-  position: relative;
-}
+    .dropdown small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 400;
+    }
 
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  border: 1px solid #D5FF4545;
-  background: #D5FF450D;
-  color: var(--lime);
-  border-radius: 50px;
-  padding: 10px 14px;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.3px;
-  margin-bottom: 28px;
-}
+    .nav-cta {
+      flex-shrink: 0;
+      padding: 12px 17px;
+      border-radius: 13px;
+      background: var(--charcoal);
+      color: white;
+      font-size: 12px;
+      font-weight: 750;
+      transition: transform 0.2s, background 0.2s;
+    }
 
-.eyebrow-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--lime);
-  box-shadow: 0 0 10px #D5FF4580;
-}
+    .nav-cta:hover {
+      background: #39463B;
+      transform: translateY(-2px);
+    }
 
-.hero h1 {
-  max-width: 800px;
-  font-size: clamp(44px, 6vw, 78px);
-  line-height: 1.04;
-  letter-spacing: -3.5px;
-  font-weight: 850;
-}
+    .mobile-toggle {
+      display: none;
+      border: 0;
+      background: transparent;
+      font-size: 25px;
+      cursor: pointer;
+    }
 
-.hero h1 span {
-  display: block;
-  color: var(--lime);
-  margin-top: 9px;
-}
+    /* HERO */
 
-.hero-description {
-  max-width: 590px;
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.9;
-  margin-top: 25px;
-}
+    .hero {
+      width: 82%;
+      max-width: 1440px;
+      min-height: 620px;
+      margin: 24px auto 0;
+      border: 1px solid rgba(32, 41, 35, 0.08);
+      border-radius: 30px;
+      overflow: hidden;
+      position: relative;
+      background: #F3F2E9;
+      isolation: isolate;
+    }
 
-.hero-buttons {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 13px;
-  margin-top: 32px;
-}
+    .hero-banner {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background-image: url("./assets/hero-banner.png");
+      background-size: cover;
+      background-position: center;
+    }
 
-.hero-buttons a {
-  min-height: 53px;
-  padding: 0 21px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 13px;
-  border-radius: 9px;
-  font-size: 12px;
-  font-weight: 800;
-  transition: .2s ease;
-}
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(
+        90deg,
+        rgba(247, 247, 240, 0.97) 0%,
+        rgba(247, 247, 240, 0.93) 34%,
+        rgba(247, 247, 240, 0.72) 52%,
+        rgba(247, 247, 240, 0.02) 80%
+      );
+    }
 
-.btn-primary {
-  background: var(--lime);
-  color: #151610;
-  border: 1px solid var(--lime);
-}
+    .hero-content {
+      width: 62%;
+      max-width: 720px;
+      padding: 76px 0 65px 6%;
+    }
 
-.btn-primary:hover {
-  background: #E7FF91;
-  transform: translateY(-2px);
-}
+    .intro-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 13px;
+      border: 1px solid rgba(32, 41, 35, 0.12);
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 30px;
+      color: var(--charcoal);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
 
-.btn-secondary {
-  color: var(--white);
-  background: #FFFFFF0A;
-  border: 1px solid #FFFFFF40;
-}
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #83B52B;
+      box-shadow: 0 0 0 4px rgba(185, 245, 43, 0.23);
+    }
 
-.btn-secondary:hover {
-  border-color: var(--lime);
-  color: var(--lime);
-  transform: translateY(-2px);
-}
+    .hero h1 {
+      font-size: clamp(42px, 5vw, 72px);
+      line-height: 1.04;
+      letter-spacing: -3.8px;
+      font-weight: 850;
+      max-width: 700px;
+      margin-bottom: 24px;
+    }
 
-.hero-services {
-  margin-top: 31px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 11px;
-  color: #C0C1B8;
-  font-size: 11px;
-  font-weight: 700;
-}
+    .hero h1 .highlight {
+      position: relative;
+      display: inline;
+      z-index: 0;
+    }
 
-.hero-services .separator { color: var(--lime); }
+    .hero h1 .highlight::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 4px;
+      width: 100%;
+      height: 12px;
+      background: var(--lime);
+      z-index: -1;
+      opacity: 0.85;
+      border-radius: 4px;
+    }
 
-/* RESPONSIVE */
+    .hero-description {
+      max-width: 560px;
+      font-size: 16px;
+      line-height: 1.8;
+      color: #4F5B51;
+      margin-bottom: 18px;
+    }
 
-@media (max-width: 1100px) {
-  .site-header { width: 90%; }
-  .main-nav { gap: 13px; }
-  .nav-link { font-size: 11px; }
-  .hero { padding-left: 6%; }
-}
+    .hero-intro {
+      max-width: 540px;
+      font-size: 14px;
+      line-height: 1.85;
+      color: #667067;
+      margin-bottom: 29px;
+    }
 
-@media (max-width: 900px) {
-  .site-header {
-    width: 92%;
-    padding: 10px 14px 10px 20px;
-  }
+    .hero-intro strong {
+      color: var(--charcoal);
+    }
 
-  .menu-toggle {
-    display: block;
-    margin-left: auto;
-  }
+    /* THREE DIFFERENT CTA STYLES */
 
-  .header-cta { display: none; }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 13px;
+      margin-bottom: 20px;
+    }
 
-  .main-nav {
-    display: none;
-    position: absolute;
-    top: calc(100% + 9px);
-    left: 0;
-    right: 0;
-    padding: 14px;
-    border-radius: 13px;
-    background: var(--cream);
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    max-height: 75vh;
-    overflow-y: auto;
-  }
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+      min-height: 49px;
+      padding: 12px 17px;
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 800;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
 
-  .main-nav.active { display: flex; }
+    .btn:hover {
+      transform: translateY(-3px);
+    }
 
-  .nav-item { width: 100%; }
+    .btn-primary {
+      background: var(--lime);
+      color: var(--charcoal);
+      box-shadow: 0 7px 18px rgba(115, 155, 29, 0.13);
+    }
 
-  .nav-link {
-    width: 100%;
-    justify-content: space-between;
-    padding: 14px 7px;
-    font-size: 13px;
-  }
+    .btn-primary:hover {
+      box-shadow: 0 11px 24px rgba(115, 155, 29, 0.22);
+    }
 
-  .dropdown {
-    display: none;
-    position: static;
-    width: 100%;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    box-shadow: none;
-    background: #E5E7DE;
-    margin-bottom: 8px;
-  }
+    .btn-secondary {
+      border: 1px solid rgba(32, 41, 35, 0.18);
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--charcoal);
+    }
 
-  .nav-item.open .dropdown { display: grid; }
+    .btn-friendly {
+      min-height: auto;
+      padding: 10px 4px;
+      color: var(--charcoal);
+      background: transparent;
+      border-radius: 0;
+      text-decoration: underline;
+      text-decoration-color: var(--lime);
+      text-decoration-thickness: 3px;
+      text-underline-offset: 5px;
+    }
 
-  .hero {
-    width: 94%;
-    min-height: 600px;
-    padding: 75px 7%;
-  }
+    .hero-note {
+      font-size: 11px;
+      color: #697268;
+    }
 
-  .hero-overlay {
-    background: linear-gradient(
-      90deg,
-      rgba(8,9,8,.94),
-      rgba(8,9,8,.70)
-    );
-  }
-}
+    /* QUICK INTRO STRIP */
 
-@media (max-width: 520px) {
-  .site-header {
-    width: 94%;
-    margin-top: 13px;
-  }
+    .trust-strip {
+      width: 82%;
+      max-width: 1440px;
+      margin: 24px auto 80px;
+      padding: 20px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.48);
+    }
 
-  .brand { font-size: 27px; }
+    .trust-intro {
+      color: var(--muted);
+      font-size: 12px;
+      max-width: 190px;
+    }
 
-  .hero {
-    min-height: 620px;
-    margin-top: 14px;
-    padding: 65px 7%;
-    border-radius: 15px;
-  }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 12px;
+      font-weight: 750;
+    }
 
-  .hero-background { background-position: center; }
+    .trust-symbol {
+      display: grid;
+      place-items: center;
+      width: 31px;
+      height: 31px;
+      border-radius: 10px;
+      background: var(--lime);
+      font-size: 14px;
+    }
 
-  .hero-overlay { background: rgba(8,9,8,.76); }
+    /* PLACEHOLDER CONTENT FOR THE THIRD CTA */
 
-  .hero h1 {
-    font-size: clamp(40px, 10.5vw, 55px);
-    letter-spacing: -2.3px;
-  }
+    .work-section {
+      width: 82%;
+      max-width: 1440px;
+      margin: 0 auto 100px;
+      padding: 55px;
+      border-radius: 28px;
+      background: #E8EDE1;
+      scroll-margin-top: 30px;
+    }
 
-  .hero-description {
-    font-size: 14px;
-    line-height: 1.8;
-  }
+    .work-section h2 {
+      max-width: 650px;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.1;
+      letter-spacing: -1.8px;
+      margin-bottom: 16px;
+    }
 
-  .hero-buttons { flex-direction: column; }
+    .work-section p {
+      max-width: 650px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
 
-  .hero-buttons a { width: 100%; }
+    .work-section .btn {
+      margin-top: 24px;
+      background: var(--charcoal);
+      color: white;
+    }
 
-  .hero-services { gap: 8px; line-height: 1.8; }
-}
-</style>
+    /* FOOTER */
+
+    footer {
+      width: 82%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 25px 0 35px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    footer strong {
+      color: var(--charcoal);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 1200px) {
+      .navbar-wrap,
+      .hero,
+      .trust-strip,
+      .work-section,
+      footer {
+        width: 90%;
+      }
+
+      .nav-links {
+        gap: 14px;
+      }
+
+      .nav-link {
+        font-size: 12px;
+      }
+
+      .hero-content {
+        width: 67%;
+        padding-left: 5%;
+      }
+
+      .hero h1 {
+        font-size: clamp(42px, 5.5vw, 64px);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .navbar-wrap {
+        width: 94%;
+        margin-top: 12px;
+      }
+
+      .navbar {
+        min-height: 66px;
+        padding: 12px 17px;
+      }
+
+      .mobile-toggle {
+        display: block;
+        margin-left: auto;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .nav-links {
+        position: absolute;
+        display: none;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        padding: 15px;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        background: #F8F9F4;
+        box-shadow: 0 15px 35px rgba(32, 41, 35, 0.10);
+        align-items: stretch;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .nav-links.mobile-open {
+        display: flex;
+      }
+
+      .nav-link {
+        width: 100%;
+        justify-content: space-between;
+        padding: 12px 8px;
+        font-size: 14px;
+      }
+
+      .dropdown {
+        position: static;
+        display: none;
+        width: 100%;
+        margin: 0 0 8px;
+        box-shadow: none;
+        background: #FFFFFF;
+      }
+
+      .nav-item.open .dropdown {
+        display: block;
+      }
+
+      .hero {
+        width: 94%;
+        min-height: 680px;
+      }
+
+      .hero-banner {
+        background-position: 62% center;
+      }
+
+      .hero-overlay {
+        background: linear-gradient(
+          90deg,
+          rgba(247, 247, 240, 0.97) 0%,
+          rgba(247, 247, 240, 0.92) 48%,
+          rgba(247, 247, 240, 0.42) 100%
+        );
+      }
+
+      .hero-content {
+        width: 78%;
+        padding: 70px 0 60px 6%;
+      }
+
+      .trust-strip {
+        width: 94%;
+        flex-wrap: wrap;
+      }
+
+      .trust-intro {
+        max-width: none;
+        width: 100%;
+      }
+
+      .work-section,
+      footer {
+        width: 94%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .brand {
+        font-size: 25px;
+      }
+
+      .brand-mark {
+        width: 32px;
+        height: 32px;
+      }
+
+      .hero {
+        min-height: 760px;
+        border-radius: 23px;
+      }
+
+      .hero-banner {
+        background-size: auto 54%;
+        background-repeat: no-repeat;
+        background-position: right bottom;
+        background-color: #F3F2E9;
+      }
+
+      .hero-overlay {
+        background: linear-gradient(
+          180deg,
+          rgba(247, 247, 240, 1) 0%,
+          rgba(247, 247, 240, 0.98) 44%,
+          rgba(247, 247, 240, 0.75) 62%,
+          rgba(247, 247, 240, 0.05) 100%
+        );
+      }
+
+      .hero-content {
+        width: 100%;
+        padding: 37px 23px 300px;
+      }
+
+      .intro-label {
+        font-size: 11px;
+        margin-bottom: 20px;
+      }
+
+      .hero h1 {
+        font-size: clamp(39px, 10vw, 54px);
+        letter-spacing: -2.5px;
+        margin-bottom: 18px;
+      }
+
+      .hero h1 .highlight::after {
+        height: 8px;
+        bottom: 3px;
+      }
+
+      .hero-description {
+        font-size: 14px;
+        line-height: 1.75;
+      }
+
+      .hero-intro {
+        font-size: 13px;
+        line-height: 1.75;
+      }
+
+      .hero-actions {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .btn {
+        min-height: 46px;
+      }
+
+      .btn-friendly {
+        padding: 8px 2px;
+      }
+
+      .trust-strip {
+        padding: 20px;
+        gap: 14px;
+      }
+
+      .trust-item {
+        width: calc(50% - 10px);
+        font-size: 11px;
+      }
+
+      .work-section {
+        padding: 30px 24px;
+      }
+
+      footer {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="site-header">
-  <a href="#" class="brand">AWS<span>Z</span></a>
+  <!-- NAVIGATION -->
+  <div class="navbar-wrap">
+    <nav class="navbar" aria-label="Main navigation">
 
-  <nav class="main-nav" id="mainNav">
-    <div class="nav-item">
-      <a href="#crms" class="nav-link dropdown-toggle" aria-expanded="false">
-        CRMs <span class="chevron"></span>
+      <a class="brand" href="#" aria-label="AWSZ home">
+        <span class="brand-mark">SZ</span>
+        <span>AWSZ</span>
       </a>
-      <div class="dropdown" id="crms">
-        <div class="dropdown-heading">CRM Platforms</div>
-        <a href="https://www.gohighlevel.com/" target="_blank" rel="noopener">GoHighLevel</a>
-        <a href="https://www.hubspot.com/" target="_blank" rel="noopener">HubSpot</a>
-        <a href="https://www.zoho.com/crm/" target="_blank" rel="noopener">Zoho CRM</a>
-        <a href="https://clickup.com/" target="_blank" rel="noopener">ClickUp</a>
-        <a href="https://www.salesforce.com/" target="_blank" rel="noopener">Salesforce</a>
-        <a href="https://www.pipedrive.com/" target="_blank" rel="noopener">Pipedrive</a>
-      </div>
-    </div>
 
-    <div class="nav-item">
-      <a href="#automation" class="nav-link dropdown-toggle" aria-expanded="false">
-        Automation <span class="chevron"></span>
+      <button
+        class="mobile-toggle"
+        id="mobileToggle"
+        aria-label="Open navigation"
+        aria-expanded="false"
+      >☰</button>
+
+      <div class="nav-links" id="navLinks">
+
+        <!-- SERVICES -->
+        <div class="nav-item">
+          <button class="nav-link dropdown-toggle" aria-expanded="false">
+            Services <span class="chevron">⌄</span>
+          </button>
+
+          <div class="dropdown">
+            <a href="#work">
+              <span class="tool-icon">⚙</span>
+              <span>Workflow Automation<small>Make repetitive work disappear</small></span>
+            </a>
+
+            <a href="#work">
+              <span class="tool-icon">↔</span>
+              <span>API Integrations<small>Make your tools work together</small></span>
+            </a>
+
+            <a href="#work">
+              <span class="tool-icon">◎</span>
+              <span>CRM Automation<small>Keep leads and follow-ups moving</small></span>
+            </a>
+
+            <a href="#work">
+              <span class="tool-icon">✳</span>
+              <span>AI Agents<small>Practical AI for real workflows</small></span>
+            </a>
+          </div>
+        </div>
+
+        <!-- INTEGRATIONS -->
+        <div class="nav-item">
+          <button class="nav-link dropdown-toggle" aria-expanded="false">
+            Integrations <span class="chevron">⌄</span>
+          </button>
+
+          <div class="dropdown">
+            <a href="#work">
+              <span class="tool-icon">
+                <img src="https://cdn.simpleicons.org/n8n/EA4B71" alt="n8n">
+              </span>
+              <span>n8n<small>Workflow automation</small></span>
+            </a>
+
+            <a href="#work">
+              <span class="tool-icon">GHL</span>
+              <span>GoHighLevel<small>CRM and sales automation</small></span>
+            </a>
+
+            <a href="#work">
+              <span class="tool-icon">
+                <img src="https://cdn.simpleicons.org/hubspot/FF7A59" alt="HubSpot">
+              </span>
+              <span>HubSpot<small>CRM and customer journeys</small></span>
+            </a>
+
+            <a href="#work">
+              <span class="tool-icon">
+                <img src="https://cdn.simpleicons.org/make/6D00CC" alt="Make">
+              </span>
+              <span>Make<small>Visual workflow automation</small></span>
+            </a>
+
+            <a href="#work">
+              <span class="tool-icon">
+                <img src="https://cdn.simpleicons.org/zapier/FF4F00" alt="Zapier">
+              </span>
+              <span>Zapier<small>Connect your apps</small></span>
+            </a>
+
+            <a href="#work">
+              <span class="tool-icon">
+                <img src="https://cdn.simpleicons.org/twilio/F22F46" alt="Twilio">
+              </span>
+              <span>Twilio<small>Messaging and voice workflows</small></span>
+            </a>
+
+            <a href="#work">
+              <span class="tool-icon">
+                <img src="https://cdn.simpleicons.org/openai/412991" alt="OpenAI">
+              </span>
+              <span>OpenAI<small>AI-powered workflows</small></span>
+            </a>
+          </div>
+        </div>
+
+        <!-- AI SOLUTIONS -->
+        <div class="nav-item">
+          <button class="nav-link dropdown-toggle" aria-expanded="false">
+            AI Solutions <span class="chevron">⌄</span>
+          </button>
+
+          <div class="dropdown">
+            <a href="#work">
+              <span class="tool-icon">☎</span>
+              <span>AI Calling Agents<small>Voice-based business assistance</small></span>
+            </a>
+
+            <a href="#work">
+              <span class="tool-icon">✉</span>
+              <span>AI Chatbots<small>Helpful automated conversations</small></span>
+            </a>
+
+            <a href="#work">
+              <span class="tool-icon">▣</span>
+              <span>AI Receptionists<small>Handle routine enquiries</small></span>
+            </a>
+          </div>
+        </div>
+
+        <a class="nav-link" href="#training">Training</a>
+        <a class="nav-link" href="#courses">Courses</a>
+      </div>
+
+      <a class="nav-cta" href="https://wa.me/923346694427">
+        Come Say Hi 👋
       </a>
-      <div class="dropdown" id="automation">
-        <div class="dropdown-heading">Automation & Integrations</div>
-        <a href="https://n8n.io/" target="_blank" rel="noopener">n8n Workflows</a>
-        <a href="https://www.make.com/" target="_blank" rel="noopener">Make Automation</a>
-        <a href="https://zapier.com/" target="_blank" rel="noopener">Zapier</a>
-        <a href="https://www.twilio.com/" target="_blank" rel="noopener">Twilio</a>
-        <a href="https://cartesia.ai/" target="_blank" rel="noopener">Cartesia Voice</a>
-        <a href="https://openai.com/" target="_blank" rel="noopener">AI Integrations</a>
+
+    </nav>
+  </div>
+
+  <!-- HERO SECTION -->
+  <main>
+    <section class="hero" id="home">
+
+      <div class="hero-banner" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <div class="hero-content">
+
+        <div class="intro-label">
+          <span class="status-dot"></span>
+          AI, automation & a little less busywork
+        </div>
+
+        <h1>
+          Let's Find What's
+          <span class="highlight">Slowing Your</span>
+          Business Down.
+        </h1>
+
+        <p class="hero-description">
+          Too many tabs open? Leads disappearing? Workflows doing
+          absolutely nothing? 😅 Let's figure out what's going wrong,
+          what we can automate, and whether I can help.
+        </p>
+
+        <p class="hero-intro">
+          I'm <strong>Sajjad</strong> — an AI Automation Engineer,
+          developer, and corporate AI trainer. I build smarter systems,
+          help agencies get technical work done, and teach teams how
+          to actually use AI. No unnecessary jargon. Just practical
+          solutions and straightforward conversations.
+        </p>
+
+        <div class="hero-actions">
+
+          <a
+            class="btn btn-primary"
+            href="https://wa.me/923346694427?text=Hi%20Sajjad!%20I%27d%20like%20to%20find%20the%20bottleneck%20in%20my%20business."
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Let's Find Your Bottleneck <span>↗</span>
+          </a>
+
+          <a
+            class="btn btn-secondary"
+            href="./assets/awsz-guide.pdf"
+            download
+          >
+            Grab My Free Guide <span>↓</span>
+          </a>
+
+          <a class="btn btn-friendly" href="#work">
+            Just Curious? Come On In 👋
+          </a>
+
+        </div>
+
+        <p class="hero-note">
+          No pressure. No complicated sales pitch. Let's just figure it out.
+        </p>
+
       </div>
-    </div>
+    </section>
 
-    <a href="#training" class="nav-link">Corporate Training</a>
-    <a href="#sessions" class="nav-link">Online Sessions</a>
-  </nav>
-
-  <a class="talk-button header-cta"
-     href="https://wa.me/923346694427"
-     target="_blank" rel="noopener">
-    Let's Talk <span>↗</span>
-  </a>
-
-  <button class="menu-toggle" id="menuToggle"
-          aria-label="Toggle navigation" aria-expanded="false">☰</button>
-</header>
-
-<main>
-  <section class="hero">
-
-    <div class="hero-background" aria-hidden="true"></div>
-    <div class="hero-overlay" aria-hidden="true"></div>
-
-    <div class="hero-content">
-      <div class="eyebrow">
-        <span class="eyebrow-dot"></span>
-        GOHIGHLEVEL · CRM AUTOMATION
-      </div>
-
-      <h1>
-        Got a CRM But It’s Not
-        <span>Making Any Difference?</span>
-      </h1>
-
-      <p class="hero-description">
-        Your CRM should do more than store contacts. Automate lead follow-ups,
-        simplify appointments, and connect your business tools into one
-        reliable system that helps you spend less time on repetitive work.
+    <!-- WHAT YOU DO -->
+    <section class="trust-strip" id="training">
+      <p class="trust-intro">
+        Different hats. One goal: make work work better.
       </p>
 
-      <div class="hero-buttons">
-        <a href="https://wa.me/923346694427" class="btn-primary">
-          Fix My CRM <span>↗</span>
-        </a>
-
-        <a href="https://www.linkedin.com/in/automation-with-sajjad-zaidi/"
-           target="_blank" rel="noopener" class="btn-secondary">
-          Let’s Talk <span>↗</span>
-        </a>
+      <div class="trust-item">
+        <span class="trust-symbol">⚙</span>
+        Automation Engineer
       </div>
 
-      <div class="hero-services">
-        <span>CRM Automation</span>
-        <span class="separator">•</span>
-        <span>Lead Follow-ups</span>
-        <span class="separator">•</span>
-        <span>AI Workflows</span>
+      <div class="trust-item">
+        <span class="trust-symbol">⌘</span>
+        Developer
       </div>
-    </div>
 
-  </section>
-</main>
+      <div class="trust-item">
+        <span class="trust-symbol">🎓</span>
+        Corporate AI Trainer
+      </div>
 
-<script>
-const menuToggle = document.getElementById("menuToggle");
-const mainNav = document.getElementById("mainNav");
+      <div class="trust-item" id="courses">
+        <span class="trust-symbol">✳</span>
+        Live Sessions & Courses
+      </div>
+    </section>
 
-menuToggle.addEventListener("click", function () {
-  const isOpen = mainNav.classList.toggle("active");
-  menuToggle.textContent = isOpen ? "×" : "☰";
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-});
+    <!-- WORK / PORTFOLIO INTRO -->
+    <section class="work-section" id="work">
+      <h2>Curiosity looks good on you. 👀</h2>
 
-document.querySelectorAll(".dropdown-toggle").forEach(function (toggle) {
-  toggle.addEventListener("click", function (event) {
-    if (window.innerWidth <= 900) {
-      event.preventDefault();
+      <p>
+        I work with business owners, teams, and agencies to connect
+        their tools, improve workflows, and put AI to practical use.
+        Explore the kind of systems I build, the problems I solve,
+        and the training sessions I deliver.
+      </p>
 
-      const parent = toggle.closest(".nav-item");
-      const wasOpen = parent.classList.contains("open");
+      <a
+        class="btn"
+        href="https://www.linkedin.com/in/automation-with-sajjad-zaidi/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Explore My Work <span>↗</span>
+      </a>
+    </section>
+  </main>
 
-      document.querySelectorAll(".nav-item.open").forEach(function (item) {
-        item.classList.remove("open");
-        item.querySelector(".dropdown-toggle")
-          .setAttribute("aria-expanded", "false");
-      });
+  <footer>
+    <p><strong>AWSZ</strong> — Build less manually. Run smarter.</p>
+    <p>Made with curiosity (and a few automations). © <span id="year"></span></p>
+  </footer>
 
-      if (!wasOpen) {
-        parent.classList.add("open");
-        toggle.setAttribute("aria-expanded", "true");
-      }
-    }
-  });
-});
+  <script>
+    const mobileToggle = document.getElementById("mobileToggle");
+    const navLinks = document.getElementById("navLinks");
+    const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
 
-window.addEventListener("resize", function () {
-  if (window.innerWidth > 900) {
-    mainNav.classList.remove("active");
-    document.querySelectorAll(".nav-item.open").forEach(function (item) {
-      item.classList.remove("open");
+    mobileToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("mobile-open");
+
+      mobileToggle.setAttribute("aria-expanded", String(isOpen));
+      mobileToggle.textContent = isOpen ? "✕" : "☰";
     });
-    menuToggle.textContent = "☰";
-    menuToggle.setAttribute("aria-expanded", "false");
-  }
-});
-</script>
+
+    dropdownToggles.forEach((toggle) => {
+      toggle.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        const parent = toggle.closest(".nav-item");
+        const willOpen = !parent.classList.contains("open");
+
+        document.querySelectorAll(".nav-item.open").forEach((item) => {
+          item.classList.remove("open");
+          item.querySelector(".dropdown-toggle")
+            ?.setAttribute("aria-expanded", "false");
+        });
+
+        if (willOpen) {
+          parent.classList.add("open");
+          toggle.setAttribute("aria-expanded", "true");
+        } else {
+          toggle.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest(".nav-item")) {
+        document.querySelectorAll(".nav-item.open").forEach((item) => {
+          item.classList.remove("open");
+          item.querySelector(".dropdown-toggle")
+            ?.setAttribute("aria-expanded", "false");
+        });
+      }
+    });
+
+    document.querySelectorAll(".nav-links a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("mobile-open");
+        mobileToggle.setAttribute("aria-expanded", "false");
+        mobileToggle.textContent = "☰";
+      });
+    });
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
 
 </body>
 </html>
