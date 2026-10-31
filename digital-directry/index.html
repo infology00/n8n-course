@@ -1,0 +1,847 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWSZ Nearby | System Blueprint</title>
+
+<style>
+:root {
+  --bg: #10110f;
+  --panel: #191b18;
+  --panel2: #20231f;
+  --green: #c5ff45;
+  --text: #f4f5f0;
+  --muted: #a1a79b;
+  --border: rgba(255,255,255,.09);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+}
+a { color: inherit; text-decoration: none; }
+header {
+  padding: 20px 7%;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  background: rgba(16,17,15,.96);
+  backdrop-filter: blur(14px);
+  z-index: 10;
+}
+.logo { font-size: 25px; font-weight: 900; letter-spacing: -1px; }
+.logo span { color: var(--green); }
+.header-label { color: var(--muted); font-size: 12px; }
+main { max-width: 1150px; margin: auto; padding: 48px 24px 90px; }
+.hero {
+  padding: 45px 0 38px;
+  border-bottom: 1px solid var(--border);
+}
+.eyebrow {
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 11px;
+  font-weight: 800;
+}
+h1 { font-size: clamp(36px,6vw,66px); line-height: 1.06; letter-spacing: -2.5px; margin: 18px 0; }
+h1 span { color: var(--green); }
+.intro { color: var(--muted); max-width: 760px; font-size: 16px; }
+.pills { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 25px; }
+.pill {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  padding: 7px 12px;
+  border-radius: 20px;
+  color: #dce1d5;
+  font-size: 12px;
+}
+.summary {
+  margin-top: 28px;
+  background: linear-gradient(120deg,#22281b,#171a15);
+  border: 1px solid rgba(197,255,69,.22);
+  border-radius: 17px;
+  padding: 23px;
+}
+.summary h2 { color: var(--green); font-size: 18px; margin-top: 0; }
+.summary p { color: #d4d9ce; margin-bottom: 0; }
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 25px 0 10px;
+}
+nav a {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+nav a:hover { color: var(--green); border-color: var(--green); }
+.section { padding-top: 55px; scroll-margin-top: 85px; }
+.section-head { margin-bottom: 22px; }
+.section-number { color: var(--green); font-size: 12px; font-weight: 800; }
+h2 { font-size: clamp(24px,4vw,34px); letter-spacing: -.8px; margin: 5px 0 8px; }
+.section-desc { color: var(--muted); margin: 0; max-width: 780px; }
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 13px;
+}
+.feature {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  min-width: 0;
+}
+.feature h3 { font-size: 15px; margin: 0 0 8px; }
+.feature p { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+.example {
+  border-left: 2px solid var(--green);
+  padding: 9px 11px;
+  background: var(--panel2);
+  color: #e4e9dd;
+  font-size: 12px;
+  border-radius: 0 7px 7px 0;
+}
+.example b { color: var(--green); }
+.flow {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 10px;
+  margin-top: 22px;
+}
+.flow-item {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 17px 12px;
+  border-radius: 11px;
+  text-align: center;
+}
+.flow-item strong { display: block; font-size: 13px; }
+.flow-item span { display: block; color: var(--muted); font-size: 11px; margin-top: 6px; }
+.note {
+  margin-top: 18px;
+  border: 1px solid rgba(197,255,69,.2);
+  border-radius: 11px;
+  padding: 16px;
+  color: #cbd1c3;
+  font-size: 13px;
+}
+.note strong { color: var(--green); }
+footer {
+  border-top: 1px solid var(--border);
+  margin-top: 65px;
+  padding-top: 25px;
+  color: var(--muted);
+  font-size: 12px;
+}
+@media(max-width:650px) {
+  header { padding: 16px 5%; }
+  main { padding: 25px 16px 60px; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .flow { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .header-label { display: none; }
+  h1 { letter-spacing: -1.5px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="logo" href="#top">AWSZ<span>.</span></a>
+  <div class="header-label">NEARBY · PRODUCT & SYSTEM BLUEPRINT</div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="eyebrow">Project Overview · 2026</div>
+    <h1>Discover nearby.<br><span>Connect smarter.</span></h1>
+    <p class="intro">
+      AWSZ Nearby is an AI-powered local business platform that connects
+      customers with nearby shops and service providers. Customers can discover
+      businesses, place orders and book appointments, while vendors manage
+      operations, influencers earn eligible referral commissions, and admins
+      control the complete platform.
+    </p>
+
+    <div class="pills">
+      <span class="pill">AI Business Search</span>
+      <span class="pill">Customer App</span>
+      <span class="pill">Vendor Portal</span>
+      <span class="pill">Influencer Portal</span>
+      <span class="pill">Admin Portal</span>
+      <span class="pill">Payments & Payouts</span>
+    </div>
+
+    <div class="summary">
+      <h2>How the complete system works</h2>
+      <p>
+        A customer searches for a nearby business and places an order or booking.
+        The vendor receives the request and updates its status. The system records
+        transactions, calculates applicable platform fees and referral commissions,
+        and tracks eligible payouts. The admin oversees users, businesses,
+        subscriptions, payments and platform activity.
+      </p>
+    </div>
+
+    <nav aria-label="Page sections">
+      <a href="#customer">Customer</a>
+      <a href="#vendor">Vendor</a>
+      <a href="#influencer">Influencer</a>
+      <a href="#admin">Admin</a>
+      <a href="#finance">Finance</a>
+      <a href="#subscriptions">Subscriptions</a>
+      <a href="#ai">AI Assistant</a>
+      <a href="#delivery">Delivery</a>
+      <a href="#support">Support</a>
+      <a href="#notifications">Notifications</a>
+      <a href="#technical">Technology</a>
+    </nav>
+  </section>
+
+  <!-- CUSTOMER PORTAL -->
+  <section class="section" id="customer">
+    <div class="section-head">
+      <div class="section-number">01 / CUSTOMER PORTAL</div>
+      <h2>Customer App</h2>
+      <p class="section-desc">Customers discover businesses, book services, order products and manage their activity.</p>
+    </div>
+    <div class="feature-grid">
+
+      <article class="feature">
+        <h3>AI-Powered Search</h3>
+        <p>Customers search using everyday language instead of navigating complicated categories.</p>
+        <div class="example"><b>Example:</b> User says, “Find a barber near me.” AI returns relevant available business listings.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Nearby Businesses</h3>
+        <p>Displays relevant shops based on the customer's selected or permitted location.</p>
+        <div class="example"><b>Example:</b> A customer selects an area and sees nearby milk shops and salons.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Business Profiles</h3>
+        <p>Shows business information, services, products, prices, opening hours and location.</p>
+        <div class="example"><b>Example:</b> A customer opens a barber profile to check haircut prices and timings.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Bookings & Appointments</h3>
+        <p>Customers choose an available service and time slot.</p>
+        <div class="example"><b>Example:</b> Customer books a 5 PM haircut; the vendor receives the appointment request.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Product Orders</h3>
+        <p>Customers order products from listed businesses.</p>
+        <div class="example"><b>Example:</b> Customer orders two litres of milk; the milk shop receives the order details.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Cart & Checkout</h3>
+        <p>Combines selected products, quantities, delivery charges and applicable discounts before confirmation.</p>
+        <div class="example"><b>Example:</b> Customer adds milk and bread to the cart and reviews the total before ordering.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Online Payment</h3>
+        <p>Allows customers to pay through an integrated and supported payment gateway.</p>
+        <div class="example"><b>Example:</b> Customer pays Rs. 2,000; the gateway returns a payment status that the system records.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Cash on Delivery</h3>
+        <p>Offers cash payment where the platform and vendor support it.</p>
+        <div class="example"><b>Example:</b> Customer selects COD, and the vendor receives an order marked for cash collection.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Order & Booking History</h3>
+        <p>Customers can review previous and upcoming orders or appointments.</p>
+        <div class="example"><b>Example:</b> Customer opens an order to check whether it has been dispatched or delivered.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Notifications</h3>
+        <p>Provides relevant booking, order and payment updates.</p>
+        <div class="example"><b>Example:</b> Vendor accepts a booking; the customer receives a confirmation notification.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Reviews & Ratings</h3>
+        <p>Allows eligible customers to rate their experience with a business.</p>
+        <div class="example"><b>Example:</b> After a completed haircut, the customer leaves a five-star review.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Profile & Saved Addresses</h3>
+        <p>Customers manage contact information and delivery addresses.</p>
+        <div class="example"><b>Example:</b> Customer saves a home address and selects it at the next checkout.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Customer Wallet & Credits</h3>
+        <p>If implemented, the wallet records eligible platform credits and refunds.</p>
+        <div class="example"><b>Example:</b> An approved platform credit appears in the customer's wallet balance.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Referrals & Favorites</h3>
+        <p>Customers can save businesses and use available referral offers.</p>
+        <div class="example"><b>Example:</b> Customer saves a favourite milk shop or applies an eligible referral code.</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- VENDOR PORTAL -->
+  <section class="section" id="vendor">
+    <div class="section-head">
+      <div class="section-number">02 / VENDOR PORTAL</div>
+      <h2>Vendor Management</h2>
+      <p class="section-desc">Business owners manage their listings, products, bookings, orders, subscriptions and earnings.</p>
+    </div>
+    <div class="feature-grid">
+
+      <article class="feature">
+        <h3>Vendor Registration & Verification</h3>
+        <p>Collects business details and supports admin review before activation.</p>
+        <div class="example"><b>Example:</b> A milk shop submits its details; the admin reviews and approves the application.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Business Profile Management</h3>
+        <p>Vendors manage their business description, address, contact details and hours.</p>
+        <div class="example"><b>Example:</b> A barber updates the shop's opening hours and phone number.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Products & Services</h3>
+        <p>Vendors create and maintain their product catalogue and service menu.</p>
+        <div class="example"><b>Example:</b> A milk shop adds one-litre milk; a barber adds a haircut service.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Pricing, Stock & Availability</h3>
+        <p>Manages prices, product stock and available services or appointment slots.</p>
+        <div class="example"><b>Example:</b> A vendor marks an unavailable product out of stock.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Booking Management</h3>
+        <p>Vendors accept, reject or reschedule appointment requests.</p>
+        <div class="example"><b>Example:</b> Barber accepts the 5 PM booking; the customer receives the updated status.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Order Management</h3>
+        <p>Vendors manage orders from receipt through preparation and fulfilment.</p>
+        <div class="example"><b>Example:</b> Milk shop accepts an order and marks it ready for delivery.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Customer & Order Details</h3>
+        <p>Displays information required to fulfil a confirmed booking or order.</p>
+        <div class="example"><b>Example:</b> An accepted delivery order displays the relevant customer contact and delivery address.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Vendor Subscription</h3>
+        <p>Displays the current plan, trial status, renewal date and available upgrades.</p>
+        <div class="example"><b>Example:</b> A vendor upgrades from Basic to Pro and sees the updated plan status.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Sales & Performance</h3>
+        <p>Summarises orders, bookings, revenue and business performance.</p>
+        <div class="example"><b>Example:</b> Vendor checks how many orders were completed this month.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Vendor Earnings</h3>
+        <p>Shows sales, platform fees, refunds, adjustments and the resulting payable balance.</p>
+        <div class="example"><b>Example:</b> Rs. 10,000 sales minus Rs. 1,000 platform fee gives an initial Rs. 9,000 payable before other adjustments.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Vendor Payouts</h3>
+        <p>Tracks eligible balances, payout requests and settlement statuses.</p>
+        <div class="example"><b>Example:</b> Vendor requests an eligible payout; after the transfer is verified, its status changes to Paid.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Promotions & Reviews</h3>
+        <p>Vendors manage supported discounts and review responses.</p>
+        <div class="example"><b>Example:</b> A barber publishes a weekend offer and responds to a customer's review.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Staff Access</h3>
+        <p>Where enabled, vendors can give staff limited permissions.</p>
+        <div class="example"><b>Example:</b> A receptionist manages bookings without accessing financial settings.</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- INFLUENCER -->
+  <section class="section" id="influencer">
+    <div class="section-head">
+      <div class="section-number">03 / INFLUENCER PORTAL</div>
+      <h2>Influencer & Referral System</h2>
+      <p class="section-desc">Influencers promote participating businesses and track eligible referrals and commissions.</p>
+    </div>
+    <div class="feature-grid">
+
+      <article class="feature">
+        <h3>Registration & Approval</h3>
+        <p>Influencers register and receive access after any required approval.</p>
+        <div class="example"><b>Example:</b> An influencer submits an application and receives approval from the admin.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Referral Links & Codes</h3>
+        <p>Provides unique links or codes for tracking eligible referrals.</p>
+        <div class="example"><b>Example:</b> Influencer shares a unique AWSZ link in an Instagram post.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Campaign Management</h3>
+        <p>Shows eligible vendors, campaigns, promotional assets and campaign rules.</p>
+        <div class="example"><b>Example:</b> Influencer selects a participating milk shop's promotion to share.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Referral Tracking</h3>
+        <p>Tracks supported link visits, registrations and attributed conversions.</p>
+        <div class="example"><b>Example:</b> A customer visits through the influencer's link; the system records the referral.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Commission Calculation</h3>
+        <p>Calculates commission using the configured campaign and qualifying-order rules.</p>
+        <div class="example"><b>Example:</b> A qualifying Rs. 2,000 order at 5% commission generates a Rs. 100 commission entry.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Influencer Earnings</h3>
+        <p>Separates pending, approved, payable and paid commissions.</p>
+        <div class="example"><b>Example:</b> Influencer checks which commissions are approved and available for payout.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Influencer Payouts</h3>
+        <p>Supports payout requests and tracks payment processing through the configured provider.</p>
+        <div class="example"><b>Example:</b> Influencer requests an eligible Rs. 3,000 payout and tracks its status.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Campaign Analytics</h3>
+        <p>Reports on clicks, conversions and eligible orders.</p>
+        <div class="example"><b>Example:</b> Influencer compares two campaigns to see which generated more qualifying orders.</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ADMIN -->
+  <section class="section" id="admin">
+    <div class="section-head">
+      <div class="section-number">04 / ADMIN PORTAL</div>
+      <h2>Platform Administration</h2>
+      <p class="section-desc">The admin portal controls approvals, users, businesses, subscriptions, transactions and platform settings.</p>
+    </div>
+    <div class="feature-grid">
+
+      <article class="feature">
+        <h3>Admin Dashboard</h3>
+        <p>Summarises users, vendors, influencers, orders and financial activity.</p>
+        <div class="example"><b>Example:</b> Admin sees total active vendors and today's bookings.</div>
+      </article>
+
+      <article class="feature">
+        <h3>User Management</h3>
+        <p>Manages customer accounts, account status and support-related actions.</p>
+        <div class="example"><b>Example:</b> Admin reviews an account following a reported issue.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Vendor & Influencer Approvals</h3>
+        <p>Reviews applications and controls access according to platform rules.</p>
+        <div class="example"><b>Example:</b> Admin approves a business and separately approves an influencer.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Business Categories & Listings</h3>
+        <p>Manages categories, listing visibility and business information.</p>
+        <div class="example"><b>Example:</b> Admin creates a Milk Shops category and reviews submitted listings.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Subscription Plans</h3>
+        <p>Configures vendor plans, pricing, trials, renewals and plan limits.</p>
+        <div class="example"><b>Example:</b> Admin sets a monthly price for the Pro vendor plan.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Orders & Bookings Monitoring</h3>
+        <p>Allows authorised admins to inspect order and appointment records.</p>
+        <div class="example"><b>Example:</b> Admin checks the booking history to investigate a complaint.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Platform Fees & Commissions</h3>
+        <p>Defines applicable transaction fees and influencer commission rules.</p>
+        <div class="example"><b>Example:</b> Admin configures a 5% commission for an eligible campaign.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Payments, Refunds & Settlements</h3>
+        <p>Monitors transaction records, authorised refunds and vendor or influencer payouts.</p>
+        <div class="example"><b>Example:</b> Admin reviews a pending vendor settlement and checks its gateway status.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Promotions & Coupons</h3>
+        <p>Manages promotional rules, discount codes and campaign eligibility.</p>
+        <div class="example"><b>Example:</b> Admin configures a campaign with a defined expiry date.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Reports & Analytics</h3>
+        <p>Provides reports on orders, revenue, fees, refunds, subscriptions and commissions.</p>
+        <div class="example"><b>Example:</b> Admin reviews monthly platform revenue and pending payouts.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Roles, Permissions & Audit Logs</h3>
+        <p>Controls staff access and records important administrative actions.</p>
+        <div class="example"><b>Example:</b> Finance staff can review transactions but cannot change AI settings.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Complaints & Fraud Monitoring</h3>
+        <p>Flags suspicious activity and supports investigation of reported issues.</p>
+        <div class="example"><b>Example:</b> Multiple suspicious referrals are flagged for admin review.</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FINANCE -->
+  <section class="section" id="finance">
+    <div class="section-head">
+      <div class="section-number">05 / FINANCE</div>
+      <h2>Payments, Earnings & Payouts</h2>
+      <p class="section-desc">A shared financial system records customer payments, vendor balances, platform revenue and influencer commissions.</p>
+    </div>
+    <div class="feature-grid">
+
+      <article class="feature">
+        <h3>Payment Gateway</h3>
+        <p>Processes supported online payments and returns transaction statuses.</p>
+        <div class="example"><b>Example:</b> Customer pays for an order; the backend verifies the gateway response.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Transaction Ledger</h3>
+        <p>Maintains linked records of payments, fees, refunds, commissions and settlements.</p>
+        <div class="example"><b>Example:</b> An order payment and its later refund remain traceable in the ledger.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Vendor Payables</h3>
+        <p>Calculates the amount owed to a vendor after applicable fees and adjustments.</p>
+        <div class="example"><b>Example:</b> Rs. 2,000 sale minus Rs. 200 platform fee gives an initial Rs. 1,800 payable.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Influencer Commissions</h3>
+        <p>Tracks qualifying referrals and applies configured commission rules.</p>
+        <div class="example"><b>Example:</b> An eligible Rs. 2,000 sale at 5% generates a Rs. 100 commission entry.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Refunds & Adjustments</h3>
+        <p>Records approved refunds, cancellations and relevant balance changes.</p>
+        <div class="example"><b>Example:</b> A Rs. 500 refund is linked to the original order and payment.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Vendor Settlements</h3>
+        <p>Tracks eligible vendor balances through payout processing and reconciliation.</p>
+        <div class="example"><b>Example:</b> An approved payout is sent through the configured provider and reconciled against its result.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Influencer Payouts</h3>
+        <p>Tracks approved commissions and their payout status.</p>
+        <div class="example"><b>Example:</b> After a qualifying order clears the required checks, its commission becomes eligible for payout.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Financial Reconciliation</h3>
+        <p>Matches internal transactions with gateway and payout records.</p>
+        <div class="example"><b>Example:</b> Admin identifies a successful customer payment whose settlement is still pending.</div>
+      </article>
+    </div>
+    <div class="note">
+      <strong>Payment rule:</strong> Actual money transfers require a compatible payment and payout provider, verified accounts and backend integration. A dashboard status alone does not transfer funds.
+    </div>
+  </section>
+
+  <!-- SUBSCRIPTIONS -->
+  <section class="section" id="subscriptions">
+    <div class="section-head">
+      <div class="section-number">06 / SUBSCRIPTIONS</div>
+      <h2>Vendor Plans & Billing</h2>
+      <p class="section-desc">Controls how businesses access paid platform features and how their subscriptions are billed.</p>
+    </div>
+    <div class="feature-grid">
+
+      <article class="feature">
+        <h3>Subscription Plans</h3>
+        <p>Offers configured plans with different features, limits and prices.</p>
+        <div class="example"><b>Example:</b> Basic includes a limited listing; Pro includes additional promotional features.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Free Trials</h3>
+        <p>Provides eligible vendors access for a defined trial period.</p>
+        <div class="example"><b>Example:</b> A vendor starts a 14-day trial and receives an expiry reminder.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Recurring Billing</h3>
+        <p>Processes renewals through a supported gateway when recurring billing is enabled.</p>
+        <div class="example"><b>Example:</b> A successful monthly renewal updates the subscription expiry date.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Upgrade, Downgrade & Expiry</h3>
+        <p>Handles plan changes, renewal status and configured restrictions after expiry.</p>
+        <div class="example"><b>Example:</b> An expired trial prompts the vendor to select a paid plan.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Invoices & Billing History</h3>
+        <p>Records subscription charges, renewal attempts and invoice details.</p>
+        <div class="example"><b>Example:</b> Vendor views the invoice for the previous billing period.</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- AI -->
+  <section class="section" id="ai">
+    <div class="section-head">
+      <div class="section-number">07 / AI ASSISTANT</div>
+      <h2>AI Search & Recommendations</h2>
+      <p class="section-desc">The AI interprets requests and works with platform data to help users find relevant businesses.</p>
+    </div>
+    <div class="feature-grid">
+
+      <article class="feature">
+        <h3>Intent Detection</h3>
+        <p>Identifies whether the customer wants a business, product, service or appointment.</p>
+        <div class="example"><b>Example:</b> “I need a haircut today” is interpreted as a service and time-related request.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Location & Category Matching</h3>
+        <p>Matches the request against available business listings and location information.</p>
+        <div class="example"><b>Example:</b> A request for nearby milk shops returns relevant listed businesses.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Filters & Recommendations</h3>
+        <p>Uses available price, rating, distance and availability data to narrow results.</p>
+        <div class="example"><b>Example:</b> User requests a haircut under Rs. 1,000 and sees matching listings with known prices.</div>
+      </article>
+
+      <article class="feature">
+        <h3>Booking & Order Assistance</h3>
+        <p>Guides customers through selection and checks availability through the backend.</p>
+        <div class="example"><b>Example:</b> AI checks a requested time slot before the customer confirms a booking.</div>
+      </article>
+
+      <article class="feature">
+        <h3>AI Provider & Usage Settings</h3>
+        <p>Allows authorised administrators to configure the AI provider and monitor usage.</p>
+        <div class="example"><b>Example:</b> Admin reviews AI request volume and estimated API costs.</div>
+      </article>
+    </div>
+    <div class="note">
+      <strong>Data accuracy:</strong> The AI must use available platform data or authorised sources. Live prices, stock and booking availability must be verified before they are presented as confirmed.
+    </div>
+  </section>
+
+  <!-- DELIVERY -->
+  <section class="section" id="delivery">
+    <div class="section-head">
+      <div class="section-number">08 / DELIVERY</div>
+      <h2>Order Fulfilment</h2>
+      <p class="section-desc">Manages the delivery process after a vendor accepts a product order.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature">
+        <h3>Delivery Method</h3>
+        <p>Offers the delivery methods configured for a business.</p>
+        <div class="example"><b>Example:</b> Customer selects home delivery or store pickup where available.</div>
+      </article>
+      <article class="feature">
+        <h3>Delivery Charges</h3>
+        <p>Calculates charges according to configured rules.</p>
+        <div class="example"><b>Example:</b> Checkout adds the applicable Rs. 200 delivery fee.</div>
+      </article>
+      <article class="feature">
+        <h3>Delivery Status</h3>
+        <p>Records preparation, dispatch and delivery progress.</p>
+        <div class="example"><b>Example:</b> Vendor marks an order dispatched and the customer receives an update.</div>
+      </article>
+      <article class="feature">
+        <h3>Delivery History</h3>
+        <p>Stores completed, cancelled and relevant delivery records.</p>
+        <div class="example"><b>Example:</b> Customer checks the final status of a previous order.</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SUPPORT -->
+  <section class="section" id="support">
+    <div class="section-head">
+      <div class="section-number">09 / SUPPORT</div>
+      <h2>Reviews, Complaints & Disputes</h2>
+      <p class="section-desc">Provides a structured process for feedback, support and issue resolution.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature">
+        <h3>Ratings & Reviews</h3>
+        <p>Collects feedback from eligible customers after a transaction.</p>
+        <div class="example"><b>Example:</b> Customer leaves a rating after a completed haircut appointment.</div>
+      </article>
+      <article class="feature">
+        <h3>Support Tickets</h3>
+        <p>Creates trackable requests for customer, vendor or influencer support.</p>
+        <div class="example"><b>Example:</b> Customer reports a missing order and receives a ticket reference.</div>
+      </article>
+      <article class="feature">
+        <h3>Dispute Management</h3>
+        <p>Allows authorised staff to investigate order, booking or payment disputes.</p>
+        <div class="example"><b>Example:</b> Admin reviews the order record and vendor response to resolve a complaint.</div>
+      </article>
+      <article class="feature">
+        <h3>Resolution Tracking</h3>
+        <p>Tracks cases through open, under-review and resolved states.</p>
+        <div class="example"><b>Example:</b> A resolved ticket is updated and the customer receives a status notification.</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- NOTIFICATIONS -->
+  <section class="section" id="notifications">
+    <div class="section-head">
+      <div class="section-number">10 / COMMUNICATION</div>
+      <h2>Notifications & Alerts</h2>
+      <p class="section-desc">Keeps customers, vendors, influencers and admins informed about relevant events.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature">
+        <h3>Booking & Order Alerts</h3>
+        <p>Sends updates when a booking or order changes status.</p>
+        <div class="example"><b>Example:</b> Vendor accepts a booking and the customer receives confirmation.</div>
+      </article>
+      <article class="feature">
+        <h3>Payment & Payout Alerts</h3>
+        <p>Communicates payment failures, refunds and payout status.</p>
+        <div class="example"><b>Example:</b> Vendor receives an alert when a payout is successfully processed.</div>
+      </article>
+      <article class="feature">
+        <h3>Subscription Reminders</h3>
+        <p>Notifies vendors about trial expiry and renewal events.</p>
+        <div class="example"><b>Example:</b> Vendor receives a reminder before the trial expires.</div>
+      </article>
+      <article class="feature">
+        <h3>Email, SMS & In-App Messages</h3>
+        <p>Uses the configured communication providers and user preferences.</p>
+        <div class="example"><b>Example:</b> An order update appears in-app and is emailed when email notifications are enabled.</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- TECHNICAL -->
+  <section class="section" id="technical">
+    <div class="section-head">
+      <div class="section-number">11 / TECHNICAL ARCHITECTURE</div>
+      <h2>How the Portals Connect</h2>
+      <p class="section-desc">The portals share a backend, database and permission system so each action updates the relevant records.</p>
+    </div>
+
+    <div class="flow">
+      <div class="flow-item">
+        <strong>Customer App</strong>
+        <span>Search · Orders · Bookings</span>
+      </div>
+      <div class="flow-item">
+        <strong>Vendor Portal</strong>
+        <span>Listings · Fulfilment · Earnings</span>
+      </div>
+      <div class="flow-item">
+        <strong>Influencer Portal</strong>
+        <span>Referrals · Commissions · Payouts</span>
+      </div>
+      <div class="flow-item">
+        <strong>Admin Portal</strong>
+        <span>Approvals · Finance · Settings</span>
+      </div>
+    </div>
+
+    <div class="feature-grid" style="margin-top:14px">
+      <article class="feature">
+        <h3>Shared Database</h3>
+        <p>Stores user accounts, businesses, orders, bookings, subscriptions and financial records with appropriate access controls.</p>
+        <div class="example"><b>Example:</b> A vendor accepts a booking; the shared booking record updates so the customer and admin see the correct status.</div>
+      </article>
+      <article class="feature">
+        <h3>Maps & Location Services</h3>
+        <p>Supports location-based discovery and map display through a configured provider.</p>
+        <div class="example"><b>Example:</b> Customer filters business listings by distance from a selected location.</div>
+      </article>
+      <article class="feature">
+        <h3>AI & Automation APIs</h3>
+        <p>Connects AI models, business search, notifications and approved workflows.</p>
+        <div class="example"><b>Example:</b> A confirmed booking triggers a configured notification workflow.</div>
+      </article>
+      <article class="feature">
+        <h3>Security, Permissions & Backups</h3>
+        <p>Protects account access and sensitive records, while supporting monitoring and recovery.</p>
+        <div class="example"><b>Example:</b> An influencer can see their own commissions but cannot access another influencer's financial records.</div>
+      </article>
+    </div>
+
+    <div class="note">
+      <strong>Implementation note:</strong> This page is a product and feature blueprint, not a functioning marketplace. Real registrations, AI search, bookings, payment processing, vendor settlements and influencer payouts require a backend, database, configured integrations and security controls.
+    </div>
+  </section>
+
+  <footer>
+    <div class="logo">AWSZ<span>.</span></div>
+    <p>Build less manually. Run smarter.</p>
+    <p>AWSZ Nearby · Product Blueprint · Customer, Vendor, Influencer, Admin & Finance Systems</p>
+  </footer>
+
+</main>
+</body>
+</html>
+```
