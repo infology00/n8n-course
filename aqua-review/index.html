@@ -1,0 +1,528 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AquaSync Fountain Preview</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#081321;color:#edf5ff;font-family:Arial;padding:18px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+h1{font-size:23px;margin:0}
+small{color:#9bb0c5}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:15px}
+.panel{background:#122238;border:1px solid #2b435d;border-radius:13px;padding:15px;margin-bottom:14px}
+h3{font-size:13px;color:#a9c4dc;text-transform:uppercase}
+canvas{display:block;width:100%;height:auto;background:white;border-radius:8px}
+button{background:#1c3b59;color:white;border:1px solid #41617e;padding:10px;border-radius:8px;cursor:pointer;margin:3px}
+button:hover{background:#28618c}
+.primary{background:#087fbd}
+button:disabled{opacity:.4;cursor:not-allowed}
+input[type=file]{width:100%;font-size:12px}
+input[type=range]{width:100%;accent-color:#35caff}
+.bar{height:7px;background:#2b4057;border-radius:10px;overflow:hidden;margin:12px 0}
+#progress{height:100%;width:0;background:#32caff}
+#clock{font-size:24px;font-weight:bold}
+.status{color:#62d8ff;font-size:12px}
+.result{font-size:12px;color:#6ce1ff;line-height:1.7;margin-top:10px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+ <div>
+  <h1>✦ AQUASYNC STUDIO</h1>
+  <small>Original Fountain Diagram · Music Visualization</small>
+ </div>
+ <div class="status" id="status">● READY</div>
+</header>
+
+<div class="layout">
+<main>
+ <div class="panel">
+  <h3>Original fountain diagram — live preview</h3>
+  <canvas id="scene"></canvas>
+  <small id="detected">Detecting nozzle positions...</small>
+ </div>
+
+ <div class="panel">
+  <h3>Audio timeline</h3>
+  <div id="clock">00:00</div>
+  <div class="bar"><div id="progress"></div></div>
+  <small id="track">No music loaded</small><br><br>
+  <button id="play" class="primary">▶ Play full song</button>
+  <button id="stop">■ Stop</button>
+ </div>
+</main>
+
+<aside>
+ <div class="panel">
+  <h3>Upload song</h3>
+  <input type="file" id="upload" accept="audio/*">
+  <p><small>MP3 / WAV / M4A</small></p>
+ </div>
+
+ <div class="panel">
+  <h3>Find dance moment</h3>
+  <small>Analyze song and locate its strongest 4-second section.</small>
+  <br><br>
+  <button id="analyze" class="primary" style="width:100%">
+   ✦ Analyze Song
+  </button>
+  <div id="result" class="result">Waiting for music...</div>
+  <br>
+  <button id="preview" style="width:100%" disabled>
+   ▶ Preview 4 Seconds
+  </button>
+ </div>
+
+ <div class="panel">
+  <h3>Visual controls</h3>
+  <label><small>Water height</small></label>
+  <input type="range" id="height" min="10" max="100" value="75">
+  <br><br>
+  <label><small>Light intensity</small></label>
+  <input type="range" id="brightness" min="10" max="100" value="85">
+  <br><br>
+  <label><small>Audio sensitivity</small></label>
+  <input type="range" id="sensitivity" min="10" max="100" value="60">
+ </div>
+
+ <div class="panel">
+  <h3>Nozzle groups detected</h3>
+  <div id="groupInfo" class="result"></div>
+  <small>Groups are identified from the colours in your original diagram.</small>
+ </div>
+</aside>
+</div>
+
+<audio id="audio"></audio>
+
+<script>
+const canvas=document.getElementById("scene");
+const ctx=canvas.getContext("2d");
+const img=new Image();
+img.src="fountain-plan.jpg";
+
+const audio=document.getElementById("audio");
+
+let audioCtx,analyser,source,data;
+let nozzles=[];
+let previewMode=false;
+let selectedStart=0;
+let selectedEnd=0;
+let analysisReady=false;
+let previewTimer=null;
+let raf=null;
+let imageReady=false;
+
+const groupDefinitions=[
+ {name:"Central blue jets",color:"#219cff",hue:210,points:[]},
+ {name:"Inner purple ring",color:"#a35cff",hue:275,points:[]},
+ {name:"Outer red ring",color:"#ff405d",hue:0,points:[]},
+ {name:"Left pink bank",color:"#e34d9e",hue:325,points:[]},
+ {name:"Right orange bank",color:"#ffae38",hue:35,points:[]},
+ {name:"Upper/lower green banks",color:"#20c994",hue:150,points:[]}
+];
+
+// Hue of a pixel
+function getHue(r,g,b){
+ let mx=Math.max(r,g,b),mn=Math.min(r,g,b);
+ let d=mx-mn;
+ if(d===0)return 0;
+ let h;
+ if(mx===r)h=((g-b)/d)%6;
+ else if(mx===g)h=(b-r)/d+2;
+ else h=(r-g)/d+4;
+ return (h*60+360)%360;
+}
+
+function hueGroup(h){
+ if(h>=190&&h<=230)return 0;
+ if(h>=255&&h<=300)return 1;
+ if(h<=12||h>=350)return 2;
+ if(h>=310&&h<350)return 3;
+ if(h>=15&&h<=55)return 4;
+ if(h>=125&&h<=175)return 5;
+ return -1;
+}
+
+// Automatically detect individual coloured nozzle dots
+function detectNozzles(){
+ const w=img.naturalWidth;
+ const h=img.naturalHeight;
+
+ canvas.width=w;
+ canvas.height=h;
+
+ const temp=document.createElement("canvas");
+ temp.width=w;
+ temp.height=h;
+
+ const tctx=temp.getContext("2d",{willReadFrequently:true});
+ tctx.drawImage(img,0,0,w,h);
+
+ const image=tctx.getImageData(0,0,w,h);
+ const px=image.data;
+ const mask=new Int8Array(w*h);
+ const visited=new Uint8Array(w*h);
+
+ for(let i=0;i<w*h;i++){
+  let p=i*4;
+  let r=px[p],g=px[p+1],b=px[p+2];
+
+  let max=Math.max(r,g,b);
+  let min=Math.min(r,g,b);
+  let saturation=max===0?0:(max-min)/max;
+
+  if(saturation>.27 && max>65 && min<245){
+   let group=hueGroup(getHue(r,g,b));
+   if(group>=0)mask[i]=group+1;
+  }
+ }
+
+ const neighbours=[
+  -w-1,-w,-w+1,-1,1,w-1,w,w+1
+ ];
+
+ for(let i=0;i<w*h;i++){
+  if(!mask[i]||visited[i])continue;
+
+  let group=mask[i]-1;
+  let stack=[i];
+  let component=[];
+  visited[i]=1;
+
+  while(stack.length){
+   let p=stack.pop();
+   component.push(p);
+
+   let x=p%w;
+   let y=Math.floor(p/w);
+
+   for(let d of neighbours){
+    let n=p+d;
+    if(n<0||n>=w*h)continue;
+
+    let nx=n%w;
+    let ny=Math.floor(n/w);
+
+    if(Math.abs(nx-x)>1||Math.abs(ny-y)>1)continue;
+
+    if(!visited[n]&&mask[n]===group+1){
+     visited[n]=1;
+     stack.push(n);
+    }
+   }
+  }
+
+  // Filter out tiny anti-aliasing pixels and large lines
+  if(component.length<5||component.length>500)continue;
+
+  let sx=0,sy=0;
+  for(let p of component){
+   sx+=p%w;
+   sy+=Math.floor(p/w);
+  }
+
+  let point={
+   x:sx/component.length,
+   y:sy/component.length,
+   group:group
+  };
+
+  nozzles.push(point);
+  groupDefinitions[group].points.push(point);
+ }
+
+ let total=nozzles.length;
+ document.getElementById("detected").textContent=
+  total+" nozzle points detected from original image.";
+
+ document.getElementById("groupInfo").innerHTML=
+  groupDefinitions.map((g,i)=>
+   `<div style="color:${g.color};margin:5px 0">
+   ● ${g.name}: ${g.points.length} points</div>`
+  ).join("");
+}
+
+// Always show the original image in grey.
+// Do not crop or change its proportions.
+function drawBase(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ ctx.save();
+ ctx.filter="grayscale(1)";
+ ctx.drawImage(img,0,0,canvas.width,canvas.height);
+ ctx.restore();
+}
+
+function setupAudio(){
+ if(!audioCtx){
+  audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  analyser=audioCtx.createAnalyser();
+  analyser.fftSize=512;
+  data=new Uint8Array(analyser.frequencyBinCount);
+  source=audioCtx.createMediaElementSource(audio);
+  source.connect(analyser);
+  analyser.connect(audioCtx.destination);
+ }
+ if(audioCtx.state==="suspended")audioCtx.resume();
+}
+
+function getEnergy(){
+ if(!analyser)return {bass:0,mid:0,high:0,all:0};
+
+ analyser.getByteFrequencyData(data);
+
+ function avg(a,b){
+  let sum=0;
+  for(let i=a;i<b;i++)sum+=data[i]||0;
+  return sum/(b-a)/255;
+ }
+
+ return {
+  bass:avg(1,8),
+  mid:avg(8,45),
+  high:avg(45,130),
+  all:avg(1,150)
+ };
+}
+
+// Draw animation exactly at detected nozzle positions
+function drawAnimation(){
+ if(!previewMode)return;
+
+ drawBase();
+
+ const e=getEnergy();
+ const sensitivity=document.getElementById("sensitivity").value/55;
+ const brightness=document.getElementById("brightness").value/100;
+ const height=document.getElementById("height").value/100;
+ const time=performance.now();
+
+ groupDefinitions.forEach((group,index)=>{
+  let band=["bass","mid","high","mid","high","bass"][index];
+  let power=e[band]*sensitivity+e.all*.18;
+  power=Math.min(1,power);
+
+  if(power<.07)return;
+
+  group.points.forEach((p,j)=>{
+   const pulse=.7+.3*Math.sin(time/130+j*.8);
+   const x=p.x,y=p.y;
+   const radius=(3+power*5)*pulse;
+
+   ctx.save();
+   ctx.globalAlpha=Math.min(1,(.25+power*1.8)*brightness);
+   ctx.shadowColor=group.color;
+   ctx.shadowBlur=18;
+   ctx.fillStyle=group.color;
+
+   // Glow at the actual nozzle location
+   ctx.beginPath();
+   ctx.arc(x,y,radius,0,Math.PI*2);
+   ctx.fill();
+
+   // Animated vertical water jet
+   const jetHeight=(14+height*65)*power;
+
+   ctx.globalAlpha*=.8;
+   ctx.strokeStyle=group.color;
+   ctx.lineWidth=Math.max(1.5,2.5*canvas.width/1195);
+   ctx.beginPath();
+   ctx.moveTo(x,y);
+   ctx.quadraticCurveTo(
+    x+Math.sin(time/150+j)*4,
+    y-jetHeight*.5,
+    x+Math.sin(time/120+j)*2,
+    y-jetHeight
+   );
+   ctx.stroke();
+
+   // Water splash at the top
+   ctx.beginPath();
+   ctx.arc(x,y-jetHeight,2.5,0,Math.PI*2);
+   ctx.fill();
+
+   ctx.restore();
+  });
+ });
+
+ raf=requestAnimationFrame(drawAnimation);
+}
+
+function startLoop(){
+ cancelAnimationFrame(raf);
+ if(previewMode)drawAnimation();
+ else drawBase();
+}
+
+img.onload=()=>{
+ imageReady=true;
+ detectNozzles();
+ drawBase();
+};
+
+function stopPreview(){
+ previewMode=false;
+ if(previewTimer)clearTimeout(previewTimer);
+ previewTimer=null;
+ cancelAnimationFrame(raf);
+ drawBase();
+}
+
+document.getElementById("upload").onchange=e=>{
+ const file=e.target.files[0];
+ if(!file)return;
+
+ stopPreview();
+ audio.src=URL.createObjectURL(file);
+ audio.load();
+ setupAudio();
+
+ document.getElementById("track").textContent=file.name;
+ document.getElementById("status").textContent="● AUDIO LOADED";
+
+ analysisReady=false;
+ document.getElementById("preview").disabled=true;
+ document.getElementById("result").textContent="Ready to analyze.";
+};
+
+document.getElementById("analyze").onclick=async()=>{
+ if(!audio.src){
+  alert("Please upload a song first.");
+  return;
+ }
+
+ stopPreview();
+ const btn=document.getElementById("analyze");
+ btn.disabled=true;
+ btn.textContent="Analyzing...";
+
+ try{
+  setupAudio();
+
+  const response=await fetch(audio.src);
+  const buffer=await response.arrayBuffer();
+  const decoded=await audioCtx.decodeAudioData(buffer);
+
+  const samples=decoded.getChannelData(0);
+  const rate=decoded.sampleRate;
+  const duration=decoded.duration;
+
+  let bestScore=-1;
+  let bestStart=0;
+
+  for(let start=0;start+4<=duration;start+=.5){
+   let from=Math.floor(start*rate);
+   let to=Math.min(samples.length,Math.floor((start+4)*rate));
+   let sum=0,count=0;
+
+   for(let i=from;i<to;i+=Math.max(1,Math.floor(rate/100))){
+    sum+=samples[i]*samples[i];
+    count++;
+   }
+
+   let score=Math.sqrt(sum/Math.max(1,count));
+
+   if(score>bestScore){
+    bestScore=score;
+    bestStart=start;
+   }
+  }
+
+  selectedStart=bestStart;
+  selectedEnd=bestStart+4;
+  analysisReady=true;
+
+  document.getElementById("result").innerHTML=
+   "✓ Analysis complete<br>"+
+   "Selected moment: "+fmt(selectedStart)+
+   " – "+fmt(selectedEnd);
+
+  document.getElementById("preview").disabled=false;
+  document.getElementById("status").textContent="● READY TO PREVIEW";
+
+ }catch(err){
+  console.error(err);
+  alert("Audio analysis failed. Try another MP3 or WAV.");
+ }finally{
+  btn.disabled=false;
+  btn.textContent="✦ Analyze Song";
+ }
+};
+
+// Animation only begins after this button is clicked.
+document.getElementById("preview").onclick=async()=>{
+ if(!analysisReady)return;
+
+ stopPreview();
+ setupAudio();
+
+ audio.currentTime=selectedStart;
+ previewMode=true;
+ startLoop();
+
+ await audio.play();
+
+ document.getElementById("status").textContent="● 4-SECOND DANCE PREVIEW";
+
+ previewTimer=setTimeout(()=>{
+  audio.pause();
+  previewMode=false;
+  drawBase();
+
+  document.getElementById("status").textContent="● PREVIEW FINISHED";
+  document.getElementById("clock").textContent=fmt(selectedStart);
+
+ },4000);
+};
+
+document.getElementById("play").onclick=async()=>{
+ stopPreview();
+
+ if(!audio.src){
+  alert("Upload a song first.");
+  return;
+ }
+
+ setupAudio();
+
+ if(audio.paused){
+  await audio.play();
+  document.getElementById("play").textContent="Ⅱ Pause";
+  document.getElementById("status").textContent="● SONG PLAYING";
+ }else{
+  audio.pause();
+  document.getElementById("play").textContent="▶ Play full song";
+  document.getElementById("status").textContent="● PAUSED";
+ }
+};
+
+document.getElementById("stop").onclick=()=>{
+ stopPreview();
+ audio.pause();
+ audio.currentTime=0;
+ document.getElementById("play").textContent="▶ Play full song";
+ document.getElementById("status").textContent="● STOPPED";
+ document.getElementById("clock").textContent="00:00";
+ document.getElementById("progress").style.width="0%";
+};
+
+function fmt(t){
+ let m=Math.floor(t/60);
+ let s=Math.floor(t%60);
+ return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+audio.addEventListener("timeupdate",()=>{
+ document.getElementById("clock").textContent=fmt(audio.currentTime);
+ document.getElementById("progress").style.width=
+  (audio.duration?audio.currentTime/audio.duration*100:0)+"%";
+});
+
+</script>
+</body>
+</html>
