@@ -1,847 +1,1207 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AWSZ Nearby | System Blueprint</title>
-
+<title>Platform Overview | Four Portal Ecosystem</title>
 <style>
 :root {
-  --bg: #10110f;
-  --panel: #191b18;
-  --panel2: #20231f;
-  --green: #c5ff45;
-  --text: #f4f5f0;
-  --muted: #a1a79b;
-  --border: rgba(255,255,255,.09);
+  --green:#b8ed42;
+  --dark:#17221d;
+  --ink:#26332d;
+  --muted:#738078;
+  --bg:#f4f5ef;
+  --white:#fff;
+  --line:#e7ebe3;
+  --soft:#edf4e4;
 }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  font-family: Inter, Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.65;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.6;
 }
-a { color: inherit; text-decoration: none; }
-header {
-  padding: 20px 7%;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  position: sticky;
-  top: 0;
-  background: rgba(16,17,15,.96);
-  backdrop-filter: blur(14px);
-  z-index: 10;
+button{font:inherit;cursor:pointer}
+.container{width:min(1180px,92%);margin:auto}
+.topbar{
+  position:sticky;top:0;z-index:20;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
 }
-.logo { font-size: 25px; font-weight: 900; letter-spacing: -1px; }
-.logo span { color: var(--green); }
-.header-label { color: var(--muted); font-size: 12px; }
-main { max-width: 1150px; margin: auto; padding: 48px 24px 90px; }
-.hero {
-  padding: 45px 0 38px;
-  border-bottom: 1px solid var(--border);
+.nav{
+  min-height:70px;display:flex;align-items:center;
+  justify-content:space-between;gap:20px;
 }
-.eyebrow {
-  color: var(--green);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 11px;
-  font-weight: 800;
+.logo{font-size:23px;font-weight:900;color:var(--dark)}
+.logo span{color:#82b923}
+.navlinks{display:flex;gap:20px;flex-wrap:wrap}
+.navlinks a{
+  color:var(--muted);text-decoration:none;
+  font-size:12px;font-weight:700
 }
-h1 { font-size: clamp(36px,6vw,66px); line-height: 1.06; letter-spacing: -2.5px; margin: 18px 0; }
-h1 span { color: var(--green); }
-.intro { color: var(--muted); max-width: 760px; font-size: 16px; }
-.pills { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 25px; }
-.pill {
-  border: 1px solid var(--border);
-  background: var(--panel);
-  padding: 7px 12px;
-  border-radius: 20px;
-  color: #dce1d5;
-  font-size: 12px;
+.navlinks a:hover{color:var(--dark)}
+.btn{
+  background:var(--green);color:var(--dark);
+  padding:11px 17px;border:0;border-radius:9px;
+  font-weight:800;font-size:12px
 }
-.summary {
-  margin-top: 28px;
-  background: linear-gradient(120deg,#22281b,#171a15);
-  border: 1px solid rgba(197,255,69,.22);
-  border-radius: 17px;
-  padding: 23px;
+.hero{
+  background:var(--dark);color:white;
+  padding:76px 0 65px;position:relative;overflow:hidden
 }
-.summary h2 { color: var(--green); font-size: 18px; margin-top: 0; }
-.summary p { color: #d4d9ce; margin-bottom: 0; }
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 25px 0 10px;
+.hero:after{
+  content:"";position:absolute;width:500px;height:500px;
+  border-radius:50%;background:rgba(184,237,66,.09);
+  right:-120px;top:-190px
 }
-nav a {
-  padding: 8px 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 12px;
-  color: var(--muted);
+.eyebrow{
+  color:var(--green);font-size:11px;font-weight:900;
+  letter-spacing:2px;text-transform:uppercase
 }
-nav a:hover { color: var(--green); border-color: var(--green); }
-.section { padding-top: 55px; scroll-margin-top: 85px; }
-.section-head { margin-bottom: 22px; }
-.section-number { color: var(--green); font-size: 12px; font-weight: 800; }
-h2 { font-size: clamp(24px,4vw,34px); letter-spacing: -.8px; margin: 5px 0 8px; }
-.section-desc { color: var(--muted); margin: 0; max-width: 780px; }
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 13px;
+.hero h1{
+  font-size:clamp(38px,6vw,68px);
+  line-height:1.05;max-width:850px;margin:18px 0
 }
-.feature {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 18px;
-  min-width: 0;
+.hero h1 span{color:var(--green)}
+.hero p{max-width:720px;color:#c6d0c8;font-size:16px}
+.hero-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.pill{
+  padding:9px 13px;border:1px solid #46534b;
+  border-radius:30px;font-size:11px;color:#e0e8df
 }
-.feature h3 { font-size: 15px; margin: 0 0 8px; }
-.feature p { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
-.example {
-  border-left: 2px solid var(--green);
-  padding: 9px 11px;
-  background: var(--panel2);
-  color: #e4e9dd;
-  font-size: 12px;
-  border-radius: 0 7px 7px 0;
+section{padding:65px 0}
+.section-head{margin-bottom:28px;max-width:760px}
+.kicker{
+  color:#79a923;text-transform:uppercase;
+  letter-spacing:1.8px;font-weight:900;font-size:10px
 }
-.example b { color: var(--green); }
-.flow {
-  display: grid;
-  grid-template-columns: repeat(4,minmax(0,1fr));
-  gap: 10px;
-  margin-top: 22px;
+h2{font-size:clamp(27px,4vw,39px);line-height:1.15;margin:9px 0 12px;color:var(--dark)}
+.section-head p{color:var(--muted);font-size:14px}
+.grid{display:grid;gap:17px}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{
+  background:white;border:1px solid var(--line);
+  border-radius:17px;padding:23px;
+  box-shadow:0 5px 20px rgba(25,40,28,.035)
 }
-.flow-item {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 17px 12px;
-  border-radius: 11px;
-  text-align: center;
+.card h3{font-size:17px;color:var(--dark);margin:9px 0}
+.card p{font-size:13px;color:var(--muted)}
+.card .example{
+  margin-top:15px;padding:12px;background:#f5f7f1;
+  border-radius:10px;font-size:12px;color:#526052
 }
-.flow-item strong { display: block; font-size: 13px; }
-.flow-item span { display: block; color: var(--muted); font-size: 11px; margin-top: 6px; }
-.note {
-  margin-top: 18px;
-  border: 1px solid rgba(197,255,69,.2);
-  border-radius: 11px;
-  padding: 16px;
-  color: #cbd1c3;
-  font-size: 13px;
+.number{
+  width:34px;height:34px;border-radius:10px;
+  display:grid;place-items:center;
+  background:var(--soft);color:#527b14;font-weight:900
 }
-.note strong { color: var(--green); }
-footer {
-  border-top: 1px solid var(--border);
-  margin-top: 65px;
-  padding-top: 25px;
-  color: var(--muted);
-  font-size: 12px;
+.portal-card{padding:0;overflow:hidden}
+.portal-top{padding:22px;background:var(--dark);color:white}
+.portal-top .number{background:var(--green);color:var(--dark)}
+.portal-top h3{color:white;font-size:20px;margin:12px 0 4px}
+.portal-top p{color:#c4cec6}
+.portal-body{padding:22px}
+.portal-body ul{list-style:none}
+.portal-body li{
+  padding:9px 0;border-bottom:1px solid var(--line);
+  font-size:12px;color:#59655c
 }
-@media(max-width:650px) {
-  header { padding: 16px 5%; }
-  main { padding: 25px 16px 60px; }
-  .feature-grid { grid-template-columns: 1fr; }
-  .flow { grid-template-columns: repeat(2,minmax(0,1fr)); }
-  .header-label { display: none; }
-  h1 { letter-spacing: -1.5px; }
+.portal-body li:last-child{border:0}
+.portal-body li:before{content:"✓";color:#79a923;font-weight:900;margin-right:9px}
+.tag{
+  display:inline-block;background:#edf4e4;color:#587e20;
+  padding:5px 9px;border-radius:20px;
+  font-size:10px;font-weight:800;margin:3px 3px 3px 0
+}
+.feature{margin-bottom:15px}
+.feature h3{font-size:15px;margin-bottom:5px}
+.feature p{font-size:12px;color:var(--muted)}
+.feature .example{
+  padding:10px 12px;background:#f4f6f0;
+  border-radius:9px;margin-top:8px;font-size:11px;color:#566252
+}
+.dark-section{background:var(--dark);color:white}
+.dark-section h2{color:white}
+.dark-section .section-head p{color:#bdc9bf}
+.dark-section .card{background:#202e26;border-color:#35443a}
+.dark-section .card h3{color:white}
+.dark-section .card p{color:#bac7bd}
+.dark-section .card .example{background:#29392e;color:#d5e0d6}
+.mockup{
+  background:#fff;border:1px solid var(--line);
+  border-radius:17px;overflow:hidden;color:var(--ink)
+}
+.mock-head{
+  padding:14px 17px;background:#f8faf5;
+  border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center
+}
+.mock-head strong{font-size:12px}
+.mock-content{padding:17px}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.stat{
+  padding:13px;background:#f4f7ef;border-radius:10px
+}
+.stat small{font-size:9px;color:var(--muted)}
+.stat strong{display:block;font-size:22px;color:var(--dark)}
+.profile{
+  display:flex;gap:12px;align-items:center;
+  padding:12px 0;border-bottom:1px solid var(--line)
+}
+.avatar{
+  width:39px;height:39px;border-radius:50%;
+  background:#dce9c9;display:grid;place-items:center;
+  font-weight:900;color:#587d24;font-size:12px
+}
+.profile strong{font-size:11px;display:block}
+.profile small{font-size:9px;color:var(--muted)}
+.progress{height:7px;background:#e9eee4;border-radius:10px;margin-top:8px;overflow:hidden}
+.progress span{display:block;height:100%;background:#9ccc3c;border-radius:10px}
+.chat{
+  background:#f7f8f4;border-radius:12px;padding:13px;
+  font-size:11px;margin-bottom:10px
+}
+.chat.answer{background:#eaf3df}
+.chat-label{font-size:9px;color:#78904e;font-weight:900;margin-bottom:4px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.step{
+  background:white;border:1px solid var(--line);
+  border-radius:13px;padding:16px
+}
+.step b{font-size:11px;color:#6e9b20}
+.step h3{font-size:13px;margin:8px 0}
+.step p{font-size:11px;color:var(--muted)}
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:white;border-radius:14px;overflow:hidden}
+th,td{padding:13px 15px;text-align:left;border-bottom:1px solid var(--line);font-size:12px}
+th{background:#edf3e6;color:#45553d;font-size:11px}
+td{color:#68736a}
+.highlight{background:#f0f6e7;border-left:4px solid #9aca3c;padding:17px;border-radius:9px;font-size:13px}
+.footer{
+  background:#121b16;color:#c2cec4;padding:35px 0;
+  font-size:11px
+}
+.footer strong{color:var(--green)}
+@media(max-width:850px){
+ .grid.four{grid-template-columns:repeat(2,1fr)}
+ .grid.three{grid-template-columns:repeat(2,1fr)}
+ .steps{grid-template-columns:repeat(2,1fr)}
+ .navlinks{display:none}
+}
+@media(max-width:560px){
+ section{padding:45px 0}
+ .grid.two,.grid.three,.grid.four{grid-template-columns:1fr}
+ .hero{padding:55px 0}
+ .steps{grid-template-columns:1fr 1fr}
+ .card{padding:18px}
+}
+@media print{
+ .topbar{position:static}
+ .btn{display:none}
+ section{break-inside:avoid;padding:35px 0}
+ body{background:white}
 }
 </style>
 </head>
-
 <body>
 
-<header>
-  <a class="logo" href="#top">AWSZ<span>.</span></a>
-  <div class="header-label">NEARBY · PRODUCT & SYSTEM BLUEPRINT</div>
+<header class="topbar">
+ <div class="container nav">
+  <div class="logo">PLATFORM<span>.</span></div>
+  <nav class="navlinks">
+   <a href="#overview">Overview</a>
+   <a href="#portals">Portals</a>
+   <a href="#workflow">Workflow</a>
+   <a href="#revenue">Revenue</a>
+   <a href="#roadmap">Roadmap</a>
+  </nav>
+  <button class="btn" onclick="window.print()">Print / Save PDF</button>
+ </div>
 </header>
 
-<main id="top">
+<div class="hero">
+ <div class="container">
+  <div class="eyebrow">Product architecture & feature briefing</div>
+  <h1>One Platform.<br><span>Four Connected Portals.</span></h1>
+  <p>
+   A connected local discovery and collaboration ecosystem that brings
+   users, local businesses, influencers and platform administrators
+   together through AI-powered discovery, business visibility, promotional
+   campaigns and measurable engagement.
+  </p>
+  <div class="hero-meta">
+   <span class="pill">01 Admin Web Portal</span>
+   <span class="pill">02 Vendor App</span>
+   <span class="pill">03 Influencer App</span>
+   <span class="pill">04 User App</span>
+  </div>
+ </div>
+</div>
 
-  <section class="hero">
-    <div class="eyebrow">Project Overview · 2026</div>
-    <h1>Discover nearby.<br><span>Connect smarter.</span></h1>
-    <p class="intro">
-      AWSZ Nearby is an AI-powered local business platform that connects
-      customers with nearby shops and service providers. Customers can discover
-      businesses, place orders and book appointments, while vendors manage
-      operations, influencers earn eligible referral commissions, and admins
-      control the complete platform.
-    </p>
+<section id="overview">
+ <div class="container">
+  <div class="section-head">
+   <div class="kicker">01 / Project overview</div>
+   <h2>What are we building?</h2>
+   <p>
+    The platform connects people searching for local services with
+    businesses that want visibility, while giving influencers a structured
+    way to collaborate with businesses and other creators.
+   </p>
+  </div>
+  <div class="grid three">
+   <div class="card">
+    <div class="number">01</div>
+    <h3>Discover</h3>
+    <p>Users ask questions through an AI-style chat interface and discover relevant local businesses, services and offers.</p>
+    <div class="example">Example: A user asks, “Find me a barber near me.” The platform returns relevant local barber shops.</div>
+   </div>
+   <div class="card">
+    <div class="number">02</div>
+    <h3>Promote</h3>
+    <p>Vendors manage their business profiles, publish content, receive visibility and create promotional offers for influencers.</p>
+    <div class="example">Example: A restaurant offers a creator 15% commission or a free meal in exchange for agreed promotional content.</div>
+   </div>
+   <div class="card">
+    <div class="number">03</div>
+    <h3>Collaborate</h3>
+    <p>Influencers discover vendor campaigns, connect with other creators and publish their own collaboration opportunities.</p>
+    <div class="example">Example: Two food creators connect to produce a joint restaurant review video.</div>
+   </div>
+  </div>
+  <div style="height:20px"></div>
+  <div class="highlight">
+   <strong>Core concept:</strong> The User App generates discovery and engagement.
+   The Vendor App monetizes business visibility and campaigns.
+   The Influencer App enables promotional collaborations.
+   The Admin Portal controls the complete ecosystem.
+  </div>
+ </div>
+</section>
 
-    <div class="pills">
-      <span class="pill">AI Business Search</span>
-      <span class="pill">Customer App</span>
-      <span class="pill">Vendor Portal</span>
-      <span class="pill">Influencer Portal</span>
-      <span class="pill">Admin Portal</span>
-      <span class="pill">Payments & Payouts</span>
+<section id="portals" style="background:#eef1e9">
+ <div class="container">
+  <div class="section-head">
+   <div class="kicker">02 / Platform structure</div>
+   <h2>Four portals, one ecosystem</h2>
+   <p>Each portal has a different user role, but all portals share the same central database and connected services.</p>
+  </div>
+  <div class="grid four">
+   <div class="card portal-card">
+    <div class="portal-top">
+     <div class="number">01</div>
+     <h3>Admin Portal</h3>
+     <p>Central management web application</p>
     </div>
-
-    <div class="summary">
-      <h2>How the complete system works</h2>
-      <p>
-        A customer searches for a nearby business and places an order or booking.
-        The vendor receives the request and updates its status. The system records
-        transactions, calculates applicable platform fees and referral commissions,
-        and tracks eligible payouts. The admin oversees users, businesses,
-        subscriptions, payments and platform activity.
-      </p>
+    <div class="portal-body">
+     <ul>
+      <li>Manage all accounts</li>
+      <li>Vendor approvals</li>
+      <li>Credit and payment control</li>
+      <li>Campaign management</li>
+      <li>Reports and analytics</li>
+      <li>AI and platform settings</li>
+     </ul>
     </div>
-
-    <nav aria-label="Page sections">
-      <a href="#customer">Customer</a>
-      <a href="#vendor">Vendor</a>
-      <a href="#influencer">Influencer</a>
-      <a href="#admin">Admin</a>
-      <a href="#finance">Finance</a>
-      <a href="#subscriptions">Subscriptions</a>
-      <a href="#ai">AI Assistant</a>
-      <a href="#delivery">Delivery</a>
-      <a href="#support">Support</a>
-      <a href="#notifications">Notifications</a>
-      <a href="#technical">Technology</a>
-    </nav>
-  </section>
-
-  <!-- CUSTOMER PORTAL -->
-  <section class="section" id="customer">
-    <div class="section-head">
-      <div class="section-number">01 / CUSTOMER PORTAL</div>
-      <h2>Customer App</h2>
-      <p class="section-desc">Customers discover businesses, book services, order products and manage their activity.</p>
+   </div>
+   <div class="card portal-card">
+    <div class="portal-top">
+     <div class="number">02</div>
+     <h3>Vendor App</h3>
+     <p>Business owner application</p>
     </div>
-    <div class="feature-grid">
-
-      <article class="feature">
-        <h3>AI-Powered Search</h3>
-        <p>Customers search using everyday language instead of navigating complicated categories.</p>
-        <div class="example"><b>Example:</b> User says, “Find a barber near me.” AI returns relevant available business listings.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Nearby Businesses</h3>
-        <p>Displays relevant shops based on the customer's selected or permitted location.</p>
-        <div class="example"><b>Example:</b> A customer selects an area and sees nearby milk shops and salons.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Business Profiles</h3>
-        <p>Shows business information, services, products, prices, opening hours and location.</p>
-        <div class="example"><b>Example:</b> A customer opens a barber profile to check haircut prices and timings.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Bookings & Appointments</h3>
-        <p>Customers choose an available service and time slot.</p>
-        <div class="example"><b>Example:</b> Customer books a 5 PM haircut; the vendor receives the appointment request.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Product Orders</h3>
-        <p>Customers order products from listed businesses.</p>
-        <div class="example"><b>Example:</b> Customer orders two litres of milk; the milk shop receives the order details.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Cart & Checkout</h3>
-        <p>Combines selected products, quantities, delivery charges and applicable discounts before confirmation.</p>
-        <div class="example"><b>Example:</b> Customer adds milk and bread to the cart and reviews the total before ordering.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Online Payment</h3>
-        <p>Allows customers to pay through an integrated and supported payment gateway.</p>
-        <div class="example"><b>Example:</b> Customer pays Rs. 2,000; the gateway returns a payment status that the system records.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Cash on Delivery</h3>
-        <p>Offers cash payment where the platform and vendor support it.</p>
-        <div class="example"><b>Example:</b> Customer selects COD, and the vendor receives an order marked for cash collection.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Order & Booking History</h3>
-        <p>Customers can review previous and upcoming orders or appointments.</p>
-        <div class="example"><b>Example:</b> Customer opens an order to check whether it has been dispatched or delivered.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Notifications</h3>
-        <p>Provides relevant booking, order and payment updates.</p>
-        <div class="example"><b>Example:</b> Vendor accepts a booking; the customer receives a confirmation notification.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Reviews & Ratings</h3>
-        <p>Allows eligible customers to rate their experience with a business.</p>
-        <div class="example"><b>Example:</b> After a completed haircut, the customer leaves a five-star review.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Profile & Saved Addresses</h3>
-        <p>Customers manage contact information and delivery addresses.</p>
-        <div class="example"><b>Example:</b> Customer saves a home address and selects it at the next checkout.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Customer Wallet & Credits</h3>
-        <p>If implemented, the wallet records eligible platform credits and refunds.</p>
-        <div class="example"><b>Example:</b> An approved platform credit appears in the customer's wallet balance.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Referrals & Favorites</h3>
-        <p>Customers can save businesses and use available referral offers.</p>
-        <div class="example"><b>Example:</b> Customer saves a favourite milk shop or applies an eligible referral code.</div>
-      </article>
+    <div class="portal-body">
+     <ul>
+      <li>Register or claim business</li>
+      <li>Manage business profile</li>
+      <li>Track visibility and credits</li>
+      <li>Publish social content</li>
+      <li>Create influencer offers</li>
+      <li>Manage subscriptions</li>
+     </ul>
     </div>
-  </section>
-
-  <!-- VENDOR PORTAL -->
-  <section class="section" id="vendor">
-    <div class="section-head">
-      <div class="section-number">02 / VENDOR PORTAL</div>
-      <h2>Vendor Management</h2>
-      <p class="section-desc">Business owners manage their listings, products, bookings, orders, subscriptions and earnings.</p>
+   </div>
+   <div class="card portal-card">
+    <div class="portal-top">
+     <div class="number">03</div>
+     <h3>Influencer App</h3>
+     <p>Creator and collaboration application</p>
     </div>
-    <div class="feature-grid">
-
-      <article class="feature">
-        <h3>Vendor Registration & Verification</h3>
-        <p>Collects business details and supports admin review before activation.</p>
-        <div class="example"><b>Example:</b> A milk shop submits its details; the admin reviews and approves the application.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Business Profile Management</h3>
-        <p>Vendors manage their business description, address, contact details and hours.</p>
-        <div class="example"><b>Example:</b> A barber updates the shop's opening hours and phone number.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Products & Services</h3>
-        <p>Vendors create and maintain their product catalogue and service menu.</p>
-        <div class="example"><b>Example:</b> A milk shop adds one-litre milk; a barber adds a haircut service.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Pricing, Stock & Availability</h3>
-        <p>Manages prices, product stock and available services or appointment slots.</p>
-        <div class="example"><b>Example:</b> A vendor marks an unavailable product out of stock.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Booking Management</h3>
-        <p>Vendors accept, reject or reschedule appointment requests.</p>
-        <div class="example"><b>Example:</b> Barber accepts the 5 PM booking; the customer receives the updated status.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Order Management</h3>
-        <p>Vendors manage orders from receipt through preparation and fulfilment.</p>
-        <div class="example"><b>Example:</b> Milk shop accepts an order and marks it ready for delivery.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Customer & Order Details</h3>
-        <p>Displays information required to fulfil a confirmed booking or order.</p>
-        <div class="example"><b>Example:</b> An accepted delivery order displays the relevant customer contact and delivery address.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Vendor Subscription</h3>
-        <p>Displays the current plan, trial status, renewal date and available upgrades.</p>
-        <div class="example"><b>Example:</b> A vendor upgrades from Basic to Pro and sees the updated plan status.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Sales & Performance</h3>
-        <p>Summarises orders, bookings, revenue and business performance.</p>
-        <div class="example"><b>Example:</b> Vendor checks how many orders were completed this month.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Vendor Earnings</h3>
-        <p>Shows sales, platform fees, refunds, adjustments and the resulting payable balance.</p>
-        <div class="example"><b>Example:</b> Rs. 10,000 sales minus Rs. 1,000 platform fee gives an initial Rs. 9,000 payable before other adjustments.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Vendor Payouts</h3>
-        <p>Tracks eligible balances, payout requests and settlement statuses.</p>
-        <div class="example"><b>Example:</b> Vendor requests an eligible payout; after the transfer is verified, its status changes to Paid.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Promotions & Reviews</h3>
-        <p>Vendors manage supported discounts and review responses.</p>
-        <div class="example"><b>Example:</b> A barber publishes a weekend offer and responds to a customer's review.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Staff Access</h3>
-        <p>Where enabled, vendors can give staff limited permissions.</p>
-        <div class="example"><b>Example:</b> A receptionist manages bookings without accessing financial settings.</div>
-      </article>
+    <div class="portal-body">
+     <ul>
+      <li>Creator registration</li>
+      <li>Social profile connections</li>
+      <li>Discover vendor campaigns</li>
+      <li>Creator-to-creator matching</li>
+      <li>Publish collaboration requests</li>
+      <li>Track applications and status</li>
+     </ul>
     </div>
-  </section>
-
-  <!-- INFLUENCER -->
-  <section class="section" id="influencer">
-    <div class="section-head">
-      <div class="section-number">03 / INFLUENCER PORTAL</div>
-      <h2>Influencer & Referral System</h2>
-      <p class="section-desc">Influencers promote participating businesses and track eligible referrals and commissions.</p>
+   </div>
+   <div class="card portal-card">
+    <div class="portal-top">
+     <div class="number">04</div>
+     <h3>User App</h3>
+     <p>AI-powered discovery application</p>
     </div>
-    <div class="feature-grid">
-
-      <article class="feature">
-        <h3>Registration & Approval</h3>
-        <p>Influencers register and receive access after any required approval.</p>
-        <div class="example"><b>Example:</b> An influencer submits an application and receives approval from the admin.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Referral Links & Codes</h3>
-        <p>Provides unique links or codes for tracking eligible referrals.</p>
-        <div class="example"><b>Example:</b> Influencer shares a unique AWSZ link in an Instagram post.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Campaign Management</h3>
-        <p>Shows eligible vendors, campaigns, promotional assets and campaign rules.</p>
-        <div class="example"><b>Example:</b> Influencer selects a participating milk shop's promotion to share.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Referral Tracking</h3>
-        <p>Tracks supported link visits, registrations and attributed conversions.</p>
-        <div class="example"><b>Example:</b> A customer visits through the influencer's link; the system records the referral.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Commission Calculation</h3>
-        <p>Calculates commission using the configured campaign and qualifying-order rules.</p>
-        <div class="example"><b>Example:</b> A qualifying Rs. 2,000 order at 5% commission generates a Rs. 100 commission entry.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Influencer Earnings</h3>
-        <p>Separates pending, approved, payable and paid commissions.</p>
-        <div class="example"><b>Example:</b> Influencer checks which commissions are approved and available for payout.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Influencer Payouts</h3>
-        <p>Supports payout requests and tracks payment processing through the configured provider.</p>
-        <div class="example"><b>Example:</b> Influencer requests an eligible Rs. 3,000 payout and tracks its status.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Campaign Analytics</h3>
-        <p>Reports on clicks, conversions and eligible orders.</p>
-        <div class="example"><b>Example:</b> Influencer compares two campaigns to see which generated more qualifying orders.</div>
-      </article>
+    <div class="portal-body">
+     <ul>
+      <li>Chat-based discovery</li>
+      <li>Local business results</li>
+      <li>Business profiles and offers</li>
+      <li>Booking and contact actions</li>
+      <li>Saved businesses and history</li>
+      <li>Sponsored advertisements</li>
+     </ul>
     </div>
-  </section>
+   </div>
+  </div>
+ </div>
+</section>
 
-  <!-- ADMIN -->
-  <section class="section" id="admin">
-    <div class="section-head">
-      <div class="section-number">04 / ADMIN PORTAL</div>
-      <h2>Platform Administration</h2>
-      <p class="section-desc">The admin portal controls approvals, users, businesses, subscriptions, transactions and platform settings.</p>
+<section>
+ <div class="container">
+  <div class="section-head">
+   <div class="kicker">03 / Admin web portal</div>
+   <h2>The central control room</h2>
+   <p>
+    Admin has visibility and management authority over all activities
+    across the Vendor, Influencer and User Apps. It is the operational
+    backbone of the platform.
+   </p>
+  </div>
+
+  <div class="grid two">
+   <div class="card">
+    <div class="feature">
+     <h3>1. Dashboard & platform overview</h3>
+     <p>Shows total registered users, active vendors, influencers, subscriptions, revenue, credits consumed, searches and campaign activity.</p>
+     <div class="example">Example: Admin sees 1,200 users, 180 vendors, 75 influencers and 24 active campaigns. These are illustrative dashboard figures.</div>
     </div>
-    <div class="feature-grid">
-
-      <article class="feature">
-        <h3>Admin Dashboard</h3>
-        <p>Summarises users, vendors, influencers, orders and financial activity.</p>
-        <div class="example"><b>Example:</b> Admin sees total active vendors and today's bookings.</div>
-      </article>
-
-      <article class="feature">
-        <h3>User Management</h3>
-        <p>Manages customer accounts, account status and support-related actions.</p>
-        <div class="example"><b>Example:</b> Admin reviews an account following a reported issue.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Vendor & Influencer Approvals</h3>
-        <p>Reviews applications and controls access according to platform rules.</p>
-        <div class="example"><b>Example:</b> Admin approves a business and separately approves an influencer.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Business Categories & Listings</h3>
-        <p>Manages categories, listing visibility and business information.</p>
-        <div class="example"><b>Example:</b> Admin creates a Milk Shops category and reviews submitted listings.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Subscription Plans</h3>
-        <p>Configures vendor plans, pricing, trials, renewals and plan limits.</p>
-        <div class="example"><b>Example:</b> Admin sets a monthly price for the Pro vendor plan.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Orders & Bookings Monitoring</h3>
-        <p>Allows authorised admins to inspect order and appointment records.</p>
-        <div class="example"><b>Example:</b> Admin checks the booking history to investigate a complaint.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Platform Fees & Commissions</h3>
-        <p>Defines applicable transaction fees and influencer commission rules.</p>
-        <div class="example"><b>Example:</b> Admin configures a 5% commission for an eligible campaign.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Payments, Refunds & Settlements</h3>
-        <p>Monitors transaction records, authorised refunds and vendor or influencer payouts.</p>
-        <div class="example"><b>Example:</b> Admin reviews a pending vendor settlement and checks its gateway status.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Promotions & Coupons</h3>
-        <p>Manages promotional rules, discount codes and campaign eligibility.</p>
-        <div class="example"><b>Example:</b> Admin configures a campaign with a defined expiry date.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Reports & Analytics</h3>
-        <p>Provides reports on orders, revenue, fees, refunds, subscriptions and commissions.</p>
-        <div class="example"><b>Example:</b> Admin reviews monthly platform revenue and pending payouts.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Roles, Permissions & Audit Logs</h3>
-        <p>Controls staff access and records important administrative actions.</p>
-        <div class="example"><b>Example:</b> Finance staff can review transactions but cannot change AI settings.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Complaints & Fraud Monitoring</h3>
-        <p>Flags suspicious activity and supports investigation of reported issues.</p>
-        <div class="example"><b>Example:</b> Multiple suspicious referrals are flagged for admin review.</div>
-      </article>
+    <div class="feature">
+     <h3>2. User management</h3>
+     <p>View user profiles, registration details, activity, saved businesses, chat history metadata and account status. Admin can suspend or restore accounts.</p>
+     <div class="example">Example: Support receives a complaint and checks the user's account status and relevant activity.</div>
     </div>
-  </section>
-
-  <!-- FINANCE -->
-  <section class="section" id="finance">
-    <div class="section-head">
-      <div class="section-number">05 / FINANCE</div>
-      <h2>Payments, Earnings & Payouts</h2>
-      <p class="section-desc">A shared financial system records customer payments, vendor balances, platform revenue and influencer commissions.</p>
+    <div class="feature">
+     <h3>3. Vendor management & approvals</h3>
+     <p>Review vendor registrations, verify business details, approve or reject applications, edit categories and manage business status.</p>
+     <div class="example">Example: A new salon submits its business registration. Admin verifies its details before publishing its profile.</div>
     </div>
-    <div class="feature-grid">
-
-      <article class="feature">
-        <h3>Payment Gateway</h3>
-        <p>Processes supported online payments and returns transaction statuses.</p>
-        <div class="example"><b>Example:</b> Customer pays for an order; the backend verifies the gateway response.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Transaction Ledger</h3>
-        <p>Maintains linked records of payments, fees, refunds, commissions and settlements.</p>
-        <div class="example"><b>Example:</b> An order payment and its later refund remain traceable in the ledger.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Vendor Payables</h3>
-        <p>Calculates the amount owed to a vendor after applicable fees and adjustments.</p>
-        <div class="example"><b>Example:</b> Rs. 2,000 sale minus Rs. 200 platform fee gives an initial Rs. 1,800 payable.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Influencer Commissions</h3>
-        <p>Tracks qualifying referrals and applies configured commission rules.</p>
-        <div class="example"><b>Example:</b> An eligible Rs. 2,000 sale at 5% generates a Rs. 100 commission entry.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Refunds & Adjustments</h3>
-        <p>Records approved refunds, cancellations and relevant balance changes.</p>
-        <div class="example"><b>Example:</b> A Rs. 500 refund is linked to the original order and payment.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Vendor Settlements</h3>
-        <p>Tracks eligible vendor balances through payout processing and reconciliation.</p>
-        <div class="example"><b>Example:</b> An approved payout is sent through the configured provider and reconciled against its result.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Influencer Payouts</h3>
-        <p>Tracks approved commissions and their payout status.</p>
-        <div class="example"><b>Example:</b> After a qualifying order clears the required checks, its commission becomes eligible for payout.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Financial Reconciliation</h3>
-        <p>Matches internal transactions with gateway and payout records.</p>
-        <div class="example"><b>Example:</b> Admin identifies a successful customer payment whose settlement is still pending.</div>
-      </article>
+    <div class="feature">
+     <h3>4. Existing business claim requests</h3>
+     <p>Manage requests from businesses that already exist on Google Business Profile or another supported business directory.</p>
+     <div class="example">Example: An existing restaurant requests ownership of its listing. Admin checks business ownership before linking it to the vendor account.</div>
     </div>
-    <div class="note">
-      <strong>Payment rule:</strong> Actual money transfers require a compatible payment and payout provider, verified accounts and backend integration. A dashboard status alone does not transfer funds.
+    <div class="feature">
+     <h3>5. External business lead management</h3>
+     <p>Review businesses discovered by the User App that are not yet registered on the platform. Admin can assign leads to the onboarding team and track follow-ups.</p>
+     <div class="example">Example: A user finds a barber that is not a platform vendor. The business is saved as an external lead for the sales team.</div>
     </div>
-  </section>
-
-  <!-- SUBSCRIPTIONS -->
-  <section class="section" id="subscriptions">
-    <div class="section-head">
-      <div class="section-number">06 / SUBSCRIPTIONS</div>
-      <h2>Vendor Plans & Billing</h2>
-      <p class="section-desc">Controls how businesses access paid platform features and how their subscriptions are billed.</p>
+    <div class="feature">
+     <h3>6. Categories and locations</h3>
+     <p>Create and manage business categories, subcategories, service types, locations and discovery filters.</p>
+     <div class="example">Example: Admin creates Food & Dining, then subcategories such as Restaurants, Cafes and Bakeries.</div>
     </div>
-    <div class="feature-grid">
+   </div>
 
-      <article class="feature">
-        <h3>Subscription Plans</h3>
-        <p>Offers configured plans with different features, limits and prices.</p>
-        <div class="example"><b>Example:</b> Basic includes a limited listing; Pro includes additional promotional features.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Free Trials</h3>
-        <p>Provides eligible vendors access for a defined trial period.</p>
-        <div class="example"><b>Example:</b> A vendor starts a 14-day trial and receives an expiry reminder.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Recurring Billing</h3>
-        <p>Processes renewals through a supported gateway when recurring billing is enabled.</p>
-        <div class="example"><b>Example:</b> A successful monthly renewal updates the subscription expiry date.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Upgrade, Downgrade & Expiry</h3>
-        <p>Handles plan changes, renewal status and configured restrictions after expiry.</p>
-        <div class="example"><b>Example:</b> An expired trial prompts the vendor to select a paid plan.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Invoices & Billing History</h3>
-        <p>Records subscription charges, renewal attempts and invoice details.</p>
-        <div class="example"><b>Example:</b> Vendor views the invoice for the previous billing period.</div>
-      </article>
+   <div class="card">
+    <div class="feature">
+     <h3>7. Credit management and ledger</h3>
+     <p>Configure free credits, paid credit packages, deduction rules, expiry, adjustments, refunds and vendor transaction history.</p>
+     <div class="example">Example: A vendor starts with 500 free credits. Each eligible engagement deducts credits according to the configured rate.</div>
     </div>
-  </section>
-
-  <!-- AI -->
-  <section class="section" id="ai">
-    <div class="section-head">
-      <div class="section-number">07 / AI ASSISTANT</div>
-      <h2>AI Search & Recommendations</h2>
-      <p class="section-desc">The AI interprets requests and works with platform data to help users find relevant businesses.</p>
+    <div class="feature">
+     <h3>8. Subscription and plan management</h3>
+     <p>Create vendor and influencer plans, trial periods, prices, renewal rules, feature limits and subscription statuses.</p>
+     <div class="example">Example: Admin creates a 14-day vendor trial followed by a monthly paid plan.</div>
     </div>
-    <div class="feature-grid">
-
-      <article class="feature">
-        <h3>Intent Detection</h3>
-        <p>Identifies whether the customer wants a business, product, service or appointment.</p>
-        <div class="example"><b>Example:</b> “I need a haircut today” is interpreted as a service and time-related request.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Location & Category Matching</h3>
-        <p>Matches the request against available business listings and location information.</p>
-        <div class="example"><b>Example:</b> A request for nearby milk shops returns relevant listed businesses.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Filters & Recommendations</h3>
-        <p>Uses available price, rating, distance and availability data to narrow results.</p>
-        <div class="example"><b>Example:</b> User requests a haircut under Rs. 1,000 and sees matching listings with known prices.</div>
-      </article>
-
-      <article class="feature">
-        <h3>Booking & Order Assistance</h3>
-        <p>Guides customers through selection and checks availability through the backend.</p>
-        <div class="example"><b>Example:</b> AI checks a requested time slot before the customer confirms a booking.</div>
-      </article>
-
-      <article class="feature">
-        <h3>AI Provider & Usage Settings</h3>
-        <p>Allows authorised administrators to configure the AI provider and monitor usage.</p>
-        <div class="example"><b>Example:</b> Admin reviews AI request volume and estimated API costs.</div>
-      </article>
+    <div class="feature">
+     <h3>9. Payments and financial management</h3>
+     <p>Monitor invoices, payment gateway references, subscription payments, credit purchases, refunds, fees, taxes and transaction statuses.</p>
+     <div class="example">Example: Finance checks whether a vendor's monthly subscription payment was successful or failed.</div>
     </div>
-    <div class="note">
-      <strong>Data accuracy:</strong> The AI must use available platform data or authorised sources. Live prices, stock and booking availability must be verified before they are presented as confirmed.
+    <div class="feature">
+     <h3>10. Influencer campaign management</h3>
+     <p>Monitor vendor offers, creator applications, approvals, deliverables, collaboration statuses and disputes.</p>
+     <div class="example">Example: Admin checks a campaign where a creator accepted an offer but has not submitted the agreed video.</div>
     </div>
-  </section>
+    <div class="feature">
+     <h3>11. Influencer payments and settlements</h3>
+     <p>If payments are processed through the platform, manage payout requests, balances, payment references, fees and settlement statuses. If vendors pay creators directly, record the agreed amount and confirmation without treating it as a platform payout.</p>
+     <div class="example">Example: A vendor agrees to pay a creator $100. Admin can track whether the agreement was completed.</div>
+    </div>
+    <div class="feature">
+     <h3>12. Advertisement management</h3>
+     <p>Create sponsored banners and popups, choose target audiences, schedule campaigns and set frequency limits.</p>
+     <div class="example">Example: Admin runs a sponsored restaurant promotion for users searching in a specific location.</div>
+    </div>
+   </div>
 
-  <!-- DELIVERY -->
-  <section class="section" id="delivery">
-    <div class="section-head">
-      <div class="section-number">08 / DELIVERY</div>
-      <h2>Order Fulfilment</h2>
-      <p class="section-desc">Manages the delivery process after a vendor accepts a product order.</p>
+   <div class="card">
+    <div class="feature">
+     <h3>13. Social media integrations</h3>
+     <p>Monitor connected social accounts, publishing permissions, expired tokens, failed uploads and scheduled content.</p>
+     <div class="example">Example: Admin can see that a vendor's Instagram connection needs to be re-authorized.</div>
     </div>
-    <div class="feature-grid">
-      <article class="feature">
-        <h3>Delivery Method</h3>
-        <p>Offers the delivery methods configured for a business.</p>
-        <div class="example"><b>Example:</b> Customer selects home delivery or store pickup where available.</div>
-      </article>
-      <article class="feature">
-        <h3>Delivery Charges</h3>
-        <p>Calculates charges according to configured rules.</p>
-        <div class="example"><b>Example:</b> Checkout adds the applicable Rs. 200 delivery fee.</div>
-      </article>
-      <article class="feature">
-        <h3>Delivery Status</h3>
-        <p>Records preparation, dispatch and delivery progress.</p>
-        <div class="example"><b>Example:</b> Vendor marks an order dispatched and the customer receives an update.</div>
-      </article>
-      <article class="feature">
-        <h3>Delivery History</h3>
-        <p>Stores completed, cancelled and relevant delivery records.</p>
-        <div class="example"><b>Example:</b> Customer checks the final status of a previous order.</div>
-      </article>
+    <div class="feature">
+     <h3>14. AI and search configuration</h3>
+     <p>Configure AI provider settings, prompts, search sources, result limits, location logic and business matching rules.</p>
+     <div class="example">Example: Admin changes the default number of business results returned from 10 to 15.</div>
     </div>
-  </section>
+    <div class="feature">
+     <h3>15. Booking and inquiry management</h3>
+     <p>View booking requests, contact inquiries, appointment statuses and integration errors.</p>
+     <div class="example">Example: Admin checks a booking request that was sent to a vendor but has not yet been confirmed.</div>
+    </div>
+    <div class="feature">
+     <h3>16. Reviews and content moderation</h3>
+     <p>Moderate platform-generated content, reported profiles, in-app reviews and inappropriate images or promotional material.</p>
+     <div class="example">Example: Admin reviews a reported vendor image before deciding whether to remove it.</div>
+    </div>
+    <div class="feature">
+     <h3>17. Notifications and announcements</h3>
+     <p>Send system notifications, email alerts, push notifications and announcements to selected user groups.</p>
+     <div class="example">Example: Admin announces a new campaign feature to all registered influencers.</div>
+    </div>
+    <div class="feature">
+     <h3>18. Roles, permissions and audit logs</h3>
+     <p>Give different staff members controlled access and maintain a record of important administrative actions.</p>
+     <div class="example">Example: Finance can access payment records, while Vendor Onboarding can approve business profiles.</div>
+    </div>
+   </div>
 
-  <!-- SUPPORT -->
-  <section class="section" id="support">
-    <div class="section-head">
-      <div class="section-number">09 / SUPPORT</div>
-      <h2>Reviews, Complaints & Disputes</h2>
-      <p class="section-desc">Provides a structured process for feedback, support and issue resolution.</p>
+   <div class="card">
+    <div class="feature">
+     <h3>19. Reports and analytics</h3>
+     <p>Generate daily, weekly and monthly reports for platform activity, vendors, influencers, users, revenue and campaigns.</p>
+     <div class="example">Example: Admin compares vendor profile opens this month with the previous month.</div>
     </div>
-    <div class="feature-grid">
-      <article class="feature">
-        <h3>Ratings & Reviews</h3>
-        <p>Collects feedback from eligible customers after a transaction.</p>
-        <div class="example"><b>Example:</b> Customer leaves a rating after a completed haircut appointment.</div>
-      </article>
-      <article class="feature">
-        <h3>Support Tickets</h3>
-        <p>Creates trackable requests for customer, vendor or influencer support.</p>
-        <div class="example"><b>Example:</b> Customer reports a missing order and receives a ticket reference.</div>
-      </article>
-      <article class="feature">
-        <h3>Dispute Management</h3>
-        <p>Allows authorised staff to investigate order, booking or payment disputes.</p>
-        <div class="example"><b>Example:</b> Admin reviews the order record and vendor response to resolve a complaint.</div>
-      </article>
-      <article class="feature">
-        <h3>Resolution Tracking</h3>
-        <p>Tracks cases through open, under-review and resolved states.</p>
-        <div class="example"><b>Example:</b> A resolved ticket is updated and the customer receives a status notification.</div>
-      </article>
+    <div class="feature">
+     <h3>20. Customer support and disputes</h3>
+     <p>Track user complaints, vendor support requests, influencer disputes and account-related issues.</p>
+     <div class="example">Example: An influencer reports that a vendor did not honor an accepted campaign agreement.</div>
     </div>
-  </section>
+    <div class="feature">
+     <h3>21. Data exports</h3>
+     <p>Export permitted records and reports to CSV or Excel for accounting, analysis and operations.</p>
+     <div class="example">Example: Finance exports monthly subscription transactions.</div>
+    </div>
+    <div class="feature">
+     <h3>22. Platform settings</h3>
+     <p>Manage global configuration, currencies, time zones, trial rules, terms, privacy settings and feature switches.</p>
+     <div class="example">Example: Admin changes the default trial duration for newly registered vendors.</div>
+    </div>
+    <div class="feature">
+     <h3>23. System health and integrations</h3>
+     <p>Monitor API failures, search provider availability, payment gateway errors, notification delivery and background jobs.</p>
+     <div class="example">Example: Admin sees that a social publishing job failed and can review the error.</div>
+    </div>
+    <div class="feature">
+     <h3>24. Data privacy and user requests</h3>
+     <p>Manage consent records and approved requests for data export, correction or deletion according to platform policy.</p>
+     <div class="example">Example: A user requests account deletion. The request is recorded and processed under the privacy policy.</div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
 
-  <!-- NOTIFICATIONS -->
-  <section class="section" id="notifications">
-    <div class="section-head">
-      <div class="section-number">10 / COMMUNICATION</div>
-      <h2>Notifications & Alerts</h2>
-      <p class="section-desc">Keeps customers, vendors, influencers and admins informed about relevant events.</p>
-    </div>
-    <div class="feature-grid">
-      <article class="feature">
-        <h3>Booking & Order Alerts</h3>
-        <p>Sends updates when a booking or order changes status.</p>
-        <div class="example"><b>Example:</b> Vendor accepts a booking and the customer receives confirmation.</div>
-      </article>
-      <article class="feature">
-        <h3>Payment & Payout Alerts</h3>
-        <p>Communicates payment failures, refunds and payout status.</p>
-        <div class="example"><b>Example:</b> Vendor receives an alert when a payout is successfully processed.</div>
-      </article>
-      <article class="feature">
-        <h3>Subscription Reminders</h3>
-        <p>Notifies vendors about trial expiry and renewal events.</p>
-        <div class="example"><b>Example:</b> Vendor receives a reminder before the trial expires.</div>
-      </article>
-      <article class="feature">
-        <h3>Email, SMS & In-App Messages</h3>
-        <p>Uses the configured communication providers and user preferences.</p>
-        <div class="example"><b>Example:</b> An order update appears in-app and is emailed when email notifications are enabled.</div>
-      </article>
-    </div>
-  </section>
+<section style="background:#eef1e9">
+ <div class="container">
+  <div class="section-head">
+   <div class="kicker">04 / Vendor application</div>
+   <h2>Vendor App — Business growth dashboard</h2>
+   <p>
+    The Vendor App allows business owners to register, manage their listing,
+    track visibility, spend credits, publish content and collaborate with influencers.
+   </p>
+  </div>
 
-  <!-- TECHNICAL -->
-  <section class="section" id="technical">
-    <div class="section-head">
-      <div class="section-number">11 / TECHNICAL ARCHITECTURE</div>
-      <h2>How the Portals Connect</h2>
-      <p class="section-desc">The portals share a backend, database and permission system so each action updates the relevant records.</p>
+  <div class="grid two">
+   <div>
+    <div class="card">
+     <div class="feature">
+      <h3>1. Vendor registration and onboarding</h3>
+      <p>New business owners complete a registration form with business name, owner details, contact information, category, location, address, services, opening hours, images and supporting information.</p>
+      <div class="example">Example: A new barber shop owner creates an account and submits the business profile for approval.</div>
+     </div>
+     <div class="feature">
+      <h3>2. Existing business claim</h3>
+      <p>Businesses already listed on Google Business Profile can request to claim or connect their existing listing. The system should verify ownership before granting management access.</p>
+      <div class="example">Example: Two existing vendors are already listed on Google. They can search for their business and submit a claim request instead of creating duplicate listings.</div>
+     </div>
+     <div class="feature">
+      <h3>3. Vendor profile management</h3>
+      <p>Manage business name, description, logo, cover image, contact details, address, map location, categories, services, products, offers and business hours.</p>
+      <div class="example">Example: A restaurant updates its menu, contact number and weekend opening hours.</div>
+     </div>
+     <div class="feature">
+      <h3>4. Business verification and approval status</h3>
+      <p>Vendors can see whether their profile is pending, approved, rejected, suspended or requires additional information.</p>
+      <div class="example">Example: A vendor sees “Pending Verification” and uploads the missing business document.</div>
+     </div>
+     <div class="feature">
+      <h3>5. Free credits and trial balance</h3>
+      <p>Every eligible new vendor receives a configured number of free credits. The balance decreases as users interact with the vendor's listing.</p>
+      <div class="example">Example: A vendor receives 500 free credits and can track the remaining balance from the dashboard.</div>
+     </div>
+     <div class="feature">
+      <h3>6. Credit deduction rules</h3>
+      <p>Different actions can have different credit rates. A listing appearing in a user's chat can have one rate, while opening the full vendor profile costs twice that rate.</p>
+      <div class="example">Example: If a chat appearance costs 2 credits, a full profile open costs 4 credits. These rates are configurable by Admin.</div>
+     </div>
+     <div class="feature">
+      <h3>7. Credit purchase and subscription</h3>
+      <p>After free credits or trial limits are reached, vendors can select a paid plan or purchase additional credits, depending on the platform's commercial model.</p>
+      <div class="example">Example: A vendor receives a low-balance notification and purchases a credit package to continue receiving paid visibility.</div>
+     </div>
     </div>
+   </div>
 
-    <div class="flow">
-      <div class="flow-item">
-        <strong>Customer App</strong>
-        <span>Search · Orders · Bookings</span>
+   <div>
+    <div class="mockup">
+     <div class="mock-head">
+      <strong>Vendor Dashboard</strong>
+      <span class="tag">Sample data</span>
+     </div>
+     <div class="mock-content">
+      <div class="stat-grid">
+       <div class="stat"><small>Available Credits</small><strong>340</strong></div>
+       <div class="stat"><small>Chat Appearances</small><strong>860</strong></div>
+       <div class="stat"><small>Profile Opens</small><strong>210</strong></div>
+       <div class="stat"><small>Contact Clicks</small><strong>94</strong></div>
       </div>
-      <div class="flow-item">
-        <strong>Vendor Portal</strong>
-        <span>Listings · Fulfilment · Earnings</span>
+      <div style="margin-top:20px">
+       <strong style="font-size:12px">Credit usage</strong>
+       <div class="progress"><span style="width:68%"></span></div>
+       <p style="font-size:10px;color:#788278;margin-top:6px">340 credits remaining from 1,000 illustrative credits.</p>
       </div>
-      <div class="flow-item">
-        <strong>Influencer Portal</strong>
-        <span>Referrals · Commissions · Payouts</span>
+      <div style="margin-top:20px">
+       <strong style="font-size:12px">Recent activity</strong>
+       <div class="profile"><div class="avatar">01</div><div><strong>Chat appearance</strong><small>2 credits deducted</small></div></div>
+       <div class="profile"><div class="avatar">02</div><div><strong>Profile opened</strong><small>4 credits deducted</small></div></div>
+       <div class="profile"><div class="avatar">03</div><div><strong>Contact clicked</strong><small>Tracked as an engagement event</small></div></div>
       </div>
-      <div class="flow-item">
-        <strong>Admin Portal</strong>
-        <span>Approvals · Finance · Settings</span>
+     </div>
+    </div>
+    <div style="height:16px"></div>
+    <div class="card">
+     <h3>8. Visibility and engagement analytics</h3>
+     <p>Show total chat appearances, unique appearances, profile views, unique profile visitors, clicks, calls, website visits and other CTA actions.</p>
+     <div class="example">Example: A vendor can see that its listing appeared 860 times, received 210 profile opens and generated 94 contact clicks.</div>
+    </div>
+   </div>
+  </div>
+
+  <div class="grid three" style="margin-top:17px">
+   <div class="card">
+    <h3>9. Daily, weekly and monthly reports</h3>
+    <p>Vendors can select a date range and view engagement and credit consumption for that period.</p>
+    <div class="example">Example: A restaurant compares this week's profile views with last week's results.</div>
+   </div>
+   <div class="card">
+    <h3>10. Social media account connections</h3>
+    <p>Connect supported business social accounts through official authorization flows. The app should not ask users to share their social passwords.</p>
+    <div class="example">Example: A vendor connects an eligible Instagram or Facebook account through the official connection process.</div>
+   </div>
+   <div class="card">
+    <h3>11. Social media content publishing</h3>
+    <p>Upload images and videos, select channels, prepare captions and schedule or publish content according to each channel's supported features and limits.</p>
+    <div class="example">Example: A vendor uploads a promotional image and selects the connected channels where it can be published.</div>
+   </div>
+   <div class="card">
+    <h3>12. Publishing queue and status</h3>
+    <p>Show scheduled, published, failed and pending posts. Provide retry options and alerts when an account connection expires.</p>
+    <div class="example">Example: A failed post remains in the queue with its error reason for the vendor to review.</div>
+   </div>
+   <div class="card">
+    <h3>13. Influencer offer creation</h3>
+    <p>Vendors can create promotional campaigns with a title, description, category, requirements, deliverables and application deadline.</p>
+    <div class="example">Example: A cafe creates an offer for local food influencers to review its new menu.</div>
+   </div>
+   <div class="card">
+    <h3>14. Offer compensation options</h3>
+    <p>Choose percentage commission, fixed payment, free products or services, barter, or a combination of compensation methods.</p>
+    <div class="example">Example: A restaurant offers a free meal plus 10% commission on tracked referrals.</div>
+   </div>
+   <div class="card">
+    <h3>15. Influencer category targeting</h3>
+    <p>Choose the categories of influencers eligible to see a campaign. The maximum number of selected categories should be configurable, for example 3 or 5.</p>
+    <div class="example">Example: A restaurant selects Food, Lifestyle and Local Travel. Only creators matching eligible categories see the offer.</div>
+   </div>
+   <div class="card">
+    <h3>16. Applicant management</h3>
+    <p>View interested creators, check their profiles and social links, compare applications and approve or reject applicants.</p>
+    <div class="example">Example: Five creators apply for a campaign. The vendor selects two and rejects the others.</div>
+   </div>
+   <div class="card">
+    <h3>17. Campaign tracking</h3>
+    <p>Track accepted creators, agreed deliverables, deadlines, submitted content and completion status.</p>
+    <div class="example">Example: A vendor checks whether the accepted creator has published the agreed promotional video.</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section>
+ <div class="container">
+  <div class="section-head">
+   <div class="kicker">05 / Influencer application</div>
+   <h2>Influencer App — Creator collaboration network</h2>
+   <p>
+    The Influencer App gives creators a dedicated place to build their
+    profiles, discover business opportunities, connect with other
+    influencers and manage collaboration requests.
+   </p>
+  </div>
+
+  <div class="grid two">
+   <div class="card">
+    <div class="feature">
+     <h3>1. Influencer registration</h3>
+     <p>Creators register with their name, email, contact details, location, profile image and creator information.</p>
+     <div class="example">Example: A Karachi-based food creator creates an account and selects Food & Dining as a primary category.</div>
+    </div>
+    <div class="feature">
+     <h3>2. Social media profiles</h3>
+     <p>Add public social profile URLs and, where supported, connect social accounts to retrieve authorized account information.</p>
+     <div class="example">Example: A creator adds Instagram, TikTok and YouTube profile links to their creator profile.</div>
+    </div>
+    <div class="feature">
+     <h3>3. Influencer profile</h3>
+     <p>Display creator biography, niche, location, audience information, portfolio, public links and collaboration history.</p>
+     <div class="example">Example: A food influencer shows their niche, previous restaurant collaborations and portfolio links.</div>
+    </div>
+    <div class="feature">
+     <h3>4. Vendor collaboration feed</h3>
+     <p>Creators discover campaigns created by vendors according to their selected categories and eligibility.</p>
+     <div class="example">Example: A food creator sees restaurant campaigns, while a beauty creator sees salon and skincare offers.</div>
+    </div>
+    <div class="feature">
+     <h3>5. Swipe-based discovery</h3>
+     <p>Provide a swipe-style interface for browsing vendor campaign cards. Creators can express interest, skip or open the complete offer details.</p>
+     <div class="example">Example: A creator swipes right on a restaurant offer to express interest and left to skip it.</div>
+    </div>
+    <div class="feature">
+     <h3>6. Apply for vendor offers</h3>
+     <p>Creators submit an application or express interest. Vendors then review and decide whether to accept or reject the application.</p>
+     <div class="example">Example: A creator applies for a paid cafe promotion. The vendor receives the application in the Vendor App.</div>
+    </div>
+    <div class="feature">
+     <h3>7. Application and acceptance counts</h3>
+     <p>Show interested or applied creators separately from creators actually accepted by the vendor.</p>
+     <div class="example">Example: A campaign displays “18 interested” and “3 accepted.” These numbers represent different stages.</div>
+    </div>
+   </div>
+   <div class="card">
+    <div class="feature">
+     <h3>8. Influencer-to-influencer collaboration</h3>
+     <p>Creators can discover other creators who want to collaborate based on niche, location, interests and collaboration preferences.</p>
+     <div class="example">Example: Two travel creators connect to plan a joint city exploration video.</div>
+    </div>
+    <div class="feature">
+     <h3>9. Creator collaboration posts</h3>
+     <p>Allow an influencer to publish their own collaboration request with a title, category, location, requirements and preferred creator type.</p>
+     <div class="example">Example: A creator publishes “Looking for a food photographer in Karachi for a joint project.”</div>
+    </div>
+    <div class="feature">
+     <h3>10. Swipe-based creator discovery</h3>
+     <p>Use creator profile cards to help influencers discover and express interest in other creators.</p>
+     <div class="example">Example: A travel creator sees a compatible local photographer and sends a collaboration request.</div>
+    </div>
+    <div class="feature">
+     <h3>11. Collaboration request management</h3>
+     <p>Creators can accept, reject or manage incoming requests and see the status of their outgoing requests.</p>
+     <div class="example">Example: A creator receives a collaboration request and accepts it from the notification screen.</div>
+    </div>
+    <div class="feature">
+     <h3>12. Notifications</h3>
+     <p>Notify creators when a vendor offer matches them, a vendor accepts their application, another creator contacts them or a collaboration status changes.</p>
+     <div class="example">Example: “Your application for the Cafe Promotion campaign has been accepted.”</div>
+    </div>
+    <div class="feature">
+     <h3>13. Collaboration dashboard</h3>
+     <p>Show total applications, interested offers, accepted collaborations, pending requests, completed projects and rejected applications.</p>
+     <div class="example">Example: A creator sees 12 applications, 4 accepted collaborations and 2 completed projects.</div>
+    </div>
+    <div class="feature">
+     <h3>14. Trial and paid subscription</h3>
+     <p>Influencers receive a configured trial and can upgrade to a paid plan for additional discovery, applications or platform features.</p>
+     <div class="example">Example: A creator uses the trial plan and upgrades after reaching the plan's application limit.</div>
+    </div>
+   </div>
+  </div>
+
+  <div class="grid two" style="margin-top:18px">
+   <div class="mockup">
+    <div class="mock-head"><strong>Vendor Campaign Card</strong><span class="tag">Sample</span></div>
+    <div class="mock-content">
+     <div style="height:120px;border-radius:12px;background:linear-gradient(120deg,#dce9cb,#8da96a);display:grid;place-items:center;color:#34472c;font-weight:900">CAMPAIGN IMAGE</div>
+     <h3 style="font-size:17px;margin:13px 0 4px">New Menu Promotion</h3>
+     <p style="font-size:11px;color:#788278">Local Cafe · Food & Dining</p>
+     <div style="margin:10px 0"><span class="tag">Free meal</span><span class="tag">10% commission</span></div>
+     <div class="stat-grid">
+      <div class="stat"><small>Interested</small><strong>18</strong></div>
+      <div class="stat"><small>Accepted</small><strong>3</strong></div>
+     </div>
+     <div style="display:flex;gap:8px;margin-top:15px">
+      <button class="btn" style="flex:1">Apply</button>
+      <button class="btn" style="background:#edf0e9;flex:1">Skip</button>
+     </div>
+    </div>
+   </div>
+   <div class="mockup">
+    <div class="mock-head"><strong>Creator Collaboration Card</strong><span class="tag">Sample</span></div>
+    <div class="mock-content">
+     <div class="profile">
+      <div class="avatar">AK</div>
+      <div><strong>Ahmed Khan</strong><small>Food & Travel Creator · Karachi</small></div>
+     </div>
+     <h3 style="font-size:16px;margin:13px 0 5px">Looking for a video partner</h3>
+     <p style="font-size:11px;color:#788278">Planning a joint food exploration video around local restaurants.</p>
+     <div style="margin:10px 0"><span class="tag">Food</span><span class="tag">Video</span><span class="tag">Karachi</span></div>
+     <div class="stat-grid">
+      <div class="stat"><small>Interested</small><strong>12</strong></div>
+      <div class="stat"><small>Accepted</small><strong>2</strong></div>
+     </div>
+     <div style="display:flex;gap:8px;margin-top:15px">
+      <button class="btn" style="flex:1">Connect</button>
+      <button class="btn" style="background:#edf0e9;flex:1">Skip</button>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section style="background:#eef1e9">
+ <div class="container">
+  <div class="section-head">
+   <div class="kicker">06 / User application</div>
+   <h2>User App — AI-powered local discovery</h2>
+   <p>
+    The User App provides a conversational search experience. Users can
+    ask questions naturally and discover relevant local businesses,
+    services and promotional offers.
+   </p>
+  </div>
+
+  <div class="grid two">
+   <div>
+    <div class="card">
+     <div class="feature">
+      <h3>1. ChatGPT-style interface</h3>
+      <p>A simple chat interface where users type natural-language questions instead of filling traditional search forms.</p>
+      <div class="example">Example: “Find me a good barber near me that is open today.”</div>
+     </div>
+     <div class="feature">
+      <h3>2. AI-powered query understanding</h3>
+      <p>The backend AI understands the user's intent, category, location, preferences and relevant filters.</p>
+      <div class="example">Example: The system understands that “good barber near me” means a nearby barber business search.</div>
+     </div>
+     <div class="feature">
+      <h3>3. External business data discovery</h3>
+      <p>Search connected data providers, directories or permitted data sources such as Apify-based workflows to discover relevant businesses not already stored in the platform database.</p>
+      <div class="example">Example: The search process discovers 10 barber shops in the user's selected area.</div>
+     </div>
+     <div class="feature">
+      <h3>4. Database matching</h3>
+      <p>Match discovered businesses with existing vendor records using identifiers and business details to avoid duplicate records.</p>
+      <div class="example">Example: If a discovered barber shop is already an approved platform vendor, display its verified platform profile.</div>
+     </div>
+     <div class="feature">
+      <h3>5. External business lead creation</h3>
+      <p>If a business is not a registered vendor, save it as an external listing or onboarding lead for Admin review. Do not present an unclaimed external listing as a verified platform vendor.</p>
+      <div class="example">Example: A user selects a barber shop found externally. Admin receives the business details as a potential vendor lead.</div>
+     </div>
+     <div class="feature">
+      <h3>6. Business results</h3>
+      <p>Display relevant results with business names, categories, locations, available images, source information and supported details.</p>
+      <div class="example">Example: The user receives 10 relevant barber shop results with available information.</div>
+     </div>
+     <div class="feature">
+      <h3>7. Business profile details</h3>
+      <p>Show the vendor's description, services, products, offers, images, contact details, opening hours and available reviews.</p>
+      <div class="example">Example: A user opens a restaurant profile and checks its menu, images, location and current offer.</div>
+     </div>
+    </div>
+   </div>
+
+   <div>
+    <div class="mockup">
+     <div class="mock-head"><strong>AI Discovery Assistant</strong><span class="tag">User App</span></div>
+     <div class="mock-content">
+      <div class="chat">
+       <div class="chat-label">YOU</div>
+       Find me a good barber near me.
       </div>
+      <div class="chat answer">
+       <div class="chat-label">AI ASSISTANT</div>
+       I found some nearby barber shops. Here are relevant options based on your location and search.
+      </div>
+      <div class="profile">
+       <div class="avatar">01</div>
+       <div><strong>Urban Cuts</strong><small>Barber Shop · Nearby · Platform Vendor</small></div>
+      </div>
+      <div class="profile">
+       <div class="avatar">02</div>
+       <div><strong>Classic Grooming</strong><small>Barber Shop · External Listing</small></div>
+      </div>
+      <div class="profile">
+       <div class="avatar">03</div>
+       <div><strong>The Barber Studio</strong><small>Barber Shop · Platform Vendor</small></div>
+      </div>
+      <p style="font-size:10px;color:#879187;margin-top:12px">Illustrative interface and sample businesses.</p>
+     </div>
     </div>
-
-    <div class="feature-grid" style="margin-top:14px">
-      <article class="feature">
-        <h3>Shared Database</h3>
-        <p>Stores user accounts, businesses, orders, bookings, subscriptions and financial records with appropriate access controls.</p>
-        <div class="example"><b>Example:</b> A vendor accepts a booking; the shared booking record updates so the customer and admin see the correct status.</div>
-      </article>
-      <article class="feature">
-        <h3>Maps & Location Services</h3>
-        <p>Supports location-based discovery and map display through a configured provider.</p>
-        <div class="example"><b>Example:</b> Customer filters business listings by distance from a selected location.</div>
-      </article>
-      <article class="feature">
-        <h3>AI & Automation APIs</h3>
-        <p>Connects AI models, business search, notifications and approved workflows.</p>
-        <div class="example"><b>Example:</b> A confirmed booking triggers a configured notification workflow.</div>
-      </article>
-      <article class="feature">
-        <h3>Security, Permissions & Backups</h3>
-        <p>Protects account access and sensitive records, while supporting monitoring and recovery.</p>
-        <div class="example"><b>Example:</b> An influencer can see their own commissions but cannot access another influencer's financial records.</div>
-      </article>
+    <div style="height:16px"></div>
+    <div class="card">
+     <h3>8. User actions and conversion</h3>
+     <p>Allow users to call, message, visit a website, open directions, view offers, request a booking or use a supported booking integration.</p>
+     <div class="example">Example: A user opens a salon profile and taps “Book Appointment.” The app creates a booking request or connects to the vendor's booking system.</div>
     </div>
+   </div>
+  </div>
 
-    <div class="note">
-      <strong>Implementation note:</strong> This page is a product and feature blueprint, not a functioning marketplace. Real registrations, AI search, bookings, payment processing, vendor settlements and influencer payouts require a backend, database, configured integrations and security controls.
-    </div>
-  </section>
+  <div class="grid three" style="margin-top:17px">
+   <div class="card">
+    <h3>9. User history</h3>
+    <p>Keep a history of previous searches and interactions according to the user's privacy and history settings.</p>
+    <div class="example">Example: A user can revisit businesses found in previous searches.</div>
+   </div>
+   <div class="card">
+    <h3>10. Saved businesses</h3>
+    <p>Allow users to save favorite businesses and revisit their profiles later.</p>
+    <div class="example">Example: A user saves three restaurants for a future visit.</div>
+   </div>
+   <div class="card">
+    <h3>11. User profile and settings</h3>
+    <p>Manage account details, preferences, language, location permissions, notifications and privacy controls.</p>
+    <div class="example">Example: A user changes their preferred location or disables location access.</div>
+   </div>
+   <div class="card">
+    <h3>12. Sponsored banners</h3>
+    <p>Display paid promotional banners managed by Admin. Every paid placement must be clearly labelled Sponsored or Advertisement.</p>
+    <div class="example">Example: A restaurant's sponsored banner appears among relevant local discovery content.</div>
+   </div>
+   <div class="card">
+    <h3>13. Sponsored popups</h3>
+    <p>Show controlled promotional popups based on campaign targeting and frequency limits.</p>
+    <div class="example">Example: A user sees a sponsored offer for a local cafe, subject to campaign settings.</div>
+   </div>
+   <div class="card">
+    <h3>14. Free user access</h3>
+    <p>The standard User App experience is free. Revenue is generated through vendor subscriptions, credits, influencer subscriptions and sponsored placements.</p>
+    <div class="example">Example: A user can search for businesses and view available profiles without paying a platform usage fee.</div>
+   </div>
+  </div>
+ </div>
+</section>
 
-  <footer>
-    <div class="logo">AWSZ<span>.</span></div>
-    <p>Build less manually. Run smarter.</p>
-    <p>AWSZ Nearby · Product Blueprint · Customer, Vendor, Influencer, Admin & Finance Systems</p>
-  </footer>
+<section class="dark-section">
+ <div class="container">
+  <div class="section-head">
+   <div class="kicker">07 / Credit and billing logic</div>
+   <h2>How vendor credits work</h2>
+   <p>
+    Credits measure eligible visibility and engagement events. Each billable
+    action should be recorded in a transparent ledger so vendors and Admin
+    can understand every deduction.
+   </p>
+  </div>
+  <div class="grid three">
+   <div class="card">
+    <div class="number">01</div>
+    <h3>Chat appearance</h3>
+    <p>When a vendor's listing is displayed in relevant AI search results, the platform records a qualifying appearance.</p>
+    <div class="example">Illustrative rate: 2 credits per qualifying appearance.</div>
+   </div>
+   <div class="card">
+    <div class="number">02</div>
+    <h3>Full profile open</h3>
+    <p>When a user opens the full business profile, a higher engagement charge is applied.</p>
+    <div class="example">Illustrative rate: 4 credits, which is 2x the 2-credit appearance rate.</div>
+   </div>
+   <div class="card">
+    <div class="number">03</div>
+    <h3>CTA and contact actions</h3>
+    <p>Call, website, booking and message actions are tracked separately. Whether these actions consume credits is a configurable commercial decision.</p>
+    <div class="example">Example: Admin can choose to charge for a qualified call click or simply include it in analytics.</div>
+   </div>
+  </div>
+  <div style="height:20px"></div>
+  <div class="highlight">
+   <strong>Important billing protection:</strong> Refreshes, repeated requests,
+   automated bots and duplicate events must not create accidental deductions.
+   Each billable event needs a unique event ID, clear eligibility rules and
+   a visible vendor ledger. Admin should be able to investigate and reverse
+   incorrect deductions.
+  </div>
+ </div>
+</section>
 
-</main>
+<section id="workflow">
+ <div class="container">
+  <div class="section-head">
+   <div class="kicker">08 / End-to-end workflows</div>
+   <h2>How the four portals work together</h2>
+   <p>The portals are separate experiences connected through shared data, permissions and platform services.</p>
+  </div>
+
+  <h3 style="font-size:17px;margin-bottom:14px">A. User discovers a business</h3>
+  <div class="steps">
+   <div class="step"><b>STEP 01</b><h3>User searches</h3><p>User asks the AI assistant for a nearby service.</p></div>
+   <div class="step"><b>STEP 02</b><h3>AI searches</h3><p>System searches internal records and permitted external sources.</p></div>
+   <div class="step"><b>STEP 03</b><h3>Match business</h3><p>System identifies registered vendors or external listings.</p></div>
+   <div class="step"><b>STEP 04</b><h3>Display results</h3><p>User views results, opens profiles or takes action.</p></div>
+  </div>
+
+  <div style="height:30px"></div>
+  <h3 style="font-size:17px;margin-bottom:14px">B. Vendor onboarding</h3>
+  <div class="steps">
+   <div class="step"><b>STEP 01</b><h3>Register or claim</h3><p>Business owner creates a profile or claims an existing listing.</p></div>
+   <div class="step"><b>STEP 02</b><h3>Verification</h3><p>Admin checks business information and ownership.</p></div>
+   <div class="step"><b>STEP 03</b><h3>Approval</h3><p>Approved vendor profile becomes eligible for platform features.</p></div>
+   <div class="step"><b>STEP 04</b><h3>Go live</h3><p>Vendor receives trial credits and starts tracking visibility.</p></div>
+  </div>
+
+  <div style="height:30px"></div>
+  <h3 style="font-size:17px;margin-bottom:14px">C. Influencer collaboration</h3>
+  <div class="steps">
+   <div class="step"><b>STEP 01</b><h3>Vendor creates offer</h3><p>Vendor defines category, compensation and deliverables.</p></div>
+   <div class="step"><b>STEP 02</b><h3>Creator discovers</h3><p>Eligible influencers see the campaign in their feed.</p></div>
+   <div class="step"><b>STEP 03</b><h3>Application</h3><p>Influencer applies and vendor reviews the request.</p></div>
+   <div class="step"><b>STEP 04</b><h3>Agreement & delivery</h3><p>Accepted creators complete agreed deliverables.</p></div>
+  </div>
+
+  <div style="height:30px"></div>
+  <h3 style="font-size:17px;margin-bottom:14px">D. External vendor onboarding</h3>
+  <div class="steps">
+   <div class="step"><b>STEP 01</b><h3>External result</h3><p>User discovers a business not registered on the platform.</p></div>
+   <div class="step"><b>STEP 02</b><h3>Lead saved</h3><p>System saves available business information as an external lead.</p></div>
+   <div class="step"><b>STEP 03</b><h3>Admin follow-up</h3><p>Onboarding team contacts the business owner.</p></div>
+   <div class="step"><b>STEP 04</b><h3>Vendor joins</h3><p>Business verifies ownership and becomes a platform vendor.</p></div>
+  </div>
+ </div>
+</section>
+
+<section id="revenue" style="background:#eef1e9">
+ <div class="container">
+  <div class="section-head">
+   <div class="kicker">09 / Business model</div>
+   <h2>Platform revenue streams</h2>
+   <p>The platform can generate revenue from business visibility, subscriptions, creator subscriptions and advertising.</p>
+  </div>
+  <div class="grid four">
+   <div class="card">
+    <div class="number">01</div>
+    <h3>Vendor credits</h3>
+    <p>Vendors purchase credits to continue using eligible paid visibility and engagement features.</p>
+   </div>
+   <div class="card">
+    <div class="number">02</div>
+    <h3>Vendor subscription</h3>
+    <p>Recurring plans provide defined features, limits, analytics and business tools.</p>
+   </div>
+   <div class="card">
+    <div class="number">03</div>
+    <h3>Influencer subscription</h3>
+    <p>Creators can upgrade to paid plans for additional collaboration and discovery features.</p>
+   </div>
+   <div class="card">
+    <div class="number">04</div>
+    <h3>Sponsored ads</h3>
+    <p>Businesses pay for approved banner and popup advertising placements.</p>
+   </div>
+  </div>
+  <div style="height:20px"></div>
+  <div class="card">
+   <h3>Recommended separation of payments</h3>
+   <div class="table-wrap">
+    <table>
+     <thead><tr><th>Payment type</th><th>Who pays?</th><th>Who receives?</th><th>Platform responsibility</th></tr></thead>
+     <tbody>
+      <tr><td>Vendor subscription</td><td>Vendor</td><td>Platform</td><td>Invoice, renewal and payment tracking</td></tr>
+      <tr><td>Credit package</td><td>Vendor</td><td>Platform</td><td>Credit allocation and ledger entry</td></tr>
+      <tr><td>Influencer subscription</td><td>Influencer</td><td>Platform</td><td>Plan access and renewal management</td></tr>
+      <tr><td>Influencer campaign payment</td><td>Vendor</td><td>Influencer or platform</td><td>Record agreement and settlement method</td></tr>
+      <tr><td>Sponsored placement</td><td>Advertiser</td><td>Platform</td><td>Campaign schedule and ad reporting</td></tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section>
+ <div class="container">
+  <div class="section-head">
+   <div class="kicker">10 / Shared platform foundation</div>
+   <h2>Core systems behind all portals</h2>
+   <p>All four portals should use a shared backend rather than storing disconnected copies of the same business and user information.</p>
+  </div>
+  <div class="grid three">
+   <div class="card">
+    <h3>Central database</h3>
+    <p>Stores users, vendors, influencers, business listings, categories, campaigns, applications, credits, subscriptions, payments, bookings and activity records.</p>
+   </div>
+   <div class="card">
+    <h3>Authentication and permissions</h3>
+    <p>Each person logs in with the correct role and can access only the functions and data permitted for that role.</p>
+   </div>
+   <div class="card">
+    <h3>AI and search engine</h3>
+    <p>Processes natural-language questions, finds relevant businesses, ranks results and uses verified data wherever possible.</p>
+   </div>
+   <div class="card">
+    <h3>Credit and billing engine</h3>
+    <p>Calculates eligible usage, records deductions and purchases, and maintains an auditable transaction ledger.</p>
+   </div>
+   <div class="card">
+    <h3>Notification engine</h3>
+    <p>Delivers push, email and in-app notifications for account, campaign, payment and booking events.</p>
+   </div>
+   <div class="card">
+    <h3>Integration layer</h3>
+    <p>Connects permitted external search providers, social networks, maps, payment gateways and booking services.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section style="background:#eef1e9">
+ <div class="container">
+  <div class="section-head">
+   <div class="kicker">11 / Important product rules</div>
+   <h2>Decisions and safeguards</h2>
+   <p>These rules protect platform accuracy, billing transparency, user privacy and operational reliability.</p>
+  </div>
+  <div class="grid two">
+   <div class="card">
+    <h3>Business data accuracy</h3>
+    <p>External listings and verified platform vendors must be clearly distinguished. Business hours, prices, reviews and availability should not be invented by AI.</p>
+   </div>
+   <div class="card">
+    <h3>External data compliance</h3>
+    <p>Search providers and data extraction services must be used according to their terms, permitted access, attribution and privacy requirements.</p>
+   </div>
+   <div class="card">
+    <h3>Credit billing transparency</h3>
+    <p>Define billable events, unique event handling, bot filtering, duplicate protection, credit expiry and refund or adjustment procedures.</p>
+   </div>
+   <div class="card">
+    <h3>Social media limitations</h3>
+    <p>Publishing depends on official API permissions, supported media formats, account eligibility, rate limits and channel-specific rules.</p>
+   </div>
+   <div class="card">
+    <h3>Influencer agreements</h3>
+    <p>Record compensation, content requirements, deadlines, cancellation, proof of delivery and dispute status for every accepted collaboration.</p>
+   </div>
+   <div class="card">
+    <h3>Reviews and ratings</h3>
+    <p>Clearly identify external reviews and platform-native reviews. Preserve their original source and avoid mixing them as if they were collected in the same way.</p>
+   </div>
+   <div class="card">
+    <h3>Bookings and appointments</h3>
+    <p>Clearly distinguish a booking request from a confirmed booking. Confirmation requires a vendor response or a successful booking-system integration.</p>
+   </div>
+   <div class="card">
+    <h3>Privacy and location</h3>
+    <p>Request location permission only when needed. Provide manual location selection and clear controls for history, consent and account data requests.</p>
+   </div>
+   <div class="card">
+    <h3>Sponsored advertising</h3>
+    <p>Clearly label paid placements and use frequency caps so users are not overwhelmed by repeated banners or popups.</p>
+   </div>
+   <div class="card">
+    <h3>Staff access and audit</h3>
+    <p>Use role-based permissions and log important actions such as approvals, refunds, credit adjustments and account suspensions.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="roadmap">
+ <div class="container">
+  <div class="section-head">
+   <div class="kicker">12 / Suggested development roadmap</div>
+   <h2>Build in manageable phases</h2>
+   <p>A phased approach makes it easier to validate the main business workflows before expanding advanced features.</p>
+  </div>
+  <div class="grid three">
+   <div class="card">
+    <span class="tag">Phase 1</span>
+    <h3>Core platform</h3>
+    <p>Authentication, database, Admin Portal foundations, vendor registration and approval, business profiles, categories and User App discovery.</p>
+   </div>
+   <div class="card">
+    <span class="tag">Phase 2</span>
+    <h3>Credits and monetization</h3>
+    <p>Free credit allocation, event tracking, credit deduction, vendor ledger, subscription plans, payment gateway and vendor analytics.</p>
+   </div>
+   <div class="card">
+    <span class="tag">Phase 3</span>
+    <h3>Influencer ecosystem</h3>
+    <p>Influencer onboarding, social profiles, vendor campaigns, creator applications, acceptance workflows and collaboration discovery.</p>
+   </div>
+   <div class="card">
+    <span class="tag">Phase 4</span>
+    <h3>Social publishing</h3>
+    <p>Official social integrations, media upload, publishing queue, scheduling, status tracking and error handling.</p>
+   </div>
+   <div class="card">
+    <span class="tag">Phase 5</span>
+    <h3>Advertising and advanced tools</h3>
+    <p>Sponsored placements, advanced reporting, booking integrations, moderation and campaign optimization.</p>
+   </div>
+   <div class="card">
+    <span class="tag">Phase 6</span>
+    <h3>Optimization and scale</h3>
+    <p>Performance optimization, security testing, monitoring, automation, analytics improvements and expansion to additional locations.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="dark-section">
+ <div class="container">
+  <div class="section-head">
+   <div class="kicker">13 / Final summary</div>
+   <h2>One connected business ecosystem</h2>
+   <p>
+    The platform combines local business discovery, vendor monetization,
+    influencer collaboration and central administration into one connected
+    system.
+   </p>
+  </div>
+  <div class="grid four">
+   <div class="card"><h3>Admin</h3><p>Controls operations, accounts, payments, credits, campaigns, advertisements and reporting.</p></div>
+   <div class="card"><h3>Vendor</h3><p>Manages business presence, visibility, credits, social publishing and influencer offers.</p></div>
+   <div class="card"><h3>Influencer</h3><p>Discovers opportunities, applies for campaigns and collaborates with other creators.</p></div>
+   <div class="card"><h3>User</h3><p>Discovers businesses through AI chat, explores profiles and takes useful actions for free.</p></div>
+  </div>
+  <div style="height:25px"></div>
+  <div class="highlight">
+   <strong>Product vision:</strong> Help users find the right local businesses,
+   help vendors reach relevant customers, and help influencers turn their
+   audience and creativity into meaningful collaborations — all managed
+   through one platform.
+  </div>
+ </div>
+</section>
+
+<footer class="footer">
+ <div class="container">
+  <strong>PLATFORM — PRODUCT BRIEFING</strong>
+  <p style="margin-top:7px">Four portals · One connected ecosystem · Illustrative product architecture</p>
+ </div>
+</footer>
+
 </body>
 </html>
-```
