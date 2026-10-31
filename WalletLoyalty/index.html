@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWSZ | WalletLoyalty SaaS Proposal</title>
+<style>
+:root{
+--green:#174f3c;--deep:#103629;--lime:#c7ed75;
+--bg:#f5f7f4;--white:#fff;--text:#1b2a22;
+--muted:#7b8980;--border:#e7ece7;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:Inter,Arial,sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app{display:flex;min-height:100vh}
+.sidebar{width:245px;background:var(--deep);color:white;
+padding:25px 16px;display:flex;flex-direction:column}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:32px}
+.logo{width:42px;height:42px;background:var(--lime);
+color:var(--deep);display:grid;place-items:center;
+border-radius:13px;font-size:20px;font-weight:900}
+.brand strong{font-size:18px;letter-spacing:1px}
+.brand small{display:block;font-size:9px;letter-spacing:2px;color:#b8d0c0}
+.nav-label{font-size:10px;letter-spacing:2px;color:#91ad9c;
+margin:18px 10px 8px}
+.nav button{width:100%;background:none;border:0;color:#c7d9cd;
+padding:12px;border-radius:9px;text-align:left;margin:2px 0}
+.nav button:hover,.nav button.active{background:#ffffff18;color:white}
+.nav button.active{border-left:3px solid var(--lime)}
+.nav button span{margin-right:10px}
+.sidebar-footer{margin-top:auto;padding:18px 9px;
+border-top:1px solid #ffffff25;color:#a9c1b2;font-size:11px}
+.main{flex:1;min-width:0}
+.topbar{height:72px;background:white;border-bottom:1px solid var(--border);
+display:flex;justify-content:space-between;align-items:center;padding:0 30px}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.lang,.avatar{padding:10px 13px;border:0;border-radius:9px;background:#eff4ed}
+.avatar{border-radius:50%;font-weight:800}
+.content{padding:30px;max-width:1450px;margin:auto}
+.page{display:none}.page.active{display:block}
+.heading{display:flex;justify-content:space-between;align-items:center;
+gap:15px;margin-bottom:24px}
+.eyebrow{font-size:10px;color:#66836d;font-weight:800;letter-spacing:2px}
+h1{font-size:27px;letter-spacing:-1px;margin:6px 0}
+h2{font-size:20px;margin:5px 0}
+h3{font-size:14px;margin:0}
+p{color:var(--muted);font-size:12px}
+.btn{background:var(--green);color:white;border:0;
+border-radius:9px;padding:11px 16px;font-weight:700;font-size:12px}
+.btn.light{background:#edf3eb;color:var(--green)}
+.btn.lime{background:var(--lime);color:var(--deep)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}
+.card,.panel{background:white;border:1px solid var(--border);
+border-radius:15px;padding:19px}
+.card small{color:var(--muted)}
+.card strong{display:block;font-size:27px;margin:9px 0}
+.green{color:#43815b;font-size:11px}
+.layout{display:grid;grid-template-columns:1.5fr 1fr;gap:17px;margin-bottom:18px}
+.panel-head{display:flex;justify-content:space-between;
+align-items:center;margin-bottom:18px}
+.wallet{background:linear-gradient(130deg,#173e30,#377552);
+border-radius:16px;color:white;padding:22px;min-height:190px;
+position:relative;overflow:hidden}
+.wallet:after{content:"";position:absolute;width:180px;height:180px;
+border:1px solid #ffffff35;border-radius:50%;right:-35px;top:-65px;
+box-shadow:0 0 0 25px #ffffff10,0 0 0 50px #ffffff08}
+.wallet-brand{font-size:10px;letter-spacing:2px;color:#d7e8d9}
+.wallet-name{margin-top:30px;font-size:18px;font-weight:800}
+.points{font-size:29px;font-weight:900}
+.wallet-foot{display:flex;justify-content:space-between;
+font-size:10px;margin-top:12px;color:#d6e6da}
+.wallet-area{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.activity{padding:13px 0;border-bottom:1px solid var(--border);
+display:flex;align-items:center;gap:10px}
+.activity-icon{width:35px;height:35px;border-radius:10px;
+background:#edf4eb;display:grid;place-items:center}
+.activity b{font-size:11px}.activity small{display:block;color:var(--muted);font-size:10px}
+.activity em{margin-left:auto;font-size:11px;color:#43815b;font-style:normal}
+table{width:100%;border-collapse:collapse;white-space:nowrap}
+th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--border);font-size:11px}
+th{font-size:10px;color:#89968e}
+.pill{background:#eaf4e9;color:#40754a;padding:5px 9px;
+border-radius:20px;font-size:9px;font-weight:800}
+.pill.gold{background:#fbf1df;color:#9b7130}
+.table-wrap{overflow:auto}
+.field{margin:13px 0}
+.field label{display:block;font-size:11px;font-weight:700;margin-bottom:6px}
+.field input,.field select,.field textarea{
+width:100%;padding:11px;border:1px solid var(--border);
+border-radius:8px;background:white}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.switch{width:39px;height:21px;border-radius:20px;
+background:#d8e1d9;display:inline-block;position:relative;cursor:pointer}
+.switch:after{content:"";position:absolute;width:15px;height:15px;
+border-radius:50%;background:white;top:3px;left:3px;transition:.2s}
+.switch.on{background:#6d9c70}
+.switch.on:after{left:21px}
+.automation{display:flex;justify-content:space-between;
+align-items:center;padding:16px 0;border-bottom:1px solid var(--border)}
+.automation b{font-size:12px}
+.automation small{display:block;color:var(--muted);font-size:10px}
+.admin-banner{background:linear-gradient(110deg,#173d30,#38704d);
+color:white;padding:24px;border-radius:15px;margin-bottom:18px}
+.admin-banner p{color:#d1e0d5}
+.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tool{padding:15px;border:1px solid var(--border);border-radius:11px;background:white}
+.tool b{display:block;font-size:12px;margin:7px 0}
+.tool small{font-size:10px;color:var(--muted)}
+.notice{background:#f0f6e9;padding:13px;border-radius:9px;
+color:#466449;font-size:11px;margin:13px 0}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--deep);
+color:white;padding:13px 18px;border-radius:9px;display:none}
+.modal{position:fixed;inset:0;background:#0009;display:none;
+align-items:center;justify-content:center;padding:20px;z-index:20}
+.modal-box{background:white;border-radius:15px;padding:23px;width:420px;max-width:100%}
+.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:15px}
+.hero-image{height:170px;border-radius:12px;background:
+linear-gradient(90deg,#143d30bb,#143d3010),
+url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200')
+center/cover;display:flex;align-items:flex-end;padding:20px;color:white;margin-bottom:18px}
+.rtl{direction:rtl}
+.rtl .nav button{text-align:right}
+.rtl th,.rtl td{text-align:right}
+.rtl .nav button.active{border-left:0;border-right:3px solid var(--lime)}
+@media(max-width:950px){
+.sidebar{width:205px}.stats{grid-template-columns:repeat(2,1fr)}
+.layout{grid-template-columns:1fr}.tool-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:650px){
+.app{display:block}.sidebar{width:100%;padding:15px}
+.sidebar-footer{display:none}.nav{display:grid;grid-template-columns:1fr 1fr}
+.nav-label{grid-column:1/-1}.topbar{padding:0 15px}
+.content{padding:18px 12px}.heading{align-items:flex-start;flex-direction:column}
+.wallet-area,.two{grid-template-columns:1fr}.tool-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+
+<aside class="sidebar">
+ <div class="brand">
+  <div class="logo">W</div>
+  <div><strong>AWSZ</strong><small>WALLETLOYALTY</small></div>
+ </div>
+ <div class="nav-label">WORKSPACE</div>
+ <nav class="nav">
+  <button class="active" onclick="page('overview',this)">◫ Overview</button>
+  <button onclick="page('customers',this)">♙ Customers</button>
+  <button onclick="page('wallet',this)">▣ Wallet cards</button>
+  <button onclick="page('rewards',this)">✧ Points & rewards</button>
+  <button onclick="page('campaigns',this)">◉ Campaigns</button>
+  <button onclick="page('automations',this)">⟳ Automations</button>
+  <button onclick="page('settings',this)">⚙ Restaurant settings</button>
+  <div class="nav-label">MANAGEMENT</div>
+  <button onclick="page('admin',this)">▦ Agency admin</button>
+  <button onclick="page('tools',this)">⌘ Tools & technology</button>
+ </nav>
+ <div class="sidebar-footer">
+  <b>DEMO RESTAURANT</b><br>Olive & Oak Restaurant<br>
+  Powered by AWSZ
+ </div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+ <div id="breadcrumb">Workspace / Overview</div>
+ <div class="topbar-right">
+  <button class="lang" onclick="toggleLang()">العربية / EN</button>
+  <div class="avatar">SZ</div>
+ </div>
+</header>
+
+<div class="content">
+
+<!-- OVERVIEW -->
+<section class="page active" id="overview">
+ <div class="heading">
+  <div><div class="eyebrow">RESTAURANT OVERVIEW</div>
+  <h1 data-en="Good morning, Olive & Oak 👋" data-ar="صباح الخير، أوليف آند أوك 👋">Good morning, Olive & Oak 👋</h1>
+  <p data-en="Your loyalty community at a glance." data-ar="نظرة عامة على مجتمع الولاء الخاص بك.">Your loyalty community at a glance.</p></div>
+  <button class="btn" onclick="openModal('campaignModal')">＋ Create campaign</button>
+ </div>
+
+ <div class="stats">
+  <div class="card"><small>Total customers</small><strong>2,846</strong><span class="green">↗ 12.8% this month</span></div>
+  <div class="card"><small>Wallet members</small><strong>1,932</strong><span class="green">↗ 8.4% this month</span></div>
+  <div class="card"><small>Points issued</small><strong>48,290</strong><span class="green">↗ 16.2% this month</span></div>
+  <div class="card"><small>Rewards redeemed</small><strong>684</strong><span class="green">↗ 6.7% this month</span></div>
+ </div>
+
+ <div class="layout">
+  <div class="panel">
+   <div class="panel-head"><div><h3>Your digital loyalty card</h3><p>Customer wallet pass preview</p></div>
+   <button class="btn light" onclick="page('wallet')">Customise</button></div>
+   <div class="wallet-area">
+    <div class="wallet">
+     <div class="wallet-brand">OLIVE & OAK · MEMBER CLUB</div>
+     <div class="wallet-name">Alex Morgan</div>
+     <div class="points">1,250 <small style="font-size:11px">PTS</small></div>
+     <div class="wallet-foot"><span>GOLD MEMBER</span><span>•••• 4829</span></div>
+    </div>
+    <div><h3>Wallet pass is ready</h3>
+     <p>Customers can add their loyalty card to Apple Wallet or Google Wallet.</p>
+     <div style="height:7px;background:#edf1ed;border-radius:9px;margin:15px 0">
+      <div style="height:100%;width:68%;background:#7ba66b;border-radius:9px"></div>
+     </div>
+     <small>68% setup completed</small>
+     <p><span class="pill">Apple Wallet</span> <span class="pill">Google Wallet</span></p>
+    </div>
+   </div>
+  </div>
+  <div class="panel">
+   <div class="panel-head"><h3>Recent activity</h3><span class="pill">Live preview</span></div>
+   <div class="activity"><div class="activity-icon">✧</div><div><b>Sarah Johnson earned points</b><small>2 minutes ago</small></div><em>+120</em></div>
+   <div class="activity"><div class="activity-icon">♧</div><div><b>Omar Hassan redeemed reward</b><small>18 minutes ago</small></div><em>-500</em></div>
+   <div class="activity"><div class="activity-icon">▣</div><div><b>New wallet member joined</b><small>42 minutes ago</small></div><em>NEW</em></div>
+   <div class="activity"><div class="activity-icon">✉</div><div><b>Weekend offer delivered</b><small>1 hour ago</small></div><em>✓</em></div>
+  </div>
+ </div>
+
+ <div class="panel">
+  <div class="panel-head"><div><h3>Top loyalty members</h3><p>Your most engaged customers this month</p></div>
+  <button class="btn light" onclick="page('customers')">View all customers →</button></div>
+  <div class="table-wrap"><table>
+   <thead><tr><th>MEMBER</th><th>WALLET</th><th>POINTS</th><th>TIER</th><th>LAST VISIT</th></tr></thead>
+   <tbody>
+    <tr><td>Sarah Johnson</td><td>Apple Wallet</td><td>4,820</td><td><span class="pill">Gold</span></td><td>Today</td></tr>
+    <tr><td>Omar Hassan</td><td>Google Wallet</td><td>3,640</td><td><span class="pill">Silver</span></td><td>Today</td></tr>
+    <tr><td>Emma Mitchell</td><td>Apple Wallet</td><td>2,950</td><td><span class="pill">Silver</span></td><td>Yesterday</td></tr>
+   </tbody>
+  </table></div>
+ </div>
+</section>
+
+<!-- CUSTOMERS -->
+<section class="page" id="customers">
+ <div class="heading"><div><div class="eyebrow">CUSTOMER RELATIONSHIPS</div>
+ <h1>Customer directory</h1><p>Manage members, points and wallet enrollment.</p></div>
+ <button class="btn" onclick="openModal('customerModal')">＋ Add customer</button></div>
+ <div class="panel">
+  <div class="panel-head"><h3>All members</h3>
+  <input id="search" oninput="filterCustomers()" placeholder="Search customers..." style="padding:10px;border:1px solid var(--border);border-radius:8px"></div>
+  <div class="table-wrap"><table id="customerTable">
+   <thead><tr><th>MEMBER</th><th>EMAIL</th><th>WALLET</th><th>POINTS</th><th>STATUS</th></tr></thead>
+   <tbody>
+    <tr><td>Sarah Johnson</td><td>sarah@email.com</td><td>Apple Wallet</td><td>4,820</td><td><span class="pill">Active</span></td></tr>
+    <tr><td>Omar Hassan</td><td>omar@email.com</td><td>Google Wallet</td><td>3,640</td><td><span class="pill">Active</span></td></tr>
+    <tr><td>Emma Mitchell</td><td>emma@email.com</td><td>Apple Wallet</td><td>2,950</td><td><span class="pill">Active</span></td></tr>
+    <tr><td>James Wilson</td><td>james@email.com</td><td>Not enrolled</td><td>840</td><td><span class="pill gold">Invited</span></td></tr>
+   </tbody>
+  </table></div>
+ </div>
+</section>
+
+<!-- WALLET -->
+<section class="page" id="wallet">
+ <div class="heading"><div><div class="eyebrow">DIGITAL MEMBERSHIP</div>
+ <h1>Wallet card studio</h1><p>Configure your Apple and Google Wallet pass experience.</p></div>
+ <button class="btn" onclick="notify('Wallet settings saved in demo')">Save changes</button></div>
+ <div class="two">
+  <div class="panel"><h3>Digital card preview</h3><br>
+   <div class="wallet" style="min-height:230px">
+    <div class="wallet-brand">OLIVE & OAK · MEMBER CLUB</div>
+    <div class="wallet-name" style="margin-top:48px">Alex Morgan</div>
+    <div class="points">1,250 PTS</div>
+    <div class="wallet-foot"><span>GOLD MEMBER</span><span>•••• 4829</span></div>
+   </div>
+   <div class="notice">Wallet pass issuance and updates require provider configuration and account approvals.</div>
+  </div>
+  <div class="panel"><h3>Card configuration</h3>
+   <div class="field"><label>Program name</label><input value="Olive & Oak Member Club"></div>
+   <div class="field"><label>Points label</label><input value="Member points"></div>
+   <div class="field"><label>Primary colour</label><input type="color" value="#174f3c"></div>
+   <div class="field"><label>Welcome message</label><textarea rows="3">Welcome to Olive & Oak. Earn points every time you visit!</textarea></div>
+   <button class="btn" onclick="notify('Card design saved')">Save card design</button>
+  </div>
+ </div>
+</section>
+
+<!-- REWARDS -->
+<section class="page" id="rewards">
+ <div class="heading"><div><div class="eyebrow">LOYALTY PROGRAM</div>
+ <h1>Points & rewards</h1><p>Set earning rules and reward returning customers.</p></div>
+ <button class="btn" onclick="openModal('rewardModal')">＋ Create reward</button></div>
+ <div class="two">
+  <div class="panel"><h3>Points earning rules</h3>
+   <div class="field"><label>Points per AED spent</label><input type="number" value="1"></div>
+   <div class="field"><label>Signup bonus points</label><input type="number" value="100"></div>
+   <div class="field"><label>Birthday bonus points</label><input type="number" value="250"></div>
+   <button class="btn" onclick="notify('Earning rules saved')">Save rules</button>
+  </div>
+  <div class="panel"><h3>Reward catalogue</h3>
+   <div class="automation"><div><b>Complimentary dessert</b><small>500 points · 32 redemptions</small></div><span class="pill">Active</span></div>
+   <div class="automation"><div><b>10% off your bill</b><small>750 points · 18 redemptions</small></div><span class="pill">Active</span></div>
+   <div class="automation"><div><b>Chef's special for two</b><small>1,500 points · 9 redemptions</small></div><span class="pill gold">Limited</span></div>
+  </div>
+ </div>
+</section>
+
+<!-- CAMPAIGNS -->
+<section class="page" id="campaigns">
+ <div class="heading"><div><div class="eyebrow">CUSTOMER ENGAGEMENT</div>
+ <h1>Campaign centre</h1><p>Send offers and announcements to loyalty members.</p></div>
+ <button class="btn" onclick="openModal('campaignModal')">＋ New campaign</button></div>
+ <div class="hero-image"><div><div class="eyebrow" style="color:#e0f0dc">WEEKEND SPECIAL</div><h2>Good food. Great rewards.</h2></div></div>
+ <div class="panel"><h3>Recent campaigns</h3><br>
+  <div class="table-wrap"><table>
+   <thead><tr><th>CAMPAIGN</th><th>CHANNEL</th><th>DELIVERED</th><th>ENGAGEMENT</th><th>STATUS</th></tr></thead>
+   <tbody>
+    <tr><td>Weekend special</td><td>Wallet push</td><td>1,240</td><td>28.4%</td><td><span class="pill">Sent</span></td></tr>
+    <tr><td>Birthday treats</td><td>Automation</td><td>86</td><td>41.2%</td><td><span class="pill">Active</span></td></tr>
+    <tr><td>Welcome offer</td><td>Email</td><td>340</td><td>36.8%</td><td><span class="pill">Active</span></td></tr>
+   </tbody>
+  </table></div>
+ </div>
+</section>
+
+<!-- AUTOMATIONS -->
+<section class="page" id="automations">
+ <div class="heading"><div><div class="eyebrow">SMART WORKFLOWS</div>
+ <h1>Automations</h1><p>Pre-built journeys restaurant teams can customise.</p></div>
+ <button class="btn" onclick="notify('Automation builder preview')">＋ Build automation</button></div>
+ <div class="panel">
+  <div class="automation"><div><b>Welcome new member</b><small>Send welcome message and signup points.</small></div><span class="switch on" onclick="this.classList.toggle('on')"></span></div>
+  <div class="automation"><div><b>Birthday reward</b><small>Issue a birthday reward automatically.</small></div><span class="switch on" onclick="this.classList.toggle('on')"></span></div>
+  <div class="automation"><div><b>Points balance reminder</b><small>Remind members close to their next reward.</small></div><span class="switch on" onclick="this.classList.toggle('on')"></span></div>
+  <div class="automation"><div><b>Win-back inactive customers</b><small>Send a return offer after 30 days.</small></div><span class="switch" onclick="this.classList.toggle('on')"></span></div>
+  <div class="automation"><div><b>Reward redemption confirmation</b><small>Confirm redemption and update the member record.</small></div><span class="switch on" onclick="this.classList.toggle('on')"></span></div>
+ </div>
+</section>
+
+<!-- SETTINGS -->
+<section class="page" id="settings">
+ <div class="heading"><div><div class="eyebrow">WORKSPACE CONFIGURATION</div>
+ <h1>Restaurant settings</h1><p>Configure restaurant details and language preferences.</p></div>
+ <button class="btn" onclick="notify('Settings saved')">Save settings</button></div>
+ <div class="two">
+  <div class="panel"><h3>Business profile</h3>
+   <div class="field"><label>Restaurant name</label><input value="Olive & Oak Restaurant"></div>
+   <div class="field"><label>Business email</label><input value="hello@oliveandoak.ae"></div>
+   <div class="field"><label>Country</label><select><option>United Arab Emirates</option><option>Saudi Arabia</option></select></div>
+   <div class="field"><label>Currency</label><select><option>AED – UAE Dirham</option><option>USD – US Dollar</option></select></div>
+  </div>
+  <div class="panel"><h3>Language & preferences</h3>
+   <div class="field"><label>Dashboard language</label><select><option>English</option><option>العربية</option></select></div>
+   <div class="field"><label>Time zone</label><select><option>Asia/Dubai (GMT+4)</option></select></div>
+   <div class="field"><label>Customer communication</label><select><option>English + Arabic</option><option>English</option><option>Arabic</option></select></div>
+   <div class="notice">Arabic interface supports right-to-left layout, including navigation and tables.</div>
+  </div>
+ </div>
+</section>
+
+<!-- AGENCY ADMIN -->
+<section class="page" id="admin">
+ <div class="heading"><div><div class="eyebrow">AWSZ · PLATFORM CONTROL</div>
+ <h1>Agency administration</h1><p>Central control for restaurant workspaces and SaaS operations.</p></div>
+ <button class="btn" onclick="openModal('restaurantModal')">＋ Onboard restaurant</button></div>
+ <div class="admin-banner"><div class="eyebrow" style="color:var(--lime)">AGENCY OWNER CONSOLE</div>
+ <h2>Your loyalty network, one place.</h2>
+ <p>Manage client workspaces, templates and onboarding.</p></div>
+ <div class="stats">
+  <div class="card"><small>Restaurant accounts</small><strong>24</strong><span class="green">3 this month</span></div>
+  <div class="card"><small>Active locations</small><strong>31</strong><span class="green">Across 4 regions</span></div>
+  <div class="card"><small>Total members</small><strong>18.6K</strong><span class="green">Growing network</span></div>
+  <div class="card"><small>Platform status</small><strong style="font-size:20px;color:#43815b">Operational</strong><span class="green">Demo environment</span></div>
+ </div>
+ <div class="panel"><div class="panel-head"><h3>Restaurant workspaces</h3><button class="btn light" onclick="notify('Export prepared in demo')">Export list</button></div>
+  <div class="table-wrap"><table>
+   <thead><tr><th>RESTAURANT</th><th>PLAN</th><th>MEMBERS</th><th>STATUS</th><th>REGION</th></tr></thead>
+   <tbody>
+    <tr><td>Olive & Oak</td><td>Growth</td><td>2,846</td><td><span class="pill">Active</span></td><td>Dubai, UAE</td></tr>
+    <tr><td>Juniper Kitchen</td><td>Starter</td><td>1,204</td><td><span class="pill">Active</span></td><td>Abu Dhabi</td></tr>
+    <tr><td>Maison 27</td><td>Growth</td><td>3,610</td><td><span class="pill gold">Setup</span></td><td>Sharjah</td></tr>
+    <tr><td>Harbour Table</td><td>Pro</td><td>4,082</td><td><span class="pill">Active</span></td><td>Dubai, UAE</td></tr>
+   </tbody>
+  </table></div>
+ </div>
+ <div class="two" style="margin-top:16px">
+  <div class="panel"><h3>Reusable SaaS assets</h3>
+   <div class="automation"><div><b>Restaurant onboarding snapshot</b><small>Core pages, forms and workflows</small></div><span class="pill">Template</span></div>
+   <div class="automation"><div><b>Default loyalty programme</b><small>Points, tiers and reward templates</small></div><span class="pill">Template</span></div>
+   <div class="automation"><div><b>Automation library</b><small>Welcome, birthday and win-back</small></div><span class="pill gold">Configure</span></div>
+  </div>
+  <div class="panel"><h3>Agency controls</h3>
+   <div class="automation"><div><b>Account permissions</b><small>Owner, manager and staff roles</small></div><button class="btn light" onclick="notify('Permissions preview')">Manage</button></div>
+   <div class="automation"><div><b>Snapshot deployment</b><small>Replicate setup to a new restaurant</small></div><button class="btn light" onclick="notify('Snapshot preview')">Open</button></div>
+   <div class="automation"><div><b>Billing & subscriptions</b><small>Plan and renewal overview</small></div><button class="btn light" onclick="notify('Billing preview')">View</button></div>
+  </div>
+ </div>
+</section>
+
+<!-- TOOLS -->
+<section class="page" id="tools">
+ <div class="heading"><div><div class="eyebrow">IMPLEMENTATION STACK</div>
+ <h1>Tools & technology</h1><p>Recommended technology for building and operating WalletLoyalty.</p></div>
+ <span class="pill">AWSZ blueprint</span></div>
+ <div class="panel" style="margin-bottom:16px">
+  <h3>Recommended platform architecture</h3>
+  <p>GoHighLevel acts as the core CRM and SaaS workspace. Wallet services and other integrations connect through approved APIs and secure workflows.</p>
+  <div class="notice">Native HighLevel Loyalty & Referral features, Apple Wallet / Google Wallet support and beta access must be verified in the actual agency account. Some wallet functions may require external provider configuration, certificates or API access.</div>
+ </div>
+ <div class="tool-grid">
+  <div class="tool">🟢<b>GoHighLevel</b><small>CRM, sub-accounts, SaaS mode, workflows, snapshots and permissions.</small></div>
+  <div class="tool">🍎<b>Apple Wallet</b><small>Digital pass distribution and wallet pass experience.</small></div>
+  <div class="tool">🟩<b>Google Wallet API</b><small>Pass classes, objects and wallet pass lifecycle.</small></div>
+  <div class="tool">⚡<b>n8n</b><small>API orchestration, event processing and integrations.</small></div>
+  <div class="tool">🔗<b>REST APIs & Webhooks</b><small>Secure communication between HighLevel and wallet services.</small></div>
+  <div class="tool">🧩<b>HighLevel Workflows</b><small>Triggers, customer journeys, reminders and loyalty automation.</small></div>
+  <div class="tool">💻<b>HTML5, CSS3 & JavaScript</b><small>Responsive portal interface and interactive components.</small></div>
+  <div class="tool">🌐<b>Arabic / English i18n</b><small>Translation, locale formatting and RTL layout.</small></div>
+  <div class="tool">🛡️<b>OAuth 2.0 & API security</b><small>Scoped access, tokens and role-based permissions.</small></div>
+  <div class="tool">🎨<b>Figma</b><small>UI design system and handoff-ready screens.</small></div>
+  <div class="tool">📦<b>GitHub</b><small>Version control and code ownership.</small></div>
+  <div class="tool">🧪<b>Postman</b><small>API testing and webhook validation.</small></div>
+ </div>
+ <div class="panel" style="margin-top:16px">
+  <h3>Recommended development languages</h3><br>
+  <div class="two">
+   <div><b>Frontend</b><p>HTML, CSS, JavaScript. React can be introduced if the portal grows into a larger application.</p></div>
+   <div><b>Backend / integration layer</b><p>Node.js or Python for secure API services when native HighLevel workflows are insufficient.</p></div>
+   <div><b>Automation</b><p>GoHighLevel workflows first; n8n for cross-platform orchestration.</p></div>
+   <div><b>Data</b><p>HighLevel CRM records as primary customer storage. Any extra database must be approved and client-owned.</p></div>
+  </div>
+ </div>
+</section>
+
+</div>
+</main>
+</div>
+
+<!-- MODALS -->
+<div class="modal" id="customerModal"><div class="modal-box">
+ <h3>Add customer</h3><p>Create a customer in this frontend demo.</p>
+ <div class="field"><label>Full name</label><input id="newName" placeholder="Customer name"></div>
+ <div class="field"><label>Email</label><input id="newEmail" placeholder="name@email.com"></div>
+ <div class="modal-actions"><button class="btn light" onclick="closeModal('customerModal')">Cancel</button><button class="btn" onclick="addCustomer()">Add customer</button></div>
+</div></div>
+
+<div class="modal" id="campaignModal"><div class="modal-box">
+ <h3>Create campaign</h3><p>Prepare a promotional message for loyalty members.</p>
+ <div class="field"><label>Campaign name</label><input id="campaignName" placeholder="Weekend rewards"></div>
+ <div class="field"><label>Campaign message</label><textarea id="campaignText" rows="3" placeholder="Write your offer..."></textarea></div>
+ <div class="field"><label>Channel</label><select><option>Wallet push notification</option><option>Email</option><option>SMS</option></select></div>
+ <div class="modal-actions"><button class="btn light" onclick="closeModal('campaignModal')">Cancel</button><button class="btn" onclick="createCampaign()">Save campaign</button></div>
+</div></div>
+
+<div class="modal" id="rewardModal"><div class="modal-box">
+ <h3>Create reward</h3><p>Add a reward to the catalogue.</p>
+ <div class="field"><label>Reward name</label><input id="rewardName" placeholder="Free coffee"></div>
+ <div class="field"><label>Points required</label><input type="number" id="rewardPoints" placeholder="500"></div>
+ <div class="modal-actions"><button class="btn light" onclick="closeModal('rewardModal')">Cancel</button><button class="btn" onclick="notify('Reward saved in demo');closeModal('rewardModal')">Save reward</button></div>
+</div></div>
+
+<div class="modal" id="restaurantModal"><div class="modal-box">
+ <h3>Onboard restaurant</h3><p>Create a sample workspace request.</p>
+ <div class="field"><label>Restaurant name</label><input id="restaurantName" placeholder="Restaurant name"></div>
+ <div class="field"><label>Owner email</label><input placeholder="owner@restaurant.com"></div>
+ <div class="field"><label>Plan</label><select><option>Starter</option><option>Growth</option><option>Pro</option></select></div>
+ <div class="modal-actions"><button class="btn light" onclick="closeModal('restaurantModal')">Cancel</button><button class="btn" onclick="notify('Onboarding request created in demo');closeModal('restaurantModal')">Create workspace</button></div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let language='en';
+
+function page(id,button){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+ if(button)button.classList.add('active');
+ document.getElementById('breadcrumb').textContent='Workspace / '+id.charAt(0).toUpperCase()+id.slice(1);
+}
+
+function toggleLang(){
+ language=language==='en'?'ar':'en';
+ document.documentElement.lang=language;
+ document.documentElement.dir=language==='ar'?'rtl':'ltr';
+ document.getElementById('app').classList.toggle('rtl',language==='ar');
+ document.querySelectorAll('[data-en]').forEach(el=>{
+  el.textContent=el.dataset[language];
+ });
+ notify(language==='ar'?'تم تفعيل اللغة العربية':'English enabled');
+}
+
+function openModal(id){document.getElementById(id).style.display='flex'}
+function closeModal(id){document.getElementById(id).style.display='none'}
+
+function notify(message){
+ const toast=document.getElementById('toast');
+ toast.textContent=message;
+ toast.style.display='block';
+ clearTimeout(window.toastTimer);
+ window.toastTimer=setTimeout(()=>toast.style.display='none',2500);
+}
+
+function addCustomer(){
+ const name=document.getElementById('newName').value.trim();
+ const email=document.getElementById('newEmail').value.trim();
+ if(!name||!email){notify('Enter customer name and email');return}
+ const row=document.querySelector('#customerTable tbody').insertRow();
+ const nameCell=row.insertCell();
+ const emailCell=row.insertCell();
+ const walletCell=row.insertCell();
+ const pointsCell=row.insertCell();
+ const statusCell=row.insertCell();
+ nameCell.textContent=name;
+ emailCell.textContent=email;
+ walletCell.textContent='Not enrolled';
+ pointsCell.textContent='0';
+ statusCell.innerHTML='<span class="pill gold">Invited</span>';
+ closeModal('customerModal');
+ document.getElementById('newName').value='';
+ document.getElementById('newEmail').value='';
+ notify('Customer added to demo table');
+}
+
+function filterCustomers(){
+ const query=document.getElementById('search').value.toLowerCase();
+ document.querySelectorAll('#customerTable tbody tr').forEach(row=>{
+  row.style.display=row.innerText.toLowerCase().includes(query)?'':'none';
+ });
+}
+
+function createCampaign(){
+ const name=document.getElementById('campaignName').value.trim();
+ if(!name){notify('Please enter campaign name');return}
+ closeModal('campaignModal');
+ notify('Campaign saved in demo: '+name);
+}
+
+document.querySelectorAll('.modal').forEach(modal=>{
+ modal.addEventListener('click',event=>{
+  if(event.target===modal)modal.style.display='none';
+ });
+});
+</script>
+</body>
+</html>
