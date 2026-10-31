@@ -3,560 +3,443 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Musical Fountain Preview</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fountain Music & Animation Studio</title>
 <style>
 *{box-sizing:border-box}
-body{
-  margin:0;background:#08111f;color:#eaf4ff;
-  font-family:Arial,sans-serif;padding:20px
-}
-.container{max-width:1100px;margin:auto}
-h1{margin:0 0 8px;font-size:26px}
-.sub{color:#9fb4ca;margin-bottom:20px}
-.panel{
-  background:#111f31;border:1px solid #263c55;
-  border-radius:14px;padding:16px;margin-bottom:16px
-}
-.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-button,.upload{
-  background:#147de0;color:white;border:0;
-  border-radius:8px;padding:11px 15px;
-  cursor:pointer;font-weight:bold
-}
-button:hover,.upload:hover{background:#2697ff}
-button.secondary{background:#34465c}
-button.green{background:#0c9b70}
+body{margin:0;background:#091321;color:#eaf3ff;font:14px Arial}
+header{padding:18px 22px;background:#101f32;border-bottom:1px solid #29415c}
+h1{font-size:23px;margin:0 0 6px}
+header p{margin:0;color:#9fb5cb}
+main{max-width:1450px;margin:auto;padding:16px;display:grid;gap:14px}
+.panel{background:#122238;border:1px solid #2a4059;border-radius:12px;padding:14px}
+h2{font-size:16px;margin:0 0 12px}
+.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+button,.filebtn{border:0;border-radius:7px;background:#147fe5;color:white;padding:10px 13px;font-weight:bold;cursor:pointer}
+button:hover,.filebtn:hover{filter:brightness(1.2)}
+.secondary{background:#40546b}
+.green{background:#0c9871}
+.orange{background:#bd7131}
+.red{background:#a83c50}
+input,select{background:#091727;color:white;border:1px solid #425a75;border-radius:6px;padding:9px;max-width:100%}
 input[type=file]{display:none}
-select,input[type=number]{
-  background:#0a1727;color:white;border:1px solid #40546b;
-  border-radius:7px;padding:9px
-}
-label{font-size:13px;color:#b9cde0}
-canvas{
-  display:block;width:100%;height:auto;
-  background:#061321;border-radius:12px;
-  border:1px solid #29435d
-}
-.status{color:#8dd7ff;font-size:13px;margin-top:10px}
-.row{display:flex;gap:18px;flex-wrap:wrap}
-.field{display:flex;flex-direction:column;gap:7px}
-input[type=range]{width:160px}
-#time{font-variant-numeric:tabular-nums;color:#b9d9ff}
-#result{color:#a9c8e6;font-size:13px;margin-top:12px}
+input[type=range]{width:130px;padding:0}
+label{color:#b7cce0;font-size:12px;display:flex;flex-direction:column;gap:5px}
+small,.muted{color:#9bb1c8}
+#diagram{width:100%;height:auto;display:block;background:#071321;border:1px solid #344e68;border-radius:9px;cursor:crosshair}
+.layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(270px,.8fr);gap:14px}
+.groupList{display:grid;gap:7px;max-height:330px;overflow:auto}
+.group{display:flex;gap:8px;align-items:center;background:#0b192a;padding:8px;border-radius:7px}
+.swatch{width:13px;height:13px;border-radius:50%;flex:none}
+.group button{padding:6px 8px;font-size:11px}
+.group span.name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.track{background:#0a192a;border:1px solid #2a4059;padding:10px;border-radius:8px;margin:8px 0}
+canvas.wave{width:100%;height:100px;display:block;cursor:crosshair;background:#071321;border-radius:6px}
+.lane{margin:8px 0;background:#0a192a;padding:8px;border-radius:7px}
+.lanehead{display:flex;justify-content:space-between;gap:8px;margin-bottom:5px}
+.lanebar{height:35px;position:relative;background:#172d43;border-radius:5px;overflow:hidden}
+.event{position:absolute;top:4px;height:27px;border-radius:4px;min-width:3px;cursor:pointer;border:1px solid #ffffff77}
+.event.selected{outline:2px solid white}
+#lanes{max-height:430px;overflow:auto}
+#status{color:#8dd7ff;padding-top:8px}
+.badge{background:#203c59;padding:5px 8px;border-radius:5px;color:#bde4ff}
+@media(max-width:850px){.layout{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>Musical Dancing Fountain</h1>
-  <div class="sub">Audio-based fountain animation preview</div>
+<header>
+<h1>Musical Fountain Studio</h1>
+<p>Group nozzles · Arrange music · Build animation · Preview</p>
+</header>
 
-  <div class="panel">
-    <div class="controls">
-      <label class="upload" for="upload">Upload MP3 / WAV</label>
-      <input id="upload" type="file" accept=".mp3,.wav,audio/*">
-
-      <select id="demo">
-        <option value="">Select demo music</option>
-        <option value="calm">Demo 1 — Calm</option>
-        <option value="dance">Demo 2 — Dance Beat</option>
-        <option value="pulse">Demo 3 — Fast Pulse</option>
-      </select>
-      <button class="secondary" id="play">Play Music</button>
-      <button class="secondary" id="stop">Stop</button>
-    </div>
-    <div class="status" id="fileStatus">No music selected</div>
-  </div>
-
-  <div class="panel">
-    <canvas id="fountain" width="1000" height="500"></canvas>
-    <div class="status">
-      Grey nozzles = inactive | Blue, cyan and pink = active
-    </div>
-  </div>
-
-  <div class="panel">
-    <div class="row">
-      <div class="field">
-        <label>Preview start time (seconds)</label>
-        <input id="startTime" type="number" min="0" value="0" step="1">
-      </div>
-      <div class="field">
-        <label>Preview duration</label>
-        <input type="number" value="4" disabled>
-      </div>
-      <div class="field">
-        <label>Jet height</label>
-        <input id="jetHeight" type="range" min="30" max="180" value="100">
-      </div>
-      <div class="field">
-        <label>Audio sensitivity</label>
-        <input id="sensitivity" type="range" min="1" max="10" value="3">
-      </div>
-    </div>
-
-    <div class="controls" style="margin-top:18px">
-      <button class="green" id="preview">▶ Preview 4 Seconds</button>
-      <button class="secondary" id="analyse">Find Loudest 4 Seconds</button>
-    </div>
-    <div id="time" style="margin-top:12px">00:00 / 00:00</div>
-    <div id="result">Upload music or select a demo, then start preview.</div>
-  </div>
+<main>
+<section class="panel">
+<h2>1. Fountain diagram</h2>
+<div class="row">
+<label class="filebtn">Load original fountain image
+<input id="imageFile" type="file" accept="image/*">
+</label>
+<button id="addMode" class="green">＋ Add nozzle dots</button>
+<button id="selectMode" class="secondary">Select dots / groups</button>
+<button id="clearSelection" class="secondary">Clear selection</button>
+<button id="deleteDots" class="red">Delete selected dots</button>
+<span class="badge" id="dotCount">0 nozzles</span>
 </div>
+<p class="muted">Image load karo. “Add nozzle dots” select karke diagram par har nozzle ki position click karo. Phir “Select dots” se dots par click karke group banao.</p>
+<canvas id="diagram" width="1195" height="896"></canvas>
+</section>
+
+<div class="layout">
+<section class="panel">
+<h2>2. Create nozzle groups</h2>
+<div class="row">
+<label>Group name<input id="groupName" placeholder="e.g. Centre Line"></label>
+<label>Group colour<input id="groupColor" type="color" value="#19bfff"></label>
+<button id="makeGroup" class="green">Create group from selected dots</button>
+</div>
+<p class="muted">Ek group mein jitne chaho dots select karo. Har group ka naam aur colour alag hoga. Maximum 100 groups.</p>
+<div id="groups" class="groupList"></div>
+</section>
+
+<section class="panel">
+<h2>3. Music tracks</h2>
+<div class="track">
+<b>Track A</b>
+<div class="row" style="margin-top:8px">
+<label class="filebtn">Upload MP3/WAV<input id="audioA" type="file" accept="audio/*,.wav,.mp3"></label>
+<button class="secondary" id="demoA">Generate 1-minute demo</button>
+</div>
+<div id="statusA" class="muted">No music loaded</div>
+</div>
+<div class="track">
+<b>Track B — second music</b>
+<div class="row" style="margin-top:8px">
+<label class="filebtn">Upload second music<input id="audioB" type="file" accept="audio/*,.wav,.mp3"></label>
+<button class="secondary" id="demoB">Generate 1-minute demo</button>
+</div>
+<div id="statusB" class="muted">No second music loaded</div>
+</div>
+<label style="margin-top:10px">Waveform track to edit
+<select id="activeTrack"><option value="A">Track A</option><option value="B">Track B</option></select>
+</label>
+<p class="muted">Waveform par click karo: playhead us second par chala jayega. Dono tracks apni alag timing rakhte hain.</p>
+<canvas class="wave" id="wave" width="1000" height="120"></canvas>
+<div class="row" style="margin-top:8px">
+<span class="badge" id="durationLabel">Duration: 00:00</span>
+<span class="badge" id="playheadLabel">Position: 0.0 sec</span>
+</div>
+</section>
+</div>
+
+<section class="panel">
+<h2>4. Animation event editor</h2>
+<div class="row">
+<label>Selected group<select id="eventGroup"></select></label>
+<label>Track<select id="eventTrack"><option>A</option><option>B</option></select></label>
+<label>Start (sec)<input id="eventStart" type="number" min="0" step=".1" value="0"></label>
+<label>Duration (sec)<input id="eventDuration" type="number" min=".1" step=".1" value="3"></label>
+<label>Pause after (sec)<input id="eventPause" type="number" min="0" step=".1" value="1"></label>
+<label>Pattern<select id="eventPattern">
+<option value="dance">Dance</option><option value="random">Random</option>
+<option value="horizontal">Horizontal wave</option><option value="vertical">Vertical wave</option>
+<option value="mix">Mixed</option><option value="steady">Steady spray</option>
+</select></label>
+<label>Height %<input id="eventHeight" type="number" min="10" max="200" value="100"></label>
+<button id="addEvent" class="green">＋ Add event</button>
+<button id="deleteEvent" class="red">Delete selected event</button>
+</div>
+<p class="muted">Event select karke uski timing edit karo. Pause next event se pehle ka gap hai. Har group ke multiple events ho sakte hain.</p>
+<div id="lanes"></div>
+</section>
+
+<section class="panel">
+<h2>5. Automatic animation builder</h2>
+<div class="row">
+<label>Build style<select id="autoStyle">
+<option value="dance">Dance sequence</option>
+<option value="random">Random groups</option>
+<option value="horizontal">Horizontal sequence</option>
+<option value="vertical">Vertical sequence</option>
+<option value="mix">Mixed sequence</option>
+</select></label>
+<label>Event duration (sec)<input id="autoDuration" type="number" min=".5" value="3" step=".5"></label>
+<label>Pause (sec)<input id="autoPause" type="number" min="0" value="1" step=".5"></label>
+<label>Group overlap<select id="overlap"><option value="one">One group at a time</option><option value="two">Two groups together</option><option value="all">All groups in sequence</option></select></label>
+<button id="autoBuild" class="orange">Build animation for music duration</button>
+<button id="clearEvents" class="red">Clear all events</button>
+</div>
+<p class="muted">Auto builder selected track ki duration ke mutabiq events banata hai. Baad mein har event ko manually change kar sakte ho.</p>
+</section>
+
+<section class="panel">
+<h2>6. Preview</h2>
+<div class="row">
+<button id="preview" class="green">▶ Play scheduled preview</button>
+<button id="stop" class="red">■ Stop</button>
+<label>Animation speed<input id="speed" type="range" min=".3" max="2.5" step=".1" value="1"></label>
+<label>Master height<input id="masterHeight" type="range" min=".2" max="2" step=".1" value="1"></label>
+<span id="playStatus" class="badge">Stopped</span>
+</div>
+<p class="muted">Preview mein Track A aur B synchronized play honge. Sirf us waqt wohi groups spray karenge jin ke events active honge.</p>
+</section>
+</main>
 
 <script>
 (() => {
-"use strict";
+const $=id=>document.getElementById(id);
+const canvas=$("diagram"),ctx=canvas.getContext("2d");
+const wave=$("wave"),wctx=wave.getContext("2d");
+const colors=["#19bfff","#ff9d37","#d56cff","#5be09c","#ff5f88","#ffe05b","#6d8cff","#50e0df"];
+let bg=new Image(),bgLoaded=false, dots=[],groups=[],events=[];
+let selectedDots=new Set(),selectedEvent=null,mode="add";
+let tracks={A:{audio:new Audio(),url:null,duration:0,buffer:null,name:""},B:{audio:new Audio(),url:null,duration:0,buffer:null,name:""}};
+let playhead=0,playing=false,startedAt=0,raf=0;
 
-const $ = id => document.getElementById(id);
-const canvas = $("fountain");
-const ctx = canvas.getContext("2d");
-const audio = new Audio();
-audio.preload = "auto";
+function setStatus(s){$("playStatus").textContent=s}
+function fmt(t){return `${String(Math.floor(t/60)).padStart(2,"0")}:${String(Math.floor(t%60)).padStart(2,"0")}`}
+function activeTrack(){return tracks[$("activeTrack").value]}
+function currentDuration(){return activeTrack().duration||60}
 
-let audioContext = null;
-let analyser = null;
-let sourceNode = null;
-let frequencyData = null;
-let currentObjectURL = null;
-let active = false;
-let previewEnd = 0;
-let previewStart = 0;
-let animationFrame = 0;
-let points = [];
-let lastLevel = 0;
-let demoBuffer = null;
-
-function setupAudio() {
-  if (audioContext) return;
-
-  audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  analyser = audioContext.createAnalyser();
-  analyser.fftSize = 2048;
-  analyser.smoothingTimeConstant = 0.72;
-  frequencyData = new Uint8Array(analyser.frequencyBinCount);
-
-  sourceNode = audioContext.createMediaElementSource(audio);
-  sourceNode.connect(analyser);
-  analyser.connect(audioContext.destination);
+function drawDiagram(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ if(bgLoaded)ctx.drawImage(bg,0,0,canvas.width,canvas.height);
+ else{
+  ctx.fillStyle="#0a2941";ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="#b8d7ec";ctx.font="28px Arial";ctx.fillText("Load your original fountain diagram",300,430);
+  ctx.font="18px Arial";ctx.fillText("Then add nozzle dots by clicking their positions",300,470);
+ }
+ dots.forEach((d,i)=>{
+  let g=groups.find(x=>x.dots.includes(d.id));
+  let color=g?g.color:"#9ba9b8";
+  ctx.beginPath();ctx.arc(d.x,d.y,selectedDots.has(d.id)?10:7,0,Math.PI*2);
+  ctx.fillStyle=color;ctx.fill();
+  ctx.lineWidth=selectedDots.has(d.id)?4:2;ctx.strokeStyle=selectedDots.has(d.id)?"#fff":"#172536";ctx.stroke();
+  if(g){ctx.font="12px Arial";ctx.fillStyle="#fff";ctx.fillText(g.name.slice(0,12),d.x+9,d.y-9)}
+ });
+ $("dotCount").textContent=dots.length+" nozzles";
 }
-
-function makeDemo(type) {
-  const sampleRate = 44100;
-  const duration = 25;
-  const length = sampleRate * duration;
-  const buffer = audioContext.createBuffer(2, length, sampleRate);
-
-  for (let channel = 0; channel < 2; channel++) {
-    const data = buffer.getChannelData(channel);
-
-    for (let i = 0; i < length; i++) {
-      const t = i / sampleRate;
-      let value = 0;
-
-      if (type === "calm") {
-        value =
-          Math.sin(2 * Math.PI * 220 * t) * 0.16 +
-          Math.sin(2 * Math.PI * 330 * t) * 0.10 +
-          Math.sin(2 * Math.PI * 440 * t) * 0.08;
-        value *= 0.6 + 0.4 * Math.sin(2 * Math.PI * 0.5 * t);
-      } else if (type === "dance") {
-        const beat = Math.pow(Math.max(0, Math.sin(2 * Math.PI * 2 * t)), 8);
-        value =
-          Math.sin(2 * Math.PI * 110 * t) * 0.22 +
-          Math.sin(2 * Math.PI * 440 * t) * 0.10 +
-          beat * 0.35;
-      } else {
-        const beat = Math.pow(Math.max(0, Math.sin(2 * Math.PI * 3 * t)), 12);
-        value =
-          Math.sin(2 * Math.PI * 150 * t) * 0.18 +
-          Math.sin(2 * Math.PI * 600 * t) * 0.12 +
-          beat * 0.4;
-      }
-
-      data[i] = value * (0.85 + 0.15 * Math.sin(2 * Math.PI * 0.1 * t));
-    }
+function drawWave(){
+ const t=activeTrack(),W=wave.width,H=wave.height;
+ wctx.clearRect(0,0,W,H);wctx.fillStyle="#071321";wctx.fillRect(0,0,W,H);
+ const dur=Math.max(1,t.duration||60);
+ wctx.strokeStyle="#25415e";wctx.lineWidth=1;
+ for(let s=0;s<=dur;s+=Math.max(1,Math.ceil(dur/12))){
+  let x=s/dur*W;wctx.beginPath();wctx.moveTo(x,0);wctx.lineTo(x,H);wctx.stroke();
+  wctx.fillStyle="#9cb5cc";wctx.font="11px Arial";wctx.fillText(s+"s",x+3,12);
+ }
+ if(t.buffer){
+  const data=t.buffer.getChannelData(0),step=Math.max(1,Math.floor(data.length/W));
+  wctx.strokeStyle="#28b9e9";wctx.lineWidth=1;wctx.beginPath();
+  for(let x=0;x<W;x++){
+   let max=0;for(let j=0;j<step;j++)max=Math.max(max,Math.abs(data[x*step+j]||0));
+   let y=H/2-max*H*.43;
+   if(x===0)wctx.moveTo(x,y);else wctx.lineTo(x,y);
   }
-  return buffer;
+  wctx.stroke();
+ }else{
+  wctx.fillStyle="#7690aa";wctx.font="16px Arial";wctx.fillText("Waveform appears here after loading music",250,65);
+ }
+ let x=playhead/dur*W;
+ wctx.strokeStyle="#fff";wctx.lineWidth=2;wctx.beginPath();wctx.moveTo(x,0);wctx.lineTo(x,H);wctx.stroke();
+ $("durationLabel").textContent="Duration: "+fmt(t.duration||0);
+ $("playheadLabel").textContent="Position: "+playhead.toFixed(1)+" sec";
 }
-
-function bufferToWav(buffer) {
-  const channels = buffer.numberOfChannels;
-  const sampleRate = buffer.sampleRate;
-  const frames = buffer.length;
-  const bytes = new ArrayBuffer(44 + frames * channels * 2);
-  const view = new DataView(bytes);
-
-  function writeString(offset, str) {
-    for (let i = 0; i < str.length; i++) {
-      view.setUint8(offset + i, str.charCodeAt(i));
-    }
-  }
-
-  writeString(0, "RIFF");
-  view.setUint32(4, 36 + frames * channels * 2, true);
-  writeString(8, "WAVE");
-  writeString(12, "fmt ");
-  view.setUint32(16, 16, true);
-  view.setUint16(20, 1, true);
-  view.setUint16(22, channels, true);
-  view.setUint32(24, sampleRate, true);
-  view.setUint32(28, sampleRate * channels * 2, true);
-  view.setUint16(32, channels * 2, true);
-  view.setUint16(34, 16, true);
-  writeString(36, "data");
-  view.setUint32(40, frames * channels * 2, true);
-
-  let offset = 44;
-  for (let i = 0; i < frames; i++) {
-    for (let c = 0; c < channels; c++) {
-      let sample = Math.max(-1, Math.min(1, buffer.getChannelData(c)[i]));
-      view.setInt16(offset, sample < 0 ? sample * 32768 : sample * 32767, true);
-      offset += 2;
-    }
-  }
-  return new Blob([bytes], { type: "audio/wav" });
+function renderGroups(){
+ $("groups").innerHTML="";
+ groups.forEach(g=>{
+  let div=document.createElement("div");div.className="group";
+  div.innerHTML=`<span class="swatch" style="background:${g.color}"></span><span class="name"></span><small>${g.dots.length} dots</small>`;
+  div.querySelector(".name").textContent=g.name;
+  let rename=document.createElement("button");rename.className="secondary";rename.textContent="Rename";
+  rename.onclick=()=>{let n=prompt("Group name",g.name);if(n){g.name=n;refresh()}};
+  let del=document.createElement("button");del.className="red";del.textContent="Delete";
+  del.onclick=()=>{groups=groups.filter(x=>x.id!==g.id);events=events.filter(e=>e.group!==g.id);refresh()};
+  div.append(rename,del);$("groups").append(div);
+ });
+ let opts=groups.map(g=>`<option value="${g.id}">${escapeHTML(g.name)}</option>`).join("");
+ $("eventGroup").innerHTML=opts||'<option value="">Create a group first</option>';
 }
-
-function loadDemo(type) {
-  setupAudio();
-  demoBuffer = makeDemo(type);
-  const wav = bufferToWav(demoBuffer);
-
-  if (currentObjectURL) URL.revokeObjectURL(currentObjectURL);
-  currentObjectURL = URL.createObjectURL(wav);
-  audio.src = currentObjectURL;
-  audio.load();
-
-  $("fileStatus").textContent = "Loaded: " + type + " demo music";
-  $("result").textContent = "Demo music ready. Press Preview 4 Seconds.";
-  $("startTime").value = 0;
-}
-
-$("demo").addEventListener("change", e => {
-  if (e.target.value) loadDemo(e.target.value);
-});
-
-$("upload").addEventListener("change", e => {
-  const file = e.target.files[0];
-  if (!file) return;
-
-  setupAudio();
-
-  if (currentObjectURL) URL.revokeObjectURL(currentObjectURL);
-  currentObjectURL = URL.createObjectURL(file);
-  audio.src = currentObjectURL;
-  audio.load();
-
-  $("fileStatus").textContent = "Loaded: " + file.name;
-  $("result").textContent = "Music loaded. Press Preview 4 Seconds.";
-  $("demo").value = "";
-});
-
-function buildPoints() {
-  points = [];
-  const cx = 500;
-  const cy = 250;
-
-  // Outer rectangle
-  for (let x = 100; x <= 900; x += 50) {
-    points.push({x, y: 105, group: "top"});
-    points.push({x, y: 395, group: "bottom"});
-  }
-  for (let y = 145; y <= 355; y += 42) {
-    points.push({x: 85, y, group: "left"});
-    points.push({x: 915, y, group: "right"});
-  }
-
-  // Inner fountain rings
-  for (let ring = 1; ring <= 3; ring++) {
-    const radiusX = 85 * ring;
-    const radiusY = 45 * ring;
-    const count = 12 + ring * 8;
-
-    for (let i = 0; i < count; i++) {
-      const angle = (Math.PI * 2 * i) / count;
-      points.push({
-        x: cx + Math.cos(angle) * radiusX,
-        y: cy + Math.sin(angle) * radiusY,
-        group: "center"
-      });
-    }
-  }
-
-  // Central nozzles
-  for (let i = 0; i < 8; i++) {
-    const angle = Math.PI * 2 * i / 8;
-    points.push({
-      x: cx + Math.cos(angle) * 25,
-      y: cy + Math.sin(angle) * 18,
-      group: "center"
-    });
-  }
-}
-
-function getLevel() {
-  if (!analyser || !active) return 0;
-
-  analyser.getByteFrequencyData(frequencyData);
-
-  let sum = 0;
-  let count = 0;
-
-  // Use useful audio frequencies
-  for (let i = 2; i < frequencyData.length * 0.65; i++) {
-    sum += frequencyData[i];
-    count++;
-  }
-
-  const average = count ? sum / count / 255 : 0;
-  const sensitivity = Number($("sensitivity").value);
-  const amplified = average * sensitivity * 2.5;
-
-  lastLevel = lastLevel * 0.55 + amplified * 0.45;
-  return Math.min(1, lastLevel);
-}
-
-function drawBase() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // Pool
-  ctx.fillStyle = "#0a2941";
-  ctx.fillRect(40, 55, 920, 390);
-
-  ctx.strokeStyle = "#39708e";
-  ctx.lineWidth = 3;
-  ctx.strokeRect(40, 55, 920, 390);
-
-  // Pool water texture
-  ctx.strokeStyle = "rgba(95,190,230,.12)";
-  ctx.lineWidth = 1;
-  for (let y = 80; y < 440; y += 35) {
-    ctx.beginPath();
-    ctx.moveTo(50, y);
-    ctx.lineTo(950, y);
-    ctx.stroke();
-  }
-
-  ctx.fillStyle = "#9bc8df";
-  ctx.font = "14px Arial";
-  ctx.fillText("MUSICAL FOUNTAIN POOL — SIMULATED LAYOUT", 345, 30);
-
-  // Inactive nozzles
-  points.forEach(p => {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
-    ctx.fillStyle = "#647687";
-    ctx.fill();
-    ctx.strokeStyle = "#b0bdc8";
-    ctx.lineWidth = 1;
-    ctx.stroke();
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function renderLanes(){
+ const host=$("lanes");host.innerHTML="";
+ const dur=Math.max(1,activeTrack().duration||60);
+ groups.forEach(g=>{
+  let lane=document.createElement("div");lane.className="lane";
+  let head=document.createElement("div");head.className="lanehead";
+  head.innerHTML=`<b></b><small>${g.dots.length} nozzles</small>`;head.querySelector("b").textContent=g.name;
+  let bar=document.createElement("div");bar.className="lanebar";
+  events.filter(e=>e.group===g.id&&e.track===$("activeTrack").value).forEach(e=>{
+   let el=document.createElement("div");el.className="event"+(selectedEvent===e.id?" selected":"");
+   el.style.left=(e.start/dur*100)+"%";el.style.width=(e.duration/dur*100)+"%";el.style.background=g.color;
+   el.title=`${e.pattern}: ${e.start}s for ${e.duration}s`;
+   el.onclick=()=>{selectedEvent=e.id;$("eventGroup").value=e.group;$("eventTrack").value=e.track;$("eventStart").value=e.start;$("eventDuration").value=e.duration;$("eventPause").value=e.pause;$("eventPattern").value=e.pattern;$("eventHeight").value=e.height;renderLanes()};
+   bar.append(el);
   });
+  lane.append(head,bar);host.append(lane);
+ });
 }
-
-function drawFountain() {
-  drawBase();
-
-  if (active) {
-    const level = getLevel();
-    const now = performance.now();
-    const maxHeight = Number($("jetHeight").value);
-
-    points.forEach((p, i) => {
-      const wave = (Math.sin(now / 150 + i * 1.7) + 1) / 2;
-      const groupFactor = p.group === "center" ? 1.15 : 0.85;
-      const power = Math.max(0, level * (0.35 + wave * 0.9) * groupFactor);
-
-      if (power > 0.025) {
-        const jet = Math.min(maxHeight, 15 + power * maxHeight);
-        const hue = 175 + (i * 13 + now / 30) % 150;
-        const color = `hsl(${hue},100%,65%)`;
-
-        // Water stream
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y - 3);
-        ctx.quadraticCurveTo(
-          p.x - 4, p.y - jet * 0.55,
-          p.x + Math.sin(now / 180 + i) * 5, p.y - jet
-        );
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 2 + power * 3;
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = color;
-        ctx.stroke();
-        ctx.shadowBlur = 0;
-
-        // Coloured nozzle
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 6 + power * 3, 0, Math.PI * 2);
-        ctx.fillStyle = color;
-        ctx.fill();
-
-        // Water spray
-        ctx.beginPath();
-        ctx.arc(
-          p.x + Math.sin(now / 100 + i) * 5,
-          p.y - jet,
-          2 + power * 2, 0, Math.PI * 2
-        );
-        ctx.fillStyle = "#ffffff";
-        ctx.fill();
-      }
-    });
-  }
-  animationFrame = requestAnimationFrame(drawFountain);
-}
-
-function formatTime(seconds) {
-  if (!Number.isFinite(seconds)) seconds = 0;
-  const m = Math.floor(seconds / 60);
-  const s = Math.floor(seconds % 60);
-  return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
-}
-
-function updateClock() {
-  const duration = audio.duration || 0;
-  $("time").textContent =
-    formatTime(audio.currentTime) + " / " + formatTime(duration);
-}
-
-audio.addEventListener("timeupdate", updateClock);
-
-async function startPlayback(start, duration) {
-  if (!audio.src) {
-    $("result").textContent = "Please upload music or select a demo first.";
-    return;
-  }
-
-  setupAudio();
-  await audioContext.resume();
-
-  const total = audio.duration || 0;
-  if (total <= 0) {
-    $("result").textContent = "Audio is still loading. Please try again.";
-    return;
-  }
-
-  start = Math.max(0, Math.min(start, Math.max(0, total - 0.1)));
-  duration = Math.min(duration, total - start);
-
-  if (duration <= 0) {
-    $("result").textContent = "Selected preview time is outside the music.";
-    return;
-  }
-
-  audio.pause();
-  audio.currentTime = start;
-  active = true;
-  lastLevel = 0;
-  previewStart = start;
-  previewEnd = performance.now() + duration * 1000;
-
-  try {
-    await audio.play();
-    $("result").textContent = "Preview playing — fountain animation active.";
-  } catch (err) {
-    active = false;
-    $("result").textContent = "Browser playback error: " + err.message;
-    return;
-  }
-
-  setTimeout(() => {
-    if (active && performance.now() >= previewEnd - 100) {
-      stopPlayback();
-      $("result").textContent = "4-second preview completed.";
-    }
-  }, duration * 1000 + 100);
-}
-
-function stopPlayback() {
-  active = false;
-  audio.pause();
-  lastLevel = 0;
-  updateClock();
-}
-
-$("preview").addEventListener("click", () => {
-  const start = Math.max(0, Number($("startTime").value) || 0);
-  startPlayback(start, 4);
+function refresh(){drawDiagram();renderGroups();renderLanes();drawWave()}
+canvas.addEventListener("click",e=>{
+ const r=canvas.getBoundingClientRect(),x=(e.clientX-r.left)*canvas.width/r.width,y=(e.clientY-r.top)*canvas.height/r.height;
+ if(mode==="add"){
+  dots.push({id:crypto.randomUUID(),x,y});refresh();
+ }else{
+  let nearest=null,dist=Infinity;
+  dots.forEach(d=>{let z=Math.hypot(d.x-x,d.y-y);if(z<dist){dist=z;nearest=d}});
+  if(nearest&&dist<28){selectedDots.has(nearest.id)?selectedDots.delete(nearest.id):selectedDots.add(nearest.id);drawDiagram()}
+ }
 });
+$("addMode").onclick=()=>{mode="add";$("addMode").classList.add("green");$("selectMode").classList.remove("green")};
+$("selectMode").onclick=()=>{mode="select";$("selectMode").classList.add("green");$("addMode").classList.remove("green")};
+$("clearSelection").onclick=()=>{selectedDots.clear();drawDiagram()};
+$("deleteDots").onclick=()=>{
+ dots=dots.filter(d=>!selectedDots.has(d.id));
+ groups.forEach(g=>g.dots=g.dots.filter(id=>dots.some(d=>d.id===id)));
+ selectedDots.clear();refresh();
+};
+$("makeGroup").onclick=()=>{
+ if(!selectedDots.size)return alert("Pehle diagram par dots select karo.");
+ if(groups.length>=100)return alert("Maximum 100 groups allowed.");
+ const name=$("groupName").value.trim()||"Group "+(groups.length+1);
+ const ids=[...selectedDots];
+ groups.push({id:crypto.randomUUID(),name,color:$("groupColor").value,dots:ids});
+ selectedDots.clear();$("groupName").value="";$("groupColor").value=colors[groups.length%colors.length];refresh();
+};
+$("imageFile").onchange=e=>{
+ const f=e.target.files[0];if(!f)return;
+ const url=URL.createObjectURL(f);bg.onload=()=>{bgLoaded=true;refresh()};bg.src=url;
+};
 
-$("play").addEventListener("click", async () => {
-  if (!audio.src) {
-    $("result").textContent = "Please upload music or select a demo first.";
-    return;
+async function decodeTrack(which,fileOrBuffer,name){
+ const t=tracks[which],audio=t.audio;
+ if(t.url)URL.revokeObjectURL(t.url);
+ let blob;
+ if(fileOrBuffer instanceof Blob)blob=fileOrBuffer;
+ else blob=wavBlob(fileOrBuffer);
+ t.url=URL.createObjectURL(blob);audio.src=t.url;audio.load();
+ t.name=name;
+ const ctx=new (window.AudioContext||window.webkitAudioContext)();
+ const ab=await blob.arrayBuffer();
+ t.buffer=await ctx.decodeAudioData(ab.slice(0));
+ t.duration=t.buffer.duration;
+ await ctx.close();
+ $("status"+which).textContent=name+" · "+fmt(t.duration);
+ refresh();
+}
+function wavBlob(buffer){
+ const ch=buffer.numberOfChannels,sr=buffer.sampleRate,n=buffer.length;
+ const ab=new ArrayBuffer(44+n*ch*2),v=new DataView(ab);
+ const str=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};
+ str(0,"RIFF");v.setUint32(4,36+n*ch*2,true);str(8,"WAVE");str(12,"fmt ");
+ v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,ch,true);
+ v.setUint32(24,sr,true);v.setUint32(28,sr*ch*2,true);v.setUint16(32,ch*2,true);v.setUint16(34,16,true);
+ str(36,"data");v.setUint32(40,n*ch*2,true);
+ let o=44;
+ for(let i=0;i<n;i++)for(let c=0;c<ch;c++){let s=Math.max(-1,Math.min(1,buffer.getChannelData(c)[i]));v.setInt16(o,s<0?s*32768:s*32767,true);o+=2}
+ return new Blob([ab],{type:"audio/wav"});
+}
+function makeDemo(){
+ const sr=22050,seconds=60,n=sr*seconds;
+ const b=new AudioContext().createBuffer(2,n,sr);
+ for(let c=0;c<2;c++){
+  let d=b.getChannelData(c);
+  for(let i=0;i<n;i++){
+   let t=i/sr,beat=Math.floor(t*2),phase=t*2%1;
+   let kick=Math.exp(-phase*18)*Math.sin(2*Math.PI*(65+phase*30)*t);
+   let bass=Math.sin(2*Math.PI*(110+(beat%4)*12)*t);
+   let melody=Math.sin(2*Math.PI*(220*Math.pow(2,((beat%8)/12)))*t);
+   let hats=(Math.random()-.5)*(phase>.85?.15:0);
+   d[i]=.22*kick+.12*bass+.09*melody+hats;
   }
-  setupAudio();
-  await audioContext.resume();
-  active = true;
-  previewEnd = Infinity;
-  try {
-    await audio.play();
-    $("result").textContent = "Music playing — fountain animation active.";
-  } catch (err) {
-    active = false;
-    $("result").textContent = err.message;
+ }
+ return b;
+}
+$("demoA").onclick=()=>decodeTrack("A",makeDemo(),"Demo music A — 60 seconds");
+$("demoB").onclick=()=>decodeTrack("B",makeDemo(),"Demo music B — 60 seconds");
+$("audioA").onchange=e=>{if(e.target.files[0])decodeTrack("A",e.target.files[0],e.target.files[0].name)};
+$("audioB").onchange=e=>{if(e.target.files[0])decodeTrack("B",e.target.files[0],e.target.files[0].name)};
+$("activeTrack").onchange=()=>{playhead=0;refresh()};
+wave.onclick=e=>{
+ const r=wave.getBoundingClientRect(),x=(e.clientX-r.left)/r.width;
+ playhead=x*Math.max(1,currentDuration());drawWave();
+};
+$("addEvent").onclick=()=>{
+ const gid=$("eventGroup").value;if(!gid)return alert("Pehle group banao.");
+ const tr=$("eventTrack").value,start=Math.max(0,+$("eventStart").value||0);
+ const duration=Math.max(.1,+$("eventDuration").value||1);
+ const pause=Math.max(0,+$("eventPause").value||0);
+ events.push({id:crypto.randomUUID(),group:gid,track:tr,start,duration,pause,pattern:$("eventPattern").value,height:+$("eventHeight").value||100});
+ selectedEvent=events[events.length-1].id;refresh();
+};
+$("deleteEvent").onclick=()=>{
+ if(!selectedEvent)return alert("Timeline par event select karo.");
+ events=events.filter(e=>e.id!==selectedEvent);selectedEvent=null;refresh();
+};
+$("clearEvents").onclick=()=>{if(confirm("Delete all animation events?")){events=[];selectedEvent=null;refresh()}};
+$("autoBuild").onclick=()=>{
+ if(!groups.length)return alert("Pehle nozzle groups banao.");
+ const tr=$("activeTrack").value,dur=tracks[tr].duration||60;
+ const len=Math.max(.5,+$("autoDuration").value||3),pause=Math.max(0,+$("autoPause").value||0);
+ const style=$("autoStyle").value,overlap=$("overlap").value;
+ events=events.filter(e=>e.track!==tr);
+ let step=len+pause;
+ let simultaneous=overlap==="two"?2:1;
+ if(overlap==="all")simultaneous=groups.length;
+ let cursor=0,index=0;
+ while(cursor<dur){
+  for(let j=0;j<simultaneous&&cursor<dur;j++){
+   let gi=(index+j)%groups.length;
+   let pattern=style==="dance"?["dance","horizontal","dance","vertical"][Math.floor(index/Math.max(1,groups.length))%4]:style;
+   events.push({id:crypto.randomUUID(),group:groups[gi].id,track:tr,start:cursor,duration:Math.min(len,dur-cursor),pause,pattern,height:100});
   }
-});
-
-$("stop").addEventListener("click", stopPlayback);
-
-audio.addEventListener("ended", () => {
-  active = false;
-});
-
-$("analyse").addEventListener("click", async () => {
-  if (!audio.src) {
-    $("result").textContent = "Please upload music or select a demo first.";
-    return;
+  cursor+=step;index+=simultaneous;
+ }
+ selectedEvent=null;refresh();
+};
+function eventPower(e,time,index){
+ const local=(time-e.start)/Math.max(.01,e.duration);
+ const base=.55+.45*Math.sin(Math.PI*Math.max(0,Math.min(1,local)));
+ const speed=+$("speed").value;
+ const p=e.pattern;
+ let wave=1;
+ if(p==="random")wave=.15+Math.random()*.85;
+ else if(p==="horizontal")wave=.2+.8*(.5+.5*Math.sin(time*4*speed-index*.5));
+ else if(p==="vertical")wave=.2+.8*(.5+.5*Math.sin(time*5*speed+index*.9));
+ else if(p==="dance")wave=Math.pow(Math.max(0,Math.sin(time*7*speed+index*.7)),2);
+ else if(p==="mix")wave=.25+.75*Math.abs(Math.sin(time*3*speed+index*1.3));
+ return base*wave*(e.height/100)*(+$("masterHeight").value);
+}
+function animate(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ if(bgLoaded)ctx.drawImage(bg,0,0,canvas.width,canvas.height);
+ else{ctx.fillStyle="#0a2941";ctx.fillRect(0,0,canvas.width,canvas.height)}
+ const nowA=tracks.A.audio.currentTime,nowB=tracks.B.audio.currentTime;
+ dots.forEach(d=>{
+  const g=groups.find(x=>x.dots.includes(d.id));
+  if(!g)return;
+  const idx=g.dots.indexOf(d.id);
+  let power=0;
+  events.forEach(ev=>{
+   if(ev.group!==g.id)return;
+   const tm=ev.track==="A"?nowA:nowB;
+   if(tm>=ev.start&&tm<=ev.start+ev.duration)power=Math.max(power,eventPower(ev,tm,idx));
+  });
+  ctx.beginPath();ctx.arc(d.x,d.y,6,0,Math.PI*2);
+  ctx.fillStyle=g.color;ctx.fill();
+  if(power>.03){
+   const h=Math.min(220,20+power*110);
+   ctx.beginPath();ctx.moveTo(d.x,d.y);
+   ctx.quadraticCurveTo(d.x-5,d.y-h*.5,d.x+Math.sin(performance.now()/130+idx)*5,d.y-h);
+   ctx.strokeStyle=g.color;ctx.lineWidth=2+power*2;ctx.shadowColor=g.color;ctx.shadowBlur=12;ctx.stroke();ctx.shadowBlur=0;
+   ctx.beginPath();ctx.arc(d.x,d.y-h,2+power*2,0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();
   }
-
-  setupAudio();
-  $("result").textContent = "Analysing audio...";
-
-  try {
-    const response = await fetch(audio.src);
-    const arrayBuffer = await response.arrayBuffer();
-    const decoded = await audioContext.decodeAudioData(arrayBuffer);
-    const data = decoded.getChannelData(0);
-    const sampleRate = decoded.sampleRate;
-    const windowSize = Math.floor(sampleRate * 4);
-    const hop = Math.floor(sampleRate * 0.5);
-
-    if (data.length < windowSize) {
-      $("result").textContent = "Music is shorter than 4 seconds.";
-      return;
-    }
-
-    let bestStart = 0;
-    let bestEnergy = -1;
-
-    for (let start = 0; start + windowSize < data.length; start += hop) {
-      let energy = 0;
-
-      for (let i = start; i < start + windowSize; i += 8) {
-        energy += data[i] * data[i];
-      }
-
-      if (energy > bestEnergy) {
-        bestEnergy = energy;
-        bestStart = start;
-      }
-    }
-
-    const seconds = bestStart / sampleRate;
-    $("startTime").value = seconds.toFixed(1);
-    $("result").textContent =
-      "Loudest 4-second section found at " + seconds.toFixed(1) +
-      " seconds. Press Preview to listen and see the animation.";
-  } catch (err) {
-    $("result").textContent = "Analysis failed: " + err.message;
-  }
-});
-
-buildPoints();
-drawFountain();
-
+ });
+ if(playing){
+  if(!tracks.A.audio.paused)playhead=tracks.A.audio.currentTime;
+  drawWave();
+  if(tracks.A.audio.ended&&tracks.B.audio.ended){stopAll()}
+ }
+ raf=requestAnimationFrame(animate);
+}
+function stopAll(){
+ playing=false;tracks.A.audio.pause();tracks.B.audio.pause();setStatus("Stopped");
+}
+$("preview").onclick=async()=>{
+ if(!tracks.A.url&&!tracks.B.url)return alert("Track A ya B mein music load karo.");
+ stopAll();
+ const start=Math.max(0,playhead);
+ for(const key of ["A","B"]){
+  const t=tracks[key];if(!t.url)continue;
+  t.audio.currentTime=Math.min(start,Math.max(0,t.duration-.05));
+ }
+ playing=true;setStatus("Playing scheduled fountain");
+ for(const key of ["A","B"]){
+  const t=tracks[key];if(t.url){try{await t.audio.play()}catch(err){console.error(err)}}
+ }
+};
+$("stop").onclick=stopAll;
+function tick(){animate()}
+refresh();tick();
 })();
 </script>
 </body>
