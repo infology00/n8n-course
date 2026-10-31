@@ -3,444 +3,494 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fountain Music & Animation Studio</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#091321;color:#eaf3ff;font:14px Arial}
-header{padding:18px 22px;background:#101f32;border-bottom:1px solid #29415c}
-h1{font-size:23px;margin:0 0 6px}
-header p{margin:0;color:#9fb5cb}
-main{max-width:1450px;margin:auto;padding:16px;display:grid;gap:14px}
-.panel{background:#122238;border:1px solid #2a4059;border-radius:12px;padding:14px}
-h2{font-size:16px;margin:0 0 12px}
-.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
-button,.filebtn{border:0;border-radius:7px;background:#147fe5;color:white;padding:10px 13px;font-weight:bold;cursor:pointer}
-button:hover,.filebtn:hover{filter:brightness(1.2)}
-.secondary{background:#40546b}
-.green{background:#0c9871}
-.orange{background:#bd7131}
-.red{background:#a83c50}
-input,select{background:#091727;color:white;border:1px solid #425a75;border-radius:6px;padding:9px;max-width:100%}
-input[type=file]{display:none}
-input[type=range]{width:130px;padding:0}
-label{color:#b7cce0;font-size:12px;display:flex;flex-direction:column;gap:5px}
-small,.muted{color:#9bb1c8}
-#diagram{width:100%;height:auto;display:block;background:#071321;border:1px solid #344e68;border-radius:9px;cursor:crosshair}
-.layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(270px,.8fr);gap:14px}
-.groupList{display:grid;gap:7px;max-height:330px;overflow:auto}
-.group{display:flex;gap:8px;align-items:center;background:#0b192a;padding:8px;border-radius:7px}
-.swatch{width:13px;height:13px;border-radius:50%;flex:none}
-.group button{padding:6px 8px;font-size:11px}
-.group span.name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
-.track{background:#0a192a;border:1px solid #2a4059;padding:10px;border-radius:8px;margin:8px 0}
-canvas.wave{width:100%;height:100px;display:block;cursor:crosshair;background:#071321;border-radius:6px}
-.lane{margin:8px 0;background:#0a192a;padding:8px;border-radius:7px}
-.lanehead{display:flex;justify-content:space-between;gap:8px;margin-bottom:5px}
-.lanebar{height:35px;position:relative;background:#172d43;border-radius:5px;overflow:hidden}
-.event{position:absolute;top:4px;height:27px;border-radius:4px;min-width:3px;cursor:pointer;border:1px solid #ffffff77}
-.event.selected{outline:2px solid white}
-#lanes{max-height:430px;overflow:auto}
-#status{color:#8dd7ff;padding-top:8px}
-.badge{background:#203c59;padding:5px 8px;border-radius:5px;color:#bde4ff}
-@media(max-width:850px){.layout{grid-template-columns:1fr}}
+body{margin:0;background:#0b1220;color:#eaf1ff;font-family:Arial,sans-serif}
+header{padding:20px;background:#111d31;border-bottom:1px solid #263752}
+h1{margin:0;font-size:24px}
+header p{color:#9fb2ce;margin:7px 0 0}
+main{max-width:1450px;margin:auto;padding:18px}
+.panel{background:#121f33;border:1px solid #2b405e;border-radius:13px;padding:16px;margin-bottom:16px}
+h2{font-size:18px;margin:0 0 10px}
+.help{color:#9eb1cc;font-size:13px;line-height:1.5;margin:5px 0 13px}
+button,.btn{background:#2878dc;color:white;border:0;border-radius:7px;padding:10px 13px;cursor:pointer;font-weight:bold;margin:3px}
+button.secondary{background:#334761}
+button.danger{background:#b63d50}
+input,select{background:#0b1729;color:white;border:1px solid #3a506d;border-radius:6px;padding:9px;max-width:100%}
+input[type=file]{width:100%}
+input[type=number]{width:90px}
+label{font-size:13px;color:#bdcce0;display:inline-block;margin:5px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+#fountain{width:100%;height:auto;display:block;background:#e8edf3;border-radius:8px;cursor:crosshair}
+#wave{width:100%;height:125px;background:#091426;border-radius:8px;cursor:pointer}
+#timeline{width:100%;height:300px;background:#091426;border-radius:8px}
+.group{padding:8px;background:#1b2b43;border-radius:7px;margin:6px 0;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.group button{padding:6px 9px}
+.small{font-size:12px;color:#9eb1cc}
+.status{color:#6ed6a1}
+@media(max-width:800px){.grid{grid-template-columns:1fr}main{padding:10px}}
 </style>
 </head>
 <body>
 <header>
-<h1>Musical Fountain Studio</h1>
-<p>Group nozzles · Arrange music · Build animation · Preview</p>
+<h1>Fountain Music & Animation Studio</h1>
+<p>Music editing • Nozzle groups • Timeline • Animation preview</p>
 </header>
-
 <main>
+
 <section class="panel">
-<h2>1. Fountain diagram</h2>
+<h2>1. Fountain Image & Nozzle Setup</h2>
+<p class="help">Yahan apni original fountain layout image select karein. Image ke upar click karke nozzle dots add karein. Har dot ek fountain jet ko represent karega.</p>
 <div class="row">
-<label class="filebtn">Load original fountain image
-<input id="imageFile" type="file" accept="image/*">
+<label>Original fountain image
+<input type="file" id="imageFile" accept="image/*">
 </label>
-<button id="addMode" class="green">＋ Add nozzle dots</button>
-<button id="selectMode" class="secondary">Select dots / groups</button>
-<button id="clearSelection" class="secondary">Clear selection</button>
-<button id="deleteDots" class="red">Delete selected dots</button>
-<span class="badge" id="dotCount">0 nozzles</span>
+<button id="addMode">Add nozzle dots: ON</button>
+<button class="secondary" id="selectMode">Select dots / groups</button>
+<button class="secondary" id="clearSelection">Clear selection</button>
+<button class="danger" id="deleteDots">Delete selected dots</button>
 </div>
-<p class="muted">Image load karo. “Add nozzle dots” select karke diagram par har nozzle ki position click karo. Phir “Select dots” se dots par click karke group banao.</p>
-<canvas id="diagram" width="1195" height="896"></canvas>
+<canvas id="fountain" width="900" height="540"></canvas>
+<p class="small" id="dotCount">Nozzles: 0 | Selected: 0</p>
 </section>
 
-<div class="layout">
 <section class="panel">
-<h2>2. Create nozzle groups</h2>
+<h2>2. Nozzle Groups</h2>
+<p class="help">Dots select karein, group ka naam likhein aur Create Group dabayein. Misal: Centre, Centre Line, Right Side. Maximum 100 groups.</p>
 <div class="row">
-<label>Group name<input id="groupName" placeholder="e.g. Centre Line"></label>
-<label>Group colour<input id="groupColor" type="color" value="#19bfff"></label>
-<button id="makeGroup" class="green">Create group from selected dots</button>
+<input id="groupName" placeholder="Group name e.g. Centre">
+<button id="createGroup">Create group from selected dots</button>
 </div>
-<p class="muted">Ek group mein jitne chaho dots select karo. Har group ka naam aur colour alag hoga. Maximum 100 groups.</p>
-<div id="groups" class="groupList"></div>
+<div id="groups"></div>
 </section>
 
 <section class="panel">
-<h2>3. Music tracks</h2>
-<div class="track">
-<b>Track A</b>
-<div class="row" style="margin-top:8px">
-<label class="filebtn">Upload MP3/WAV<input id="audioA" type="file" accept="audio/*,.wav,.mp3"></label>
-<button class="secondary" id="demoA">Generate 1-minute demo</button>
+<h2>3. Music Tracks</h2>
+<p class="help">Track A aur Track B alag-alag music files hain. WAV ya MP3 upload karein. Demo ke liye 60-second sample music bhi generate kar sakte hain.</p>
+<div class="grid">
+<div>
+<h3>Track A</h3>
+<input type="file" id="audioA" accept=".wav,.mp3,audio/*">
+<button class="secondary" id="demoA">Generate 1-minute demo A</button>
+<p id="infoA" class="small">No track loaded</p>
 </div>
-<div id="statusA" class="muted">No music loaded</div>
+<div>
+<h3>Track B</h3>
+<input type="file" id="audioB" accept=".wav,.mp3,audio/*">
+<button class="secondary" id="demoB">Generate 1-minute demo B</button>
+<p id="infoB" class="small">No track loaded</p>
 </div>
-<div class="track">
-<b>Track B — second music</b>
-<div class="row" style="margin-top:8px">
-<label class="filebtn">Upload second music<input id="audioB" type="file" accept="audio/*,.wav,.mp3"></label>
-<button class="secondary" id="demoB">Generate 1-minute demo</button>
 </div>
-<div id="statusB" class="muted">No second music loaded</div>
-</div>
-<label style="margin-top:10px">Waveform track to edit
+</section>
+
+<section class="panel">
+<h2>4. Music Waveform</h2>
+<p class="help">Waveform par click karke music ka playhead set karein. Selected track ki waveform yahan nazar aayegi.</p>
+<div class="row">
+<label>Active track
 <select id="activeTrack"><option value="A">Track A</option><option value="B">Track B</option></select>
 </label>
-<p class="muted">Waveform par click karo: playhead us second par chala jayega. Dono tracks apni alag timing rakhte hain.</p>
-<canvas class="wave" id="wave" width="1000" height="120"></canvas>
-<div class="row" style="margin-top:8px">
-<span class="badge" id="durationLabel">Duration: 00:00</span>
-<span class="badge" id="playheadLabel">Position: 0.0 sec</span>
+<span id="waveInfo" class="small">Load a track to view waveform</span>
 </div>
-</section>
-</div>
-
-<section class="panel">
-<h2>4. Animation event editor</h2>
-<div class="row">
-<label>Selected group<select id="eventGroup"></select></label>
-<label>Track<select id="eventTrack"><option>A</option><option>B</option></select></label>
-<label>Start (sec)<input id="eventStart" type="number" min="0" step=".1" value="0"></label>
-<label>Duration (sec)<input id="eventDuration" type="number" min=".1" step=".1" value="3"></label>
-<label>Pause after (sec)<input id="eventPause" type="number" min="0" step=".1" value="1"></label>
-<label>Pattern<select id="eventPattern">
-<option value="dance">Dance</option><option value="random">Random</option>
-<option value="horizontal">Horizontal wave</option><option value="vertical">Vertical wave</option>
-<option value="mix">Mixed</option><option value="steady">Steady spray</option>
-</select></label>
-<label>Height %<input id="eventHeight" type="number" min="10" max="200" value="100"></label>
-<button id="addEvent" class="green">＋ Add event</button>
-<button id="deleteEvent" class="red">Delete selected event</button>
-</div>
-<p class="muted">Event select karke uski timing edit karo. Pause next event se pehle ka gap hai. Har group ke multiple events ho sakte hain.</p>
-<div id="lanes"></div>
+<canvas id="wave" width="1200" height="125"></canvas>
 </section>
 
 <section class="panel">
-<h2>5. Automatic animation builder</h2>
+<h2>5. Animation Builder</h2>
+<p class="help">Selected group ke liye animation event banayein. Start time, spray duration, pause aur height apni marzi se set karein.</p>
 <div class="row">
-<label>Build style<select id="autoStyle">
-<option value="dance">Dance sequence</option>
-<option value="random">Random groups</option>
-<option value="horizontal">Horizontal sequence</option>
-<option value="vertical">Vertical sequence</option>
-<option value="mix">Mixed sequence</option>
-</select></label>
-<label>Event duration (sec)<input id="autoDuration" type="number" min=".5" value="3" step=".5"></label>
-<label>Pause (sec)<input id="autoPause" type="number" min="0" value="1" step=".5"></label>
-<label>Group overlap<select id="overlap"><option value="one">One group at a time</option><option value="two">Two groups together</option><option value="all">All groups in sequence</option></select></label>
-<button id="autoBuild" class="orange">Build animation for music duration</button>
-<button id="clearEvents" class="red">Clear all events</button>
+<label>Group
+<select id="eventGroup"></select>
+</label>
+<label>Track
+<select id="eventTrack"><option>A</option><option>B</option></select>
+</label>
+<label>Start (sec)
+<input id="eventStart" type="number" min="0" step=".1" value="0">
+</label>
+<label>Duration (sec)
+<input id="eventDuration" type="number" min=".1" step=".1" value="3">
+</label>
+<label>Pause (sec)
+<input id="eventPause" type="number" min="0" step=".1" value="1">
+</label>
+<label>Height
+<input id="eventHeight" type="number" min="10" max="100" value="65">
+</label>
+<label>Pattern
+<select id="eventPattern">
+<option value="mixed">Mixed</option>
+<option value="random">Random</option>
+<option value="horizontal">Horizontal</option>
+<option value="vertical">Vertical</option>
+<option value="manual">Manual</option>
+</select>
+</label>
+<button id="addEvent">Add animation event</button>
 </div>
-<p class="muted">Auto builder selected track ki duration ke mutabiq events banata hai. Baad mein har event ko manually change kar sakte ho.</p>
+<div class="row">
+<label>Auto build duration (seconds)
+<input id="buildDuration" type="number" value="60" min="1">
+</label>
+<label>Pattern
+<select id="buildPattern">
+<option value="mixed">Mixed dance</option>
+<option value="random">Random</option>
+<option value="horizontal">Horizontal</option>
+<option value="vertical">Vertical</option>
+</select>
+</label>
+<label>Group sequence
+<select id="sequence">
+<option value="sequential">One group at a time</option>
+<option value="overlap">Groups overlap</option>
+<option value="all">All groups together</option>
+</select>
+</label>
+<button id="autoBuild">Auto build animation</button>
+<button class="danger" id="clearEvents">Clear all events</button>
+</div>
 </section>
 
 <section class="panel">
-<h2>6. Preview</h2>
+<h2>6. Animation Timeline</h2>
+<p class="help">Har group ki timeline lane hai. Event par click karke uski settings load karein. Phir Update selected event se timing change karein.</p>
 <div class="row">
-<button id="preview" class="green">▶ Play scheduled preview</button>
-<button id="stop" class="red">■ Stop</button>
-<label>Animation speed<input id="speed" type="range" min=".3" max="2.5" step=".1" value="1"></label>
-<label>Master height<input id="masterHeight" type="range" min=".2" max="2" step=".1" value="1"></label>
-<span id="playStatus" class="badge">Stopped</span>
+<button id="updateEvent">Update selected event</button>
+<button class="danger" id="deleteEvent">Delete selected event</button>
 </div>
-<p class="muted">Preview mein Track A aur B synchronized play honge. Sirf us waqt wohi groups spray karenge jin ke events active honge.</p>
+<canvas id="timeline" width="1200" height="300"></canvas>
+<div id="eventList"></div>
 </section>
+
+<section class="panel">
+<h2>7. Live Fountain Preview</h2>
+<p class="help">Play dabane se loaded music aur group-wise fountain animation saath chalegi. Stop se preview ruk jayega.</p>
+<div class="row">
+<button id="play">▶ Play preview</button>
+<button class="danger" id="stop">■ Stop</button>
+<span id="playStatus" class="status">Ready</span>
+</div>
+<p class="small">Preview mein jets sirf unhi groups ke liye spray karenge jin ka event us waqt active hoga.</p>
+</section>
+
 </main>
-
 <script>
-(() => {
 const $=id=>document.getElementById(id);
-const canvas=$("diagram"),ctx=canvas.getContext("2d");
-const wave=$("wave"),wctx=wave.getContext("2d");
-const colors=["#19bfff","#ff9d37","#d56cff","#5be09c","#ff5f88","#ffe05b","#6d8cff","#50e0df"];
-let bg=new Image(),bgLoaded=false, dots=[],groups=[],events=[];
-let selectedDots=new Set(),selectedEvent=null,mode="add";
-let tracks={A:{audio:new Audio(),url:null,duration:0,buffer:null,name:""},B:{audio:new Audio(),url:null,duration:0,buffer:null,name:""}};
-let playhead=0,playing=false,startedAt=0,raf=0;
+const canvas=$('fountain'),ctx=canvas.getContext('2d');
+const wave=$('wave'),wx=wave.getContext('2d');
+const timeline=$('timeline'),tx=timeline.getContext('2d');
 
-function setStatus(s){$("playStatus").textContent=s}
-function fmt(t){return `${String(Math.floor(t/60)).padStart(2,"0")}:${String(Math.floor(t%60)).padStart(2,"0")}`}
-function activeTrack(){return tracks[$("activeTrack").value]}
-function currentDuration(){return activeTrack().duration||60}
+let image=null, dots=[], groups=[], events=[];
+let selectedDots=new Set(),selectedEvent=null;
+let addMode=true, tracks={A:null,B:null}, active='A';
+let audioContext=null, sources=[], playing=false, startClock=0, playOffset=0;
+let raf=null;
 
-function drawDiagram(){
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
+
+function drawFountain(time=0){
  ctx.clearRect(0,0,canvas.width,canvas.height);
- if(bgLoaded)ctx.drawImage(bg,0,0,canvas.width,canvas.height);
- else{
-  ctx.fillStyle="#0a2941";ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="#b8d7ec";ctx.font="28px Arial";ctx.fillText("Load your original fountain diagram",300,430);
-  ctx.font="18px Arial";ctx.fillText("Then add nozzle dots by clicking their positions",300,470);
+ if(image){
+  let scale=Math.min(canvas.width/image.width,canvas.height/image.height);
+  let w=image.width*scale,h=image.height*scale;
+  ctx.drawImage(image,(canvas.width-w)/2,(canvas.height-h)/2,w,h);
+ }else{
+  ctx.fillStyle='#e7edf4';ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle='#51657e';ctx.font='bold 25px Arial';
+  ctx.fillText('Select your original fountain image above',190,260);
+  ctx.font='16px Arial';ctx.fillText('Then click Add nozzle dots to mark the jet positions',215,295);
  }
  dots.forEach((d,i)=>{
-  let g=groups.find(x=>x.dots.includes(d.id));
-  let color=g?g.color:"#9ba9b8";
-  ctx.beginPath();ctx.arc(d.x,d.y,selectedDots.has(d.id)?10:7,0,Math.PI*2);
-  ctx.fillStyle=color;ctx.fill();
-  ctx.lineWidth=selectedDots.has(d.id)?4:2;ctx.strokeStyle=selectedDots.has(d.id)?"#fff":"#172536";ctx.stroke();
-  if(g){ctx.font="12px Arial";ctx.fillStyle="#fff";ctx.fillText(g.name.slice(0,12),d.x+9,d.y-9)}
- });
- $("dotCount").textContent=dots.length+" nozzles";
-}
-function drawWave(){
- const t=activeTrack(),W=wave.width,H=wave.height;
- wctx.clearRect(0,0,W,H);wctx.fillStyle="#071321";wctx.fillRect(0,0,W,H);
- const dur=Math.max(1,t.duration||60);
- wctx.strokeStyle="#25415e";wctx.lineWidth=1;
- for(let s=0;s<=dur;s+=Math.max(1,Math.ceil(dur/12))){
-  let x=s/dur*W;wctx.beginPath();wctx.moveTo(x,0);wctx.lineTo(x,H);wctx.stroke();
-  wctx.fillStyle="#9cb5cc";wctx.font="11px Arial";wctx.fillText(s+"s",x+3,12);
- }
- if(t.buffer){
-  const data=t.buffer.getChannelData(0),step=Math.max(1,Math.floor(data.length/W));
-  wctx.strokeStyle="#28b9e9";wctx.lineWidth=1;wctx.beginPath();
-  for(let x=0;x<W;x++){
-   let max=0;for(let j=0;j<step;j++)max=Math.max(max,Math.abs(data[x*step+j]||0));
-   let y=H/2-max*H*.43;
-   if(x===0)wctx.moveTo(x,y);else wctx.lineTo(x,y);
-  }
-  wctx.stroke();
- }else{
-  wctx.fillStyle="#7690aa";wctx.font="16px Arial";wctx.fillText("Waveform appears here after loading music",250,65);
- }
- let x=playhead/dur*W;
- wctx.strokeStyle="#fff";wctx.lineWidth=2;wctx.beginPath();wctx.moveTo(x,0);wctx.lineTo(x,H);wctx.stroke();
- $("durationLabel").textContent="Duration: "+fmt(t.duration||0);
- $("playheadLabel").textContent="Position: "+playhead.toFixed(1)+" sec";
-}
-function renderGroups(){
- $("groups").innerHTML="";
- groups.forEach(g=>{
-  let div=document.createElement("div");div.className="group";
-  div.innerHTML=`<span class="swatch" style="background:${g.color}"></span><span class="name"></span><small>${g.dots.length} dots</small>`;
-  div.querySelector(".name").textContent=g.name;
-  let rename=document.createElement("button");rename.className="secondary";rename.textContent="Rename";
-  rename.onclick=()=>{let n=prompt("Group name",g.name);if(n){g.name=n;refresh()}};
-  let del=document.createElement("button");del.className="red";del.textContent="Delete";
-  del.onclick=()=>{groups=groups.filter(x=>x.id!==g.id);events=events.filter(e=>e.group!==g.id);refresh()};
-  div.append(rename,del);$("groups").append(div);
- });
- let opts=groups.map(g=>`<option value="${g.id}">${escapeHTML(g.name)}</option>`).join("");
- $("eventGroup").innerHTML=opts||'<option value="">Create a group first</option>';
-}
-function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function renderLanes(){
- const host=$("lanes");host.innerHTML="";
- const dur=Math.max(1,activeTrack().duration||60);
- groups.forEach(g=>{
-  let lane=document.createElement("div");lane.className="lane";
-  let head=document.createElement("div");head.className="lanehead";
-  head.innerHTML=`<b></b><small>${g.dots.length} nozzles</small>`;head.querySelector("b").textContent=g.name;
-  let bar=document.createElement("div");bar.className="lanebar";
-  events.filter(e=>e.group===g.id&&e.track===$("activeTrack").value).forEach(e=>{
-   let el=document.createElement("div");el.className="event"+(selectedEvent===e.id?" selected":"");
-   el.style.left=(e.start/dur*100)+"%";el.style.width=(e.duration/dur*100)+"%";el.style.background=g.color;
-   el.title=`${e.pattern}: ${e.start}s for ${e.duration}s`;
-   el.onclick=()=>{selectedEvent=e.id;$("eventGroup").value=e.group;$("eventTrack").value=e.track;$("eventStart").value=e.start;$("eventDuration").value=e.duration;$("eventPause").value=e.pause;$("eventPattern").value=e.pattern;$("eventHeight").value=e.height;renderLanes()};
-   bar.append(el);
+  let g=groups.find(x=>x.id===d.group);
+  let activePower=0;
+  events.forEach(e=>{
+   if(!g||e.group!==g.id)return;
+   let t=playing?getTime():time;
+   if(e.track!==active)return;
+   let local=t-e.start;
+   if(local>=0&&local<=e.duration){
+    let p=patternPower(e,i,local);
+    activePower=Math.max(activePower,p*e.height/100);
+   }
   });
-  lane.append(head,bar);host.append(lane);
+  if(activePower>0){
+   let h=activePower*105;
+   ctx.strokeStyle='rgba(20,130,230,.85)';ctx.lineWidth=5;
+   ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.quadraticCurveTo(d.x-12,d.y-h*.6,d.x,d.y-h);ctx.stroke();
+   ctx.fillStyle='rgba(110,205,255,.8)';
+   ctx.beginPath();ctx.arc(d.x,d.y-h,4,0,Math.PI*2);ctx.fill();
+  }
+  ctx.beginPath();ctx.arc(d.x,d.y,7,0,Math.PI*2);
+  ctx.fillStyle=g?g.color:'#ef8b35';ctx.fill();
+  ctx.strokeStyle=selectedDots.has(d.id)?'#fff':'#25364a';
+  ctx.lineWidth=selectedDots.has(d.id)?3:1;ctx.stroke();
  });
+ $('dotCount').textContent=`Nozzles: ${dots.length} | Selected: ${selectedDots.size}`;
 }
-function refresh(){drawDiagram();renderGroups();renderLanes();drawWave()}
-canvas.addEventListener("click",e=>{
- const r=canvas.getBoundingClientRect(),x=(e.clientX-r.left)*canvas.width/r.width,y=(e.clientY-r.top)*canvas.height/r.height;
- if(mode==="add"){
-  dots.push({id:crypto.randomUUID(),x,y});refresh();
- }else{
-  let nearest=null,dist=Infinity;
-  dots.forEach(d=>{let z=Math.hypot(d.x-x,d.y-y);if(z<dist){dist=z;nearest=d}});
-  if(nearest&&dist<28){selectedDots.has(nearest.id)?selectedDots.delete(nearest.id):selectedDots.add(nearest.id);drawDiagram()}
+
+function patternPower(e,i,t){
+ let phase=t*2.4;
+ if(e.pattern==='horizontal')return .25+.75*(.5+.5*Math.sin(phase+i*.65));
+ if(e.pattern==='vertical')return .2+.8*(.5+.5*Math.sin(phase));
+ if(e.pattern==='random'){
+  let bucket=Math.floor(t*3);
+  let n=Math.abs(Math.sin((i+1)*127.1+bucket*311.7)*43758.5)%1;
+  return .2+n*.8;
  }
+ if(e.pattern==='manual')return .7;
+ return .25+.75*(.5+.5*Math.sin(phase+i*.9));
+}
+
+canvas.addEventListener('click',e=>{
+ let r=canvas.getBoundingClientRect();
+ let x=(e.clientX-r.left)*canvas.width/r.width;
+ let y=(e.clientY-r.top)*canvas.height/r.height;
+ if(addMode){
+  dots.push({id:uid(),x,y,group:null});
+ }else{
+  let nearest=null,dist=20;
+  dots.forEach(d=>{
+   let q=Math.hypot(d.x-x,d.y-y);
+   if(q<dist){nearest=d;dist=q}
+  });
+  if(nearest){
+   if(selectedDots.has(nearest.id))selectedDots.delete(nearest.id);
+   else selectedDots.add(nearest.id);
+  }
+ }
+ drawFountain();renderGroups();
 });
-$("addMode").onclick=()=>{mode="add";$("addMode").classList.add("green");$("selectMode").classList.remove("green")};
-$("selectMode").onclick=()=>{mode="select";$("selectMode").classList.add("green");$("addMode").classList.remove("green")};
-$("clearSelection").onclick=()=>{selectedDots.clear();drawDiagram()};
-$("deleteDots").onclick=()=>{
- dots=dots.filter(d=>!selectedDots.has(d.id));
- groups.forEach(g=>g.dots=g.dots.filter(id=>dots.some(d=>d.id===id)));
- selectedDots.clear();refresh();
-};
-$("makeGroup").onclick=()=>{
- if(!selectedDots.size)return alert("Pehle diagram par dots select karo.");
- if(groups.length>=100)return alert("Maximum 100 groups allowed.");
- const name=$("groupName").value.trim()||"Group "+(groups.length+1);
- const ids=[...selectedDots];
- groups.push({id:crypto.randomUUID(),name,color:$("groupColor").value,dots:ids});
- selectedDots.clear();$("groupName").value="";$("groupColor").value=colors[groups.length%colors.length];refresh();
-};
-$("imageFile").onchange=e=>{
- const f=e.target.files[0];if(!f)return;
- const url=URL.createObjectURL(f);bg.onload=()=>{bgLoaded=true;refresh()};bg.src=url;
+$('addMode').onclick=()=>{addMode=true;$('addMode').textContent='Add nozzle dots: ON'};
+$('selectMode').onclick=()=>{addMode=false;$('addMode').textContent='Add nozzle dots: OFF'};
+$('clearSelection').onclick=()=>{selectedDots.clear();drawFountain()};
+$('deleteDots').onclick=()=>{
+ dots=dots.filter(d=>!selectedDots.has(d.id));selectedDots.clear();drawFountain();renderGroups();
 };
 
-async function decodeTrack(which,fileOrBuffer,name){
- const t=tracks[which],audio=t.audio;
- if(t.url)URL.revokeObjectURL(t.url);
- let blob;
- if(fileOrBuffer instanceof Blob)blob=fileOrBuffer;
- else blob=wavBlob(fileOrBuffer);
- t.url=URL.createObjectURL(blob);audio.src=t.url;audio.load();
- t.name=name;
- const ctx=new (window.AudioContext||window.webkitAudioContext)();
- const ab=await blob.arrayBuffer();
- t.buffer=await ctx.decodeAudioData(ab.slice(0));
- t.duration=t.buffer.duration;
- await ctx.close();
- $("status"+which).textContent=name+" · "+fmt(t.duration);
- refresh();
+$('imageFile').onchange=e=>{
+ let f=e.target.files[0];if(!f)return;
+ let im=new Image();im.onload=()=>{image=im;drawFountain()};im.src=URL.createObjectURL(f);
+};
+
+const colors=['#f2a33a','#46b6e9','#a58af0','#52c99b','#f0789d','#d6c65b','#5e9df2'];
+$('createGroup').onclick=()=>{
+ if(!selectedDots.size)return alert('Pehle nozzle dots select karein');
+ if(groups.length>=100)return alert('Maximum 100 groups allowed');
+ let name=$('groupName').value.trim()||`Group ${groups.length+1}`;
+ let g={id:uid(),name,color:colors[groups.length%colors.length]};
+ groups.push(g);
+ dots.forEach(d=>{if(selectedDots.has(d.id))d.group=g.id});
+ selectedDots.clear();renderGroups();drawFountain();
+};
+function renderGroups(){
+ $('groups').innerHTML='';
+ $('eventGroup').innerHTML='';
+ groups.forEach(g=>{
+  let count=dots.filter(d=>d.group===g.id).length;
+  let div=document.createElement('div');div.className='group';
+  let span=document.createElement('span');span.textContent=`${g.name} (${count} nozzles)`;
+  let rename=document.createElement('button');rename.className='secondary';rename.textContent='Rename';
+  rename.onclick=()=>{let n=prompt('New group name',g.name);if(n){g.name=n;renderGroups();drawTimeline()}};
+  let del=document.createElement('button');del.className='danger';del.textContent='Delete';
+  del.onclick=()=>{groups=groups.filter(x=>x.id!==g.id);dots.forEach(d=>{if(d.group===g.id)d.group=null});events=events.filter(e=>e.group!==g.id);renderGroups();drawTimeline();drawFountain()};
+  div.append(span,rename,del);$('groups').append(div);
+  let op=document.createElement('option');op.value=g.id;op.textContent=g.name;$('eventGroup').append(op);
+ });
+ drawTimeline();
 }
-function wavBlob(buffer){
- const ch=buffer.numberOfChannels,sr=buffer.sampleRate,n=buffer.length;
- const ab=new ArrayBuffer(44+n*ch*2),v=new DataView(ab);
- const str=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};
- str(0,"RIFF");v.setUint32(4,36+n*ch*2,true);str(8,"WAVE");str(12,"fmt ");
- v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,ch,true);
- v.setUint32(24,sr,true);v.setUint32(28,sr*ch*2,true);v.setUint16(32,ch*2,true);v.setUint16(34,16,true);
- str(36,"data");v.setUint32(40,n*ch*2,true);
- let o=44;
- for(let i=0;i<n;i++)for(let c=0;c<ch;c++){let s=Math.max(-1,Math.min(1,buffer.getChannelData(c)[i]));v.setInt16(o,s<0?s*32768:s*32767,true);o+=2}
- return new Blob([ab],{type:"audio/wav"});
-}
-function makeDemo(){
- const sr=22050,seconds=60,n=sr*seconds;
- const b=new AudioContext().createBuffer(2,n,sr);
- for(let c=0;c<2;c++){
-  let d=b.getChannelData(c);
-  for(let i=0;i<n;i++){
-   let t=i/sr,beat=Math.floor(t*2),phase=t*2%1;
-   let kick=Math.exp(-phase*18)*Math.sin(2*Math.PI*(65+phase*30)*t);
-   let bass=Math.sin(2*Math.PI*(110+(beat%4)*12)*t);
-   let melody=Math.sin(2*Math.PI*(220*Math.pow(2,((beat%8)/12)))*t);
-   let hats=(Math.random()-.5)*(phase>.85?.15:0);
-   d[i]=.22*kick+.12*bass+.09*melody+hats;
-  }
+
+function drawWave(){
+ wx.clearRect(0,0,wave.width,wave.height);
+ wx.fillStyle='#091426';wx.fillRect(0,0,wave.width,wave.height);
+ let tr=tracks[active];
+ if(!tr){$('waveInfo').textContent='Load a track to view waveform';return}
+ $('waveInfo').textContent=`Track ${active} • ${tr.duration.toFixed(1)} seconds`;
+ let data=tr.peaks;
+ wx.strokeStyle='#50b8ec';wx.lineWidth=1;
+ for(let x=0;x<wave.width;x++){
+  let v=data[Math.floor(x/data.length*data.length)]||0;
+  let h=v*48;wx.beginPath();wx.moveTo(x,62-h);wx.lineTo(x,62+h);wx.stroke();
  }
- return b;
+ wx.strokeStyle='#fff';wx.beginPath();wx.moveTo(playOffset/waveDuration()*wave.width,0);wx.lineTo(playOffset/waveDuration()*wave.width,125);wx.stroke();
 }
-$("demoA").onclick=()=>decodeTrack("A",makeDemo(),"Demo music A — 60 seconds");
-$("demoB").onclick=()=>decodeTrack("B",makeDemo(),"Demo music B — 60 seconds");
-$("audioA").onchange=e=>{if(e.target.files[0])decodeTrack("A",e.target.files[0],e.target.files[0].name)};
-$("audioB").onchange=e=>{if(e.target.files[0])decodeTrack("B",e.target.files[0],e.target.files[0].name)};
-$("activeTrack").onchange=()=>{playhead=0;refresh()};
-wave.onclick=e=>{
- const r=wave.getBoundingClientRect(),x=(e.clientX-r.left)/r.width;
- playhead=x*Math.max(1,currentDuration());drawWave();
-};
-$("addEvent").onclick=()=>{
- const gid=$("eventGroup").value;if(!gid)return alert("Pehle group banao.");
- const tr=$("eventTrack").value,start=Math.max(0,+$("eventStart").value||0);
- const duration=Math.max(.1,+$("eventDuration").value||1);
- const pause=Math.max(0,+$("eventPause").value||0);
- events.push({id:crypto.randomUUID(),group:gid,track:tr,start,duration,pause,pattern:$("eventPattern").value,height:+$("eventHeight").value||100});
- selectedEvent=events[events.length-1].id;refresh();
-};
-$("deleteEvent").onclick=()=>{
- if(!selectedEvent)return alert("Timeline par event select karo.");
- events=events.filter(e=>e.id!==selectedEvent);selectedEvent=null;refresh();
-};
-$("clearEvents").onclick=()=>{if(confirm("Delete all animation events?")){events=[];selectedEvent=null;refresh()}};
-$("autoBuild").onclick=()=>{
- if(!groups.length)return alert("Pehle nozzle groups banao.");
- const tr=$("activeTrack").value,dur=tracks[tr].duration||60;
- const len=Math.max(.5,+$("autoDuration").value||3),pause=Math.max(0,+$("autoPause").value||0);
- const style=$("autoStyle").value,overlap=$("overlap").value;
- events=events.filter(e=>e.track!==tr);
- let step=len+pause;
- let simultaneous=overlap==="two"?2:1;
- if(overlap==="all")simultaneous=groups.length;
- let cursor=0,index=0;
- while(cursor<dur){
-  for(let j=0;j<simultaneous&&cursor<dur;j++){
-   let gi=(index+j)%groups.length;
-   let pattern=style==="dance"?["dance","horizontal","dance","vertical"][Math.floor(index/Math.max(1,groups.length))%4]:style;
-   events.push({id:crypto.randomUUID(),group:groups[gi].id,track:tr,start:cursor,duration:Math.min(len,dur-cursor),pause,pattern,height:100});
+function waveDuration(){return tracks[active]?.duration||60}
+function loadAudio(file,key){
+ let reader=new FileReader();
+ reader.onload=async()=>{
+  let ac=new (window.AudioContext||window.webkitAudioContext)();
+  let buffer=await ac.decodeAudioData(reader.result.slice(0));
+  let raw=buffer.getChannelData(0),peaks=[];
+  for(let i=0;i<1200;i++){
+   let a=Math.floor(i*raw.length/1200),b=Math.floor((i+1)*raw.length/1200),max=0;
+   for(let j=a;j<b;j+=4)max=Math.max(max,Math.abs(raw[j]));
+   peaks.push(max);
   }
-  cursor+=step;index+=simultaneous;
+  tracks[key]={buffer,duration:buffer.duration,peaks};
+  await ac.close();
+  $('info'+key).textContent=`${file.name} • ${buffer.duration.toFixed(1)} sec`;
+  active=key;$('activeTrack').value=key;drawWave();
+ };
+ reader.readAsArrayBuffer(file);
+}
+$('audioA').onchange=e=>{if(e.target.files[0])loadAudio(e.target.files[0],'A')};
+$('audioB').onchange=e=>{if(e.target.files[0])loadAudio(e.target.files[0],'B')};
+
+async function demoTrack(key){
+ let ac=new (window.AudioContext||window.webkitAudioContext)();
+ let sr=ac.sampleRate,buffer=ac.createBuffer(1,sr*60,sr),d=buffer.getChannelData(0);
+ for(let i=0;i<d.length;i++){
+  let t=i/sr;
+  let beat=Math.sin(2*Math.PI*(110+25*Math.sin(t*.4))*t);
+  let melody=Math.sin(2*Math.PI*(220+55*Math.sin(t*.7))*t);
+  let pulse=Math.sin(2*Math.PI*2*t);
+  d[i]=(beat*.15+melody*.08)*(.45+.55*Math.max(0,pulse));
  }
- selectedEvent=null;refresh();
+ let peaks=[];
+ for(let i=0;i<1200;i++){
+  let a=Math.floor(i*d.length/1200),max=0;
+  for(let j=a;j<Math.min(d.length,a+100);j+=4)max=Math.max(max,Math.abs(d[j]));
+  peaks.push(max);
+ }
+ tracks[key]={buffer,duration:60,peaks};
+ $('info'+key).textContent='Generated demo • 60 seconds';
+ active=key;$('activeTrack').value=key;drawWave();await ac.close();
+}
+$('demoA').onclick=()=>demoTrack('A');
+$('demoB').onclick=()=>demoTrack('B');
+$('activeTrack').onchange=e=>{active=e.target.value;drawWave();drawTimeline();drawFountain()};
+wave.addEventListener('click',e=>{
+ let r=wave.getBoundingClientRect();
+ playOffset=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*waveDuration();
+ drawWave();
+});
+
+$('addEvent').onclick=()=>{
+ let gid=$('eventGroup').value;if(!gid)return alert('Create a group first');
+ events.push({
+  id:uid(),group:gid,track:$('eventTrack').value,
+  start:+$('eventStart').value||0,
+  duration:Math.max(.1,+$('eventDuration').value||3),
+  pause:Math.max(0,+$('eventPause').value||0),
+  height:Math.max(10,Math.min(100,+$('eventHeight').value||65)),
+  pattern:$('eventPattern').value
+ });
+ selectedEvent=events[events.length-1].id;drawTimeline();
 };
-function eventPower(e,time,index){
- const local=(time-e.start)/Math.max(.01,e.duration);
- const base=.55+.45*Math.sin(Math.PI*Math.max(0,Math.min(1,local)));
- const speed=+$("speed").value;
- const p=e.pattern;
- let wave=1;
- if(p==="random")wave=.15+Math.random()*.85;
- else if(p==="horizontal")wave=.2+.8*(.5+.5*Math.sin(time*4*speed-index*.5));
- else if(p==="vertical")wave=.2+.8*(.5+.5*Math.sin(time*5*speed+index*.9));
- else if(p==="dance")wave=Math.pow(Math.max(0,Math.sin(time*7*speed+index*.7)),2);
- else if(p==="mix")wave=.25+.75*Math.abs(Math.sin(time*3*speed+index*1.3));
- return base*wave*(e.height/100)*(+$("masterHeight").value);
+$('updateEvent').onclick=()=>{
+ let e=events.find(x=>x.id===selectedEvent);if(!e)return alert('Timeline se event select karein');
+ e.group=$('eventGroup').value;e.track=$('eventTrack').value;
+ e.start=+$('eventStart').value;e.duration=Math.max(.1,+$('eventDuration').value);
+ e.pause=Math.max(0,+$('eventPause').value);
+ e.height=Math.max(10,Math.min(100,+$('eventHeight').value));
+ e.pattern=$('eventPattern').value;drawTimeline();
+};
+$('deleteEvent').onclick=()=>{
+ events=events.filter(e=>e.id!==selectedEvent);selectedEvent=null;drawTimeline();
+};
+$('clearEvents').onclick=()=>{if(confirm('Delete all animation events?')){events=[];selectedEvent=null;drawTimeline()}};
+
+$('autoBuild').onclick=()=>{
+ if(!groups.length)return alert('Create nozzle groups first');
+ let duration=Math.max(1,+$('buildDuration').value||60);
+ let pattern=$('buildPattern').value,mode=$('sequence').value;
+ events=[];let cursor=0;
+ let step=Math.max(2,Math.min(5,duration/Math.max(1,groups.length)));
+ groups.forEach((g,i)=>{
+  let start=mode==='all'?0:mode==='overlap'?i*step*.45:cursor;
+  let dur=Math.min(step,duration-start);
+  if(dur<=0)return;
+  events.push({id:uid(),group:g.id,track:active,start,duration:dur,pause:.5,height:45+(i%4)*15,pattern});
+  if(mode==='sequential')cursor+=dur+.5;
+ });
+ drawTimeline();
+};
+
+function drawTimeline(){
+ tx.clearRect(0,0,timeline.width,timeline.height);
+ tx.fillStyle='#091426';tx.fillRect(0,0,timeline.width,timeline.height);
+ let max=60;
+ let tr=tracks[active];if(tr)max=Math.max(10,tr.duration);
+ tx.font='13px Arial';tx.fillStyle='#a9bbd2';
+ for(let s=0;s<=max;s+=5){
+  let x=s/max*timeline.width;tx.fillText(s+'s',x+3,15);
+  tx.strokeStyle='#263a55';tx.beginPath();tx.moveTo(x,22);tx.lineTo(x,timeline.height);tx.stroke();
+ }
+ let lane=36;
+ groups.forEach((g,i)=>{
+  let y=26+i*lane;
+  tx.fillStyle=g.color;tx.fillText(g.name.slice(0,18),5,y+14);
+  tx.strokeStyle='#263a55';tx.beginPath();tx.moveTo(125,y+20);tx.lineTo(timeline.width,y+20);tx.stroke();
+  events.filter(e=>e.group===g.id&&e.track===active).forEach(e=>{
+   let x=125+e.start/max*(timeline.width-130);
+   let w=e.duration/max*(timeline.width-130);
+   tx.fillStyle=e.id===selectedEvent?'#fff':g.color;
+   tx.fillRect(x,y,w,17);
+   tx.fillStyle='#081321';tx.fillText(e.pattern,x+3,y+13);
+  });
+ });
+ $('eventList').innerHTML=events.filter(e=>e.track===active).map(e=>{
+  let g=groups.find(x=>x.id===e.group);
+  return `<div class="group"><span>${g?.name||'Group'} • ${e.start.toFixed(1)}s • ${e.duration}s • ${e.pattern}</span><button class="secondary" onclick="pickEvent('${e.id}')">Edit</button></div>`;
+ }).join('');
+}
+window.pickEvent=id=>{
+ let e=events.find(x=>x.id===id);if(!e)return;selectedEvent=id;
+ $('eventGroup').value=e.group;$('eventTrack').value=e.track;
+ $('eventStart').value=e.start;$('eventDuration').value=e.duration;
+ $('eventPause').value=e.pause;$('eventHeight').value=e.height;
+ $('eventPattern').value=e.pattern;active=e.track;$('activeTrack').value=active;
+ drawWave();drawTimeline();
+};
+timeline.addEventListener('click',e=>{
+ let r=timeline.getBoundingClientRect();
+ let x=(e.clientX-r.left)/r.width*timeline.width;
+ let y=(e.clientY-r.top)/r.height*timeline.height;
+ let idx=Math.floor((y-26)/36);let g=groups[idx];if(!g)return;
+ let max=tracks[active]?.duration||60;
+ let t=(x-125)/(timeline.width-130)*max;
+ let found=events.find(ev=>ev.group===g.id&&ev.track===active&&t>=ev.start&&t<=ev.start+ev.duration);
+ if(found)pickEvent(found.id);
+});
+
+function getTime(){return playOffset+(performance.now()-startClock)/1000}
+async function playPreview(){
+ stopPreview();
+ if(!tracks.A&&!tracks.B)return alert('Upload music or generate demo music first');
+ audioContext=new (window.AudioContext||window.webkitAudioContext)();
+ await audioContext.resume();
+ sources=[];
+ for(let key of ['A','B']){
+  let tr=tracks[key];if(!tr)continue;
+  let src=audioContext.createBufferSource();src.buffer=tr.buffer;
+  let gain=audioContext.createGain();gain.gain.value=.7;
+  src.connect(gain);gain.connect(audioContext.destination);
+  let offset=Math.min(playOffset,tr.duration-.01);
+  src.start(0,offset);sources.push(src);
+ }
+ startClock=performance.now();playing=true;
+ $('playStatus').textContent='Playing preview';
+ animate();
+}
+function stopPreview(){
+ playing=false;sources.forEach(s=>{try{s.stop()}catch(e){}});
+ sources=[];if(raf)cancelAnimationFrame(raf);
+ if(audioContext){audioContext.close();audioContext=null}
+ $('playStatus').textContent='Stopped';drawFountain();
 }
 function animate(){
- ctx.clearRect(0,0,canvas.width,canvas.height);
- if(bgLoaded)ctx.drawImage(bg,0,0,canvas.width,canvas.height);
- else{ctx.fillStyle="#0a2941";ctx.fillRect(0,0,canvas.width,canvas.height)}
- const nowA=tracks.A.audio.currentTime,nowB=tracks.B.audio.currentTime;
- dots.forEach(d=>{
-  const g=groups.find(x=>x.dots.includes(d.id));
-  if(!g)return;
-  const idx=g.dots.indexOf(d.id);
-  let power=0;
-  events.forEach(ev=>{
-   if(ev.group!==g.id)return;
-   const tm=ev.track==="A"?nowA:nowB;
-   if(tm>=ev.start&&tm<=ev.start+ev.duration)power=Math.max(power,eventPower(ev,tm,idx));
-  });
-  ctx.beginPath();ctx.arc(d.x,d.y,6,0,Math.PI*2);
-  ctx.fillStyle=g.color;ctx.fill();
-  if(power>.03){
-   const h=Math.min(220,20+power*110);
-   ctx.beginPath();ctx.moveTo(d.x,d.y);
-   ctx.quadraticCurveTo(d.x-5,d.y-h*.5,d.x+Math.sin(performance.now()/130+idx)*5,d.y-h);
-   ctx.strokeStyle=g.color;ctx.lineWidth=2+power*2;ctx.shadowColor=g.color;ctx.shadowBlur=12;ctx.stroke();ctx.shadowBlur=0;
-   ctx.beginPath();ctx.arc(d.x,d.y-h,2+power*2,0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();
-  }
- });
- if(playing){
-  if(!tracks.A.audio.paused)playhead=tracks.A.audio.currentTime;
-  drawWave();
-  if(tracks.A.audio.ended&&tracks.B.audio.ended){stopAll()}
- }
+ if(!playing)return;
+ let t=getTime();
+ drawFountain(t);
+ if(tracks[active]&&t>=tracks[active].duration){stopPreview();return}
  raf=requestAnimationFrame(animate);
 }
-function stopAll(){
- playing=false;tracks.A.audio.pause();tracks.B.audio.pause();setStatus("Stopped");
-}
-$("preview").onclick=async()=>{
- if(!tracks.A.url&&!tracks.B.url)return alert("Track A ya B mein music load karo.");
- stopAll();
- const start=Math.max(0,playhead);
- for(const key of ["A","B"]){
-  const t=tracks[key];if(!t.url)continue;
-  t.audio.currentTime=Math.min(start,Math.max(0,t.duration-.05));
- }
- playing=true;setStatus("Playing scheduled fountain");
- for(const key of ["A","B"]){
-  const t=tracks[key];if(t.url){try{await t.audio.play()}catch(err){console.error(err)}}
- }
-};
-$("stop").onclick=stopAll;
-function tick(){animate()}
-refresh();tick();
-})();
+$('play').onclick=playPreview;
+$('stop').onclick=stopPreview;
+drawFountain();renderGroups();drawTimeline();drawWave();
 </script>
 </body>
 </html>
