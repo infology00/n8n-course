@@ -1,0 +1,1424 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#193b35">
+
+<title>StayFlow | Guest Messaging & Booking Automation</title>
+
+<style>
+:root {
+    --green: #193b35;
+    --green-light: #2c594d;
+    --cream: #f8f7f2;
+    --sage: #e7eee7;
+    --gold: #c5a16b;
+    --text: #25332e;
+    --muted: #68756e;
+    --white: #ffffff;
+    --border: #e0e6df;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    width: min(1160px, 90%);
+    margin: auto;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(248,247,242,.96);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+}
+
+nav {
+    min-height: 78px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--green);
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+.logo small {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: var(--gold);
+}
+
+.button {
+    display: inline-block;
+    padding: 13px 22px;
+    background: var(--green);
+    color: white;
+    border-radius: 40px;
+    font-size: 13px;
+    font-weight: 700;
+    border: 1px solid var(--green);
+    transition: .25s;
+}
+
+.button:hover {
+    background: var(--green-light);
+    transform: translateY(-2px);
+}
+
+.button-outline {
+    background: transparent;
+    color: var(--green);
+}
+
+.hero {
+    padding: 95px 0 85px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 90% 15%, #e5e9d9 0, transparent 30%),
+        var(--cream);
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 65px;
+    align-items: center;
+}
+
+.eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #967546;
+}
+
+h1, h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 500;
+    color: var(--green);
+    letter-spacing: -1.5px;
+    line-height: 1.13;
+}
+
+h1 {
+    font-size: clamp(42px, 5vw, 67px);
+    margin: 22px 0;
+}
+
+h1 em {
+    color: #a4824f;
+}
+
+.hero-description {
+    color: var(--muted);
+    font-size: 17px;
+    max-width: 560px;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 30px 0;
+}
+
+.hero-points {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.hero-points span::before {
+    content: "✓ ";
+    color: var(--green-light);
+    font-weight: 900;
+}
+
+.chat-window {
+    background: white;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 25px 70px #193b3515;
+}
+
+.chat-header {
+    background: var(--green);
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.avatar {
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #dce8dc;
+    color: var(--green);
+    font-weight: 800;
+}
+
+.chat-header strong {
+    display: block;
+}
+
+.chat-header small {
+    opacity: .75;
+}
+
+.chat-body {
+    padding: 23px;
+    background: #f3f6f2;
+}
+
+.message {
+    background: white;
+    padding: 13px 15px;
+    border-radius: 14px 14px 14px 3px;
+    margin-bottom: 13px;
+    font-size: 13px;
+    border: 1px solid var(--border);
+}
+
+.message.user {
+    background: #dcebdd;
+    border-color: #dcebdd;
+    margin-left: 35px;
+    border-radius: 14px 14px 3px 14px;
+}
+
+.menu-option {
+    background: white;
+    border: 1px solid #d9e3d9;
+    border-radius: 10px;
+    padding: 11px 13px;
+    margin: 8px 0;
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.chat-footer {
+    padding: 12px 18px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+section {
+    padding: 85px 0;
+}
+
+.section-white {
+    background: white;
+}
+
+.section-heading {
+    max-width: 740px;
+    margin-bottom: 40px;
+}
+
+.section-label {
+    color: #a17e48;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+h2 {
+    font-size: clamp(34px, 4vw, 48px);
+    margin: 13px 0 18px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    padding: 27px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    transition: .25s;
+}
+
+.section-white .card {
+    background: var(--cream);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px #193b3510;
+}
+
+.card-icon {
+    height: 45px;
+    width: 45px;
+    display: grid;
+    place-items: center;
+    background: var(--sage);
+    color: var(--green);
+    border-radius: 12px;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    font-size: 17px;
+    color: var(--green);
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.feature-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.feature {
+    display: flex;
+    gap: 14px;
+    background: white;
+    border: 1px solid var(--border);
+    padding: 19px;
+    border-radius: 13px;
+}
+
+.check {
+    flex-shrink: 0;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--sage);
+    color: var(--green);
+    font-weight: 900;
+}
+
+.feature h3 {
+    font-size: 14px;
+    color: var(--green);
+    margin-bottom: 5px;
+}
+
+.feature p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 17px;
+}
+
+.step {
+    background: white;
+    padding: 24px 20px;
+    border-top: 3px solid var(--gold);
+    border-radius: 0 0 14px 14px;
+}
+
+.step-number {
+    font-family: Georgia, serif;
+    font-size: 30px;
+    color: var(--gold);
+    margin-bottom: 16px;
+}
+
+.step h3 {
+    color: var(--green);
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.step p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.flow {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.flow-box {
+    text-align: center;
+    background: var(--sage);
+    color: var(--green);
+    padding: 19px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.flow-box small {
+    display: block;
+    font-weight: 400;
+    margin-top: 4px;
+}
+
+.integration-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    align-items: center;
+}
+
+.integration-panel {
+    background: var(--green);
+    padding: 32px;
+    color: white;
+    border-radius: 20px;
+}
+
+.integration-panel h3 {
+    font-family: Georgia, serif;
+    font-size: 27px;
+    font-weight: 500;
+    margin-bottom: 18px;
+}
+
+.integration-panel p {
+    color: #dbe6dd;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.integration-panel strong {
+    color: white;
+}
+
+.integration-note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 17px;
+}
+
+.pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.pill {
+    border: 1px solid #ffffff40;
+    border-radius: 30px;
+    padding: 7px 12px;
+    font-size: 11px;
+}
+
+.phase-list {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    padding: 10px 28px;
+}
+
+.phase {
+    display: grid;
+    grid-template-columns: 95px 1fr 115px;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+}
+
+.phase:last-child {
+    border-bottom: none;
+}
+
+.phase-label {
+    color: #a17e48;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.phase h3 {
+    color: var(--green);
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.phase p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.phase-status {
+    text-align: center;
+    background: var(--sage);
+    color: var(--green);
+    border-radius: 8px;
+    padding: 7px;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.faq-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 22px;
+}
+
+.faq-item h3 {
+    color: var(--green);
+    font-size: 14px;
+    margin-bottom: 9px;
+}
+
+.faq-item p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.cta {
+    background: var(--green);
+    color: white;
+}
+
+.cta h2 {
+    color: white;
+    max-width: 760px;
+}
+
+.cta p {
+    color: #dce6df;
+    max-width: 760px;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.cta .button {
+    background: white;
+    color: var(--green);
+    border-color: white;
+}
+
+footer {
+    padding: 25px 0;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+@media(max-width:900px) {
+    .nav-links {
+        display: none;
+    }
+
+    .hero-grid,
+    .integration-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width:600px) {
+    .container {
+        width: 92%;
+    }
+
+    .hero {
+        padding: 60px 0;
+    }
+
+    section {
+        padding: 60px 0;
+    }
+
+    .grid-3,
+    .feature-list,
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .flow {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .phase {
+        grid-template-columns: 1fr;
+        gap: 7px;
+    }
+
+    .phase-status {
+        width: max-content;
+        padding: 6px 12px;
+    }
+
+    .hero-buttons .button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <nav>
+            <a href="#home" class="logo">
+                Stay<span>Flow</span>
+                <small>Guest Messaging Systems</small>
+            </a>
+
+            <div class="nav-links">
+                <a href="#experience">Experience</a>
+                <a href="#features">Features</a>
+                <a href="#workflow">Workflow</a>
+                <a href="#integration">Integrations</a>
+                <a href="#delivery">Delivery</a>
+            </div>
+
+            <a href="#contact" class="button">Discuss the Project ↗</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+    <div class="container hero-grid">
+
+        <div>
+            <div class="eyebrow">Messenger Booking Automation Proposal</div>
+
+            <h1>
+                A better welcome.<br>
+                A smoother <em>stay.</em>
+            </h1>
+
+            <p class="hero-description">
+                Transform your Facebook Messenger into a helpful digital
+                front desk for your Airbnb and condo rental business.
+                Give guests instant answers, help them explore your rooms,
+                simplify booking enquiries, and let your customer service
+                team focus on the guests who need personal attention.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#workflow" class="button">Explore the Guest Journey ↓</a>
+                <a href="#delivery" class="button button-outline">Implementation Plan</a>
+            </div>
+
+            <div class="hero-points">
+                <span>Instant FAQ responses</span>
+                <span>Guided room selection</span>
+                <span>Human support when needed</span>
+            </div>
+        </div>
+
+        <div class="chat-window">
+            <div class="chat-header">
+                <div class="avatar">SF</div>
+                <div>
+                    <strong>Guest Assistance</strong>
+                    <small>Automated Messenger Experience</small>
+                </div>
+            </div>
+
+            <div class="chat-body">
+                <div class="message">
+                    Hello and welcome! 👋<br><br>
+                    Thank you for considering our property for your stay.
+                    How can we help you today?
+                </div>
+
+                <div class="message user">
+                    I'd like to see the rooms.
+                </div>
+
+                <div class="message">
+                    Of course! Please choose an option below.
+                </div>
+
+                <div class="menu-option">🏡 View Rooms & Rates</div>
+                <div class="menu-option">📅 Dates & Availability</div>
+                <div class="menu-option">🗝 Check-in & Property Information</div>
+                <div class="menu-option">💳 Booking & Payment Instructions</div>
+                <div class="menu-option">💬 Speak to Our Team</div>
+            </div>
+
+            <div class="chat-footer">
+                Illustrative conversation — customised to your property
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+
+<section class="section-white" id="experience">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-label">The Guest Experience</div>
+
+            <h2>Your digital front desk, available whenever guests reach out.</h2>
+
+            <p>
+                Guests should not have to wait for a manual response just
+                to learn your nightly rates, check-in times, or house rules.
+                The proposed system organises the most common questions
+                into a simple, friendly Messenger journey.
+            </p>
+        </div>
+
+        <div class="grid-3">
+
+            <div class="card">
+                <div class="card-icon">✦</div>
+                <h3>A Warm Welcome</h3>
+                <p>
+                    Every new conversation can begin with a professional
+                    welcome and a menu of clear choices, helping guests
+                    find the information they need without unnecessary
+                    back-and-forth messages.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">⌂</div>
+                <h3>Confident Room Selection</h3>
+                <p>
+                    Present available room information with photographs,
+                    nightly rates, guest capacity, amenities, and the
+                    appropriate booking or enquiry link.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">♡</div>
+                <h3>Personal Support</h3>
+                <p>
+                    When a guest is ready to book, needs special assistance,
+                    or has a question outside the automated flow, the
+                    conversation can be handed to your customer service team.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+
+<section id="features">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-label">Proposed System Features</div>
+
+            <h2>Everything guests need to take the next step.</h2>
+
+            <p>
+                The automation will be built around your real property
+                information, booking process, policies, and frequently
+                asked questions.
+            </p>
+        </div>
+
+        <div class="feature-list">
+
+            <div class="feature">
+                <div class="check">✓</div>
+                <div>
+                    <h3>Welcome Message & Interactive Menu</h3>
+                    <p>
+                        Introduce guests to the property and provide
+                        organised options for rooms, availability,
+                        facilities, bookings, FAQs, and human support.
+                    </p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="check">✓</div>
+                <div>
+                    <h3>Room Selection & Property Gallery</h3>
+                    <p>
+                        Display room descriptions, photos, nightly rates,
+                        maximum occupancy, key amenities, and links to
+                        the relevant booking page.
+                    </p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="check">✓</div>
+                <div>
+                    <h3>Booking Dates & Availability</h3>
+                    <p>
+                        Ask for check-in and check-out dates and the
+                        number of guests. Direct visitors to a booking
+                        engine or connected availability source where
+                        supported.
+                    </p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="check">✓</div>
+                <div>
+                    <h3>Check-in & Check-out Procedures</h3>
+                    <p>
+                        Explain arrival and departure times, key collection,
+                        access arrangements, identification requirements,
+                        and approved guest instructions.
+                    </p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="check">✓</div>
+                <div>
+                    <h3>Parking, Amenities & Wi-Fi</h3>
+                    <p>
+                        Answer questions about parking, internet access,
+                        facilities, accessibility, location, and other
+                        property essentials.
+                    </p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="check">✓</div>
+                <div>
+                    <h3>House Rules & Guest Policies</h3>
+                    <p>
+                        Explain smoking and pet policies, quiet hours,
+                        visitor rules, occupancy limits, and other
+                        approved property requirements.
+                    </p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="check">✓</div>
+                <div>
+                    <h3>Frequently Asked Questions</h3>
+                    <p>
+                        Create a structured answer library for repetitive
+                        enquiries, with a fallback response whenever
+                        the system cannot confidently answer.
+                    </p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="check">✓</div>
+                <div>
+                    <h3>Booking Instructions & Payment Process</h3>
+                    <p>
+                        Guide guests through your approved reservation
+                        process, payment methods, payment instructions,
+                        and booking confirmation steps.
+                    </p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="check">✓</div>
+                <div>
+                    <h3>Live Customer Service Handover</h3>
+                    <p>
+                        Offer a clear route to your team for booking
+                        assistance, payment verification, complaints,
+                        exceptions, and complex enquiries.
+                    </p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="check">✓</div>
+                <div>
+                    <h3>Guest Enquiry Information</h3>
+                    <p>
+                        Capture relevant details provided by the guest,
+                        such as preferred room, dates, guest count, and
+                        contact information where permitted.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- WORKFLOW -->
+
+<section class="section-white" id="workflow">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-label">How The Automation Works</div>
+
+            <h2>A clear journey from first enquiry to booking.</h2>
+
+            <p>
+                Each conversation follows a defined path. Guests receive
+                relevant information and a useful next step instead of
+                being left in an endless automated conversation.
+            </p>
+        </div>
+
+        <div class="steps">
+
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3>Guest Sends a Message</h3>
+                <p>
+                    A visitor messages your connected Facebook Page.
+                    The welcome automation starts the conversation
+                    and presents the main menu.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3>Guest Selects an Option</h3>
+                <p>
+                    They choose rooms, dates, property information,
+                    booking instructions, FAQs, or live assistance.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3>The System Responds</h3>
+                <p>
+                    The automation displays the relevant information,
+                    collects appropriate details, or directs the guest
+                    to the correct booking page.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">04</div>
+                <h3>Booking or Human Support</h3>
+                <p>
+                    Guests continue through the approved booking process
+                    or connect with your customer service team when
+                    personal assistance is required.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="flow">
+            <div class="flow-box">
+                Facebook Page
+                <small>New enquiry</small>
+            </div>
+
+            <div class="flow-box">
+                Messenger Menu
+                <small>Guest selects</small>
+            </div>
+
+            <div class="flow-box">
+                Automated Response
+                <small>Relevant information</small>
+            </div>
+
+            <div class="flow-box">
+                Booking or Support
+                <small>Next action</small>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- INTEGRATIONS -->
+
+<section id="integration">
+    <div class="container integration-grid">
+
+        <div>
+            <div class="section-label">Platforms & Integrations</div>
+
+            <h2>Connected to your existing business workflow.</h2>
+
+            <p style="color:var(--muted);font-size:14px;">
+                The recommended setup will depend on your current
+                Facebook Page, booking platform, number of rental units,
+                and how room availability is managed.
+            </p>
+
+            <p style="color:var(--muted);font-size:14px;margin-top:15px;">
+                The goal is to keep the system straightforward for your
+                team to manage while making the guest experience more
+                consistent and efficient.
+            </p>
+
+            <div class="pills">
+                <span class="pill" style="color:var(--green);border-color:var(--border);">Meta Business Suite</span>
+                <span class="pill" style="color:var(--green);border-color:var(--border);">Facebook Messenger</span>
+                <span class="pill" style="color:var(--green);border-color:var(--border);">ManyChat</span>
+                <span class="pill" style="color:var(--green);border-color:var(--border);">Booking Engine</span>
+                <span class="pill" style="color:var(--green);border-color:var(--border);">Property Management System</span>
+                <span class="pill" style="color:var(--green);border-color:var(--border);">API / Webhooks</span>
+            </div>
+
+            <p style="font-size:11px;color:var(--muted);margin-top:17px;">
+                The final platform and integration scope will be confirmed
+                after reviewing the tools you already use.
+            </p>
+        </div>
+
+        <div class="integration-panel">
+            <h3>How the connection will work</h3>
+
+            <p>
+                <strong>01. Connect your Facebook Page</strong><br>
+                Authorise the selected automation platform using the
+                required Page permissions.
+            </p>
+
+            <p>
+                <strong>02. Configure Messenger automation</strong><br>
+                Build the welcome flow, menu choices, room information,
+                FAQs, booking instructions, and escalation routes.
+            </p>
+
+            <p>
+                <strong>03. Connect booking information</strong><br>
+                Where supported, integrate your booking system to
+                retrieve availability or direct guests to the correct
+                reservation page.
+            </p>
+
+            <p>
+                <strong>04. Test and launch</strong><br>
+                Verify the conversations, links, mobile experience,
+                permissions, and customer service handover before launch.
+            </p>
+
+            <div class="pills">
+                <span class="pill">Page Permissions</span>
+                <span class="pill">Approved Content</span>
+                <span class="pill">Testing</span>
+                <span class="pill">Staff Handover</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- AVAILABILITY -->
+
+<section class="section-white">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-label">Availability & Booking Logic</div>
+
+            <h2>Reliable booking information, without guesswork.</h2>
+
+            <p>
+                Showing room details is straightforward. Confirming live
+                availability requires access to a reliable booking source.
+                The system will only confirm availability when that
+                information can actually be verified.
+            </p>
+        </div>
+
+        <div class="grid-3">
+
+            <div class="card">
+                <div class="card-icon">▦</div>
+                <h3>Connected Booking Engine</h3>
+                <p>
+                    If your booking platform supports availability
+                    integration, guests can be directed to the relevant
+                    unit and date-selection process using the supported
+                    connection.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">↗</div>
+                <h3>Existing Booking Links</h3>
+                <p>
+                    If only booking links are available, the automation
+                    can ask for preferred dates and send guests to your
+                    official booking page to confirm rates and availability.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">☎</div>
+                <h3>Manual Confirmation</h3>
+                <p>
+                    If your team manages availability manually, the bot
+                    can capture the enquiry and hand it to staff to verify
+                    dates, prices, and reservation details.
+                </p>
+            </div>
+
+        </div>
+
+        <p style="font-size:11px;color:var(--muted);margin-top:20px;">
+            Airbnb-specific capabilities, platform permissions, messaging
+            restrictions, and booking-system integrations must be checked
+            before implementation. The system will not promise unsupported
+            direct Airbnb booking actions.
+        </p>
+
+    </div>
+</section>
+
+<!-- DELIVERY -->
+
+<section id="delivery">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-label">Implementation Roadmap</div>
+
+            <h2>A structured delivery process, from discovery to launch.</h2>
+
+            <p>
+                The exact timeline depends on the number of units,
+                readiness of your property information, and whether
+                a live availability integration is required.
+            </p>
+        </div>
+
+        <div class="phase-list">
+
+            <div class="phase">
+                <div class="phase-label">STAGE 01</div>
+                <div>
+                    <h3>Discovery & Requirements</h3>
+                    <p>
+                        Review the Facebook Page, current booking process,
+                        room list, rates, photos, FAQs, property policies,
+                        payment instructions, and customer service workflow.
+                    </p>
+                </div>
+                <div class="phase-status">Scope Definition</div>
+            </div>
+
+            <div class="phase">
+                <div class="phase-label">STAGE 02</div>
+                <div>
+                    <h3>Conversation Design</h3>
+                    <p>
+                        Plan the welcome menu, room-selection flow,
+                        availability enquiries, FAQ responses, fallback
+                        messages, and rules for live-agent handover.
+                    </p>
+                </div>
+                <div class="phase-status">Flow Approval</div>
+            </div>
+
+            <div class="phase">
+                <div class="phase-label">STAGE 03</div>
+                <div>
+                    <h3>Automation Build & Integrations</h3>
+                    <p>
+                        Configure the chosen platform, add room details
+                        and booking links, and connect supported systems
+                        where access and integrations permit.
+                    </p>
+                </div>
+                <div class="phase-status">Configuration</div>
+            </div>
+
+            <div class="phase">
+                <div class="phase-label">STAGE 04</div>
+                <div>
+                    <h3>Testing & Launch</h3>
+                    <p>
+                        Test menu options, room information, booking links,
+                        date enquiries, FAQs, mobile behaviour, and the
+                        transition to your support team.
+                    </p>
+                </div>
+                <div class="phase-status">Quality Check</div>
+            </div>
+
+            <div class="phase">
+                <div class="phase-label">STAGE 05</div>
+                <div>
+                    <h3>Handover & Optimisation</h3>
+                    <p>
+                        Walk your team through the system, explain how
+                        to update room information and FAQs, and identify
+                        improvements based on actual guest questions.
+                    </p>
+                </div>
+                <div class="phase-status">Handover</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- SCOPE -->
+
+<section class="section-white">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-label">Project Scope</div>
+
+            <h2>Clear deliverables. Clear expectations.</h2>
+
+            <p>
+                The implementation will be scoped around your existing
+                setup so the final solution addresses the actual needs
+                of your rental business.
+            </p>
+        </div>
+
+        <div class="grid-3">
+
+            <div class="card">
+                <h3>Core Automation</h3>
+                <p>
+                    Welcome message, interactive menu, agreed room details,
+                    FAQs, property information, booking instructions,
+                    approved booking links, fallback responses, and
+                    live-agent handover.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Optional Integrations</h3>
+                <p>
+                    Live inventory, pricing checks, automated booking
+                    creation, CRM updates, payment-status checks, and
+                    staff notifications depend on supported integrations
+                    and access to the required systems.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Safe Booking Process</h3>
+                <p>
+                    Guests will be directed to your approved booking
+                    and payment provider. Sensitive card details will
+                    not be collected through Messenger, and payments
+                    will not be marked verified without a reliable source.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+
+<section id="faq">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-label">Frequently Asked Questions</div>
+
+            <h2>Important details before we begin.</h2>
+        </div>
+
+        <div class="faq-grid">
+
+            <div class="faq-item">
+                <h3>Will this work with Meta Business Suite?</h3>
+                <p>
+                    The Facebook Page and messaging setup will be reviewed
+                    first. Depending on the required features and Meta's
+                    current capabilities, we can use Meta-supported tools
+                    or an automation platform such as ManyChat.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can the automation check live availability?</h3>
+                <p>
+                    Yes, if your booking system offers a supported
+                    integration or API. Otherwise, guests will be directed
+                    to your booking page or the team will confirm dates
+                    manually.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can guests speak to a real person?</h3>
+                <p>
+                    Yes. A clear support option will allow guests to
+                    request assistance. The exact handover method depends
+                    on your team's existing inbox and workflow.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can we update room prices and photographs?</h3>
+                <p>
+                    Yes. The handover will cover how to maintain the
+                    relevant room information, photos, links, policies,
+                    and FAQ content within the selected platform.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Will payments happen inside Messenger?</h3>
+                <p>
+                    The recommended approach is to direct guests to your
+                    approved booking and payment provider. Messenger
+                    should explain the process rather than collect
+                    sensitive card details.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What do you need from us?</h3>
+                <p>
+                    Access to the Facebook Page with the required
+                    permissions, room details, approved rates, photographs,
+                    house rules, booking links, payment instructions,
+                    and your current availability process.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+
+<section class="cta" id="contact">
+    <div class="container">
+
+        <div class="section-label" style="color:#d8bd8d;">
+            The Recommended Next Step
+        </div>
+
+        <h2>Let's turn your Messenger inbox into a more helpful guest experience.</h2>
+
+        <p>
+            The next step is to review your Facebook Page, room information,
+            booking links, and how you currently confirm availability.
+            This will allow us to recommend the right platform, define
+            the integration requirements, and agree the project timeline
+            and fixed implementation fee.
+        </p>
+
+        <a class="button"
+           href="mailto:infology00@gmail.com?subject=Messenger%20Booking%20Automation%20Proposal">
+           Discuss the Project ↗
+        </a>
+
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <div class="container footer-content">
+        <div><strong style="color:var(--green);">StayFlow</strong> · Guest Messaging & Booking Automation</div>
+        <div>Project concept · Final scope and pricing subject to discovery</div>
+    </div>
+</footer>
+
+</body>
+</html>
+```
