@@ -4,122 +4,178 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AWSZ | AI Voice Operations</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>AWSZ | Intelligent Voice Operations</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#17172d;--muted:#77788f;--blue:#6375f5;--pink:#f29bc5;
-  --lav:#eeeaff;--line:#e9e8f2;--white:#fff;--green:#28b985;
+ --navy:#171637;--blue:#5267f5;--purple:#8b65e9;--pink:#ef78b5;
+ --lav:#eeeaff;--cyan:#b9eaff;--ink:#20203d;--muted:#73738c;
+ --line:#e8e5f2;--green:#27bd91;--orange:#ffb45c;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;color:var(--ink);background:#fff}
-button,a{font:inherit}
-a{text-decoration:none;color:inherit}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:#fbfaff}
+button,input{font:inherit}
 button{cursor:pointer}
-.wrap{width:min(1160px,91%);margin:auto}
-nav{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
-.logo{font-family:Manrope;font-size:27px;font-weight:800;letter-spacing:-2px}
-.logo span{color:var(--blue)}
-.navlinks{display:flex;gap:30px;font-size:13px;color:#64647b;font-weight:600}
-.navbtn,.primary{background:var(--ink);color:#fff;border:0;border-radius:30px;padding:13px 21px;font-weight:700}
-.hero{padding:100px 0 85px;position:relative;overflow:hidden}
-.hero:after{content:"";position:absolute;width:430px;height:430px;border-radius:50%;background:radial-gradient(circle,#eeeaff,transparent 70%);right:-100px;top:-90px;z-index:-1}
-.eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);font-weight:800;margin-bottom:22px}
-h1{font-family:Manrope;font-size:clamp(43px,7vw,76px);line-height:1.05;letter-spacing:-4px;max-width:850px}
-h1 span{color:var(--blue)}
-.hero p{font-size:18px;line-height:1.8;color:var(--muted);max-width:680px;margin:25px 0 30px}
-.hero-actions{display:flex;gap:13px;align-items:center;flex-wrap:wrap}
-.secondary{border:1px solid var(--line);padding:13px 21px;border-radius:30px;font-weight:700;background:#fff}
-.hero-note{font-size:12px;color:#999;margin-top:18px}
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:55px;max-width:750px}
-.metric{padding:20px;background:#faf9ff;border:1px solid var(--line);border-radius:17px}
-.metric strong{display:block;font-size:25px;font-family:Manrope}
-.metric small{color:var(--muted)}
-section{padding:88px 0}
-.section-head{max-width:700px;margin-bottom:38px}
-.section-head h2{font:800 clamp(32px,4vw,47px)/1.13 Manrope;letter-spacing:-2px}
-.section-head p{color:var(--muted);font-size:16px;line-height:1.8;margin-top:16px}
-.soft{background:#faf9ff}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card{padding:28px;border:1px solid var(--line);border-radius:22px;background:#fff}
-.icon{width:48px;height:48px;border-radius:15px;background:var(--lav);display:grid;place-items:center;font-size:22px;margin-bottom:22px}
-.card h3{font:800 20px Manrope;margin-bottom:12px}
-.card p{font-size:14px;line-height:1.8;color:var(--muted)}
-.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-.step{padding:22px 17px;border:1px solid var(--line);border-radius:18px;min-height:190px}
-.step b{font-size:12px;color:var(--blue);letter-spacing:1px}
-.step h3{font-size:17px;margin:17px 0 9px}
-.step p{font-size:13px;color:var(--muted);line-height:1.7}
-.stack{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.stackitem{background:#fff;border:1px solid var(--line);border-radius:18px;padding:23px 16px;text-align:center}
-.stackitem .symbol{font-size:26px;margin-bottom:12px}
-.stackitem strong{display:block;font-size:15px}
-.stackitem small{display:block;color:var(--muted);margin-top:7px;line-height:1.5}
-.demo-layout{display:grid;grid-template-columns:1fr 1.05fr;gap:35px;align-items:start}
-.scenarios{display:grid;gap:12px}
-.scenario{border:1px solid var(--line);padding:18px;border-radius:16px;background:white;text-align:left}
-.scenario.active{border-color:var(--blue);background:#f7f6ff}
-.scenario strong{display:block;font-size:15px;margin-bottom:5px}
-.scenario small{color:var(--muted);line-height:1.5}
-.phone-shell{background:#17172d;border-radius:35px;padding:13px;max-width:390px;margin:auto;box-shadow:0 25px 70px #24204a26}
-.phone{background:#fff;border-radius:25px;overflow:hidden;min-height:600px}
-.phone-top{padding:19px 20px 13px;display:flex;justify-content:space-between;font-size:12px;color:#888}
-.phone-body{text-align:center;padding:23px 22px}
-.avatar{width:86px;height:86px;border-radius:50%;background:linear-gradient(135deg,#dcd8ff,#f9c9df);display:grid;place-items:center;font-size:35px;margin:14px auto}
-.phone-body h3{font:800 23px Manrope}
-.status{font-size:12px;color:var(--green);margin-top:8px}
-.call-time{font-size:26px;font-weight:700;margin:20px}
-.wave{height:45px;display:flex;align-items:center;justify-content:center;gap:4px;margin:15px}
-.wave i{display:block;width:4px;border-radius:9px;background:#8990fa;height:15px;animation:wave .8s infinite alternate}
-.wave i:nth-child(2n){height:28px;animation-delay:.2s}
-.wave i:nth-child(3n){height:38px;animation-delay:.4s}
-@keyframes wave{to{transform:scaleY(.35)}}
-.phone-actions{display:flex;justify-content:center;gap:16px;margin:20px 0}
-.round{width:52px;height:52px;border:0;border-radius:50%;background:#f0eff8;font-size:20px}
-.round.end{background:#f05c77;color:#fff}
-.round:disabled{opacity:.5;cursor:not-allowed}
-.phone-label{font-size:11px;color:#999}
-.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px auto;max-width:225px}
-.keypad button{height:43px;border:1px solid var(--line);background:#fff;border-radius:11px;font-weight:700}
-.transcript{margin:16px;text-align:left;background:#f8f7fc;padding:15px;border-radius:14px;min-height:95px}
-.transcript strong{font-size:11px;color:var(--blue);text-transform:uppercase;letter-spacing:1px}
-.transcript p{font-size:12px;color:#666;line-height:1.6;margin-top:8px}
-.monitor{border:1px solid var(--line);border-radius:20px;padding:23px;margin-top:18px}
-.monitor h3{font:800 18px Manrope;margin-bottom:16px}
-.log{max-height:175px;overflow:auto}
-.logitem{font-size:12px;color:#6e6e83;padding:9px 0;border-bottom:1px solid #f0eff5}
-.logitem span{color:var(--blue);font-weight:700;margin-right:8px}
-.admin{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.adminbox{border:1px solid var(--line);border-radius:20px;padding:25px}
-.adminbox h3{font:800 20px Manrope;margin-bottom:12px}
-.adminbox p{color:var(--muted);font-size:14px;line-height:1.8}
-.adminbox ul{padding-left:18px;color:var(--muted);font-size:14px;line-height:2;margin-top:12px}
-.dashboard{background:#17172d;color:#fff;border-radius:24px;padding:25px}
-.dash-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
-.live{color:#65d8a8;font-size:12px}
-.dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.dash-stat{background:#25253e;padding:17px;border-radius:14px}
-.dash-stat small{color:#aaa;font-size:11px}
-.dash-stat strong{display:block;font-size:24px;margin-top:8px}
-.bar{height:8px;background:#34344e;border-radius:10px;margin-top:9px;overflow:hidden}
-.bar i{display:block;height:100%;width:75%;background:#9298ff;border-radius:10px}
-.cta{background:linear-gradient(120deg,#eeebff,#fff0f7);border-radius:28px;padding:55px}
-.cta h2{font:800 clamp(30px,4vw,46px)/1.15 Manrope;letter-spacing:-2px;max-width:700px}
-.cta p{color:var(--muted);line-height:1.8;margin:18px 0 25px;max-width:650px}
-footer{padding:30px 0;border-top:1px solid var(--line);color:#888;font-size:12px}
-footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
-.disclaimer{font-size:11px;color:#999;line-height:1.7;margin-top:18px}
-@media(max-width:850px){
- .navlinks{display:none}.grid3{grid-template-columns:1fr}
- .steps{grid-template-columns:repeat(2,1fr)}.stack{grid-template-columns:repeat(2,1fr)}
- .demo-layout,.admin{grid-template-columns:1fr}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(1190px,92%);margin:auto}
+nav{height:82px;display:flex;align-items:center;justify-content:space-between}
+.brand{font:800 29px Manrope;letter-spacing:-2px;color:var(--navy)}
+.brand span{color:var(--blue)}
+.navlinks{display:flex;gap:28px;font-size:13px;font-weight:700;color:#77748e}
+.navlinks a:hover{color:var(--blue)}
+.navcta{background:var(--navy);color:white;padding:13px 21px;border-radius:30px;font-size:13px;font-weight:700}
+.hero{
+ background:linear-gradient(120deg,#e7eaff 0%,#f3eaff 49%,#ffe8f3 100%);
+ border-radius:0 0 38px 38px;overflow:hidden;position:relative
 }
-@media(max-width:520px){
- .hero{padding:70px 0}.metrics{grid-template-columns:1fr}
- .steps{grid-template-columns:1fr}.stack{grid-template-columns:1fr 1fr}
- section{padding:65px 0}.cta{padding:30px 22px}
+.hero-inner{padding:85px 0 75px;display:grid;grid-template-columns:1.15fr .85fr;gap:35px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:9px 14px;border-radius:30px;background:#ffffffa8;color:#555bd3;font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase}
+.dot{width:8px;height:8px;border-radius:50%;background:#38bd91}
+h1{font:800 clamp(43px,6vw,72px)/1.06 Manrope;letter-spacing:-3.5px;color:var(--navy);margin:23px 0}
+h1 span{background:linear-gradient(90deg,#5267f5,#a45be3,#ed78b4);background-clip:text;color:transparent}
+.hero-copy{font-size:17px;line-height:1.85;color:#62617e;max-width:620px}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:27px}
+.btn{border:0;border-radius:30px;padding:15px 22px;font-weight:800;font-size:13px}
+.btn-primary{background:linear-gradient(100deg,#5368f5,#8c63e7);color:white;box-shadow:0 9px 24px #7165e844}
+.btn-light{background:white;color:var(--navy);border:1px solid #e8e4f6}
+.hero-points{display:flex;gap:22px;flex-wrap:wrap;margin-top:29px;color:#77738d;font-size:12px;font-weight:700}
+.hero-visual{background:#fff9;border:1px solid #ffffffb0;padding:20px;border-radius:28px;box-shadow:0 25px 70px #6a5aa322;transform:rotate(1deg)}
+.mini-window{background:var(--navy);border-radius:20px;padding:24px;color:white}
+.mini-top{display:flex;justify-content:space-between;font-size:11px;color:#c9c7ed}
+.mini-circle{height:95px;width:95px;border-radius:50%;margin:27px auto 15px;background:linear-gradient(135deg,#8c79ff,#ed8ec6);display:grid;place-items:center;font-size:35px;box-shadow:0 0 0 12px #ffffff12}
+.mini-window h3{text-align:center;font:800 21px Manrope}
+.mini-window p{text-align:center;color:#c6c4e2;font-size:12px;margin-top:8px}
+.mini-bars{display:flex;align-items:center;justify-content:center;gap:5px;height:45px;margin-top:15px}
+.mini-bars i{height:16px;width:4px;border-radius:5px;background:#b1a5ff}
+.mini-bars i:nth-child(2n){height:30px}.mini-bars i:nth-child(3n){height:40px}
+.mini-footer{display:flex;justify-content:space-between;border-top:1px solid #ffffff20;padding-top:16px;font-size:11px;color:#b9b7d5}
+section{padding:85px 0}
+.section-top{max-width:760px;margin-bottom:38px}
+.kicker{font-size:11px;color:var(--blue);font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:15px}
+h2{font:800 clamp(32px,4vw,48px)/1.14 Manrope;letter-spacing:-2px;color:var(--navy)}
+.section-top p{font-size:16px;line-height:1.85;color:var(--muted);margin-top:17px}
+.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.benefit{border-radius:22px;padding:27px;background:white;border:1px solid var(--line);box-shadow:0 10px 30px #3b2d6810}
+.benefit:nth-child(2){background:#f1edff}
+.benefit:nth-child(3){background:#fff0f7}
+.bicon{width:51px;height:51px;border-radius:16px;display:grid;place-items:center;font-size:24px;background:#eaeaff;margin-bottom:20px}
+.benefit h3{font:800 19px Manrope;margin-bottom:11px}
+.benefit p{font-size:14px;line-height:1.8;color:var(--muted)}
+.tools-section{background:var(--navy);color:white}
+.tools-section h2{color:white}
+.tools-section .section-top p{color:#c4c2df}
+.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.tool{
+ background:#242345;border:1px solid #ffffff18;border-radius:20px;padding:23px;
+ transition:.2s
+}
+.tool:hover{transform:translateY(-4px);border-color:#9c8cff}
+.tool-head{display:flex;align-items:center;gap:13px;margin-bottom:16px}
+.tool-logo{width:47px;height:47px;border-radius:14px;background:linear-gradient(135deg,#646ef7,#a96ce9);display:grid;place-items:center;font-size:21px;font-weight:800}
+.tool h3{font:800 19px Manrope}
+.tool .role{color:#c5b8ff;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}
+.tool p{color:#c4c2df;font-size:13px;line-height:1.8}
+.tool .advantage{margin-top:14px;padding-top:13px;border-top:1px solid #ffffff19;color:#b3f2da;font-size:12px;line-height:1.7}
+.architecture{margin-top:25px;background:linear-gradient(110deg,#3e3d76,#44366f);padding:23px;border-radius:20px}
+.architecture h3{font:800 17px Manrope;margin-bottom:14px}
+.flow{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.flow span{background:#ffffff18;border:1px solid #ffffff25;padding:10px 13px;border-radius:10px;font-size:12px;font-weight:700}
+.flow b{color:#d5c9ff}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
+.step{padding:22px;border-radius:19px;background:white;border:1px solid var(--line);min-height:195px}
+.step-no{font:800 29px Manrope;color:#a69af3}
+.step h3{font:800 17px Manrope;margin:14px 0 9px}
+.step p{font-size:13px;line-height:1.75;color:var(--muted)}
+.demo-section{background:linear-gradient(140deg,#e9eaff,#f6eaff 55%,#ffeaf4)}
+.demo-intro{display:flex;justify-content:space-between;gap:25px;align-items:end;margin-bottom:32px}
+.demo-intro .section-top{margin:0}
+.demo-label{padding:11px 15px;background:#fff;border-radius:30px;font-size:12px;font-weight:800;color:#6e5ed2;white-space:nowrap}
+.demo-layout{display:grid;grid-template-columns:.82fr 1.18fr;gap:20px;align-items:stretch}
+.scenario-panel,.call-panel{background:white;border-radius:25px;padding:25px;box-shadow:0 15px 40px #493a8c12}
+.panel-title{font:800 19px Manrope;margin-bottom:7px}
+.panel-desc{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:19px}
+.scenario{display:flex;gap:13px;width:100%;text-align:left;padding:15px;border:1px solid var(--line);background:#fff;border-radius:15px;margin-bottom:10px;align-items:center}
+.scenario.active{border:2px solid #7569ed;background:#f4f1ff;padding:14px}
+.scenario .sicon{width:43px;height:43px;border-radius:13px;background:#efedff;display:grid;place-items:center;font-size:20px;flex-shrink:0}
+.scenario strong{display:block;font-size:13px;margin-bottom:4px}
+.scenario small{font-size:11px;color:var(--muted);line-height:1.5}
+.phone-area{display:grid;grid-template-columns: .85fr 1.15fr;gap:17px}
+.phone{
+ background:linear-gradient(160deg,#202044,#302b65);
+ border-radius:27px;padding:17px;color:white;min-height:510px;
+ display:flex;flex-direction:column;align-items:center
+}
+.phone-status{width:100%;display:flex;justify-content:space-between;color:#c4c3e2;font-size:10px}
+.phone-avatar{width:77px;height:77px;border-radius:50%;background:linear-gradient(135deg,#7d7afa,#e98bc3);display:grid;place-items:center;font-size:31px;margin-top:27px;box-shadow:0 0 0 10px #ffffff10}
+.phone h3{font:800 19px Manrope;margin-top:17px}
+.phone-sub{color:#c3c0e2;font-size:11px;margin-top:6px}
+.phone-timer{font:700 26px Manrope;margin:22px 0 5px}
+.phone-state{font-size:11px;color:#a9e9d3}
+.soundwave{height:45px;display:flex;align-items:center;gap:4px;margin:12px 0}
+.soundwave i{width:4px;border-radius:5px;background:#a89bff;height:12px}
+.soundwave i:nth-child(2n){height:26px}.soundwave i:nth-child(3n){height:36px}
+.soundwave.playing i{animation:beat .65s infinite alternate}
+.soundwave.playing i:nth-child(2n){animation-delay:.2s}
+.soundwave.playing i:nth-child(3n){animation-delay:.35s}
+@keyframes beat{to{transform:scaleY(.3)}}
+.call-controls{display:flex;gap:15px;margin:13px 0}
+.call-controls button{width:49px;height:49px;border:0;border-radius:50%;background:#ffffff20;color:white;font-size:19px}
+.call-controls .hang{background:#f45c82}
+.call-controls button:disabled{opacity:.4;cursor:not-allowed}
+.phone-note{font-size:10px;color:#aaa8cb;text-align:center}
+.voice-log{background:#f8f7fc;border-radius:17px;padding:16px;display:flex;flex-direction:column;min-height:460px}
+.voice-log-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800}
+.live-tag{color:#159c72;font-size:10px}
+.messages{flex:1;overflow-y:auto;max-height:335px;padding:12px 0}
+.msg{padding:11px 12px;border-radius:13px;margin:9px 0;max-width:95%;font-size:12px;line-height:1.65}
+.msg.ai{background:#eceaff;color:#38345f;border-bottom-left-radius:3px}
+.msg.user{background:#e4f8f1;color:#28644e;margin-left:auto;border-bottom-right-radius:3px}
+.msg small{display:block;font-size:9px;opacity:.65;margin-bottom:4px;font-weight:800;text-transform:uppercase}
+.voice-input{display:flex;gap:7px;margin-top:10px}
+.voice-input input{width:100%;min-width:0;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:12px;outline:none}
+.voice-input button{border:0;border-radius:12px;background:var(--blue);color:white;padding:0 15px;font-weight:800}
+.voice-buttons{display:flex;gap:8px;margin-top:10px}
+.voice-buttons button{flex:1;border:0;border-radius:12px;padding:12px 8px;font-size:11px;font-weight:800}
+.listen-btn{background:#eeeaff;color:#5d55ca}
+.end-btn{background:#ffe9ef;color:#d44b71}
+.hint{font-size:10px;color:#8a879d;line-height:1.6;margin-top:12px}
+.dash-section{background:#fff}
+.dashboard{background:#1e1d41;color:white;border-radius:25px;padding:28px}
+.dash-head{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px}
+.dash-head h3{font:800 20px Manrope}
+.dash-head span{font-size:11px;color:#9fe7ce}
+.dash-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.dash-stat{background:#2b2a53;padding:18px;border-radius:16px}
+.dash-stat small{font-size:11px;color:#bdbbd8}
+.dash-stat strong{display:block;font:800 26px Manrope;margin-top:8px}
+.dash-bottom{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px}
+.dash-box{background:#2b2a53;border-radius:16px;padding:18px}
+.dash-box h4{font-size:13px;margin-bottom:14px}
+.dash-row{display:flex;justify-content:space-between;color:#c7c5dd;font-size:11px;padding:9px 0;border-bottom:1px solid #ffffff12}
+.progress{height:7px;background:#47456d;border-radius:10px;margin-top:8px}
+.progress i{display:block;height:100%;width:78%;background:linear-gradient(90deg,#7c8aff,#e48ac3);border-radius:10px}
+.dash-disclaimer{font-size:10px;color:#a8a6c5;margin-top:16px}
+.ending{background:linear-gradient(110deg,#5267f5,#9263e6,#e47cb8);border-radius:27px;padding:55px;color:white}
+.ending h2{color:white;max-width:740px}
+.ending p{color:#f0eaff;line-height:1.8;max-width:680px;margin:17px 0 25px}
+.ending .btn{background:white;color:#514bc0}
+footer{padding:28px 0;color:#888;font-size:12px}
+footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+@media(max-width:900px){
+ .hero-inner{grid-template-columns:1fr}.hero-visual{max-width:430px}
+ .tool-grid{grid-template-columns:repeat(2,1fr)}
+ .steps{grid-template-columns:repeat(2,1fr)}
+ .demo-layout{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+ .navlinks{display:none}.benefit-grid,.tool-grid{grid-template-columns:1fr}
+ .phone-area{grid-template-columns:1fr}.phone{min-height:440px}
+ .dash-stats{grid-template-columns:repeat(2,1fr)}
+ .dash-bottom{grid-template-columns:1fr}.demo-intro{display:block}
+ .demo-label{display:inline-block;margin-top:17px}
+ .steps{grid-template-columns:1fr}.hero-inner{padding:60px 0}
+ section{padding:65px 0}.ending{padding:30px 23px}
  h1{letter-spacing:-2px}
 }
 </style>
@@ -128,472 +184,563 @@ footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
 
 <header class="wrap">
 <nav>
-  <a class="logo" href="#">AWS<span>Z</span></a>
-  <div class="navlinks">
-    <a href="#workflow">How it works</a>
-    <a href="#technology">Technology</a>
-    <a href="#demo">Live demo</a>
-    <a href="#dashboard">Dashboard</a>
-  </div>
-  <a class="navbtn" href="https://automationwithsajjadzaidi.com/" target="_blank">Start a conversation ↗</a>
+ <a class="brand" href="#">AWS<span>Z</span></a>
+ <div class="navlinks">
+  <a href="#solution">Solution</a><a href="#tools">Technology</a>
+  <a href="#workflow">Workflow</a><a href="#demo">Voice demo</a>
+  <a href="#dashboard">Dashboard</a>
+ </div>
+ <a class="navcta" href="https://automationwithsajjadzaidi.com/">Discuss a project ↗</a>
 </nav>
 </header>
 
-<main>
-<section class="hero wrap">
-  <div class="eyebrow">AWSZ · AI Voice Operations</div>
-  <h1>Every customer call.<br><span>Handled intelligently.</span></h1>
+<div class="hero">
+ <div class="wrap hero-inner">
+  <div>
+   <div class="eyebrow"><i class="dot"></i> AI VOICE AUTOMATION · AWSZ</div>
+   <h1>Meet your new<br><span>AI Voice Team.</span></h1>
+   <p class="hero-copy">
+    A connected voice operation that can answer customer calls, speak naturally,
+    understand requests, follow business rules and trigger actions in your
+    existing systems. Give customers faster responses while reducing repetitive
+    work for your team.
+   </p>
+   <div class="hero-buttons">
+    <a class="btn btn-primary" href="#demo">☎ Experience the voice demo</a>
+    <a class="btn btn-light" href="#tools">Explore the technology</a>
+   </div>
+   <div class="hero-points">
+    <span>✦ Inbound & outbound calls</span>
+    <span>✦ CRM-connected workflows</span>
+    <span>✦ Human handoff</span>
+   </div>
+  </div>
+  <div class="hero-visual">
+   <div class="mini-window">
+    <div class="mini-top"><span>AWSZ VOICE OPERATIONS</span><span>● SYSTEM CONCEPT</span></div>
+    <div class="mini-circle">✳</div>
+    <h3>Always ready to assist.</h3>
+    <p>Listen · Understand · Respond · Automate</p>
+    <div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="mini-footer"><span>AI VOICE ASSISTANT</span><span>CONNECTED WORKFLOWS ↗</span></div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<section id="solution">
+<div class="wrap">
+ <div class="section-top">
+  <div class="kicker">01 · What this system delivers</div>
+  <h2>Not just an answering machine. A working part of your business.</h2>
   <p>
-    Imagine a voice assistant that can answer incoming calls, follow up with new
-    enquiries, remind customers about appointments, respond to common questions
-    and pass important information into your business systems — without making
-    your team handle every repetitive conversation manually.
+   The assistant handles the conversation, but the real value comes from what
+   happens after the customer speaks. It can collect information, check rules,
+   create follow-up tasks and update business records through connected
+   automation workflows.
   </p>
-  <div class="hero-actions">
-    <a class="primary" href="#demo">Explore the call demo ↗</a>
-    <a class="secondary" href="#workflow">Understand the system</a>
-  </div>
-  <div class="hero-note">A proposed AI voice operations experience by AWSZ.</div>
-  <div class="metrics">
-    <div class="metric"><strong>24/7</strong><small>Call handling potential</small></div>
-    <div class="metric"><strong>One flow</strong><small>Connected business operations</small></div>
-    <div class="metric"><strong>Real-time</strong><small>Information and workflow updates</small></div>
-  </div>
+ </div>
+ <div class="benefit-grid">
+  <article class="benefit"><div class="bicon">☎</div><h3>Customer care, around the clock</h3><p>Answer common questions, explain services, capture complaints and direct customers to the right team. Customers get a consistent first response without waiting for an available agent.</p></article>
+  <article class="benefit"><div class="bicon">↗</div><h3>Proactive outbound calling</h3><p>Follow up with new leads, confirm appointments and send payment reminders through configured calling workflows. Your team spends less time repeatedly dialing customers.</p></article>
+  <article class="benefit"><div class="bicon">▦</div><h3>Every call creates a next step</h3><p>Save call summaries, update CRM records, create tasks and notify staff. The conversation becomes a trackable business activity instead of a forgotten phone call.</p></article>
+ </div>
+</div>
 </section>
 
-<section class="soft" id="opportunity">
+<section class="tools-section" id="tools">
 <div class="wrap">
-  <div class="section-head">
-    <div class="eyebrow">The opportunity</div>
-    <h2>Your team should focus on customers, not repetitive phone tasks.</h2>
-    <p>
-      Businesses lose time when staff repeatedly answer the same questions,
-      call back missed enquiries, confirm appointments or chase pending actions.
-      An AI voice operation can take care of defined conversations and trigger
-      the next business action automatically. Staff can then focus on complex
-      situations that genuinely need a person.
-    </p>
+ <div class="section-top">
+  <div class="kicker" style="color:#b9adff">02 · Technology explained</div>
+  <h2>What each tool does — and why it matters.</h2>
+  <p>
+   This architecture separates phone connectivity, speech, intelligence and
+   business automation. Each technology has a defined job, so the complete
+   system can be maintained, tested and expanded without putting everything
+   into one complicated application.
+  </p>
+ </div>
+ <div class="tool-grid">
+  <article class="tool">
+   <div class="tool-head"><div class="tool-logo">☎</div><h3>Twilio</h3></div>
+   <div class="role">The phone connection</div>
+   <p>Connects the system to real phone numbers and the telephone network. It can receive inbound calls, initiate outbound calls and provide call events to the application.</p>
+   <div class="advantage">Business benefit: Customers call a real number, and approved outbound calling can be automated.</div>
+  </article>
+  <article class="tool">
+   <div class="tool-head"><div class="tool-logo">◖</div><h3>Cartesia</h3></div>
+   <div class="role">The voice experience</div>
+   <p>Provides AI speech generation so the assistant can speak its responses with a natural-sounding voice. It is part of the audio experience, not the phone network itself.</p>
+   <div class="advantage">Business benefit: A more natural spoken interaction instead of robotic recorded menu messages.</div>
+  </article>
+  <article class="tool">
+   <div class="tool-head"><div class="tool-logo">✳</div><h3>AI Model</h3></div>
+   <div class="role">The conversation intelligence</div>
+   <p>Interprets what a customer is asking, uses business instructions and knowledge, and decides what response or next action is appropriate.</p>
+   <div class="advantage">Business benefit: Customers can explain requests in their own words instead of navigating rigid menus.</div>
+  </article>
+  <article class="tool">
+   <div class="tool-head"><div class="tool-logo">⌘</div><h3>n8n</h3></div>
+   <div class="role">The automation engine</div>
+   <p>Connects the voice assistant to APIs and business applications. It can look up records, create tasks, send notifications and run workflows based on call outcomes.</p>
+   <div class="advantage">Business benefit: Less copy-pasting and fewer manual steps after every conversation.</div>
+  </article>
+  <article class="tool">
+   <div class="tool-head"><div class="tool-logo">▦</div><h3>CRM / Business System</h3></div>
+   <div class="role">The customer record</div>
+   <p>Stores customer details, enquiry history, appointment information, call notes and follow-up status in the business's chosen platform.</p>
+   <div class="advantage">Business benefit: Staff can see the customer history and continue the conversation with context.</div>
+  </article>
+  <article class="tool">
+   <div class="tool-head"><div class="tool-logo">◫</div><h3>Admin Dashboard</h3></div>
+   <div class="role">The management layer</div>
+   <p>Gives authorised staff a place to review calls, transcripts, outcomes, workflow status, assistant settings and issues that require attention.</p>
+   <div class="advantage">Business benefit: Managers can measure activity, investigate problems and improve the service.</div>
+  </article>
+ </div>
+ <div class="architecture">
+  <h3>How the components work together</h3>
+  <div class="flow">
+   <span>Customer phone</span><b>→</b><span>Twilio</span><b>→</b><span>AI voice + model</span><b>→</b><span>n8n</span><b>→</b><span>CRM / Calendar</span><b>→</b><span>Admin dashboard</span>
   </div>
-  <div class="grid3">
-    <article class="card"><div class="icon">☎</div><h3>Never leave routine calls unattended</h3><p>Configure an assistant to answer common enquiries, collect caller details and guide customers through a consistent conversation, even outside normal working hours.</p></article>
-    <article class="card"><div class="icon">↗</div><h3>Follow up without manual chasing</h3><p>Trigger outbound calls for new leads, appointment reminders or pending payments based on events and rules in your connected business systems.</p></article>
-    <article class="card"><div class="icon">◎</div><h3>Turn conversations into action</h3><p>Capture the outcome of a call and pass relevant information to a CRM, calendar or internal workflow so the next step is not forgotten.</p></article>
-  </div>
+ </div>
 </div>
 </section>
 
 <section id="workflow">
 <div class="wrap">
-  <div class="section-head">
-    <div class="eyebrow">Call journey</div>
-    <h2>From the first hello to the next business action.</h2>
-    <p>
-      The voice assistant is only one part of the system. A useful solution
-      connects the phone conversation to business rules, customer records and
-      follow-up processes. Here is how a typical call can move through the system.
-    </p>
-  </div>
-  <div class="steps">
-    <div class="step"><b>01 · CONNECT</b><h3>Call arrives</h3><p>Telephony receives an inbound call or starts an approved outbound call to a customer.</p></div>
-    <div class="step"><b>02 · UNDERSTAND</b><h3>AI listens</h3><p>The voice experience captures the caller's request and interprets the conversation.</p></div>
-    <div class="step"><b>03 · RESPOND</b><h3>Natural reply</h3><p>The assistant responds using the configured knowledge, voice and conversation rules.</p></div>
-    <div class="step"><b>04 · AUTOMATE</b><h3>Workflow runs</h3><p>Automation checks business rules and updates the relevant CRM, calendar or system.</p></div>
-    <div class="step"><b>05 · REPORT</b><h3>Outcome saved</h3><p>The call result, notes and next action become available to the business team.</p></div>
-  </div>
+ <div class="section-top">
+  <div class="kicker">03 · Behind every call</div>
+  <h2>From a spoken request to a completed business workflow.</h2>
+  <p>
+   A call should not end with just a voice response. The system can identify
+   what the customer needs, check the permitted information, perform the
+   relevant action and record the outcome for the business team.
+  </p>
+ </div>
+ <div class="steps">
+  <div class="step"><div class="step-no">01</div><h3>Connect</h3><p>Twilio receives the call and routes the audio to the configured voice application.</p></div>
+  <div class="step"><div class="step-no">02</div><h3>Listen</h3><p>Speech recognition converts the customer's spoken words into information the AI can process.</p></div>
+  <div class="step"><div class="step-no">03</div><h3>Understand</h3><p>The AI model interprets the request and determines the appropriate response within its instructions.</p></div>
+  <div class="step"><div class="step-no">04</div><h3>Take action</h3><p>n8n runs approved workflows, such as looking up a record or creating a follow-up task.</p></div>
+  <div class="step"><div class="step-no">05</div><h3>Record</h3><p>The outcome and call details are saved for staff review, reporting and the next customer interaction.</p></div>
+ </div>
 </div>
 </section>
 
-<section class="soft" id="technology">
+<section class="demo-section" id="demo">
 <div class="wrap">
-  <div class="section-head">
-    <div class="eyebrow">Technology architecture</div>
-    <h2>Different technologies. One connected operation.</h2>
-    <p>
-      Each component has a specific responsibility. The phone provider handles
-      the call connection, the voice layer delivers spoken interaction, the AI
-      model interprets requests, and the automation layer coordinates actions
-      across the business tools.
-    </p>
+ <div class="demo-intro">
+  <div class="section-top">
+   <div class="kicker">04 · Interactive voice experience</div>
+   <h2>Choose a department. Make the call.</h2>
+   <p>
+    Try a sample customer conversation. Select a department, start the call,
+    allow microphone access and speak naturally. The assistant will listen and
+    respond aloud using your browser's speech capabilities.
+   </p>
   </div>
-  <div class="stack">
-    <div class="stackitem"><div class="symbol">☎</div><strong>Twilio</strong><small>Phone numbers, inbound and outbound telephony</small></div>
-    <div class="stackitem"><div class="symbol">◖</div><strong>Cartesia</strong><small>Natural AI voice generation and audio</small></div>
-    <div class="stackitem"><div class="symbol">✳</div><strong>AI Model</strong><small>Conversation understanding and response logic</small></div>
-    <div class="stackitem"><div class="symbol">⌘</div><strong>n8n</strong><small>Workflow automation, APIs and integrations</small></div>
-    <div class="stackitem"><div class="symbol">▦</div><strong>CRM</strong><small>Contacts, notes, appointments and call outcomes</small></div>
+  <div class="demo-label">✦ BROWSER VOICE PROTOTYPE</div>
+ </div>
+
+ <div class="demo-layout">
+  <div class="scenario-panel">
+   <div class="panel-title">Choose your experience</div>
+   <div class="panel-desc">Select which type of business conversation you want to test.</div>
+
+   <button class="scenario active" data-mode="care">
+    <span class="sicon">🎧</span><span><strong>Customer Care</strong><small>Ask a question, report a problem or request help.</small></span>
+   </button>
+   <button class="scenario" data-mode="lead">
+    <span class="sicon">✨</span><span><strong>New Lead Follow-up</strong><small>Discuss a service enquiry and request a callback.</small></span>
+   </button>
+   <button class="scenario" data-mode="appointment">
+    <span class="sicon">📅</span><span><strong>Appointment Desk</strong><small>Confirm, change or ask about an appointment.</small></span>
+   </button>
+   <button class="scenario" data-mode="payment">
+    <span class="sicon">💳</span><span><strong>Billing & Payments</strong><small>Ask about an invoice or a payment reminder.</small></span>
+   </button>
+   <button class="scenario" data-mode="sales">
+    <span class="sicon">📞</span><span><strong>Outbound Sales</strong><small>Experience a sample sales follow-up conversation.</small></span>
+   </button>
+   <div style="background:#f4f1ff;border-radius:14px;padding:14px;margin-top:16px">
+    <strong style="font-size:12px;color:#5146b8">What to try saying</strong>
+    <p id="suggestion" style="font-size:11px;color:#77718f;line-height:1.7;margin-top:6px">"I need help with my account. Can someone assist me?"</p>
+   </div>
   </div>
-  <p class="disclaimer">The stack shown is a proposed architecture. Actual providers, models and integrations depend on the project requirements and configuration.</p>
+
+  <div class="call-panel">
+   <div class="panel-title">Live call interface</div>
+   <div class="panel-desc">A phone-style conversation with voice input and spoken replies.</div>
+   <div class="phone-area">
+    <div class="phone">
+     <div class="phone-status"><span>◉ AWSZ PHONE</span><span id="phoneBadge">READY</span></div>
+     <div class="phone-avatar">✳</div>
+     <h3>AWSZ Assistant</h3>
+     <div class="phone-sub" id="department">Customer Care Department</div>
+     <div class="phone-timer" id="timer">00:00</div>
+     <div class="phone-state" id="phoneState">Ready to connect</div>
+     <div class="soundwave" id="soundwave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+     <div class="call-controls">
+      <button id="micBtn" title="Start listening" disabled>🎙</button>
+      <button id="hangBtn" class="hang" title="Start call">☎</button>
+      <button id="speakerBtn" title="Repeat last reply" disabled>🔊</button>
+     </div>
+     <div class="phone-note">Microphone · End call · Repeat reply</div>
+     <div style="margin-top:auto;padding-top:25px;font-size:10px;color:#aaa8cb">DEMO LINE · NOT A REAL PHONE NUMBER</div>
+    </div>
+
+    <div class="voice-log">
+     <div class="voice-log-head"><span>CONVERSATION</span><span class="live-tag" id="liveTag">● STANDBY</span></div>
+     <div class="messages" id="messages">
+      <div class="msg ai"><small>Assistant</small>Welcome! Select a department and start the call to begin your conversation.</div>
+     </div>
+     <div class="voice-input">
+      <input id="typedMessage" type="text" placeholder="Or type your message here..." />
+      <button id="sendBtn">Send</button>
+     </div>
+     <div class="voice-buttons">
+      <button class="listen-btn" id="listenBtn" disabled>🎙 Speak to assistant</button>
+      <button class="end-btn" id="clearBtn">Clear chat</button>
+     </div>
+     <div class="hint" id="voiceHint">For voice conversation, use Chrome or Edge and allow microphone access. You can also type messages as a fallback.</div>
+    </div>
+   </div>
+  </div>
+ </div>
+ <p class="hint" style="margin-top:18px">
+  Prototype limitation: this uses your browser's speech recognition and speech synthesis. The replies are generated by local demo conversation logic, not a connected AI model. It does not place an actual Twilio call or connect to Cartesia, n8n or a CRM.
+ </p>
 </div>
 </section>
 
-<section id="demo">
+<section class="dash-section" id="dashboard">
 <div class="wrap">
-  <div class="section-head">
-    <div class="eyebrow">Interactive experience</div>
-    <h2>Try a sample AI phone conversation.</h2>
-    <p>
-      Select a business scenario and start the simulation. The assistant will
-      speak through your browser's available text-to-speech voice, display its
-      conversation and add events to the activity monitor.
-    </p>
+ <div class="section-top">
+  <div class="kicker">05 · Management & reporting</div>
+  <h2>One place to manage the entire voice operation.</h2>
+  <p>
+   An admin dashboard can show what the assistant handled, which calls need
+   attention and whether the connected workflows completed successfully.
+   Supervisors can review conversations and make improvements based on real
+   call data.
+  </p>
+ </div>
+ <div class="dashboard">
+  <div class="dash-head"><h3>Voice Operations · Admin Overview</h3><span>● Illustrative dashboard</span></div>
+  <div class="dash-stats">
+   <div class="dash-stat"><small>Total calls</small><strong>1,284</strong></div>
+   <div class="dash-stat"><small>AI handled</small><strong>936</strong></div>
+   <div class="dash-stat"><small>Human handoffs</small><strong>84</strong></div>
+   <div class="dash-stat"><small>Follow-ups</small><strong>126</strong></div>
   </div>
-
-  <div class="demo-layout">
-    <div>
-      <h3 style="font:800 20px Manrope;margin-bottom:16px">Choose a call scenario</h3>
-      <div class="scenarios">
-        <button class="scenario active" data-case="lead"><strong>✦ New lead follow-up</strong><small>Respond to a new enquiry and collect the customer's requirements.</small></button>
-        <button class="scenario" data-case="appointment"><strong>▣ Appointment reminder</strong><small>Confirm an upcoming appointment and offer a rescheduling option.</small></button>
-        <button class="scenario" data-case="payment"><strong>＄ Payment reminder</strong><small>Politely remind a customer about a pending invoice.</small></button>
-        <button class="scenario" data-case="support"><strong>♡ Customer support</strong><small>Handle a common service question and offer further assistance.</small></button>
-      </div>
-      <div class="monitor">
-        <h3>Call activity monitor <span style="color:var(--green);font-size:11px">● LIVE DEMO</span></h3>
-        <div class="log" id="activity">
-          <div class="logitem"><span>READY</span> Demo system is waiting for a call.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="phone-shell">
-      <div class="phone">
-        <div class="phone-top"><span>◉ AWSZ VOICE</span><span>● DEMO MODE</span></div>
-        <div class="phone-body">
-          <div class="avatar">✳</div>
-          <h3>AWSZ AI Assistant</h3>
-          <div class="status" id="callStatus">Ready to start</div>
-          <div class="call-time" id="timer">00:00</div>
-          <div class="wave" id="wave">
-            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          </div>
-          <div class="phone-actions">
-            <button class="round" id="muteBtn" title="Mute / unmute" disabled>🎙</button>
-            <button class="round end" id="callBtn" title="Start call">☎</button>
-            <button class="round" id="repeatBtn" title="Repeat assistant message" disabled>↻</button>
-          </div>
-          <div class="phone-label">Microphone · End call · Repeat message</div>
-          <div class="keypad">
-            <button>1</button><button>2</button><button>3</button>
-            <button>4</button><button>5</button><button>6</button>
-            <button>7</button><button>8</button><button>9</button>
-            <button>*</button><button>0</button><button>#</button>
-          </div>
-          <div class="transcript">
-            <strong>Conversation transcript</strong>
-            <p id="transcript">Choose a scenario and press the call button to begin.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="dash-bottom">
+   <div class="dash-box">
+    <h4>Call handling overview</h4>
+    <div class="dash-row"><span>AI handled</span><b>73%</b></div>
+    <div class="progress"><i style="width:73%"></i></div>
+    <div class="dash-row"><span>Transferred to staff</span><b>18%</b></div>
+    <div class="progress"><i style="width:18%;background:#f28abd"></i></div>
+    <div class="dash-row"><span>Unresolved / review</span><b>9%</b></div>
+    <div class="progress"><i style="width:9%;background:#ffb45c"></i></div>
+   </div>
+   <div class="dash-box">
+    <h4>What administrators can manage</h4>
+    <div class="dash-row"><span>Call history & recordings</span><b>↗</b></div>
+    <div class="dash-row"><span>Transcripts & summaries</span><b>↗</b></div>
+    <div class="dash-row"><span>AI instructions & knowledge</span><b>↗</b></div>
+    <div class="dash-row"><span>Workflow execution status</span><b>↗</b></div>
+    <div class="dash-row"><span>Staff handoff & permissions</span><b>↗</b></div>
+   </div>
   </div>
-  <p class="disclaimer">Important: This is a browser-based demonstration. It does not place a real phone call, connect to Twilio or Cartesia, contact a CRM, or process a payment. The voice is generated by your browser and available system voices. Actual production calling requires a secure backend, provider credentials, configured workflows and appropriate customer consent.</p>
-</div>
-</section>
-
-<section class="soft" id="dashboard">
-<div class="wrap">
-  <div class="section-head">
-    <div class="eyebrow">Admin operations</div>
-    <h2>Give your team visibility into every conversation.</h2>
-    <p>
-      A management dashboard can help supervisors understand call volume,
-      identify outcomes and review what needs attention. Instead of treating
-      calls as isolated events, the business gets a structured view of its
-      customer communication and follow-up pipeline.
-    </p>
-  </div>
-  <div class="admin">
-    <div class="adminbox">
-      <h3>Call management</h3>
-      <p>Review call records and understand what happened during each interaction.</p>
-      <ul>
-        <li>Inbound and outbound call history</li>
-        <li>Call duration and timestamps</li>
-        <li>Conversation transcripts and summaries</li>
-        <li>Call outcomes and escalation status</li>
-        <li>Customer contact and CRM association</li>
-      </ul>
-    </div>
-    <div class="adminbox">
-      <h3>AI and workflow controls</h3>
-      <p>Manage how the assistant behaves and which business actions it can perform.</p>
-      <ul>
-        <li>Assistant instructions and knowledge sources</li>
-        <li>Business hours and call routing rules</li>
-        <li>Appointment and follow-up workflows</li>
-        <li>Human handoff and escalation conditions</li>
-        <li>Integration health and error monitoring</li>
-      </ul>
-    </div>
-  </div>
-  <div class="dashboard" style="margin-top:20px">
-    <div class="dash-top"><strong>AWSZ · Operations overview</strong><span class="live">● Illustrative dashboard</span></div>
-    <div class="dash-grid">
-      <div class="dash-stat"><small>Total calls</small><strong>248</strong></div>
-      <div class="dash-stat"><small>Handled by AI</small><strong>186</strong></div>
-      <div class="dash-stat"><small>Escalated</small><strong>12</strong></div>
-    </div>
-    <div style="margin-top:23px;font-size:13px;color:#c4c4d5">Illustrative call handling distribution</div>
-    <div class="bar"><i></i></div>
-    <div style="display:flex;justify-content:space-between;color:#aaa;font-size:11px;margin-top:9px"><span>AI handled</span><span>75% example</span></div>
-    <p style="font-size:11px;color:#85859e;margin-top:18px">Sample figures only — not live customer or production data.</p>
-  </div>
+  <div class="dash-disclaimer">All dashboard figures are sample presentation data, not live system metrics.</div>
+ </div>
 </div>
 </section>
 
 <section>
 <div class="wrap">
-  <div class="section-head">
-    <div class="eyebrow">Responsible deployment</div>
-    <h2>Automation should be controlled, measurable and reliable.</h2>
-    <p>
-      A production voice system needs more than a convincing voice. It needs
-      secure handling of customer information, clear boundaries for what the
-      assistant can do, a route to a human when needed, and monitoring for
-      failed calls or incomplete workflows.
-    </p>
-  </div>
-  <div class="grid3">
-    <article class="card"><div class="icon">♧</div><h3>Privacy and access</h3><p>Protect customer data, secure API credentials and give staff access only to the information and actions required for their roles.</p></article>
-    <article class="card"><div class="icon">⇄</div><h3>Human escalation</h3><p>Define situations where the AI should transfer the call, create a support task or ask a team member to take over.</p></article>
-    <article class="card"><div class="icon">✓</div><h3>Testing and monitoring</h3><p>Test real-world scenarios, review call outcomes, monitor integrations and maintain a fallback process for service interruptions.</p></article>
-  </div>
+ <div class="section-top">
+  <div class="kicker">06 · Built for real operations</div>
+  <h2>Automation with the right controls.</h2>
+  <p>
+   A production deployment should include secure API access, customer consent
+   and calling compliance, clear escalation rules, error handling and testing.
+   The assistant should know when to help and when to hand a conversation to a
+   human team member.
+  </p>
+ </div>
+ <div class="benefit-grid">
+  <article class="benefit"><div class="bicon">🔐</div><h3>Secure access</h3><p>Protect credentials and customer information. Use role-based access and keep sensitive operations behind a secure backend.</p></article>
+  <article class="benefit"><div class="bicon">🤝</div><h3>Human handoff</h3><p>Escalate complaints, unusual requests and sensitive situations to a trained staff member with the relevant conversation context.</p></article>
+  <article class="benefit"><div class="bicon">📊</div><h3>Continuous improvement</h3><p>Review failed calls, conversation outcomes and workflow errors to improve the assistant's instructions and business processes.</p></article>
+ </div>
 </div>
 </section>
 
 <section>
 <div class="wrap">
-  <div class="cta">
-    <div class="eyebrow">Let's design your system</div>
-    <h2>Build a voice operation around the way your business works.</h2>
-    <p>
-      The right implementation starts with understanding your call types,
-      customer journey, existing CRM and the actions your team currently performs
-      manually. From there, the voice assistant and automation workflows can be
-      designed around your actual business process.
-    </p>
-    <a class="primary" href="https://automationwithsajjadzaidi.com/" target="_blank">Start a conversation ↗</a>
-  </div>
+ <div class="ending">
+  <div class="kicker" style="color:#eee5ff">AWSZ · AI Automation & Digital Systems</div>
+  <h2>Let's turn your customer calls into intelligent business operations.</h2>
+  <p>
+   Start with your most repetitive call types. Connect your phone system,
+   customer records and business workflows, then expand the assistant around
+   the real needs of your team.
+  </p>
+  <a class="btn" href="https://automationwithsajjadzaidi.com/" target="_blank">Discuss your voice automation project ↗</a>
+ </div>
+</div>
 </section>
 </main>
 
-<footer>
-<div class="wrap">
-  <div><strong>AWSZ</strong> · AI Automation & Digital Systems</div>
-  <div>Build less manually. Run smarter.</div>
-  <div>automationwithsajjadzaidi.com</div>
-</div>
-</footer>
+<footer><div class="wrap"><strong>AWSZ · Build less manually. Run smarter.</strong><span>AI Voice Operations Presentation</span><span>automationwithsajjadzaidi.com</span></div></footer>
 
 <script>
-const scenarios = {
-  lead: {
-    name: "New lead follow-up",
-    lines: [
-      "Hello! This is the AWSZ AI assistant calling regarding your recent enquiry. Is this a good time to talk?",
-      "Thank you. I would be happy to understand what you are looking for. Could you briefly tell me which service you are interested in?",
-      "Absolutely. I can record your requirements and arrange for a team member to follow up with you.",
-      "Thank you for your time. Our team will review your enquiry and get back to you. Have a great day!"
-    ]
-  },
-  appointment: {
-    name: "Appointment reminder",
-    lines: [
-      "Hello! This is an automated appointment reminder from your service team. I am calling about your upcoming appointment.",
-      "We would like to confirm that your scheduled appointment is still convenient for you.",
-      "If you need to change the time, I can pass your request to our scheduling team.",
-      "Thank you for confirming. We look forward to speaking with you. Have a great day!"
-    ]
-  },
-  payment: {
-    name: "Payment reminder",
-    lines: [
-      "Hello! This is a courtesy reminder from your accounts team regarding a pending invoice.",
-      "We are calling to make sure you have received the invoice and to check whether you need any assistance.",
-      "If you have already made the payment, please disregard this reminder. Otherwise, our team can help you with the payment details.",
-      "Thank you for your time. We appreciate your business."
-    ]
-  },
-  support: {
-    name: "Customer support",
-    lines: [
-      "Hello! Thank you for contacting customer support. I am the AI assistant. How can I help you today?",
-      "I understand. Let me make sure I have understood your concern correctly.",
-      "I can record the issue and arrange for the appropriate team member to assist you.",
-      "Thank you for contacting us. Your request has been noted in this demo conversation."
-    ]
-  }
+const modes={
+ care:{
+  title:"Customer Care Department",
+  suggestion:'"I need help with my account. Can someone assist me?"',
+  greeting:"Hello! Thank you for calling customer care. I'm your virtual assistant. How can I help you today?",
+  replies:[
+   [/refund|return|money back/i,"I can help you with a refund request. Could you tell me what you purchased and when? I can record the details for the support team."],
+   [/complaint|problem|issue|not working|broken/i,"I'm sorry you're experiencing that. I can help document the issue. Could you explain what happened and when you first noticed it?"],
+   [/order|delivery|shipping|tracking/i,"I can help with an order enquiry. Do you have an order number? In a live system, I would securely check your order status."],
+   [/account|login|password|sign in/i,"I can help with an account access issue. For your security, please don't share your password. Is the problem with logging in or updating your account?"],
+   [/human|person|agent|representative|staff/i,"Of course. I can arrange a handoff to a human support representative. I'll pass along the details you've shared."],
+   [/price|cost|charge|billing/i,"I can help with a billing question. Are you asking about a recent charge, an invoice or the price of a service?"],
+   [/thank|thanks/i,"You're very welcome. Is there anything else I can help you with today?"]
+  ],
+  fallback:"I understand. Could you share a little more detail so I can guide you to the right support? If this needs a staff member, I can arrange a handoff."
+ },
+ lead:{
+  title:"New Lead Follow-up",
+  suggestion:'"I am interested in your services. Can you tell me more?"',
+  greeting:"Hello! I'm calling from the business enquiry team. Thank you for your interest. What kind of service are you looking for?",
+  replies:[
+   [/price|cost|budget|quote/i,"Absolutely. Pricing depends on your requirements. Could you tell me a little more about the service and scope you're considering?"],
+   [/demo|example|show/i,"Certainly. We can arrange a demonstration so you can see how the service works. What would be a convenient time for our team to contact you?"],
+   [/call|contact|callback/i,"No problem. I can record a callback request. What day or time would work best for you?"],
+   [/human|person|sales/i,"Of course. I'll arrange for a member of the sales team to follow up with you and discuss your requirements."],
+   [/thank|thanks/i,"Thank you for your interest. Our team can follow up with the information you need."]
+  ],
+  fallback:"That's useful information. Could you tell me what outcome you're hoping to achieve? I'll make sure your requirements are recorded."
+ },
+ appointment:{
+  title:"Appointment Desk",
+  suggestion:'"I want to reschedule my appointment for another day."',
+  greeting:"Hello! You've reached the appointment desk. I can help with appointment questions. Would you like to book, confirm or reschedule?",
+  replies:[
+   [/reschedule|change|different day|move/i,"Certainly. What day would you prefer? I can record your preferred time for the scheduling team to confirm."],
+   [/cancel/i,"I can record a cancellation request. Could you tell me the appointment date and the name on the booking?"],
+   [/book|schedule|available|slot/i,"I'd be happy to help with a booking request. What day and approximate time would you prefer?"],
+   [/confirm|remind|when/i,"I can help check an appointment in a connected scheduling system. In this demo, please tell me the date you have in mind."],
+   [/human|person|staff/i,"I can pass your request to the scheduling team so a staff member can assist you."]
+  ],
+  fallback:"I can help with that. Are you looking to make a new booking, change an existing appointment or ask about a scheduled visit?"
+ },
+ payment:{
+  title:"Billing & Payments",
+  suggestion:'"I received an invoice and I have a question about the amount."',
+  greeting:"Hello! Thank you for contacting the billing department. I can help with general invoice questions. What would you like to know?",
+  replies:[
+   [/invoice|bill|amount|charge/i,"I can help with an invoice enquiry. Could you share the invoice reference? Please do not share full card or banking details here."],
+   [/paid|payment sent|already paid/i,"Thank you for letting me know. I can record that payment has been made and request that the accounts team verify it."],
+   [/due|deadline|late|date/i,"I can help clarify a payment due date. In a live system, I would check the invoice record and confirm the relevant date."],
+   [/refund/i,"I can record a refund enquiry and pass it to the accounts team for review. Could you explain the reason for the request?"],
+   [/human|person|accounts/i,"Of course. I'll arrange for the accounts team to review your question."]
+  ],
+  fallback:"I understand. Is your question about an invoice, a payment you have already made, a due date or a refund?"
+ },
+ sales:{
+  title:"Outbound Sales",
+  suggestion:'"I would like to know what your service can do for my business."',
+  greeting:"Hello! I'm calling from the business solutions team. Is this a good time for a quick conversation about your enquiry?",
+  replies:[
+   [/busy|later|not now/i,"Of course. I don't want to interrupt your day. What time would be more convenient for a callback?"],
+   [/price|cost|quote/i,"I'd be happy to discuss pricing. It depends on your needs. Could you briefly describe what you're looking to achieve?"],
+   [/interested|yes|tell me|more/i,"Great. To make this useful, what is the main challenge you're trying to solve in your business?"],
+   [/human|person|consultant/i,"Certainly. I can request a follow-up from a team member who can discuss the details with you."],
+   [/no|not interested/i,"No problem at all. Thank you for your time. We won't continue this conversation."]
+  ],
+  fallback:"I understand. Could you tell me a little about what your business needs? I can direct your enquiry to the right person."
+ }
 };
 
-let selected = "lead";
-let lineIndex = 0;
-let active = false;
-let muted = false;
-let seconds = 0;
-let timerInterval = null;
-let currentText = "";
-let recognition = null;
+let selected="care",active=false,muted=false,seconds=0,timer=null,lastReply="",recognition=null,listening=false;
+const $=id=>document.getElementById(id);
+const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+const synth=window.speechSynthesis;
 
-const $ = id => document.getElementById(id);
-const synth = window.speechSynthesis;
-
-function log(message, type="EVENT"){
-  const item = document.createElement("div");
-  item.className = "logitem";
-  const stamp = new Date().toLocaleTimeString();
-  const tag = document.createElement("span");
-  tag.textContent = type + " · " + stamp;
-  item.appendChild(tag);
-  item.appendChild(document.createTextNode(message));
-  $("activity").prepend(item);
+function addMessage(text,who){
+ const box=document.createElement("div");
+ box.className="msg "+who;
+ const label=document.createElement("small");
+ label.textContent=who==="ai"?"AWSZ Assistant":"Customer";
+ box.appendChild(label);
+ box.appendChild(document.createTextNode(text));
+ $("messages").appendChild(box);
+ $("messages").scrollTop=$("messages").scrollHeight;
 }
-
-function setTranscript(text){
-  $("transcript").textContent = text;
+function setStatus(text){$("phoneState").textContent=text}
+function logTime(){
+ const m=String(Math.floor(seconds/60)).padStart(2,"0");
+ const s=String(seconds%60).padStart(2,"0");
+ $("timer").textContent=m+":"+s;
 }
-
-function updateTimer(){
-  const m = String(Math.floor(seconds/60)).padStart(2,"0");
-  const s = String(seconds%60).padStart(2,"0");
-  $("timer").textContent = `${m}:${s}`;
+function speak(text){
+ lastReply=text;
+ if(muted||!synth)return;
+ synth.cancel();
+ const u=new SpeechSynthesisUtterance(text);
+ u.lang="en-US";u.rate=.96;u.pitch=1.02;u.volume=1;
+ u.onstart=()=>{$("soundwave").classList.add("playing");setStatus("Assistant speaking...")};
+ u.onend=()=>{$("soundwave").classList.remove("playing");if(active)setStatus("Connected · Your turn to speak")};
+ u.onerror=()=>{$("soundwave").classList.remove("playing");setStatus("Voice playback unavailable")};
+ synth.speak(u);
 }
-
-function speak(text, onEnd){
-  currentText = text;
-  setTranscript(text);
-  if(muted){
-    if(onEnd) onEnd();
-    return;
-  }
-  if(!("speechSynthesis" in window)){
-    log("Speech synthesis is not supported in this browser.","WARNING");
-    if(onEnd) onEnd();
-    return;
-  }
-  synth.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "en-US";
-  utterance.rate = 0.94;
-  utterance.pitch = 1.03;
-  utterance.volume = 1;
-  utterance.onstart = () => {
-    $("callStatus").textContent = "Assistant is speaking";
+function respond(text){
+ if(!active)return;
+ addMessage(text,"user");
+ setStatus("Understanding request...");
+ $("liveTag").textContent="● PROCESSING";
+ let answer=modes[selected].fallback;
+ for(const [pattern,response] of modes[selected].replies){
+  if(pattern.test(text)){answer=response;break}
+ }
+ setTimeout(()=>{
+  if(!active)return;
+  addMessage(answer,"ai");
+  $("liveTag").textContent="● CONNECTED";
+  speak(answer);
+ },550);
+}
+function stopListening(){
+ if(recognition&&listening){
+  try{recognition.stop()}catch(e){}
+ }
+ listening=false;
+ $("listenBtn").textContent="🎙 Speak to assistant";
+ $("micBtn").textContent="🎙";
+}
+function startListening(){
+ if(!active)return;
+ if(!SpeechRecognition){
+  $("voiceHint").textContent="Speech recognition is not available in this browser. Use the message box to type.";
+  return;
+ }
+ if(listening){stopListening();return}
+ try{
+  recognition=new SpeechRecognition();
+  recognition.lang="en-US";
+  recognition.continuous=false;
+  recognition.interimResults=false;
+  recognition.onstart=()=>{
+   listening=true;
+   $("listenBtn").textContent="Listening... tap to stop";
+   $("micBtn").textContent="🔴";
+   setStatus("Listening to customer...");
+   $("liveTag").textContent="● LISTENING";
   };
-  utterance.onend = () => {
-    if(active) $("callStatus").textContent = "Listening / ready";
-    if(onEnd) onEnd();
+  recognition.onresult=e=>{
+   const said=e.results[0][0].transcript;
+   $("typedMessage").value="";
+   respond(said);
   };
-  utterance.onerror = () => {
-    log("Browser could not play the voice. Check device audio settings.","WARNING");
-    if(onEnd) onEnd();
+  recognition.onerror=e=>{
+   $("voiceHint").textContent="Microphone error: "+e.error+". Check browser permissions or type your message instead.";
+   stopListening();
+   if(active)setStatus("Ready · Try again");
   };
-  synth.speak(utterance);
+  recognition.onend=()=>{
+   listening=false;
+   $("listenBtn").textContent="🎙 Speak to assistant";
+   $("micBtn").textContent="🎙";
+   if(active&&$("phoneState").textContent==="Listening to customer...")setStatus("Connected · Your turn to speak");
+  };
+  recognition.start();
+ }catch(e){
+  $("voiceHint").textContent="Could not start microphone. Allow microphone access and try again.";
+ }
 }
-
-function nextLine(){
-  if(!active) return;
-  const lines = scenarios[selected].lines;
-  if(lineIndex >= lines.length){
-    endCall(true);
-    return;
-  }
-  const text = lines[lineIndex++];
-  log("Assistant: " + text,"VOICE");
-  speak(text, () => {
-    if(!active) return;
-    if(lineIndex < lines.length){
-      $("callStatus").textContent = "Waiting for next demo response";
-      setTimeout(nextLine, 1100);
-    } else {
-      setTimeout(() => endCall(true), 1800);
-    }
-  });
-}
-
 function startCall(){
-  if(active) return;
-  if(synth) synth.cancel();
-  active = true;
-  muted = false;
-  lineIndex = 0;
-  seconds = 0;
-  $("callBtn").textContent = "■";
-  $("callStatus").textContent = "Connecting...";
-  $("muteBtn").disabled = false;
-  $("repeatBtn").disabled = false;
-  $("wave").style.opacity = "1";
-  log("Call started: " + scenarios[selected].name,"CONNECTED");
-  timerInterval = setInterval(() => {
-    seconds++;
-    updateTimer();
-  },1000);
-  setTimeout(() => {
-    if(active) nextLine();
-  },700);
+ if(active)return;
+ active=true;seconds=0;logTime();
+ $("hangBtn").textContent="■";
+ $("phoneBadge").textContent="CONNECTED";
+ $("liveTag").textContent="● CONNECTED";
+ $("micBtn").disabled=false;
+ $("speakerBtn").disabled=false;
+ $("listenBtn").disabled=false;
+ $("soundwave").classList.add("playing");
+ $("messages").innerHTML="";
+ setStatus("Connecting...");
+ addMessage("Call connected. This is a browser voice prototype.","ai");
+ timer=setInterval(()=>{seconds++;logTime()},1000);
+ setTimeout(()=>{
+  if(!active)return;
+  addMessage(modes[selected].greeting,"ai");
+  speak(modes[selected].greeting);
+ },450);
+}
+function endCall(){
+ if(!active)return;
+ stopListening();
+ active=false;
+ if(synth)synth.cancel();
+ clearInterval(timer);
+ $("soundwave").classList.remove("playing");
+ $("hangBtn").textContent="☎";
+ $("phoneBadge").textContent="ENDED";
+ $("liveTag").textContent="● CALL ENDED";
+ $("micBtn").disabled=true;
+ $("speakerBtn").disabled=true;
+ $("listenBtn").disabled=true;
+ setStatus("Call ended · "+$("timer").textContent);
+ addMessage("The demo conversation has ended. Select a department to try again.","ai");
+}
+function clearChat(){
+ if(active)endCall();
+ $("messages").innerHTML='<div class="msg ai"><small>Assistant</small>Choose a department and start a new conversation.</div>';
+ $("timer").textContent="00:00";
 }
 
-function endCall(completed=false){
-  if(!active) return;
-  active = false;
-  if(synth) synth.cancel();
-  clearInterval(timerInterval);
-  $("callBtn").textContent = "☎";
-  $("callStatus").textContent = completed ? "Demo conversation completed" : "Call ended";
-  $("muteBtn").disabled = true;
-  $("repeatBtn").disabled = true;
-  $("wave").style.opacity = ".2";
-  log(completed ? "Conversation completed." : "Call ended by user.",
-      completed ? "COMPLETED" : "ENDED");
+document.querySelectorAll(".scenario").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+  if(active)endCall();
+  document.querySelectorAll(".scenario").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  selected=btn.dataset.mode;
+  $("department").textContent=modes[selected].title;
+  $("suggestion").textContent=modes[selected].suggestion;
+  $("phoneBadge").textContent="READY";
+  $("liveTag").textContent="● STANDBY";
+  setStatus("Ready to connect");
+  $("messages").innerHTML='<div class="msg ai"><small>Assistant</small>'+modes[selected].greeting+'</div>';
+ });
+});
+$("hangBtn").addEventListener("click",()=>active?endCall():startCall());
+$("micBtn").addEventListener("click",startListening);
+$("listenBtn").addEventListener("click",startListening);
+$("speakerBtn").addEventListener("click",()=>{if(active&&lastReply)speak(lastReply)});
+$("clearBtn").addEventListener("click",clearChat);
+$("sendBtn").addEventListener("click",()=>{
+ const value=$("typedMessage").value.trim();
+ if(!value)return;
+ if(!active){startCall();setTimeout(()=>respond(value),700)}
+ else respond(value);
+ $("typedMessage").value="";
+});
+$("typedMessage").addEventListener("keydown",e=>{
+ if(e.key==="Enter")$("sendBtn").click();
+});
+
+if(!SpeechRecognition){
+ $("voiceHint").textContent="Your browser does not support speech recognition. Try Chrome or Edge, or use the text message box.";
 }
-
-$("callBtn").addEventListener("click", () => {
-  if(active) endCall(false);
-  else startCall();
-});
-
-$("muteBtn").addEventListener("click", () => {
-  muted = !muted;
-  $("muteBtn").textContent = muted ? "🔇" : "🎙";
-  if(muted && synth) synth.cancel();
-  log(muted ? "Assistant voice muted." : "Assistant voice unmuted.","AUDIO");
-});
-
-$("repeatBtn").addEventListener("click", () => {
-  if(!active || !currentText) return;
-  log("Repeating the last assistant message.","VOICE");
-  speak(currentText);
-});
-
-document.querySelectorAll(".scenario").forEach(button => {
-  button.addEventListener("click", () => {
-    if(active) endCall(false);
-    document.querySelectorAll(".scenario").forEach(b => b.classList.remove("active"));
-    button.classList.add("active");
-    selected = button.dataset.case;
-    lineIndex = 0;
-    seconds = 0;
-    updateTimer();
-    $("callStatus").textContent = "Ready · " + scenarios[selected].name;
-    setTranscript("Selected scenario: " + scenarios[selected].name + ". Press the call button to begin.");
-    log("Scenario selected: " + scenarios[selected].name,"SETUP");
-  });
-});
-
-document.querySelectorAll(".keypad button").forEach(button => {
-  button.addEventListener("click", () => {
-    const digit = button.textContent;
-    log("Keypad input: " + digit,"KEYPAD");
-    if(active){
-      setTranscript("Keypad input received: " + digit + ". This is a local demo; no phone system is connected.");
-    }
-  });
-});
-
-$("callStatus").textContent = "Ready · New lead follow-up";
-updateTimer();
-
-log("Browser demo loaded. No live telephony connection.","SYSTEM");
-log("Select a scenario and start a simulated call.","READY");
+if(!("speechSynthesis" in window)){
+ $("voiceHint").textContent="Speech output is not supported by this browser. Text conversation remains available.";
+}
 </script>
 </body>
 </html>
