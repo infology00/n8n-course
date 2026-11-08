@@ -1,190 +1,658 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AquaSync Studio — Fountain Control Designer</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaSync Studio | 3D Fountain Designer</title>
 <style>
-:root{--blue:#1267b2;--blue2:#258ce0;--navy:#12375f;--cyan:#24bde2;--ink:#183b5c;--muted:#69839d;--line:#cbdced;--bg:#eaf2fa;--panel:#fff;--soft:#f3f8fd;--gold:#f4b34e;--green:#19a77a}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 "Segoe UI",Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:7px;padding:8px 12px;background:#fff;color:var(--ink);font-weight:600}button:hover{border-color:var(--blue2);color:var(--blue)}button.primary{background:linear-gradient(135deg,#1678ca,#07539b);border-color:#176db8;color:#fff;box-shadow:0 2px 5px #0c579333}button.active,.selected{background:#e2f1ff!important;border-color:#58a7e8!important;color:#075ba8!important}
-.top{height:64px;background:linear-gradient(100deg,#12365f,#1268b4 68%,#168bc8);display:flex;align-items:center;justify-content:space-between;padding:0 20px;color:#fff;position:sticky;top:0;z-index:10;box-shadow:0 3px 12px #163f6828}.brand{display:flex;gap:11px;align-items:center;font-weight:800;font-size:19px}.brandmark{width:38px;height:38px;border-radius:10px;background:linear-gradient(145deg,#fff,#d5efff);color:#146ab5;display:grid;place-items:center;font-size:21px;box-shadow:inset 0 0 0 1px #fff}.brand small{display:block;font-size:10px;font-weight:500;color:#d9efff;letter-spacing:.4px}.topright{display:flex;align-items:center;gap:12px}.statusdot{font-size:10px;color:#e3f8ff}.statusdot:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#6ff0c1;margin-right:6px}.top select{background:#14548c;color:white;border:1px solid #6ba1cf;border-radius:6px;padding:7px}
-.ribbon{display:flex;align-items:center;gap:5px;padding:8px 16px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:64px;z-index:9;overflow:auto}.tab{border:0;white-space:nowrap;background:transparent;padding:10px 13px;color:#55718d}.tab.active{background:#e6f3ff;color:#075da8;box-shadow:inset 0 -2px #1784d7}
-.wrap{max-width:1680px;margin:auto;padding:16px}.pagehead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 14px}.pagehead h1{font-size:22px;margin:0;color:#153f6b}.pagehead p{margin:3px 0 0;color:var(--muted)}.actions,.row{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.panel{background:var(--panel);border:1px solid var(--line);border-radius:11px;box-shadow:0 3px 12px #1b47700c;overflow:hidden;margin-bottom:13px}.ph{padding:11px 14px;border-bottom:1px solid #e2ebf4;display:flex;align-items:center;justify-content:space-between;gap:9px}.ph h3{font-size:13px;letter-spacing:.35px;margin:0;color:#1c4b78}.pb{padding:13px}.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(300px,.8fr);gap:13px}.stagewrap{padding:10px;background:#f5f9fd}.stage{height:430px;position:relative;border-radius:9px;overflow:hidden;background:radial-gradient(ellipse at 50% 83%,#236d9c 0,#103e68 48%,#071e3b 100%);box-shadow:inset 0 0 45px #00142b}.stage canvas{display:block;width:100%;height:100%}.stageoverlay{position:absolute;top:10px;left:11px;right:11px;display:flex;justify-content:space-between;pointer-events:none;color:#e7f7ff;text-shadow:0 1px 4px #00152c}.stageoverlay span{font-size:10px;background:#082d50b8;border:1px solid #78b9e177;padding:5px 8px;border-radius:5px}.stagebottom{position:absolute;bottom:9px;left:12px;right:12px;display:flex;justify-content:space-between;color:#d9f2ff;font-size:10px;text-shadow:0 1px 4px #00152c;pointer-events:none}
-.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}.stat{padding:9px 10px;border-radius:8px;background:linear-gradient(145deg,#f7fbff,#eaf4fd);border:1px solid #dce9f5}.stat b{display:block;font-size:18px;color:#1269b5}.stat span{font-size:9px;letter-spacing:.5px;color:#6a8299;font-weight:700}
-.timeline{display:flex;gap:8px;overflow:auto;padding:2px 1px 8px}.scene{min-width:150px;text-align:left;background:#f8fbff;border:1px solid var(--line);border-radius:8px;padding:9px}.scene b{display:block;font-size:12px}.scene small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.scene .mini{height:4px;border-radius:5px;background:#c8e4fa;margin-top:8px;overflow:hidden}.scene .mini i{display:block;height:100%;background:linear-gradient(90deg,#1683d1,#28c8e7)}
-.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.field label{display:block;font-size:10px;letter-spacing:.45px;color:#617b95;font-weight:800;margin-bottom:5px}.field input:not([type=range]),.field select{width:100%;border:1px solid #cbdceb;background:#fbfdff;border-radius:6px;padding:8px;color:#254766}.field input[type=range]{width:100%;accent-color:#1680ce}.value{font-size:10px;color:#176db4;margin-top:3px}.hint{font-size:11px;color:#7890a6;margin-top:4px}
-.pill{display:inline-block;border-radius:20px;padding:4px 8px;background:#e6f3ff;color:#1769b1;font-size:10px;font-weight:800}.projectgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.projectcard{border:1px solid #cbddeb;border-radius:10px;overflow:hidden;background:#fff}.projectvisual{height:125px;background:linear-gradient(125deg,#0a3159,#1687c3);position:relative;overflow:hidden}.projectvisual:after{content:"";position:absolute;left:10%;right:10%;bottom:0;height:65%;background:radial-gradient(ellipse,#42d9ff66,transparent 70%)}.projectcontent{padding:13px}.projectcontent h3{margin:7px 0 4px;color:#174b7a}.projectcontent p{font-size:12px;color:var(--muted);min-height:38px}
-.effectsgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;max-height:650px;overflow:auto}.effectcard{background:#f8fbff;text-align:left;padding:9px;border-radius:8px;min-height:75px}.effectcard strong{font-size:11px;display:block}.effectcard small{display:block;color:#728ba2;font-size:10px;margin-top:4px}.effectno{font-size:9px;color:#1881cc;font-weight:800}
-.nozzles{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}.nozzles button{font-size:10px;padding:9px 2px}.nozzles button.on{background:#d9f4ff;border-color:#24a4d5;color:#07598f}.fixtures{display:grid;grid-template-columns:repeat(8,1fr);gap:8px}.fixture{border:1px solid #d4e3f0;border-radius:7px;padding:13px 3px;text-align:center;font-size:10px;color:#173b5a;font-weight:700}
-.guide{max-width:1100px;margin:auto}.guide .intro{background:linear-gradient(110deg,#e7f4ff,#f7fbff);border:1px solid #cbdff1;padding:15px;border-radius:9px}.guide h2{color:#164b7b;margin:8px 0}.guide h3{color:#176db5;margin:22px 0 6px;border-bottom:1px solid #e0eaf3;padding-bottom:6px}.guide h4{color:#2b628e;margin:13px 0 4px}.guide p,.guide li{color:#506c86;line-height:1.65;font-size:13px}.guide ul,.guide ol{padding-left:22px}.guide table{width:100%;border-collapse:collapse;margin:8px 0 14px;font-size:12px}.guide td,.guide th{border:1px solid #d9e5f0;padding:8px;text-align:left}.guide th{background:#edf5fc;color:#24577f}.callout{background:#fff8e9;border-left:3px solid #efa83b;padding:10px 12px;border-radius:5px;color:#77551d;font-size:12px;margin:12px 0}
-.hidden{display:none!important}.foot{text-align:center;color:#8195a9;font-size:11px;padding:14px}
-@media(max-width:1000px){.workspace{grid-template-columns:1fr}.effectsgrid{grid-template-columns:repeat(3,1fr)}}@media(max-width:650px){.wrap{padding:8px}.stats{grid-template-columns:repeat(2,1fr)}.fields{grid-template-columns:repeat(2,1fr)}.projectgrid{grid-template-columns:1fr}.effectsgrid{grid-template-columns:repeat(2,1fr)}.stage{height:330px}.nozzles{grid-template-columns:repeat(6,1fr)}}
-</style></head>
-<body>
-<header class="top"><div class="brand"><div class="brandmark">A</div><div>AquaSync Studio<small>PRO FOUNTAIN CHOREOGRAPHY · LIGHTING DESIGN</small></div></div><div class="topright"><span class="statusdot" id="systemStatus">SIMULATION READY</span><select id="language"><option value="en">English</option><option value="pt">Português (Brasil)</option></select></div></header>
-<nav class="ribbon"><button class="tab active" data-page="studio">◫ Studio</button><button class="tab" data-page="projects">▦ Demo Projects</button><button class="tab" data-page="effects">✦ Effects Library</button><button class="tab" data-page="lighting">☼ Lighting Desk</button><button class="tab" data-page="nozzles">⌗ Nozzles & Outputs</button><button class="tab" data-page="guide">▤ Guide Book</button></nav>
-<main class="wrap">
-<section id="page-studio">
-<div class="pagehead"><div><h1 data-t="studio">Fountain Show Studio</h1><p data-t="studioSub">Compose water choreography, RGB lighting and scene transitions in one workspace.</p></div><div class="actions"><button class="primary" id="play">▶ Play Show</button><button id="pause">Ⅱ Pause</button><button id="stop">■ Stop</button><button id="restart">↺ Restart</button></div></div>
-<div class="workspace"><div>
-<div class="panel"><div class="ph"><h3>LIVE 3D-STYLE FOUNTAIN PREVIEW</h3><div class="row"><span class="pill" id="runState">READY</span><span class="small" id="elapsedLabel">00:00 / 02:00</span></div></div><div class="stagewrap"><div class="stage"><canvas id="fountain"></canvas><div class="stageoverlay"><span id="showLabel">OCEAN SYMPHONY · DEMO SHOW</span><span>60 JETS · RGB LIGHTING</span></div><div class="stagebottom"><span>FRONT VIEW · WATER BASIN</span><span>VISUAL SIMULATION</span></div></div><div class="stats"><div class="stat"><b id="timeStat">00:00</b><span>SHOW POSITION</span></div><div class="stat"><b id="sceneStat">01 / 06</b><span>ACTIVE SCENE</span></div><div class="stat"><b id="jetStat">60</b><span>ACTIVE NOZZLES</span></div><div class="stat"><b>24</b><span>RGB FIXTURES</span></div><div class="stat"><b id="bpmStat">112</b><span>DEMO BPM</span></div></div></div></div>
-<div class="panel"><div class="ph"><h3>SHOW TIMELINE · SCENES</h3><div class="row"><button id="addScene">＋ Add Scene</button><button id="buildAgain">✦ Reload Demo Sequence</button></div></div><div class="pb"><div class="timeline" id="timeline"></div><div class="hint">Select a scene tile to edit its timing, water movement, nozzle group and lighting behavior.</div></div></div>
-<div class="panel"><div class="ph"><h3>SCENE PROPERTY EDITOR</h3><span class="small">Changes preview immediately</span></div><div class="pb"><div class="fields">
-<div class="field"><label>SCENE NAME</label><input id="sceneName" type="text"></div>
-<div class="field"><label>WATER CHOREOGRAPHY</label><select id="waterEffect"></select></div>
-<div class="field"><label>SCENE DURATION · SECONDS</label><input id="duration" type="range" min="3" max="60" value="12"><div class="value" id="durationValue">12 seconds</div></div>
-<div class="field"><label>JET HEIGHT / INTENSITY</label><input id="intensity" type="range" min="10" max="100" value="75"><div class="value" id="intensityValue">75%</div></div>
-<div class="field"><label>NOZZLE GROUP / PATCH</label><select id="nozzleGroup"><option value="all">All nozzles</option><option value="left">Left bank</option><option value="center">Center bank</option><option value="right">Right bank</option><option value="outer">Outer row</option><option value="inner">Inner row</option><option value="odd">Odd numbered</option><option value="even">Even numbered</option><option value="selected">Selected nozzles only</option></select></div>
-<div class="field"><label>JET MOTION SPEED</label><input id="motionSpeed" type="range" min="1" max="10" value="5"><div class="value" id="motionValue">5 / 10</div></div>
-<div class="field"><label>LIGHT COLOR PALETTE</label><select id="lightColor"><option>Ocean Blue</option><option>Rainbow</option><option>Warm Gold</option><option>Ice White</option><option>Neon Party</option><option>Red & Blue</option><option>Sunset</option><option>Emerald</option><option>Violet Dream</option></select></div>
-<div class="field"><label>LIGHTING ANIMATION</label><select id="lightMode"><option value="chase">Sequential chase</option><option value="blink">Blink / strobe</option><option value="fade">Soft fade</option><option value="rainbow">Rainbow cycle</option><option value="alternate">Alternate banks</option><option value="steady">Steady color</option><option value="pulse">Pulse / breathe</option><option value="wave">Traveling color wave</option><option value="spark">Random sparkle</option></select></div>
-<div class="field"><label>SCENE TRANSITION</label><select id="transition"><option>Instant cut</option><option>Fade in</option><option>Crossfade</option><option>Gradual build</option><option>Wave reveal</option><option>Finale burst</option></select></div>
-<div class="field"><label>LIGHT BRIGHTNESS</label><input id="lightBrightness" type="range" min="5" max="100" value="85"><div class="value" id="lightValue">85%</div></div>
-</div><div class="row" style="margin-top:13px"><button class="primary" id="applyScene">Apply Scene Settings</button><button id="duplicateScene">Duplicate Scene</button><button id="deleteScene">Delete Scene</button><span class="small" id="selectedLabel">0 individual nozzles selected</span></div></div></div>
-</div>
-<aside>
-<div class="panel"><div class="ph"><h3>BUILT-IN DEMONSTRATION SHOWS</h3><span class="pill">2 PROJECTS</span></div><div class="pb"><div class="projectgrid">
-<div class="projectcard"><div class="projectvisual"></div><div class="projectcontent"><span class="pill">02:00 · 112 BPM</span><h3>Ocean Symphony</h3><p>Elegant water arcs, rising curtain, blue/cyan colors and slow synchronized lighting.</p><button class="primary" onclick="loadProject('ocean')">Load Ocean Symphony</button></div></div>
-<div class="projectcard"><div class="projectvisual" style="background:linear-gradient(125deg,#2b175e,#a52a94 55%,#0878b4)"></div><div class="projectcontent"><span class="pill">02:30 · 128 BPM</span><h3>Neon Celebration</h3><p>Fast line chases, center bursts, alternating banks and rainbow RGB sequences.</p><button class="primary" onclick="loadProject('neon')">Load Neon Celebration</button></div></div>
-</div><p class="hint">These projects are editable starting templates, not hardware-ready programs.</p></div></div>
-<div class="panel"><div class="ph"><h3>DEMO MUSIC PLAYER</h3><span class="pill">GENERATED AUDIO</span></div><div class="pb"><p class="hint">Create an original electronic demo soundtrack directly in your browser.</p><div class="field"><label>MUSIC DURATION</label><select id="musicLength"><option value="60">1 minute</option><option value="120" selected>2 minutes</option><option value="150">2.5 minutes</option><option value="180">3 minutes</option></select></div><div class="row" style="margin-top:10px"><button class="primary" id="musicPlay">▶ Play Demo Music</button><button id="musicStop">Stop Audio</button></div><p class="hint" id="musicStatus">Audio engine is stopped.</p></div></div>
-<div class="panel"><div class="ph"><h3>COLOR QUICK PICKER</h3></div><div class="pb"><div class="row" id="colorSwatches"></div><p class="hint">Select a color palette to apply it to the active scene.</p></div></div>
-<div class="panel"><div class="ph"><h3>PROJECT ACTIONS</h3></div><div class="pb"><div class="row"><button id="saveProject">Save in Browser</button><button id="exportProject">Export Project JSON</button></div><p class="hint" id="saveStatus">Project data is stored locally in this browser only.</p></div></div>
-</aside></div></section>
-
-<section id="page-projects" class="hidden"><div class="pagehead"><div><h1>Demo Project Library</h1><p>Load a complete editable fountain sequence into the studio.</p></div></div><div class="projectgrid" id="projectLibrary"></div></section>
-<section id="page-effects" class="hidden"><div class="pagehead"><div><h1>100 Fountain & Lighting Effects</h1><p>Choose a choreography preset. It is applied to the active scene and rendered on the fountain stage.</p></div><input id="effectSearch" placeholder="Search effect name…" style="padding:9px;border:1px solid var(--line);border-radius:7px"></div><div class="panel"><div class="ph"><h3>COMPLETE EFFECT PRESET LIBRARY</h3><span class="pill" id="effectCount">100 EFFECTS</span></div><div class="pb"><div class="effectsgrid" id="effectsGrid"></div></div></div></section>
-<section id="page-lighting" class="hidden"><div class="pagehead"><div><h1>Lighting Desk</h1><p>Control simulated RGB fixture groups, color palettes, brightness and movement.</p></div></div><div class="workspace"><div class="panel"><div class="ph"><h3>24 RGB FIXTURES · LIVE PREVIEW</h3><span class="pill">RGB SIMULATION</span></div><div class="pb"><div class="fixtures" id="fixtures"></div><div class="hint">Fixture tiles show the active color family. Their animation is visible in the main fountain preview.</div></div></div><div class="panel"><div class="ph"><h3>LIGHTING CONTROLS</h3></div><div class="pb"><div class="field"><label>COLOR PALETTE</label><select id="deskColor"><option>Ocean Blue</option><option>Rainbow</option><option>Warm Gold</option><option>Ice White</option><option>Neon Party</option><option>Red & Blue</option><option>Sunset</option><option>Emerald</option><option>Violet Dream</option></select></div><div class="field"><label>ANIMATION MODE</label><select id="deskMode"><option value="chase">Sequential chase</option><option value="blink">Blink / strobe</option><option value="fade">Soft fade</option><option value="rainbow">Rainbow cycle</option><option value="alternate">Alternate banks</option><option value="steady">Steady color</option><option value="pulse">Pulse / breathe</option><option value="wave">Traveling color wave</option><option value="spark">Random sparkle</option></select></div><div class="field"><label>BRIGHTNESS</label><input id="deskBrightness" type="range" min="5" max="100" value="85"></div><div class="field"><label>CHASE SPEED</label><input id="deskSpeed" type="range" min="1" max="10" value="5"></div><button class="primary" id="applyLighting" style="margin-top:12px">Apply to Active Scene</button></div></div></div></section>
-<section id="page-nozzles" class="hidden"><div class="pagehead"><div><h1>Nozzles & Output Patch</h1><p>Select individual water outlets, then animate only those selected in the scene editor.</p></div><div class="actions"><button id="selectAll">Select All</button><button id="clearSelection">Clear Selection</button></div></div><div class="panel"><div class="ph"><h3>60 INDIVIDUAL NOZZLES · N01–N60</h3><span class="pill" id="selectionCount">0 SELECTED</span></div><div class="pb"><div class="nozzles" id="nozzleGrid"></div><p class="hint">Click a nozzle tile to select/deselect it. Use “Selected nozzles only” in the scene editor to isolate this patch.</p></div></div><div class="panel"><div class="ph"><h3>24 RGB LIGHT CHANNELS · L01–L24</h3><span class="pill">ILLUSTRATIVE PATCH</span></div><div class="pb"><div class="nozzles" id="lightPatch"></div></div></div><div class="callout">Hardware note: these are illustrative channel labels only. Actual output numbering, DMX addresses, analog channels, relay mapping and pump assignment must be confirmed against the installed controller configuration before any real-world connection.</div></section>
-<section id="page-guide" class="hidden"><div class="pagehead"><div><h1>Complete Software Guide Book</h1><p>Screen-by-screen operating manual · English / Português (Brasil)</p></div><button onclick="window.print()">Print / Save Guide as PDF</button></div><div class="panel"><div class="pb guide" id="guideContent"></div></div></section>
-<div class="foot">AquaSync Studio · Interactive frontend prototype · All water, light and channel outputs are simulated. No physical hardware connection.</div>
-</main>
-<script>
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const effectNames=["Single Line Blast","Left-to-Right Chase","Right-to-Left Chase","Center-Out Blast","Outside-In Blast","Alternating Banks","Odd-Even Sequence","Wave Sweep Left","Wave Sweep Right","Twin Wave","Triple Wave","Sine Wave Jets","Traveling Pulse","Sequential Pop","Rapid Sequential Pop","Slow Sequential Rise","Full Wall Blast","Curtain Rise","Curtain Drop","Crown Burst","Center Crown","Outer Ring Chase","Inner Ring Chase","Zigzag Chase","Diagonal Sweep","V Formation","Arrow Formation","Fan Opening","Fan Closing","Water Tunnel","Water Arch","Water Bridge","High-Low Alternation","Low-High Alternation","Stepped Height","Staircase Rise","Staircase Fall","Ripple Rings","Concentric Burst","Spiral Clockwise","Spiral Counterclockwise","Random Spark","Random Rhythm","Cluster Burst","Four Corner Burst","Side-to-Center","Center-to-Sides","Left Bank Pulse","Right Bank Pulse","Center Bank Pulse","Three Zone Rotation","Six Zone Rotation","Mirror Symmetry","Symmetry Break","Ping Pong","Comet Trail","Meteor Shower","Heartbeat Double Pulse","Breathing Fountain","Staccato Jets","Long Exposure Sweep","Peak Drop","Build to Finale","Finale Mega Burst","Soft Mist","Gentle Dancing","Musical Bounce","Bass Hit Burst","Treble Flicker","Syncopated Rhythm","Polka Pulse","Marching Jets","Fan Ripple","Diamond Pattern","X Pattern","Crossfire","Checkerboard","One-by-One Blink","Light Chase + Jet Chase","Rainbow Water Dance","Blue Ice Sweep","Gold Royal Wave","Red Alert Pulse","Neon Party","Pastel Dream","Ocean Deep Pulse","Sunrise Sequence","Sunset Fade","Aurora Wave","White Flash Finale","Color Wheel Chase","RGB Alternation","Light Curtain","Light Ripple","Light Strobe Burst","Light Breathing","Light Cascade","Waterfall Chase","Fountain Fireworks","Grand Finale"];
-const palettes={"Ocean Blue":["#16b8f1","#167be5","#a7edff"],"Rainbow":["#ff3d66","#ffb52f","#47e58b","#24b9ff","#b66cff"],"Warm Gold":["#ffbd48","#ffe5a0","#ff7d35"],"Ice White":["#e7fbff","#8deaff","#ffffff"],"Neon Party":["#ff31d2","#40f5ff","#c8ff35"],"Red & Blue":["#ff4054","#258dff","#f6fbff"],"Sunset":["#ff593b","#ffad39","#ff4e9a"],"Emerald":["#00d49a","#75ffcb","#1a8d80"],"Violet Dream":["#a66bff","#f05fc4","#6e9bff"]};
-let project='ocean',scenes=[],sceneIndex=0,selected=new Set(),playing=false,elapsed=0,lastFrame=0,brightness=85,motionSpeed=5,lightAudio=null,musicTimer=null,showStart=0;
-function makeScenes(kind){let ocean=kind==='ocean';let names=ocean?['Opening Mist','Blue Wave','Twin Arcs','Cyan Cascade','Center Bloom','Ocean Finale']:['Neon Intro','Rainbow Chase','Side Blast','Pulse Party','Color Storm','Mega Finale'];let effects=ocean?[64,9,27,72,38,62]:[88,1,43,14,95,63];let colors=ocean?['Ocean Blue','Ice White','Ocean Blue','Emerald','Ice White','Ocean Blue']:['Neon Party','Rainbow','Red & Blue','Neon Party','Rainbow','Warm Gold'];return names.map((name,i)=>({name,duration:(ocean?[15,20,22,24,25,34]:[12,24,20,28,30,36])[i],intensity:(ocean?[35,68,82,72,90,100]:[50,95,85,90,100,100])[i],effect:effects[i],color:colors[i],mode:ocean?'fade':i%2?'chase':'blink',group:'all',speed:5,transition:i?'Crossfade':'Fade in',brightness:85}))}
-function current(){return scenes[sceneIndex]||scenes[0]}
-function loadProject(k){project=k;scenes=makeScenes(k);sceneIndex=0;elapsed=0;playing=false;updateAll();showPage('studio')}
-function showPage(p){$$('.tab').forEach(b=>b.classList.toggle('active',b.dataset.page===p));['studio','projects','effects','lighting','nozzles','guide'].forEach(x=>$('#page-'+x).classList.toggle('hidden',x!==p))}
-$$('.tab').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
-$('#waterEffect').innerHTML=effectNames.map((n,i)=>`<option value="${i}">${String(i+1).padStart(2,'0')} · ${n}</option>`).join('');
-function renderTimeline(){let root=$('#timeline');root.innerHTML='';scenes.forEach((s,i)=>{let b=document.createElement('button');b.className='scene'+(i===sceneIndex?' selected':'');b.innerHTML=`<b>${String(i+1).padStart(2,'0')} · ${s.name}</b><small>${s.duration}s · ${effectNames[s.effect]}</small><div class="mini"><i style="width:${s.intensity}%"></i></div>`;b.onclick=()=>{sceneIndex=i;updateAll()};root.append(b)})}
-function syncEditor(){let s=current();if(!s)return;$('#sceneName').value=s.name;$('#waterEffect').value=s.effect;$('#duration').value=s.duration;$('#durationValue').textContent=s.duration+' seconds';$('#intensity').value=s.intensity;$('#intensityValue').textContent=s.intensity+'%';$('#nozzleGroup').value=s.group;$('#motionSpeed').value=s.speed;$('#motionValue').textContent=s.speed+' / 10';$('#lightColor').value=s.color;$('#lightMode').value=s.mode;$('#transition').value=s.transition;$('#lightBrightness').value=s.brightness;$('#lightValue').textContent=s.brightness+'%';$('#showLabel').textContent=(project==='ocean'?'OCEAN SYMPHONY':'NEON CELEBRATION')+' · '+s.name.toUpperCase();brightness=s.brightness;motionSpeed=s.speed}
-function updateAll(){renderTimeline();syncEditor();renderNozzles();renderFixtures();renderEffects($('#effectSearch').value||'');$('#selectionCount').textContent=selected.size+' SELECTED';$('#selectedLabel').textContent=selected.size+' individual nozzles selected'}
-function applyScene(){let s=current();Object.assign(s,{name:$('#sceneName').value||'Untitled Scene',effect:+$('#waterEffect').value,duration:+$('#duration').value,intensity:+$('#intensity').value,group:$('#nozzleGroup').value,speed:+$('#motionSpeed').value,color:$('#lightColor').value,mode:$('#lightMode').value,transition:$('#transition').value,brightness:+$('#lightBrightness').value});brightness=s.brightness;motionSpeed=s.speed;updateAll()}
-['sceneName','waterEffect','duration','intensity','nozzleGroup','motionSpeed','lightColor','lightMode','transition','lightBrightness'].forEach(id=>$('#'+id).addEventListener('change',applyScene));
-[['duration','durationValue',' seconds'],['intensity','intensityValue','%'],['motionSpeed','motionValue',' / 10'],['lightBrightness','lightValue','%']].forEach(([id,out,suffix])=>$('#'+id).addEventListener('input',()=>$('#'+out).textContent=$('#'+id).value+suffix));
-$('#applyScene').onclick=applyScene;
-$('#addScene').onclick=()=>{scenes.push({name:'Custom Scene',duration:15,intensity:75,effect:0,color:'Ocean Blue',mode:'chase',group:'all',speed:5,transition:'Crossfade',brightness:85});sceneIndex=scenes.length-1;updateAll()};
-$('#duplicateScene').onclick=()=>{scenes.splice(sceneIndex+1,0,{...current(),name:current().name+' Copy'});sceneIndex++;updateAll()};
-$('#deleteScene').onclick=()=>{if(scenes.length>1){scenes.splice(sceneIndex,1);sceneIndex=Math.max(0,sceneIndex-1);updateAll()}};
-$('#buildAgain').onclick=()=>loadProject(project);
-function renderEffects(query=''){let root=$('#effectsGrid');root.innerHTML='';let count=0;effectNames.forEach((name,i)=>{if(!name.toLowerCase().includes(query.toLowerCase()))return;count++;let b=document.createElement('button');b.className='effectcard'+(current()?.effect===i?' selected':'');b.innerHTML=`<span class="effectno">PRESET ${String(i+1).padStart(3,'0')}</span><strong>${name}</strong><small>Water choreography + RGB light behavior</small>`;b.onclick=()=>{current().effect=i;updateAll();showPage('studio')};root.append(b)});$('#effectCount').textContent=count+' EFFECTS SHOWN'}
-$('#effectSearch').oninput=e=>renderEffects(e.target.value);
-function renderNozzles(){let root=$('#nozzleGrid');if(!root)return;root.innerHTML='';for(let i=1;i<=60;i++){let b=document.createElement('button');b.textContent='N'+String(i).padStart(2,'0');b.className=selected.has(i)?'on':'';b.onclick=()=>{selected.has(i)?selected.delete(i):selected.add(i);renderNozzles();$('#selectionCount').textContent=selected.size+' SELECTED';$('#selectedLabel').textContent=selected.size+' individual nozzles selected'};root.append(b)}}
-$('#selectAll').onclick=()=>{selected=new Set(Array.from({length:60},(_,i)=>i+1));renderNozzles();$('#selectionCount').textContent='60 SELECTED';$('#selectedLabel').textContent='60 individual nozzles selected'};
-$('#clearSelection').onclick=()=>{selected.clear();renderNozzles();$('#selectionCount').textContent='0 SELECTED';$('#selectedLabel').textContent='0 individual nozzles selected'};
-function renderFixtures(){let root=$('#fixtures');if(!root)return;root.innerHTML='';let cols=palettes[current().color];for(let i=0;i<24;i++){let d=document.createElement('div');d.className='fixture';d.textContent='RGB '+String(i+1).padStart(2,'0');d.style.background=cols[i%cols.length];root.append(d)}let patch=$('#lightPatch');patch.innerHTML='';for(let i=1;i<=24;i++){let b=document.createElement('button');b.textContent='L'+String(i).padStart(2,'0');patch.append(b)}}
-$('#applyLighting').onclick=()=>{Object.assign(current(),{color:$('#deskColor').value,mode:$('#deskMode').value,brightness:+$('#deskBrightness').value,speed:+$('#deskSpeed').value});updateAll()};
-Object.keys(palettes).forEach(name=>{let b=document.createElement('button');b.title=name;b.style.cssText=`width:29px;height:29px;padding:0;background:linear-gradient(135deg,${palettes[name].join(',')})`;b.onclick=()=>{current().color=name;$('#lightColor').value=name;updateAll()};$('#colorSwatches').append(b)});
-$('#saveProject').onclick=()=>{localStorage.setItem('aquasync-project',JSON.stringify({project,scenes,sceneIndex}));$('#saveStatus').textContent='Saved in this browser. Reopen this browser to retrieve the saved data.'};
-$('#exportProject').onclick=()=>{let blob=new Blob([JSON.stringify({application:'AquaSync Studio Demo',project,scenes,notice:'Simulation only; not a Brazil native project file.'},null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='aquasync-demo-project.json';a.click();URL.revokeObjectURL(a.href)};
-function projectCards(){let root=$('#projectLibrary');[['ocean','Ocean Symphony','02:00 · 112 BPM','Six scenes: mist opening, flowing waves, twin arcs, cyan cascade, center bloom and a large finale.'],['neon','Neon Celebration','02:30 · 128 BPM','Six scenes: neon intro, rainbow chase, side blasts, pulse party, color storm and mega finale.']].forEach(x=>{let c=document.createElement('div');c.className='projectcard';c.innerHTML=`<div class="projectvisual"></div><div class="projectcontent"><span class="pill">${x[2]}</span><h3>${x[1]}</h3><p>${x[3]}</p><button class="primary">Open project</button></div>`;c.querySelector('button').onclick=()=>loadProject(x[0]);root.append(c)})}
-const canvas=$('#fountain'),ctx=canvas.getContext('2d');let CW=1000,CH=430;
-function resizeCanvas(){let r=canvas.getBoundingClientRect();canvas.width=Math.max(600,Math.floor(r.width*devicePixelRatio));canvas.height=Math.floor(r.height*devicePixelRatio);CW=canvas.width;CH=canvas.height}window.addEventListener('resize',resizeCanvas);resizeCanvas();
-function hsl(h,s,l){return `hsl(${h},${s}%,${l}%)`}
-function drawFountain(t){ctx.clearRect(0,0,CW,CH);let s=current(),scale=CW/1000,base=CH*.76,center=CW*.5,cols=palettes[s.color],sp=s.speed||5;let bg=ctx.createRadialGradient(center,base*.45,20,center,base*.5,CW*.65);bg.addColorStop(0,'#1c6691');bg.addColorStop(.55,'#0d3c68');bg.addColorStop(1,'#061b37');ctx.fillStyle=bg;ctx.fillRect(0,0,CW,CH);
- // distant architectural silhouettes and soft stage lights
- for(let k=0;k<9;k++){let x=CW*(.08+k*.105);ctx.fillStyle='#174d72';ctx.globalAlpha=.32;ctx.fillRect(x,base-65*scale,22*scale,65*scale);ctx.beginPath();ctx.arc(x+11*scale,base-65*scale,12*scale,Math.PI,0);ctx.fill()}ctx.globalAlpha=1;
- // pool ellipse and water surface
- ctx.save();ctx.beginPath();ctx.ellipse(center,base+22*scale,CW*.44,54*scale,0,0,Math.PI*2);let pool=ctx.createLinearGradient(0,base-15*scale,0,base+80*scale);pool.addColorStop(0,'#4dd7ef');pool.addColorStop(.16,'#147eaa');pool.addColorStop(1,'#062d52');ctx.fillStyle=pool;ctx.fill();ctx.lineWidth=3*scale;ctx.strokeStyle='#91eaff';ctx.globalAlpha=.72;ctx.stroke();ctx.restore();ctx.globalAlpha=1;
- // pool ripples
- for(let r=0;r<6;r++){ctx.beginPath();ctx.ellipse(center,base+12*scale,CW*(.12+r*.055),12*scale+r*4*scale,0,0,Math.PI*2);ctx.strokeStyle='#9aeaff';ctx.globalAlpha=.09+.04*Math.sin(t/400+r);ctx.lineWidth=1.4*scale;ctx.stroke()}ctx.globalAlpha=1;
- let effect=s.effect,phase=t*(.0015+sp*.0007),amp=s.intensity/100,lightMode=s.mode,step=Math.floor(t/Math.max(65,650/sp))%24;
- // 60 nozzle positions in a curved horseshoe / three rows
- for(let i=0;i<60;i++){let row=Math.floor(i/20),col=i%20;let x=center+(col-9.5)*CW*.041;let depth=row===0?-.04:row===1?.02:.08;let y=base+depth*CH;let spread=(col-9.5)/9.5;let group=s.group;
- let allowed=true;if(group==='left'&&col>=7||group==='center'&&(col<7||col>=13)||group==='right'&&col<13||group==='outer'&&row===1||group==='inner'&&row!==1||group==='odd'&&i%2===1||group==='even'&&i%2===0||group==='selected'&&selected.size&&!selected.has(i+1))allowed=false;
- let wave=Math.sin(phase*2.4+i*.36+row*.9),height=(.24+.34*(wave+1))*amp;
- // choreographic signatures
- if(effect===0)height*=((Math.floor(t/(620/sp))+i)%60===0)?2.25:.07;
- else if(effect===1)height*=((Math.floor(t/(125/sp))+i)%60<4)?2.0:.10;
- else if(effect===2)height*=((Math.floor(t/(125/sp))+60-i)%60<4)?2.0:.10;
- else if(effect===3)height*=Math.max(.06,1-Math.abs(col-9.5)/10);
- else if(effect===4)height*=Math.min(1,Math.abs(col-9.5)/5);
- else if(effect===5)height*=i%2?1.3:.18;
- else if(effect===6)height*=i%2?.18:1.3;
- else if(effect===16||effect===63||effect===99)height=.95*amp*(.9+.1*Math.sin(phase));
- else if(effect===17||effect===18)height*=.55+.45*Math.sin(phase*.55);
- else if(effect===19||effect===20)height*=col>7&&col<13?1.8:.3;
- else if(effect===27||effect===28)height*=.25+.75*Math.abs(Math.sin(phase+spread*1.6));
- else if(effect===32||effect===33)height*=row===1?.25:1.25;
- else if(effect===37||effect===38)height*=.3+.7*Math.abs(Math.sin(phase*1.4+Math.abs(spread)*2));
- else if(effect===39||effect===40)height*=.2+.8*(.5+.5*Math.sin(phase+spread*5));
- else if(effect===57)height*=.25+.75*Math.max(0,Math.sin(phase*1.8))**2;
- else if(effect===58)height*=.3+.7*(.5+.5*Math.sin(phase*.55));
- else if(effect===62||effect===63)height*=.25+.75*(.5+.5*Math.sin(phase*1.3));
- else if(effect===78||effect===79||effect===92||effect===99)height*=.25+.75*(.5+.5*Math.sin(phase*2+i*.8));
- if(!allowed)height*=.025;
- let jetH=(28+height*CH*.55)*(row===0?.9:row===1?1.05:1.18),x0=x,y0=y;
- // RGB fixture behavior
- let lightIndex=i%24,lit=lightMode==='steady'?1:lightMode==='blink'?(Math.floor(t/170)%2?1:.08):lightMode==='fade'?.42+.58*(.5+.5*Math.sin(t/700+i*.12)):lightMode==='pulse'?.2+.8*(.5+.5*Math.sin(t/270)):lightMode==='alternate'?(Math.floor(i/12)%2===Math.floor(t/500)%2?1:.12):lightMode==='wave'?.15+.85*(.5+.5*Math.sin(t/300+i*.23)):lightMode==='spark'?(Math.sin(t/90+i*78)>.72?1:.15):((i+24-step)%24<4?1:.18);
- let color=cols[lightIndex%cols.length];if(lightMode==='rainbow')color=hsl((t/22+i*13)%360,95,62);
- // glowing light on pool surface / fixture
- ctx.beginPath();ctx.ellipse(x0,y0+4*scale,12*scale,4*scale,0,0,Math.PI*2);ctx.fillStyle=color;ctx.globalAlpha=.55*lit;ctx.shadowColor=color;ctx.shadowBlur=15*scale*lit*s.brightness/85;ctx.fill();ctx.shadowBlur=0;ctx.globalAlpha=1;
- // water jet: graceful ballistic arch with many tiny droplets
- let peakY=y0-jetH;let lean=Math.sin(phase+i*.16)*9*scale;let jetColor=effect===80?cols[(i+Math.floor(t/100))%cols.length]:'#b9f5ff';
- ctx.beginPath();ctx.moveTo(x0,y0);ctx.quadraticCurveTo(x0+lean*1.4,peakY+jetH*.1,x0+lean,peakY);ctx.quadraticCurveTo(x0-lean*.7,peakY+jetH*.45,x0+lean*.12,y0);ctx.closePath();let waterGrad=ctx.createLinearGradient(x0,y0,x0+lean,peakY);waterGrad.addColorStop(0,color);waterGrad.addColorStop(.55,jetColor);waterGrad.addColorStop(1,'#ffffff');ctx.fillStyle=waterGrad;ctx.globalAlpha=allowed?.78:.08;ctx.fill();ctx.globalAlpha=1;
- // central bright stream and spray
- ctx.beginPath();ctx.moveTo(x0,y0);ctx.quadraticCurveTo(x0+lean*1.2,peakY+jetH*.1,x0+lean,peakY);ctx.strokeStyle='#e9fdff';ctx.lineWidth=1.5*scale;ctx.globalAlpha=allowed?.8:.05;ctx.stroke();ctx.globalAlpha=1;
- for(let d=0;d<4;d++){let q=(t*.00055*(.6+d*.13)+i*.17+d*.24)%1;let px=x0+lean*q+Math.sin(q*5+i)*3*scale,py=y0-jetH*(2*q-q*q)+Math.sin(q*10+i)*2*scale;ctx.beginPath();ctx.arc(px,py,(1.1+d*.25)*scale,0,Math.PI*2);ctx.fillStyle=d%2?'#d5fbff':color;ctx.globalAlpha=allowed?.75*(1-q*.35):.03;ctx.fill();ctx.globalAlpha=1}
- // mist splash sparkle
- if(allowed){for(let d=0;d<2;d++){let sx=x0+lean*.15+Math.sin(t/240+i*3+d)*7*scale,sy=y0-jetH*.18+Math.cos(t/190+i+d)*4*scale;ctx.fillStyle='#e5fbff';ctx.globalAlpha=.38;ctx.fillRect(sx,sy,1.5*scale,1.5*scale)}}ctx.globalAlpha=1;
- }
- // decorative stage light beams behind fountain
- for(let i=0;i<8;i++){let x=CW*(.12+i*.108),col=cols[i%cols.length];ctx.save();ctx.globalAlpha=.055+.025*Math.sin(t/350+i);ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(x,CH*.12);ctx.lineTo(x-38*scale,CH*.75);ctx.lineTo(x+38*scale,CH*.75);ctx.closePath();ctx.fill();ctx.restore()}
- ctx.fillStyle='#dff8ff';ctx.font=`${11*scale}px Segoe UI`;ctx.globalAlpha=.8;ctx.fillText('AQUASYNC · SIMULATED FOUNTAIN STAGE',15*scale,CH-12*scale);ctx.globalAlpha=1;
+:root{
+ --bg:#242629;--panel:#2d3034;--panel2:#373b40;
+ --line:#484d53;--text:#edf0ed;--muted:#a7ada8;
+ --green:#9bd34b;--green2:#b5e477;
 }
-function fmt(sec){return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(Math.floor(sec%60)).padStart(2,'0')}
-function animate(ts){if(playing){if(!lastFrame)lastFrame=ts;elapsed+=(ts-lastFrame)/1000;lastFrame=ts;let total=scenes.reduce((a,s)=>a+s.duration,0);if(elapsed>=total){elapsed=0;playing=false;$('#runState').textContent='SHOW COMPLETE';$('#systemStatus').textContent='SHOW COMPLETE'}else{let acc=0;for(let i=0;i<scenes.length;i++){acc+=scenes[i].duration;if(elapsed<acc){if(sceneIndex!==i){sceneIndex=i;renderTimeline();syncEditor()}break}}}}else lastFrame=ts;drawFountain(ts);let acc=0;for(let i=0;i<sceneIndex;i++)acc+=scenes[i].duration;let inScene=Math.max(0,elapsed-acc);$('#timeStat').textContent=fmt(elapsed);$('#elapsedLabel').textContent=fmt(elapsed)+' / '+fmt(scenes.reduce((a,s)=>a+s.duration,0));$('#sceneStat').textContent=String(sceneIndex+1).padStart(2,'0')+' / '+String(scenes.length).padStart(2,'0');$('#jetStat').textContent=current().group==='selected'?selected.size:current().group==='all'?60:20;requestAnimationFrame(animate)}
-$('#play').onclick=()=>{playing=true;lastFrame=0;$('#runState').textContent='PLAYING';$('#systemStatus').textContent='SHOW RUNNING'};
-$('#pause').onclick=()=>{playing=false;$('#runState').textContent='PAUSED';$('#systemStatus').textContent='SIMULATION PAUSED'};
-$('#stop').onclick=()=>{playing=false;elapsed=0;sceneIndex=0;updateAll();$('#runState').textContent='STOPPED'};
-$('#restart').onclick=()=>{elapsed=0;sceneIndex=0;playing=true;lastFrame=0;updateAll();$('#runState').textContent='PLAYING'};
-$('#musicPlay').onclick=()=>{if(lightAudio)lightAudio.close();lightAudio=new(window.AudioContext||window.webkitAudioContext)();let dur=+$('#musicLength').value,bpm=project==='ocean'?112:128,beat=60/bpm,now=lightAudio.currentTime,master=lightAudio.createGain();master.gain.value=.085;master.connect(lightAudio.destination);for(let t=now;t<now+dur;t+=beat){let osc=lightAudio.createOscillator(),gain=lightAudio.createGain();osc.type='sine';osc.frequency.value=(Math.floor((t-now)/beat)%4===0)?82:132;gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.55,t+.012);gain.gain.exponentialRampToValueAtTime(.0001,t+.16);osc.connect(gain);gain.connect(master);osc.start(t);osc.stop(t+.18);if(Math.floor((t-now)/beat)%2===0){let o=lightAudio.createOscillator(),g=lightAudio.createGain();o.type='triangle';o.frequency.value=[220,277,330,440][Math.floor((t-now)/beat/2)%4];g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.15,t+.04);g.gain.exponentialRampToValueAtTime(.0001,t+.28);o.connect(g);g.connect(master);o.start(t);o.stop(t+.3)}}$('#musicStatus').textContent='Playing generated original demo music for '+dur+' seconds.';clearTimeout(musicTimer);musicTimer=setTimeout(()=>$('#musicStatus').textContent='Demo music finished.',dur*1000)};
-$('#musicStop').onclick=()=>{if(lightAudio)lightAudio.close();clearTimeout(musicTimer);$('#musicStatus').textContent='Audio engine is stopped.'};
-function guideHTML(pt){if(pt)return `
-<div class="intro"><h2>Manual completo do AquaSync Studio</h2><p>Este manual explica cada tela, botão, campo e fluxo de trabalho. Esta versão é um protótipo visual: não envia comandos para bombas, válvulas, módulos DMX, PLC ou inversores reais.</p></div>
-<h3>1. Visão geral do software</h3><p>O AquaSync Studio é uma interface de demonstração para projetar espetáculos de fontes musicais. O projeto é organizado em cenas. Cada cena possui duração, padrão de jatos, grupo de bicos, altura/intensidade, paleta de cores, animação de iluminação e transição.</p>
-<h3>2. Barra superior e navegação</h3><h4>Marca AquaSync Studio</h4><p>Identifica o aplicativo. O indicador “SIMULATION READY” mostra que a demonstração está pronta; não significa que o hardware esteja conectado.</p><h4>Seletor de idioma</h4><p>Escolha English ou Português (Brasil). O manual e os principais títulos de navegação mudam conforme o idioma.</p><h4>Abas de navegação</h4><ul><li><b>Studio:</b> tela principal para pré-visualizar e editar o espetáculo.</li><li><b>Demo Projects:</b> modelos prontos para abrir.</li><li><b>Effects Library:</b> lista pesquisável de 100 padrões de coreografia.</li><li><b>Lighting Desk:</b> painel de paletas e comportamentos de luz.</li><li><b>Nozzles & Outputs:</b> seleção individual dos bicos e visualização de saídas.</li><li><b>Guide Book:</b> este manual.</li></ul>
-<h3>3. Tela Studio — pré-visualização</h3><p>O palco central mostra uma piscina oval, 60 jatos simulados, arcos de água, gotas, brilho na superfície e iluminação colorida. A cena ativa determina a altura, o desenho dos jatos, a cor e o comportamento das luzes.</p><table><tr><th>Controle / indicador</th><th>Função</th></tr><tr><td>Play Show</td><td>Inicia a reprodução da sequência de cenas e o relógio do espetáculo.</td></tr><tr><td>Pause</td><td>Pausa o relógio e a sequência. A animação visual continua como pré-visualização.</td></tr><tr><td>Stop</td><td>Para o espetáculo e retorna o relógio à posição inicial.</td></tr><tr><td>Restart</td><td>Volta ao início e inicia novamente.</td></tr><tr><td>Run State</td><td>Mostra READY, PLAYING, PAUSED, STOPPED ou SHOW COMPLETE.</td></tr><tr><td>Show Position</td><td>Tempo decorrido desde o início.</td></tr><tr><td>Active Scene</td><td>Número da cena atualmente selecionada pela reprodução.</td></tr><tr><td>Active Nozzles</td><td>Quantidade ilustrativa de bicos ativos de acordo com o grupo selecionado.</td></tr><tr><td>RGB Fixtures</td><td>Quantidade fixa de luminárias demonstrativas nesta versão.</td></tr><tr><td>Demo BPM</td><td>Batidas por minuto de referência do projeto; não representa análise de áudio importado.</td></tr></table>
-<h3>4. Projetos de demonstração integrados</h3><h4>Ocean Symphony</h4><p>Espetáculo calmo em azul e ciano, com abertura suave, ondas, arcos duplos, cascata, explosão central e finalização ampla. Duração aproximada de dois minutos.</p><h4>Neon Celebration</h4><p>Espetáculo mais rápido, com cores arco-íris, perseguição de luz, jatos laterais alternados e finalização intensa. Duração aproximada de dois minutos e meio.</p><p>O botão Load abre o projeto e substitui a sequência atual por suas cenas de demonstração.</p>
-<h3>5. Linha do tempo — Scenes</h3><p>Cada cartão representa uma cena. O cartão mostra número, nome, duração, efeito e uma barra visual de intensidade.</p><ul><li><b>Clicar no cartão:</b> seleciona a cena e carrega seus parâmetros no editor.</li><li><b>Add Scene:</b> adiciona uma nova cena personalizável ao final.</li><li><b>Reload Demo Sequence:</b> recria as cenas padrão do projeto atual.</li></ul>
-<h3>6. Scene Property Editor — todos os campos</h3><table><tr><th>Campo</th><th>O que faz</th></tr><tr><td>Scene Name</td><td>Nome exibido na linha do tempo e no rótulo do palco.</td></tr><tr><td>Water Choreography</td><td>Seleciona um dos 100 padrões de jatos e movimento.</td></tr><tr><td>Scene Duration</td><td>Define quantos segundos a cena permanece ativa durante a reprodução.</td></tr><tr><td>Jet Height / Intensity</td><td>Controla a altura visual relativa dos jatos. Não é pressão real da bomba.</td></tr><tr><td>Nozzle Group / Patch</td><td>Escolhe todos, bancos esquerdo/central/direito, linhas interna/externa, pares/ímpares ou bicos selecionados.</td></tr><tr><td>Jet Motion Speed</td><td>Ajusta a velocidade da variação e da sequência visual dos jatos.</td></tr><tr><td>Light Color Palette</td><td>Define as cores RGB usadas na cena.</td></tr><tr><td>Lighting Animation</td><td>Escolhe chase, blink, fade, rainbow, alternate, steady, pulse, wave ou sparkle.</td></tr><tr><td>Scene Transition</td><td>Define como a cena é descrita: corte, entrada suave, crossfade, construção gradual, revelação em onda ou finalização.</td></tr><tr><td>Light Brightness</td><td>Controla o brilho visual simulado das luzes.</td></tr><tr><td>Apply Scene Settings</td><td>Aplica os valores editados à cena ativa.</td></tr><tr><td>Duplicate Scene</td><td>Cria uma cópia da cena atual para servir de base a uma variação.</td></tr><tr><td>Delete Scene</td><td>Remove a cena atual. É necessário manter pelo menos uma cena no projeto.</td></tr></table>
-<h3>7. Effects Library — 100 presets</h3><p>Use o campo de pesquisa para localizar um efeito pelo nome. Clique em um cartão para aplicar o padrão à cena ativa. Volte à tela Studio para ajustar intensidade, velocidade, grupos de bicos e iluminação. Os presets incluem movimentos direcionais, ondas, explosões, simetria, padrões de grupo, perseguição e efeitos de iluminação. Alguns presets compartilham uma família de movimento visual nesta demonstração; a coreografia individual de cada preset precisa ser refinada na fase de produção.</p>
-<h3>8. Lighting Desk — mesa de iluminação</h3><p>O painel apresenta 24 luminárias RGB fictícias. As cores dos cartões representam a paleta da cena atual.</p><ul><li><b>Color Palette:</b> Ocean Blue, Rainbow, Warm Gold, Ice White, Neon Party, Red & Blue, Sunset, Emerald ou Violet Dream.</li><li><b>Sequential Chase:</b> acende luminárias em sequência.</li><li><b>Blink / Strobe:</b> alterna rapidamente entre ligado e apagado.</li><li><b>Soft Fade:</b> varia o brilho suavemente.</li><li><b>Rainbow Cycle:</b> percorre o espectro de cores.</li><li><b>Alternate Banks:</b> alterna grupos de luminárias.</li><li><b>Steady Color:</b> mantém uma cor constante.</li><li><b>Pulse / Breathe:</b> aumenta e reduz o brilho em ciclos.</li><li><b>Traveling Color Wave:</b> desloca uma onda de cor entre as luminárias.</li><li><b>Random Sparkle:</b> cria pequenos flashes em posições variadas.</li><li><b>Brightness / Chase Speed:</b> ajustam brilho e velocidade.</li><li><b>Apply to Active Scene:</b> grava os valores no cenário selecionado.</li></ul>
-<h3>9. Nozzles & Outputs — seleção individual</h3><p>Os botões N01 a N60 representam saídas de bicos. Clique para selecionar ou desmarcar cada bico. Select All seleciona os 60; Clear Selection remove a seleção. Para usar essa seleção, volte ao editor da cena e escolha “Selected nozzles only” no campo Nozzle Group. O patch RGB L01–L24 é apenas uma referência visual das luminárias.</p>
-<h3>10. Demo Music Player</h3><p>Escolha 1, 2, 2,5 ou 3 minutos e pressione Play Demo Music. O navegador sintetiza um ritmo eletrônico original. Stop Audio encerra a reprodução. O áudio é um recurso de demonstração, não uma faixa musical, não lê arquivos externos e não faz sincronização profissional por batida.</p>
-<h3>11. Project Actions</h3><p><b>Save in Browser</b> armazena os dados do projeto no armazenamento local do navegador atual. <b>Export Project JSON</b> baixa uma representação JSON das cenas e configurações. Esse JSON é um arquivo de intercâmbio desta demonstração, não um arquivo nativo do software Brazil.</p>
-<h3>12. Fluxo recomendado para testar</h3><ol><li>Abra Demo Projects e carregue Ocean Symphony.</li><li>Volte ao Studio e pressione Play Show.</li><li>Selecione cada cena na linha do tempo para observar as mudanças.</li><li>Abra Effects Library e escolha Single Line Blast ou Left-to-Right Chase.</li><li>Abra Nozzles & Outputs e selecione alguns bicos.</li><li>Volte ao Studio e defina Nozzle Group como Selected nozzles only.</li><li>Abra Lighting Desk, escolha Rainbow e Sequential Chase e aplique à cena.</li><li>Adicione uma cena, duplique outra e exporte o JSON para inspecionar a estrutura.</li></ol>
-<h3>13. Limitações, segurança e próxima fase</h3><div class="callout">Importante: esta versão não controla bombas, válvulas, DMX, PLC, módulos analógicos, relés, VFDs ou qualquer hardware. Os 60 bicos e 24 luminárias são valores de demonstração. Intensidade visual não equivale a pressão hidráulica. Não conecte esta página a equipamentos reais.</div><p>Antes de criar um exportador compatível com o software Brazil, será necessário confirmar o mapeamento físico de cada saída, endereços DMX, módulos instalados, comportamento dos canais, formato de projeto e arquivos de exemplo válidos. O formato nativo deve ser testado em uma cópia isolada do software original antes de qualquer operação de campo.</p>`;
-return `
-<div class="intro"><h2>AquaSync Studio — Complete Operating Manual</h2><p>This manual explains every screen, navigation item, control, field and recommended workflow. This build is an interactive visual prototype. It does not send commands to real pumps, valves, DMX fixtures, PLCs or variable-frequency drives.</p></div>
-<h3>1. What this software is designed to do</h3><p>AquaSync Studio is a frontend concept for designing musical fountain shows. A show is made of scenes. Each scene stores its own duration, water choreography preset, nozzle group, relative jet height, RGB palette, lighting animation, transition and speed settings. The live stage visualizes those settings as animated water jets, arcs, spray particles, pool reflections and colored light.</p>
-<h3>2. Top bar and navigation ribbon</h3><h4>Application identity</h4><p>The AquaSync Studio logo and title identify the workspace. The status indicator reports the state of this browser simulation. “SIMULATION READY” does not mean a controller or fountain is connected.</p><h4>Language selector</h4><p>Choose English or Português (Brasil). The guide book and main navigation labels switch language. Some detailed editor labels remain technical English in this prototype.</p><h4>Navigation tabs</h4><table><tr><th>Tab</th><th>Purpose</th></tr><tr><td>Studio</td><td>Main workspace for live preview, playback, timeline and scene editing.</td></tr><tr><td>Demo Projects</td><td>Browse and load built-in editable sample shows.</td></tr><tr><td>Effects Library</td><td>Search and select any of the 100 named water/lighting presets.</td></tr><tr><td>Lighting Desk</td><td>Configure RGB color palettes and lighting animation behavior.</td></tr><tr><td>Nozzles & Outputs</td><td>Select individual nozzle outputs and inspect illustrative light channels.</td></tr><tr><td>Guide Book</td><td>Open this detailed operating manual.</td></tr></table>
-<h3>3. Studio screen — live fountain stage</h3><p>The stage is the main visual preview. It draws an oval pool, three curved nozzle rows, individual rising water streams, arcing trajectories, droplets, spray highlights, surface reflections and colored fixture glows. The active scene determines the movement pattern and lighting behavior. It is a 2D canvas illustration designed to create a 3D-style fountain impression; it is not a hydraulic simulator.</p><table><tr><th>Control / readout</th><th>Function</th></tr><tr><td>Play Show</td><td>Starts the show clock and moves through scenes in timeline order.</td></tr><tr><td>Pause</td><td>Pauses show time and scene progression. The stage continues animating as a live preview.</td></tr><tr><td>Stop</td><td>Stops playback, resets elapsed time and selects the first scene.</td></tr><tr><td>Restart</td><td>Resets to the beginning and immediately starts playback again.</td></tr><tr><td>Run State</td><td>Displays READY, PLAYING, PAUSED, STOPPED or SHOW COMPLETE.</td></tr><tr><td>Show Position</td><td>Elapsed show time compared with total scene duration.</td></tr><tr><td>Active Scene</td><td>Current scene number and total scene count.</td></tr><tr><td>Active Nozzles</td><td>Illustrative nozzle count based on the selected nozzle group.</td></tr><tr><td>RGB Fixtures</td><td>Number of simulated RGB lighting fixtures in this demo.</td></tr><tr><td>Demo BPM</td><td>Reference tempo assigned to the sample project. It is not measured from an uploaded song.</td></tr></table>
-<h3>4. Built-in demonstration projects</h3><h4>Ocean Symphony — 2:00 / 112 BPM</h4><p>A calm blue/cyan show template. Its six scenes are Opening Mist, Blue Wave, Twin Arcs, Cyan Cascade, Center Bloom and Ocean Finale. It demonstrates gentle opening movement, rising jets, symmetric patterns and a stronger ending.</p><h4>Neon Celebration — 2:30 / 128 BPM</h4><p>A faster high-energy template. Its six scenes are Neon Intro, Rainbow Chase, Side Blast, Pulse Party, Color Storm and Mega Finale. It demonstrates bright palettes, fast directional movement, alternating groups and a finale.</p><p>Use a Load button to replace the current sample sequence with the selected project. Both projects are editable.</p>
-<h3>5. Timeline — scene cards</h3><p>Each card is one part of the show. It displays the scene number, name, duration, selected choreography preset and a small intensity bar.</p><ul><li><b>Select a card:</b> makes that scene active and loads its settings into the Scene Property Editor.</li><li><b>Add Scene:</b> appends a new editable scene to the project.</li><li><b>Reload Demo Sequence:</b> restores the original six-scene sequence for the current sample project and discards edits to that sequence.</li></ul>
-<h3>6. Scene Property Editor — field-by-field reference</h3><table><tr><th>Field / action</th><th>What it controls</th></tr><tr><td>Scene Name</td><td>The label shown on the timeline and stage overlay.</td></tr><tr><td>Water Choreography</td><td>Chooses one of the 100 named jet movement presets.</td></tr><tr><td>Scene Duration</td><td>How many seconds the scene remains active during show playback.</td></tr><tr><td>Jet Height / Intensity</td><td>Relative visual height of the water streams. This is not real pump pressure.</td></tr><tr><td>Nozzle Group / Patch</td><td>Chooses all nozzles, left/center/right banks, inner/outer rows, odd/even outputs or individually selected nozzles.</td></tr><tr><td>Jet Motion Speed</td><td>Changes the speed of the visual movement and choreography cycle.</td></tr><tr><td>Light Color Palette</td><td>Chooses the RGB colors used by the scene.</td></tr><tr><td>Lighting Animation</td><td>Chooses chase, blink, fade, rainbow, alternate, steady, pulse, wave or sparkle behavior.</td></tr><tr><td>Scene Transition</td><td>Labels the intended changeover style: instant cut, fade in, crossfade, gradual build, wave reveal or finale burst.</td></tr><tr><td>Light Brightness</td><td>Changes the simulated brightness of fixture glows.</td></tr><tr><td>Apply Scene Settings</td><td>Commits the editor values to the active scene and refreshes the timeline.</td></tr><tr><td>Duplicate Scene</td><td>Creates a copy of the current scene so you can make a variation without rebuilding it.</td></tr><tr><td>Delete Scene</td><td>Deletes the current scene. At least one scene must remain in the project.</td></tr></table>
-<h3>7. Effects Library — all 100 presets</h3><p>Use the search box to filter the library by effect name. Select an effect card to assign it to the active scene. Return to Studio to adjust duration, intensity, speed, nozzle group and lighting. The named collection covers directional chases, single-line sequences, center and outer bursts, waves, curtains, arches, symmetry, group patterns, rhythmic movement and lighting-led patterns. In this prototype, the 100 presets are selectable and mapped into a set of visual choreography families; not every named preset yet has a unique production-grade motion algorithm. Each one needs its own refined movement definition during the engineering phase.</p>
-<h3>8. Lighting Desk — fixture and color control</h3><p>The desk shows 24 illustrative RGB fixtures. Fixture tiles display the active palette. Their animated behavior is visible on the Studio stage.</p><ul><li><b>Color Palette:</b> Ocean Blue, Rainbow, Warm Gold, Ice White, Neon Party, Red & Blue, Sunset, Emerald or Violet Dream.</li><li><b>Sequential Chase:</b> moves the lit state through fixtures one after another.</li><li><b>Blink / Strobe:</b> flashes between bright and dim states.</li><li><b>Soft Fade:</b> smoothly raises and lowers the light level.</li><li><b>Rainbow Cycle:</b> moves through changing hues.</li><li><b>Alternate Banks:</b> alternates fixture groups.</li><li><b>Steady Color:</b> holds a constant palette color.</li><li><b>Pulse / Breathe:</b> smoothly pulses brightness up and down.</li><li><b>Traveling Color Wave:</b> moves a color wave across fixture positions.</li><li><b>Random Sparkle:</b> creates scattered short flashes.</li><li><b>Brightness:</b> changes the simulated light output level.</li><li><b>Chase Speed:</b> changes how quickly the sequence advances.</li><li><b>Apply to Active Scene:</b> saves the desk settings into the currently selected scene.</li></ul>
-<h3>9. Nozzles & Outputs — individual nozzle patch</h3><p>The N01–N60 buttons represent individual water outlets. Click a tile to select or deselect it. Select All marks all 60 outputs; Clear Selection removes all selections. To preview only those outlets, return to Studio and set Nozzle Group / Patch to “Selected nozzles only”. The L01–L24 patch is a visual reference for RGB light channels.</p>
-<h3>10. Demo Music Player</h3><p>Select 1, 2, 2.5 or 3 minutes, then press Play Demo Music. The browser synthesizes an original electronic rhythm using its audio engine. Stop Audio ends playback. This is not an imported commercial track, uploaded-audio analysis or professional beat-detection/synchronization.</p>
-<h3>11. Project Actions — save and export</h3><p><b>Save in Browser</b> stores the current project data in this browser's local storage. It is local to this browser profile and device. <b>Export Project JSON</b> downloads a JSON representation of the scenes and settings. The JSON is a demo interchange format; it is not a native Brazil software project file and cannot be assumed to open in MusicFCS.exe.</p>
-<h3>12. Recommended test procedure</h3><ol><li>Open Demo Projects and load Ocean Symphony.</li><li>Return to Studio and press Play Show.</li><li>Select each timeline card to inspect its settings and stage movement.</li><li>Open Effects Library and try Single Line Blast or Left-to-Right Chase.</li><li>Open Nozzles & Outputs and select a few nozzle tiles.</li><li>Return to Studio and choose Selected nozzles only in the group selector.</li><li>Open Lighting Desk, choose Rainbow and Sequential Chase, then apply it.</li><li>Add a scene, duplicate another scene and export the JSON to inspect the project structure.</li></ol>
-<h3>13. Hardware compatibility, safety and next development phase</h3><div class="callout">Important: this prototype does not operate pumps, valves, DMX fixtures, PLCs, analog output modules, relays or VFDs. The 60 nozzle and 24 light counts are illustrative. Visual intensity is not hydraulic pressure. Do not connect this browser prototype to real equipment.</div><p>Before developing a Brazil-compatible exporter, the real output mapping, controller model, DMX addresses, analog channels, pump assignment, timing behavior and native project structure must be confirmed. A valid sample project should be exported from the original software, inspected, and tested on an isolated copy before any live fountain operation.</p>`}
-function renderGuide(){let pt=$('#language').value==='pt';$('#guideContent').innerHTML=guideHTML(pt)}
-const tabNames={en:['◫ Studio','▦ Demo Projects','✦ Effects Library','☼ Lighting Desk','⌗ Nozzles & Outputs','▤ Guide Book'],pt:['◫ Estúdio','▦ Projetos Demo','✦ Biblioteca de Efeitos','☼ Mesa de Luz','⌗ Bicos e Saídas','▤ Manual']};
-$('#language').onchange=()=>{let l=$('#language').value;$$('.tab').forEach((b,i)=>b.textContent=tabNames[l][i]);$$('[data-t]').forEach(e=>e.textContent=e.dataset[l]||e.dataset.en);renderGuide()};
-projectCards();loadProject('ocean');renderGuide();requestAnimationFrame(animate);
-</script></body></html>
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+font:13px "Segoe UI",Arial,sans-serif;overflow:hidden}
+button,input,select{font:inherit}
+button{cursor:pointer;color:inherit;background:#393e42;
+border:1px solid var(--line);border-radius:7px;padding:7px 10px}
+button:hover{border-color:var(--green)}
+button.active,.primary{background:var(--green);color:#17200e;
+border-color:var(--green);font-weight:700}
+.top{height:55px;background:#202225;border-bottom:1px solid var(--line);
+display:flex;align-items:center;justify-content:space-between;padding:0 15px;gap:10px}
+.brand{font-size:17px;font-weight:800;white-space:nowrap}
+.logo{display:inline-grid;place-items:center;width:29px;height:29px;
+background:var(--green);color:#1a220f;border-radius:8px;margin-right:7px}
+.nav{display:flex;gap:4px}
+.nav button{background:transparent;border-color:transparent;color:var(--muted)}
+.nav button.active{background:#39452e;color:var(--green2);border-color:#52683b}
+.topright{display:flex;gap:7px;align-items:center}
+.status{font-size:10px;color:var(--green2);border:1px solid #536a3a;
+padding:5px 8px;border-radius:20px}
+.workspace{height:calc(100vh - 80px);display:grid;
+grid-template-columns:255px minmax(350px,1fr) 285px;gap:9px;padding:9px}
+.panel{background:var(--panel);border:1px solid var(--line);
+border-radius:9px;overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.panelhead{height:40px;flex-shrink:0;padding:0 11px;
+border-bottom:1px solid var(--line);display:flex;
+align-items:center;justify-content:space-between;font-weight:700}
+.panelbody{padding:12px;overflow:auto;min-height:0}
+.section{margin-bottom:17px}
+.sectitle{font-size:10px;letter-spacing:.8px;text-transform:uppercase;
+color:var(--green2);font-weight:800;margin-bottom:8px}
+.item{padding:8px;border-radius:6px;display:flex;gap:9px;
+align-items:center;margin:3px 0;cursor:pointer;color:#dce1dc}
+.item:hover,.item.selected{background:#3c4535;border:1px solid #566d40}
+.ico{color:var(--green2);width:19px}
+.count{margin-left:auto;color:var(--muted);font-size:10px}
+.help{width:21px;height:21px;padding:0;border-radius:50%;
+color:var(--green2);font-weight:bold}
+label{display:block;font-size:11px;color:var(--muted);margin:9px 0 5px}
+input[type=range]{width:100%;accent-color:var(--green)}
+select{width:100%;padding:8px;background:#202327;color:white;
+border:1px solid var(--line);border-radius:6px}
+.row{display:flex;gap:7px;align-items:center}
+.row>*{min-width:0}
+.spread{justify-content:space-between}
+.tiny{font-size:10px;color:var(--muted)}
+.value{color:var(--green2)}
+.center{display:grid;grid-template-rows:minmax(300px,1fr) 190px;gap:9px;min-height:0}
+.viewport{position:relative;background:#202a27;border:1px solid #48534a;
+border-radius:9px;overflow:hidden;min-height:0}
+#scene{width:100%;height:100%;display:block}
+.viewtop,.viewbottom{position:absolute;z-index:2;left:11px;right:11px;
+display:flex;justify-content:space-between;align-items:center}
+.viewtop{top:10px}.viewbottom{bottom:10px}
+.pill{background:#303a35;border:1px solid #58665a;
+padding:6px 9px;border-radius:6px;font-size:10px}
+.transport{display:flex;gap:5px;align-items:center;background:#303a35;
+border:1px solid #56615a;border-radius:7px;padding:5px}
+.transport button{min-width:32px}
+.timeline{background:var(--panel);border:1px solid var(--line);
+border-radius:9px;overflow:hidden}
+.timelinehead{padding:8px 11px;border-bottom:1px solid var(--line);
+display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.tracks{padding:7px 10px}
+.track{display:grid;grid-template-columns:115px 1fr;gap:8px;
+align-items:center;height:32px}
+.trackname{font-size:10px;color:#cbd1ca}
+.lane{height:21px;background:#222629;border:1px solid #42494a;
+border-radius:4px;position:relative;overflow:hidden}
+.clip{position:absolute;top:2px;bottom:2px;border-radius:3px;
+background:#83a94d;color:#15200e;font-size:9px;padding:2px 5px}
+.clip.alt{background:#78948a;color:#101b16}
+.clip.purple{background:#9185aa;color:#191322}
+.effects{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.effect{font-size:10px;text-align:left;padding:8px 6px}
+.control{margin:12px 0}
+.controlhead{display:flex;justify-content:space-between;font-size:11px}
+.footer{height:25px;background:#202225;border-top:1px solid var(--line);
+display:flex;justify-content:space-between;align-items:center;
+padding:0 12px;font-size:10px;color:var(--muted)}
+.modal{display:none;position:fixed;inset:0;background:#0009;
+z-index:9;align-items:center;justify-content:center}
+.modal.show{display:flex}
+.modalbox{width:min(530px,92vw);background:#303438;
+border:1px solid #60675f;border-radius:12px;padding:20px}
+.modalbox h2{color:var(--green2);margin-top:0}
+.modalbox p{line-height:1.7;color:#d3d9d2}
+@media(max-width:1000px){
+.workspace{grid-template-columns:220px minmax(300px,1fr)}
+.rightpanel{display:none}
+}
+@media(max-width:700px){
+body{overflow:auto}.top{height:auto;flex-wrap:wrap;padding:9px}
+.nav{order:3;width:100%;overflow:auto}
+.workspace{height:auto;display:flex;flex-direction:column}
+.center{height:620px}.rightpanel{display:flex;min-height:500px}
+.footer{height:auto;padding:8px;gap:8px;flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="brand"><span class="logo">A</span>AquaSync <span style="color:var(--green)">Studio</span></div>
+ <nav class="nav">
+  <button class="active">Design</button>
+  <button>Music</button><button>Effects</button>
+  <button>Timeline</button><button>Outputs</button>
+ </nav>
+ <div class="topright">
+  <span class="status">● SIMULATION</span>
+  <button class="help" data-help="manual">?</button>
+  <button id="save">Save</button>
+ </div>
+</header>
+
+<main class="workspace">
+
+<!-- LEFT: PROJECT EXPLORER -->
+<aside class="panel">
+ <div class="panelhead">Project Explorer <button class="help" data-help="explorer">?</button></div>
+ <div class="panelbody">
+
+  <div class="section">
+   <div class="sectitle">Workspace</div>
+   <div class="item selected"><span class="ico">▦</span>Fountain Layout<span class="count">60</span></div>
+   <div class="item"><span class="ico">♫</span>Music & Audio</div>
+   <div class="item"><span class="ico">◉</span>Nozzle Groups<span class="count">6</span></div>
+   <div class="item"><span class="ico">✳</span>Water Effects</div>
+   <div class="item"><span class="ico">☼</span>Lighting & Colors</div>
+   <div class="item"><span class="ico">▤</span>Show Timeline</div>
+   <div class="item"><span class="ico">⌁</span>Output Channels</div>
+  </div>
+
+  <div class="section">
+   <div class="sectitle">Nozzle Selection <button class="help" data-help="nozzles">?</button></div>
+   <label>Select nozzle group</label>
+   <select id="group">
+    <option value="all">All nozzles N01–N60</option>
+    <option value="front">Front row N01–N20</option>
+    <option value="middle">Middle row N21–N40</option>
+    <option value="back">Back row N41–N60</option>
+    <option value="center">Center group N28–N33</option>
+   </select>
+   <div class="row" style="margin-top:8px">
+    <button id="all" class="active" style="flex:1">Select all</button>
+    <button id="none" style="flex:1">Clear</button>
+   </div>
+  </div>
+
+  <div class="section">
+   <div class="sectitle">Project Actions</div>
+   <button class="primary" id="demo" style="width:100%">▶ Run demo show</button>
+   <div class="row" style="margin-top:7px">
+    <button id="upload" style="flex:1">＋ Upload music</button>
+    <button id="export" style="flex:1">Export JSON</button>
+   </div>
+   <input type="file" id="audioFile" accept="audio/*" hidden>
+   <div class="tiny" id="musicName" style="margin-top:8px">Demo music mode</div>
+  </div>
+  <p class="tiny">*60 nozzles and 16 analog channels are illustrative demo values, not confirmed hardware mapping.</p>
+ </div>
+</aside>
+
+<!-- CENTER: LIVE 3D VIEW + TIMELINE -->
+<section class="center">
+ <div class="viewport">
+  <div class="viewtop">
+   <span class="pill">3D FOUNTAIN VIEW · PERSPECTIVE</span>
+   <div class="row">
+    <button class="pill" id="topView">Top view</button>
+    <button class="pill" id="reset">Reset</button>
+   </div>
+  </div>
+  <canvas id="scene"></canvas>
+  <div class="viewbottom">
+   <span class="pill" id="info">60 fixed nozzles · 6 groups</span>
+   <div class="transport">
+    <button id="restart">↺</button>
+    <button id="play" class="primary">▶</button>
+    <button id="stop">■</button>
+    <span id="clock" class="tiny">00:00.0</span>
+   </div>
+  </div>
+ </div>
+
+ <div class="timeline">
+  <div class="timelinehead">
+   <span>Show Sequencer <button class="help" data-help="timeline">?</button></span>
+   <span class="tiny">BPM <b id="bpm">118</b> &nbsp; <button id="add">＋ Add scene</button></span>
+  </div>
+  <div class="tracks">
+   <div class="track">
+    <div class="trackname">♫ Music waveform</div>
+    <div class="lane" id="wave"></div>
+   </div>
+   <div class="track">
+    <div class="trackname">Water choreography</div>
+    <div class="lane">
+     <div class="clip" style="left:0;width:23%">Opening rise</div>
+     <div class="clip alt" style="left:25%;width:24%">Alternating jets</div>
+     <div class="clip" style="left:51%;width:22%">Crown pattern</div>
+     <div class="clip purple" style="left:75%;width:24%">Finale</div>
+    </div>
+   </div>
+   <div class="track">
+    <div class="trackname">RGB Lighting</div>
+    <div class="lane">
+     <div class="clip purple" style="left:0;width:25%">Cool blue</div>
+     <div class="clip" style="left:26%;width:25%">Green pulse</div>
+     <div class="clip alt" style="left:52%;width:22%">Color sweep</div>
+     <div class="clip purple" style="left:76%;width:23%">White finale</div>
+    </div>
+   </div>
+   <div class="track">
+    <div class="trackname">Pump intensity</div>
+    <div class="lane">
+     <div class="clip alt" style="left:0;width:20%">35%</div>
+     <div class="clip" style="left:22%;width:30%">70%</div>
+     <div class="clip alt" style="left:54%;width:20%">55%</div>
+     <div class="clip" style="left:76%;width:23%">100%</div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- RIGHT: PROPERTIES -->
+<aside class="panel rightpanel">
+ <div class="panelhead">Properties & Inspector <button class="help" data-help="inspector">?</button></div>
+ <div class="panelbody">
+
+  <div class="section">
+   <div class="sectitle">Water Effects <button class="help" data-help="effects">?</button></div>
+   <div class="effects">
+    <button class="effect active" data-effect="pulse">Pulse Jets</button>
+    <button class="effect" data-effect="chase">Traveling Chase</button>
+    <button class="effect" data-effect="alternating">Alternating</button>
+    <button class="effect" data-effect="center">Center Burst</button>
+    <button class="effect" data-effect="crown">Crown Ring</button>
+    <button class="effect" data-effect="wave">Height Wave</button>
+    <button class="effect" data-effect="curtain">Water Curtain</button>
+    <button class="effect" data-effect="finale">Grand Finale</button>
+    <button class="effect" data-effect="sparkle">Sparkle Burst</button>
+    <button class="effect" data-effect="steady">Steady Jets</button>
+    <button class="effect" data-effect="fan">Fan Pattern</button>
+    <button class="effect" data-effect="ripple">Ripple</button>
+   </div>
+  </div>
+
+  <div class="section">
+   <div class="sectitle">Water Parameters <button class="help" data-help="water">?</button></div>
+   <div class="control">
+    <div class="controlhead"><label>Maximum jet height</label><b class="value" id="heightVal">8.0 m</b></div>
+    <input type="range" id="height" min="1" max="18" step=".5" value="8">
+   </div>
+   <div class="control">
+    <div class="controlhead"><label>Water intensity</label><b class="value" id="intensityVal">72%</b></div>
+    <input type="range" id="intensity" min="0" max="100" value="72">
+   </div>
+   <div class="control">
+    <div class="controlhead"><label>Animation speed</label><b class="value" id="speedVal">1.0×</b></div>
+    <input type="range" id="speed" min=".2" max="2.5" step=".1" value="1">
+   </div>
+  </div>
+
+  <div class="section">
+   <div class="sectitle">Lighting <button class="help" data-help="lighting">?</button></div>
+   <label><input type="checkbox" id="lights" checked> Enable lighting</label>
+   <label>Color preset</label>
+   <select id="color">
+    <option value="green">Emerald / Aqua</option>
+    <option value="blue">Ocean Blue</option>
+    <option value="rainbow">Rainbow</option>
+    <option value="warm">Warm Gold</option>
+    <option value="white">Pure White</option>
+   </select>
+   <div class="control">
+    <div class="controlhead"><label>Light brightness</label><b class="value" id="brightVal">80%</b></div>
+    <input type="range" id="brightness" min="0" max="100" value="80">
+   </div>
+  </div>
+
+  <div class="section">
+   <div class="sectitle">Selection Status</div>
+   <p class="tiny" id="selection">All 60 fixed nozzle positions selected.</p>
+   <button class="primary" id="apply" style="width:100%">Apply effect to selection</button>
+  </div>
+ </div>
+</aside>
+</main>
+
+<footer class="footer">
+ <span>Ready · Browser simulation</span>
+ <span>Hardware disconnected · No real pumps or DMX connected</span>
+ <span>Help available using ? icons</span>
+</footer>
+
+<div class="modal" id="modal">
+ <div class="modalbox">
+  <button id="close" style="float:right">✕</button>
+  <h2 id="modalTitle">AquaSync Manual</h2>
+  <p id="modalText"></p>
+  <small class="tiny">This is a visual simulation. Real controller compatibility requires separate development and testing.</small>
+ </div>
+</div>
+
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+
+const canvas=document.querySelector('#scene');
+const viewport=canvas.parentElement;
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setClearColor(0x202a27);
+const scene=new THREE.Scene();
+scene.fog=new THREE.Fog(0x202a27,30,75);
+const camera=new THREE.PerspectiveCamera(42,1,.1,150);
+camera.position.set(0,18,28);
+camera.lookAt(0,0,0);
+
+scene.add(new THREE.HemisphereLight(0xd8eee0,0x26302c,2));
+const key=new THREE.DirectionalLight(0xffffff,2);
+key.position.set(-8,18,12);
+scene.add(key);
+
+const floor=new THREE.Mesh(
+ new THREE.PlaneGeometry(90,90),
+ new THREE.MeshStandardMaterial({color:0x29332f,roughness:.35})
+);
+floor.rotation.x=-Math.PI/2;
+floor.position.y=-.45;
+scene.add(floor);
+
+const grid=new THREE.GridHelper(50,50,0x59675d,0x3a463f);
+grid.position.y=-.42;
+scene.add(grid);
+
+const water=new THREE.Mesh(
+ new THREE.CircleGeometry(12.8,96),
+ new THREE.MeshPhysicalMaterial({
+  color:0x286166,metalness:.3,roughness:.17,
+  transparent:true,opacity:.83,clearcoat:1
+ })
+);
+water.rotation.x=-Math.PI/2;
+water.scale.set(1,.57,1);
+water.position.y=.04;
+scene.add(water);
+
+const rim=new THREE.Mesh(
+ new THREE.TorusGeometry(13,.17,8,120),
+ new THREE.MeshStandardMaterial({color:0x9bd34b,metalness:.6})
+);
+rim.rotation.x=Math.PI/2;
+rim.scale.z=.57;
+rim.position.y=.02;
+scene.add(rim);
+
+const nozzles=[];
+const baseGeo=new THREE.CylinderGeometry(.16,.2,.18,12);
+const baseMat=new THREE.MeshStandardMaterial({color:0xc0c9c0,metalness:.8});
+for(let i=0;i<60;i++){
+ const row=Math.floor(i/20);
+ const col=i%20;
+ const x=(col-9.5)*1.13;
+ const z=(row-1)*4.1;
+
+ const base=new THREE.Mesh(baseGeo,baseMat);
+ base.position.set(x,.16,z);
+ scene.add(base);
+
+ const jet=new THREE.Mesh(
+  new THREE.CylinderGeometry(.035,.12,1,8,1,true),
+  new THREE.MeshStandardMaterial({
+   color:0x9bdde0,transparent:true,opacity:.68
+  })
+ );
+ jet.position.set(x,.6,z);
+ scene.add(jet);
+
+ const light=new THREE.PointLight(0x80dca0,1.5,4);
+ light.position.set(x,.35,z);
+ scene.add(light);
+
+ nozzles.push({x,z,base,jet,light,index:i});
+}
+
+const ambient=new THREE.PointLight(0x70d9a4,18,35);
+ambient.position.set(0,5,0);
+scene.add(ambient);
+
+let effect='pulse',height=8,intensity=72,speed=1;
+let brightness=80,playing=false,elapsed=0,last=performance.now();
+let selected='all',colorMode='green',showLights=true;
+
+function resize(){
+ const w=viewport.clientWidth,h=viewport.clientHeight;
+ renderer.setSize(w,h,false);
+ camera.aspect=w/h;
+ camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(viewport);
+resize();
+
+function groupFactor(n){
+ if(selected==='all')return 1;
+ if(selected==='none')return 0;
+ if(selected==='front')return n<20?1:0;
+ if(selected==='middle')return n>=20&&n<40?1:0;
+ if(selected==='back')return n>=40?1:0;
+ if(selected==='center')return n>=27&&n<=32?1:0;
+ return 1;
+}
+
+function effectValue(n,t){
+ const p=n/60,phase=t*speed;
+ switch(effect){
+ case'chase':
+  return .12+.88*Math.pow(Math.max(0,Math.sin((p*6-phase*1.5)*Math.PI)),2);
+ case'alternating':return n%2?.9:.18;
+ case'center':return Math.max(.12,1-Math.abs(n-29.5)/30)*(.55+.45*Math.sin(phase*2));
+ case'crown':return .25+.75*(.5+.5*Math.sin(p*Math.PI*8+phase*2));
+ case'wave':return .15+.85*(.5+.5*Math.sin(p*9-phase*2));
+ case'curtain':return .45+.55*Math.sin(phase*1.3+p*3)**2;
+ case'finale':return .65+.35*Math.sin(phase*4+p*12)**2;
+ case'sparkle':return .15+.85*Math.max(0,Math.sin(phase*3+n*12.989))**5;
+ case'steady':return .8;
+ case'fan':return .18+.82*(1-Math.abs(p-.5)*1.7);
+ case'ripple':return .15+.85*Math.max(0,Math.sin(Math.hypot(nozzles[n].x,nozzles[n].z)*.5-phase*2));
+ default:return .25+.75*(.5+.5*Math.sin(phase*2.3+n*.5));
+ }
+}
+
+function jetColor(n,t){
+ if(colorMode==='rainbow')return new THREE.Color().setHSL((n/60+t*.08)%1,.85,.62);
+ if(colorMode==='blue')return new THREE.Color(0x45aaff);
+ if(colorMode==='warm')return new THREE.Color(0xffc36a);
+ if(colorMode==='white')return new THREE.Color(0xeaf6ff);
+ return new THREE.Color(0x8cdb9b).lerp(new THREE.Color(0x54c6d5),.45+.4*Math.sin(t+n*.12));
+}
+
+function animate(now){
+ requestAnimationFrame(animate);
+ const dt=Math.min(.05,(now-last)/1000);
+ last=now;
+ if(playing)elapsed+=dt;
+
+ nozzles.forEach((n,i)=>{
+  const v=effectValue(i,elapsed)*groupFactor(i)*intensity/100;
+  const h=Math.max(.08,height*v);
+  n.jet.scale.y=h;
+  n.jet.position.y=.25+h/2;
+  n.jet.material.color.copy(jetColor(i,elapsed));
+  n.jet.material.opacity=.3+.48*v;
+  n.light.color.copy(jetColor(i,elapsed));
+  n.light.intensity=showLights?brightness/100*(.3+v*2):0;
+  n.base.material.emissive.set(showLights?jetColor(i,elapsed):0x000000);
+  n.base.material.emissiveIntensity=showLights?.25:0;
+ });
+ ambient.intensity=showLights?brightness/100*18:0;
+ renderer.render(scene,camera);
+
+ document.querySelector('#clock').textContent=
+  `${String(Math.floor(elapsed/60)).padStart(2,'0')}:`+
+  `${String(Math.floor(elapsed%60)).padStart(2,'0')}.`+
+  `${Math.floor(elapsed%1*10)}`;
+}
+requestAnimationFrame(animate);
+
+function play(v){
+ playing=v;
+ document.querySelector('#play').textContent=v?'Ⅱ':'▶';
+}
+
+document.querySelector('#play').onclick=()=>play(!playing);
+document.querySelector('#stop').onclick=()=>{play(false);elapsed=0};
+document.querySelector('#restart').onclick=()=>{elapsed=0;play(true)};
+document.querySelector('#demo').onclick=()=>{
+ effect='wave';updateEffects();elapsed=0;play(true);
+};
+
+function updateEffects(){
+ document.querySelectorAll('.effect').forEach(b=>
+  b.classList.toggle('active',b.dataset.effect===effect)
+ );
+}
+document.querySelectorAll('.effect').forEach(b=>{
+ b.onclick=()=>{effect=b.dataset.effect;updateEffects()};
+});
+
+function bindRange(id,fn,format){
+ const el=document.getElementById(id);
+ const out=document.getElementById(id+'Val');
+ el.oninput=()=>{fn(+el.value);out.textContent=format(+el.value)};
+}
+bindRange('height',v=>height=v,v=>v.toFixed(1)+' m');
+bindRange('intensity',v=>intensity=v,v=>v+'%');
+bindRange('speed',v=>speed=v,v=>v.toFixed(1)+'×');
+bindRange('brightness',v=>brightness=v,v=>v+'%');
+
+document.querySelector('#lights').onchange=e=>showLights=e.target.checked;
+document.querySelector('#color').onchange=e=>colorMode=e.target.value;
+
+document.querySelector('#group').onchange=e=>{
+ selected=e.target.value;
+ const names={
+  all:'All 60 fixed nozzle positions selected.',
+  front:'Front row N01–N20 selected.',
+  middle:'Middle row N21–N40 selected.',
+  back:'Back row N41–N60 selected.',
+  center:'Center group N28–N33 selected.'
+ };
+ document.querySelector('#selection').textContent=names[selected];
+ document.querySelector('#info').textContent=names[selected];
+};
+
+document.querySelector('#all').onclick=()=>{
+ document.querySelector('#group').value='all';
+ document.querySelector('#group').dispatchEvent(new Event('change'));
+};
+document.querySelector('#none').onclick=()=>{
+ selected='none';
+ document.querySelector('#selection').textContent='No nozzle group selected.';
+ document.querySelector('#info').textContent='No nozzles selected';
+};
+document.querySelector('#apply').onclick=()=>{
+ alert('Selected effect applied to the selected visual nozzle group.');
+};
+
+document.querySelector('#topView').onclick=()=>{
+ camera.position.set(0,31,.1);camera.lookAt(0,0,0);
+};
+document.querySelector('#reset').onclick=()=>{
+ camera.position.set(0,18,28);camera.lookAt(0,0,0);
+};
+
+const guides={
+ manual:'AquaSync Studio is a browser-based musical fountain design prototype. Use the left panel to choose project sections, the center to preview the fountain and the right panel to adjust water and lighting properties.',
+ explorer:'Project Explorer organizes fountain layout, music, nozzle groups, water effects, lighting, timeline and output channels.',
+ nozzles:'Nozzles are fixed at their physical positions. Choose a row or group to preview an effect on that group. The current 60-nozzle arrangement is illustrative and is not a verified client hardware map.',
+ inspector:'The Inspector controls the selected effect, water height, intensity, animation speed and lighting. Changes appear in the 3D preview.',
+ effects:'Choose a water choreography preset. Pulse, chase, alternating, crown, curtain and finale change the animated water height pattern.',
+ water:'Maximum jet height changes the visual water column height. Intensity scales the output height. Animation speed changes choreography speed. These are simulation values, not real pressure readings.',
+ lighting:'Toggle visual lighting, select a color palette and adjust brightness. No physical DMX lighting fixtures are connected.',
+ timeline:'The sequencer displays example music, water, lighting and pump-intensity lanes. The current scene blocks are a visual prototype, not a full drag-and-drop automation sequencer.'
+};
+
+function help(key){
+ document.querySelector('#modalTitle').textContent=key==='manual'?'AquaSync User Manual':key.charAt(0).toUpperCase()+key.slice(1);
+ document.querySelector('#modalText').textContent=guides[key]||guides.manual;
+ document.querySelector('#modal').classList.add('show');
+}
+document.querySelectorAll('[data-help]').forEach(b=>{
+ b.onclick=()=>help(b.dataset.help);
+});
+document.querySelector('#close').onclick=()=>document.querySelector('#modal').classList.remove('show');
+document.querySelector('#modal').onclick=e=>{
+ if(e.target.id==='modal')e.currentTarget.classList.remove('show');
+};
+
+const fileInput=document.querySelector('#audioFile');
+document.querySelector('#upload').onclick=()=>fileInput.click();
+let audio=null,audioUrl=null;
+
+fileInput.onchange=()=>{
+ const file=fileInput.files[0];
+ if(!file)return;
+ if(audioUrl)URL.revokeObjectURL(audioUrl);
+ audioUrl=URL.createObjectURL(file);
+ if(audio)audio.pause();
+ audio=new Audio(audioUrl);
+ document.querySelector('#musicName').textContent='Loaded: '+file.name;
+ document.querySelector('#play').onclick=()=>{
+  if(audio.paused){
+   audio.play();play(true);
+  }else{
+   audio.pause();play(false);
+  }
+ };
+ audio.onended=()=>play(false);
+};
+
+document.querySelector('#add').onclick=()=>{
+ const lane=document.querySelectorAll('.lane')[1];
+ const clip=document.createElement('div');
+ clip.className='clip';
+ clip.style.left=(Math.random()*70)+'%';
+ clip.style.width='18%';
+ clip.textContent='New scene';
+ lane.appendChild(clip);
+};
+
+document.querySelector('#save').onclick=()=>{
+ const data={
+  effect,height,intensity,speed,brightness,colorMode,showLights,selected
+ };
+ localStorage.setItem('aquasync-project',JSON.stringify(data));
+ alert('Project settings saved in this browser.');
+};
+
+document.querySelector('#export').onclick=()=>{
+ const data={
+  app:'AquaSync Studio',
+  effect,height,intensity,speed,brightness,colorMode,showLights,selected,
+  notice:'JSON simulation export only. Not a Brazil-native project file.'
+ };
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
+ a.download='aquasync-demo-project.json';
+ a.click();
+ URL.revokeObjectURL(a.href);
+};
+
+const saved=localStorage.getItem('aquasync-project');
+if(saved){
+ try{
+  const d=JSON.parse(saved);
+  effect=d.effect||effect;height=d.height||height;
+  intensity=d.intensity||intensity;speed=d.speed||speed;
+  brightness=d.brightness||brightness;
+  colorMode=d.colorMode||colorMode;showLights=d.showLights??true;
+  selected=d.selected||selected;
+  ['height','intensity','speed','brightness'].forEach(id=>{
+   document.getElementById(id).value=d[id];
+   document.getElementById(id+'Val').textContent=
+    id==='height'?d[id].toFixed(1)+' m':
+    id==='speed'?d[id].toFixed(1)+'×':d[id]+'%';
+  });
+  document.querySelector('#color').value=colorMode;
+  document.querySelector('#lights').checked=showLights;
+  document.querySelector('#group').value=selected;
+  updateEffects();
+ }catch(e){}
+}
+
+const wave=document.querySelector('#wave');
+for(let i=0;i<75;i++){
+ const bar=document.createElement('i');
+ bar.style.cssText=
+  `display:inline-block;width:3px;height:${4+Math.abs(Math.sin(i*2.3))*14}px;background:#9bd34b;margin:2px 1px;vertical-align:middle;border-radius:2px`;
+ wave.appendChild(bar);
+}
+</script>
+</body>
+</html>
