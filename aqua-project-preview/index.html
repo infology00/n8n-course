@@ -1,0 +1,538 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AquaSync Studio | Musical Fountain Designer</title>
+<style>
+:root{--bg:#09111c;--panel:#111d2b;--panel2:#172638;--line:#2a3b50;--blue:#29a9f4;--cyan:#51d9ed;--green:#48d5a1;--orange:#ffb35c;--text:#eaf2fa;--muted:#91a2b7}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:13px Segoe UI,Arial,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}
+.top{background:#0d1724;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.brandrow{height:55px;display:flex;align-items:center;justify-content:space-between;padding:0 22px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:750;font-size:17px}
+.logo{width:33px;height:33px;border-radius:9px;background:linear-gradient(135deg,#168ce4,#42d7dd);display:grid;place-items:center;font-size:19px}
+.brand small{display:block;font-size:9px;letter-spacing:1.5px;color:var(--muted);font-weight:500;margin-top:2px}
+.topright{display:flex;align-items:center;gap:9px}.projectname{background:#101e2d;border:1px solid var(--line);color:white;padding:8px 10px;border-radius:6px;width:190px}
+.ribbon{height:48px;display:flex;align-items:stretch;gap:4px;padding:0 16px;overflow-x:auto;border-top:1px solid #1e2c3c}
+.tab{border:0;background:transparent;color:#9eafc2;padding:0 17px;border-bottom:2px solid transparent;white-space:nowrap}
+.tab:hover,.tab.active{color:white;background:#14263a;border-bottom-color:var(--blue)}
+.toolbar{height:43px;background:#101b29;border-top:1px solid #202f41;display:flex;align-items:center;justify-content:space-between;padding:0 20px;gap:10px}
+.toolbar-left,.toolbar-right{display:flex;align-items:center;gap:9px}
+.status{color:var(--green);font-size:10px}.btn{border:1px solid var(--line);background:#1a2a3d;color:#e7f0fa;padding:8px 12px;border-radius:6px;font-weight:600}
+.btn:hover{border-color:var(--blue);background:#203950}.btn.primary{background:var(--blue);border-color:var(--blue);color:#061522}.btn.green{background:#15513e;border-color:#27785c;color:#9af0ca}.btn.small{font-size:11px;padding:6px 9px}
+main{padding:20px;max-width:1700px;margin:auto}.page{display:none}.page.active{display:block}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:17px}
+h1{font-size:22px;margin:0 0 6px}h2{font-size:14px;margin:0 0 13px}h3{font-size:12px;margin:0 0 11px}
+.sub{color:var(--muted);font-size:11px;line-height:1.5}
+.grid{display:grid;gap:13px}.stats{grid-template-columns:repeat(4,1fr);margin-bottom:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:15px;min-width:0}
+.statlabel{color:var(--muted);font-size:10px;letter-spacing:.6px}.statvalue{font-size:23px;font-weight:750;margin:8px 0 3px}
+.statnote{color:var(--green);font-size:10px}
+.cols{grid-template-columns:1.4fr 1fr}
+.quickgrid{grid-template-columns:repeat(3,1fr)}
+.quick{border:1px solid var(--line);border-radius:8px;background:#142337;padding:15px;cursor:pointer}
+.quick:hover{border-color:var(--blue)}.quick b{display:block;margin:7px 0 4px}.quick span{font-size:20px}
+.upload{border:1px dashed #42617e;border-radius:9px;background:#102033;padding:22px;text-align:center}
+.upload input{margin-top:13px;max-width:100%}
+.filemeta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px}
+.miniwave{height:44px;display:flex;gap:2px;align-items:center;overflow:hidden;margin-top:10px}
+.miniwave i{display:block;min-width:3px;flex:1;background:#269edc;border-radius:5px;height:var(--h)}
+.formgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.field label{display:block;color:var(--muted);font-size:10px;margin-bottom:6px}
+.field input,.field select{width:100%;background:#0d1926;border:1px solid var(--line);color:white;border-radius:6px;padding:9px}
+.variations{grid-template-columns:repeat(5,minmax(145px,1fr));overflow-x:auto}
+.variant{border:1px solid var(--line);border-radius:9px;background:#121f2e;padding:12px;cursor:pointer;min-width:145px}
+.variant.active{border:1px solid var(--orange);background:#2a281f;box-shadow:0 0 0 1px #ffb35c22}
+.variant .emoji{font-size:23px}.variant b{display:block;margin:7px 0 5px;font-size:12px}.variant small{color:var(--muted);font-size:10px;line-height:1.5}
+.variant .vmeta{font-size:10px;color:#8bd8fa;margin-top:9px}
+.editorgrid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(265px,.7fr);gap:13px}
+.stage{height:390px;background:radial-gradient(ellipse at 50% 85%,#143e5a,#091522 68%);border:1px solid #29435b;border-radius:8px;position:relative;overflow:hidden}
+canvas{width:100%;height:100%;display:block}
+.stage-label{position:absolute;bottom:12px;left:15px;color:#80a9c5;font-size:9px;letter-spacing:2px;pointer-events:none}
+.stage-top{position:absolute;top:12px;left:13px;right:13px;display:flex;justify-content:space-between;pointer-events:none}
+.pill{background:#0b1b2bc9;border:1px solid #31516b;border-radius:20px;padding:6px 9px;font-size:10px;color:#a6d9f3}
+.stagebuttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.sidecards{display:flex;flex-direction:column;gap:12px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:11px 0;color:var(--muted);font-size:11px}
+.row b{color:var(--text)}input[type=range]{width:100%;accent-color:var(--blue)}
+input[type=number],input[type=text],select{background:#0c1927;color:white;border:1px solid var(--line);padding:8px;border-radius:5px}
+.full{width:100%}
+.timeline{display:flex;gap:7px;overflow-x:auto;padding:5px 0 12px}
+.scene{min-width:135px;border:1px solid #315879;background:#142b40;border-radius:7px;padding:10px;cursor:pointer}
+.scene.active{border-color:var(--orange);background:#39301f}
+.scene b{display:block;font-size:11px}.scene small{color:#a0b4c8;font-size:10px}
+.bar{height:5px;background:#26384c;border-radius:8px;margin-top:9px}.bar i{display:block;height:100%;background:var(--blue);border-radius:8px}
+.effectgrid{grid-template-columns:repeat(4,1fr)}
+.effect{padding:12px;border:1px solid var(--line);background:#132234;border-radius:7px;cursor:pointer}
+.effect.active{border-color:var(--cyan);background:#15364a}
+.effect b{font-size:11px;display:block;margin-bottom:5px}.effect small{font-size:9px;color:var(--muted)}
+.tag{padding:5px 8px;border-radius:20px;background:#15394a;color:#8cdbff;font-size:10px}
+.warn{padding:12px;border-radius:7px;border:1px solid #66512e;background:#2b251a;color:#f3c985;font-size:10px;line-height:1.6;margin-top:13px}
+.outputgrid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.output{border:1px solid var(--line);border-radius:5px;background:#142235;color:#9eb2c6;padding:7px 2px;font-size:9px}
+.output.active{background:#174366;border-color:#278dc8;color:#a6e4ff}
+.table{width:100%;border-collapse:collapse}.table td,.table th{border-bottom:1px solid var(--line);padding:10px;text-align:left;font-size:11px}.table th{color:var(--muted)}
+.hidden{display:none!important}
+@media(max-width:950px){.stats{grid-template-columns:repeat(2,1fr)}.cols{grid-template-columns:1fr}.editorgrid{grid-template-columns:1fr}.sidecards{display:grid;grid-template-columns:repeat(2,1fr)}.formgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){main{padding:12px}.brandrow{padding:0 12px}.projectname{width:115px}.topright .btn{padding:7px}.toolbar{padding:0 10px}.sidecards{grid-template-columns:1fr}.quickgrid{grid-template-columns:repeat(2,1fr)}.effectgrid{grid-template-columns:repeat(2,1fr)}.outputgrid{grid-template-columns:repeat(6,1fr)}}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="brandrow">
+  <div class="brand"><div class="logo">A</div><div>AquaSync Studio<small>MUSICAL FOUNTAIN CONTROL & DESIGN</small></div></div>
+  <div class="topright"><input class="projectname" id="projectName" value="My Fountain Show"><button class="btn small" onclick="saveProject()">Save</button><button class="btn primary small" onclick="exportProject()">Export JSON</button></div>
+ </div>
+ <nav class="ribbon">
+  <button class="tab active" data-page="home">Home</button>
+  <button class="tab" data-page="music">Music & Auto Shows</button>
+  <button class="tab" data-page="designer">Fountain Designer</button>
+  <button class="tab" data-page="timeline">Timeline & Scenes</button>
+  <button class="tab" data-page="effects">Effects Library</button>
+  <button class="tab" data-page="waterscreen">Water Screen</button>
+  <button class="tab" data-page="outputs">Outputs & Channels</button>
+  <button class="tab" data-page="settings">Settings</button>
+ </nav>
+ <div class="toolbar">
+  <div class="toolbar-left"><span class="status">● DEMO PROJECT</span><span class="sub" id="toolbarScene">Scene 01</span></div>
+  <div class="toolbar-right"><button class="btn small" onclick="stopShow()">■ Stop</button><button class="btn green small" id="playBtn" onclick="toggleShow()">▶ Live Preview</button></div>
+ </div>
+</header>
+
+<main>
+<!-- HOME -->
+<section class="page active" id="home">
+ <div class="head"><div><h1>Musical Fountain Show Studio</h1><div class="sub">Create a show automatically from music, then customize every scene, effect and timing.</div></div><button class="btn primary" onclick="go('music')">＋ Create from Music</button></div>
+ <div class="grid stats">
+  <div class="card"><div class="statlabel">PUMP OUTPUTS</div><div class="statvalue">60</div><div class="statnote">Illustrative configuration</div></div>
+  <div class="card"><div class="statlabel">ANALOG CHANNELS</div><div class="statvalue">16</div><div class="statnote">Illustrative configuration</div></div>
+  <div class="card"><div class="statlabel">SHOW SCENES</div><div class="statvalue" id="statScenes">5</div><div class="statnote">Editable scenes</div></div>
+  <div class="card"><div class="statlabel">SHOW DURATION</div><div class="statvalue" id="statDuration">02:30</div><div class="statnote">Current project</div></div>
+ </div>
+ <div class="grid cols">
+  <div class="card"><h2>Start a New Show</h2><div class="grid quickgrid">
+   <div class="quick" onclick="go('music')"><span>♫</span><b>Music to Show</b><div class="sub">Upload music and generate show concepts.</div></div>
+   <div class="quick" onclick="go('designer')"><span>◉</span><b>Fountain Layout</b><div class="sub">Configure the visual pool layout.</div></div>
+   <div class="quick" onclick="go('effects')"><span>✦</span><b>Effects Library</b><div class="sub">Choose animation and water styles.</div></div>
+   <div class="quick" onclick="go('timeline')"><span>▤</span><b>Scene Timeline</b><div class="sub">Edit every scene and duration.</div></div>
+   <div class="quick" onclick="go('waterscreen')"><span>▥</span><b>Water Screen</b><div class="sub">Configure visual water-screen effects.</div></div>
+   <div class="quick" onclick="go('outputs')"><span>⌁</span><b>Outputs</b><div class="sub">Manage demo pumps and channels.</div></div>
+  </div></div>
+  <div class="card"><h2>Live Show Preview</h2><div class="stage" style="height:245px"><canvas id="homeCanvas"></canvas><div class="stage-top"><span class="pill">LIVE SIMULATION</span><span class="pill" id="homeEffect">Dancing Jets</span></div></div><div class="row"><span>Current show</span><b id="homeShowName">Balanced Musical Show</b></div><button class="btn full" onclick="go('designer')">Open Show Editor</button></div>
+ </div>
+ <div class="warn">This is a frontend demonstration. Water height, pressure, pump response, DMX and hardware values are simulated. Actual output mapping and Brazil-compatible export are not yet implemented.</div>
+</section>
+
+<!-- MUSIC -->
+<section class="page" id="music">
+ <div class="head"><div><h1>Music & Automatic Show Generator</h1><div class="sub">Upload a song. AquaSync analyzes its duration and audio energy, then creates five different show concepts.</div></div><span class="tag">AUTO SHOW ENGINE · DEMO</span></div>
+ <div class="grid cols">
+  <div class="card">
+   <h2>01 · Upload Your Music</h2>
+   <div class="upload"><div style="font-size:30px">♫</div><b>Choose an audio track</b><div class="sub">MP3, WAV, M4A, OGG and browser-supported audio</div><input type="file" id="audioFile" accept="audio/*"></div>
+   <div class="filemeta"><div><b id="trackName">No music uploaded</b><div class="sub" id="trackInfo">Upload a track to begin analysis.</div></div><span class="tag" id="analysisTag">WAITING</span></div>
+   <div class="miniwave" id="wave"></div>
+   <audio id="audio" controls style="width:100%;margin-top:12px;display:none"></audio>
+   <div class="row"><span>Estimated tempo / BPM</span><b id="bpm">--</b></div>
+   <div class="row"><span>Track duration</span><b id="duration">--:--</b></div>
+   <div class="row"><span>Audio energy</span><b id="energy">Not analyzed</b></div>
+   <button class="btn primary full" style="margin-top:12px" onclick="generateShows()">✦ Generate 5 Show Variations</button>
+  </div>
+  <div class="card">
+   <h2>02 · Generation Preferences</h2>
+   <div class="formgrid" style="grid-template-columns:1fr 1fr">
+    <div class="field"><label>Show style preference</label><select id="preference"><option value="balanced">Automatic / Balanced</option><option value="power">Powerful & Dynamic</option><option value="elegant">Elegant & Smooth</option><option value="dramatic">Dramatic & Cinematic</option><option value="colorful">Colorful & Playful</option></select></div>
+    <div class="field"><label>Fountain character</label><select id="character"><option>Mixed fountain</option><option>High jets</option><option>Low dancing jets</option><option>Water screen focus</option><option>Wide pool choreography</option></select></div>
+    <div class="field"><label>Show energy</label><select id="energyPreference"><option>Follow music</option><option>Low</option><option>Medium</option><option>High</option></select></div>
+    <div class="field"><label>Scene complexity</label><select id="complexity"><option>Automatic</option><option>Simple</option><option>Detailed</option><option>Advanced</option></select></div>
+   </div>
+   <div class="warn">Automatic generation uses the uploaded audio's duration and browser-side audio analysis to create illustrative scene timings. It does not yet perform professional beat-by-beat choreography.</div>
+  </div>
+ </div>
+ <div class="card" style="margin-top:14px">
+  <div class="head"><div><h2>03 · Choose Your Show Variation</h2><div class="sub">Each variation has a different choreography, motion style and intensity profile.</div></div><span class="tag" id="variationStatus">5 CONCEPTS</span></div>
+  <div class="grid variations" id="variations">
+   <div class="variant active"><div class="emoji">🌊</div><b>Balanced Musical</b><small>Mixed jets, smooth transitions and rhythmic movement.</small><div class="vmeta">Medium energy · Mixed</div></div>
+   <div class="variant"><div class="emoji">⚡</div><b>Power Blast</b><small>Fast changes, strong visual peaks and high jets.</small><div class="vmeta">High energy · Dynamic</div></div>
+   <div class="variant"><div class="emoji">✨</div><b>Elegant Symphony</b><small>Soft movement, gradual ramps and graceful patterns.</small><div class="vmeta">Low energy · Smooth</div></div>
+   <div class="variant"><div class="emoji">🎬</div><b>Cinematic Drama</b><small>Slow build-ups, dramatic bursts and water-screen moments.</small><div class="vmeta">Variable · Dramatic</div></div>
+   <div class="variant"><div class="emoji">🎉</div><b>Rhythm & Dance</b><small>Alternating jets, quick patterns and playful sequences.</small><div class="vmeta">High energy · Rhythmic</div></div>
+  </div>
+  <div class="row"><span>Selected concept</span><b id="selectedVariation">Balanced Musical</b></div>
+  <button class="btn primary" onclick="useVariation()">Use Selected Show & Open Editor →</button>
+ </div>
+</section>
+
+<!-- DESIGNER -->
+<section class="page" id="designer">
+ <div class="head"><div><h1>Fountain Designer</h1><div class="sub">Top-view fountain layout with selectable outputs and animated water effects.</div></div><button class="btn" onclick="resetLayout()">Reset Layout</button></div>
+ <div class="editorgrid">
+  <div class="card">
+   <div class="row"><h2>Pool / Fountain Preview</h2><span class="tag">60 DEMO OUTPUTS</span></div>
+   <div class="stage"><canvas id="designerCanvas"></canvas><div class="stage-top"><span class="pill">TOP VIEW</span><span class="pill" id="selectedOutputLabel">No output selected</span></div><div class="stage-label">ILLUSTRATIVE FOUNTAIN LAYOUT</div></div>
+   <div class="row"><span>Click a nozzle point to select it</span><b id="selectedCount">0 selected</b></div>
+  </div>
+  <div class="sidecards">
+   <div class="card"><h3>Selected Pump Output</h3><div class="row"><span>Output</span><b id="pumpId">None</b></div><div class="row"><span>Enabled</span><b id="pumpState">Yes</b></div><label class="sub">Intensity / simulated pressure</label><input id="pumpIntensity" type="range" min="0" max="100" value="75"><div class="row"><span>Intensity</span><b id="pumpIntensityValue">75%</b></div><button class="btn small full" onclick="togglePump()">Enable / Disable</button></div>
+   <div class="card"><h3>Layout Controls</h3><div class="row"><span>Pool shape</span><b>Ellipse · Demo</b></div><div class="row"><span>Output arrangement</span><b>3 rings</b></div><div class="row"><span>Analog channels</span><b>16</b></div><button class="btn small full" onclick="selectAllPumps()">Select all outputs</button></div>
+  </div>
+ </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="page" id="timeline">
+ <div class="head"><div><h1>Timeline & Scene Editor</h1><div class="sub">Control scene durations, effects, intensity, pressure and transitions individually.</div></div><button class="btn primary" onclick="addScene()">＋ Add Scene</button></div>
+ <div class="card">
+  <div class="row"><h2>Show Sequence Timeline</h2><span class="tag" id="sceneCount">5 SCENES</span></div>
+  <div class="timeline" id="timelineBlocks"></div>
+  <div class="formgrid">
+   <div class="field"><label>Scene name</label><input id="sceneName" type="text"></div>
+   <div class="field"><label>Duration (seconds)</label><input id="sceneDuration" type="number" min="1" max="600"></div>
+   <div class="field"><label>Intensity (%)</label><input id="sceneIntensity" type="number" min="0" max="100"></div>
+   <div class="field"><label>Simulated pressure (%)</label><input id="scenePressure" type="number" min="0" max="100"></div>
+   <div class="field"><label>Animation style</label><select id="sceneEffect"></select></div>
+   <div class="field"><label>Transition</label><select id="sceneTransition"><option>Instant</option><option>Fade In</option><option>Gradual Ramp</option><option>Smooth Crossfade</option><option>Pulse Transition</option></select></div>
+   <div class="field"><label>Output group</label><select id="sceneGroup"><option>All Outputs</option><option>Inner Ring</option><option>Middle Ring</option><option>Outer Ring</option><option>Alternate Outputs</option><option>Selected Outputs</option></select></div>
+   <div class="field"><label>Water screen</label><select id="sceneScreen"><option>Off</option><option>Water Curtain</option><option>Water Fan</option><option>Water Wave</option><option>Water Wall</option><option>Water Tunnel</option></select></div>
+  </div>
+  <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><button class="btn primary" onclick="applyScene()">Apply Scene Changes</button><button class="btn" onclick="duplicateScene()">Duplicate Scene</button><button class="btn" onclick="deleteScene()">Delete Scene</button></div>
+ </div>
+ <div class="card" style="margin-top:13px"><h2>Scene Timing & Progression</h2><div class="row"><span>Total show duration</span><b id="totalDuration">00:00</b></div><div class="row"><span>Selected scene length</span><b id="selectedDuration">00:00</b></div><div class="row"><span>Sequence progression</span><b id="sceneProgress">Scene 1 of 5</b></div></div>
+</section>
+
+<!-- EFFECTS -->
+<section class="page" id="effects">
+ <div class="head"><div><h1>Effects Library</h1><div class="sub">Choose different fountain choreographies and animation patterns.</div></div><span class="tag">VISUAL EFFECTS</span></div>
+ <div class="grid effectgrid" id="effectLibrary"></div>
+ <div class="card" style="margin-top:14px"><h2>Effect Parameters</h2><div class="formgrid">
+  <div class="field"><label>Animation speed</label><input id="effectSpeed" type="range" min="1" max="100" value="55"></div>
+  <div class="field"><label>Jet height / reach</label><input id="effectHeight" type="range" min="10" max="100" value="65"></div>
+  <div class="field"><label>Water intensity</label><input id="effectIntensity" type="range" min="0" max="100" value="75"></div>
+  <div class="field"><label>Pattern width</label><input id="effectWidth" type="range" min="10" max="100" value="65"></div>
+ </div><button class="btn primary" style="margin-top:14px" onclick="applyEffect()">Apply Effect to Current Scene</button></div>
+</section>
+
+<!-- WATER SCREEN -->
+<section class="page" id="waterscreen">
+ <div class="head"><div><h1>Water Screen Studio</h1><div class="sub">Configure water-screen choreography, visual effects and show timing.</div></div><span class="tag">SIMULATED WATER SCREEN</span></div>
+ <div class="editorgrid">
+  <div class="card"><h2>Water Screen Preview</h2><div class="stage"><canvas id="screenCanvas"></canvas><div class="stage-top"><span class="pill">WATER SCREEN SIMULATION</span></div></div></div>
+  <div class="sidecards">
+   <div class="card"><h3>Screen Effect</h3><div class="field"><label>Screen pattern</label><select id="screenType"><option>Water Curtain</option><option>Water Fan</option><option>Water Wave</option><option>Water Wall</option><option>Water Tunnel</option><option>Water Arch</option></select></div><div class="field" style="margin-top:10px"><label>Effect duration (seconds)</label><input id="screenDuration" type="number" value="20" min="1"></div><div class="field" style="margin-top:10px"><label>Screen intensity (%)</label><input id="screenIntensity" type="range" min="0" max="100" value="75"></div><div class="row"><span>Intensity</span><b id="screenIntensityValue">75%</b></div><button class="btn primary full" onclick="applyScreen()">Apply Water Screen Effect</button></div>
+   <div class="card"><h3>Screen Timing</h3><div class="field"><label>Start at (seconds)</label><input id="screenStart" type="number" value="0" min="0"></div><div class="field" style="margin-top:10px"><label>End at (seconds)</label><input id="screenEnd" type="number" value="20" min="1"></div><div class="row"><span>Current assignment</span><b id="screenAssignment">Not assigned</b></div></div>
+  </div>
+ </div>
+ <div class="warn">Water-screen patterns are visual simulations. Actual water-screen equipment, valves, pressure limits and projection systems must be mapped to the real installation.</div>
+</section>
+
+<!-- OUTPUTS -->
+<section class="page" id="outputs">
+ <div class="head"><div><h1>Outputs & Channels</h1><div class="sub">Illustrative pump and analog channel management.</div></div><button class="btn" onclick="selectAllPumps()">Select All Pumps</button></div>
+ <div class="card"><h2>Pump Outputs · 01–60</h2><div class="sub" style="margin-bottom:12px">Select outputs to include them in the current scene. These are example IDs, not verified hardware addresses.</div><div class="outputgrid" id="outputGrid"></div></div>
+ <div class="card" style="margin-top:13px"><h2>Analog Channels · 01–16</h2><div class="outputgrid" id="analogGrid"></div></div>
+ <div class="card" style="margin-top:13px"><h2>Lighting / DMX Configuration</h2><div class="row"><span>DMX lighting</span><b>Illustrative / unassigned</b></div><div class="row"><span>DMX address range</span><b>Not configured</b></div><div class="row"><span>Hardware connection</span><span class="tag">Offline demo</span></div></div>
+</section>
+
+<!-- SETTINGS -->
+<section class="page" id="settings">
+ <div class="head"><div><h1>Project Settings</h1><div class="sub">Project configuration and future export settings.</div></div></div>
+ <div class="grid cols">
+  <div class="card"><h2>Project Information</h2><div class="field"><label>Project name</label><input id="settingsName" type="text" value="My Fountain Show"></div><div class="field" style="margin-top:12px"><label>Location</label><input type="text" placeholder="Fountain location"></div><div class="field" style="margin-top:12px"><label>Notes</label><input type="text" placeholder="Project notes"></div></div>
+  <div class="card"><h2>Illustrative System Profile</h2><div class="row"><span>Pump outputs</span><b>60</b></div><div class="row"><span>Analog channels</span><b>16</b></div><div class="row"><span>Water screen</span><b>Visual module</b></div><div class="row"><span>Music analysis</span><b>Browser-based</b></div><div class="row"><span>Hardware</span><span class="tag">Not connected</span></div></div>
+ </div>
+ <div class="card" style="margin-top:13px"><h2>Project Save / Export</h2><p class="sub">Save the editable frontend project data as JSON. This is not a native Brazil software file.</p><button class="btn primary" onclick="exportProject()">Download Project JSON</button></div>
+ <div class="warn">Native Brazil project export and real pump/DMX control are not implemented. These require original project samples, hardware documentation, exact channel mapping and physical validation.</div>
+</section>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const effectNames=["Dancing Jets","High Vertical Jets","Low Dancing Jets","Alternating Waves","Chasing Jets","Crown Fountain","Water Fan","Water Curtain","Water Arch","Water Tunnel","Pulse Burst","Spiral Motion","Center Burst","Outer Ring Chase","Symmetrical Dance","Random Rhythm"];
+const effectIcons=["🌊","⬆","〰","↔","➜","👑","🪭","▥","🌈","⭕","⚡","🌀","✴","🔵","✦","🎵"];
+const effectDescriptions=["Rhythmic up-and-down jet movement","Tall vertical fountain columns","Low flowing water patterns","Alternating left and right movements","Outputs activate in sequence","Circular crown-style pattern","Wide fan-shaped water display","Continuous curtain effect","Arc-shaped water choreography","Circular tunnel-style motion","Short bursts with pauses","Rotating fountain pattern","Central synchronized burst","Outer ring activates in sequence","Mirrored symmetrical movement","Varied rhythmic movement"];
+let pumps=Array.from({length:60},(_,i)=>({id:i+1,on:true,selected:false,intensity:75}));
+let scenes=[],sceneIndex=0,variationIndex=0,playing=false,uploaded=false;
+let bpmValue=100,trackDuration=150,audioEnergy="Medium",audioURL=null;
+let chosenEffect="Dancing Jets",screenPattern="Water Curtain",screenConfig={duration:20,start:0,end:20,intensity:75};
+let startTime=0,raf=null,variationData=[];
+const variationDefs=[
+ {name:"Balanced Musical",icon:"🌊",effect:"Dancing Jets",energy:"Medium",pressure:65,transition:"Smooth Crossfade"},
+ {name:"Power Blast",icon:"⚡",effect:"High Vertical Jets",energy:"High",pressure:95,transition:"Instant"},
+ {name:"Elegant Symphony",icon:"✨",effect:"Alternating Waves",energy:"Low",pressure:45,transition:"Gradual Ramp"},
+ {name:"Cinematic Drama",icon:"🎬",effect:"Water Curtain",energy:"Variable",pressure:80,transition:"Fade In"},
+ {name:"Rhythm & Dance",icon:"🎉",effect:"Chasing Jets",energy:"High",pressure:85,transition:"Pulse Transition"}
+];
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,Number(n)||0));
+function go(id){
+ document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));
+ document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.page===id));
+ if(id==="timeline")renderTimeline();
+ if(id==="designer")drawDesigner();
+ if(id==="outputs")renderOutputs();
+ if(id==="effects")renderEffects();
+ if(id==="waterscreen")drawScreen();
+}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>go(t.dataset.page));
+$("projectName").addEventListener("input",()=>$("settingsName").value=$("projectName").value);
+$("settingsName").addEventListener("input",()=>$("projectName").value=$("settingsName").value);
+function fmt(s){s=Math.max(0,Math.round(s));return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function makeScenes(def,duration){
+ const count=Math.max(4,Math.min(9,Math.round(duration/28)));
+ const names=["Opening","Build Up","Main Theme","Peak Performance","Water Screen","Rhythm Section","Finale","Grand Finale","Closing"];
+ const patterns={
+ "Dancing Jets":["Low Dancing Jets","Alternating Waves","Chasing Jets","High Vertical Jets","Crown Fountain"],
+ "High Vertical Jets":["High Vertical Jets","Center Burst","Pulse Burst","Outer Ring Chase","Grand Finale"],
+ "Alternating Waves":["Low Dancing Jets","Alternating Waves","Symmetrical Dance","Water Arch","Closing"],
+ "Water Curtain":["Water Curtain","Water Fan","High Vertical Jets","Center Burst","Water Curtain"],
+ "Chasing Jets":["Chasing Jets","Spiral Motion","Outer Ring Chase","Pulse Burst","Crown Fountain"]
+ };
+ const effects=patterns[def.effect]||[def.effect,"Alternating Waves","Chasing Jets","Center Burst","Crown Fountain"];
+ let result=[];
+ for(let i=0;i<count;i++){
+  const fraction=duration/count;
+  const intensity=def.energy==="Low"?[35,45,55,65,50][i%5]:def.energy==="High"?[55,75,90,100,85][i%5]:[40,60,75,90,65][i%5];
+  result.push({name:names[i]||"Scene "+(i+1),duration:Math.max(3,Math.round(fraction)),intensity,pressure:Math.min(100,Math.round(intensity*(def.pressure/75))),effect:effects[i%effects.length],transition:def.transition,group:["All Outputs","Inner Ring","Middle Ring","Outer Ring"][i%4],screen:i===Math.floor(count/2)?"Water Curtain":"Off"});
+ }
+ const sum=result.reduce((a,s)=>a+s.duration,0);result[result.length-1].duration+=Math.round(duration)-sum;
+ return result;
+}
+function selectVariation(i){
+ variationIndex=i;const def=variationDefs[i];
+ document.querySelectorAll(".variant").forEach((v,j)=>v.classList.toggle("active",j===i));
+ $("selectedVariation").textContent=def.name;$("homeShowName").textContent=def.name;
+ $("homeEffect").textContent=def.effect;
+}
+function renderVariations(){
+ $("variations").innerHTML=variationDefs.map((v,i)=>`<div class="variant ${i===variationIndex?"active":""}" onclick="selectVariation(${i})"><div class="emoji">${v.icon}</div><b>${v.name}</b><small>${v.effect} · ${v.transition}</small><div class="vmeta">${v.energy} energy · ${v.pressure}% pressure</div></div>`).join("");
+ $("selectedVariation").textContent=variationDefs[variationIndex].name;
+}
+function generateShows(){
+ if(!uploaded){alert("Please upload a music track first.");go("music");return}
+ const preference=$("preference").value;
+ if(preference!=="balanced"){
+  const prefMap={power:1,elegant:2,dramatic:3,colorful:4};
+  selectVariation(prefMap[preference]);
+ }
+ variationData=variationDefs.map(d=>makeScenes(d,trackDuration));
+ renderVariations();selectVariation(variationIndex);
+ $("variationStatus").textContent="5 SHOWS GENERATED";
+ $("statScenes").textContent=variationData[variationIndex].length;
+ alert("Five show concepts generated. Select a concept and preview it, then use it to open the editor.");
+}
+function useVariation(){
+ scenes=variationData[variationIndex]?JSON.parse(JSON.stringify(variationData[variationIndex])):makeScenes(variationDefs[variationIndex],trackDuration);
+ sceneIndex=0;syncScene();go("designer");updateStats();
+}
+$("audioFile").addEventListener("change",async e=>{
+ const file=e.target.files[0];if(!file)return;
+ if(audioURL)URL.revokeObjectURL(audioURL);
+ audioURL=URL.createObjectURL(file);$("audio").src=audioURL;$("audio").style.display="block";
+ $("trackName").textContent=file.name;$("analysisTag").textContent="ANALYZING";
+ try{
+  const ctx=new (window.AudioContext||window.webkitAudioContext)();
+  const buffer=await ctx.decodeAudioData(await file.arrayBuffer());
+  trackDuration=buffer.duration;
+  const channel=buffer.getChannelData(0);
+  const step=Math.max(1,Math.floor(channel.length/12000));
+  let energies=[];
+  for(let i=0;i<channel.length;i+=step*256){
+   let sum=0,n=0;for(let j=i;j<Math.min(i+step*256,channel.length);j+=step){sum+=channel[j]*channel[j];n++}
+   energies.push(Math.sqrt(sum/Math.max(1,n)));
+  }
+  let mean=energies.reduce((a,b)=>a+b,0)/energies.length;
+  let variance=energies.reduce((a,b)=>a+(b-mean)**2,0)/energies.length;
+  audioEnergy=mean>.16?"High":mean>.055?"Medium":"Soft";
+  // Estimate a rough tempo from changes in audio energy.
+  const env=energies.map((v,i)=>Math.max(0,v-(energies[Math.max(0,i-1)]*.75)));
+  let bestLag=0,bestScore=0;
+  const envRate=buffer.sampleRate/(step*256);
+  for(let lag=Math.max(1,Math.round(envRate*60/180));lag<=Math.round(envRate*60/60);lag++){
+   let score=0;for(let i=lag;i<env.length;i++)score+=env[i]*env[i-lag];
+   if(score>bestScore){bestScore=score;bestLag=lag}
+  }
+  bpmValue=bestLag?Math.round(60*envRate/bestLag):100;
+  bpmValue=clamp(bpmValue,60,180);
+  await ctx.close();
+  $("analysisTag").textContent="ANALYZED";
+  $("trackInfo").textContent=(file.size/1048576).toFixed(2)+" MB · "+buffer.numberOfChannels+" channel(s)";
+  $("bpm").textContent=bpmValue+" BPM (estimate)";
+  $("duration").textContent=fmt(trackDuration);
+  $("energy").textContent=audioEnergy;
+  $("statDuration").textContent=fmt(trackDuration);
+  drawWave(energies);
+ }catch(err){
+  $("analysisTag").textContent="LOADED";
+  $("trackInfo").textContent="Audio loaded; detailed analysis unavailable in this browser.";
+  trackDuration=150;bpmValue=100;
+  $("bpm").textContent="100 BPM (fallback)";
+  $("duration").textContent=fmt(trackDuration);
+  $("energy").textContent="Unknown";drawWave([]);
+ }
+ uploaded=true;variationData=variationDefs.map(d=>makeScenes(d,trackDuration));
+ $("variationStatus").textContent="READY TO GENERATE";
+});
+function drawWave(data){
+ let arr=data.length?data:Array.from({length:100},(_,i)=>.2+Math.abs(Math.sin(i*.32))*.4);
+ $("wave").innerHTML=arr.slice(0,130).map(v=>`<i style="--h:${Math.max(4,Math.round(v*75))}px"></i>`).join("");
+}
+function updateStats(){
+ const total=scenes.reduce((a,s)=>a+s.duration,0);
+ $("statScenes").textContent=scenes.length;$("statDuration").textContent=fmt(total);
+ $("sceneCount").textContent=scenes.length+" SCENES";
+ $("totalDuration").textContent=fmt(total);
+}
+function syncScene(){
+ if(!scenes.length)return;
+ const s=scenes[sceneIndex];
+ $("sceneName").value=s.name;$("sceneDuration").value=s.duration;
+ $("sceneIntensity").value=s.intensity;$("scenePressure").value=s.pressure;
+ $("sceneEffect").innerHTML=effectNames.map(n=>`<option ${n===s.effect?"selected":""}>${n}</option>`).join("");
+ $("sceneTransition").value=s.transition;$("sceneGroup").value=s.group;
+ $("sceneScreen").value=s.screen;
+ $("toolbarScene").textContent=s.name;
+ $("selectedDuration").textContent=fmt(s.duration);
+ $("sceneProgress").textContent="Scene "+(sceneIndex+1)+" of "+scenes.length;
+ chosenEffect=s.effect;drawAll();
+}
+function renderTimeline(){
+ $("timelineBlocks").innerHTML=scenes.map((s,i)=>`<div class="scene ${i===sceneIndex?"active":""}" onclick="selectScene(${i})"><b>${esc(s.name)}</b><small>${s.duration}s · ${s.intensity}% intensity</small><div class="bar"><i style="width:${s.intensity}%"></i></div></div>`).join("");
+ updateStats();
+}
+function selectScene(i){sceneIndex=i;syncScene();renderTimeline()}
+function applyScene(){
+ if(!scenes.length)return;
+ Object.assign(scenes[sceneIndex],{name:$("sceneName").value||"Scene",duration:clamp($("sceneDuration").value,1,600),intensity:clamp($("sceneIntensity").value,0,100),pressure:clamp($("scenePressure").value,0,100),effect:$("sceneEffect").value,transition:$("sceneTransition").value,group:$("sceneGroup").value,screen:$("sceneScreen").value});
+ syncScene();renderTimeline();
+}
+function addScene(){
+ scenes.push({name:"New Scene "+(scenes.length+1),duration:20,intensity:70,pressure:70,effect:"Dancing Jets",transition:"Gradual Ramp",group:"All Outputs",screen:"Off"});
+ sceneIndex=scenes.length-1;syncScene();renderTimeline();
+}
+function duplicateScene(){
+ const s=JSON.parse(JSON.stringify(scenes[sceneIndex]));s.name+=" Copy";
+ scenes.splice(sceneIndex+1,0,s);sceneIndex++;syncScene();renderTimeline();
+}
+function deleteScene(){
+ if(scenes.length<=1){alert("At least one scene is required.");return}
+ scenes.splice(sceneIndex,1);sceneIndex=Math.max(0,sceneIndex-1);syncScene();renderTimeline();
+}
+function renderEffects(){
+ $("effectLibrary").innerHTML=effectNames.map((n,i)=>`<div class="effect ${chosenEffect===n?"active":""}" onclick="chooseEffect('${n.replace(/'/g,"\\'")}')"><b>${effectIcons[i]} ${n}</b><small>${effectDescriptions[i]}</small></div>`).join("");
+}
+function chooseEffect(n){chosenEffect=n;renderEffects();drawAll()}
+function applyEffect(){
+ if(!scenes.length)return;
+ scenes[sceneIndex].effect=chosenEffect;syncScene();renderTimeline();
+}
+$("pumpIntensity").addEventListener("input",e=>{const p=pumps.find(x=>x.selected);if(p)p.intensity=+e.target.value;$("pumpIntensityValue").textContent=e.target.value+"%"});
+function togglePump(){const p=pumps.find(x=>x.selected);if(!p)return;p.on=!p.on;drawDesigner();updatePumpInfo()}
+function updatePumpInfo(){
+ const p=pumps.find(x=>x.selected);
+ $("pumpId").textContent=p?"Pump "+String(p.id).padStart(2,"0"):"None";
+ $("pumpState").textContent=p?(p.on?"Yes":"No"):"—";
+ if(p){$("pumpIntensity").value=p.intensity;$("pumpIntensityValue").textContent=p.intensity+"%"}
+ $("selectedOutputLabel").textContent=p?"Pump "+p.id:"No output selected";
+ $("selectedCount").textContent=pumps.filter(x=>x.selected).length+" selected";
+}
+function selectAllPumps(){pumps.forEach(p=>p.selected=true);updatePumpInfo();renderOutputs();drawDesigner()}
+function resetLayout(){pumps.forEach(p=>{p.on=true;p.selected=false;p.intensity=75});updatePumpInfo();drawDesigner()}
+function renderOutputs(){
+ $("outputGrid").innerHTML=pumps.map(p=>`<button class="output ${p.selected?"active":""}" onclick="p.selected=!p.selected;updatePumpInfo();renderOutputs();drawDesigner()">P${String(p.id).padStart(2,"0")}</button>`).join("");
+ $("analogGrid").innerHTML=Array.from({length:16},(_,i)=>`<div class="output active">A${String(i+1).padStart(2,"0")}</div>`).join("");
+}
+$("screenIntensity").addEventListener("input",e=>$("screenIntensityValue").textContent=e.target.value+"%");
+function applyScreen(){
+ screenPattern=$("screenType").value;
+ screenConfig={duration:clamp($("screenDuration").value,1,600),start:clamp($("screenStart").value,0,99999),end:clamp($("screenEnd").value,1,99999),intensity:+$("screenIntensity").value};
+ $("screenAssignment").textContent=screenPattern+" · "+screenConfig.duration+"s";
+ if(scenes.length){scenes[sceneIndex].screen=screenPattern;renderTimeline()}
+ drawScreen();
+}
+function canvasSetup(id){
+ const c=$(id),r=c.getBoundingClientRect(),dpr=Math.min(2,window.devicePixelRatio||1);
+ c.width=Math.max(1,r.width*dpr);c.height=Math.max(1,r.height*dpr);
+ const ctx=c.getContext("2d");ctx.setTransform(dpr,0,0,dpr,0,0);
+ return {c,ctx,w:r.width,h:r.height};
+}
+function drawFountain(id,mode){
+ const {ctx,w,h}=canvasSetup(id),t=performance.now()/1000;
+ ctx.clearRect(0,0,w,h);
+ ctx.strokeStyle="#254760";ctx.lineWidth=1;
+ for(let x=0;x<w;x+=28){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke()}
+ for(let y=0;y<h;y+=28){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}
+ const cx=w/2,cy=h*.77,rx=Math.min(w*.38,260),ry=Math.min(h*.31,125);
+ ctx.fillStyle="#0c2b42";ctx.strokeStyle="#45bfe7";ctx.lineWidth=3;
+ ctx.beginPath();ctx.ellipse(cx,cy,rx,ry,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+ ctx.strokeStyle="#287ea5";ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(cx,cy,rx*.72,ry*.72,0,0,Math.PI*2);ctx.stroke();
+ ctx.beginPath();ctx.ellipse(cx,cy,rx*.4,ry*.4,0,0,Math.PI*2);ctx.stroke();
+ const count=mode==="designer"?60:34;
+ for(let i=0;i<count;i++){
+  const a=i/count*Math.PI*2;
+  const ring=i%3===0?.83:i%3===1?.59:.34;
+  const x=cx+Math.cos(a)*rx*ring,y=cy+Math.sin(a)*ry*ring;
+  let amp=mode==="home"?.65:mode==="designer"?(pumps[i%60].on?pumps[i%60].intensity/100:0):.7;
+  if(mode==="designer"&&pumps[i%60].selected){ctx.fillStyle="#ffbd61";ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);ctx.fill();continue}
+  if(mode==="designer"&&!pumps[i%60].on)amp=0;
+  const wave=(Math.sin(t*3+i*.7)+1)/2;
+  const ht=(14+wave*55)*amp;
+  ctx.strokeStyle=mode==="home"?"#55d8ee":"#49c9f1";ctx.lineWidth=mode==="designer"?2:2.5;
+  ctx.beginPath();ctx.moveTo(x,y);ctx.quadraticCurveTo(x-5,y-ht*.5,x+Math.sin(t+i)*3,y-ht);ctx.stroke();
+  ctx.fillStyle="#9ceeff";ctx.beginPath();ctx.arc(x,y,2.5,0,Math.PI*2);ctx.fill();
+ }
+ ctx.fillStyle="#8bc9e4";ctx.font="10px Segoe UI";ctx.textAlign="center";ctx.fillText("FOUNTAIN POOL",cx,cy+4);
+}
+function drawScreen(){
+ const {ctx,w,h}=canvasSetup("screenCanvas"),t=performance.now()/1000;
+ ctx.clearRect(0,0,w,h);
+ const base=h*.82;
+ ctx.fillStyle="#0d2b41";ctx.fillRect(0,base,w,h-base);
+ ctx.strokeStyle="#3ab8e6";ctx.lineWidth=2;
+ const intensity=(+$("screenIntensity").value||75)/100;
+ for(let i=0;i<90;i++){
+  let x=i/89*w,y=base;
+  let height=80*intensity;
+  if(screenPattern==="Water Fan")height*=.5+Math.sin(i/89*Math.PI)*1.6;
+  if(screenPattern==="Water Curtain")height*=.8+Math.sin(i*.2+t)*.1;
+  if(screenPattern==="Water Wave")height*=.6+Math.sin(i*.12+t*2)*.6;
+  if(screenPattern==="Water Wall")height*=1.2;
+  if(screenPattern==="Water Tunnel")height*=.8+Math.sin(i/89*Math.PI*2)*.6;
+  if(screenPattern==="Water Arch")height*=.4+Math.sin(i/89*Math.PI)*1.5;
+  ctx.globalAlpha=.5+Math.sin(t*2+i*.3)*.18;
+  ctx.beginPath();ctx.moveTo(x,base);ctx.quadraticCurveTo(x+Math.sin(t+i)*3,base-height*.55,x,base-height);ctx.stroke();
+ }
+ ctx.globalAlpha=1;ctx.fillStyle="#9cecff";ctx.font="11px Segoe UI";ctx.textAlign="center";ctx.fillText(screenPattern.toUpperCase(),w/2,25);
+}
+function drawDesigner(){
+ drawFountain("designerCanvas","designer");
+}
+function drawAll(){
+ drawFountain("homeCanvas","home");drawDesigner();drawScreen();
+}
+function toggleShow(){
+ if(playing){playing=false;cancelAnimationFrame(raf);$("playBtn").textContent="▶ Live Preview";return}
+ playing=true;$("playBtn").textContent="Ⅱ Pause";
+ const loop=()=>{if(!playing)return;drawAll();raf=requestAnimationFrame(loop)};loop();
+}
+function stopShow(){playing=false;cancelAnimationFrame(raf);$("playBtn").textContent="▶ Live Preview";drawAll()}
+function exportProject(){
+ const data={app:"AquaSync Studio",version:"0.2-demo",projectName:$("projectName").value,configuration:{pumpOutputs:60,analogChannels:16,hardwareConnected:false},music:{uploaded,estimatedBPM:bpmValue,duration:trackDuration,energy:audioEnergy},selectedVariation:variationDefs[variationIndex].name,scenes,pumps,waterScreen:screenConfig,waterScreenPattern:screenPattern,note:"Frontend demo JSON only. Not a Brazil native project or hardware export."};
+ const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob);
+ const a=document.createElement("a");a.href=url;a.download="AquaSync-Show-Project.json";a.click();URL.revokeObjectURL(url);
+}
+function saveProject(){
+ try{localStorage.setItem("aquasync_project_v2",JSON.stringify({projectName:$("projectName").value,scenes,pumps,variationIndex,screenConfig,screenPattern}));alert("Project saved in this browser.");}
+ catch(e){alert("Browser storage unavailable. Use Export JSON instead.");}
+}
+function init(){
+ scenes=makeScenes(variationDefs[0],150);
+ renderVariations();selectVariation(0);syncScene();renderTimeline();renderOutputs();renderEffects();drawAll();updateStats();
+ $("sceneEffect").innerHTML=effectNames.map(n=>`<option>${n}</option>`).join("");
+}
+window.addEventListener("resize",()=>drawAll());
+init();
+</script>
+</body>
+</html>
