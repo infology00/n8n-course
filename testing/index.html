@@ -410,254 +410,74 @@ function addNozzle(x,z,groupName,groupIndex,kind="blue",height=7){
 
 /* -------------------------------------------------------
    PDF SCHEMATIC LAYOUT
-   Approved drawing coordinates: 1024 x 512
-   Existing nozzle geometry and water effects preserved.
+   Left circle / centre circle / right circle
+   Green curved paths / four horizontal rows
 ------------------------------------------------------- */
 
-function drawingX(x){
- return (x-512)/30;
-}
-
-function drawingZ(y){
- return (y-256)/30;
-}
-
-function addDrawingNozzle(x,y,groupName,index,kind="blue",height=7){
- addNozzle(
-  drawingX(x),
-  drawingZ(y),
-  groupName,
-  index,
-  kind,
-  height
- );
-}
-
-function addDrawingRing(cx,cy,r,count,groupName,kind="blue",height=7){
+function addRing(cx,cz,r,count,groupName,kind,height,offset=0){
  for(let i=0;i<count;i++){
-  const angle=i/count*Math.PI*2;
-
-  addDrawingNozzle(
-   cx+Math.cos(angle)*r,
-   cy+Math.sin(angle)*r,
-   groupName,
-   i,
-   kind,
-   height
+  const a=i/count*Math.PI*2+offset;
+  addNozzle(
+   cx+Math.cos(a)*r,
+   cz+Math.sin(a)*r,
+   groupName,i,kind,height
   );
  }
 }
 
-/* LEFT CIRCLE
-   Centre (100,145), radius 53
-   24 blue nozzles + red centre + external red nozzle
-*/
-addDrawingRing(
- 100,145,53,24,
- "01 LEFT CIRCLE","blue",7
-);
+/* LEFT CIRCULAR ASSEMBLY */
+addNozzle(-12,0,"01 LEFT CENTER",0,"red",8.5);
+addRing(-12,0,2.15,22,"02 LEFT INNER RING","blue",7.5);
+addNozzle(-15.2,0,"03 LEFT OUTER RED",0,"red",9);
 
-addDrawingNozzle(
- 100,145,
- "01 LEFT CIRCLE",24,"red",7
-);
+/* CENTRE CIRCULAR ASSEMBLY */
+addNozzle(0,0,"04 CENTRE RED",0,"red",10);
+addRing(0,0,2.5,22,"05 CENTRE INNER RING","blue",8);
+addRing(0,0,5.0,30,"06 CENTRE OUTER RED RING","red",9.5,Math.PI/30);
 
-addDrawingNozzle(
- 18,145,
- "01 LEFT CIRCLE",25,"red",7
-);
+/* RIGHT CIRCULAR ASSEMBLY */
+addNozzle(12,0,"07 RIGHT CENTER",0,"red",8.5);
+addRing(12,0,2.15,22,"08 RIGHT INNER RING","blue",7.5);
+addNozzle(15.2,0,"09 RIGHT OUTER RED",0,"red",9);
 
-/* CENTRE INNER CIRCLE
-   Centre (512,157), radius 47
-   24 blue nozzles + red centre
-*/
-addDrawingRing(
- 512,157,47,24,
- "02 CENTRE INNER CIRCLE","blue",7
-);
-
-addDrawingNozzle(
- 512,157,
- "02 CENTRE INNER CIRCLE",24,"red",7
-);
-
-/* CENTRE OUTER RED RING
-   Centre (512,157), radius 88
-   32 red nozzles
-*/
-addDrawingRing(
- 512,157,88,32,
- "03 CENTRE OUTER RING","red",7
-);
-
-/* RIGHT CIRCLE
-   Centre (935,153), radius 53
-   24 blue nozzles + red centre + external red nozzle
-*/
-addDrawingRing(
- 935,153,53,24,
- "04 RIGHT CIRCLE","blue",7
-);
-
-addDrawingNozzle(
- 935,153,
- "04 RIGHT CIRCLE",24,"red",7
-);
-
-addDrawingNozzle(
- 1017,145,
- "04 RIGHT CIRCLE",25,"red",7
-);
-
-/* LEFT CONNECTOR
-   Exactly four blue nozzles
-*/
-[252,298,343,389].forEach((x,i)=>{
- addDrawingNozzle(
-  x,153,
-  "05 LEFT CONNECTOR",
-  i,
-  "blue",
-  7
+/* Green curved connecting paths */
+function addPath(points,groupName){
+ const curve=new THREE.CatmullRomCurve3(
+  points.map(p=>new THREE.Vector3(p[0],.1,p[1]))
  );
-});
-
-/* RIGHT CONNECTOR
-   Exactly four blue nozzles
-*/
-[644,689,734,780].forEach((x,i)=>{
- addDrawingNozzle(
-  x,162,
-  "06 RIGHT CONNECTOR",
-  i,
-  "blue",
-  7
+ const line=new THREE.Mesh(
+  new THREE.TubeGeometry(curve,100,.025,6,false),
+  new THREE.MeshBasicMaterial({
+   color:0x24d77c,transparent:true,opacity:.65
+  })
  );
-});
+ fountainBase.add(line);
 
-/* TWO INDEPENDENT RED CURVES
-   Curves remain separate from all circular assemblies.
-   No visible guide tube is created.
-*/
-
-function bezierPoint(p0,p1,p2,p3,t){
- const u=1-t;
-
- return {
-  x:u*u*u*p0.x+
-    3*u*u*t*p1.x+
-    3*u*t*t*p2.x+
-    t*t*t*p3.x,
-
-  y:u*u*u*p0.y+
-    3*u*u*t*p1.y+
-    3*u*t*t*p2.y+
-    t*t*t*p3.y
- };
+ const pts=curve.getPoints(13);
+ pts.forEach((p,i)=>{
+  addNozzle(p.x,p.z,groupName,i,"green",6.5);
+ });
 }
 
-function getCurvePoint(segments,t){
- const scaled=t*segments.length;
+addPath([
+ [-14,1],[-10,3],[-7,4.5],[-4,4.7],[-1,3.8],[0,2.5]
+],"10 GREEN UPPER PATH");
 
- const segment=Math.min(
-  Math.floor(scaled),
-  segments.length-1
- );
+addPath([
+ [0,-2.5],[2,-3.8],[5,-4.7],[8,-4.4],[11,-2.8],[14,-1]
+],"11 GREEN LOWER PATH");
 
- const localT=scaled-segment;
-
- return bezierPoint(
-  segments[segment][0],
-  segments[segment][1],
-  segments[segment][2],
-  segments[segment][3],
-  localT
- );
-}
-
-/* FIRST RED CURVE */
-const redCurveOne=[
- [
-  {x:95,y:250},
-  {x:180,y:205},
-  {x:245,y:130},
-  {x:310,y:92}
- ],
- [
-  {x:310,y:92},
-  {x:375,y:53},
-  {x:430,y:25},
-  {x:512,y:17}
- ]
-];
-
-/* SECOND RED CURVE */
-const redCurveTwo=[
- [
-  {x:510,y:300},
-  {x:600,y:285},
-  {x:680,y:245},
-  {x:745,y:205}
- ],
- [
-  {x:745,y:205},
-  {x:815,y:160},
-  {x:850,y:105},
-  {x:890,y:63}
- ]
-];
-
-/* Nozzles along first red curve */
-for(let i=0;i<24;i++){
- const point=getCurvePoint(redCurveOne,i/23);
-
- addDrawingNozzle(
-  point.x,
-  point.y,
-  "07 RED CURVE ONE",
-  i,
-  "red",
-  7
- );
-}
-
-/* Nozzles along second red curve */
-for(let i=0;i<24;i++){
- const point=getCurvePoint(redCurveTwo,i/23);
-
- addDrawingNozzle(
-  point.x,
-  point.y,
-  "08 RED CURVE TWO",
-  i,
-  "red",
-  7
- );
-}
-
-/* FOUR BOTTOM ROWS
-   24 blue nozzles in each row
-   Drawing spacing = 6
-*/
-const bottomRows=[
- {startX:107,y:320,group:"09 BOTTOM ROW ONE"},
- {startX:298,y:320,group:"10 BOTTOM ROW TWO"},
- {startX:489,y:320,group:"11 BOTTOM ROW THREE"},
- {startX:778,y:320,group:"12 BOTTOM ROW FOUR"}
-];
-
-bottomRows.forEach(row=>{
- for(let i=0;i<24;i++){
-  addDrawingNozzle(
-   row.startX+i*6,
-   row.y,
-   row.group,
-   i,
-   "blue",
-   7
-  );
+/* Four horizontal nozzle rows */
+function addRow(x1,x2,z,count,groupName){
+ for(let i=0;i<count;i++){
+  const x=x1+(x2-x1)*(i/(count-1));
+  addNozzle(x,z,groupName,i,"blue",7.2);
  }
-});
+}
+addRow(-15,-9,-8,16,"12 ROW LEFT");
+addRow(-7,-1,-8,16,"13 ROW SECOND");
+addRow(1,7,-8,16,"14 ROW CENTRE");
+addRow(9,15,-8,16,"15 ROW RIGHT");
 
 /* -------------------------------------------------------
    SEQUENCE ENGINE
