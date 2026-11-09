@@ -1,0 +1,941 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Musical Fountain – 3D Simulation</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;overflow:hidden;background:#000;color:#fff;font-family:Arial,sans-serif}
+#app{position:fixed;inset:0}
+#ui{
+ position:absolute;top:18px;left:18px;z-index:10;width:260px;
+ padding:17px;background:rgba(8,13,20,.88);
+ border:1px solid rgba(90,190,255,.25);border-radius:15px;
+ backdrop-filter:blur(14px);box-shadow:0 0 30px #001a2c
+}
+#ui h2{font-size:16px;margin:0 0 5px;color:#eaf8ff;letter-spacing:1px}
+.sub{font-size:10px;color:#8ba8bd;margin-bottom:15px}
+button,select{
+ width:100%;padding:10px;margin:4px 0;border-radius:8px;
+ border:1px solid #25465c;background:#101e2b;color:#eaf8ff;
+ cursor:pointer;font-size:12px
+}
+button:hover{background:#18354b;border-color:#48caff}
+button.active{background:#07547b;border-color:#49caff}
+.row{display:flex;gap:7px}
+.row button{flex:1}
+.section{font-size:10px;color:#67caff;margin:13px 0 5px;letter-spacing:1px}
+#status{
+ position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+ z-index:10;background:rgba(5,12,19,.8);border:1px solid #23465c;
+ border-radius:30px;padding:9px 18px;font-size:11px;color:#b9eaff;
+ white-space:nowrap
+}
+#hint{position:absolute;right:18px;bottom:18px;color:#8da9ba;font-size:10px;z-index:10}
+#loading{position:absolute;inset:0;display:grid;place-items:center;background:#000;z-index:20;color:#8bdcff}
+</style>
+
+<script type="importmap">
+{
+ "imports":{
+  "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+ }
+}
+</script>
+</head>
+
+<body>
+<div id="app"></div>
+<div id="loading">Loading 3D Fountain...</div>
+
+<div id="ui">
+ <h2>FOUNTAIN CONTROL</h2>
+ <div class="sub">3D MUSICAL FOUNTAIN SIMULATION</div>
+
+ <div class="section">WATER SEQUENCE</div>
+ <button id="sequenceBtn" class="active">Line-by-Line Sequence</button>
+ <div class="row">
+  <button id="allBtn">All Jets</button>
+  <button id="stopBtn">Stop</button>
+ </div>
+
+ <div class="section">WATER SPEED</div>
+ <select id="speed">
+  <option value="0.035">Very Fast</option>
+  <option value="0.065" selected>Fast</option>
+  <option value="0.12">Normal</option>
+  <option value="0.22">Slow</option>
+ </select>
+
+ <div class="section">LIGHTING MODE</div>
+ <select id="lightMode">
+  <option value="rainbow">RGB / Rainbow</option>
+  <option value="blue">Blue & White</option>
+  <option value="white">Pure White</option>
+  <option value="gold">Golden</option>
+  <option value="purple">Purple</option>
+ </select>
+
+ <div class="section">CAMERA</div>
+ <div class="row">
+  <button id="topBtn">Top View</button>
+  <button id="sideBtn">Side View</button>
+ </div>
+ <button id="rotateBtn">360° Rotation: OFF</button>
+ <button id="resetBtn">Reset Camera</button>
+
+ <div class="section">DISPLAY</div>
+ <div class="row">
+  <button id="grassBtn" class="active">Grass ON</button>
+  <button id="lightsBtn" class="active">Lights ON</button>
+ </div>
+</div>
+
+<div id="status">READY · LINE SEQUENCE</div>
+<div id="hint">Drag to rotate · Scroll to zoom</div>
+
+<script type="module">
+import * as THREE from "three";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+import {EffectComposer} from "three/addons/postprocessing/EffectComposer.js";
+import {RenderPass} from "three/addons/postprocessing/RenderPass.js";
+import {UnrealBloomPass} from "three/addons/postprocessing/UnrealBloomPass.js";
+
+/* -------------------------------------------------------
+   SCENE / CAMERA / RENDERER
+------------------------------------------------------- */
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000000);
+scene.fog = new THREE.FogExp2(0x000000,0.009);
+
+const camera = new THREE.PerspectiveCamera(
+ 48,window.innerWidth/window.innerHeight,0.1,500
+);
+camera.position.set(0,28,43);
+
+const renderer = new THREE.WebGLRenderer({
+ antialias:true,
+ powerPreference:"high-performance"
+});
+renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.25;
+document.getElementById("app").appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true;
+controls.dampingFactor=.055;
+controls.minDistance=12;
+controls.maxDistance=85;
+controls.maxPolarAngle=Math.PI*.49;
+controls.target.set(0,1,0);
+controls.autoRotate=false;
+controls.autoRotateSpeed=.65;
+
+/* Bloom makes nozzle lights and water highlights glow */
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene,camera));
+const bloom = new UnrealBloomPass(
+ new THREE.Vector2(window.innerWidth,window.innerHeight),
+ .9,.65,.16
+);
+composer.addPass(bloom);
+
+/* -------------------------------------------------------
+   LIGHTING
+------------------------------------------------------- */
+
+scene.add(new THREE.AmbientLight(0x7896b5,.55));
+
+const moon = new THREE.DirectionalLight(0xb9dcff,1.2);
+moon.position.set(-15,25,12);
+moon.castShadow=true;
+scene.add(moon);
+
+const fill = new THREE.DirectionalLight(0x286b9a,.7);
+fill.position.set(15,12,-15);
+scene.add(fill);
+
+const colorLights=[];
+for(let i=0;i<12;i++){
+ const light=new THREE.PointLight(0x00aaff,2.3,19,1.8);
+ const a=i/12*Math.PI*2;
+ light.position.set(Math.cos(a)*12,1.2,Math.sin(a)*12);
+ scene.add(light);
+ colorLights.push(light);
+}
+
+/* -------------------------------------------------------
+   FLOOR, POOL AND GRASS
+------------------------------------------------------- */
+
+const ground = new THREE.Mesh(
+ new THREE.PlaneGeometry(180,180),
+ new THREE.MeshStandardMaterial({color:0x080b0b,roughness:.95})
+);
+ground.rotation.x=-Math.PI/2;
+ground.position.y=-.35;
+ground.receiveShadow=true;
+scene.add(ground);
+
+/* Main dark reflective pool */
+const pool = new THREE.Mesh(
+ new THREE.CylinderGeometry(17.2,17.2,.42,128),
+ new THREE.MeshStandardMaterial({
+  color:0x061a24,metalness:.75,roughness:.18,
+  transparent:true,opacity:.96
+ })
+);
+pool.position.y=-.13;
+pool.receiveShadow=true;
+pool.castShadow=true;
+scene.add(pool);
+
+const waterSurface = new THREE.Mesh(
+ new THREE.CircleGeometry(16.95,128),
+ new THREE.MeshPhysicalMaterial({
+  color:0x16445a,
+  metalness:.55,
+  roughness:.12,
+  clearcoat:1,
+  clearcoatRoughness:.08,
+  transparent:true,
+  opacity:.82
+ })
+);
+waterSurface.rotation.x=-Math.PI/2;
+waterSurface.position.y=.095;
+scene.add(waterSurface);
+
+/* Pool rim */
+const rim = new THREE.Mesh(
+ new THREE.TorusGeometry(17.05,.18,12,160),
+ new THREE.MeshStandardMaterial({
+  color:0x263c43,metalness:.8,roughness:.25
+ })
+);
+rim.rotation.x=Math.PI/2;
+rim.position.y=.08;
+scene.add(rim);
+
+/* Grass around the pool */
+const grassGroup=new THREE.Group();
+scene.add(grassGroup);
+
+const grassGeo=new THREE.ConeGeometry(.045,.45,3);
+grassGeo.translate(0,.22,0);
+
+const grassMat=new THREE.MeshStandardMaterial({
+ color:0x276b36,roughness:.9,side:THREE.DoubleSide
+});
+
+const grassCount=2300;
+const grassMesh=new THREE.InstancedMesh(grassGeo,grassMat,grassCount);
+const dummy=new THREE.Object3D();
+
+for(let i=0;i<grassCount;i++){
+ const a=Math.random()*Math.PI*2;
+ const r=18+Math.random()*8;
+ dummy.position.set(Math.cos(a)*r,-.32,Math.sin(a)*r);
+ dummy.rotation.set(
+  (Math.random()-.5)*.25,
+  Math.random()*Math.PI,
+  (Math.random()-.5)*.25
+ );
+ const s=.55+Math.random()*1.15;
+ dummy.scale.set(s,s,s);
+ dummy.updateMatrix();
+ grassMesh.setMatrixAt(i,dummy.matrix);
+}
+grassMesh.instanceMatrix.needsUpdate=true;
+grassGroup.add(grassMesh);
+
+/* Small grass border lights */
+for(let i=0;i<20;i++){
+ const a=i/20*Math.PI*2;
+ const l=new THREE.PointLight(0x1c8d58,.45,5);
+ l.position.set(Math.cos(a)*19,.2,Math.sin(a)*19);
+ scene.add(l);
+}
+
+/* -------------------------------------------------------
+   FOUNTAIN BASE / NOZZLES
+------------------------------------------------------- */
+
+const fountainBase=new THREE.Group();
+scene.add(fountainBase);
+
+const nozzleMetal=new THREE.MeshStandardMaterial({
+ color:0x8299a5,metalness:.9,roughness:.18
+});
+
+const nozzleGlowMat=new THREE.MeshBasicMaterial({
+ color:0x37d9ff
+});
+
+const waterOuterMat=new THREE.MeshPhysicalMaterial({
+ color:0x9deaff,
+ roughness:.055,
+ metalness:.02,
+ clearcoat:1,
+ clearcoatRoughness:.02,
+ transparent:true,
+ opacity:.15,
+ depthWrite:false,
+ side:THREE.DoubleSide
+});
+
+const waterCoreMat=new THREE.MeshBasicMaterial({
+ color:0xe5faff,
+ transparent:true,
+ opacity:.29,
+ depthWrite:false
+});
+
+const nozzleItems=[];
+const lineGroups=[];
+
+function addNozzle(x,z,groupName,groupIndex,kind="blue",height=7){
+ const holder=new THREE.Group();
+ holder.position.set(x,.12,z);
+ fountainBase.add(holder);
+
+ const metal=new THREE.Mesh(
+  new THREE.CylinderGeometry(.13,.18,.18,16),
+  nozzleMetal
+ );
+ metal.position.y=.02;
+ metal.castShadow=true;
+ holder.add(metal);
+
+ const mouth=new THREE.Mesh(
+  new THREE.TorusGeometry(.105,.035,8,24),
+  nozzleGlowMat
+ );
+ mouth.rotation.x=Math.PI/2;
+ mouth.position.y=.12;
+ holder.add(mouth);
+
+ /* Individual nozzle glow light */
+ const glow=new THREE.PointLight(0x38cfff,1.7,4.8,2);
+ glow.position.y=.35;
+ holder.add(glow);
+
+ const glowBall=new THREE.Mesh(
+  new THREE.SphereGeometry(.15,12,12),
+  new THREE.MeshBasicMaterial({
+   color:0x67e8ff,transparent:true,opacity:.85
+  })
+ );
+ glowBall.position.y=.2;
+ holder.add(glowBall);
+
+ /* Curved stream shape */
+ const curve=new THREE.CatmullRomCurve3([
+  new THREE.Vector3(0,0,0),
+  new THREE.Vector3(.035,.28,0),
+  new THREE.Vector3(.09,.58,.015),
+  new THREE.Vector3(.16,.82,.035),
+  new THREE.Vector3(.21,1,0)
+ ]);
+
+ const outer=new THREE.Mesh(
+  new THREE.TubeGeometry(curve,22,.055,8,false),
+  waterOuterMat.clone()
+ );
+ outer.scale.y=.001;
+ outer.position.y=.12;
+ holder.add(outer);
+
+ const core=new THREE.Mesh(
+  new THREE.TubeGeometry(curve,22,.018,6,false),
+  waterCoreMat.clone()
+ );
+ core.scale.y=.001;
+ core.position.y=.12;
+ holder.add(core);
+
+ /* Water spray particles */
+ const dropCount=12;
+ const drops=[];
+ for(let i=0;i<dropCount;i++){
+  const drop=new THREE.Mesh(
+   new THREE.SphereGeometry(.035+Math.random()*.025,7,7),
+   new THREE.MeshBasicMaterial({
+    color:0xc9f5ff,transparent:true,opacity:.8
+   })
+  );
+  drop.visible=false;
+  holder.add(drop);
+  drops.push({
+   mesh:drop,
+   phase:Math.random(),
+   speed:.7+Math.random()*.5
+  });
+ }
+
+ /* Ripple ring at the base */
+ const ripple=new THREE.Mesh(
+  new THREE.TorusGeometry(.18,.012,6,32),
+  new THREE.MeshBasicMaterial({
+   color:0x73ddff,transparent:true,opacity:.4
+  })
+ );
+ ripple.rotation.x=Math.PI/2;
+ ripple.position.y=.13;
+ holder.add(ripple);
+
+ const item={
+  holder,outer,core,glow,glowBall,drops,ripple,
+  height,groupName,groupIndex,kind,
+  active:false,level:0,phase:Math.random()*Math.PI*2
+ };
+
+ nozzleItems.push(item);
+
+ if(!lineGroups[groupName]){
+  lineGroups[groupName]=[];
+ }
+ lineGroups[groupName].push(item);
+ return item;
+}
+
+/* -------------------------------------------------------
+   PDF SCHEMATIC LAYOUT
+   Approved drawing coordinates: 1024 x 512
+   Existing nozzle geometry and water effects preserved.
+------------------------------------------------------- */
+
+function drawingX(x){
+ return (x-512)/30;
+}
+
+function drawingZ(y){
+ return (y-256)/30;
+}
+
+function addDrawingNozzle(x,y,groupName,index,kind="blue",height=7){
+ addNozzle(
+  drawingX(x),
+  drawingZ(y),
+  groupName,
+  index,
+  kind,
+  height
+ );
+}
+
+function addDrawingRing(cx,cy,r,count,groupName,kind="blue",height=7){
+ for(let i=0;i<count;i++){
+  const angle=i/count*Math.PI*2;
+
+  addDrawingNozzle(
+   cx+Math.cos(angle)*r,
+   cy+Math.sin(angle)*r,
+   groupName,
+   i,
+   kind,
+   height
+  );
+ }
+}
+
+/* LEFT CIRCLE
+   Centre (100,145), radius 53
+   24 blue nozzles + red centre + external red nozzle
+*/
+addDrawingRing(
+ 100,145,53,24,
+ "01 LEFT CIRCLE","blue",7
+);
+
+addDrawingNozzle(
+ 100,145,
+ "01 LEFT CIRCLE",24,"red",7
+);
+
+addDrawingNozzle(
+ 18,145,
+ "01 LEFT CIRCLE",25,"red",7
+);
+
+/* CENTRE INNER CIRCLE
+   Centre (512,157), radius 47
+   24 blue nozzles + red centre
+*/
+addDrawingRing(
+ 512,157,47,24,
+ "02 CENTRE INNER CIRCLE","blue",7
+);
+
+addDrawingNozzle(
+ 512,157,
+ "02 CENTRE INNER CIRCLE",24,"red",7
+);
+
+/* CENTRE OUTER RED RING
+   Centre (512,157), radius 88
+   32 red nozzles
+*/
+addDrawingRing(
+ 512,157,88,32,
+ "03 CENTRE OUTER RING","red",7
+);
+
+/* RIGHT CIRCLE
+   Centre (935,153), radius 53
+   24 blue nozzles + red centre + external red nozzle
+*/
+addDrawingRing(
+ 935,153,53,24,
+ "04 RIGHT CIRCLE","blue",7
+);
+
+addDrawingNozzle(
+ 935,153,
+ "04 RIGHT CIRCLE",24,"red",7
+);
+
+addDrawingNozzle(
+ 1017,145,
+ "04 RIGHT CIRCLE",25,"red",7
+);
+
+/* LEFT CONNECTOR
+   Exactly four blue nozzles
+*/
+[252,298,343,389].forEach((x,i)=>{
+ addDrawingNozzle(
+  x,153,
+  "05 LEFT CONNECTOR",
+  i,
+  "blue",
+  7
+ );
+});
+
+/* RIGHT CONNECTOR
+   Exactly four blue nozzles
+*/
+[644,689,734,780].forEach((x,i)=>{
+ addDrawingNozzle(
+  x,162,
+  "06 RIGHT CONNECTOR",
+  i,
+  "blue",
+  7
+ );
+});
+
+/* TWO INDEPENDENT RED CURVES
+   Curves remain separate from all circular assemblies.
+   No visible guide tube is created.
+*/
+
+function bezierPoint(p0,p1,p2,p3,t){
+ const u=1-t;
+
+ return {
+  x:u*u*u*p0.x+
+    3*u*u*t*p1.x+
+    3*u*t*t*p2.x+
+    t*t*t*p3.x,
+
+  y:u*u*u*p0.y+
+    3*u*u*t*p1.y+
+    3*u*t*t*p2.y+
+    t*t*t*p3.y
+ };
+}
+
+function getCurvePoint(segments,t){
+ const scaled=t*segments.length;
+
+ const segment=Math.min(
+  Math.floor(scaled),
+  segments.length-1
+ );
+
+ const localT=scaled-segment;
+
+ return bezierPoint(
+  segments[segment][0],
+  segments[segment][1],
+  segments[segment][2],
+  segments[segment][3],
+  localT
+ );
+}
+
+/* FIRST RED CURVE */
+const redCurveOne=[
+ [
+  {x:95,y:250},
+  {x:180,y:205},
+  {x:245,y:130},
+  {x:310,y:92}
+ ],
+ [
+  {x:310,y:92},
+  {x:375,y:53},
+  {x:430,y:25},
+  {x:512,y:17}
+ ]
+];
+
+/* SECOND RED CURVE */
+const redCurveTwo=[
+ [
+  {x:510,y:300},
+  {x:600,y:285},
+  {x:680,y:245},
+  {x:745,y:205}
+ ],
+ [
+  {x:745,y:205},
+  {x:815,y:160},
+  {x:850,y:105},
+  {x:890,y:63}
+ ]
+];
+
+/* Nozzles along first red curve */
+for(let i=0;i<24;i++){
+ const point=getCurvePoint(redCurveOne,i/23);
+
+ addDrawingNozzle(
+  point.x,
+  point.y,
+  "07 RED CURVE ONE",
+  i,
+  "red",
+  7
+ );
+}
+
+/* Nozzles along second red curve */
+for(let i=0;i<24;i++){
+ const point=getCurvePoint(redCurveTwo,i/23);
+
+ addDrawingNozzle(
+  point.x,
+  point.y,
+  "08 RED CURVE TWO",
+  i,
+  "red",
+  7
+ );
+}
+
+/* FOUR BOTTOM ROWS
+   24 blue nozzles in each row
+   Drawing spacing = 6
+*/
+const bottomRows=[
+ {startX:107,y:320,group:"09 BOTTOM ROW ONE"},
+ {startX:298,y:320,group:"10 BOTTOM ROW TWO"},
+ {startX:489,y:320,group:"11 BOTTOM ROW THREE"},
+ {startX:778,y:320,group:"12 BOTTOM ROW FOUR"}
+];
+
+bottomRows.forEach(row=>{
+ for(let i=0;i<24;i++){
+  addDrawingNozzle(
+   row.startX+i*6,
+   row.y,
+   row.group,
+   i,
+   "blue",
+   7
+  );
+ }
+});
+
+/* -------------------------------------------------------
+   SEQUENCE ENGINE
+------------------------------------------------------- */
+
+let sequenceMode="line";
+let running=false;
+let currentGroup=0;
+let currentNozzle=0;
+let lastStep=0;
+let stepDelay=.065;
+let allGroups=Object.keys(lineGroups);
+
+const status=document.getElementById("status");
+
+function resetJets(){
+ nozzleItems.forEach(item=>{
+  item.active=false;
+  item.level=0;
+ });
+ currentGroup=0;
+ currentNozzle=0;
+}
+
+function startSequence(){
+ resetJets();
+ sequenceMode="line";
+ running=true;
+ lastStep=0;
+ status.textContent="LINE-BY-LINE · FAST SEQUENCE";
+ document.getElementById("sequenceBtn").classList.add("active");
+ document.getElementById("allBtn").classList.remove("active");
+}
+
+function activateAll(){
+ resetJets();
+ sequenceMode="all";
+ running=false;
+ nozzleItems.forEach(item=>{
+  item.active=true;
+  item.level=1;
+ });
+ status.textContent="ALL WATER JETS ACTIVE";
+ document.getElementById("allBtn").classList.add("active");
+ document.getElementById("sequenceBtn").classList.remove("active");
+}
+
+function stopJets(){
+ running=false;
+ nozzleItems.forEach(item=>{
+  item.active=false;
+ });
+ status.textContent="FOUNTAIN STOPPED";
+ document.getElementById("stopBtn").classList.add("active");
+}
+
+function updateSequence(time){
+ if(!running)return;
+ if(time-lastStep<stepDelay)return;
+ lastStep=time;
+
+ const groupName=allGroups[currentGroup];
+ if(!groupName){
+  currentGroup=0;
+  currentNozzle=0;
+  resetJets();
+  return;
+ }
+
+ const group=lineGroups[groupName];
+
+ if(currentNozzle<group.length){
+  const item=group[currentNozzle];
+  item.active=true;
+  currentNozzle++;
+ }else{
+  currentGroup++;
+  currentNozzle=0;
+ }
+}
+
+/* -------------------------------------------------------
+   LIGHT COLOR MODES
+------------------------------------------------------- */
+
+let lightMode="rainbow";
+
+function getLightColor(time,index){
+ if(lightMode==="blue"){
+  return index%2===0?0x19aaff:0xe4faff;
+ }
+ if(lightMode==="white")return 0xffffff;
+ if(lightMode==="gold")return 0xffbd55;
+ if(lightMode==="purple")return 0xb56aff;
+
+ const hue=(time*.045+index*.075)%1;
+ return new THREE.Color().setHSL(hue,.95,.62);
+}
+
+function updateLights(time){
+ colorLights.forEach((light,i)=>{
+  const c=getLightColor(time,i);
+  light.color.set(c);
+  light.intensity=2.1+Math.sin(time*2+i)*.45;
+ });
+
+ nozzleItems.forEach((item,i)=>{
+  const c=getLightColor(time,i);
+  item.glow.color.set(c);
+  item.glow.intensity=item.active?3.2:1.0;
+  item.glowBall.material.color.set(c);
+  item.ripple.material.color.set(c);
+ });
+}
+
+/* -------------------------------------------------------
+   WATER MOTION / SPLASHES
+------------------------------------------------------- */
+
+function updateWater(time){
+ nozzleItems.forEach((item,i)=>{
+  const target=item.active?1:0;
+  item.level=THREE.MathUtils.damp(
+   item.level,target,item.active?8:3,.016
+  );
+
+  const pulse=1+Math.sin(time*2.4+item.phase)*.025;
+  const h=item.height*item.level*pulse;
+
+  item.outer.scale.y=Math.max(.001,h);
+  item.core.scale.y=Math.max(.001,h);
+
+  item.outer.material.opacity=.15;
+  item.core.material.opacity=.30;
+
+  item.outer.visible=item.level>.015;
+  item.core.visible=item.level>.015;
+
+  item.glow.intensity=(item.active?3.5:1.0)*(
+   .85+Math.sin(time*3+i)*.15
+  );
+
+  item.glowBall.scale.setScalar(
+   item.active?1.15+Math.sin(time*5+i)*.12:.8
+  );
+
+  /* Expanding water ripple */
+  const rippleScale=item.active
+   ?1.0+((time*1.5+item.phase)%1)*2.1
+   :.8;
+  item.ripple.scale.set(rippleScale,rippleScale,1);
+  item.ripple.material.opacity=item.active
+   ?.45*(1-((time*1.5+item.phase)%1))
+   :.08;
+
+  /* Moving water droplets */
+  item.drops.forEach((drop,j)=>{
+   const d=drop.phase+time*drop.speed*.65;
+   const cycle=d%1;
+   const active=item.level>.1;
+
+   drop.mesh.visible=active&&cycle<.88;
+   if(!drop.mesh.visible)return;
+
+   const y=.3+cycle*h*1.15-4.9*cycle*cycle*(h/10);
+   const spread=.15+cycle*.65;
+   const angle=item.phase+j*2.4+time*.3;
+
+   drop.mesh.position.set(
+    Math.cos(angle)*spread,
+    Math.max(.2,y),
+    Math.sin(angle)*spread
+   );
+   drop.mesh.scale.setScalar(.65+Math.sin(cycle*Math.PI)*.5);
+  });
+ });
+}
+
+/* -------------------------------------------------------
+   UI ACTIONS
+------------------------------------------------------- */
+
+document.getElementById("sequenceBtn").onclick=startSequence;
+document.getElementById("allBtn").onclick=activateAll;
+document.getElementById("stopBtn").onclick=stopJets;
+
+document.getElementById("speed").onchange=e=>{
+ stepDelay=Number(e.target.value);
+};
+
+document.getElementById("lightMode").onchange=e=>{
+ lightMode=e.target.value;
+};
+
+document.getElementById("rotateBtn").onclick=()=>{
+ controls.autoRotate=!controls.autoRotate;
+ document.getElementById("rotateBtn").textContent=
+  "360° Rotation: "+(controls.autoRotate?"ON":"OFF");
+};
+
+function moveCamera(x,y,z){
+ camera.position.set(x,y,z);
+ controls.target.set(0,0,0);
+ controls.update();
+}
+
+document.getElementById("topBtn").onclick=()=>{
+ moveCamera(0,48,.01);
+};
+
+document.getElementById("sideBtn").onclick=()=>{
+ moveCamera(0,12,48);
+};
+
+document.getElementById("resetBtn").onclick=()=>{
+ moveCamera(0,28,43);
+ controls.autoRotate=false;
+ document.getElementById("rotateBtn").textContent="360° Rotation: OFF";
+};
+
+let grassVisible=true;
+document.getElementById("grassBtn").onclick=()=>{
+ grassVisible=!grassVisible;
+ grassGroup.visible=grassVisible;
+ document.getElementById("grassBtn").textContent=
+  grassVisible?"Grass ON":"Grass OFF";
+};
+
+let lightsVisible=true;
+document.getElementById("lightsBtn").onclick=()=>{
+ lightsVisible=!lightsVisible;
+ colorLights.forEach(l=>l.visible=lightsVisible);
+ nozzleItems.forEach(item=>{
+  item.glow.visible=lightsVisible;
+  item.glowBall.visible=lightsVisible;
+ });
+ document.getElementById("lightsBtn").textContent=
+  lightsVisible?"Lights ON":"Lights OFF";
+};
+
+/* -------------------------------------------------------
+   ANIMATION LOOP
+------------------------------------------------------- */
+
+const clock=new THREE.Clock();
+
+function animate(){
+ requestAnimationFrame(animate);
+
+ const time=clock.getElapsedTime();
+
+ updateSequence(time);
+ updateWater(time);
+ updateLights(time);
+
+ controls.update();
+ composer.render();
+}
+
+animate();
+document.getElementById("loading").style.display="none";
+
+/* -------------------------------------------------------
+   RESPONSIVE RESIZE
+------------------------------------------------------- */
+
+window.addEventListener("resize",()=>{
+ camera.aspect=window.innerWidth/window.innerHeight;
+ camera.updateProjectionMatrix();
+
+ renderer.setSize(window.innerWidth,window.innerHeight);
+ composer.setSize(window.innerWidth,window.innerHeight);
+ bloom.setSize(window.innerWidth,window.innerHeight);
+});
+
+/* Start automatically with line-by-line water sequence */
+startSequence();
+
+</script>
+</body>
+</html>
