@@ -1,0 +1,1046 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Musical Fountain – 3D Simulation</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;overflow:hidden;background:#000;color:#fff;font-family:Arial,sans-serif}
+#app{position:fixed;inset:0}
+#ui{
+ position:absolute;top:18px;left:18px;z-index:10;width:260px;
+ padding:17px;background:rgba(8,13,20,.88);
+ border:1px solid rgba(90,190,255,.25);border-radius:15px;
+ backdrop-filter:blur(14px);box-shadow:0 0 30px #001a2c
+}
+#ui h2{font-size:16px;margin:0 0 5px;color:#eaf8ff;letter-spacing:1px}
+.sub{font-size:10px;color:#8ba8bd;margin-bottom:15px}
+button,select{
+ width:100%;padding:10px;margin:4px 0;border-radius:8px;
+ border:1px solid #25465c;background:#101e2b;color:#eaf8ff;
+ cursor:pointer;font-size:12px
+}
+button:hover{background:#18354b;border-color:#48caff}
+button.active{background:#07547b;border-color:#49caff}
+.row{display:flex;gap:7px}
+.row button{flex:1}
+.section{font-size:10px;color:#67caff;margin:13px 0 5px;letter-spacing:1px}
+#status{
+ position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+ z-index:10;background:rgba(5,12,19,.8);border:1px solid #23465c;
+ border-radius:30px;padding:9px 18px;font-size:11px;color:#b9eaff;
+ white-space:nowrap
+}
+#hint{position:absolute;right:18px;bottom:18px;color:#8da9ba;font-size:10px;z-index:10}
+#loading{position:absolute;inset:0;display:grid;place-items:center;background:#000;z-index:20;color:#8bdcff}
+@media(max-width:600px){
+ #ui{top:8px;left:8px;width:215px;padding:11px}
+ #ui h2{font-size:13px}
+ button,select{padding:8px;font-size:11px}
+ #hint{display:none}
+ #status{font-size:9px;bottom:8px}
+}
+</style>
+
+<script type="importmap">
+{
+ "imports":{
+  "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+ }
+}
+</script>
+</head>
+
+<body>
+<div id="app"></div>
+<div id="loading">Loading 3D Fountain...</div>
+
+<div id="ui">
+ <h2>FOUNTAIN CONTROL</h2>
+ <div class="sub">3D MUSICAL FOUNTAIN SIMULATION</div>
+
+ <div class="section">WATER SEQUENCE</div>
+ <button id="sequenceBtn" class="active">Line-by-Line Sequence</button>
+ <div class="row">
+  <button id="allBtn">All Jets</button>
+  <button id="stopBtn">Stop</button>
+ </div>
+
+ <div class="section">WATER SPEED</div>
+ <select id="speed">
+  <option value="0.035">Very Fast</option>
+  <option value="0.065" selected>Fast</option>
+  <option value="0.12">Normal</option>
+  <option value="0.22">Slow</option>
+ </select>
+
+ <div class="section">LIGHTING MODE</div>
+ <select id="lightMode">
+  <option value="rainbow">RGB / Rainbow</option>
+  <option value="blue">Blue & White</option>
+  <option value="white">Pure White</option>
+  <option value="gold">Golden</option>
+  <option value="purple">Purple</option>
+ </select>
+
+ <div class="section">CAMERA</div>
+ <div class="row">
+  <button id="topBtn">Top View</button>
+  <button id="sideBtn">Side View</button>
+ </div>
+ <button id="rotateBtn">360° Rotation: OFF</button>
+ <button id="resetBtn">Reset Camera</button>
+
+ <div class="section">DISPLAY</div>
+ <div class="row">
+  <button id="grassBtn" class="active">Grass ON</button>
+  <button id="lightsBtn" class="active">Lights ON</button>
+ </div>
+</div>
+
+<div id="status">READY · LINE SEQUENCE</div>
+<div id="hint">Drag to rotate · Scroll to zoom</div>
+
+<script type="module">
+import * as THREE from "three";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+import {EffectComposer} from "three/addons/postprocessing/EffectComposer.js";
+import {RenderPass} from "three/addons/postprocessing/RenderPass.js";
+import {UnrealBloomPass} from "three/addons/postprocessing/UnrealBloomPass.js";
+
+/* =======================================================
+   SCENE / CAMERA / RENDERER
+======================================================= */
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x020609);
+scene.fog = new THREE.FogExp2(0x020609,0.0065);
+
+const camera = new THREE.PerspectiveCamera(
+ 48,window.innerWidth/window.innerHeight,.1,500
+);
+camera.position.set(0,28,43);
+
+const renderer = new THREE.WebGLRenderer({
+ antialias:true,
+ powerPreference:"high-performance"
+});
+renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.75));
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.35;
+document.getElementById("app").appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true;
+controls.dampingFactor=.055;
+controls.minDistance=12;
+controls.maxDistance=85;
+controls.maxPolarAngle=Math.PI*.49;
+controls.target.set(0,1,0);
+controls.autoRotate=false;
+controls.autoRotateSpeed=.65;
+
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene,camera));
+
+const bloom = new UnrealBloomPass(
+ new THREE.Vector2(window.innerWidth,window.innerHeight),
+ .78,.55,.18
+);
+composer.addPass(bloom);
+
+/* =======================================================
+   LIGHTING
+======================================================= */
+
+scene.add(new THREE.AmbientLight(0x9abbd0,.65));
+
+const hemisphere = new THREE.HemisphereLight(0x9ddcff,0x14251c,1.05);
+scene.add(hemisphere);
+
+const moon = new THREE.DirectionalLight(0xd5edff,1.45);
+moon.position.set(-15,25,12);
+moon.castShadow=true;
+moon.shadow.mapSize.set(1024,1024);
+scene.add(moon);
+
+const fill = new THREE.DirectionalLight(0x3d9fc5,.85);
+fill.position.set(15,12,-15);
+scene.add(fill);
+
+const colorLights=[];
+for(let i=0;i<12;i++){
+ const light=new THREE.PointLight(0x00aaff,2.4,22,1.65);
+ const a=i/12*Math.PI*2;
+ light.position.set(Math.cos(a)*12,1.4,Math.sin(a)*12);
+ scene.add(light);
+ colorLights.push(light);
+}
+
+/* =======================================================
+   FLOOR / POOL / WATER SURFACE
+======================================================= */
+
+const ground = new THREE.Mesh(
+ new THREE.PlaneGeometry(180,180),
+ new THREE.MeshStandardMaterial({
+  color:0x101b17,roughness:.96
+ })
+);
+ground.rotation.x=-Math.PI/2;
+ground.position.y=-.35;
+ground.receiveShadow=true;
+scene.add(ground);
+
+const pool = new THREE.Mesh(
+ new THREE.CylinderGeometry(17.2,17.2,.42,128),
+ new THREE.MeshStandardMaterial({
+  color:0x071e29,
+  metalness:.68,
+  roughness:.2
+ })
+);
+pool.position.y=-.13;
+pool.receiveShadow=true;
+pool.castShadow=true;
+scene.add(pool);
+
+const waterSurface = new THREE.Mesh(
+ new THREE.CircleGeometry(16.95,128),
+ new THREE.MeshPhysicalMaterial({
+  color:0x164b61,
+  metalness:.5,
+  roughness:.105,
+  clearcoat:1,
+  clearcoatRoughness:.045
+ })
+);
+waterSurface.rotation.x=-Math.PI/2;
+waterSurface.position.y=.095;
+scene.add(waterSurface);
+
+/* Animated caustic pattern over the pool surface */
+const causticMaterial=new THREE.ShaderMaterial({
+ uniforms:{
+  uTime:{value:0},
+  uColor:{value:new THREE.Color(0x38bde2)}
+ },
+ vertexShader:`
+  varying vec2 vUv;
+  void main(){
+   vUv=uv;
+   gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);
+  }
+ `,
+ fragmentShader:`
+  uniform float uTime;
+  uniform vec3 uColor;
+  varying vec2 vUv;
+
+  void main(){
+   vec2 uv=vUv*10.0;
+   float a=sin(uv.x*2.0+uTime*.65+sin(uv.y*1.8));
+   float b=sin(uv.y*2.4-uTime*.48+cos(uv.x*1.4));
+   float c=sin((uv.x+uv.y)*2.0+uTime*.35);
+   float pattern=pow(max(0.0,a*b*c),2.0);
+   float waves=pow(max(0.0,sin(uv.x*1.3+uv.y*1.7+uTime*.55)),8.0);
+   float alpha=pattern*.17+waves*.045;
+   gl_FragColor=vec4(uColor,alpha);
+  }
+ `,
+ transparent:true,
+ depthWrite:false,
+ blending:THREE.AdditiveBlending,
+ side:THREE.DoubleSide
+});
+
+const caustics=new THREE.Mesh(
+ new THREE.CircleGeometry(16.88,128),
+ causticMaterial
+);
+caustics.rotation.x=-Math.PI/2;
+caustics.position.y=.102;
+scene.add(caustics);
+
+/* Pool rim */
+const rim = new THREE.Mesh(
+ new THREE.TorusGeometry(17.05,.18,12,160),
+ new THREE.MeshStandardMaterial({
+  color:0x344e56,metalness:.82,roughness:.2
+ })
+);
+rim.rotation.x=Math.PI/2;
+rim.position.y=.08;
+rim.castShadow=true;
+scene.add(rim);
+
+/* Subtle outer pool highlight */
+const rimGlow=new THREE.Mesh(
+ new THREE.TorusGeometry(17.27,.035,8,160),
+ new THREE.MeshBasicMaterial({
+  color:0x278db2,
+  transparent:true,
+  opacity:.45
+ })
+);
+rimGlow.rotation.x=Math.PI/2;
+rimGlow.position.y=-.02;
+scene.add(rimGlow);
+
+/* =======================================================
+   GRASS
+======================================================= */
+
+const grassGroup=new THREE.Group();
+scene.add(grassGroup);
+
+const grassGeo=new THREE.ConeGeometry(.045,.45,3);
+grassGeo.translate(0,.22,0);
+
+const grassMat=new THREE.MeshStandardMaterial({
+ color:0x347e3c,
+ emissive:0x102d12,
+ emissiveIntensity:.48,
+ roughness:.88,
+ side:THREE.DoubleSide
+});
+
+const grassCount=2300;
+const grassMesh=new THREE.InstancedMesh(grassGeo,grassMat,grassCount);
+const dummy=new THREE.Object3D();
+
+for(let i=0;i<grassCount;i++){
+ const a=Math.random()*Math.PI*2;
+ const r=18+Math.random()*8;
+
+ dummy.position.set(
+  Math.cos(a)*r,-.32,Math.sin(a)*r
+ );
+
+ dummy.rotation.set(
+  (Math.random()-.5)*.25,
+  Math.random()*Math.PI,
+  (Math.random()-.5)*.25
+ );
+
+ const s=.55+Math.random()*1.15;
+ dummy.scale.set(s,s,s);
+ dummy.updateMatrix();
+ grassMesh.setMatrixAt(i,dummy.matrix);
+}
+grassMesh.instanceMatrix.needsUpdate=true;
+grassGroup.add(grassMesh);
+
+const grassLights=[];
+for(let i=0;i<20;i++){
+ const a=i/20*Math.PI*2;
+ const l=new THREE.PointLight(0x36b86b,.65,6);
+ l.position.set(Math.cos(a)*19,.3,Math.sin(a)*19);
+ scene.add(l);
+ grassLights.push(l);
+}
+
+/* =======================================================
+   FOUNTAIN BASE / NOZZLES
+======================================================= */
+
+const fountainBase=new THREE.Group();
+scene.add(fountainBase);
+
+const nozzleMetal=new THREE.MeshStandardMaterial({
+ color:0x9aafb8,
+ metalness:.92,
+ roughness:.16
+});
+
+const nozzleGlowMat=new THREE.MeshBasicMaterial({
+ color:0x37d9ff
+});
+
+/* Shared water particle geometry/material */
+const dropGeometry=new THREE.SphereGeometry(1,8,8);
+const dropMaterial=new THREE.MeshBasicMaterial({
+ color:0xdaf8ff,
+ transparent:true,
+ opacity:.88,
+ depthWrite:false
+});
+
+/*
+ Dynamic tapered tube:
+ vertices are updated each frame, so the stream is not
+ simply a stretched static tube.
+*/
+function createDynamicTube(segments=22,radial=7){
+ const positions=new Float32Array((segments+1)*(radial+1)*3);
+ const indices=[];
+
+ for(let y=0;y<segments;y++){
+  for(let r=0;r<radial;r++){
+   const a=y*(radial+1)+r;
+   const b=a+radial+1;
+   indices.push(a,b,a+1,b,b+1,a+1);
+  }
+ }
+
+ const geometry=new THREE.BufferGeometry();
+ geometry.setAttribute(
+  "position",
+  new THREE.BufferAttribute(positions,3).setUsage(THREE.DynamicDrawUsage)
+ );
+ geometry.setIndex(indices);
+ geometry.computeVertexNormals();
+ return {geometry,segments,radial};
+}
+
+function updateDynamicTube(tube,time,height,phase,thickness,bend){
+ const {geometry,segments,radial}=tube;
+ const array=geometry.attributes.position.array;
+
+ for(let s=0;s<=segments;s++){
+  const t=s/segments;
+
+  const waveX=Math.sin(time*2.1+phase+t*5.2)*.018*t;
+  const waveZ=Math.cos(time*1.8+phase+t*4.1)*.016*t;
+
+  const centerX=bend*t*t+waveX;
+  const centerZ=.035*t+waveZ;
+  const centerY=.12+height*t;
+
+  const taper=thickness*(.16+.84*Math.pow(1-t,.62));
+
+  for(let r=0;r<=radial;r++){
+   const angle=(r/radial)*Math.PI*2;
+   const index=(s*(radial+1)+r)*3;
+
+   array[index]=centerX+Math.cos(angle)*taper;
+   array[index+1]=centerY;
+   array[index+2]=centerZ+Math.sin(angle)*taper;
+  }
+ }
+
+ geometry.attributes.position.needsUpdate=true;
+ geometry.computeVertexNormals();
+}
+
+const nozzleItems=[];
+const lineGroups={};
+
+function addNozzle(x,z,groupName,groupIndex,kind="blue",height=7){
+ const holder=new THREE.Group();
+ holder.position.set(x,.12,z);
+ fountainBase.add(holder);
+
+ const metal=new THREE.Mesh(
+  new THREE.CylinderGeometry(.13,.18,.18,16),
+  nozzleMetal
+ );
+ metal.position.y=.02;
+ metal.castShadow=true;
+ holder.add(metal);
+
+ const mouth=new THREE.Mesh(
+  new THREE.TorusGeometry(.105,.035,8,24),
+  nozzleGlowMat
+ );
+ mouth.rotation.x=Math.PI/2;
+ mouth.position.y=.12;
+ holder.add(mouth);
+
+ const glow=new THREE.PointLight(0x38cfff,1.7,4.8,2);
+ glow.position.y=.35;
+ holder.add(glow);
+
+ const glowBall=new THREE.Mesh(
+  new THREE.SphereGeometry(.15,12,12),
+  new THREE.MeshBasicMaterial({
+   color:0x67e8ff,
+   transparent:true,
+   opacity:.85
+  })
+ );
+ glowBall.position.y=.2;
+ holder.add(glowBall);
+
+ /* Animated outer water stream */
+ const outerTube=createDynamicTube(22,8);
+ const outerMat=new THREE.MeshBasicMaterial({
+  color:0x74dfff,
+  transparent:true,
+  opacity:.27,
+  blending:THREE.AdditiveBlending,
+  depthWrite:false,
+  side:THREE.DoubleSide
+ });
+ const outer=new THREE.Mesh(outerTube.geometry,outerMat);
+ outer.frustumCulled=false;
+ outer.position.y=.12;
+ holder.add(outer);
+
+ /* Bright central water highlight */
+ const coreTube=createDynamicTube(22,6);
+ const coreMat=new THREE.MeshBasicMaterial({
+  color:0xe5faff,
+  transparent:true,
+  opacity:.52,
+  blending:THREE.AdditiveBlending,
+  depthWrite:false,
+  side:THREE.DoubleSide
+ });
+ const core=new THREE.Mesh(coreTube.geometry,coreMat);
+ core.frustumCulled=false;
+ core.position.y=.12;
+ holder.add(core);
+
+ /* Falling water droplets */
+ const drops=[];
+ const dropCount=8;
+
+ for(let i=0;i<dropCount;i++){
+  const drop=new THREE.Mesh(dropGeometry,dropMaterial);
+  drop.visible=false;
+  holder.add(drop);
+
+  drops.push({
+   mesh:drop,
+   phase:Math.random(),
+   speed:.65+Math.random()*.55,
+   angle:Math.random()*Math.PI*2,
+   size:.035+Math.random()*.035,
+   launch:.68+Math.random()*.27,
+   vx:(Math.random()-.5)*1.8,
+   vz:(Math.random()-.5)*1.8,
+   vy:1.3+Math.random()*2.1
+  });
+ }
+
+ /* Two splash ripples */
+ const ripple=new THREE.Mesh(
+  new THREE.TorusGeometry(.18,.012,6,32),
+  new THREE.MeshBasicMaterial({
+   color:0x73ddff,
+   transparent:true,
+   opacity:.4,
+   depthWrite:false
+  })
+ );
+ ripple.rotation.x=Math.PI/2;
+ ripple.position.y=.13;
+ holder.add(ripple);
+
+ const ripple2=new THREE.Mesh(
+  new THREE.TorusGeometry(.12,.009,6,32),
+  new THREE.MeshBasicMaterial({
+   color:0xb5f2ff,
+   transparent:true,
+   opacity:.3,
+   depthWrite:false
+  })
+ );
+ ripple2.rotation.x=Math.PI/2;
+ ripple2.position.y=.135;
+ holder.add(ripple2);
+
+ const item={
+  holder,outer,core,outerTube,coreTube,
+  glow,glowBall,drops,ripple,ripple2,
+  height,groupName,groupIndex,kind,
+  active:false,level:0,
+  phase:Math.random()*Math.PI*2,
+  bend:(Math.random()-.5)*.12
+ };
+
+ nozzleItems.push(item);
+
+ if(!lineGroups[groupName]){
+  lineGroups[groupName]=[];
+ }
+ lineGroups[groupName].push(item);
+
+ return item;
+}
+
+/* =======================================================
+   APPROVED FOUNTAIN LAYOUT — UNCHANGED
+======================================================= */
+
+function layoutX(x){
+ return (x-512)/30;
+}
+function layoutZ(y){
+ return (y-256)/30;
+}
+
+function addLayoutNozzle(x,y,groupName,index,kind="blue",height=7){
+ return addNozzle(
+  layoutX(x),
+  layoutZ(y),
+  groupName,
+  index,
+  kind,
+  height
+ );
+}
+
+function addLayoutRing(cx,cy,radius,count,groupName,kind,height,offset=0){
+ for(let i=0;i<count;i++){
+  const angle=(i/count)*Math.PI*2+offset;
+  const x=cx+Math.cos(angle)*radius;
+  const y=cy+Math.sin(angle)*radius;
+
+  addLayoutNozzle(x,y,groupName,i,kind,height);
+ }
+}
+
+function makeLayoutCurve(p0,p1,p2,p3){
+ return new THREE.CubicBezierCurve3(
+  new THREE.Vector3(layoutX(p0[0]),.1,layoutZ(p0[1])),
+  new THREE.Vector3(layoutX(p1[0]),.1,layoutZ(p1[1])),
+  new THREE.Vector3(layoutX(p2[0]),.1,layoutZ(p2[1])),
+  new THREE.Vector3(layoutX(p3[0]),.1,layoutZ(p3[1]))
+ );
+}
+
+function addRedCurveNozzles(segmentOne,segmentTwo,groupName,count=24){
+ const curveOne=makeLayoutCurve(
+  segmentOne[0],segmentOne[1],segmentOne[2],segmentOne[3]
+ );
+
+ const curveTwo=makeLayoutCurve(
+  segmentTwo[0],segmentTwo[1],segmentTwo[2],segmentTwo[3]
+ );
+
+ for(let i=0;i<count;i++){
+  const progress=(i/(count-1))*2;
+  let point;
+
+  if(progress<=1){
+   point=curveOne.getPoint(progress);
+  }else{
+   point=curveTwo.getPoint(progress-1);
+  }
+
+  addNozzle(point.x,point.z,groupName,i,"red",8.5);
+ }
+}
+
+/* LEFT CIRCLE */
+addLayoutNozzle(100,145,"01 LEFT CENTRE RED",0,"red",8.5);
+addLayoutRing(100,145,53,24,"02 LEFT CIRCLE","blue",7.5);
+addLayoutNozzle(18,145,"03 LEFT EXTERNAL RED",0,"red",9);
+
+/* CENTRE CIRCLE */
+addLayoutNozzle(512,157,"04 CENTRE RED",0,"red",10);
+addLayoutRing(512,157,47,24,"05 CENTRE INNER CIRCLE","blue",8);
+addLayoutRing(512,157,88,32,"06 CENTRE OUTER RED CIRCLE","red",9.5,Math.PI/32);
+
+/* RIGHT CIRCLE */
+addLayoutNozzle(935,153,"07 RIGHT CENTRE RED",0,"red",8.5);
+addLayoutRing(935,153,53,24,"08 RIGHT CIRCLE","blue",7.5);
+addLayoutNozzle(1017,145,"09 RIGHT EXTERNAL RED",0,"red",9);
+
+/* CONNECTORS */
+const leftConnectorX=[252,298,343,389];
+leftConnectorX.forEach((x,i)=>{
+ addLayoutNozzle(x,153,"10 LEFT CONNECTOR",i,"blue",7);
+});
+
+const rightConnectorX=[644,689,734,780];
+rightConnectorX.forEach((x,i)=>{
+ addLayoutNozzle(x,162,"11 RIGHT CONNECTOR",i,"blue",7);
+});
+
+/* UPPER RED CURVE */
+addRedCurveNozzles(
+ [
+  [95,250],[180,205],[245,130],[310,92]
+ ],
+ [
+  [310,92],[375,53],[430,25],[512,17]
+ ],
+ "12 UPPER RED CURVE",
+ 24
+);
+
+/* LOWER RED CURVE */
+addRedCurveNozzles(
+ [
+  [510,300],[600,285],[680,245],[745,205]
+ ],
+ [
+  [745,205],[815,160],[850,105],[890,63]
+ ],
+ "13 LOWER RED CURVE",
+ 24
+);
+
+/* FOUR BOTTOM ROWS */
+function addLayoutRow(startX,y,count,spacing,groupName){
+ for(let i=0;i<count;i++){
+  addLayoutNozzle(startX+i*spacing,y,groupName,i,"blue",7.2);
+ }
+}
+
+addLayoutRow(107,320,24,6,"14 BOTTOM ROW LEFT");
+addLayoutRow(298,320,24,6,"15 BOTTOM ROW SECOND");
+addLayoutRow(489,320,24,6,"16 BOTTOM ROW THIRD");
+addLayoutRow(778,320,24,6,"17 BOTTOM ROW RIGHT");
+
+/* =======================================================
+   SEQUENCE ENGINE — ORIGINAL BEHAVIOUR
+======================================================= */
+
+let sequenceMode="line";
+let running=false;
+let currentGroup=0;
+let currentNozzle=0;
+let lastStep=0;
+let stepDelay=.065;
+const allGroups=Object.keys(lineGroups);
+
+const status=document.getElementById("status");
+
+function resetJets(){
+ nozzleItems.forEach(item=>{
+  item.active=false;
+  item.level=0;
+ });
+ currentGroup=0;
+ currentNozzle=0;
+}
+
+function updateButtonStates(activeId){
+ ["sequenceBtn","allBtn","stopBtn"].forEach(id=>{
+  document.getElementById(id).classList.toggle(id===activeId);
+ });
+}
+
+function startSequence(){
+ resetJets();
+ sequenceMode="line";
+ running=true;
+ lastStep=0;
+ status.textContent="LINE-BY-LINE · FAST SEQUENCE";
+ updateButtonStates("sequenceBtn");
+}
+
+function activateAll(){
+ resetJets();
+ sequenceMode="all";
+ running=false;
+
+ nozzleItems.forEach(item=>{
+  item.active=true;
+  item.level=1;
+ });
+
+ status.textContent="ALL WATER JETS ACTIVE";
+ updateButtonStates("allBtn");
+}
+
+function stopJets(){
+ running=false;
+ nozzleItems.forEach(item=>{
+  item.active=false;
+ });
+ status.textContent="FOUNTAIN STOPPED";
+ updateButtonStates("stopBtn");
+}
+
+function updateSequence(time){
+ if(!running)return;
+ if(time-lastStep<stepDelay)return;
+
+ lastStep=time;
+
+ const groupName=allGroups[currentGroup];
+
+ if(!groupName){
+  currentGroup=0;
+  currentNozzle=0;
+  resetJets();
+  return;
+ }
+
+ const group=lineGroups[groupName];
+
+ if(currentNozzle<group.length){
+  group[currentNozzle].active=true;
+  currentNozzle++;
+ }else{
+  currentGroup++;
+  currentNozzle=0;
+ }
+}
+
+/* =======================================================
+   LIGHT MODES
+======================================================= */
+
+let lightMode="rainbow";
+let lightsVisible=true;
+
+function getLightColor(time,index){
+ if(lightMode==="blue"){
+  return index%2===0?0x19aaff:0xe4faff;
+ }
+ if(lightMode==="white")return 0xffffff;
+ if(lightMode==="gold")return 0xffbd55;
+ if(lightMode==="purple")return 0xb56aff;
+
+ const hue=(time*.045+index*.075)%1;
+ return new THREE.Color().setHSL(hue,.95,.62);
+}
+
+function updateLights(time){
+ colorLights.forEach((light,i)=>{
+  const c=getLightColor(time,i);
+  light.color.set(c);
+  light.intensity=lightsVisible
+   ?2.2+Math.sin(time*2+i)*.4
+   :0;
+ });
+
+ grassLights.forEach((light,i)=>{
+  light.intensity=lightsVisible
+   ?.55+Math.sin(time*1.4+i)*.12
+   :0;
+ });
+
+ nozzleItems.forEach((item,i)=>{
+  const c=getLightColor(time,i);
+
+  item.glow.color.set(c);
+  item.glow.intensity=lightsVisible
+   ?(item.active?3.4:1.0)
+   :0;
+
+  item.glowBall.material.color.set(c);
+
+  /* Coloured water highlights follow the selected light mode */
+  item.outer.material.color.set(c);
+  item.core.material.color.set(c);
+
+  item.ripple.material.color.set(c);
+  item.ripple2.material.color.set(c);
+
+  item.glow.visible=lightsVisible;
+  item.glowBall.visible=lightsVisible;
+ });
+
+ causticMaterial.uniforms.uColor.value.set(
+  getLightColor(time,3)
+ );
+}
+
+/* =======================================================
+   WATER MOTION / DROPLETS / SPLASH
+======================================================= */
+
+function updateWater(time,delta){
+ nozzleItems.forEach((item,i)=>{
+  const target=item.active?1:0;
+
+  item.level=THREE.MathUtils.damp(
+   item.level,target,item.active?7.5:2.8,delta
+  );
+
+  const pulse=1+Math.sin(time*2.4+item.phase)*.018;
+  const h=item.height*item.level*pulse;
+
+  const visible=item.level>.015;
+
+  item.outer.visible=visible;
+  item.core.visible=visible;
+
+  if(visible){
+   updateDynamicTube(
+    item.outerTube,time,h,item.phase,.066,item.bend
+   );
+
+   updateDynamicTube(
+    item.coreTube,time,h,item.phase,.019,item.bend
+   );
+  }
+
+  /* Small water pressure variation */
+  const pressure=1+Math.sin(time*3.1+item.phase)*.035;
+  item.outer.material.opacity=.23*pressure;
+  item.core.material.opacity=.48*pressure;
+
+  /* Nozzle glow */
+  item.glow.intensity=lightsVisible
+   ?(item.active?3.3:1.0)*(.88+Math.sin(time*3+i)*.12)
+   :0;
+
+  item.glowBall.scale.setScalar(
+   item.active?1.12+Math.sin(time*5+i)*.1:.8
+  );
+
+  /* Expanding base ripples */
+  const ripplePhase=(time*1.35+item.phase)%1;
+  const rippleScale=.8+ripplePhase*2.6;
+
+  item.ripple.scale.set(rippleScale,rippleScale,1);
+  item.ripple.material.opacity=item.active
+   ?.48*(1-ripplePhase)
+   :.035;
+
+  const ripplePhase2=(time*1.35+item.phase+.48)%1;
+  const rippleScale2=.8+ripplePhase2*2.5;
+
+  item.ripple2.scale.set(rippleScale2,rippleScale2,1);
+  item.ripple2.material.opacity=item.active
+   ?.25*(1-ripplePhase2)
+   :.02;
+
+  /* Ballistic droplets: upward launch followed by gravity */
+  item.drops.forEach((drop,j)=>{
+   const cycle=(time*drop.speed+drop.phase)%1;
+   const age=cycle*1.05;
+   const active=item.level>.1&&item.active;
+
+   if(!active){
+    drop.mesh.visible=false;
+    return;
+   }
+
+   const launchY=.12+h*drop.launch;
+   const gravity=5.4;
+
+   const y=launchY+drop.vy*age-.5*gravity*age*age;
+   const spread=age*1.15;
+
+   const x=Math.cos(drop.angle)*spread+drop.vx*age;
+   const z=Math.sin(drop.angle)*spread+drop.vz*age;
+
+   drop.mesh.visible=y>.14&&age<.95;
+
+   if(drop.mesh.visible){
+    drop.mesh.position.set(x,y,z);
+
+    const scale=drop.size*(.8+Math.sin(age*5)*.18);
+    drop.mesh.scale.set(scale,scale*1.25,scale);
+   }
+  });
+ });
+}
+
+/* =======================================================
+   UI ACTIONS
+======================================================= */
+
+document.getElementById("sequenceBtn").onclick=startSequence;
+document.getElementById("allBtn").onclick=activateAll;
+document.getElementById("stopBtn").onclick=stopJets;
+
+document.getElementById("speed").onchange=e=>{
+ stepDelay=Number(e.target.value);
+};
+
+document.getElementById("lightMode").onchange=e=>{
+ lightMode=e.target.value;
+};
+
+document.getElementById("rotateBtn").onclick=()=>{
+ controls.autoRotate=!controls.autoRotate;
+ document.getElementById("rotateBtn").textContent=
+  "360° Rotation: "+(controls.autoRotate?"ON":"OFF");
+};
+
+function moveCamera(x,y,z){
+ camera.position.set(x,y,z);
+ controls.target.set(0,0,0);
+ controls.update();
+}
+
+document.getElementById("topBtn").onclick=()=>{
+ moveCamera(0,48,.01);
+};
+
+document.getElementById("sideBtn").onclick=()=>{
+ moveCamera(0,12,48);
+};
+
+document.getElementById("resetBtn").onclick=()=>{
+ moveCamera(0,28,43);
+ controls.autoRotate=false;
+ document.getElementById("rotateBtn").textContent="360° Rotation: OFF";
+};
+
+let grassVisible=true;
+document.getElementById("grassBtn").onclick=()=>{
+ grassVisible=!grassVisible;
+ grassGroup.visible=grassVisible;
+
+ document.getElementById("grassBtn").textContent=
+  grassVisible?"Grass ON":"Grass OFF";
+
+ document.getElementById("grassBtn").classList.toggle("active",grassVisible);
+};
+
+document.getElementById("lightsBtn").onclick=()=>{
+ lightsVisible=!lightsVisible;
+
+ document.getElementById("lightsBtn").textContent=
+  lightsVisible?"Lights ON":"Lights OFF";
+
+ document.getElementById("lightsBtn").classList.toggle("active",lightsVisible);
+
+ updateLights(clock.getElapsedTime());
+};
+
+/* =======================================================
+   ANIMATION LOOP
+======================================================= */
+
+const clock=new THREE.Clock();
+
+function animate(){
+ requestAnimationFrame(animate);
+
+ const delta=Math.min(clock.getDelta(),.04);
+ const time=clock.elapsedTime;
+
+ updateSequence(time);
+ updateWater(time,delta);
+ updateLights(time);
+
+ causticMaterial.uniforms.uTime.value=time;
+
+ controls.update();
+ composer.render();
+}
+
+animate();
+document.getElementById("loading").style.display="none";
+
+/* =======================================================
+   RESPONSIVE RESIZE
+======================================================= */
+
+window.addEventListener("resize",()=>{
+ camera.aspect=window.innerWidth/window.innerHeight;
+ camera.updateProjectionMatrix();
+
+ renderer.setSize(window.innerWidth,window.innerHeight);
+ composer.setSize(window.innerWidth,window.innerHeight);
+ bloom.setSize(window.innerWidth,window.innerHeight);
+});
+
+/* Start automatically with line-by-line water sequence */
+startSequence();
+
+/* Nozzle count for quick verification */
+console.log("Fountain nozzles:",nozzleItems.length);
+
+</script>
+</body>
+</html>
